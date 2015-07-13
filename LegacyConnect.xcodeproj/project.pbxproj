@@ -1,0 +1,587 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
+		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
+		0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B3594221B4E6C6E0098C484 /* SignUp.storyboard */; };
+		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
+		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
+		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
+		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
+		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
+		0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */; };
+		0BF05A7D1B4E645400FF7B39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A7A1B4E645400FF7B39 /* main.m */; };
+		0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */; };
+		0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A801B4E64A000FF7B39 /* Main.storyboard */; };
+		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0BF05A561B4E622200FF7B39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BF05A341B4E622200FF7B39 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BF05A3B1B4E622200FF7B39;
+			remoteInfo = LegacyConnect;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
+		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
+		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
+		0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginHomeViewController.m; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.m; sourceTree = "<group>"; };
+		0B3594221B4E6C6E0098C484 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = Storyboards/SignUp.storyboard; sourceTree = "<group>"; };
+		0B3594241B4E6D920098C484 /* LCSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSignupViewController.h; path = ViewControllers/LCSignupViewController/LCSignupViewController.h; sourceTree = "<group>"; };
+		0B3594251B4E6D920098C484 /* LCSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSignupViewController.m; path = ViewControllers/LCSignupViewController/LCSignupViewController.m; sourceTree = "<group>"; };
+		0B3594281B4E6DBE0098C484 /* LCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginViewController.h; path = ViewControllers/LCLoginViewController/LCLoginViewController.h; sourceTree = "<group>"; };
+		0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginViewController.m; path = ViewControllers/LCLoginViewController/LCLoginViewController.m; sourceTree = "<group>"; };
+		0B35942C1B4E731C0098C484 /* LCEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEmptyViewController.h; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.h; sourceTree = "<group>"; };
+		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
+		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BF05A4C1B4E622200FF7B39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BF05A5A1B4E622200FF7B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LegacyConnectTests.m; sourceTree = "<group>"; };
+		0BF05A771B4E645400FF7B39 /* LCAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAppDelegate.h; path = SupportingFiles/LCAppDelegate.h; sourceTree = "<group>"; };
+		0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAppDelegate.m; path = SupportingFiles/LCAppDelegate.m; sourceTree = "<group>"; };
+		0BF05A791B4E645400FF7B39 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SupportingFiles/Info.plist; sourceTree = "<group>"; };
+		0BF05A7A1B4E645400FF7B39 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SupportingFiles/main.m; sourceTree = "<group>"; };
+		0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = Storyboards/LaunchScreen.xib; sourceTree = "<group>"; };
+		0BF05A801B4E64A000FF7B39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
+		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
+		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0BF05A391B4E622200FF7B39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0BF05A521B4E622200FF7B39 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0B35941D1B4E6AE00098C484 /* LCFeedsHomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */,
+				0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */,
+			);
+			name = LCFeedsHomeViewController;
+			sourceTree = "<group>";
+		};
+		0B3594211B4E6BC80098C484 /* LCLoginHomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */,
+				0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */,
+			);
+			name = LCLoginHomeViewController;
+			sourceTree = "<group>";
+		};
+		0B3594271B4E6D980098C484 /* LCSignupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B3594241B4E6D920098C484 /* LCSignupViewController.h */,
+				0B3594251B4E6D920098C484 /* LCSignupViewController.m */,
+			);
+			name = LCSignupViewController;
+			sourceTree = "<group>";
+		};
+		0B35942B1B4E6DC20098C484 /* LCLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B3594281B4E6DBE0098C484 /* LCLoginViewController.h */,
+				0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */,
+			);
+			name = LCLoginViewController;
+			sourceTree = "<group>";
+		};
+		0B35942F1B4E73220098C484 /* LCEmptyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B35942C1B4E731C0098C484 /* LCEmptyViewController.h */,
+				0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */,
+			);
+			name = LCEmptyViewController;
+			sourceTree = "<group>";
+		};
+		0BF05A331B4E622200FF7B39 = {
+			isa = PBXGroup;
+			children = (
+				0BF05A3E1B4E622200FF7B39 /* LegacyConnect */,
+				0BF05A581B4E622200FF7B39 /* LegacyConnectTests */,
+				0BF05A3D1B4E622200FF7B39 /* Products */,
+				AA0D4ABFB4BBC81C1666D4C8 /* Pods */,
+				8F70C2AF88FA9740E76A5CA2 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		0BF05A3D1B4E622200FF7B39 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */,
+				0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0BF05A3E1B4E622200FF7B39 /* LegacyConnect */ = {
+			isa = PBXGroup;
+			children = (
+				0BF05A6A1B4E629700FF7B39 /* DummyData */,
+				0BF05A691B4E628C00FF7B39 /* Utilities */,
+				0BF05A681B4E628700FF7B39 /* Models */,
+				0BF05A671B4E627A00FF7B39 /* CustomViews */,
+				0BF05A661B4E626E00FF7B39 /* ViewControllers */,
+				0BF05A651B4E623D00FF7B39 /* Storyboards */,
+				0BF05A4C1B4E622200FF7B39 /* Images.xcassets */,
+				0BF05A3F1B4E622200FF7B39 /* Supporting Files */,
+			);
+			path = LegacyConnect;
+			sourceTree = "<group>";
+		};
+		0BF05A3F1B4E622200FF7B39 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BF05A771B4E645400FF7B39 /* LCAppDelegate.h */,
+				0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */,
+				0BF05A791B4E645400FF7B39 /* Info.plist */,
+				0BF05A7A1B4E645400FF7B39 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0BF05A581B4E622200FF7B39 /* LegacyConnectTests */ = {
+			isa = PBXGroup;
+			children = (
+				0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */,
+				0BF05A591B4E622200FF7B39 /* Supporting Files */,
+			);
+			path = LegacyConnectTests;
+			sourceTree = "<group>";
+		};
+		0BF05A591B4E622200FF7B39 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0BF05A5A1B4E622200FF7B39 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0BF05A651B4E623D00FF7B39 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				0BF05A801B4E64A000FF7B39 /* Main.storyboard */,
+				0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */,
+				0B3594221B4E6C6E0098C484 /* SignUp.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
+				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
+				0B3594271B4E6D980098C484 /* LCSignupViewController */,
+				0B3594211B4E6BC80098C484 /* LCLoginHomeViewController */,
+				0B35941D1B4E6AE00098C484 /* LCFeedsHomeViewController */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0BF05A671B4E627A00FF7B39 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		0BF05A681B4E628700FF7B39 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		0BF05A691B4E628C00FF7B39 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DummyData;
+			sourceTree = "<group>";
+		};
+		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA0D4ABFB4BBC81C1666D4C8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */,
+				61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0BF05A3B1B4E622200FF7B39 /* LegacyConnect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0BF05A5F1B4E622200FF7B39 /* Build configuration list for PBXNativeTarget "LegacyConnect" */;
+			buildPhases = (
+				ED8444EAA26E1BB9B396D191 /* Check Pods Manifest.lock */,
+				0BF05A381B4E622200FF7B39 /* Sources */,
+				0BF05A391B4E622200FF7B39 /* Frameworks */,
+				0BF05A3A1B4E622200FF7B39 /* Resources */,
+				D2DD0732B293BB2EA6818F80 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LegacyConnect;
+			productName = LegacyConnect;
+			productReference = 0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */;
+			productType = "com.apple.product-type.application";
+		};
+		0BF05A541B4E622200FF7B39 /* LegacyConnectTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0BF05A621B4E622200FF7B39 /* Build configuration list for PBXNativeTarget "LegacyConnectTests" */;
+			buildPhases = (
+				0BF05A511B4E622200FF7B39 /* Sources */,
+				0BF05A521B4E622200FF7B39 /* Frameworks */,
+				0BF05A531B4E622200FF7B39 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0BF05A571B4E622200FF7B39 /* PBXTargetDependency */,
+			);
+			name = LegacyConnectTests;
+			productName = LegacyConnectTests;
+			productReference = 0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0BF05A341B4E622200FF7B39 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Gist;
+				TargetAttributes = {
+					0BF05A3B1B4E622200FF7B39 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					0BF05A541B4E622200FF7B39 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 0BF05A3B1B4E622200FF7B39;
+					};
+				};
+			};
+			buildConfigurationList = 0BF05A371B4E622200FF7B39 /* Build configuration list for PBXProject "LegacyConnect" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0BF05A331B4E622200FF7B39;
+			productRefGroup = 0BF05A3D1B4E622200FF7B39 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0BF05A3B1B4E622200FF7B39 /* LegacyConnect */,
+				0BF05A541B4E622200FF7B39 /* LegacyConnectTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0BF05A3A1B4E622200FF7B39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
+				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,
+				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
+				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0BF05A531B4E622200FF7B39 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D2DD0732B293BB2EA6818F80 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ED8444EAA26E1BB9B396D191 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0BF05A381B4E622200FF7B39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
+				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
+				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
+				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
+				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
+				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
+				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0BF05A511B4E622200FF7B39 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0BF05A571B4E622200FF7B39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0BF05A3B1B4E622200FF7B39 /* LegacyConnect */;
+			targetProxy = 0BF05A561B4E622200FF7B39 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0BF05A5D1B4E622200FF7B39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		0BF05A5E1B4E622200FF7B39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		0BF05A601B4E622200FF7B39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0BF05A611B4E622200FF7B39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		0BF05A631B4E622200FF7B39 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LegacyConnectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LegacyConnect.app/LegacyConnect";
+			};
+			name = Debug;
+		};
+		0BF05A641B4E622200FF7B39 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LegacyConnectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LegacyConnect.app/LegacyConnect";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0BF05A371B4E622200FF7B39 /* Build configuration list for PBXProject "LegacyConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BF05A5D1B4E622200FF7B39 /* Debug */,
+				0BF05A5E1B4E622200FF7B39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0BF05A5F1B4E622200FF7B39 /* Build configuration list for PBXNativeTarget "LegacyConnect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BF05A601B4E622200FF7B39 /* Debug */,
+				0BF05A611B4E622200FF7B39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0BF05A621B4E622200FF7B39 /* Build configuration list for PBXNativeTarget "LegacyConnectTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BF05A631B4E622200FF7B39 /* Debug */,
+				0BF05A641B4E622200FF7B39 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0BF05A341B4E622200FF7B39 /* Project object */;
+}
