@@ -28,6 +28,7 @@
   [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
 }
 
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
