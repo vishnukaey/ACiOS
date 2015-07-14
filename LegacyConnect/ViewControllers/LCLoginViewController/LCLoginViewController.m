@@ -30,7 +30,7 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:YES forKey:@"logged_in"];
   [defaults synchronize];
-  [self.navigationController popToRootViewControllerAnimated:YES];
+  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 

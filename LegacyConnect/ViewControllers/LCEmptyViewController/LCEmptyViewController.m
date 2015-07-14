@@ -31,7 +31,7 @@
   {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
     UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    [self showViewController:myStoryBoardInitialViewController sender:self];
+    [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
   }
   else
   {
