@@ -237,6 +237,7 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				CE1FA2E61B5508AA00A9B609 /* clock.jpg */,
 				0BD1428A1B552914004F7647 /* manplaceholder.jpg */,
 			);
 			name = DummyData;
