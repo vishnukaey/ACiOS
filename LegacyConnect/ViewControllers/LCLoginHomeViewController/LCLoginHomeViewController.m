@@ -19,14 +19,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-  CGRect frame = loginButton.frame;
-  frame.origin.x = 0.0;
-  frame.origin.y = 0.0;
-  loginButton.frame = frame;
-  [self.fbButtonContainer addSubview:loginButton];
-    // Do any additional setup after loading the view.
+  [self addFBLoginbutton];
 }
+
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -36,6 +31,17 @@
                                            selector:@selector(receiveTestNotification:)
                                                name:@"logged_in_facebook"
                                              object:nil];
+}
+
+
+- (void)addFBLoginbutton
+{
+  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+  CGRect frame = loginButton.frame;
+  frame.origin.x = 0.0;
+  frame.origin.y = 0.0;
+  loginButton.frame = frame;
+  [self.fbButtonContainer addSubview:loginButton];
 }
 
 
