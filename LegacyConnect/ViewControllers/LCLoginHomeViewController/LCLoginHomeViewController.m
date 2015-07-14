@@ -32,9 +32,19 @@
 {
   [super viewWillAppear:animated];
   [self.navigationController setNavigationBarHidden:YES];
-  if ([FBSDKAccessToken currentAccessToken])
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(receiveTestNotification:)
+                                               name:@"logged_in_facebook"
+                                             object:nil];
+}
+
+
+- (void) receiveTestNotification:(NSNotification *) notification
+{
+  if ([[notification name] isEqualToString:@"logged_in_facebook"])
   {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    [self.navigationController popToRootViewControllerAnimated:NO];
   }
 }
 
@@ -46,8 +56,10 @@
 
 - (void)viewDidDisappear: (BOOL)animated
 {
-  [self.navigationController setNavigationBarHidden:NO animated:NO];
   [super viewDidDisappear:animated];
+  [self.navigationController setNavigationBarHidden:NO animated:NO];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
 }
 
 @end
