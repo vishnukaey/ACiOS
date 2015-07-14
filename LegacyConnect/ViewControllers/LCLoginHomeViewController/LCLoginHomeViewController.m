@@ -19,19 +19,13 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-  CGRect frame = loginButton.frame;
-  frame.origin.x = 0.0;
-  frame.origin.y = 0.0;
-  loginButton.frame = frame;
-  [self.fbButtonContainer addSubview:loginButton];
-    // Do any additional setup after loading the view.
+  [self addFBLoginbutton];
 }
+
 
 -(void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.navigationController setNavigationBarHidden:YES];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(receiveTestNotification:)
                                                name:@"logged_in_facebook"
@@ -39,11 +33,21 @@
 }
 
 
+- (void)addFBLoginbutton
+{
+  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
+  CGRect frame = loginButton.frame;
+  frame.origin.x = 0.0;
+  frame.origin.y = 0.0;
+  loginButton.frame = frame;
+  [self.fbButtonContainer addSubview:loginButton];
+}
+
+
 - (void) receiveTestNotification:(NSNotification *) notification
 {
   if ([[notification name] isEqualToString:@"logged_in_facebook"])
   {
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self.navigationController popToRootViewControllerAnimated:NO];
   }
 }
@@ -57,9 +61,7 @@
 - (void)viewDidDisappear: (BOOL)animated
 {
   [super viewDidDisappear:animated];
-  [self.navigationController setNavigationBarHidden:NO animated:NO];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
 }
 
 @end

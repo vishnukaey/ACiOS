@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCFeedsHomeViewController : UIViewController
+@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+{
+  IBOutlet  UITableView *H_feedsTable;
+    
+    NSMutableArray *H_feedsViewArray;
+}
+
 
 @end
