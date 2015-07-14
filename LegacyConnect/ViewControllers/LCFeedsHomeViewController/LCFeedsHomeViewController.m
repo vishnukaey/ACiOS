@@ -45,7 +45,7 @@
   {
     [[FBSDKLoginManager new] logOut];
   }
-  [self.navigationController popToRootViewControllerAnimated:YES];
+  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 @end

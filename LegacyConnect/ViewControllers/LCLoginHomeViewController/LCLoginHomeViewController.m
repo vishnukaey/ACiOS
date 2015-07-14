@@ -26,7 +26,6 @@
 -(void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.navigationController setNavigationBarHidden:YES];
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(receiveTestNotification:)
                                                name:@"logged_in_facebook"
@@ -49,7 +48,6 @@
 {
   if ([[notification name] isEqualToString:@"logged_in_facebook"])
   {
-    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self.navigationController popToRootViewControllerAnimated:NO];
   }
 }
@@ -63,9 +61,7 @@
 - (void)viewDidDisappear: (BOOL)animated
 {
   [super viewDidDisappear:animated];
-  [self.navigationController setNavigationBarHidden:NO animated:NO];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
 }
 
 @end

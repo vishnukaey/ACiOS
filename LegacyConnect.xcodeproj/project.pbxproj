@@ -13,6 +13,7 @@
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
+		0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD1428A1B552914004F7647 /* manplaceholder.jpg */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
 		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
 		0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */; };
@@ -44,6 +45,7 @@
 		0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginViewController.m; path = ViewControllers/LCLoginViewController/LCLoginViewController.m; sourceTree = "<group>"; };
 		0B35942C1B4E731C0098C484 /* LCEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEmptyViewController.h; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.h; sourceTree = "<group>"; };
 		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
+		0BD1428A1B552914004F7647 /* manplaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manplaceholder.jpg; sourceTree = "<group>"; };
 		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF05A4C1B4E622200FF7B39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,6 +235,7 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				0BD1428A1B552914004F7647 /* manplaceholder.jpg */,
 			);
 			name = DummyData;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
 				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
