@@ -10,4 +10,9 @@
 
 @interface LCLoginViewController : UIViewController
 
+
+@property (nonatomic,retain) IBOutlet UITextField *userNameTextField;
+@property (nonatomic,retain) IBOutlet UITextField *passwordTextField;
+
+
 @end
