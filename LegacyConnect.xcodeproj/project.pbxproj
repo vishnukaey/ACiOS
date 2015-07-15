@@ -21,8 +21,6 @@
 		0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755781B5631AF009CE7F3 /* LCDataManager.m */; };
 		0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */; };
 		0BC755801B563907009CE7F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BC7557F1B563907009CE7F3 /* Localizable.strings */; };
-		0BC755851B567714009CE7F3 /* LCForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755841B567714009CE7F3 /* LCForgotPasswordViewController.m */; };
-		0BC755881B567724009CE7F3 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755871B567724009CE7F3 /* LCUpdatePasswordViewController.m */; };
 		0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD1428A1B552914004F7647 /* manplaceholder.jpg */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
 		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
@@ -32,11 +30,13 @@
 		0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A801B4E64A000FF7B39 /* Main.storyboard */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
+		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
+		966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287271B567C2600C91196 /* LCForgotPasswordViewController.m */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
-		CE0374511B5623200031FFC7 /* GIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374501B5623200031FFC7 /* GIButton.m */; };
-		CE0374541B56335B0031FFC7 /* feedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374531B56335B0031FFC7 /* feedCellView.m */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
+		CECBC8D11B56794F0012B287 /* feedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* feedCellView.m */; };
+		CECBC8D21B56794F0012B287 /* GIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* GIButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,10 +76,6 @@
 		0BC7557B1B563356009CE7F3 /* LCUtilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUtilityManager.h; path = Utilities/LCUtilityManager/LCUtilityManager.h; sourceTree = "<group>"; };
 		0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUtilityManager.m; path = Utilities/LCUtilityManager/LCUtilityManager.m; sourceTree = "<group>"; };
 		0BC7557F1B563907009CE7F3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Utilities/Localizable.strings; sourceTree = "<group>"; };
-		0BC755831B567714009CE7F3 /* LCForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCForgotPasswordViewController.h; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.h; sourceTree = "<group>"; };
-		0BC755841B567714009CE7F3 /* LCForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCForgotPasswordViewController.m; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.m; sourceTree = "<group>"; };
-		0BC755861B567724009CE7F3 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
-		0BC755871B567724009CE7F3 /* LCUpdatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUpdatePasswordViewController.m; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.m; sourceTree = "<group>"; };
 		0BD1428A1B552914004F7647 /* manplaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manplaceholder.jpg; sourceTree = "<group>"; };
 		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF05A4C1B4E622200FF7B39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -94,13 +90,17 @@
 		0BF05A801B4E64A000FF7B39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
-		CE03744F1B5623200031FFC7 /* GIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIButton.h; sourceTree = "<group>"; };
-		CE0374501B5623200031FFC7 /* GIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIButton.m; sourceTree = "<group>"; };
-		CE0374521B56335B0031FFC7 /* feedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = feedCellView.h; sourceTree = "<group>"; };
-		CE0374531B56335B0031FFC7 /* feedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = feedCellView.m; sourceTree = "<group>"; };
+		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
+		966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUpdatePasswordViewController.m; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.m; sourceTree = "<group>"; };
+		966287261B567C2600C91196 /* LCForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCForgotPasswordViewController.h; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.h; sourceTree = "<group>"; };
+		966287271B567C2600C91196 /* LCForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCForgotPasswordViewController.m; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.m; sourceTree = "<group>"; };
 		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
 		CE1FA2E61B5508AA00A9B609 /* clock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clock.jpg; sourceTree = "<group>"; };
+		CECBC8CD1B56794F0012B287 /* feedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = feedCellView.h; path = CustomViews/feedCellView.h; sourceTree = "<group>"; };
+		CECBC8CE1B56794F0012B287 /* feedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = feedCellView.m; path = CustomViews/feedCellView.m; sourceTree = "<group>"; };
+		CECBC8CF1B56794F0012B287 /* GIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GIButton.h; path = CustomViews/GIButton.h; sourceTree = "<group>"; };
+		CECBC8D01B56794F0012B287 /* GIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GIButton.m; path = CustomViews/GIButton.m; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,10 +280,10 @@
 		0BF05A3E1B4E622200FF7B39 /* LegacyConnect */ = {
 			isa = PBXGroup;
 			children = (
+				CECBC8CC1B5678FE0012B287 /* CustomViews */,
 				0BF05A6A1B4E629700FF7B39 /* DummyData */,
 				0BF05A691B4E628C00FF7B39 /* Utilities */,
 				0BF05A681B4E628700FF7B39 /* Models */,
-				0BF05A671B4E627A00FF7B39 /* CustomViews */,
 				0BF05A661B4E626E00FF7B39 /* ViewControllers */,
 				0BF05A651B4E623D00FF7B39 /* Storyboards */,
 				0BF05A4C1B4E622200FF7B39 /* Images.xcassets */,
@@ -340,17 +340,6 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		0BF05A671B4E627A00FF7B39 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				CE03744F1B5623200031FFC7 /* GIButton.h */,
-				CE0374501B5623200031FFC7 /* GIButton.m */,
-				CE0374521B56335B0031FFC7 /* feedCellView.h */,
-				CE0374531B56335B0031FFC7 /* feedCellView.m */,
-			);
-			name = CustomViews;
-			sourceTree = "<group>";
-		};
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,8 +378,8 @@
 		9662871B1B56445500C91196 /* LCForgotPasswordViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0BC755831B567714009CE7F3 /* LCForgotPasswordViewController.h */,
-				0BC755841B567714009CE7F3 /* LCForgotPasswordViewController.m */,
+				966287261B567C2600C91196 /* LCForgotPasswordViewController.h */,
+				966287271B567C2600C91196 /* LCForgotPasswordViewController.m */,
 			);
 			name = LCForgotPasswordViewController;
 			sourceTree = "<group>";
@@ -398,8 +387,8 @@
 		9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0BC755861B567724009CE7F3 /* LCUpdatePasswordViewController.h */,
-				0BC755871B567724009CE7F3 /* LCUpdatePasswordViewController.m */,
+				966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */,
+				966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */,
 			);
 			name = LCUpdatePasswordViewController;
 			sourceTree = "<group>";
@@ -411,6 +400,17 @@
 				61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				CECBC8CD1B56794F0012B287 /* feedCellView.h */,
+				CECBC8CE1B56794F0012B287 /* feedCellView.m */,
+				CECBC8CF1B56794F0012B287 /* GIButton.h */,
+				CECBC8D01B56794F0012B287 /* GIButton.m */,
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -552,18 +552,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CECBC8D11B56794F0012B287 /* feedCellView.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
-				CE0374511B5623200031FFC7 /* GIButton.m in Sources */,
-				0BC755881B567724009CE7F3 /* LCUpdatePasswordViewController.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,
-				0BC755851B567714009CE7F3 /* LCForgotPasswordViewController.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
+				CECBC8D21B56794F0012B287 /* GIButton.m in Sources */,
+				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
-				CE0374541B56335B0031FFC7 /* feedCellView.m in Sources */,
+				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
