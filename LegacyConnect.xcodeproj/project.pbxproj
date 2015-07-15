@@ -20,6 +20,8 @@
 		0BF05A7D1B4E645400FF7B39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A7A1B4E645400FF7B39 /* main.m */; };
 		0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */; };
 		0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A801B4E64A000FF7B39 /* Main.storyboard */; };
+		9662871E1B56448E00C91196 /* LCForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9662871D1B56448E00C91196 /* LCForgotPasswordViewController.m */; };
+		966287221B565F2900C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287211B565F2900C91196 /* LCUpdatePasswordViewController.m */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
 /* End PBXBuildFile section */
@@ -60,6 +62,10 @@
 		0BF05A801B4E64A000FF7B39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
+		9662871C1B56448E00C91196 /* LCForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCForgotPasswordViewController.h; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.h; sourceTree = "<group>"; };
+		9662871D1B56448E00C91196 /* LCForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCForgotPasswordViewController.m; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.m; sourceTree = "<group>"; };
+		966287201B565F2900C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
+		966287211B565F2900C91196 /* LCUpdatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUpdatePasswordViewController.m; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.m; sourceTree = "<group>"; };
 		CE1FA2E61B5508AA00A9B609 /* clock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clock.jpg; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +210,8 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
+				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
 				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
 				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
 				0B3594271B4E6D980098C484 /* LCSignupViewController */,
@@ -249,6 +257,24 @@
 				4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9662871B1B56445500C91196 /* LCForgotPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				9662871C1B56448E00C91196 /* LCForgotPasswordViewController.h */,
+				9662871D1B56448E00C91196 /* LCForgotPasswordViewController.m */,
+			);
+			name = LCForgotPasswordViewController;
+			sourceTree = "<group>";
+		};
+		9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				966287201B565F2900C91196 /* LCUpdatePasswordViewController.h */,
+				966287211B565F2900C91196 /* LCUpdatePasswordViewController.m */,
+			);
+			name = LCUpdatePasswordViewController;
 			sourceTree = "<group>";
 		};
 		AA0D4ABFB4BBC81C1666D4C8 /* Pods */ = {
@@ -400,6 +426,8 @@
 			files = (
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
+				9662871E1B56448E00C91196 /* LCForgotPasswordViewController.m in Sources */,
+				966287221B565F2900C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
