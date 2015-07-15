@@ -31,12 +31,6 @@
 }
 
 
-- (IBAction)loginButtonTapped:(id)sender
-{
-  
-}
-
-
 - (IBAction)loginButtonClicked:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
