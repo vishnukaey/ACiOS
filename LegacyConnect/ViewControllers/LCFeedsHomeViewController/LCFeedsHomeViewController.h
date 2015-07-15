@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "feedCellView.h"
+#import "LCFeedsCommentsController.h"
 
 @interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {

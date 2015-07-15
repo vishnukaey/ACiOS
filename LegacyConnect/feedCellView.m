@@ -23,8 +23,11 @@
     return self;
 }
 
--(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_
+-(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(int)pageType
 {
+    //pagetypy <<1 for home page feeds>>  <<>2 for comments page feed>
+    
+    
     float cellMargin_x = 15, cellMargin_y = 8;
     float dp_im_hight = 60;
     float in_margin = 10;
@@ -40,13 +43,18 @@
     
     [self setFrame:CGRectMake(0, 0,width_,0)];
     
-    UIView *celSpace = [[UIView alloc]initWithFrame:CGRectMake(-2, 0, width_+4, cellSpacing_height)];//spacing  between cells
-    celSpace.layer.borderColor = [UIColor lightTextColor].CGColor;
-    celSpace.layer.borderWidth = 1;
-    celSpace.backgroundColor = [UIColor lightGrayColor];
-    [self addSubview:celSpace];
+    if (pageType == 1)//home page
+    {
+        UIView *celSpace = [[UIView alloc]initWithFrame:CGRectMake(-2, 0, width_+4, cellSpacing_height)];//spacing  between cells
+        celSpace.layer.borderColor = [UIColor lightTextColor].CGColor;
+        celSpace.layer.borderWidth = 1;
+        celSpace.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:celSpace];
+        top_space+=cellSpacing_height;
+    }
+   
     
-    top_space+=cellSpacing_height+cellMargin_y;
+    top_space+=cellMargin_y;
     
     NSString  *userName = [dic valueForKey:@"user_name"];
     NSString *dp_data = [dic valueForKey:@"profile_pic"];
@@ -194,6 +202,19 @@
     [thanksLabel setTextAlignment:NSTextAlignmentCenter];
     
     top_space+=botRow.frame.size.height;
+    
+    if (pageType == 2)//comments page
+    {
+        UIView *celSpace = [[UIView alloc]initWithFrame:CGRectMake(-2, top_space, width_+4, cellSpacing_height)];//spacing  between cells
+        celSpace.layer.borderColor = [UIColor lightTextColor].CGColor;
+        celSpace.layer.borderWidth = 1;
+        celSpace.backgroundColor = [UIColor lightGrayColor];
+        [self addSubview:celSpace];
+        top_space+=cellSpacing_height;
+    }
+    
+    
+    top_space+=cellMargin_y;
     
     [self setFrame:CGRectMake(0, 0, self.frame.size.width, top_space)];
 }

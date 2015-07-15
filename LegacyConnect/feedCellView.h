@@ -10,7 +10,7 @@
 
 @protocol feedCellDelegate <NSObject>
 
-//action type-- 1 for like......2 for comment
+//action type-- <<1 for like>>   <<2 for comment>>
 -(void)feedCellActionWithType :(int)type andID:(NSString *)postID;
 
 @end
@@ -23,6 +23,6 @@
 
 @property(nonatomic, retain)id delegate;
 
--(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_;
+-(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(int)pageType;
 
 @end

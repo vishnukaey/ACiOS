@@ -15,6 +15,9 @@
 
 
 
+
+
+
 @interface LCFeedsHomeViewController ()
 
 @end
@@ -78,7 +81,7 @@
     H_feedsViewArray = [[NSMutableArray alloc]init];
     for (int i=0; i<feedsArray.count; i++) {        
         feedCellView *celViewFinal = [[feedCellView alloc]init];
-        [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width];
+        [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:1];
         celViewFinal.delegate = self;
         [H_feedsViewArray addObject:celViewFinal];
     }
@@ -108,6 +111,7 @@
 
 - (IBAction)logout:(id)sender
 {
+    
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:NO forKey:@"logged_in"];
   [defaults synchronize];
@@ -177,6 +181,14 @@
 -(void)feedCellActionWithType:(int)type andID:(NSString *)postID
 {
     NSLog(@"actionType--->>>%d", type);
+    if (type==2)//comments
+    {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                      bundle:nil];
+        LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+        
+        [self.navigationController pushViewController:next animated:YES];
+    }
 }
 
 @end
