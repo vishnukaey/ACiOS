@@ -146,10 +146,10 @@
             </objects>
             <point key="canvasLocation" x="452" y="-222"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up User PhotoVC-->
         <scene sceneID="ZyD-zE-XCh">
             <objects>
-                <viewController id="eAh-bG-B8v" sceneMemberID="viewController">
+                <viewController id="eAh-bG-B8v" customClass="LCSignUpUserPhotoVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eh5-BV-a31"/>
                         <viewControllerLayoutGuide type="bottom" id="Oes-OC-md0"/>
@@ -215,10 +215,10 @@
             </objects>
             <point key="canvasLocation" x="844" y="-222"/>
         </scene>
-        <!--View Controller-->
+        <!--Choose CausesVC-->
         <scene sceneID="oHv-Ak-hrx">
             <objects>
-                <viewController id="P0n-lH-Sgz" sceneMemberID="viewController">
+                <viewController id="P0n-lH-Sgz" customClass="LCChooseCausesVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UJa-5F-8IK"/>
                         <viewControllerLayoutGuide type="bottom" id="4I5-Li-JV0"/>
@@ -259,10 +259,10 @@
             </objects>
             <point key="canvasLocation" x="1214" y="-222"/>
         </scene>
-        <!--View Controller-->
+        <!--Connect FriendsVC-->
         <scene sceneID="7sB-tv-ACv">
             <objects>
-                <viewController id="rX4-yN-9BJ" sceneMemberID="viewController">
+                <viewController id="rX4-yN-9BJ" customClass="LCConnectFriendsVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0wh-qV-Ijs"/>
                         <viewControllerLayoutGuide type="bottom" id="aYS-ml-jRe"/>
@@ -317,10 +317,10 @@
             </objects>
             <point key="canvasLocation" x="1562" y="-222"/>
         </scene>
-        <!--View Controller-->
+        <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
             <objects>
-                <viewController id="ajw-VA-3ws" sceneMemberID="viewController">
+                <viewController id="ajw-VA-3ws" customClass="LCContactsListVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cQ0-a5-xB0"/>
                         <viewControllerLayoutGuide type="bottom" id="RK4-Rf-Hn0"/>
