@@ -9,6 +9,7 @@
 #import "LCFeedsHomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "GIButton.h"
 
 
 
@@ -25,12 +26,43 @@
 {
   [super viewDidLoad];
     
+    GIButton * giButton = [[GIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60, self.view.frame.size.height - 60, 50, 50)];
+    [self.view addSubview:giButton];
+    [giButton setUpMenu];
+    [giButton addTarget:self action:@selector(GIBAction:) forControlEvents:UIControlEventTouchUpInside];
+    giButton.P_community.tag = 0;
+    [giButton.P_community addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    giButton.P_video.tag = 1;
+    [giButton.P_video addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    giButton.P_status.tag = 2;
+    [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
     
 //    H_feedsTable.layer.borderColor = [UIColor yellowColor].CGColor;
 //    H_feedsTable.layer.borderWidth = 4;
     [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     
+}
+
+-(void)GIBComponentsAction :(UIButton *)sender
+{
+    NSLog(@"tag-->>%d", (int)sender.tag);
+}
+
+-(void)GIBAction :(GIButton *)sender
+{
+    NSLog(@"gib-->>");
+    if (sender.tag ==0) {
+        sender.tag = 1;
+        [sender showMenu];
+    }
+    else
+    {
+        sender.tag = 0 ;
+        [sender hideMenu];
+    }
 }
 
 -(void)prepareFeedViews
