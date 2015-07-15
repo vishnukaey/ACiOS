@@ -31,6 +31,9 @@
 		9662871E1B56448E00C91196 /* LCForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9662871D1B56448E00C91196 /* LCForgotPasswordViewController.m */; };
 		966287221B565F2900C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287211B565F2900C91196 /* LCUpdatePasswordViewController.m */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
+		CE0374511B5623200031FFC7 /* GIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374501B5623200031FFC7 /* GIButton.m */; };
+		CE0374541B56335B0031FFC7 /* feedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374531B56335B0031FFC7 /* feedCellView.m */; };
+		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
 /* End PBXBuildFile section */
 
@@ -85,10 +88,12 @@
 		0BF05A801B4E64A000FF7B39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
-		9662871C1B56448E00C91196 /* LCForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCForgotPasswordViewController.h; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.h; sourceTree = "<group>"; };
-		9662871D1B56448E00C91196 /* LCForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCForgotPasswordViewController.m; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.m; sourceTree = "<group>"; };
-		966287201B565F2900C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
-		966287211B565F2900C91196 /* LCUpdatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUpdatePasswordViewController.m; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.m; sourceTree = "<group>"; };
+		CE03744F1B5623200031FFC7 /* GIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIButton.h; sourceTree = "<group>"; };
+		CE0374501B5623200031FFC7 /* GIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIButton.m; sourceTree = "<group>"; };
+		CE0374521B56335B0031FFC7 /* feedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = feedCellView.h; sourceTree = "<group>"; };
+		CE0374531B56335B0031FFC7 /* feedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = feedCellView.m; sourceTree = "<group>"; };
+		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
+		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
 		CE1FA2E61B5508AA00A9B609 /* clock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clock.jpg; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +122,8 @@
 			children = (
 				0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */,
 				0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */,
+				CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */,
+				CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */,
 			);
 			name = LCFeedsHomeViewController;
 			sourceTree = "<group>";
@@ -330,6 +337,10 @@
 		0BF05A671B4E627A00FF7B39 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CE03744F1B5623200031FFC7 /* GIButton.h */,
+				CE0374501B5623200031FFC7 /* GIButton.m */,
+				CE0374521B56335B0031FFC7 /* feedCellView.h */,
+				CE0374531B56335B0031FFC7 /* feedCellView.m */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -537,18 +548,21 @@
 			files = (
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
+				CE0374511B5623200031FFC7 /* GIButton.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				9662871E1B56448E00C91196 /* LCForgotPasswordViewController.m in Sources */,
 				966287221B565F2900C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
+				CE0374541B56335B0031FFC7 /* feedCellView.m in Sources */,
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
+				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
 			);
