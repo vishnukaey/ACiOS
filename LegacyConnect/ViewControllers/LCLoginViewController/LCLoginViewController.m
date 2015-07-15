@@ -31,12 +31,18 @@
 }
 
 
-- (IBAction)loginButtonTapped:(id)sender
+- (IBAction)loginButtonClicked:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:YES forKey:@"logged_in"];
   [defaults synchronize];
   [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+
+- (IBAction)forgotPasswordButtonClicked:(id)sender
+{
+  
 }
 
 
