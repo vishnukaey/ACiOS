@@ -317,6 +317,8 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0BC755721B562AB7009CE7F3 /* Feeds */,
+				0BC755711B562AAD009CE7F3 /* Registration */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
 				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
@@ -537,6 +539,7 @@
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
+				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				9662871E1B56448E00C91196 /* LCForgotPasswordViewController.m in Sources */,
 				966287221B565F2900C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
