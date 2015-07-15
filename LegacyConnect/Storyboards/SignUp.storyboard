@@ -36,7 +36,7 @@
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iyg-K8-dPI">
                                 <rect key="frame" x="70" y="234" width="180" height="34"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -141,15 +141,18 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="eAh-bG-B8v" kind="show" identifier="selectPhoto" id="KTY-jY-TJI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keP-q5-XQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="-222"/>
+            <point key="canvasLocation" x="452" y="-230"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up User PhotoVC-->
         <scene sceneID="ZyD-zE-XCh">
             <objects>
-                <viewController id="eAh-bG-B8v" sceneMemberID="viewController">
+                <viewController id="eAh-bG-B8v" customClass="LCSignUpUserPhotoVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Eh5-BV-a31"/>
                         <viewControllerLayoutGuide type="bottom" id="Oes-OC-md0"/>
@@ -164,6 +167,9 @@
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="P0n-lH-Sgz" kind="show" identifier="skipToChooseCauses" id="v3B-zp-gUz"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGNUP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mu-Y2-ZPb">
                                 <rect key="frame" x="128" y="32" width="65" height="21"/>
@@ -207,15 +213,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="P0n-lH-Sgz" kind="show" identifier="chooseCauses" id="Jx6-Pg-DRw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JA-Tw-ur9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="-222"/>
+            <point key="canvasLocation" x="840" y="-230"/>
         </scene>
-        <!--View Controller-->
+        <!--Choose CausesVC-->
         <scene sceneID="oHv-Ak-hrx">
             <objects>
-                <viewController id="P0n-lH-Sgz" sceneMemberID="viewController">
+                <viewController id="P0n-lH-Sgz" customClass="LCChooseCausesVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="UJa-5F-8IK"/>
                         <viewControllerLayoutGuide type="bottom" id="4I5-Li-JV0"/>
@@ -233,6 +242,9 @@
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="rX4-yN-9BJ" kind="show" identifier="skipToConnectFriends" id="8Po-aI-aTM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose interests you might like, then select some related Causes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0X-HK-ATn">
                                 <rect key="frame" x="16" y="177" width="288" height="50"/>
@@ -251,15 +263,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="rX4-yN-9BJ" kind="show" identifier="connectFriends" id="aNy-6t-e6c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46p-z1-on9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1214" y="-222"/>
+            <point key="canvasLocation" x="1230" y="-230"/>
         </scene>
-        <!--View Controller-->
+        <!--Connect FriendsVC-->
         <scene sceneID="7sB-tv-ACv">
             <objects>
-                <viewController id="rX4-yN-9BJ" sceneMemberID="viewController">
+                <viewController id="rX4-yN-9BJ" customClass="LCConnectFriendsVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0wh-qV-Ijs"/>
                         <viewControllerLayoutGuide type="bottom" id="aYS-ml-jRe"/>
@@ -304,20 +319,26 @@
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="35I-eZ-UNh" kind="show" identifier="skipToTutorial" id="gZR-kJ-XwM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="ajw-VA-3ws" kind="show" identifier="listOwnContacts" id="VIv-wG-9Be"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1562" y="-222"/>
+            <point key="canvasLocation" x="1618" y="-230"/>
         </scene>
-        <!--View Controller-->
+        <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
             <objects>
-                <viewController id="ajw-VA-3ws" sceneMemberID="viewController">
+                <viewController id="ajw-VA-3ws" customClass="LCContactsListVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cQ0-a5-xB0"/>
                         <viewControllerLayoutGuide type="bottom" id="RK4-Rf-Hn0"/>
@@ -349,46 +370,112 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="-513"/>
+            <point key="canvasLocation" x="2056" y="-623"/>
         </scene>
         <!--View Controller-->
-        <scene sceneID="fCz-nN-GIA">
+        <scene sceneID="aDc-Ju-RoL">
             <objects>
-                <viewController id="ue0-Zo-YQA" sceneMemberID="viewController">
+                <viewController id="35I-eZ-UNh" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WAK-0G-nU4"/>
-                        <viewControllerLayoutGuide type="bottom" id="q5x-9n-HgM"/>
+                        <viewControllerLayoutGuide type="top" id="uWh-CV-F1Y"/>
+                        <viewControllerLayoutGuide type="bottom" id="hvn-Br-I3y"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tAV-9z-byh">
+                    <view key="view" contentMode="scaleToFill" id="j5B-et-gCz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contacts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJU-46-Gvw">
-                                <rect key="frame" x="125" y="32" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UU2-DM-d19">
+                                <rect key="frame" x="84" y="20" width="152" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIp-Wa-cJB">
-                                <rect key="frame" x="267" y="28" width="37" height="30"/>
-                                <state key="normal" title="Done">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdk-r2-35y">
+                                <rect key="frame" x="141" y="518" width="39" height="30"/>
+                                <state key="normal" title="NEXT">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="IXT-YA-8iR" kind="show" identifier="skipToTutorial2" id="Ga7-AU-dd0"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="List fb friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehp-wU-u4P">
-                                <rect key="frame" x="108" y="273" width="105" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9tM-0j-qCP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="193"/>
+            <point key="canvasLocation" x="2431" y="-230"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="cb6-Ky-QXR">
+            <objects>
+                <viewController id="IXT-YA-8iR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MeY-6o-mck"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zp7-Ev-4G7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="A2k-Hs-WKa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YO6-Kx-r6J">
+                                <rect key="frame" x="79" y="28" width="152" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGG-iL-af9">
+                                <rect key="frame" x="141" y="518" width="39" height="30"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="g20-bz-1ai" kind="show" identifier="skipToTutorial3" id="b6U-KS-xaf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggU-an-fqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2824" y="-230"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="d3S-8N-EBd">
+            <objects>
+                <viewController id="g20-bz-1ai" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4hM-IS-Bdq"/>
+                        <viewControllerLayoutGuide type="bottom" id="WGZ-Z4-ekX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R7h-0A-l6g">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsI-tP-0bO">
+                                <rect key="frame" x="84" y="20" width="152" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS6-A5-rdi">
+                                <rect key="frame" x="141" y="518" width="49" height="30"/>
+                                <state key="normal" title="GOT IT">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h9E-0A-xO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3234" y="-230"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="mdR-u6-hMM">
@@ -570,4 +657,8 @@
     <resources>
         <image name="manplaceholder.jpg" width="100" height="100"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="v3B-zp-gUz"/>
+        <segue reference="8Po-aI-aTM"/>
+    </inferredMetricsTieBreakers>
 </document>
