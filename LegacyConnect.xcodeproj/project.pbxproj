@@ -26,6 +26,7 @@
 		0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A801B4E64A000FF7B39 /* Main.storyboard */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374511B5623200031FFC7 /* GIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374501B5623200031FFC7 /* GIButton.m */; };
+		CE0374541B56335B0031FFC7 /* feedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374531B56335B0031FFC7 /* feedCellView.m */; };
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		CE03744F1B5623200031FFC7 /* GIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIButton.h; sourceTree = "<group>"; };
 		CE0374501B5623200031FFC7 /* GIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIButton.m; sourceTree = "<group>"; };
+		CE0374521B56335B0031FFC7 /* feedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = feedCellView.h; sourceTree = "<group>"; };
+		CE0374531B56335B0031FFC7 /* feedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = feedCellView.m; sourceTree = "<group>"; };
 		CE1FA2E61B5508AA00A9B609 /* clock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clock.jpg; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,6 +292,8 @@
 			children = (
 				CE03744F1B5623200031FFC7 /* GIButton.h */,
 				CE0374501B5623200031FFC7 /* GIButton.m */,
+				CE0374521B56335B0031FFC7 /* feedCellView.h */,
+				CE0374531B56335B0031FFC7 /* feedCellView.m */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
+				CE0374541B56335B0031FFC7 /* feedCellView.m in Sources */,
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,

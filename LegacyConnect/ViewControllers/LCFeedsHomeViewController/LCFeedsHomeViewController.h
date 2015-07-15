@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "feedCellView.h"
 
-@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
   IBOutlet  UITableView *H_feedsTable;
     
