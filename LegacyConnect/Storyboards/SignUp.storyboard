@@ -141,10 +141,13 @@
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="translatesAutoresizingMaskIntoConstraints" value="NO"/>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <segue destination="eAh-bG-B8v" kind="show" identifier="selectPhoto" id="KTY-jY-TJI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="keP-q5-XQV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452" y="-222"/>
+            <point key="canvasLocation" x="452" y="-230"/>
         </scene>
         <!--Sign Up User PhotoVC-->
         <scene sceneID="ZyD-zE-XCh">
@@ -165,7 +168,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="P0n-lH-Sgz" kind="show" id="v3B-zp-gUz"/>
+                                    <segue destination="P0n-lH-Sgz" kind="show" identifier="skipToChooseCauses" id="v3B-zp-gUz"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGNUP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mu-Y2-ZPb">
@@ -210,10 +213,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="P0n-lH-Sgz" kind="show" identifier="chooseCauses" id="Jx6-Pg-DRw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9JA-Tw-ur9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="-222"/>
+            <point key="canvasLocation" x="840" y="-230"/>
         </scene>
         <!--Choose CausesVC-->
         <scene sceneID="oHv-Ak-hrx">
@@ -236,6 +242,9 @@
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="rX4-yN-9BJ" kind="show" identifier="skipToConnectFriends" id="8Po-aI-aTM"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Choose interests you might like, then select some related Causes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0X-HK-ATn">
                                 <rect key="frame" x="16" y="177" width="288" height="50"/>
@@ -254,10 +263,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="rX4-yN-9BJ" kind="show" identifier="connectFriends" id="aNy-6t-e6c"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46p-z1-on9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1214" y="-222"/>
+            <point key="canvasLocation" x="1230" y="-230"/>
         </scene>
         <!--Connect FriendsVC-->
         <scene sceneID="7sB-tv-ACv">
@@ -307,15 +319,21 @@
                                     <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="35I-eZ-UNh" kind="show" identifier="skipToTutorial" id="gZR-kJ-XwM"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="ajw-VA-3ws" kind="show" identifier="listOwnContacts" id="VIv-wG-9Be"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1562" y="-222"/>
+            <point key="canvasLocation" x="1618" y="-230"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
@@ -352,46 +370,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2038" y="-513"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="fCz-nN-GIA">
-            <objects>
-                <viewController id="ue0-Zo-YQA" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WAK-0G-nU4"/>
-                        <viewControllerLayoutGuide type="bottom" id="q5x-9n-HgM"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="tAV-9z-byh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contacts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJU-46-Gvw">
-                                <rect key="frame" x="125" y="32" width="70" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yIp-Wa-cJB">
-                                <rect key="frame" x="267" y="28" width="37" height="30"/>
-                                <state key="normal" title="Done">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="List fb friends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehp-wU-u4P">
-                                <rect key="frame" x="108" y="273" width="105" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9tM-0j-qCP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2038" y="193"/>
+            <point key="canvasLocation" x="2056" y="-623"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="aDc-Ju-RoL">
@@ -417,7 +396,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="IXT-YA-8iR" kind="show" id="Ga7-AU-dd0"/>
+                                    <segue destination="IXT-YA-8iR" kind="show" identifier="skipToTutorial2" id="Ga7-AU-dd0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -427,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2442" y="-139"/>
+            <point key="canvasLocation" x="2431" y="-230"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="cb6-Ky-QXR">
@@ -453,7 +432,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="g20-bz-1ai" kind="show" id="b6U-KS-xaf"/>
+                                    <segue destination="g20-bz-1ai" kind="show" identifier="skipToTutorial3" id="b6U-KS-xaf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -463,7 +442,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggU-an-fqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2836" y="-139"/>
+            <point key="canvasLocation" x="2824" y="-230"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="d3S-8N-EBd">
@@ -496,7 +475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h9E-0A-xO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3200" y="-139"/>
+            <point key="canvasLocation" x="3234" y="-230"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="mdR-u6-hMM">
@@ -541,4 +520,8 @@
     <resources>
         <image name="manplaceholder.jpg" width="100" height="100"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="v3B-zp-gUz"/>
+        <segue reference="8Po-aI-aTM"/>
+    </inferredMetricsTieBreakers>
 </document>

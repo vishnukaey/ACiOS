@@ -34,7 +34,7 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-  
+  [self performSegueWithIdentifier:@"selectPhoto" sender:self];
 }
 
 @end
