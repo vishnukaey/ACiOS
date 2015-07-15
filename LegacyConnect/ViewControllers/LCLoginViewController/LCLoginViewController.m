@@ -2,7 +2,7 @@
 //  LCLoginViewController.m
 //  LegacyConnect
 //
-//  Created by qbuser on 7/9/15.
+//  Created by Vishnu on 7/9/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
@@ -31,12 +31,18 @@
 }
 
 
-- (IBAction)loginButtonTapped:(id)sender
+- (IBAction)loginButtonClicked:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:YES forKey:@"logged_in"];
   [defaults synchronize];
   [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+
+- (IBAction)forgotPasswordButtonClicked:(id)sender
+{
+  
 }
 
 

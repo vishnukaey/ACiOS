@@ -1,18 +1,18 @@
 //
-//  LCChooseCausesVC.m
+//  LCForgotPasswordViewController.m
 //  LegacyConnect
 //
-//  Created by Vishnu on 7/15/15.
+//  Created by Govind_Office on 15/07/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCChooseCausesVC.h"
+#import "LCForgotPasswordViewController.h"
 
-@interface LCChooseCausesVC ()
+@interface LCForgotPasswordViewController ()
 
 @end
 
-@implementation LCChooseCausesVC
+@implementation LCForgotPasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,5 +33,10 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)backButtonClicked:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

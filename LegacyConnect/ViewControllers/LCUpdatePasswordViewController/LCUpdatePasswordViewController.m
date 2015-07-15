@@ -1,18 +1,18 @@
 //
-//  LCChooseCausesVC.m
+//  LCUpdatePasswordViewController.m
 //  LegacyConnect
 //
-//  Created by Vishnu on 7/15/15.
+//  Created by Govind_Office on 15/07/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCChooseCausesVC.h"
-
-@interface LCChooseCausesVC ()
+#import "LCUpdatePasswordViewController.h"
+#import "LCLoginViewController.h"
+@interface LCUpdatePasswordViewController ()
 
 @end
 
-@implementation LCChooseCausesVC
+@implementation LCUpdatePasswordViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,5 +33,25 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+- (IBAction)updatePasswordButtonClicked:(id)sender
+{
+  
+  for(UIViewController * vc in self.navigationController.viewControllers)
+  {
+    if ([vc isKindOfClass:[LCLoginViewController class]])
+    {
+      [self.navigationController popToViewController:vc animated:YES];
+    }
+  }
+}
+
+
+- (IBAction)backButtonClicked:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 @end
