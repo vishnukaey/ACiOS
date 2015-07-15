@@ -196,14 +196,15 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
+				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
+				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
+				0B3594271B4E6D980098C484 /* LCSignupViewController */,
+				0B3594211B4E6BC80098C484 /* LCLoginHomeViewController */,
 				0BC755701B562A8F009CE7F3 /* LCContactsListVC */,
 				0BC7556C1B5629DF009CE7F3 /* LCConnectFriends */,
 				0BC755681B562982009CE7F3 /* LCChooseCausesVC */,
 				0BC755641B562921009CE7F3 /* LCSignUpUserPhotoVC */,
-				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
-				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
-				0B3594271B4E6D980098C484 /* LCSignupViewController */,
-				0B3594211B4E6BC80098C484 /* LCLoginHomeViewController */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
@@ -321,13 +322,7 @@
 			children = (
 				0BC755721B562AB7009CE7F3 /* Feeds */,
 				0BC755711B562AAD009CE7F3 /* Registration */,
-				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
-				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
 				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
-				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
-				0B3594271B4E6D980098C484 /* LCSignupViewController */,
-				0B3594211B4E6BC80098C484 /* LCLoginHomeViewController */,
-				0B35941D1B4E6AE00098C484 /* LCFeedsHomeViewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
