@@ -17,8 +17,8 @@
 @implementation LCEmptyViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
 }
 
 
@@ -31,18 +31,20 @@
   {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
     UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+    [self.navigationController setNavigationBarHidden:YES];
     [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
   }
   else
   {
+    [self.navigationController setNavigationBarHidden:NO];
     [self performSegueWithIdentifier:@"showFeeds" sender:self];
   }
 }
 
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 
