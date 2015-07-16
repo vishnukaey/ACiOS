@@ -651,7 +651,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="updatePasswordButtonClicked:" destination="eYx-RK-K5O" eventType="touchDown" id="i9S-8u-S5e"/>
+                                    <action selector="updatePasswordButtonClicked:" destination="eYx-RK-K5O" eventType="touchDown" id="uYa-ao-XQU"/>
                                 </connections>
                             </button>
                         </subviews>
