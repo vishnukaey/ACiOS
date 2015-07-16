@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCLoginTextField.h"
 
 @interface LCSignupViewController : UIViewController
-
+{
+  LCUser *user;
+}
+@property (weak, nonatomic) IBOutlet LCLoginTextField *firstNameTextField;
+@property (weak, nonatomic) IBOutlet LCLoginTextField *lastNameTextField;
+@property (weak, nonatomic) IBOutlet LCLoginTextField *emailTextField;
+@property (weak, nonatomic) IBOutlet LCLoginTextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet LCLoginTextField *confirmPasswordTextField;
+@property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 @end

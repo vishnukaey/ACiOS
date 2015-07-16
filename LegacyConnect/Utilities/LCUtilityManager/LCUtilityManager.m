@@ -7,6 +7,8 @@
 //
 
 #import "LCUtilityManager.h"
+#import <AFNetworking/AFNetworkReachabilityManager.h>
+
 
 @implementation LCUtilityManager
 

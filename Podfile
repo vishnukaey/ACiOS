@@ -6,6 +6,7 @@ pod 'AFNetworking', '~> 2.5'
 pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
+pod 'UITextField+Shake', '~> 1.0'
 end
 
 target 'LegacyConnectTests' do
