@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCContactsListVC : UIViewController
+@interface LCContactsListVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+{
+    NSArray *H_contactsArray;
+}
 
 @end
