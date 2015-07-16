@@ -10,4 +10,7 @@
 
 @interface LCConstants : NSObject
 
+extern NSString *const kEmptyStringValue;
+
+
 @end

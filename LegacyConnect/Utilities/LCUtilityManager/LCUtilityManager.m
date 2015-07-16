@@ -15,5 +15,13 @@
   return [AFNetworkReachabilityManager sharedManager].reachable;
 }
 
++ (NSString *)performNullCheckAndSetValue:(NSString *)value
+{
+  if (value && ![value isKindOfClass:[NSNull class]])
+  {
+    return value;
+  }
+  return kEmptyStringValue;
+}
 
 @end

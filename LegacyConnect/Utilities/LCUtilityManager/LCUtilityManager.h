@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AFNetworking/AFNetworkReachabilityManager.h>
+#import "LCConstants.h"
 
 @interface LCUtilityManager : NSObject
 
 + (BOOL)isNetworkAvailable;
++ (NSString *)performNullCheckAndSetValue:(NSString *)value;
 
 @end

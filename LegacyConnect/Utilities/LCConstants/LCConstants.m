@@ -10,4 +10,6 @@
 
 @implementation LCConstants
 
+NSString *const kEmptyStringValue = @"";
+
 @end

@@ -22,6 +22,7 @@
 		0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */; };
 		0BC755801B563907009CE7F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BC7557F1B563907009CE7F3 /* Localizable.strings */; };
 		0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BD1428A1B552914004F7647 /* manplaceholder.jpg */; };
+		0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
 		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
 		0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */; };
@@ -77,6 +78,8 @@
 		0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUtilityManager.m; path = Utilities/LCUtilityManager/LCUtilityManager.m; sourceTree = "<group>"; };
 		0BC7557F1B563907009CE7F3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Utilities/Localizable.strings; sourceTree = "<group>"; };
 		0BD1428A1B552914004F7647 /* manplaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manplaceholder.jpg; sourceTree = "<group>"; };
+		0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFinalTutorialVC.h; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.h; sourceTree = "<group>"; };
+		0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFinalTutorialVC.m; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.m; sourceTree = "<group>"; };
 		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF05A4C1B4E622200FF7B39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -209,6 +212,7 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				0BD5936F1B57786200658E99 /* LCFinalTutorialVC */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
 				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
@@ -255,6 +259,15 @@
 				0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */,
 			);
 			name = LCUtilityManager;
+			sourceTree = "<group>";
+		};
+		0BD5936F1B57786200658E99 /* LCFinalTutorialVC */ = {
+			isa = PBXGroup;
+			children = (
+				0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */,
+				0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */,
+			);
+			name = LCFinalTutorialVC;
 			sourceTree = "<group>";
 		};
 		0BF05A331B4E622200FF7B39 = {
@@ -572,6 +585,7 @@
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */,
+				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -676,6 +690,8 @@
 			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -687,6 +703,8 @@
 			baseConfigurationReference = 61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -701,6 +719,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -720,6 +740,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				INFOPLIST_FILE = LegacyConnectTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
