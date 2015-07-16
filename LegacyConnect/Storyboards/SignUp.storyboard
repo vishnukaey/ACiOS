@@ -340,7 +340,7 @@
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
             <objects>
-                <viewController id="ajw-VA-3ws" customClass="LCContactsListVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ContactList" id="ajw-VA-3ws" customClass="LCContactsListVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="cQ0-a5-xB0"/>
                         <viewControllerLayoutGuide type="bottom" id="RK4-Rf-Hn0"/>

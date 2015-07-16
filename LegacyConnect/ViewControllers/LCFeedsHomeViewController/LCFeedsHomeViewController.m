@@ -11,7 +11,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "GIButton.h"
 
-
+#import "LCContactsListVC.h"
 
 
 
@@ -46,8 +46,9 @@
 //    H_feedsTable.layer.borderWidth = 4;
     [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    
 }
+
+
 
 -(void)GIBComponentsAction :(UIButton *)sender
 {
@@ -183,12 +184,20 @@
     NSLog(@"actionType--->>>%d", type);
     if (type==2)//comments
     {
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+//        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+//                                                      bundle:nil];
+//        LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+//        
+//        [self.navigationController pushViewController:next animated:YES];
+        
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp"
                                                       bundle:nil];
-        LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+        LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
         
         [self.navigationController pushViewController:next animated:YES];
     }
 }
+
+
 
 @end

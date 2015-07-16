@@ -36,6 +36,7 @@
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
+		CEC17E391B578D51004F9D87 /* contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC17E381B578D51004F9D87 /* contact.m */; };
 		CECBC8D11B56794F0012B287 /* feedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* feedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* GIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* GIButton.m */; };
 /* End PBXBuildFile section */
@@ -100,6 +101,8 @@
 		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
 		CE1FA2E61B5508AA00A9B609 /* clock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clock.jpg; sourceTree = "<group>"; };
+		CEC17E371B578D51004F9D87 /* contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = contact.h; sourceTree = "<group>"; };
+		CEC17E381B578D51004F9D87 /* contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = contact.m; sourceTree = "<group>"; };
 		CECBC8CD1B56794F0012B287 /* feedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = feedCellView.h; path = CustomViews/feedCellView.h; sourceTree = "<group>"; };
 		CECBC8CE1B56794F0012B287 /* feedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = feedCellView.m; path = CustomViews/feedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* GIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GIButton.h; path = CustomViews/GIButton.h; sourceTree = "<group>"; };
@@ -356,6 +359,8 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CEC17E371B578D51004F9D87 /* contact.h */,
+				CEC17E381B578D51004F9D87 /* contact.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -581,6 +586,7 @@
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
+				CEC17E391B578D51004F9D87 /* contact.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
