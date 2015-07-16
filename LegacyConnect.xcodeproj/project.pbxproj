@@ -559,6 +559,8 @@
 				CECBC8D11B56794F0012B287 /* feedCellView.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
+				CE0374511B5623200031FFC7 /* GIButton.m in Sources */,
+				0BC755881B567724009CE7F3 /* LCUpdatePasswordViewController.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				9662871E1B56448E00C91196 /* LCForgotPasswordViewController.m in Sources */,
