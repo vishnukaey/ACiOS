@@ -34,7 +34,7 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-  if(![self validateFields])
+  if([self validateFields])
   {
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   }
@@ -64,23 +64,16 @@
   if([_firstNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _firstNameTextField.isValid = NO;
+    [self.firstNameTextField shake];
     isValid = NO;
   }
   if([_lastNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _lastNameTextField.isValid = NO;
+    [self.lastNameTextField shake];
     isValid = NO;
   }
-  if([_emailTextField.text isEqualToString:kEmptyStringValue])
-  {
-    _emailTextField.isValid = NO;
-    isValid = NO;
-  }
-  if([_passwordTextField.text isEqualToString:kEmptyStringValue] || [_confirmPasswordTextField.text isEqualToString:kEmptyStringValue])
-  {
-    _passwordTextField.isValid = NO;
-    isValid = NO;
-  }
+
   if(!isValid)
   {
     _warningLabel.text = @"Missing Fields";
@@ -103,6 +96,7 @@
   else
   {
     _emailTextField.isValid = NO;
+    [self.emailTextField shake];
     _warningLabel.text = @"Invalid Email";
     return NO;
   }
@@ -112,15 +106,24 @@
 - (BOOL)validatePasswords
 {
   [self clearWarnings];
-  if([_passwordTextField.text isEqualToString:_confirmPasswordTextField.text])
+  if([_passwordTextField.text isEqualToString:kEmptyStringValue])
+  {
+    _warningLabel.text = @"Password Missing";
+    _passwordTextField.isValid = NO;
+    [self.passwordTextField shake];
+        return NO;
+  }
+  else if([_passwordTextField.text isEqualToString:_confirmPasswordTextField.text])
   {
     _confirmPasswordTextField.isValid=YES;
+
     return YES;
   }
   else
   {
     _warningLabel.text = @"Password Mismatch";
     _confirmPasswordTextField.isValid = NO;
+    [self.confirmPasswordTextField shake];
     return NO;
   }
 }
