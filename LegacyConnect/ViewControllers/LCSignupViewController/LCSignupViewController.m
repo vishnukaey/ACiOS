@@ -34,7 +34,7 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-  if([self validateFields])
+  if(![self validateFields])
   {
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   }

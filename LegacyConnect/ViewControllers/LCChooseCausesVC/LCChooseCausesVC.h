@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LCChooseCausesVC : UIViewController
-
+@property (weak, nonatomic) IBOutlet UICollectionView *interestsCollectionView;
+@property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
+@property (weak, nonatomic) IBOutlet UIPageControl *pagecontroller;
 @end
