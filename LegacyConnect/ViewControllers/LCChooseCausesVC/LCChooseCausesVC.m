@@ -10,13 +10,18 @@
 #import "LCChooseCausesCollectionViewCell.h"
 
 @interface LCChooseCausesVC ()
-
+{
+  NSMutableArray *selectedCauses;
+  NSMutableArray *selectedInterests;
+}
 @end
 
 @implementation LCChooseCausesVC
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+  selectedCauses = [[NSMutableArray alloc] init];
+  selectedInterests = [[NSMutableArray alloc] init];
   // Do any additional setup after loading the view.
 }
 
@@ -30,7 +35,7 @@
   if([collectionView isEqual:_interestsCollectionView])
     return 10;
   else
-    return 20;
+    return 50;
 }
 
 
@@ -41,13 +46,35 @@
     static NSString *cellIdentifier = @"interestsCollectionViewCell";
     
     LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    if (cell == nil)
+    {
+      NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
+      cell=cells[0];
+    }
+    if([selectedInterests containsObject:indexPath])
+    {
+      cell.selectionButton.selected =YES;
+    }
+    else
+    {
+      cell.selectionButton.selected=NO;
+    }
     return cell;
   }
   else
   {
     static NSString *cellIdentifier = @"causesCollectionViewCell";
-    
     LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    if([selectedCauses containsObject:indexPath])
+    {
+      cell.selectionButton.selected =YES;
+    }
+    else
+    {
+      cell.selectionButton.selected=NO;
+    }
+    _pagecontroller.numberOfPages = floor(self.causesCollectionView.contentSize.width /
+                                          self.causesCollectionView.frame.size.width) + 1;
     return cell;
   }
 }
@@ -71,8 +98,30 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-  cell.selectionButton.selected = !cell.selectionButton.selected;
+  if([collectionView isEqual:_causesCollectionView])
+  {
+    if([selectedCauses containsObject:indexPath])
+    {
+      [selectedCauses removeObject:indexPath];
+    }
+    else
+    {
+      [selectedCauses addObject:indexPath];
+    }
+    [self.causesCollectionView reloadData];
+  }
+  else
+  {
+    if([selectedInterests containsObject:indexPath])
+    {
+      [selectedInterests removeObject:indexPath];
+    }
+    else
+    {
+      [selectedInterests addObject:indexPath];
+    }
+    [self.interestsCollectionView reloadData];
+  }
 }
 
 @end
