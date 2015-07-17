@@ -13,5 +13,6 @@
 
 + (BOOL)isNetworkAvailable;
 + (NSString *)performNullCheckAndSetValue:(NSString *)value;
++ (NSArray *)getPhoneContacts;
 
 @end
