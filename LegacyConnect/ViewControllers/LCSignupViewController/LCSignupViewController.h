@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LCLoginTextField.h"
+#import <UITextField+Shake/UITextField+Shake.h>
 
 @interface LCSignupViewController : UIViewController
 {
