@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LCFinalTutorialVC : UIViewController
-
+@property (assign, nonatomic) NSInteger pageIndex;
 @end

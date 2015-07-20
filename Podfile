@@ -7,6 +7,7 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'UITextField+Shake', '~> 1.0'
+pod 'MFSideMenu'
 end
 
 target 'LegacyConnectTests' do

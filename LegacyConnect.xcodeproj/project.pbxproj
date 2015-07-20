@@ -31,6 +31,7 @@
 		0BE2B9B51B58D79C0026E607 /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B41B58D79C0026E607 /* photo.jpg */; };
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
 		0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BE2B9BA1B590B190026E607 /* simple-green-check-button-th.png */; };
+		0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE437151B5D30090072600C /* LCTutorialContainerVC.m */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
 		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
 		0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */; };
@@ -101,6 +102,8 @@
 		0BE2B9B61B58F7B80026E607 /* LCChooseCausesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseCausesCollectionViewCell.h; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.h; sourceTree = "<group>"; };
 		0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCChooseCausesCollectionViewCell.m; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.m; sourceTree = "<group>"; };
 		0BE2B9BA1B590B190026E607 /* simple-green-check-button-th.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simple-green-check-button-th.png"; sourceTree = "<group>"; };
+		0BE437141B5D30090072600C /* LCTutorialContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialContainerVC.h; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.h; sourceTree = "<group>"; };
+		0BE437151B5D30090072600C /* LCTutorialContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialContainerVC.m; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.m; sourceTree = "<group>"; };
 		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF05A4C1B4E622200FF7B39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +281,7 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				0BE437171B5D300E0072600C /* LCTutorialContainerVC */,
 				0BD5936F1B57786200658E99 /* LCFinalTutorialVC */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
@@ -343,6 +347,15 @@
 				0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */,
 			);
 			name = LCChooseCausesCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		0BE437171B5D300E0072600C /* LCTutorialContainerVC */ = {
+			isa = PBXGroup;
+			children = (
+				0BE437141B5D30090072600C /* LCTutorialContainerVC.h */,
+				0BE437151B5D30090072600C /* LCTutorialContainerVC.m */,
+			);
+			name = LCTutorialContainerVC;
 			sourceTree = "<group>";
 		};
 		0BF05A331B4E622200FF7B39 = {
@@ -664,6 +677,7 @@
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
+				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
 				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0B5FA6E91B57BB4A00DDC2B1 /* contact.m in Sources */,
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,

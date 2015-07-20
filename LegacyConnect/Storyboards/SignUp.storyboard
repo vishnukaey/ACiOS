@@ -425,7 +425,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="35I-eZ-UNh" kind="show" identifier="skipToTutorial" id="gZR-kJ-XwM"/>
+                                    <segue destination="CSB-n7-86j" kind="show" id="d1M-8h-KHT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -477,10 +477,10 @@
             </objects>
             <point key="canvasLocation" x="2056" y="-623"/>
         </scene>
-        <!--View Controller-->
+        <!--Final TutorialVC-->
         <scene sceneID="aDc-Ju-RoL">
             <objects>
-                <viewController id="35I-eZ-UNh" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page1" id="35I-eZ-UNh" customClass="LCFinalTutorialVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uWh-CV-F1Y"/>
                         <viewControllerLayoutGuide type="bottom" id="hvn-Br-I3y"/>
@@ -489,21 +489,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UU2-DM-d19">
-                                <rect key="frame" x="84" y="20" width="152" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque at tellus in vestibulum." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj5-FB-632">
+                                <rect key="frame" x="16" y="337" width="280" height="81"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdk-r2-35y">
-                                <rect key="frame" x="141" y="518" width="39" height="30"/>
-                                <state key="normal" title="NEXT">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="IXT-YA-8iR" kind="show" identifier="skipToTutorial2" id="Ga7-AU-dd0"/>
-                                </connections>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="sN0-d2-aUH">
+                                <rect key="frame" x="16" y="28" width="280" height="312"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -511,76 +505,59 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2431" y="-230"/>
+            <point key="canvasLocation" x="3154" y="-298"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="cb6-Ky-QXR">
+        <!--Tutorial ContainerVC-->
+        <scene sceneID="JsV-I3-yg1">
             <objects>
-                <viewController id="IXT-YA-8iR" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="page2" id="CSB-n7-86j" customClass="LCTutorialContainerVC" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="MeY-6o-mck"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zp7-Ev-4G7"/>
+                        <viewControllerLayoutGuide type="top" id="mYq-rQ-hUT"/>
+                        <viewControllerLayoutGuide type="bottom" id="beP-qa-g4n"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="A2k-Hs-WKa">
+                    <view key="view" contentMode="scaleToFill" id="bxd-dC-RlD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YO6-Kx-r6J">
-                                <rect key="frame" x="79" y="28" width="152" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGG-iL-af9">
-                                <rect key="frame" x="141" y="518" width="39" height="30"/>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQq-f6-GVH">
+                                <rect key="frame" x="0.0" y="57" width="320" height="453"/>
+                                <connections>
+                                    <segue destination="jAT-tD-Nau" kind="embed" id="WjI-LB-tb5"/>
+                                </connections>
+                            </containerView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdk-r2-35y">
+                                <rect key="frame" x="110" y="518" width="100" height="30"/>
                                 <state key="normal" title="NEXT">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="g20-bz-1ai" kind="show" identifier="skipToTutorial3" id="b6U-KS-xaf"/>
-                                </connections>
                             </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ggU-an-fqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2824" y="-230"/>
-        </scene>
-        <!--Final TutorialVC-->
-        <scene sceneID="d3S-8N-EBd">
-            <objects>
-                <viewController id="g20-bz-1ai" customClass="LCFinalTutorialVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4hM-IS-Bdq"/>
-                        <viewControllerLayoutGuide type="bottom" id="WGZ-Z4-ekX"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="R7h-0A-l6g">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IsI-tP-0bO">
-                                <rect key="frame" x="84" y="20" width="152" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxH-cA-wZg">
+                                <rect key="frame" x="84" y="28" width="152" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IS6-A5-rdi">
-                                <rect key="frame" x="141" y="518" width="49" height="30"/>
-                                <state key="normal" title="GOT IT">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="nextButton" destination="mdk-r2-35y" id="16y-Rb-yUz"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="h9E-0A-xO6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NLI-I1-il1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3234" y="-230"/>
+            <point key="canvasLocation" x="2416" y="-298"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="dCQ-Az-kVE">
+            <objects>
+                <pageViewController storyboardIdentifier="pageview" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jAT-tD-Nau" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1zS-Dn-wRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2797" y="-298"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="mdR-u6-hMM">
