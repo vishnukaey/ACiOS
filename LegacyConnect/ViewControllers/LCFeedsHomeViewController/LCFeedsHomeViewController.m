@@ -9,9 +9,13 @@
 #import "LCFeedsHomeViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #import "GIButton.h"
 
 #import "LCContactsListVC.h"
+#import "LCConnectFriendsVC.h"
+
+
 
 
 
@@ -46,6 +50,12 @@
 //    H_feedsTable.layer.borderWidth = 4;
     [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    
+
+    
+    
+    
+   
 }
 
 
@@ -193,6 +203,13 @@
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp"
                                                       bundle:nil];
         LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
+        
+        [self.navigationController pushViewController:next animated:YES];
+    }
+    if (type==1) {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp"
+                                                      bundle:nil];
+        LCConnectFriendsVC *next = [sb instantiateViewControllerWithIdentifier:@"connectFriends"];
         
         [self.navigationController pushViewController:next animated:YES];
     }
