@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    [self.navigationController setNavigationBarHidden:YES];
     
     H_mainTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
     
@@ -27,7 +27,6 @@
     H_mainTable.delegate = self;
     H_mainTable.dataSource = self;
     [H_mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
     
     
     

@@ -15,26 +15,39 @@
 #import "LCContactsListVC.h"
 #import "LCConnectFriendsVC.h"
 
+#import "LCAppDelegate.h"
 
 
 
-
-
-
-
-@interface LCFeedsHomeViewController ()
-
-@end
 
 @implementation LCFeedsHomeViewController
 
+@synthesize P_containerController;
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
     
-    GIButton * giButton = [[GIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 60, self.view.frame.size.height - 60, 50, 50)];
-    [self.view addSubview:giButton];
+    
+    
+//    H_feedsTable.layer.borderColor = [UIColor yellowColor].CGColor;
+//    H_feedsTable.layer.borderWidth = 4;
+    [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.P_containerController = (MFSideMenuContainerViewController *)appdel.window.rootViewController;
+    
+    [self addfloatingButtons];
+   
+}
+
+
+-(void)addfloatingButtons
+{
+    //global impact button
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    GIButton * giButton = [[GIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
+    [appdel.window addSubview:giButton];
     [giButton setUpMenu];
     [giButton addTarget:self action:@selector(GIBAction:) forControlEvents:UIControlEventTouchUpInside];
     giButton.P_community.tag = 0;
@@ -46,20 +59,37 @@
     giButton.P_status.tag = 2;
     [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
     
-//    H_feedsTable.layer.borderColor = [UIColor yellowColor].CGColor;
-//    H_feedsTable.layer.borderWidth = 4;
-    [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
-    
-
-    
-    
-    
-   
+    //menu poper button
+    UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,70, 30, 30)];
+    menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
+    menuButton.backgroundColor = [UIColor grayColor];
+    [appdel.window addSubview:menuButton];
+    [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
+-(void)prepareFeedViews
+{
+    NSDictionary *dic1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"Global Employment",@"cause",  @"15 minutes ago",@"time",   @"Can't wait to run in Haiti for TeamTassy, stay tuned for details!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
+    
+    NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mark Smith",@"user_name",   @"2",@"type",     @"Ocean Initiative group",@"cause",  @"35 minutes ago",@"time",   @"Perfect weather for today's meetup!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",   @"",@"profile_pic",  nil];
+    
+    NSArray *feedsArray = [[NSArray alloc]initWithObjects:dic1, dic2, nil];
+    
+    
+    H_feedsViewArray = [[NSMutableArray alloc]init];
+    for (int i=0; i<feedsArray.count; i++) {
+        feedCellView *celViewFinal = [[feedCellView alloc]init];
+        [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:1];
+        celViewFinal.delegate = self;
+        [H_feedsViewArray addObject:celViewFinal];
+    }
+}
 
-
+#pragma mark - menu and GIButton actions
+-(void)menuButtonAction
+{
+    [self.P_containerController setMenuState:MFSideMenuStateLeftMenuOpen];
+}
 -(void)GIBComponentsAction :(UIButton *)sender
 {
     NSLog(@"tag-->>%d", (int)sender.tag);
@@ -80,23 +110,7 @@
 }
 
 
--(void)prepareFeedViews
-{
-    NSDictionary *dic1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"Global Employment",@"cause",  @"15 minutes ago",@"time",   @"Can't wait to run in Haiti for TeamTassy, stay tuned for details!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
-    
-    NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mark Smith",@"user_name",   @"2",@"type",     @"Ocean Initiative group",@"cause",  @"35 minutes ago",@"time",   @"Perfect weather for today's meetup!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",   @"",@"profile_pic",  nil];
-    
-    NSArray *feedsArray = [[NSArray alloc]initWithObjects:dic1, dic2, nil];
-    
 
-    H_feedsViewArray = [[NSMutableArray alloc]init];
-    for (int i=0; i<feedsArray.count; i++) {        
-        feedCellView *celViewFinal = [[feedCellView alloc]init];
-        [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:1];
-        celViewFinal.delegate = self;
-        [H_feedsViewArray addObject:celViewFinal];
-    }
-}
 
 -(void) viewWillAppear:(BOOL)animated
 {
@@ -122,7 +136,6 @@
 
 - (IBAction)logout:(id)sender
 {
-    
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:NO forKey:@"logged_in"];
   [defaults synchronize];
@@ -213,6 +226,13 @@
         
         [self.navigationController pushViewController:next animated:YES];
     }
+}
+
+#pragma mark - leftmenu delegates
+-(void)leftMenuButtonActions:(UIButton *)sender
+{
+    NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
+    [self.P_containerController setMenuState:MFSideMenuStateClosed];
 }
 
 
