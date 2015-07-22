@@ -47,6 +47,7 @@
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
 		CEBED6981B5F78B00012FEBB /* LCDummyValues.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6971B5F78B00012FEBB /* LCDummyValues.m */; };
+		CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
 /* End PBXBuildFile section */
@@ -130,6 +131,8 @@
 		CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLeftMenuController.m; path = ViewControllers/LCFeedsHomeViewController/LCLeftMenuController.m; sourceTree = "<group>"; };
 		CEBED6961B5F78B00012FEBB /* LCDummyValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCDummyValues.h; sourceTree = "<group>"; };
 		CEBED6971B5F78B00012FEBB /* LCDummyValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCDummyValues.m; sourceTree = "<group>"; };
+		CEBED6991B5F89560012FEBB /* LCFBContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFBContactsVC.h; path = ViewControllers/LCContactsListVC/LCFBContactsVC.h; sourceTree = "<group>"; };
+		CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFBContactsVC.m; path = ViewControllers/LCContactsListVC/LCFBContactsVC.m; sourceTree = "<group>"; };
 		CECBC8CD1B56794F0012B287 /* LCFeedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedCellView.h; path = CustomViews/LCFeedCellView.h; sourceTree = "<group>"; };
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 			children = (
 				0BC7556D1B562A8A009CE7F3 /* LCContactsListVC.h */,
 				0BC7556E1B562A8A009CE7F3 /* LCContactsListVC.m */,
+				CEBED6991B5F89560012FEBB /* LCFBContactsVC.h */,
+				CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */,
 			);
 			name = LCContactsListVC;
 			sourceTree = "<group>";
@@ -688,6 +693,7 @@
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
 				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
+				CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */,
 				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */,
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,

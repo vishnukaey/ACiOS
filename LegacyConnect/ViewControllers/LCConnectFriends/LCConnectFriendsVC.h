@@ -8,10 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCConnectFriendsVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
-{
-    UITableView *H_friendsTable;
-    NSMutableArray *H_friendsArray;;
-}
+@interface LCConnectFriendsVC : UIViewController
+
+-(IBAction)buttonActions :(UIButton *)sender;
 
 @end

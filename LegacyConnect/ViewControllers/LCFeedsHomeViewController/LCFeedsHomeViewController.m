@@ -10,9 +10,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCGIButton.h"
-#import "LCContactsListVC.h"
-#import "LCConnectFriendsVC.h"
 #import "LCAppDelegate.h"
+#import "LCLoginHomeViewController.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -124,7 +123,15 @@
   {
     [[FBSDKLoginManager new] logOut];
   }
-  [self.navigationController popToRootViewControllerAnimated:NO];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+  LCLoginHomeViewController *login = [sb instantiateViewControllerWithIdentifier:@"LoginHomeVC"];
+  UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
+  [nav setNavigationBarHidden:YES];
+  appdel.window.rootViewController = nav;
+  [appdel.window makeKeyAndVisible];
+  
+  
 }
 
 #pragma mark - TableView delegates
@@ -178,17 +185,10 @@
         LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
         
         [self.navigationController pushViewController:next animated:YES];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
-//    LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
-//    [self.navigationController pushViewController:next animated:YES];
   }
   
   if (type==1)
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp"
-    bundle:nil];
-    LCConnectFriendsVC *next = [sb instantiateViewControllerWithIdentifier:@"connectFriends"];
-    [self.navigationController pushViewController:next animated:YES];
   }
 }
 
