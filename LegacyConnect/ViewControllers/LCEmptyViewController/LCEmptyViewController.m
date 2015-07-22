@@ -27,11 +27,10 @@
   // Do any additional setup after loading the view.
 }
 
-
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
+
   // Check if user is not logged in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:@"logged_in"] && ![FBSDKAccessToken currentAccessToken])
   {
@@ -42,30 +41,27 @@
   }
   else
   {
-      //create appdelegate object to make the MFmenucontainer controller as the root view controller
-      //add homefeed controller as the center controller and leftmenu controller as the left menu to the container controller.
-      //make the homefeed controller as delegate of leftmenu
-      LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-      
-      LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
-      UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-      
-      LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
-      leftSideMenuViewController.P_menuwidth = appdel.window.frame.size.width*2/3;
-      leftSideMenuViewController.delegate_ = centerViewController;
+    //create appdelegate object to make the MFmenucontainer controller as the root view controller
+    //add homefeed controller as the center controller and leftmenu controller as the left menu to the container controller.
+    //make the homefeed controller as delegate of leftmenu
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-      MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
-                                                      containerWithCenterViewController:nav
-                                                      leftMenuViewController:leftSideMenuViewController
-                                                      rightMenuViewController:nil];
-      container.leftMenuWidth = leftSideMenuViewController.P_menuwidth;
-      appdel.window.rootViewController = container;
-      [appdel.window makeKeyAndVisible];
-      
+    LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:centerViewController];
 
+    LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
+    leftSideMenuViewController.P_menuwidth = appdel.window.frame.size.width*2/3;
+    leftSideMenuViewController.delegate_ = centerViewController;
+
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
+                                                    containerWithCenterViewController:nav
+                                                    leftMenuViewController:leftSideMenuViewController
+                                                    rightMenuViewController:nil];
+    container.leftMenuWidth = leftSideMenuViewController.P_menuwidth;
+    appdel.window.rootViewController = container;
+    [appdel.window makeKeyAndVisible];
   }
 }
-
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];

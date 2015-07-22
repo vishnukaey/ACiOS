@@ -10,13 +10,11 @@
 #import <UIKit/UIKit.h>
 
 @interface LCGIButton : UIButton
-{
-    
-}
+
+@property(nonatomic, retain)UIButton *P_community, *P_status, *P_video;
 
 -(void)showMenu;
 -(void)hideMenu;
 -(void)setUpMenu;
 
-@property(nonatomic, retain)UIButton *P_community, *P_status, *P_video;
 @end

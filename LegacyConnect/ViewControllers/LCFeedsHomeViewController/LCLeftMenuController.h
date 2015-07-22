@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+
+//---------protocols
 @protocol leftMenuDelegate <NSObject>
 
 -(void)leftMenuButtonActions:(UIButton *)sender;//this function will be defined in the homefeed controller
 
 @end
 
+//------interface
 @interface LCLeftMenuController : UIViewController
-
 
 @property(nonatomic, assign)float P_menuwidth;
 @property(nonatomic, retain)id delegate_;
+
 @end

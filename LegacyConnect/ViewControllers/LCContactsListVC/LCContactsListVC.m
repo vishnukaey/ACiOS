@@ -7,16 +7,12 @@
 //
 
 #import "LCContactsListVC.h"
-
 #import <AddressBook/AddressBook.h>
-
 #import "LCContact.h"
 
-@interface LCContactsListVC ()
-
-@end
 
 @implementation LCContactsListVC
+@synthesize P_contactType;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

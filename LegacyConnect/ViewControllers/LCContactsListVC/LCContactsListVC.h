@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface LCContactsListVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-    NSArray *H_contactsArray;
+  NSArray *H_contactsArray;
 }
+
+@property(nonatomic, assign)float P_contactType;//<<type=1 for facebook>> ----- <<type=2 for phone contacts>>
 
 @end

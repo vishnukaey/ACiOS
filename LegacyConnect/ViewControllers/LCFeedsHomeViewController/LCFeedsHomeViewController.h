@@ -15,11 +15,9 @@
 @interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate, leftMenuDelegate>
 {
   IBOutlet  UITableView *H_feedsTable;
-    
-    NSMutableArray *H_feedsViewArray;
+  NSMutableArray *H_feedsViewArray;
 }
 
 @property(nonatomic, retain)MFSideMenuContainerViewController *P_containerController;
-
 
 @end
