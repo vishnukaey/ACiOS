@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "feedCellView.h"
+#import "LCFeedCellView.h"
 
-@implementation feedCellView
+@implementation LCFeedCellView
 @synthesize delegate;
 
 -  (id)initWithFrame:(CGRect)frame

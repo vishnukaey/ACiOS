@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface contact : NSObject
+@interface LCContact : NSObject
 
 @property(nonatomic, retain)NSString * P_name;
 @property(nonatomic, retain)NSString * P_address;

@@ -9,7 +9,7 @@
 #import "LCUtilityManager.h"
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <AddressBook/AddressBook.h>
-#import "contact.h"
+#import "LCContact.h"
 
 
 @implementation LCUtilityManager
@@ -51,7 +51,7 @@
         @autoreleasepool {
             
             //data model
-            contact *contact_ = [[contact alloc] init];
+            LCContact *contact_ = [[LCContact alloc] init];
             
             ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
             

@@ -10,7 +10,7 @@
 
 #import <AddressBook/AddressBook.h>
 
-#import "contact.h"
+#import "LCContact.h"
 
 @interface LCContactsListVC ()
 
@@ -105,7 +105,7 @@
     UIView *contactCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
     
     UIImageView *contactImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-    contact *con = [H_contactsArray objectAtIndex:indexPath.row];
+    LCContact *con = [H_contactsArray objectAtIndex:indexPath.row];
     
     contactImage.image = con.P_image;
     [contactCell addSubview:contactImage];

@@ -10,7 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import "GIButton.h"
+#import "LCGIButton.h"
 
 #import "LCContactsListVC.h"
 #import "LCConnectFriendsVC.h"
@@ -46,7 +46,7 @@
 {
     //global impact button
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    GIButton * giButton = [[GIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
+    LCGIButton * giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
     [appdel.window addSubview:giButton];
     [giButton setUpMenu];
     [giButton addTarget:self action:@selector(GIBAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -78,7 +78,7 @@
     
     H_feedsViewArray = [[NSMutableArray alloc]init];
     for (int i=0; i<feedsArray.count; i++) {
-        feedCellView *celViewFinal = [[feedCellView alloc]init];
+        LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
         [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:1];
         celViewFinal.delegate = self;
         [H_feedsViewArray addObject:celViewFinal];
@@ -95,7 +95,7 @@
     NSLog(@"tag-->>%d", (int)sender.tag);
 }
 
--(void)GIBAction :(GIButton *)sender
+-(void)GIBAction :(LCGIButton *)sender
 {
     NSLog(@"gib-->>");
     if (sender.tag ==0) {

@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "feedCellView.h"
+#import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
 #import "MFSideMenu.h"
-#import "leftMenuController.h"
+#import "LCLeftMenuController.h"
 
 @interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate, leftMenuDelegate>
 {

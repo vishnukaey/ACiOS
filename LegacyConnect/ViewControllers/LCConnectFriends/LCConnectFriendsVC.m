@@ -10,7 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-#import "contact.h"
+#import "LCContact.h"
 
 @interface LCConnectFriendsVC ()
 
@@ -26,7 +26,7 @@
     //request permission for accessing the friends list of the user. No need to ask permission everytime. Should store the status once the permission is granted and avoid this step from next access
     
     FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-    [login logInWithReadPermissions:@[@"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    [login logInWithReadPermissions:@[@"user_friends", @"email", @"user_likes"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         if (error) {
             // Process error
             NSLog(@"permissionError-->>");
@@ -74,7 +74,7 @@
             H_friendsArray = [[NSMutableArray alloc] init];
             NSArray *friendsArray = [result objectForKey:@"data"];
             for (int i = 0; i<friendsArray.count; i++) {
-                contact * con = [[contact alloc] init];
+                LCContact * con = [[LCContact alloc] init];
                 con.P_name = [[friendsArray objectAtIndex:i] valueForKey:@"name"];
                 NSURL *imageURL = [NSURL URLWithString:[[[[friendsArray objectAtIndex:i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];//image url;
                 NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
@@ -126,7 +126,7 @@
     UIView *friendCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
     
     UIImageView *friendImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-    contact *con = [H_friendsArray objectAtIndex:indexPath.row];
+    LCContact *con = [H_friendsArray objectAtIndex:indexPath.row];
     
     friendImage.image = con.P_image;
     [friendCell addSubview:friendImage];

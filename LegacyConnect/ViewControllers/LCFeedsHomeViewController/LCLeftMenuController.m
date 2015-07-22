@@ -6,13 +6,13 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "leftMenuController.h"
+#import "LCLeftMenuController.h"
 
-@interface leftMenuController ()
+@interface LCLeftMenuController ()
 
 @end
 
-@implementation leftMenuController
+@implementation LCLeftMenuController
 
 @synthesize P_menuwidth, delegate_;
 

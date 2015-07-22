@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 User. All rights reserved.
 //
 
-#import "GIButton.h"
+#import "LCGIButton.h"
 
-@implementation GIButton
+@implementation LCGIButton
 @synthesize P_community, P_status, P_video;
 
 -  (id)initWithFrame:(CGRect)frame

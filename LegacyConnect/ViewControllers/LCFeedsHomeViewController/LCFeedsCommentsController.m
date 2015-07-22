@@ -71,7 +71,7 @@
         
         H_cellsViewArray = [[NSMutableArray alloc]init];
     
-    feedCellView *postView = [[feedCellView alloc]init];
+    LCFeedCellView *postView = [[LCFeedCellView alloc]init];
     [postView arrangeSelfForData:postDetail forWidth:H_mainTable.frame.size.width forPage:2];
     postView.delegate = self;
     [H_cellsViewArray addObject:postView];

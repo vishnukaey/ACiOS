@@ -14,7 +14,7 @@
 
 @end
 
-@interface leftMenuController : UIViewController
+@interface LCLeftMenuController : UIViewController
 
 
 @property(nonatomic, assign)float P_menuwidth;

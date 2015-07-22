@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "contact.h"
+#import "LCContact.h"
 
-@implementation contact
+@implementation LCContact
 @synthesize P_address, P_name, P_image, P_emails, P_numbers;
 
 @end

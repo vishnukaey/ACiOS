@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface GIButton : UIButton
+@interface LCGIButton : UIButton
 {
     
 }

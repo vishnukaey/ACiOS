@@ -14,7 +14,7 @@
 #import "MFSideMenu.h"
 #import "LCAppDelegate.h"
 
-#import "leftMenuController.h"
+#import "LCLeftMenuController.h"
 
 @interface LCEmptyViewController ()
 
@@ -50,7 +50,7 @@
       LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
       UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:centerViewController];
       
-      leftMenuController *leftSideMenuViewController = [[leftMenuController alloc] init];
+      LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
       leftSideMenuViewController.P_menuwidth = appdel.window.frame.size.width*2/3;
       leftSideMenuViewController.delegate_ = centerViewController;
 

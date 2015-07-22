@@ -16,7 +16,7 @@
 @end
 
 
-@interface feedCellView : UIView
+@interface LCFeedCellView : UIView
 {
     
 }
