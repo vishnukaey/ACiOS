@@ -32,6 +32,11 @@
                                                      annotation:annotation];
 }
 
++ (LCAppDelegate *)appDelegate
+{
+  return (LCAppDelegate *)[UIApplication sharedApplication];
+}
+
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];

@@ -9,15 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "LCLoginTextField.h"
 #import <UITextField+Shake/UITextField+Shake.h>
+#import "LCWebServiceManager.h"
 
 @interface LCSignupViewController : UIViewController
 {
   LCUser *user;
+  UIDatePicker *datePicker;
 }
 @property (weak, nonatomic) IBOutlet LCLoginTextField *firstNameTextField;
 @property (weak, nonatomic) IBOutlet LCLoginTextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet LCLoginTextField *emailTextField;
 @property (weak, nonatomic) IBOutlet LCLoginTextField *passwordTextField;
 @property (weak, nonatomic) IBOutlet LCLoginTextField *confirmPasswordTextField;
+@property (weak, nonatomic) IBOutlet LCLoginTextField *dobTextField;
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 @end

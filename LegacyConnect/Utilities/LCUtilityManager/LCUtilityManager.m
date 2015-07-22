@@ -9,6 +9,7 @@
 #import "LCUtilityManager.h"
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <AddressBook/AddressBook.h>
+#import <Reachability/Reachability.h>
 #import "contact.h"
 
 
@@ -16,7 +17,8 @@
 
 + (BOOL)isNetworkAvailable
 {
-  return [AFNetworkReachabilityManager sharedManager].reachable;
+  Reachability *reach= [Reachability reachabilityForInternetConnection];
+  return reach.isReachable;
 }
 
 + (NSString *)performNullCheckAndSetValue:(NSString *)value
@@ -28,11 +30,39 @@
   return kEmptyStringValue;
 }
 
+
++ (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message
+{
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
+  [alert show];
+}
+
+
++ (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format
+{
+  NSString *date = kEmptyStringValue;
+  if (![[self performNullCheckAndSetValue:timeStamp] isEqualToString:kEmptyStringValue] && ![timeStamp isEqualToString:@"0"])
+  {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:format];
+    date = [dateFormatter stringFromDate:[NSDate dateWithTimeIntervalSince1970:timeStamp.longLongValue/1000]];
+  }
+  return date;
+}
+
+
++ (NSString *)getTimeStampStringFromDate:(NSDate *)date
+{
+  NSTimeInterval timeInterval = [date timeIntervalSince1970];
+  NSString *timeStampString = [NSString stringWithFormat:@"%0.0f", timeInterval * 1000];
+  return timeStampString;
+}
+
+
+
+#pragma mark- Get Contacts
 + (NSArray *)getPhoneContacts {
-    
-    
-    
-    
+  
     CFErrorRef *error = nil;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
     ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
@@ -166,7 +196,7 @@
     CFRelease(addressBook);
     CFRelease(source);
     return items;
-    
 }
+
 
 @end

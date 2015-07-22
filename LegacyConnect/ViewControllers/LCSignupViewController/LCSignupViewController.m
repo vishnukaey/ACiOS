@@ -1,4 +1,4 @@
-  //
+//
 //  LCSignupViewController.m
 //  LegacyConnect
 //
@@ -17,7 +17,8 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-   user = [[LCUser alloc] init];
+  user = [[LCUser alloc] init];
+  [self setDobTextFieldWithInputView];
 }
 
 
@@ -25,6 +26,61 @@
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
+- (void) setDobTextFieldWithInputView
+{
+  datePicker = [[UIDatePicker alloc] init];
+  datePicker.datePickerMode = UIDatePickerModeDate;
+  [datePicker setMaximumDate:[NSDate date]];
+  NSString *str =@"01/01/1900";
+  NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+  [formatter setDateFormat:@"MM/dd/yyyy"];
+  NSDate *date = [formatter dateFromString:str];
+  [datePicker setMinimumDate:date];
+  NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDateComponents *components = [[NSDateComponents alloc] init];
+  [components setYear:1950];
+  [components setMonth:1];
+  [components setDay:1];
+  NSDate *defualtDate = [calendar dateFromComponents:components];
+  datePicker.date = defualtDate;
+  _dobTextField.inputView = datePicker;
+  [self createInputAccessoryView];
+}
+
+
+-(void)createInputAccessoryView
+{
+  UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+  accessoryView.barStyle = UIBarStyleBlackTranslucent;
+  UIBarButtonItem* flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
+  [doneButton setTintColor:[UIColor whiteColor]];
+  UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
+  [cancelButton setTintColor:[UIColor whiteColor]];
+  [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
+  [self.dobTextField setInputAccessoryView:accessoryView];
+}
+
+
+- (void) setDateAndDismissDatePickerView:(id)sender
+{
+  [_dobTextField resignFirstResponder];
+  [self updateTextFieldWithDate:self];
+}
+
+- (void)dismissDatePickerView:(id)sender
+{
+  [_dobTextField resignFirstResponder];
+}
+
+
+-(void) updateTextFieldWithDate:(id) picker
+{
+  NSString *timeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
+  _dobTextField.text = [LCUtilityManager getDateFromTimeStamp:timeStamp WithFormat:@"MM/dd/yyyy"];
+}
+
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
@@ -36,8 +92,27 @@
 {
   if([self validateFields])
   {
-    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+    [self registerUserOnline];
   }
+}
+
+
+- (void)registerUserOnline
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.dobTextField.text] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
+  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
+   {
+     NSLog(@"post success");
+     NSLog(@"%@",response);
+     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+     
+   } andFailure:^(NSString *error) {
+     
+     NSLog(@"post failure");
+     NSLog(@"%@",error);
+   }];
 }
 
 
@@ -67,13 +142,20 @@
     [self.firstNameTextField shake];
     isValid = NO;
   }
-  if([_lastNameTextField.text isEqualToString:kEmptyStringValue])
+  else if([_lastNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _lastNameTextField.isValid = NO;
     [self.lastNameTextField shake];
     isValid = NO;
   }
-
+  
+  else if([_dobTextField.text isEqualToString:kEmptyStringValue])
+  {
+    _dobTextField.isValid = NO;
+    [self.dobTextField shake];
+    isValid = NO;
+  }
+  
   if(!isValid)
   {
     _warningLabel.text = @"Missing Fields";
@@ -111,12 +193,12 @@
     _warningLabel.text = @"Password Missing";
     _passwordTextField.isValid = NO;
     [self.passwordTextField shake];
-        return NO;
+    return NO;
   }
   else if([_passwordTextField.text isEqualToString:_confirmPasswordTextField.text])
   {
     _confirmPasswordTextField.isValid=YES;
-
+    
     return YES;
   }
   else
@@ -136,5 +218,6 @@
   _emailTextField.isValid = YES;
   _passwordTextField.isValid = YES;
   _confirmPasswordTextField.isValid = YES;
+  _dobTextField.isValid =YES;
 }
 @end

@@ -33,12 +33,28 @@
 
 - (IBAction)loginButtonClicked:(id)sender
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:YES forKey:@"logged_in"];
-  [defaults synchronize];
-  [self.navigationController popToRootViewControllerAnimated:NO];
+  [self performOnlineLogin];
 }
 
+- (void)performOnlineLogin
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kLoginURL];
+  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
+   {
+     NSLog(@"post success");
+     NSLog(@"%@",response);
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     [defaults setBool:YES forKey:@"logged_in"];
+     [defaults synchronize];
+     [self.navigationController popToRootViewControllerAnimated:NO];
+     
+   } andFailure:^(NSString *error) {
+     NSLog(@"post failure");
+     NSLog(@"%@",error);
+   }];
+}
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
 {

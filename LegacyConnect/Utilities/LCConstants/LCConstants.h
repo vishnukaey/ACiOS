@@ -10,7 +10,20 @@
 
 @interface LCConstants : NSObject
 
-extern NSString *const kEmptyStringValue;
+extern NSString *const kBaseURL;
+extern NSString *const kLoginURL;
+extern NSString *const kRegisterURL;
+extern NSString *const kUpdatePasswordURL;
+extern NSString *const kForgotPasswordURL;
+extern NSString *const kChangePasswordURL;
+extern NSString *const kLogOutURL;
 
+extern NSString *const kFirstNameKey;
+extern NSString *const kLastNameKey;
+extern NSString *const kEmailKey;
+extern NSString *const kPasswordKey;
+extern NSString *const kDobKey;
+
+extern NSString *const kEmptyStringValue;
 
 @end

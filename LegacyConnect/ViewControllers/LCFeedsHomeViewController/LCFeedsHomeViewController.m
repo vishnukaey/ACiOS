@@ -16,12 +16,6 @@
 #import "LCConnectFriendsVC.h"
 
 
-
-
-
-
-
-
 @interface LCFeedsHomeViewController ()
 
 @end
@@ -122,7 +116,6 @@
 
 - (IBAction)logout:(id)sender
 {
-    
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:NO forKey:@"logged_in"];
   [defaults synchronize];

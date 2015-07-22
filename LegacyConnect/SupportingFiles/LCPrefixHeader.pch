@@ -13,5 +13,7 @@
 #import "LCUser.h"
 #import "LCUtilityManager.h"
 #import "LCDataManager.h"
+#import "LCUtilityManager.h"
+#import "LCAppDelegate.h"
 
 #endif

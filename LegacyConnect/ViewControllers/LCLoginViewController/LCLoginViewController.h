@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCWebServiceManager.h"
 
 @interface LCLoginViewController : UIViewController
 
-
-@property (nonatomic,retain) IBOutlet UITextField *userNameTextField;
+@property (nonatomic,retain) IBOutlet UITextField *emailTextField;
 @property (nonatomic,retain) IBOutlet UITextField *passwordTextField;
-
 
 @end
