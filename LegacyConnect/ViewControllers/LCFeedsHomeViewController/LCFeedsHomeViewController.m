@@ -13,15 +13,6 @@
 #import "LCAppDelegate.h"
 #import "LCLoginHomeViewController.h"
 
-#import "GIButton.h"
-
-#import "LCContactsListVC.h"
-#import "LCConnectFriendsVC.h"
-
-
-@interface LCFeedsHomeViewController ()
-
-@end
 
 @implementation LCFeedsHomeViewController
 

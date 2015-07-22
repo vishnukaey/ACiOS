@@ -10,8 +10,7 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <AddressBook/AddressBook.h>
 #import <Reachability/Reachability.h>
-#import "contact.h"
-
+#import "LCContact.h"
 
 @implementation LCUtilityManager
 
