@@ -122,10 +122,12 @@
 
 - (IBAction)logout:(id)sender
 {
+  /* uncomment test contacts functionality directly
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
   LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
   [self.navigationController pushViewController:next animated:YES];
   return;
+   */
   
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:NO forKey:@"logged_in"];
