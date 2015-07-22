@@ -33,7 +33,7 @@
   [super viewWillAppear:animated];
 
   // Check if user is not logged in
-  if(![[NSUserDefaults standardUserDefaults] boolForKey:@"logged_in"] && ![FBSDKAccessToken currentAccessToken])
+  if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey] && ![FBSDKAccessToken currentAccessToken])
   {
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
     UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];

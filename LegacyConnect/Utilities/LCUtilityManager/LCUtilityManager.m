@@ -58,6 +58,26 @@
 }
 
 
++ (NSString *)encodeToBase64String:(NSString *)string
+{
+  NSData *encodedData = [string dataUsingEncoding: NSUTF8StringEncoding];
+  NSString *base64String = [encodedData base64EncodedStringWithOptions:0];
+  return base64String;
+}
+
+
++ (NSString *)decodeFromBase64String:(NSString *)string
+{
+  NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:string options:0];
+  NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+  return decodedString;
+}
+
++ (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password
+{
+  NSString *appendedString = [NSString stringWithFormat:@"%@%@",userID,password];
+  return [LCUtilityManager encodeToBase64String:appendedString];
+}
 
 #pragma mark- Get Contacts
 + (NSArray *)getPhoneContacts {

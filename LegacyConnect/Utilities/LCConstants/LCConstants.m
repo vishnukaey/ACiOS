@@ -14,6 +14,15 @@ NSString *const kBaseURL = @"http://10.3.0.55:8000";
 NSString *const kLoginURL = @"/api/login";
 NSString *const kRegisterURL = @"/api/user";
 
+NSString *const kResponseCode = @"code";
+NSString *const kResponseMessage = @"message";
+NSString *const kResponseData = @"data";
+
+NSString *const kLoginStatusKey = @"logged_in";
+
+NSString *const kStatusCodeSuccess = @"200";
+NSString *const kStatusCodeFailure = @"205";
+
 NSString *const kUpdatePasswordURL = @"";
 NSString *const kForgotPasswordURL = @"";
 NSString *const kChangePasswordURL = @"";

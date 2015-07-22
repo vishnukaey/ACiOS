@@ -12,8 +12,13 @@
 
 + (BOOL)isNetworkAvailable;
 + (NSString *)performNullCheckAndSetValue:(NSString *)value;
-+ (NSArray *)getPhoneContacts;
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format;
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date;
++ (NSString *)encodeToBase64String:(NSString *)string;
++ (NSString *)decodeFromBase64String:(NSString *)string;
++ (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
+
++ (NSArray *)getPhoneContacts;
+
 @end

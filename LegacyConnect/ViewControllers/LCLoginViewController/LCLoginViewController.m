@@ -25,6 +25,7 @@
   // Dispose of any resources that can be recreated.
 }
 
+
 - (IBAction)backButtonTapped:(id)sender
 {
   [self.navigationController popToRootViewControllerAnimated:NO];
@@ -33,27 +34,49 @@
 
 - (IBAction)loginButtonClicked:(id)sender
 {
-  [self performOnlineLogin];
+  [self performOnlineLoginRequest];
 }
 
-- (void)performOnlineLogin
+- (void)performOnlineLoginRequest
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kLoginURL];
   [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
    {
-     NSLog(@"post success");
-     NSLog(@"%@",response);
-     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-     [defaults setBool:YES forKey:@"logged_in"];
-     [defaults synchronize];
-     [self.navigationController popToRootViewControllerAnimated:NO];
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+     }
+     else
+     {
+       NSLog(@"%@",response);
+       [self saveUserDetailsToDataManagerFromResponse:response];
+       [self loginUser];
+     }
      
    } andFailure:^(NSString *error) {
-     NSLog(@"post failure");
      NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
    }];
+}
+
+
+- (void)loginUser
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setBool:YES forKey:kLoginStatusKey];
+  [defaults synchronize];
+  [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (void)saveUserDetailsToDataManagerFromResponse:(id)response
+{
+  NSDictionary *userInfo = response[kResponseData];
+  [LCDataManager sharedDataManager].userEmail = userInfo[kEmailKey];
+  [LCDataManager sharedDataManager].userID = userInfo[@"id"];
+  [LCDataManager sharedDataManager].isActive = [userInfo[@"isActive"] boolValue];
+  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[@"id"] andPassword:self.passwordTextField.text];
 }
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender

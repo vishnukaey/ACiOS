@@ -18,6 +18,15 @@ extern NSString *const kForgotPasswordURL;
 extern NSString *const kChangePasswordURL;
 extern NSString *const kLogOutURL;
 
+extern NSString *const kResponseCode;
+extern NSString *const kResponseMessage;
+extern NSString *const kResponseData;
+
+extern NSString *const kStatusCodeSuccess;
+extern NSString *const kStatusCodeFailure;
+
+extern NSString *const kLoginStatusKey;
+
 extern NSString *const kFirstNameKey;
 extern NSString *const kLastNameKey;
 extern NSString *const kEmailKey;

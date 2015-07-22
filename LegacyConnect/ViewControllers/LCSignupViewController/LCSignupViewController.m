@@ -106,6 +106,9 @@
    {
      NSLog(@"post success");
      NSLog(@"%@",response);
+     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+     [defaults setBool:YES forKey:kLoginStatusKey];
+     [defaults synchronize];
      [self performSegueWithIdentifier:@"selectPhoto" sender:self];
      
    } andFailure:^(NSString *error) {

@@ -123,8 +123,9 @@
 - (IBAction)logout:(id)sender
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:NO forKey:@"logged_in"];
+  [defaults setBool:NO forKey:kLoginStatusKey];
   [defaults synchronize];
+  [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
   if ([FBSDKAccessToken currentAccessToken])
   {
     [[FBSDKLoginManager new] logOut];
