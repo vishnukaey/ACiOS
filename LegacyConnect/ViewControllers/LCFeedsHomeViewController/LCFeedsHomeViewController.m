@@ -124,14 +124,10 @@
     [[FBSDKLoginManager new] logOut];
   }
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
-  LCLoginHomeViewController *login = [sb instantiateViewControllerWithIdentifier:@"LoginHomeVC"];
-  UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:login];
-  [nav setNavigationBarHidden:YES];
-  appdel.window.rootViewController = nav;
+  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+  appdel.window.rootViewController = myStoryBoardInitialViewController;
   [appdel.window makeKeyAndVisible];
-  
-  
 }
 
 #pragma mark - TableView delegates
