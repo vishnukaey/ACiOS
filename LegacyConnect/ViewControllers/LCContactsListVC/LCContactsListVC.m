@@ -19,13 +19,14 @@
   [self.navigationController setNavigationBarHidden:NO];
 
   [self loadContacts];
-  UITableView *contactsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
+  H_contactsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
 
-  contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
-  contactsTable.layer.borderWidth = 3;
-  contactsTable.delegate = self;
-  contactsTable.dataSource = self;
-  [self.view addSubview:contactsTable];
+  H_contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
+  H_contactsTable.layer.borderWidth = 3;
+  H_contactsTable.delegate = self;
+  H_contactsTable.dataSource = self;
+  [self.view addSubview:H_contactsTable];
+  
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,6 +46,7 @@
       {
         // First time access has been granted, add the contact
         H_contactsArray = [LCUtilityManager getPhoneContacts];
+        [H_contactsTable reloadData];
       }
       else
       {
@@ -57,6 +59,7 @@
   {
     // The user has previously given access, add the contact
     H_contactsArray = [LCUtilityManager getPhoneContacts];
+    [H_contactsTable reloadData];
   }
   else
   {

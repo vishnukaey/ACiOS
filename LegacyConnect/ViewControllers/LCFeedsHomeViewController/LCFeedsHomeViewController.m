@@ -12,17 +12,18 @@
 #import "LCGIButton.h"
 #import "LCAppDelegate.h"
 #import "LCLoginHomeViewController.h"
+#import "LCChooseCommunityInterest.h"
+#import "LCContactsListVC.h"
 
 
 @implementation LCFeedsHomeViewController
 
 @synthesize P_containerController;
 
+#pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  //    H_feedsTable.layer.borderColor = [UIColor yellowColor].CGColor;
-  //    H_feedsTable.layer.borderWidth = 4;
   [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -31,7 +32,27 @@
   [self addfloatingButtons];
 }
 
--(void)addfloatingButtons
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self prepareFeedViews];
+  [H_feedsTable reloadData];
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - initial setup functions
+- (void)addfloatingButtons
 {
   //global impact button
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -56,7 +77,7 @@
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
 }
 
--(void)prepareFeedViews
+- (void)prepareFeedViews
 {
   NSArray *feedsArray = [LCDummyValues dummyFeedArray];
 
@@ -70,18 +91,22 @@
   }
 }
 
-#pragma mark - menu and GIButton actions
--(void)menuButtonAction
+#pragma mark - button actions
+- (void)menuButtonAction
 {
   [self.P_containerController setMenuState:MFSideMenuStateLeftMenuOpen];
 }
 
--(void)GIBComponentsAction :(UIButton *)sender
+- (void)GIBComponentsAction :(UIButton *)sender
 {
   NSLog(@"tag-->>%d", (int)sender.tag);
+  
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+  LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)GIBAction :(LCGIButton *)sender
+- (void)GIBAction :(LCGIButton *)sender
 {
   NSLog(@"gib-->>");
   if (sender.tag ==0) {
@@ -95,27 +120,13 @@
   }
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-  [self prepareFeedViews];
-  [H_feedsTable reloadData];
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)logout:(id)sender
 {
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+  LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
+  [self.navigationController pushViewController:next animated:YES];
+  return;
+  
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:NO forKey:@"logged_in"];
   [defaults synchronize];
@@ -171,7 +182,7 @@
 }
 
 #pragma mark - feedCell delegates
--(void)feedCellActionWithType:(int)type andID:(NSString *)postID
+- (void)feedCellActionWithType:(int)type andID:(NSString *)postID
 {
   NSLog(@"actionType--->>>%d", type);
   if (type==2)//comments
@@ -189,7 +200,7 @@
 }
 
 #pragma mark - leftmenu delegates
--(void)leftMenuButtonActions:(UIButton *)sender
+- (void)leftMenuButtonActions:(UIButton *)sender
 {
   NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
   [self.P_containerController setMenuState:MFSideMenuStateClosed];

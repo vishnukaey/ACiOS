@@ -12,6 +12,7 @@
 @interface LCContactsListVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   NSArray *H_contactsArray;
+  UITableView *H_contactsTable;
 }
 
 @end
