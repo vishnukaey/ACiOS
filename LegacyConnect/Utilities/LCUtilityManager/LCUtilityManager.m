@@ -81,7 +81,7 @@
         @autoreleasepool {
             
             //data model
-            contact *contact_ = [[contact alloc] init];
+            LCContact *contact_ = [[LCContact alloc] init];
             
             ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
             

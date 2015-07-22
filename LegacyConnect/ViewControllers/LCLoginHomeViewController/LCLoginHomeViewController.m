@@ -32,7 +32,6 @@
                                              object:nil];
 }
 
-
 - (void)addFBLoginbutton
 {
   FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];

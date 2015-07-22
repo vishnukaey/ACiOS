@@ -7,144 +7,120 @@
 //
 
 #import "LCContactsListVC.h"
-
 #import <AddressBook/AddressBook.h>
+#import "LCContact.h"
 
-#import "contact.h"
-
-@interface LCContactsListVC ()
-
-@end
 
 @implementation LCContactsListVC
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self loadContacts];
-    
-    UITableView *contactsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
-    
-    contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
-    contactsTable.layer.borderWidth = 3;
-    contactsTable.delegate = self;
-    contactsTable.dataSource = self;
-    
-    
-    [self.view addSubview:contactsTable];
-    // Do any additional setup after loading the view.
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  [self.navigationController setNavigationBarHidden:NO];
+
+  [self loadContacts];
+  UITableView *contactsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
+
+  contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
+  contactsTable.layer.borderWidth = 3;
+  contactsTable.delegate = self;
+  contactsTable.dataSource = self;
+  [self.view addSubview:contactsTable];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    
-    
 }
 
--(void)loadContacts
+- (void)loadContacts
 {
-    ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
-    
-    if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
-        ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
-            if (granted) {
-                // First time access has been granted, add the contact
-               H_contactsArray = [LCUtilityManager getPhoneContacts];
-            } else {
-                // User denied access
-                // Display an alert telling user the contact could not be added
-            }
-        });
-    }
-    else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
-        // The user has previously given access, add the contact
-       H_contactsArray = [LCUtilityManager getPhoneContacts];
-    }
-    else {
-        
-        // The user has previously denied access
-        // Send an alert telling user to change privacy setting in settings app
-    }
+  ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
+  if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)
+  {
+    ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error)
+    {
+      if (granted)
+      {
+        // First time access has been granted, add the contact
+        H_contactsArray = [LCUtilityManager getPhoneContacts];
+      }
+      else
+      {
+        // User denied access
+        // Display an alert telling user the contact could not be added
+      }
+    });
+  }
+  else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
+  {
+    // The user has previously given access, add the contact
+    H_contactsArray = [LCUtilityManager getPhoneContacts];
+  }
+  else
+  {
+    // The user has previously denied access
+    // Send an alert telling user to change privacy setting in settings app
+  }
 }
-
-
-
-
-
 
 #pragma mark - TableView delegates
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;    //count of section
+  return 1;    //count of section
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return H_contactsArray.count;    //count number of row from counting array hear cataGorry is An Array
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return H_contactsArray.count;    //count number of row from counting array hear cataGorry is An Array
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyIdentifier = @"MyIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:MyIdentifier];
-    }
-    
-    [[cell viewWithTag:10] removeFromSuperview];
-    
-    UIView *contactCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
-    
-    UIImageView *contactImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-    contact *con = [H_contactsArray objectAtIndex:indexPath.row];
-    
-    contactImage.image = con.P_image;
-    [contactCell addSubview:contactImage];
-    
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, self.view.frame.size.width - 80, 20)];
-    nameLabel.text = con.P_name;
-    [contactCell addSubview:nameLabel];
-    
-    UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 30, self.view.frame.size.width - 80, 20)];
-    numberLabel.text = [con.P_numbers objectAtIndex:0];
-    [contactCell addSubview:numberLabel];
-    
-    UILabel *emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, self.view.frame.size.width - 80, 20)];
-    emailLabel.text = [con.P_emails objectAtIndex:0];
-    [contactCell addSubview:emailLabel];
-    
-    
-    
-    
-    [cell addSubview:contactCell];
-    contactCell.tag = 10;
-    
-    
-    return cell;
-}
+  static NSString *MyIdentifier = @"MyIdentifier";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                            reuseIdentifier:MyIdentifier];
+  }
 
+  [[cell viewWithTag:10] removeFromSuperview];
+  UIView *contactCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
+
+  UIImageView *contactImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
+  LCContact *con = [H_contactsArray objectAtIndex:indexPath.row];
+  contactImage.image = con.P_image;
+  [contactCell addSubview:contactImage];
+
+  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, self.view.frame.size.width - 80, 20)];
+  nameLabel.text = con.P_name;
+  [contactCell addSubview:nameLabel];
+
+  UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 30, self.view.frame.size.width - 80, 20)];
+  numberLabel.text = [con.P_numbers objectAtIndex:0];
+  [contactCell addSubview:numberLabel];
+
+  UILabel *emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, self.view.frame.size.width - 80, 20)];
+  emailLabel.text = [con.P_emails objectAtIndex:0];
+  [contactCell addSubview:emailLabel];
+  [cell addSubview:contactCell];
+  contactCell.tag = 10;
+
+  return cell;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
-    
+  return 80;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSLog(@"selected row-->>>%d", (int)indexPath.row);
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
-
-
 
 /*
 #pragma mark - Navigation

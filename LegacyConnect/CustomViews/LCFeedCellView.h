@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+//--------------protocols
 @protocol feedCellDelegate <NSObject>
 
 //action type-- <<1 for like>>   <<2 for comment>>
@@ -15,11 +16,8 @@
 
 @end
 
-
-@interface feedCellView : UIView
-{
-    
-}
+//---------------interface
+@interface LCFeedCellView : UIView
 
 @property(nonatomic, retain)id delegate;
 
