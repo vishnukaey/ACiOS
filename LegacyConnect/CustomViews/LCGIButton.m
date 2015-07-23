@@ -8,6 +8,7 @@
 
 #import "LCGIButton.h"
 
+
 @implementation LCGIButton
 @synthesize P_community, P_status, P_video;
 
@@ -18,8 +19,17 @@
   {
     self.backgroundColor = [UIColor redColor];
     self.layer.cornerRadius = frame.size.width/2;
+    [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
   }
   return self;
+}
+
+-(void)setHidden:(BOOL)hidden
+{
+  [super setHidden:hidden];
+  [P_community setHidden:hidden];
+  [P_status setHidden:hidden];
+  [P_video setHidden:hidden];
 }
 
 -(void)setUpMenu
@@ -88,6 +98,20 @@
   completion:^(BOOL finished) {
   //Completion Block
   }];
+}
+
+-(void)toggle
+{
+  if (self.tag ==0)
+  {
+    self.tag = 1;
+    [self showMenu];
+  }
+  else
+  {
+    self.tag = 0 ;
+    [self hideMenu];
+  }
 }
 
 @end

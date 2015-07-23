@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
         <!--Choose Interest-->
@@ -22,6 +22,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iam-XJ-Er5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="168" y="154"/>
+        </scene>
+        <!--Invite to Community-->
+        <scene sceneID="cm0-bS-llD">
+            <objects>
+                <viewController storyboardIdentifier="LCInviteToCommunity" title="Invite to Community" id="d1r-qX-Qev" customClass="LCInviteToCommunity" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HHg-16-yad"/>
+                        <viewControllerLayoutGuide type="bottom" id="5c4-Yp-7Jl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SsH-AU-6Vk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pnm-O1-FjH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="511" y="154"/>
+        </scene>
+        <!--View Community-->
+        <scene sceneID="BDI-0l-X5X">
+            <objects>
+                <viewController storyboardIdentifier="LCViewCommunity" title="View Community" id="k8j-y9-80a" customClass="LCViewCommunity" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7yi-tA-9bl"/>
+                        <viewControllerLayoutGuide type="bottom" id="0eE-nU-e7d"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6wS-uI-7qm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1zw-pf-jP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="849" y="154"/>
+        </scene>
+        <!--Select date-->
+        <scene sceneID="eJA-ja-AJ5">
+            <objects>
+                <viewController storyboardIdentifier="LCCommunityDateSelection" title="Select date" id="kff-62-AYo" customClass="LCCommunityDateSelection" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0JJ-Hp-AZJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="V2G-ov-kjC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dSr-YK-b87">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="glX-hX-kj0">
+                                <rect key="frame" x="0.0" y="162" width="320" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="459332063.360843">
+                                    <!--2015-07-23 08:14:23 +0000-->
+                                </date>
+                            </datePicker>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="g3W-pJ-gGt">
+                                <rect key="frame" x="117" y="98" width="87" height="29"/>
+                                <segments>
+                                    <segment title="Start"/>
+                                    <segment title="End"/>
+                                </segments>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sdq-vq-8EU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1190" y="154"/>
         </scene>
         <!--Create Community-->
         <scene sceneID="bnf-bP-pJf">

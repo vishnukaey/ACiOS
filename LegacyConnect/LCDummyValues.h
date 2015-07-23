@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+
 @interface LCDummyValues : NSObject
 
-+(NSArray *)dummyFeedArray;
-+(NSArray *)dummyCommentArray;
++ (NSArray *)dummyFeedArray;
++ (NSArray *)dummyCommentArray;
++ (NSArray *)dummyFriendsArray;
 
 @end

@@ -10,20 +10,29 @@
 
 @implementation LCDummyValues
 
-+(NSArray *)dummyFeedArray
++ (NSArray *)dummyFeedArray
 {
   NSDictionary *dic1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"Global Employment",@"cause",  @"15 minutes ago",@"time",   @"Can't wait to run in Haiti for TeamTassy, stay tuned for details!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
   NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mark Smith",@"user_name",   @"2",@"type",     @"Ocean Initiative group",@"cause",  @"35 minutes ago",@"time",   @"Perfect weather for today's meetup!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",   @"",@"profile_pic",  nil];
   NSArray *feedsArray = [[NSArray alloc]initWithObjects:dic1, dic2, nil];
+  
   return feedsArray;
 }
 
-+(NSArray *)dummyCommentArray
++ (NSArray *)dummyCommentArray
 {
   NSDictionary *comm1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mel Matthews",@"user_name",         @"5 mins",@"time",   @"Amazing Json! Best of luck.",@"comment",    @"",@"profile_pic",  nil];
   NSDictionary *comm2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Amy Samson",@"user_name",         @"10 mins",@"time",   @"This is incredible! All the best and keep us posted in your journy.",@"comment",    @"",@"profile_pic",  nil];
   NSArray *commentsArray = [[NSArray alloc]initWithObjects:comm1, comm2, nil];
+  
   return commentsArray;
+}
+
++ (NSArray *)dummyFriendsArray
+{
+  NSArray *friendsArray = [[NSArray alloc]initWithObjects:@"Adam Murry", @"Amanda Jones", @"Billy Johnson", nil];
+  
+  return friendsArray;
 }
 
 @end

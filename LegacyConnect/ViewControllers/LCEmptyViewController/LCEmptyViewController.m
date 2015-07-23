@@ -12,8 +12,6 @@
 #import "LCFeedsHomeViewController.h"
 #import "LCFeedsCommentsController.h"
 #import "MFSideMenu.h"
-#import "LCAppDelegate.h"
-
 #import "LCLeftMenuController.h"
 
 @interface LCEmptyViewController ()

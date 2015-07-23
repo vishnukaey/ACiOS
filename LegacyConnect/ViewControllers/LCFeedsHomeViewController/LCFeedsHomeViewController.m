@@ -10,7 +10,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCGIButton.h"
-#import "LCAppDelegate.h"
 #import "LCLoginHomeViewController.h"
 #import "LCChooseCommunityInterest.h"
 #import "LCContactsListVC.h"
@@ -59,9 +58,9 @@
   LCGIButton * giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
   [appdel.window addSubview:giButton];
   [giButton setUpMenu];
-  [giButton addTarget:self action:@selector(GIBAction:) forControlEvents:UIControlEventTouchUpInside];
   giButton.P_community.tag = 0;
   [giButton.P_community addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
+  appdel.GIButton = giButton;
 
   giButton.P_video.tag = 1;
   [giButton.P_video addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,6 +74,7 @@
   menuButton.backgroundColor = [UIColor grayColor];
   [appdel.window addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
+  appdel.menuButton = menuButton;
 }
 
 - (void)prepareFeedViews
@@ -100,24 +100,14 @@
 - (void)GIBComponentsAction :(UIButton *)sender
 {
   NSLog(@"tag-->>%d", (int)sender.tag);
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton toggle];
+  [appdel.GIButton setHidden:YES];
+  [appdel.menuButton setHidden:YES];
   
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
   [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)GIBAction :(LCGIButton *)sender
-{
-  NSLog(@"gib-->>");
-  if (sender.tag ==0) {
-    sender.tag = 1;
-    [sender showMenu];
-  }
-  else
-  {
-    sender.tag = 0 ;
-    [sender hideMenu];
-  }
 }
 
 - (IBAction)logout:(id)sender
