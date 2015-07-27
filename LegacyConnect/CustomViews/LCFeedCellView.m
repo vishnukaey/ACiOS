@@ -61,7 +61,9 @@
   }
 
   UIImageView *dp_view = [[UIImageView alloc]initWithFrame:CGRectMake(cellMargin_x, top_space, dp_im_hight, dp_im_hight)];
-  [dp_view setImage:[UIImage imageNamed:@"clock.jpg"]];
+  dp_view.layer.cornerRadius = dp_view.frame.size.width/2;
+  dp_view.clipsToBounds = YES;
+  [dp_view setImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   [self addSubview:dp_view];
 
   UILabel *infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(dp_view.frame.origin.x + dp_view.frame.size.width + cellMargin_x, top_space, self.frame.size.width - 2*cellMargin_x - dp_view.frame.size.width  - favWidth, 0)];
@@ -138,7 +140,7 @@
   if ([[dic valueForKey:@"type"] intValue] == 2)//photo
   {
     UIImageView *statusPhoto = [[UIImageView alloc] initWithFrame:CGRectMake(cellMargin_x, top_space, self.frame.size.width - 2*cellMargin_x, 100)];
-    [statusPhoto setImage:[UIImage imageNamed:@"clock.jpg"]];
+    [statusPhoto setImage:[UIImage imageNamed:@"photoPost_dummy.png"]];
     [self addSubview:statusPhoto];
     top_space += statusPhoto.frame.size.height + in_margin;
   }
@@ -158,23 +160,23 @@
   UIView * botRow = [[UIView alloc] initWithFrame:CGRectMake(cellMargin_x, top_space, self.frame.size.width - 2*cellMargin_x, bot_row_hight)];
   [self addSubview:botRow];
   UIImageView *likeIcon = [[UIImageView alloc] initWithFrame:CGRectMake(0, (bot_row_hight - bot_IC_hight)/2, bot_IC_hight, bot_IC_hight)];
-  [likeIcon setImage:[UIImage imageNamed:@"clock.jpg"]];
+  [likeIcon setImage:[UIImage imageNamed:@"heart_dummy.png"]];
   [botRow addSubview:likeIcon];
 
   UIButton *likeButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, bot_IC_hight, bot_row_hight)];
   likeButton.center = likeIcon.center;
   [botRow addSubview:likeButton];
-  [likeButton setBackgroundColor:[UIColor purpleColor]];
+//  [likeButton setBackgroundColor:[UIColor purpleColor]];
   [likeButton addTarget:self action:@selector(likeAction) forControlEvents:UIControlEventTouchUpInside];
 
   UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(bot_row_hight + 10, (bot_row_hight - bot_IC_hight)/2, bot_IC_hight, bot_IC_hight)];
-  [commentIcon setImage:[UIImage imageNamed:@"clock.jpg"]];
+  [commentIcon setImage:[UIImage imageNamed:@"comment_dummy.png"]];
   [botRow addSubview:commentIcon];
 
   UIButton *commentButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, bot_IC_hight, bot_row_hight)];
   commentButton.center = commentIcon.center;
   [botRow addSubview:commentButton];
-  [commentButton setBackgroundColor:[UIColor purpleColor]];
+//  [commentButton setBackgroundColor:[UIColor purpleColor]];
   [commentButton addTarget:self action:@selector(commentAction) forControlEvents:UIControlEventTouchUpInside];
 
   UILabel *commentsLabel = [[UILabel alloc] initWithFrame:CGRectMake(botRow.frame.size.width - bot_labe_width, 0, bot_labe_width, botRow.frame.size.height)];

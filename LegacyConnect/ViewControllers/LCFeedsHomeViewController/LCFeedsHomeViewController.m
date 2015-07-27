@@ -13,6 +13,7 @@
 #import "LCLoginHomeViewController.h"
 #import "LCChooseCommunityInterest.h"
 #import "LCContactsListVC.h"
+#import "LCProfileViewVC.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -35,6 +36,8 @@
 {
   [super viewWillAppear:animated];
   [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
+  
+  self.navigationController.navigationBarHidden = false;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,6 +64,7 @@
   giButton.P_community.tag = 0;
   [giButton.P_community addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   appdel.GIButton = giButton;
+  [giButton setImage:[UIImage imageNamed:@"GIButton_dummy.png"] forState:UIControlStateNormal];
 
   giButton.P_video.tag = 1;
   [giButton.P_video addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,6 +79,7 @@
   [appdel.window addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
+  [menuButton setImage:[UIImage imageNamed:@"menuButton_dummy.png"] forState:UIControlStateNormal];
 }
 
 - (void)prepareFeedViews
@@ -103,11 +108,20 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
-  [appdel.menuButton setHidden:YES];
+  if (sender.tag == 2)
+  {
+    [appdel.menuButton setHidden:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
   
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)logout:(id)sender
