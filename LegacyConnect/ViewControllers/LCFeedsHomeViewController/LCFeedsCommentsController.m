@@ -11,6 +11,7 @@
 
 @implementation LCFeedsCommentsController
 
+#pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -31,6 +32,17 @@
   [self prepareCells];
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - setup functions
 -(void)prepareCells
 {
   NSDictionary *postDetail = [[LCDummyValues dummyFeedArray] objectAtIndex:0];//post data
@@ -138,20 +150,11 @@
   [H_dup becomeFirstResponder];
 }
 
+#pragma mark - button actions
 -(void)postAction
 {
   [H_commmentTextField resignFirstResponder];
   [H_dup resignFirstResponder];
-}
-
--(void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 -(void)changeFirstResponder
@@ -167,7 +170,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-  return H_cellsViewArray.count;    //count number of row from counting array hear cataGorry is An Array
+  return H_cellsViewArray.count;    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

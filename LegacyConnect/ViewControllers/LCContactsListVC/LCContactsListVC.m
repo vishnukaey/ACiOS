@@ -76,7 +76,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_contactsArray.count;    //count number of row from counting array hear cataGorry is An Array
+  return H_contactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

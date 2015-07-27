@@ -10,5 +10,13 @@
 
 
 @interface LCViewCommunity : UIViewController
+{
+  IBOutlet UITableView *H_commentsTable;
+  NSMutableArray *H_cellsViewArray;
+}
+
+- (IBAction)backAction:(id)sender;
+- (IBAction)settingsAction:(id)sender;
+- (IBAction)membersAction:(id)sender;
 
 @end
