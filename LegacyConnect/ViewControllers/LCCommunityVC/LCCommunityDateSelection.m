@@ -16,6 +16,12 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonAction)];
+  self.navigationItem.rightBarButtonItem = anotherButton;
+  
+  UIBarButtonItem *barButton = [[UIBarButtonItem alloc] init];
+  barButton.title = @"Cancel";
+  self.navigationController.navigationBar.topItem.backBarButtonItem = barButton;
 }
 
 - (void)didReceiveMemoryWarning
@@ -24,6 +30,11 @@
   // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - button actions
+- (void)doneButtonAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 /*
 #pragma mark - Navigation
 

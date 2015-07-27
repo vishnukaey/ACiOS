@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LCInviteToCommunity : UIViewController
+@interface LCInviteToCommunity : UIViewController<UITableViewDataSource, UITableViewDelegate>
+{
+  NSArray *H_friendsArray;
+}
 
 @end

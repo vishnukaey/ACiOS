@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LCCreateCommunity : UIViewController
+@interface LCCreateCommunity : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end

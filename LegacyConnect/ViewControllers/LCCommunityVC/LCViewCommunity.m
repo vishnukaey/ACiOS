@@ -18,10 +18,29 @@
   // Do any additional setup after loading the view.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.menuButton setHidden:NO];
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+  if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound)
+  {
+    // back button was pressed.
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appdel.GIButton setHidden:NO];
+    [self.navigationController popToRootViewControllerAnimated:YES];
+  }
+  [super viewWillDisappear:animated];
 }
 
 /*

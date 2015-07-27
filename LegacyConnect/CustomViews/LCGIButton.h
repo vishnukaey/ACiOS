@@ -13,8 +13,7 @@
 
 @property(nonatomic, retain)UIButton *P_community, *P_status, *P_video;
 
--(void)showMenu;
--(void)hideMenu;
+-(void)toggle;
 -(void)setUpMenu;
 
 @end

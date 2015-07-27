@@ -24,7 +24,7 @@
 @end
 
 @implementation LCAppDelegate
-
+@synthesize menuButton, GIButton;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     

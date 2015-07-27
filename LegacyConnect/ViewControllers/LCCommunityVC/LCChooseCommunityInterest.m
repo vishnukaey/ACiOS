@@ -31,6 +31,17 @@
   // Dispose of any resources that can be recreated.
 }
 
+-(void) viewWillDisappear:(BOOL)animated
+{
+  if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+    // back button was pressed.
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appdel.GIButton setHidden:NO];
+    [appdel.menuButton setHidden:NO];
+  }
+  [super viewWillDisappear:animated];
+}
+
 #pragma mark - button actions
 - (void)interestSelected :(UIButton *)sender
 {
