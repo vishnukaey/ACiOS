@@ -2,7 +2,7 @@
 //  LCTutorialContainerVC.m
 //  LegacyConnect
 //
-//  Created by qbuser on 7/20/15.
+//  Created by Vishnu on 7/20/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
@@ -111,22 +111,27 @@
   LCFinalTutorialVC *vc = [pendingViewControllers lastObject];
   if(vc.pageIndex+1 == [self.pageTitle count])
   {
-    [_nextButton setTitle:@"GOT IT" forState:UIControlStateNormal];
+    [_nextButton setSelected:NO];
   }
   else
   {
-    [_nextButton setTitle:@"NEXT" forState:UIControlStateNormal];
+    [_nextButton setSelected:YES];
   }
 }
 
-//- (void)goToNextPage:(id)sender
-//{
-//  
-//}
-//
-//- (void)finishedTutorial:(id)sender
-//{
-//  
-//}
+
+- (IBAction)nextButtonTapped:(id)sender
+{
+  UIButton *nextButton = (UIButton*)sender;
+  if(nextButton.selected)
+  {
+    
+  }
+  else
+  {
+    
+  }
+}
+
 
 @end

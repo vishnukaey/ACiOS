@@ -2,7 +2,7 @@
 //  LCFinalTutorialVC.m
 //  LegacyConnect
 //
-//  Created by qbuser on 7/16/15.
+//  Created by Vishnu on 7/16/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
@@ -26,8 +26,4 @@
   // Dispose of any resources that can be recreated.
 }
 
--(IBAction)didFinish:(id)sender
-{
-  
-}
 @end

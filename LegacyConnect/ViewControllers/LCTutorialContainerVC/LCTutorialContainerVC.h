@@ -2,7 +2,7 @@
 //  LCTutorialContainerVC.h
 //  LegacyConnect
 //
-//  Created by qbuser on 7/20/15.
+//  Created by Vishnu on 7/20/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
