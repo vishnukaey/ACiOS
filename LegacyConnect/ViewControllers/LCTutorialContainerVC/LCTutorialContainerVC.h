@@ -10,6 +10,9 @@
 #import "LCFinalTutorialVC.h"
 
 @interface LCTutorialContainerVC : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+{
+  UIPageControl *pageControl;
+}
 @property (strong, nonatomic) NSArray *pageTitle;
 @property (weak, nonatomic) UIPageViewController *pageController;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
