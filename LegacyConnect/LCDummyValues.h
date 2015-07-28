@@ -14,5 +14,6 @@
 + (NSArray *)dummyFeedArray;
 + (NSArray *)dummyCommentArray;
 + (NSArray *)dummyFriendsArray;
++ (NSArray *)dummyPROFILEFeedArray;
 
 @end

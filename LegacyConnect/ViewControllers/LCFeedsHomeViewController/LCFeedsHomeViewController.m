@@ -36,8 +36,11 @@
 {
   [super viewWillAppear:animated];
   [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
-  
   self.navigationController.navigationBarHidden = false;
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:NO];
+  [appdel.menuButton setHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -124,23 +127,6 @@
   
 }
 
-- (IBAction)logout:(id)sender
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:NO forKey:kLoginStatusKey];
-  [defaults synchronize];
-  [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
-  if ([FBSDKAccessToken currentAccessToken])
-  {
-    [[FBSDKLoginManager new] logOut];
-  }
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-  appdel.window.rootViewController = myStoryBoardInitialViewController;
-  [appdel.window makeKeyAndVisible];
-}
-
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -185,6 +171,7 @@
 - (void)feedCellActionWithType:(int)type andID:(NSString *)postID
 {
   NSLog(@"actionType--->>>%d", type);
+  
   if (type==2)//comments
   {
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
@@ -204,6 +191,28 @@
 {
   NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
   [self.P_containerController setMenuState:MFSideMenuStateClosed];
+  if (sender.tag == 0)//profile
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if (sender.tag == 1)//logout
+  {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:NO forKey:kLoginStatusKey];
+    [defaults synchronize];
+    [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+      [[FBSDKLoginManager new] logOut];
+    }
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+    appdel.window.rootViewController = myStoryBoardInitialViewController;
+    [appdel.window makeKeyAndVisible];
+  }
 }
 
 @end

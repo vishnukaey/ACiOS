@@ -39,7 +39,7 @@
    
 -(void)prepareCells
 {
-  NSArray *feedsArray = [LCDummyValues dummyFeedArray];
+  NSArray *feedsArray = [LCDummyValues dummyPROFILEFeedArray];
   
   H_cellsViewArray = [[NSMutableArray alloc]init];
   for (int i=0; i<feedsArray.count; i++)
