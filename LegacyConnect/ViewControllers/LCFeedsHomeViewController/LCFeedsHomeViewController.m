@@ -76,7 +76,7 @@
   [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
 
   //menu poper button
-  UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,70, 30, 30)];
+  UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
   menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor grayColor];
   [appdel.window addSubview:menuButton];
@@ -174,11 +174,11 @@
   
   if (type==2)//comments
   {
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                      bundle:nil];
-        LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-        
-        [self.navigationController pushViewController:next animated:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                  bundle:nil];
+    LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+
+    [self.navigationController pushViewController:next animated:YES];
   }
   
   if (type==1)
