@@ -29,7 +29,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-
+  
   // Check if user is not logged in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey] && ![FBSDKAccessToken currentAccessToken])
   {
