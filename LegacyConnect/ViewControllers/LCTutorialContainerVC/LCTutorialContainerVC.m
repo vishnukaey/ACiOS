@@ -2,7 +2,7 @@
 //  LCTutorialContainerVC.m
 //  LegacyConnect
 //
-//  Created by qbuser on 7/20/15.
+//  Created by Vishnu on 7/20/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
@@ -16,10 +16,10 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.pageTitle = @[@"",@"",@""];
+  self.pageTitle = @[@"Tutorial Page1",@"Tutorial Page2",@"Tutorial Page3"];
   _pageController = [self getChildViewControllerOfType:[UIPageViewController class]];
   [self.pageController setViewControllers:[NSArray arrayWithObject:[self viewControllerAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-  UIPageControl *pageControl = [UIPageControl appearance];
+  pageControl = [UIPageControl appearance];
   pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
   pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
   pageControl.backgroundColor = [UIColor whiteColor];
@@ -105,28 +105,33 @@
   return 0;
 }
 
-
-- (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
+- (void) pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
-  LCFinalTutorialVC *vc = [pendingViewControllers lastObject];
-  if(vc.pageIndex+1 == [self.pageTitle count])
+  LCFinalTutorialVC *pageContentVC = pendingViewControllers[0];
+  if(pageContentVC.pageIndex == 2)
   {
-    [_nextButton setTitle:@"GOT IT" forState:UIControlStateNormal];
+    _nextButton.selected = YES;
   }
   else
   {
-    [_nextButton setTitle:@"NEXT" forState:UIControlStateNormal];
+    _nextButton.selected = NO;
   }
 }
 
-//- (void)goToNextPage:(id)sender
-//{
-//  
-//}
-//
-//- (void)finishedTutorial:(id)sender
-//{
-//  
-//}
 
+- (IBAction)nextButtonTapped:(id)sender
+{
+  if(_nextButton.selected)
+  {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+  }
+  else
+  {
+    /*
+     
+     Go to Next Page
+     
+     */
+  }
+}
 @end
