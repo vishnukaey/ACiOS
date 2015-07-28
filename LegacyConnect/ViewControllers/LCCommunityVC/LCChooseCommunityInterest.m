@@ -33,12 +33,6 @@
 
 -(void) viewWillDisappear:(BOOL)animated
 {
-  if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-    // back button was pressed.
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdel.GIButton setHidden:NO];
-    [appdel.menuButton setHidden:NO];
-  }
   [super viewWillDisappear:animated];
 }
 

@@ -45,7 +45,7 @@
 #pragma mark - button actions
 -(void)doneButtonAction
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
   [self.navigationController pushViewController:vc animated:YES];
 }
@@ -58,7 +58,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_friendsArray.count;    //count number of row from counting array hear cataGorry is An Array
+  return H_friendsArray.count;    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

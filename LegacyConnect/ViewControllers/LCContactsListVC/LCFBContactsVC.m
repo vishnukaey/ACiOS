@@ -99,7 +99,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_friendsArray.count;    //count number of row from counting array hear cataGorry is An Array
+  return H_friendsArray.count;    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView

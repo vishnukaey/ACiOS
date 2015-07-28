@@ -13,6 +13,7 @@
 #import "LCLoginHomeViewController.h"
 #import "LCChooseCommunityInterest.h"
 #import "LCContactsListVC.h"
+#import "LCProfileViewVC.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -35,6 +36,11 @@
 {
   [super viewWillAppear:animated];
   [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
+  self.navigationController.navigationBarHidden = false;
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:NO];
+  [appdel.menuButton setHidden:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -61,6 +67,7 @@
   giButton.P_community.tag = 0;
   [giButton.P_community addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   appdel.GIButton = giButton;
+  [giButton setImage:[UIImage imageNamed:@"GIButton_dummy.png"] forState:UIControlStateNormal];
 
   giButton.P_video.tag = 1;
   [giButton.P_video addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -75,6 +82,7 @@
   [appdel.window addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
+  [menuButton setImage:[UIImage imageNamed:@"menuButton_dummy.png"] forState:UIControlStateNormal];
 }
 
 - (void)prepareFeedViews
@@ -103,28 +111,20 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
-  [appdel.menuButton setHidden:YES];
-  
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-  [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (IBAction)logout:(id)sender
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:NO forKey:kLoginStatusKey];
-  [defaults synchronize];
-  [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
-  if ([FBSDKAccessToken currentAccessToken])
+  if (sender.tag == 2)
   {
-    [[FBSDKLoginManager new] logOut];
+    [appdel.menuButton setHidden:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
+    [self.navigationController pushViewController:vc animated:YES];
   }
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-  appdel.window.rootViewController = myStoryBoardInitialViewController;
-  [appdel.window makeKeyAndVisible];
+  else
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  
 }
 
 #pragma mark - TableView delegates
@@ -135,7 +135,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-  return H_feedsViewArray.count;    //count number of row from counting array hear cataGorry is An Array
+  return H_feedsViewArray.count;    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -171,6 +171,7 @@
 - (void)feedCellActionWithType:(int)type andID:(NSString *)postID
 {
   NSLog(@"actionType--->>>%d", type);
+  
   if (type==2)//comments
   {
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
@@ -190,6 +191,28 @@
 {
   NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
   [self.P_containerController setMenuState:MFSideMenuStateClosed];
+  if (sender.tag == 0)//profile
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if (sender.tag == 1)//logout
+  {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:NO forKey:kLoginStatusKey];
+    [defaults synchronize];
+    [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+      [[FBSDKLoginManager new] logOut];
+    }
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+    appdel.window.rootViewController = myStoryBoardInitialViewController;
+    [appdel.window makeKeyAndVisible];
+  }
 }
 
 @end

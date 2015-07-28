@@ -63,6 +63,7 @@
   }
   else
   {
+    NSLog(@"---->>>The user has previously denied access");
     // The user has previously denied access
     // Send an alert telling user to change privacy setting in settings app
   }
@@ -76,7 +77,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_contactsArray.count;    //count number of row from counting array hear cataGorry is An Array
+  return H_contactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
