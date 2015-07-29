@@ -20,7 +20,7 @@
   [self.view setBackgroundColor:[UIColor lightTextColor]];
   
   
-  NSArray *titles_ = [[NSArray alloc] initWithObjects:@"Profile", @"Notifications", @"Logout", nil];
+  NSArray *titles_ = [[NSArray alloc] initWithObjects:@"Profile", @"Interests", @"Notifications", @"Logout", nil];
 
   float y_margin = 2;
   float but_height = 50;

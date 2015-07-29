@@ -14,6 +14,7 @@
 #import "LCChooseCommunityInterest.h"
 #import "LCContactsListVC.h"
 #import "LCProfileViewVC.h"
+#import "LCAllInterestVC.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -111,19 +112,19 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
-  if (sender.tag == 2)
-  {
+//  if (sender.tag == 2)
+//  {
     [appdel.menuButton setHidden:YES];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
     [self.navigationController pushViewController:vc animated:YES];
-  }
-  else
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
+//  }
+//  else
+//  {
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+//    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+//    [self.navigationController pushViewController:vc animated:YES];
+//  }
   
 }
 
@@ -197,11 +198,17 @@
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     [self.navigationController pushViewController:vc animated:YES];
   }
-  else if (sender.tag == 1)//notifications
+  else if (sender.tag == 1)//Interests
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCAllInterestVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if (sender.tag == 2)//notifications
   {
     
   }
-  else if (sender.tag == 2)//logout
+  else if (sender.tag == 3)//logout
   {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:NO forKey:kLoginStatusKey];

@@ -18,5 +18,6 @@
 - (IBAction)backAction:(id)sender;
 - (IBAction)settingsAction:(id)sender;
 - (IBAction)membersAction:(id)sender;
+- (IBAction)websiteLinkAction:(id)sender;
 
 @end

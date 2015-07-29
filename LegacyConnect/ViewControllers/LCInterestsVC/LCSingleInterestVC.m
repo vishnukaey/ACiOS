@@ -1,58 +1,83 @@
 //
-//  LCProfileViewVC.m
+//  LCSingleInterestVC.m
 //  LegacyConnect
 //
-//  Created by User on 7/27/15.
+//  Created by User on 7/29/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCProfileViewVC.h"
+#import "LCSingleInterestVC.h"
+#import "LCSingleCauseVC.h"
 
 
-@implementation LCProfileViewVC
+@implementation LCSingleInterestVC
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self prepareCells];
-  [self prepareInterests];
   // Do any additional setup after loading the view.
-  self.navigationController.navigationBarHidden = true;
-  H_interestsScrollview.hidden = true;
+  [self prepareCauses];
+  [self prepareCells];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - setup functions
-- (void)prepareInterests
+- (void) viewWillAppear:(BOOL)animated
 {
-  UIButton *anInterest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-  [anInterest setTitle:@"An interest" forState:UIControlStateNormal];
-  [H_interestsScrollview addSubview:anInterest];
-  anInterest.backgroundColor = [UIColor orangeColor];
-  anInterest.center = CGPointMake(H_interestsScrollview.frame.size.width/2, H_interestsScrollview.frame.size.height/2);
-  [anInterest addTarget:self action:@selector(interestClicked:) forControlEvents:UIControlEventTouchUpInside];
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
 }
-   
+
+#pragma mark - setup functions
+- (void)prepareCauses
+{
+  UIButton *aCause = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
+  [aCause setTitle:@"A Cause" forState:UIControlStateNormal];
+  [H_causesScrollView addSubview:aCause];
+  aCause.backgroundColor = [UIColor orangeColor];
+  aCause.center = CGPointMake(H_causesScrollView.frame.size.width/2, H_causesScrollView.frame.size.height/2);
+  [aCause addTarget:self action:@selector(causesClicked:) forControlEvents:UIControlEventTouchUpInside];
+}
+
 -(void)prepareCells
 {
-  NSArray *feedsArray = [LCDummyValues dummyPROFILEFeedArray];
+  NSArray *feedsArray = [LCDummyValues dummyFeedArray];
   
   H_cellsViewArray = [[NSMutableArray alloc]init];
   for (int i=0; i<feedsArray.count; i++)
   {
     LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_milestonesTable.frame.size.width forPage:1];
+    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:1];
     celViewFinal.delegate = self;
     [H_cellsViewArray addObject:celViewFinal];
   }
 }
 
 #pragma mark - button actions
+- (IBAction)followButtonAction:(id)sender
+{
+  NSLog(@"follow button clicked-->>");
+}
+
+- (IBAction)toggleHelpsORCauses:(UIButton *)sender
+{
+  if (sender.tag == 1)//helps
+  {
+    H_feedsTable.hidden = false;
+    H_causesScrollView.hidden = true;
+  }
+  else//causes--tag is 2
+  {
+    H_feedsTable.hidden = true;
+    H_causesScrollView.hidden = false;
+  }
+}
+
 - (IBAction)backAction:(id)sender
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -60,28 +85,12 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)interestClicked :(UIButton *)sender
+- (void)causesClicked :(UIButton *)sender
 {
-  NSLog(@"interest clicked----->");
-}
-
-- (IBAction)toggleInterestOrMilestones:(UIButton *)sender
-{
-  if (sender.tag == 1)//milestones
-  {
-    H_milestonesTable.hidden = false;
-    H_interestsScrollview.hidden = true;
-  }
-  else//interests
-  {
-    H_milestonesTable.hidden = true;
-    H_interestsScrollview.hidden = false;
-  }
-}
-
-- (IBAction)editClicked:(UIButton *)sender
-{
-  NSLog(@"edit clicked-->>");
+  NSLog(@"cause clicked0-->>>");
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - TableView delegates
@@ -129,7 +138,6 @@
 {
   NSLog(@"actionType--->>>%d", type);
 }
-
 /*
 #pragma mark - Navigation
 
