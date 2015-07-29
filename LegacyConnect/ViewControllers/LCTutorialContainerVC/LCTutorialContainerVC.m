@@ -14,23 +14,44 @@
 
 @implementation LCTutorialContainerVC
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
   [super viewDidLoad];
-  self.pageTitle = @[@"Tutorial Page1",@"Tutorial Page2",@"Tutorial Page3"];
-  _pageController = [self getChildViewControllerOfType:[UIPageViewController class]];
-  [self.pageController setViewControllers:[NSArray arrayWithObject:[self viewControllerAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-  pageControl = [UIPageControl appearance];
-  pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-  pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
-  pageControl.backgroundColor = [UIColor whiteColor];
-  self.pageController.dataSource =self;
-  self.pageController.delegate =self;
+  [self setUpPageViewController];
 }
 
 
-- (void)didReceiveMemoryWarning {
+- (void) viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  NSArray *subviews = self.pageViewController.view.subviews;
+  
+  for (int i=0; i<[subviews count]; i++) {
+    if ([[subviews objectAtIndex:i] isKindOfClass:[UIPageControl class]]) {
+      pageControl = (UIPageControl *)[subviews objectAtIndex:i];
+    }
+  }
+}
+
+- (void)didReceiveMemoryWarning
+{
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+
+- (void) setUpPageViewController
+{
+  self.pageTitleArray = @[@"Tutorial Page1",@"Tutorial Page2",@"Tutorial Page3"];
+  _pageViewController = [self getChildViewControllerOfType:[UIPageViewController class]];
+  [self.pageViewController setViewControllers:[NSArray arrayWithObject:[self viewControllerAtIndex:0]] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+  pageControl = [UIPageControl appearance];
+  pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+  pageControl.currentPageIndicatorTintColor = [UIColor redColor];
+  pageControl.backgroundColor = [UIColor whiteColor];
+  
+  self.pageViewController.dataSource =self;
+  self.pageViewController.delegate =self;
 }
 
 
@@ -71,7 +92,7 @@
   }
   
   index++;
-  if (index == [self.pageTitle count]) {
+  if (index == [self.pageTitleArray count]) {
     return nil;
   }
   
@@ -79,13 +100,11 @@
 }
 
 
-
 - (LCFinalTutorialVC *)viewControllerAtIndex:(NSUInteger)index
 {
-  if (([self.pageTitle count] == 0) || (index >= [self.pageTitle count])) {
+  if (([self.pageTitleArray count] == 0) || (index >= [self.pageTitleArray count])) {
     return nil;
   }
-  // Create a new view controller and pass suitable data.
   LCFinalTutorialVC *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"page1"];
   pageContentViewController.pageIndex = index;
   
@@ -93,10 +112,9 @@
 }
 
 
-
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-  return [self.pageTitle count];
+  return [self.pageTitleArray count];
 }
 
 
@@ -108,14 +126,7 @@
 - (void) pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {
   LCFinalTutorialVC *pageContentVC = pendingViewControllers[0];
-  if(pageContentVC.pageIndex == 2)
-  {
-    _nextButton.selected = YES;
-  }
-  else
-  {
-    _nextButton.selected = NO;
-  }
+  [self updateNextButtonTitleForPageIndex:pageContentVC.pageIndex];
 }
 
 
@@ -127,11 +138,26 @@
   }
   else
   {
-    /*
-     
-     Go to Next Page
-     
-     */
+    LCFinalTutorialVC *final = self.pageViewController.viewControllers[0];
+    NSArray *viewControllers = nil;
+    viewControllers = [NSArray arrayWithObjects:[self viewControllerAtIndex:final.pageIndex+1], nil];
+    [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
+    pageControl.currentPage = final.pageIndex+1;
+    [self updateNextButtonTitleForPageIndex:final.pageIndex+1];
   }
 }
+
+
+-(void) updateNextButtonTitleForPageIndex:(NSInteger)pageIndex
+{
+  if(pageIndex == [_pageTitleArray count]-1)
+  {
+    _nextButton.selected = YES;
+  }
+  else
+  {
+    _nextButton.selected = NO;
+  }
+}
+
 @end

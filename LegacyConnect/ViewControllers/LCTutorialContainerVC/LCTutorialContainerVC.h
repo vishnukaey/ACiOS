@@ -13,7 +13,7 @@
 {
   UIPageControl *pageControl;
 }
-@property (strong, nonatomic) NSArray *pageTitle;
-@property (weak, nonatomic) UIPageViewController *pageController;
+@property (strong, nonatomic) NSArray *pageTitleArray;
+@property (weak, nonatomic) UIPageViewController *pageViewController;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @end

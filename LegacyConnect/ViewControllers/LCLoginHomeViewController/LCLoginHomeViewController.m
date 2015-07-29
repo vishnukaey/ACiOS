@@ -47,6 +47,7 @@
 {
   if ([[notification name] isEqualToString:@"logged_in_facebook"])
   {
+    
     [self.navigationController popToRootViewControllerAnimated:NO];
   }
 }
