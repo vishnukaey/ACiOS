@@ -102,7 +102,7 @@
 #pragma mark - button actions
 - (void)menuButtonAction
 {
-  [self.P_containerController setMenuState:MFSideMenuStateLeftMenuOpen];
+  [self.P_containerController setMenuState:MFSideMenuStateRightMenuOpen];
 }
 
 - (void)GIBComponentsAction :(UIButton *)sender
@@ -197,7 +197,11 @@
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     [self.navigationController pushViewController:vc animated:YES];
   }
-  else if (sender.tag == 1)//logout
+  else if (sender.tag == 1)//notifications
+  {
+    
+  }
+  else if (sender.tag == 2)//logout
   {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:NO forKey:kLoginStatusKey];

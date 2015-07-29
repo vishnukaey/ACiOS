@@ -54,9 +54,9 @@
 
     MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
                                                     containerWithCenterViewController:nav
-                                                    leftMenuViewController:leftSideMenuViewController
-                                                    rightMenuViewController:nil];
-    container.leftMenuWidth = leftSideMenuViewController.P_menuwidth;
+                                                    leftMenuViewController:nil
+                                                    rightMenuViewController:leftSideMenuViewController];
+    container.rightMenuWidth = leftSideMenuViewController.P_menuwidth;
     appdel.window.rootViewController = container;
     [appdel.window makeKeyAndVisible];
   }
