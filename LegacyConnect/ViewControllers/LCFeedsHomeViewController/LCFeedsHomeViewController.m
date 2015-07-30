@@ -7,30 +7,17 @@
 //
 
 #import "LCFeedsHomeViewController.h"
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-#import "LCGIButton.h"
 #import "LCLoginHomeViewController.h"
-#import "LCChooseCommunityInterest.h"
-#import "LCContactsListVC.h"
-#import "LCProfileViewVC.h"
-#import "LCAllInterestVC.h"
 
 
 @implementation LCFeedsHomeViewController
 
-@synthesize P_containerController;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  self.P_containerController = (MFSideMenuContainerViewController *)appdel.window.rootViewController;
-
-  [self addfloatingButtons];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -58,34 +45,6 @@
 }
 
 #pragma mark - initial setup functions
-- (void)addfloatingButtons
-{
-  //global impact button
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  LCGIButton * giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
-  [appdel.window addSubview:giButton];
-  [giButton setUpMenu];
-  giButton.P_community.tag = 0;
-  [giButton.P_community addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
-  appdel.GIButton = giButton;
-  [giButton setImage:[UIImage imageNamed:@"GIButton_dummy.png"] forState:UIControlStateNormal];
-
-  giButton.P_video.tag = 1;
-  [giButton.P_video addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
-
-  giButton.P_status.tag = 2;
-  [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
-
-  //menu poper button
-  UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
-  menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
-  menuButton.backgroundColor = [UIColor grayColor];
-  [appdel.window addSubview:menuButton];
-  [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
-  appdel.menuButton = menuButton;
-  [menuButton setImage:[UIImage imageNamed:@"menuButton_dummy.png"] forState:UIControlStateNormal];
-}
-
 - (void)prepareFeedViews
 {
   NSArray *feedsArray = [LCDummyValues dummyFeedArray];
@@ -98,34 +57,6 @@
     celViewFinal.delegate = self;
     [H_feedsViewArray addObject:celViewFinal];
   }
-}
-
-#pragma mark - button actions
-- (void)menuButtonAction
-{
-  [self.P_containerController setMenuState:MFSideMenuStateRightMenuOpen];
-}
-
-- (void)GIBComponentsAction :(UIButton *)sender
-{
-  NSLog(@"tag-->>%d", (int)sender.tag);
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton toggle];
-  [appdel.GIButton setHidden:YES];
-//  if (sender.tag == 2)
-//  {
-    [appdel.menuButton setHidden:YES];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-    [self.navigationController pushViewController:vc animated:YES];
-//  }
-//  else
-//  {
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-//    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-//    [self.navigationController pushViewController:vc animated:YES];
-//  }
-  
 }
 
 #pragma mark - TableView delegates
@@ -187,43 +118,5 @@
   }
 }
 
-#pragma mark - leftmenu delegates
-- (void)leftMenuButtonActions:(UIButton *)sender
-{
-  NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
-  [self.P_containerController setMenuState:MFSideMenuStateClosed];
-  if (sender.tag == 0)//profile
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-  else if (sender.tag == 1)//Interests
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCAllInterestVC"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-  else if (sender.tag == 2)//notifications
-  {
-    
-  }
-  else if (sender.tag == 3)//logout
-  {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:NO forKey:kLoginStatusKey];
-    [defaults synchronize];
-    [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
-    if ([FBSDKAccessToken currentAccessToken])
-    {
-      [[FBSDKLoginManager new] logOut];
-    }
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    appdel.window.rootViewController = myStoryBoardInitialViewController;
-    [appdel.window makeKeyAndVisible];
-  }
-}
 
 @end

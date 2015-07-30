@@ -20,12 +20,12 @@
   [self.view setBackgroundColor:[UIColor lightTextColor]];
   
   
-  NSArray *titles_ = [[NSArray alloc] initWithObjects:@"Profile", @"Interests", @"Notifications", @"Logout", nil];
+  NSArray *titles_ = [[NSArray alloc] initWithObjects:@"Home", @"Profile", @"Interests", @"Notifications", @"Logout", nil];
 
   float y_margin = 2;
   float but_height = 50;
   for (int i = 0; i<titles_.count; i++) {
-    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, y_margin*(i+1) + i * but_height, P_menuwidth, but_height)];
+    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 50+y_margin*(i+1) + i * but_height, P_menuwidth, but_height)];
     but.backgroundColor = [UIColor whiteColor];
     [but setTitle:[titles_ objectAtIndex:i] forState:UIControlStateNormal];
     [self.view addSubview:but];

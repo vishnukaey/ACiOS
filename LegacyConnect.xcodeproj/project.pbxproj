@@ -55,6 +55,7 @@
 		CEBA92D41B66632000C02F93 /* menuButton_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */; };
 		CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D01B66632000C02F93 /* photoPost_dummy.png */; };
 		CEBA92D71B6664A300C02F93 /* search_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D61B6664A300C02F93 /* search_dummy.png */; };
+		CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */; };
 		CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC601B68994500F0116E /* LCAllInterestVC.m */; };
 		CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */; };
 		CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */; };
@@ -160,6 +161,8 @@
 		CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuButton_dummy.png; sourceTree = "<group>"; };
 		CEBA92D01B66632000C02F93 /* photoPost_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoPost_dummy.png; sourceTree = "<group>"; };
 		CEBA92D61B6664A300C02F93 /* search_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_dummy.png; sourceTree = "<group>"; };
+		CEBCE1A61B6A252100730FD5 /* LCMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMenuButton.h; path = CustomViews/LCMenuButton/LCMenuButton.h; sourceTree = "<group>"; };
+		CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMenuButton.m; path = CustomViews/LCMenuButton/LCMenuButton.m; sourceTree = "<group>"; };
 		CEBCEC5F1B68994500F0116E /* LCAllInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAllInterestVC.h; path = ViewControllers/LCInterestsVC/LCAllInterestVC.h; sourceTree = "<group>"; };
 		CEBCEC601B68994500F0116E /* LCAllInterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAllInterestVC.m; path = ViewControllers/LCInterestsVC/LCAllInterestVC.m; sourceTree = "<group>"; };
 		CEBCEC621B68996F00F0116E /* LCSingleInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSingleInterestVC.h; path = ViewControllers/LCInterestsVC/LCSingleInterestVC.h; sourceTree = "<group>"; };
@@ -607,6 +610,15 @@
 			name = LCProfileVC;
 			sourceTree = "<group>";
 		};
+		CEBCE1A51B6A24DC00730FD5 /* LCMenuButton */ = {
+			isa = PBXGroup;
+			children = (
+				CEBCE1A61B6A252100730FD5 /* LCMenuButton.h */,
+				CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */,
+			);
+			name = LCMenuButton;
+			sourceTree = "<group>";
+		};
 		CEBCEC5E1B6898FD00F0116E /* LCInterestsVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -642,6 +654,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEBCE1A51B6A24DC00730FD5 /* LCMenuButton */,
 				0BE2B9B91B58F7BC0026E607 /* LCChooseCausesCollectionViewCell */,
 				0BB7B3711B57DEC800261658 /* LCFeedCellView */,
 				0BB7B3701B57DEB100261658 /* LCGIButton */,
@@ -831,6 +844,7 @@
 				CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */,
 				CEBED6A11B5FACD60012FEBB /* LCCreateCommunity.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
+				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,

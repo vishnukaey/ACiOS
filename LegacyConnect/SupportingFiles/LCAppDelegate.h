@@ -10,7 +10,7 @@
 
 @interface LCAppDelegate : UIResponder <UIApplicationDelegate>
 @property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, retain) UIButton *menuButton;
+@property (nonatomic, retain) id menuButton;
 @property (nonatomic, retain) id GIButton;
 + (LCAppDelegate *)appDelegate;
 @end

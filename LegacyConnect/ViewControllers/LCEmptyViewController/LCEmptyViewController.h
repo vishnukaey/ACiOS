@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCLeftMenuController.h"
 
 @interface LCEmptyViewController : UIViewController
 
