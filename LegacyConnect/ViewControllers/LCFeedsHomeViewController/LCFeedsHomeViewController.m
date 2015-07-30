@@ -14,6 +14,7 @@
 #import "LCChooseCommunityInterest.h"
 #import "LCContactsListVC.h"
 #import "LCProfileViewVC.h"
+#import "LCAllInterestVC.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -76,7 +77,7 @@
   [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
 
   //menu poper button
-  UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,70, 30, 30)];
+  UIButton *menuButton = [[UIButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
   menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor grayColor];
   [appdel.window addSubview:menuButton];
@@ -102,7 +103,7 @@
 #pragma mark - button actions
 - (void)menuButtonAction
 {
-  [self.P_containerController setMenuState:MFSideMenuStateLeftMenuOpen];
+  [self.P_containerController setMenuState:MFSideMenuStateRightMenuOpen];
 }
 
 - (void)GIBComponentsAction :(UIButton *)sender
@@ -111,19 +112,19 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
-  if (sender.tag == 2)
-  {
+//  if (sender.tag == 2)
+//  {
     [appdel.menuButton setHidden:YES];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
     [self.navigationController pushViewController:vc animated:YES];
-  }
-  else
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
+//  }
+//  else
+//  {
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+//    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+//    [self.navigationController pushViewController:vc animated:YES];
+//  }
   
 }
 
@@ -174,11 +175,11 @@
   
   if (type==2)//comments
   {
-        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                      bundle:nil];
-        LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-        
-        [self.navigationController pushViewController:next animated:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                  bundle:nil];
+    LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+
+    [self.navigationController pushViewController:next animated:YES];
   }
   
   if (type==1)
@@ -197,7 +198,17 @@
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     [self.navigationController pushViewController:vc animated:YES];
   }
-  else if (sender.tag == 1)//logout
+  else if (sender.tag == 1)//Interests
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCAllInterestVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if (sender.tag == 2)//notifications
+  {
+    
+  }
+  else if (sender.tag == 3)//logout
   {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:NO forKey:kLoginStatusKey];
