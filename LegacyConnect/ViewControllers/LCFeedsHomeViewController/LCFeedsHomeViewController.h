@@ -9,15 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
-#import "MFSideMenu.h"
-#import "LCLeftMenuController.h"
 
-@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate, leftMenuDelegate>
+@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
   IBOutlet  UITableView *H_feedsTable;
   NSMutableArray *H_feedsViewArray;
 }
 
-@property(nonatomic, retain)MFSideMenuContainerViewController *P_containerController;
 
 @end
