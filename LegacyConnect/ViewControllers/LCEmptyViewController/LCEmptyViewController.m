@@ -49,6 +49,9 @@
   {
     //create appdelegate object to make the MFmenucontainer controller as the root view controller
     //add homefeed controller as the center controller and leftmenu controller as the left menu to the container controller.
+    //make the homefeed controller as delegate of leftmenu
+    
+    
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
 
     LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
