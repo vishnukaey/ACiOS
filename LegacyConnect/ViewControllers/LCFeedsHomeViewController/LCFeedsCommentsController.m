@@ -147,7 +147,7 @@
   [self.view addSubview:H_dup];
   H_dup.delegate = self;
   H_dup.inputAccessoryView = commentntField;
-  [H_dup becomeFirstResponder];
+//  [H_dup becomeFirstResponder];
 }
 
 #pragma mark - button actions
