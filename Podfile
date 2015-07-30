@@ -9,6 +9,7 @@ pod 'FBSDKShareKit'
 pod 'UITextField+Shake', '~> 1.0'
 pod 'MFSideMenu'
 pod 'Reachability', '~> 3.2'
+pod 'MBProgressHUD', '~> 0.9'
 end
 
 target 'LegacyConnectTests' do

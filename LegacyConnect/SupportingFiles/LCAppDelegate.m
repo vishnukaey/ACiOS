@@ -27,8 +27,7 @@
 @synthesize menuButton, GIButton;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
-    
+  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }
@@ -37,11 +36,13 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+  [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+  BOOL boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:sourceApplication
+                                                               annotation:annotation];
   [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
-  return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                        openURL:url
-                                              sourceApplication:sourceApplication
-                                                     annotation:annotation];
+  return boolValue;
 }
 
 + (LCAppDelegate *)appDelegate
