@@ -36,12 +36,33 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
-  BOOL boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                                  openURL:url
-                                                        sourceApplication:sourceApplication
-                                                               annotation:annotation];
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
+  
+  BOOL boolValue = false;
+  
+  if([[url scheme] caseInsensitiveCompare:@"legacyConnect"] == NSOrderedSame)
+  {
+    //CODE TO LOAD FORGOT PASSWORD SCREEN COMES HERE
+    // html code to load app <a href="legacyConnect://myapp?var1=a&var2=b">Open my app</a>
+    
+    UIAlertView *alertView;
+    alertView = [[UIAlertView alloc] initWithTitle:@"Launch by URL" message:@"This app was launched from a URL" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
+    
+    NSLog(@"legacyConnect");
+    boolValue = true;
+    return boolValue;
+    
+  }
+  else
+  {
+    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                    openURL:url
+                                                          sourceApplication:sourceApplication
+                                                                 annotation:annotation];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
+    return boolValue;
+  }
   return boolValue;
 }
 
