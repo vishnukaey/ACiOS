@@ -161,6 +161,9 @@
   else if (sender.tag == 3)//notifications
   {
     
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Notification" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    [H_root setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 4)//logout
   {

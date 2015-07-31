@@ -32,6 +32,7 @@
   self.navigationController.navigationBarHidden = false;
 }
 
+
 #pragma mark - setUpFunctions
 - (void)addMyInterests
 {
@@ -45,6 +46,7 @@
   anInterest.center = CGPointMake(self.view.frame.size.width/4, self.view.frame.size.height/4);
   [anInterest addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 -(void)addAllInterests
 {
@@ -65,6 +67,7 @@
   anInterest1.center = CGPointMake(self.view.frame.size.width/4*3, self.view.frame.size.height/4);
   [anInterest1 addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
 }
+
 
 #pragma mark - button Actions
 - (IBAction)toggleMineORAll:(UIButton *)sender
