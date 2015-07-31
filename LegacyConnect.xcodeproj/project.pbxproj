@@ -60,6 +60,7 @@
 		CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D01B66632000C02F93 /* photoPost_dummy.png */; };
 		CEBA92D71B6664A300C02F93 /* search_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D61B6664A300C02F93 /* search_dummy.png */; };
 		CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */; };
+		CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */; };
 		CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */; };
 		CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC601B68994500F0116E /* LCAllInterestVC.m */; };
 		CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */; };
@@ -175,6 +176,8 @@
 		CEBA92D61B6664A300C02F93 /* search_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_dummy.png; sourceTree = "<group>"; };
 		CEBBBFAD1B6B377B001C91E1 /* LCLocationSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLocationSearchField.h; path = CustomViews/LCLocationSearchField/LCLocationSearchField.h; sourceTree = "<group>"; };
 		CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLocationSearchField.m; path = CustomViews/LCLocationSearchField/LCLocationSearchField.m; sourceTree = "<group>"; };
+		CEBBBFB01B6B9041001C91E1 /* LCFullScreenImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFullScreenImageVC.h; path = ViewControllers/LCFeedsHomeViewController/LCFullScreenImageVC.h; sourceTree = "<group>"; };
+		CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFullScreenImageVC.m; path = ViewControllers/LCFeedsHomeViewController/LCFullScreenImageVC.m; sourceTree = "<group>"; };
 		CEBCE1A61B6A252100730FD5 /* LCMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMenuButton.h; path = CustomViews/LCMenuButton/LCMenuButton.h; sourceTree = "<group>"; };
 		CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMenuButton.m; path = CustomViews/LCMenuButton/LCMenuButton.m; sourceTree = "<group>"; };
 		CEBCEC5F1B68994500F0116E /* LCAllInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAllInterestVC.h; path = ViewControllers/LCInterestsVC/LCAllInterestVC.h; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 				CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */,
 				CE4EB6751B5E28D900B8A725 /* LCLeftMenuController.h */,
 				CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */,
+				CEBBBFB01B6B9041001C91E1 /* LCFullScreenImageVC.h */,
+				CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */,
 			);
 			name = LCFeedsHomeViewController;
 			sourceTree = "<group>";
@@ -875,6 +880,7 @@
 				0B5FA6EC1B57BB5400DDC2B1 /* LCUser.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
+				CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,

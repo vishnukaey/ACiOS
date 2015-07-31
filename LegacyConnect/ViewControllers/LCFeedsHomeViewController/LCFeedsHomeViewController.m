@@ -8,6 +8,7 @@
 
 #import "LCFeedsHomeViewController.h"
 #import "LCLoginHomeViewController.h"
+#import "LCFullScreenImageVC.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -23,12 +24,19 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:[[UIView alloc] init]]];
   self.navigationController.navigationBarHidden = false;
-  
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:NO];
   [appdel.menuButton setHidden:NO];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.navigationController.navigationBarHidden = true;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:true];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -100,11 +108,11 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(int)type andID:(NSString *)postID
+- (void)feedCellActionWithType:(NSString *)type andID:(NSString *)postID
 {
-  NSLog(@"actionType--->>>%d", type);
+  NSLog(@"actionType--->>>%@", type);
   
-  if (type==2)//comments
+  if ([type isEqualToString:kFeedCellActionComment])//comments
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
@@ -113,8 +121,18 @@
     [self.navigationController pushViewController:next animated:YES];
   }
   
-  if (type==1)
+  else if ([type isEqualToString:kFeedCellActionLike])
   {
+  }
+  else if ([type isEqualToString:kFeedCellActionImage])
+  {
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appdel.GIButton setHidden:YES];
+    [appdel.menuButton setHidden:YES];
+    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+    vc.P_image = [UIImage imageNamed:@"photoPost_dummy.png"];
+    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:vc animated:YES completion:nil];
   }
 }
 

@@ -143,6 +143,9 @@
     [statusPhoto setImage:[UIImage imageNamed:@"photoPost_dummy.png"]];
     [self addSubview:statusPhoto];
     top_space += statusPhoto.frame.size.height + in_margin;
+    UIButton *im_button = [[UIButton alloc] initWithFrame:statusPhoto.frame];
+    [self addSubview:im_button];
+    [im_button addTarget:self action:@selector(imageFullscreenAction) forControlEvents:UIControlEventTouchUpInside];
   }
   else
   {
@@ -209,12 +212,17 @@
 
 -(void)likeAction
 {
-  [delegate feedCellActionWithType:1 andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionLike andID:@""];
 }
 
 -(void)commentAction
 {
-  [delegate feedCellActionWithType:2 andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionComment andID:@""];
+}
+
+- (void)imageFullscreenAction
+{
+  [delegate feedCellActionWithType:kFeedCellActionImage andID:@""];
 }
 
 /*
