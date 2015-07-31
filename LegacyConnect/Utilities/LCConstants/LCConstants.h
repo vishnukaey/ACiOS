@@ -43,4 +43,8 @@ extern NSString *const kEmptyStringValue;
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
 
+extern NSString *const kFeedCellActionLike;
+extern NSString *const kFeedCellActionComment;
+extern NSString *const kFeedCellActionImage;
+
 @end

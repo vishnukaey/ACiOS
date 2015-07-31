@@ -103,9 +103,9 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(int)type andID:(NSString *)postID
+- (void)feedCellActionWithType:(NSString *)type andID:(NSString *)postID
 {
-  NSLog(@"actionType--->>>%d", type);
+  NSLog(@"actionType--->>>%@", type);
 }
 
 /*
