@@ -124,7 +124,7 @@
   [appdel.menuButton setHidden:YES];
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-  [self.navigationController pushViewController:vc animated:YES];
+  [H_root pushViewController:vc animated:YES];
   //  }
   //  else
   //  {

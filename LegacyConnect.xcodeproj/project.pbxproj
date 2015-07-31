@@ -59,8 +59,8 @@
 		CEBA92D41B66632000C02F93 /* menuButton_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */; };
 		CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D01B66632000C02F93 /* photoPost_dummy.png */; };
 		CEBA92D71B6664A300C02F93 /* search_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D61B6664A300C02F93 /* search_dummy.png */; };
+		CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */; };
 		CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */; };
-		CEBCE1AF1B6A3A5C00730FD5 /* LCLocationSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1AE1B6A3A5C00730FD5 /* LCLocationSearchField.m */; };
 		CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC601B68994500F0116E /* LCAllInterestVC.m */; };
 		CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */; };
 		CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */; };
@@ -173,10 +173,10 @@
 		CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuButton_dummy.png; sourceTree = "<group>"; };
 		CEBA92D01B66632000C02F93 /* photoPost_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoPost_dummy.png; sourceTree = "<group>"; };
 		CEBA92D61B6664A300C02F93 /* search_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_dummy.png; sourceTree = "<group>"; };
+		CEBBBFAD1B6B377B001C91E1 /* LCLocationSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLocationSearchField.h; path = CustomViews/LCLocationSearchField/LCLocationSearchField.h; sourceTree = "<group>"; };
+		CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLocationSearchField.m; path = CustomViews/LCLocationSearchField/LCLocationSearchField.m; sourceTree = "<group>"; };
 		CEBCE1A61B6A252100730FD5 /* LCMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMenuButton.h; path = CustomViews/LCMenuButton/LCMenuButton.h; sourceTree = "<group>"; };
 		CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMenuButton.m; path = CustomViews/LCMenuButton/LCMenuButton.m; sourceTree = "<group>"; };
-		CEBCE1AD1B6A3A5C00730FD5 /* LCLocationSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLocationSearchField.h; path = CustomViews/LCLocationSearchField/LCLocationSearchField.h; sourceTree = "<group>"; };
-		CEBCE1AE1B6A3A5C00730FD5 /* LCLocationSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLocationSearchField.m; path = CustomViews/LCLocationSearchField/LCLocationSearchField.m; sourceTree = "<group>"; };
 		CEBCEC5F1B68994500F0116E /* LCAllInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAllInterestVC.h; path = ViewControllers/LCInterestsVC/LCAllInterestVC.h; sourceTree = "<group>"; };
 		CEBCEC601B68994500F0116E /* LCAllInterestVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAllInterestVC.m; path = ViewControllers/LCInterestsVC/LCAllInterestVC.m; sourceTree = "<group>"; };
 		CEBCEC621B68996F00F0116E /* LCSingleInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSingleInterestVC.h; path = ViewControllers/LCInterestsVC/LCSingleInterestVC.h; sourceTree = "<group>"; };
@@ -653,6 +653,15 @@
 			name = LCProfileVC;
 			sourceTree = "<group>";
 		};
+		CEBBBFAC1B6B3764001C91E1 /* LCLocationSearchField */ = {
+			isa = PBXGroup;
+			children = (
+				CEBBBFAD1B6B377B001C91E1 /* LCLocationSearchField.h */,
+				CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */,
+			);
+			name = LCLocationSearchField;
+			sourceTree = "<group>";
+		};
 		CEBCE1A51B6A24DC00730FD5 /* LCMenuButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -660,15 +669,6 @@
 				CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */,
 			);
 			name = LCMenuButton;
-			sourceTree = "<group>";
-		};
-		CEBCE1A91B6A39FC00730FD5 /* LCLocationSearchField */ = {
-			isa = PBXGroup;
-			children = (
-				CEBCE1AD1B6A3A5C00730FD5 /* LCLocationSearchField.h */,
-				CEBCE1AE1B6A3A5C00730FD5 /* LCLocationSearchField.m */,
-			);
-			name = LCLocationSearchField;
 			sourceTree = "<group>";
 		};
 		CEBCEC5E1B6898FD00F0116E /* LCInterestsVC */ = {
@@ -706,6 +706,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEBBBFAC1B6B3764001C91E1 /* LCLocationSearchField */,
 				0B56A8021B6A46520065C231 /* LCRequestNotificationTVC */,
 				0B56A7FE1B6A45ED0065C231 /* LCRecentNotificationTVC */,
 				CEBCE1A51B6A24DC00730FD5 /* LCMenuButton */,
@@ -888,6 +889,7 @@
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
 				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
+				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */,
 				CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */,
 				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,
@@ -904,7 +906,6 @@
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
-				CEBCE1AF1B6A3A5C00730FD5 /* LCLocationSearchField.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				CEBED6A71B5FADBB0012FEBB /* LCChooseCommunityInterest.m in Sources */,
