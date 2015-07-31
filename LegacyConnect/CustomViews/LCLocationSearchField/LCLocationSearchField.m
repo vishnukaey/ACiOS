@@ -51,6 +51,7 @@
 
 - (void)searchForLocations:(NSString *)string
 {
+  [activity stopAnimating];
   [previousSearch cancel];
   if ([string isEqualToString:@""])
   {

@@ -21,6 +21,6 @@
 
 @property(nonatomic, retain)id delegate;
 
--(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(int)pageType;
+-(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(NSString *)pageType;
 
 @end

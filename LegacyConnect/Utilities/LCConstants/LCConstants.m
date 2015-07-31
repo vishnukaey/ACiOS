@@ -24,7 +24,7 @@ NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
 
-NSString *const kUpdatePasswordURL = @"";
+NSString *const ç = @"";
 NSString *const kForgotPasswordURL = @"";
 NSString *const kChangePasswordURL = @"";
 NSString *const kStaticTableSyncURL = @"";
@@ -42,5 +42,8 @@ NSString *const kFBAccessTokenKey = @"fbAccessToken";
 
 
 NSString *const kEmptyStringValue = @"";
+
+NSString *const kHomefeedCellID = @"homefeedCell";
+NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
 @end

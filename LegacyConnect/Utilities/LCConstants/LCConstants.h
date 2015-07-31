@@ -40,4 +40,7 @@ extern NSString *const kFBAccessTokenKey;
 
 extern NSString *const kEmptyStringValue;
 
+extern NSString *const kHomefeedCellID;
+extern NSString *const kCommentsfeedCellID;
+
 @end

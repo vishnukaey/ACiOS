@@ -21,7 +21,7 @@
   return self;
 }
 
--(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(int)pageType
+-(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(NSString *)pageType
 {
   //pagetypy <<1 for home page feeds>>  <<>2 for comments page feed>
 
@@ -36,7 +36,7 @@
 
   [self setFrame:CGRectMake(0, 0,width_,0)];
 
-  if (pageType == 1)//home page
+  if ([pageType isEqualToString:kHomefeedCellID])//home page
   {
     UIView *celSpace = [[UIView alloc]initWithFrame:CGRectMake(-2, 0, width_+4, cellSpacing_height)];//spacing  between cells
     celSpace.layer.borderColor = [UIColor lightTextColor].CGColor;
@@ -193,7 +193,7 @@
 
   top_space+=botRow.frame.size.height;
 
-  if (pageType == 2)//comments page
+  if ([pageType isEqualToString:kCommentsfeedCellID])//comments page
   {
     UIView *celSpace = [[UIView alloc]initWithFrame:CGRectMake(-2, top_space, width_+4, cellSpacing_height)];//spacing  between cells
     celSpace.layer.borderColor = [UIColor lightTextColor].CGColor;
