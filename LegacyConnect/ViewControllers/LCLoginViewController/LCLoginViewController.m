@@ -7,6 +7,7 @@
 //
 
 #import "LCLoginViewController.h"
+#import <SDWebImage/SDImageCache.h>
 
 @interface LCLoginViewController ()
 
