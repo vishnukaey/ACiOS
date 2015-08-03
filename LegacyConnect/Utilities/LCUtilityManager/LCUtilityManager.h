@@ -18,6 +18,8 @@
 + (NSString *)encodeToBase64String:(NSString *)string;
 + (NSString *)decodeFromBase64String:(NSString *)string;
 + (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
+//+(NSNumber*) getNSNumberFromString:(NSString*)string;
+
 
 + (NSArray *)getPhoneContacts;
 

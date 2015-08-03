@@ -14,6 +14,7 @@ extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
 extern NSString *const kFBLoginURL;
+extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
 extern NSString *const kForgotPasswordURL;
 extern NSString *const kChangePasswordURL;
@@ -28,6 +29,7 @@ extern NSString *const kStatusCodeFailure;
 
 extern NSString *const kLoginStatusKey;
 
+extern NSString *const kIDKey;
 extern NSString *const kUserIDKey;
 extern NSString *const kFirstNameKey;
 extern NSString *const kLastNameKey;
@@ -37,6 +39,8 @@ extern NSString *const kDobKey;
 extern NSString *const kFBUserIDKey;
 extern NSString *const kFBAvatarImageUrlKey;
 extern NSString *const kFBAccessTokenKey;
+extern NSString *const kUserImageData;
+extern NSString *const kUserimageExtension;
 
 extern NSString *const kEmptyStringValue;
 

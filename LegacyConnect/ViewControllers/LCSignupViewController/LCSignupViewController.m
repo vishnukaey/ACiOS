@@ -104,20 +104,35 @@
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
   [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
    {
-     NSLog(@"post success");
-     NSLog(@"%@",response);
-     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-     [defaults setBool:YES forKey:kLoginStatusKey];
-     [defaults synchronize];
-     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
-     
-   } andFailure:^(NSString *error) {
-     
-     NSLog(@"post failure");
-     NSLog(@"%@",error);
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+     }
+     else
+     {
+       NSLog(@"%@",response);
+       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+       [defaults setBool:YES forKey:kLoginStatusKey];
+       [defaults synchronize];
+       [self saveUserDetailsToDataManagerFromResponse:response];	
+       [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+     }
+   } andFailure:^(NSString *error){
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
    }];
 }
 
+
+- (void)saveUserDetailsToDataManagerFromResponse:(id)response
+{
+  NSDictionary *userInfo = response[kResponseData];
+  [LCDataManager sharedDataManager].userID = userInfo[kIDKey];
+  [LCDataManager sharedDataManager].userEmail = _emailTextField.text;
+  [LCDataManager sharedDataManager].firstName = _firstNameTextField.text;
+  [LCDataManager sharedDataManager].lastName = _lastNameTextField.text;
+  [LCDataManager sharedDataManager].dob = _dobTextField.text;
+  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kIDKey] andPassword:self.passwordTextField.text];
+}
 
 - (BOOL)validateFields
 {

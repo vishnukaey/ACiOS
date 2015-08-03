@@ -23,7 +23,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1408366702711751</string>
+				<string>fb785925134858928</string>
 			</array>
 		</dict>
 		<dict>
@@ -36,9 +36,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>1408366702711751</string>
+	<string>785925134858928</string>
 	<key>FacebookDisplayName</key>
-	<string>GmgTestApp</string>
+	<string>LegacyConnectGreeshmaLocal</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

@@ -93,12 +93,12 @@
 {
   NSDictionary *userInfo = response[kResponseData];
   [LCDataManager sharedDataManager].userEmail = userInfo[kEmailKey];
-  [LCDataManager sharedDataManager].userID = userInfo[kUserIDKey];
+  [LCDataManager sharedDataManager].userID = userInfo[kIDKey];
   [LCDataManager sharedDataManager].firstName = userInfo[kFirstNameKey];
   [LCDataManager sharedDataManager].lastName = userInfo[kLastNameKey];
   [LCDataManager sharedDataManager].dob = userInfo[kDobKey];
   [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kUserIDKey] andPassword:self.passwordTextField.text];
+  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kIDKey] andPassword:self.passwordTextField.text];
 }
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
