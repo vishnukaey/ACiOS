@@ -24,8 +24,11 @@
 
   float y_margin = 2;
   float but_height = 50;
+  _userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 70, 70)];
+  [self.view addSubview:_userImageView];
+  [_userImageView sd_setImageWithURL:[NSURL URLWithString:[LCDataManager sharedDataManager].avatarUrl]placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   for (int i = 0; i<titles_.count; i++) {
-    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 50+y_margin*(i+1) + i * but_height, P_menuwidth, but_height)];
+    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 150+y_margin*(i+1) + i * but_height, P_menuwidth, but_height)];
     but.backgroundColor = [UIColor whiteColor];
     [but setTitle:[titles_ objectAtIndex:i] forState:UIControlStateNormal];
     [self.view addSubview:but];
