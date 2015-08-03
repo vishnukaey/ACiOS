@@ -19,6 +19,8 @@
 		0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A8041B6A46AD0065C231 /* LCNotificationsViewController.m */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
 		0B5FA6EC1B57BB5400DDC2B1 /* LCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6EB1B57BB5400DDC2B1 /* LCUser.m */; };
+		0BA524A61B6F39BE00E7770A /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BA524A41B6F39BE00E7770A /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */; };
+		0BA524AA1B6F3B0A00E7770A /* rsz_lc-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BA524A91B6F3B0A00E7770A /* rsz_lc-logo.png */; };
 		0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7B3691B57CCF200261658 /* LCLoginTextField.m */; };
 		0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36B1B57DE7400261658 /* warning@2x.png */; };
 		0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36C1B57DE7400261658 /* warning@3x.png */; };
@@ -113,6 +115,8 @@
 		0B5FA6EA1B57BB5400DDC2B1 /* LCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUser.h; path = Models/LCUser/LCUser.h; sourceTree = "<group>"; };
 		0B5FA6EB1B57BB5400DDC2B1 /* LCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUser.m; path = Models/LCUser/LCUser.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
+		0BA524A41B6F39BE00E7770A /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"; sourceTree = "<group>"; };
+		0BA524A91B6F3B0A00E7770A /* rsz_lc-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rsz_lc-logo.png"; sourceTree = "<group>"; };
 		0BB7B3681B57CCF200261658 /* LCLoginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginTextField.h; path = CustomViews/LCLoginTextField/LCLoginTextField.h; sourceTree = "<group>"; };
 		0BB7B3691B57CCF200261658 /* LCLoginTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginTextField.m; path = CustomViews/LCLoginTextField/LCLoginTextField.m; sourceTree = "<group>"; };
 		0BB7B36B1B57DE7400261658 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
@@ -596,6 +600,8 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				0BA524A91B6F3B0A00E7770A /* rsz_lc-logo.png */,
+				0BA524A41B6F39BE00E7770A /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */,
 				CEBA92D61B6664A300C02F93 /* search_dummy.png */,
 				CEBA92CC1B66632000C02F93 /* comment_dummy.png */,
 				CEBA92CD1B66632000C02F93 /* GIButton_dummy.png */,
@@ -816,6 +822,7 @@
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
 				CEBA92D71B6664A300C02F93 /* search_dummy.png in Resources */,
 				CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */,
+				0BA524A61B6F39BE00E7770A /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
 				CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
@@ -824,6 +831,7 @@
 				CEBCEC691B6899CF00F0116E /* Interests.storyboard in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
 				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
+				0BA524AA1B6F3B0A00E7770A /* rsz_lc-logo.png in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
 				0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */,
 			);

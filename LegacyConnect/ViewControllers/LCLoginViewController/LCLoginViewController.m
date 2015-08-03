@@ -8,6 +8,7 @@
 
 #import "LCLoginViewController.h"
 #import <SDWebImage/SDImageCache.h>
+#import "LCUpdatePasswordViewController.h"
 
 @interface LCLoginViewController ()
 
@@ -18,8 +19,25 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
 }
+
+- (void) viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(goToUpdatePassword:)
+                                               name:@"logged_in_from_URL"
+                                             object:nil];
+}
+
+
+-(void)goToUpdatePassword:(id)sender
+{
+  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+  [self.navigationController pushViewController:updatePasswordVC animated:YES];
+  
+}
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
