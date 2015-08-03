@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LCMultipleSelectionTable.h"
 
 @interface LCContactsListVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   NSArray *H_contactsArray;
-  UITableView *H_contactsTable;
+  LCMultipleSelectionTable *H_contactsTable;
 }
 
 @end
