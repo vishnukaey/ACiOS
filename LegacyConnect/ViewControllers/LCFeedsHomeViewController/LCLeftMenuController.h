@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 //---------protocols
@@ -21,5 +22,6 @@
 
 @property(nonatomic, assign)float P_menuwidth;
 @property(nonatomic, retain)id delegate_;
+@property (nonatomic, strong) UIImageView *userImageView;
 
 @end

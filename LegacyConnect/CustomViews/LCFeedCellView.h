@@ -11,8 +11,7 @@
 //--------------protocols
 @protocol feedCellDelegate <NSObject>
 
-//action type-- <<1 for like>>   <<2 for comment>>
--(void)feedCellActionWithType :(int)type andID:(NSString *)postID;
+-(void)feedCellActionWithType :(NSString *)type andID:(NSString *)postID;
 
 @end
 

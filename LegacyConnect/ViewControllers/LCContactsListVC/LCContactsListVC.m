@@ -11,6 +11,7 @@
 #import "LCContact.h"
 
 
+
 @implementation LCContactsListVC
 
 - (void)viewDidLoad
@@ -19,7 +20,7 @@
   [self.navigationController setNavigationBarHidden:NO];
 
   [self loadContacts];
-  H_contactsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
+  H_contactsTable = [[LCMultipleSelectionTable alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
 
   H_contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
   H_contactsTable.layer.borderWidth = 3;
@@ -80,7 +81,7 @@
   return H_contactsArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
+- (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *MyIdentifier = @"MyIdentifier";
@@ -110,6 +111,13 @@
   UILabel *emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, self.view.frame.size.width - 80, 20)];
   emailLabel.text = [con.P_emails objectAtIndex:0];
   [contactCell addSubview:emailLabel];
+  
+  UIButton *checkbutton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+  checkbutton.tag = indexPath.row;
+  checkbutton.center = CGPointMake(tableView.frame.size.width - 50, 40);
+  [checkbutton addTarget:tableView action:@selector(checkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+  [tableView setImageForButton:checkbutton];
+  [contactCell addSubview:checkbutton];
   [cell addSubview:contactCell];
   contactCell.tag = 10;
 

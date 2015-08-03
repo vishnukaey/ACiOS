@@ -41,13 +41,10 @@
   
   if([[url scheme] caseInsensitiveCompare:@"legacyConnect"] == NSOrderedSame)
   {
-    //CODE TO LOAD FORGOT PASSWORD SCREEN COMES HERE
-    // html code to load app <a href="legacyConnect://myapp?var1=a&var2=b">Open my app</a>
-    
     UIAlertView *alertView;
     alertView = [[UIAlertView alloc] initWithTitle:@"Launch by URL" message:@"This app was launched from a URL" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alertView show];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:self];
     NSLog(@"legacyConnect");
     boolValue = true;
     return boolValue;

@@ -20,5 +20,6 @@
 @property (strong, nonatomic) NSString *userFBID;
 @property (strong, nonatomic) NSString *userToken;
 @property (strong, nonatomic) NSString *createdDateTime;
+@property (strong, nonatomic) NSData *userImageData;
 @property (assign) BOOL isActive;
 @end

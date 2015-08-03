@@ -110,12 +110,20 @@
 #pragma mark - button actions
 - (void)menuButtonAction
 {
-  [H_container setMenuState:MFSideMenuStateRightMenuOpen];
+  if (H_container.menuState == MFSideMenuStateClosed) {
+    [H_container setMenuState:MFSideMenuStateRightMenuOpen];
+  }
+  else
+  {
+    [H_container setMenuState:MFSideMenuStateClosed];
+  }
+  
 }
 
 - (void)GIBComponentsAction :(UIButton *)sender
 {
   NSLog(@"tag-->>%d", (int)sender.tag);
+  [H_container setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
@@ -160,7 +168,6 @@
   }
   else if (sender.tag == 3)//notifications
   {
-    
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Notification" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateInitialViewController];
     [H_root setViewControllers:[NSArray arrayWithObject:vc]];

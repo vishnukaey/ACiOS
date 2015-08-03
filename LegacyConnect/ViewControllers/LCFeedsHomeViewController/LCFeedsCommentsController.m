@@ -32,9 +32,22 @@
   [self prepareCells];
 }
 
--(void)viewDidAppear:(BOOL)animated
+- (void) viewWillAppear:(BOOL)animated
 {
-  [super viewDidAppear:animated];
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = false;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:NO];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.navigationController.navigationBarHidden = true;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:true];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -203,10 +216,10 @@
 }
 
 #pragma mark - feedCell delegates
--(void)feedCellActionWithType:(int)type andID:(NSString *)postID
+-(void)feedCellActionWithType:(NSString *)type andID:(NSString *)postID
 {
-  NSLog(@"actionTypecommentpage--->>>%d", type);
-  if (type == 2)
+  NSLog(@"actionTypecommentpage--->>>%@", type);
+  if ([type isEqualToString:kFeedCellActionComment])
   {
     [H_dup becomeFirstResponder];
   }

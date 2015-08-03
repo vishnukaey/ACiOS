@@ -46,4 +46,8 @@ NSString *const kEmptyStringValue = @"";
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
+NSString *const kFeedCellActionLike = @"feedCellLike";
+NSString *const kFeedCellActionComment = @"feedCellComment";
+NSString *const kFeedCellActionImage = @"feedCellImage";
+
 @end
