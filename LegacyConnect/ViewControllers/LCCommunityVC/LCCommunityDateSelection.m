@@ -24,6 +24,24 @@
   self.navigationController.navigationBar.topItem.backBarButtonItem = barButton;
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = false;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:true];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.navigationController.navigationBarHidden = true;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:true];
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
