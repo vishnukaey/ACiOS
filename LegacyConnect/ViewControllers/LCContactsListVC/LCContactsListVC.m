@@ -10,10 +10,9 @@
 #import <AddressBook/AddressBook.h>
 #import "LCContact.h"
 
-
-
 @implementation LCContactsListVC
 
+#pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -32,10 +31,11 @@
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - initial setup functions
 - (void)loadContacts
 {
   ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
@@ -67,6 +67,41 @@
     NSLog(@"---->>>The user has previously denied access");
     // The user has previously denied access
     // Send an alert telling user to change privacy setting in settings app
+  }
+}
+
+#pragma mark - buttonActions
+- (void)checkbuttonAction :(UIButton *)sender
+{
+  LCContact *con = [H_contactsArray objectAtIndex:sender.tag];
+  H_contactsTable.P_selectedButton = sender;
+  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
+  if (![H_contactsTable indexPathSelected:indexPath])
+  {
+    if (con.P_emails.count==1)
+    {
+      [H_contactsTable AddIndexPath:indexPath];
+    }
+    else//only if there are multiple selections for a single cell
+    {
+      UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select email-ID" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
+      for (NSString *title in con.P_emails)
+      {
+        [sheet addButtonWithTitle:title];
+      }
+      sheet.tag = sender.tag;
+      [sheet showInView:self.view];
+    }
+  }
+}
+
+#pragma mark - UIActionSheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if (buttonIndex>0)
+  {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:buttonIndex - 1 inSection:actionSheet.tag];
+    [H_contactsTable AddIndexPath:indexPath];
   }
 }
 
@@ -115,7 +150,7 @@
   UIButton *checkbutton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
   checkbutton.tag = indexPath.row;
   checkbutton.center = CGPointMake(tableView.frame.size.width - 50, 40);
-  [checkbutton addTarget:tableView action:@selector(checkButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+  [checkbutton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   [tableView setImageForButton:checkbutton];
   [contactCell addSubview:checkbutton];
   [cell addSubview:contactCell];

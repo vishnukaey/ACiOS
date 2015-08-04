@@ -9,39 +9,45 @@
 #import "LCMultipleSelectionTable.h"
 
 @implementation LCMultipleSelectionTable
-@synthesize P_selectedRows;
+@synthesize P_selectedRows, P_selectedButton;
 
-- (void)checkButtonAction :(UIButton *)sender
+- (void)AddIndexPath :(NSIndexPath *)indexPath
 {
   if (!P_selectedRows) {
     P_selectedRows = [[NSMutableArray alloc]init];
   }
-  NSNumber *obj = [NSNumber numberWithInteger:sender.tag];
-  
-  if (![P_selectedRows containsObject:obj])
+  [P_selectedRows addObject:indexPath];
+  [P_selectedButton setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+}
+
+- (BOOL)indexPathSelected :(NSIndexPath *)indexPath;
+{
+  for (int i=0 ; i<P_selectedRows.count ; i++)
   {
-    [P_selectedRows addObject:obj];
-    [sender setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+    NSIndexPath *path = [P_selectedRows objectAtIndex:i];
+    if (path.section == indexPath.section)
+    {
+      [P_selectedRows removeObjectAtIndex:i];
+      [P_selectedButton setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
+      return YES;
+    }
   }
-  else
-  {
-    [P_selectedRows removeObject:obj];
-    [sender setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
-  }
+  return NO;
 }
 
 - (void)setImageForButton:(UIButton *)button
 {
-  NSNumber *obj = [NSNumber numberWithInteger:button.tag];
-  if (![P_selectedRows containsObject:obj])
+  for (NSIndexPath *path in P_selectedRows)
   {
-    [button setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
+    if (path.section == button.tag)
+    {
+      [button setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+      return;
+    }
   }
-  else
-  {
-    [button setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
-  }
+  [button setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
 }
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
