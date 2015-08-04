@@ -17,7 +17,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  user = [[LCUser alloc] init];
   [self setDobTextFieldWithInputView];
 }
 
@@ -32,9 +31,9 @@
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
   [datePicker setMaximumDate:[NSDate date]];
-  NSString *str =@"01/01/1900";
+  NSString *str =@"1900-01-01";
   NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-  [formatter setDateFormat:@"MM/dd/yyyy"];
+  [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
   [datePicker setMinimumDate:date];
   NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];

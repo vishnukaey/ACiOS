@@ -43,6 +43,7 @@ extern NSString *const kUserImageData;
 extern NSString *const kUserimageExtension;
 
 extern NSString *const kEmptyStringValue;
+extern NSString *const kDefaultDateFormat;
 
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;

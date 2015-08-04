@@ -46,6 +46,7 @@ NSString *const kUserImageData = @"image";
 NSString *const kUserimageExtension = @"imageExtension";
 
 NSString *const kEmptyStringValue = @"";
+NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
