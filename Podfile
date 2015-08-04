@@ -11,6 +11,7 @@ pod 'MFSideMenu'
 pod 'Reachability', '~> 3.2'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'SDWebImage', '~> 3.7'
+pod 'Mantle', '~> 2.0'
 end
 
 target 'LegacyConnectTests' do

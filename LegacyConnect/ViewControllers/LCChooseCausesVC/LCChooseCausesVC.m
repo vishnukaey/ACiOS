@@ -8,6 +8,8 @@
 
 #import "LCChooseCausesVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @interface LCChooseCausesVC ()
 {
@@ -22,6 +24,11 @@
   [super viewDidLoad];
   selectedCauses = [[NSMutableArray alloc] init];
   selectedInterests = [[NSMutableArray alloc] init];
+  self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
+  self.userImageView.clipsToBounds = YES;
+  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
+  [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  
   // Do any additional setup after loading the view.
 }
 

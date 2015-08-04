@@ -72,10 +72,10 @@
 {
   NSDictionary *userInfo = response;
   [LCDataManager sharedDataManager].userEmail = [LCUtilityManager performNullCheckAndSetValue:userInfo[kEmailKey]];
-  [LCDataManager sharedDataManager].userFBID = [LCUtilityManager performNullCheckAndSetValue:userInfo[kUserIDKey]];
+  [LCDataManager sharedDataManager].userFBID = [LCUtilityManager performNullCheckAndSetValue:userInfo[kIDKey]];
   [LCDataManager sharedDataManager].firstName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].firstName];
   [LCDataManager sharedDataManager].lastName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].lastName];
-  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=normal",[LCDataManager sharedDataManager].userFBID];
+  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
   [LCDataManager sharedDataManager].dob = [LCUtilityManager performNullCheckAndSetValue:userInfo[kDobKey]];
 }
 
