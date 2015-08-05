@@ -32,7 +32,6 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
        success(responsesArray);
      }
-   
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
@@ -41,5 +40,9 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
++ (void)UploadImage:(UIImage *)image ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+}
 
 @end

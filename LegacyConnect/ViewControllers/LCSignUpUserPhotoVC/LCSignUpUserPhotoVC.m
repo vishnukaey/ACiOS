@@ -57,32 +57,39 @@
 {
   [picker dismissViewControllerAnimated:YES completion:nil];
   self.imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];
-  [self performImageUpload];
+  
+  [LCAPIManager UploadImage:_imageView.image ofUser:[LCDataManager sharedDataManager].userID withSuccess:^(id response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
+//  [self performImageUpload];
 }
 
-- (void)performImageUpload
-{
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *imageData= [self encodeImageToBase64String:_imageView.image];
-  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[[LCDataManager sharedDataManager].userID,imageData,[self contentTypeForImageData:_imageView.image]] forKeys:@[kUserIDKey, kUserImageData, kUserimageExtension]];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUploadUserImageURL];
-  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-     }
-     else
-     {
-       NSLog(@"%@",response);
-       [self saveUserDetailsToDataManagerFromResponse:response];
-       [self performSegueWithIdentifier:@"chooseCauses" sender:self];
-     }
-   } andFailure:^(NSString *error)
-  {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-   }];
-}
+//- (void)performImageUpload
+//{
+//  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+//  NSString *imageData= [self encodeImageToBase64String:_imageView.image];
+//  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[[LCDataManager sharedDataManager].userID,imageData,[self contentTypeForImageData:_imageView.image]] forKeys:@[kUserIDKey, kUserImageData, kUserimageExtension]];
+//  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUploadUserImageURL];
+//  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
+//   {
+//     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+//     {
+//       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+//     }
+//     else
+//     {
+//       NSLog(@"%@",response);
+//       [self saveUserDetailsToDataManagerFromResponse:response];
+//       [self performSegueWithIdentifier:@"chooseCauses" sender:self];
+//     }
+//   } andFailure:^(NSString *error)
+//  {
+//    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+//   }];
+//}
 
 - (void)saveUserDetailsToDataManagerFromResponse:(id)response
 {
