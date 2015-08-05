@@ -8,6 +8,19 @@
 
 #import "LCUser.h"
 
+
 @implementation LCUser
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+  return @{
+           @"userID": @"id",
+           @"email": @"email",
+           @"firstName": @"firstName",
+           @"lastName": @"lastName",
+           @"dob": @"dob",
+           @"avatarURL": @"avatarURL",
+           };
+}
 
 @end

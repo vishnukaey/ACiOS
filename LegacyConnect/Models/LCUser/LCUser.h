@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface LCUser : NSObject
-
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSString *email;
-@property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *firstName;
-@property (nonatomic, strong) NSString *gender;
 @property (nonatomic, strong) NSString *lastName;
-@property (nonatomic, strong) NSData *userImage;
+@property (nonatomic, strong) NSString *dob;
+@property (nonatomic, strong) NSString *avatarURL;
 
 @end

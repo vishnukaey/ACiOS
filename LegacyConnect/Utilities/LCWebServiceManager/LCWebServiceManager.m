@@ -60,7 +60,7 @@
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-       NSString *errorMsg = operation.responseObject[@"message"];
+       NSString *errorMsg = operation.responseObject[kResponseMessage];
        (!errorMsg||[errorMsg isKindOfClass:[NSNull class]] ? failure([error localizedDescription]) : failure(errorMsg));
        NSLog(@"error is %@", [error localizedDescription]);
      }];

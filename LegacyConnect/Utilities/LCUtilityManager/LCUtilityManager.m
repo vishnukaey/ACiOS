@@ -11,6 +11,9 @@
 #import <AddressBook/AddressBook.h>
 #import <Reachability/Reachability.h>
 #import "LCContact.h"
+#import <SDWebImage/UIImageView+WebCache.h>
+
+
 
 @implementation LCUtilityManager
 
@@ -78,6 +81,14 @@
   NSString *appendedString = [NSString stringWithFormat:@"%@%@",userID,password];
   return [LCUtilityManager encodeToBase64String:appendedString];
 }
+
+//+(NSNumber*) getNSNumberFromString:(NSString*)string
+//{
+//  NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
+//  format.numberStyle = NSNumberFormatterDecimalStyle;
+//  NSNumber *myNumber = [format numberFromString:string];
+//  return myNumber;
+//}
 
 #pragma mark- Get Contacts
 + (NSArray *)getPhoneContacts {

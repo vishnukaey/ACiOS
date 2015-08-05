@@ -17,6 +17,14 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  
+  [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
+  
   [self addMyInterests];
 }
 

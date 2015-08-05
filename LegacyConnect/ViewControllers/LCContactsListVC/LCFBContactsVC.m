@@ -20,28 +20,35 @@
   [self.navigationController setNavigationBarHidden:NO];
 
   //request permission for accessing the friends list of the user. No need to ask permission everytime. Should store the status once the permission is granted and avoid this step from next access
-  FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-  [login logInWithReadPermissions:@[@"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
+  if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"user_friends"])
   {
-    if (error)
+    [self getFacebookFriendsList];
+  }
+  else
+  {
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    [login logInWithReadPermissions:@[@"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
     {
-      // Process error
-      NSLog(@"permissionError-->>");
-    } else if (result.isCancelled)
-    {
-      // Handle cancellations
-    } else
-    {
-      // If you ask for multiple permissions at once, you
-      // should check if specific permissions missing
-      if ([result.grantedPermissions containsObject:@"user_friends"])
+      if (error)
       {
-        // Do work
-        NSLog(@"permission granted-->>");
-        [self getFacebookFriendsList];
+        // Process error
+        NSLog(@"permissionError-->>");
+      } else if (result.isCancelled)
+      {
+        // Handle cancellations
+      } else
+      {
+        // If you ask for multiple permissions at once, you
+        // should check if specific permissions missing
+        if ([result.grantedPermissions containsObject:@"user_friends"])
+        {
+          // Do work
+          NSLog(@"permission granted-->>");
+          [self getFacebookFriendsList];
+        }
       }
-    }
-  }];
+    }];
+  }
 
   H_friendsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
   H_friendsTable.layer.borderColor = [UIColor greenColor].CGColor;

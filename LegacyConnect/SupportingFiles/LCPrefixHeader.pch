@@ -16,5 +16,9 @@
 #import "LCUtilityManager.h"
 #import "LCAppDelegate.h"
 #import "LCDummyValues.h"
-
+#import "LCInterest.h"
+#import "LCUser.h"
+#import "LCUserDetail.h"
+#import "LCCause.h"
+#import "LCAPIManager.h"
 #endif
