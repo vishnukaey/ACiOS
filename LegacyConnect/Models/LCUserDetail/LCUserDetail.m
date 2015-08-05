@@ -10,4 +10,20 @@
 
 @implementation LCUserDetail
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+  return @{
+           @"userID": @"userId",
+           @"email": @"email",
+           @"firstName": @"firstName",
+           @"lastName": @"lastName",
+           @"dob": @"dob",
+           @"avatarURL": @"avatarUrl",
+           @"activationDate": @"activationDate",
+           @"gender": @"gender",
+           @"headerPhotoURL": @"headerPhoto",
+           @"location": @"location"
+           };
+}
+
 @end

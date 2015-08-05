@@ -10,4 +10,15 @@
 
 @implementation LCCause
 
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+  return @{
+           @"causeID": @"id",
+           @"name": @"name",
+           @"tagLine": @"tagLine",
+           @"logoURLLarge": @"causeLogoLarge",
+           @"logoURLSmall": @"causeLogoSmall",
+           };
+}
+
 @end

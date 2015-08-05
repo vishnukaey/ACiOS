@@ -20,6 +20,7 @@ NSString *const kUploadUserImageURL = @"/api/user/profileImage";
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
 NSString *const kResponseData = @"data";
+NSString *const kInterestsKey = @"interests";
 
 NSString *const kLoginStatusKey = @"logged_in";
 

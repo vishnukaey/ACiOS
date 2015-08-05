@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MTLModel.h"
+#import "MTLJSONAdapter.h"
 
 @interface LCCause : MTLModel <MTLJSONSerializing>
 @property (nonatomic, strong) NSString *causeID;

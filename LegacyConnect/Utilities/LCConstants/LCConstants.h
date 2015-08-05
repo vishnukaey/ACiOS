@@ -23,6 +23,7 @@ extern NSString *const kLogOutURL;
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;
 extern NSString *const kResponseData;
+extern NSString *const kInterestsKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;

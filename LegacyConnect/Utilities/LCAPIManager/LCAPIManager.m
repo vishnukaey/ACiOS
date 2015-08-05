@@ -14,11 +14,7 @@ static LCAPIManager *sharedManager = nil;
 @implementation LCAPIManager
 
 
-
-
-
-
-+ (void)getInterestsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getInterestsWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/interests"];
@@ -31,15 +27,19 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"%@",response);
-       success(response);
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
+       success(responsesArray);
      }
+   
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
 }
+
 
 
 @end
