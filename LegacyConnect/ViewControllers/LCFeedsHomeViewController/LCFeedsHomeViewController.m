@@ -10,9 +10,11 @@
 #import "LCLoginHomeViewController.h"
 #import "LCFullScreenImageVC.h"
 
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
+
 
 @implementation LCFeedsHomeViewController
-
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -123,6 +125,7 @@
   
   else if ([type isEqualToString:kFeedCellActionLike])
   {
+//    [self postMessage];
   }
   else if ([type isEqualToString:kFeedCellActionImage])
   {
@@ -135,6 +138,128 @@
     [self presentViewController:vc animated:YES completion:nil];
   }
 }
+
+
+
+//following is the code for other screens
+ACAccount *facebookAccount;
+-(void)postMessage
+{
+  ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+  
+  ACAccountType *facebookAccountType = [accountStore
+                                        accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+  
+  // Specify App ID and permissions
+  NSDictionary *options = @{
+                            ACFacebookAppIdKey: @"1408366702711751",
+                            ACFacebookPermissionsKey: @[@"publish_stream", @"publish_actions"],
+                            ACFacebookAudienceKey: ACFacebookAudienceFriends
+                            };
+  
+  [accountStore requestAccessToAccountsWithType:facebookAccountType
+                                        options:options completion:^(BOOL granted, NSError *e) {
+                                          if (granted) {
+                                            NSLog(@"granted-->>>");
+                                            NSArray *accounts = [accountStore
+                                                                 accountsWithAccountType:facebookAccountType];
+                                             facebookAccount = [accounts lastObject];
+                                          
+                                                          UIImage *image = [UIImage imageNamed:@"check_box.png"];
+                                                          NSDictionary *parameters = @{@"message": @"nil", @"picture":image};
+                                                          
+                                                          NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
+                                                          
+                                                          SLRequest *feedRequest = [SLRequest
+                                                                                    requestForServiceType:SLServiceTypeFacebook
+                                                                                    requestMethod:SLRequestMethodPOST
+                                                                                    URL:feedURL
+                                                                                    parameters:parameters];
+                                                          
+                                                          feedRequest.account = facebookAccount;
+                                                          
+                                                          [feedRequest performRequestWithHandler:^(NSData *responseData, 
+                                                                                                   NSHTTPURLResponse *urlResponse, NSError *error)
+                                                           {
+                                                             // Handle response
+                                                             NSString *res = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+                                                             NSLog(@"response-->>>%@   error-->>%@", res, error);
+                                                           }];
+                                          }
+                                          else
+                                          {
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                              
+                                              // Fail gracefully...
+                                              NSLog(@"%@",e.description);
+//                                              if([e code]== ACErrorAccountNotFound)
+//                                                [self throwAlertWithTitle:@"Error" message:@"Account not found. Please setup your account in settings app."];
+//                                              else
+//                                                [self throwAlertWithTitle:@"Error" message:@"Account access denied."];
+                                              
+                                            });
+                                          }
+                                        }];
+  
+}
+
+
+//-(void)shareFB
+//{
+//  if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"])
+//  {
+//    [self postToFB];
+//  }
+//  else
+//  {
+//    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+//    [login logInWithPublishPermissions:@[@"publish_actions"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error)
+//     {
+//       if (error)
+//       {
+//         // Process error
+//         NSLog(@"permissionError-->>");
+//       } else if (result.isCancelled)
+//       {
+//         // Handle cancellations
+//       } else
+//       {
+//         // If you ask for multiple permissions at once, you
+//         // should check if specific permissions missing
+//         if ([result.grantedPermissions containsObject:@"publish_actions"])
+//         {
+//           // Do work
+//           NSLog(@"permission granted-->>");
+//           [self postToFB];
+//         }
+//       }
+//     }];
+//  }
+//}
+
+//-(void)postToFB
+//{
+//  FBSDKSharePhoto *sharePhoto = [[FBSDKSharePhoto alloc] init];
+//  sharePhoto.caption = @"Test Caption";
+//  sharePhoto.image = [UIImage imageNamed:@"check_box.png"];
+//  
+//  FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+//  content.photos = @[sharePhoto];
+//  
+//  [FBSDKShareAPI shareWithContent:content delegate:nil];
+//  
+//  return;
+//  
+////  [[[FBSDKGraphRequest alloc]
+////    initWithGraphPath:@"me/feed"
+////    parameters: @{ @"message" : @"test...1111"}
+////    HTTPMethod:@"POST"]
+////   startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+////     if (!error) {
+////       NSLog(@"Post id:%@", result[@"id"]);
+////     }
+////   }];
+//}
 
 
 @end
