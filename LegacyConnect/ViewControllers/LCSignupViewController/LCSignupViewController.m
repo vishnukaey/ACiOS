@@ -93,6 +93,8 @@
   {
     [self registerUserOnline];
   }
+//  [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+
 }
 
 
