@@ -764,8 +764,6 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
-				96BD14621B7216B6004D5CFA /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */,
-				96BD14631B7216B6004D5CFA /* rsz_lc-logo.png */,
 				CE5954CF1B6F5EF100D839DD /* check_box.png */,
 				CE5954D01B6F5EF100D839DD /* uncheck_box.png */,
 				CEBA92D61B6664A300C02F93 /* search_dummy.png */,
