@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LCWebServiceManager.h"
+#import "LCForgotPasswordViewController.h"
+#import "LCUpdatePasswordViewController.h"
 
-@interface LCLoginViewController : UIViewController
+@interface LCLoginViewController : UIViewController<forgotPasswordDelegate,updatePasswordDelegate>
 
 @property (nonatomic,retain) IBOutlet UITextField *emailTextField;
 @property (nonatomic,retain) IBOutlet UITextField *passwordTextField;

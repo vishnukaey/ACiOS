@@ -38,12 +38,16 @@
 - (IBAction)updatePasswordButtonClicked:(id)sender
 {
   
-  for(UIViewController * vc in self.navigationController.viewControllers)
+  if ([_confirmPasswordTextField.text isEqualToString:_passwordTextField.text])
   {
-    if ([vc isKindOfClass:[LCLoginViewController class]])
-    {
-      [self.navigationController popToViewController:vc animated:YES];
-    }
+    [_delegate updatePasswordSuccessful];
+    _confirmPasswordTextField.isValid = YES;
+  }
+  else
+  {
+    _confirmPasswordTextField.isValid = NO;
+    [_confirmPasswordTextField shake];
+    
   }
 }
 

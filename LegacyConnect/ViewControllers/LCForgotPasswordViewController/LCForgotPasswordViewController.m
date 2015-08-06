@@ -10,6 +10,7 @@
 
 @interface LCForgotPasswordViewController ()
 
+
 @end
 
 @implementation LCForgotPasswordViewController
@@ -37,6 +38,45 @@
 - (IBAction)backButtonClicked:(id)sender
 {
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (IBAction)submitButtonClicked:(id)sender
+{
+  if ([self validateEmail])
+  {
+    [self.delegate forgotPasswordRequestSent:_emailTextField.text];
+  }
+}
+
+
+
+- (BOOL)validateEmail
+{
+  [self clearWarnings];
+  NSString *emailRegex = @"[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}";
+  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+  bool isvalid = [emailTest evaluateWithObject:_emailTextField.text];
+  if(isvalid)
+  {
+    _emailTextField.isValid = YES;
+    _warningLabel.hidden = YES;
+    return YES;
+  }
+  else
+  {
+    _emailTextField.isValid = NO;
+    [self.emailTextField shake];
+    _warningLabel.hidden = NO;
+    return NO;
+  }
+}
+
+
+-(void)clearWarnings
+{
+  _warningLabel.hidden = NO;
+  _emailTextField.isValid = YES;
 }
 
 @end

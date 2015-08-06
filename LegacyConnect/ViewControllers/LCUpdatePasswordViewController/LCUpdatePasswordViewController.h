@@ -7,7 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCLoginTextField.h"
+
+@protocol updatePasswordDelegate <NSObject>
+
+- (void)updatePasswordSuccessful;
+
+@end
+
 
 @interface LCUpdatePasswordViewController : UIViewController
+
+
+@property (nonatomic,retain) IBOutlet LCLoginTextField *passwordTextField;
+@property (nonatomic,retain) IBOutlet LCLoginTextField *confirmPasswordTextField;
+@property (nonatomic, unsafe_unretained) NSObject <updatePasswordDelegate> *delegate;
 
 @end

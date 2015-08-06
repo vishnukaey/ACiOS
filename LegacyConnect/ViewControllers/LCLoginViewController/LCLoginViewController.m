@@ -8,7 +8,6 @@
 
 #import "LCLoginViewController.h"
 #import <SDWebImage/SDImageCache.h>
-#import "LCUpdatePasswordViewController.h"
 
 @interface LCLoginViewController ()
 
@@ -34,6 +33,7 @@
 -(void)goToUpdatePassword:(id)sender
 {
   LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+  updatePasswordVC.delegate = self;
   [self.navigationController pushViewController:updatePasswordVC animated:YES];
   
 }
@@ -103,8 +103,31 @@
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
 {
-  
+  LCForgotPasswordViewController *forgotPasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCForgotPasswordViewController"];
+  forgotPasswordVC.delegate = self;
+  [self.navigationController pushViewController:forgotPasswordVC animated:YES];
 }
 
 
+- (void)forgotPasswordRequestSent:(NSString *)user
+{
+  [self.navigationController popViewControllerAnimated:YES];
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"An email has been sent to %@",user] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+  [alertView show];
+}
+
+
+- (void)updatePasswordSuccessful
+{
+  for(UIViewController * vc in self.navigationController.viewControllers)
+  {
+    if ([vc isKindOfClass:[LCLoginViewController class]])
+    {
+      [self.navigationController popToViewController:vc animated:YES];
+    }
+  }
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Your password has been successfully updated" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+  [alertView show];
+  
+}
 @end

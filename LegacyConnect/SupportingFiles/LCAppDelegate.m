@@ -41,11 +41,11 @@
   
   if([[url scheme] caseInsensitiveCompare:@"legacyConnect"] == NSOrderedSame)
   {
-    UIAlertView *alertView;
-    alertView = [[UIAlertView alloc] initWithTitle:@"Launch by URL" message:@"This app was launched from a URL" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [alertView show];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:self];
     NSLog(@"legacyConnect");
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"resetPassword"] forKey:@"typeOfLaunch"];
+    [defaults synchronize];
     boolValue = true;
     return boolValue;
     
@@ -58,6 +58,10 @@
                                                           sourceApplication:sourceApplication
                                                                  annotation:annotation];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSString stringWithFormat:@"facebook"] forKey:@"typeOfLaunch"];
+    [defaults synchronize];
+    
     return boolValue;
   }
   return boolValue;
