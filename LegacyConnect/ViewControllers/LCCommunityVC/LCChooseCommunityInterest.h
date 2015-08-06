@@ -10,5 +10,11 @@
 
 
 @interface LCChooseCommunityInterest : UIViewController
+{
+  IBOutlet UICollectionView * H_interstsCollection;
+  NSArray *H_interestsArray;
+}
+
+- (IBAction)cancelAction;
 
 @end
