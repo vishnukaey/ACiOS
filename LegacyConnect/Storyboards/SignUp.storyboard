@@ -52,7 +52,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="pw9-lU-jrP" kind="show" id="kau-wd-dAZ"/>
+                                    <action selector="signInButtonClicked:" destination="AKf-9h-MQf" eventType="touchDown" id="9BA-Hl-Tdf"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="rsz_lc-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="TTp-qK-u3f">
@@ -641,7 +641,7 @@
         <!--Login View Controller-->
         <scene sceneID="mdR-u6-hMM">
             <objects>
-                <viewController id="pw9-lU-jrP" customClass="LCLoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCLoginViewController" id="pw9-lU-jrP" customClass="LCLoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="81C-ku-vgp"/>
                         <viewControllerLayoutGuide type="bottom" id="Lbj-hJ-JtR"/>

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCLoginViewController.h"
 
 @interface LCLoginHomeViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *fbButtonContainer;

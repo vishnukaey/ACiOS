@@ -20,6 +20,19 @@
   [super viewDidLoad];
 }
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *typeOfLaunch = [defaults objectForKey:@"typeOfLaunch"];
+  if ([typeOfLaunch isEqualToString:@"resetPassword"])
+  {
+    [self goToUpdatePassword:nil];
+  }
+}
+
+
 - (void) viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];

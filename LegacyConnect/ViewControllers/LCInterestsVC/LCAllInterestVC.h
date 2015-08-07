@@ -10,7 +10,8 @@
 
 @interface LCAllInterestVC : UIViewController
 {
-  IBOutlet UIScrollView *H_interestsScroll;
+  IBOutlet UICollectionView *H_interestsCollection;
+  NSArray *H_interestsMine, *H_interestsAll, *H_selectedDataArray;
 }
 
 - (IBAction)toggleMineORAll:(UIButton *)sender;

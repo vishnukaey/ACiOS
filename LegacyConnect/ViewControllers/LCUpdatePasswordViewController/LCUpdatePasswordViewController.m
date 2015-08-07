@@ -14,8 +14,13 @@
 
 @implementation LCUpdatePasswordViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
+  [defaults synchronize];
+  
     // Do any additional setup after loading the view.
 }
 
@@ -40,8 +45,8 @@
   
   if ([_confirmPasswordTextField.text isEqualToString:_passwordTextField.text])
   {
-    [_delegate updatePasswordSuccessful];
     _confirmPasswordTextField.isValid = YES;
+    [_delegate updatePasswordSuccessful];
   }
   else
   {
