@@ -15,6 +15,7 @@
 
 
 @implementation LCFeedsHomeViewController
+@synthesize H_feedsTable;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -33,7 +34,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:NO];
   [appdel.menuButton setHidden:NO];

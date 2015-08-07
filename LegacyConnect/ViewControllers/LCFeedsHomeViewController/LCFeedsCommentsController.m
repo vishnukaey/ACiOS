@@ -16,12 +16,6 @@
 {
   [super viewDidLoad];
 
-  H_mainTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
-
-//  H_mainTable.layer.borderColor = [UIColor greenColor].CGColor;
-//  H_mainTable.layer.borderWidth = 3;
-  H_mainTable.delegate = self;
-  H_mainTable.dataSource = self;
   [H_mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -35,7 +29,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:NO];
@@ -64,7 +58,7 @@
   H_cellsViewArray = [[NSMutableArray alloc]init];
 
   LCFeedCellView *postView = [[LCFeedCellView alloc]init];
-  [postView arrangeSelfForData:postDetail forWidth:H_mainTable.frame.size.width forPage:kCommentsfeedCellID];
+  [postView arrangeSelfForData:postDetail forWidth:[[UIScreen mainScreen] bounds].size.width forPage:kCommentsfeedCellID];
   postView.delegate = self;
   [H_cellsViewArray addObject:postView];
 
@@ -72,7 +66,7 @@
   UIFont *smallFont = [UIFont systemFontOfSize:12];
   float cellMargin_x = 15, cellMargin_y = 8;
   float dp_im_hight = 60;
-  float timeWidth_ = 80;
+  float timeWidth_ = 60;
   float in_margin = 10;
   
   for (int i=0; i<commentsArray.count; i++)
@@ -82,7 +76,7 @@
     NSString *comments_ = [[commentsArray objectAtIndex:i] valueForKey:@"comment"];
     float top_space = cellMargin_y;
 
-    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, H_mainTable.frame.size.width, 0)];
+    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 0)];
     UIImageView *dp_view = [[UIImageView alloc]initWithFrame:CGRectMake(cellMargin_x, top_space, dp_im_hight, dp_im_hight)];
     [dp_view setImage:[UIImage imageNamed:@"clock.jpg"]];
     [cellView addSubview:dp_view];
@@ -137,7 +131,7 @@
   }
   [self.view addSubview:H_mainTable];
 
-  UIView* commentntField = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+  UIView* commentntField = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 40)];
   [commentntField setBackgroundColor:[UIColor orangeColor]];
 
   float com_IC_hight = 25;
@@ -173,6 +167,11 @@
 -(void)changeFirstResponder
 {
   [H_commmentTextField becomeFirstResponder]; //will return YES;
+}
+
+- (IBAction)backAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - TableView delegates
