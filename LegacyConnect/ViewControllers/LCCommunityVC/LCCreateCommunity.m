@@ -21,7 +21,7 @@
   UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(nextButtonAction)];
   self.navigationItem.rightBarButtonItem = anotherButton;
   
-  float topSpace = self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height;
+  float topSpace = 64;
   //name
   UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
   nameLabel.text = @"Name";
