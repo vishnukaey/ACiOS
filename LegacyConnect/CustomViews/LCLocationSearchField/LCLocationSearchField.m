@@ -7,7 +7,7 @@
 //usage->>set locdelegate and implement the ||- (void)recievedLocations: (NSMutableArray *)locations;|| method
 
 #import "LCLocationSearchField.h"
-
+#define MINIMUM_SEARCHLENGTH 4
 
 @interface LCLocationSearchField()
 {
@@ -53,7 +53,7 @@
 {
   [activity stopAnimating];
   [previousSearch cancel];
-  if ([string isEqualToString:@""])
+  if (string.length<MINIMUM_SEARCHLENGTH)
   {
     return;
   }

@@ -30,7 +30,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
+
   // Do any additional setup after loading the view.
 }
 
@@ -71,6 +71,7 @@
     [appdel.window makeKeyAndVisible];
     
     [self addfloatingButtons];
+    H_container.panMode = MFSideMenuPanModeNone;
   }
 }
 

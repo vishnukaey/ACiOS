@@ -58,13 +58,14 @@
   [picker dismissViewControllerAnimated:YES completion:nil];
   self.imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];
   
-  [LCAPIManager UploadImage:_imageView.image ofUser:[LCDataManager sharedDataManager].userID withSuccess:^(id response) {
-    NSLog(@"%@",response);
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
-  
-//  [self performImageUpload];
+  [LCAPIManager UploadImage:_imageView.image ofUser:@"6875"
+                withSuccess:^(id response) {
+                  [self saveUserDetailsToDataManagerFromResponse:response];
+                  [self performSegueWithIdentifier:@"chooseCauses" sender:self];
+    
+                } andFailure:^(NSString *error) {
+    
+                }];
 }
 
 //- (void)performImageUpload

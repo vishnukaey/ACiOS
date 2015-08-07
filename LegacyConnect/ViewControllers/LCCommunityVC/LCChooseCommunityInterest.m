@@ -8,7 +8,8 @@
 
 #import "LCChooseCommunityInterest.h"
 #import "LCCreateCommunity.h"
-
+#import "LCCommunityInterestCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LCChooseCommunityInterest
 
@@ -17,18 +18,23 @@
 {
   [super viewDidLoad];
   
-  UIButton *anInterest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-  [anInterest setTitle:@"An interest" forState:UIControlStateNormal];
-  [self.view addSubview:anInterest];
-  anInterest.backgroundColor = [UIColor orangeColor];
-  anInterest.center = CGPointMake(self.view.frame.size.width/2, self.view.frame.size.height/2);
-  [anInterest addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
+  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
+    {
+      NSLog(@"%@",response);
+      H_interestsArray = response;
+      [H_interstsCollection reloadData];
+    }
+    andFailure:^(NSString *error)
+    {
+      NSLog(@"%@",error);
+    }
+  ];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
@@ -43,15 +49,71 @@
   [appdel.menuButton setHidden:true];
 }
 
+#pragma mark - Initial setup functions
+/* use this function if need to add in a scrollview
+- (void)displayInterestsFromResponse :(NSArray *)response
+{
+  float x_margin = 10, y_margin = 10;
+  float icon_size = (H_interstsScroll.frame.size.width - 4*x_margin)/3;
+  float labelHeight = 30;
+
+  for (int i = 0; i<response.count; i++)
+  {
+    UIButton *interestView = [[UIButton alloc] initWithFrame:CGRectMake((i%3 + 1)*x_margin + icon_size*(i%3), (i/3 + 1)*y_margin + (icon_size + labelHeight) * (i/3), icon_size, (icon_size + labelHeight))];
+    [interestView addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [H_interstsScroll addSubview:interestView];
+    
+    LCInterest *interstObj = [response objectAtIndex:i];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_size, icon_size)];
+    [interestView addSubview:imageView];
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:interstObj.logoURL]];
+    imageView.image = [UIImage imageWithData:imageData];
+    
+    UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, icon_size, icon_size, labelHeight)];
+    interestLabel.font = [UIFont systemFontOfSize:10];
+    [interestView addSubview:interestLabel];
+    interestLabel.text = interstObj.name;
+    interestLabel.textAlignment = NSTextAlignmentCenter;
+  }
+}
+ */
 
 #pragma mark - button actions
-- (void)interestSelected :(UIButton *)sender
+- (IBAction)cancelAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - collection view delegates
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+  return H_interestsArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *cellIdentifier = @"LCCommunityInterestCell";
+  LCCommunityInterestCell *cell = (LCCommunityInterestCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+  if (cell == nil)
+  {
+    NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCCommunityInterestCell class]) owner:nil options:nil];
+    cell=cells[0];
+  }
+  LCInterest *interstObj = [H_interestsArray objectAtIndex:indexPath.row];
+  cell.interestNameLabel.text = interstObj.name;
+  
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  
+  return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCCreateCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateCommunity"];
   [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 /*
 #pragma mark - Navigation
