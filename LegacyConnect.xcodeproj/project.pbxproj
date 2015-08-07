@@ -1173,6 +1173,7 @@
 /* Begin XCBuildConfiguration section */
 		0BF05A5D1B4E622200FF7B39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1214,6 +1215,7 @@
 		};
 		0BF05A5E1B4E622200FF7B39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -1275,6 +1277,7 @@
 		};
 		0BF05A631B4E622200FF7B39 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1296,6 +1299,7 @@
 		};
 		0BF05A641B4E622200FF7B39 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
