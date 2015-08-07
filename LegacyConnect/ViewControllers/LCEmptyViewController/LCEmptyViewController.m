@@ -71,6 +71,7 @@
     [appdel.window makeKeyAndVisible];
     
     [self addfloatingButtons];
+    H_container.panMode = MFSideMenuPanModeNone;
   }
 }
 

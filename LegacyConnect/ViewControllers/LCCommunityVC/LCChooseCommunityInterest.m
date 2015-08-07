@@ -21,7 +21,8 @@
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
     {
       NSLog(@"%@",response);
-      [self displayInterestsFromResponse:response];
+      H_interestsArray = response;
+      [H_interstsCollection reloadData];
     }
     andFailure:^(NSString *error)
     {
@@ -49,34 +50,34 @@
 }
 
 #pragma mark - Initial setup functions
+/* use this function if need to add in a scrollview
 - (void)displayInterestsFromResponse :(NSArray *)response
 {
-  H_interestsArray = response;
-  [H_interstsCollection reloadData];
-//  float x_margin = 10, y_margin = 10;
-//  float icon_size = (H_interstsScroll.frame.size.width - 4*x_margin)/3;
-//  float labelHeight = 30;
-//
-//  for (int i = 0; i<response.count; i++)
-//  {
-//    UIButton *interestView = [[UIButton alloc] initWithFrame:CGRectMake((i%3 + 1)*x_margin + icon_size*(i%3), (i/3 + 1)*y_margin + (icon_size + labelHeight) * (i/3), icon_size, (icon_size + labelHeight))];
-//    [interestView addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
-//    [H_interstsScroll addSubview:interestView];
-//    
-//    LCInterest *interstObj = [response objectAtIndex:i];
-//    
-//    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_size, icon_size)];
-//    [interestView addSubview:imageView];
-//    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:interstObj.logoURL]];
-//    imageView.image = [UIImage imageWithData:imageData];
-//    
-//    UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, icon_size, icon_size, labelHeight)];
-//    interestLabel.font = [UIFont systemFontOfSize:10];
-//    [interestView addSubview:interestLabel];
-//    interestLabel.text = interstObj.name;
-//    interestLabel.textAlignment = NSTextAlignmentCenter;
-//  }
+  float x_margin = 10, y_margin = 10;
+  float icon_size = (H_interstsScroll.frame.size.width - 4*x_margin)/3;
+  float labelHeight = 30;
+
+  for (int i = 0; i<response.count; i++)
+  {
+    UIButton *interestView = [[UIButton alloc] initWithFrame:CGRectMake((i%3 + 1)*x_margin + icon_size*(i%3), (i/3 + 1)*y_margin + (icon_size + labelHeight) * (i/3), icon_size, (icon_size + labelHeight))];
+    [interestView addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
+    [H_interstsScroll addSubview:interestView];
+    
+    LCInterest *interstObj = [response objectAtIndex:i];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_size, icon_size)];
+    [interestView addSubview:imageView];
+    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:interstObj.logoURL]];
+    imageView.image = [UIImage imageWithData:imageData];
+    
+    UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, icon_size, icon_size, labelHeight)];
+    interestLabel.font = [UIFont systemFontOfSize:10];
+    [interestView addSubview:interestLabel];
+    interestLabel.text = interstObj.name;
+    interestLabel.textAlignment = NSTextAlignmentCenter;
+  }
 }
+ */
 
 #pragma mark - button actions
 - (IBAction)cancelAction
