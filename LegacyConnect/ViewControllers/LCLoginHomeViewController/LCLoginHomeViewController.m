@@ -22,6 +22,7 @@
 {
   [super viewDidLoad];
   [self addFBLoginbutton];
+  NSLog(@"viewDidLoad");
 }
 
 
@@ -32,6 +33,14 @@
                                            selector:@selector(receiveTestNotification:)
                                                name:@"logged_in_facebook"
                                              object:nil];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  NSString *typeOfLaunch = [defaults objectForKey:@"typeOfLaunch"];
+  if ([typeOfLaunch isEqualToString:@"resetPassword"])
+  {
+    [self signInButtonClicked:nil];
+  }
+  NSLog(@"viewWillAppear");
+
 }
 
 - (void)addFBLoginbutton
@@ -131,6 +140,16 @@
 {
   [super viewDidDisappear:animated];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  NSLog(@"viewDidDisappear");
+
+}
+
+
+- (IBAction)signInButtonClicked:(id)sender
+{
+  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+//  updatePasswordVC.delegate = self;
+  [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 @end
