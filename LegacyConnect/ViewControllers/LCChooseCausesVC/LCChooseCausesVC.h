@@ -11,6 +11,5 @@
 @interface LCChooseCausesVC : UIViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *interestsCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
-@property (weak, nonatomic) IBOutlet UIPageControl *pagecontroller;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @end

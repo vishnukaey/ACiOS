@@ -80,25 +80,7 @@
     {
       cell.selectionButton.selected=NO;
     }
-    _pagecontroller.numberOfPages = floor(self.causesCollectionView.contentSize.width /
-                                          self.causesCollectionView.frame.size.width) + 1;
     return cell;
-  }
-}
-
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-  CGFloat pageWidth = _causesCollectionView.frame.size.width;
-  float currentPage = _causesCollectionView.contentOffset.x / pageWidth;
-  
-  if (0.0f != fmodf(currentPage, 1.0f))
-  {
-    _pagecontroller.currentPage = currentPage + 1;
-  }
-  else
-  {
-    _pagecontroller.currentPage = currentPage;
   }
 }
 

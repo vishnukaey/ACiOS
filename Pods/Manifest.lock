@@ -39,6 +39,9 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.4.0):
     - FBSDKCoreKit
+  - FontAwesome+iOS (0.1.4)
+  - KoaPullToRefresh (1.0.6):
+    - FontAwesome+iOS
   - MBProgressHUD (0.9.1)
   - MFSideMenu (0.5.5)
   - Reachability (3.2)
@@ -52,6 +55,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - KoaPullToRefresh (~> 1.0)
   - MBProgressHUD (~> 0.9)
   - MFSideMenu
   - Reachability (~> 3.2)
@@ -64,6 +68,8 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 75bdd75c980e811db218488d99dd93b7740f4474
   FBSDKLoginKit: 02a9254a4c132412fa03577b0d53e936d068a7fb
   FBSDKShareKit: a42865f20ba2d1cc548c4d0f73ad22cff6377ddb
+  FontAwesome+iOS: 9070b682a9255ca0fdc34bcfb129ad0ba2b73b87
+  KoaPullToRefresh: b83ab0cd9ad8da426ed49ca7d48904ab778491f5
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MFSideMenu: 268122e6894f2747fc3a2b48578100b232506c60
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96

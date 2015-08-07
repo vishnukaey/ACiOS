@@ -17,7 +17,7 @@ static LCAPIManager *sharedManager = nil;
 + (void)getInterestsWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/interests"];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetInterestsURL];
   [webService performGetOperationWithUrl:url withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -43,7 +43,7 @@ static LCAPIManager *sharedManager = nil;
 + (void)UploadImage:(UIImage *)image ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSData *imageData = UIImagePNGRepresentation(image);
-  NSDictionary *parameters = @{kUserIDKey: userID, @"imageExtension" : @"png"};
+  NSDictionary *parameters = @{kUserIDKey: userID};
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
@@ -63,15 +63,14 @@ static LCAPIManager *sharedManager = nil;
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     failure(error.localizedRecoverySuggestion);
   }];
-  
 }
 
 
-+ (void)saveInterests:(NSArray *)interests ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)saveCauses:(NSArray *)causes ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/saveInterests"];
-  NSDictionary *dict = @{@"userId": userID, @"interests" : interests};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kSaveIneterestsURL];
+  NSDictionary *dict = @{kUserIDKey: userID, kCausesKey : causes};
   [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -91,10 +90,11 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
+
 + (void)getUserDetailsOfUser:(NSString*)userID WithSuccess:(void (^)(LCUserDetail* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, @"/api/user/",userID];
+  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kGetUserDetailsURL,userID];
   [webService performGetOperationWithUrl:url withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])

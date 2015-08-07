@@ -96,6 +96,18 @@
 #define COCOAPODS_VERSION_MINOR_FBSDKShareKit 4
 #define COCOAPODS_VERSION_PATCH_FBSDKShareKit 0
 
+// FontAwesome+iOS
+#define COCOAPODS_POD_AVAILABLE_FontAwesome_iOS
+#define COCOAPODS_VERSION_MAJOR_FontAwesome_iOS 0
+#define COCOAPODS_VERSION_MINOR_FontAwesome_iOS 1
+#define COCOAPODS_VERSION_PATCH_FontAwesome_iOS 4
+
+// KoaPullToRefresh
+#define COCOAPODS_POD_AVAILABLE_KoaPullToRefresh
+#define COCOAPODS_VERSION_MAJOR_KoaPullToRefresh 1
+#define COCOAPODS_VERSION_MINOR_KoaPullToRefresh 0
+#define COCOAPODS_VERSION_PATCH_KoaPullToRefresh 6
+
 // MBProgressHUD
 #define COCOAPODS_POD_AVAILABLE_MBProgressHUD
 #define COCOAPODS_VERSION_MAJOR_MBProgressHUD 0

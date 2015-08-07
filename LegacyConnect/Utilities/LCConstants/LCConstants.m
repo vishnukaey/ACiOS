@@ -15,12 +15,15 @@ NSString *const kLoginURL = @"/api/login";
 NSString *const kRegisterURL = @"/api/user";
 NSString *const kFBLoginURL = @"/api/user/fbLogin";
 NSString *const kUploadUserImageURL = @"/api/user/profileImage";
-
+NSString *const kGetUserDetailsURL =  @"/api/user/";
+NSString *const kGetInterestsURL = @"/api/interests";
+NSString *const kSaveIneterestsURL = @"/api/user/interests";
 
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
 NSString *const kResponseData = @"data";
 NSString *const kInterestsKey = @"interests";
+NSString *const kCausesKey = @"causes";
 
 NSString *const kLoginStatusKey = @"logged_in";
 

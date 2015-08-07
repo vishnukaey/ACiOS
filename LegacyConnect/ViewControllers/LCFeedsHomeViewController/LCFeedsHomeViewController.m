@@ -9,7 +9,7 @@
 #import "LCFeedsHomeViewController.h"
 #import "LCLoginHomeViewController.h"
 #import "LCFullScreenImageVC.h"
-
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 
@@ -21,6 +21,13 @@
 {
   [super viewDidLoad];
   [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  [H_feedsTable addPullToRefreshWithActionHandler:^{
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [H_feedsTable.pullToRefreshView stopAnimating];
+    });
+  }withBackgroundColor:[UIColor colorWithRed:255.0/255 green:75.0/255 blue:67/255.0 alpha:1]];
 }
 
 - (void) viewWillAppear:(BOOL)animated

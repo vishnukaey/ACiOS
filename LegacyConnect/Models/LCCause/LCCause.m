@@ -16,6 +16,7 @@
            @"causeID": @"id",
            @"name": @"name",
            @"tagLine": @"tagLine",
+           @"interestID": @"interestId",
            @"logoURLLarge": @"causeLogoLarge",
            @"logoURLSmall": @"causeLogoSmall",
            };

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B1717C41B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0B1717C21B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */; };
+		0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1717C31B73865000BACDC0 /* rsz_lc-logo.png */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
 		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
 		0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B3594221B4E6C6E0098C484 /* SignUp.storyboard */; };
@@ -67,8 +69,6 @@
 		96BD145F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD144F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m */; };
 		96BD14601B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14511B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m */; };
 		96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */; };
-		96BD14641B7216B6004D5CFA /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 96BD14621B7216B6004D5CFA /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */; };
-		96BD14651B7216B6004D5CFA /* rsz_lc-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 96BD14631B7216B6004D5CFA /* rsz_lc-logo.png */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
 		CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE1FA2E61B5508AA00A9B609 /* clock.jpg */; };
@@ -115,6 +115,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B1717C21B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"; sourceTree = "<group>"; };
+		0B1717C31B73865000BACDC0 /* rsz_lc-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rsz_lc-logo.png"; sourceTree = "<group>"; };
 		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
 		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
 		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
@@ -228,8 +230,6 @@
 		96BD14511B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLInversionAdditions.m"; sourceTree = "<group>"; };
 		96BD14521B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
 		96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
-		96BD14621B7216B6004D5CFA /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"; sourceTree = "<group>"; };
-		96BD14631B7216B6004D5CFA /* rsz_lc-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rsz_lc-logo.png"; sourceTree = "<group>"; };
 		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
 		CE1FA2E61B5508AA00A9B609 /* clock.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = clock.jpg; sourceTree = "<group>"; };
@@ -761,6 +761,8 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				0B1717C21B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */,
+				0B1717C31B73865000BACDC0 /* rsz_lc-logo.png */,
 				CE5954CF1B6F5EF100D839DD /* check_box.png */,
 				CE5954D01B6F5EF100D839DD /* uncheck_box.png */,
 				CEBA92D61B6664A300C02F93 /* search_dummy.png */,
@@ -988,7 +990,7 @@
 				CEBED6B21B5FB5FF0012FEBB /* Community.storyboard in Resources */,
 				CEBA92D31B66632000C02F93 /* heart_dummy.png in Resources */,
 				0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */,
-				96BD14641B7216B6004D5CFA /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
+				0B1717C41B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
 				0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */,
@@ -998,7 +1000,7 @@
 				CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */,
 				CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
-				96BD14651B7216B6004D5CFA /* rsz_lc-logo.png in Resources */,
+				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
 				0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */,
 				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *causeID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *tagLine;
+@property (nonatomic, strong) NSString *interestID;
 @property (nonatomic, strong) NSString *logoURLLarge;
 @property (nonatomic, strong) NSString *logoURLSmall;
 @end

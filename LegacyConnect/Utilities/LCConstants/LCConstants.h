@@ -14,6 +14,9 @@ extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
 extern NSString *const kFBLoginURL;
+extern NSString *const kGetUserDetailsURL;
+extern NSString *const kGetInterestsURL;
+extern NSString *const kSaveIneterestsURL;
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
 extern NSString *const kForgotPasswordURL;
@@ -24,6 +27,7 @@ extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;
 extern NSString *const kResponseData;
 extern NSString *const kInterestsKey;
+extern NSString *const kCausesKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;
