@@ -38,6 +38,9 @@
 {
   
   BOOL boolValue = false;
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
+  [defaults synchronize];
   
   if([[url scheme] caseInsensitiveCompare:@"legacyConnect"] == NSOrderedSame)
   {
