@@ -70,7 +70,9 @@ static LCAPIManager *sharedManager = nil;
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kSaveIneterestsURL];
-  NSDictionary *dict = @{kUserIDKey: userID, kCausesKey : causes};
+  NSError *error;
+  NSArray *jsonArray = [MTLJSONAdapter JSONArrayFromModels:causes error:&error];
+  NSDictionary *dict = @{kUserIDKey: userID, kCausesKey : jsonArray};
   [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
