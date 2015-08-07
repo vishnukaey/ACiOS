@@ -43,6 +43,7 @@
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
 		0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BE2B9BA1B590B190026E607 /* simple-green-check-button-th.png */; };
 		0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE437151B5D30090072600C /* LCTutorialContainerVC.m */; };
+		0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BED515D1B74D3F600DA125B /* LCChooseInterestCVC.m */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
 		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
 		0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */; };
@@ -179,6 +180,8 @@
 		0BE2B9BA1B590B190026E607 /* simple-green-check-button-th.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simple-green-check-button-th.png"; sourceTree = "<group>"; };
 		0BE437141B5D30090072600C /* LCTutorialContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialContainerVC.h; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.h; sourceTree = "<group>"; };
 		0BE437151B5D30090072600C /* LCTutorialContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialContainerVC.m; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.m; sourceTree = "<group>"; };
+		0BED515C1B74D3F600DA125B /* LCChooseInterestCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseInterestCVC.h; path = CustomViews/LCChooseInterestCVC/LCChooseInterestCVC.h; sourceTree = "<group>"; };
+		0BED515D1B74D3F600DA125B /* LCChooseInterestCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCChooseInterestCVC.m; path = CustomViews/LCChooseInterestCVC/LCChooseInterestCVC.m; sourceTree = "<group>"; };
 		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BF05A4C1B4E622200FF7B39 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0BF05A551B4E622200FF7B39 /* LegacyConnectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LegacyConnectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -643,6 +646,15 @@
 			name = LCTutorialContainerVC;
 			sourceTree = "<group>";
 		};
+		0BED515F1B74D3FA00DA125B /* LCChooseInterestCVC */ = {
+			isa = PBXGroup;
+			children = (
+				0BED515C1B74D3F600DA125B /* LCChooseInterestCVC.h */,
+				0BED515D1B74D3F600DA125B /* LCChooseInterestCVC.m */,
+			);
+			name = LCChooseInterestCVC;
+			sourceTree = "<group>";
+		};
 		0BF05A331B4E622200FF7B39 = {
 			isa = PBXGroup;
 			children = (
@@ -903,6 +915,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0BED515F1B74D3FA00DA125B /* LCChooseInterestCVC */,
 				CEA30E2D1B73663200DAA4BA /* LCCommunityInterestCell */,
 				CE5954D31B6F605400D839DD /* LCMultipleSelectionTable */,
 				CEBBBFAC1B6B3764001C91E1 /* LCLocationSearchField */,
@@ -1108,6 +1121,7 @@
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				96BD14561B72166B004D5CFA /* MTLModel+NSCoding.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
+				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */,
 				CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */,
 				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,

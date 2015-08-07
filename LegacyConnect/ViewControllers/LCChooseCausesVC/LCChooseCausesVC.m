@@ -8,13 +8,15 @@
 
 #import "LCChooseCausesVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
-#import <SDWebImage/UIImageView+WebCache.h>
+#import "LCChooseInterestCVC.h"
 
 
 @interface LCChooseCausesVC ()
 {
   NSMutableArray *selectedCauses;
   NSMutableArray *selectedInterests;
+  NSMutableArray *causes;
+  NSArray *interests;
 }
 @end
 
@@ -24,25 +26,30 @@
   [super viewDidLoad];
   selectedCauses = [[NSMutableArray alloc] init];
   selectedInterests = [[NSMutableArray alloc] init];
+  causes = [[NSMutableArray alloc] init];
   self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
   self.userImageView.clipsToBounds = YES;
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
   [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-  
-  // Do any additional setup after loading the view.
+  [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
+    interests = response;
+    [self.interestsCollectionView reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
+
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
   if([collectionView isEqual:_interestsCollectionView])
-    return 10;
+    return interests.count;
   else
-    return 50;
+    return causes.count;
 }
 
 
@@ -52,13 +59,15 @@
   {
     static NSString *cellIdentifier = @"interestsCollectionViewCell";
     
-    LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+    LCChooseInterestCVC *cell = (LCChooseInterestCVC*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     if (cell == nil)
     {
-      NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
+      NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseInterestCVC class]) owner:nil options:nil];
       cell=cells[0];
     }
-    if([selectedInterests containsObject:indexPath])
+    cell.interest = interests[indexPath.item];
+    
+    if([selectedInterests containsObject:cell.interest])
     {
       cell.selectionButton.selected =YES;
     }
@@ -72,7 +81,15 @@
   {
     static NSString *cellIdentifier = @"causesCollectionViewCell";
     LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    if([selectedCauses containsObject:indexPath])
+   
+    if (cell == nil)
+    {
+      NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
+      cell=cells[0];
+    }
+    cell.cause = causes[indexPath.item];
+    
+    if([selectedCauses containsObject:cell.cause])
     {
       cell.selectionButton.selected =YES;
     }
@@ -89,28 +106,44 @@
 {
   if([collectionView isEqual:_causesCollectionView])
   {
-    if([selectedCauses containsObject:indexPath])
+    LCCause *cause = causes[indexPath.item];
+    if([selectedCauses containsObject:cause])
     {
-      [selectedCauses removeObject:indexPath];
+      [selectedCauses removeObject:cause];
     }
     else
     {
-      [selectedCauses addObject:indexPath];
+      [selectedCauses addObject:cause];
     }
     [self.causesCollectionView reloadData];
   }
   else
   {
-    if([selectedInterests containsObject:indexPath])
+    LCInterest *interest = interests[indexPath.item];
+    if([selectedInterests containsObject:interest])
     {
-      [selectedInterests removeObject:indexPath];
+      [selectedInterests removeObject:interest];
+      [causes removeObjectsInArray:interest.causes];
     }
     else
     {
-      [selectedInterests addObject:indexPath];
+      [selectedInterests addObject:interest];
+      [causes addObjectsFromArray:interest.causes];
     }
+    [self.causesCollectionView reloadData];
     [self.interestsCollectionView reloadData];
   }
+}
+
+-(IBAction) nextButtonTapped:(id)sender
+{
+  [LCAPIManager saveCauses:selectedCauses ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
+    NSLog(@"%@",response);
+    [self performSegueWithIdentifier:@"connectFriends" sender:self];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
 }
 
 @end

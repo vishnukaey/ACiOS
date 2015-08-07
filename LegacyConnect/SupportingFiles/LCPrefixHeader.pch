@@ -21,4 +21,5 @@
 #import "LCUserDetail.h"
 #import "LCCause.h"
 #import "LCAPIManager.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #endif

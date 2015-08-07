@@ -30,20 +30,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
-    NSError *error;
-    LCInterest *interest = response[0];
-    NSArray *causesArray = interest.causes;
-    NSArray *jsonArray = [MTLJSONAdapter JSONArrayFromModels:causesArray error:&error];
-    
-    [LCAPIManager saveCauses:jsonArray ofUser:@"6981" withSuccess:^(id response) {
-      NSLog(@"%@",response);
-    } andFailure:^(NSString *error) {
-      NSLog(@"%@",error);
-    }];
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
   // Do any additional setup after loading the view.
 }
 

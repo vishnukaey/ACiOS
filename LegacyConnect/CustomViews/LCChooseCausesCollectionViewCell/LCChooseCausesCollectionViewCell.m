@@ -10,4 +10,11 @@
 
 @implementation LCChooseCausesCollectionViewCell
 
+
+-(void)setCause:(LCCause *)cause
+{
+  _cause = cause;
+  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+}
+
 @end
