@@ -13,8 +13,9 @@
 @interface LCFeedsCommentsController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate, UITextFieldDelegate>
 {
   NSMutableArray *H_cellsViewArray;
-  UITableView *H_mainTable;
+  IBOutlet UITableView *H_mainTable;
   UITextField *H_commmentTextField, *H_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
 }
+- (IBAction)backAction;
 
 @end
