@@ -16,10 +16,19 @@
 @end
 
 //---------------interface
-@interface LCFeedCellView : UIView
+@interface LCFeedCellView : UITableViewCell
+{
+  IBOutlet UIImageView *profilePic;
+  IBOutlet UIButton *postPhoto;
+  IBOutlet UILabel *usernameLabel, *createdLabel, *timeLabel, *postDescription, *thanksLabel, *commentsLabel;
+  IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
+}
 
 @property(nonatomic, retain)id delegate;
 
--(void)arrangeSelfForData :(NSDictionary *)dic forWidth:(float)width_ forPage :(NSString *)pageType;
+- (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType;
+- (IBAction)likeAction;
+- (IBAction)commentAction;
+- (IBAction)imageFullscreenAction;
 
 @end

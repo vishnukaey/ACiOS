@@ -11,6 +11,83 @@
 @implementation LCFeedCellView
 @synthesize delegate;
 
+- (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType
+{
+  NSString  *userName = [dic valueForKey:@"user_name"];
+  NSString *cause = [dic valueForKey:@"cause"];
+  NSString *time_ = [dic valueForKey:@"time"];
+  NSString *post_ = [dic valueForKey:@"post"];
+  NSString *thanks_ = [dic valueForKey:@"thanks"];
+  NSString *comments_ = [dic valueForKey:@"comments"];
+  NSString *image = [dic valueForKey:@"image_url"];
+  
+  [profilePic setImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
+  profilePic.clipsToBounds = YES;
+  [usernameLabel setText:userName];
+  
+  NSString *typeString = @"Added a Photo in ";
+  if ([image isEqualToString:@""])//not a photopost
+  {
+    typeString = @"Created a Post in ";
+    postPhotoHeight.constant = 0;
+  }
+  else
+  {
+    [postPhoto setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+    [postPhoto setContentHorizontalAlignment:UIControlContentHorizontalAlignmentFill];
+    [postPhoto setContentVerticalAlignment:UIControlContentVerticalAlignmentFill];
+  }
+  if ([pageType isEqualToString:kHomefeedCellID])
+  {
+    bottomBorderHeight.constant = 0;
+  }
+  else if ([pageType isEqualToString:kCommentsfeedCellID])
+  {
+    topBorderheight.constant = 0;
+  }
+  
+  NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:@""];
+  NSAttributedString *type_attr = [[NSAttributedString alloc] initWithString : typeString
+                                                                  attributes : @{
+                                                                                 NSForegroundColorAttributeName : [UIColor grayColor],
+                                                                                 }];
+  [attributtedString appendAttributedString:type_attr];
+  
+  NSAttributedString *name_attr = [[NSAttributedString alloc] initWithString : cause
+                                                                  attributes : @{
+                                                                                 NSForegroundColorAttributeName : [UIColor greenColor],
+                                                                                 }];
+  [attributtedString appendAttributedString:name_attr];
+  [createdLabel setAttributedText:attributtedString];
+  
+  [timeLabel setText:time_];
+  
+  [postDescription setText:post_];
+  
+  [thanksLabel setText:thanks_];
+  
+  [commentsLabel setText:comments_];
+  
+}
+
+
+- (IBAction)likeAction
+{
+  [delegate feedCellActionWithType:kFeedCellActionLike andID:@""];
+}
+
+- (IBAction)commentAction
+{
+  [delegate feedCellActionWithType:kFeedCellActionComment andID:@""];
+}
+
+- (IBAction)imageFullscreenAction
+{
+  [delegate feedCellActionWithType:kFeedCellActionImage andID:@""];
+}
+
+/* use thi code if need to get the view by code
 -  (id)initWithFrame:(CGRect)frame
 {
   self = [super initWithFrame:frame];
@@ -209,21 +286,9 @@
 
   [self setFrame:CGRectMake(0, 0, self.frame.size.width, top_space)];
 }
+ */
 
--(void)likeAction
-{
-  [delegate feedCellActionWithType:kFeedCellActionLike andID:@""];
-}
 
--(void)commentAction
-{
-  [delegate feedCellActionWithType:kFeedCellActionComment andID:@""];
-}
-
-- (void)imageFullscreenAction
-{
-  [delegate feedCellActionWithType:kFeedCellActionImage andID:@""];
-}
 
 /*
 // Only override drawRect: if you perform custom drawing.

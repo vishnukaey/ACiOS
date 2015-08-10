@@ -15,10 +15,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self prepareCells];
-  [self prepareInterests];
+  H_milestonesTable.estimatedRowHeight = 44.0;
+  H_milestonesTable.rowHeight = UITableViewAutomaticDimension;
+  [self loadMileStones];
+  [self loadInterests];
   // Do any additional setup after loading the view.
-  self.navigationController.navigationBarHidden = true;
   H_interestsScrollview.hidden = true;
 }
 
@@ -47,7 +48,7 @@
 
 
 #pragma mark - setup functions
-- (void)prepareInterests
+- (void)loadInterests
 {
   UIButton *anInterest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
   [anInterest setTitle:@"An interest" forState:UIControlStateNormal];
@@ -57,18 +58,10 @@
   [anInterest addTarget:self action:@selector(interestClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
    
--(void)prepareCells
+-(void)loadMileStones
 {
-  NSArray *feedsArray = [LCDummyValues dummyPROFILEFeedArray];
-  
-  H_cellsViewArray = [[NSMutableArray alloc]init];
-  for (int i=0; i<feedsArray.count; i++)
-  {
-    LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_milestonesTable.frame.size.width forPage:kHomefeedCellID];
-    celViewFinal.delegate = self;
-    [H_cellsViewArray addObject:celViewFinal];
-  }
+  H_MileStones = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyPROFILEFeedArray]];
+  [H_milestonesTable reloadData];
 }
 
 #pragma mark - button actions
@@ -111,31 +104,23 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  return H_cellsViewArray.count;
+  return H_MileStones.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  static NSString *MyIdentifier = @"LCFeedCell";
+  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
+    // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+    cell = [topLevelObjects objectAtIndex:0];
   }
-  [[cell viewWithTag:10] removeFromSuperview];
-  
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
-  [cell addSubview:cellView];
-  cellView.tag = 10;
+  cell.delegate = self;
+  [cell setData:[H_MileStones objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   
   return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
-  
-  return cellView.frame.size.height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

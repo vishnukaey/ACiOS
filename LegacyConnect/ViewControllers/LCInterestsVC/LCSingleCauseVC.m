@@ -40,7 +40,7 @@
   for (int i=0; i<feedsArray.count; i++)
   {
     LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:kHomefeedCellID];
+//    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:kHomefeedCellID];
     celViewFinal.delegate = self;
     [H_cellsViewArray addObject:celViewFinal];
   }

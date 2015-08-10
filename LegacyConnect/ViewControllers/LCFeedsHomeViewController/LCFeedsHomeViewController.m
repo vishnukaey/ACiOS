@@ -22,6 +22,10 @@
 {
   [super viewDidLoad];
   [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  H_feedsTable.estimatedRowHeight = 44.0;
+  H_feedsTable.rowHeight = UITableViewAutomaticDimension;
+  [self loadFeed];
+  
   [H_feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -49,13 +53,6 @@
   [appdel.menuButton setHidden:true];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-  [self prepareFeedViews];
-  [H_feedsTable reloadData];
-}
-
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -63,18 +60,10 @@
 }
 
 #pragma mark - initial setup functions
-- (void)prepareFeedViews
+- (void)loadFeed
 {
-  NSArray *feedsArray = [LCDummyValues dummyFeedArray];
-
-  H_feedsViewArray = [[NSMutableArray alloc]init];
-  for (int i=0; i<feedsArray.count; i++)
-  {
-    LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:kHomefeedCellID];
-    celViewFinal.delegate = self;
-    [H_feedsViewArray addObject:celViewFinal];
-  }
+  H_feedsArray = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyFeedArray]];
+  [H_feedsTable reloadData];
 }
 
 #pragma mark - TableView delegates
@@ -83,33 +72,25 @@
   return 1;    //count of section
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-  return H_feedsViewArray.count;    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{    
+  return H_feedsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  static NSString *MyIdentifier = @"LCFeedCell";
+  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
+    // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+    cell = [topLevelObjects objectAtIndex:0];
   }
-  [[cell viewWithTag:10] removeFromSuperview];
-
-  UIView *cellView = (UIView *)[H_feedsViewArray objectAtIndex:indexPath.row];
-  [cell addSubview:cellView];
-  cellView.tag = 10;
+  cell.delegate = self;
+  [cell setData:[H_feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
 
   return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UIView *cellView = (UIView *)[H_feedsViewArray objectAtIndex:indexPath.row];
-  
-  return cellView.frame.size.height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

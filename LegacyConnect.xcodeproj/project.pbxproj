@@ -104,6 +104,9 @@
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
+		CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */; };
+		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
+		CEF275D91B78A32600709005 /* LCCommentCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D81B78A32600709005 /* LCCommentCellXIB.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +291,10 @@
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
 		CECBC8D01B56794F0012B287 /* LCGIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGIButton.m; path = CustomViews/LCGIButton.m; sourceTree = "<group>"; };
+		CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFeedcellXIB.xib; sourceTree = "<group>"; };
+		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
+		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
+		CEF275D81B78A32600709005 /* LCCommentCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCCommentCellXIB.xib; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -479,6 +486,7 @@
 			children = (
 				CECBC8CD1B56794F0012B287 /* LCFeedCellView.h */,
 				CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */,
+				CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */,
 			);
 			name = LCFeedCellView;
 			sourceTree = "<group>";
@@ -915,6 +923,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEF275D41B78A2BA00709005 /* LCCommentCell */,
 				0BED515F1B74D3FA00DA125B /* LCChooseInterestCVC */,
 				CEA30E2D1B73663200DAA4BA /* LCCommunityInterestCell */,
 				CE5954D31B6F605400D839DD /* LCMultipleSelectionTable */,
@@ -928,6 +937,16 @@
 				0BB7B36F1B57DE9500261658 /* LCLoginTextField */,
 			);
 			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		CEF275D41B78A2BA00709005 /* LCCommentCell */ = {
+			isa = PBXGroup;
+			children = (
+				CEF275D51B78A30800709005 /* LCCommentCell.h */,
+				CEF275D61B78A30800709005 /* LCCommentCell.m */,
+				CEF275D81B78A32600709005 /* LCCommentCellXIB.xib */,
+			);
+			name = LCCommentCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1026,11 +1045,13 @@
 				CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
+				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
 				0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */,
 				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,
 				CEBCEC691B6899CF00F0116E /* Interests.storyboard in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
+				CEF275D91B78A32600709005 /* LCCommentCellXIB.xib in Resources */,
 				CE5954D11B6F5EF100D839DD /* check_box.png in Resources */,
 				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
@@ -1093,6 +1114,7 @@
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
 				0B5FA6EC1B57BB5400DDC2B1 /* LCUser.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
+				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
 				96BD14591B72166B004D5CFA /* MTLValueTransformer.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */,
