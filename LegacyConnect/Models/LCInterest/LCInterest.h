@@ -11,7 +11,7 @@
 #import "MTLJSONAdapter.h"
 
 @interface LCInterest : MTLModel <MTLJSONSerializing>
-@property (nonatomic, strong) NSString *interestID;
+@property (nonatomic, strong) NSNumber *interestID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *descriptionText;
 @property (nonatomic, strong) NSString *logoURL;
