@@ -14,7 +14,7 @@
 {
   IBOutlet UITableView *H_milestonesTable;
   IBOutlet UIScrollView *H_interestsScrollview;
-  NSMutableArray *H_cellsViewArray;
+  NSMutableArray *H_MileStones;
 }
 
 - (IBAction)backAction:(id)sender;

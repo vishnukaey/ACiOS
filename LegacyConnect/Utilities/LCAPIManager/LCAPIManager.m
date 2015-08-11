@@ -28,8 +28,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        NSError *error = nil;
-       NSDictionary *dict= response[kResponseData];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:response[kResponseData] error:&error];
        success(responsesArray);
      }
    } andFailure:^(NSString *error) {

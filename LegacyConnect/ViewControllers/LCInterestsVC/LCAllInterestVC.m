@@ -21,7 +21,7 @@
   
   //mine interst api call
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
-    NSLog(@"%@",response);
+//    NSLog(@"%@",response);
     H_interestsMine = response;
     [self showMyInterests];
   } andFailure:^(NSString *error) {
@@ -30,7 +30,7 @@
   
   //all interests api call
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
-    NSLog(@"%@",response);
+//    NSLog(@"%@",response);
     H_interestsAll = response;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);

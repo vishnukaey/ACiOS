@@ -12,8 +12,8 @@
 
 + (NSArray *)dummyFeedArray
 {
-  NSDictionary *dic1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"Global Employment",@"cause",  @"15 minutes ago",@"time",   @"Can't wait to run in Haiti for TeamTassy, stay tuned for details!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
-  NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mark Smith",@"user_name",   @"2",@"type",     @"Ocean Initiative group",@"cause",  @"35 minutes ago",@"time",   @"Perfect weather for today's meetup!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",   @"",@"profile_pic",  nil];
+  NSDictionary *dic1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",     @"Global Employment",@"cause",  @"15 minutes ago",@"time",   @"Can't wait to run in Haiti for TeamTassy, stay tuned for details!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
+  NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mark Smith",@"user_name",   @"2",@"type",     @"Ocean Initiative group",@"cause",  @"35 minutes ago",@"time",   @"Perfect weather for today's meetup!",@"post",   @"photoPost_dummy.png",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",   @"",@"profile_pic",  nil];
   NSArray *feedsArray = [[NSArray alloc]initWithObjects:dic1, dic2, nil];
   
   return feedsArray;
@@ -22,7 +22,7 @@
 + (NSArray *)dummyPROFILEFeedArray
 {
   NSDictionary *dic1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"Global Employment",@"cause",  @"15 minutes ago",@"time",   @"Can't wait to run in Haiti for TeamTassy, stay tuned for details!",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
-  NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"WATER",@"cause",  @"15 minutes ago",@"time",   @"Just arrived at Ocean Grove. Who's ready for some sun and sand?",@"post",   @"",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
+  NSDictionary *dic2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Json Rogers",@"user_name",   @"1",@"type",     @"WATER",@"cause",  @"15 minutes ago",@"time",   @"Just arrived at Ocean Grove. Who's ready for some sun and sand?",@"post",   @"photoPost_dummy.png",@"image_url",  @"0",@"favourite",   @"8",@"thanks",  @"2",@"comments",  nil];
   NSArray *feedsArray = [[NSArray alloc]initWithObjects:dic1, dic2, nil];
   
   return feedsArray;

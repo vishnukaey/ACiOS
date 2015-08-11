@@ -7,6 +7,7 @@
 //
 
 #import "LCFeedsCommentsController.h"
+#import "LCCommentCell.h"
 
 
 @implementation LCFeedsCommentsController
@@ -17,13 +18,15 @@
   [super viewDidLoad];
 
   [H_mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  H_mainTable.estimatedRowHeight = 44.0;
+  H_mainTable.rowHeight = UITableViewAutomaticDimension;
 
   [[NSNotificationCenter defaultCenter] addObserver:self
                                    selector:@selector(changeFirstResponder)
                                        name:UIKeyboardDidShowNotification
                                      object:nil];
 
-  [self prepareCells];
+  [self loadFeedAndComments];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -50,92 +53,20 @@
 }
 
 #pragma mark - setup functions
--(void)prepareCells
+-(void)loadFeedAndComments
 {
   NSDictionary *postDetail = [[LCDummyValues dummyFeedArray] objectAtIndex:0];//post data
-  NSArray *commentsArray = [LCDummyValues dummyCommentArray];
-
-  H_cellsViewArray = [[NSMutableArray alloc]init];
-
-  LCFeedCellView *postView = [[LCFeedCellView alloc]init];
-  [postView arrangeSelfForData:postDetail forWidth:[[UIScreen mainScreen] bounds].size.width forPage:kCommentsfeedCellID];
-  postView.delegate = self;
-  [H_cellsViewArray addObject:postView];
-
-  UIFont *bigFont = [UIFont systemFontOfSize:15];
-  UIFont *smallFont = [UIFont systemFontOfSize:12];
-  float cellMargin_x = 15, cellMargin_y = 8;
-  float dp_im_hight = 60;
-  float timeWidth_ = 60;
-  float in_margin = 10;
-  
-  for (int i=0; i<commentsArray.count; i++)
-  {
-    NSString  *userName = [[commentsArray objectAtIndex:i] valueForKey:@"user_name"];
-    NSString *time_ = [[commentsArray objectAtIndex:i] valueForKey:@"time"];
-    NSString *comments_ = [[commentsArray objectAtIndex:i] valueForKey:@"comment"];
-    float top_space = cellMargin_y;
-
-    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 0)];
-    UIImageView *dp_view = [[UIImageView alloc]initWithFrame:CGRectMake(cellMargin_x, top_space, dp_im_hight, dp_im_hight)];
-    [dp_view setImage:[UIImage imageNamed:@"clock.jpg"]];
-    [cellView addSubview:dp_view];
-
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(dp_view.frame.origin.x
-                                                                 + dp_view.frame.size.width + in_margin, top_space, (cellView.frame.size.width - cellMargin_x - timeWidth_) - (dp_view.frame.origin.x
-                                                                                                                                                                               + dp_view.frame.size.width + in_margin), 0)];
-    nameLabel.font = bigFont;
-    nameLabel.numberOfLines = 0;
-    [cellView addSubview:nameLabel];
-    NSMutableAttributedString * name_attributtedString = [[NSMutableAttributedString alloc] initWithString:userName attributes : @{
-                                                                                                                                NSFontAttributeName : bigFont,
-                                                                                                                                NSForegroundColorAttributeName : [UIColor blackColor],
-                                                                                                                                }];
-    [nameLabel setAttributedText:name_attributtedString];
-
-    CGRect  rect = [name_attributtedString boundingRectWithSize:CGSizeMake(nameLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-    [nameLabel setFrame:CGRectMake(nameLabel.frame.origin.x, nameLabel.frame.origin.y, nameLabel.frame.size.width, rect.size.height)];
-
-    UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(cellView.frame.size.width - cellMargin_x - timeWidth_, top_space, timeWidth_, 15)];
-    timeLabel.font = smallFont;
-    timeLabel.text = time_;
-    [timeLabel setTextAlignment:NSTextAlignmentLeft];
-    [timeLabel setTextColor:[UIColor lightGrayColor]];
-    [cellView addSubview:timeLabel];
-
-    top_space +=nameLabel.frame.size.height + in_margin;
-
-    UILabel *postLabel = [[UILabel alloc]initWithFrame:CGRectMake(dp_view.frame.origin.x
-                                                                  + dp_view.frame.size.width + in_margin, top_space, cellView.frame.size.width - 2*cellMargin_x - dp_view.frame.size.width - in_margin, 0)];
-    postLabel.font = bigFont;
-    postLabel.numberOfLines = 0;
-    [cellView addSubview:postLabel];
-    NSMutableAttributedString * post_attributtedString = [[NSMutableAttributedString alloc] initWithString:comments_ attributes : @{
-                                                                                                                                   NSFontAttributeName : bigFont,
-                                                                                                                                   NSForegroundColorAttributeName : [UIColor blackColor],
-                                                                                                                                   }];
-    [postLabel setAttributedText:post_attributtedString];
-
-    rect = [post_attributtedString boundingRectWithSize:CGSizeMake(postLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-    [postLabel setFrame:CGRectMake(postLabel.frame.origin.x, postLabel.frame.origin.y, postLabel.frame.size.width, rect.size.height)];
-
-    top_space = top_space + postLabel.frame.size.height;
-    if (top_space<dp_view.frame.origin.y + dp_view.frame.size.height)
-    {
-      top_space = dp_view.frame.origin.y + dp_view.frame.size.height;
-    }
-    top_space+=cellMargin_y;
-
-    [cellView setFrame:CGRectMake(cellView.frame.origin.x, cellView.frame.origin.y, cellView.frame.size.width, top_space)];
-    [H_cellsViewArray addObject:cellView];
-  }
-  [self.view addSubview:H_mainTable];
+  H_cellsData = [[NSMutableArray alloc]init];
+  [H_cellsData addObject:postDetail];
+  [H_cellsData addObjectsFromArray:[LCDummyValues dummyCommentArray]];
+  [H_mainTable reloadData];
 
   UIView* commentntField = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 40)];
   [commentntField setBackgroundColor:[UIColor orangeColor]];
 
   float com_IC_hight = 25;
   float postBut_width = 60;
+  float cellMargin_x = 8;
   UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(cellMargin_x, (commentntField.frame.size.height - com_IC_hight)/2, com_IC_hight, com_IC_hight)];
   [commentIcon setImage:[UIImage imageNamed:@"clock.jpg"]];
   [commentntField addSubview:commentIcon];
@@ -182,31 +113,41 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-  return H_cellsViewArray.count;    
+  return H_cellsData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
+  LCFeedCellView *feedCell;
+  LCCommentCell *commentCell;
+  if (indexPath.row == 0)//feedcell
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    
+    static NSString *MyIdentifier = @"LCFeedCell";
+    feedCell = (LCFeedCellView *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (feedCell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
+      // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+      feedCell = [topLevelObjects objectAtIndex:0];
+    }
+    [feedCell setData:[H_cellsData objectAtIndex:indexPath.row] forPage:kCommentsfeedCellID];
+    return feedCell;
   }
-  
-  [[cell viewWithTag:10] removeFromSuperview];
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
-  [cell addSubview:cellView];
-  cellView.tag = 10;
-
-  return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
-
-  return cellView.frame.size.height;
+  else //comment cell
+  {
+    static NSString *MyIdentifier = @"LCCommentCell";
+    commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (commentCell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
+      // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+      commentCell = [topLevelObjects objectAtIndex:0];
+    }
+    [commentCell setData:[H_cellsData objectAtIndex:indexPath.row]];
+    return commentCell;
+  }
+  return commentCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
