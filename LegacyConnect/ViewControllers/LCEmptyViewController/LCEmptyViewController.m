@@ -30,6 +30,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [LCAPIManager getCausesForInterest:@"1" andLastCauseID:@"2" withSuccess:^(NSArray *responses) {
+    NSLog(@"%@",responses);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@", error);
+  }];
   // Do any additional setup after loading the view.
 }
 

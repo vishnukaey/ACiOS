@@ -74,7 +74,7 @@
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kLoginURL];
-  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
+  [webService performPostOperationWithUrl:url  andAccessToken:kEmptyStringValue withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
@@ -111,7 +111,7 @@
   [LCDataManager sharedDataManager].lastName = userInfo[kLastNameKey];
   [LCDataManager sharedDataManager].dob = userInfo[kDobKey];
   [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kIDKey] andPassword:self.passwordTextField.text];
+  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kEmailKey] andPassword:self.passwordTextField.text];
 }
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender

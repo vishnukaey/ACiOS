@@ -103,7 +103,7 @@
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.dobTextField.text] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
-  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
+  [webService performPostOperationWithUrl:url andAccessToken:kEmptyStringValue withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
