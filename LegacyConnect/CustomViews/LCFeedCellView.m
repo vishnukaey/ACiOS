@@ -71,7 +71,6 @@
   
 }
 
-
 - (IBAction)likeAction
 {
   [delegate feedCellActionWithType:kFeedCellActionLike andID:@""];
