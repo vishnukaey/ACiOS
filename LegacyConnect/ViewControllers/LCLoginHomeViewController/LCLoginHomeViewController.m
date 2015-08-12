@@ -85,7 +85,7 @@
   [LCDataManager sharedDataManager].firstName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].firstName];
   [LCDataManager sharedDataManager].lastName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].lastName];
 #warning  avtar error
-  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
+  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"//graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
   [LCDataManager sharedDataManager].dob = [LCUtilityManager performNullCheckAndSetValue:userInfo[kDobKey]];
 }
 
@@ -112,6 +112,9 @@
      else
      {
        NSLog(@"%@",response);
+       NSDictionary *responseData = response[kResponseData];
+       [LCDataManager sharedDataManager].avatarUrl = responseData[kFBAvatarImageUrlKey];
+       [LCDataManager sharedDataManager].userID = responseData[kUserIDKey];
        [self loginUser];
      }
    } andFailure:^(NSString *error) {
