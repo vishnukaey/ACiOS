@@ -51,7 +51,6 @@
   else
   {
     _confirmPasswordTextField.isValid = NO;
-    [_confirmPasswordTextField shake];
     
   }
 }

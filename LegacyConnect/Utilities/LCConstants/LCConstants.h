@@ -16,6 +16,7 @@ extern NSString *const kRegisterURL;
 extern NSString *const kFBLoginURL;
 extern NSString *const kGetUserDetailsURL;
 extern NSString *const kGetInterestsURL;
+extern NSString *const kGetCausesURL;
 extern NSString *const kSaveIneterestsURL;
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;

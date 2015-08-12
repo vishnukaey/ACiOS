@@ -69,28 +69,17 @@
   [self performOnlineLoginRequest];
 }
 
+
 - (void)performOnlineLoginRequest
 {
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kLoginURL];
-  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-     }
-     else
-     {
-       NSLog(@"%@",response);
-       [self saveUserDetailsToDataManagerFromResponse:response];
-       [self loginUser];
-     }
-     
-   } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-   }];
+  [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
+    NSLog(@"%@",response);
+    [self saveUserDetailsToDataManagerFromResponse:response];
+    [self loginUser];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
 
 
@@ -111,7 +100,7 @@
   [LCDataManager sharedDataManager].lastName = userInfo[kLastNameKey];
   [LCDataManager sharedDataManager].dob = userInfo[kDobKey];
   [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kIDKey] andPassword:self.passwordTextField.text];
+  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kEmailKey] andPassword:self.passwordTextField.text];
 }
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender

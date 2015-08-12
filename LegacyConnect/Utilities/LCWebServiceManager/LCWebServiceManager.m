@@ -11,7 +11,7 @@
 @implementation LCWebServiceManager
 
 
-- (void)performPostOperationWithUrl:(NSString *)urlString withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+- (void)performPostOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   if ([LCUtilityManager isNetworkAvailable])
   {
@@ -19,6 +19,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"Authorization"];
     manager.securityPolicy.allowInvalidCertificates = YES;
     [manager POST:urlString parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -41,7 +42,7 @@
 
 /* Un comment for GET Request */
 
-- (void)performGetOperationWithUrl:(NSString *)urlString withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+- (void)performGetOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   if ([LCUtilityManager isNetworkAvailable])
   {
@@ -49,6 +50,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:accessToken forHTTPHeaderField:@"Authorization"];
     manager.securityPolicy.allowInvalidCertificates = YES;
     
     [manager GET:urlString parameters:params

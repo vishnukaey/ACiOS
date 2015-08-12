@@ -66,7 +66,6 @@
   else
   {
     _emailTextField.isValid = NO;
-    [self.emailTextField shake];
     _warningLabel.hidden = NO;
     return NO;
   }

@@ -101,7 +101,7 @@
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:parameters forKeys:@[kEmailKey,kFirstNameKey, kLastNameKey, kDobKey, kFBUserIDKey, kFBAccessTokenKey, kFBAvatarImageUrlKey]];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFBLoginURL];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
+  [webService performPostOperationWithUrl:url andAccessToken:kEmptyStringValue withParameters:dict withSuccess:^(id response)
    {
      [MBProgressHUD hideHUDForView:self.view animated:YES];
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])

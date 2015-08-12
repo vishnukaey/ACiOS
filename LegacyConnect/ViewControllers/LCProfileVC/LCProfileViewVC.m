@@ -7,6 +7,7 @@
 //
 
 #import "LCProfileViewVC.h"
+#import "LCTabMenuView.h"
 
 
 @implementation LCProfileViewVC
@@ -17,10 +18,16 @@
   [super viewDidLoad];
   H_milestonesTable.estimatedRowHeight = 44.0;
   H_milestonesTable.rowHeight = UITableViewAutomaticDimension;
+  
+  H_profilePic.layer.cornerRadius = H_profilePic.frame.size.width/2;
+  H_profilePic.clipsToBounds = YES;
+  
+  
+  [self addTabMenu];
+  
   [self loadMileStones];
   [self loadInterests];
   // Do any additional setup after loading the view.
-  H_interestsScrollview.hidden = true;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +55,39 @@
 
 
 #pragma mark - setup functions
+
+- (void)addTabMenu
+{
+  UIButton *mileStonesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+  [mileStonesButton setTitle:@"MileStones" forState:UIControlStateNormal];
+  UIButton *interestsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+  [interestsButton setTitle:@"Interests" forState:UIControlStateNormal];
+  
+  LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+  [H_tabMenuContainer addSubview:tabmenu];
+  [tabmenu setBackgroundColor:[UIColor whiteColor]];
+  tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
+  H_tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+  
+  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:H_tabMenuContainer attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+  [H_tabMenuContainer addConstraint:top];
+  
+  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:H_tabMenuContainer attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+  [H_tabMenuContainer addConstraint:bottom];
+  
+  NSLayoutConstraint *left =[NSLayoutConstraint constraintWithItem:H_tabMenuContainer attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+  [H_tabMenuContainer addConstraint:left];
+  
+  NSLayoutConstraint *right =[NSLayoutConstraint constraintWithItem:H_tabMenuContainer attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+  [H_tabMenuContainer addConstraint:right];
+
+//  tabmenu.layer.borderWidth = 3;
+  tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:H_milestonesTable,  H_interestsScrollview, nil];
+  tabmenu.highlightColor = [UIColor orangeColor];
+  tabmenu.normalColor = [UIColor blackColor];
+}
+
 - (void)loadInterests
 {
   UIButton *anInterest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];

@@ -14,6 +14,8 @@
 {
   IBOutlet UITableView *H_milestonesTable;
   IBOutlet UIScrollView *H_interestsScrollview;
+  IBOutlet UIImageView *H_profilePic;
+  IBOutlet UIView *H_tabMenuContainer;
   NSMutableArray *H_MileStones;
 }
 

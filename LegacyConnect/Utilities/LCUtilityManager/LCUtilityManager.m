@@ -76,9 +76,9 @@
   return decodedString;
 }
 
-+ (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password
++ (NSString *) generateUserTokenForUserID:(NSString*)userEmail andPassword:(NSString *)password
 {
-  NSString *appendedString = [NSString stringWithFormat:@"%@%@",userID,password];
+  NSString *appendedString = [NSString stringWithFormat:@"%@:%@",userEmail,password];
   return [LCUtilityManager encodeToBase64String:appendedString];
 }
 

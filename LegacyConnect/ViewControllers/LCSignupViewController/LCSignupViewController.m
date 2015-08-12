@@ -100,27 +100,17 @@
 
 - (void)registerUserOnline
 {
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.dobTextField.text] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
-  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-     }
-     else
-     {
-       NSLog(@"%@",response);
-       NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-       [defaults setBool:YES forKey:kLoginStatusKey];
-       [defaults synchronize];
-       [self saveUserDetailsToDataManagerFromResponse:response];	
-       [self performSegueWithIdentifier:@"selectPhoto" sender:self];
-     }
-   } andFailure:^(NSString *error){
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-   }];
+  [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
+    NSLog(@"%@",response);
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:YES forKey:kLoginStatusKey];
+    [defaults synchronize];
+    [self saveUserDetailsToDataManagerFromResponse:response];
+    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
 
 
@@ -158,20 +148,17 @@
   if([_firstNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _firstNameTextField.isValid = NO;
-    [self.firstNameTextField shake];
     isValid = NO;
   }
   else if([_lastNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _lastNameTextField.isValid = NO;
-    [self.lastNameTextField shake];
     isValid = NO;
   }
   
   else if([_dobTextField.text isEqualToString:kEmptyStringValue])
   {
     _dobTextField.isValid = NO;
-    [self.dobTextField shake];
     isValid = NO;
   }
   
@@ -197,7 +184,6 @@
   else
   {
     _emailTextField.isValid = NO;
-    [self.emailTextField shake];
     _warningLabel.text = @"Invalid Email";
     return NO;
   }
@@ -211,7 +197,6 @@
   {
     _warningLabel.text = @"Password Missing";
     _passwordTextField.isValid = NO;
-    [self.passwordTextField shake];
     return NO;
   }
   else if([_passwordTextField.text isEqualToString:_confirmPasswordTextField.text])
@@ -224,7 +209,6 @@
   {
     _warningLabel.text = @"Password Mismatch";
     _confirmPasswordTextField.isValid = NO;
-    [self.confirmPasswordTextField shake];
     return NO;
   }
 }

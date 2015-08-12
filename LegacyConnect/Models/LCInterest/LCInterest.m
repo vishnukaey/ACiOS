@@ -18,13 +18,13 @@
            @"name": @"name",
            @"descriptionText": @"description",
            @"logoURL": @"logo",
-           @"causes": @"causes",
+//           @"causes": @"causes",
            };
 }
 
-+ (NSValueTransformer *)causesJSONTransformer
-{
-  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCCause class]];
-}
+//+ (NSValueTransformer *)causesJSONTransformer
+//{
+//  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCCause class]];
+//}
 
 @end

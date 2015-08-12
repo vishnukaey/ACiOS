@@ -7,7 +7,6 @@
 //
 
 #import "LCSignUpUserPhotoVC.h"
-#import "LCWebServiceManager.h"
 
 @interface LCSignUpUserPhotoVC ()
 
@@ -58,7 +57,7 @@
   [picker dismissViewControllerAnimated:YES completion:nil];
   self.imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];
   
-  [LCAPIManager UploadImage:_imageView.image ofUser:@"6875"
+  [LCAPIManager UploadImage:_imageView.image ofUser:[LCDataManager sharedDataManager].userFBID
                 withSuccess:^(id response) {
                   [self saveUserDetailsToDataManagerFromResponse:response];
                   [self performSegueWithIdentifier:@"chooseCauses" sender:self];
@@ -68,66 +67,11 @@
                 }];
 }
 
-//- (void)performImageUpload
-//{
-//  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-//  NSString *imageData= [self encodeImageToBase64String:_imageView.image];
-//  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[[LCDataManager sharedDataManager].userID,imageData,[self contentTypeForImageData:_imageView.image]] forKeys:@[kUserIDKey, kUserImageData, kUserimageExtension]];
-//  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUploadUserImageURL];
-//  [webService performPostOperationWithUrl:url withParameters:dict withSuccess:^(id response)
-//   {
-//     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-//     {
-//       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-//     }
-//     else
-//     {
-//       NSLog(@"%@",response);
-//       [self saveUserDetailsToDataManagerFromResponse:response];
-//       [self performSegueWithIdentifier:@"chooseCauses" sender:self];
-//     }
-//   } andFailure:^(NSString *error)
-//  {
-//    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-//   }];
-//}
 
 - (void)saveUserDetailsToDataManagerFromResponse:(id)response
 {
   NSDictionary *userInfo = response[kResponseData];
   [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-}
-
-
-- (NSString *)encodeImageToBase64String:(UIImage *)image
-{
-  return [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-}
-
-
-- (NSString *)contentTypeForImageData:(UIImage*)image
-{
-  NSData *imageData =UIImagePNGRepresentation(image);
-  //  NSData *imageData =UIImageJPEGRepresentation (image,0);
-  
-  uint8_t c;
-  [imageData getBytes:&c length:1];
-  
-  switch (c)
-  {
-    case 0xFF:
-      return @"jpeg";;
-    case 0x89:
-      return @"png";;
-    case 0x47:
-      return @"gif";;
-    case 0x49:
-    case 0x4D:
-      return @"tiff";;
-    case 0x42:
-      return @"@bmp";;
-  }
-  return nil;
 }
 
 
