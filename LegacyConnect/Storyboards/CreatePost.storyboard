@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Create Post View Controller-->
+        <scene sceneID="c7s-eM-h3L">
+            <objects>
+                <viewController storyboardIdentifier="LCCreatePostViewController" id="qhF-9Z-rbX" customClass="LCCreatePostViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aLQ-Ui-9aF"/>
+                        <viewControllerLayoutGuide type="bottom" id="7kq-tu-5AA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1If-JH-g0B">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vgc-FW-wNW">
+                                <rect key="frame" x="4" y="4" width="46" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeButtonClicked:" destination="qhF-9Z-rbX" eventType="touchDown" id="tuG-A0-uPo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5GF-WI-yeP">
+                                <rect key="frame" x="68" y="41" width="105" height="30"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rg5-TJ-HYv">
+                                <rect key="frame" x="268" y="4" width="46" height="30"/>
+                                <state key="normal" title="Post">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vo5-vY-Une">
+                                <rect key="frame" x="351" y="41" width="19" height="30"/>
+                                <state key="normal" title="T">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sum-tm-Kmg">
+                                <rect key="frame" x="324" y="41" width="19" height="30"/>
+                                <state key="normal" title="F">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SHARE WHAT'S NEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xxq-03-t0z">
+                                <rect key="frame" x="59" y="8" width="204" height="21"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Post to" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="maO-JU-P08">
+                                <rect key="frame" x="8" y="50" width="52" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TBZ-i2-Cao">
+                                <rect key="frame" x="10" y="266" width="46" height="30"/>
+                                <state key="normal" title="friend">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addFriendsToPostButtonClicked:" destination="qhF-9Z-rbX" eventType="touchDown" id="3bn-il-xzw"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fv-Ox-MFV">
+                                <rect key="frame" x="89" y="266" width="46" height="30"/>
+                                <state key="normal" title="photo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqP-dc-gj9">
+                                <rect key="frame" x="181" y="266" width="46" height="30"/>
+                                <state key="normal" title="location">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ywu-SK-vG6">
+                                <rect key="frame" x="268" y="266" width="46" height="30"/>
+                                <state key="normal" title="Milestone">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y62-oR-LZt">
+                                <rect key="frame" x="80" y="79" width="234" height="179"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="qhF-9Z-rbX" id="nvN-mT-BiY"/>
+                                </connections>
+                            </textView>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tz0-6j-eYs">
+                                <rect key="frame" x="8" y="151" width="351" height="101"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Share your legacy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHS-xu-Qvb">
+                                <rect key="frame" x="93" y="84" width="134" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qaC-t7-0Uk">
+                                <rect key="frame" x="8" y="79" width="66" height="65"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="300"/>
+                    <connections>
+                        <outlet property="addFriendsToPost" destination="TBZ-i2-Cao" id="UAA-O1-B7x"/>
+                        <outlet property="addImageToPost" destination="5Fv-Ox-MFV" id="cDo-pg-x2S"/>
+                        <outlet property="addLocationToPost" destination="kqP-dc-gj9" id="gYr-lG-K7E"/>
+                        <outlet property="addMilestone" destination="Ywu-SK-vG6" id="giF-DQ-b6H"/>
+                        <outlet property="closeButton" destination="Vgc-FW-wNW" id="S1c-az-wjb"/>
+                        <outlet property="interestImageView" destination="qaC-t7-0Uk" id="GFE-zf-XS4"/>
+                        <outlet property="placeHolderText" destination="fHS-xu-Qvb" id="Sna-Nx-AvA"/>
+                        <outlet property="postButton" destination="Rg5-TJ-HYv" id="oSa-RN-fg6"/>
+                        <outlet property="postImageView" destination="Tz0-6j-eYs" id="hef-ZG-uP9"/>
+                        <outlet property="postTextView" destination="y62-oR-LZt" id="5xV-fq-mND"/>
+                        <outlet property="postToFacebook" destination="Sum-tm-Kmg" id="clU-s7-XVK"/>
+                        <outlet property="postToTwitter" destination="Vo5-vY-Une" id="Yr5-Qx-BP5"/>
+                        <outlet property="selectInterest" destination="5GF-WI-yeP" id="LMX-Vf-gCd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Laj-gb-FRt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="352" y="332"/>
+        </scene>
+        <!--List Friends To Tag View Controller-->
+        <scene sceneID="z28-k6-zWj">
+            <objects>
+                <viewController storyboardIdentifier="LCListFriendsToTagViewController" id="CDo-PS-FyP" customClass="LCListFriendsToTagViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4SH-el-0ZL"/>
+                        <viewControllerLayoutGuide type="bottom" id="X4o-qC-Ujh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Phg-zp-aeC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="F4k-lO-1lb">
+                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="CDo-PS-FyP" id="N5D-fX-kwh"/>
+                                    <outlet property="delegate" destination="CDo-PS-FyP" id="xN2-od-o4U"/>
+                                </connections>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rL7-eM-Sob">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="GRz-DA-Wio">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="fEP-uv-DIO"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="r9I-t1-Kc2"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="cancelButton" destination="fEP-uv-DIO" id="SlH-NF-enZ"/>
+                        <outlet property="doneButton" destination="r9I-t1-Kc2" id="YR5-de-2dA"/>
+                        <outlet property="navigationBar" destination="rL7-eM-Sob" id="G7m-Zg-yd1"/>
+                        <outlet property="tableView" destination="F4k-lO-1lb" id="l77-c2-JmI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nW3-ke-sz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1220" y="417"/>
+        </scene>
+    </scenes>
+</document>
