@@ -99,7 +99,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_feedsTable" destination="hVO-KL-Fml" id="gfu-tz-IM3"/>
+                        <outlet property="feedsTable" destination="hVO-KL-Fml" id="zaD-SA-ksj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -178,7 +178,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_mainTable" destination="HuG-7V-Jiv" id="zTY-3c-lL5"/>
+                        <outlet property="mainTable" destination="HuG-7V-Jiv" id="J5H-Y7-2zJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh5-jg-lT1" userLabel="First Responder" sceneMemberID="firstResponder"/>

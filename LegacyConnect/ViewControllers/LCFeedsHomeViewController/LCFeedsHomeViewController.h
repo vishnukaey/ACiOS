@@ -12,9 +12,9 @@
 
 @interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
-  NSMutableArray *H_feedsArray;
+  NSMutableArray *feedsArray;
 }
 
-@property(nonatomic, weak)IBOutlet  UITableView *H_feedsTable;
+@property(nonatomic, weak)IBOutlet  UITableView *feedsTable;
 
 @end

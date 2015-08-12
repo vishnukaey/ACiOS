@@ -19,7 +19,7 @@
 //------interface
 @interface LCLeftMenuController : UIViewController
 
-@property(nonatomic, assign)float P_menuwidth;
+@property(nonatomic, assign)float menuwidth;
 @property(nonatomic, retain)id delegate_;
 @property (nonatomic, strong) UIImageView *userImageView;
 

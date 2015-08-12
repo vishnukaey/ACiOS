@@ -11,8 +11,8 @@
 
 @interface LCContactsListVC : UIViewController<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 {
-  NSArray *H_contactsArray;
-  LCMultipleSelectionTable *H_contactsTable;
+  NSArray *contactsArray;
+  LCMultipleSelectionTable *contactsTable;
 }
 
 @end

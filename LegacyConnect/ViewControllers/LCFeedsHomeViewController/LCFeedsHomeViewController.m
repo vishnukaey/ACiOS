@@ -15,22 +15,22 @@
 
 
 @implementation LCFeedsHomeViewController
-@synthesize H_feedsTable;
+@synthesize feedsTable;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [H_feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  H_feedsTable.estimatedRowHeight = 44.0;
-  H_feedsTable.rowHeight = UITableViewAutomaticDimension;
+  [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  feedsTable.estimatedRowHeight = 44.0;
+  feedsTable.rowHeight = UITableViewAutomaticDimension;
   [self loadFeed];
   
-  [H_feedsTable addPullToRefreshWithActionHandler:^{
+  [feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [H_feedsTable.pullToRefreshView stopAnimating];
+      [feedsTable.pullToRefreshView stopAnimating];
     });
   }withBackgroundColor:[UIColor colorWithRed:255.0/255 green:75.0/255 blue:67/255.0 alpha:1]];
 }
@@ -62,8 +62,8 @@
 #pragma mark - initial setup functions
 - (void)loadFeed
 {
-  H_feedsArray = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyFeedArray]];
-  [H_feedsTable reloadData];
+  feedsArray = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyFeedArray]];
+  [feedsTable reloadData];
 }
 
 #pragma mark - TableView delegates
@@ -74,7 +74,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-  return H_feedsArray.count;
+  return feedsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,7 +88,7 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   cell.delegate = self;
-  [cell setData:[H_feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
 
   return cell;
 }
@@ -122,7 +122,7 @@
     [appdel.GIButton setHidden:YES];
     [appdel.menuButton setHidden:YES];
     LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.P_image = [UIImage imageNamed:@"photoPost_dummy.png"];
+    vc.selectedImage = [UIImage imageNamed:@"photoPost_dummy.png"];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
   }

@@ -21,8 +21,8 @@
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
     {
       NSLog(@"%@",response);
-      H_interestsArray = response;
-      [H_interstsCollection reloadData];
+      interestsArray = response;
+      [interstsCollection reloadData];
     }
     andFailure:^(NSString *error)
     {
@@ -54,14 +54,14 @@
 - (void)displayInterestsFromResponse :(NSArray *)response
 {
   float x_margin = 10, y_margin = 10;
-  float icon_size = (H_interstsScroll.frame.size.width - 4*x_margin)/3;
+  float icon_size = (interstsScroll.frame.size.width - 4*x_margin)/3;
   float labelHeight = 30;
 
   for (int i = 0; i<response.count; i++)
   {
     UIButton *interestView = [[UIButton alloc] initWithFrame:CGRectMake((i%3 + 1)*x_margin + icon_size*(i%3), (i/3 + 1)*y_margin + (icon_size + labelHeight) * (i/3), icon_size, (icon_size + labelHeight))];
     [interestView addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [H_interstsScroll addSubview:interestView];
+    [interstsScroll addSubview:interestView];
     
     LCInterest *interstObj = [response objectAtIndex:i];
     
@@ -88,7 +88,7 @@
 #pragma mark - collection view delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return H_interestsArray.count;
+  return interestsArray.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -100,7 +100,7 @@
     NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCCommunityInterestCell class]) owner:nil options:nil];
     cell=cells[0];
   }
-  LCInterest *interstObj = [H_interestsArray objectAtIndex:indexPath.row];
+  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
   cell.interestNameLabel.text = interstObj.name;
   
   [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];

@@ -11,7 +11,7 @@
 
 @interface LCInviteToCommunity : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-  NSArray *H_friendsArray;
+  NSArray *friendsArray;
 }
 
 @end

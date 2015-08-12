@@ -103,10 +103,8 @@
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.dobTextField.text] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:YES forKey:kLoginStatusKey];
-    [defaults synchronize];
     [self saveUserDetailsToDataManagerFromResponse:response];
+    [LCUtilityManager saveUserDefaultsForNewUser:self.emailTextField.text andPassword:self.passwordTextField.text];
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);

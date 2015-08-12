@@ -12,7 +12,7 @@
 
 @implementation LCLeftMenuController
 
-@synthesize P_menuwidth, delegate_;
+@synthesize menuwidth, delegate_;
 
 - (void)viewDidLoad
 {
@@ -30,7 +30,7 @@
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
   [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   for (int i = 0; i<titles_.count; i++) {
-    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 150+y_margin*(i+1) + i * but_height, P_menuwidth, but_height)];
+    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 150+y_margin*(i+1) + i * but_height, menuwidth, but_height)];
     but.backgroundColor = [UIColor whiteColor];
     [but setTitle:[titles_ objectAtIndex:i] forState:UIControlStateNormal];
     [self.view addSubview:but];

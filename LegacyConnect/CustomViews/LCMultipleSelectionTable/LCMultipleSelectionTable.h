@@ -10,8 +10,8 @@
 
 @interface LCMultipleSelectionTable : UITableView
 
-@property(nonatomic, retain)NSMutableArray *P_selectedRows;
-@property(nonatomic, retain)UIButton *P_selectedButton;
+@property(nonatomic, retain)NSMutableArray *selectedRows;
+@property(nonatomic, retain)UIButton *selectedButton;
 
 - (void)AddIndexPath :(NSIndexPath *)indexPath;
 - (BOOL)indexPathSelected :(NSIndexPath *)indexPath;

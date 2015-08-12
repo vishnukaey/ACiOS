@@ -1,4 +1,5 @@
 //
+  //
 //  LCEmptyViewController.m
 //  LegacyConnect
 //
@@ -20,11 +21,11 @@
 
 @interface LCEmptyViewController ()
 {
-  MFSideMenuContainerViewController *H_container;
-  UINavigationController *H_root;
   LCCreatePostViewController *createPostVC;
   LCGIButton * giButton;
   LCMenuButton *menuButton;
+  MFSideMenuContainerViewController *mainContainer;
+  UINavigationController *navigationRoot;
 }
 @end
 
@@ -55,26 +56,26 @@
     //add homefeed controller as the center controller and leftmenu controller as the left menu to the container controller.
     //make the homefeed controller as delegate of leftmenu
     
-    
+    [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
-    H_root = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-    
+    navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+
     LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
-    leftSideMenuViewController.P_menuwidth = appdel.window.frame.size.width*2/3;
+    leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
     leftSideMenuViewController.delegate_ = self;
-    
-    H_container = [MFSideMenuContainerViewController
-                   containerWithCenterViewController:H_root
-                   leftMenuViewController:nil
-                   rightMenuViewController:leftSideMenuViewController];
-    H_container.rightMenuWidth = leftSideMenuViewController.P_menuwidth;
-    appdel.window.rootViewController = H_container;
+
+    mainContainer = [MFSideMenuContainerViewController
+                                                    containerWithCenterViewController:navigationRoot
+                                                    leftMenuViewController:nil
+                                                    rightMenuViewController:leftSideMenuViewController];
+    mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
+    appdel.window.rootViewController = mainContainer;
     [appdel.window makeKeyAndVisible];
     
     [self addfloatingButtons];
-    H_container.panMode = MFSideMenuPanModeNone;
+    mainContainer.panMode = MFSideMenuPanModeNone;
   }
 }
 
@@ -90,16 +91,16 @@
   giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
   [appdel.window addSubview:giButton];
   [giButton setUpMenu];
-  giButton.P_community.tag = 0;
-  [giButton.P_community addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
+  giButton.communityButton.tag = 0;
+  [giButton.communityButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   appdel.GIButton = giButton;
   [giButton setImage:[UIImage imageNamed:@"GIButton_dummy.png"] forState:UIControlStateNormal];
   
-  giButton.P_video.tag = 1;
-  [giButton.P_video addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
+  giButton.postPhotoButton.tag = 1;
+  [giButton.postPhotoButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   
-  giButton.P_status.tag = 2;
-  [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
+  giButton.postStatusButton.tag = 2;
+  [giButton.postStatusButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   
   //menu poper button
   menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
@@ -115,12 +116,12 @@
 #pragma mark - button actions
 - (void)menuButtonAction
 {
-  if (H_container.menuState == MFSideMenuStateClosed) {
-    [H_container setMenuState:MFSideMenuStateRightMenuOpen];
+  if (mainContainer.menuState == MFSideMenuStateClosed) {
+    [mainContainer setMenuState:MFSideMenuStateRightMenuOpen];
   }
   else
   {
-    [H_container setMenuState:MFSideMenuStateClosed];
+    [mainContainer setMenuState:MFSideMenuStateClosed];
   }
   
 }
@@ -128,7 +129,7 @@
 - (void)GIBComponentsAction :(UIButton *)sender
 {
   NSLog(@"tag-->>%d", (int)sender.tag);
-  [H_container setMenuState:MFSideMenuStateClosed];
+  [mainContainer setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
@@ -137,7 +138,7 @@
     [appdel.menuButton setHidden:YES];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-    [H_root pushViewController:vc animated:YES];
+    [navigationRoot pushViewController:vc animated:YES];
   }
   else if (sender.tag == 2)
   {
@@ -147,7 +148,7 @@
     createPostVC.delegate = self;
     giButton.hidden = YES;
     menuButton.hidden = YES;
-    [H_container.view addSubview:createPostVC.view];
+    [mainContainer.view addSubview:createPostVC.view];
     
     
   }
@@ -159,7 +160,7 @@
     
     UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     [view setBackgroundColor:[UIColor blackColor]];
-    [H_container.view addSubview:view];
+    [mainContainer.view addSubview:view];
   }
   
 }
@@ -168,37 +169,34 @@
 - (void)leftMenuButtonActions:(UIButton *)sender
 {
   NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
-  [H_container setMenuState:MFSideMenuStateClosed];
+  [mainContainer setMenuState:MFSideMenuStateClosed];
   if (sender.tag == 0)//home
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"homeFeeds"];
-    [H_root setViewControllers:[NSArray arrayWithObject:vc]];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 1)//profile
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    [H_root setViewControllers:[NSArray arrayWithObject:vc]];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 2)//Interests
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCAllInterestVC"];
-    [H_root setViewControllers:[NSArray arrayWithObject:vc]];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 3)//notifications
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Notification" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateInitialViewController];
-    [H_root setViewControllers:[NSArray arrayWithObject:vc]];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 4)//logout
   {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:NO forKey:kLoginStatusKey];
-    [defaults synchronize];
-    [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
+    [LCUtilityManager clearUserDefaultsForCurrentUser];
     if ([FBSDKAccessToken currentAccessToken])
     {
       [[FBSDKLoginManager new] logOut];

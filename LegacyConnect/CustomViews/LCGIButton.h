@@ -11,7 +11,7 @@
 
 @interface LCGIButton : UIButton
 
-@property(nonatomic, retain)UIButton *P_community, *P_status, *P_video;
+@property(nonatomic, retain)UIButton *communityButton, *postStatusButton, *postPhotoButton;
 
 -(void)toggle;
 -(void)setUpMenu;

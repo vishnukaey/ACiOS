@@ -29,7 +29,7 @@
   topSpace += searchField.frame.size.height;
   
   //friends list table
-  H_friendsArray = [LCDummyValues dummyFriendsArray];
+  friendsArray = [LCDummyValues dummyFriendsArray];
   UITableView *friendsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, self.view.frame.size.height -topSpace)];
   friendsTable.delegate = self;
   friendsTable.dataSource = self;
@@ -76,7 +76,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_friendsArray.count;    
+  return friendsArray.count;    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -90,7 +90,7 @@
                                   reuseIdentifier:MyIdentifier];
   }
   
-  cell.textLabel.text = [H_friendsArray objectAtIndex:indexPath.row];
+  cell.textLabel.text = [friendsArray objectAtIndex:indexPath.row];
   
   return cell;
 }

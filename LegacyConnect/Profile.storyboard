@@ -178,10 +178,10 @@ FRIENDS</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_interestsScrollview" destination="1Sz-ak-B8R" id="3Vk-mi-CeW"/>
-                        <outlet property="H_milestonesTable" destination="wWo-lz-r7z" id="QUl-9r-XZd"/>
-                        <outlet property="H_profilePic" destination="moX-4w-sux" id="3j6-o1-nbd"/>
-                        <outlet property="H_tabMenuContainer" destination="xTW-Ak-bXz" id="9La-yn-YNs"/>
+                        <outlet property="interestsScrollview" destination="1Sz-ak-B8R" id="vdN-Nj-AeU"/>
+                        <outlet property="milestonesTable" destination="wWo-lz-r7z" id="AEy-bb-FCo"/>
+                        <outlet property="profilePic" destination="moX-4w-sux" id="t8x-yG-q1z"/>
+                        <outlet property="tabMenuContainer" destination="xTW-Ak-bXz" id="AFS-M2-GMg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="535-Y2-uP7" userLabel="First Responder" sceneMemberID="firstResponder"/>

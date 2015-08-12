@@ -12,11 +12,11 @@
 
 @interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
-  IBOutlet UITableView *H_milestonesTable;
-  IBOutlet UIScrollView *H_interestsScrollview;
-  IBOutlet UIImageView *H_profilePic;
-  IBOutlet UIView *H_tabMenuContainer;
-  NSMutableArray *H_MileStones;
+  IBOutlet UITableView *milestonesTable;
+  IBOutlet UIScrollView *interestsScrollview;
+  IBOutlet UIImageView *profilePic;
+  IBOutlet UIView *tabMenuContainer;
+  NSMutableArray *MileStones;
 }
 
 - (IBAction)backAction:(id)sender;
