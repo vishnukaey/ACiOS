@@ -43,6 +43,7 @@ extern NSString *const kLastNameKey;
 extern NSString *const kEmailKey;
 extern NSString *const kPasswordKey;
 extern NSString *const kDobKey;
+extern NSString *const kAccessTokenKey;
 extern NSString *const kFBUserIDKey;
 extern NSString *const kFBAvatarImageUrlKey;
 extern NSString *const kFBAccessTokenKey;

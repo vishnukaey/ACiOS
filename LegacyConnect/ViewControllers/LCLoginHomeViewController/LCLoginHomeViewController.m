@@ -115,7 +115,7 @@
        NSDictionary *responseData = response[kResponseData];
        [LCDataManager sharedDataManager].avatarUrl = responseData[kFBAvatarImageUrlKey];
        [LCDataManager sharedDataManager].userID = responseData[kUserIDKey];
-       [LCDataManager sharedDataManager].userToken = responseData[@"accessToken"];
+       [LCDataManager sharedDataManager].userToken = responseData[kAccessTokenKey];
        [self loginUser];
      }
    } andFailure:^(NSString *error) {

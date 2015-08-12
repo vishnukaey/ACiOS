@@ -95,7 +95,7 @@
   [LCDataManager sharedDataManager].lastName = userInfo[kLastNameKey];
   [LCDataManager sharedDataManager].dob = userInfo[kDobKey];
   [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-  [LCDataManager sharedDataManager].userToken = userInfo[@"accessToken"];
+  [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender

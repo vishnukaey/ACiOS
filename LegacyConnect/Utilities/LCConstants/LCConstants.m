@@ -45,6 +45,7 @@ NSString *const kUserIDKey = @"userId";
 NSString *const kFirstNameKey = @"firstName";
 NSString *const kLastNameKey = @"lastName";
 NSString *const kEmailKey = @"email";
+NSString *const kAccessTokenKey = @"accessToken";
 NSString *const kPasswordKey = @"password";
 NSString *const kDobKey = @"dob";
 NSString *const kFBUserIDKey = @"fbUid";
