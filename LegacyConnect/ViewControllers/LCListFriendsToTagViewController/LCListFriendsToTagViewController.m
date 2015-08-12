@@ -34,4 +34,12 @@
 }
 */
 
+
+#pragma searchbar delegates
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+  
+}
+
+
 @end

@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCListFriendsToTagViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface LCListFriendsToTagViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 
 
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *doneButton;
 @property(nonatomic,retain) IBOutlet UINavigationBar *navigationBar;
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
+@property(nonatomic,retain) IBOutlet UISearchBar *searchBar;
 @end
