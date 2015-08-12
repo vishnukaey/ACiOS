@@ -74,22 +74,17 @@
 {
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
+    
     NSLog(@"%@",response);
     [self saveUserDetailsToDataManagerFromResponse:response];
-    [self loginUser];
+    [LCUtilityManager saveUserDefaultsForNewUser:self.emailTextField.text andPassword:self.passwordTextField.text];
+    [self.navigationController popToRootViewControllerAnimated:NO];
+    
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
 }
 
-
-- (void)loginUser
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:YES forKey:kLoginStatusKey];
-  [defaults synchronize];
-  [self.navigationController popToRootViewControllerAnimated:NO];
-}
 
 - (void)saveUserDetailsToDataManagerFromResponse:(id)response
 {

@@ -51,7 +51,6 @@
     [defaults synchronize];
     boolValue = true;
     return boolValue;
-    
   }
   else
   {
