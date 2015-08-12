@@ -84,6 +84,7 @@
   [LCDataManager sharedDataManager].userFBID = [LCUtilityManager performNullCheckAndSetValue:userInfo[kIDKey]];
   [LCDataManager sharedDataManager].firstName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].firstName];
   [LCDataManager sharedDataManager].lastName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].lastName];
+#warning  avtar error
   [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
   [LCDataManager sharedDataManager].dob = [LCUtilityManager performNullCheckAndSetValue:userInfo[kDobKey]];
 }
@@ -123,9 +124,7 @@
 
 - (void) loginUser
 {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:YES forKey:kLoginStatusKey];
-  [defaults synchronize];
+  [LCUtilityManager saveUserDefaultsForCurrentFBUser];
   [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

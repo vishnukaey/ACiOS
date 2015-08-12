@@ -28,6 +28,8 @@ NSString *const kInterestsKey = @"interests";
 NSString *const kCausesKey = @"causes";
 
 NSString *const kLoginStatusKey = @"logged_in";
+NSString *const kUserTokenKey = @"user_token";
+
 
 NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";

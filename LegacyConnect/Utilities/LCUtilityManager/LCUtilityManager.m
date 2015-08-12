@@ -39,6 +39,32 @@
   [alert show];
 }
 
++ (void)saveUserDefaultsForNewUser:(NSString*)userEmail andPassword:(NSString*)password
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setBool:YES forKey:kLoginStatusKey];
+  [defaults setValue:[LCDataManager sharedDataManager].userToken forKey:kUserTokenKey];
+  [defaults synchronize];
+}
+
++ (void)saveUserDefaultsForCurrentFBUser
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setBool:YES forKey:kLoginStatusKey];
+#warning  createuser Token for FB
+  [defaults setValue:@"" forKey:kUserTokenKey];
+  [defaults synchronize];
+}
+
++ (void)clearUserDefaultsForCurrentUser
+{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults setBool:NO forKey:kLoginStatusKey];
+  [defaults synchronize];
+  [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
+  [defaults setValue:[LCDataManager sharedDataManager].userToken forKey:kUserTokenKey];
+}
+
 
 + (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format
 {

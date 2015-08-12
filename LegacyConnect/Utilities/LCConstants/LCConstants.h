@@ -34,6 +34,7 @@ extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;
 
 extern NSString *const kLoginStatusKey;
+extern NSString *const kUserTokenKey;
 
 extern NSString *const kIDKey;
 extern NSString *const kUserIDKey;

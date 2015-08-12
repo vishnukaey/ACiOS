@@ -52,7 +52,7 @@
     //add homefeed controller as the center controller and leftmenu controller as the left menu to the container controller.
     //make the homefeed controller as delegate of leftmenu
     
-    
+    [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
 
     LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
@@ -176,10 +176,7 @@
   }
   else if (sender.tag == 4)//logout
   {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setBool:NO forKey:kLoginStatusKey];
-    [defaults synchronize];
-    [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
+    [LCUtilityManager clearUserDefaultsForCurrentUser];
     if ([FBSDKAccessToken currentAccessToken])
     {
       [[FBSDKLoginManager new] logOut];
