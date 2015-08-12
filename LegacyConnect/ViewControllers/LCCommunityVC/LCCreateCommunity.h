@@ -11,4 +11,7 @@
 
 @interface LCCreateCommunity : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+- (IBAction)cancelAction;
+- (IBAction)nextButtonAction;
+
 @end
