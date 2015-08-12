@@ -68,7 +68,7 @@
          if (!error)
          {
            [self saveUserDetailsToDataManagerFromResponse:result];
-           [self performOnlineFBLoginRequest:[self getFBUserDetails]];
+           [self performOnlineFBLoginRequest:[self getFBUserDetails:result]];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
          }
       }];
@@ -84,17 +84,17 @@
   [LCDataManager sharedDataManager].userFBID = [LCUtilityManager performNullCheckAndSetValue:userInfo[kIDKey]];
   [LCDataManager sharedDataManager].firstName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].firstName];
   [LCDataManager sharedDataManager].lastName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].lastName];
-#warning  avtar error
   [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"//graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
   [LCDataManager sharedDataManager].dob = [LCUtilityManager performNullCheckAndSetValue:userInfo[kDobKey]];
 }
 
 
--(NSArray*) getFBUserDetails
+-(NSArray*) getFBUserDetails:(id)response
 {
   NSArray *userDetails = @[[LCDataManager sharedDataManager].userEmail,[LCDataManager sharedDataManager].firstName, [LCDataManager sharedDataManager].lastName, [LCDataManager sharedDataManager].dob, [LCDataManager sharedDataManager].userFBID, [FBSDKAccessToken currentAccessToken].tokenString, [LCDataManager sharedDataManager].avatarUrl];
   return userDetails;
 }
+
 
 - (void)performOnlineFBLoginRequest:(NSArray*)parameters
 {
@@ -115,6 +115,7 @@
        NSDictionary *responseData = response[kResponseData];
        [LCDataManager sharedDataManager].avatarUrl = responseData[kFBAvatarImageUrlKey];
        [LCDataManager sharedDataManager].userID = responseData[kUserIDKey];
+       [LCDataManager sharedDataManager].userToken = responseData[@"accessToken"];
        [self loginUser];
      }
    } andFailure:^(NSString *error) {
@@ -127,7 +128,7 @@
 
 - (void) loginUser
 {
-  [LCUtilityManager saveUserDefaultsForCurrentFBUser];
+  [LCUtilityManager saveUserDefaultsForNewUser];
   [self.navigationController popToRootViewControllerAnimated:NO];
 }
 

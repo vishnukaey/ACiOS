@@ -104,7 +104,7 @@
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
     [self saveUserDetailsToDataManagerFromResponse:response];
-    [LCUtilityManager saveUserDefaultsForNewUser:self.emailTextField.text andPassword:self.passwordTextField.text];
+    [LCUtilityManager saveUserDefaultsForNewUser];
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -120,7 +120,7 @@
   [LCDataManager sharedDataManager].firstName = _firstNameTextField.text;
   [LCDataManager sharedDataManager].lastName = _lastNameTextField.text;
   [LCDataManager sharedDataManager].dob = _dobTextField.text;
-  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kIDKey] andPassword:self.passwordTextField.text];
+  [LCDataManager sharedDataManager].userToken = userInfo[@""];
 }
 
 - (BOOL)validateFields

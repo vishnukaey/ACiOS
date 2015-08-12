@@ -19,8 +19,7 @@
 + (NSString *)decodeFromBase64String:(NSString *)string;
 + (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
 + (void)clearUserDefaultsForCurrentUser;
-+ (void)saveUserDefaultsForNewUser:(NSString*)userEmail andPassword:(NSString*)password;
-+ (void)saveUserDefaultsForCurrentFBUser;
++ (void)saveUserDefaultsForNewUser;
 
 
 //+(NSNumber*) getNSNumberFromString:(NSString*)string;

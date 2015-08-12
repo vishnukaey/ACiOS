@@ -39,7 +39,7 @@
   [alert show];
 }
 
-+ (void)saveUserDefaultsForNewUser:(NSString*)userEmail andPassword:(NSString*)password
++ (void)saveUserDefaultsForNewUser
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:YES forKey:kLoginStatusKey];
@@ -47,14 +47,6 @@
   [defaults synchronize];
 }
 
-+ (void)saveUserDefaultsForCurrentFBUser
-{
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setBool:YES forKey:kLoginStatusKey];
-#warning  createuser Token for FB
-  [defaults setValue:@"" forKey:kUserTokenKey];
-  [defaults synchronize];
-}
 
 + (void)clearUserDefaultsForCurrentUser
 {
