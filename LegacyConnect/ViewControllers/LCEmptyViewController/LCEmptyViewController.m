@@ -1,4 +1,4 @@
-  //
+//
 //  LCEmptyViewController.m
 //  LegacyConnect
 //
@@ -22,6 +22,9 @@
 {
   MFSideMenuContainerViewController *H_container;
   UINavigationController *H_root;
+  LCCreatePostViewController *createPostVC;
+  LCGIButton * giButton;
+  LCMenuButton *menuButton;
 }
 @end
 
@@ -53,18 +56,18 @@
     
     
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
     H_root = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-
+    
     LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
     leftSideMenuViewController.P_menuwidth = appdel.window.frame.size.width*2/3;
     leftSideMenuViewController.delegate_ = self;
-
+    
     H_container = [MFSideMenuContainerViewController
-                                                    containerWithCenterViewController:H_root
-                                                    leftMenuViewController:nil
-                                                    rightMenuViewController:leftSideMenuViewController];
+                   containerWithCenterViewController:H_root
+                   leftMenuViewController:nil
+                   rightMenuViewController:leftSideMenuViewController];
     H_container.rightMenuWidth = leftSideMenuViewController.P_menuwidth;
     appdel.window.rootViewController = H_container;
     [appdel.window makeKeyAndVisible];
@@ -83,7 +86,7 @@
 {
   //global impact button
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  LCGIButton * giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
+  giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
   [appdel.window addSubview:giButton];
   [giButton setUpMenu];
   giButton.P_community.tag = 0;
@@ -98,7 +101,7 @@
   [giButton.P_status addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   
   //menu poper button
-  LCMenuButton *menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
   menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor grayColor];
   [appdel.window addSubview:menuButton];
@@ -128,19 +131,35 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
-  //  if (sender.tag == 2)
-  //  {
-  [appdel.menuButton setHidden:YES];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-  [H_root pushViewController:vc animated:YES];
-  //  }
-  //  else
-  //  {
-  //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-  //    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-  //    [self.navigationController pushViewController:vc animated:YES];
-  //  }
+  if (sender.tag == 1)
+  {
+    [appdel.menuButton setHidden:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
+    [H_root pushViewController:vc animated:YES];
+  }
+  else if (sender.tag == 2)
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+    createPostVC = [sb instantiateViewControllerWithIdentifier:@"LCCreatePostViewController"];
+    [createPostVC.view setFrame:CGRectMake(0, 20, 320, 300)];
+    createPostVC.delegate = self;
+    giButton.hidden = YES;
+    menuButton.hidden = YES;
+    [H_container.view addSubview:createPostVC.view];
+    
+    
+  }
+  else
+  {
+    //      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    //      LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    //      [self.navigationController pushViewController:vc animated:YES];
+    
+    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    [view setBackgroundColor:[UIColor blackColor]];
+    [H_container.view addSubview:view];
+  }
   
 }
 
@@ -191,5 +210,11 @@
   }
 }
 
+
+- (void)dismissView
+{
+  giButton.hidden = NO;
+  menuButton.hidden = NO;
+}
 
 @end

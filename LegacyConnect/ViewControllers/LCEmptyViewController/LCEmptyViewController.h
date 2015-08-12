@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LCLeftMenuController.h"
+#import "LCCreatePostViewController.h"
 
-@interface LCEmptyViewController : UIViewController
+@interface LCEmptyViewController : UIViewController<createPostDelegate>
 
 @end
