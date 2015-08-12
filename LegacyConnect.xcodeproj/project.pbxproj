@@ -54,6 +54,9 @@
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
 		966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287271B567C2600C91196 /* LCForgotPasswordViewController.m */; };
+		96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */; };
+		96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */; };
+		96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */; };
 		96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */; };
 		96BD14361B721659004D5CFA /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14331B721659004D5CFA /* EXTScope.m */; };
 		96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14391B72166B004D5CFA /* MTLJSONAdapter.m */; };
@@ -202,6 +205,11 @@
 		966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUpdatePasswordViewController.m; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.m; sourceTree = "<group>"; };
 		966287261B567C2600C91196 /* LCForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCForgotPasswordViewController.h; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.h; sourceTree = "<group>"; };
 		966287271B567C2600C91196 /* LCForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCForgotPasswordViewController.m; path = ViewControllers/LCForgotPasswordViewController/LCForgotPasswordViewController.m; sourceTree = "<group>"; };
+		96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = CreatePost.storyboard; path = Storyboards/CreatePost.storyboard; sourceTree = "<group>"; };
+		96B86A1C1B79C456003EF7CA /* LCCreatePostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCreatePostViewController.h; path = ViewControllers/LCCreatePostViewController/LCCreatePostViewController.h; sourceTree = "<group>"; };
+		96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreatePostViewController.m; path = ViewControllers/LCCreatePostViewController/LCCreatePostViewController.m; sourceTree = "<group>"; };
+		96B86A231B7A232C003EF7CA /* LCListFriendsToTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListFriendsToTagViewController.h; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.h; sourceTree = "<group>"; };
+		96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListFriendsToTagViewController.m; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.m; sourceTree = "<group>"; };
 		96BD142F1B721659004D5CFA /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTKeyPathCoding.h; sourceTree = "<group>"; };
 		96BD14301B721659004D5CFA /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
 		96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
@@ -738,6 +746,7 @@
 				CEBCEC681B6899CF00F0116E /* Interests.storyboard */,
 				CEA30E2B1B7361C700DAA4BA /* Community.storyboard */,
 				0B56A7F91B6A31CF0065C231 /* Notification.storyboard */,
+				96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -752,6 +761,7 @@
 				0BC755721B562AB7009CE7F3 /* Feeds */,
 				0BC755711B562AAD009CE7F3 /* Registration */,
 				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
+				96B86A221B7A2106003EF7CA /* CreatePost */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -831,6 +841,33 @@
 				966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */,
 			);
 			name = LCUpdatePasswordViewController;
+			sourceTree = "<group>";
+		};
+		96B86A1F1B79CF77003EF7CA /* LCCreatePostViewController */ = {
+			isa = PBXGroup;
+			children = (
+				96B86A1C1B79C456003EF7CA /* LCCreatePostViewController.h */,
+				96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */,
+			);
+			name = LCCreatePostViewController;
+			sourceTree = "<group>";
+		};
+		96B86A221B7A2106003EF7CA /* CreatePost */ = {
+			isa = PBXGroup;
+			children = (
+				96B86A1F1B79CF77003EF7CA /* LCCreatePostViewController */,
+				96B86A261B7A2353003EF7CA /* LCListFriendsToTagViewController */,
+			);
+			name = CreatePost;
+			sourceTree = "<group>";
+		};
+		96B86A261B7A2353003EF7CA /* LCListFriendsToTagViewController */ = {
+			isa = PBXGroup;
+			children = (
+				96B86A231B7A232C003EF7CA /* LCListFriendsToTagViewController.h */,
+				96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */,
+			);
+			name = LCListFriendsToTagViewController;
 			sourceTree = "<group>";
 		};
 		AA0D4ABFB4BBC81C1666D4C8 /* Pods */ = {
@@ -1037,6 +1074,7 @@
 				0B1717C41B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
+				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */,
 				0BE2B9B51B58D79C0026E607 /* photo.jpg in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
@@ -1123,6 +1161,7 @@
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
 				0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
+				96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */,
@@ -1159,6 +1198,7 @@
 				CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */,
 				CEBED6A11B5FACD60012FEBB /* LCCreateCommunity.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
+				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
