@@ -148,20 +148,17 @@
   if([_firstNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _firstNameTextField.isValid = NO;
-    [self.firstNameTextField shake];
     isValid = NO;
   }
   else if([_lastNameTextField.text isEqualToString:kEmptyStringValue])
   {
     _lastNameTextField.isValid = NO;
-    [self.lastNameTextField shake];
     isValid = NO;
   }
   
   else if([_dobTextField.text isEqualToString:kEmptyStringValue])
   {
     _dobTextField.isValid = NO;
-    [self.dobTextField shake];
     isValid = NO;
   }
   
@@ -187,7 +184,6 @@
   else
   {
     _emailTextField.isValid = NO;
-    [self.emailTextField shake];
     _warningLabel.text = @"Invalid Email";
     return NO;
   }
@@ -201,7 +197,6 @@
   {
     _warningLabel.text = @"Password Missing";
     _passwordTextField.isValid = NO;
-    [self.passwordTextField shake];
     return NO;
   }
   else if([_passwordTextField.text isEqualToString:_confirmPasswordTextField.text])
@@ -214,7 +209,6 @@
   {
     _warningLabel.text = @"Password Mismatch";
     _confirmPasswordTextField.isValid = NO;
-    [self.confirmPasswordTextField shake];
     return NO;
   }
 }
