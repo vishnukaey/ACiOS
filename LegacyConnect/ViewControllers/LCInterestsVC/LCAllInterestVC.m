@@ -22,7 +22,7 @@
   //mine interst api call
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
 //    NSLog(@"%@",response);
-    H_interestsMine = response;
+    interestsMine = response;
     [self showMyInterests];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -31,7 +31,7 @@
   //all interests api call
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
 //    NSLog(@"%@",response);
-    H_interestsAll = response;
+    interestsAll = response;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
@@ -66,14 +66,14 @@
 #pragma mark - setUpFunctions
 - (void)showMyInterests
 {
-  H_selectedDataArray = H_interestsMine;
-  [H_interestsCollection reloadData];
+  selectedDataArray = interestsMine;
+  [interestsCollection reloadData];
 }
 
 -(void)showAllInterests
 {
-  H_selectedDataArray = H_interestsAll;
-  [H_interestsCollection reloadData];
+  selectedDataArray = interestsAll;
+  [interestsCollection reloadData];
 }
 
 #pragma mark - button Actions
@@ -92,7 +92,7 @@
 #pragma mark - collection view delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return H_selectedDataArray.count;
+  return selectedDataArray.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +104,7 @@
     NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCCommunityInterestCell class]) owner:nil options:nil];
     cell=cells[0];
   }
-  LCInterest *interstObj = [H_selectedDataArray objectAtIndex:indexPath.row];
+  LCInterest *interstObj = [selectedDataArray objectAtIndex:indexPath.row];
   cell.interestNameLabel.text = interstObj.name;
   
   [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];

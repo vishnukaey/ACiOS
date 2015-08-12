@@ -11,9 +11,9 @@
 
 @interface LCSingleInterestVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
-  IBOutlet UITableView *H_feedsTable;
-  IBOutlet UIScrollView *H_causesScrollView;
-  NSMutableArray *H_cellsViewArray;
+  IBOutlet UITableView *feedsTable;
+  IBOutlet UIScrollView *causesScrollView;
+  NSMutableArray *cellsViewArray;
 }
 
 - (IBAction)toggleHelpsORCauses:(UIButton *)sender;

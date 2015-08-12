@@ -86,7 +86,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_interestsCollection" destination="YOj-Cg-4he" id="G5C-Cd-Ehn"/>
+                        <outlet property="interestsCollection" destination="YOj-Cg-4he" id="z3u-qu-Dxw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRq-Vi-IF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -227,8 +227,8 @@ Cg
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_causesScrollView" destination="xHc-W3-Xcp" id="P1S-00-Sgf"/>
-                        <outlet property="H_feedsTable" destination="bgC-xR-3jz" id="aVC-zO-t04"/>
+                        <outlet property="causesScrollView" destination="xHc-W3-Xcp" id="Zfn-Ut-xgi"/>
+                        <outlet property="feedsTable" destination="bgC-xR-3jz" id="4On-wo-zsy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VUg-7U-hNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -335,7 +335,7 @@ Cg
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_feedsTable" destination="F0m-Oz-1jY" id="K3Z-AS-bqk"/>
+                        <outlet property="feedsTable" destination="F0m-Oz-1jY" id="4hY-rg-foB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPv-mG-9jJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

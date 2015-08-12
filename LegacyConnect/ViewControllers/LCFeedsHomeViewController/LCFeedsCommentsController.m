@@ -17,9 +17,9 @@
 {
   [super viewDidLoad];
 
-  [H_mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  H_mainTable.estimatedRowHeight = 44.0;
-  H_mainTable.rowHeight = UITableViewAutomaticDimension;
+  [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  mainTable.estimatedRowHeight = 44.0;
+  mainTable.rowHeight = UITableViewAutomaticDimension;
 
   [[NSNotificationCenter defaultCenter] addObserver:self
                                    selector:@selector(changeFirstResponder)
@@ -56,10 +56,10 @@
 -(void)loadFeedAndComments
 {
   NSDictionary *postDetail = [[LCDummyValues dummyFeedArray] objectAtIndex:0];//post data
-  H_cellsData = [[NSMutableArray alloc]init];
-  [H_cellsData addObject:postDetail];
-  [H_cellsData addObjectsFromArray:[LCDummyValues dummyCommentArray]];
-  [H_mainTable reloadData];
+  cellsData = [[NSMutableArray alloc]init];
+  [cellsData addObject:postDetail];
+  [cellsData addObjectsFromArray:[LCDummyValues dummyCommentArray]];
+  [mainTable reloadData];
 
   UIView* commentntField = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 40)];
   [commentntField setBackgroundColor:[UIColor orangeColor]];
@@ -71,33 +71,33 @@
   [commentIcon setImage:[UIImage imageNamed:@"clock.jpg"]];
   [commentntField addSubview:commentIcon];
 
-  H_commmentTextField = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, commentntField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, commentntField.frame.size.height)];
-  [commentntField addSubview:H_commmentTextField];
-  H_commmentTextField.delegate = self;
-  [H_commmentTextField setBackgroundColor:[UIColor whiteColor]];
+  commmentTextField = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, commentntField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, commentntField.frame.size.height)];
+  [commentntField addSubview:commmentTextField];
+  commmentTextField.delegate = self;
+  [commmentTextField setBackgroundColor:[UIColor whiteColor]];
 
   UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(commentntField.frame.size.width - postBut_width, 0, postBut_width, commentntField.frame.size.height)];
   [commentntField addSubview:postButton];
   [postButton setTitle:@"Post" forState:UIControlStateNormal];
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
 
-  H_dup = [[UITextField alloc] initWithFrame:CGRectMake(-100, 0, 50, 50)];
-  [self.view addSubview:H_dup];
-  H_dup.delegate = self;
-  H_dup.inputAccessoryView = commentntField;
-//  [H_dup becomeFirstResponder];
+  commmentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(-100, 0, 50, 50)];
+  [self.view addSubview:commmentTextField_dup];
+  commmentTextField_dup.delegate = self;
+  commmentTextField_dup.inputAccessoryView = commentntField;
+//  [commmentTextField_dup becomeFirstResponder];
 }
 
 #pragma mark - button actions
 -(void)postAction
 {
-  [H_commmentTextField resignFirstResponder];
-  [H_dup resignFirstResponder];
+  [commmentTextField resignFirstResponder];
+  [commmentTextField_dup resignFirstResponder];
 }
 
 -(void)changeFirstResponder
 {
-  [H_commmentTextField becomeFirstResponder]; //will return YES;
+  [commmentTextField becomeFirstResponder]; //will return YES;
 }
 
 - (IBAction)backAction
@@ -113,7 +113,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-  return H_cellsData.count;
+  return cellsData.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +131,7 @@
       // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
       feedCell = [topLevelObjects objectAtIndex:0];
     }
-    [feedCell setData:[H_cellsData objectAtIndex:indexPath.row] forPage:kCommentsfeedCellID];
+    [feedCell setData:[cellsData objectAtIndex:indexPath.row] forPage:kCommentsfeedCellID];
     return feedCell;
   }
   else //comment cell
@@ -144,7 +144,7 @@
       // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
       commentCell = [topLevelObjects objectAtIndex:0];
     }
-    [commentCell setData:[H_cellsData objectAtIndex:indexPath.row]];
+    [commentCell setData:[cellsData objectAtIndex:indexPath.row]];
     return commentCell;
   }
   return commentCell;
@@ -161,15 +161,15 @@
   NSLog(@"actionTypecommentpage--->>>%@", type);
   if ([type isEqualToString:kFeedCellActionComment])
   {
-    [H_dup becomeFirstResponder];
+    [commmentTextField_dup becomeFirstResponder];
   }
 }
 
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-  [H_commmentTextField resignFirstResponder];
-  [H_dup resignFirstResponder];
+  [commmentTextField resignFirstResponder];
+  [commmentTextField_dup resignFirstResponder];
 
   return YES;
 }

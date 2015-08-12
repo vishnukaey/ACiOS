@@ -44,7 +44,7 @@
 {
   NSArray *commentsArray = [LCDummyValues dummyCommentArray];
   
-  H_cellsViewArray = [[NSMutableArray alloc]init];
+  cellsViewArray = [[NSMutableArray alloc]init];
   
   UIFont *bigFont = [UIFont systemFontOfSize:15];
   UIFont *smallFont = [UIFont systemFontOfSize:12];
@@ -60,7 +60,7 @@
     NSString *comments_ = [[commentsArray objectAtIndex:i] valueForKey:@"comment"];
     float top_space = cellMargin_y;
     
-    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, H_commentsTable.frame.size.width, 0)];
+    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, commentsTable.frame.size.width, 0)];
     UIImageView *dp_view = [[UIImageView alloc]initWithFrame:CGRectMake(cellMargin_x, top_space, dp_im_hight, dp_im_hight)];
     [dp_view setImage:[UIImage imageNamed:@"clock.jpg"]];
     [cellView addSubview:dp_view];
@@ -111,9 +111,9 @@
     top_space+=cellMargin_y;
     
     [cellView setFrame:CGRectMake(cellView.frame.origin.x, cellView.frame.origin.y, cellView.frame.size.width, top_space)];
-    [H_cellsViewArray addObject:cellView];
+    [cellsViewArray addObject:cellView];
   }
-  [H_commentsTable reloadData];
+  [commentsTable reloadData];
 }
 
 #pragma mark - button actions
@@ -147,7 +147,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  return H_cellsViewArray.count;
+  return cellsViewArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -160,7 +160,7 @@
   }
   
   [[cell viewWithTag:10] removeFromSuperview];
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
+  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
   [cell addSubview:cellView];
   cellView.tag = 10;
   
@@ -169,7 +169,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
+  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
   
   return cellView.frame.size.height;
 }

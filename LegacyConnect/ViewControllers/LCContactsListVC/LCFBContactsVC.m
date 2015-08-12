@@ -50,11 +50,11 @@
     }];
   }
 
-  H_friendsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
-  H_friendsTable.layer.borderColor = [UIColor greenColor].CGColor;
-  H_friendsTable.layer.borderWidth = 3;
-  H_friendsTable.delegate = self;
-  H_friendsTable.dataSource = self;
+  friendsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
+  friendsTable.layer.borderColor = [UIColor greenColor].CGColor;
+  friendsTable.layer.borderWidth = 3;
+  friendsTable.delegate = self;
+  friendsTable.dataSource = self;
 }
 
 -(void)getFacebookFriendsList
@@ -69,7 +69,7 @@
     if (!error)
     {
       NSLog(@"fetched user:%@", result);
-      H_friendsArray = [[NSMutableArray alloc] init];
+      finalFriendsArray = [[NSMutableArray alloc] init];
       NSArray *friendsArray = [result objectForKey:@"data"];
       for (int i = 0; i<friendsArray.count; i++)
       {
@@ -79,9 +79,9 @@
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *image = [UIImage imageWithData:imageData];
         con.P_image = image;
-        [H_friendsArray addObject:con];
+        [finalFriendsArray addObject:con];
       }
-      [self.view addSubview:H_friendsTable];
+      [self.view addSubview:friendsTable];
     }
     else
     {
@@ -106,7 +106,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_friendsArray.count;    
+  return finalFriendsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -123,7 +123,7 @@
   UIView *friendCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
 
   UIImageView *friendImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-  LCContact *con = [H_friendsArray objectAtIndex:indexPath.row];
+  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
   friendImage.image = con.P_image;
   [friendCell addSubview:friendImage];
 

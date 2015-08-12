@@ -13,7 +13,7 @@
 @end
 
 @implementation LCFullScreenImageVC
-@synthesize P_image;
+@synthesize selectedImage;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -23,7 +23,7 @@
   UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
   
   [self.view addSubview:imageView];
-  imageView.image = P_image;
+  imageView.image = selectedImage;
   imageView.contentMode = UIViewContentModeScaleAspectFit;
   [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
   [imageView setBackgroundColor:[UIColor clearColor]];

@@ -11,8 +11,8 @@
 
 @interface LCSingleCauseVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
-  IBOutlet UITableView *H_feedsTable;
-  NSMutableArray *H_cellsViewArray;
+  IBOutlet UITableView *feedsTable;
+  NSMutableArray *cellsViewArray;
 }
 
 - (IBAction)supportClicked:(id)sender;

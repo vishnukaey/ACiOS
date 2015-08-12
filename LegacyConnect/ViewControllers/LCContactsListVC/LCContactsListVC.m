@@ -19,13 +19,13 @@
   [self.navigationController setNavigationBarHidden:NO];
 
   [self loadContacts];
-  H_contactsTable = [[LCMultipleSelectionTable alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
+  contactsTable = [[LCMultipleSelectionTable alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
 
-  H_contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
-  H_contactsTable.layer.borderWidth = 3;
-  H_contactsTable.delegate = self;
-  H_contactsTable.dataSource = self;
-  [self.view addSubview:H_contactsTable];
+  contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
+  contactsTable.layer.borderWidth = 3;
+  contactsTable.delegate = self;
+  contactsTable.dataSource = self;
+  [self.view addSubview:contactsTable];
   
 }
 
@@ -46,8 +46,8 @@
       if (granted)
       {
         // First time access has been granted, add the contact
-        H_contactsArray = [LCUtilityManager getPhoneContacts];
-        [H_contactsTable reloadData];
+        contactsArray = [LCUtilityManager getPhoneContacts];
+        [contactsTable reloadData];
       }
       else
       {
@@ -59,8 +59,8 @@
   else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
   {
     // The user has previously given access, add the contact
-    H_contactsArray = [LCUtilityManager getPhoneContacts];
-    [H_contactsTable reloadData];
+    contactsArray = [LCUtilityManager getPhoneContacts];
+    [contactsTable reloadData];
   }
   else
   {
@@ -73,14 +73,14 @@
 #pragma mark - buttonActions
 - (void)checkbuttonAction :(UIButton *)sender
 {
-  LCContact *con = [H_contactsArray objectAtIndex:sender.tag];
-  H_contactsTable.P_selectedButton = sender;
+  LCContact *con = [contactsArray objectAtIndex:sender.tag];
+  contactsTable.selectedButton = sender;
   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
-  if (![H_contactsTable indexPathSelected:indexPath])
+  if (![contactsTable indexPathSelected:indexPath])
   {
     if (con.P_emails.count==1)
     {
-      [H_contactsTable AddIndexPath:indexPath];
+      [contactsTable AddIndexPath:indexPath];
     }
     else//only if there are multiple selections for a single cell
     {
@@ -101,7 +101,7 @@
   if (buttonIndex>0)
   {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:buttonIndex - 1 inSection:actionSheet.tag];
-    [H_contactsTable AddIndexPath:indexPath];
+    [contactsTable AddIndexPath:indexPath];
   }
 }
 
@@ -113,7 +113,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return H_contactsArray.count;
+  return contactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
@@ -131,7 +131,7 @@
   UIView *contactCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
 
   UIImageView *contactImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-  LCContact *con = [H_contactsArray objectAtIndex:indexPath.row];
+  LCContact *con = [contactsArray objectAtIndex:indexPath.row];
   contactImage.image = con.P_image;
   [contactCell addSubview:contactImage];
 

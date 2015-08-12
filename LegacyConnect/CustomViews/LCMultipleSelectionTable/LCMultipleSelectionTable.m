@@ -9,26 +9,26 @@
 #import "LCMultipleSelectionTable.h"
 
 @implementation LCMultipleSelectionTable
-@synthesize P_selectedRows, P_selectedButton;
+@synthesize selectedRows, selectedButton;
 
 - (void)AddIndexPath :(NSIndexPath *)indexPath
 {
-  if (!P_selectedRows) {
-    P_selectedRows = [[NSMutableArray alloc]init];
+  if (!selectedRows) {
+    selectedRows = [[NSMutableArray alloc]init];
   }
-  [P_selectedRows addObject:indexPath];
-  [P_selectedButton setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+  [selectedRows addObject:indexPath];
+  [selectedButton setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
 }
 
 - (BOOL)indexPathSelected :(NSIndexPath *)indexPath;
 {
-  for (int i=0 ; i<P_selectedRows.count ; i++)
+  for (int i=0 ; i<selectedRows.count ; i++)
   {
-    NSIndexPath *path = [P_selectedRows objectAtIndex:i];
+    NSIndexPath *path = [selectedRows objectAtIndex:i];
     if (path.section == indexPath.section)
     {
-      [P_selectedRows removeObjectAtIndex:i];
-      [P_selectedButton setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
+      [selectedRows removeObjectAtIndex:i];
+      [selectedButton setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
       return YES;
     }
   }
@@ -37,7 +37,7 @@
 
 - (void)setImageForButton:(UIButton *)button
 {
-  for (NSIndexPath *path in P_selectedRows)
+  for (NSIndexPath *path in selectedRows)
   {
     if (path.section == button.tag)
     {

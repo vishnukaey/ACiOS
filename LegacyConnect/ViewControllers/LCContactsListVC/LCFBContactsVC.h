@@ -11,8 +11,8 @@
 
 @interface LCFBContactsVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-  UITableView *H_friendsTable;
-  NSMutableArray *H_friendsArray;;
+  UITableView *friendsTable;
+  NSMutableArray *finalFriendsArray;;
 }
 
 @end

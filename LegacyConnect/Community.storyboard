@@ -116,7 +116,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_interstsCollection" destination="zNF-53-GKv" id="pHQ-Mj-sCJ"/>
+                        <outlet property="interstsCollection" destination="zNF-53-GKv" id="Xss-Mb-5jc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iam-XJ-Er5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -301,7 +301,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="H_commentsTable" destination="qHG-QX-qf7" id="1ZH-PR-1TP"/>
+                        <outlet property="commentsTable" destination="qHG-QX-qf7" id="fP5-Ez-h7a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zw-pf-jP0" userLabel="First Responder" sceneMemberID="firstResponder"/>

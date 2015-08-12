@@ -36,13 +36,13 @@
 {
   NSArray *feedsArray = [LCDummyValues dummyFeedArray];
   
-  H_cellsViewArray = [[NSMutableArray alloc]init];
+  cellsViewArray = [[NSMutableArray alloc]init];
   for (int i=0; i<feedsArray.count; i++)
   {
     LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-//    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:H_feedsTable.frame.size.width forPage:kHomefeedCellID];
+//    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
     celViewFinal.delegate = self;
-    [H_cellsViewArray addObject:celViewFinal];
+    [cellsViewArray addObject:celViewFinal];
   }
 }
 
@@ -70,7 +70,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  return H_cellsViewArray.count;
+  return cellsViewArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,7 +83,7 @@
   }
   [[cell viewWithTag:10] removeFromSuperview];
   
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
+  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
   [cell addSubview:cellView];
   cellView.tag = 10;
   
@@ -92,7 +92,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIView *cellView = (UIView *)[H_cellsViewArray objectAtIndex:indexPath.row];
+  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
   
   return cellView.frame.size.height;
 }
