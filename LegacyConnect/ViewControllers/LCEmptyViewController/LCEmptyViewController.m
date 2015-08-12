@@ -1,3 +1,4 @@
+//
   //
 //  LCEmptyViewController.m
 //  LegacyConnect
@@ -20,6 +21,9 @@
 
 @interface LCEmptyViewController ()
 {
+  LCCreatePostViewController *createPostVC;
+  LCGIButton * giButton;
+  LCMenuButton *menuButton;
   MFSideMenuContainerViewController *mainContainer;
   UINavigationController *navigationRoot;
 }
@@ -54,7 +58,7 @@
     
     [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-
+    
     LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
     navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
 
@@ -84,7 +88,7 @@
 {
   //global impact button
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  LCGIButton * giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
+  giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
   [appdel.window addSubview:giButton];
   [giButton setUpMenu];
   giButton.communityButton.tag = 0;
@@ -99,7 +103,7 @@
   [giButton.postStatusButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   
   //menu poper button
-  LCMenuButton *menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
   menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor grayColor];
   [appdel.window addSubview:menuButton];
@@ -129,19 +133,35 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
   [appdel.GIButton setHidden:YES];
-  //  if (sender.tag == 2)
-  //  {
-  [appdel.menuButton setHidden:YES];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
-  [navigationRoot pushViewController:vc animated:YES];
-  //  }
-  //  else
-  //  {
-  //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-  //    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-  //    [self.navigationController pushViewController:vc animated:YES];
-  //  }
+  if (sender.tag == 1)
+  {
+    [appdel.menuButton setHidden:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
+    [navigationRoot pushViewController:vc animated:YES];
+  }
+  else if (sender.tag == 2)
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+    createPostVC = [sb instantiateViewControllerWithIdentifier:@"LCCreatePostViewController"];
+    [createPostVC.view setFrame:CGRectMake(0, 20, 320, 300)];
+    createPostVC.delegate = self;
+    giButton.hidden = YES;
+    menuButton.hidden = YES;
+    [mainContainer.view addSubview:createPostVC.view];
+    
+    
+  }
+  else
+  {
+    //      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    //      LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    //      [self.navigationController pushViewController:vc animated:YES];
+    
+    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+    [view setBackgroundColor:[UIColor blackColor]];
+    [mainContainer.view addSubview:view];
+  }
   
 }
 
@@ -189,5 +209,11 @@
   }
 }
 
+
+- (void)dismissView
+{
+  giButton.hidden = NO;
+  menuButton.hidden = NO;
+}
 
 @end
