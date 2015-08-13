@@ -117,23 +117,34 @@
   NSLog(@"interest clicked----->");
 }
 
-- (IBAction)toggleInterestOrMilestones:(UIButton *)sender
-{
-  if (sender.tag == 1)//milestones
-  {
-    milestonesTable.hidden = false;
-    interestsScrollview.hidden = true;
-  }
-  else//interests
-  {
-    milestonesTable.hidden = true;
-    interestsScrollview.hidden = false;
-  }
-}
-
 - (IBAction)editClicked:(UIButton *)sender
 {
   NSLog(@"edit clicked-->>");
+}
+
+#pragma mark - scrollview delegates
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  float collapseConstant = 0;;
+  if (self.collapseViewHeight.constant>0)
+  {
+    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (self.collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
+  {
+    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseConstant<0)
+  {
+    collapseConstant = 0;
+  }
+  if (collapseConstant>170)
+  {
+    collapseConstant = 170;
+  }
+  self.collapseViewHeight.constant = collapseConstant;
 }
 
 #pragma mark - TableView delegates

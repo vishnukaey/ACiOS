@@ -15,12 +15,13 @@
   IBOutlet UITableView *milestonesTable;
   IBOutlet UIScrollView *interestsScrollview;
   IBOutlet UIImageView *profilePic;
-  IBOutlet UIView *tabMenuContainer;
+  IBOutlet UIView *tabMenuContainer, *viewToCollapse;
   NSMutableArray *MileStones;
 }
 
+@property(nonatomic, weak)IBOutlet NSLayoutConstraint *collapseViewHeight;
+
 - (IBAction)backAction:(id)sender;
-- (IBAction)toggleInterestOrMilestones:(UIButton *)sender;
 - (IBAction)editClicked:(UIButton *)sender;
 
 @end
