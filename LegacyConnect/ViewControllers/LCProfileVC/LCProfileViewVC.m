@@ -8,6 +8,7 @@
 
 #import "LCProfileViewVC.h"
 #import "LCTabMenuView.h"
+#import "LCCommunityInterestCell.h"
 
 
 @implementation LCProfileViewVC
@@ -83,19 +84,24 @@
 
 //  tabmenu.layer.borderWidth = 3;
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, nil];
-  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsScrollview, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsCollectionView, nil];
   tabmenu.highlightColor = [UIColor orangeColor];
   tabmenu.normalColor = [UIColor blackColor];
 }
 
 - (void)loadInterests
 {
-  UIButton *anInterest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-  [anInterest setTitle:@"An interest" forState:UIControlStateNormal];
-  [interestsScrollview addSubview:anInterest];
-  anInterest.backgroundColor = [UIColor orangeColor];
-  anInterest.center = CGPointMake(interestsScrollview.frame.size.width/2, interestsScrollview.frame.size.height/2);
-  [anInterest addTarget:self action:@selector(interestClicked:) forControlEvents:UIControlEventTouchUpInside];
+  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
+   {
+     NSLog(@"%@",response);
+     interestsArray = response;
+     [interestsCollectionView reloadData];
+   }
+                             andFailure:^(NSString *error)
+   {
+     NSLog(@"%@",error);
+   }
+   ];
 }
    
 -(void)loadMileStones
@@ -145,6 +151,33 @@
     collapseConstant = 170;
   }
   self.collapseViewHeight.constant = collapseConstant;
+}
+
+#pragma mark - collection view delegates
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+  return interestsArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *cellIdentifier = @"LCInterestCell";
+  LCCommunityInterestCell *cell = (LCCommunityInterestCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+  if (cell == nil)
+  {
+    NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCCommunityInterestCell class]) owner:nil options:nil];
+    cell=cells[0];
+  }
+  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+  cell.interestNameLabel.text = interstObj.name;
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  
+  return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"interest clicked--->>>");
 }
 
 #pragma mark - TableView delegates

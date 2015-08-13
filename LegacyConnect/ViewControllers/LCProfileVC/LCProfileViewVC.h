@@ -13,10 +13,11 @@
 @interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
   IBOutlet UITableView *milestonesTable;
-  IBOutlet UIScrollView *interestsScrollview;
+  IBOutlet UICollectionView *interestsCollectionView;
   IBOutlet UIImageView *profilePic;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
   NSMutableArray *MileStones;
+  NSArray *interestsArray;
 }
 
 @property(nonatomic, weak)IBOutlet NSLayoutConstraint *collapseViewHeight;
