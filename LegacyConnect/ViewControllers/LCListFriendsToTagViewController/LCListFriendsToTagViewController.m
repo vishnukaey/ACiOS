@@ -9,13 +9,19 @@
 #import "LCListFriendsToTagViewController.h"
 
 @interface LCListFriendsToTagViewController ()
-
+{
+  NSMutableArray *friendsArray;
+  NSMutableArray *tableSourceArray;
+}
 @end
 
 @implementation LCListFriendsToTagViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+  friendsArray = [[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3", nil];
+  tableSourceArray = [[NSMutableArray alloc] initWithArray:friendsArray];
     // Do any additional setup after loading the view.
 }
 
@@ -38,7 +44,44 @@
 #pragma searchbar delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+  NSLog(@"searchText :%@",searchText);
+}
+
+
+#pragma mark - TableView delegates
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return tableSourceArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *MyIdentifier = @"MyIdentifier";
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:MyIdentifier];
+  }
   
+  
+  
+  return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 80;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 
