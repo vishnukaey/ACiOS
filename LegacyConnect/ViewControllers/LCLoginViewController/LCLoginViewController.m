@@ -77,7 +77,7 @@
     
     NSLog(@"%@",response);
     [self saveUserDetailsToDataManagerFromResponse:response];
-    [LCUtilityManager saveUserDefaultsForNewUser:self.emailTextField.text andPassword:self.passwordTextField.text];
+    [LCUtilityManager saveUserDefaultsForNewUser];
     [self.navigationController popToRootViewControllerAnimated:NO];
     
   } andFailure:^(NSString *error) {
@@ -95,7 +95,7 @@
   [LCDataManager sharedDataManager].lastName = userInfo[kLastNameKey];
   [LCDataManager sharedDataManager].dob = userInfo[kDobKey];
   [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-  [LCDataManager sharedDataManager].userToken = [LCUtilityManager generateUserTokenForUserID:userInfo[kEmailKey] andPassword:self.passwordTextField.text];
+  [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender

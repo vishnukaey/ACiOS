@@ -10,6 +10,77 @@
 #import "LCInviteToCommunity.h"
 #import "LCCommunityDateSelection.h"
 
+//label with edge insets
+@interface OSLabel : UILabel
+
+@property (nonatomic, assign) UIEdgeInsets edgeInsets;
+
+@end
+
+@implementation OSLabel
+
+- (id)initWithFrame:(CGRect)frame{
+  self = [super initWithFrame:frame];
+  if (self) {
+    self.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+  }
+  return self;
+}
+
+- (void)drawTextInRect:(CGRect)rect {
+  [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.edgeInsets)];
+}
+
+- (CGSize)intrinsicContentSize
+{
+  CGSize size = [super intrinsicContentSize];
+  size.width  += self.edgeInsets.left + self.edgeInsets.right;
+  size.height += self.edgeInsets.top + self.edgeInsets.bottom;
+  return size;
+}
+
+@end
+
+//textField with edge insets
+@interface OSTextField : UITextField
+
+@property (nonatomic, assign) UIEdgeInsets edgeInsets;
+- (void)addBorderLinesWithColor :(UIColor *)color;
+
+@end
+
+@implementation OSTextField
+
+- (id)initWithFrame:(CGRect)frame{
+  self = [super initWithFrame:frame];
+  if (self) {
+    self.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+  }
+  return self;
+}
+
+- (void)addBorderLinesWithColor :(UIColor *)color;
+{
+  UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
+  [topLine setBackgroundColor:color];
+  [self addSubview:topLine];
+  
+  UIView *botLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
+  [botLine setBackgroundColor:color];
+  [self addSubview:botLine];
+}
+
+- (CGRect)textRectForBounds:(CGRect)bounds {
+  return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.edgeInsets)];
+}
+
+- (CGRect)editingRectForBounds:(CGRect)bounds {
+  return [super editingRectForBounds:UIEdgeInsetsInsetRect(bounds, self.edgeInsets)];
+}
+
+@end
+
+
 
 @implementation LCCreateCommunity
 
@@ -18,75 +89,114 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStylePlain target:self action:@selector(nextButtonAction)];
-  self.navigationItem.rightBarButtonItem = anotherButton;
   
   float topSpace = 64;
+  float titleheight = 40;
+  UIEdgeInsets edgeInsetLabel = UIEdgeInsetsMake(0, 10, -20, 0);
+  UIEdgeInsets edgeInsetTextField = UIEdgeInsetsMake(0, 10, 0, 0);
+  UIFont *titleFont = [UIFont boldSystemFontOfSize:12];
+  UIFont *valueFont = [UIFont systemFontOfSize:14];
+  UIColor *titleColor = [UIColor darkGrayColor];
+  UIColor *titleBackGroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
+  UIColor *lineColor = [UIColor lightGrayColor];
   //name
-  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  nameLabel.text = @"Name";
+  OSLabel *nameLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  nameLabel.text = @"NAME";
+  nameLabel.edgeInsets = edgeInsetLabel;
+  nameLabel.font = titleFont;
+  nameLabel.textColor = titleColor;
+  nameLabel.backgroundColor = titleBackGroundColor;
   [self.view addSubview:nameLabel];
   topSpace += nameLabel.frame.size.height;
   
-  UITextField *nameField = [[UITextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  nameField.layer.borderWidth = 1;
+  OSTextField *nameField = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
   nameField.placeholder = @"Enter the name of your community";
+  nameField.edgeInsets = edgeInsetTextField;
+  nameField.font = valueFont;
+  [nameField addBorderLinesWithColor:lineColor];
   [self.view addSubview:nameField];
   topSpace += nameField.frame.size.height;
   //about
-  UILabel *aboutLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  aboutLabel.text = @"About";
+  OSLabel *aboutLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  aboutLabel.text = @"ABOUT";
+  aboutLabel.edgeInsets = edgeInsetLabel;
+  aboutLabel.font = titleFont;
+  aboutLabel.textColor = titleColor;
+  aboutLabel.backgroundColor = titleBackGroundColor;
   [self.view addSubview:aboutLabel];
   topSpace += aboutLabel.frame.size.height;
   
-  UITextField *aboutField = [[UITextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  aboutField.layer.borderWidth = 1;
-  aboutField.placeholder = @"Few words about your community";
+  OSTextField *aboutField = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 60)];
+  aboutField.placeholder = @"Tell people a little about it";
+  aboutField.edgeInsets = edgeInsetTextField;
+  aboutField.font = valueFont;
+  [aboutField addBorderLinesWithColor:lineColor];
   [self.view addSubview:aboutField];
   topSpace += aboutField.frame.size.height;
   //date
-  UILabel *dateLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  dateLabel.text = @"Date&Time(optional)";
+  OSLabel *dateLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  dateLabel.text = @"DATE & TIME(Optional)";
+  dateLabel.edgeInsets = edgeInsetLabel;
+  dateLabel.font = titleFont;
+  dateLabel.textColor = titleColor;
+  dateLabel.backgroundColor = titleBackGroundColor;
   [self.view addSubview:dateLabel];
   topSpace += dateLabel.frame.size.height;
   
-  UIButton *dateSelection = [[UIButton alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  [dateSelection setTitle:@"Select date and time" forState:UIControlStateNormal];
+  OSTextField *dateSelection = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
+  dateSelection.placeholder = @"None";
+  dateSelection.edgeInsets = edgeInsetTextField;
+  dateSelection.font = valueFont;
+  [dateSelection addBorderLinesWithColor:lineColor];
   [self.view addSubview:dateSelection];
-  dateSelection.layer.borderWidth = 1;
-  [dateSelection setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-  [dateSelection addTarget:self action:@selector(dateSelection) forControlEvents:UIControlEventTouchUpInside];
+  dateSelection.userInteractionEnabled = NO;
+  UIButton *dateSelectionButton = [[UIButton alloc] initWithFrame:dateSelection.frame];
+  [self.view addSubview:dateSelectionButton];
+  [dateSelectionButton addTarget:self action:@selector(dateSelection) forControlEvents:UIControlEventTouchUpInside];
   topSpace += dateSelection.frame.size.height;
   //website
-  UILabel *websiteLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  websiteLabel.text = @"Website(optional)";
+  OSLabel *websiteLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  websiteLabel.text = @"WEBSITE(Optional)";
+  websiteLabel.edgeInsets = edgeInsetLabel;
+  websiteLabel.font = titleFont;
+  websiteLabel.textColor = titleColor;
+  websiteLabel.backgroundColor = titleBackGroundColor;
   [self.view addSubview:websiteLabel];
   topSpace += websiteLabel.frame.size.height;
   
-  UITextField *websiteField = [[UITextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  websiteField.layer.borderWidth = 1;
+  OSTextField *websiteField = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
   websiteField.placeholder = @"Enter the community website";
+  websiteField.edgeInsets = edgeInsetTextField;
+  websiteField.font = valueFont;
+  [websiteField addBorderLinesWithColor:lineColor];
   [self.view addSubview:websiteField];
   topSpace += websiteField.frame.size.height;
   //headerphoto
-  UILabel *headerphotoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  headerphotoLabel.text = @"Header photo(optional)";
+  OSLabel *headerphotoLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  headerphotoLabel.text = @"HEADER PHOTO(Optional)";
+  headerphotoLabel.edgeInsets = edgeInsetLabel;
+  headerphotoLabel.font = titleFont;
+  headerphotoLabel.textColor = titleColor;
+  headerphotoLabel.backgroundColor = titleBackGroundColor;
   [self.view addSubview:headerphotoLabel];
   topSpace += headerphotoLabel.frame.size.height;
   
-  UIButton *headerphotoSelection = [[UIButton alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  [headerphotoSelection setTitle:@"Select a header photo" forState:UIControlStateNormal];
+  OSTextField *headerphotoSelection = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
+  headerphotoSelection.placeholder = @"Add a background header photo";
+  headerphotoSelection.edgeInsets = edgeInsetTextField;
+  headerphotoSelection.font = valueFont;
+  [headerphotoSelection addBorderLinesWithColor:lineColor];
   [self.view addSubview:headerphotoSelection];
-  headerphotoSelection.layer.borderWidth = 1;
-  [headerphotoSelection setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-  [headerphotoSelection addTarget:self action:@selector(headerPhotoSelection) forControlEvents:UIControlEventTouchUpInside];
+  UIButton *headerphotoSelectionButton = [[UIButton alloc] initWithFrame:headerphotoSelection.frame];
+  [self.view addSubview:headerphotoSelectionButton];
+  [headerphotoSelectionButton addTarget:self action:@selector(headerPhotoSelection) forControlEvents:UIControlEventTouchUpInside];
   topSpace += headerphotoSelection.frame.size.height;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
@@ -108,11 +218,16 @@
 }
 
 #pragma mark - button actions
-- (void)nextButtonAction
+- (IBAction)nextButtonAction
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
   [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)cancelAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)dateSelection
@@ -172,3 +287,5 @@
 */
 
 @end
+
+
