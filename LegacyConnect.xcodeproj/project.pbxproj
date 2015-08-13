@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
+		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
 		0B1717C41B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0B1717C21B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */; };
 		0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1717C31B73865000BACDC0 /* rsz_lc-logo.png */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
@@ -127,6 +129,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B001B151B7C9E6800E8E569 /* LCFeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeed.h; path = Models/LCFeed/LCFeed.h; sourceTree = "<group>"; };
+		0B001B161B7C9E6800E8E569 /* LCFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeed.m; path = Models/LCFeed/LCFeed.m; sourceTree = "<group>"; };
+		0B001B191B7CA70400E8E569 /* LCTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTag.h; path = Models/LCTag/LCTag.h; sourceTree = "<group>"; };
+		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
 		0B1717C21B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"; sourceTree = "<group>"; };
 		0B1717C31B73865000BACDC0 /* rsz_lc-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rsz_lc-logo.png"; sourceTree = "<group>"; };
 		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
@@ -334,6 +340,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B001B181B7C9E7400E8E569 /* LCFeed */ = {
+			isa = PBXGroup;
+			children = (
+				0B001B151B7C9E6800E8E569 /* LCFeed.h */,
+				0B001B161B7C9E6800E8E569 /* LCFeed.m */,
+			);
+			name = LCFeed;
+			sourceTree = "<group>";
+		};
+		0B001B1C1B7CA70A00E8E569 /* LCTag */ = {
+			isa = PBXGroup;
+			children = (
+				0B001B191B7CA70400E8E569 /* LCTag.h */,
+				0B001B1A1B7CA70400E8E569 /* LCTag.m */,
+			);
+			name = LCTag;
+			sourceTree = "<group>";
+		};
 		0B35941D1B4E6AE00098C484 /* LCFeedsHomeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -778,6 +802,8 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0B001B1C1B7CA70A00E8E569 /* LCTag */,
+				0B001B181B7C9E7400E8E569 /* LCFeed */,
 				0BBDC0781B70C4950004C4B6 /* LCUserDetail */,
 				0BBDC0741B70BFA20004C4B6 /* LCInterest */,
 				0BBDC0731B70BF960004C4B6 /* LCCause */,
@@ -1196,6 +1222,7 @@
 				96BD145D1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
+				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
 				96BD145B1B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
@@ -1243,6 +1270,7 @@
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
 				CEBED6A41B5FAD0B0012FEBB /* LCInviteToCommunity.m in Sources */,
 				96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */,
+				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
 			);

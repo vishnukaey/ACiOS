@@ -20,6 +20,10 @@
 #import "LCUser.h"
 #import "LCUserDetail.h"
 #import "LCCause.h"
+#import "LCFeed.h"
+#import "LCTag.h" 
+
 #import "LCAPIManager.h"
+
 #import <SDWebImage/UIImageView+WebCache.h>
 #endif

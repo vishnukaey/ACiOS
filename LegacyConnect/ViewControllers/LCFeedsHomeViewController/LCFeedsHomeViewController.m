@@ -21,6 +21,12 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
   [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   feedsTable.estimatedRowHeight = 44.0;
   feedsTable.rowHeight = UITableViewAutomaticDimension;
