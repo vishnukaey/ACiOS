@@ -19,7 +19,7 @@
 @interface LCFeedCellView : UITableViewCell
 {
   IBOutlet UIImageView *profilePic;
-  IBOutlet UIButton *postPhoto;
+  IBOutlet UIImageView *postPhoto;
   IBOutlet UILabel *usernameLabel, *createdLabel, *timeLabel, *postDescription, *thanksLabel, *commentsLabel;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
 }
