@@ -16,6 +16,8 @@
   IBOutlet UITableView *mainTable;
   UITextField *commmentTextField, *commmentTextField_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
 }
+@property(nonatomic, retain)LCFeed *feedObject;
+
 - (IBAction)backAction;
 
 @end

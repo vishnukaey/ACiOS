@@ -10,10 +10,11 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LCFeedCellView
-@synthesize delegate;
+@synthesize delegate, feedObject;
 
 - (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
 {
+  self.feedObject = feed;
   NSString  *userName = [NSString stringWithFormat:@"%@ %@", feed.firstName, feed.lastName];
   NSString *cause = feed.entityName;
   NSString *time_ = feed.createdAt;
@@ -67,21 +68,32 @@
   
   [commentsLabel setText:comments_];
   
+  
+  postDescription.systemURLStyle = YES;
+  postDescription.linkDetectionTypes ^= KILinkTypeOptionURL;
+  postDescription.linkDetectionTypes ^= KILinkTypeOptionHashtag;
+  postDescription.linkDetectionTypes |= KILinkTypeOptionUserHandle;
+  // Attach block for handling taps on usenames
+  postDescription.userHandleLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range) {
+    NSString *message = [NSString stringWithFormat:@"You tapped %@", string];
+    NSLog(@"message--%@---%lu", message, (unsigned long)range.location);
+  };
+  
 }
 
 - (IBAction)likeAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionLike andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionLike andFeed:feedObject];
 }
 
 - (IBAction)commentAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionComment andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionComment andFeed:feedObject];
 }
 
 - (IBAction)imageFullscreenAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionImage andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionImage andFeed:feedObject];
 }
 
 /* use thi code if need to get the view by code
