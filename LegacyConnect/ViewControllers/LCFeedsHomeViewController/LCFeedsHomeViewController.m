@@ -23,6 +23,8 @@
   [super viewDidLoad];
   [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
+    feedsArray = response;
+    [feedsTable reloadData];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
@@ -30,7 +32,7 @@
   [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   feedsTable.estimatedRowHeight = 44.0;
   feedsTable.rowHeight = UITableViewAutomaticDimension;
-  [self loadFeed];
+  
   
   [feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
@@ -63,13 +65,6 @@
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - initial setup functions
-- (void)loadFeed
-{
-  feedsArray = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyFeedArray]];
-  [feedsTable reloadData];
 }
 
 #pragma mark - TableView delegates
