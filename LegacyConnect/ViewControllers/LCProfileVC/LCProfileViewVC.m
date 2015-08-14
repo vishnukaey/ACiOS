@@ -19,7 +19,7 @@
   [super viewDidLoad];
   milestonesTable.estimatedRowHeight = 44.0;
   milestonesTable.rowHeight = UITableViewAutomaticDimension;
-  
+
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
   
@@ -103,12 +103,18 @@
    }
    ];
 }
-   
+
+
 -(void)loadMileStones
 {
-  MileStones = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyPROFILEFeedArray]];
-  [milestonesTable reloadData];
+  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+    mileStoneFeeds = response;
+    [milestonesTable reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
+
 
 #pragma mark - button actions
 - (IBAction)backAction:(id)sender
@@ -188,7 +194,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  return MileStones.count;
+  return mileStoneFeeds.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -202,7 +208,7 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   cell.delegate = self;
-  [cell setData:[MileStones objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   
   return cell;
 }
