@@ -16,9 +16,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2;
-  self.imageView.clipsToBounds = YES;
-  _firstNameLabel.text = [LCDataManager sharedDataManager].firstName;
+  _firstNameLabel.text = [NSString stringWithFormat:@"%@ !",[LCDataManager sharedDataManager].firstName];
   
   // Do any additional setup after loading the view.
 }
@@ -55,9 +53,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:nil];
-  self.imageView.image = [info objectForKey:UIImagePickerControllerEditedImage];
-  
-  [LCAPIManager UploadImage:_imageView.image ofUser:[LCDataManager sharedDataManager].userFBID
+  [LCAPIManager UploadImage:[info objectForKey:UIImagePickerControllerEditedImage] ofUser:[LCDataManager sharedDataManager].userID
                 withSuccess:^(id response) {
                   [self saveUserDetailsToDataManagerFromResponse:response];
                   [self performSegueWithIdentifier:@"chooseCauses" sender:self];

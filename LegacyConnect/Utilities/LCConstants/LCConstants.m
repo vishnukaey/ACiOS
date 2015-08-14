@@ -19,7 +19,7 @@ NSString *const kGetUserDetailsURL =  @"/api/user/";
 NSString *const kGetInterestsURL = @"/api/interests";
 NSString *const kGetCausesURL = @"/api/causes";
 NSString *const kSaveIneterestsURL = @"/api/user/interests";
-
+NSString *const kGetFeedsURL = @"/api/feed";
 
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
