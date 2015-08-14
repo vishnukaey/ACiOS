@@ -124,14 +124,24 @@
     {
       [selectedInterests removeObject:interest];
       [causes removeObjectsInArray:interest.causes];
+      [self.causesCollectionView reloadData];
+      [self.interestsCollectionView reloadData];
     }
     else
     {
       [selectedInterests addObject:interest];
-      [causes addObjectsFromArray:interest.causes];
+
+      [LCAPIManager getCausesForInterestID:interest.interestID andLastCauseID:kEmptyStringValue withSuccess:^(NSArray *responses) {
+        interest.causes = responses;
+        [causes addObjectsFromArray:interest.causes];
+        [self.causesCollectionView reloadData];
+        [self.interestsCollectionView reloadData];
+      } andFailure:^(NSString *error) {
+        NSLog(@"%@",error);
+      }];
+      
     }
-    [self.causesCollectionView reloadData];
-    [self.interestsCollectionView reloadData];
+
   }
 }
 

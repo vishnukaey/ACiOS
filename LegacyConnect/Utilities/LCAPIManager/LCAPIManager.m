@@ -41,7 +41,7 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)getCausesForInterest:(NSString*)InterestID andLastCauseID:(NSString*)lastCauseID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getCausesForInterestID:(NSString*)InterestID andLastCauseID:(NSString*)lastCauseID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *params = [NSString stringWithFormat:@"?%@=%@&%@=%@",@"interestId",InterestID,@"lastCauseId",lastCauseID];
@@ -96,7 +96,7 @@ static LCAPIManager *sharedManager = nil;
 + (void)getHomeFeedsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?userid=%@", kBaseURL,@"/api/feed",[LCDataManager sharedDataManager].userID];
+  NSString *url = [NSString stringWithFormat:@"%@%@?userid=%@", kBaseURL,kGetFeedsURL,[LCDataManager sharedDataManager].userID];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])

@@ -16,7 +16,7 @@
   IBOutlet UICollectionView *interestsCollectionView;
   IBOutlet UIImageView *profilePic;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  NSMutableArray *MileStones;
+  NSArray *mileStoneFeeds;
   NSArray *interestsArray;
 }
 

@@ -21,6 +21,8 @@
 		0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A7FC1B6A45E40065C231 /* LCRecentNotificationTVC.m */; };
 		0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A8001B6A461D0065C231 /* LCRequestNotificationTVC.m */; };
 		0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A8041B6A46AD0065C231 /* LCNotificationsViewController.m */; };
+		0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5F1BEF1B7DC17200E749BF /* camera-icon.png */; };
+		0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5F1BF11B7DC50800E749BF /* default-placeholder.png */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
 		0B5FA6EC1B57BB5400DDC2B1 /* LCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6EB1B57BB5400DDC2B1 /* LCUser.m */; };
 		0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7B3691B57CCF200261658 /* LCLoginTextField.m */; };
@@ -155,6 +157,8 @@
 		0B56A8001B6A461D0065C231 /* LCRequestNotificationTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRequestNotificationTVC.m; path = CustomViews/LCRequestNotificationTVC/LCRequestNotificationTVC.m; sourceTree = "<group>"; };
 		0B56A8031B6A46AD0065C231 /* LCNotificationsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCNotificationsViewController.h; path = ViewControllers/LCNotificationsViewController/LCNotificationsViewController.h; sourceTree = "<group>"; };
 		0B56A8041B6A46AD0065C231 /* LCNotificationsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCNotificationsViewController.m; path = ViewControllers/LCNotificationsViewController/LCNotificationsViewController.m; sourceTree = "<group>"; };
+		0B5F1BEF1B7DC17200E749BF /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
+		0B5F1BF11B7DC50800E749BF /* default-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-placeholder.png"; sourceTree = "<group>"; };
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6EA1B57BB5400DDC2B1 /* LCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUser.h; path = Models/LCUser/LCUser.h; sourceTree = "<group>"; };
@@ -834,6 +838,8 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				0B5F1BF11B7DC50800E749BF /* default-placeholder.png */,
+				0B5F1BEF1B7DC17200E749BF /* camera-icon.png */,
 				CEB9B6A41B79C26300C61BA0 /* profileSettings.png */,
 				CEB9B6A21B79BE2200C61BA0 /* backButton.png */,
 				CE9C4DD21B78DB9000D6F6A8 /* star.png */,
@@ -1137,10 +1143,12 @@
 				CEBA92D31B66632000C02F93 /* heart_dummy.png in Resources */,
 				0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */,
 				0B1717C41B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
+				0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */,
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
 				96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
+				0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */,
 				0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */,
 				0BE2B9B51B58D79C0026E607 /* photo.jpg in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
