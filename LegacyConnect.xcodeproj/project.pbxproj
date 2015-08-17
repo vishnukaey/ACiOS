@@ -115,6 +115,7 @@
 		CEBED6AA1B5FAE0C0012FEBB /* LCViewCommunity.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6A91B5FAE0C0012FEBB /* LCViewCommunity.m */; };
 		CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */; };
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
+		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
 		CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */; };
@@ -319,6 +320,8 @@
 		CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityMembers.m; path = ViewControllers/LCCommunityVC/LCCommunityMembers.m; sourceTree = "<group>"; };
 		CEBED6AE1B5FAE460012FEBB /* LCCommunityDateSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommunityDateSelection.h; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.h; sourceTree = "<group>"; };
 		CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityDateSelection.m; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.m; sourceTree = "<group>"; };
+		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
+		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
 		CECBC8CD1B56794F0012B287 /* LCFeedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedCellView.h; path = CustomViews/LCFeedCellView.h; sourceTree = "<group>"; };
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
@@ -1025,9 +1028,19 @@
 			name = LCCommunityVC;
 			sourceTree = "<group>";
 		};
+		CEC6D9961B81D1C000157F89 /* LCTaggedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */,
+				CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */,
+			);
+			name = LCTaggedLabel;
+			sourceTree = "<group>";
+		};
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEC6D9961B81D1C000157F89 /* LCTaggedLabel */,
 				CEB9B6A61B79E49B00C61BA0 /* LCTabMenuView */,
 				CEF275D41B78A2BA00709005 /* LCCommentCell */,
 				0BED515F1B74D3FA00DA125B /* LCChooseInterestCVC */,
@@ -1241,6 +1254,7 @@
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */,
+				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,
 				96BD145C1B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m in Sources */,
 				CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */,
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,

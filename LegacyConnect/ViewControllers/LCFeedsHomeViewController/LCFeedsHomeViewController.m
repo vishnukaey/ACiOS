@@ -12,6 +12,8 @@
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
+#import "LCSingleCauseVC.h"
+#import "LCProfileViewVC.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -129,7 +131,22 @@
   }
 }
 
-
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  NSLog(@"tag details-->>%@", tagDetails);
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+}
 
 //following is the code for other screens
 ACAccount *facebookAccount;

@@ -64,4 +64,7 @@ NSString *const kFeedCellActionLike = @"feedCellLike";
 NSString *const kFeedCellActionComment = @"feedCellComment";
 NSString *const kFeedCellActionImage = @"feedCellImage";
 
+NSString *const kFeedTagTypeCause = @"cause";
+NSString *const kFeedTagTypeUser = @"user";
+
 @end

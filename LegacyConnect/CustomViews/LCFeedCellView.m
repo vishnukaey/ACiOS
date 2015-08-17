@@ -69,14 +69,26 @@
   [commentsLabel setText:comments_];
   
   
-  postDescription.systemURLStyle = YES;
-  postDescription.linkDetectionTypes ^= KILinkTypeOptionURL;
-  postDescription.linkDetectionTypes ^= KILinkTypeOptionHashtag;
-  postDescription.linkDetectionTypes |= KILinkTypeOptionUserHandle;
-  // Attach block for handling taps on usenames
-  postDescription.userHandleLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range) {
-    NSString *message = [NSString stringWithFormat:@"You tapped %@", string];
-    NSLog(@"message--%@---%lu", message, (unsigned long)range.location);
+  NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:feed.message];
+ 
+  NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
+  for (int i = 0; i<feed.postTags.count; i++)
+  {
+    NSRange tagRange = [feed.message rangeOfString:feed.postTags[i][@"text"]];
+    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:feed.postTags[i][@"id"], @"id", feed.postTags[i][@"text"], @"text", feed.postTags[i][@"type"], @"type", [NSValue valueWithRange:tagRange], @"range", nil];
+    [tagsWithRanges addObject:dic];
+    
+    [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRange];
+  }
+  [postDescriptionString addAttributes:@{
+                                        NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                        } range:NSMakeRange(0, postDescriptionString.length)];
+  postDescription.tagsArray  = tagsWithRanges;
+  [postDescription setAttributedText:postDescriptionString];
+  __weak typeof(self) weakSelf = self;
+  postDescription.nameTagTapped = ^(int index) {
+    // Open URLs
+    [weakSelf.delegate tagTapped:weakSelf.feedObject.postTags[index]];
   };
   
 }
