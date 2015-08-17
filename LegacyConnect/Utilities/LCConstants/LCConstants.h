@@ -23,6 +23,7 @@ extern NSString *const kUpdatePasswordURL;
 extern NSString *const kForgotPasswordURL;
 extern NSString *const kChangePasswordURL;
 extern NSString *const kLogOutURL;
+extern NSString *const kGetFeedsURL;
 
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;

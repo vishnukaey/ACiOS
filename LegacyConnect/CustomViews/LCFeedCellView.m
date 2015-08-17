@@ -7,36 +7,35 @@
 //
 
 #import "LCFeedCellView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LCFeedCellView
-@synthesize delegate;
+@synthesize delegate, feedObject;
 
-- (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType
+- (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
 {
-  NSString  *userName = [dic valueForKey:@"user_name"];
-  NSString *cause = [dic valueForKey:@"cause"];
-  NSString *time_ = [dic valueForKey:@"time"];
-  NSString *post_ = [dic valueForKey:@"post"];
-  NSString *thanks_ = [dic valueForKey:@"thanks"];
-  NSString *comments_ = [dic valueForKey:@"comments"];
-  NSString *image = [dic valueForKey:@"image_url"];
+  self.feedObject = feed;
+  NSString  *userName = [NSString stringWithFormat:@"%@ %@", feed.firstName, feed.lastName];
+  NSString *cause = feed.entityName;
+  NSString *time_ = feed.createdAt;
+  NSString *post_ = feed.message;
+  NSString *thanks_ = feed.likeCount;
+  NSString *comments_ = feed.commentCount;
   
-  [profilePic setImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:feed.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
   [usernameLabel setText:userName];
   
   NSString *typeString = @"Added a Photo in ";
-  if ([image isEqualToString:@""])//not a photopost
+  if ([feed.postType isEqualToString:@"0"])//not a photopost
   {
     typeString = @"Created a Post in ";
     postPhotoHeight.constant = 0;
   }
   else
   {
-    [postPhoto setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
-    [postPhoto setContentHorizontalAlignment:UIControlContentHorizontalAlignmentFill];
-    [postPhoto setContentVerticalAlignment:UIControlContentVerticalAlignmentFill];
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   }
   if ([pageType isEqualToString:kHomefeedCellID])
   {
@@ -69,21 +68,32 @@
   
   [commentsLabel setText:comments_];
   
+  
+  postDescription.systemURLStyle = YES;
+  postDescription.linkDetectionTypes ^= KILinkTypeOptionURL;
+  postDescription.linkDetectionTypes ^= KILinkTypeOptionHashtag;
+  postDescription.linkDetectionTypes |= KILinkTypeOptionUserHandle;
+  // Attach block for handling taps on usenames
+  postDescription.userHandleLinkTapHandler = ^(KILabel *label, NSString *string, NSRange range) {
+    NSString *message = [NSString stringWithFormat:@"You tapped %@", string];
+    NSLog(@"message--%@---%lu", message, (unsigned long)range.location);
+  };
+  
 }
 
 - (IBAction)likeAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionLike andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionLike andFeed:feedObject];
 }
 
 - (IBAction)commentAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionComment andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionComment andFeed:feedObject];
 }
 
 - (IBAction)imageFullscreenAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionImage andID:@""];
+  [delegate feedCellActionWithType:kFeedCellActionImage andFeed:feedObject];
 }
 
 /* use thi code if need to get the view by code

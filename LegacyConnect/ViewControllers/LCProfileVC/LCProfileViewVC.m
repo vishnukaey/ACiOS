@@ -8,6 +8,7 @@
 
 #import "LCProfileViewVC.h"
 #import "LCTabMenuView.h"
+#import "LCCommunityInterestCell.h"
 
 
 @implementation LCProfileViewVC
@@ -18,7 +19,7 @@
   [super viewDidLoad];
   milestonesTable.estimatedRowHeight = 44.0;
   milestonesTable.rowHeight = UITableViewAutomaticDimension;
-  
+
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
   
@@ -83,26 +84,37 @@
 
 //  tabmenu.layer.borderWidth = 3;
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, nil];
-  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsScrollview, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsCollectionView, nil];
   tabmenu.highlightColor = [UIColor orangeColor];
   tabmenu.normalColor = [UIColor blackColor];
 }
 
 - (void)loadInterests
 {
-  UIButton *anInterest = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-  [anInterest setTitle:@"An interest" forState:UIControlStateNormal];
-  [interestsScrollview addSubview:anInterest];
-  anInterest.backgroundColor = [UIColor orangeColor];
-  anInterest.center = CGPointMake(interestsScrollview.frame.size.width/2, interestsScrollview.frame.size.height/2);
-  [anInterest addTarget:self action:@selector(interestClicked:) forControlEvents:UIControlEventTouchUpInside];
+  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
+   {
+     NSLog(@"%@",response);
+     interestsArray = response;
+     [interestsCollectionView reloadData];
+   }
+                             andFailure:^(NSString *error)
+   {
+     NSLog(@"%@",error);
+   }
+   ];
 }
-   
+
+
 -(void)loadMileStones
 {
-  MileStones = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyPROFILEFeedArray]];
-  [milestonesTable reloadData];
+  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+    mileStoneFeeds = response;
+    [milestonesTable reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
+
 
 #pragma mark - button actions
 - (IBAction)backAction:(id)sender
@@ -117,23 +129,61 @@
   NSLog(@"interest clicked----->");
 }
 
-- (IBAction)toggleInterestOrMilestones:(UIButton *)sender
-{
-  if (sender.tag == 1)//milestones
-  {
-    milestonesTable.hidden = false;
-    interestsScrollview.hidden = true;
-  }
-  else//interests
-  {
-    milestonesTable.hidden = true;
-    interestsScrollview.hidden = false;
-  }
-}
-
 - (IBAction)editClicked:(UIButton *)sender
 {
   NSLog(@"edit clicked-->>");
+}
+
+#pragma mark - scrollview delegates
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  float collapseConstant = 0;;
+  if (self.collapseViewHeight.constant>0)
+  {
+    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (self.collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
+  {
+    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseConstant<0)
+  {
+    collapseConstant = 0;
+  }
+  if (collapseConstant>170)
+  {
+    collapseConstant = 170;
+  }
+  self.collapseViewHeight.constant = collapseConstant;
+}
+
+#pragma mark - collection view delegates
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+  return interestsArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  static NSString *cellIdentifier = @"LCInterestCell";
+  LCCommunityInterestCell *cell = (LCCommunityInterestCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+  if (cell == nil)
+  {
+    NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCCommunityInterestCell class]) owner:nil options:nil];
+    cell=cells[0];
+  }
+  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+  cell.interestNameLabel.text = interstObj.name;
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  
+  return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"interest clicked--->>>");
 }
 
 #pragma mark - TableView delegates
@@ -144,7 +194,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  return MileStones.count;
+  return mileStoneFeeds.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,7 +208,7 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   cell.delegate = self;
-  [cell setData:[MileStones objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   
   return cell;
 }
@@ -169,7 +219,7 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andID:(NSString *)postID
+- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
 {
   NSLog(@"actionType--->>>%@", type);
 }

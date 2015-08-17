@@ -120,7 +120,7 @@
   [LCDataManager sharedDataManager].firstName = _firstNameTextField.text;
   [LCDataManager sharedDataManager].lastName = _lastNameTextField.text;
   [LCDataManager sharedDataManager].dob = _dobTextField.text;
-  [LCDataManager sharedDataManager].userToken = userInfo[@""];
+  [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
 
 - (BOOL)validateFields

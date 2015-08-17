@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LCConnectFriendsVC : UIViewController
-
+@property (weak , nonatomic) IBOutlet UIImageView *imageView;
 -(IBAction)buttonActions :(UIButton *)sender;
 
 @end

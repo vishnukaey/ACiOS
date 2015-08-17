@@ -11,6 +11,7 @@
 
 
 @implementation LCFeedsCommentsController
+@synthesize feedObject;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -55,9 +56,8 @@
 #pragma mark - setup functions
 -(void)loadFeedAndComments
 {
-  NSDictionary *postDetail = [[LCDummyValues dummyFeedArray] objectAtIndex:0];//post data
   cellsData = [[NSMutableArray alloc]init];
-  [cellsData addObject:postDetail];
+  [cellsData addObject:feedObject];
   [cellsData addObjectsFromArray:[LCDummyValues dummyCommentArray]];
   [mainTable reloadData];
 
@@ -156,7 +156,7 @@
 }
 
 #pragma mark - feedCell delegates
--(void)feedCellActionWithType:(NSString *)type andID:(NSString *)postID
+-(void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
 {
   NSLog(@"actionTypecommentpage--->>>%@", type);
   if ([type isEqualToString:kFeedCellActionComment])

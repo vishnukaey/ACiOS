@@ -13,14 +13,16 @@
 @interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
   IBOutlet UITableView *milestonesTable;
-  IBOutlet UIScrollView *interestsScrollview;
+  IBOutlet UICollectionView *interestsCollectionView;
   IBOutlet UIImageView *profilePic;
-  IBOutlet UIView *tabMenuContainer;
-  NSMutableArray *MileStones;
+  IBOutlet UIView *tabMenuContainer, *viewToCollapse;
+  NSArray *mileStoneFeeds;
+  NSArray *interestsArray;
 }
 
+@property(nonatomic, weak)IBOutlet NSLayoutConstraint *collapseViewHeight;
+
 - (IBAction)backAction:(id)sender;
-- (IBAction)toggleInterestOrMilestones:(UIButton *)sender;
 - (IBAction)editClicked:(UIButton *)sender;
 
 @end

@@ -21,10 +21,18 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+    NSLog(@"%@",response);
+    feedsArray = response;
+    [feedsTable reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
   [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   feedsTable.estimatedRowHeight = 44.0;
   feedsTable.rowHeight = UITableViewAutomaticDimension;
-  [self loadFeed];
+  
   
   [feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
@@ -57,13 +65,6 @@
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - initial setup functions
-- (void)loadFeed
-{
-  feedsArray = [[NSMutableArray alloc]initWithArray:[LCDummyValues dummyFeedArray]];
-  [feedsTable reloadData];
 }
 
 #pragma mark - TableView delegates
@@ -99,7 +100,7 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andID:(NSString *)postID
+- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
 {
   NSLog(@"actionType--->>>%@", type);
   
@@ -108,7 +109,7 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
     LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-
+    [next setFeedObject:feed];
     [self.navigationController pushViewController:next animated:YES];
   }
   
