@@ -14,7 +14,7 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLLarge] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   _interestNameLabel.text = interest.descriptionText;
 }
 
