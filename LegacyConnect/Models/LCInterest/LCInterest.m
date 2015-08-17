@@ -17,8 +17,8 @@
            @"interestID": @"id",
            @"name": @"name",
            @"descriptionText": @"description",
-           @"logoURL": @"logo",
-//           @"causes": @"causes",
+           @"logoURLLarge": @"interest_logo_large",
+           @"logoURLSmall": @"interest_logo_small"
            };
 }
 

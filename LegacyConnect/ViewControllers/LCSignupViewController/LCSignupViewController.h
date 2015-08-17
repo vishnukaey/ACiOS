@@ -11,7 +11,6 @@
 
 @interface LCSignupViewController : UIViewController
 {
-  LCUser *user;
   UIDatePicker *datePicker;
 }
 @property (weak, nonatomic) IBOutlet LCLoginTextField *firstNameTextField;

@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-//#import <Foundation/Foundation.h>
+#import <Foundation/Foundation.h>
 #import "MTLModel.h"
 #import "MTLJSONAdapter.h"
 
@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *interestID;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *descriptionText;
-@property (nonatomic, strong) NSString *logoURL;
+@property (nonatomic, strong) NSString *logoURLLarge;
+@property (nonatomic, strong) NSString *logoURLSmall;
 @property (nonatomic, strong) NSArray *causes;  
 @end
