@@ -26,6 +26,7 @@
 + (void)saveCauses:(NSArray *)causes ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void) sendFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void) acceptFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
-+ (void) rejectFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void) rejectFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)createCommunity:(LCCommunity*)community withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 @end
