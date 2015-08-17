@@ -10,14 +10,13 @@
 #define LegacyConnect_LCPrefixHeader_pch
 
 #import "LCConstants.h"
-#import "LCUser.h"
+#import "LCFriend.h"
 #import "LCUtilityManager.h"
 #import "LCDataManager.h"
 #import "LCUtilityManager.h"
 #import "LCAppDelegate.h"
 #import "LCDummyValues.h"
 #import "LCInterest.h"
-#import "LCUser.h"
 #import "LCUserDetail.h"
 #import "LCCause.h"
 #import "LCFeed.h"
