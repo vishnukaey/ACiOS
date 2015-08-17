@@ -7,6 +7,7 @@
 //
 
 #import "LCListFriendsToTagViewController.h"
+#import "LCTagFriendsTableViewCell.h"
 
 @interface LCListFriendsToTagViewController ()
 {
@@ -61,15 +62,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  static NSString *MyIdentifier = @"LCTagFriendsTableViewCell";
+  LCTagFriendsTableViewCell *cell = (LCTagFriendsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:MyIdentifier];
+    NSArray *customCellArray = [[NSBundle mainBundle] loadNibNamed:MyIdentifier owner:nil options:nil];
+    cell = [customCellArray objectAtIndex:0];
   }
   
-  
+  cell.friendNameLabel.text = tableSourceArray[indexPath.row];
   
   return cell;
 }
