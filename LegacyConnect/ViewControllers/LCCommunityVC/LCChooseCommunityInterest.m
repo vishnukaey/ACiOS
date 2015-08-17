@@ -103,7 +103,7 @@
   LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
   cell.interestNameLabel.text = interstObj.name;
   
-  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   
   return cell;
 }
