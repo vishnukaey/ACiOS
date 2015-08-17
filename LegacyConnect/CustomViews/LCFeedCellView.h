@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KILabel.h"
 
 //--------------protocols
 @protocol feedCellDelegate <NSObject>
 
--(void)feedCellActionWithType :(NSString *)type andID:(NSString *)postID;
+-(void)feedCellActionWithType :(NSString *)type andFeed:(LCFeed *)feed;
 
 @end
 
@@ -20,11 +21,13 @@
 {
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
-  IBOutlet UILabel *usernameLabel, *createdLabel, *timeLabel, *postDescription, *thanksLabel, *commentsLabel;
+  IBOutlet UILabel *usernameLabel, *createdLabel, *timeLabel, *thanksLabel, *commentsLabel;
+  IBOutlet KILabel *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
 }
 
 @property(nonatomic, retain)id delegate;
+@property(nonatomic, weak)LCFeed *feedObject;
 
 - (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType;
 - (IBAction)likeAction;
