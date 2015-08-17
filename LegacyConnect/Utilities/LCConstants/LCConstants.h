@@ -62,4 +62,7 @@ extern NSString *const kFeedCellActionLike;
 extern NSString *const kFeedCellActionComment;
 extern NSString *const kFeedCellActionImage;
 
+extern NSString *const kFeedTagTypeCause;
+extern NSString *const kFeedTagTypeUser;
+
 @end

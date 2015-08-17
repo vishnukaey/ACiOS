@@ -108,6 +108,10 @@
   NSLog(@"actionType--->>>%@", type);
 }
 
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  NSLog(@"tag details-->>%@", tagDetails);
+}
 /*
 #pragma mark - Navigation
 
