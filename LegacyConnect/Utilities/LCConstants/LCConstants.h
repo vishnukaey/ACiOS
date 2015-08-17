@@ -24,6 +24,7 @@ extern NSString *const kForgotPasswordURL;
 extern NSString *const kChangePasswordURL;
 extern NSString *const kLogOutURL;
 extern NSString *const kGetFeedsURL;
+extern NSString *const kFriendsURL;
 
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;

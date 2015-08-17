@@ -11,7 +11,6 @@ pod 'Reachability', '~> 3.2'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'SDWebImage', '~> 3.7'
 pod 'KoaPullToRefresh', '~> 1.0'
-pod 'KILabel', '~> 1.0'
 end
 
 target 'LegacyConnectTests' do
