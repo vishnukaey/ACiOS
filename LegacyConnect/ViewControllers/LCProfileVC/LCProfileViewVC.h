@@ -14,15 +14,20 @@
 {
   IBOutlet UITableView *milestonesTable;
   IBOutlet UICollectionView *interestsCollectionView;
-  IBOutlet UIImageView *profilePic;
+  IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
+  IBOutlet UIButton *impactsButton, *friendsButton, *editButton;
+  IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   NSArray *mileStoneFeeds;
   NSArray *interestsArray;
 }
 
 @property(nonatomic, weak)IBOutlet NSLayoutConstraint *collapseViewHeight;
+@property(nonatomic, retain)NSString *userID;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)editClicked:(UIButton *)sender;
+- (IBAction)friendsButtonClicked;
+- (IBAction)impactsButtonClicked;
 
 @end

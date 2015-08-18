@@ -12,6 +12,7 @@
 
 
 @implementation LCProfileViewVC
+@synthesize userID;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -23,8 +24,14 @@
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
   
+  friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+  impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+  
+  NSLog(@"userID-->>>%@", [LCDataManager sharedDataManager].userID);
   
   [self addTabMenu];
+  
+  [self loadUserDetails];
   
   [self loadMileStones];
   [self loadInterests];
@@ -56,6 +63,14 @@
 
 
 #pragma mark - setup functions
+- (void)loadUserDetails
+{
+  [LCAPIManager getUserDetailsOfUser:userID WithSuccess:^(id response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+}
 
 - (void)addTabMenu
 {
@@ -117,6 +132,16 @@
 
 
 #pragma mark - button actions
+- (IBAction)friendsButtonClicked
+{
+  NSLog(@"friends clicked----->");
+}
+
+- (IBAction)impactsButtonClicked
+{
+  NSLog(@"impacts clicked----->");
+}
+
 - (IBAction)backAction:(id)sender
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];

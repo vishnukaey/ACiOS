@@ -10,7 +10,7 @@
 #import "LCInviteToCommunity.h"
 #import "LCCommunityDateSelection.h"
 
-//label with edge insets
+#pragma mark - insetLabel class
 @interface insetLabel : UILabel
 
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
@@ -41,7 +41,7 @@
 
 @end
 
-//textField with edge insets
+#pragma mark - insetTextField class
 @interface insetTextField : UITextField
 
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
@@ -79,6 +79,9 @@
 }
 
 @end
+
+
+#pragma mark - LCCreateCommunity class
 
 @interface LCCreateCommunity ()
 {
