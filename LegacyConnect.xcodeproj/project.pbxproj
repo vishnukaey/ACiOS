@@ -117,6 +117,8 @@
 		CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */; };
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
+		CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65E1B835DC8008DAD01 /* profileAdd.png */; };
+		CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65F1B835DC8008DAD01 /* profileTick.png */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
 		CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */; };
@@ -325,6 +327,8 @@
 		CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityDateSelection.m; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
+		CEC9C65E1B835DC8008DAD01 /* profileAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileAdd.png; sourceTree = "<group>"; };
+		CEC9C65F1B835DC8008DAD01 /* profileTick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileTick.png; sourceTree = "<group>"; };
 		CECBC8CD1B56794F0012B287 /* LCFeedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedCellView.h; path = CustomViews/LCFeedCellView.h; sourceTree = "<group>"; };
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
@@ -845,6 +849,8 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				CEC9C65E1B835DC8008DAD01 /* profileAdd.png */,
+				CEC9C65F1B835DC8008DAD01 /* profileTick.png */,
 				0B5F1BF11B7DC50800E749BF /* default-placeholder.png */,
 				0B5F1BEF1B7DC17200E749BF /* camera-icon.png */,
 				CEB9B6A41B79C26300C61BA0 /* profileSettings.png */,
@@ -1182,6 +1188,7 @@
 				CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */,
 				CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
+				CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */,
 				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
 				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
@@ -1193,6 +1200,7 @@
 				CE5954D11B6F5EF100D839DD /* check_box.png in Resources */,
 				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
 				CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */,
+				CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
 				CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */,
 				CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */,

@@ -9,6 +9,7 @@
 #import "LCProfileViewVC.h"
 #import "LCTabMenuView.h"
 #import "LCCommunityInterestCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @implementation LCProfileViewVC
@@ -27,7 +28,7 @@
   friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   
-  NSLog(@"userID-->>>%@", [LCDataManager sharedDataManager].userID);
+ 
   
   [self addTabMenu];
   
@@ -65,8 +66,30 @@
 #pragma mark - setup functions
 - (void)loadUserDetails
 {
+   NSLog(@"userID<<<-->>>%@", userID);
+  //for testing as user ID is not persisting
+  NSString *nativeUserId = @"6994";
+  userID = @"6875";
   [LCAPIManager getUserDetailsOfUser:userID WithSuccess:^(id response) {
+    LCUserDetail *obj = response;
     NSLog(@"%@",response);
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:obj.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatarURL] placeholderImage:[UIImage imageNamed:@"landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"]];
+    userNameLabel.text = [NSString stringWithFormat:@"%@ %@", obj.firstName, obj.lastName];
+    memeberSincelabel.text = [NSString stringWithFormat:@"Member since %@", obj.activationDate];
+    locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", obj.gender, obj.dob, obj.location];
+    
+    if ([nativeUserId isEqualToString:userID])
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_SELF;
+    }
+    else
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    }
+    
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];

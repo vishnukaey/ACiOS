@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 
+typedef enum profileStateTypes
+{
+  PROFILE_SELF,
+  PROFILE_OTHER_FRIEND,
+  PROFILE_OTHER_NON_FRIEND,
+  PROFILE_OTHER_WAITING
+} profileState;
 
 @interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
@@ -20,6 +27,8 @@
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   NSArray *mileStoneFeeds;
   NSArray *interestsArray;
+  
+  profileState currentProfileState;
 }
 
 @property(nonatomic, weak)IBOutlet NSLayoutConstraint *collapseViewHeight;
