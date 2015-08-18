@@ -11,4 +11,6 @@
 
 @interface LCCommunityDateSelection : UIViewController
 
+@property(nonatomic, retain)NSMutableString *datePointer;
+
 @end
