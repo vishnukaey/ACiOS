@@ -112,6 +112,8 @@
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCCreateCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateCommunity"];
+  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+  vc.interestId = interstObj.interestID;
   [self.navigationController pushViewController:vc animated:YES];
 }
 

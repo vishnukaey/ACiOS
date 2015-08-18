@@ -11,13 +11,13 @@
 #import "LCCommunityDateSelection.h"
 
 //label with edge insets
-@interface OSLabel : UILabel
+@interface insetLabel : UILabel
 
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
 
 @end
 
-@implementation OSLabel
+@implementation insetLabel
 
 - (id)initWithFrame:(CGRect)frame{
   self = [super initWithFrame:frame];
@@ -42,14 +42,14 @@
 @end
 
 //textField with edge insets
-@interface OSTextField : UITextField
+@interface insetTextField : UITextField
 
 @property (nonatomic, assign) UIEdgeInsets edgeInsets;
 - (void)addBorderLinesWithColor :(UIColor *)color;
 
 @end
 
-@implementation OSTextField
+@implementation insetTextField
 
 - (id)initWithFrame:(CGRect)frame{
   self = [super initWithFrame:frame];
@@ -80,23 +80,24 @@
 
 @end
 
+@interface LCCreateCommunity ()
+{
+  insetTextField *communityNameField;
+  insetTextField *aboutCommunityField;
+  insetTextField *communityWebsiteField;
+  UIImageView *headerPhotoImageView;
+}
 
+@end
 
 @implementation LCCreateCommunity
+@synthesize communityDate, interestId;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  LCCommunity *com;
-  [LCAPIManager createCommunity:com withSuccess:^(id response) {
-    NSLog(@"%@",response);
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
-  
-  
+  // Do any additional setup after loading the view
   float topSpace = 64;
   float titleheight = 40;
   UIEdgeInsets edgeInsetLabel = UIEdgeInsetsMake(0, 10, -20, 0);
@@ -107,7 +108,7 @@
   UIColor *titleBackGroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
   UIColor *lineColor = [UIColor lightGrayColor];
   //name
-  OSLabel *nameLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  insetLabel *nameLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
   nameLabel.text = @"NAME";
   nameLabel.edgeInsets = edgeInsetLabel;
   nameLabel.font = titleFont;
@@ -116,15 +117,15 @@
   [self.view addSubview:nameLabel];
   topSpace += nameLabel.frame.size.height;
   
-  OSTextField *nameField = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
-  nameField.placeholder = @"Enter the name of your community";
-  nameField.edgeInsets = edgeInsetTextField;
-  nameField.font = valueFont;
-  [nameField addBorderLinesWithColor:lineColor];
-  [self.view addSubview:nameField];
-  topSpace += nameField.frame.size.height;
+  communityNameField = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
+  communityNameField.placeholder = @"Enter the name of your community";
+  communityNameField.edgeInsets = edgeInsetTextField;
+  communityNameField.font = valueFont;
+  [communityNameField addBorderLinesWithColor:lineColor];
+  [self.view addSubview:communityNameField];
+  topSpace += communityNameField.frame.size.height;
   //about
-  OSLabel *aboutLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  insetLabel *aboutLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
   aboutLabel.text = @"ABOUT";
   aboutLabel.edgeInsets = edgeInsetLabel;
   aboutLabel.font = titleFont;
@@ -133,15 +134,15 @@
   [self.view addSubview:aboutLabel];
   topSpace += aboutLabel.frame.size.height;
   
-  OSTextField *aboutField = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 60)];
-  aboutField.placeholder = @"Tell people a little about it";
-  aboutField.edgeInsets = edgeInsetTextField;
-  aboutField.font = valueFont;
-  [aboutField addBorderLinesWithColor:lineColor];
-  [self.view addSubview:aboutField];
-  topSpace += aboutField.frame.size.height;
+  aboutCommunityField = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 60)];
+  aboutCommunityField.placeholder = @"Tell people a little about it";
+  aboutCommunityField.edgeInsets = edgeInsetTextField;
+  aboutCommunityField.font = valueFont;
+  [aboutCommunityField addBorderLinesWithColor:lineColor];
+  [self.view addSubview:aboutCommunityField];
+  topSpace += aboutCommunityField.frame.size.height;
   //date
-  OSLabel *dateLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  insetLabel *dateLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
   dateLabel.text = @"DATE & TIME(Optional)";
   dateLabel.edgeInsets = edgeInsetLabel;
   dateLabel.font = titleFont;
@@ -150,7 +151,7 @@
   [self.view addSubview:dateLabel];
   topSpace += dateLabel.frame.size.height;
   
-  OSTextField *dateSelection = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
+  insetTextField *dateSelection = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
   dateSelection.placeholder = @"None";
   dateSelection.edgeInsets = edgeInsetTextField;
   dateSelection.font = valueFont;
@@ -162,7 +163,7 @@
   [dateSelectionButton addTarget:self action:@selector(dateSelection) forControlEvents:UIControlEventTouchUpInside];
   topSpace += dateSelection.frame.size.height;
   //website
-  OSLabel *websiteLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  insetLabel *websiteLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
   websiteLabel.text = @"WEBSITE(Optional)";
   websiteLabel.edgeInsets = edgeInsetLabel;
   websiteLabel.font = titleFont;
@@ -171,15 +172,15 @@
   [self.view addSubview:websiteLabel];
   topSpace += websiteLabel.frame.size.height;
   
-  OSTextField *websiteField = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
-  websiteField.placeholder = @"Enter the community website";
-  websiteField.edgeInsets = edgeInsetTextField;
-  websiteField.font = valueFont;
-  [websiteField addBorderLinesWithColor:lineColor];
-  [self.view addSubview:websiteField];
-  topSpace += websiteField.frame.size.height;
+  communityWebsiteField = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
+  communityWebsiteField.placeholder = @"Enter the community website";
+  communityWebsiteField.edgeInsets = edgeInsetTextField;
+  communityWebsiteField.font = valueFont;
+  [communityWebsiteField addBorderLinesWithColor:lineColor];
+  [self.view addSubview:communityWebsiteField];
+  topSpace += communityWebsiteField.frame.size.height;
   //headerphoto
-  OSLabel *headerphotoLabel = [[OSLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
+  insetLabel *headerphotoLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
   headerphotoLabel.text = @"HEADER PHOTO(Optional)";
   headerphotoLabel.edgeInsets = edgeInsetLabel;
   headerphotoLabel.font = titleFont;
@@ -188,7 +189,7 @@
   [self.view addSubview:headerphotoLabel];
   topSpace += headerphotoLabel.frame.size.height;
   
-  OSTextField *headerphotoSelection = [[OSTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
+  insetTextField *headerphotoSelection = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
   headerphotoSelection.placeholder = @"Add a background header photo";
   headerphotoSelection.edgeInsets = edgeInsetTextField;
   headerphotoSelection.font = valueFont;
@@ -197,6 +198,10 @@
   UIButton *headerphotoSelectionButton = [[UIButton alloc] initWithFrame:headerphotoSelection.frame];
   [self.view addSubview:headerphotoSelectionButton];
   [headerphotoSelectionButton addTarget:self action:@selector(headerPhotoSelection) forControlEvents:UIControlEventTouchUpInside];
+  
+  headerPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - headerphotoSelectionButton.frame.size.height, headerphotoSelectionButton.frame.origin.y, headerphotoSelectionButton.frame.size.height, headerphotoSelectionButton.frame.size.height)];
+  [self.view addSubview:headerPhotoImageView];
+  
   topSpace += headerphotoSelection.frame.size.height;
 }
 
@@ -227,9 +232,24 @@
 #pragma mark - button actions
 - (IBAction)nextButtonAction
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
-  [self.navigationController pushViewController:vc animated:YES];
+  LCCommunity *com = [[LCCommunity alloc] init];
+  com.name = communityNameField.text;
+  com.interestID = self.interestId;
+  com.website = communityWebsiteField.text;
+  com.communityDescription = aboutCommunityField.text;
+  com.time = self.communityDate;
+  com.headerPhoto = headerPhotoImageView.image;
+  
+  NSLog(@"comm--->>%@", com);
+  
+  [LCAPIManager createCommunity:com withSuccess:^(id response) {
+    NSLog(@"%@",response);
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
+    [self.navigationController pushViewController:vc animated:YES];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
 
 - (IBAction)cancelAction
@@ -241,6 +261,8 @@
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCCommunityDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCCommunityDateSelection"];
+  communityDate = [[NSMutableString alloc]initWithString:@"test"];;
+  vc.datePointer = communityDate;
   [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -280,7 +302,8 @@
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  NSLog(@"image picked-->>%@", chosenImage);
+  headerPhotoImageView.image = chosenImage;
+//  NSLog(@"image picked-->>%@", chosenImage);
 }
 
 /*

@@ -10,6 +10,7 @@
 
 
 @implementation LCCommunityDateSelection
+@synthesize datePointer;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -51,6 +52,7 @@
 #pragma mark - button actions
 - (void)doneButtonAction
 {
+  [datePointer setString:@"dddddd"];
   [self.navigationController popViewControllerAnimated:YES];
 }
 /*
