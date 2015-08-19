@@ -7,8 +7,45 @@
 //
 
 #import "LCViewCommunity.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
+#pragma mark - LCCommunityDetailCell class
+@interface LCCommunityDetailCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *communityDetailsLabel;
+@end
 
+@implementation LCCommunityDetailCell
+@end
+
+#pragma mark - LCCommunityMemebersCountCell class
+@interface LCCommunityMemebersCountCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
+@end
+
+@implementation LCCommunityMemebersCountCell
+@end
+
+#pragma mark - LCCommunityWebsiteCell class
+@interface LCCommunityWebsiteCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *communityWebsiteLabel;
+@end
+
+@implementation LCCommunityWebsiteCell
+@end
+
+#pragma mark - LCCommunityCommentsCell class
+@interface LCCommunityCommentsCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *commentDescriptionLabel;
+@property(nonatomic, strong)IBOutlet UILabel *commentTimeLabel;
+@property(nonatomic, strong)IBOutlet UILabel *commentUserNameLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *commentUserImageView;
+@end
+
+@implementation LCCommunityCommentsCell
+@end
+
+#pragma mark - LCViewCommunity class implementation
+#define SECTION_HEIGHT 30
 @implementation LCViewCommunity
 
 #pragma mark - controller life cycle
@@ -16,14 +53,15 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  self.navigationController.navigationBarHidden = true;
-  
-  [self prepareCells];
+  mainTableView.estimatedRowHeight = 44.0;
+  mainTableView.rowHeight = UITableViewAutomaticDimension;
+  [self loadCommunityData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.menuButton setHidden:NO];
 }
@@ -40,80 +78,14 @@
 }
 
 #pragma mark - setup functions
--(void)prepareCells
+-(void)loadCommunityData
 {
-  NSArray *commentsArray = [LCDummyValues dummyCommentArray];
+  communityDetails = @"Lorem Ipsum is simply @dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
+  communityMembersCount = @"23 members";
+  communityWebsite = @"google.com";
+  commentsArray = [[NSMutableArray alloc] initWithArray:[LCDummyValues dummyCommentArray]];
   
-  cellsViewArray = [[NSMutableArray alloc]init];
-  
-  UIFont *bigFont = [UIFont systemFontOfSize:15];
-  UIFont *smallFont = [UIFont systemFontOfSize:12];
-  float cellMargin_x = 15, cellMargin_y = 8;
-  float dp_im_hight = 60;
-  float timeWidth_ = 80;
-  float in_margin = 10;
-  
-  for (int i=0; i<commentsArray.count; i++)
-  {
-    NSString  *userName = [[commentsArray objectAtIndex:i] valueForKey:@"user_name"];
-    NSString *time_ = [[commentsArray objectAtIndex:i] valueForKey:@"time"];
-    NSString *comments_ = [[commentsArray objectAtIndex:i] valueForKey:@"comment"];
-    float top_space = cellMargin_y;
-    
-    UIView *cellView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, commentsTable.frame.size.width, 0)];
-    UIImageView *dp_view = [[UIImageView alloc]initWithFrame:CGRectMake(cellMargin_x, top_space, dp_im_hight, dp_im_hight)];
-    [dp_view setImage:[UIImage imageNamed:@"clock.jpg"]];
-    [cellView addSubview:dp_view];
-    
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(dp_view.frame.origin.x
-                                                                  + dp_view.frame.size.width + in_margin, top_space, (cellView.frame.size.width - cellMargin_x - timeWidth_) - (dp_view.frame.origin.x
-                                                                                                                                                                                + dp_view.frame.size.width + in_margin), 0)];
-    nameLabel.font = bigFont;
-    nameLabel.numberOfLines = 0;
-    [cellView addSubview:nameLabel];
-    NSMutableAttributedString * name_attributtedString = [[NSMutableAttributedString alloc] initWithString:userName attributes : @{
-                                                                                                                                   NSFontAttributeName : bigFont,
-                                                                                                                                   NSForegroundColorAttributeName : [UIColor blackColor],
-                                                                                                                                   }];
-    [nameLabel setAttributedText:name_attributtedString];
-    
-    CGRect  rect = [name_attributtedString boundingRectWithSize:CGSizeMake(nameLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-    [nameLabel setFrame:CGRectMake(nameLabel.frame.origin.x, nameLabel.frame.origin.y, nameLabel.frame.size.width, rect.size.height)];
-    
-    UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(cellView.frame.size.width - cellMargin_x - timeWidth_, top_space, timeWidth_, 15)];
-    timeLabel.font = smallFont;
-    timeLabel.text = time_;
-    [timeLabel setTextAlignment:NSTextAlignmentLeft];
-    [timeLabel setTextColor:[UIColor lightGrayColor]];
-    [cellView addSubview:timeLabel];
-    
-    top_space +=nameLabel.frame.size.height + in_margin;
-    
-    UILabel *postLabel = [[UILabel alloc]initWithFrame:CGRectMake(dp_view.frame.origin.x
-                                                                  + dp_view.frame.size.width + in_margin, top_space, cellView.frame.size.width - 2*cellMargin_x - dp_view.frame.size.width - in_margin, 0)];
-    postLabel.font = bigFont;
-    postLabel.numberOfLines = 0;
-    [cellView addSubview:postLabel];
-    NSMutableAttributedString * post_attributtedString = [[NSMutableAttributedString alloc] initWithString:comments_ attributes : @{
-                                                                                                                                    NSFontAttributeName : bigFont,
-                                                                                                                                    NSForegroundColorAttributeName : [UIColor blackColor],
-                                                                                                                                    }];
-    [postLabel setAttributedText:post_attributtedString];
-    
-    rect = [post_attributtedString boundingRectWithSize:CGSizeMake(postLabel.frame.size.width, 10000) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading context:nil];
-    [postLabel setFrame:CGRectMake(postLabel.frame.origin.x, postLabel.frame.origin.y, postLabel.frame.size.width, rect.size.height)];
-    
-    top_space = top_space + postLabel.frame.size.height;
-    if (top_space<dp_view.frame.origin.y + dp_view.frame.size.height)
-    {
-      top_space = dp_view.frame.origin.y + dp_view.frame.size.height;
-    }
-    top_space+=cellMargin_y;
-    
-    [cellView setFrame:CGRectMake(cellView.frame.origin.x, cellView.frame.origin.y, cellView.frame.size.width, top_space)];
-    [cellsViewArray addObject:cellView];
-  }
-  [commentsTable reloadData];
+  [mainTableView reloadData];
 }
 
 #pragma mark - button actions
@@ -142,41 +114,149 @@
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return 2;    //count of section
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-  return cellsViewArray.count;
+  if (section == 0)//first 3 cells
+  {
+    return 3;
+  }
+  return commentsArray.count;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return SECTION_HEIGHT;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEIGHT)];
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, tableView.frame.size.width - 8, SECTION_HEIGHT)];
+  [label setFont:[UIFont boldSystemFontOfSize:12]];
+  switch (section)
+  {
+    case 0:
+    {
+      label.text = @"DETAILS";
+    }
+      break;
+      
+      case 1:
+    {
+      label.text = @"COMMENTS";
+    }
+      break;
+      
+    default:
+      break;
+  }
+  [label setTextColor:[UIColor grayColor]];
+  [view addSubview:label];
+  [view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]];
+  return view;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
+  if (indexPath.section == 0)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    switch (indexPath.row)
+    {
+      case 0:
+      {
+        static NSString *MyIdentifier = @"LCCommunityDetailCell";
+        LCCommunityDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        if (cell == nil)
+        {
+          cell = [[LCCommunityDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+        }
+        NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:communityDetails];
+        cell.communityDetailsLabel.attributedText = attributedString;
+        return cell;
+      }
+        break;
+        
+      case 1:
+      {
+        static NSString *MyIdentifier = @"LCCommunityMemebersCountCell";
+        LCCommunityMemebersCountCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        if (cell == nil)
+        {
+          cell = [[LCCommunityMemebersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+        }
+        cell.communityMemebersCountLabel.text = communityMembersCount;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        return cell;
+      }
+        break;
+        
+      case 2:
+      {
+        static NSString *MyIdentifier = @"LCCommunityWebsiteCell";
+        LCCommunityWebsiteCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        if (cell == nil)
+        {
+          cell = [[LCCommunityWebsiteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+        }
+        cell.communityWebsiteLabel.text = communityWebsite;
+        return cell;
+      }
+        break;
+        
+      default:
+        break;
+    }
+  }
+  else//comments
+  {
+    static NSString *MyIdentifier = @"LCCommunityCommentsCell";
+    LCCommunityCommentsCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      cell = [[LCCommunityCommentsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    }
+    cell.commentUserNameLabel.text = commentsArray[indexPath.row][@"user_name"];
+    cell.commentTimeLabel.text = commentsArray[indexPath.row][@"time"];
+    cell.commentDescriptionLabel.text = commentsArray[indexPath.row][@"comment"];
+    cell.commentUserImageView.layer.cornerRadius = cell.commentUserImageView.frame.size.width/2;
+    [cell.commentUserImageView sd_setImageWithURL:[NSURL URLWithString:commentsArray[indexPath.row][@"profile_pic"]] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    return cell;
   }
   
-  [[cell viewWithTag:10] removeFromSuperview];
-  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-  [cell addSubview:cellView];
-  cellView.tag = 10;
   
-  return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-  
-  return cellView.frame.size.height;
+  return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSLog(@"selected row-->>>%d", (int)indexPath.row);
+}
+
+#pragma mark - scrollview delegates
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  float collapseConstant = 0;;
+  if (collapseViewHeight.constant>0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseConstant<0)
+  {
+    collapseConstant = 0;
+  }
+  if (collapseConstant>170)
+  {
+    collapseConstant = 170;
+  }
+  collapseViewHeight.constant = collapseConstant;
 }
 
 /*

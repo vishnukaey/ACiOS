@@ -179,21 +179,42 @@
 
 - (IBAction)editClicked:(UIButton *)sender
 {
-  NSLog(@"edit clicked-->>");
+  if (currentProfileState == PROFILE_SELF)
+  {
+    NSLog(@"go to settings-->>");
+  }
+  else if (currentProfileState == PROFILE_OTHER_FRIEND)
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    NSLog(@"remove friend-->>");
+  }
+  else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_WAITING;
+    NSLog(@"send friend request-->>");
+  }
+  else if (currentProfileState == PROFILE_OTHER_WAITING)
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    NSLog(@"cancel invitation-->>");
+  }
 }
 
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
   float collapseConstant = 0;;
-  if (self.collapseViewHeight.constant>0)
+  if (collapseViewHeight.constant>0)
   {
-    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
   }
-  if (self.collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
+  if (collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
   {
-    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
   }
   if (collapseConstant<0)
@@ -204,7 +225,7 @@
   {
     collapseConstant = 170;
   }
-  self.collapseViewHeight.constant = collapseConstant;
+  collapseViewHeight.constant = collapseConstant;
 }
 
 #pragma mark - collection view delegates

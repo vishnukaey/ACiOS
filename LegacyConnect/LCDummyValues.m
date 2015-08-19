@@ -31,8 +31,9 @@
 + (NSArray *)dummyCommentArray
 {
   NSDictionary *comm1 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mel Matthews",@"user_name",         @"5 mins",@"time",   @"Amazing Json! Best of luck.",@"comment",    @"",@"profile_pic",  nil];
-  NSDictionary *comm2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Amy Samson",@"user_name",         @"10 mins",@"time",   @"This is incredible! All the best and keep us posted in your journy.",@"comment",    @"",@"profile_pic",  nil];
-  NSArray *commentsArray = [[NSArray alloc]initWithObjects:comm1, comm2, nil];
+  NSDictionary *comm2 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Amy Samson",@"user_name",         @"10 mins",@"time",   @"This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.This is incredible! All the best and keep us posted in your journy.",@"comment",    @"",@"profile_pic",  nil];
+  NSDictionary *comm3 = [[NSDictionary alloc]initWithObjectsAndKeys:@"Mel Matthews",@"user_name",         @"5 mins",@"time",   @"Amazing Json! Best of luck.",@"comment",    @"",@"profile_pic",  nil];
+  NSArray *commentsArray = [[NSArray alloc]initWithObjects:comm1, comm2, comm3, nil];
   
   return commentsArray;
 }

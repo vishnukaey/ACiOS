@@ -11,8 +11,13 @@
 
 @interface LCViewCommunity : UIViewController
 {
-  IBOutlet UITableView *commentsTable;
-  NSMutableArray *cellsViewArray;
+  IBOutlet UITableView *mainTableView;
+  IBOutlet NSLayoutConstraint *collapseViewHeight;
+  IBOutlet UIView *tabMenuContainer, *viewToCollapse;
+  NSString *communityDetails;
+  NSString *communityMembersCount;
+  NSString *communityWebsite;
+  NSMutableArray *commentsArray;
 }
 
 - (IBAction)backAction:(id)sender;

@@ -25,13 +25,13 @@ typedef enum profileStateTypes
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
   IBOutlet UIButton *impactsButton, *friendsButton, *editButton;
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
+  IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSArray *mileStoneFeeds;
   NSArray *interestsArray;
   
   profileState currentProfileState;
 }
 
-@property(nonatomic, weak)IBOutlet NSLayoutConstraint *collapseViewHeight;
 @property(nonatomic, retain)NSString *userID;
 
 - (IBAction)backAction:(id)sender;

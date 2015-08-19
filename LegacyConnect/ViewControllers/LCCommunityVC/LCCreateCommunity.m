@@ -245,14 +245,14 @@
   
   NSLog(@"comm--->>%@", com);
   
-  [LCAPIManager createCommunity:com withSuccess:^(id response) {
-    NSLog(@"%@",response);
+//  [LCAPIManager createCommunity:com withSuccess:^(id response) {
+//    NSLog(@"%@",response);
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
     [self.navigationController pushViewController:vc animated:YES];
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
+//  } andFailure:^(NSString *error) {
+//    NSLog(@"%@",error);
+//  }];
 }
 
 - (IBAction)cancelAction
