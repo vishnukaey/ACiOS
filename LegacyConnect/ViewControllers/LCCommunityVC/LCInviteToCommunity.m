@@ -61,8 +61,13 @@
 #pragma mark - setup functions
 - (void) loadFriendsList
 {
-  friendsArray = [LCDummyValues dummyFriendsArray];
-  [friendsTableView reloadData];
+  [LCAPIManager getFriendsWithSuccess:^(id response) {
+    NSLog(@"%@",response);
+    friendsArray = response;
+    [friendsTableView reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
 
 
@@ -82,7 +87,8 @@
 - (void)checkbuttonAction :(UIButton *)sender
 {
   friendsTableView.selectedButton = sender;
-  [friendsTableView AddOrRemoveID:friendsArray[sender.tag]];
+  LCFriend *friend = friendsArray[sender.tag];
+  [friendsTableView AddOrRemoveID:friend.userID];
 }
 
 #pragma mark - TableView delegates
@@ -106,12 +112,13 @@
     cell = [[LCInviteCommunityFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:MyIdentifier];
   }
-  cell.friendNameLabel.text = friendsArray[indexPath.row];
+  LCFriend *friend = friendsArray[indexPath.row];
+  cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
-  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   cell.checkButton.tag = indexPath.row;
-  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friendsArray[indexPath.row], nil]];
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friend.userID, nil]];
   
   return cell;
 }

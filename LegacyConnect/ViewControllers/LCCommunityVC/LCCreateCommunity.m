@@ -100,16 +100,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  LCEvent *com = [[LCEvent alloc] init];
-  com.name = @"a";
-  com.interestID =@"1";
-  
-  [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
-    NSLog(@"%@",response);
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
+  // Do any additional setup after loading the view
   
   float topSpace = 64;
   float titleheight = 40;
@@ -245,17 +236,14 @@
 #pragma mark - button actions
 - (IBAction)nextButtonAction
 {
-  LCCommunity *com = [[LCCommunity alloc] init];
+  LCEvent *com = [[LCEvent alloc] init];
   com.name = communityNameField.text;
   com.interestID = self.interestId;
   com.website = communityWebsiteField.text;
-  com.communityDescription = aboutCommunityField.text;
+  com.eventDescription = aboutCommunityField.text;
   com.time = self.communityDate;
-  com.headerPhoto = headerPhotoImageView.image;
   
-  NSLog(@"comm--->>%@", com);
-  
-//  [LCAPIManager createCommunity:com withSuccess:^(id response) {
+//  [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
 //    NSLog(@"%@",response);
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
@@ -263,6 +251,7 @@
 //  } andFailure:^(NSString *error) {
 //    NSLog(@"%@",error);
 //  }];
+
 }
 
 - (IBAction)cancelAction
