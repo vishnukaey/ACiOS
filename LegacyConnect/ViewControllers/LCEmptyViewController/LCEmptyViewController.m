@@ -45,10 +45,25 @@
   // Check if user is not logged in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
-    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    [self.navigationController setNavigationBarHidden:YES];
-    [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+    if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
+    {
+      [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
+      {
+        UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+        UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+        [self.navigationController setNavigationBarHidden:YES];
+        [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+      } andFailure:^(NSString *error) {
+        NSLog(@" error:  %@",error);
+      }];
+    }
+    else
+    {
+      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+      [self.navigationController setNavigationBarHidden:YES];
+      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+    }
   }
   else
   {

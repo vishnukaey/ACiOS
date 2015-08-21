@@ -101,7 +101,7 @@ static LCAPIManager *sharedManager = nil;
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kGetUserDetailsURL,userID];
-  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+  [webService performGetOperationWithUrl:url andAccessToken:[[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey] withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
@@ -326,29 +326,57 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)createCommunity:(LCCommunity*)community withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)createEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/community"];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event"];
   NSError *error = nil;
-  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:community error:&error];
-  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
+  
+  if(headerPhoto)
+  {
+    NSData *imageData = UIImagePNGRepresentation(headerPhoto);
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:@"Authorization"];
+    [manager POST:url parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+      [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
+      {
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+        failure(responseObject[kResponseMessage]);
+      }
+      else
+      {
+        NSLog(@"%@",responseObject);
+        success(responseObject);
+      }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      failure(error.localizedRecoverySuggestion);
+    }];
+  }
+  else
+  {
+    LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+    [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-       failure(response[kResponseMessage]);
-     }
-     else
-     {
-       NSLog(@"%@",response);
-       success(response);
-     }
-   } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-     failure(error);
-   }];
+       if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+       {
+         [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+         failure(response[kResponseMessage]);
+       }
+       else
+       {
+         NSLog(@"%@",response);
+         success(response);
+       }
+     } andFailure:^(NSString *error) {
+       NSLog(@"%@",error);
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+       failure(error);
+     }];
+  }
+
 }
 
 @end

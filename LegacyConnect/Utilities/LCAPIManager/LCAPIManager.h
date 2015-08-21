@@ -27,6 +27,6 @@
 + (void) sendFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void) acceptFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void) rejectFriendRequest:(LCFriend *)friend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
-+ (void)createCommunity:(LCCommunity*)community withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)createEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 @end

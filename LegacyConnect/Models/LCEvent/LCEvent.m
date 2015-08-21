@@ -1,21 +1,20 @@
 //
-//  LCCommunity.m
+//  LCEvent.m
 //  LegacyConnect
 //
-//  Created by qbuser on 8/17/15.
+//  Created by qbuser on 8/21/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCCommunity.h"
+#import "LCEvent.h"
 
-@implementation LCCommunity
+@implementation LCEvent
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
-           @"headerPhoto": @"headerPhoto",
            @"name": @"name",
-           @"communityDescription": @"description",
+           @"eventDescription": @"description",
            @"website": @"website",
            @"time": @"time",
            @"interestID": @"interestId",

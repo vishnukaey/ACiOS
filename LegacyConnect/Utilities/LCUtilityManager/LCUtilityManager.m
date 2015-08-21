@@ -44,6 +44,7 @@
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setBool:YES forKey:kLoginStatusKey];
   [defaults setValue:[LCDataManager sharedDataManager].userToken forKey:kUserTokenKey];
+  [defaults setValue:[LCDataManager sharedDataManager].userID forKey:kUserIDKey];
   [defaults synchronize];
 }
 
@@ -54,7 +55,10 @@
   [defaults setBool:NO forKey:kLoginStatusKey];
   [defaults synchronize];
   [LCDataManager sharedDataManager].userToken = kEmptyStringValue;
-  [defaults setValue:[LCDataManager sharedDataManager].userToken forKey:kUserTokenKey];
+  [LCDataManager sharedDataManager].userID = kEmptyStringValue;
+  [defaults setValue:kEmptyStringValue forKey:kUserTokenKey];
+  [defaults setValue:nil forKey:kUserTokenKey];
+  [defaults setValue:nil forKey:kUserIDKey];
 }
 
 
