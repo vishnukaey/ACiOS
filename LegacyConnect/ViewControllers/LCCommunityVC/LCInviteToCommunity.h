@@ -15,6 +15,8 @@
   IBOutlet LCMultipleSelectionTable *friendsTableView;
   NSArray *friendsArray;
 }
+@property(nonatomic, retain)LCEvent *eventToInvite;
+
 - (IBAction)cancelAction;
 -(IBAction)doneButtonAction;
 

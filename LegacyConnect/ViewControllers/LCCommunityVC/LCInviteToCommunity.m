@@ -24,13 +24,14 @@
 #pragma mark - LCInviteToCommunity class
 
 @implementation LCInviteToCommunity
+@synthesize eventToInvite;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  
+  NSLog(@"event-->>%@", eventToInvite);
   [self loadFriendsList];
 }
 

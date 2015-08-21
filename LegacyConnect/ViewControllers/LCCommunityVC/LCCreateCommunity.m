@@ -242,11 +242,12 @@
   com.website = communityWebsiteField.text;
   com.eventDescription = aboutCommunityField.text;
   com.time = self.communityDate;
-  
 //  [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
 //    NSLog(@"%@",response);
+//    com.eventID = response[@"data"][@"id"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
+    vc.eventToInvite = com;
     [self.navigationController pushViewController:vc animated:YES];
 //  } andFailure:^(NSString *error) {
 //    NSLog(@"%@",error);
