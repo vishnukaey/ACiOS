@@ -381,7 +381,7 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)addUsersWithUserIDs:(NSArray*)userIDs forEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event/user"];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event/users"];
   NSDictionary *dict = @{@"users":userIDs, @"eventId": eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)

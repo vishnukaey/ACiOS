@@ -101,10 +101,13 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  
+  
+   /* Create Event sample code */
   LCEvent *com = [[LCEvent alloc] init];
   com.name = @"a";
   com.interestID =@"1";
-  com.eventID = @"788c4651-47e5-11e5-be74-9140ac5054f1​";
+  com.eventID = @"de59cb91-47ce-11e5-927f-3c15202af3db​";
   
   [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
     NSLog(@"%@",response);
@@ -112,7 +115,9 @@
     NSLog(@"%@",error);
   }];
   
-  NSArray *ids = @[@"",@"",@""];
+   /* Add user to event sample code */
+  
+  NSArray *ids = @[@"6998"];
   [LCAPIManager addUsersWithUserIDs:ids forEventWithEventID:com.eventID withSuccess:^(id response) {
     NSLog(@"%@",response);
   } andFailure:^(NSString *error) {
