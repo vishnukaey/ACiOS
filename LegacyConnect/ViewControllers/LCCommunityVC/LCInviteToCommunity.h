@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCMultipleSelectionTable.h"
 
 
 @interface LCInviteToCommunity : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
+  IBOutlet LCMultipleSelectionTable *friendsTableView;
   NSArray *friendsArray;
 }
+- (IBAction)cancelAction;
+-(IBAction)doneButtonAction;
 
 @end

@@ -10,6 +10,19 @@
 #import "LCViewCommunity.h"
 
 
+
+#pragma mark - LCInviteCommunityFriendCell class
+@interface LCInviteCommunityFriendCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *friendNameLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *friendPhotoView;
+@property(nonatomic, strong)IBOutlet UIButton *checkButton;
+@end
+
+@implementation LCInviteCommunityFriendCell
+@end
+
+#pragma mark - LCInviteToCommunity class
+
 @implementation LCInviteToCommunity
 
 #pragma mark - controller life cycle
@@ -17,29 +30,14 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonAction)];
-  self.navigationItem.rightBarButtonItem = anotherButton;
   
-  float topSpace = self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height;
-  //searchbar
-  UITextField *searchField = [[UITextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 20)];
-  searchField.layer.borderWidth = 1;
-  searchField.placeholder = @"Search among your friends";
-  [self.view addSubview:searchField];
-  topSpace += searchField.frame.size.height;
-  
-  //friends list table
-  friendsArray = [LCDummyValues dummyFriendsArray];
-  UITableView *friendsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, self.view.frame.size.height -topSpace)];
-  friendsTable.delegate = self;
-  friendsTable.dataSource = self;
-  [self.view addSubview:friendsTable];
+  [self loadFriendsList];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
@@ -60,12 +58,31 @@
   // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - setup functions
+- (void) loadFriendsList
+{
+  friendsArray = [LCDummyValues dummyFriendsArray];
+  [friendsTableView reloadData];
+}
+
+
 #pragma mark - button actions
--(void)doneButtonAction
+-(IBAction)doneButtonAction
 {
   UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
   [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)cancelAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)checkbuttonAction :(UIButton *)sender
+{
+  friendsTableView.selectedButton = sender;
+  [friendsTableView AddOrRemoveID:friendsArray[sender.tag]];
 }
 
 #pragma mark - TableView delegates
@@ -79,25 +96,29 @@
   return friendsArray.count;    
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
+- (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  static NSString *MyIdentifier = @"LCInviteCommunityFriendCell";
+  LCInviteCommunityFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    cell = [[LCInviteCommunityFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:MyIdentifier];
   }
-  
-  cell.textLabel.text = [friendsArray objectAtIndex:indexPath.row];
+  cell.friendNameLabel.text = friendsArray[indexPath.row];
+  cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
+  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+  cell.checkButton.tag = indexPath.row;
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friendsArray[indexPath.row], nil]];
   
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 40;
+  return 76;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

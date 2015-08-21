@@ -124,6 +124,7 @@
 		CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65F1B835DC8008DAD01 /* profileTick.png */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
+		CEE358011B86E41900405239 /* LCUserFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE358001B86E41900405239 /* LCUserFriendsVC.m */; };
 		CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
 		CEF275D91B78A32600709005 /* LCCommentCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D81B78A32600709005 /* LCCommentCellXIB.xib */; };
@@ -339,6 +340,8 @@
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
 		CECBC8D01B56794F0012B287 /* LCGIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGIButton.m; path = CustomViews/LCGIButton.m; sourceTree = "<group>"; };
+		CEE357FF1B86E41900405239 /* LCUserFriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserFriendsVC.h; path = ViewControllers/LCProfileVC/LCUserFriendsVC.h; sourceTree = "<group>"; };
+		CEE358001B86E41900405239 /* LCUserFriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUserFriendsVC.m; path = ViewControllers/LCProfileVC/LCUserFriendsVC.m; sourceTree = "<group>"; };
 		CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFeedcellXIB.xib; sourceTree = "<group>"; };
 		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
 		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
@@ -1002,6 +1005,8 @@
 			children = (
 				CEBA92C71B660F0500C02F93 /* LCProfileViewVC.h */,
 				CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */,
+				CEE357FF1B86E41900405239 /* LCUserFriendsVC.h */,
+				CEE358001B86E41900405239 /* LCUserFriendsVC.m */,
 			);
 			name = LCProfileVC;
 			sourceTree = "<group>";
@@ -1283,6 +1288,7 @@
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
 				0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */,
+				CEE358011B86E41900405239 /* LCUserFriendsVC.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,
