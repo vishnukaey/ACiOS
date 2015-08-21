@@ -93,6 +93,9 @@
 		CEB9B6A31B79BE2200C61BA0 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9B6A21B79BE2200C61BA0 /* backButton.png */; };
 		CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9B6A41B79C26300C61BA0 /* profileSettings.png */; };
 		CEB9B6A91B79E4E900C61BA0 /* LCTabMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9B6A81B79E4E900C61BA0 /* LCTabMenuView.m */; };
+		CEB9F3E01B84487100AD265A /* profileWaiting.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9F3DF1B84487100AD265A /* profileWaiting.png */; };
+		CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9F3E11B8496E400AD265A /* communityMemebrs.png */; };
+		CEB9F3E41B8496E900AD265A /* communityWebsite.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9F3E31B8496E900AD265A /* communityWebsite.png */; };
 		CEBA92C91B660F0500C02F93 /* LCProfileViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */; };
 		CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CA1B6627D400C02F93 /* Profile.storyboard */; };
 		CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CC1B66632000C02F93 /* comment_dummy.png */; };
@@ -117,6 +120,8 @@
 		CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */; };
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
+		CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65E1B835DC8008DAD01 /* profileAdd.png */; };
+		CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65F1B835DC8008DAD01 /* profileTick.png */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
 		CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */; };
@@ -285,6 +290,9 @@
 		CEB9B6A41B79C26300C61BA0 /* profileSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileSettings.png; sourceTree = "<group>"; };
 		CEB9B6A71B79E4E900C61BA0 /* LCTabMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTabMenuView.h; path = CustomViews/LCTabMenuView/LCTabMenuView.h; sourceTree = "<group>"; };
 		CEB9B6A81B79E4E900C61BA0 /* LCTabMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTabMenuView.m; path = CustomViews/LCTabMenuView/LCTabMenuView.m; sourceTree = "<group>"; };
+		CEB9F3DF1B84487100AD265A /* profileWaiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileWaiting.png; sourceTree = "<group>"; };
+		CEB9F3E11B8496E400AD265A /* communityMemebrs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communityMemebrs.png; sourceTree = "<group>"; };
+		CEB9F3E31B8496E900AD265A /* communityWebsite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communityWebsite.png; sourceTree = "<group>"; };
 		CEBA92C71B660F0500C02F93 /* LCProfileViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileViewVC.h; path = ViewControllers/LCProfileVC/LCProfileViewVC.h; sourceTree = "<group>"; };
 		CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileViewVC.m; path = ViewControllers/LCProfileVC/LCProfileViewVC.m; sourceTree = "<group>"; };
 		CEBA92CA1B6627D400C02F93 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -325,6 +333,8 @@
 		CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityDateSelection.m; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
+		CEC9C65E1B835DC8008DAD01 /* profileAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileAdd.png; sourceTree = "<group>"; };
+		CEC9C65F1B835DC8008DAD01 /* profileTick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileTick.png; sourceTree = "<group>"; };
 		CECBC8CD1B56794F0012B287 /* LCFeedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedCellView.h; path = CustomViews/LCFeedCellView.h; sourceTree = "<group>"; };
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
@@ -845,6 +855,11 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				CEB9F3E11B8496E400AD265A /* communityMemebrs.png */,
+				CEB9F3E31B8496E900AD265A /* communityWebsite.png */,
+				CEB9F3DF1B84487100AD265A /* profileWaiting.png */,
+				CEC9C65E1B835DC8008DAD01 /* profileAdd.png */,
+				CEC9C65F1B835DC8008DAD01 /* profileTick.png */,
 				0B5F1BF11B7DC50800E749BF /* default-placeholder.png */,
 				0B5F1BEF1B7DC17200E749BF /* camera-icon.png */,
 				CEB9B6A41B79C26300C61BA0 /* profileSettings.png */,
@@ -1133,6 +1148,7 @@
 				TargetAttributes = {
 					0BF05A3B1B4E622200FF7B39 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = L75K25G57P;
 					};
 					0BF05A541B4E622200FF7B39 = {
 						CreatedOnToolsVersion = 6.1;
@@ -1173,8 +1189,10 @@
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
 				96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */,
+				CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */,
+				CEB9F3E41B8496E900AD265A /* communityWebsite.png in Resources */,
 				0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */,
 				0BE2B9B51B58D79C0026E607 /* photo.jpg in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
@@ -1182,6 +1200,7 @@
 				CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */,
 				CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
+				CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */,
 				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
 				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
@@ -1193,8 +1212,10 @@
 				CE5954D11B6F5EF100D839DD /* check_box.png in Resources */,
 				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
 				CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */,
+				CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
 				CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */,
+				CEB9F3E01B84487100AD265A /* profileWaiting.png in Resources */,
 				CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */,
 				CEA30E2C1B7361C700DAA4BA /* Community.storyboard in Resources */,
 				0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */,
@@ -1434,12 +1455,14 @@
 			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1448,12 +1471,14 @@
 			baseConfigurationReference = 61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
