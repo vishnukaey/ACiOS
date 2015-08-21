@@ -10,11 +10,10 @@
 
 @interface LCMultipleSelectionTable : UITableView
 
-@property(nonatomic, retain)NSMutableArray *selectedRows;
+@property(nonatomic, retain)NSMutableArray *selectedIDs;
 @property(nonatomic, retain)UIButton *selectedButton;
 
-- (void)AddIndexPath :(NSIndexPath *)indexPath;
-- (BOOL)indexPathSelected :(NSIndexPath *)indexPath;
-- (void)setImageForButton:(UIButton *)button;
+- (void)AddOrRemoveID :(id)ID_;
+- (void)setStatusForButton:(UIButton *)button byCheckingIDs:(NSArray *)IDs;
 
 @end
