@@ -104,12 +104,21 @@
   LCEvent *com = [[LCEvent alloc] init];
   com.name = @"a";
   com.interestID =@"1";
+  com.eventID = @"788c4651-47e5-11e5-be74-9140ac5054f1​";
   
   [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
     NSLog(@"%@",response);
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
+  
+  NSArray *ids = @[@"",@"",@""];
+  [LCAPIManager addUsersWithUserIDs:ids forEventWithEventID:com.eventID withSuccess:^(id response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
   
   float topSpace = 64;
   float titleheight = 40;
