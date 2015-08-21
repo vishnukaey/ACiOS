@@ -19,7 +19,7 @@
 #import "LCInterest.h"
 #import "LCUserDetail.h"
 #import "LCCause.h"
-#import "LCCommunity.h"
+#import "LCEvent.h"
 #import "LCFeed.h"
 #import "LCTag.h" 
 

@@ -89,13 +89,15 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  LCCommunity *com;
-  [LCAPIManager createCommunity:com withSuccess:^(id response) {
+  LCEvent *com = [[LCEvent alloc] init];
+  com.name = @"a";
+  com.interestID =@"1";
+  
+  [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
     NSLog(@"%@",response);
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
-  
   
   float topSpace = 64;
   float titleheight = 40;

@@ -1,19 +1,18 @@
 //
-//  LCCommunity.h
+//  LCEvent.h
 //  LegacyConnect
 //
-//  Created by qbuser on 8/17/15.
+//  Created by qbuser on 8/21/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 
-@interface LCCommunity :  MTLModel <MTLJSONSerializing>
+@interface LCEvent : MTLModel <MTLJSONSerializing>
 
-@property (nonatomic, strong) UIImage *headerPhoto;
+@property (nonatomic, strong) NSString *eventID;
 @property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) NSString *communityDescription;
+@property (nonatomic, strong) NSString *eventDescription;
 @property (nonatomic, strong) NSString *website;
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic, strong) NSString *interestID;
