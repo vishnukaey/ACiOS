@@ -100,7 +100,30 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view
+  // Do any additional setup after loading the view.
+  
+  
+   /* Create Event sample code */
+  LCEvent *com = [[LCEvent alloc] init];
+  com.name = @"a";
+  com.interestID =@"1";
+  com.eventID = @"de59cb91-47ce-11e5-927f-3c15202af3db​";
+  
+  [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
+   /* Add user to event sample code */
+  
+  NSArray *ids = @[@"6998"];
+  [LCAPIManager addUsersWithUserIDs:ids forEventWithEventID:com.eventID withSuccess:^(id response) {
+    NSLog(@"%@",response);
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+  
   
   float topSpace = 64;
   float titleheight = 40;
