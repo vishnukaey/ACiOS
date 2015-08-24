@@ -129,10 +129,10 @@ IMPACTS</string>
                                 <rect key="frame" x="0.0" y="286" width="320" height="282"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="0BL-pG-ccT">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="282"/>
+                                        <rect key="frame" x="8" y="0.0" width="304" height="282"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fh3-Z9-NzS">
-                                            <size key="itemSize" width="96" height="98"/>
+                                            <size key="itemSize" width="101" height="98"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -142,7 +142,7 @@ IMPACTS</string>
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="96" height="98"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="101" height="98"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zL1-hC-IhI">
@@ -180,13 +180,13 @@ IMPACTS</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="0BL-pG-ccT" secondAttribute="bottom" id="Fzt-Sn-T0P"/>
-                                    <constraint firstItem="0BL-pG-ccT" firstAttribute="leading" secondItem="eAg-gO-u6z" secondAttribute="leading" id="NCk-jR-Ux3"/>
+                                    <constraint firstItem="0BL-pG-ccT" firstAttribute="leading" secondItem="eAg-gO-u6z" secondAttribute="leading" constant="8" id="NCk-jR-Ux3"/>
                                     <constraint firstItem="0BL-pG-ccT" firstAttribute="top" secondItem="eAg-gO-u6z" secondAttribute="top" id="Oww-VZ-K2Z"/>
                                     <constraint firstAttribute="trailing" secondItem="wWo-lz-r7z" secondAttribute="trailing" id="SIO-8N-FrU"/>
                                     <constraint firstItem="wWo-lz-r7z" firstAttribute="leading" secondItem="eAg-gO-u6z" secondAttribute="leading" id="fKe-Bm-wTt"/>
                                     <constraint firstAttribute="bottom" secondItem="wWo-lz-r7z" secondAttribute="bottom" id="jSM-Mx-H1x"/>
                                     <constraint firstItem="wWo-lz-r7z" firstAttribute="top" secondItem="eAg-gO-u6z" secondAttribute="top" id="sfT-Bx-cDH"/>
-                                    <constraint firstAttribute="trailing" secondItem="0BL-pG-ccT" secondAttribute="trailing" id="wTE-Iv-Rjv"/>
+                                    <constraint firstAttribute="trailing" secondItem="0BL-pG-ccT" secondAttribute="trailing" constant="8" id="wTE-Iv-Rjv"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member since 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTO-QN-Nhd">
