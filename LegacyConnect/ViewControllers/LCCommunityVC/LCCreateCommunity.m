@@ -109,6 +109,14 @@
   com.interestID =@"1";
   com.eventID = @"de59cb91-47ce-11e5-927f-3c15202af3db​";
   
+  
+  [LCAPIManager getEventDetailsForEventWithID:com.eventID withSuccess:^(NSArray *response) {
+    NSLog(@"");
+  } andFailure:^(NSString *error) {
+    
+  }];
+  
+  
   [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
     NSLog(@"%@",response);
   } andFailure:^(NSString *error) {

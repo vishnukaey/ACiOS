@@ -16,4 +16,5 @@
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *avatarURL;
+@property (nonatomic, strong) NSString *createdAt;
 @end
