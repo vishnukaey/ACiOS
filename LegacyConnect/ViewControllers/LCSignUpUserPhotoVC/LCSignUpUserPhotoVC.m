@@ -53,7 +53,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:nil];
-  [LCAPIManager UploadImage:[info objectForKey:UIImagePickerControllerEditedImage] ofUser:[LCDataManager sharedDataManager].userID
+  [LCAPIManager uploadImage:[info objectForKey:UIImagePickerControllerEditedImage] ofUser:[LCDataManager sharedDataManager].userID
                 withSuccess:^(id response) {
                   [self saveUserDetailsToDataManagerFromResponse:response];
                   [self performSegueWithIdentifier:@"chooseCauses" sender:self];
