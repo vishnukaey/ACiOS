@@ -75,9 +75,15 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
-  [self.navigationController pushViewController:vc animated:YES];
+  NSLog(@"friendsTableView.selectedIDs-->>>%@", friendsTableView.selectedIDs);
+  [LCAPIManager addUsersWithUserIDs:friendsTableView.selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
+    NSLog(@"%@",response);
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }andFailure:^(NSString *error){
+    NSLog(@"%@",error);
+  }];
 }
 
 - (IBAction)cancelAction

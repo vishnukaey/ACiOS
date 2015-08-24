@@ -102,37 +102,6 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   
-  
-   /* Create Event sample code */
-  LCEvent *com = [[LCEvent alloc] init];
-  com.name = @"a";
-  com.interestID =@"1";
-  com.eventID = @"de59cb91-47ce-11e5-927f-3c15202af3db​";
-  
-  
-  [LCAPIManager getEventDetailsForEventWithID:com.eventID withSuccess:^(NSArray *response) {
-    NSLog(@"");
-  } andFailure:^(NSString *error) {
-    
-  }];
-  
-  
-  [LCAPIManager createEvent:com havingHeaderPhoto:nil withSuccess:^(id response) {
-    NSLog(@"%@",response);
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
-  
-   /* Add user to event sample code */
-  
-  NSArray *ids = @[@"6998"];
-  [LCAPIManager addUsersWithUserIDs:ids forEventWithEventID:com.eventID withSuccess:^(id response) {
-    NSLog(@"%@",response);
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
-  
-  
   float topSpace = 64;
   float titleheight = 40;
   UIEdgeInsets edgeInsetLabel = UIEdgeInsetsMake(0, 10, -20, 0);
@@ -273,16 +242,16 @@
   com.website = communityWebsiteField.text;
   com.eventDescription = aboutCommunityField.text;
   com.time = self.communityDate;
-//  [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
-//    NSLog(@"%@",response);
-//    com.eventID = response[@"data"][@"id"];
+  [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
+    NSLog(@"%@",response);
+    com.eventID = response[@"data"][@"id"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
     vc.eventToInvite = com;
     [self.navigationController pushViewController:vc animated:YES];
-//  } andFailure:^(NSString *error) {
-//    NSLog(@"%@",error);
-//  }];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 
 }
 

@@ -14,7 +14,7 @@
 
 
 @implementation LCProfileViewVC
-@synthesize userID;
+@synthesize userDetail;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -67,20 +67,21 @@
 #pragma mark - setup functions
 - (void)loadUserDetails
 {
-   NSLog(@"userID<<<-->>>%@", userID);
+  
   //for testing as user ID is not persisting
   NSString *nativeUserId = @"6994";
-  userID = @"6875";
-  [LCAPIManager getUserDetailsOfUser:userID WithSuccess:^(id response) {
-    LCUserDetail *obj = response;
+  userDetail.userID = @"6875";
+   NSLog(@"userID<<<-->>>%@", userDetail.userID);
+  [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
+    userDetail = response;
     NSLog(@"%@",response);
-    [profilePic sd_setImageWithURL:[NSURL URLWithString:obj.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-    [headerImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatarURL] placeholderImage:[UIImage imageNamed:@"landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"]];
-    userNameLabel.text = [NSString stringWithFormat:@"%@ %@", obj.firstName, obj.lastName];
-    memeberSincelabel.text = [NSString stringWithFormat:@"Member since %@", obj.activationDate];
-    locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", obj.gender, obj.dob, obj.location];
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL] placeholderImage:[UIImage imageNamed:@"landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"]];
+    userNameLabel.text = [NSString stringWithFormat:@"%@ %@", userDetail.firstName, userDetail.lastName];
+    memeberSincelabel.text = [NSString stringWithFormat:@"Member since %@", userDetail.activationDate];
+    locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", userDetail.gender, userDetail.dob, userDetail.location];
     
-    if ([nativeUserId isEqualToString:userID])
+    if ([nativeUserId isEqualToString:userDetail.userID])
     {
       [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
       currentProfileState = PROFILE_SELF;
@@ -195,6 +196,16 @@
   }
   else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
   {
+    LCFriend *friend = [[LCFriend alloc] init];
+    friend.userID = userDetail.userID;
+    friend.firstName = userDetail.firstName;
+    friend.lastName = userDetail.lastName;
+    friend.avatarURL = userDetail.avatarURL;
+    [LCAPIManager sendFriendRequest:friend withSuccess:^(NSArray *response) {
+     NSLog(@"%@",response);
+    } andFailure:^(NSString *error) {
+      NSLog(@"%@",error);
+    }];
     [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
     currentProfileState = PROFILE_OTHER_WAITING;
     NSLog(@"send friend request-->>");

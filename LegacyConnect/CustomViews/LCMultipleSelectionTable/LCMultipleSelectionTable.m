@@ -11,11 +11,35 @@
 @implementation LCMultipleSelectionTable
 @synthesize selectedIDs, selectedButton;
 
+#pragma mark - Construction
+
+- (id)initWithFrame:(CGRect)frame
+{
+  self = [super initWithFrame:frame];
+  if (self)
+  {
+    if (!selectedIDs) {
+      selectedIDs = [[NSMutableArray alloc]init];
+    }
+  }
+  return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
+  if (self)
+  {
+    if (!selectedIDs) {
+      selectedIDs = [[NSMutableArray alloc]init];
+    }
+  }
+  
+  return self;
+}
+
 - (void)AddOrRemoveID :(id)ID_ 
 {
-  if (!selectedIDs) {
-    selectedIDs = [[NSMutableArray alloc]init];
-  }
   if ([selectedIDs containsObject:ID_])
   {
     [selectedIDs removeObject:ID_];
