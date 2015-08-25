@@ -8,6 +8,7 @@
 
 #import "LCCreatePostViewController.h"
 #import "LCListFriendsToTagViewController.h"
+#import "LCListLocationsToTagVC.h"
 
 @interface LCCreatePostViewController ()
 {
@@ -64,6 +65,13 @@
   contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
   [self presentViewController:contactListVC animated:YES completion:nil];
 
+}
+
+- (IBAction)addLocationToPostButtonClicked:(id)sender
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListLocationsToTagVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 @end

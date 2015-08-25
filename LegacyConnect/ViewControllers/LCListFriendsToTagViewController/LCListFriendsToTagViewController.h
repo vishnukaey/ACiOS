@@ -20,5 +20,4 @@
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *doneButton;
 @property(nonatomic,retain) IBOutlet UINavigationBar *navigationBar;
 @property(nonatomic,retain) IBOutlet UITableView *tableView;
-@property(nonatomic,retain) IBOutlet UISearchBar *searchBar;
 @end

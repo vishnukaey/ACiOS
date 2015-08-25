@@ -9,15 +9,15 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@protocol locationsSearchFieldDelegate <NSObject>
+@protocol locationsSearchFieldDelegate <UISearchBarDelegate>
 
-- (void)recievedLocations: (NSMutableArray *)locations;
+- (void)recievedLocations: (NSArray *)locations;
 
 @end
 
-@interface LCLocationSearchField : UITextField<CLLocationManagerDelegate>
+@interface LCLocationSearchField : UISearchBar<CLLocationManagerDelegate>
 
-@property(nonatomic, retain)id locDelegate;
+@property(nonatomic, assign)id <locationsSearchFieldDelegate>delegate;
 
 - (void)searchForLocations :(NSString *)string;
 

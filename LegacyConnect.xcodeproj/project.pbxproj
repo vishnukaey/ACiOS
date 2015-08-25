@@ -102,6 +102,8 @@
 		CEBA92D41B66632000C02F93 /* menuButton_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */; };
 		CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D01B66632000C02F93 /* photoPost_dummy.png */; };
 		CEBA92D71B6664A300C02F93 /* search_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D61B6664A300C02F93 /* search_dummy.png */; };
+		CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */; };
+		CEBB4FFC1B8C85D300C1552E /* locationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBB4FFB1B8C85D300C1552E /* locationIcon.png */; };
 		CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */; };
 		CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */; };
 		CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */; };
@@ -298,6 +300,9 @@
 		CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuButton_dummy.png; sourceTree = "<group>"; };
 		CEBA92D01B66632000C02F93 /* photoPost_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoPost_dummy.png; sourceTree = "<group>"; };
 		CEBA92D61B6664A300C02F93 /* search_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_dummy.png; sourceTree = "<group>"; };
+		CEBB4FF81B8C75BD00C1552E /* LCListLocationsToTagVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListLocationsToTagVC.h; path = ViewControllers/LCListLocationsToTagVC/LCListLocationsToTagVC.h; sourceTree = "<group>"; };
+		CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListLocationsToTagVC.m; path = ViewControllers/LCListLocationsToTagVC/LCListLocationsToTagVC.m; sourceTree = "<group>"; };
+		CEBB4FFB1B8C85D300C1552E /* locationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationIcon.png; sourceTree = "<group>"; };
 		CEBBBFAD1B6B377B001C91E1 /* LCLocationSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLocationSearchField.h; path = CustomViews/LCLocationSearchField/LCLocationSearchField.h; sourceTree = "<group>"; };
 		CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLocationSearchField.m; path = CustomViews/LCLocationSearchField/LCLocationSearchField.m; sourceTree = "<group>"; };
 		CEBBBFB01B6B9041001C91E1 /* LCFullScreenImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFullScreenImageVC.h; path = ViewControllers/LCFeedsHomeViewController/LCFullScreenImageVC.h; sourceTree = "<group>"; };
@@ -853,6 +858,7 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				CEBB4FFB1B8C85D300C1552E /* locationIcon.png */,
 				CEB9F3E11B8496E400AD265A /* communityMemebrs.png */,
 				CEB9F3E31B8496E900AD265A /* communityWebsite.png */,
 				CEB9F3DF1B84487100AD265A /* profileWaiting.png */,
@@ -933,6 +939,7 @@
 		96B86A221B7A2106003EF7CA /* CreatePost */ = {
 			isa = PBXGroup;
 			children = (
+				CEBB4FF71B8C752200C1552E /* LCListLocationsToTagVC */,
 				96B86A1F1B79CF77003EF7CA /* LCCreatePostViewController */,
 				96B86A261B7A2353003EF7CA /* LCListFriendsToTagViewController */,
 			);
@@ -994,6 +1001,15 @@
 				CEE358001B86E41900405239 /* LCUserFriendsVC.m */,
 			);
 			name = LCProfileVC;
+			sourceTree = "<group>";
+		};
+		CEBB4FF71B8C752200C1552E /* LCListLocationsToTagVC */ = {
+			isa = PBXGroup;
+			children = (
+				CEBB4FF81B8C75BD00C1552E /* LCListLocationsToTagVC.h */,
+				CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */,
+			);
+			name = LCListLocationsToTagVC;
 			sourceTree = "<group>";
 		};
 		CEBBBFAC1B6B3764001C91E1 /* LCLocationSearchField */ = {
@@ -1190,6 +1206,7 @@
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */,
 				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
+				CEBB4FFC1B8C85D300C1552E /* locationIcon.png in Resources */,
 				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
 				0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */,
@@ -1259,6 +1276,7 @@
 			files = (
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */,
+				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,

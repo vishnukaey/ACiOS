@@ -7,7 +7,7 @@
 //usage->>set locdelegate and implement the ||- (void)recievedLocations: (NSMutableArray *)locations;|| method
 
 #import "LCLocationSearchField.h"
-#define MINIMUM_SEARCHLENGTH 4
+#define MINIMUM_SEARCHLENGTH 2
 
 @interface LCLocationSearchField()
 {
@@ -20,8 +20,6 @@
 @end
 
 @implementation LCLocationSearchField
-@synthesize locDelegate;
-
 - (id)initWithFrame:(CGRect)frame
 {
   self = [super initWithFrame:frame];
@@ -41,6 +39,29 @@
     [self addSubview:activity];
     activity.center = CGPointMake(frame.size.width - frame.size.height/2, frame.size.height/2);
   }
+  return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+  self = [super initWithCoder:aDecoder];
+  if (self)
+  {
+    locManager = [[CLLocationManager alloc] init];
+    [locManager setDelegate:self];
+    [locManager setDesiredAccuracy:kCLLocationAccuracyBest];
+    if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+    {
+      [locManager requestWhenInUseAuthorization];
+    }
+    [locManager startUpdatingLocation];
+    
+    activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activity.hidesWhenStopped = YES;
+    [self addSubview:activity];
+    activity.center = CGPointMake(self.frame.size.width - self.frame.size.height/2 - 100, self.frame.size.height/2);
+  }
+  
   return self;
 }
 
@@ -70,8 +91,8 @@
   
   MKCoordinateRegion region;
   MKCoordinateSpan span;
-  span.latitudeDelta = 0.05;
-  span.longitudeDelta = 0.05;
+  span.latitudeDelta = 0.005;
+  span.longitudeDelta = 0.005;
   region.span = span;
   region.center = newLocation.coordinate;
   request.region = region;
@@ -87,9 +108,19 @@
     {
       [locations_ addObject:item.name];
     }
-    [locDelegate recievedLocations:locations_];
+    NSArray *returnArray = [locations_ copy];
+    [self.delegate recievedLocations:returnArray];
     [activity stopAnimating];
   }];
+}
+
+
+
+-(void) setDelegate:(id<locationsSearchFieldDelegate>) delegate {
+  [super setDelegate: delegate];
+}
+- (id) delegate {
+  return [super delegate];
 }
 
 /*
