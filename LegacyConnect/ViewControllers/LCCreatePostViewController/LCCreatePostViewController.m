@@ -43,7 +43,7 @@
 - (IBAction)closeButtonClicked:(id)sender
 {
   [self.delegate dismissView];
-  [self.view removeFromSuperview];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)textViewDidChange:(UITextView *)textView
