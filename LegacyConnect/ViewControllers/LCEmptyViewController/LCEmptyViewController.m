@@ -167,7 +167,7 @@
     frame.origin.y = 20;
     createPostVC.view.frame = frame;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [mainContainer presentViewController:createPostVC animated:YES completion:nil];
+    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
   }
   else
   {
