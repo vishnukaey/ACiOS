@@ -22,7 +22,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  _navigationItem.title = @"Select Friends";
+   self.navigationItem.title = @"Select Friends";
   self.title = @"Select Friends";
 }
 

@@ -14,6 +14,7 @@
 {
   IBOutlet LCMultipleSelectionTable *friendsTableView;
   NSArray *friendsArray;
+  NSMutableArray *searchResultsArray;
 }
 @property(nonatomic, retain)LCEvent *eventToInvite;
 

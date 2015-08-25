@@ -33,6 +33,7 @@
   // Do any additional setup after loading the view.
   NSLog(@"event-->>%@", eventToInvite);
   [self loadFriendsList];
+  searchResultsArray = [[NSMutableArray alloc] init];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -65,6 +66,7 @@
   [LCAPIManager getFriendsWithSuccess:^(id response) {
     NSLog(@"%@",response);
     friendsArray = response;
+    [searchResultsArray addObjectsFromArray:response];
     [friendsTableView reloadData];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -94,8 +96,46 @@
 - (void)checkbuttonAction :(UIButton *)sender
 {
   friendsTableView.selectedButton = sender;
-  LCFriend *friend = friendsArray[sender.tag];
+  LCFriend *friend = searchResultsArray[sender.tag];
   [friendsTableView AddOrRemoveID:friend.userID];
+}
+#pragma mark - searchfield delegates
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+  [searchResultsArray removeAllObjects];
+  if([searchText length] != 0) {
+    [self searchTableList:searchBar.text];
+  }
+  else
+  {
+    [searchResultsArray addObjectsFromArray:friendsArray];
+  }
+  [friendsTableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+  NSLog(@"Cancel clicked");
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+  NSLog(@"Search Clicked");
+  [self searchTableList:searchBar.text];
+}
+
+- (void)searchTableList :(NSString *)text
+{
+  for (int i = 0; i<friendsArray.count ; i++)
+  {
+    LCFriend *friend = friendsArray[i];
+    NSString * tempStr = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
+    NSComparisonResult result = [tempStr compare:text options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [text length])];
+    if (result == NSOrderedSame)
+    {
+      [searchResultsArray addObject:friend];
+    }
+  }
 }
 
 #pragma mark - TableView delegates
@@ -106,7 +146,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return friendsArray.count;    
+  return searchResultsArray.count;
 }
 
 - (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
@@ -119,7 +159,7 @@
     cell = [[LCInviteCommunityFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:MyIdentifier];
   }
-  LCFriend *friend = friendsArray[indexPath.row];
+  LCFriend *friend = searchResultsArray[indexPath.row];
   cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
