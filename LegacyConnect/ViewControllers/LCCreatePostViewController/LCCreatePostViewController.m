@@ -7,11 +7,11 @@
 //
 
 #import "LCCreatePostViewController.h"
-#import "LCContactsListVC.h"
+#import "LCListFriendsToTagViewController.h"
 
 @interface LCCreatePostViewController ()
 {
-  LCContactsListVC *contactListVC;
+  LCListFriendsToTagViewController *contactListVC;
 }
 @end
 
@@ -60,8 +60,8 @@
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
-  contactListVC = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
   [self presentViewController:contactListVC animated:YES completion:nil];
 
 }
