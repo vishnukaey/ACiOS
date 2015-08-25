@@ -369,52 +369,24 @@ static LCAPIManager *sharedManager = nil;
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event"];
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
-  
-  if(headerPhoto)
-  {
-    NSData *imageData = UIImagePNGRepresentation(headerPhoto);
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:@"Authorization"];
-    [manager PUT:url parameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
-      
-#warning - PUT multipart issue
-      
-      if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
-      {
-        [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
-        failure(responseObject[kResponseMessage]);
-      }
-      else
-      {
-        NSLog(@"%@",responseObject);
-        success(responseObject);
-      }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      failure(error.localizedRecoverySuggestion);
-    }];
-  }
-  else
-  {
-    LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-    [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
-     {
-       if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-       {
-         [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-         failure(response[kResponseMessage]);
-       }
-       else
-       {
-         NSLog(@"%@",response);
-         success(response);
-       }
-     } andFailure:^(NSString *error) {
-       NSLog(@"%@",error);
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-       failure(error);
-     }];
-  }
+  NSData *imageData = UIImagePNGRepresentation(headerPhoto);
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPutOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andImageData:imageData withSuccess:^(id response) {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      NSLog(@"%@",response);
+      success(response);
+    }
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
 }
 
 + (void)followEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure

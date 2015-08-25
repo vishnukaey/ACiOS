@@ -15,5 +15,6 @@
 
 - (void)performGetOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
+- (void)performPutOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andImageData:(NSData*)imageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 @end
