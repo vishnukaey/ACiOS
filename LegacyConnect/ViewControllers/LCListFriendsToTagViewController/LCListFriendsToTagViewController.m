@@ -18,12 +18,21 @@
 
 @implementation LCListFriendsToTagViewController
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  _navigationItem.title = @"Select Friends";
+  self.title = @"Select Friends";
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
   friendsArray = [[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3", nil];
   tableSourceArray = [[NSMutableArray alloc] initWithArray:friendsArray];
-    // Do any additional setup after loading the view.
+  
+  // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,7 +86,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 80;
+  return 44;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -85,5 +94,10 @@
   NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
+
+- (IBAction)cancelButtonClicked:(id)sender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end
