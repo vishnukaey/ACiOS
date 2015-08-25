@@ -25,12 +25,21 @@ extern NSString *const kChangePasswordURL;
 extern NSString *const kLogOutURL;
 extern NSString *const kGetFeedsURL;
 extern NSString *const kFriendsURL;
+extern NSString *const kEventsURL;
+extern NSString *const kRejectFriendURL;
+extern NSString *const kAcceptFriendURL;
 
+extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;
 extern NSString *const kResponseData;
 extern NSString *const kInterestsKey;
 extern NSString *const kCausesKey;
+extern NSString *const kInterestIDKey;
+extern NSString *const kLastCauseIDKey;
+extern NSString *const kFriendsKey;
+extern NSString *const kFeedsKey;
+extern NSString *const kFriendsIDKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;

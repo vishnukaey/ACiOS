@@ -11,6 +11,7 @@
 @implementation LCConstants
 
 NSString *const kBaseURL = @"http://10.3.0.55:8000";
+
 NSString *const kLoginURL = @"/api/login";
 NSString *const kRegisterURL = @"/api/user";
 NSString *const kFBLoginURL = @"/api/user/fbLogin";
@@ -21,12 +22,21 @@ NSString *const kGetCausesURL = @"/api/causes";
 NSString *const kSaveIneterestsURL = @"/api/user/interests";
 NSString *const kGetFeedsURL = @"/api/feed";
 NSString *const kFriendsURL = @"/api/user/friend";
+NSString *const kEventsURL = @"/api/event";
+NSString *const kRejectFriendURL = @"api/user/friend/decline";
+NSString *const kAcceptFriendURL = @"api/user/friend/accept";
 
+NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
 NSString *const kResponseData = @"data";
 NSString *const kInterestsKey = @"interests";
 NSString *const kCausesKey = @"causes";
+NSString *const kInterestIDKey = @"interestId";
+NSString *const kLastCauseIDKey = @"lastCauseId";
+NSString *const kFriendsKey = @"friends";
+NSString *const kFriendsIDKey = @"friendId";
+NSString *const kFeedsKey = @"feeds";
 
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";
