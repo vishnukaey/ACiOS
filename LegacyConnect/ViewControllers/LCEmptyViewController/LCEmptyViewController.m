@@ -159,12 +159,13 @@
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
     createPostVC = [sb instantiateViewControllerWithIdentifier:@"LCCreatePostViewController"];
-//    [createPostVC.view setFrame:CGRectMake(0, 20, 320, 300)];
+
     createPostVC.delegate = self;
     giButton.hidden = YES;
     menuButton.hidden = YES;
-//    [mainContainer.view addSubview:createPostVC.view];
-    
+    CGRect frame = createPostVC.view.frame;
+    frame.origin.y = 20;
+    createPostVC.view.frame = frame;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [mainContainer presentViewController:createPostVC animated:YES completion:nil];
   }
