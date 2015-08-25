@@ -17,8 +17,8 @@
            @"causeID": @"causeid",
            @"name": @"name",
            @"tagLine": @"tagline",
-           @"logoURLLarge": @"causelogolarge",
-           @"logoURLSmall": @"causelogosmall",
+           @"logoURLLarge": @"cause_logo_large",
+           @"logoURLSmall": @"cause_logo_small"
            };
 }
 

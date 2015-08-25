@@ -75,15 +75,19 @@
 {
   LCContact *con = [contactsArray objectAtIndex:sender.tag];
   contactsTable.selectedButton = sender;
-  NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:sender.tag];
-  if (![contactsTable indexPathSelected:indexPath])
-  {
     if (con.P_emails.count==1)
     {
-      [contactsTable AddIndexPath:indexPath];
+      [contactsTable AddOrRemoveID:con.P_emails[0]];
     }
     else//only if there are multiple selections for a single cell
     {
+      for (int i = 0; i<con.P_emails.count; i++)
+      {
+        if ([contactsTable.selectedIDs containsObject:con.P_emails[i]]) {
+          [contactsTable AddOrRemoveID:con.P_emails[i]];
+          return;
+        }
+      }
       UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select email-ID" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
       for (NSString *title in con.P_emails)
       {
@@ -92,7 +96,6 @@
       sheet.tag = sender.tag;
       [sheet showInView:self.view];
     }
-  }
 }
 
 #pragma mark - UIActionSheet delegate
@@ -100,8 +103,8 @@
 {
   if (buttonIndex>0)
   {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:buttonIndex - 1 inSection:actionSheet.tag];
-    [contactsTable AddIndexPath:indexPath];
+    LCContact *con = [contactsArray objectAtIndex:actionSheet.tag];
+    [contactsTable AddOrRemoveID:con.P_emails[buttonIndex -1]];
   }
 }
 
@@ -151,7 +154,7 @@
   checkbutton.tag = indexPath.row;
   checkbutton.center = CGPointMake(tableView.frame.size.width - 50, 40);
   [checkbutton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-  [tableView setImageForButton:checkbutton];
+  [tableView setStatusForButton:checkbutton byCheckingIDs:con.P_emails];
   [contactCell addSubview:checkbutton];
   [cell addSubview:contactCell];
   contactCell.tag = 10;

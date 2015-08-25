@@ -24,7 +24,7 @@
 		0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5F1BEF1B7DC17200E749BF /* camera-icon.png */; };
 		0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5F1BF11B7DC50800E749BF /* default-placeholder.png */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
-		0B5FA6EC1B57BB5400DDC2B1 /* LCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6EB1B57BB5400DDC2B1 /* LCUser.m */; };
+		0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */; };
 		0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7B3691B57CCF200261658 /* LCLoginTextField.m */; };
 		0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36B1B57DE7400261658 /* warning@2x.png */; };
 		0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36C1B57DE7400261658 /* warning@3x.png */; };
@@ -54,6 +54,7 @@
 		0BF05A7D1B4E645400FF7B39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A7A1B4E645400FF7B39 /* main.m */; };
 		0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */; };
 		0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A801B4E64A000FF7B39 /* Main.storyboard */; };
+		0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBC7B81B81BC5100E75179 /* LCFriend.m */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -92,6 +93,9 @@
 		CEB9B6A31B79BE2200C61BA0 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9B6A21B79BE2200C61BA0 /* backButton.png */; };
 		CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9B6A41B79C26300C61BA0 /* profileSettings.png */; };
 		CEB9B6A91B79E4E900C61BA0 /* LCTabMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9B6A81B79E4E900C61BA0 /* LCTabMenuView.m */; };
+		CEB9F3E01B84487100AD265A /* profileWaiting.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9F3DF1B84487100AD265A /* profileWaiting.png */; };
+		CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9F3E11B8496E400AD265A /* communityMemebrs.png */; };
+		CEB9F3E41B8496E900AD265A /* communityWebsite.png in Resources */ = {isa = PBXBuildFile; fileRef = CEB9F3E31B8496E900AD265A /* communityWebsite.png */; };
 		CEBA92C91B660F0500C02F93 /* LCProfileViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */; };
 		CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CA1B6627D400C02F93 /* Profile.storyboard */; };
 		CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CC1B66632000C02F93 /* comment_dummy.png */; };
@@ -115,8 +119,12 @@
 		CEBED6AA1B5FAE0C0012FEBB /* LCViewCommunity.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6A91B5FAE0C0012FEBB /* LCViewCommunity.m */; };
 		CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */; };
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
+		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
+		CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65E1B835DC8008DAD01 /* profileAdd.png */; };
+		CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC9C65F1B835DC8008DAD01 /* profileTick.png */; };
 		CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */; };
 		CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CECBC8D01B56794F0012B287 /* LCGIButton.m */; };
+		CEE358011B86E41900405239 /* LCUserFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE358001B86E41900405239 /* LCUserFriendsVC.m */; };
 		CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
 		CEF275D91B78A32600709005 /* LCCommentCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEF275D81B78A32600709005 /* LCCommentCellXIB.xib */; };
@@ -161,9 +169,9 @@
 		0B5F1BF11B7DC50800E749BF /* default-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-placeholder.png"; sourceTree = "<group>"; };
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
-		0B5FA6EA1B57BB5400DDC2B1 /* LCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUser.h; path = Models/LCUser/LCUser.h; sourceTree = "<group>"; };
-		0B5FA6EB1B57BB5400DDC2B1 /* LCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUser.m; path = Models/LCUser/LCUser.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
+		0B86A4EC1B86EE73005D4BD7 /* LCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEvent.h; path = Models/LCEvent/LCEvent.h; sourceTree = "<group>"; };
+		0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEvent.m; path = Models/LCEvent/LCEvent.m; sourceTree = "<group>"; };
 		0BB7B3681B57CCF200261658 /* LCLoginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginTextField.h; path = CustomViews/LCLoginTextField/LCLoginTextField.h; sourceTree = "<group>"; };
 		0BB7B3691B57CCF200261658 /* LCLoginTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginTextField.m; path = CustomViews/LCLoginTextField/LCLoginTextField.m; sourceTree = "<group>"; };
 		0BB7B36B1B57DE7400261658 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
@@ -215,6 +223,8 @@
 		0BF05A7A1B4E645400FF7B39 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SupportingFiles/main.m; sourceTree = "<group>"; };
 		0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = Storyboards/LaunchScreen.xib; sourceTree = "<group>"; };
 		0BF05A801B4E64A000FF7B39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
+		0BFBC7B71B81BC5100E75179 /* LCFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFriend.h; path = Models/LCFriend/LCFriend.h; sourceTree = "<group>"; };
+		0BFBC7B81B81BC5100E75179 /* LCFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFriend.m; path = Models/LCFriend/LCFriend.m; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -281,6 +291,9 @@
 		CEB9B6A41B79C26300C61BA0 /* profileSettings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileSettings.png; sourceTree = "<group>"; };
 		CEB9B6A71B79E4E900C61BA0 /* LCTabMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTabMenuView.h; path = CustomViews/LCTabMenuView/LCTabMenuView.h; sourceTree = "<group>"; };
 		CEB9B6A81B79E4E900C61BA0 /* LCTabMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTabMenuView.m; path = CustomViews/LCTabMenuView/LCTabMenuView.m; sourceTree = "<group>"; };
+		CEB9F3DF1B84487100AD265A /* profileWaiting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileWaiting.png; sourceTree = "<group>"; };
+		CEB9F3E11B8496E400AD265A /* communityMemebrs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communityMemebrs.png; sourceTree = "<group>"; };
+		CEB9F3E31B8496E900AD265A /* communityWebsite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = communityWebsite.png; sourceTree = "<group>"; };
 		CEBA92C71B660F0500C02F93 /* LCProfileViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileViewVC.h; path = ViewControllers/LCProfileVC/LCProfileViewVC.h; sourceTree = "<group>"; };
 		CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileViewVC.m; path = ViewControllers/LCProfileVC/LCProfileViewVC.m; sourceTree = "<group>"; };
 		CEBA92CA1B6627D400C02F93 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -319,10 +332,16 @@
 		CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityMembers.m; path = ViewControllers/LCCommunityVC/LCCommunityMembers.m; sourceTree = "<group>"; };
 		CEBED6AE1B5FAE460012FEBB /* LCCommunityDateSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommunityDateSelection.h; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.h; sourceTree = "<group>"; };
 		CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityDateSelection.m; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.m; sourceTree = "<group>"; };
+		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
+		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
+		CEC9C65E1B835DC8008DAD01 /* profileAdd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileAdd.png; sourceTree = "<group>"; };
+		CEC9C65F1B835DC8008DAD01 /* profileTick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileTick.png; sourceTree = "<group>"; };
 		CECBC8CD1B56794F0012B287 /* LCFeedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedCellView.h; path = CustomViews/LCFeedCellView.h; sourceTree = "<group>"; };
 		CECBC8CE1B56794F0012B287 /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView.m; sourceTree = "<group>"; };
 		CECBC8CF1B56794F0012B287 /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton.h; sourceTree = "<group>"; };
 		CECBC8D01B56794F0012B287 /* LCGIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGIButton.m; path = CustomViews/LCGIButton.m; sourceTree = "<group>"; };
+		CEE357FF1B86E41900405239 /* LCUserFriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserFriendsVC.h; path = ViewControllers/LCProfileVC/LCUserFriendsVC.h; sourceTree = "<group>"; };
+		CEE358001B86E41900405239 /* LCUserFriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUserFriendsVC.m; path = ViewControllers/LCProfileVC/LCUserFriendsVC.m; sourceTree = "<group>"; };
 		CEF275D21B78748B00709005 /* LCFeedcellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFeedcellXIB.xib; sourceTree = "<group>"; };
 		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
 		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
@@ -454,13 +473,13 @@
 			name = Contact;
 			sourceTree = "<group>";
 		};
-		0B5FA6E31B57BA7100DDC2B1 /* LCUser */ = {
+		0B5FA6E31B57BA7100DDC2B1 /* LCFriend */ = {
 			isa = PBXGroup;
 			children = (
-				0B5FA6EA1B57BB5400DDC2B1 /* LCUser.h */,
-				0B5FA6EB1B57BB5400DDC2B1 /* LCUser.m */,
+				0BFBC7B71B81BC5100E75179 /* LCFriend.h */,
+				0BFBC7B81B81BC5100E75179 /* LCFriend.m */,
 			);
-			name = LCUser;
+			name = LCFriend;
 			sourceTree = "<group>";
 		};
 		0BB594241B71E4EC0067744B /* Mantle */ = {
@@ -811,12 +830,13 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0BFBC7BD1B820CA700E75179 /* LCEvent */,
 				0B001B1C1B7CA70A00E8E569 /* LCTag */,
 				0B001B181B7C9E7400E8E569 /* LCFeed */,
 				0BBDC0781B70C4950004C4B6 /* LCUserDetail */,
 				0BBDC0741B70BFA20004C4B6 /* LCInterest */,
 				0BBDC0731B70BF960004C4B6 /* LCCause */,
-				0B5FA6E31B57BA7100DDC2B1 /* LCUser */,
+				0B5FA6E31B57BA7100DDC2B1 /* LCFriend */,
 				0B5FA6E21B57BA6400DDC2B1 /* Contact */,
 			);
 			name = Models;
@@ -838,6 +858,11 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				CEB9F3E11B8496E400AD265A /* communityMemebrs.png */,
+				CEB9F3E31B8496E900AD265A /* communityWebsite.png */,
+				CEB9F3DF1B84487100AD265A /* profileWaiting.png */,
+				CEC9C65E1B835DC8008DAD01 /* profileAdd.png */,
+				CEC9C65F1B835DC8008DAD01 /* profileTick.png */,
 				0B5F1BF11B7DC50800E749BF /* default-placeholder.png */,
 				0B5F1BEF1B7DC17200E749BF /* camera-icon.png */,
 				CEB9B6A41B79C26300C61BA0 /* profileSettings.png */,
@@ -863,6 +888,15 @@
 				CEBED6971B5F78B00012FEBB /* LCDummyValues.m */,
 			);
 			name = DummyData;
+			sourceTree = "<group>";
+		};
+		0BFBC7BD1B820CA700E75179 /* LCEvent */ = {
+			isa = PBXGroup;
+			children = (
+				0B86A4EC1B86EE73005D4BD7 /* LCEvent.h */,
+				0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */,
+			);
+			name = LCEvent;
 			sourceTree = "<group>";
 		};
 		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
@@ -971,6 +1005,8 @@
 			children = (
 				CEBA92C71B660F0500C02F93 /* LCProfileViewVC.h */,
 				CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */,
+				CEE357FF1B86E41900405239 /* LCUserFriendsVC.h */,
+				CEE358001B86E41900405239 /* LCUserFriendsVC.m */,
 			);
 			name = LCProfileVC;
 			sourceTree = "<group>";
@@ -1025,9 +1061,19 @@
 			name = LCCommunityVC;
 			sourceTree = "<group>";
 		};
+		CEC6D9961B81D1C000157F89 /* LCTaggedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */,
+				CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */,
+			);
+			name = LCTaggedLabel;
+			sourceTree = "<group>";
+		};
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEC6D9961B81D1C000157F89 /* LCTaggedLabel */,
 				CEB9B6A61B79E49B00C61BA0 /* LCTabMenuView */,
 				CEF275D41B78A2BA00709005 /* LCCommentCell */,
 				0BED515F1B74D3FA00DA125B /* LCChooseInterestCVC */,
@@ -1107,6 +1153,7 @@
 				TargetAttributes = {
 					0BF05A3B1B4E622200FF7B39 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = L75K25G57P;
 					};
 					0BF05A541B4E622200FF7B39 = {
 						CreatedOnToolsVersion = 6.1;
@@ -1147,8 +1194,10 @@
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
 				96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */,
+				CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */,
+				CEB9F3E41B8496E900AD265A /* communityWebsite.png in Resources */,
 				0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */,
 				0BE2B9B51B58D79C0026E607 /* photo.jpg in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
@@ -1156,6 +1205,7 @@
 				CEBA92CB1B6627D400C02F93 /* Profile.storyboard in Resources */,
 				CE1FA2E71B5508AA00A9B609 /* clock.jpg in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
+				CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */,
 				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
 				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
@@ -1167,8 +1217,10 @@
 				CE5954D11B6F5EF100D839DD /* check_box.png in Resources */,
 				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
 				CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */,
+				CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
 				CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */,
+				CEB9F3E01B84487100AD265A /* profileWaiting.png in Resources */,
 				CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */,
 				CEA30E2C1B7361C700DAA4BA /* Community.storyboard in Resources */,
 				0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */,
@@ -1224,9 +1276,9 @@
 			files = (
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */,
+				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
-				0B5FA6EC1B57BB5400DDC2B1 /* LCUser.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
 				96BD14591B72166B004D5CFA /* MTLValueTransformer.m in Sources */,
@@ -1236,12 +1288,15 @@
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
 				0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */,
+				CEE358011B86E41900405239 /* LCUserFriendsVC.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */,
+				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,
 				96BD145C1B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m in Sources */,
+				0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */,
 				CECBC8D21B56794F0012B287 /* LCGIButton.m in Sources */,
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				96BD145D1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m in Sources */,
@@ -1406,12 +1461,14 @@
 			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1420,12 +1477,14 @@
 			baseConfigurationReference = 61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

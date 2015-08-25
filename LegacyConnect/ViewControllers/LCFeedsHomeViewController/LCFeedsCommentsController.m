@@ -165,6 +165,11 @@
   }
 }
 
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  NSLog(@"tag details-->>%@", tagDetails);
+}
+
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

@@ -103,7 +103,7 @@
   LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
   cell.interestNameLabel.text = interstObj.name;
   
-  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   
   return cell;
 }
@@ -112,6 +112,8 @@
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
   LCCreateCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateCommunity"];
+  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+  vc.interestId = interstObj.interestID;
   [self.navigationController pushViewController:vc animated:YES];
 }
 

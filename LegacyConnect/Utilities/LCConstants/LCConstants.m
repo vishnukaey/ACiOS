@@ -20,6 +20,7 @@ NSString *const kGetInterestsURL = @"/api/interests";
 NSString *const kGetCausesURL = @"/api/causes";
 NSString *const kSaveIneterestsURL = @"/api/user/interests";
 NSString *const kGetFeedsURL = @"/api/feed";
+NSString *const kFriendsURL = @"/api/user/friend";
 
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
@@ -63,5 +64,8 @@ NSString *const kCommentsfeedCellID = @"commentfeedCell";
 NSString *const kFeedCellActionLike = @"feedCellLike";
 NSString *const kFeedCellActionComment = @"feedCellComment";
 NSString *const kFeedCellActionImage = @"feedCellImage";
+
+NSString *const kFeedTagTypeCause = @"cause";
+NSString *const kFeedTagTypeUser = @"user";
 
 @end

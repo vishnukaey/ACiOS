@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KILabel.h"
+#import "LCTaggedLabel.h"
 
 //--------------protocols
 @protocol feedCellDelegate <NSObject>
 
 -(void)feedCellActionWithType :(NSString *)type andFeed:(LCFeed *)feed;
+-(void)tagTapped :(NSDictionary *)tagDetails;
 
 @end
 
@@ -22,7 +23,7 @@
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
   IBOutlet UILabel *usernameLabel, *createdLabel, *timeLabel, *thanksLabel, *commentsLabel;
-  IBOutlet KILabel *postDescription;
+  IBOutlet LCTaggedLabel *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
 }
 

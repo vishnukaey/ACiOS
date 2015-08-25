@@ -11,6 +11,9 @@
 
 @interface LCCreateCommunity : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property(nonatomic, retain)NSMutableString *communityDate;
+@property(nonatomic, retain)NSString *interestId;
+
 - (IBAction)cancelAction;
 - (IBAction)nextButtonAction;
 

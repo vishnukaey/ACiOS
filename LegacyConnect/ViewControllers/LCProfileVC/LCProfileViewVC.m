@@ -9,9 +9,12 @@
 #import "LCProfileViewVC.h"
 #import "LCTabMenuView.h"
 #import "LCCommunityInterestCell.h"
+#import "LCUserFriendsVC.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 
 @implementation LCProfileViewVC
+@synthesize userID;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -23,8 +26,14 @@
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
   
+  friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+  impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
+  
+ 
   
   [self addTabMenu];
+  
+  [self loadUserDetails];
   
   [self loadMileStones];
   [self loadInterests];
@@ -56,6 +65,36 @@
 
 
 #pragma mark - setup functions
+- (void)loadUserDetails
+{
+   NSLog(@"userID<<<-->>>%@", userID);
+  //for testing as user ID is not persisting
+  NSString *nativeUserId = @"6994";
+  userID = @"6875";
+  [LCAPIManager getUserDetailsOfUser:userID WithSuccess:^(id response) {
+    LCUserDetail *obj = response;
+    NSLog(@"%@",response);
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:obj.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:obj.avatarURL] placeholderImage:[UIImage imageNamed:@"landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"]];
+    userNameLabel.text = [NSString stringWithFormat:@"%@ %@", obj.firstName, obj.lastName];
+    memeberSincelabel.text = [NSString stringWithFormat:@"Member since %@", obj.activationDate];
+    locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", obj.gender, obj.dob, obj.location];
+    
+    if ([nativeUserId isEqualToString:userID])
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_SELF;
+    }
+    else
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    }
+    
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+}
 
 - (void)addTabMenu
 {
@@ -117,6 +156,19 @@
 
 
 #pragma mark - button actions
+- (IBAction)friendsButtonClicked
+{
+  NSLog(@"friends clicked----->");
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+  LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCUserFriendsVC"];
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)impactsButtonClicked
+{
+  NSLog(@"impacts clicked----->");
+}
+
 - (IBAction)backAction:(id)sender
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -131,21 +183,42 @@
 
 - (IBAction)editClicked:(UIButton *)sender
 {
-  NSLog(@"edit clicked-->>");
+  if (currentProfileState == PROFILE_SELF)
+  {
+    NSLog(@"go to settings-->>");
+  }
+  else if (currentProfileState == PROFILE_OTHER_FRIEND)
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    NSLog(@"remove friend-->>");
+  }
+  else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_WAITING;
+    NSLog(@"send friend request-->>");
+  }
+  else if (currentProfileState == PROFILE_OTHER_WAITING)
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    NSLog(@"cancel invitation-->>");
+  }
 }
 
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
   float collapseConstant = 0;;
-  if (self.collapseViewHeight.constant>0)
+  if (collapseViewHeight.constant>0)
   {
-    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
   }
-  if (self.collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
+  if (collapseViewHeight.constant<170 && scrollView.contentOffset.y<0)
   {
-    collapseConstant = self.collapseViewHeight.constant - scrollView.contentOffset.y;
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
   }
   if (collapseConstant<0)
@@ -156,7 +229,7 @@
   {
     collapseConstant = 170;
   }
-  self.collapseViewHeight.constant = collapseConstant;
+  collapseViewHeight.constant = collapseConstant;
 }
 
 #pragma mark - collection view delegates
@@ -176,7 +249,7 @@
   }
   LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
   cell.interestNameLabel.text = interstObj.name;
-  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   
   return cell;
 }
@@ -224,5 +297,9 @@
   NSLog(@"actionType--->>>%@", type);
 }
 
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  NSLog(@"tag details-->>%@", tagDetails);
+}
 
 @end

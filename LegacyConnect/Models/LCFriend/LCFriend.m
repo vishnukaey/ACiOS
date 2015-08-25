@@ -6,20 +6,20 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCUser.h"
+#import "LCFriend.h"
 
 
-@implementation LCUser
+@implementation LCFriend
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
-           @"userID": @"id",
-           @"email": @"email",
+           @"createdAt": @"createdAt",
+           @"userID": @"friendId",
            @"firstName": @"firstName",
            @"lastName": @"lastName",
-           @"dob": @"dob",
-           @"avatarURL": @"avatarURL",
+           @"avatarURL": @"avatarUrl",
+           @"status": @"status"
            };
 }
 
