@@ -62,8 +62,6 @@
 		96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */; };
 		96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */; };
 		96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */; };
-		96B86A2A1B7B474A003EF7CA /* LCTagFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A281B7B474A003EF7CA /* LCTagFriendsTableViewCell.m */; };
-		96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B86A291B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib */; };
 		96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */; };
 		96BD14361B721659004D5CFA /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14331B721659004D5CFA /* EXTScope.m */; };
 		96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14391B72166B004D5CFA /* MTLJSONAdapter.m */; };
@@ -236,9 +234,6 @@
 		96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreatePostViewController.m; path = ViewControllers/LCCreatePostViewController/LCCreatePostViewController.m; sourceTree = "<group>"; };
 		96B86A231B7A232C003EF7CA /* LCListFriendsToTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListFriendsToTagViewController.h; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.h; sourceTree = "<group>"; };
 		96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListFriendsToTagViewController.m; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.m; sourceTree = "<group>"; };
-		96B86A271B7B474A003EF7CA /* LCTagFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTagFriendsTableViewCell.h; path = CustomViews/LCTagFriendsTableViewCell/LCTagFriendsTableViewCell.h; sourceTree = "<group>"; };
-		96B86A281B7B474A003EF7CA /* LCTagFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTagFriendsTableViewCell.m; path = CustomViews/LCTagFriendsTableViewCell/LCTagFriendsTableViewCell.m; sourceTree = "<group>"; };
-		96B86A291B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCTagFriendsTableViewCell.xib; path = CustomViews/LCTagFriendsTableViewCell/LCTagFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		96BD142F1B721659004D5CFA /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTKeyPathCoding.h; sourceTree = "<group>"; };
 		96BD14301B721659004D5CFA /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
 		96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
@@ -953,16 +948,6 @@
 			name = LCListFriendsToTagViewController;
 			sourceTree = "<group>";
 		};
-		96B86A2C1B7B4751003EF7CA /* LCTagFriendsTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				96B86A271B7B474A003EF7CA /* LCTagFriendsTableViewCell.h */,
-				96B86A281B7B474A003EF7CA /* LCTagFriendsTableViewCell.m */,
-				96B86A291B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib */,
-			);
-			name = LCTagFriendsTableViewCell;
-			sourceTree = "<group>";
-		};
 		AA0D4ABFB4BBC81C1666D4C8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1087,7 +1072,6 @@
 				0BB7B3711B57DEC800261658 /* LCFeedCellView */,
 				0BB7B3701B57DEB100261658 /* LCGIButton */,
 				0BB7B36F1B57DE9500261658 /* LCLoginTextField */,
-				96B86A2C1B7B4751003EF7CA /* LCTagFriendsTableViewCell */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -1193,7 +1177,6 @@
 				0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */,
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
-				96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */,
 				CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */,
@@ -1313,7 +1296,6 @@
 				96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				96BD14561B72166B004D5CFA /* MTLModel+NSCoding.m in Sources */,
-				96B86A2A1B7B474A003EF7CA /* LCTagFriendsTableViewCell.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */,

@@ -113,17 +113,6 @@
   [friendsTableView reloadData];
 }
 
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
-{
-  NSLog(@"Cancel clicked");
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
-{
-  NSLog(@"Search Clicked");
-  [self searchTableList:searchBar.text];
-}
-
 - (void)searchTableList :(NSString *)text
 {
   for (int i = 0; i<friendsArray.count ; i++)

@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCMultipleSelectionTable.h"
 
 @interface LCListFriendsToTagViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
-
+{
+  IBOutlet LCMultipleSelectionTable *friendsTableView;
+  NSArray *friendsArray;
+  NSMutableArray *searchResultsArray;
+}
 
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *doneButton;

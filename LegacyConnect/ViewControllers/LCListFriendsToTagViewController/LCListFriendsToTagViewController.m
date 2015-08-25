@@ -7,86 +7,151 @@
 //
 
 #import "LCListFriendsToTagViewController.h"
-#import "LCTagFriendsTableViewCell.h"
 
-@interface LCListFriendsToTagViewController ()
-{
-  NSMutableArray *friendsArray;
-  NSMutableArray *tableSourceArray;
-}
+
+
+#pragma mark - LCInviteCommunityFriendCell class
+@interface LCTagFriendsTableViewCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *friendNameLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *friendPhotoView;
+@property(nonatomic, strong)IBOutlet UIButton *checkButton;
 @end
+
+@implementation LCTagFriendsTableViewCell
+@end
+
+#pragma mark - LCListFriendsToTagViewController class
 
 @implementation LCListFriendsToTagViewController
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-   self.navigationItem.title = @"Select Friends";
-  self.title = @"Select Friends";
-}
-
+#pragma mark - controller life cycle
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-  friendsArray = [[NSMutableArray alloc] initWithObjects:@"1",@"2",@"3", nil];
-  tableSourceArray = [[NSMutableArray alloc] initWithArray:friendsArray];
-  
+  [super viewDidLoad];
   // Do any additional setup after loading the view.
+  [self loadFriendsList];
+  searchResultsArray = [[NSMutableArray alloc] init];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:true];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.navigationController.navigationBarHidden = true;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:true];
+  [appdel.menuButton setHidden:true];
 }
-*/
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - setup functions
+- (void) loadFriendsList
+{
+  [LCAPIManager getFriendsWithSuccess:^(id response) {
+    NSLog(@"%@",response);
+    friendsArray = response;
+    [searchResultsArray addObjectsFromArray:response];
+    [friendsTableView reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+}
 
 
-#pragma searchbar delegates
+#pragma mark - button actions
+-(IBAction)doneButtonAction
+{
+  NSLog(@"done button clicked-->>>");
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)cancelAction
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)checkbuttonAction :(UIButton *)sender
+{
+  friendsTableView.selectedButton = sender;
+  LCFriend *friend = searchResultsArray[sender.tag];
+  [friendsTableView AddOrRemoveID:friend.userID];
+}
+#pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  NSLog(@"searchText :%@",searchText);
+  [searchResultsArray removeAllObjects];
+  if([searchText length] != 0) {
+    [self searchTableList:searchBar.text];
+  }
+  else
+  {
+    [searchResultsArray addObjectsFromArray:friendsArray];
+  }
+  [friendsTableView reloadData];
 }
 
+- (void)searchTableList :(NSString *)text
+{
+  for (int i = 0; i<friendsArray.count ; i++)
+  {
+    LCFriend *friend = friendsArray[i];
+    NSString * tempStr = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
+    NSComparisonResult result = [tempStr compare:text options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [text length])];
+    if (result == NSOrderedSame)
+    {
+      [searchResultsArray addObject:friend];
+    }
+  }
+}
 
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;
+  return 1;    //count of section
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return tableSourceArray.count;
+  return searchResultsArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *MyIdentifier = @"LCTagFriendsTableViewCell";
-  LCTagFriendsTableViewCell *cell = (LCTagFriendsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  LCTagFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-    NSArray *customCellArray = [[NSBundle mainBundle] loadNibNamed:MyIdentifier owner:nil options:nil];
-    cell = [customCellArray objectAtIndex:0];
+    cell = [[LCTagFriendsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:MyIdentifier];
   }
-  
-  cell.friendNameLabel.text = tableSourceArray[indexPath.row];
+  LCFriend *friend = searchResultsArray[indexPath.row];
+  cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+  cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
+  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+  cell.checkButton.tag = indexPath.row;
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friend.userID, nil]];
   
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 44;
+  return 76;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,10 +159,14 @@
   NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
-
-- (IBAction)cancelButtonClicked:(id)sender
-{
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
