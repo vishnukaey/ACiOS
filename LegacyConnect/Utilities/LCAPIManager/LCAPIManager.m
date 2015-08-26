@@ -186,7 +186,7 @@ static LCAPIManager *sharedManager = nil;
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
-  NSDictionary *dict = @{kFriendsIDKey: userFriend.userID};
+  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -209,8 +209,8 @@ static LCAPIManager *sharedManager = nil;
 + (void)acceptFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/user/friend/accept"];
-  NSDictionary *dict = @{@"friendId": userFriend.userID};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kAcceptFriendURL];
+  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -234,8 +234,8 @@ static LCAPIManager *sharedManager = nil;
 + (void)rejectFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/user/friend/decline"];
-  NSDictionary *dict = @{@"friendId": userFriend.userID};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRejectFriendURL];
+  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -287,7 +287,7 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)createEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event"];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   
@@ -296,7 +296,7 @@ static LCAPIManager *sharedManager = nil;
     NSData *imageData = UIImagePNGRepresentation(headerPhoto);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:@"Authorization"];
+    [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
     [manager POST:url parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
       [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -340,8 +340,8 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)addUsersWithUserIDs:(NSArray*)userIDs forEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event/users"];
-  NSDictionary *dict = @{@"users":userIDs, @"eventId": eventID};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kAddUsersToEventURL];
+  NSDictionary *dict = @{@"users":userIDs, kEventIDKey: eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -363,10 +363,9 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-
 + (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event"];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   NSData *imageData = UIImagePNGRepresentation(headerPhoto);
@@ -389,10 +388,11 @@ static LCAPIManager *sharedManager = nil;
   }];
 }
 
+
 + (void)followEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event/follow"];
-  NSDictionary *dict = @{@"eventId":eventID};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL,kFollowEventURL];
+  NSDictionary *dict = @{kEventIDKey:eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -413,10 +413,11 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
+
 + (void)unfollowEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/event/unfollow"];
-  NSDictionary *dict = @{@"eventId":eventID};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUnfollowEventURL];
+  NSDictionary *dict = @{kEventIDKey:eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -441,8 +442,8 @@ static LCAPIManager *sharedManager = nil;
 + (void)getListOfEventsForInterestID:(NSString*)InterestID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *params = [NSString stringWithFormat:@"?%@=%@",@"interestId",InterestID];
-  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, @"/api/event",params];
+  NSString *params = [NSString stringWithFormat:@"?%@=%@",kInterestIDKey,InterestID];
+  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kEventsURL,params];
   
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
@@ -455,7 +456,7 @@ static LCAPIManager *sharedManager = nil;
      {
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kEventsKey] error:&error];
        success(responsesArray);
      }
    } andFailure:^(NSString *error) {
@@ -464,7 +465,6 @@ static LCAPIManager *sharedManager = nil;
      failure(error);
    }];
 }
-
 
 
 
@@ -546,8 +546,8 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)forgotPasswordOfUserWithMailID:(NSString *)emailID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/user/forgotPassword"];
-  NSDictionary *dict = @{@"email":emailID};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kForgotPasswordURL];
+  NSDictionary *dict = @{kEmailKey:emailID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -571,8 +571,8 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)resetPasswordWithPasswordResetCode:(NSString *)PasswordResetCode andNewPassword:(NSString*) password withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"/api/user/resetPassword"];
-  NSDictionary *dict = @{@"passwordResetCode":PasswordResetCode, @"password":password};
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUpdatePasswordURL];
+  NSDictionary *dict = @{kPasswordResetCodeKey:PasswordResetCode, kPasswordKey:password};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
