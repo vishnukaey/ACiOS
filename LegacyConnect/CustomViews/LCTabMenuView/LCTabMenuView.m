@@ -155,6 +155,15 @@
 
 - (void)buttonAction :(UIButton *)sender
 {
+    for (int i = 0; i<views.count; i++)
+    {
+      if (i==currentIndex)
+      {
+        continue;
+      }
+      UIView *v_ = views[i];
+      v_.center = CGPointMake(v_.superview.frame.size.width*3/2, v_.center.y);
+    }
   [self animateToIndex:sender.tag];
 }
 
