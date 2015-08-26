@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCTabMenuView.h"
 
 @interface LCSearchViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIView *tableView;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet LCTabMenuView *tabMenu;
 @end

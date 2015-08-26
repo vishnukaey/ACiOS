@@ -135,6 +135,11 @@
 - (void)setViews:(NSArray *)views_
 {
   views = views_;
+  if(views_.count)
+  {
+    UIView *v__ = [views_ objectAtIndex:0];
+    [v__ superview].clipsToBounds = YES;
+  }
 }
 
 - (void)addButtons
@@ -173,7 +178,7 @@
     return;
   }
   
-  [UIView animateWithDuration:0.1 delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^
+  [UIView animateWithDuration:0.5 delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^
    {
      currentView.center = currentViewPointTo;
      nextView.center = CGPointMake(nextView.superview.frame.size.width/2, nextView.center.y);
