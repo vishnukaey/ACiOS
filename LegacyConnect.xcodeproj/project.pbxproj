@@ -62,8 +62,6 @@
 		96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */; };
 		96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */; };
 		96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */; };
-		96B86A2A1B7B474A003EF7CA /* LCTagFriendsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A281B7B474A003EF7CA /* LCTagFriendsTableViewCell.m */; };
-		96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96B86A291B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib */; };
 		96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */; };
 		96BD14361B721659004D5CFA /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14331B721659004D5CFA /* EXTScope.m */; };
 		96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14391B72166B004D5CFA /* MTLJSONAdapter.m */; };
@@ -104,6 +102,8 @@
 		CEBA92D41B66632000C02F93 /* menuButton_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */; };
 		CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D01B66632000C02F93 /* photoPost_dummy.png */; };
 		CEBA92D71B6664A300C02F93 /* search_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBA92D61B6664A300C02F93 /* search_dummy.png */; };
+		CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */; };
+		CEBB4FFC1B8C85D300C1552E /* locationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = CEBB4FFB1B8C85D300C1552E /* locationIcon.png */; };
 		CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */; };
 		CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */; };
 		CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */; };
@@ -236,9 +236,6 @@
 		96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreatePostViewController.m; path = ViewControllers/LCCreatePostViewController/LCCreatePostViewController.m; sourceTree = "<group>"; };
 		96B86A231B7A232C003EF7CA /* LCListFriendsToTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListFriendsToTagViewController.h; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.h; sourceTree = "<group>"; };
 		96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListFriendsToTagViewController.m; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.m; sourceTree = "<group>"; };
-		96B86A271B7B474A003EF7CA /* LCTagFriendsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTagFriendsTableViewCell.h; path = CustomViews/LCTagFriendsTableViewCell/LCTagFriendsTableViewCell.h; sourceTree = "<group>"; };
-		96B86A281B7B474A003EF7CA /* LCTagFriendsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTagFriendsTableViewCell.m; path = CustomViews/LCTagFriendsTableViewCell/LCTagFriendsTableViewCell.m; sourceTree = "<group>"; };
-		96B86A291B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCTagFriendsTableViewCell.xib; path = CustomViews/LCTagFriendsTableViewCell/LCTagFriendsTableViewCell.xib; sourceTree = "<group>"; };
 		96BD142F1B721659004D5CFA /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTKeyPathCoding.h; sourceTree = "<group>"; };
 		96BD14301B721659004D5CFA /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
 		96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
@@ -303,6 +300,9 @@
 		CEBA92CF1B66632000C02F93 /* menuButton_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuButton_dummy.png; sourceTree = "<group>"; };
 		CEBA92D01B66632000C02F93 /* photoPost_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoPost_dummy.png; sourceTree = "<group>"; };
 		CEBA92D61B6664A300C02F93 /* search_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search_dummy.png; sourceTree = "<group>"; };
+		CEBB4FF81B8C75BD00C1552E /* LCListLocationsToTagVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListLocationsToTagVC.h; path = ViewControllers/LCListLocationsToTagVC/LCListLocationsToTagVC.h; sourceTree = "<group>"; };
+		CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListLocationsToTagVC.m; path = ViewControllers/LCListLocationsToTagVC/LCListLocationsToTagVC.m; sourceTree = "<group>"; };
+		CEBB4FFB1B8C85D300C1552E /* locationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationIcon.png; sourceTree = "<group>"; };
 		CEBBBFAD1B6B377B001C91E1 /* LCLocationSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLocationSearchField.h; path = CustomViews/LCLocationSearchField/LCLocationSearchField.h; sourceTree = "<group>"; };
 		CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLocationSearchField.m; path = CustomViews/LCLocationSearchField/LCLocationSearchField.m; sourceTree = "<group>"; };
 		CEBBBFB01B6B9041001C91E1 /* LCFullScreenImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFullScreenImageVC.h; path = ViewControllers/LCFeedsHomeViewController/LCFullScreenImageVC.h; sourceTree = "<group>"; };
@@ -858,6 +858,7 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				CEBB4FFB1B8C85D300C1552E /* locationIcon.png */,
 				CEB9F3E11B8496E400AD265A /* communityMemebrs.png */,
 				CEB9F3E31B8496E900AD265A /* communityWebsite.png */,
 				CEB9F3DF1B84487100AD265A /* profileWaiting.png */,
@@ -938,6 +939,7 @@
 		96B86A221B7A2106003EF7CA /* CreatePost */ = {
 			isa = PBXGroup;
 			children = (
+				CEBB4FF71B8C752200C1552E /* LCListLocationsToTagVC */,
 				96B86A1F1B79CF77003EF7CA /* LCCreatePostViewController */,
 				96B86A261B7A2353003EF7CA /* LCListFriendsToTagViewController */,
 			);
@@ -951,16 +953,6 @@
 				96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */,
 			);
 			name = LCListFriendsToTagViewController;
-			sourceTree = "<group>";
-		};
-		96B86A2C1B7B4751003EF7CA /* LCTagFriendsTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				96B86A271B7B474A003EF7CA /* LCTagFriendsTableViewCell.h */,
-				96B86A281B7B474A003EF7CA /* LCTagFriendsTableViewCell.m */,
-				96B86A291B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib */,
-			);
-			name = LCTagFriendsTableViewCell;
 			sourceTree = "<group>";
 		};
 		AA0D4ABFB4BBC81C1666D4C8 /* Pods */ = {
@@ -1009,6 +1001,15 @@
 				CEE358001B86E41900405239 /* LCUserFriendsVC.m */,
 			);
 			name = LCProfileVC;
+			sourceTree = "<group>";
+		};
+		CEBB4FF71B8C752200C1552E /* LCListLocationsToTagVC */ = {
+			isa = PBXGroup;
+			children = (
+				CEBB4FF81B8C75BD00C1552E /* LCListLocationsToTagVC.h */,
+				CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */,
+			);
+			name = LCListLocationsToTagVC;
 			sourceTree = "<group>";
 		};
 		CEBBBFAC1B6B3764001C91E1 /* LCLocationSearchField */ = {
@@ -1087,7 +1088,6 @@
 				0BB7B3711B57DEC800261658 /* LCFeedCellView */,
 				0BB7B3701B57DEB100261658 /* LCGIButton */,
 				0BB7B36F1B57DE9500261658 /* LCLoginTextField */,
-				96B86A2C1B7B4751003EF7CA /* LCTagFriendsTableViewCell */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -1193,7 +1193,6 @@
 				0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */,
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
-				96B86A2B1B7B474A003EF7CA /* LCTagFriendsTableViewCell.xib in Resources */,
 				CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */,
@@ -1207,6 +1206,7 @@
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				CEC9C6611B835DC8008DAD01 /* profileTick.png in Resources */,
 				0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */,
+				CEBB4FFC1B8C85D300C1552E /* locationIcon.png in Resources */,
 				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
 				0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */,
@@ -1276,6 +1276,7 @@
 			files = (
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */,
+				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
@@ -1313,7 +1314,6 @@
 				96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				96BD14561B72166B004D5CFA /* MTLModel+NSCoding.m in Sources */,
-				96B86A2A1B7B474A003EF7CA /* LCTagFriendsTableViewCell.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */,

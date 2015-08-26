@@ -197,7 +197,8 @@
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userID = [LCDataManager sharedDataManager].userID;
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = [LCDataManager sharedDataManager].userID;
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 2)//Interests

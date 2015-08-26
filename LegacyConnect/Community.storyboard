@@ -193,6 +193,9 @@
                             <searchBar contentMode="redraw" placeholder="Search among your friends" translatesAutoresizingMaskIntoConstraints="NO" id="vb2-Cy-ApG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="d1r-qX-Qev" id="a2A-Ew-b66"/>
+                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qzy-zA-tHS" customClass="LCMultipleSelectionTable">
                                 <rect key="frame" x="0.0" y="108" width="320" height="460"/>
@@ -275,6 +278,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="5c4-Yp-7Jl" firstAttribute="top" secondItem="qzy-zA-tHS" secondAttribute="bottom" id="5q6-fi-WQv"/>
                             <constraint firstItem="WnE-38-ZO1" firstAttribute="top" secondItem="SsH-AU-6Vk" secondAttribute="top" id="Hlg-zk-2cI"/>
                             <constraint firstItem="vb2-Cy-ApG" firstAttribute="leading" secondItem="SsH-AU-6Vk" secondAttribute="leading" id="R2g-fs-7Rf"/>
                             <constraint firstItem="qzy-zA-tHS" firstAttribute="top" secondItem="vb2-Cy-ApG" secondAttribute="bottom" id="TXW-Zy-m3u"/>
@@ -284,7 +288,6 @@
                             <constraint firstItem="qzy-zA-tHS" firstAttribute="leading" secondItem="SsH-AU-6Vk" secondAttribute="leading" id="ZjY-yR-Gwd"/>
                             <constraint firstItem="vb2-Cy-ApG" firstAttribute="top" secondItem="WnE-38-ZO1" secondAttribute="bottom" id="cOU-4T-nf4"/>
                             <constraint firstAttribute="trailing" secondItem="qzy-zA-tHS" secondAttribute="trailing" id="lpb-Ov-4SV"/>
-                            <constraint firstItem="5c4-Yp-7Jl" firstAttribute="top" secondItem="qzy-zA-tHS" secondAttribute="bottom" id="zv8-gt-4s5"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

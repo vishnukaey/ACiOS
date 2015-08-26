@@ -42,8 +42,13 @@
 #pragma mark - setup functions
 - (void)loadFriendsList
 {
-  friendsArray = [LCDummyValues dummyFriendsArray];
-  [friendsTableView reloadData];
+  [LCAPIManager getFriendsWithSuccess:^(id response) {
+    NSLog(@"%@",response);
+    friendsArray = response;
+    [friendsTableView reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
 
 #pragma mark - button actions
@@ -74,11 +79,11 @@
     cell = [[LCFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
                                   reuseIdentifier:MyIdentifier];
   }
-  
-  cell.friendNameLabel.text = friendsArray[indexPath.row];
+  LCFriend *friend = friendsArray[indexPath.row];
+  cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
   cell.friendLocationLabel.text = @"Location";
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
-  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   
   return cell;
 }

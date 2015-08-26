@@ -32,7 +32,7 @@ typedef enum profileStateTypes
   profileState currentProfileState;
 }
 
-@property(nonatomic, retain)NSString *userID;
+@property(nonatomic, retain)LCUserDetail *userDetail;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)editClicked:(UIButton *)sender;
