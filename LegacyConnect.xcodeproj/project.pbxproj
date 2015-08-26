@@ -17,6 +17,8 @@
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
+		0B5571421B8D9D2700445958 /* search-icon_white_64.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5571411B8D9D2700445958 /* search-icon_white_64.png */; };
+		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
 		0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A7FC1B6A45E40065C231 /* LCRecentNotificationTVC.m */; };
 		0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A8001B6A461D0065C231 /* LCRequestNotificationTVC.m */; };
@@ -158,6 +160,9 @@
 		0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginViewController.m; path = ViewControllers/LCLoginViewController/LCLoginViewController.m; sourceTree = "<group>"; };
 		0B35942C1B4E731C0098C484 /* LCEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEmptyViewController.h; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.h; sourceTree = "<group>"; };
 		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
+		0B5571411B8D9D2700445958 /* search-icon_white_64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search-icon_white_64.png"; sourceTree = "<group>"; };
+		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
+		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
 		0B56A7F91B6A31CF0065C231 /* Notification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Notification.storyboard; path = Storyboards/Notification.storyboard; sourceTree = "<group>"; };
 		0B56A7FB1B6A45E40065C231 /* LCRecentNotificationTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRecentNotificationTVC.h; path = CustomViews/LCRecentNotificationTVC/LCRecentNotificationTVC.h; sourceTree = "<group>"; };
 		0B56A7FC1B6A45E40065C231 /* LCRecentNotificationTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRecentNotificationTVC.m; path = CustomViews/LCRecentNotificationTVC/LCRecentNotificationTVC.m; sourceTree = "<group>"; };
@@ -435,6 +440,15 @@
 				0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */,
 			);
 			name = LCEmptyViewController;
+			sourceTree = "<group>";
+		};
+		0B5571431B8D9F1B00445958 /* LCSearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B5571441B8D9F5D00445958 /* LCSearchViewController.h */,
+				0B5571451B8D9F5D00445958 /* LCSearchViewController.m */,
+			);
+			name = LCSearchViewController;
 			sourceTree = "<group>";
 		};
 		0B56A7FE1B6A45ED0065C231 /* LCRecentNotificationTVC */ = {
@@ -815,6 +829,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B5571431B8D9F1B00445958 /* LCSearchViewController */,
 				0B56A8061B6A46B80065C231 /* LCNotificationsViewController */,
 				CEBCEC5E1B6898FD00F0116E /* LCInterestsVC */,
 				CEBA92C61B660E2100C02F93 /* LCProfileVC */,
@@ -858,6 +873,7 @@
 		0BF05A6A1B4E629700FF7B39 /* DummyData */ = {
 			isa = PBXGroup;
 			children = (
+				0B5571411B8D9D2700445958 /* search-icon_white_64.png */,
 				CEBB4FFB1B8C85D300C1552E /* locationIcon.png */,
 				CEB9F3E11B8496E400AD265A /* communityMemebrs.png */,
 				CEB9F3E31B8496E900AD265A /* communityWebsite.png */,
@@ -1209,6 +1225,7 @@
 				CEBB4FFC1B8C85D300C1552E /* locationIcon.png in Resources */,
 				CEF275D31B78748B00709005 /* LCFeedcellXIB.xib in Resources */,
 				0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */,
+				0B5571421B8D9D2700445958 /* search-icon_white_64.png in Resources */,
 				0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */,
 				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,
 				CEBCEC691B6899CF00F0116E /* Interests.storyboard in Resources */,
@@ -1330,6 +1347,7 @@
 				CEBED6AA1B5FAE0C0012FEBB /* LCViewCommunity.m in Sources */,
 				CEB9B6A91B79E4E900C61BA0 /* LCTabMenuView.m in Sources */,
 				CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */,
+				0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */,
 				CEBED6A11B5FACD60012FEBB /* LCCreateCommunity.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
 				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,

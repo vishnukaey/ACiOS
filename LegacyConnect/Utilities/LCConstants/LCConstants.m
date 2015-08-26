@@ -25,6 +25,9 @@ NSString *const kFriendsURL = @"/api/user/friend";
 NSString *const kEventsURL = @"/api/event";
 NSString *const kRejectFriendURL = @"api/user/friend/decline";
 NSString *const kAcceptFriendURL = @"api/user/friend/accept";
+NSString *const kUnfollowEventURL = @"/api/event/unfollow";
+NSString *const kFollowEventURL = @"/api/event/follow";
+NSString *const kAddUsersToEventURL = @"/api/event/users";
 
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
@@ -33,9 +36,10 @@ NSString *const kResponseData = @"data";
 NSString *const kInterestsKey = @"interests";
 NSString *const kCausesKey = @"causes";
 NSString *const kInterestIDKey = @"interestId";
+NSString *const kEventIDKey = @"eventId";
 NSString *const kLastCauseIDKey = @"lastCauseId";
 NSString *const kFriendsKey = @"friends";
-NSString *const kFriendsIDKey = @"friendId";
+NSString *const kFriendIDKey = @"friendId";
 NSString *const kFeedsKey = @"feeds";
 
 NSString *const kLoginStatusKey = @"logged_in";
@@ -45,10 +49,8 @@ NSString *const kUserTokenKey = @"user_token";
 NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
 
-NSString *const kUpdatePasswordURL = @"";
-NSString *const kForgotPasswordURL = @"";
-NSString *const kChangePasswordURL = @"";
-NSString *const kStaticTableSyncURL = @"";
+NSString *const kForgotPasswordURL = @"/api/user/forgotPassword";
+NSString *const kUpdatePasswordURL = @"/api/user/resetPassword";
 NSString *const kLogOutURL = @"";
 
 NSString *const kIDKey = @"id";
@@ -56,6 +58,7 @@ NSString *const kUserIDKey = @"userId";
 NSString *const kFirstNameKey = @"firstName";
 NSString *const kLastNameKey = @"lastName";
 NSString *const kEmailKey = @"email";
+NSString *const kEventsKey = @"events";
 NSString *const kAccessTokenKey = @"accessToken";
 NSString *const kPasswordKey = @"password";
 NSString *const kDobKey = @"dob";
@@ -64,6 +67,7 @@ NSString *const kFBAvatarImageUrlKey = @"avatarUrl";
 NSString *const kFBAccessTokenKey = @"fbAccessToken";
 NSString *const kUserImageData = @"image";
 NSString *const kUserimageExtension = @"imageExtension";
+NSString *const kPasswordResetCodeKey = @"passwordResetCode";
 
 NSString *const kEmptyStringValue = @"";
 NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
