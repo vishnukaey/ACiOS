@@ -14,6 +14,7 @@
 #import <Accounts/Accounts.h>
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCSearchViewController.h"
 
 
 @implementation LCFeedsHomeViewController
@@ -208,6 +209,14 @@ ACAccount *facebookAccount;
                                           }
                                         }];
   
+}
+
+
+
+-(IBAction)search:(id)sender
+{
+  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
+  [self.navigationController showViewController:searchVC sender:self];
 }
 
 
