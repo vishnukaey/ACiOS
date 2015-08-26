@@ -18,15 +18,29 @@
   NSString  *userName = [NSString stringWithFormat:@"%@ %@", feed.firstName, feed.lastName];
   NSString *cause = feed.entityName;
   NSString *time_ = feed.createdAt;
-  NSString *post_ = feed.message;
   NSString *thanks_ = feed.likeCount;
   NSString *comments_ = feed.commentCount;
-  
+  //set profile pic
   [profilePic sd_setImageWithURL:[NSURL URLWithString:feed.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
-  [usernameLabel setText:userName];
+  //set user name
+  NSMutableAttributedString * userNameAttributtedString = [[NSMutableAttributedString alloc] initWithString:userName];
+  NSRange tagRangeUserName = NSMakeRange(0, userName.length);
+  [userNameAttributtedString addAttributes:@{
+                                     NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                     } range:NSMakeRange(0, userNameAttributtedString.length)];
   
+  NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
+  [userNameLabelTagsWithRanges addObject:dic_user];
+  usernameLabel.tagsArray  = userNameLabelTagsWithRanges;
+  [usernameLabel setAttributedText:userNameAttributtedString];
+  __weak typeof(self) weakSelf = self;
+  usernameLabel.nameTagTapped = ^(int index) {
+    [weakSelf.delegate tagTapped:dic_user];
+  };
+  //if photo post or just plain text post
   NSString *typeString = @"Added a Photo in ";
   if ([feed.postType isEqualToString:@"0"])//not a photopost
   {
@@ -45,49 +59,50 @@
   {
     topBorderheight.constant = 0;
   }
+  //created at a cause label
+  //never ever forget to add the font attribute to the tagged label
+  NSString *createsAtString = [NSString stringWithFormat:@"%@%@", typeString, cause];
+  NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:createsAtString];
+  NSRange tagRangeCreatedAt = NSMakeRange(createsAtString.length - cause.length, cause.length);
+  [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, typeString.length)];
+  [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:tagRangeCreatedAt];
+  [attributtedString addAttributes:@{
+                                         NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                         } range:NSMakeRange(0, attributtedString.length)];
   
-  NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:@""];
-  NSAttributedString *type_attr = [[NSAttributedString alloc] initWithString : typeString
-                                                                  attributes : @{
-                                                                                 NSForegroundColorAttributeName : [UIColor grayColor],
-                                                                                 }];
-  [attributtedString appendAttributedString:type_attr];
-  
-  NSAttributedString *name_attr = [[NSAttributedString alloc] initWithString : cause
-                                                                  attributes : @{
-                                                                                 NSForegroundColorAttributeName : [UIColor greenColor],
-                                                                                 }];
-  [attributtedString appendAttributedString:name_attr];
+  NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
+  NSDictionary *dic_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"id", @"cause", @"text", kFeedTagTypeCause, @"type", [NSValue valueWithRange:tagRangeCreatedAt], @"range", nil];
+  [createdAtLabelTagsWithRanges addObject:dic_createdAt];
+  createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
   [createdLabel setAttributedText:attributtedString];
-  
+  createdLabel.nameTagTapped = ^(int index) {
+    [weakSelf.delegate tagTapped:dic_createdAt];
+  };
+  //time label
   [timeLabel setText:time_];
-  
-  [postDescription setText:post_];
-  
+  //thanks count label
   [thanksLabel setText:thanks_];
-  
+  //comments count label
   [commentsLabel setText:comments_];
-  
-  
+  //post desritpion
+  //never ever forget to add the font attribute to the tagged label
   NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:feed.message];
  
-  NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
+  NSMutableArray *postDescriptionTagsWithRanges = [[NSMutableArray alloc] init];
   for (int i = 0; i<feed.postTags.count; i++)
   {
-    NSRange tagRange = [feed.message rangeOfString:feed.postTags[i][@"text"]];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:feed.postTags[i][@"id"], @"id", feed.postTags[i][@"text"], @"text", feed.postTags[i][@"type"], @"type", [NSValue valueWithRange:tagRange], @"range", nil];
-    [tagsWithRanges addObject:dic];
+    NSRange tagRangePost = [feed.message rangeOfString:feed.postTags[i][@"text"]];
+    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:feed.postTags[i][@"id"], @"id", feed.postTags[i][@"text"], @"text", feed.postTags[i][@"type"], @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
+    [postDescriptionTagsWithRanges addObject:dic_post];
     
-    [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRange];
+    [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRangePost];
   }
   [postDescriptionString addAttributes:@{
                                         NSFontAttributeName : [UIFont systemFontOfSize:14],
                                         } range:NSMakeRange(0, postDescriptionString.length)];
-  postDescription.tagsArray  = tagsWithRanges;
+  postDescription.tagsArray  = postDescriptionTagsWithRanges;
   [postDescription setAttributedText:postDescriptionString];
-  __weak typeof(self) weakSelf = self;
   postDescription.nameTagTapped = ^(int index) {
-    // Open URLs
     [weakSelf.delegate tagTapped:weakSelf.feedObject.postTags[index]];
   };
   
