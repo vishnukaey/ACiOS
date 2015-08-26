@@ -104,14 +104,7 @@
   {
     CGFloat paddingHeight = (self.bounds.size.height - textBounds.size.height) / 2.0;
     textOffset.y = paddingHeight;
-  }
-  
-  if (textBounds.size.width < self.bounds.size.width)
-  {
-    CGFloat paddingHeight = (self.bounds.size.width - textBounds.size.width) / 2.0;
-    textOffset.x = paddingHeight;
-  }
-  
+  }  
   return textOffset;
 }
 

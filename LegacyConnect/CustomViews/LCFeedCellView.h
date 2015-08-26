@@ -22,8 +22,8 @@
 {
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
-  IBOutlet UILabel *usernameLabel, *createdLabel, *timeLabel, *thanksLabel, *commentsLabel;
-  IBOutlet LCTaggedLabel *postDescription;
+  IBOutlet UILabel  *timeLabel, *thanksLabel, *commentsLabel;
+  IBOutlet LCTaggedLabel *usernameLabel, *createdLabel, *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
 }
 

@@ -27,15 +27,6 @@
                             <constraint firstAttribute="height" constant="10" id="hBN-r2-W9b"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Created post" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sok-jq-UiD">
-                        <rect key="frame" x="76" y="36" width="392" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="IeQ-iR-1mo"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKp-8U-1B4">
                         <rect key="frame" x="99" y="56" width="377" height="20"/>
                         <constraints>
@@ -158,7 +149,7 @@
                             <constraint firstAttribute="height" constant="8" id="t7J-lj-xjU"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcg-BE-PLJ">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcg-BE-PLJ" customClass="LCTaggedLabel">
                         <rect key="frame" x="76" y="16" width="382" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="X7v-YG-T4t"/>
@@ -177,6 +168,15 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QfK-NE-qaz">
                         <rect key="frame" x="8" y="133" width="468" height="199"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Created post" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sok-jq-UiD" customClass="LCTaggedLabel">
+                        <rect key="frame" x="76" y="36" width="392" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="IeQ-iR-1mo"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="nFe-Bp-ley" firstAttribute="leading" secondItem="sgZ-Vr-4nk" secondAttribute="leading" id="0F4-zY-Kd8"/>
@@ -219,8 +219,8 @@
             <connections>
                 <outlet property="bottomBorderHeight" destination="PHx-9p-Jf8" id="SK0-os-cYX"/>
                 <outlet property="commentsLabel" destination="ALI-21-bQD" id="1ZY-SX-mJ9"/>
-                <outlet property="createdLabel" destination="Sok-jq-UiD" id="MLh-U4-fLE"/>
-                <outlet property="postDescription" destination="pNa-Mb-cau" id="g0I-Op-aQ2"/>
+                <outlet property="createdLabel" destination="Sok-jq-UiD" id="Jeb-8Z-rlV"/>
+                <outlet property="postDescription" destination="pNa-Mb-cau" id="1gG-83-Ai5"/>
                 <outlet property="postPhoto" destination="QfK-NE-qaz" id="5lu-VW-YD8"/>
                 <outlet property="postPhotoHeight" destination="kZ1-xh-J3Y" id="LUt-0B-fUR"/>
                 <outlet property="profilePic" destination="5bn-gW-4lj" id="MhW-Ui-yBI"/>
