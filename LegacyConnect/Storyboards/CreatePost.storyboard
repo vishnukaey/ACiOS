@@ -283,7 +283,6 @@
                                             <outlet property="checkButton" destination="rdg-IM-KTU" id="dtr-Me-hzK"/>
                                             <outlet property="friendNameLabel" destination="cgl-SA-MYj" id="VIG-cT-seF"/>
                                             <outlet property="friendPhotoView" destination="ddG-VW-XbD" id="XmG-Yr-Z2Q"/>
-                                            <outlet property="locationLabel" destination="cgl-SA-MYj" id="ola-vh-ye6"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -310,7 +309,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="friendsTableView" destination="4N0-M0-Sgk" id="3Hp-6L-qbS"/>
-                        <outlet property="searchBar" destination="2iX-r5-BnN" id="yqI-yj-go4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nW3-ke-sz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
