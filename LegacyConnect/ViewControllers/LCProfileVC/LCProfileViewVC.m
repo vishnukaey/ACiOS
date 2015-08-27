@@ -30,6 +30,7 @@
   friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   
+  backButton.hidden = true;
  
   
   [self addTabMenu];
@@ -71,6 +72,17 @@
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;// @"6994";
+  if ([nativeUserId isEqualToString:userDetail.userID])
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_SELF;
+  }
+  else
+  {
+    backButton.hidden = false;
+    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_NON_FRIEND;
+  }
 //  userDetail.userID = @"6875";
    NSLog(@"userID<<<-->>>%@", userDetail.userID);
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
@@ -82,16 +94,7 @@
     memeberSincelabel.text = [NSString stringWithFormat:@"Member since %@", userDetail.activationDate];
     locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", userDetail.gender, userDetail.dob, userDetail.location];
     
-    if ([nativeUserId isEqualToString:userDetail.userID])
-    {
-      [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
-      currentProfileState = PROFILE_SELF;
-    }
-    else
-    {
-      [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
-      currentProfileState = PROFILE_OTHER_NON_FRIEND;
-    }
+    
     
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -158,6 +161,7 @@
 
 
 #pragma mark - button actions
+
 - (IBAction)friendsButtonClicked
 {
   NSLog(@"friends clicked----->");

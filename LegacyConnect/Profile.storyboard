@@ -235,6 +235,7 @@ IMPACTS</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="backButton" destination="vi4-x4-cdn" id="xMA-wA-w0v"/>
                         <outlet property="collapseViewHeight" destination="ubh-6C-xe0" id="L1T-nL-TGf"/>
                         <outlet property="editButton" destination="uGR-xf-bgQ" id="2SS-9w-v64"/>
                         <outlet property="friendsButton" destination="riI-wT-TVE" id="HaR-Ef-0qi"/>

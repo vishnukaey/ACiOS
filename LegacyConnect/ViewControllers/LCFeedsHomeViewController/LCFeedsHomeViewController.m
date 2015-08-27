@@ -146,7 +146,7 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = [LCDataManager sharedDataManager].userID;
+    vc.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
