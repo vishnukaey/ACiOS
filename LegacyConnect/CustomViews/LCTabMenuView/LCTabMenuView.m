@@ -168,7 +168,7 @@
 }
 
 - (void)animateToIndex :(NSInteger)index
-{
+{  
   UIView *currentView = [views objectAtIndex:currentIndex];
   UIView *nextView = [views objectAtIndex:index];
   CGPoint currentViewPointTo;

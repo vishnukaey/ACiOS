@@ -10,6 +10,7 @@
 #import "LCTabMenuView.h"
 #import "LCCommunityInterestCell.h"
 #import "LCUserFriendsVC.h"
+#import "LCImapactsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 
@@ -69,8 +70,8 @@
 {
   
   //for testing as user ID is not persisting
-  NSString *nativeUserId = @"6994";
-  userDetail.userID = @"6875";
+  NSString *nativeUserId = [LCDataManager sharedDataManager].userID;// @"6994";
+//  userDetail.userID = @"6875";
    NSLog(@"userID<<<-->>>%@", userDetail.userID);
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     userDetail = response;
@@ -168,6 +169,9 @@
 - (IBAction)impactsButtonClicked
 {
   NSLog(@"impacts clicked----->");
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+  LCImapactsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)backAction:(id)sender

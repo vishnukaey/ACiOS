@@ -19,9 +19,9 @@
   [super viewDidLoad];
 
   [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  mainTable.estimatedRowHeight = 44.0;
-  mainTable.rowHeight = UITableViewAutomaticDimension;
 
+  mainTable.rowHeight = UITableViewAutomaticDimension;
+  mainTable.estimatedRowHeight = 76.0;
   [[NSNotificationCenter defaultCenter] addObserver:self
                                    selector:@selector(changeFirstResponder)
                                        name:UIKeyboardDidShowNotification

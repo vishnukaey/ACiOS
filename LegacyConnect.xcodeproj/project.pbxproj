@@ -87,6 +87,7 @@
 		CE5954D11B6F5EF100D839DD /* check_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5954CF1B6F5EF100D839DD /* check_box.png */; };
 		CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5954D01B6F5EF100D839DD /* uncheck_box.png */; };
 		CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */; };
+		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
 		CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9C4DD21B78DB9000D6F6A8 /* star.png */; };
 		CEA30E2C1B7361C700DAA4BA /* Community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA30E2B1B7361C700DAA4BA /* Community.storyboard */; };
 		CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA30E2F1B7366C100DAA4BA /* LCCommunityInterestCell.m */; };
@@ -285,6 +286,8 @@
 		CE5954D01B6F5EF100D839DD /* uncheck_box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = uncheck_box.png; sourceTree = "<group>"; };
 		CE5954D41B6F608B00D839DD /* LCMultipleSelectionTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMultipleSelectionTable.h; path = CustomViews/LCMultipleSelectionTable/LCMultipleSelectionTable.h; sourceTree = "<group>"; };
 		CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMultipleSelectionTable.m; path = CustomViews/LCMultipleSelectionTable/LCMultipleSelectionTable.m; sourceTree = "<group>"; };
+		CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImapactsViewController.h; path = ViewControllers/LCProfileVC/LCImapactsViewController.h; sourceTree = "<group>"; };
+		CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImapactsViewController.m; path = ViewControllers/LCProfileVC/LCImapactsViewController.m; sourceTree = "<group>"; };
 		CE9C4DD21B78DB9000D6F6A8 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		CEA30E2B1B7361C700DAA4BA /* Community.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Community.storyboard; sourceTree = "<group>"; };
 		CEA30E2E1B7366C100DAA4BA /* LCCommunityInterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommunityInterestCell.h; path = CustomViews/LCCommunityInterestCell/LCCommunityInterestCell.h; sourceTree = "<group>"; };
@@ -1015,6 +1018,8 @@
 				CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */,
 				CEE357FF1B86E41900405239 /* LCUserFriendsVC.h */,
 				CEE358001B86E41900405239 /* LCUserFriendsVC.m */,
+				CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */,
+				CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */,
 			);
 			name = LCProfileVC;
 			sourceTree = "<group>";
@@ -1358,6 +1363,7 @@
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				CEBED6A71B5FADBB0012FEBB /* LCChooseCommunityInterest.m in Sources */,
+				CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */,
 				0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */,
 				0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
