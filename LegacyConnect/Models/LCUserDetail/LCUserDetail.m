@@ -19,10 +19,13 @@
            @"lastName": @"lastName",
            @"dob": @"dob",
            @"avatarURL": @"avatarUrl",
-           @"activationDate": @"activationDate",
            @"gender": @"gender",
-           @"headerPhotoURL": @"headerPhoto",
-           @"location": @"location"
+           @"headerPhotoURL": @"headerPhotoUrl",
+           @"location": @"addressCity",
+           @"activationDate": @"memberSince",
+           @"friendCount": @"friendCount",
+           @"impactCount": @"impactCount",
+           @"isFriend": @"isFriend",
            };
 }
 

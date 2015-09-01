@@ -25,16 +25,17 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testLoginAPI
+{
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[@"prabhal+545@qburst.com",@"burst"] forKeys:@[kEmailKey, kPasswordKey]];
+  [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
+    NSLog(@"passed is passed")
+    ;    XCTAssert(YES, @"login Pass");
+  } andFailure:^(NSString *error) {
+    XCTFail(@"Fail");
+  }];
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
+
 
 @end
