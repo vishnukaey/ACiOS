@@ -135,6 +135,7 @@ static LCAPIManager *sharedManager = nil;
        LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
+         [user performNullCheck];
          success(user);
        }
        else

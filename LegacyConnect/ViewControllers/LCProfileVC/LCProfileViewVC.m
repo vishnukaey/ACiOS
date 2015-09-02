@@ -94,7 +94,11 @@
     memeberSincelabel.text = [NSString stringWithFormat:@"Member since %@", userDetail.activationDate];
     locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", userDetail.gender, userDetail.dob, userDetail.location];
     
-    
+    if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_WAITING;
+    }
     
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -204,6 +208,7 @@
   }
   else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
   {
+    NSLog(@"send friend request-->>");
     LCFriend *friend = [[LCFriend alloc] init];
     friend.userID = userDetail.userID;
     friend.firstName = userDetail.firstName;
@@ -211,18 +216,27 @@
     friend.avatarURL = userDetail.avatarURL;
     [LCAPIManager sendFriendRequest:friend withSuccess:^(NSArray *response) {
      NSLog(@"%@",response);
+      [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_WAITING;
     } andFailure:^(NSString *error) {
       NSLog(@"%@",error);
     }];
-    [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
-    currentProfileState = PROFILE_OTHER_WAITING;
-    NSLog(@"send friend request-->>");
   }
   else if (currentProfileState == PROFILE_OTHER_WAITING)
   {
-    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
-    currentProfileState = PROFILE_OTHER_NON_FRIEND;
     NSLog(@"cancel invitation-->>");
+    LCFriend *friend = [[LCFriend alloc] init];
+    friend.userID = userDetail.userID;
+    friend.firstName = userDetail.firstName;
+    friend.lastName = userDetail.lastName;
+    friend.avatarURL = userDetail.avatarURL;
+//    [LCAPIManager ca:friend withSuccess:^(NSArray *response) {
+//      NSLog(@"%@",response);
+//      [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+//      currentProfileState = PROFILE_OTHER_NON_FRIEND;
+//    } andFailure:^(NSString *error) {
+//      NSLog(@"%@",error);
+//    }];
   }
 }
 
