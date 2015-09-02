@@ -32,7 +32,14 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
-       success(responsesArray);
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -60,7 +67,14 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCCause class] fromJSONArray:dict[kCausesKey] error:&error];
-       success(responsesArray);
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -76,6 +90,10 @@ static LCAPIManager *sharedManager = nil;
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kSaveIneterestsURL];
   NSError *error;
   NSArray *jsonArray = [MTLJSONAdapter JSONArrayFromModels:causes error:&error];
+  if(error)
+  {
+    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+  }
   NSDictionary *dict = @{kUserIDKey: userID, kCausesKey : jsonArray};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -142,7 +160,14 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kFeedsKey] error:&error];
-       success(responsesArray);
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -172,7 +197,14 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:dict[kFriendsKey] error:&error];
-       success(responsesArray);
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -276,7 +308,14 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kFeedsKey] error:&error];
-       success(responsesArray);
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -291,7 +330,10 @@ static LCAPIManager *sharedManager = nil;
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
-  
+  if(error)
+  {
+    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+  }
   if(headerPhoto)
   {
     NSData *imageData = UIImagePNGRepresentation(headerPhoto);
@@ -369,6 +411,10 @@ static LCAPIManager *sharedManager = nil;
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
+  if(error)
+  {
+    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+  }
   NSData *imageData = UIImagePNGRepresentation(headerPhoto);
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPutOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andImageData:imageData withSuccess:^(id response) {
@@ -458,7 +504,14 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kEventsKey] error:&error];
-       success(responsesArray);
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
