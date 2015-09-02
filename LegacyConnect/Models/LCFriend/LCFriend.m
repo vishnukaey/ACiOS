@@ -19,7 +19,7 @@
            @"firstName": @"firstName",
            @"lastName": @"lastName",
            @"avatarURL": @"avatarUrl",
-           @"status": @"status"
+           @"isFriend": @"isFriend"
            };
 }
 

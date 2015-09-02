@@ -12,7 +12,7 @@
 
 @interface LCFriend : MTLModel <MTLJSONSerializing>
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, strong) NSString *isFriend;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *avatarURL;
