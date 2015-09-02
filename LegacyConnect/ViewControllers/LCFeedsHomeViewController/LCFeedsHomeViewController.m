@@ -16,6 +16,9 @@
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 
+#if DEBUG
+#import "LCViewCommunity.h"
+#endif
 
 @implementation LCFeedsHomeViewController
 @synthesize feedsTable;
@@ -118,6 +121,13 @@
   
   else if ([type isEqualToString:kFeedCellActionLike])
   {
+#if DEBUG
+    //testing community
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
+    vc.eventID = @"e82de0d2-4fd4-11e5-9852-3d5d64aee29a";
+    [self.navigationController pushViewController:vc animated:YES];
+#endif
 //    [self postMessage];
   }
   else if ([type isEqualToString:kFeedCellActionImage])

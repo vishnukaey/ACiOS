@@ -82,6 +82,7 @@
     NSLog(@"%@",response);
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
+    vc.eventID = self.eventToInvite.eventID;
     [self.navigationController pushViewController:vc animated:YES];
   }andFailure:^(NSString *error){
     NSLog(@"%@",error);
