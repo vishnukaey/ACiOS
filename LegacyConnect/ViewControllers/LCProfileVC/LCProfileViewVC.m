@@ -72,6 +72,7 @@
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;// @"6994";
+  NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
   if ([nativeUserId isEqualToString:userDetail.userID])
   {
     [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
