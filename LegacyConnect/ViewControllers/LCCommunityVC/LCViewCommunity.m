@@ -47,7 +47,7 @@
 #pragma mark - LCViewCommunity class implementation
 #define SECTION_HEIGHT 30
 @implementation LCViewCommunity
-
+@synthesize eventID;
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -55,6 +55,8 @@
   // Do any additional setup after loading the view.
   mainTableView.estimatedRowHeight = 44.0;
   mainTableView.rowHeight = UITableViewAutomaticDimension;
+  eventObject = [[LCEvent alloc] init];
+  eventObject.eventDescription = @"";
   [self loadCommunityData];
 }
 
@@ -80,12 +82,14 @@
 #pragma mark - setup functions
 -(void)loadCommunityData
 {
-  communityDetails = @"Lorem Ipsum is simply @dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.";
-  communityMembersCount = @"23 members";
-  communityWebsite = @"google.com";
-  commentsArray = [[NSMutableArray alloc] initWithArray:[LCDummyValues dummyCommentArray]];
-  
-  [mainTableView reloadData];
+  [LCAPIManager getEventDetailsForEventWithID:eventID withSuccess:^(id response){
+    NSLog(@"%@",response);
+    eventObject = response;
+    commentsArray = [[NSMutableArray alloc] initWithArray:[LCDummyValues dummyCommentArray]];
+    [mainTableView reloadData];
+  }andFailure:^(NSString *error){
+    NSLog(@"%@",error);
+  }];
 }
 
 #pragma mark - button actions
@@ -172,7 +176,7 @@
         {
           cell = [[LCCommunityDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
-        NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:communityDetails];
+        NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:eventObject.eventDescription];
         cell.communityDetailsLabel.attributedText = attributedString;
         return cell;
       }
@@ -186,7 +190,7 @@
         {
           cell = [[LCCommunityMemebersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
-        cell.communityMemebersCountLabel.text = communityMembersCount;
+        cell.communityMemebersCountLabel.text = eventObject.eventID;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
       }
@@ -200,7 +204,7 @@
         {
           cell = [[LCCommunityWebsiteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
         }
-        cell.communityWebsiteLabel.text = communityWebsite;
+        cell.communityWebsiteLabel.text = eventObject.website;
         return cell;
       }
         break;

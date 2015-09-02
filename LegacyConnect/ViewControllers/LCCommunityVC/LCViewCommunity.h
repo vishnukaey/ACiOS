@@ -14,11 +14,11 @@
   IBOutlet UITableView *mainTableView;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  NSString *communityDetails;
-  NSString *communityMembersCount;
-  NSString *communityWebsite;
+  LCEvent * eventObject;
   NSMutableArray *commentsArray;
 }
+
+@property(nonatomic, retain)NSString *eventID;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)settingsAction:(id)sender;
