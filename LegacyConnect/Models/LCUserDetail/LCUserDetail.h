@@ -21,6 +21,9 @@
 @property (nonatomic, strong) NSString *headerPhotoURL;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *activationDate;
+@property (nonatomic, strong) NSString *isFriend;
+@property (nonatomic, strong) NSString *impactCount;
+@property (nonatomic, strong) NSString *friendCount;
 
 - (void)performNullCheck;
 @end

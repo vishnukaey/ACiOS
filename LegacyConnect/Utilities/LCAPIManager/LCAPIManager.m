@@ -133,8 +133,14 @@ static LCAPIManager *sharedManager = nil;
      {
        NSError *error = nil;
        LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
-       [user performNullCheck];
-       success(user);
+       if(!error)
+       {
+         success(user);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
