@@ -16,5 +16,6 @@
 @property (nonatomic, strong) NSString *descriptionText;
 @property (nonatomic, strong) NSString *logoURLLarge;
 @property (nonatomic, strong) NSString *logoURLSmall;
-@property (nonatomic, strong) NSArray *causes;  
+@property (nonatomic, strong) NSArray *causes;
+@property (nonatomic, assign) BOOL isDeleted;
 @end
