@@ -139,6 +139,7 @@ static LCAPIManager *sharedManager = nil;
        if(!error)
        {
          success(responsesArray);
+         
        }
        else
        {
