@@ -13,6 +13,110 @@ static LCAPIManager *sharedManager = nil;
 
 @implementation LCAPIManager
 
+
+#pragma mark - Feeds and Notifications
+
+
++ (void)getUserDetailsOfUser:(NSString*)userID WithSuccess:(void (^)(LCUserDetail* responses))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kGetUserDetailsURL,userID];
+  [webService performGetOperationWithUrl:url andAccessToken:[[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey] withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
+       if(!error)
+       {
+         success(user);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
++ (void)getHomeFeedsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?userid=%@", kBaseURL,kGetFeedsURL,[LCDataManager sharedDataManager].userID];
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kFeedsKey] error:&error];
+       if(!error)
+       {
+         success(responsesArray);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL,@"/api/search"];
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       
+       LCSearchResult *searchresult = [MTLJSONAdapter modelOfClass:[LCSearchResult class] fromJSONDictionary:dict error:&error];
+       if(!error)
+       {
+         success(searchresult);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
+
+
 #pragma mark - Interests and Causes
 
 
@@ -114,73 +218,6 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-
-#pragma mark - Feeds and Notifications
-
-
-+ (void)getUserDetailsOfUser:(NSString*)userID WithSuccess:(void (^)(LCUserDetail* responses))success andFailure:(void (^)(NSString *error))failure
-{
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kGetUserDetailsURL,userID];
-  [webService performGetOperationWithUrl:url andAccessToken:[[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey] withParameters:nil withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-       failure(response[kResponseMessage]);
-     }
-     else
-     {
-       NSError *error = nil;
-       LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
-       if(!error)
-       {
-         success(user);
-       }
-       else
-       {
-         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-       }
-     }
-   } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-     failure(error);
-   }];
-}
-
-
-+ (void)getHomeFeedsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
-{
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?userid=%@", kBaseURL,kGetFeedsURL,[LCDataManager sharedDataManager].userID];
-  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-       failure(response[kResponseMessage]);
-     }
-     else
-     {
-       NSError *error = nil;
-       NSDictionary *dict= response[kResponseData];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kFeedsKey] error:&error];
-       if(!error)
-       {
-         success(responsesArray);
-       }
-       else
-       {
-         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-       }
-     }
-   } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-     failure(error);
-   }];
-}
 
 
 #pragma mark - Friends and Requests

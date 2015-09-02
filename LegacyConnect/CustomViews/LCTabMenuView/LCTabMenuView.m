@@ -11,7 +11,6 @@
 
 @interface LCTabMenuView ()
 {
-  NSInteger currentIndex;
   UIView *bottomBar;
 }
 @end
@@ -157,7 +156,7 @@
 {
     for (int i = 0; i<views.count; i++)
     {
-      if (i==currentIndex)
+      if (i==(int)_currentIndex)
       {
         continue;
       }
@@ -169,15 +168,15 @@
 
 - (void)animateToIndex :(NSInteger)index
 {  
-  UIView *currentView = [views objectAtIndex:currentIndex];
+  UIView *currentView = [views objectAtIndex:(int)_currentIndex];
   UIView *nextView = [views objectAtIndex:index];
   CGPoint currentViewPointTo;
-  if (index>currentIndex)
+  if (index>(int)_currentIndex)
   {
     nextView.center = CGPointMake(nextView.superview.frame.size.width*3/2, nextView.center.y);
     currentViewPointTo = CGPointMake(-nextView.superview.frame.size.width/2, nextView.center.y);
   }
-  else if (index<currentIndex)
+  else if (index<(int)_currentIndex)
   {
     nextView.center = CGPointMake(-nextView.superview.frame.size.width/2, nextView.center.y);
     currentViewPointTo = CGPointMake(nextView.superview.frame.size.width*3/2, nextView.center.y);
@@ -191,7 +190,7 @@
    {
      currentView.center = currentViewPointTo;
      nextView.center = CGPointMake(nextView.superview.frame.size.width/2, nextView.center.y);
-     [[menuButtons objectAtIndex:currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
+     [[menuButtons objectAtIndex:(int)_currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
      [[menuButtons objectAtIndex:index] setTitleColor:highlightColor forState:UIControlStateNormal];
      UIButton *nextBut = [menuButtons objectAtIndex:index];
      [bottomBar setFrame:CGRectMake(nextBut.center.x - nextBut.titleLabel.text.length*BAR_LENGTH_MULTIPLIER/2, bottomBar.frame.origin.y, nextBut.titleLabel.text.length*BAR_LENGTH_MULTIPLIER, bottomBar.frame.size.height)];
@@ -200,7 +199,7 @@
    {
       //Completion Block
    }];
-  currentIndex = index;
+  _currentIndex = index;
   
 }
 /*
