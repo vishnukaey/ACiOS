@@ -22,6 +22,7 @@
 #import "LCEvent.h"
 #import "LCFeed.h"
 #import "LCTag.h" 
+#import "LCSearchResult.h"
 
 #import "LCAPIManager.h"
 

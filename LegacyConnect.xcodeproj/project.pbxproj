@@ -30,6 +30,7 @@
 		0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7B3691B57CCF200261658 /* LCLoginTextField.m */; };
 		0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36B1B57DE7400261658 /* warning@2x.png */; };
 		0BB7B36E1B57DE7400261658 /* warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36C1B57DE7400261658 /* warning@3x.png */; };
+		0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */; };
 		0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0661B70A8490004C4B6 /* LCAPIManager.m */; };
 		0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC06E1B70BF730004C4B6 /* LCInterest.m */; };
 		0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0711B70BF910004C4B6 /* LCCause.m */; };
@@ -182,6 +183,8 @@
 		0BB7B3691B57CCF200261658 /* LCLoginTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginTextField.m; path = CustomViews/LCLoginTextField/LCLoginTextField.m; sourceTree = "<group>"; };
 		0BB7B36B1B57DE7400261658 /* warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@2x.png"; sourceTree = "<group>"; };
 		0BB7B36C1B57DE7400261658 /* warning@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "warning@3x.png"; sourceTree = "<group>"; };
+		0BB8BF6D1B96ED3800A27F1F /* LCSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchResult.h; path = Models/LCSearchResult/LCSearchResult.h; sourceTree = "<group>"; };
+		0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchResult.m; path = Models/LCSearchResult/LCSearchResult.m; sourceTree = "<group>"; };
 		0BBDC0651B70A8490004C4B6 /* LCAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAPIManager.h; path = Utilities/LCAPIManager/LCAPIManager.h; sourceTree = "<group>"; };
 		0BBDC0661B70A8490004C4B6 /* LCAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAPIManager.m; path = Utilities/LCAPIManager/LCAPIManager.m; sourceTree = "<group>"; };
 		0BBDC06D1B70BF730004C4B6 /* LCInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterest.h; path = Models/LCInterest/LCInterest.h; sourceTree = "<group>"; };
@@ -577,6 +580,15 @@
 			name = LCFeedCellView;
 			sourceTree = "<group>";
 		};
+		0BB8BF701B96ED3C00A27F1F /* LCSearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				0BB8BF6D1B96ED3800A27F1F /* LCSearchResult.h */,
+				0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */,
+			);
+			name = LCSearchResult;
+			sourceTree = "<group>";
+		};
 		0BBDC0681B70A84E0004C4B6 /* LCAPIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -848,6 +860,7 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0BB8BF701B96ED3C00A27F1F /* LCSearchResult */,
 				0BFBC7BD1B820CA700E75179 /* LCEvent */,
 				0B001B1C1B7CA70A00E8E569 /* LCTag */,
 				0B001B181B7C9E7400E8E569 /* LCFeed */,
@@ -1301,6 +1314,7 @@
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
+				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,

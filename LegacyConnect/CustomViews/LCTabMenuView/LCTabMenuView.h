@@ -13,5 +13,5 @@
 @property(nonatomic, strong)NSArray *menuButtons;
 @property(nonatomic, strong)NSArray *views;
 @property(nonatomic, strong)UIColor *highlightColor, *normalColor;
-
+@property (nonatomic, assign) NSInteger currentIndex;
 @end
