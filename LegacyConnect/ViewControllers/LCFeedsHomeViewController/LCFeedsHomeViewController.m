@@ -28,7 +28,6 @@
 {
   [super viewDidLoad];
   [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-    NSLog(@"%@",response);
     feedsArray = response;
     [feedsTable reloadData];
   } andFailure:^(NSString *error) {
@@ -228,7 +227,7 @@ ACAccount *facebookAccount;
 -(IBAction)search:(id)sender
 {
   LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
-  [self.navigationController showViewController:searchVC sender:self];
+  [self.navigationController pushViewController:searchVC animated:NO];
 }
 
 

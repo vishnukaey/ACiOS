@@ -27,6 +27,7 @@
            @"friendCount": @"friendCount",
            @"impactCount": @"impactCount",
            @"isFriend": @"isFriend",
+           @"accessToken": @"accessToken"
            };
 }
 

@@ -74,29 +74,15 @@
 {
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
-    
     NSLog(@"%@",response);
-    [self saveUserDetailsToDataManagerFromResponse:response];
+    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [self.navigationController popToRootViewControllerAnimated:NO];
-    
-  } andFailure:^(NSString *error) {
+    } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
 }
 
-
-- (void)saveUserDetailsToDataManagerFromResponse:(id)response
-{
-  NSDictionary *userInfo = response[kResponseData];
-  [LCDataManager sharedDataManager].userEmail = userInfo[kEmailKey];
-  [LCDataManager sharedDataManager].userID = userInfo[kUserIDKey];
-  [LCDataManager sharedDataManager].firstName = userInfo[kFirstNameKey];
-  [LCDataManager sharedDataManager].lastName = userInfo[kLastNameKey];
-  [LCDataManager sharedDataManager].dob = userInfo[kDobKey];
-  [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
-  [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
-}
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
 {

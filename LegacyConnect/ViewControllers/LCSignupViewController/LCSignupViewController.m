@@ -103,7 +103,8 @@
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.dobTextField.text] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
-    [self saveUserDetailsToDataManagerFromResponse:response];
+    [self saveUserAcessTokenAndUserIDFromResponse:response];
+#warning - Get user Details
     [LCUtilityManager saveUserDefaultsForNewUser];
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   } andFailure:^(NSString *error) {
@@ -111,17 +112,13 @@
   }];
 }
 
-
-- (void)saveUserDetailsToDataManagerFromResponse:(id)response
+- (void)saveUserAcessTokenAndUserIDFromResponse:(id)response
 {
   NSDictionary *userInfo = response[kResponseData];
-  [LCDataManager sharedDataManager].userID = userInfo[kIDKey];
-  [LCDataManager sharedDataManager].userEmail = _emailTextField.text;
-  [LCDataManager sharedDataManager].firstName = _firstNameTextField.text;
-  [LCDataManager sharedDataManager].lastName = _lastNameTextField.text;
-  [LCDataManager sharedDataManager].dob = _dobTextField.text;
+  [LCDataManager sharedDataManager].userID = userInfo[kUserIDKey];
   [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
+
 
 - (BOOL)validateFields
 {
