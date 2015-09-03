@@ -13,7 +13,6 @@
 {
   LCSearchResult *searchResultObject;
   NSArray *tableData;
-  NSMutableArray *selectedCauses;
 }
 @end
 
@@ -46,7 +45,6 @@
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
-  selectedCauses = [[NSMutableArray alloc] init];
   // Do any additional setup after loading the view.
 }
 
@@ -181,30 +179,13 @@
   
   cell.cause = searchResultObject.causesArray[indexPath.item];
   
-  if([selectedCauses containsObject:cell.cause])
-  {
-    cell.selectionButton.selected =YES;
-  }
-  else
-  {
-    cell.selectionButton.selected=NO;
-  }
   return cell;
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCCause *cause = searchResultObject.causesArray[indexPath.row];
-  if([selectedCauses containsObject:cause])
-  {
-    [selectedCauses removeObject:cause];
-  }
-  else
-  {
-    [selectedCauses addObject:cause];
-  }
-  [self.collectionView reloadData];
+  
 }
 
 
@@ -222,7 +203,7 @@
 
 - (IBAction)searchCancelButtonClicked:(UIButton *)cancelButton
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:NO];
 }
 
 -(void)reloadAllViews
