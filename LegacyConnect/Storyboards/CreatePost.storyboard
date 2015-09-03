@@ -75,6 +75,9 @@
                                 <state key="normal" title="photo">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="postPhotoButtonClicked" destination="qhF-9Z-rbX" eventType="touchUpInside" id="aAI-04-fij"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kqP-dc-gj9">
                                 <rect key="frame" x="181" y="282" width="46" height="30"/>

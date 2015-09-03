@@ -40,12 +40,35 @@
 */
 
 
+#pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
   [self.delegate dismissView];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)addFriendsToPostButtonClicked:(id)sender
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
+  [self presentViewController:contactListVC animated:YES completion:nil];
+  
+}
+
+- (IBAction)addLocationToPostButtonClicked:(id)sender
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListLocationsToTagVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
+  [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (IBAction)postPhotoButtonClicked
+{
+  UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
+  [sheet showInView:self.view];
+}
+
+#pragma mark - textview delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
   if (textView.text.length>0)
@@ -59,19 +82,37 @@
 }
 
 
-- (IBAction)addFriendsToPostButtonClicked:(id)sender
+#pragma mark - UIActionSheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
-  [self presentViewController:contactListVC animated:YES completion:nil];
-
+  if (buttonIndex < 2)
+  {
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    UIImagePickerControllerSourceType type;
+    switch (buttonIndex)
+    {
+      case 0:
+        type = UIImagePickerControllerSourceTypePhotoLibrary;
+        break;
+      case 1:
+        type = UIImagePickerControllerSourceTypeCamera;
+        break;
+        
+      default:
+        break;
+    }
+    imagePicker.sourceType = type;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:^{ }];
+  }
 }
 
-- (IBAction)addLocationToPostButtonClicked:(id)sender
+#pragma mark - UIImagePickerController delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListLocationsToTagVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
-  [self presentViewController:vc animated:YES completion:nil];
+  [picker dismissViewControllerAnimated:YES completion:NULL];
+  UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  NSLog(@"image picked-->>%@", chosenImage);
 }
 
 @end
