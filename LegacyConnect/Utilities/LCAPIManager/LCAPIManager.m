@@ -613,8 +613,16 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"%@",response);
-       success(response);
+       NSError *error = nil;
+       LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
+       if(!error)
+       {
+         success(user);
+       }
+       else
+       {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error){
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];

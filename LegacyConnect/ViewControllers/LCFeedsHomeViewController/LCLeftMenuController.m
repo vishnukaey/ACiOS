@@ -25,10 +25,11 @@
 
   float y_margin = 2;
   float but_height = 50;
-  _userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, 50, 70, 70)];
+  _userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 70, 70)];
   [self.view addSubview:_userImageView];
-  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
-  [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
+  self.userImageView.clipsToBounds = YES;
+  
   for (int i = 0; i<titles_.count; i++) {
     UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 150+y_margin*(i+1) + i * but_height, menuwidth, but_height)];
     but.backgroundColor = [UIColor whiteColor];
@@ -39,6 +40,16 @@
     [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   }
 }
+
+
+- (void) viewWillAppear:(BOOL)animated
+
+{
+  [super viewWillAppear:animated];
+  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
+  [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+}
+
 
 -(void)buttonActions :(UIButton *)sender
 {

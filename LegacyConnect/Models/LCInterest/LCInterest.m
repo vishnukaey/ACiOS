@@ -14,7 +14,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
-           @"interestID": @"id  ",
+           @"interestID": @"interestId",
            @"name": @"name",
            @"descriptionText": @"description",
            @"logoURLLarge": @"interestLogoLarge",
