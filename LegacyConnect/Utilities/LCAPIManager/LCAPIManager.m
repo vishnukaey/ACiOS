@@ -613,6 +613,7 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
+       NSLog(@"%@",response[kResponseMessage]);
        NSError *error = nil;
        LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)

@@ -24,6 +24,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSString *typeOfLaunch = [defaults objectForKey:@"typeOfLaunch"];
   if ([typeOfLaunch isEqualToString:@"resetPassword"])
