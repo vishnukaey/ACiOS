@@ -19,7 +19,8 @@
            @"descriptionText": @"description",
            @"logoURLLarge": @"interestLogoLarge",
            @"logoURLSmall": @"interestLogoSmall",
-           @"isDeleted": @"isDeleted"
+           @"isDeleted": @"isDeleted",
+           @"followers": @"followers"
            };
 }
 

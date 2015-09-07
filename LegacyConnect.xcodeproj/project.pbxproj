@@ -26,6 +26,9 @@
 		0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5F1BEF1B7DC17200E749BF /* camera-icon.png */; };
 		0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B5F1BF11B7DC50800E749BF /* default-placeholder.png */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
+		0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */; };
+		0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */; };
+		0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */; };
 		0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */; };
 		0BB7B36A1B57CCF200261658 /* LCLoginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB7B3691B57CCF200261658 /* LCLoginTextField.m */; };
 		0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB7B36B1B57DE7400261658 /* warning@2x.png */; };
@@ -177,6 +180,12 @@
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
+		0B8574FC1B9D62B000FD8766 /* LCUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserTableViewCell.h; path = CustomViews/LCUserTableViewCell/LCUserTableViewCell.h; sourceTree = "<group>"; };
+		0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUserTableViewCell.m; path = CustomViews/LCUserTableViewCell/LCUserTableViewCell.m; sourceTree = "<group>"; };
+		0B8575001B9D644D00FD8766 /* LCInterestsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestsTableViewCell.h; path = CustomViews/LCInterestsTableViewCell/LCInterestsTableViewCell.h; sourceTree = "<group>"; };
+		0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestsTableViewCell.m; path = CustomViews/LCInterestsTableViewCell/LCInterestsTableViewCell.m; sourceTree = "<group>"; };
+		0B8575041B9D64BD00FD8766 /* LCCausesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCausesTableViewCell.h; path = CustomViews/LCCausesTableViewCell/LCCausesTableViewCell.h; sourceTree = "<group>"; };
+		0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCausesTableViewCell.m; path = CustomViews/LCCausesTableViewCell/LCCausesTableViewCell.m; sourceTree = "<group>"; };
 		0B86A4EC1B86EE73005D4BD7 /* LCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEvent.h; path = Models/LCEvent/LCEvent.h; sourceTree = "<group>"; };
 		0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEvent.m; path = Models/LCEvent/LCEvent.m; sourceTree = "<group>"; };
 		0BB7B3681B57CCF200261658 /* LCLoginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginTextField.h; path = CustomViews/LCLoginTextField/LCLoginTextField.h; sourceTree = "<group>"; };
@@ -500,6 +509,33 @@
 				0BFBC7B81B81BC5100E75179 /* LCFriend.m */,
 			);
 			name = LCFriend;
+			sourceTree = "<group>";
+		};
+		0B8574FF1B9D62B400FD8766 /* LCUserTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B8574FC1B9D62B000FD8766 /* LCUserTableViewCell.h */,
+				0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */,
+			);
+			name = LCUserTableViewCell;
+			sourceTree = "<group>";
+		};
+		0B8575031B9D645500FD8766 /* LCInterestsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B8575001B9D644D00FD8766 /* LCInterestsTableViewCell.h */,
+				0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */,
+			);
+			name = LCInterestsTableViewCell;
+			sourceTree = "<group>";
+		};
+		0B8575071B9D64C600FD8766 /* LCCausesTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B8575041B9D64BD00FD8766 /* LCCausesTableViewCell.h */,
+				0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */,
+			);
+			name = LCCausesTableViewCell;
 			sourceTree = "<group>";
 		};
 		0BB594241B71E4EC0067744B /* Mantle */ = {
@@ -1108,6 +1144,9 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0B8575071B9D64C600FD8766 /* LCCausesTableViewCell */,
+				0B8575031B9D645500FD8766 /* LCInterestsTableViewCell */,
+				0B8574FF1B9D62B400FD8766 /* LCUserTableViewCell */,
 				CEC6D9961B81D1C000157F89 /* LCTaggedLabel */,
 				CEB9B6A61B79E49B00C61BA0 /* LCTabMenuView */,
 				CEF275D41B78A2BA00709005 /* LCCommentCell */,
@@ -1314,6 +1353,7 @@
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
+				0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */,
 				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
@@ -1350,6 +1390,7 @@
 				96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				96BD14561B72166B004D5CFA /* MTLModel+NSCoding.m in Sources */,
+				0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */,
@@ -1391,6 +1432,7 @@
 				96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */,
+				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1504,6 +1546,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1520,6 +1563,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

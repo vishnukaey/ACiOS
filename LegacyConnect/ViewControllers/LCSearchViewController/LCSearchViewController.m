@@ -8,6 +8,13 @@
 
 #import "LCSearchViewController.h"
 #import "LCChooseCausesCollectionViewCell.h"
+#import "LCUserTableViewCell.h"
+#import "LCInterestsTableViewCell.h"
+#import "LCCausesTableViewCell.h"
+#import "LCSingleCauseVC.h"
+#import "LCSingleInterestVC.h"
+#import "LCProfileViewVC.h"
+
 
 @interface LCSearchViewController ()
 {
@@ -38,15 +45,24 @@
   self.tabMenu.highlightColor = [UIColor orangeColor];
   self.tabMenu.normalColor = [UIColor blackColor];
   
-  self.topTableView.rowHeight = UITableViewAutomaticDimension;
-  self.usersTableView.rowHeight = UITableViewAutomaticDimension;
-  self.interestsTableView.rowHeight = UITableViewAutomaticDimension;
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
   // Do any additional setup after loading the view.
 }
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
+  self.topTableView.rowHeight = UITableViewAutomaticDimension;
+  self.usersTableView.rowHeight = UITableViewAutomaticDimension;
+  self.interestsTableView.rowHeight = UITableViewAutomaticDimension;
+  [self reloadAllViews];
+}
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
@@ -117,42 +133,45 @@
 {
   if([tableView isEqual:_topTableView])
   {
-    static NSString *MyIdentifier = @"userTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     if(indexPath.section == 0)
     {
+      LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
+      [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
       LCUserDetail *user = searchResultObject.usersArray[indexPath.row];
-      cell.textLabel.text = user.firstName;
+      cell.user = user;
+      return cell;
     }
     else if(indexPath.section == 1)
     {
+      LCInterestsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCInterestsTableViewCell"];
+      [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
       LCInterest *interest = searchResultObject.interestsArray[indexPath.row];
-      cell.textLabel.text = interest.name;
+      cell.interest = interest;
+      return cell;
     }
     else
     {
+      LCCausesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCCausesTableViewCell"];
+      [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
       LCCause *cause = searchResultObject.causesArray[indexPath.row];
-      cell.textLabel.text = cause.name;
+      cell.cause= cause;
+      return cell;
     }
-    return cell;
   }
   else if([tableView isEqual:_usersTableView])
   {
-    static NSString *MyIdentifier = @"userTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     LCUserDetail *user = searchResultObject.usersArray[indexPath.row];
-    cell.textLabel.text = user.firstName;
+    cell.user = user;
     return cell;
   }
   else
   {
-    static NSString *MyIdentifier = @"userTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    LCInterestsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCInterestsTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     LCInterest *interest = searchResultObject.interestsArray[indexPath.row];
-    cell.textLabel.text = interest.name;
+    cell.interest = interest;
     return cell;
   }
 }
@@ -160,7 +179,54 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  if([tableView isEqual:_topTableView])
+  {
+    switch (indexPath.section) {
+      case 0:
+      {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+        LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+        vc.userDetail = [[LCUserDetail alloc] init];
+        vc.userDetail.userID = @"6994";
+        [self.navigationController pushViewController:vc animated:YES];
+      }
+        break;
+        
+      case 1:
+      {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+        LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+        [self.navigationController pushViewController:vc animated:YES];
+      }
+        break;
+        
+      case 2:
+      {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+        LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+        [self.navigationController pushViewController:vc animated:YES];
+      }
+        break;
+        
+      default:
+        break;
+    }
+    
+  }
+  else if([tableView isEqual:_usersTableView])
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = @"6994";
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 
@@ -185,14 +251,15 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
   [LCAPIManager searchForItem:@"" withSuccess:^(LCSearchResult *searchResult) {
-    NSLog(@"%@",searchResult);
     searchResultObject = searchResult;
     [self reloadAllViews];
   } andFailure:^(NSString *error) {

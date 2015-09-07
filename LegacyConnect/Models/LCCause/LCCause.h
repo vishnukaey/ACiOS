@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *interestID;
 @property (nonatomic, strong) NSString *logoURLLarge;
 @property (nonatomic, strong) NSString *logoURLSmall;
+@property (nonatomic, strong) NSString *supporters;
 @property (nonatomic, assign) BOOL isDeleted;
 @property (nonatomic, assign) BOOL isSupporting;
 

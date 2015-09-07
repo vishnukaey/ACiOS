@@ -20,7 +20,8 @@
            @"logoURLLarge": @"causeLogoLarge",
            @"logoURLSmall": @"causeLogoSmall",
            @"isDeleted": @"isDeleted",
-           @"isSupporting": @"isSupporting"
+           @"isSupporting": @"isSupporting",
+           @"supporters": @"supporters"
            };
 }
 
