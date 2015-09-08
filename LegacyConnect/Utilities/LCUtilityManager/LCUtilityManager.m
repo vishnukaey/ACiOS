@@ -48,6 +48,24 @@
   [defaults synchronize];
 }
 
++ (void)saveUserDetailsToDataManagerFromResponse:(LCUserDetail*)user
+{
+  if(![[LCUtilityManager performNullCheckAndSetValue:user.accessToken] isEqualToString:kEmptyStringValue])
+  {
+    [LCDataManager sharedDataManager].userToken = user.accessToken;
+  }
+  if(![[LCUtilityManager performNullCheckAndSetValue:user.userID] isEqualToString:kEmptyStringValue])
+  {
+    [LCDataManager sharedDataManager].userID = user.userID;
+  }
+  [LCDataManager sharedDataManager].userEmail = user.email;
+  [LCDataManager sharedDataManager].firstName = user.firstName;
+  [LCDataManager sharedDataManager].lastName = user.lastName;
+  [LCDataManager sharedDataManager].dob = user.dob;
+  [LCDataManager sharedDataManager].avatarUrl = user.avatarURL;
+}
+
+
 
 + (void)clearUserDefaultsForCurrentUser
 {

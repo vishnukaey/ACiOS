@@ -14,12 +14,13 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
-           @"interestID": @"id  ",
+           @"interestID": @"interestId",
            @"name": @"name",
            @"descriptionText": @"description",
            @"logoURLLarge": @"interestLogoLarge",
            @"logoURLSmall": @"interestLogoSmall",
-           @"isDeleted": @"isDeleted"
+           @"isDeleted": @"isDeleted",
+           @"followers": @"followers"
            };
 }
 

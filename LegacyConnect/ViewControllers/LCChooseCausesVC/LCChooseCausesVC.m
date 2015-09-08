@@ -39,6 +39,14 @@
   }];
 }
 
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
+}
+
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }

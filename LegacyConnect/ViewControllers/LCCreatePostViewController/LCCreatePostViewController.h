@@ -14,7 +14,7 @@
 
 @end
 
-@interface LCCreatePostViewController : UIViewController <UITextViewDelegate>
+@interface LCCreatePostViewController : UIViewController <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 
 @property (nonatomic, unsafe_unretained) NSObject <createPostDelegate> *delegate;

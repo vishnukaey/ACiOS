@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LCUserDetail.h"
 
 @interface LCUtilityManager : NSObject
 
@@ -16,6 +17,7 @@
 + (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format;
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date;
 + (NSString *)encodeToBase64String:(NSString *)string;
++ (void)saveUserDetailsToDataManagerFromResponse:(LCUserDetail *)user;
 + (NSString *)decodeFromBase64String:(NSString *)string;
 + (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
 + (void)clearUserDefaultsForCurrentUser;

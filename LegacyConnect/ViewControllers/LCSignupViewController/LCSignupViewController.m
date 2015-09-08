@@ -9,7 +9,9 @@
 #import "LCSignupViewController.h"
 
 @interface LCSignupViewController ()
-
+{
+  NSString *dobTimeStamp;
+}
 @end
 
 @implementation LCSignupViewController
@@ -18,6 +20,12 @@
 {
   [super viewDidLoad];
   [self setDobTextFieldWithInputView];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
 }
 
 
@@ -76,8 +84,8 @@
 
 -(void) updateTextFieldWithDate:(id) picker
 {
-  NSString *timeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
-  _dobTextField.text = [LCUtilityManager getDateFromTimeStamp:timeStamp WithFormat:@"MM/dd/yyyy"];
+  dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
+  _dobTextField.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"MM/dd/yyyy"];
 }
 
 
@@ -100,10 +108,11 @@
 
 - (void)registerUserOnline
 {
-  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,self.dobTextField.text] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
+  NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
-    [self saveUserDetailsToDataManagerFromResponse:response];
+    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   } andFailure:^(NSString *error) {
@@ -111,17 +120,13 @@
   }];
 }
 
-
-- (void)saveUserDetailsToDataManagerFromResponse:(id)response
+- (void)saveUserAcessTokenAndUserIDFromResponse:(id)response
 {
   NSDictionary *userInfo = response[kResponseData];
-  [LCDataManager sharedDataManager].userID = userInfo[kIDKey];
-  [LCDataManager sharedDataManager].userEmail = _emailTextField.text;
-  [LCDataManager sharedDataManager].firstName = _firstNameTextField.text;
-  [LCDataManager sharedDataManager].lastName = _lastNameTextField.text;
-  [LCDataManager sharedDataManager].dob = _dobTextField.text;
+  [LCDataManager sharedDataManager].userID = userInfo[kUserIDKey];
   [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
+
 
 - (BOOL)validateFields
 {

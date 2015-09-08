@@ -8,6 +8,8 @@
 
 #import "LCFeedsCommentsController.h"
 #import "LCCommentCell.h"
+#import "LCSingleCauseVC.h"
+#import "LCProfileViewVC.h"
 
 
 @implementation LCFeedsCommentsController
@@ -85,7 +87,7 @@
   [self.view addSubview:commmentTextField_dup];
   commmentTextField_dup.delegate = self;
   commmentTextField_dup.inputAccessoryView = commentntField;
-//  [commmentTextField_dup becomeFirstResponder];
+  [commmentTextField_dup becomeFirstResponder];
 }
 
 #pragma mark - button actions
@@ -131,6 +133,7 @@
       // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
       feedCell = [topLevelObjects objectAtIndex:0];
     }
+    feedCell.delegate = self;
     [feedCell setData:[cellsData objectAtIndex:indexPath.row] forPage:kCommentsfeedCellID];
     return feedCell;
   }
@@ -161,13 +164,29 @@
   NSLog(@"actionTypecommentpage--->>>%@", type);
   if ([type isEqualToString:kFeedCellActionComment])
   {
-    [commmentTextField_dup becomeFirstResponder];
+    if (!commmentTextField.isFirstResponder) {
+      [commmentTextField_dup becomeFirstResponder];
+    }
   }
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
   NSLog(@"tag details-->>%@", tagDetails);
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 #pragma mark - textfield delegates
