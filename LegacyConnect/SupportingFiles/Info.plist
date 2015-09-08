@@ -33,8 +33,10 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>legacyConnect</string>
+				<string>legacyconnect</string>
 			</array>
+			<key>CFBundleURLName</key>
+			<string>com.LC.legacyconnect</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>

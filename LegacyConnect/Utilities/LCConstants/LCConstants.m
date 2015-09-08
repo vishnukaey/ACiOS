@@ -82,4 +82,7 @@ NSString *const kFeedCellActionImage = @"feedCellImage";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeUser = @"user";
 
+NSString *const kLCUrlScheme = @"legacyconnect";
+NSString *const kResetPasswordTokenKey = @"password_reset_token";
+
 @end

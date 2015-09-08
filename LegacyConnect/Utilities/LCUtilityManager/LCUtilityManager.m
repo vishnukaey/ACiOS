@@ -250,5 +250,21 @@
     return items;
 }
 
+/**
+ * Method for extracting password reset token from url query.
+ */
++ (NSString*)getPasswordResetTokenFromURLQuery:(NSString*)queryString
+{
+  NSString * toeknKey = kResetPasswordTokenKey;
+  NSString * token = nil;
+  if ([queryString containsString:toeknKey])
+  {
+    NSRange tokenKeyRange = [queryString rangeOfString:toeknKey];
+    
+    token = [queryString substringFromIndex:tokenKeyRange.location + tokenKeyRange.length];
+  }
+  return token;
+}
+
 
 @end

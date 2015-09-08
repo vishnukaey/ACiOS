@@ -79,4 +79,7 @@ extern NSString *const kFeedCellActionImage;
 extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeUser;
 
+extern NSString *const kLCUrlScheme;
+extern NSString *const kResetPasswordTokenKey;
+
 @end

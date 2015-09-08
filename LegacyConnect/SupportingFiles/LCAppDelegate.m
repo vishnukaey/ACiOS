@@ -42,14 +42,14 @@
   [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
   [defaults synchronize];
   
-  if([[url scheme] caseInsensitiveCompare:@"legacyConnect"] == NSOrderedSame)
+  if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
   {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:self];
-    NSLog(@"legacyConnect");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:[NSString stringWithFormat:@"resetPassword"] forKey:@"typeOfLaunch"];
     [defaults synchronize];
     boolValue = true;
+    NSString * tokenString = [LCUtilityManager getPasswordResetTokenFromURLQuery:[url query]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:tokenString];
     return boolValue;
   }
   else
