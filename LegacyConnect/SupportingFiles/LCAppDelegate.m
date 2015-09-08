@@ -38,6 +38,7 @@
 {
   
   BOOL boolValue = false;
+  
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
   [defaults synchronize];
@@ -54,7 +55,6 @@
   }
   else
   {
-    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
     boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
                                                                     openURL:url
                                                           sourceApplication:sourceApplication
@@ -77,6 +77,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];
+  [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+
 }
 
 

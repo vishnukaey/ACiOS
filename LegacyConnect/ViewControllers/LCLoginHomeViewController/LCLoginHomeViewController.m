@@ -60,16 +60,14 @@
   {
     if([FBSDKAccessToken currentAccessToken])
     {
-      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
       NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-      [parameters setValue:@"id, email, name" forKey:@"fields"];
+      [parameters setValue:@"id, email, name, friends" forKey:@"fields"];
       [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
        startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
          if (!error)
          {
            [self saveUserDetailsToDataManagerFromResponse:result];
            [self performOnlineFBLoginRequest:[self getFBUserDetails:result]];
-           [MBProgressHUD hideHUDForView:self.view animated:YES];
          }
       }];
     }
@@ -119,6 +117,7 @@
        [self loginUser];
      }
    } andFailure:^(NSString *error) {
+     [MBProgressHUD hideHUDForView:self.view animated:YES];
      NSLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
    }];
