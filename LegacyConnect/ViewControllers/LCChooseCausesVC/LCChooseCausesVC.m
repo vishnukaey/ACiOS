@@ -13,8 +13,7 @@
 
 @interface LCChooseCausesVC ()
 {
-  NSMutableArray *selectedCauses;
-  NSMutableArray *selectedInterests;
+  NSMutableDictionary *selectedItems;
   NSMutableArray *causes;
   NSArray *interests;
 }
@@ -24,8 +23,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  selectedCauses = [[NSMutableArray alloc] init];
-  selectedInterests = [[NSMutableArray alloc] init];
+  selectedItems = [[NSMutableDictionary alloc] init];
   causes = [[NSMutableArray alloc] init];
   self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
   self.userImageView.clipsToBounds = YES;
@@ -74,8 +72,8 @@
       cell=cells[0];
     }
     cell.interest = interests[indexPath.item];
-    
-    if([selectedInterests containsObject:cell.interest])
+    NSArray *selectedInterestIDs = [selectedItems allKeys];
+    if([selectedInterestIDs containsObject:cell.interest.interestID])
     {
       cell.selectionButton.selected =YES;
     }
@@ -96,8 +94,8 @@
       cell=cells[0];
     }
     cell.cause = causes[indexPath.item];
-    
-    if([selectedCauses containsObject:cell.cause])
+    NSArray *selectedCauseIDs = [selectedItems valueForKey:cell.cause.interestID];
+    if([selectedCauseIDs containsObject:cell.cause.causeID])
     {
       cell.selectionButton.selected =YES;
     }
@@ -112,32 +110,35 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  NSArray *selectedInterestIDs = [selectedItems allKeys];
   if([collectionView isEqual:_causesCollectionView])
   {
     LCCause *cause = causes[indexPath.item];
-    if([selectedCauses containsObject:cause])
+    NSMutableArray *selectedCauseIDs = [selectedItems valueForKey:cause.interestID];
+    if([selectedCauseIDs containsObject:cause.causeID])
     {
-      [selectedCauses removeObject:cause];
+      [selectedCauseIDs removeObject:cause.causeID];
     }
     else
     {
-      [selectedCauses addObject:cause];
+      [selectedCauseIDs addObject:cause.causeID];
     }
     [self.causesCollectionView reloadData];
   }
   else
   {
     LCInterest *interest = interests[indexPath.item];
-    if([selectedInterests containsObject:interest])
+    if([selectedInterestIDs containsObject:interest.interestID])
     {
-      [selectedInterests removeObject:interest];
+      [selectedItems removeObjectForKey:interest.interestID];
       [causes removeObjectsInArray:interest.causes];
       [self.causesCollectionView reloadData];
       [self.interestsCollectionView reloadData];
     }
     else
     {
-      [selectedInterests addObject:interest];
+      NSMutableArray *selectedCauses = [[NSMutableArray alloc] init];
+      [selectedItems setObject:selectedCauses forKey:interest.interestID];
 
       [LCAPIManager getCausesForInterestID:interest.interestID andLastCauseID:kEmptyStringValue withSuccess:^(NSArray *responses) {
         interest.causes = responses;
@@ -153,15 +154,16 @@
   }
 }
 
+
 -(IBAction) nextButtonTapped:(id)sender
 {
-  [LCAPIManager saveCauses:selectedCauses ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
-    NSLog(@"%@",response);
+  NSArray *selectedInterestIDs = [selectedItems allKeys];
+  NSArray *selectedCauseIDs = [selectedItems allValues];
+  [LCAPIManager saveCauses:selectedCauseIDs andInterests:selectedInterestIDs ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
     [self performSegueWithIdentifier:@"connectFriends" sender:self];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
-  
 }
 
 @end
