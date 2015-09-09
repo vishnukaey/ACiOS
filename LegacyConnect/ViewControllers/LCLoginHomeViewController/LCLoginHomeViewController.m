@@ -33,12 +33,12 @@
                                            selector:@selector(receiveTestNotification:)
                                                name:@"logged_in_facebook"
                                              object:nil];
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSString *typeOfLaunch = [defaults objectForKey:@"typeOfLaunch"];
-  if ([typeOfLaunch isEqualToString:@"resetPassword"])
-  {
-    [self signInButtonClicked:nil];
-  }
+//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//  NSString *typeOfLaunch = [defaults objectForKey:@"typeOfLaunch"];
+//  if ([typeOfLaunch isEqualToString:@"resetPassword"])
+//  {
+//    [self signInButtonClicked:nil];
+//  }
   NSLog(@"viewWillAppear");
 
 }
@@ -132,6 +132,19 @@
   [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
+- (void)goToUpdatePassword:(NSNotification*)notification {
+  
+  NSDictionary *userInfo = notification.userInfo;
+
+  NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
+  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+  [viewArray addObject:loginVC];
+  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+  updatePasswordVC.delegate = loginVC;
+  updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
+  [viewArray addObject:updatePasswordVC];
+  self.navigationController.viewControllers = viewArray;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -146,6 +159,16 @@
   NSLog(@"viewDidDisappear");
 
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(goToUpdatePassword:)
+                                               name:@"logged_in_from_URL"
+                                             object:nil];
+}
+
 
 
 - (IBAction)signInButtonClicked:(id)sender

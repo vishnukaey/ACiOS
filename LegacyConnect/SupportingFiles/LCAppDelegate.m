@@ -17,7 +17,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCAppDelegate.h"
-
+#import "LCAppLaunchHelper.h"
 
 @interface LCAppDelegate ()
 
@@ -38,18 +38,21 @@
 {
   
   BOOL boolValue = false;
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
-  [defaults synchronize];
+//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//  [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
+//  [defaults synchronize];
   
   if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
   {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSString stringWithFormat:@"resetPassword"] forKey:@"typeOfLaunch"];
-    [defaults synchronize];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:[NSString stringWithFormat:@"resetPassword"] forKey:@"typeOfLaunch"];
+//    [defaults synchronize];
     boolValue = true;
-    NSString * tokenString = [LCUtilityManager getPasswordResetTokenFromURLQuery:[url query]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:tokenString];
+    NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
+    if (tokenString) {
+      NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
+      [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:nil userInfo:userInfo];
+    }
     return boolValue;
   }
   else
@@ -59,10 +62,10 @@
                                                                     openURL:url
                                                           sourceApplication:sourceApplication
                                                                  annotation:annotation];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[NSString stringWithFormat:@"facebook"] forKey:@"typeOfLaunch"];
-    [defaults synchronize];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    [defaults setObject:[NSString stringWithFormat:@"facebook"] forKey:@"typeOfLaunch"];
+//    [defaults synchronize];
     
     return boolValue;
   }

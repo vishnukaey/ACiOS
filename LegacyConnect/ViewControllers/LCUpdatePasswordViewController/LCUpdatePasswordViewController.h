@@ -21,6 +21,7 @@
 
 @property (nonatomic,retain) IBOutlet LCLoginTextField *passwordTextField;
 @property (nonatomic,retain) IBOutlet LCLoginTextField *confirmPasswordTextField;
+@property (nonatomic, strong) NSString * token;
 @property (nonatomic, unsafe_unretained) NSObject <updatePasswordDelegate> *delegate;
 
 @end

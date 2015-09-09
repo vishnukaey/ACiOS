@@ -29,6 +29,5 @@
 
 + (NSArray *)getPhoneContacts;
 
-+ (NSString*)getPasswordResetTokenFromURLQuery:(NSString*)queryString;
 
 @end
