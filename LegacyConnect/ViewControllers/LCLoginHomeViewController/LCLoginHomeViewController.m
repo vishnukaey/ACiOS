@@ -45,7 +45,7 @@
 - (IBAction)continueWithFBAction
 {
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-  [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+  [login logInWithReadPermissions:@[@"email", @"user_friends"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error) {
       // Process error
       NSLog(@"error %@",error);

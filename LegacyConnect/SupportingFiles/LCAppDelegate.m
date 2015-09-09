@@ -61,7 +61,7 @@
                                                                     openURL:url
                                                           sourceApplication:sourceApplication
                                                                  annotation:annotation];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
 //    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 //    [defaults setObject:[NSString stringWithFormat:@"facebook"] forKey:@"typeOfLaunch"];
 //    [defaults synchronize];
