@@ -11,5 +11,9 @@
 @interface LCAppLaunchHelper : NSObject
 
 + (NSString*)getPasswordResetTokenFromURLQuery:(NSString*)queryString;
++ (void)setNeedsToShowPasswordResetScreenWithToken:(NSString*)token;
++ (void)clearPasswordResetToken;
++ (BOOL)needsToShowPasswordResetScreen;
++ (NSString*)getPasswordResetToken;
 
 @end

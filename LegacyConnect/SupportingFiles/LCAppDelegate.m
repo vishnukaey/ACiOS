@@ -38,20 +38,16 @@
 {
   
   BOOL boolValue = false;
-//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//  [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
-//  [defaults synchronize];
   
   if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
   {
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:[NSString stringWithFormat:@"resetPassword"] forKey:@"typeOfLaunch"];
-//    [defaults synchronize];
     boolValue = true;
     NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
     if (tokenString) {
       NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:nil userInfo:userInfo];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
+                                                          object:nil
+                                                        userInfo:userInfo];
     }
     return boolValue;
   }
@@ -61,11 +57,7 @@
                                                                     openURL:url
                                                           sourceApplication:sourceApplication
                                                                  annotation:annotation];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    [defaults setObject:[NSString stringWithFormat:@"facebook"] forKey:@"typeOfLaunch"];
-//    [defaults synchronize];
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
     return boolValue;
   }
   return boolValue;
