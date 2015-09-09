@@ -21,7 +21,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self addFBLoginbutton];
   NSLog(@"viewDidLoad");
 }
 
@@ -43,16 +42,25 @@
 
 }
 
-- (void)addFBLoginbutton
+- (IBAction)continueWithFBAction
 {
-  FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-  CGRect frame = loginButton.frame;
-  frame.origin.x = 0.0;
-  frame.origin.y = 0.0;
-  loginButton.frame = frame;
-  [self.fbButtonContainer addSubview:loginButton];
+  FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+  [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    if (error) {
+      // Process error
+      NSLog(@"error %@",error);
+    } else if (result.isCancelled) {
+      // Handle cancellations
+      NSLog(@"Cancelled");
+    } else {
+      if ([result.grantedPermissions containsObject:@"email"]) {
+        // Do work
+        NSLog(@"%@",result);
+        NSLog(@"Correct");
+      }
+    }
+  }];
 }
-
 
 - (void) receiveTestNotification:(NSNotification *) notification
 {
