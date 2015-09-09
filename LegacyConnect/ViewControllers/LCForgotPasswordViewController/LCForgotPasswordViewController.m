@@ -45,8 +45,17 @@
 {
   if ([self validateEmail])
   {
-    [self.delegate forgotPasswordRequestSent:_emailTextField.text];
+    [self performPasswordResetRequestWithEmail:_emailTextField.text];
   }
+}
+
+- (void)performPasswordResetRequestWithEmail:(NSString*)email {
+  
+  [LCAPIManager forgotPasswordOfUserWithMailID:email withSuccess:^(id response) {
+    [self.delegate forgotPasswordRequestSent:_emailTextField.text];
+  } andFailure:^(NSString *error) {
+    NSLog(@"response : %@",error);
+  }];
 }
 
 

@@ -53,6 +53,7 @@
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
 		0BE2B9BB1B590B190026E607 /* simple-green-check-button-th.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BE2B9BA1B590B190026E607 /* simple-green-check-button-th.png */; };
 		0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE437151B5D30090072600C /* LCTutorialContainerVC.m */; };
+		0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEC736E1BA0306C00D97BCA /* LCAppLaunchHelper.m */; };
 		0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BED515D1B74D3F600DA125B /* LCChooseInterestCVC.m */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
 		0BF05A5C1B4E622200FF7B39 /* LegacyConnectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A5B1B4E622200FF7B39 /* LegacyConnectTests.m */; };
@@ -229,6 +230,8 @@
 		0BE2B9BA1B590B190026E607 /* simple-green-check-button-th.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "simple-green-check-button-th.png"; sourceTree = "<group>"; };
 		0BE437141B5D30090072600C /* LCTutorialContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialContainerVC.h; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.h; sourceTree = "<group>"; };
 		0BE437151B5D30090072600C /* LCTutorialContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialContainerVC.m; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.m; sourceTree = "<group>"; };
+		0BEC736D1BA0306C00D97BCA /* LCAppLaunchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAppLaunchHelper.h; path = Helpers/LCAppLaunchHelper/LCAppLaunchHelper.h; sourceTree = "<group>"; };
+		0BEC736E1BA0306C00D97BCA /* LCAppLaunchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAppLaunchHelper.m; path = Helpers/LCAppLaunchHelper/LCAppLaunchHelper.m; sourceTree = "<group>"; };
 		0BED515C1B74D3F600DA125B /* LCChooseInterestCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseInterestCVC.h; path = CustomViews/LCChooseInterestCVC/LCChooseInterestCVC.h; sourceTree = "<group>"; };
 		0BED515D1B74D3F600DA125B /* LCChooseInterestCVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCChooseInterestCVC.m; path = CustomViews/LCChooseInterestCVC/LCChooseInterestCVC.m; sourceTree = "<group>"; };
 		0BF05A3C1B4E622200FF7B39 /* LegacyConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LegacyConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -790,6 +793,23 @@
 			name = LCTutorialContainerVC;
 			sourceTree = "<group>";
 		};
+		0BEC736B1BA0301400D97BCA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0BEC736C1BA0304D00D97BCA /* LCAppLaunchHelper */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		0BEC736C1BA0304D00D97BCA /* LCAppLaunchHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0BEC736D1BA0306C00D97BCA /* LCAppLaunchHelper.h */,
+				0BEC736E1BA0306C00D97BCA /* LCAppLaunchHelper.m */,
+			);
+			name = LCAppLaunchHelper;
+			sourceTree = "<group>";
+		};
 		0BED515F1B74D3FA00DA125B /* LCChooseInterestCVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -820,6 +840,7 @@
 		0BF05A3E1B4E622200FF7B39 /* LegacyConnect */ = {
 			isa = PBXGroup;
 			children = (
+				0BEC736B1BA0301400D97BCA /* Helpers */,
 				CECBC8CC1B5678FE0012B287 /* CustomViews */,
 				0BF05A6A1B4E629700FF7B39 /* DummyData */,
 				0BF05A691B4E628C00FF7B39 /* Utilities */,
@@ -1352,6 +1373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				CECBC8D11B56794F0012B287 /* LCFeedCellView.m in Sources */,
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
