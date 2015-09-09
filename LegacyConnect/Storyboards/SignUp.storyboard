@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AKf-9h-MQf">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
@@ -65,28 +64,31 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iyg-K8-dPI" userLabel="FBView">
-                                        <rect key="frame" x="80" y="380" width="161" height="30"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="161" id="N4e-V4-OvP"/>
-                                            <constraint firstAttribute="height" constant="30" id="b3M-kb-Yke"/>
-                                        </constraints>
-                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8Q-Hb-L4V">
+                                        <rect key="frame" x="16" y="358" width="288" height="41"/>
+                                        <state key="normal" image="fbButton.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="continueWithFBAction" destination="AKf-9h-MQf" eventType="touchUpInside" id="c6H-cm-dQ2"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="9Ne-AS-Ndc" firstAttribute="top" secondItem="TTp-qK-u3f" secondAttribute="bottom" constant="8" id="7WP-eA-Cam"/>
                                     <constraint firstItem="f4z-Eo-vo5" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" id="Fq4-wu-atp"/>
-                                    <constraint firstAttribute="centerX" secondItem="Iyg-K8-dPI" secondAttribute="centerX" id="H4o-G7-QmK"/>
                                     <constraint firstAttribute="bottom" secondItem="xLb-YV-Hak" secondAttribute="bottom" constant="52" id="IkY-4V-SGM"/>
                                     <constraint firstAttribute="bottom" secondItem="f4z-Eo-vo5" secondAttribute="bottom" id="Nvr-fw-WZl"/>
+                                    <constraint firstItem="Goa-rM-Brg" firstAttribute="top" secondItem="Y8Q-Hb-L4V" secondAttribute="bottom" constant="34" id="QdU-v6-tD3"/>
                                     <constraint firstAttribute="trailing" secondItem="xLb-YV-Hak" secondAttribute="trailing" constant="16" id="XEu-Nr-XUJ"/>
-                                    <constraint firstItem="xLb-YV-Hak" firstAttribute="top" secondItem="Iyg-K8-dPI" secondAttribute="bottom" constant="17" id="aYF-fj-Sbk"/>
+                                    <constraint firstItem="Y8Q-Hb-L4V" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" constant="16" id="aQh-7u-iLn"/>
                                     <constraint firstAttribute="centerX" secondItem="TTp-qK-u3f" secondAttribute="centerX" id="bXh-ai-bzj"/>
+                                    <constraint firstItem="Y8Q-Hb-L4V" firstAttribute="height" secondItem="xLb-YV-Hak" secondAttribute="height" id="cjF-Uq-F6n"/>
                                     <constraint firstItem="xLb-YV-Hak" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" constant="16" id="g2s-uj-IcL"/>
                                     <constraint firstAttribute="trailing" secondItem="f4z-Eo-vo5" secondAttribute="trailing" id="ghj-6a-BNZ"/>
                                     <constraint firstItem="f4z-Eo-vo5" firstAttribute="top" secondItem="qcj-ch-vno" secondAttribute="top" id="lHz-kj-yWd"/>
+                                    <constraint firstAttribute="trailing" secondItem="Y8Q-Hb-L4V" secondAttribute="trailing" constant="16" id="qeT-gT-g5K"/>
                                     <constraint firstItem="9Ne-AS-Ndc" firstAttribute="centerX" secondItem="TTp-qK-u3f" secondAttribute="centerX" id="qlo-Hu-1hM"/>
                                     <constraint firstItem="TTp-qK-u3f" firstAttribute="top" secondItem="qcj-ch-vno" secondAttribute="top" constant="93" id="rar-iq-Ie1"/>
                                 </constraints>
@@ -129,9 +131,6 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="fbButtonContainer" destination="Iyg-K8-dPI" id="5HI-j6-BRc"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sdh-d0-leA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -934,6 +933,7 @@
     <resources>
         <image name="camera-icon.png" width="256" height="256"/>
         <image name="default-placeholder.png" width="250" height="250"/>
+        <image name="fbButton.png" width="690" height="87"/>
         <image name="landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg" width="320" height="568"/>
         <image name="manplaceholder.jpg" width="100" height="100"/>
         <image name="rsz_lc-logo.png" width="104" height="103"/>
