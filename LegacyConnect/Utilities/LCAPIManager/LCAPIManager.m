@@ -608,6 +608,36 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
++ (void)performOnlineFBLoginRequest:(NSArray*)parameters withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:parameters forKeys:@[kEmailKey,kFirstNameKey, kLastNameKey, kDobKey, kFBUserIDKey, kFBAccessTokenKey, kFBAvatarImageUrlKey]];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFBLoginURL];
+  [webService performPostOperationWithUrl:url andAccessToken:kEmptyStringValue withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"%@",response);
+       NSDictionary *responseData = response[kResponseData];
+       [LCDataManager sharedDataManager].avatarUrl = responseData[kFBAvatarImageUrlKey];
+       [LCDataManager sharedDataManager].userID = responseData[kUserIDKey];
+       [LCDataManager sharedDataManager].userToken = responseData[kAccessTokenKey];
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     failure(error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+   }];
+}
+
+
+
 + (void)registerNewUser:(NSDictionary*)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
