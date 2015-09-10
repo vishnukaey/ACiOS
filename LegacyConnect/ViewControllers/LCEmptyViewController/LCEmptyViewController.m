@@ -37,7 +37,6 @@
 {
   [super viewDidLoad];
   [self addPasswordResetNotificationObserver];
-  // Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -48,34 +47,29 @@
 {
   [super viewWillAppear:animated];
   
-  // Check if user is not logged in
+  // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
-      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
       UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
     
-    if ([LCAppLaunchHelper needsToShowPasswordResetScreen]) {
+    if ([LCAppLaunchHelper needsToShowPasswordResetScreen])
+    {
       [self showPasswordResetScreen];
     }
-    
   }
   else
   {
-    //create appdelegate object to make the MFmenucontainer controller as the root view controller
-    //add homefeed controller as the center controller and leftmenu controller as the left menu to the container controller.
-    //make the homefeed controller as delegate of leftmenu
-    
+    //Fetch additional userdetails if user is logged-in
     if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
     {
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
          [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
-//         [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
          LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-         
-         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"homeFeeds"];  //I have instantiated using storyboard id.
+         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
          navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
          
          LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
@@ -100,7 +94,7 @@
     else
     {
       [LCUtilityManager clearUserDefaultsForCurrentUser];
-      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
       UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
@@ -165,14 +159,14 @@
   if (sender.tag == 1)
   {
     [appdel.menuButton setHidden:YES];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCChooseCommunityInterest"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
     [navigationRoot pushViewController:vc animated:YES];
   }
   else if (sender.tag == 2)
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-    createPostVC = [sb instantiateViewControllerWithIdentifier:@"LCCreatePostViewController"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    createPostVC = [sb instantiateInitialViewController];
 
     createPostVC.delegate = self;
     giButton.hidden = YES;
@@ -185,10 +179,6 @@
   }
   else
   {
-    //      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    //      LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    //      [self.navigationController pushViewController:vc animated:YES];
-    
     UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
     [view setBackgroundColor:[UIColor blackColor]];
     [mainContainer.view addSubview:view];
@@ -203,27 +193,27 @@
   [mainContainer setMenuState:MFSideMenuStateClosed];
   if (sender.tag == 0)//home
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"homeFeeds"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 1)//profile
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateInitialViewController];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = [LCDataManager sharedDataManager].userID;
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 2)//Interests
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCAllInterestVC"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (sender.tag == 3)//notifications
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Notification" bundle:nil];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
@@ -235,7 +225,7 @@
       [[FBSDKLoginManager new] logOut];
     }
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
     UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
     appdel.window.rootViewController = myStoryBoardInitialViewController;
     [appdel.window makeKeyAndVisible];
@@ -270,11 +260,13 @@
   NSDictionary *userInfo = notification.userInfo;
   if ([self.navigationController.topViewController isKindOfClass:[LCLoginViewController class]]) {
     LCLoginViewController * loginViewController = (LCLoginViewController*)self.navigationController.topViewController;
-    LCUpdatePasswordViewController *updatePasswordVC = [loginViewController.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+    LCUpdatePasswordViewController *updatePasswordVC = [loginViewController.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
     updatePasswordVC.delegate = loginViewController;
     updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
     [self.navigationController pushViewController:updatePasswordVC animated:YES];
-  } else {
+  }
+  else
+  {
     //Logout
     UIButton * dummyLogoutButton = [UIButton new];
     [dummyLogoutButton setTag:4];
@@ -283,17 +275,18 @@
   }
 }
 
+
 - (void)showPasswordResetScreen {
   // Set sign up story board
-  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
   UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
   [self.navigationController setNavigationBarHidden:YES];
   [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
   
   NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
-  LCLoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+  LCLoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:kLoginStoryBoardID];
   [viewArray addObject:loginVC];
-  LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+  LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
   updatePasswordVC.delegate = loginVC;
   updatePasswordVC.token = [LCAppLaunchHelper getPasswordResetToken];
   [viewArray addObject:updatePasswordVC];
