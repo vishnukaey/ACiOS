@@ -81,5 +81,6 @@ extern NSString *const kFeedTagTypeUser;
 
 extern NSString *const kLCUrlScheme;
 extern NSString *const kResetPasswordTokenKey;
+extern NSString *const kResetPasswordNotificationName;
 
 @end

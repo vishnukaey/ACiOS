@@ -25,44 +25,17 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//  NSString *typeOfLaunch = [defaults objectForKey:@"typeOfLaunch"];
-//  if ([typeOfLaunch isEqualToString:@"resetPassword"])
-//  {
-//    [self goToUpdatePassword:nil];
-//  }
 }
 
 
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(goToUpdatePassword:)
-                                               name:@"logged_in_from_URL"
-                                             object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:@"logged_in_from_URL"
-                                                object:nil];
   [super viewDidDisappear:animated];
 }
-
-
--(void)goToUpdatePassword:(NSNotification*)notification
-{
-  
-  NSDictionary *userInfo = notification.userInfo;
-
-  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
-  updatePasswordVC.delegate = self;
-  updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
-  [self.navigationController pushViewController:updatePasswordVC animated:YES];
-  
-}
-
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];

@@ -43,7 +43,9 @@
     NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
     if (tokenString) {
       NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
-      [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_from_URL" object:nil userInfo:userInfo];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
+                                                          object:nil
+                                                        userInfo:userInfo];
     }
     return boolValue;
   }

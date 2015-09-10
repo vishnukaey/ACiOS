@@ -18,6 +18,8 @@
 #import "LCAllInterestVC.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "LCLoginViewController.h"
+#import "LCAppLaunchHelper.h"
 
 @interface LCEmptyViewController ()
 {
@@ -34,7 +36,12 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self addPasswordResetNotificationObserver];
   // Do any additional setup after loading the view.
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -48,6 +55,11 @@
       UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+    
+    if ([LCAppLaunchHelper needsToShowPasswordResetScreen]) {
+      [self showPasswordResetScreen];
+    }
+    
   }
   else
   {
@@ -237,4 +249,56 @@
   menuButton.hidden = NO;
 }
 
+#pragma mark - Passwor reset implementation
+- (void)addPasswordResetNotificationObserver
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(showResetPasswordScreen:)
+                                               name:kResetPasswordNotificationName
+                                             object:nil];
+}
+
+- (void)removePasswordResetNotificationObserver
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kResetPasswordNotificationName
+                                                object:nil];
+}
+
+- (void)showResetPasswordScreen:(NSNotification*)notification
+{
+  NSDictionary *userInfo = notification.userInfo;
+  if ([self.navigationController.topViewController isKindOfClass:[LCLoginViewController class]]) {
+    LCLoginViewController * loginViewController = (LCLoginViewController*)self.navigationController.topViewController;
+    LCUpdatePasswordViewController *updatePasswordVC = [loginViewController.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+    updatePasswordVC.delegate = loginViewController;
+    updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
+    [self.navigationController pushViewController:updatePasswordVC animated:YES];
+  } else {
+    //Logout
+    UIButton * dummyLogoutButton = [UIButton new];
+    [dummyLogoutButton setTag:4];
+    [self leftMenuButtonActions:dummyLogoutButton];
+    [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
+  }
+}
+
+- (void)showPasswordResetScreen {
+  // Set sign up story board
+  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+  [self.navigationController setNavigationBarHidden:YES];
+  [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+  
+  NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
+  LCLoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+  [viewArray addObject:loginVC];
+  LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+  updatePasswordVC.delegate = loginVC;
+  updatePasswordVC.token = [LCAppLaunchHelper getPasswordResetToken];
+  [viewArray addObject:updatePasswordVC];
+  [LCAppLaunchHelper clearPasswordResetToken];
+  self.navigationController.viewControllers = viewArray;
+
+}
 @end

@@ -84,5 +84,8 @@ NSString *const kFeedTagTypeUser = @"user";
 
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
+NSString *const kResetPasswordNotificationName = @"password_reset_notification";
+
+
 
 @end
