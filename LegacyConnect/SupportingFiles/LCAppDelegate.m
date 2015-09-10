@@ -55,8 +55,6 @@
                                                                openURL:url
                                                      sourceApplication:sourceApplication
                                                             annotation:annotation];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
-    
     return boolValue;
   }
 }

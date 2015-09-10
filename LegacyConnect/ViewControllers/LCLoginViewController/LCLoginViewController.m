@@ -98,4 +98,19 @@
   [alertView show];
   
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+  if([textField isEqual:_emailTextField])
+  {
+    [_passwordTextField becomeFirstResponder];
+  }
+  else
+  {
+    [self performOnlineLoginRequest];
+  }
+  return YES;
+}
+
+
 @end
