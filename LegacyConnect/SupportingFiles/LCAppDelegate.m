@@ -36,9 +36,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-  
   BOOL boolValue = false;
-  
   if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
   {
     boolValue = true;
@@ -52,14 +50,13 @@
   else
   {
     boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                                    openURL:url
-                                                          sourceApplication:sourceApplication
-                                                                 annotation:annotation];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
-   
-    return !boolValue;
+                                                               openURL:url
+                                                     sourceApplication:sourceApplication
+                                                            annotation:annotation];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"logged_in_facebook" object:self];
+    
+    return boolValue;
   }
-  return boolValue;
 }
 
 + (LCAppDelegate *)appDelegate
@@ -71,7 +68,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
   [FBSDKAppEvents activateApp];
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
-
+  
 }
 
 

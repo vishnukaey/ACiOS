@@ -51,27 +51,27 @@
 
 - (void) fetchUserDetailsFromFacebook
 {
-    if([FBSDKAccessToken currentAccessToken])
-    {
-      NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-      [parameters setValue:@"id, email, name" forKey:@"fields"];
-      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
-       startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-         if (!error)
-         {
-           [self saveUserDetailsToDataManagerFromResponse:result];
-           NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
-           [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-             [self loginUser];
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-           } andFailure:^(NSString *error) {
-             NSLog(@"");
-             [MBProgressHUD hideHUDForView:self.view animated:YES];
-           }];
-         }
-      }];
-    }
+  if([FBSDKAccessToken currentAccessToken])
+  {
+    NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+    [parameters setValue:@"id, email, name" forKey:@"fields"];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
+     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+       if (!error)
+       {
+         [self saveUserDetailsToDataManagerFromResponse:result];
+         NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
+         [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+           [self loginUser];
+           [MBProgressHUD hideHUDForView:self.view animated:YES];
+         } andFailure:^(NSString *error) {
+           NSLog(@"");
+           [MBProgressHUD hideHUDForView:self.view animated:YES];
+         }];
+       }
+     }];
+  }
 }
 
 
@@ -105,7 +105,7 @@
 - (void)goToUpdatePassword:(NSNotification*)notification {
   
   NSDictionary *userInfo = notification.userInfo;
-
+  
   NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
   LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
   [viewArray addObject:loginVC];
