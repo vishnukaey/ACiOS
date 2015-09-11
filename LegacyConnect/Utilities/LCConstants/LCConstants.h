@@ -43,6 +43,7 @@ extern NSString *const kHomeFeedsStoryBoardID;
 extern NSString *const kChooseCommunityStoryBoardID;
 extern NSString *const kUpdatePasswordStoryBoardID;
 extern NSString *const kLoginStoryBoardID;
+extern NSString *const kForgotPasswordStoryBoardID;
 
 extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
@@ -66,10 +67,12 @@ extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;
 
 extern NSString *const kIDKey;
+extern NSString *const kMeKey;
 extern NSString *const kUserIDKey;
 extern NSString *const kFirstNameKey;
 extern NSString *const kLastNameKey;
 extern NSString *const kEmailKey;
+extern NSString *const kFieldsKey;
 extern NSString *const kPasswordKey;
 extern NSString *const kDobKey;
 extern NSString *const kAccessTokenKey;

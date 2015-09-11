@@ -33,11 +33,13 @@
   [super viewDidAppear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated
+{
   [super viewDidDisappear:animated];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
@@ -71,7 +73,7 @@
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
 {
-  LCForgotPasswordViewController *forgotPasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCForgotPasswordViewController"];
+  LCForgotPasswordViewController *forgotPasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kForgotPasswordStoryBoardID];
   forgotPasswordVC.delegate = self;
   [self.navigationController pushViewController:forgotPasswordVC animated:YES];
 }
@@ -80,7 +82,7 @@
 - (void)forgotPasswordRequestSent:(NSString *)user
 {
   [self.navigationController popViewControllerAnimated:YES];
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"An email has been sent to %@",user] delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"email_sent_message", @""),user] delegate:nil cancelButtonTitle:NSLocalizedString(@"dismiss_button_title", @"") otherButtonTitles:nil];
   [alertView show];
 }
 
@@ -94,7 +96,7 @@
       [self.navigationController popToViewController:vc animated:YES];
     }
   }
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"Your password has been successfully updated" delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:NSLocalizedString(@"password_updated", @"") delegate:nil cancelButtonTitle:NSLocalizedString(@"dismiss_button_title", @"") otherButtonTitles:nil];
   [alertView show];
   
 }
