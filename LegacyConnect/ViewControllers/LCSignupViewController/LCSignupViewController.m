@@ -101,7 +101,6 @@
   {
     [self registerUserOnline];
   }
-//  [self performSegueWithIdentifier:@"selectPhoto" sender:self];
 
 }
 
@@ -215,6 +214,14 @@
     return NO;
   }
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+  [self nextButtonTapped:nil];
+  return YES;
+}
+
+
 
 -(void)clearWarnings
 {

@@ -31,6 +31,19 @@ extern NSString *const kUnfollowEventURL;
 extern NSString *const kFollowEventURL;
 extern NSString *const kAddUsersToEventURL;
 
+extern NSString *const kMainStoryBoardIdentifier;
+extern NSString *const kSignupStoryBoardIdentifier;
+extern NSString *const kProfileStoryBoardIdentifier;
+extern NSString *const kInterestsStoryBoardIdentifier;
+extern NSString *const kCommunityStoryBoardIdentifier;
+extern NSString *const kNotificationStoryBoardIdentifier;
+extern NSString *const kCreatePostStoryBoardIdentifier;
+
+extern NSString *const kHomeFeedsStoryBoardID;
+extern NSString *const kChooseCommunityStoryBoardID;
+extern NSString *const kUpdatePasswordStoryBoardID;
+extern NSString *const kLoginStoryBoardID;
+
 extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;

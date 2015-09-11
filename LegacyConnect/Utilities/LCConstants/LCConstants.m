@@ -10,6 +10,7 @@
 
 @implementation LCConstants
 
+
 NSString *const kBaseURL = @"http://10.3.0.55:8000";
 
 NSString *const kLoginURL = @"/api/login";
@@ -28,6 +29,19 @@ NSString *const kAcceptFriendURL = @"api/user/friend/accept";
 NSString *const kUnfollowEventURL = @"/api/event/unfollow";
 NSString *const kFollowEventURL = @"/api/event/follow";
 NSString *const kAddUsersToEventURL = @"/api/event/users";
+
+NSString *const kMainStoryBoardIdentifier = @"Main";
+NSString *const kSignupStoryBoardIdentifier = @"SignUp";
+NSString *const kProfileStoryBoardIdentifier = @"Profile";
+NSString *const kInterestsStoryBoardIdentifier = @"Interests";
+NSString *const kCommunityStoryBoardIdentifier = @"Community";
+NSString *const kNotificationStoryBoardIdentifier = @"Notification";
+NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
+
+NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
+NSString *const kChooseCommunityStoryBoardID = @"LCChooseCommunityInterest";
+NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
+NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
