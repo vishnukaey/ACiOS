@@ -9,4 +9,7 @@
 "dismiss_button_title" = "Dismiss";
 "email_sent_message" = "An email has been sent to ";
 "password_updated" = "Your password has been successfully updated";
+"invalid_mail_address" = "Please enter a valid mail address";
+
+"ok" = "OK";
 

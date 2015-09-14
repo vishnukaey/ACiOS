@@ -18,9 +18,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-//  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//  [defaults setObject:[NSString stringWithFormat:@""] forKey:@"typeOfLaunch"];
-//  [defaults synchronize];
+  [self.navigationController setNavigationBarHidden:false];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -43,11 +41,6 @@
   {
     _confirmPasswordTextField.isValid = NO;
   }
-}
-
-- (IBAction)backButtonClicked:(id)sender
-{
-  [self.navigationController popViewControllerAnimated:YES];
 }
 
 
