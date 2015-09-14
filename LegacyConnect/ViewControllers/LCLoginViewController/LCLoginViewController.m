@@ -24,6 +24,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [_emailTextField becomeFirstResponder];
   self.navigationController.navigationBarHidden = true;
 }
 

@@ -12,7 +12,7 @@
 
 @interface LCLoginViewController : UIViewController<forgotPasswordDelegate,updatePasswordDelegate>
 
-@property (nonatomic,retain) IBOutlet UITextField *emailTextField;
-@property (nonatomic,retain) IBOutlet UITextField *passwordTextField;
-
+@property (nonatomic,weak) IBOutlet UITextField *emailTextField;
+@property (nonatomic,weak) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @end
