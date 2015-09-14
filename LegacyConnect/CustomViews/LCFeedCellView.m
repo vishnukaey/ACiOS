@@ -98,7 +98,7 @@
     [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRangePost];
   }
   [postDescriptionString addAttributes:@{
-                                        NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-light" size:14],
                                         } range:NSMakeRange(0, postDescriptionString.length)];
   postDescription.tagsArray  = postDescriptionTagsWithRanges;
   [postDescription setAttributedText:postDescriptionString];
