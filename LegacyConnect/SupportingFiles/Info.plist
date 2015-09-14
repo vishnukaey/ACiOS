@@ -27,12 +27,12 @@
 			</array>
 		</dict>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.LC.legacyconnect</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>legacyconnect</string>
 			</array>
-			<key>CFBundleURLName</key>
-			<string>com.LC.legacyconnect</string>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
@@ -49,6 +49,17 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Legacy connect would like to access your location.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Gotham-Bold.otf</string>
+		<string>Gotham-BoldItalic.otf</string>
+		<string>Gotham-Book.otf</string>
+		<string>Gotham-BookItalic.otf</string>
+		<string>Gotham-Light.otf</string>
+		<string>Gotham-LightItalic.otf</string>
+		<string>Gotham-Medium.otf</string>
+		<string>Gotham-MediumItalic.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

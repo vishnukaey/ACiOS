@@ -93,6 +93,14 @@
 		CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */ = {isa = PBXBuildFile; fileRef = CE5954D01B6F5EF100D839DD /* uncheck_box.png */; };
 		CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
+		CE96C9191BA2C533004964CC /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9111BA2C533004964CC /* Gotham-Bold.otf */; };
+		CE96C91A1BA2C533004964CC /* Gotham-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9121BA2C533004964CC /* Gotham-BoldItalic.otf */; };
+		CE96C91B1BA2C533004964CC /* Gotham-Book.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9131BA2C533004964CC /* Gotham-Book.otf */; };
+		CE96C91C1BA2C533004964CC /* Gotham-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9141BA2C533004964CC /* Gotham-BookItalic.otf */; };
+		CE96C91D1BA2C533004964CC /* Gotham-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9151BA2C533004964CC /* Gotham-Light.otf */; };
+		CE96C91E1BA2C533004964CC /* Gotham-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9161BA2C533004964CC /* Gotham-LightItalic.otf */; };
+		CE96C91F1BA2C533004964CC /* Gotham-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9171BA2C533004964CC /* Gotham-Medium.otf */; };
+		CE96C9201BA2C533004964CC /* Gotham-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CE96C9181BA2C533004964CC /* Gotham-MediumItalic.otf */; };
 		CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9C4DD21B78DB9000D6F6A8 /* star.png */; };
 		CEA30E2C1B7361C700DAA4BA /* Community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA30E2B1B7361C700DAA4BA /* Community.storyboard */; };
 		CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA30E2F1B7366C100DAA4BA /* LCCommunityInterestCell.m */; };
@@ -304,6 +312,14 @@
 		CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMultipleSelectionTable.m; path = CustomViews/LCMultipleSelectionTable/LCMultipleSelectionTable.m; sourceTree = "<group>"; };
 		CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImapactsViewController.h; path = ViewControllers/LCProfileVC/LCImapactsViewController.h; sourceTree = "<group>"; };
 		CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImapactsViewController.m; path = ViewControllers/LCProfileVC/LCImapactsViewController.m; sourceTree = "<group>"; };
+		CE96C9111BA2C533004964CC /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Bold.otf"; sourceTree = "<group>"; };
+		CE96C9121BA2C533004964CC /* Gotham-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BoldItalic.otf"; sourceTree = "<group>"; };
+		CE96C9131BA2C533004964CC /* Gotham-Book.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Book.otf"; sourceTree = "<group>"; };
+		CE96C9141BA2C533004964CC /* Gotham-BookItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-BookItalic.otf"; sourceTree = "<group>"; };
+		CE96C9151BA2C533004964CC /* Gotham-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Light.otf"; sourceTree = "<group>"; };
+		CE96C9161BA2C533004964CC /* Gotham-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-LightItalic.otf"; sourceTree = "<group>"; };
+		CE96C9171BA2C533004964CC /* Gotham-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-Medium.otf"; sourceTree = "<group>"; };
+		CE96C9181BA2C533004964CC /* Gotham-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gotham-MediumItalic.otf"; sourceTree = "<group>"; };
 		CE9C4DD21B78DB9000D6F6A8 /* star.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star.png; sourceTree = "<group>"; };
 		CEA30E2B1B7361C700DAA4BA /* Community.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Community.storyboard; sourceTree = "<group>"; };
 		CEA30E2E1B7366C100DAA4BA /* LCCommunityInterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommunityInterestCell.h; path = CustomViews/LCCommunityInterestCell/LCCommunityInterestCell.h; sourceTree = "<group>"; };
@@ -840,6 +856,7 @@
 		0BF05A3E1B4E622200FF7B39 /* LegacyConnect */ = {
 			isa = PBXGroup;
 			children = (
+				CE96C9101BA2C515004964CC /* Font Files */,
 				0BEC736B1BA0301400D97BCA /* Helpers */,
 				CECBC8CC1B5678FE0012B287 /* CustomViews */,
 				0BF05A6A1B4E629700FF7B39 /* DummyData */,
@@ -1066,6 +1083,21 @@
 			name = LCMultipleSelectionTable;
 			sourceTree = "<group>";
 		};
+		CE96C9101BA2C515004964CC /* Font Files */ = {
+			isa = PBXGroup;
+			children = (
+				CE96C9111BA2C533004964CC /* Gotham-Bold.otf */,
+				CE96C9121BA2C533004964CC /* Gotham-BoldItalic.otf */,
+				CE96C9131BA2C533004964CC /* Gotham-Book.otf */,
+				CE96C9141BA2C533004964CC /* Gotham-BookItalic.otf */,
+				CE96C9151BA2C533004964CC /* Gotham-Light.otf */,
+				CE96C9161BA2C533004964CC /* Gotham-LightItalic.otf */,
+				CE96C9171BA2C533004964CC /* Gotham-Medium.otf */,
+				CE96C9181BA2C533004964CC /* Gotham-MediumItalic.otf */,
+			);
+			name = "Font Files";
+			sourceTree = "<group>";
+		};
 		CEA30E2D1B73663200DAA4BA /* LCCommunityInterestCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1287,6 +1319,9 @@
 				CEBA92D31B66632000C02F93 /* heart_dummy.png in Resources */,
 				0BD1428B1B552914004F7647 /* manplaceholder.jpg in Resources */,
 				0B1717C41B73865000BACDC0 /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
+				CE96C91A1BA2C533004964CC /* Gotham-BoldItalic.otf in Resources */,
+				CE96C91F1BA2C533004964CC /* Gotham-Medium.otf in Resources */,
+				CE96C91B1BA2C533004964CC /* Gotham-Book.otf in Resources */,
 				0B5F1BF21B7DC50800E749BF /* default-placeholder.png in Resources */,
 				CEBA92D11B66632000C02F93 /* comment_dummy.png in Resources */,
 				CEBA92D21B66632000C02F93 /* GIButton_dummy.png in Resources */,
@@ -1294,7 +1329,10 @@
 				CEB9F3E21B8496E400AD265A /* communityMemebrs.png in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0B5F1BF01B7DC17200E749BF /* camera-icon.png in Resources */,
+				CE96C91E1BA2C533004964CC /* Gotham-LightItalic.otf in Resources */,
 				CEB9F3E41B8496E900AD265A /* communityWebsite.png in Resources */,
+				CE96C9201BA2C533004964CC /* Gotham-MediumItalic.otf in Resources */,
+				CE96C91C1BA2C533004964CC /* Gotham-BookItalic.otf in Resources */,
 				0BB7B36D1B57DE7400261658 /* warning@2x.png in Resources */,
 				0BE2B9B51B58D79C0026E607 /* photo.jpg in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
@@ -1318,10 +1356,12 @@
 				CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */,
 				CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
+				CE96C9191BA2C533004964CC /* Gotham-Bold.otf in Resources */,
 				CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */,
 				CEB9F3E01B84487100AD265A /* profileWaiting.png in Resources */,
 				CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */,
 				CEA30E2C1B7361C700DAA4BA /* Community.storyboard in Resources */,
+				CE96C91D1BA2C533004964CC /* Gotham-Light.otf in Resources */,
 				0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
