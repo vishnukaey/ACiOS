@@ -23,7 +23,6 @@
   [super viewDidLoad];
 }
 
-
 - (IBAction)continueWithFBAction
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
