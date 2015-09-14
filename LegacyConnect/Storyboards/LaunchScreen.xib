@@ -2,9 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="Gotham-Bold.otf">
+            <string>Gotham-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -15,26 +18,27 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_BG" translatesAutoresizingMaskIntoConstraints="NO" id="0XS-tw-izZ">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="CPw-Yv-pUg">
-                    <rect key="frame" x="80" y="204" width="160" height="160"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="CPw-Yv-pUg" secondAttribute="height" multiplier="1:1" id="nm6-3A-KeJ"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="CPw-Yv-pUg">
+                    <rect key="frame" x="85" y="179" width="150" height="150"/>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEGACY CONNECT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQM-hc-JBM">
+                    <rect key="frame" x="0.0" y="349" width="320" height="18"/>
+                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="0XS-tw-izZ" secondAttribute="bottom" id="Bdy-Mu-CYu"/>
-                <constraint firstItem="0XS-tw-izZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="GLI-Bw-hqy"/>
-                <constraint firstItem="0XS-tw-izZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Gqy-3X-7gd"/>
-                <constraint firstItem="CPw-Yv-pUg" firstAttribute="width" secondItem="0XS-tw-izZ" secondAttribute="width" multiplier="1:2" id="IDe-OP-m5L"/>
-                <constraint firstAttribute="bottom" secondItem="0XS-tw-izZ" secondAttribute="bottom" id="Iq2-3I-CFW"/>
-                <constraint firstAttribute="centerX" secondItem="CPw-Yv-pUg" secondAttribute="centerX" id="MF4-1q-Slf"/>
-                <constraint firstItem="0XS-tw-izZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RpY-VO-W35"/>
-                <constraint firstAttribute="trailing" secondItem="0XS-tw-izZ" secondAttribute="trailing" id="aDs-SV-a7J"/>
-                <constraint firstAttribute="trailing" secondItem="0XS-tw-izZ" secondAttribute="trailing" id="cBz-FO-hwK"/>
-                <constraint firstAttribute="centerY" secondItem="CPw-Yv-pUg" secondAttribute="centerY" id="sai-jz-3T2"/>
-                <constraint firstItem="0XS-tw-izZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="tS0-ZK-gZJ"/>
+                <constraint firstAttribute="bottom" secondItem="0XS-tw-izZ" secondAttribute="bottom" id="2H1-sD-bRV"/>
+                <constraint firstAttribute="centerY" secondItem="CPw-Yv-pUg" secondAttribute="centerY" constant="30" id="5ti-JS-AFw"/>
+                <constraint firstItem="YQM-hc-JBM" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8YX-z7-hGX"/>
+                <constraint firstAttribute="centerX" secondItem="CPw-Yv-pUg" secondAttribute="centerX" id="Fc6-B5-z37"/>
+                <constraint firstItem="0XS-tw-izZ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="VHk-Yj-LpV"/>
+                <constraint firstItem="0XS-tw-izZ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ZOm-98-87W"/>
+                <constraint firstAttribute="trailing" secondItem="0XS-tw-izZ" secondAttribute="trailing" id="tFV-6c-Rld"/>
+                <constraint firstItem="YQM-hc-JBM" firstAttribute="top" secondItem="CPw-Yv-pUg" secondAttribute="bottom" constant="20" id="vrJ-U6-tzF"/>
+                <constraint firstAttribute="trailing" secondItem="YQM-hc-JBM" secondAttribute="trailing" id="xSM-tB-Yl2"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
