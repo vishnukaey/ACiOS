@@ -12,6 +12,8 @@
 #import "LCWebServiceManager.h"
 #import "MBProgressHud.h"
 
+#import "LCChooseCausesVC.h"
+
 @interface LCLoginHomeViewController ()
 
 @end
@@ -130,6 +132,10 @@
 
 - (IBAction)signInButtonClicked:(id)sender
 {
+//  [LCDataManager sharedDataManager].userToken = @"df16cd47b6390a079042d6351a4b61c066af69224d1fb3c847f0322f4627e1fa0bbb7d4fcd172f8206d676ab5a0ccf90";
+//  LCChooseCausesVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCChooseCausesVC"];
+//  [self.navigationController pushViewController:loginVC animated:YES];
+  
   LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
   [self.navigationController pushViewController:loginVC animated:YES];
 }

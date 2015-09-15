@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface LCChooseCausesCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIButton *selectionButton;
 @property (weak, nonatomic) IBOutlet UIImageView *causesImageView;
 @property (strong, nonatomic) LCCause *cause;
+
+- (void)setCellSelected :(BOOL)selected;
 @end

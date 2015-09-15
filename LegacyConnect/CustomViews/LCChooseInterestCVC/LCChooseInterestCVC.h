@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LCChooseInterestCVC : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIButton *selectionButton;
 @property (strong, nonatomic) LCInterest *interest;
 @property (weak, nonatomic) IBOutlet UIImageView *interestsImageView;
 @property (weak, nonatomic) IBOutlet UILabel *interestNameLabel;
+
+- (void)setCellSelected :(BOOL)selected;
 @end

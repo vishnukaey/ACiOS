@@ -16,6 +16,7 @@
   NSMutableDictionary *selectedItems;
   NSMutableArray *causes;
   NSArray *interests;
+  IBOutlet UIButton *nextButton;
 }
 @end
 
@@ -27,6 +28,11 @@
   causes = [[NSMutableArray alloc] init];
   self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
   self.userImageView.clipsToBounds = YES;
+  self.userImageView.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.userImageView.layer.borderWidth = 3;
+  nextButton.layer.cornerRadius = 5;
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
   [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
@@ -75,11 +81,11 @@
     NSArray *selectedInterestIDs = [selectedItems allKeys];
     if([selectedInterestIDs containsObject:cell.interest.interestID])
     {
-      cell.selectionButton.selected =YES;
+      [cell setCellSelected:YES];
     }
     else
     {
-      cell.selectionButton.selected=NO;
+      [cell setCellSelected:NO];
     }
     return cell;
   }
@@ -97,11 +103,11 @@
     NSArray *selectedCauseIDs = [selectedItems valueForKey:cell.cause.interestID];
     if([selectedCauseIDs containsObject:cell.cause.causeID])
     {
-      cell.selectionButton.selected =YES;
+      [cell setCellSelected:YES];
     }
     else
     {
-      cell.selectionButton.selected=NO;
+      [cell setCellSelected:NO];
     }
     return cell;
   }
