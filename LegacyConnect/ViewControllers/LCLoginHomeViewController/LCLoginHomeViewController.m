@@ -11,11 +11,13 @@
 #import "LCLoginHomeViewController.h"
 #import "LCWebServiceManager.h"
 #import "MBProgressHud.h"
+#import "LCConstants.h"
 
 #import "LCChooseCausesVC.h"
 
 @interface LCLoginHomeViewController ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewYPosition;
 @end
 
 @implementation LCLoginHomeViewController
@@ -23,13 +25,20 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  if (IS_IPHONE_4)
+  {
+    self.textViewYPosition.constant = -65.0f;
+  } else if (IS_IPHONE_5)
+  {
+    self.textViewYPosition.constant = -45.0f;
+  }
 }
 
 - (IBAction)continueWithFBAction
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-  [login logInWithReadPermissions:@[@"email"] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+  [login logInWithReadPermissions:@[kEmailKey] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
     {
       NSLog(@"error %@",error);
@@ -40,7 +49,7 @@
     }
     else
     {
-      if ([result.grantedPermissions containsObject:@"email"])
+      if ([result.grantedPermissions containsObject:kEmailKey])
       {
         [self fetchUserDetailsFromFacebook];
       }
@@ -55,9 +64,9 @@
   if([FBSDKAccessToken currentAccessToken])
   {
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-    [parameters setValue:@"id, email, name" forKey:@"fields"];
+    [parameters setValue:@"id, email, name" forKey:kFieldsKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters]
      startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
        if (!error)
        {
@@ -108,9 +117,9 @@
   NSDictionary *userInfo = notification.userInfo;
   
   NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
-  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:kLoginStoryBoardID];
   [viewArray addObject:loginVC];
-  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdatePasswordViewController"];
+  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
   updatePasswordVC.delegate = loginVC;
   updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
   [viewArray addObject:updatePasswordVC];

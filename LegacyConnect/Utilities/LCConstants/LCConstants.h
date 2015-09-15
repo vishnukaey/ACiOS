@@ -43,6 +43,7 @@ extern NSString *const kHomeFeedsStoryBoardID;
 extern NSString *const kChooseCommunityStoryBoardID;
 extern NSString *const kUpdatePasswordStoryBoardID;
 extern NSString *const kLoginStoryBoardID;
+extern NSString *const kForgotPasswordStoryBoardID;
 
 extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
@@ -66,10 +67,12 @@ extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;
 
 extern NSString *const kIDKey;
+extern NSString *const kMeKey;
 extern NSString *const kUserIDKey;
 extern NSString *const kFirstNameKey;
 extern NSString *const kLastNameKey;
 extern NSString *const kEmailKey;
+extern NSString *const kFieldsKey;
 extern NSString *const kPasswordKey;
 extern NSString *const kDobKey;
 extern NSString *const kAccessTokenKey;
@@ -95,5 +98,11 @@ extern NSString *const kFeedTagTypeUser;
 extern NSString *const kLCUrlScheme;
 extern NSString *const kResetPasswordTokenKey;
 extern NSString *const kResetPasswordNotificationName;
+
+#define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)480) < DBL_EPSILON)
+#define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)568) < DBL_EPSILON)
+#define IS_IPHONE_6 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)667) < DBL_EPSILON)
+#define IS_IPHONE_6_PLUS (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)736) < DBL_EPSILON)
+
 
 @end

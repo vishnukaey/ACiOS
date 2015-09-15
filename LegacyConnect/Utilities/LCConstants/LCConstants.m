@@ -10,7 +10,6 @@
 
 @implementation LCConstants
 
-
 NSString *const kBaseURL = @"http://10.3.0.55:8000";
 
 NSString *const kLoginURL = @"/api/login";
@@ -42,6 +41,7 @@ NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
 NSString *const kChooseCommunityStoryBoardID = @"LCChooseCommunityInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
+NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
 
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
@@ -68,10 +68,12 @@ NSString *const kUpdatePasswordURL = @"/api/user/resetPassword";
 NSString *const kLogOutURL = @"";
 
 NSString *const kIDKey = @"id";
+NSString *const kMeKey = @"me";
 NSString *const kUserIDKey = @"userId";
 NSString *const kFirstNameKey = @"firstName";
 NSString *const kLastNameKey = @"lastName";
 NSString *const kEmailKey = @"email";
+NSString *const kFieldsKey = @"fields";
 NSString *const kEventsKey = @"events";
 NSString *const kAccessTokenKey = @"accessToken";
 NSString *const kPasswordKey = @"password";
@@ -99,7 +101,6 @@ NSString *const kFeedTagTypeUser = @"user";
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
 NSString *const kResetPasswordNotificationName = @"password_reset_notification";
-
 
 
 @end
