@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -26,8 +26,12 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
@@ -570,9 +574,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyJ-K7-mEk">
-                                        <rect key="frame" x="328" y="12" width="39" height="38"/>
+                                        <rect key="frame" x="328" y="12" width="47" height="38"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="39" id="2OY-LQ-OQK"/>
+                                            <constraint firstAttribute="width" constant="47" id="2OY-LQ-OQK"/>
                                             <constraint firstAttribute="height" constant="38" id="PZq-C0-87g"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
@@ -589,7 +593,7 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="FyJ-K7-mEk" secondAttribute="bottom" id="MzC-Dk-QZG"/>
                                     <constraint firstAttribute="height" constant="50" id="kUj-9c-07W"/>
-                                    <constraint firstAttribute="trailing" secondItem="FyJ-K7-mEk" secondAttribute="trailing" constant="8" id="m4k-W9-4ny"/>
+                                    <constraint firstAttribute="trailing" secondItem="FyJ-K7-mEk" secondAttribute="trailing" id="m4k-W9-4ny"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chooseCauses_topBG" translatesAutoresizingMaskIntoConstraints="NO" id="bBB-Kw-8Fs">
@@ -847,52 +851,28 @@ then select some related Causes</string>
                         <viewControllerLayoutGuide type="bottom" id="aYS-ml-jRe"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Sm-J1-ocn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Would you like to connect with existing friends?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOM-De-AUw">
-                                <rect key="frame" x="60" y="208" width="200" height="50"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG7-fI-1vT">
-                                <rect key="frame" x="81" y="354" width="158" height="30"/>
-                                <state key="normal" title="Find Facebook Friends">
-                                    <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="CIt-mh-v7y"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BB-QP-54h">
-                                <rect key="frame" x="104" y="316" width="113" height="30"/>
-                                <state key="normal" title="Find in Contacts">
-                                    <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="hw5-uN-qMy"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
-                                <rect key="frame" x="110" y="94" width="100" height="100"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
                                         <rect key="frame" x="8" y="10" width="35" height="30"/>
                                         <state key="normal" title="Back">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-Jd-cza">
-                                        <rect key="frame" x="251" y="10" width="61" height="30"/>
-                                        <state key="normal" title="Not Now">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-Jd-cza">
+                                        <rect key="frame" x="328" y="12" width="47" height="38"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="38" id="jeH-tG-Sub"/>
+                                            <constraint firstAttribute="width" constant="47" id="lBH-zI-2gI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -901,21 +881,120 @@ then select some related Causes</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UNM-Jd-cza" secondAttribute="trailing" id="G0z-vM-fzM"/>
+                                    <constraint firstAttribute="bottom" secondItem="UNM-Jd-cza" secondAttribute="bottom" id="dPm-zE-j39"/>
+                                    <constraint firstAttribute="height" constant="50" id="jEv-TB-uLI"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
+                                <rect key="frame" x="138" y="15" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="2Ab-2S-8G8"/>
+                                    <constraint firstAttribute="width" constant="100" id="5m0-Tu-Vea"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOM-De-AUw">
+                                <rect key="frame" x="0.0" y="125" width="375" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="X0n-DM-vKK"/>
+                                </constraints>
+                                <string key="text">Would you like to connect
+ with existing friends?</string>
+                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BB-QP-54h">
+                                <rect key="frame" x="50" y="180" width="275" height="44"/>
+                                <color key="backgroundColor" red="0.93725490199999995" green="0.3921568627" blue="0.30196078430000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="VQb-8S-fOb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                <state key="normal" title="Find in Contacts">
+                                    <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="hw5-uN-qMy"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v28-q3-dnp">
+                                <rect key="frame" x="50" y="244" width="275" height="44"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FBLogoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="BF6-Al-sbl">
+                                        <rect key="frame" x="15" y="11" width="22" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="WDj-PU-fQC"/>
+                                            <constraint firstAttribute="width" constant="22" id="pHG-yk-KyJ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Find Facebook Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seK-lI-vin">
+                                        <rect key="frame" x="37" y="0.0" width="238" height="44"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                        <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG7-fI-1vT">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
+                                        <state key="normal">
+                                            <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="CIt-mh-v7y"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.23529411764705882" green="0.35686274509803922" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="zG7-fI-1vT" secondAttribute="bottom" id="CPS-Wh-ke1"/>
+                                    <constraint firstItem="zG7-fI-1vT" firstAttribute="leading" secondItem="v28-q3-dnp" secondAttribute="leading" id="LWT-4P-U2g"/>
+                                    <constraint firstAttribute="height" constant="44" id="Wc3-We-J4S"/>
+                                    <constraint firstAttribute="bottom" secondItem="seK-lI-vin" secondAttribute="bottom" id="XbB-Y5-cxU"/>
+                                    <constraint firstItem="zG7-fI-1vT" firstAttribute="top" secondItem="v28-q3-dnp" secondAttribute="top" id="czQ-b7-uem"/>
+                                    <constraint firstAttribute="trailing" secondItem="seK-lI-vin" secondAttribute="trailing" id="m2u-s9-F9h"/>
+                                    <constraint firstItem="seK-lI-vin" firstAttribute="leading" secondItem="BF6-Al-sbl" secondAttribute="trailing" id="pg6-ue-9rS"/>
+                                    <constraint firstItem="seK-lI-vin" firstAttribute="top" secondItem="v28-q3-dnp" secondAttribute="top" id="qR5-hl-f9n"/>
+                                    <constraint firstAttribute="trailing" secondItem="zG7-fI-1vT" secondAttribute="trailing" id="uMI-AG-Qgt"/>
+                                    <constraint firstAttribute="centerY" secondItem="BF6-Al-sbl" secondAttribute="centerY" id="ub1-Dv-Jxk"/>
+                                    <constraint firstItem="BF6-Al-sbl" firstAttribute="leading" secondItem="v28-q3-dnp" secondAttribute="leading" constant="15" id="yrj-cB-Nfx"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Mz0-Jt-69X" secondAttribute="trailing" id="6Gd-HX-yuk"/>
+                            <constraint firstItem="v28-q3-dnp" firstAttribute="top" secondItem="0BB-QP-54h" secondAttribute="bottom" constant="20" id="8VI-Ho-3Mi"/>
+                            <constraint firstAttribute="trailing" secondItem="v28-q3-dnp" secondAttribute="trailing" constant="50" id="D2y-LT-4dM"/>
+                            <constraint firstAttribute="trailing" secondItem="uOM-De-AUw" secondAttribute="trailing" id="G0D-pa-ajo"/>
+                            <constraint firstItem="0BB-QP-54h" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" constant="50" id="I2F-qQ-6jw"/>
+                            <constraint firstItem="Kig-Hh-ZLO" firstAttribute="top" secondItem="Mz0-Jt-69X" secondAttribute="bottom" constant="-35" id="JKL-6F-GTo"/>
+                            <constraint firstItem="v28-q3-dnp" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" constant="50" id="KoU-Lc-v29"/>
+                            <constraint firstItem="Mz0-Jt-69X" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" id="LWF-YC-3Lj"/>
+                            <constraint firstAttribute="trailing" secondItem="0BB-QP-54h" secondAttribute="trailing" constant="50" id="POz-RK-mp6"/>
+                            <constraint firstItem="0BB-QP-54h" firstAttribute="top" secondItem="uOM-De-AUw" secondAttribute="bottom" constant="25" id="arV-iw-Lf7"/>
+                            <constraint firstItem="Mz0-Jt-69X" firstAttribute="top" secondItem="2Sm-J1-ocn" secondAttribute="top" id="cSY-kd-MaH"/>
+                            <constraint firstAttribute="centerX" secondItem="Kig-Hh-ZLO" secondAttribute="centerX" id="ci5-dJ-ReF"/>
+                            <constraint firstItem="uOM-De-AUw" firstAttribute="top" secondItem="Kig-Hh-ZLO" secondAttribute="bottom" constant="10" id="qxa-z7-NSB"/>
+                            <constraint firstItem="uOM-De-AUw" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" id="r2D-hk-mB2"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="customNavigationHeight" destination="jEv-TB-uLI" id="O7j-U0-e9m"/>
+                        <outlet property="facebookButtonContainer" destination="v28-q3-dnp" id="cUt-7x-p0R"/>
+                        <outlet property="findInContactsButton" destination="0BB-QP-54h" id="vHZ-Rv-VEu"/>
                         <outlet property="imageView" destination="Kig-Hh-ZLO" id="GKZ-bG-AN9"/>
                         <segue destination="ajw-VA-3ws" kind="show" identifier="listOwnContacts" id="VIv-wG-9Be"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1618" y="-230"/>
+            <point key="canvasLocation" x="1617.5" y="-230.5"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">

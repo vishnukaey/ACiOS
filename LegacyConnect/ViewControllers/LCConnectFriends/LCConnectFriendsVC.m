@@ -11,7 +11,10 @@
 
 
 @interface LCConnectFriendsVC ()
-
+{
+  IBOutlet UIButton *findInContactsButton;
+  IBOutlet UIView *facebookButtonContainer;
+}
 @end
 
 @implementation LCConnectFriendsVC
@@ -20,6 +23,10 @@
 {
   [super viewDidLoad];
   self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2;
+  findInContactsButton.layer.cornerRadius = 5;
+  facebookButtonContainer.layer.cornerRadius = 5;
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   self.imageView.clipsToBounds = YES;
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
   [_imageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
