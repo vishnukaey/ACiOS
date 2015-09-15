@@ -13,7 +13,6 @@
 		0B1717C51B73865000BACDC0 /* rsz_lc-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B1717C31B73865000BACDC0 /* rsz_lc-logo.png */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
 		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
-		0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B3594221B4E6C6E0098C484 /* SignUp.storyboard */; };
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
@@ -127,6 +126,7 @@
 		CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */; };
 		CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */; };
 		CEBCEC691B6899CF00F0116E /* Interests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEBCEC681B6899CF00F0116E /* Interests.storyboard */; };
+		CEBDDC411BA7F3A200354F91 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEBDDC401BA7F3A200354F91 /* SignUp.storyboard */; };
 		CEBED6981B5F78B00012FEBB /* LCDummyValues.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6971B5F78B00012FEBB /* LCDummyValues.m */; };
 		CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */; };
 		CEBED6A11B5FACD60012FEBB /* LCCreateCommunity.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6A01B5FACD60012FEBB /* LCCreateCommunity.m */; };
@@ -168,7 +168,6 @@
 		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
 		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
 		0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginHomeViewController.m; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.m; sourceTree = "<group>"; };
-		0B3594221B4E6C6E0098C484 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = Storyboards/SignUp.storyboard; sourceTree = "<group>"; };
 		0B3594241B4E6D920098C484 /* LCSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSignupViewController.h; path = ViewControllers/LCSignupViewController/LCSignupViewController.h; sourceTree = "<group>"; };
 		0B3594251B4E6D920098C484 /* LCSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSignupViewController.m; path = ViewControllers/LCSignupViewController/LCSignupViewController.m; sourceTree = "<group>"; };
 		0B3594281B4E6DBE0098C484 /* LCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginViewController.h; path = ViewControllers/LCLoginViewController/LCLoginViewController.h; sourceTree = "<group>"; };
@@ -356,6 +355,7 @@
 		CEBCEC651B6899B600F0116E /* LCSingleCauseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSingleCauseVC.h; path = ViewControllers/LCInterestsVC/LCSingleCauseVC.h; sourceTree = "<group>"; };
 		CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSingleCauseVC.m; path = ViewControllers/LCInterestsVC/LCSingleCauseVC.m; sourceTree = "<group>"; };
 		CEBCEC681B6899CF00F0116E /* Interests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Interests.storyboard; sourceTree = "<group>"; };
+		CEBDDC401BA7F3A200354F91 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		CEBED6961B5F78B00012FEBB /* LCDummyValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCDummyValues.h; sourceTree = "<group>"; };
 		CEBED6971B5F78B00012FEBB /* LCDummyValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCDummyValues.m; sourceTree = "<group>"; };
 		CEBED6991B5F89560012FEBB /* LCFBContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFBContactsVC.h; path = ViewControllers/LCContactsListVC/LCFBContactsVC.h; sourceTree = "<group>"; };
@@ -905,9 +905,9 @@
 		0BF05A651B4E623D00FF7B39 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				CEBDDC401BA7F3A200354F91 /* SignUp.storyboard */,
 				0BF05A801B4E64A000FF7B39 /* Main.storyboard */,
 				0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */,
-				0B3594221B4E6C6E0098C484 /* SignUp.storyboard */,
 				CEBA92CA1B6627D400C02F93 /* Profile.storyboard */,
 				CEBCEC681B6899CF00F0116E /* Interests.storyboard */,
 				CEA30E2B1B7361C700DAA4BA /* Community.storyboard */,
@@ -1352,7 +1352,6 @@
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
 				CEF275D91B78A32600709005 /* LCCommentCellXIB.xib in Resources */,
 				CE5954D11B6F5EF100D839DD /* check_box.png in Resources */,
-				0B3594231B4E6C6E0098C484 /* SignUp.storyboard in Resources */,
 				CEB9B6A51B79C26300C61BA0 /* profileSettings.png in Resources */,
 				CEC9C6601B835DC8008DAD01 /* profileAdd.png in Resources */,
 				CEBA92D51B66632000C02F93 /* photoPost_dummy.png in Resources */,
@@ -1360,6 +1359,7 @@
 				CE5954D21B6F5EF100D839DD /* uncheck_box.png in Resources */,
 				CEB9F3E01B84487100AD265A /* profileWaiting.png in Resources */,
 				CE9C4DD31B78DB9000D6F6A8 /* star.png in Resources */,
+				CEBDDC411BA7F3A200354F91 /* SignUp.storyboard in Resources */,
 				CEA30E2C1B7361C700DAA4BA /* Community.storyboard in Resources */,
 				CE96C91D1BA2C533004964CC /* Gotham-Light.otf in Resources */,
 				0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */,
