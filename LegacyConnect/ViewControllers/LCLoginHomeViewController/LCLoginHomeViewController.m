@@ -11,9 +11,11 @@
 #import "LCLoginHomeViewController.h"
 #import "LCWebServiceManager.h"
 #import "MBProgressHud.h"
+#import "LCConstants.h"
 
 @interface LCLoginHomeViewController ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewYPosition;
 @end
 
 @implementation LCLoginHomeViewController
@@ -21,6 +23,13 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  if (IS_IPHONE_4)
+  {
+    self.textViewYPosition.constant = -65.0f;
+  } else if (IS_IPHONE_5)
+  {
+    self.textViewYPosition.constant = -45.0f;
+  }
 }
 
 - (IBAction)continueWithFBAction

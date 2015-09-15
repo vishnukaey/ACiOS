@@ -28,6 +28,8 @@
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -49,11 +51,18 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg_copy" translatesAutoresizingMaskIntoConstraints="NO" id="f4z-Eo-vo5">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lc_logo_reg" translatesAutoresizingMaskIntoConstraints="NO" id="TTp-qK-u3f">
-                                        <rect key="frame" x="85" y="33" width="150" height="150"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="TTp-qK-u3f">
+                                        <rect key="frame" x="112" y="70" width="150" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="LMV-SZ-t7W"/>
+                                            <constraint firstAttribute="width" constant="150" id="iNx-9b-1fK"/>
+                                        </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LEGACY CONNECT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ne-AS-Ndc">
-                                        <rect key="frame" x="0.0" y="226" width="375" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEGACY CONNECT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ne-AS-Ndc">
+                                        <rect key="frame" x="0.0" y="242" width="375" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="sRH-nl-pRK"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="18"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -68,35 +77,96 @@
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8Q-Hb-L4V">
-                                        <rect key="frame" x="47" y="501" width="280" height="44"/>
-                                        <state key="normal" image="FacebookButtonSignUp">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="continueWithFBAction" destination="AKf-9h-MQf" eventType="touchUpInside" id="c6H-cm-dQ2"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Goa-rM-Brg">
-                                        <rect key="frame" x="47" y="560" width="280" height="44"/>
-                                        <state key="normal" image="EmailButtonSignUp">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Goa-rM-Brg">
+                                        <rect key="frame" x="15" y="552" width="345" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="UDc-S3-oVm"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                        <state key="normal" title="Sign Up with Email" backgroundImage="SinUpWithEmailBG">
+                                            <color key="titleColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <segue destination="b9m-AF-Bq4" kind="show" id="jBi-Be-gcR"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WrU-fK-ICg">
+                                        <rect key="frame" x="15" y="492" width="345" height="45"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FacebookButtonSignUp" translatesAutoresizingMaskIntoConstraints="NO" id="Mqx-LO-Zmd">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Continue with Facebook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQ3-5L-8K4">
+                                                <rect key="frame" x="95" y="0.0" width="194" height="45"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="194" id="6Q3-I2-TFs"/>
+                                                    <constraint firstAttribute="height" constant="45" id="PI6-8T-go4"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FBLogoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="HTJ-rR-cfe">
+                                                <rect key="frame" x="57" y="11" width="23" height="23"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="23" id="l2Z-Ii-BMX"/>
+                                                    <constraint firstAttribute="width" constant="23" id="wxu-v6-H7h"/>
+                                                </constraints>
+                                            </imageView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y8Q-Hb-L4V">
+                                                <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="continueWithFBAction" destination="AKf-9h-MQf" eventType="touchUpInside" id="c6H-cm-dQ2"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="centerY" secondItem="HTJ-rR-cfe" secondAttribute="centerY" id="C9J-m2-nA7"/>
+                                            <constraint firstItem="xQ3-5L-8K4" firstAttribute="leading" secondItem="HTJ-rR-cfe" secondAttribute="trailing" constant="15" id="FsA-Ps-oYm"/>
+                                            <constraint firstAttribute="height" constant="45" id="Jdk-0t-FWN"/>
+                                            <constraint firstItem="Mqx-LO-Zmd" firstAttribute="top" secondItem="WrU-fK-ICg" secondAttribute="top" id="LsR-9q-YPC"/>
+                                            <constraint firstAttribute="bottom" secondItem="Y8Q-Hb-L4V" secondAttribute="bottom" id="WME-hs-yG2"/>
+                                            <constraint firstAttribute="bottom" secondItem="Mqx-LO-Zmd" secondAttribute="bottom" id="c0Y-hn-Q2Q"/>
+                                            <constraint firstItem="Y8Q-Hb-L4V" firstAttribute="top" secondItem="WrU-fK-ICg" secondAttribute="top" id="faQ-Uc-K6T"/>
+                                            <constraint firstItem="Y8Q-Hb-L4V" firstAttribute="leading" secondItem="WrU-fK-ICg" secondAttribute="leading" id="iLT-yu-gw6"/>
+                                            <constraint firstItem="Mqx-LO-Zmd" firstAttribute="leading" secondItem="WrU-fK-ICg" secondAttribute="leading" id="krq-kX-lf9"/>
+                                            <constraint firstAttribute="centerY" secondItem="xQ3-5L-8K4" secondAttribute="centerY" id="oFr-FC-39c"/>
+                                            <constraint firstAttribute="centerX" secondItem="xQ3-5L-8K4" secondAttribute="centerX" constant="-19" id="oHM-GD-X7d"/>
+                                            <constraint firstAttribute="trailing" secondItem="Mqx-LO-Zmd" secondAttribute="trailing" id="vLM-hx-zmi"/>
+                                            <constraint firstAttribute="trailing" secondItem="Y8Q-Hb-L4V" secondAttribute="trailing" id="yp3-CW-zFX"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="TTp-qK-u3f" secondAttribute="centerX" id="4Ma-Sl-Te7"/>
                                     <constraint firstAttribute="trailing" secondItem="dvc-O1-ilY" secondAttribute="trailing" id="4SI-4s-vnh"/>
+                                    <constraint firstItem="WrU-fK-ICg" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" constant="15" id="BIK-HL-khu"/>
+                                    <constraint firstItem="dvc-O1-ilY" firstAttribute="top" secondItem="9Ne-AS-Ndc" secondAttribute="bottom" constant="25" id="IAc-uN-hOC"/>
+                                    <constraint firstAttribute="bottom" secondItem="Goa-rM-Brg" secondAttribute="bottom" constant="25" id="NkO-Xw-LZI"/>
+                                    <constraint firstItem="Goa-rM-Brg" firstAttribute="top" secondItem="WrU-fK-ICg" secondAttribute="bottom" constant="15" id="Qgy-q0-Jzf"/>
                                     <constraint firstItem="f4z-Eo-vo5" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" id="Qpu-nc-fpw"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Ne-AS-Ndc" secondAttribute="trailing" id="Scd-sJ-Ly1"/>
+                                    <constraint firstItem="Goa-rM-Brg" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" constant="15" id="T85-rm-4WQ"/>
                                     <constraint firstItem="dvc-O1-ilY" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" id="TYt-e4-RZm"/>
                                     <constraint firstAttribute="bottom" secondItem="f4z-Eo-vo5" secondAttribute="bottom" id="U5a-zg-pGF"/>
                                     <constraint firstAttribute="trailing" secondItem="f4z-Eo-vo5" secondAttribute="trailing" id="dtU-hc-gGm"/>
+                                    <constraint firstItem="9Ne-AS-Ndc" firstAttribute="leading" secondItem="qcj-ch-vno" secondAttribute="leading" id="fGT-cQ-Soc"/>
                                     <constraint firstAttribute="centerY" secondItem="dvc-O1-ilY" secondAttribute="centerY" constant="-22" id="ghH-ST-tfK"/>
                                     <constraint firstItem="f4z-Eo-vo5" firstAttribute="top" secondItem="qcj-ch-vno" secondAttribute="top" id="h28-vb-Da8"/>
+                                    <constraint firstAttribute="trailing" secondItem="WrU-fK-ICg" secondAttribute="trailing" constant="15" id="raM-ol-shU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Goa-rM-Brg" secondAttribute="trailing" constant="15" id="tGt-Vp-jDH"/>
+                                    <constraint firstItem="9Ne-AS-Ndc" firstAttribute="top" secondItem="TTp-qK-u3f" secondAttribute="bottom" constant="22" id="wb4-uG-tSt"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dvK-bb-UJr">
@@ -105,14 +175,14 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBj-by-OhV">
                                         <rect key="frame" x="0.0" y="0.0" width="188" height="45"/>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QtK-nO-9HN">
                                         <rect key="frame" x="188" y="0.0" width="187" height="45"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                         <state key="normal" title=" Sign in here">
-                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.90980392156862744" green="0.30196078431372547" blue="0.23921568627450981" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -147,6 +217,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="textViewYPosition" destination="ghH-ST-tfK" id="B36-hi-BRZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Sdh-d0-leA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1224,10 +1297,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EmailButtonSignUp" width="345" height="44"/>
+        <image name="FBLogoSmall" width="22" height="22"/>
         <image name="FacebookButtonSignUp" width="345" height="44"/>
         <image name="HorizontalDivider" width="1" height="1"/>
+        <image name="LC_logo" width="150" height="150"/>
         <image name="OrangeButtonBG" width="345" height="44"/>
+        <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="camera-icon.png" width="256" height="256"/>
         <image name="default-placeholder.png" width="250" height="250"/>
         <image name="lc_logo_reg" width="116" height="116"/>

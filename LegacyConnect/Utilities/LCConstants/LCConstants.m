@@ -10,7 +10,6 @@
 
 @implementation LCConstants
 
-
 NSString *const kBaseURL = @"http://10.3.0.55:8000";
 
 NSString *const kLoginURL = @"/api/login";
@@ -102,7 +101,6 @@ NSString *const kFeedTagTypeUser = @"user";
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
 NSString *const kResetPasswordNotificationName = @"password_reset_notification";
-
 
 
 @end
