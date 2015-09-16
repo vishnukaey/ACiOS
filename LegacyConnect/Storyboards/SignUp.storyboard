@@ -510,7 +510,7 @@
                         <outlet property="passwordTextField" destination="pNq-0g-rs9" id="6vy-8C-O4Z"/>
                         <outlet property="signupButton" destination="u4t-AC-zlZ" id="yO2-d1-Upa"/>
                         <outlet property="warningLabel" destination="jn1-9h-gDM" id="pCG-sV-cjf"/>
-                        <segue destination="neY-up-Txe" kind="modal" identifier="selectPhoto" id="epE-Zn-RNL"/>
+                        <segue destination="neY-up-Txe" kind="push" identifier="selectPhoto" id="epE-Zn-RNL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuh-SE-SiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -562,7 +562,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="P0n-lH-Sgz" kind="modal" id="krZ-hL-VvX"/>
+                                            <segue destination="P0n-lH-Sgz" kind="push" id="krZ-hL-VvX"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-PH-Ngb">
@@ -672,6 +672,7 @@
                             <constraint firstItem="CMz-t7-7Xx" firstAttribute="top" secondItem="Mal-bE-9d3" secondAttribute="bottom" id="t3G-Q7-hyN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Aqx-s0-zUS"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -681,7 +682,7 @@
                         <outlet property="takePhotoContainerHeight" destination="fze-O3-beL" id="okx-Ky-xOI"/>
                         <outlet property="takePhotoContainerWidth" destination="sWJ-V8-269" id="pb1-oR-qXN"/>
                         <outlet property="welcomeNoteYPosition" destination="SSh-5h-c0o" id="3pd-Iu-6be"/>
-                        <segue destination="P0n-lH-Sgz" kind="modal" identifier="chooseCauses" id="DWD-Bl-WmO"/>
+                        <segue destination="P0n-lH-Sgz" kind="push" identifier="chooseCauses" id="DWD-Bl-WmO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHr-1V-8Kn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -909,7 +910,7 @@ then select some related Causes</string>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="rX4-yN-9BJ" kind="modal" identifier="skipToConnectFriends" id="8Po-aI-aTM"/>
+                                            <segue destination="rX4-yN-9BJ" kind="push" identifier="skipToConnectFriends" id="8Po-aI-aTM"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -955,6 +956,7 @@ then select some related Causes</string>
                             <constraint firstAttribute="trailing" secondItem="jqk-BZ-Sd0" secondAttribute="trailing" id="xBM-MI-7Mk"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="CRN-Dm-yG5"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -963,7 +965,7 @@ then select some related Causes</string>
                         <outlet property="interestsCollectionView" destination="SPR-ea-c07" id="p8m-Wq-r1x"/>
                         <outlet property="nextButton" destination="kiA-vT-V5i" id="p2T-iN-u6O"/>
                         <outlet property="userImageView" destination="JuP-Gg-t3z" id="Qma-Xs-UC9"/>
-                        <segue destination="rX4-yN-9BJ" kind="modal" identifier="connectFriends" id="aNy-6t-e6c"/>
+                        <segue destination="rX4-yN-9BJ" kind="push" identifier="connectFriends" id="aNy-6t-e6c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46p-z1-on9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1128,6 +1130,7 @@ then select some related Causes</string>
                             <constraint firstItem="uOM-De-AUw" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" id="r2D-hk-mB2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="HBo-KI-8ne"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -1135,12 +1138,12 @@ then select some related Causes</string>
                         <outlet property="facebookButtonContainer" destination="v28-q3-dnp" id="cUt-7x-p0R"/>
                         <outlet property="findInContactsButton" destination="0BB-QP-54h" id="vHZ-Rv-VEu"/>
                         <outlet property="imageView" destination="Kig-Hh-ZLO" id="GKZ-bG-AN9"/>
-                        <segue destination="ajw-VA-3ws" kind="modal" identifier="listOwnContacts" id="VIv-wG-9Be"/>
+                        <segue destination="ajw-VA-3ws" kind="push" identifier="listOwnContacts" id="VIv-wG-9Be"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1255.5" y="-108.5"/>
+            <point key="canvasLocation" x="1278.5" y="-348.5"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
@@ -1173,6 +1176,7 @@ then select some related Causes</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="r8X-DI-yfH"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1672,7 +1676,7 @@ then select some related Causes</string>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="aNy-6t-e6c"/>
         <segue reference="krZ-hL-VvX"/>
+        <segue reference="aNy-6t-e6c"/>
     </inferredMetricsTieBreakers>
 </document>
