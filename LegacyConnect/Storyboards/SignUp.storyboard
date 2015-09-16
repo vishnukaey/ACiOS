@@ -245,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygP-lN-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-530.5" y="-440.5"/>
+            <point key="canvasLocation" x="-1714.5" y="-368.5"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="ZvZ-mw-Vr2">
@@ -515,7 +515,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuh-SE-SiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-67.5" y="-804.5"/>
+            <point key="canvasLocation" x="-1231.5" y="-368.5"/>
         </scene>
         <!--Sign Up User PhotoVC-->
         <scene sceneID="nr8-Ui-0hS">
@@ -687,7 +687,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHr-1V-8Kn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="364.5333333333333" y="-347.54500000000002"/>
+            <point key="canvasLocation" x="-747.5" y="-368.5"/>
         </scene>
         <!--Choose CausesVC-->
         <scene sceneID="oHv-Ak-hrx">
@@ -970,7 +970,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46p-z1-on9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="788.5" y="-340.5"/>
+            <point key="canvasLocation" x="-247.5" y="-368.5"/>
         </scene>
         <!--Connect FriendsVC-->
         <scene sceneID="7sB-tv-ACv">
@@ -1143,7 +1143,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1278.5" y="-348.5"/>
+            <point key="canvasLocation" x="310.5" y="-368.5"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
@@ -1154,7 +1154,7 @@ then select some related Causes</string>
                         <viewControllerLayoutGuide type="bottom" id="RK4-Rf-Hn0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="tM1-ki-uDU">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Un5-YU-fOR">
@@ -1164,7 +1164,6 @@ then select some related Causes</string>
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RNj-KA-H5D">
-                                <rect key="frame" x="0.0" y="53" width="320" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contacts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymG-jm-Y9a">
@@ -1177,11 +1176,11 @@ then select some related Causes</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="r8X-DI-yfH"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1661" y="-755"/>
+            <point key="canvasLocation" x="812.5" y="-368.5"/>
         </scene>
         <!--Final TutorialVC-->
         <scene sceneID="aDc-Ju-RoL">
@@ -1211,7 +1210,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3011" y="-299"/>
+            <point key="canvasLocation" x="2271" y="-155"/>
         </scene>
         <!--Tutorial ContainerVC-->
         <scene sceneID="JsV-I3-yg1">
@@ -1257,7 +1256,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NLI-I1-il1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2121" y="-319"/>
+            <point key="canvasLocation" x="1381" y="-155"/>
         </scene>
         <!--Facebook Friends-->
         <scene sceneID="Mf4-7x-Z6K">
@@ -1268,15 +1267,15 @@ then select some related Causes</string>
                         <viewControllerLayoutGuide type="bottom" id="1Cp-Lu-beR"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="vEI-wu-ZXT">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rYI-BI-rWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832" y="249"/>
+            <point key="canvasLocation" x="812" y="473"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="dCQ-Az-kVE">
@@ -1286,7 +1285,7 @@ then select some related Causes</string>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zS-Dn-wRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2564" y="-335"/>
+            <point key="canvasLocation" x="1808" y="-155"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Pwo-rh-u61">
@@ -1466,7 +1465,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kv4-ew-bdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-242.5" y="903.5"/>
+            <point key="canvasLocation" x="-1282.5" y="683.5"/>
         </scene>
         <!--FORGOT PASSWORD-->
         <scene sceneID="R3f-TQ-xlM">
@@ -1548,7 +1547,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBC-7I-Jgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420.5" y="892.5"/>
+            <point key="canvasLocation" x="-775.5" y="683.5"/>
         </scene>
         <!--Update Password View Controller-->
         <scene sceneID="XP1-Jo-GIa">
@@ -1650,7 +1649,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTQ-sJ-fO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="980.5" y="815.5"/>
+            <point key="canvasLocation" x="-227.5" y="683.5"/>
         </scene>
     </scenes>
     <resources>
