@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rX4-yN-9BJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -1010,6 +1010,16 @@ then select some related Causes</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v28-q3-dnp">
                                 <rect key="frame" x="50" y="257" width="275" height="44"/>
                                 <subviews>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG7-fI-1vT">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
+                                        <state key="normal" backgroundImage="FacebookButtonSignUp">
+                                            <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="CIt-mh-v7y"/>
+                                        </connections>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FBLogoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="BF6-Al-sbl">
                                         <rect key="frame" x="15" y="11" width="22" height="22"/>
                                         <constraints>
@@ -1023,18 +1033,8 @@ then select some related Causes</string>
                                         <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG7-fI-1vT">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="44"/>
-                                        <state key="normal">
-                                            <color key="titleColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="CIt-mh-v7y"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.23529411764705882" green="0.35686274509803922" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="zG7-fI-1vT" secondAttribute="bottom" id="CPS-Wh-ke1"/>
                                     <constraint firstItem="zG7-fI-1vT" firstAttribute="leading" secondItem="v28-q3-dnp" secondAttribute="leading" id="LWT-4P-U2g"/>
@@ -1052,18 +1052,13 @@ then select some related Causes</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
-                                        <rect key="frame" x="15" y="27" width="46" height="30"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backButton_image" translatesAutoresizingMaskIntoConstraints="NO" id="pW9-0z-lfK">
+                                        <rect key="frame" x="15" y="32" width="13" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="46" id="7Ue-jT-DQw"/>
-                                            <constraint firstAttribute="height" constant="30" id="MIs-4V-VhA"/>
+                                            <constraint firstAttribute="width" constant="13" id="DQm-O7-usN"/>
+                                            <constraint firstAttribute="height" constant="21" id="TEZ-xL-0L8"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
+                                    </imageView>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-Jd-cza">
                                         <rect key="frame" x="316" y="27" width="47" height="30"/>
                                         <constraints>
@@ -1077,15 +1072,31 @@ then select some related Causes</string>
                                         </state>
                                         <connections>
                                             <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="dmJ-Ro-GGg"/>
-                                            <segue destination="CSB-n7-86j" kind="modal" id="d1M-8h-KHT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
+                                        <rect key="frame" x="15" y="27" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="7Ue-jT-DQw"/>
+                                            <constraint firstAttribute="height" constant="30" id="MIs-4V-VhA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="hDi-ty-vL4"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="UNM-Jd-cza" secondAttribute="trailing" constant="12" id="G0z-vM-fzM"/>
+                                    <constraint firstItem="IAy-gU-RrU" firstAttribute="centerY" secondItem="pW9-0z-lfK" secondAttribute="centerY" id="SVD-MG-pps"/>
                                     <constraint firstAttribute="bottom" secondItem="IAy-gU-RrU" secondAttribute="bottom" constant="8" id="Wnj-Au-NIB"/>
                                     <constraint firstAttribute="bottom" secondItem="UNM-Jd-cza" secondAttribute="bottom" constant="8" id="dPm-zE-j39"/>
+                                    <constraint firstItem="pW9-0z-lfK" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="15" id="hAP-3t-Td5"/>
                                     <constraint firstAttribute="height" constant="65" id="jEv-TB-uLI"/>
                                     <constraint firstItem="IAy-gU-RrU" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="15" id="wlC-As-kR6"/>
                                 </constraints>
@@ -1645,6 +1656,7 @@ then select some related Causes</string>
         <image name="OrangeButtonBG" width="345" height="44"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="TakeAPhotoBtnBG" width="287" height="287"/>
+        <image name="backButton_image" width="12" height="21"/>
         <image name="chooseCauses_topBG" width="375" height="297"/>
         <image name="default-placeholder.png" width="250" height="250"/>
         <image name="lc_logo_reg" width="116" height="116"/>

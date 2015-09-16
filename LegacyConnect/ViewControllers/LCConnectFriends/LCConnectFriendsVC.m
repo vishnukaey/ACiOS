@@ -47,22 +47,22 @@
 
 -(IBAction)buttonActions :(UIButton *)sender
 {
-  if (sender.tag == 1)//phone contacts
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
-    LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
-    [self.navigationController pushViewController:next animated:YES];
-  }
-  else if (sender.tag == 2)//facebook contacts
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
-    LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"FBContactList"];
-    [self.navigationController pushViewController:next animated:YES];
-  }
-  else//not now -- tag is 3
-  {
-    //handle if user skips
-  }
+//  if (sender.tag == 1)//phone contacts
+//  {
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+//    LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"ContactList"];
+//    [self.navigationController pushViewController:next animated:YES];
+//  }
+//  else if (sender.tag == 2)//facebook contacts
+//  {
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+//    LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"FBContactList"];
+//    [self.navigationController pushViewController:next animated:YES];
+//  }
+//  else//not now -- tag is 3
+//  {
+//    //handle if user skips
+//  }
 }
 
 - (IBAction)backButtonTapped:(id)sender
