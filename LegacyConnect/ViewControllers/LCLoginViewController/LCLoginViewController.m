@@ -24,7 +24,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [_emailTextField becomeFirstResponder];
+  _loginButton.enabled = NO;
+  [_emailTextField addTarget:self
+                      action:@selector(textFieldDidChange:)
+            forControlEvents:UIControlEventEditingChanged];
+  [_passwordTextField addTarget:self
+                         action:@selector(textFieldDidChange:)
+               forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
 }
 
@@ -66,7 +72,7 @@
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [self.navigationController popToRootViewControllerAnimated:NO];
-    } andFailure:^(NSString *error) {
+  } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
 }
@@ -113,6 +119,19 @@
     [self performOnlineLoginRequest];
   }
   return YES;
+}
+
+
+- (void)textFieldDidChange:(id)sender
+{
+  if(_emailTextField.text.length!=0 && _passwordTextField.text.length!=0)
+  {
+    _loginButton.enabled = YES;
+  }
+  else
+  {
+    _loginButton.enabled = NO;
+  }
 }
 
 

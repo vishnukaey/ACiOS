@@ -8,6 +8,7 @@
 
 #import "LCUpdatePasswordViewController.h"
 #import "LCLoginViewController.h"
+
 @interface LCUpdatePasswordViewController ()
 
 @end
@@ -30,7 +31,6 @@
 {
   if ([_confirmPasswordTextField.text isEqualToString:_passwordTextField.text])
   {
-    _confirmPasswordTextField.isValid = YES;
     [LCAPIManager resetPasswordWithPasswordResetCode:self.token andNewPassword:_confirmPasswordTextField.text withSuccess:^(id response) {
       [_delegate updatePasswordSuccessful];
     } andFailure:^(NSString *error) {
@@ -39,7 +39,7 @@
   }
   else
   {
-    _confirmPasswordTextField.isValid = NO;
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"password mistach"];
   }
 }
 

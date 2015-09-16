@@ -13,6 +13,7 @@
 
 + (BOOL)isNetworkAvailable;
 + (NSString *)performNullCheckAndSetValue:(NSString *)value;
++ (BOOL)validateEmail:(NSString*)emailString;
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format;
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date;

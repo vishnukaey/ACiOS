@@ -12,6 +12,7 @@ pod 'MBProgressHUD', '~> 0.9'
 pod 'SDWebImage', '~> 3.7'
 pod 'KoaPullToRefresh', '~> 1.0'
 pod 'RSKImageCropper'
+pod 'IQKeyboardManager', '~> 3.3'
 end
 
 target 'LegacyConnectTests' do
