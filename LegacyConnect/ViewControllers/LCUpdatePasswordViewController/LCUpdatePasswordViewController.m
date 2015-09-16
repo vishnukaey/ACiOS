@@ -9,6 +9,8 @@
 #import "LCUpdatePasswordViewController.h"
 #import "LCLoginViewController.h"
 
+static NSString * kResetPasswordTitle = @"RESET PASSWORD";
+
 @interface LCUpdatePasswordViewController ()
 
 @end
@@ -20,6 +22,17 @@
 {
   [super viewDidLoad];
   [self.navigationController setNavigationBarHidden:false];
+  self.title = kResetPasswordTitle;
+  UIButton * backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 21)];
+  [backButton setImage:[UIImage imageNamed:@"backButton_image"] forState:UIControlStateNormal];
+  [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+  UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+  [self.navigationItem setLeftBarButtonItem:backButtonItem];
+}
+
+- (void)backButtonPressed:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
