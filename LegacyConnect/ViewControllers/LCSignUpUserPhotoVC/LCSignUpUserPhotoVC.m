@@ -80,12 +80,12 @@
 #pragma mark - ImagePicker delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  [picker dismissViewControllerAnimated:YES completion:nil];
-  
-  UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-  RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
-  imageCropVC.delegate = self;
-  [self.navigationController pushViewController:imageCropVC animated:YES];
+  [picker dismissViewControllerAnimated:YES completion:^{
+    UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
+    imageCropVC.delegate = self;
+    [self.navigationController pushViewController:imageCropVC animated:YES];
+  }];
 }
 
 - (void)saveUserDetailsToDataManagerFromResponse:(id)response
