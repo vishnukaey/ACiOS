@@ -72,47 +72,33 @@
   datePicker.date = defualtDate;
   _dobTextField.inputView = datePicker;
   [self createDatePickerInputAccessoryView];
-//  [self createInputAccessoryView];
 }
 
 
 -(void)createDatePickerInputAccessoryView
 {
   UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-  accessoryView.barStyle = UIBarStyleBlackTranslucent;
+  accessoryView.barStyle = UIBarStyleDefault;
   UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
   UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
-  [doneButton setTintColor:[UIColor whiteColor]];
+  [doneButton setTintColor:[UIColor blackColor]];
   UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
-  [cancelButton setTintColor:[UIColor whiteColor]];
+  [cancelButton setTintColor:[UIColor blackColor]];
   [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
   [self.dobTextField setInputAccessoryView:accessoryView];
 }
 
 
--(void)createInputAccessoryView
-{
-  UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-  accessoryView.barStyle = UIBarStyleBlackTranslucent;
-  UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
-  [doneButton setTintColor:[UIColor whiteColor]];
-  UIBarButtonItem *shiftLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(dismissDatePickerView:)];
-  UIBarButtonItem *shiftRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(dismissDatePickerView:)];
-  [shiftLeft setTintColor:[UIColor whiteColor]];
-   [shiftRight setTintColor:[UIColor whiteColor]];
-  [accessoryView setItems:[NSArray arrayWithObjects:shiftLeft,shiftRight,flexSpace, doneButton, nil] animated:NO];
-  [self.firstNameTextField setInputAccessoryView:accessoryView];
-}
-
 - (void) setDateAndDismissDatePickerView:(id)sender
 {
   [_dobTextField resignFirstResponder];
   [self updateTextFieldWithDate:self];
+  [self textFieldDidChange:nil];
 }
 
 - (void)dismissDatePickerView:(id)sender
 {
+  [self textFieldDidChange:nil];
   [_dobTextField resignFirstResponder];
 }
 
