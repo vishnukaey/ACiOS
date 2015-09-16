@@ -65,6 +65,11 @@
   }
 }
 
+- (IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
 
 
 @end
