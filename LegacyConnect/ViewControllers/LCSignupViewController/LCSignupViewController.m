@@ -25,6 +25,25 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  _signupButton.enabled = NO;
+  [_firstNameTextField addTarget:self
+                      action:@selector(textFieldDidChange:)
+            forControlEvents:UIControlEventEditingChanged];
+  [_lastNameTextField addTarget:self
+                         action:@selector(textFieldDidChange:)
+               forControlEvents:UIControlEventEditingChanged];
+  [_emailTextField addTarget:self
+                      action:@selector(textFieldDidChange:)
+            forControlEvents:UIControlEventEditingChanged];
+  [_passwordTextField addTarget:self
+                         action:@selector(textFieldDidChange:)
+               forControlEvents:UIControlEventEditingChanged];
+  [_confirmPasswordTextField addTarget:self
+                      action:@selector(textFieldDidChange:)
+            forControlEvents:UIControlEventEditingChanged];
+  [_dobTextField addTarget:self
+                         action:@selector(textFieldDidChange:)
+               forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
 }
 
@@ -52,7 +71,22 @@
   NSDate *defualtDate = [calendar dateFromComponents:components];
   datePicker.date = defualtDate;
   _dobTextField.inputView = datePicker;
-  [self createInputAccessoryView];
+  [self createDatePickerInputAccessoryView];
+//  [self createInputAccessoryView];
+}
+
+
+-(void)createDatePickerInputAccessoryView
+{
+  UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
+  accessoryView.barStyle = UIBarStyleBlackTranslucent;
+  UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
+  [doneButton setTintColor:[UIColor whiteColor]];
+  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
+  [cancelButton setTintColor:[UIColor whiteColor]];
+  [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
+  [self.dobTextField setInputAccessoryView:accessoryView];
 }
 
 
@@ -60,15 +94,16 @@
 {
   UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
   accessoryView.barStyle = UIBarStyleBlackTranslucent;
-  UIBarButtonItem* flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-  UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
+  UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
   [doneButton setTintColor:[UIColor whiteColor]];
-  UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
-  [cancelButton setTintColor:[UIColor whiteColor]];
-  [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
-  [self.dobTextField setInputAccessoryView:accessoryView];
+  UIBarButtonItem *shiftLeft = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(dismissDatePickerView:)];
+  UIBarButtonItem *shiftRight = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(dismissDatePickerView:)];
+  [shiftLeft setTintColor:[UIColor whiteColor]];
+   [shiftRight setTintColor:[UIColor whiteColor]];
+  [accessoryView setItems:[NSArray arrayWithObjects:shiftLeft,shiftRight,flexSpace, doneButton, nil] animated:NO];
+  [self.firstNameTextField setInputAccessoryView:accessoryView];
 }
-
 
 - (void) setDateAndDismissDatePickerView:(id)sender
 {
@@ -97,9 +132,13 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-  if([self validateFields])
+  if([LCUtilityManager validateEmail:_emailTextField.text])
   {
     [self registerUserOnline];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
   }
 
 }
@@ -119,6 +158,7 @@
   }];
 }
 
+
 - (void)saveUserAcessTokenAndUserIDFromResponse:(id)response
 {
   NSDictionary *userInfo = response[kResponseData];
@@ -127,110 +167,17 @@
 }
 
 
-- (BOOL)validateFields
+- (void)textFieldDidChange:(id)sender
 {
-  if([self fieldsNotMissing])
+  if(_firstNameTextField.text.length!=0 && _lastNameTextField.text.length!=0 && _emailTextField.text.length!=0 && _passwordTextField.text.length!=0 && _confirmPasswordTextField.text.length!=0 && _dobTextField.text.length!=0 )
   {
-    if([self validateEmail])
-    {
-      if([self validatePasswords])
-      {
-        return YES;
-      }
-    }
-  }
-  return NO;
-}
-
-
-- (BOOL)fieldsNotMissing
-{
-  [self clearWarnings];
-  bool isValid = YES;
-  if([_firstNameTextField.text isEqualToString:kEmptyStringValue])
-  {
-    _firstNameTextField.isValid = NO;
-    isValid = NO;
-  }
-  else if([_lastNameTextField.text isEqualToString:kEmptyStringValue])
-  {
-    _lastNameTextField.isValid = NO;
-    isValid = NO;
-  }
-  
-  else if([_dobTextField.text isEqualToString:kEmptyStringValue])
-  {
-    _dobTextField.isValid = NO;
-    isValid = NO;
-  }
-  
-  if(!isValid)
-  {
-    _warningLabel.text = @"Missing Fields";
-  }
-  return isValid;
-}
-
-
-- (BOOL)validateEmail
-{
-  [self clearWarnings];
-  NSString *emailRegex = @"[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}";
-  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-  bool isvalid = [emailTest evaluateWithObject:_emailTextField.text];
-  if(isvalid)
-  {
-    _emailTextField.isValid = YES;
-    return YES;
+    _signupButton.enabled = YES;
   }
   else
   {
-    _emailTextField.isValid = NO;
-    _warningLabel.text = @"Invalid Email";
-    return NO;
+    _signupButton.enabled = NO;
   }
 }
-
-
-- (BOOL)validatePasswords
-{
-  [self clearWarnings];
-  if([_passwordTextField.text isEqualToString:kEmptyStringValue])
-  {
-    _warningLabel.text = @"Password Missing";
-    _passwordTextField.isValid = NO;
-    return NO;
-  }
-  else if([_passwordTextField.text isEqualToString:_confirmPasswordTextField.text])
-  {
-    _confirmPasswordTextField.isValid=YES;
-    
-    return YES;
-  }
-  else
-  {
-    _warningLabel.text = @"Password Mismatch";
-    _confirmPasswordTextField.isValid = NO;
-    return NO;
-  }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-  [self nextButtonTapped:nil];
-  return YES;
-}
-
-
-
--(void)clearWarnings
-{
-  _warningLabel.text=@"";
-  _firstNameTextField.isValid = YES;
-  _lastNameTextField.isValid = YES;
-  _emailTextField.isValid = YES;
-  _passwordTextField.isValid = YES;
-  _confirmPasswordTextField.isValid = YES;
-  _dobTextField.isValid =YES;
-}
+  
+  
 @end
