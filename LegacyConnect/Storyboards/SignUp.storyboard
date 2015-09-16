@@ -797,7 +797,7 @@ then select some related Causes</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCn-SR-dJM">
                                                     <rect key="frame" x="4" y="4" width="76" height="76"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy2-3F-lGU">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy2-3F-lGU">
                                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-i4-Sda">
@@ -900,21 +900,32 @@ then select some related Causes</string>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-lM-YqA">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
+                                                            <rect key="frame" x="2" y="2" width="101" height="101"/>
+                                                            <variation key="heightClass=regular" fixedFrame="YES">
+                                                                <rect key="frame" x="2" y="2" width="101" height="101"/>
+                                                            </variation>
+                                                        </imageView>
+                                                    </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <variation key="default">
+                                                        <mask key="subviews">
+                                                            <exclude reference="hLr-BR-roZ"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular">
+                                                        <mask key="subviews">
+                                                            <include reference="hLr-BR-roZ"/>
+                                                        </mask>
+                                                    </variation>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
-                                                    <rect key="frame" x="2" y="2" width="101" height="101"/>
-                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="hLr-BR-roZ" firstAttribute="leading" secondItem="Nkd-zY-y97" secondAttribute="leading" constant="2" id="2C6-C0-Aq9"/>
-                                            <constraint firstAttribute="trailing" secondItem="hLr-BR-roZ" secondAttribute="trailing" constant="2" id="DuP-ue-y52"/>
                                             <constraint firstAttribute="bottom" secondItem="8rB-lM-YqA" secondAttribute="bottom" id="FaD-g9-11o"/>
-                                            <constraint firstAttribute="bottom" secondItem="hLr-BR-roZ" secondAttribute="bottom" constant="2" id="Hko-IT-ocE"/>
                                             <constraint firstItem="8rB-lM-YqA" firstAttribute="leading" secondItem="Nkd-zY-y97" secondAttribute="leading" id="S0s-E3-Fgi"/>
-                                            <constraint firstItem="hLr-BR-roZ" firstAttribute="top" secondItem="Nkd-zY-y97" secondAttribute="top" constant="2" id="Sr8-yy-aCb"/>
                                             <constraint firstAttribute="trailing" secondItem="8rB-lM-YqA" secondAttribute="trailing" id="YIm-l1-fPS"/>
                                             <constraint firstItem="8rB-lM-YqA" firstAttribute="top" secondItem="Nkd-zY-y97" secondAttribute="top" id="o1W-B9-VCS"/>
                                         </constraints>
