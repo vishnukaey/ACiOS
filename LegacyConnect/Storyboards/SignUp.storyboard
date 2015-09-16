@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="rX4-yN-9BJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rX4-yN-9BJ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -101,7 +101,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="sEZ-MI-sW3" kind="show" id="o08-29-Jel"/>
+                                            <segue destination="sEZ-MI-sW3" kind="modal" id="o08-29-Jel"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pK-Ug-TD8">
@@ -245,7 +245,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygP-lN-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-363.5" y="-355.125"/>
+            <point key="canvasLocation" x="-530.5" y="-440.5"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="ZvZ-mw-Vr2">
@@ -509,12 +509,12 @@
                         <outlet property="passwordTextField" destination="pNq-0g-rs9" id="6vy-8C-O4Z"/>
                         <outlet property="signupButton" destination="u4t-AC-zlZ" id="yO2-d1-Upa"/>
                         <outlet property="warningLabel" destination="jn1-9h-gDM" id="pCG-sV-cjf"/>
-                        <segue destination="neY-up-Txe" kind="show" identifier="selectPhoto" id="epE-Zn-RNL"/>
+                        <segue destination="neY-up-Txe" kind="modal" identifier="selectPhoto" id="epE-Zn-RNL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuh-SE-SiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143.5" y="-367.125"/>
+            <point key="canvasLocation" x="-67.5" y="-804.5"/>
         </scene>
         <!--Sign Up User PhotoVC-->
         <scene sceneID="nr8-Ui-0hS">
@@ -547,10 +547,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9X-JJ-RC2">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qol-uE-0xQ">
-                                        <rect key="frame" x="310" y="15" width="50" height="30"/>
+                                        <rect key="frame" x="309" y="29" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="2PJ-9w-gcn"/>
                                             <constraint firstAttribute="height" constant="30" id="iqG-R2-pCA"/>
@@ -561,11 +561,11 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="P0n-lH-Sgz" kind="show" id="krZ-hL-VvX"/>
+                                            <segue destination="P0n-lH-Sgz" kind="modal" id="krZ-hL-VvX"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-PH-Ngb">
-                                        <rect key="frame" x="150" y="20" width="76" height="21"/>
+                                        <rect key="frame" x="150" y="31" width="76" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="76" id="Yhr-Po-a84"/>
                                             <constraint firstAttribute="height" constant="21" id="qbp-vg-65C"/>
@@ -577,17 +577,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Qol-uE-0xQ" secondAttribute="trailing" constant="15" id="1gV-0H-hEf"/>
-                                    <constraint firstAttribute="height" constant="60" id="52q-i3-KQp">
-                                        <variation key="heightClass=regular" constant="65"/>
-                                    </constraint>
-                                    <constraint firstAttribute="centerY" secondItem="thn-PH-Ngb" secondAttribute="centerY" id="Bqr-69-BQQ">
-                                        <variation key="heightClass=regular" constant="-9"/>
-                                    </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="Qol-uE-0xQ" secondAttribute="trailing" constant="16" id="1gV-0H-hEf"/>
+                                    <constraint firstAttribute="height" constant="65" id="52q-i3-KQp"/>
+                                    <constraint firstAttribute="centerY" secondItem="thn-PH-Ngb" secondAttribute="centerY" constant="-9" id="Bqr-69-BQQ"/>
                                     <constraint firstAttribute="centerX" secondItem="thn-PH-Ngb" secondAttribute="centerX" id="GWl-Y9-R9K"/>
-                                    <constraint firstAttribute="centerY" secondItem="Qol-uE-0xQ" secondAttribute="centerY" id="gjL-YI-2vw">
-                                        <variation key="heightClass=regular" constant="-9.5"/>
-                                    </constraint>
+                                    <constraint firstAttribute="centerY" secondItem="Qol-uE-0xQ" secondAttribute="centerY" constant="-11" id="gjL-YI-2vw"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mal-bE-9d3">
@@ -686,12 +680,12 @@
                         <outlet property="takePhotoContainerHeight" destination="fze-O3-beL" id="okx-Ky-xOI"/>
                         <outlet property="takePhotoContainerWidth" destination="sWJ-V8-269" id="pb1-oR-qXN"/>
                         <outlet property="welcomeNoteYPosition" destination="SSh-5h-c0o" id="3pd-Iu-6be"/>
-                        <segue destination="P0n-lH-Sgz" kind="show" identifier="chooseCauses" id="DWD-Bl-WmO"/>
+                        <segue destination="P0n-lH-Sgz" kind="modal" identifier="chooseCauses" id="DWD-Bl-WmO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHr-1V-8Kn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="683.5" y="-367.125"/>
+            <point key="canvasLocation" x="364.5333333333333" y="-347.54500000000002"/>
         </scene>
         <!--Choose CausesVC-->
         <scene sceneID="oHv-Ak-hrx">
@@ -705,59 +699,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqk-BZ-Sd0">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyJ-K7-mEk">
-                                        <rect key="frame" x="328" y="12" width="47" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="47" id="2OY-LQ-OQK"/>
-                                            <constraint firstAttribute="height" constant="38" id="PZq-C0-87g">
-                                                <variation key="heightClass=regular" constant="30"/>
-                                            </constraint>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Skip">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="widthClass=regular" ambiguous="YES">
-                                            <rect key="frame" x="620" y="12" width="39" height="38"/>
-                                        </variation>
-                                        <connections>
-                                            <segue destination="rX4-yN-9BJ" kind="show" identifier="skipToConnectFriends" id="8Po-aI-aTM"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="FyJ-K7-mEk" secondAttribute="bottom" id="MzC-Dk-QZG">
-                                        <variation key="heightClass=regular" constant="8"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="50" id="kUj-9c-07W">
-                                        <variation key="heightClass=regular" constant="65"/>
-                                    </constraint>
-                                    <constraint firstAttribute="trailing" secondItem="FyJ-K7-mEk" secondAttribute="trailing" id="m4k-W9-4ny">
-                                        <variation key="heightClass=regular" constant="15"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="-42" width="667" height="50"/>
-                                </variation>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chooseCauses_topBG" translatesAutoresizingMaskIntoConstraints="NO" id="bBB-Kw-8Fs">
-                                <rect key="frame" x="0.0" y="50" width="375" height="242"/>
+                                <rect key="frame" x="0.0" y="66" width="375" height="226"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="242" id="A4V-HE-jcB">
-                                        <variation key="heightClass=regular" constant="226"/>
-                                    </constraint>
+                                    <constraint firstAttribute="height" constant="226" id="A4V-HE-jcB"/>
                                 </constraints>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="8" width="667" height="242"/>
-                                </variation>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c0X-HK-ATn">
-                                <rect key="frame" x="0.0" y="125" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="137" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lKh-yh-1hd"/>
                                 </constraints>
@@ -766,12 +715,9 @@ then select some related Causes</string>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="83" width="667" height="30"/>
-                                </variation>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="SPR-ea-c07">
-                                <rect key="frame" x="8" y="155" width="359" height="100"/>
+                                <rect key="frame" x="8" y="170" width="359" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="zNd-EZ-XHU"/>
@@ -860,9 +806,6 @@ then select some related Causes</string>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="8" y="113" width="651" height="100"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="P0n-lH-Sgz" id="3gK-ir-p8j"/>
                                     <outlet property="delegate" destination="P0n-lH-Sgz" id="hnd-lp-JfF"/>
@@ -877,9 +820,6 @@ then select some related Causes</string>
                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="10" y="250" width="58" height="21"/>
-                                </variation>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EED-pu-HzR">
                                 <rect key="frame" x="8" y="321" width="359" height="250"/>
@@ -901,24 +841,11 @@ then select some related Causes</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-lM-YqA">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
                                                             <rect key="frame" x="2" y="2" width="101" height="101"/>
-                                                            <variation key="heightClass=regular" fixedFrame="YES">
-                                                                <rect key="frame" x="2" y="2" width="101" height="101"/>
-                                                            </variation>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <variation key="default">
-                                                        <mask key="subviews">
-                                                            <exclude reference="hLr-BR-roZ"/>
-                                                        </mask>
-                                                    </variation>
-                                                    <variation key="heightClass=regular">
-                                                        <mask key="subviews">
-                                                            <include reference="hLr-BR-roZ"/>
-                                                        </mask>
-                                                    </variation>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -936,9 +863,6 @@ then select some related Causes</string>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="8" y="279" width="651" height="0.0"/>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="P0n-lH-Sgz" id="aez-jS-dwj"/>
                                     <outlet property="delegate" destination="P0n-lH-Sgz" id="IpR-do-tJY"/>
@@ -969,26 +893,43 @@ then select some related Causes</string>
                                     <constraint firstAttribute="bottom" secondItem="kiA-vT-V5i" secondAttribute="bottom" constant="20" id="xRo-BE-rEm"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-Gg-t3z">
-                                <rect key="frame" x="138" y="15" width="100" height="100"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqk-BZ-Sd0">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyJ-K7-mEk">
+                                        <rect key="frame" x="313" y="27" width="47" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="47" id="2OY-LQ-OQK"/>
+                                            <constraint firstAttribute="height" constant="30" id="PZq-C0-87g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="rX4-yN-9BJ" kind="modal" identifier="skipToConnectFriends" id="8Po-aI-aTM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="47T-jr-nWZ">
-                                        <variation key="heightClass=regular" constant="100"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="100" id="hW0-SA-OOs">
-                                        <variation key="heightClass=regular" constant="100"/>
-                                    </constraint>
+                                    <constraint firstAttribute="bottom" secondItem="FyJ-K7-mEk" secondAttribute="bottom" constant="8" id="MzC-Dk-QZG"/>
+                                    <constraint firstAttribute="height" constant="65" id="kUj-9c-07W"/>
+                                    <constraint firstAttribute="trailing" secondItem="FyJ-K7-mEk" secondAttribute="trailing" constant="15" id="m4k-W9-4ny"/>
                                 </constraints>
-                                <variation key="widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="284" y="-27" width="100" height="100"/>
-                                </variation>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-Gg-t3z">
+                                <rect key="frame" x="142" y="23" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="47T-jr-nWZ"/>
+                                    <constraint firstAttribute="height" constant="100" id="hW0-SA-OOs"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="SPR-ea-c07" firstAttribute="top" secondItem="c0X-HK-ATn" secondAttribute="bottom" id="1fj-5x-qdv">
-                                <variation key="heightClass=regular" constant="3"/>
-                            </constraint>
+                            <constraint firstItem="SPR-ea-c07" firstAttribute="top" secondItem="c0X-HK-ATn" secondAttribute="bottom" constant="3" id="1fj-5x-qdv"/>
                             <constraint firstAttribute="trailing" secondItem="bBB-Kw-8Fs" secondAttribute="trailing" id="1t4-az-LvI"/>
                             <constraint firstItem="EED-pu-HzR" firstAttribute="top" secondItem="ekL-SE-SdJ" secondAttribute="bottom" constant="8" id="1xG-mM-E3P"/>
                             <constraint firstItem="c0X-HK-ATn" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="6dH-vc-Rzu"/>
@@ -996,28 +937,20 @@ then select some related Causes</string>
                             <constraint firstItem="bBB-Kw-8Fs" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="Bjw-aI-H4b"/>
                             <constraint firstItem="ekL-SE-SdJ" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" constant="10" id="ERk-rb-BOl"/>
                             <constraint firstItem="ekL-SE-SdJ" firstAttribute="top" secondItem="bBB-Kw-8Fs" secondAttribute="bottom" id="Obi-b5-s9D"/>
-                            <constraint firstAttribute="centerX" secondItem="JuP-Gg-t3z" secondAttribute="centerX" id="Sqy-T8-IYp">
-                                <variation key="heightClass=regular" constant="-4.5"/>
-                            </constraint>
+                            <constraint firstAttribute="centerX" secondItem="JuP-Gg-t3z" secondAttribute="centerX" constant="-4.5" id="Sqy-T8-IYp"/>
                             <constraint firstAttribute="trailing" secondItem="SPR-ea-c07" secondAttribute="trailing" constant="8" id="UhW-Qc-gAp"/>
                             <constraint firstItem="4I5-Li-JV0" firstAttribute="top" secondItem="IL5-Uy-ChW" secondAttribute="bottom" id="Vrd-oT-g2K"/>
                             <constraint firstItem="IL5-Uy-ChW" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="YUH-oG-DBU"/>
-                            <constraint firstItem="JuP-Gg-t3z" firstAttribute="top" secondItem="jqk-BZ-Sd0" secondAttribute="bottom" constant="-35" id="bNL-OG-WrA">
-                                <variation key="heightClass=regular" constant="-42"/>
-                            </constraint>
+                            <constraint firstItem="JuP-Gg-t3z" firstAttribute="top" secondItem="jqk-BZ-Sd0" secondAttribute="bottom" constant="-42" id="bNL-OG-WrA"/>
                             <constraint firstAttribute="trailing" secondItem="c0X-HK-ATn" secondAttribute="trailing" id="dxB-if-2rP"/>
                             <constraint firstItem="SPR-ea-c07" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" constant="8" id="fpR-TS-5Wc"/>
                             <constraint firstAttribute="trailing" secondItem="IL5-Uy-ChW" secondAttribute="trailing" id="kuF-88-JIW"/>
                             <constraint firstAttribute="trailing" secondItem="EED-pu-HzR" secondAttribute="trailing" constant="8" id="lXQ-c9-Cft"/>
                             <constraint firstItem="jqk-BZ-Sd0" firstAttribute="top" secondItem="KQ0-uO-cD8" secondAttribute="top" id="nXa-Fn-CaV"/>
                             <constraint firstItem="EED-pu-HzR" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" constant="8" id="oiu-xP-7ia"/>
-                            <constraint firstItem="c0X-HK-ATn" firstAttribute="top" secondItem="JuP-Gg-t3z" secondAttribute="bottom" constant="10" id="pfd-Tg-otR">
-                                <variation key="heightClass=regular" constant="14"/>
-                            </constraint>
+                            <constraint firstItem="c0X-HK-ATn" firstAttribute="top" secondItem="JuP-Gg-t3z" secondAttribute="bottom" constant="14" id="pfd-Tg-otR"/>
                             <constraint firstItem="IL5-Uy-ChW" firstAttribute="top" secondItem="EED-pu-HzR" secondAttribute="bottom" constant="8" id="pjQ-2N-bGA"/>
-                            <constraint firstItem="bBB-Kw-8Fs" firstAttribute="top" secondItem="jqk-BZ-Sd0" secondAttribute="bottom" id="q2z-kW-dYv">
-                                <variation key="heightClass=regular" constant="1"/>
-                            </constraint>
+                            <constraint firstItem="bBB-Kw-8Fs" firstAttribute="top" secondItem="jqk-BZ-Sd0" secondAttribute="bottom" constant="1" id="q2z-kW-dYv"/>
                             <constraint firstAttribute="trailing" secondItem="jqk-BZ-Sd0" secondAttribute="trailing" id="xBM-MI-7Mk"/>
                         </constraints>
                     </view>
@@ -1029,12 +962,12 @@ then select some related Causes</string>
                         <outlet property="interestsCollectionView" destination="SPR-ea-c07" id="p8m-Wq-r1x"/>
                         <outlet property="nextButton" destination="kiA-vT-V5i" id="p2T-iN-u6O"/>
                         <outlet property="userImageView" destination="JuP-Gg-t3z" id="Qma-Xs-UC9"/>
-                        <segue destination="rX4-yN-9BJ" kind="show" identifier="connectFriends" id="aNy-6t-e6c"/>
+                        <segue destination="rX4-yN-9BJ" kind="modal" identifier="connectFriends" id="aNy-6t-e6c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46p-z1-on9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1314.5" y="-367.125"/>
+            <point key="canvasLocation" x="788.5" y="-340.5"/>
         </scene>
         <!--Connect FriendsVC-->
         <scene sceneID="7sB-tv-ACv">
@@ -1048,92 +981,15 @@ then select some related Causes</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
-                                        <rect key="frame" x="8" y="10" width="35" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="7Ue-jT-DQw">
-                                                <variation key="heightClass=regular" constant="46"/>
-                                            </constraint>
-                                            <constraint firstAttribute="height" constant="30" id="MIs-4V-VhA"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Back">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="7Ue-jT-DQw"/>
-                                                <exclude reference="MIs-4V-VhA"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular">
-                                            <mask key="constraints">
-                                                <include reference="7Ue-jT-DQw"/>
-                                                <include reference="MIs-4V-VhA"/>
-                                            </mask>
-                                        </variation>
-                                    </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-Jd-cza">
-                                        <rect key="frame" x="328" y="12" width="47" height="38"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="38" id="jeH-tG-Sub">
-                                                <variation key="heightClass=regular" constant="30"/>
-                                            </constraint>
-                                            <constraint firstAttribute="width" constant="47" id="lBH-zI-2gI"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Skip">
-                                            <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="dmJ-Ro-GGg"/>
-                                            <segue destination="CSB-n7-86j" kind="show" id="d1M-8h-KHT"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="UNM-Jd-cza" secondAttribute="trailing" id="G0z-vM-fzM">
-                                        <variation key="heightClass=regular" constant="12"/>
-                                    </constraint>
-                                    <constraint firstAttribute="bottom" secondItem="IAy-gU-RrU" secondAttribute="bottom" constant="8" id="Wnj-Au-NIB"/>
-                                    <constraint firstAttribute="bottom" secondItem="UNM-Jd-cza" secondAttribute="bottom" id="dPm-zE-j39">
-                                        <variation key="heightClass=regular" constant="8"/>
-                                    </constraint>
-                                    <constraint firstAttribute="height" constant="50" id="jEv-TB-uLI">
-                                        <variation key="heightClass=regular" constant="65"/>
-                                    </constraint>
-                                    <constraint firstItem="IAy-gU-RrU" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="8" id="wlC-As-kR6">
-                                        <variation key="heightClass=regular" constant="15"/>
-                                    </constraint>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="Wnj-Au-NIB"/>
-                                        <exclude reference="wlC-As-kR6"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=regular">
-                                    <mask key="constraints">
-                                        <include reference="Wnj-Au-NIB"/>
-                                        <include reference="wlC-As-kR6"/>
-                                    </mask>
-                                </variation>
-                            </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
-                                <rect key="frame" x="138" y="15" width="100" height="100"/>
+                                <rect key="frame" x="138" y="28" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="2Ab-2S-8G8"/>
                                     <constraint firstAttribute="width" constant="100" id="5m0-Tu-Vea"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOM-De-AUw">
-                                <rect key="frame" x="0.0" y="125" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="138" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="X0n-DM-vKK"/>
                                 </constraints>
@@ -1144,7 +1000,7 @@ then select some related Causes</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0BB-QP-54h">
-                                <rect key="frame" x="50" y="180" width="275" height="44"/>
+                                <rect key="frame" x="50" y="193" width="275" height="44"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.3921568627" blue="0.30196078430000001" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="VQb-8S-fOb"/>
@@ -1159,7 +1015,7 @@ then select some related Causes</string>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v28-q3-dnp">
-                                <rect key="frame" x="50" y="244" width="275" height="44"/>
+                                <rect key="frame" x="50" y="257" width="275" height="44"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FBLogoSmall" translatesAutoresizingMaskIntoConstraints="NO" id="BF6-Al-sbl">
                                         <rect key="frame" x="15" y="11" width="22" height="22"/>
@@ -1200,6 +1056,47 @@ then select some related Causes</string>
                                     <constraint firstItem="BF6-Al-sbl" firstAttribute="leading" secondItem="v28-q3-dnp" secondAttribute="leading" constant="15" id="yrj-cB-Nfx"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
+                                        <rect key="frame" x="15" y="27" width="46" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="7Ue-jT-DQw"/>
+                                            <constraint firstAttribute="height" constant="30" id="MIs-4V-VhA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal" title="Back">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-Jd-cza">
+                                        <rect key="frame" x="316" y="27" width="47" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="jeH-tG-Sub"/>
+                                            <constraint firstAttribute="width" constant="47" id="lBH-zI-2gI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal" title="Skip">
+                                            <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="dmJ-Ro-GGg"/>
+                                            <segue destination="CSB-n7-86j" kind="modal" id="d1M-8h-KHT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="UNM-Jd-cza" secondAttribute="trailing" constant="12" id="G0z-vM-fzM"/>
+                                    <constraint firstAttribute="bottom" secondItem="IAy-gU-RrU" secondAttribute="bottom" constant="8" id="Wnj-Au-NIB"/>
+                                    <constraint firstAttribute="bottom" secondItem="UNM-Jd-cza" secondAttribute="bottom" constant="8" id="dPm-zE-j39"/>
+                                    <constraint firstAttribute="height" constant="65" id="jEv-TB-uLI"/>
+                                    <constraint firstItem="IAy-gU-RrU" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="15" id="wlC-As-kR6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1208,9 +1105,7 @@ then select some related Causes</string>
                             <constraint firstAttribute="trailing" secondItem="v28-q3-dnp" secondAttribute="trailing" constant="50" id="D2y-LT-4dM"/>
                             <constraint firstAttribute="trailing" secondItem="uOM-De-AUw" secondAttribute="trailing" id="G0D-pa-ajo"/>
                             <constraint firstItem="0BB-QP-54h" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" constant="50" id="I2F-qQ-6jw"/>
-                            <constraint firstItem="Kig-Hh-ZLO" firstAttribute="top" secondItem="Mz0-Jt-69X" secondAttribute="bottom" constant="-35" id="JKL-6F-GTo">
-                                <variation key="heightClass=regular" constant="-37"/>
-                            </constraint>
+                            <constraint firstItem="Kig-Hh-ZLO" firstAttribute="top" secondItem="Mz0-Jt-69X" secondAttribute="bottom" constant="-37" id="JKL-6F-GTo"/>
                             <constraint firstItem="v28-q3-dnp" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" constant="50" id="KoU-Lc-v29"/>
                             <constraint firstItem="Mz0-Jt-69X" firstAttribute="leading" secondItem="2Sm-J1-ocn" secondAttribute="leading" id="LWF-YC-3Lj"/>
                             <constraint firstAttribute="trailing" secondItem="0BB-QP-54h" secondAttribute="trailing" constant="50" id="POz-RK-mp6"/>
@@ -1228,12 +1123,12 @@ then select some related Causes</string>
                         <outlet property="facebookButtonContainer" destination="v28-q3-dnp" id="cUt-7x-p0R"/>
                         <outlet property="findInContactsButton" destination="0BB-QP-54h" id="vHZ-Rv-VEu"/>
                         <outlet property="imageView" destination="Kig-Hh-ZLO" id="GKZ-bG-AN9"/>
-                        <segue destination="ajw-VA-3ws" kind="show" identifier="listOwnContacts" id="VIv-wG-9Be"/>
+                        <segue destination="ajw-VA-3ws" kind="modal" identifier="listOwnContacts" id="VIv-wG-9Be"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1853.5" y="-367.125"/>
+            <point key="canvasLocation" x="1255.5" y="-108.5"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
@@ -1256,9 +1151,6 @@ then select some related Causes</string>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RNj-KA-H5D">
                                 <rect key="frame" x="0.0" y="53" width="320" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Contacts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ymG-jm-Y9a">
                                 <rect key="frame" x="125" y="24" width="70" height="21"/>
@@ -1273,7 +1165,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2320" y="-771.75"/>
+            <point key="canvasLocation" x="1661" y="-755"/>
         </scene>
         <!--Final TutorialVC-->
         <scene sceneID="aDc-Ju-RoL">
@@ -1303,7 +1195,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3546" y="-370.5"/>
+            <point key="canvasLocation" x="3011" y="-299"/>
         </scene>
         <!--Tutorial ContainerVC-->
         <scene sceneID="JsV-I3-yg1">
@@ -1319,9 +1211,6 @@ then select some related Causes</string>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQq-f6-GVH">
                                 <rect key="frame" x="0.0" y="57" width="320" height="453"/>
-                                <variation key="widthClass=regular" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="0.0" height="0.0"/>
-                                </variation>
                                 <connections>
                                     <segue destination="jAT-tD-Nau" kind="embed" id="WjI-LB-tb5"/>
                                 </connections>
@@ -1352,7 +1241,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NLI-I1-il1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2808" y="-370.5"/>
+            <point key="canvasLocation" x="2121" y="-319"/>
         </scene>
         <!--Facebook Friends-->
         <scene sceneID="Mf4-7x-Z6K">
@@ -1371,7 +1260,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rYI-BI-rWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2304" y="-19.5"/>
+            <point key="canvasLocation" x="1228.8" y="-18.460000000000001"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="dCQ-Az-kVE">
@@ -1381,7 +1270,7 @@ then select some related Causes</string>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zS-Dn-wRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3189" y="-370.5"/>
+            <point key="canvasLocation" x="2564" y="-335"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Pwo-rh-u61">
@@ -1561,7 +1450,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kv4-ew-bdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-363.5" y="405.375"/>
+            <point key="canvasLocation" x="-242.5" y="903.5"/>
         </scene>
         <!--FORGOT PASSWORD-->
         <scene sceneID="R3f-TQ-xlM">
@@ -1643,7 +1532,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBC-7I-Jgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143.5" y="411.375"/>
+            <point key="canvasLocation" x="420.5" y="892.5"/>
         </scene>
         <!--Update Password View Controller-->
         <scene sceneID="XP1-Jo-GIa">
@@ -1745,7 +1634,7 @@ then select some related Causes</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTQ-sJ-fO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="683.5" y="405.375"/>
+            <point key="canvasLocation" x="980.5" y="815.5"/>
         </scene>
     </scenes>
     <resources>
@@ -1764,8 +1653,13 @@ then select some related Causes</string>
         <image name="manplaceholder.jpg" width="100" height="100"/>
         <image name="rightChevron" width="8" height="12"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="aNy-6t-e6c"/>
         <segue reference="krZ-hL-VvX"/>
-        <segue reference="8Po-aI-aTM"/>
     </inferredMetricsTieBreakers>
 </document>
