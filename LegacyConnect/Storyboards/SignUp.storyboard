@@ -11,6 +11,7 @@
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
+            <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
@@ -502,7 +503,7 @@
                         <outlet property="passwordTextField" destination="pNq-0g-rs9" id="6vy-8C-O4Z"/>
                         <outlet property="signupButton" destination="u4t-AC-zlZ" id="yO2-d1-Upa"/>
                         <outlet property="warningLabel" destination="jn1-9h-gDM" id="pCG-sV-cjf"/>
-                        <segue destination="eAh-bG-B8v" kind="show" identifier="selectPhoto" id="DWG-1x-M5R"/>
+                        <segue destination="neY-up-Txe" kind="show" identifier="selectPhoto" id="epE-Zn-RNL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuh-SE-SiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -510,96 +511,175 @@
             <point key="canvasLocation" x="419.5" y="-230.5"/>
         </scene>
         <!--Sign Up User PhotoVC-->
-        <scene sceneID="ZyD-zE-XCh">
+        <scene sceneID="nr8-Ui-0hS">
             <objects>
-                <viewController id="eAh-bG-B8v" customClass="LCSignUpUserPhotoVC" sceneMemberID="viewController">
+                <viewController id="neY-up-Txe" customClass="LCSignUpUserPhotoVC" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Eh5-BV-a31"/>
-                        <viewControllerLayoutGuide type="bottom" id="Oes-OC-md0"/>
+                        <viewControllerLayoutGuide type="top" id="uvl-DI-G6l"/>
+                        <viewControllerLayoutGuide type="bottom" id="CMz-t7-7Xx"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="HgV-sv-gtQ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <view key="view" contentMode="scaleToFill" id="5GG-A7-8Oa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome, " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Adp-9h-B4X">
-                                <rect key="frame" x="57" y="101" width="99" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome, " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JiO-TB-upp">
+                                <rect key="frame" x="0.0" y="104" width="375" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="YOv-Sk-kpj"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="24"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="first name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7B-zo-Zzp">
-                                <rect key="frame" x="149" y="101" width="140" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can add a photo of yourself below." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01p-4a-UlF">
+                                <rect key="frame" x="0.0" y="139" width="375" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="VlQ-dl-iFo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="15"/>
+                                <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You can add a photo of yourself below." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9we-MS-Mzf">
-                                <rect key="frame" x="32" y="130" width="257" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ZV-4r-s6a">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9X-JJ-RC2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZSc-88-PGv">
-                                        <rect key="frame" x="281" y="13" width="31" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qol-uE-0xQ">
+                                        <rect key="frame" x="310" y="15" width="50" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="2PJ-9w-gcn"/>
+                                            <constraint firstAttribute="height" constant="30" id="iqG-R2-pCA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
                                         <state key="normal" title="Skip">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="P0n-lH-Sgz" kind="show" identifier="skipToChooseCauses" id="v3B-zp-gUz"/>
+                                            <segue destination="P0n-lH-Sgz" kind="show" id="krZ-hL-VvX"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SIGNUP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Mu-Y2-ZPb">
-                                        <rect key="frame" x="128" y="22" width="65" height="21"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-PH-Ngb">
+                                        <rect key="frame" x="150" y="20" width="76" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="76" id="Yhr-Po-a84"/>
+                                            <constraint firstAttribute="height" constant="21" id="qbp-vg-65C"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Qol-uE-0xQ" secondAttribute="trailing" constant="15" id="1gV-0H-hEf"/>
+                                    <constraint firstAttribute="height" constant="60" id="52q-i3-KQp"/>
+                                    <constraint firstAttribute="centerY" secondItem="thn-PH-Ngb" secondAttribute="centerY" id="Bqr-69-BQQ"/>
+                                    <constraint firstAttribute="centerX" secondItem="thn-PH-Ngb" secondAttribute="centerX" id="GWl-Y9-R9K"/>
+                                    <constraint firstAttribute="centerY" secondItem="Qol-uE-0xQ" secondAttribute="centerY" id="gjL-YI-2vw"/>
+                                </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waC-A6-vhM">
-                                <rect key="frame" x="85" y="242" width="150" height="150"/>
-                                <state key="normal" backgroundImage="camera-icon.png">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="takeAPhoto:" destination="eAh-bG-B8v" eventType="touchUpInside" id="rCg-I7-LAB"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eje-m6-Tns">
-                                <rect key="frame" x="0.0" y="510" width="320" height="58"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mal-bE-9d3">
+                                <rect key="frame" x="0.0" y="579" width="375" height="88"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fgq-nf-V6R">
-                                        <rect key="frame" x="65" y="20" width="211" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50M-eO-Dyh">
+                                        <rect key="frame" x="15" y="20" width="345" height="48"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                         <state key="normal" title="Or Choose Photo From Library">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="chooseAPhotoFromLibrary:" destination="eAh-bG-B8v" eventType="touchUpInside" id="a9g-37-QO9"/>
+                                            <action selector="chooseAPhotoFromLibrary:" destination="neY-up-Txe" eventType="touchUpInside" id="9Xv-KA-4H3"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="50M-eO-Dyh" firstAttribute="top" secondItem="Mal-bE-9d3" secondAttribute="top" constant="20" id="Enn-eZ-suj"/>
+                                    <constraint firstAttribute="bottom" secondItem="50M-eO-Dyh" secondAttribute="bottom" constant="20" id="LdG-r1-2tH"/>
+                                    <constraint firstAttribute="trailing" secondItem="50M-eO-Dyh" secondAttribute="trailing" constant="15" id="TYI-g6-MVo"/>
+                                    <constraint firstAttribute="height" constant="88" id="dY3-ZT-qWP"/>
+                                    <constraint firstItem="50M-eO-Dyh" firstAttribute="leading" secondItem="Mal-bE-9d3" secondAttribute="leading" constant="15" id="oW7-gP-vDv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ors-E3-fiH">
+                                <rect key="frame" x="44" y="190" width="288" height="288"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0e7-WY-hOy">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="288"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="takeAPhoto:" destination="neY-up-Txe" eventType="touchUpInside" id="X26-01-F3d"/>
+                                        </connections>
+                                    </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TakeAPhotoBtnBG" translatesAutoresizingMaskIntoConstraints="NO" id="CLQ-mJ-r8u">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="288"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yGB-DN-fbf">
+                                        <rect key="frame" x="79" y="164" width="130" height="21"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="130" id="20d-gn-wJJ"/>
+                                            <constraint firstAttribute="height" constant="21" id="YCY-ez-hJX"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" red="0.96470588239999999" green="0.98823529409999999" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CLQ-mJ-r8u" secondAttribute="trailing" id="FH8-6l-Cg9"/>
+                                    <constraint firstItem="0e7-WY-hOy" firstAttribute="leading" secondItem="ors-E3-fiH" secondAttribute="leading" id="Gms-fw-K0n"/>
+                                    <constraint firstAttribute="bottom" secondItem="CLQ-mJ-r8u" secondAttribute="bottom" id="ILI-qh-fCC"/>
+                                    <constraint firstItem="CLQ-mJ-r8u" firstAttribute="top" secondItem="ors-E3-fiH" secondAttribute="top" id="NEk-H8-TJv"/>
+                                    <constraint firstAttribute="centerY" secondItem="yGB-DN-fbf" secondAttribute="centerY" constant="-30" id="NRj-9s-qER"/>
+                                    <constraint firstItem="0e7-WY-hOy" firstAttribute="top" secondItem="ors-E3-fiH" secondAttribute="top" id="RsK-Rg-4Pb"/>
+                                    <constraint firstAttribute="height" constant="288" id="fze-O3-beL"/>
+                                    <constraint firstItem="CLQ-mJ-r8u" firstAttribute="leading" secondItem="ors-E3-fiH" secondAttribute="leading" id="hR9-dE-eQK"/>
+                                    <constraint firstAttribute="centerX" secondItem="yGB-DN-fbf" secondAttribute="centerX" id="mN8-uk-gGy"/>
+                                    <constraint firstAttribute="bottom" secondItem="0e7-WY-hOy" secondAttribute="bottom" id="nOI-Ug-bgF"/>
+                                    <constraint firstAttribute="width" constant="288" id="sWJ-V8-269"/>
+                                    <constraint firstAttribute="trailing" secondItem="0e7-WY-hOy" secondAttribute="trailing" id="ynJ-nd-U9F"/>
+                                </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="01p-4a-UlF" secondAttribute="trailing" id="ELg-MY-ZNz"/>
+                            <constraint firstAttribute="centerX" secondItem="ors-E3-fiH" secondAttribute="centerX" id="FT3-vM-mpe"/>
+                            <constraint firstItem="b9X-JJ-RC2" firstAttribute="top" secondItem="5GG-A7-8Oa" secondAttribute="top" id="OhX-fS-Yra"/>
+                            <constraint firstItem="01p-4a-UlF" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="OlX-qJ-wfm"/>
+                            <constraint firstAttribute="trailing" secondItem="JiO-TB-upp" secondAttribute="trailing" id="Peu-2S-B3t"/>
+                            <constraint firstItem="JiO-TB-upp" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="QzS-sv-b25"/>
+                            <constraint firstItem="01p-4a-UlF" firstAttribute="top" secondItem="JiO-TB-upp" secondAttribute="bottom" constant="10" id="SSh-5h-c0o"/>
+                            <constraint firstAttribute="centerY" secondItem="ors-E3-fiH" secondAttribute="centerY" id="T3Q-hM-nMU"/>
+                            <constraint firstItem="b9X-JJ-RC2" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="jGF-tG-fBC"/>
+                            <constraint firstAttribute="trailing" secondItem="Mal-bE-9d3" secondAttribute="trailing" id="mTT-PJ-cL1"/>
+                            <constraint firstItem="ors-E3-fiH" firstAttribute="top" secondItem="01p-4a-UlF" secondAttribute="bottom" constant="30" id="neY-Y0-gYu"/>
+                            <constraint firstItem="Mal-bE-9d3" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="ogI-cx-MDI"/>
+                            <constraint firstAttribute="trailing" secondItem="b9X-JJ-RC2" secondAttribute="trailing" id="r67-VJ-iih"/>
+                            <constraint firstItem="CMz-t7-7Xx" firstAttribute="top" secondItem="Mal-bE-9d3" secondAttribute="bottom" id="t3G-Q7-hyN"/>
+                        </constraints>
                     </view>
                     <nil key="simulatedTopBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="firstNameLabel" destination="Q7B-zo-Zzp" id="YAb-wy-p1N"/>
-                        <segue destination="P0n-lH-Sgz" kind="show" identifier="chooseCauses" id="Jx6-Pg-DRw"/>
+                        <outlet property="chooseFromLibraryBtn" destination="50M-eO-Dyh" id="TSa-Hx-7VU"/>
+                        <outlet property="firstNameLabel" destination="JiO-TB-upp" id="I6a-rV-uWk"/>
+                        <outlet property="infoNoteYPosition" destination="neY-Y0-gYu" id="S0W-Jp-5k1"/>
+                        <outlet property="takePhotoContainerHeight" destination="fze-O3-beL" id="okx-Ky-xOI"/>
+                        <outlet property="takePhotoContainerWidth" destination="sWJ-V8-269" id="pb1-oR-qXN"/>
+                        <outlet property="welcomeNoteYPosition" destination="SSh-5h-c0o" id="3pd-Iu-6be"/>
+                        <segue destination="P0n-lH-Sgz" kind="show" identifier="chooseCauses" id="DWD-Bl-WmO"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9JA-Tw-ur9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yHr-1V-8Kn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="840" y="-230"/>
+            <point key="canvasLocation" x="839.5" y="-230.5"/>
         </scene>
         <!--Choose CausesVC-->
         <scene sceneID="oHv-Ak-hrx">
@@ -1583,7 +1663,7 @@ then select some related Causes</string>
         <image name="LC_logo" width="150" height="150"/>
         <image name="OrangeButtonBG" width="345" height="44"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
-        <image name="camera-icon.png" width="256" height="256"/>
+        <image name="TakeAPhotoBtnBG" width="287" height="287"/>
         <image name="chooseCauses_topBG" width="375" height="297"/>
         <image name="default-placeholder.png" width="250" height="250"/>
         <image name="lc_logo_reg" width="116" height="116"/>
@@ -1593,7 +1673,7 @@ then select some related Causes</string>
         <image name="rightChevron" width="8" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="DWD-Bl-WmO"/>
         <segue reference="aNy-6t-e6c"/>
-        <segue reference="v3B-zp-gUz"/>
     </inferredMetricsTieBreakers>
 </document>
