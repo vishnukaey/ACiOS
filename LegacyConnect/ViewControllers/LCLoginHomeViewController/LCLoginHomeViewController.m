@@ -38,6 +38,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+  [login logOut];
   [login logInWithReadPermissions:@[kEmailKey] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
     {
@@ -66,12 +67,12 @@
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters setValue:@"id, email, name" forKey:kFieldsKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters]
-     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:nil] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
        if (!error)
        {
          [self saveUserDetailsToDataManagerFromResponse:result];
          NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
+         
          [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
            [self loginUser];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -79,6 +80,7 @@
            NSLog(@"");
            [MBProgressHUD hideHUDForView:self.view animated:YES];
          }];
+         
        }
      }];
   }
