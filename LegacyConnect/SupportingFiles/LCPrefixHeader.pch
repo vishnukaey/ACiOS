@@ -23,6 +23,7 @@
 #import "LCFeed.h"
 #import "LCTag.h" 
 #import "LCSearchResult.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #import "LCAPIManager.h"
 
