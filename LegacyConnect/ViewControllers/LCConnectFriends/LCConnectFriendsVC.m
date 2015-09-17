@@ -67,7 +67,7 @@
 
 - (IBAction)backButtonTapped:(id)sender
 {
-  [self.navigationController popToRootViewControllerAnimated:NO];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 
