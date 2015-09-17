@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -842,20 +842,23 @@ then select some related Causes</string>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rB-lM-YqA">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
-                                                            <rect key="frame" x="2" y="2" width="101" height="101"/>
-                                                        </imageView>
-                                                    </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
+                                                    <rect key="frame" x="2" y="2" width="101" height="101"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="hLr-BR-roZ" firstAttribute="leading" secondItem="Nkd-zY-y97" secondAttribute="leading" constant="2" id="F42-11-1r3"/>
                                             <constraint firstAttribute="bottom" secondItem="8rB-lM-YqA" secondAttribute="bottom" id="FaD-g9-11o"/>
+                                            <constraint firstAttribute="bottom" secondItem="hLr-BR-roZ" secondAttribute="bottom" constant="2" id="PBe-hR-CHN"/>
                                             <constraint firstItem="8rB-lM-YqA" firstAttribute="leading" secondItem="Nkd-zY-y97" secondAttribute="leading" id="S0s-E3-Fgi"/>
+                                            <constraint firstItem="hLr-BR-roZ" firstAttribute="top" secondItem="Nkd-zY-y97" secondAttribute="top" constant="2" id="XLg-iQ-nXS"/>
                                             <constraint firstAttribute="trailing" secondItem="8rB-lM-YqA" secondAttribute="trailing" id="YIm-l1-fPS"/>
+                                            <constraint firstAttribute="trailing" secondItem="hLr-BR-roZ" secondAttribute="trailing" constant="2" id="gaM-bb-lE5"/>
                                             <constraint firstItem="8rB-lM-YqA" firstAttribute="top" secondItem="Nkd-zY-y97" secondAttribute="top" id="o1W-B9-VCS"/>
                                         </constraints>
                                         <size key="customSize" width="105" height="105"/>
@@ -1479,8 +1482,8 @@ then select some related Causes</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email address  used for Legacy Connect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-PW-hCj">
-                                <rect key="frame" x="0.0" y="40" width="375" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email address used for Legacy Connect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-PW-hCj">
+                                <rect key="frame" x="15" y="40" width="345" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5LA-Qf-n6U"/>
                                 </constraints>
@@ -1529,9 +1532,9 @@ then select some related Causes</string>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="KB9-4H-IXa" firstAttribute="leading" secondItem="tLA-hX-Ofu" secondAttribute="leading" id="RgJ-YS-MMP"/>
-                            <constraint firstItem="bZn-PW-hCj" firstAttribute="leading" secondItem="tLA-hX-Ofu" secondAttribute="leading" id="T3u-NI-BJy"/>
+                            <constraint firstItem="bZn-PW-hCj" firstAttribute="leading" secondItem="tLA-hX-Ofu" secondAttribute="leading" constant="15" id="T3u-NI-BJy"/>
                             <constraint firstItem="TaW-Fh-x7J" firstAttribute="top" secondItem="KB9-4H-IXa" secondAttribute="bottom" constant="15" id="XR5-ZK-fpM"/>
-                            <constraint firstAttribute="trailing" secondItem="bZn-PW-hCj" secondAttribute="trailing" id="Zqi-jO-Mvs"/>
+                            <constraint firstAttribute="trailing" secondItem="bZn-PW-hCj" secondAttribute="trailing" constant="15" id="Zqi-jO-Mvs"/>
                             <constraint firstItem="bZn-PW-hCj" firstAttribute="top" secondItem="dgP-Dj-xAg" secondAttribute="bottom" constant="20" id="blN-57-xeb"/>
                             <constraint firstAttribute="trailing" secondItem="KB9-4H-IXa" secondAttribute="trailing" id="k0g-Ux-67e"/>
                             <constraint firstAttribute="trailing" secondItem="TaW-Fh-x7J" secondAttribute="trailing" constant="15" id="pi9-1Y-xcN"/>
@@ -1561,8 +1564,8 @@ then select some related Causes</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a new password  for your Legacy Connect account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pB-oo-gQQ">
-                                <rect key="frame" x="0.0" y="40" width="375" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a new password  for your Legacy Connect account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pB-oo-gQQ">
+                                <rect key="frame" x="15" y="40" width="345" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="c5Z-k0-U7k"/>
                                 </constraints>
@@ -1630,12 +1633,12 @@ then select some related Causes</string>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="8pB-oo-gQQ" secondAttribute="trailing" id="4eK-f2-NAJ"/>
+                            <constraint firstAttribute="trailing" secondItem="8pB-oo-gQQ" secondAttribute="trailing" constant="15" id="4eK-f2-NAJ"/>
                             <constraint firstAttribute="trailing" secondItem="tdU-yZ-BSc" secondAttribute="trailing" id="4kW-hu-tiO"/>
                             <constraint firstAttribute="trailing" secondItem="hBh-wb-yhA" secondAttribute="trailing" constant="15" id="9QO-Qp-QJc"/>
                             <constraint firstItem="8pB-oo-gQQ" firstAttribute="top" secondItem="gyl-a4-eki" secondAttribute="bottom" constant="20" id="DfW-fp-GcM"/>
                             <constraint firstItem="tdU-yZ-BSc" firstAttribute="top" secondItem="8pB-oo-gQQ" secondAttribute="bottom" constant="10" id="Oeh-LW-rsN"/>
-                            <constraint firstItem="8pB-oo-gQQ" firstAttribute="leading" secondItem="zNJ-VV-ooe" secondAttribute="leading" id="UO3-o6-4GG"/>
+                            <constraint firstItem="8pB-oo-gQQ" firstAttribute="leading" secondItem="zNJ-VV-ooe" secondAttribute="leading" constant="15" id="UO3-o6-4GG"/>
                             <constraint firstItem="tdU-yZ-BSc" firstAttribute="leading" secondItem="zNJ-VV-ooe" secondAttribute="leading" id="fb8-D9-EZ0"/>
                             <constraint firstItem="hBh-wb-yhA" firstAttribute="leading" secondItem="zNJ-VV-ooe" secondAttribute="leading" constant="15" id="gpR-j8-WLR"/>
                             <constraint firstItem="hBh-wb-yhA" firstAttribute="top" secondItem="tdU-yZ-BSc" secondAttribute="bottom" constant="15" id="qIq-vl-vnC"/>
