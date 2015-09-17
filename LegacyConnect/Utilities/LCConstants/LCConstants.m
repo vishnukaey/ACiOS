@@ -10,24 +10,43 @@
 
 @implementation LCConstants
 
-NSString *const kBaseURL = @"http://10.3.0.55:8000";
+#define QA_SERVER 0
+#define DEV_SERVER 1
 
-NSString *const kLoginURL = @"/api/login";
-NSString *const kRegisterURL = @"/api/user";
-NSString *const kFBLoginURL = @"/api/user/fbLogin";
-NSString *const kUploadUserImageURL = @"/api/user/profileImage";
-NSString *const kGetUserDetailsURL =  @"/api/user/";
-NSString *const kGetInterestsURL = @"/api/interests";
-NSString *const kGetCausesURL = @"/api/causes";
-NSString *const kSaveIneterestsURL = @"/api/user/interests";
-NSString *const kGetFeedsURL = @"/api/feed";
-NSString *const kFriendsURL = @"/api/user/friend";
-NSString *const kEventsURL = @"/api/event";
+/* Set server to be used */
+#define CURRENT_SERVER DEV_SERVER
+
+
+#if CURRENT_SERVER == QA_SERVER
+/* QA url */
+NSString *const kBaseURL = @"http://10.3.0.55:8000/";
+
+#elif CURRENT_SERVER == DEV_SERVER
+///* staging url */
+NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
+
+#endif
+
+
+NSString *const kLoginURL = @"api/login";
+NSString *const kRegisterURL = @"api/user";
+NSString *const kFBLoginURL = @"api/user/fbLogin";
+NSString *const kUploadUserImageURL = @"api/user/profileImage";
+NSString *const kGetUserDetailsURL =  @"api/user/";
+NSString *const kGetInterestsURL = @"api/interests";
+NSString *const kGetCausesURL = @"api/causes";
+NSString *const kSaveIneterestsURL = @"api/user/interests";
+NSString *const kGetFeedsURL = @"api/feed";
+NSString *const kFriendsURL = @"api/user/friend";
+NSString *const kEventsURL = @"api/event";
 NSString *const kRejectFriendURL = @"api/user/friend/decline";
 NSString *const kAcceptFriendURL = @"api/user/friend/accept";
-NSString *const kUnfollowEventURL = @"/api/event/unfollow";
-NSString *const kFollowEventURL = @"/api/event/follow";
-NSString *const kAddUsersToEventURL = @"/api/event/users";
+NSString *const kUnfollowEventURL = @"api/event/unfollow";
+NSString *const kFollowEventURL = @"api/event/follow";
+NSString *const kAddUsersToEventURL = @"api/event/users";
+NSString *const kForgotPasswordURL = @"api/user/forgotPassword";
+NSString *const kUpdatePasswordURL = @"api/user/resetPassword";
+NSString *const kLogOutURL = @"";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -62,10 +81,6 @@ NSString *const kUserTokenKey = @"user_token";
 
 NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
-
-NSString *const kForgotPasswordURL = @"/api/user/forgotPassword";
-NSString *const kUpdatePasswordURL = @"/api/user/resetPassword";
-NSString *const kLogOutURL = @"";
 
 NSString *const kIDKey = @"id";
 NSString *const kMeKey = @"me";
