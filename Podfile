@@ -11,7 +11,7 @@ pod 'Reachability', '~> 3.2'
 pod 'MBProgressHUD', '~> 0.9'
 pod 'SDWebImage', '~> 3.7'
 pod 'KoaPullToRefresh', '~> 1.0'
-pod 'RSKImageCropper' '~> 1.3'
+pod 'RSKImageCropper', '~> 1.3'
 pod 'IQKeyboardManager', '~> 3.3'
 end
 
