@@ -77,6 +77,68 @@
   [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+- (void)customizeCropViewUI:(RSKImageCropViewController*)imageCropVC {
+  [imageCropVC.view setAlpha:1];
+  [imageCropVC.cancelButton setHidden:true];
+  [imageCropVC.chooseButton setHidden:true];
+  [imageCropVC.moveAndScaleLabel setHidden:true];
+  
+  
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height)];
+  [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
+  
+  [topBar setUserInteractionEnabled:true];
+  
+  
+  
+  CGFloat btnWidth = 75;
+  
+  CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
+  
+  
+  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
+  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  for (id target in imageCropVC.cancelButton.allTargets) {
+    NSArray *actions = [imageCropVC.cancelButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  
+  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
+  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  
+  for (id target in imageCropVC.chooseButton.allTargets) {
+    NSArray *actions = [imageCropVC.chooseButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  
+  CGFloat screenWidth = CGRectGetWidth(topBar.frame);
+  UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
+  [titleLabel setTextAlignment:NSTextAlignmentCenter];
+  [titleLabel setTextColor:[UIColor whiteColor]];
+  [titleLabel setText:@"MOVE AND SCALE"];
+  [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
+  [titleLabel setUserInteractionEnabled:NO];
+  
+  
+  [topBar addSubview:cancelBtn];
+  [topBar addSubview:doneBtn];
+  [topBar addSubview:titleLabel];
+  [imageCropVC.view addSubview:topBar];
+}
+
 #pragma mark - ImagePicker delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -85,6 +147,8 @@
     RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
     imageCropVC.delegate = self;
     [self.navigationController pushViewController:imageCropVC animated:YES];
+  
+    [self customizeCropViewUI:imageCropVC];
   }];
 }
 
@@ -168,7 +232,7 @@
                    didCropImage:(UIImage *)croppedImage
                   usingCropRect:(CGRect)cropRect
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:NO];
   [self invokeUploadImageAPIWithImage:croppedImage];
 }
 
@@ -178,7 +242,7 @@
                   usingCropRect:(CGRect)cropRect
                   rotationAngle:(CGFloat)rotationAngle
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:NO];
   [self invokeUploadImageAPIWithImage:croppedImage];
 }
 
