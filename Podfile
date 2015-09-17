@@ -2,9 +2,9 @@
 # platform :ios, ‘7.0’
 
 target 'LegacyConnect' do
-pod 'AFNetworking', '~> 2.5'
+pod 'AFNetworking', '~> 2.5.4'
 pod 'FBSDKCoreKit'
-pod 'FBSDKLoginKit'
+pod 'FBSDKLoginKit', '~> 4.6'
 pod 'FBSDKShareKit'
 pod 'MFSideMenu'
 pod 'Reachability', '~> 3.2'

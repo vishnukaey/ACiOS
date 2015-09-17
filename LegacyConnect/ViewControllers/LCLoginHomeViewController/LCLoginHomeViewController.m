@@ -39,7 +39,7 @@
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
   [login logOut];
-  [login logInWithReadPermissions:@[kEmailKey] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+  [login logInWithReadPermissions:@[kEmailKey,@"public_profile",@"user_friends"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
     {
       NSLog(@"error %@",error);
@@ -67,7 +67,7 @@
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters setValue:@"id, email, name" forKey:kFieldsKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:nil] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
        if (!error)
        {
          [self saveUserDetailsToDataManagerFromResponse:result];
