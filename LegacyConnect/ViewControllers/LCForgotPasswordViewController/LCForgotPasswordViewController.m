@@ -10,6 +10,7 @@
 
 @interface LCForgotPasswordViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @end
 
@@ -25,11 +26,13 @@
   UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   [self.navigationItem setLeftBarButtonItem:backButtonItem];
   [self.emailTextField becomeFirstResponder];
+  [self textFieldValueChanged];
 }
 
-- (void)backButtonPressed:(id)sender
+- (void)viewWillAppear:(BOOL)animated
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [super viewWillAppear:animated];
+  [self addTextFieldTextDidChangeNotifiaction];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,9 +41,37 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [self removeTextFieldTextDidChangeNotifiaction];
   [self.emailTextField resignFirstResponder];
   [super viewWillDisappear:animated];
 }
+
+#pragma mark - private method implementation
+- (void)addTextFieldTextDidChangeNotifiaction
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(textFieldValueChanged)
+                                               name:UITextFieldTextDidChangeNotification
+                                             object:nil];
+}
+
+- (void)removeTextFieldTextDidChangeNotifiaction
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UITextFieldTextDidChangeNotification
+                                                object:nil];
+}
+
+- (void)textFieldValueChanged
+{
+  [self.submitButton setEnabled:(self.emailTextField.text.length > 0)];
+}
+
+- (void)backButtonPressed:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - IBAction implementation
 
@@ -66,6 +97,5 @@
     NSLog(@"response : %@",error);
   }];
 }
-
 
 @end
