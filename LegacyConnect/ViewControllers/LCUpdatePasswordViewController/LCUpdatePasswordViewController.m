@@ -29,6 +29,7 @@ static NSString * kResetPasswordTitle = @"RESET PASSWORD";
   [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
   UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   [self.navigationItem setLeftBarButtonItem:backButtonItem];
+  [self.updateButton.layer setCornerRadius:5];
   [self changeUpdateButtonState];
 }
 
@@ -65,10 +66,12 @@ static NSString * kResetPasswordTitle = @"RESET PASSWORD";
 {
   if (self.passwordTextField.text.length > 0 && self.confirmPasswordTextField.text.length > 0) {
     [self.updateButton setEnabled:true];
+    [self.updateButton setBackgroundColor:[UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]];
   }
   else
   {
     [self.updateButton setEnabled:false];
+    [self.updateButton setBackgroundColor:[UIColor colorWithRed:184.0/255 green:184.0/255 blue:184.0/255 alpha:1.0]];
   }
 }
 

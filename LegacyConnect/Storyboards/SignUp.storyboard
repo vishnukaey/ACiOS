@@ -745,7 +745,7 @@ then select some related Causes</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCn-SR-dJM">
                                                     <rect key="frame" x="4" y="4" width="76" height="76"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy2-3F-lGU">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy2-3F-lGU">
                                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-i4-Sda">
@@ -844,7 +844,7 @@ then select some related Causes</string>
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
                                                     <rect key="frame" x="2" y="2" width="101" height="101"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
@@ -1516,11 +1516,12 @@ then select some related Causes</string>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TaW-Fh-x7J">
                                 <rect key="frame" x="15" y="150" width="345" height="45"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="hlC-F1-wC8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
-                                <state key="normal" title="Submit" backgroundImage="OrangeButtonBG">
+                                <state key="normal" title="Submit">
                                     <color key="titleColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1629,7 +1630,7 @@ then select some related Causes</string>
                                     <constraint firstAttribute="height" constant="45" id="GmJ-bU-ov8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
-                                <state key="normal" title="Update" backgroundImage="OrangeButtonBG">
+                                <state key="normal" title="Update">
                                     <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1668,7 +1669,6 @@ then select some related Causes</string>
         <image name="FacebookButtonSignUp" width="345" height="44"/>
         <image name="HorizontalDivider" width="1" height="1"/>
         <image name="LC_logo" width="150" height="150"/>
-        <image name="OrangeButtonBG" width="345" height="44"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="TakeAPhotoBtnBG" width="287" height="287"/>
         <image name="backButton_image" width="12" height="21"/>

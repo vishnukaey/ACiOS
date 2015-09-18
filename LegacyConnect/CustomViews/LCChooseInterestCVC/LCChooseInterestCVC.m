@@ -32,8 +32,8 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLLarge] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-  _interestNameLabel.text = interest.descriptionText;
+  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  _interestNameLabel.text = interest.name;
 }
 
 - (void)setCellSelected :(BOOL)selected

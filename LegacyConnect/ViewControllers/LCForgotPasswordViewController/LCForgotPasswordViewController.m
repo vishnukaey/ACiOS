@@ -26,6 +26,7 @@
   UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   [self.navigationItem setLeftBarButtonItem:backButtonItem];
   [self.emailTextField becomeFirstResponder];
+  [self.submitButton.layer setCornerRadius:5];
   [self textFieldValueChanged];
 }
 
@@ -64,7 +65,16 @@
 
 - (void)textFieldValueChanged
 {
-  [self.submitButton setEnabled:(self.emailTextField.text.length > 0)];
+  if (self.emailTextField.text.length > 0) {
+    [self.submitButton setEnabled:true];
+    [self.submitButton setBackgroundColor:[UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]];
+  }
+  else
+  {
+    [self.submitButton setEnabled:false];
+    [self.submitButton setBackgroundColor:[UIColor colorWithRed:184.0/255 green:184.0/255 blue:184.0/255 alpha:1.0]];
+  }
+    
 }
 
 - (void)backButtonPressed:(id)sender
