@@ -71,6 +71,10 @@
     NSLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
+    /*
+     Temporarily added alert, remove after sprint 1.
+     */
+    [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
     [self.navigationController popToRootViewControllerAnimated:NO];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);

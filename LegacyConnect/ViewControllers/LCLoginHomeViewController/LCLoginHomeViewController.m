@@ -75,6 +75,12 @@
          [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
            [self loginUser];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
+           
+           /*
+            Temporarily added alert, remove after sprint 1.
+            */
+           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+
          } andFailure:^(NSString *error) {
            NSLog(@"");
            [MBProgressHUD hideHUDForView:self.view animated:YES];
