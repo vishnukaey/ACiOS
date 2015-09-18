@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -1546,6 +1546,7 @@ then select some related Causes</string>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="emailTextField" destination="NTc-Um-esN" id="tt8-vh-oGz"/>
+                        <outlet property="submitButton" destination="TaW-Fh-x7J" id="TK1-98-jR5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBC-7I-Jgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1584,6 +1585,9 @@ then select some related Causes</string>
                                         <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="7bZ-ST-csu" id="oYs-C6-kmV"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUh-Qf-liw">
                                         <rect key="frame" x="30" y="52" width="315" height="30"/>
@@ -1593,6 +1597,9 @@ then select some related Causes</string>
                                         <color key="textColor" red="0.42745098040000001" green="0.42745098040000001" blue="0.42745098040000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="15"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="7bZ-ST-csu" id="76x-br-IoI"/>
+                                        </connections>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="HorizontalDivider" translatesAutoresizingMaskIntoConstraints="NO" id="pJ4-a3-fdo">
                                         <rect key="frame" x="0.0" y="45" width="375" height="1"/>
@@ -1648,6 +1655,7 @@ then select some related Causes</string>
                     <connections>
                         <outlet property="confirmPasswordTextField" destination="FUh-Qf-liw" id="QgG-C6-xIw"/>
                         <outlet property="passwordTextField" destination="8Xd-Tg-QVh" id="NfA-rV-d5D"/>
+                        <outlet property="updateButton" destination="hBh-wb-yhA" id="kvv-yb-oUC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTQ-sJ-fO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
