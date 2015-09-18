@@ -60,13 +60,15 @@
 
 - (IBAction)loginButtonClicked:(id)sender
 {
-  [self performOnlineLoginRequest];
+  [self performOnlineLoginRequest:(UIButton*)sender];
 }
 
 
-- (void)performOnlineLoginRequest
+- (void)performOnlineLoginRequest:(UIButton*)loginBtn
 {
+  [loginBtn setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
@@ -75,9 +77,13 @@
      Temporarily added alert, remove after sprint 1.
      */
     [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+    [loginBtn setEnabled:true];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
+    [loginBtn setEnabled:true];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
 }
 
@@ -120,7 +126,7 @@
   }
   else
   {
-    [self performOnlineLoginRequest];
+    [self performOnlineLoginRequest:self.loginButton];
   }
   return YES;
 }

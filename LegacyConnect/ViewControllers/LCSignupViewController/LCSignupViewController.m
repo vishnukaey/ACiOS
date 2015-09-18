@@ -132,6 +132,7 @@
 
 - (void)registerUserOnline
 {
+  [self.signupButton setEnabled:false];
   NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -139,10 +140,12 @@
     NSLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
+    [self.signupButton setEnabled:true];
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
+    [self.signupButton setEnabled:true];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
 }
