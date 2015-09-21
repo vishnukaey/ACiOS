@@ -10,7 +10,6 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCLoginHomeViewController.h"
 #import "LCWebServiceManager.h"
-#import "MBProgressHud.h"
 #import "LCConstants.h"
 
 #import "LCChooseCausesVC.h"
@@ -38,7 +37,8 @@
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-  [login logInWithReadPermissions:@[kEmailKey] handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+  [login logOut];
+  [login logInWithReadPermissions:@[kEmailKey,@"public_profile",@"user_friends"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
     {
       NSLog(@"error %@",error);
@@ -66,19 +66,26 @@
     NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
     [parameters setValue:@"id, email, name" forKey:kFieldsKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters]
-     startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+    [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
        if (!error)
        {
          [self saveUserDetailsToDataManagerFromResponse:result];
          NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
+         
          [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
            [self loginUser];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
+           
+           /*
+            Temporarily added alert, remove after sprint 1.
+            */
+           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+
          } andFailure:^(NSString *error) {
            NSLog(@"");
            [MBProgressHUD hideHUDForView:self.view animated:YES];
          }];
+         
        }
      }];
   }

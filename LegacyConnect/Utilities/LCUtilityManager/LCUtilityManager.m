@@ -108,6 +108,21 @@
   return base64String;
 }
 
++ (BOOL)validateEmail:(NSString*)emailString
+{
+  NSString *emailRegex = @"[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}";
+  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+  bool isvalid = [emailTest evaluateWithObject:emailString];
+  if(isvalid)
+  {
+    return YES;
+  }
+  else
+  {
+    return NO;
+  }
+}
+
 
 + (NSString *)decodeFromBase64String:(NSString *)string
 {

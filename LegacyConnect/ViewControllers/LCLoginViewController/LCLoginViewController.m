@@ -24,7 +24,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [_emailTextField becomeFirstResponder];
+  _loginButton.enabled = NO;
+  [_emailTextField addTarget:self
+                      action:@selector(textFieldDidChange:)
+            forControlEvents:UIControlEventEditingChanged];
+  [_passwordTextField addTarget:self
+                         action:@selector(textFieldDidChange:)
+               forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
 }
 
@@ -54,20 +60,30 @@
 
 - (IBAction)loginButtonClicked:(id)sender
 {
-  [self performOnlineLoginRequest];
+  [self performOnlineLoginRequest:(UIButton*)sender];
 }
 
 
-- (void)performOnlineLoginRequest
+- (void)performOnlineLoginRequest:(UIButton*)loginBtn
 {
+  [loginBtn setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
+    /*
+     Temporarily added alert, remove after sprint 1.
+     */
+    [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+    [loginBtn setEnabled:true];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
-    } andFailure:^(NSString *error) {
+  } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
+    [loginBtn setEnabled:true];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
 }
 
@@ -110,9 +126,22 @@
   }
   else
   {
-    [self performOnlineLoginRequest];
+    [self performOnlineLoginRequest:self.loginButton];
   }
   return YES;
+}
+
+
+- (void)textFieldDidChange:(id)sender
+{
+  if(_emailTextField.text.length!=0 && _passwordTextField.text.length!=0)
+  {
+    _loginButton.enabled = YES;
+  }
+  else
+  {
+    _loginButton.enabled = NO;
+  }
 }
 
 

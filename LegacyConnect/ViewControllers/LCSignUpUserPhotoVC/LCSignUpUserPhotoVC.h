@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RSKImageCropper/RSKImageCropper.h>
 
-@interface LCSignUpUserPhotoVC : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface LCSignUpUserPhotoVC : UIViewController <UIImagePickerControllerDelegate,UINavigationControllerDelegate,RSKImageCropViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLabel;
 @end

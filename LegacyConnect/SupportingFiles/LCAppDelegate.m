@@ -18,6 +18,9 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCAppDelegate.h"
 #import "LCAppLaunchHelper.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import "LCSpecialContainerView.h"
+#import "LCLoginViewController.h"
 
 @interface LCAppDelegate ()
 
@@ -28,6 +31,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
+  [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[LCLoginViewController class]];
+  [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[LCSpecialContainerView class]];
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }

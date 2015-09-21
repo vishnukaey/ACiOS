@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCLoginTextField.h"
 
 @interface LCSignupViewController : UIViewController
 {
   UIDatePicker *datePicker;
 }
-@property (weak, nonatomic) IBOutlet LCLoginTextField *firstNameTextField;
-@property (weak, nonatomic) IBOutlet LCLoginTextField *lastNameTextField;
-@property (weak, nonatomic) IBOutlet LCLoginTextField *emailTextField;
-@property (weak, nonatomic) IBOutlet LCLoginTextField *passwordTextField;
-@property (weak, nonatomic) IBOutlet LCLoginTextField *confirmPasswordTextField;
-@property (weak, nonatomic) IBOutlet LCLoginTextField *dobTextField;
+@property (weak, nonatomic) IBOutlet UITextField *firstNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
+@property (weak, nonatomic) IBOutlet UITextField *dobTextField;
+@property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 @end
