@@ -20,7 +20,10 @@ typedef enum profileStateTypes
 @interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
   IBOutlet UITableView *milestonesTable;
-  IBOutlet UICollectionView *interestsCollectionView;
+  IBOutlet UITableView *interestsTable;
+  
+  IBOutlet UIView *actionsView;
+  
   IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
   IBOutlet UIButton *impactsButton, *friendsButton, *editButton, *backButton;
