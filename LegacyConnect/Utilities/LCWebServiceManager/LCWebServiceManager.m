@@ -35,7 +35,7 @@
   }
   else
   {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
   }
 }
 
@@ -68,7 +68,7 @@
   }
   else
   {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
   }
 }
 
