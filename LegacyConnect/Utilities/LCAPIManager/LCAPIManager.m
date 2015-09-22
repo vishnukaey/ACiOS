@@ -39,6 +39,7 @@ static LCAPIManager *sharedManager = nil;
        }
        else
        {
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
@@ -693,8 +694,9 @@ static LCAPIManager *sharedManager = nil;
       success(responseObject);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedRecoverySuggestion];
-    failure(error.localizedRecoverySuggestion);
+      NSLog(@"%@",error);
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+    failure(error.localizedDescription);
   }];
 }
 

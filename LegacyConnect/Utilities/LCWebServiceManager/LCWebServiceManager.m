@@ -18,6 +18,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:30];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
@@ -49,6 +50,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
     
