@@ -53,6 +53,7 @@
   // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - private method implementation
 - (void) setDobTextFieldWithInputView
 {
   datePicker = [[UIDatePicker alloc] init];
@@ -110,33 +111,6 @@
 }
 
 
-- (IBAction)cancelButtonTapped:(id)sender
-{
-  [self.navigationController popToRootViewControllerAnimated:NO];
-}
-
-
-- (IBAction)nextButtonTapped:(id)sender
-{
-  if(![LCUtilityManager validateEmail:_emailTextField.text])
-  {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
-  }
-  else if(![LCUtilityManager validatePassword:self.passwordTextField.text])
-  {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_password", @"")];
-  }
-  else if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text])
-  {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"password_mismatch", @"")];
-  }
-  else
-  {
-    [self registerUserOnline];
-  }
-}
-
-
 - (void)registerUserOnline
 {
   [self.signupButton setEnabled:false];
@@ -165,7 +139,6 @@
   [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
 
-
 - (void)textFieldDidChange:(id)sender
 {
   if(_firstNameTextField.text.length!=0 && _lastNameTextField.text.length!=0 && _emailTextField.text.length!=0 && _passwordTextField.text.length!=0 && _confirmPasswordTextField.text.length!=0 && _dobTextField.text.length!=0 )
@@ -177,6 +150,34 @@
     _signupButton.enabled = NO;
   }
 }
-  
+
+
+#pragma mark - IBAction implementation
+- (IBAction)cancelButtonTapped:(id)sender
+{
+  [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+
+- (IBAction)nextButtonTapped:(id)sender
+{
+  if(![LCUtilityManager validateEmail:_emailTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
+  }
+  else if(![LCUtilityManager validatePassword:self.passwordTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_password", @"")];
+  }
+  else if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"password_mismatch", @"")];
+  }
+  else
+  {
+    [self registerUserOnline];
+  }
+}
+
   
 @end
