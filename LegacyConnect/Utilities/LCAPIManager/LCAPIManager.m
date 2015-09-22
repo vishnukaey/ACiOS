@@ -693,6 +693,7 @@ static LCAPIManager *sharedManager = nil;
       success(responseObject);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedRecoverySuggestion];
     failure(error.localizedRecoverySuggestion);
   }];
 }
