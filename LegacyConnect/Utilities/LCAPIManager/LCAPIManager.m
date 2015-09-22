@@ -39,6 +39,7 @@ static LCAPIManager *sharedManager = nil;
        }
        else
        {
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
@@ -676,6 +677,7 @@ static LCAPIManager *sharedManager = nil;
   NSData *imageData = UIImagePNGRepresentation(image);
   NSDictionary *parameters = @{kUserIDKey: userID};
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+  [manager.requestSerializer setTimeoutInterval:30];
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
   [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
@@ -693,7 +695,9 @@ static LCAPIManager *sharedManager = nil;
       success(responseObject);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    failure(error.localizedRecoverySuggestion);
+      NSLog(@"%@",error);
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+    failure(error.localizedDescription);
   }];
 }
 
