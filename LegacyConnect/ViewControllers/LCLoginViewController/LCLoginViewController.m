@@ -126,6 +126,7 @@
   }
   else
   {
+    [self.view endEditing:YES];
     [self performOnlineLoginRequest:self.loginButton];
   }
   return YES;
