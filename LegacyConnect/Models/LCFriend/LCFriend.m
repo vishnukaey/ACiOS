@@ -15,7 +15,8 @@
 {
   return @{
            @"createdAt": @"createdAt",
-           @"userID": @"friendId",
+           @"userID": @"userId",
+           @"friendId": @"friendId",
            @"firstName": @"firstName",
            @"lastName": @"lastName",
            @"avatarURL": @"avatarUrl",
