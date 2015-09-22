@@ -66,6 +66,13 @@
 
 - (void)performOnlineLoginRequest:(UIButton*)loginBtn
 {
+  [self.view endEditing:YES];
+  if(![LCUtilityManager validateEmail:_emailTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
+    return;
+  }
+
   [loginBtn setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -126,7 +133,6 @@
   }
   else
   {
-    [self.view endEditing:YES];
     [self performOnlineLoginRequest:self.loginButton];
   }
   return YES;

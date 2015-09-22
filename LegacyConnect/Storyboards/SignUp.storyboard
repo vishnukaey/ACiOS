@@ -1426,7 +1426,7 @@ then select a few related causes.</string>
                                             <constraint firstAttribute="height" constant="30" id="6IB-Gh-Res"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="zgM-N2-seB" id="i6B-9C-tws"/>
                                         </connections>

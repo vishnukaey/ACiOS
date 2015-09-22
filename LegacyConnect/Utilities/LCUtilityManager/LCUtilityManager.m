@@ -123,6 +123,21 @@
   }
 }
 
++ (BOOL)validatePassword:(NSString*)passwordString
+{
+  BOOL isValid = NO;
+  if (passwordString.length>7) {
+    isValid = YES;
+  }
+  if(isValid)
+  {
+    return YES;
+  }
+  else
+  {
+    return NO;
+  }
+}
 
 + (NSString *)decodeFromBase64String:(NSString *)string
 {

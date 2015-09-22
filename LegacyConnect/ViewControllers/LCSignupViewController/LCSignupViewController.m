@@ -118,15 +118,22 @@
 
 - (IBAction)nextButtonTapped:(id)sender
 {
-  if([LCUtilityManager validateEmail:_emailTextField.text])
-  {
-    [self registerUserOnline];
-  }
-  else
+  if(![LCUtilityManager validateEmail:_emailTextField.text])
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
   }
-
+  else if(![LCUtilityManager validatePassword:self.passwordTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_password", @"")];
+  }
+  else if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"password_mismatch", @"")];
+  }
+  else
+  {
+    [self registerUserOnline];
+  }
 }
 
 
