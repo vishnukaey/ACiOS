@@ -9,7 +9,7 @@
 #import "LCUpdatePasswordViewController.h"
 #import "LCLoginViewController.h"
 
-static NSString * kResetPasswordTitle = @"RESET PASSWORD";
+static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
 
 @interface LCUpdatePasswordViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *updateButton;
