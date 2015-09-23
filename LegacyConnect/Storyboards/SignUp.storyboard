@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -70,7 +70,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RK-dy-Ksn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg_copy" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homeloginbg" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
@@ -1690,6 +1690,7 @@ then select a few related causes.</string>
         <image name="backButton_image" width="12" height="21"/>
         <image name="chooseCauses_topBG" width="375" height="297"/>
         <image name="default-placeholder.png" width="250" height="250"/>
+        <image name="homeloginbg" width="375" height="667"/>
         <image name="lc_logo_reg" width="116" height="116"/>
         <image name="login_bg_copy" width="375" height="667"/>
         <image name="login_textFieldbg" width="345" height="88"/>
