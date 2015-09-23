@@ -100,11 +100,19 @@
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     userDetail = response;
     NSLog(@"%@",response);
+    
     [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"headerImage"]];
-    userNameLabel.text = [NSString stringWithFormat:@"%@ %@", userDetail.firstName, userDetail.lastName];
-    memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@", userDetail.activationDate];
-    locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", userDetail.gender, userDetail.dob, userDetail.location];
+    userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]];
+    memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
+                              [LCUtilityManager performNullCheckAndSetValue:userDetail.activationDate]];
+    
+    locationLabel.text = [NSString stringWithFormat:@"%@ . %@ . %@",
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.dob],
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.location]];
     
     if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
     {
@@ -368,10 +376,11 @@
     [interestLogo sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"headerImage"]];
     
     UILabel *interestNameLabel = (UILabel*)[cell viewWithTag:102];
-    interestNameLabel.text = interstObj.name;
+    interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
     
     UILabel *interestFollowLabel = (UILabel*)[cell viewWithTag:103];
-    interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",interstObj.followers];
+    interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",
+                                [LCUtilityManager performNullCheckAndSetValue:interstObj.followers]];
   
     return cell;
   }
