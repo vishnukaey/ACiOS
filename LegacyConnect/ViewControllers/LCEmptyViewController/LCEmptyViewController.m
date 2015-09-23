@@ -47,9 +47,9 @@
 {
   [super viewWillAppear:animated];
   
-  // Navigate to signup if user is NOT logged-in
-//  if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
-//  {
+   Navigate to signup if user is NOT logged-in
+  if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
+  {
       UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
       UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
@@ -59,47 +59,47 @@
     {
       [self showPasswordResetScreen];
     }
-//  }
-//  else
-//  {
-//    //Fetch additional userdetails if user is logged-in
-//    if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
-//    {
-//      [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
-//       {
-//         [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
-//         LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-//         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
-//         navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-//         
-//         LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
-//         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
-//         leftSideMenuViewController.delegate_ = self;
-//         
-//         mainContainer = [MFSideMenuContainerViewController
-//                          containerWithCenterViewController:navigationRoot
-//                          leftMenuViewController:nil
-//                          rightMenuViewController:leftSideMenuViewController];
-//         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
-//         appdel.window.rootViewController = mainContainer;
-//         [appdel.window makeKeyAndVisible];
-//         
-//         [self addfloatingButtons];
-//         mainContainer.panMode = MFSideMenuPanModeNone;
-//         
-//       } andFailure:^(NSString *error) {
-//         NSLog(@" error:  %@",error);
-//       }];
-//    }
-//    else
-//    {
-//      [LCUtilityManager clearUserDefaultsForCurrentUser];
-//      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-//      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-//      [self.navigationController setNavigationBarHidden:YES];
-//      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
-//    }
-//  }
+  }
+  else
+  {
+    //Fetch additional userdetails if user is logged-in
+    if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
+    {
+      [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
+       {
+         [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
+         LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
+         navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+         
+         LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
+         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
+         leftSideMenuViewController.delegate_ = self;
+         
+         mainContainer = [MFSideMenuContainerViewController
+                          containerWithCenterViewController:navigationRoot
+                          leftMenuViewController:nil
+                          rightMenuViewController:leftSideMenuViewController];
+         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
+         appdel.window.rootViewController = mainContainer;
+         [appdel.window makeKeyAndVisible];
+         
+         [self addfloatingButtons];
+         mainContainer.panMode = MFSideMenuPanModeNone;
+         
+       } andFailure:^(NSString *error) {
+         NSLog(@" error:  %@",error);
+       }];
+    }
+    else
+    {
+      [LCUtilityManager clearUserDefaultsForCurrentUser];
+      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+      [self.navigationController setNavigationBarHidden:YES];
+      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+    }
+  }
 }
 
 - (void)didReceiveMemoryWarning {
