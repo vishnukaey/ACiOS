@@ -677,8 +677,8 @@ static LCAPIManager *sharedManager = nil;
   NSData *imageData = UIImagePNGRepresentation(image);
   NSDictionary *parameters = @{kUserIDKey: userID};
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  [manager.requestSerializer setTimeoutInterval:30];
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:5.0];
   [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
   [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {

@@ -30,7 +30,7 @@
 -(void)setCause:(LCCause *)cause
 {
   _cause = cause;
-  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
 }
 
 - (void)setCellSelected :(BOOL)selected
