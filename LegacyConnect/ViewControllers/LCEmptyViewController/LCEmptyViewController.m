@@ -47,7 +47,7 @@
 {
   [super viewWillAppear:animated];
   
-   Navigate to signup if user is NOT logged-in
+//   Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
       UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
