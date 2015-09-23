@@ -10,6 +10,7 @@
 
 @interface LCForgotPasswordViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @end
 
@@ -19,7 +20,20 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self.navigationController setNavigationBarHidden:false];
+  UIButton * backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 21)];
+  [backButton setImage:[UIImage imageNamed:@"backButton_image"] forState:UIControlStateNormal];
+  [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+  UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+  [self.navigationItem setLeftBarButtonItem:backButtonItem];
   [self.emailTextField becomeFirstResponder];
+  [self.submitButton.layer setCornerRadius:5];
+  [self textFieldValueChanged];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self addTextFieldTextDidChangeNotifiaction];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,18 +42,59 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [self removeTextFieldTextDidChangeNotifiaction];
   [self.emailTextField resignFirstResponder];
   [super viewWillDisappear:animated];
 }
+
+#pragma mark - private method implementation
+- (void)addTextFieldTextDidChangeNotifiaction
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(textFieldValueChanged)
+                                               name:UITextFieldTextDidChangeNotification
+                                             object:nil];
+}
+
+- (void)removeTextFieldTextDidChangeNotifiaction
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UITextFieldTextDidChangeNotification
+                                                object:nil];
+}
+
+- (void)textFieldValueChanged
+{
+  if (self.emailTextField.text.length > 0) {
+    [self.submitButton setEnabled:true];
+    [self.submitButton setBackgroundColor:[UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]];
+  }
+  else
+  {
+    [self.submitButton setEnabled:false];
+    [self.submitButton setBackgroundColor:[UIColor colorWithRed:184.0/255 green:184.0/255 blue:184.0/255 alpha:1.0]];
+  }
+    
+}
+
+- (void)backButtonPressed:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 #pragma mark - IBAction implementation
 
 - (IBAction)submitButtonClicked:(id)sender
 {
-  if ([self validateEmail])
+  if ([LCUtilityManager validateEmail:_emailTextField.text])
   {
     [self.emailTextField resignFirstResponder];
     [self performPasswordResetRequestWithEmail:_emailTextField.text];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
   }
 }
 
@@ -51,41 +106,6 @@
   } andFailure:^(NSString *error) {
     NSLog(@"response : %@",error);
   }];
-}
-
-- (BOOL)validateEmail
-{
-  _emailTextField.isValid = YES;
-  NSString *emailRegex = @"[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}";
-  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-  bool isvalid = [emailTest evaluateWithObject:_emailTextField.text];
-  if(isvalid)
-  {
-    _emailTextField.isValid = YES;
-    return YES;
-  }
-  else
-  {
-    [self showInvalidMailErrorMessage];
-    _emailTextField.isValid = NO;
-    return NO;
-  }
-}
-
-- (void)showInvalidMailErrorMessage
-{
-  UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:nil
-                                                       message:NSLocalizedString(@"invalid_mail_address", @"")
-                                                      delegate:self
-                                             cancelButtonTitle:NSLocalizedString(@"ok", @"")
-                                             otherButtonTitles: nil];
-  [errorAlert show];
-}
-
-#pragma mark - UIAlertViewDelegate implementation
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-  [self.emailTextField becomeFirstResponder];
 }
 
 @end

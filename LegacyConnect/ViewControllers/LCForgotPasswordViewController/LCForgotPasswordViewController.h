@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCLoginTextField.h"
 
 @protocol forgotPasswordDelegate <NSObject>
 
@@ -20,7 +19,7 @@
 
 
 @property (nonatomic, unsafe_unretained) NSObject <forgotPasswordDelegate> *delegate;
-@property (nonatomic,retain) IBOutlet LCLoginTextField *emailTextField;
+@property (nonatomic,retain) IBOutlet UITextField *emailTextField;
 
 
 @end

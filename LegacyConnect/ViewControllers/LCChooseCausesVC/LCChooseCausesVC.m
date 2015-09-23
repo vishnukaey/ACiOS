@@ -145,13 +145,15 @@
     {
       NSMutableArray *selectedCauses = [[NSMutableArray alloc] init];
       [selectedItems setObject:selectedCauses forKey:interest.interestID];
-
+      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
       [LCAPIManager getCausesForInterestID:interest.interestID andLastCauseID:kEmptyStringValue withSuccess:^(NSArray *responses) {
         interest.causes = responses;
         [causes addObjectsFromArray:interest.causes];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         [self.causesCollectionView reloadData];
         [self.interestsCollectionView reloadData];
       } andFailure:^(NSString *error) {
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
         NSLog(@"%@",error);
       }];
       
@@ -165,9 +167,12 @@
 {
   NSArray *selectedInterestIDs = [selectedItems allKeys];
   NSArray *selectedCauseIDs = [selectedItems allValues];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager saveCauses:selectedCauseIDs andInterests:selectedInterestIDs ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self performSegueWithIdentifier:@"connectFriends" sender:self];
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"%@",error);
   }];
 }

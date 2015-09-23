@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <RSKImageCropper/RSKImageCropper.h>
 
 typedef enum profileSectionTypes
 {
@@ -17,10 +18,12 @@ typedef enum profileSectionTypes
   SECTION_GENDER
 } sectionType;
 
-@interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate>
 {
   
   IBOutlet UIImageView *profilePic;
+  IBOutlet UIButton *buttonSave;
   
   
   UITextField *txt_firstName;
@@ -33,6 +36,8 @@ typedef enum profileSectionTypes
   
   UIDatePicker *datePicker;
   NSString *dobTimeStamp;
+  
+  BOOL isEditingProfilePic;
   
 }
 
