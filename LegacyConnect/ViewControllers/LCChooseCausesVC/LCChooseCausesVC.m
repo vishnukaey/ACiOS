@@ -48,6 +48,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+    [self updatePlaceHolderLabel];
 }
 
 
@@ -138,6 +139,7 @@
     {
       [selectedItems removeObjectForKey:interest.interestID];
       [causes removeObjectsInArray:interest.causes];
+        [self updatePlaceHolderLabel];
       [self.causesCollectionView reloadData];
       [self.interestsCollectionView reloadData];
     }
@@ -150,6 +152,7 @@
         interest.causes = responses;
         [causes addObjectsFromArray:interest.causes];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+          [self updatePlaceHolderLabel];
         [self.causesCollectionView reloadData];
         [self.interestsCollectionView reloadData];
       } andFailure:^(NSString *error) {
@@ -162,6 +165,26 @@
   }
 }
 
+-(void)updatePlaceHolderLabel
+{
+    if(causes.count > 0)
+    {
+        _placeHolderLabel.hidden =YES;
+    }
+    else
+    {
+        _placeHolderLabel.hidden = NO;
+        if(selectedItems.count > 0)
+        {
+            [_placeHolderLabel setText:NSLocalizedString(@"no_causes_available", @"")];
+        }
+        else
+            
+        {
+            [_placeHolderLabel setText:NSLocalizedString(@"no_interests_selected", @"")];
+        }
+    }
+}
 
 -(IBAction) nextButtonTapped:(id)sender
 {

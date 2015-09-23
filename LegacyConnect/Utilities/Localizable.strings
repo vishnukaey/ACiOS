@@ -13,5 +13,8 @@
 "no_network_alert_msg" = "The network connection was lost.";
 "invalid_password" = "Password should be minimum of 8 characters.";
 "password_mismatch" = "Passwords doesn't match.";
+"no_interests_selected" = "Causes will appear here based on the interests you choose";
+"no_causes_available" = "No causes to display";
+
 "ok" = "OK";
 

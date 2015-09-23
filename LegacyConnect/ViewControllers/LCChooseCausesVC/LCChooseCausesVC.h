@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *interestsCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (weak, nonatomic) IBOutlet UILabel *placeHolderLabel;
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 @end

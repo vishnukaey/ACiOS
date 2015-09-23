@@ -704,6 +704,16 @@ id augue sagittis, mattis sapien.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-Ve-zKO">
+                                <rect key="frame" x="37" y="421.5" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="RuS-bm-112"/>
+                                    <constraint firstAttribute="height" constant="50" id="maZ-Iu-2Bl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chooseCauses_topBG" translatesAutoresizingMaskIntoConstraints="NO" id="bBB-Kw-8Fs">
                                 <rect key="frame" x="0.0" y="66" width="375" height="226"/>
                                 <constraints>
@@ -944,6 +954,8 @@ then select a few related causes.</string>
                             <constraint firstItem="jqk-BZ-Sd0" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="9Wl-7x-gqT"/>
                             <constraint firstItem="bBB-Kw-8Fs" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="Bjw-aI-H4b"/>
                             <constraint firstItem="ekL-SE-SdJ" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" constant="10" id="ERk-rb-BOl"/>
+                            <constraint firstItem="Gvz-Ve-zKO" firstAttribute="centerX" secondItem="EED-pu-HzR" secondAttribute="centerX" id="F6P-4w-uNd"/>
+                            <constraint firstItem="Gvz-Ve-zKO" firstAttribute="centerY" secondItem="EED-pu-HzR" secondAttribute="centerY" id="Lv7-g5-6Vb"/>
                             <constraint firstItem="ekL-SE-SdJ" firstAttribute="top" secondItem="bBB-Kw-8Fs" secondAttribute="bottom" id="Obi-b5-s9D"/>
                             <constraint firstAttribute="centerX" secondItem="JuP-Gg-t3z" secondAttribute="centerX" constant="-4.5" id="Sqy-T8-IYp"/>
                             <constraint firstAttribute="trailing" secondItem="SPR-ea-c07" secondAttribute="trailing" constant="8" id="UhW-Qc-gAp"/>
@@ -970,6 +982,7 @@ then select a few related causes.</string>
                         <outlet property="customNavigationHeight" destination="kUj-9c-07W" id="mbS-19-m2q"/>
                         <outlet property="interestsCollectionView" destination="SPR-ea-c07" id="p8m-Wq-r1x"/>
                         <outlet property="nextButton" destination="kiA-vT-V5i" id="p2T-iN-u6O"/>
+                        <outlet property="placeHolderLabel" destination="Gvz-Ve-zKO" id="flg-r0-vyq"/>
                         <outlet property="userImageView" destination="JuP-Gg-t3z" id="Qma-Xs-UC9"/>
                         <segue destination="rX4-yN-9BJ" kind="push" identifier="connectFriends" id="aNy-6t-e6c"/>
                     </connections>
