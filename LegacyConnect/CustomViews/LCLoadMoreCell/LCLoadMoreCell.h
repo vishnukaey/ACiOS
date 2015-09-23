@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^LoadMoreCellTapAction)(UITableViewCell *loadMoreCell);
+//typedef void (^LoadMoreCellTapAction)();
 
 @interface LCLoadMoreCell : UITableViewCell
 
-@property (nonatomic, weak) LoadMoreCellTapAction loadMoreCellTapAction;
+//@property (nonatomic, strong) LoadMoreCellTapAction loadMoreCellTapAction;
 
 @end

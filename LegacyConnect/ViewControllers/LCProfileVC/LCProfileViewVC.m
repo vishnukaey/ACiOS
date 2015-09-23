@@ -13,7 +13,7 @@
 #import "LCProfileEditVC.h"
 #import "LCImapactsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
-
+#import "LCFriendsListViewController.h"
 
 @implementation LCProfileViewVC
 @synthesize userDetail;
@@ -175,10 +175,15 @@
 
 - (IBAction)friendsButtonClicked
 {
-  NSLog(@"friends clicked----->");
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCUserFriendsVC"];
-  [self.navigationController pushViewController:vc animated:YES];
+  
+  LCFriendsListViewController * friendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCFriendsListVC"];
+  friendsVC.userId = self.userDetail.userID;
+  [self.navigationController pushViewController:friendsVC animated:YES];
+  
+//  NSLog(@"friends clicked----->");
+//  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+//  LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCUserFriendsVC"];
+//  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)impactsButtonClicked

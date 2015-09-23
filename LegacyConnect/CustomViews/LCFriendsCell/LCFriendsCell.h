@@ -13,5 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *friendsImageView;
 @property (weak, nonatomic) IBOutlet UILabel * friendsNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel * friendsLocationLabel;
+@property (weak, nonatomic) IBOutlet UIButton * addRemoveFriendBtn;
 @property (weak, nonatomic) LCFriend * friendObj;
+
 @end

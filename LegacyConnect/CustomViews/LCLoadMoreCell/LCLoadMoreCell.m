@@ -11,6 +11,7 @@
 @implementation LCLoadMoreCell
 
 - (void)awakeFromNib {
+  self.textLabel.text = @"Load More";
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
