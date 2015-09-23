@@ -10,7 +10,6 @@
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
-		0B288C751BA96662001A8E9D /* headerImage_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0B288C741BA96662001A8E9D /* headerImage_dummy.png */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
 		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
@@ -166,7 +165,6 @@
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
 		0B288C711BA92660001A8E9D /* LCProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileEditVC.h; path = ViewControllers/LCProfileVC/LCProfileEditVC.h; sourceTree = "<group>"; };
 		0B288C721BA92660001A8E9D /* LCProfileEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileEditVC.m; path = ViewControllers/LCProfileVC/LCProfileEditVC.m; sourceTree = "<group>"; };
-		0B288C741BA96662001A8E9D /* headerImage_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = headerImage_dummy.png; sourceTree = "<group>"; };
 		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
 		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
 		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
@@ -584,7 +582,6 @@
 				0BB33DBC1BA81400009E6D0C /* communityMemebrs.png */,
 				0BB33DBD1BA81400009E6D0C /* communityWebsite.png */,
 				0BB33DBE1BA81400009E6D0C /* default-placeholder.png */,
-				0B288C741BA96662001A8E9D /* headerImage_dummy.png */,
 				0BB33DBF1BA81400009E6D0C /* fbButton.png */,
 				0BB33DC01BA81400009E6D0C /* GIButton_dummy.png */,
 				0BB33DC11BA81400009E6D0C /* heart_dummy.png */,
@@ -1354,7 +1351,6 @@
 				0BB33DE71BA81401009E6D0C /* profileWaiting.png in Resources */,
 				0BB33DE21BA81401009E6D0C /* photo.jpg in Resources */,
 				0BB33DB51BA81359009E6D0C /* Interests.storyboard in Resources */,
-				0B288C751BA96662001A8E9D /* headerImage_dummy.png in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				0BB33DA51BA812A3009E6D0C /* Gotham-MediumItalic.otf in Resources */,
 				0BB33DD51BA81401009E6D0C /* check_box.png in Resources */,

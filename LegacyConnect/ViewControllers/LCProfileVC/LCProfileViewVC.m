@@ -14,7 +14,6 @@
 #import "LCImapactsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-
 @implementation LCProfileViewVC
 @synthesize userDetail;
 
@@ -33,14 +32,14 @@
   impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   
   backButton.hidden = true;
- 
   
   [self addTabMenu];
   
+  [self loadEmptyDetails];
   [self loadUserDetails];
-  
   [self loadMileStones];
-  [self loadInterests];
+  //[self loadInterests];
+  
   // Do any additional setup after loading the view.
 }
 
@@ -69,15 +68,25 @@
 
 
 #pragma mark - setup functions
+
+- (void) loadEmptyDetails {
+  
+  userNameLabel.text = @"";
+  memeberSincelabel.text = @"";
+  locationLabel.text = @"";
+  
+}
+
+
 - (void)loadUserDetails
 {
   
   //for testing as user ID is not persisting
-  NSString *nativeUserId = [LCDataManager sharedDataManager].userID;// @"6994";
+  NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
   if ([nativeUserId isEqualToString:userDetail.userID])
   {
-    [editButton setImage:[UIImage imageNamed:@"profileSettings.png"] forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:@"profileSettings"] forState:UIControlStateNormal];
     currentProfileState = PROFILE_SELF;
   }
   else
@@ -92,7 +101,7 @@
     userDetail = response;
     NSLog(@"%@",response);
     [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"]];
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"headerImage"]];
     userNameLabel.text = [NSString stringWithFormat:@"%@ %@", userDetail.firstName, userDetail.lastName];
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@", userDetail.activationDate];
     locationLabel.text = [NSString stringWithFormat:@"%@. %@. %@", userDetail.gender, userDetail.dob, userDetail.location];
@@ -110,12 +119,21 @@
 
 - (void)addTabMenu
 {
-  UIButton *mileStonesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+  UIFont *buttonFont = [UIFont fontWithName:@"Gotham-Bold" size:12];
+  
+  UIButton *mileStonesButton = [[UIButton alloc]  initWithFrame:CGRectMake(0, 0, 0, 0)];
   [mileStonesButton setTitle:@"MILESTONES" forState:UIControlStateNormal];
+  [mileStonesButton addTarget:self action:@selector(mileStonesClicked:) forControlEvents:UIControlEventTouchUpInside];
+  mileStonesButton.titleLabel.font = buttonFont;
+  
   UIButton *interestsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [interestsButton setTitle:@"INTERESTS" forState:UIControlStateNormal];
+  [interestsButton addTarget:self action:@selector(interestClicked:) forControlEvents:UIControlEventTouchUpInside];
+  interestsButton.titleLabel.font = buttonFont;
+  
   UIButton *actionsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [actionsButton setTitle:@"ACTIONS" forState:UIControlStateNormal];
+  actionsButton.titleLabel.font = buttonFont;
   
   LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [tabMenuContainer addSubview:tabmenu];
@@ -145,15 +163,18 @@
 
 - (void)loadInterests
 {
+  [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
    {
      NSLog(@"%@",response);
      interestsArray = response;
      [interestsTable reloadData];
+     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
      
    }
-                             andFailure:^(NSString *error)
+   andFailure:^(NSString *error)
    {
+     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
      NSLog(@"%@",error);
    }
    ];
@@ -162,10 +183,14 @@
 
 -(void)loadMileStones
 {
+  [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
+  
   [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
     mileStoneFeeds = response;
     [milestonesTable reloadData];
+    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
     NSLog(@"%@",error);
   }];
 }
@@ -196,26 +221,28 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)interestClicked :(UIButton *)sender
+-(IBAction)mileStonesClicked:(id)sender
+{
+  [self loadMileStones];
+}
+
+-(IBAction)interestClicked:(id)sender
 {
   NSLog(@"interest clicked----->");
+  [self loadInterests];
 }
 
 - (IBAction)editClicked:(UIButton *)sender
 {
   
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
-  vc.userDetail = self.userDetail;
-  //[self.navigationController pushViewController:vc animated:YES];
-  [self presentViewController:vc animated:YES completion:nil];
-  
   if (currentProfileState == PROFILE_SELF)
   {
-    NSLog(@"go to settings-->>");
-    //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    //    LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
-    //    [self.navigationController pushViewController:vc animated:YES];
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
+    vc.userDetail = self.userDetail;
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:navC animated:YES completion:nil];
   }
   else if (currentProfileState == PROFILE_OTHER_FRIEND)
   {
@@ -260,6 +287,12 @@
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+  if (scrollView == milestonesTable) {
+    NSLog(@"milesstones--->>>");
+  }
+  if (scrollView == interestsTable) {
+    NSLog(@"interestsTable--->>>");
+  }
   float collapseConstant = 0;;
   if (collapseViewHeight.constant>0)
   {
@@ -330,6 +363,9 @@
     }
     
     LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+    
+    UIImageView *interestLogo = (UIImageView*)[cell viewWithTag:101];
+    [interestLogo sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"headerImage"]];
     
     UILabel *interestNameLabel = (UILabel*)[cell viewWithTag:102];
     interestNameLabel.text = interstObj.name;

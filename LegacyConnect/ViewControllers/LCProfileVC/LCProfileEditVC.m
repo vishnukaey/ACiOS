@@ -7,6 +7,7 @@
 //
 
 #import "LCProfileEditVC.h"
+#import "RSKImageCropViewController.h"
 
 @interface LCProfileEditVC ()
 
@@ -32,8 +33,9 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width / 2.0;
   profilePic.layer.borderWidth = 3.0f;
-  profilePic.layer.borderColor = [[UIColor whiteColor]CGColor];
+  profilePic.layer.borderColor = [[UIColor colorWithRed:235.0f/255.0 green:236.0f/255.0 blue:235.0f/255.0 alpha:1.0] CGColor];
   
+  self.navigationController.navigationBarHidden = YES;
   [self loadUserData];
 }
 
@@ -48,6 +50,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
 - (IBAction)cancelAction:(id)sender {
   
+  [self.view endEditing:YES];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -62,24 +65,22 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 }
 
 - (IBAction)editPictureAction:(id)sender {
-  
-  NSLog(@"edit picture here...");
+
+  isEditingProfilePic = YES;
+  [self showEditingPictureOptions];
 }
 
 
 #pragma mark -
 
 - (void)loadUserData {
-  NSLog(@"avatar url - %@", userDetail.avatarURL);
   
-//  if (userDetail.avatarURL != nil) {
-//    profilePic.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:userDetail.avatarURL]]];
-//  }
-
-  [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-  
+  [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                  placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
 }
 
+
+#pragma mark -
 
 - (void) setDobTextFieldWithInputView
 {
@@ -100,23 +101,23 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   NSDate *defualtDate = [calendar dateFromComponents:components];
   datePicker.date = defualtDate;
   txt_birthday.inputView = datePicker;
-  [self createInputAccessoryView];
+  [self createDatePickerInputAccessoryView];
 }
 
 
--(void)createInputAccessoryView
+-(void)createDatePickerInputAccessoryView
 {
-  
   UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-  accessoryView.barStyle = UIBarStyleBlackTranslucent;
-  UIBarButtonItem* flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-  UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
-  [doneButton setTintColor:[UIColor whiteColor]];
-  UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
-  [cancelButton setTintColor:[UIColor whiteColor]];
+  accessoryView.barStyle = UIBarStyleDefault;
+  UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
+  [doneButton setTintColor:[UIColor blackColor]];
+  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
+  [cancelButton setTintColor:[UIColor blackColor]];
   [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
   [txt_birthday setInputAccessoryView:accessoryView];
 }
+
 
 - (void) setDateAndDismissDatePickerView:(id)sender
 {
@@ -133,6 +134,193 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
   txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"MM/dd/yyyy"];
+}
+
+
+#pragma mark -
+
+- (void)validateFields:(id)sender
+{
+  
+  if (txt_firstName.text.length != 0 && txt_lastName.text.length != 0 && txt_birthday.text.length != 0) {
+    
+    buttonSave.enabled = YES;
+  }
+  else {
+    buttonSave.enabled = NO;
+  }
+}
+
+
+- (void) showGenderSelection {
+  
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  
+  UIAlertAction *maleAction = [UIAlertAction actionWithTitle:@"Male" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    txt_gender.text = @"Male";
+    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  }];
+  [actionSheet addAction:maleAction];
+  
+  UIAlertAction *femaleAction = [UIAlertAction actionWithTitle:@"Female" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    txt_gender.text = @"Female";
+    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  }];
+  [actionSheet addAction:femaleAction];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  
+  [self presentViewController:actionSheet animated:YES completion:nil];
+  
+}
+
+
+- (void) showEditingPictureOptions {
+  
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    UIImage *originalImage;
+    
+    if (isEditingProfilePic) {
+      originalImage = profilePic.image;
+    }
+    else {
+      originalImage = img_headerBG.image;
+    }
+    
+    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
+    imageCropVC.delegate = self;
+    
+    if (!isEditingProfilePic) {
+      
+      imageCropVC.cropMode = RSKImageCropModeCustom;
+      imageCropVC.dataSource = self;
+    }
+    
+    //[self.navigationController pushViewController:imageCropVC animated:YES];
+    [self presentViewController:imageCropVC animated:YES completion:nil];
+    
+    [self customizeCropViewUI:imageCropVC];
+  }];
+  [actionSheet addAction:editAction];
+  
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+      
+      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+      imagePicker.delegate = self;
+      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+      imagePicker.allowsEditing = NO;
+      
+      [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
+  }];
+  [actionSheet addAction:takeAction];
+  
+  
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.allowsEditing = NO;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+  }];
+  [actionSheet addAction:chooseAction];
+  
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+    if (isEditingProfilePic) {
+      profilePic.image = [UIImage imageNamed:@"manplaceholder.jpg"];
+    }
+    else {
+      img_headerBG.image = [UIImage imageNamed:@"headerImage"];
+    }
+    
+  }];
+  [actionSheet addAction:removeAction];
+  
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  
+  [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+
+
+- (void)customizeCropViewUI:(RSKImageCropViewController*)imageCropVC {
+  
+  [imageCropVC.view setAlpha:1];
+  [imageCropVC.cancelButton setHidden:true];
+  [imageCropVC.chooseButton setHidden:true];
+  [imageCropVC.moveAndScaleLabel setHidden:true];
+  
+  
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height)];
+  [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
+  
+  [topBar setUserInteractionEnabled:true];
+  
+  
+  
+  CGFloat btnWidth = 75;
+  
+  CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
+  
+  
+  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
+  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  for (id target in imageCropVC.cancelButton.allTargets) {
+    NSArray *actions = [imageCropVC.cancelButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  
+  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
+  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  
+  for (id target in imageCropVC.chooseButton.allTargets) {
+    NSArray *actions = [imageCropVC.chooseButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  
+  CGFloat screenWidth = CGRectGetWidth(topBar.frame);
+  UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
+  [titleLabel setTextAlignment:NSTextAlignmentCenter];
+  [titleLabel setTextColor:[UIColor whiteColor]];
+  [titleLabel setText:@"MOVE AND SCALE"];
+  [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
+  [titleLabel setUserInteractionEnabled:NO];
+  
+  
+  [topBar addSubview:cancelBtn];
+  [topBar addSubview:doneBtn];
+  [topBar addSubview:titleLabel];
+  [imageCropVC.view addSubview:topBar];
 }
 
 
@@ -205,7 +393,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  static UITableViewCell *cell = nil;
+  UITableViewCell *cell = nil;
   
   if(indexPath.section == SECTION_NAME){
     
@@ -215,22 +403,18 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                     reuseIdentifier:cellIdentifier];
     }
-    for (UIView *view in  cell.contentView.subviews){
-      
-      if ([view isKindOfClass:[UITextField class]]){
-        
-        UITextField *txtField = (UITextField *)view;
-        
-        if (txtField.tag == 101) {
-          txt_firstName = txtField;
-          txt_firstName.text = userDetail.firstName;
-        }
-        else if (txtField.tag == 102) {
-          txt_lastName = txtField;
-          txt_lastName.text = userDetail.lastName;
-        }
-      }
-    }
+    
+    txt_firstName = (UITextField*)[cell viewWithTag:101];
+    txt_firstName.text = userDetail.firstName;
+    [txt_firstName addTarget:self
+                      action:@selector(validateFields:)
+            forControlEvents:UIControlEventEditingChanged];
+    
+    txt_lastName = (UITextField*)[cell viewWithTag:102];
+    txt_lastName.text = userDetail.lastName;
+    [txt_lastName addTarget:self
+                     action:@selector(validateFields:)
+           forControlEvents:UIControlEventEditingChanged];
   }
   
   else if(indexPath.section == SECTION_LOCATION){
@@ -242,18 +426,11 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                                     reuseIdentifier:cellIdentifier];
     }
     
-    for (UIView *view in  cell.contentView.subviews){
-      
-      if ([view isKindOfClass:[UITextField class]]){
-        
-        UITextField *txtField = (UITextField *)view;
-        
-        if (txtField.tag == 101) {
-          txt_location = txtField;
-          txt_location.text = userDetail.location;
-        }
-      }
-    }
+    txt_location = (UITextField*)[cell viewWithTag:101];
+    txt_location.text = userDetail.location;
+    [txt_location addTarget:self
+                      action:@selector(validateFields:)
+            forControlEvents:UIControlEventEditingChanged];
     
   }
   
@@ -266,19 +443,8 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                                     reuseIdentifier:cellIdentifier];
     }
     
-    for (UIView *view in  cell.contentView.subviews){
-      
-      if ([view isKindOfClass:[UIImageView class]]){
-        
-        UIImageView *imageView = (UIImageView *)view;
-        
-        if (imageView.tag == 101) {
-          img_headerBG = imageView;
-          //img_headerBG.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:userDetail.headerPhotoURL]]];
-          [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"]];
-        }
-      }
-    }
+    img_headerBG = (UIImageView*)[cell viewWithTag:101];
+    [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"headerImage"]];
   }
   
   else if(indexPath.section == SECTION_BIRTHDAY){
@@ -290,21 +456,13 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                                     reuseIdentifier:cellIdentifier];
     }
     
-    for (UIView *view in  cell.contentView.subviews){
-      
-      if ([view isKindOfClass:[UITextField class]]){
-        
-        UITextField *txtField = (UITextField *)view;
-        
-        if (txtField.tag == 101) {
-          txt_birthday = txtField;
-          txt_birthday.text = userDetail.dob;
-          
-          [self setDobTextFieldWithInputView];
-        }
-      }
-    }
+    txt_birthday = (UITextField*)[cell viewWithTag:101];
+    txt_birthday.text = userDetail.dob;
+    [txt_birthday addTarget:self
+                     action:@selector(validateFields:)
+           forControlEvents:UIControlEventEditingChanged];
     
+    [self setDobTextFieldWithInputView];
   }
   
   else if(indexPath.section == SECTION_GENDER){
@@ -316,18 +474,13 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                                     reuseIdentifier:cellIdentifier];
     }
     
-    for (UIView *view in  cell.contentView.subviews){
-      
-      if ([view isKindOfClass:[UITextField class]]){
-        
-        UITextField *txtField = (UITextField *)view;
-        
-        if (txtField.tag == 101) {
-          txt_gender = txtField;
-          txt_gender.text = userDetail.gender;
-        }
-      }
-    }
+    txt_gender = (UITextField*)[cell viewWithTag:101];
+    txt_gender.text = userDetail.gender;
+    [txt_gender addTarget:self
+                      action:@selector(validateFields:)
+            forControlEvents:UIControlEventEditingChanged];
+    txt_gender.enabled = NO;
+
   }
   
   return cell;
@@ -335,15 +488,134 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected section-->>>%d", (int)indexPath.section);
-  if (indexPath.section == SECTION_BIRTHDAY) {
+  
+  if (indexPath.section == SECTION_HEADER_BACKGROUND) {
     
-    
+    [self.view endEditing:YES];
+    isEditingProfilePic = NO;
+    [self showEditingPictureOptions];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
   }
+  
   else if (indexPath.section == SECTION_GENDER) {
     
+    [self.view endEditing:YES];
+    [self performSelector:@selector(showGenderSelection) withObject:nil afterDelay:0];
   }
 }
+
+
+#pragma mark - ImagePicker delegate methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  [picker dismissViewControllerAnimated:YES completion:^{
+    UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
+    imageCropVC.delegate = self;
+    
+    if (!isEditingProfilePic) {
+      
+      imageCropVC.cropMode = RSKImageCropModeCustom;
+      imageCropVC.dataSource = self;
+    }
+    
+    //[self.navigationController pushViewController:imageCropVC animated:YES];
+    [self presentViewController:imageCropVC animated:YES completion:nil];
+    
+    [self customizeCropViewUI:imageCropVC];
+  }];
+}
+
+
+#pragma mark - RSKImageCropViewControllerDatasource
+
+// Returns a custom rect for the mask.
+- (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
+{
+  CGSize maskSize;
+  maskSize = CGSizeMake(350, 250);
+  
+  
+  CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
+  CGFloat viewHeight = CGRectGetHeight(controller.view.frame);
+  
+  CGRect maskRect = CGRectMake((viewWidth - maskSize.width) * 0.5f,
+                               (viewHeight - maskSize.height) * 0.5f,
+                               maskSize.width,
+                               maskSize.height);
+  
+  return maskRect;
+}
+
+// Returns a custom path for the mask.
+- (UIBezierPath *)imageCropViewControllerCustomMaskPath:(RSKImageCropViewController *)controller
+{
+  CGRect rect = controller.maskRect;
+  UIBezierPath *rectangle = [UIBezierPath bezierPathWithRect:rect];
+  
+  return rectangle;
+}
+
+// Returns a custom rect in which the image can be moved.
+- (CGRect)imageCropViewControllerCustomMovementRect:(RSKImageCropViewController *)controller
+{
+  // If the image is not rotated, then the movement rect coincides with the mask rect.
+  return controller.maskRect;
+}
+
+
+
+
+#pragma mark - RSKImageCropViewControllerDelegate
+// Crop image has been canceled.
+- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
+{
+  //[self.navigationController popViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+// The original image has been cropped.
+- (void)imageCropViewController:(RSKImageCropViewController *)controller
+                   didCropImage:(UIImage *)croppedImage
+                  usingCropRect:(CGRect)cropRect
+{
+  //[self.navigationController popViewControllerAnimated:NO];
+  //+kc[self invokeUploadImageAPIWithImage:croppedImage];
+  [self dismissViewControllerAnimated:YES completion:^{
+    if (isEditingProfilePic) {
+      
+      profilePic.image = croppedImage;
+    }
+    else {
+      
+      img_headerBG.image = croppedImage;
+    }
+    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  }];
+}
+
+// The original image has been cropped. Additionally provides a rotation angle used to produce image.
+- (void)imageCropViewController:(RSKImageCropViewController *)controller
+                   didCropImage:(UIImage *)croppedImage
+                  usingCropRect:(CGRect)cropRect
+                  rotationAngle:(CGFloat)rotationAngle
+{
+  //[self.navigationController popViewControllerAnimated:NO];
+  //+kc[self invokeUploadImageAPIWithImage:croppedImage];
+  
+  [self dismissViewControllerAnimated:YES completion:^{
+    if (isEditingProfilePic) {
+      
+      profilePic.image = croppedImage;
+    }
+    else {
+      
+      img_headerBG.image = croppedImage;
+    }
+    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  }];
+}
+
 
 /*
  #pragma mark - Navigation
