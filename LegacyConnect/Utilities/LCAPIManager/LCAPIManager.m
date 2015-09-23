@@ -681,7 +681,7 @@ static LCAPIManager *sharedManager = nil;
     [manager.requestSerializer setTimeoutInterval:5.0];
   [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
-  [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+  AFHTTPRequestOperation *operation = [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
   } success:^(AFHTTPRequestOperation *operation, id responseObject) {
     if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -699,6 +699,10 @@ static LCAPIManager *sharedManager = nil;
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
     failure(error.localizedDescription);
   }];
+  
+//  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+//    NSLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
+//  }];
 }
 
 
