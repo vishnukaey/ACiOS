@@ -287,12 +287,6 @@
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-  if (scrollView == milestonesTable) {
-    NSLog(@"milesstones--->>>");
-  }
-  if (scrollView == interestsTable) {
-    NSLog(@"interestsTable--->>>");
-  }
   float collapseConstant = 0;;
   if (collapseViewHeight.constant>0)
   {
