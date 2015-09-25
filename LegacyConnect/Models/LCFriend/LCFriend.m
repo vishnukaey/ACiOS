@@ -7,7 +7,7 @@
 //
 
 #import "LCFriend.h"
-
+static NSString *kAlreadyFriend = @"Already Friend";
 
 @implementation LCFriend
 
@@ -15,12 +15,21 @@
 {
   return @{
            @"createdAt": @"createdAt",
-           @"userID": @"friendId",
+           @"userID": @"userId",
+           @"friendId": @"friendId",
            @"firstName": @"firstName",
            @"lastName": @"lastName",
            @"avatarURL": @"avatarUrl",
+           @"status" : @"status",
            @"isFriend": @"isFriend"
            };
+}
+
++ (BOOL)isAlreadyFriend:(LCFriend*)friendObj {
+  if ([friendObj.isFriend isEqual:kAlreadyFriend]) {
+    return YES;
+  }
+  return NO;
 }
 
 @end

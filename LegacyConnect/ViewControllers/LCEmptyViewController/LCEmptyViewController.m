@@ -68,6 +68,8 @@
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
          [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
+         [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
+         
          LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
          LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
          navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
