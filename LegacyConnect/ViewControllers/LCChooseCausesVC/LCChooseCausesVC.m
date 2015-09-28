@@ -48,6 +48,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+    [self updatePlaceHolderLabel];
 }
 
 
@@ -64,6 +65,40 @@
     return causes.count;
 }
 
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//  if([collectionView isEqual:_interestsCollectionView])
+//  {
+//  return CGSizeMake(84, 84);
+//  }
+//  else
+//  {
+//    float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
+//    return CGSizeMake(size, size);
+//  }
+//}
+
+- (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  if([collectionView isEqual:_interestsCollectionView])
+  {
+    return CGSizeMake(84, 84);
+  }
+  float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
+  return CGSizeMake(size, size);  // will be w120xh100 or w190x100
+  // if the width is higher, only one image will be shown in a line
+}
+
+#pragma mark collection view cell paddings
+- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+  return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
+  if([collectionView isEqual:_interestsCollectionView])
+  {
+    return 8;
+  }
+  return 0.0;
+}
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -138,6 +173,7 @@
     {
       [selectedItems removeObjectForKey:interest.interestID];
       [causes removeObjectsInArray:interest.causes];
+        [self updatePlaceHolderLabel];
       [self.causesCollectionView reloadData];
       [self.interestsCollectionView reloadData];
     }
@@ -150,6 +186,7 @@
         interest.causes = responses;
         [causes addObjectsFromArray:interest.causes];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+          [self updatePlaceHolderLabel];
         [self.causesCollectionView reloadData];
         [self.interestsCollectionView reloadData];
       } andFailure:^(NSString *error) {
@@ -162,6 +199,26 @@
   }
 }
 
+-(void)updatePlaceHolderLabel
+{
+    if(causes.count > 0)
+    {
+        _placeHolderLabel.hidden =YES;
+    }
+    else
+    {
+        _placeHolderLabel.hidden = NO;
+        if(selectedItems.count > 0)
+        {
+            [_placeHolderLabel setText:NSLocalizedString(@"no_causes_available", @"")];
+        }
+        else
+            
+        {
+            [_placeHolderLabel setText:NSLocalizedString(@"no_interests_selected", @"")];
+        }
+    }
+}
 
 -(IBAction) nextButtonTapped:(id)sender
 {

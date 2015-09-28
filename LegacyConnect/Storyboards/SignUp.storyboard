@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -74,7 +74,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RK-dy-Ksn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg_copy" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homeloginbg" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
@@ -84,12 +84,15 @@
                                             <constraint firstAttribute="height" constant="150" id="HKc-y1-MJB"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium . " textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT3-8f-KV0">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT3-8f-KV0">
                                         <rect key="frame" x="0.0" y="288" width="375" height="90"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="90" id="B0X-Yu-YPZ"/>
                                         </constraints>
+                                        <string key="text">Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Duis
+id augue sagittis, mattis sapien.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -317,7 +320,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5K-n9-vkT">
                                         <rect key="frame" x="0.0" y="45" width="375" height="44"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zyz-P6-1Fv">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zyz-P6-1Fv">
                                                 <rect key="frame" x="20" y="8" width="347" height="28"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
@@ -359,7 +362,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="72M-Jg-vWf">
                                         <rect key="frame" x="0.0" y="135" width="375" height="44"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-s3-JdY">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gtI-s3-JdY">
                                                 <rect key="frame" x="20" y="8" width="347" height="28"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -380,7 +383,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KD4-fi-MKp">
                                         <rect key="frame" x="0.0" y="180" width="375" height="44"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Date of Birth" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jbU-64-S2M">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Birthday" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jbU-64-S2M">
                                                 <rect key="frame" x="20" y="8" width="308" height="28"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -388,7 +391,7 @@
                                                     <outlet property="delegate" destination="sEZ-MI-sW3" id="0A2-tG-xqQ"/>
                                                 </connections>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightChevron" translatesAutoresizingMaskIntoConstraints="NO" id="awk-gk-GZJ">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightChevron" translatesAutoresizingMaskIntoConstraints="NO" id="awk-gk-GZJ">
                                                 <rect key="frame" x="351" y="15" width="8" height="13"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="8" id="0Wu-5b-M6Y"/>
@@ -436,10 +439,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLu-gJ-chA">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUs-Ri-0RD">
-                                        <rect key="frame" x="155" y="31" width="65" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUs-Ri-0RD">
+                                        <rect key="frame" x="153" y="31" width="69" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="65" id="1JZ-am-XxH"/>
+                                            <constraint firstAttribute="width" constant="69" id="1JZ-am-XxH"/>
                                             <constraint firstAttribute="height" constant="21" id="RH7-SI-790"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="16"/>
@@ -569,7 +572,7 @@
                                             <segue destination="P0n-lH-Sgz" kind="push" id="krZ-hL-VvX"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-PH-Ngb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-PH-Ngb">
                                         <rect key="frame" x="150" y="31" width="76" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="76" id="Yhr-Po-a84"/>
@@ -705,6 +708,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvz-Ve-zKO">
+                                <rect key="frame" x="37" y="421" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="RuS-bm-112"/>
+                                    <constraint firstAttribute="height" constant="50" id="maZ-Iu-2Bl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chooseCauses_topBG" translatesAutoresizingMaskIntoConstraints="NO" id="bBB-Kw-8Fs">
                                 <rect key="frame" x="0.0" y="66" width="375" height="226"/>
                                 <constraints>
@@ -717,7 +730,7 @@
                                     <constraint firstAttribute="height" constant="30" id="lKh-yh-1hd"/>
                                 </constraints>
                                 <string key="text">Choose interests you might like, 
-then select some related Causes</string>
+then select a few related causes.</string>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -749,14 +762,14 @@ then select some related Causes</string>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bCn-SR-dJM">
                                                     <rect key="frame" x="4" y="4" width="76" height="76"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy2-3F-lGU">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="cy2-3F-lGU">
                                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wpe-i4-Sda">
                                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
                                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brD-QP-e9v">
+                                                        <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="brD-QP-e9v">
                                                             <rect key="frame" x="0.0" y="0.0" width="76" height="76"/>
                                                             <color key="backgroundColor" red="0.97254901960784312" green="0.76470588235294112" blue="0.24313725490196078" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
@@ -848,9 +861,9 @@ then select some related Causes</string>
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="hLr-BR-roZ">
                                                     <rect key="frame" x="2" y="2" width="101" height="101"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -945,6 +958,8 @@ then select some related Causes</string>
                             <constraint firstItem="jqk-BZ-Sd0" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="9Wl-7x-gqT"/>
                             <constraint firstItem="bBB-Kw-8Fs" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" id="Bjw-aI-H4b"/>
                             <constraint firstItem="ekL-SE-SdJ" firstAttribute="leading" secondItem="KQ0-uO-cD8" secondAttribute="leading" constant="10" id="ERk-rb-BOl"/>
+                            <constraint firstItem="Gvz-Ve-zKO" firstAttribute="centerX" secondItem="EED-pu-HzR" secondAttribute="centerX" id="F6P-4w-uNd"/>
+                            <constraint firstItem="Gvz-Ve-zKO" firstAttribute="centerY" secondItem="EED-pu-HzR" secondAttribute="centerY" id="Lv7-g5-6Vb"/>
                             <constraint firstItem="ekL-SE-SdJ" firstAttribute="top" secondItem="bBB-Kw-8Fs" secondAttribute="bottom" id="Obi-b5-s9D"/>
                             <constraint firstAttribute="centerX" secondItem="JuP-Gg-t3z" secondAttribute="centerX" constant="-4.5" id="Sqy-T8-IYp"/>
                             <constraint firstAttribute="trailing" secondItem="SPR-ea-c07" secondAttribute="trailing" constant="8" id="UhW-Qc-gAp"/>
@@ -971,6 +986,7 @@ then select some related Causes</string>
                         <outlet property="customNavigationHeight" destination="kUj-9c-07W" id="mbS-19-m2q"/>
                         <outlet property="interestsCollectionView" destination="SPR-ea-c07" id="p8m-Wq-r1x"/>
                         <outlet property="nextButton" destination="kiA-vT-V5i" id="p2T-iN-u6O"/>
+                        <outlet property="placeHolderLabel" destination="Gvz-Ve-zKO" id="flg-r0-vyq"/>
                         <outlet property="userImageView" destination="JuP-Gg-t3z" id="Qma-Xs-UC9"/>
                         <segue destination="rX4-yN-9BJ" kind="push" identifier="connectFriends" id="aNy-6t-e6c"/>
                     </connections>
@@ -1111,7 +1127,7 @@ then select some related Causes</string>
                                     <constraint firstItem="IAy-gU-RrU" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="15" id="wlC-As-kR6"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
                                 <rect key="frame" x="138" y="28" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="2Ab-2S-8G8"/>
@@ -1426,7 +1442,7 @@ then select some related Causes</string>
                                             <constraint firstAttribute="height" constant="30" id="ytg-5P-xLg"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
-                                        <state key="normal" title="Forgot password?">
+                                        <state key="normal" title="Forgot Password?">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1518,7 +1534,7 @@ then select some related Causes</string>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_textFieldbg" translatesAutoresizingMaskIntoConstraints="NO" id="Alq-V2-uvY">
                                         <rect key="frame" x="15" y="0.0" width="345" height="88"/>
                                     </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ndh-Ag-J36">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ndh-Ag-J36">
                                         <rect key="frame" x="37" y="10" width="300" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="RRh-ox-Fxf"/>
@@ -1535,7 +1551,7 @@ then select some related Causes</string>
                                             <constraint firstAttribute="height" constant="30" id="6IB-Gh-Res"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <connections>
                                             <outlet property="delegate" destination="zgM-N2-seB" id="i6B-9C-tws"/>
                                         </connections>
@@ -1594,7 +1610,8 @@ then select some related Causes</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email address used for Legacy Connect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-PW-hCj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter your email address
+used for Legacy Connect" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZn-PW-hCj">
                                 <rect key="frame" x="15" y="40" width="345" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="5LA-Qf-n6U"/>
@@ -1678,7 +1695,8 @@ then select some related Causes</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a new password  for your Legacy Connect account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pB-oo-gQQ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a new password 
+for your Legacy Connect account" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8pB-oo-gQQ">
                                 <rect key="frame" x="15" y="40" width="345" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="c5Z-k0-U7k"/>
@@ -1787,6 +1805,7 @@ then select some related Causes</string>
         <image name="chooseCauses_topBG" width="375" height="297"/>
         <image name="contact_plus" width="37" height="37"/>
         <image name="default-placeholder.png" width="250" height="250"/>
+        <image name="homeloginbg" width="375" height="667"/>
         <image name="lc_logo_reg" width="116" height="116"/>
         <image name="login_bg_copy" width="375" height="667"/>
         <image name="login_textFieldbg" width="345" height="88"/>
