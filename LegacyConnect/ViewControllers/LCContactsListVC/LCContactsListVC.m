@@ -106,9 +106,17 @@
 
 - (IBAction)doneButtonAction
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-  LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-  [self.navigationController pushViewController:vc animated:YES];
+  NSArray *selectedMailIDs = contactsTable.selectedIDs;
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager sendFriendRequestFromContacts:selectedMailIDs withSuccess:^(id response) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    [self.navigationController pushViewController:vc animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"%@",error);
+  }];
 }
 
 #pragma mark - UIActionSheet delegate

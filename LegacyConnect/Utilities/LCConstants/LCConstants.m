@@ -17,6 +17,7 @@
 /* Set server to be used */
 #define CURRENT_SERVER QA_SERVER
 
+
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
 NSString *const kBaseURL = @"http://10.3.0.55:8000/";
@@ -51,6 +52,7 @@ NSString *const kAddUsersToEventURL = @"api/event/users";
 NSString *const kForgotPasswordURL = @"api/user/forgotPassword";
 NSString *const kUpdatePasswordURL = @"api/user/resetPassword";
 NSString *const kLogOutURL = @"";
+NSString *const kContactFriendsURL = @"api/user/friends";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -103,6 +105,7 @@ NSString *const kFBAccessTokenKey = @"fbAccessToken";
 NSString *const kUserImageData = @"image";
 NSString *const kUserimageExtension = @"imageExtension";
 NSString *const kPasswordResetCodeKey = @"passwordResetCode";
+NSString *const kContactEmailsKey = @"emails";
 
 NSString *const kEmptyStringValue = @"";
 NSString *const kDefaultDateFormat = @"yyyy-mm-dd";

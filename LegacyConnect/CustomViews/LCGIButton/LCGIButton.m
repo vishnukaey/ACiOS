@@ -42,28 +42,32 @@
 -(void)setUpMenu
 {
   CGSize screenSize = [self superview].frame.size;
+  float sizeDiff = 5;
   activeLayer = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
   [activeLayer setBackgroundImage:[UIImage imageNamed:@"GI_active_layer"] forState:UIControlStateNormal];
   [self.superview addSubview:activeLayer];
   activeLayer.hidden = true;
   [activeLayer addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
   
-  communityButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 10, self.frame.size.width - 10)];
+  communityButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-sizeDiff , self.frame.size.width-sizeDiff )];
   communityButton.center = self.center;
   [[self superview] addSubview:communityButton];
   [communityButton setBackgroundImage:[UIImage imageNamed:@"gi_create_event_button"] forState:UIControlStateNormal];
 
-  postStatusButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 10, self.frame.size.width - 10)];
+  postStatusButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-sizeDiff , self.frame.size.width-sizeDiff )];
   postStatusButton.center = self.center;
   [[self superview] addSubview:postStatusButton];
   [postStatusButton setBackgroundImage:[UIImage imageNamed:@"gi_text_post_button"] forState:UIControlStateNormal];
 
-  postPhotoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 10, self.frame.size.width - 10)];
+  postPhotoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-sizeDiff , self.frame.size.width-sizeDiff )];
   postPhotoButton.center = self.center;
   [[self superview] addSubview:postPhotoButton];
   [postPhotoButton setBackgroundImage:[UIImage imageNamed:@"gi_photo_post_button"] forState:UIControlStateNormal];
 
   
+  postPhotoButton.alpha = 0;
+  postStatusButton.alpha = 0;
+  communityButton.alpha = 0;
   
   [[self superview] bringSubviewToFront:self];
 }
@@ -78,6 +82,9 @@
   sep_ = sep_ - 20;//adjust 10 to show the middle button on the round
   photo_p = CGPointMake(self.center.x - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_, self.center.y - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_);
 
+  postPhotoButton.alpha = 1;
+  postStatusButton.alpha = 1;
+  communityButton.alpha = 1;
   [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:25.0
   options: UIViewAnimationOptionCurveEaseInOut animations:^
         {
@@ -104,6 +111,10 @@
         postPhotoButton.center = self.center;
         postStatusButton.center = self.center;
         menuOpen = false;
+          
+        postPhotoButton.alpha = 0;
+        postStatusButton.alpha = 0;
+        communityButton.alpha = 0;
         }
   completion:^(BOOL finished) {
   //Completion Block
