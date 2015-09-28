@@ -51,18 +51,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
-                                    <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="moX-4w-sux">
-                                        <rect key="frame" x="137" y="50" width="100" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="0zx-JZ-xrl"/>
-                                            <constraint firstAttribute="width" constant="100" id="c6A-6v-qVs"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="riI-wT-TVE">
-                                        <rect key="frame" x="277" y="64" width="65" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="43" id="67z-Ks-Z4y"/>
-                                        </constraints>
+                                        <rect key="frame" x="40" y="65" width="65" height="41"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                         <state key="normal">
                                             <string key="title">0
@@ -75,10 +65,7 @@ FRIENDS</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Qs-Od-1Y6">
-                                        <rect key="frame" x="33" y="64" width="64" height="43"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="43" id="DjJ-vP-VhC"/>
-                                        </constraints>
+                                        <rect key="frame" x="271" y="65" width="64" height="41"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                         <state key="normal">
                                             <string key="title">0
@@ -90,8 +77,27 @@ IMPACTS</string>
                                             <action selector="impactsButtonClicked" destination="R7c-NE-Puc" eventType="touchUpInside" id="O6l-Fi-laI"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kcm-Tc-W3C">
+                                        <rect key="frame" x="135" y="32" width="106" height="106"/>
+                                        <subviews>
+                                            <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="moX-4w-sux">
+                                                <rect key="frame" x="3" y="3" width="100" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="0zx-JZ-xrl"/>
+                                                    <constraint firstAttribute="width" constant="100" id="c6A-6v-qVs"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="moX-4w-sux" firstAttribute="leading" secondItem="Kcm-Tc-W3C" secondAttribute="leading" constant="3" id="boq-6n-SUp"/>
+                                            <constraint firstAttribute="bottom" secondItem="moX-4w-sux" secondAttribute="bottom" constant="3" id="gjh-s3-1AS"/>
+                                            <constraint firstItem="moX-4w-sux" firstAttribute="top" secondItem="Kcm-Tc-W3C" secondAttribute="top" constant="3" id="grA-Oc-4Fa"/>
+                                            <constraint firstAttribute="trailing" secondItem="moX-4w-sux" secondAttribute="trailing" constant="3" id="tJX-GR-ai8"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uGR-xf-bgQ">
-                                        <rect key="frame" x="202" y="115" width="38" height="38"/>
+                                        <rect key="frame" x="204" y="101" width="38" height="38"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="38" id="LSg-BK-uAF"/>
                                             <constraint firstAttribute="height" constant="38" id="f26-iT-OOg"/>
@@ -106,19 +112,19 @@ IMPACTS</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="5Qs-Od-1Y6" firstAttribute="centerY" secondItem="hv9-pK-e80" secondAttribute="centerY" id="5AD-Z9-zus"/>
-                                    <constraint firstItem="riI-wT-TVE" firstAttribute="leading" secondItem="moX-4w-sux" secondAttribute="trailing" constant="40" id="9AD-Po-5xl"/>
-                                    <constraint firstItem="hv9-pK-e80" firstAttribute="centerY" secondItem="riI-wT-TVE" secondAttribute="centerY" id="A8f-l8-6Bx"/>
-                                    <constraint firstItem="moX-4w-sux" firstAttribute="trailing" secondItem="uGR-xf-bgQ" secondAttribute="trailing" constant="-3" id="GN5-E1-Ldi"/>
-                                    <constraint firstItem="moX-4w-sux" firstAttribute="centerY" secondItem="hv9-pK-e80" secondAttribute="centerY" constant="15" id="VLu-5X-e3x"/>
+                                    <constraint firstItem="Kcm-Tc-W3C" firstAttribute="centerY" secondItem="5Qs-Od-1Y6" secondAttribute="centerY" id="3nU-xO-9Gt"/>
+                                    <constraint firstItem="5Qs-Od-1Y6" firstAttribute="leading" secondItem="Kcm-Tc-W3C" secondAttribute="trailing" constant="30" id="PXU-5Z-6By"/>
+                                    <constraint firstAttribute="centerY" secondItem="Kcm-Tc-W3C" secondAttribute="centerY" id="WZ8-W6-48K"/>
+                                    <constraint firstItem="Kcm-Tc-W3C" firstAttribute="leading" secondItem="riI-wT-TVE" secondAttribute="trailing" constant="30" id="Y5n-Wa-2vB"/>
+                                    <constraint firstAttribute="centerX" secondItem="Kcm-Tc-W3C" secondAttribute="centerX" id="ZU9-IL-b2q"/>
                                     <constraint firstItem="hv9-pK-e80" firstAttribute="top" secondItem="j9U-9r-QED" secondAttribute="top" id="arw-Gn-tkE"/>
-                                    <constraint firstItem="moX-4w-sux" firstAttribute="centerX" secondItem="hv9-pK-e80" secondAttribute="centerX" id="cF9-UC-EFN"/>
-                                    <constraint firstItem="moX-4w-sux" firstAttribute="bottom" secondItem="uGR-xf-bgQ" secondAttribute="bottom" constant="-3" id="ccc-J9-J5g"/>
                                     <constraint firstAttribute="bottom" secondItem="hv9-pK-e80" secondAttribute="bottom" id="faL-AN-H93"/>
+                                    <constraint firstItem="Kcm-Tc-W3C" firstAttribute="centerY" secondItem="riI-wT-TVE" secondAttribute="centerY" id="gNS-qg-9Ve"/>
+                                    <constraint firstItem="uGR-xf-bgQ" firstAttribute="leading" secondItem="moX-4w-sux" secondAttribute="trailing" constant="-34" id="jDg-pt-ANb"/>
                                     <constraint firstAttribute="trailing" secondItem="hv9-pK-e80" secondAttribute="trailing" id="pcv-Dn-MsL"/>
+                                    <constraint firstItem="moX-4w-sux" firstAttribute="centerY" secondItem="uGR-xf-bgQ" secondAttribute="centerY" constant="-35" id="u4F-gX-1Ym"/>
                                     <constraint firstAttribute="height" constant="170" id="ubh-6C-xe0"/>
                                     <constraint firstItem="hv9-pK-e80" firstAttribute="leading" secondItem="j9U-9r-QED" secondAttribute="leading" id="xC3-Bc-ss8"/>
-                                    <constraint firstItem="moX-4w-sux" firstAttribute="leading" secondItem="5Qs-Od-1Y6" secondAttribute="trailing" constant="40" id="xE4-j3-8Bv"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vi4-x4-cdn">
@@ -321,6 +327,7 @@ IMPACTS</string>
                         <outlet property="mileStonesButton" destination="qF5-c5-j3e" id="h8C-H6-hZN"/>
                         <outlet property="milestonesTable" destination="wWo-lz-r7z" id="AEy-bb-FCo"/>
                         <outlet property="profilePic" destination="moX-4w-sux" id="t8x-yG-q1z"/>
+                        <outlet property="profilePicBorderView" destination="Kcm-Tc-W3C" id="Ee3-2W-5Mg"/>
                         <outlet property="tabMenuContainer" destination="xTW-Ak-bXz" id="AFS-M2-GMg"/>
                         <outlet property="userNameLabel" destination="73e-Pq-r0a" id="8cG-R7-5M4"/>
                         <outlet property="viewToCollapse" destination="j9U-9r-QED" id="UTS-og-HEF"/>

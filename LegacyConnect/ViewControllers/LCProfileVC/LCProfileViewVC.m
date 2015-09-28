@@ -26,8 +26,7 @@
   milestonesTable.rowHeight = UITableViewAutomaticDimension;
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
-  profilePic.layer.borderWidth = 3.0f;
-  profilePic.layer.borderColor = [[UIColor colorWithRed:247.0f/255.0 green:247.0f/255.0 blue:247.0f/255.0 alpha:0.5] CGColor];
+  profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
   friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
