@@ -33,7 +33,7 @@
   [super viewDidLoad];
   selectedContacts = [[NSMutableArray alloc] init];
   [_friendsTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
-  [self.navigationController setNavigationBarHidden:NO];
+  [self.navigationController setNavigationBarHidden:YES];
   //request permission for accessing the friends list of the user. No need to ask permission everytime. Should store the status once the permission is granted and avoid this step from next access
   if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"user_friends"])
   {
@@ -169,5 +169,13 @@
   }
 }
 
+- (IBAction)doneButtonTapped:(id)sender
+{
+  [LCAPIManager sendFriendRequestToFBFriends:selectedContacts withSuccess:^(id response) {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
+}
 
 @end
