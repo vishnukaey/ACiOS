@@ -175,6 +175,13 @@
   return 93;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCInviteFromContactsCell *cell = (LCInviteFromContactsCell *)[tableView cellForRowAtIndexPath:indexPath];
+  UIButton *checkbutton = cell.checkButton;
+  [self checkbuttonAction:checkbutton];
+}
+
 /*
 #pragma mark - Navigation
 
