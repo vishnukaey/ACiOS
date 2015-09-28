@@ -148,12 +148,17 @@
 
 - (IBAction)signInButtonClicked:(id)sender
 {
-  [LCDataManager sharedDataManager].userToken = @"d3cc6a2b6ac3ef5100b31dbac2ab13e18e19589114da0165e06948a00181b5a3d5eca53c30f2da96a680e5bf709d0e64";
-  LCConnectFriendsVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"connectFriends"];
-  [self.navigationController pushViewController:loginVC animated:YES];
-  
-//  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+//#if DEBUG
+//  //testing community
+//  [LCDataManager sharedDataManager].userToken = @"d3cc6a2b6ac3ef5100b31dbac2ab13e18e19589114da0165e06948a00181b5a3d5eca53c30f2da96a680e5bf709d0e64";
+//  LCConnectFriendsVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"connectFriends"];
 //  [self.navigationController pushViewController:loginVC animated:YES];
+//  return;
+//#endif
+ 
+  
+  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+  [self.navigationController pushViewController:loginVC animated:YES];
 }
 
 @end
