@@ -16,7 +16,7 @@
 {
   self.feedObject = feed;
   NSString  *userName = [NSString stringWithFormat:@"%@ %@", feed.firstName, feed.lastName];
-  NSString *cause = feed.entityName;
+  NSString *cause = feed.interestName;
   NSString *time_ = feed.createdAt;
   NSString *thanks_ = feed.likeCount;
   NSString *comments_ = feed.commentCount;
