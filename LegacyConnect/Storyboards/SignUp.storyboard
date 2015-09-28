@@ -1184,7 +1184,7 @@ then select a few related causes.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wwW-fm-I2n" customClass="LCMultipleSelectionTable">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wwW-fm-I2n" customClass="LCMultipleSelectionTable">
                                 <rect key="frame" x="0.0" y="65" width="375" height="602"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1405,8 +1405,8 @@ then select a few related causes.</string>
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="k10-0f-gjj" customClass="LCMultipleSelectionTable">
-                                <rect key="frame" x="0.0" y="45" width="375" height="622"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="k10-0f-gjj" customClass="LCMultipleSelectionTable">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCFBContactsCell" rowHeight="93" id="4rt-vB-gIN" customClass="LCFBContactsCell">
@@ -1423,15 +1423,16 @@ then select a few related causes.</string>
                                                         <constraint firstAttribute="width" constant="63" id="trd-CT-vRl"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-Za-2DS">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-Za-2DS">
                                                     <rect key="frame" x="322" y="27" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="PW4-dC-sO4"/>
                                                         <constraint firstAttribute="width" constant="38" id="ZfE-xe-Zs1"/>
                                                     </constraints>
-                                                    <state key="normal" image="contact_plus">
+                                                    <state key="normal" backgroundImage="contact_plus">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <state key="selected" backgroundImage="contact_tick"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jOk-Ji-gHM">
                                                     <rect key="frame" x="86" y="52" width="228" height="20"/>
@@ -1520,7 +1521,7 @@ then select a few related causes.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="owd-PY-Dzl" firstAttribute="leading" secondItem="vEI-wu-ZXT" secondAttribute="leading" id="37J-tJ-3xu"/>
-                            <constraint firstItem="k10-0f-gjj" firstAttribute="top" secondItem="owd-PY-Dzl" secondAttribute="bottom" constant="-20" id="b9r-aw-972"/>
+                            <constraint firstItem="k10-0f-gjj" firstAttribute="top" secondItem="owd-PY-Dzl" secondAttribute="bottom" constant="-65" id="b9r-aw-972"/>
                             <constraint firstItem="k10-0f-gjj" firstAttribute="leading" secondItem="vEI-wu-ZXT" secondAttribute="leading" id="bb8-8m-0gg"/>
                             <constraint firstAttribute="trailing" secondItem="k10-0f-gjj" secondAttribute="trailing" id="jYL-e4-M2d"/>
                             <constraint firstAttribute="trailing" secondItem="owd-PY-Dzl" secondAttribute="trailing" id="nHV-28-w92"/>
@@ -1931,6 +1932,7 @@ then select a few related causes.</string>
         <image name="backButton_image" width="12" height="21"/>
         <image name="chooseCauses_topBG" width="375" height="297"/>
         <image name="contact_plus" width="37" height="37"/>
+        <image name="contact_tick" width="37" height="37"/>
         <image name="default-placeholder.png" width="250" height="250"/>
         <image name="homeloginbg" width="375" height="667"/>
         <image name="lc_logo_reg" width="116" height="116"/>

@@ -12,6 +12,7 @@
 @interface LCContact : NSObject
 
 @property(nonatomic, retain)NSString * P_name;
+@property(nonatomic, retain)NSString * P_id;
 @property(nonatomic, retain)NSString * P_address;
 @property(nonatomic, retain)UIImage * P_image;
 @property(nonatomic, retain)NSString * P_imageURL;

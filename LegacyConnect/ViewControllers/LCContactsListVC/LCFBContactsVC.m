@@ -24,12 +24,16 @@
 
 
 @implementation LCFBContactsVC
+{
+  NSMutableArray *selectedContacts;
+}
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  selectedContacts = [[NSMutableArray alloc] init];
+  [_friendsTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
   [self.navigationController setNavigationBarHidden:NO];
-
   //request permission for accessing the friends list of the user. No need to ask permission everytime. Should store the status once the permission is granted and avoid this step from next access
   if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"user_friends"])
   {
@@ -63,6 +67,7 @@
 
 -(void)getFacebookFriendsList
 {
+  [MBProgressHUD showHUDAddedTo:_friendsTable animated:YES];
   //get the friends list
   NSDictionary *params1 = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString],@"fields": @"id,name,picture.type(large)"
   };
@@ -79,14 +84,17 @@
       {
         LCContact * con = [[LCContact alloc] init];
         con.P_name = [[friendsArray objectAtIndex:i] valueForKey:@"name"];
+        con.P_id = [[friendsArray objectAtIndex:i] valueForKey:@"id"];
         con.P_imageURL = [[[[friendsArray objectAtIndex:i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
         [finalFriendsArray addObject:con];
          [self.friendsTable reloadData];
       }
+      [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
     }
     else
     {
       NSLog(@"error-->>>%@", error);
+      [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
       // Handle the result
     }
   }];
@@ -124,9 +132,19 @@
   cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
   cell.conatctPhotoView.clipsToBounds = YES;
   [cell.conatctPhotoView sd_setImageWithURL:[NSURL URLWithString:con.P_imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
   cell.contactNameLabel.text = con.P_name;
+  if([selectedContacts containsObject:con.P_id])
+  {
+    [cell.checkButton setSelected:YES];
+  }
+  else
+  {
+    [cell.checkButton setSelected:NO];
+  }
   return cell;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -136,6 +154,19 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  
+  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
+  LCFBContactsCell *cell = (LCFBContactsCell*)[_friendsTable cellForRowAtIndexPath:indexPath];
+  if([selectedContacts containsObject:con.P_id])
+  {
+    [cell.checkButton setSelected:NO];
+    [selectedContacts removeObject:con.P_id];
+  }
+  else
+  {
+    [cell.checkButton setSelected:YES];
+    [selectedContacts addObject:con.P_id];
+  }
 }
 
 

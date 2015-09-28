@@ -53,6 +53,7 @@ NSString *const kForgotPasswordURL = @"api/user/forgotPassword";
 NSString *const kUpdatePasswordURL = @"api/user/resetPassword";
 NSString *const kLogOutURL = @"";
 NSString *const kContactFriendsURL = @"api/user/friends";
+NSString *const kFBContactFriendsURL = @"api/user/fbFriends";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -100,6 +101,7 @@ NSString *const kAccessTokenKey = @"accessToken";
 NSString *const kPasswordKey = @"password";
 NSString *const kDobKey = @"dob";
 NSString *const kFBUserIDKey = @"fbUid";
+NSString *const kFBIDsKey = @"fbIds";
 NSString *const kFBAvatarImageUrlKey = @"avatarUrl";
 NSString *const kFBAccessTokenKey = @"fbAccessToken";
 NSString *const kUserImageData = @"image";
