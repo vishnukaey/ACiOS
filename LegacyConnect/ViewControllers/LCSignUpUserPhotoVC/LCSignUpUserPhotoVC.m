@@ -49,6 +49,10 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+  /**
+   * When a Imagepicker is displayed the status bar appearance style is changed to nil Hence we applied this fix.
+   */
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)didReceiveMemoryWarning {

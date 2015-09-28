@@ -18,6 +18,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:30];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
@@ -35,7 +36,7 @@
   }
   else
   {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
   }
 }
 
@@ -49,6 +50,7 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
     
@@ -68,7 +70,7 @@
   }
   else
   {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
   }
 }
 
