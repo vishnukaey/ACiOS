@@ -14,6 +14,7 @@
 @property(nonatomic, retain)NSString * P_name;
 @property(nonatomic, retain)NSString * P_address;
 @property(nonatomic, retain)UIImage * P_image;
+@property(nonatomic, retain)NSString * P_imageURL;
 @property(nonatomic, retain)NSArray *P_numbers;
 @property(nonatomic, retain)NSArray * P_emails;
 
