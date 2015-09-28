@@ -26,8 +26,7 @@
   milestonesTable.rowHeight = UITableViewAutomaticDimension;
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
-  profilePic.layer.borderWidth = 3.0f;
-  profilePic.layer.borderColor = [[UIColor colorWithRed:247.0f/255.0 green:247.0f/255.0 blue:247.0f/255.0 alpha:0.5] CGColor];
+  profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
   friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
   impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -92,57 +91,46 @@
   }
   else
   {
-    backButton.hidden = false;
-    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
+    backButton.hidden = NO;
+    [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
     currentProfileState = PROFILE_OTHER_NON_FRIEND;
   }
-  //  userDetail.userID = @"6875";
+  
   NSLog(@"userID<<<-->>>%@", userDetail.userID);
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     userDetail = response;
-    NSLog(@"%@",response);
-    
-    [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    NSLog(@"user details - %@",response);
+  
     userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]];
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
-                              [LCUtilityManager performNullCheckAndSetValue:userDetail.activationDate]];
+                              [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
     locationLabel.text = [NSString stringWithFormat:@"%@ . %@ . %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.dob],
+                          [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.location]];
     
-    if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
-    {
-      [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
-      currentProfileState = PROFILE_OTHER_WAITING;
-    }
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                  placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
+                       placeholderImage:[UIImage imageNamed:@"headerImage"]];
     
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
+  
+  
+  if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
+  {
+    [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
+    currentProfileState = PROFILE_OTHER_WAITING;
+  }
 }
 
 - (void)addTabMenu
 {
-  UIFont *buttonFont = [UIFont fontWithName:@"Gotham-Bold" size:12];
-  
-  UIButton *mileStonesButton = [[UIButton alloc]  initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [mileStonesButton setTitle:@"MILESTONES" forState:UIControlStateNormal];
-  [mileStonesButton addTarget:self action:@selector(mileStonesClicked:) forControlEvents:UIControlEventTouchUpInside];
-  mileStonesButton.titleLabel.font = buttonFont;
-  
-  UIButton *interestsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [interestsButton setTitle:@"INTERESTS" forState:UIControlStateNormal];
-  [interestsButton addTarget:self action:@selector(interestClicked:) forControlEvents:UIControlEventTouchUpInside];
-  interestsButton.titleLabel.font = buttonFont;
-  
-  UIButton *actionsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [actionsButton setTitle:@"ACTIONS" forState:UIControlStateNormal];
-  actionsButton.titleLabel.font = buttonFont;
   
   LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [tabMenuContainer addSubview:tabmenu];
@@ -164,7 +152,7 @@
   
   //  tabmenu.layer.borderWidth = 3;
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, actionsButton, nil];
-  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsTable, actionsView, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsTable, actionsTable, nil];
   
   tabmenu.highlightColor = [UIColor colorWithRed:239.0f/255.0 green:100.0f/255.0 blue:77.0f/255.0 alpha:1.0];
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
@@ -235,16 +223,21 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
--(IBAction)mileStonesClicked:(id)sender
+- (IBAction)mileStonesClicked:(id)sender
 {
   [self loadMileStones];
 }
 
--(IBAction)interestClicked:(id)sender
+- (IBAction)interestsClicked:(id)sender
 {
-  NSLog(@"interest clicked----->");
   [self loadInterests];
 }
+
+- (IBAction)actionsClicked:(id)sender
+{
+  
+}
+
 
 - (IBAction)editClicked:(UIButton *)sender
 {
@@ -260,21 +253,36 @@
   }
   else if (currentProfileState == PROFILE_OTHER_FRIEND)
   {
-    [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
-    currentProfileState = PROFILE_OTHER_NON_FRIEND;
-    NSLog(@"remove friend-->>");
-  }
-  else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
-  {
-    NSLog(@"send friend request-->>");
+    //remove friend
     LCFriend *friend = [[LCFriend alloc] init];
     friend.userID = userDetail.userID;
     friend.firstName = userDetail.firstName;
     friend.lastName = userDetail.lastName;
     friend.avatarURL = userDetail.avatarURL;
+    
+    [LCAPIManager removeFried:friend withSuccess:^(NSArray *response)
+    {
+      NSLog(@"%@",response);
+      [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    }
+    andFailure:^(NSString *error)
+    {
+      NSLog(@"%@",error);
+    }];
+  }
+  else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
+  {
+    //send friend request
+    LCFriend *friend = [[LCFriend alloc] init];
+    friend.userID = userDetail.userID;
+    friend.firstName = userDetail.firstName;
+    friend.lastName = userDetail.lastName;
+    friend.avatarURL = userDetail.avatarURL;
+    
     [LCAPIManager sendFriendRequest:friend withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
-      [editButton setImage:[UIImage imageNamed:@"profileWaiting.png"] forState:UIControlStateNormal];
+      [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
       currentProfileState = PROFILE_OTHER_WAITING;
     } andFailure:^(NSString *error) {
       NSLog(@"%@",error);
@@ -282,19 +290,20 @@
   }
   else if (currentProfileState == PROFILE_OTHER_WAITING)
   {
-    NSLog(@"cancel invitation-->>");
+    //cancel friend request
     LCFriend *friend = [[LCFriend alloc] init];
     friend.userID = userDetail.userID;
     friend.firstName = userDetail.firstName;
     friend.lastName = userDetail.lastName;
     friend.avatarURL = userDetail.avatarURL;
-    //    [LCAPIManager ca:friend withSuccess:^(NSArray *response) {
-    //      NSLog(@"%@",response);
-    //      [editButton setImage:[UIImage imageNamed:@"profileAdd.png"] forState:UIControlStateNormal];
-    //      currentProfileState = PROFILE_OTHER_NON_FRIEND;
-    //    } andFailure:^(NSString *error) {
-    //      NSLog(@"%@",error);
-    //    }];
+    
+    [LCAPIManager cancelFriendRequest:friend withSuccess:^(NSArray *response) {
+      NSLog(@"%@",response);
+      [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_NON_FRIEND;
+    } andFailure:^(NSString *error) {
+      NSLog(@"%@",error);
+    }];
   }
 }
 
@@ -325,10 +334,6 @@
 
 
 #pragma mark - TableView delegates
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;    //count of section
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
@@ -337,6 +342,9 @@
   }
   else if (tableView == interestsTable) {
     return interestsArray.count;
+  }
+  else if (tableView == actionsTable) {
+    return 5;
   }
   
   return 0;
@@ -361,29 +369,42 @@
     return cell;
     
   }
-  else {
+  else if (tableView == interestsTable){
     
-    static NSString *MyIdentifier = @"interestsCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    static NSString *MyIdentifier = @"LCInterestsCell";
+    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil)
     {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+
     }
     
     LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
     
-    UIImageView *interestLogo = (UIImageView*)[cell viewWithTag:101];
-    [interestLogo sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"headerImage"]];
-    
-    UILabel *interestNameLabel = (UILabel*)[cell viewWithTag:102];
-    interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
-    
-    UILabel *interestFollowLabel = (UILabel*)[cell viewWithTag:103];
-    interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",
-                                [LCUtilityManager performNullCheckAndSetValue:interstObj.followers]];
-  
+    cell.interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
+    cell.interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",
+                                     [LCUtilityManager performNullCheckAndSetValue:interstObj.followers]];
+    [cell.interestsBG sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge]
+                        placeholderImage:[UIImage imageNamed:@"headerImage"]];
+
     return cell;
   }
+  
+  else if (tableView == actionsTable){
+    
+    static NSString *MyIdentifier = @"LCActionsCell";
+    LCActionsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+    }
+
+    return cell;
+  }
+  
+  return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

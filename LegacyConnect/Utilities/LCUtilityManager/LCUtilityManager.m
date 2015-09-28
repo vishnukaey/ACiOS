@@ -100,6 +100,22 @@
   return timeStampString;
 }
 
++ (NSString *)getAgeFromTimeStamp:(NSString *)timeStamp
+{
+  NSString *age = kEmptyStringValue;
+  if (![[self performNullCheckAndSetValue:timeStamp] isEqualToString:kEmptyStringValue] && ![timeStamp isEqualToString:@"0"])
+  {
+    NSDate *dob = [NSDate dateWithTimeIntervalSince1970:timeStamp.longLongValue/1000];
+    NSDate* now = [NSDate date];
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar]
+                                     components:NSCalendarUnitYear
+                                     fromDate:dob
+                                     toDate:now
+                                     options:0];
+    age = [NSString stringWithFormat: @"%ld", [ageComponents year]];
+  }
+  return age;
+}
 
 + (NSString *)encodeToBase64String:(NSString *)string
 {
@@ -123,6 +139,21 @@
   }
 }
 
++ (BOOL)validatePassword:(NSString*)passwordString
+{
+  BOOL isValid = NO;
+  if (passwordString.length>7) {
+    isValid = YES;
+  }
+  if(isValid)
+  {
+    return YES;
+  }
+  else
+  {
+    return NO;
+  }
+}
 
 + (NSString *)decodeFromBase64String:(NSString *)string
 {

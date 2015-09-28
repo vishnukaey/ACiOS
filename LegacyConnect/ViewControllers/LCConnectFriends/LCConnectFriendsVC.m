@@ -23,6 +23,8 @@
 {
   [super viewDidLoad];
   self.imageView.layer.cornerRadius = self.imageView.frame.size.width / 2;
+  self.imageView.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.imageView.layer.borderWidth = 3;
   findInContactsButton.layer.cornerRadius = 5;
   facebookButtonContainer.layer.cornerRadius = 5;
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];

@@ -12,6 +12,7 @@
 
 #define QA_SERVER 0
 #define DEV_SERVER 1
+#define STAGING_SERVER 2
 
 /* Set server to be used */
 #define CURRENT_SERVER QA_SERVER
@@ -22,8 +23,12 @@
 NSString *const kBaseURL = @"http://10.3.0.55:8000/";
 
 #elif CURRENT_SERVER == DEV_SERVER
-///* staging url */
+///* Development url */
 NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
+
+#elif CURRENT_SERVER == STAGING_SERVER
+///* Staging url */
+NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 
 #endif
 
@@ -41,6 +46,7 @@ NSString *const kFriendsURL = @"api/user/friend";
 NSString *const kEventsURL = @"api/event";
 NSString *const kRejectFriendURL = @"api/user/friend/decline";
 NSString *const kAcceptFriendURL = @"api/user/friend/accept";
+NSString *const kCancelFriendURL = @"api/user/friend/cancel";
 NSString *const kUnfollowEventURL = @"api/event/unfollow";
 NSString *const kFollowEventURL = @"api/event/follow";
 NSString *const kAddUsersToEventURL = @"api/event/users";

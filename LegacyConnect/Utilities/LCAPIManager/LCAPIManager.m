@@ -39,6 +39,7 @@ static LCAPIManager *sharedManager = nil;
        }
        else
        {
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
@@ -314,6 +315,57 @@ static LCAPIManager *sharedManager = nil;
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
   NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Friend request sent %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)cancelFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kCancelFriendURL];
+  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Friend request cancelled \n %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+  
+}
+
++ (void)removeFried:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
+  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
@@ -722,9 +774,10 @@ static LCAPIManager *sharedManager = nil;
   NSDictionary *parameters = @{kUserIDKey: userID};
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:5.0];
   [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
-  [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+  AFHTTPRequestOperation *operation = [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
     [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
   } success:^(AFHTTPRequestOperation *operation, id responseObject) {
     if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -738,8 +791,14 @@ static LCAPIManager *sharedManager = nil;
       success(responseObject);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    failure(error.localizedRecoverySuggestion);
+      NSLog(@"%@",error);
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+    failure(error.localizedDescription);
   }];
+  
+//  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+//    NSLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
+//  }];
 }
 
 
