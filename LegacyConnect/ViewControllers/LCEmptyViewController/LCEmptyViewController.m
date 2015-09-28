@@ -111,7 +111,7 @@
 {
   //global impact button
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 50, 50)];
+  giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 56, 56)];
   [appdel.window addSubview:giButton];
   [giButton setUpMenu];
   giButton.communityButton.tag = 0;
@@ -154,34 +154,34 @@
   [mainContainer setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
-  [appdel.GIButton setHidden:YES];
-  if (sender.tag == 1)
-  {
-    [appdel.menuButton setHidden:YES];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
-    [navigationRoot pushViewController:vc animated:YES];
-  }
-  else if (sender.tag == 2)
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-    createPostVC = [sb instantiateInitialViewController];
-
-    createPostVC.delegate = self;
-    giButton.hidden = YES;
-    menuButton.hidden = YES;
-    CGRect frame = createPostVC.view.frame;
-    frame.origin.y = 20;
-    createPostVC.view.frame = frame;
-    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-  }
-  else
-  {
-    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-    [view setBackgroundColor:[UIColor blackColor]];
-    [mainContainer.view addSubview:view];
-  }
+//  [appdel.GIButton setHidden:YES];
+//  if (sender.tag == 1)
+//  {
+//    [appdel.menuButton setHidden:YES];
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+//    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+//    [navigationRoot pushViewController:vc animated:YES];
+//  }
+//  else if (sender.tag == 2)
+//  {
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+//    createPostVC = [sb instantiateInitialViewController];
+//
+//    createPostVC.delegate = self;
+//    giButton.hidden = YES;
+//    menuButton.hidden = YES;
+//    CGRect frame = createPostVC.view.frame;
+//    frame.origin.y = 20;
+//    createPostVC.view.frame = frame;
+//    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+//  }
+//  else
+//  {
+//    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
+//    [view setBackgroundColor:[UIColor blackColor]];
+//    [mainContainer.view addSubview:view];
+//  }
   
 }
 
