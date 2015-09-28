@@ -240,10 +240,10 @@
             
             contact_.P_numbers = phoneNumbers;
             
-            if (contact_.P_numbers.count == 0) {
-                continue;
-            }
-            
+//            if (contact_.P_numbers.count == 0) {
+//                continue;
+//            }
+          
             //get Contact email
             NSMutableArray *contactEmails = [NSMutableArray new];
             ABMultiValueRef multiEmails = ABRecordCopyValue(person, kABPersonEmailProperty);
@@ -266,7 +266,17 @@
             if (contact_.P_emails.count == 0) {
                 continue;
             }
+          
+          //get location
+          contact_.P_address = @"";
+          ABMultiValueRef addressRef = ABRecordCopyValue(person, kABPersonAddressProperty);
+          if (ABMultiValueGetCount(addressRef) > 0) {
+            NSDictionary *addressDict = (__bridge NSDictionary *)ABMultiValueCopyValueAtIndex(addressRef, 0);
             
+            contact_.P_address = [NSString stringWithFormat:@"%@",[addressDict objectForKey:(NSString *)kABPersonAddressCityKey]];
+           
+          }
+          CFRelease(addressRef);
             [items addObject:contact_];
             
 #ifdef DEBUG
