@@ -340,12 +340,9 @@
   if (tableView == milestonesTable) {
     return mileStoneFeeds.count;
   }
-  else if (tableView == interestsTable) {
-    return interestsArray.count;
-  }
-  else if (tableView == actionsTable) {
-    return 5;
-  }
+  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+  cell.interestNameLabel.text = interstObj.name;
+  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
   
   return 0;
 }

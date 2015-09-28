@@ -9,7 +9,7 @@
 #import "LCUpdatePasswordViewController.h"
 #import "LCLoginViewController.h"
 
-static NSString * kResetPasswordTitle = @"RESET PASSWORD";
+static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
 
 @interface LCUpdatePasswordViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *updateButton;
@@ -87,7 +87,15 @@ static NSString * kResetPasswordTitle = @"RESET PASSWORD";
 #pragma mark - IBAction implementation
 - (IBAction)updatePasswordButtonClicked:(id)sender
 {
-  if ([_confirmPasswordTextField.text isEqualToString:_passwordTextField.text])
+  if(![LCUtilityManager validatePassword:self.passwordTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_password", @"")];
+  }
+  else if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"password_mismatch", @"")];
+  }
+  else
   {
     [LCAPIManager resetPasswordWithPasswordResetCode:self.token andNewPassword:_confirmPasswordTextField.text withSuccess:^(id response) {
       [_delegate updatePasswordSuccessful];
@@ -95,10 +103,7 @@ static NSString * kResetPasswordTitle = @"RESET PASSWORD";
       NSLog(@"error");
     }];
   }
-  else
-  {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"password mistach"];
-  }
+
 }
 
 

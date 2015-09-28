@@ -12,18 +12,22 @@
 
 #define QA_SERVER 0
 #define DEV_SERVER 1
+#define STAGING_SERVER 2
 
 /* Set server to be used */
 #define CURRENT_SERVER QA_SERVER
-
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
 NSString *const kBaseURL = @"http://10.3.0.55:8000/";
 
 #elif CURRENT_SERVER == DEV_SERVER
-///* staging url */
+///* Development url */
 NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
+
+#elif CURRENT_SERVER == STAGING_SERVER
+///* Staging url */
+NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 
 #endif
 
