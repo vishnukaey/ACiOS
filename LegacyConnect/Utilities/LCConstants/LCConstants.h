@@ -90,6 +90,7 @@ extern NSString *const kCommentsfeedCellID;
 
 extern NSString *const kFeedCellActionLike;
 extern NSString *const kFeedCellActionComment;
+extern NSString *const kFeedCellActionMore;
 extern NSString *const kFeedCellActionImage;
 
 extern NSString *const kFeedTagTypeCause;

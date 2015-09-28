@@ -10,13 +10,13 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LCFeedCellView
-@synthesize delegate, feedObject;
+@synthesize delegate, feedObject, moreButton;
 
 - (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
 {
   self.feedObject = feed;
   NSString  *userName = [NSString stringWithFormat:@"%@ %@", feed.firstName, feed.lastName];
-  NSString *cause = feed.entityName;
+  NSString *cause = feed.interestName;
   NSString *time_ = feed.createdAt;
   NSString *thanks_ = feed.likeCount;
   NSString *comments_ = feed.commentCount;
@@ -121,6 +121,11 @@
 - (IBAction)imageFullscreenAction
 {
   [delegate feedCellActionWithType:kFeedCellActionImage andFeed:feedObject];
+}
+
+- (IBAction)moreButtonAction
+{
+  [delegate feedCellActionWithType:kFeedCellActionMore andFeed:feedObject];
 }
 
 /* use thi code if need to get the view by code

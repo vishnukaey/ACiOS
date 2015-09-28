@@ -14,7 +14,7 @@
 #define DEV_SERVER 1
 
 /* Set server to be used */
-#define CURRENT_SERVER DEV_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -108,6 +108,7 @@ NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
 NSString *const kFeedCellActionLike = @"feedCellLike";
 NSString *const kFeedCellActionComment = @"feedCellComment";
+NSString *const kFeedCellActionMore = @"feedCellmore";
 NSString *const kFeedCellActionImage = @"feedCellImage";
 
 NSString *const kFeedTagTypeCause = @"cause";
