@@ -193,19 +193,8 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
       originalImage = img_headerBG.image;
     }
     
-    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
-    imageCropVC.delegate = self;
+    [self showImageCropViewWithImage:originalImage];
     
-    if (!isEditingProfilePic) {
-      
-      imageCropVC.cropMode = RSKImageCropModeCustom;
-      imageCropVC.dataSource = self;
-    }
-    
-    //[self.navigationController pushViewController:imageCropVC animated:YES];
-    [self presentViewController:imageCropVC animated:YES completion:nil];
-    
-    [self customizeCropViewUI:imageCropVC];
   }];
   [actionSheet addAction:editAction];
   
@@ -256,6 +245,23 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   [actionSheet addAction:cancelAction];
   
   [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+
+- (void) showImageCropViewWithImage:(UIImage *)image {
+  
+  RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
+  imageCropVC.delegate = self;
+  
+  if (!isEditingProfilePic) {
+    
+    imageCropVC.cropMode = RSKImageCropModeCustom;
+    imageCropVC.dataSource = self;
+  }
+  
+  //[self.navigationController pushViewController:imageCropVC animated:YES];
+  [self presentViewController:imageCropVC animated:YES completion:nil];
+  [self customizeCropViewUI:imageCropVC];
 }
 
 
@@ -405,13 +411,13 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     txt_firstName = (UITextField*)[cell viewWithTag:101];
-    txt_firstName.text = userDetail.firstName;
+    txt_firstName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName];
     [txt_firstName addTarget:self
                       action:@selector(validateFields:)
             forControlEvents:UIControlEventEditingChanged];
     
     txt_lastName = (UITextField*)[cell viewWithTag:102];
-    txt_lastName.text = userDetail.lastName;
+    txt_lastName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName];
     [txt_lastName addTarget:self
                      action:@selector(validateFields:)
            forControlEvents:UIControlEventEditingChanged];
@@ -427,7 +433,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     txt_location = (UITextField*)[cell viewWithTag:101];
-    txt_location.text = userDetail.location;
+    txt_location.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.location];
     [txt_location addTarget:self
                       action:@selector(validateFields:)
             forControlEvents:UIControlEventEditingChanged];
@@ -457,7 +463,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     txt_birthday = (UITextField*)[cell viewWithTag:101];
-    txt_birthday.text = userDetail.dob;
+    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:@"MM/dd/yyyy"];
     [txt_birthday addTarget:self
                      action:@selector(validateFields:)
            forControlEvents:UIControlEventEditingChanged];
@@ -475,7 +481,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     txt_gender = (UITextField*)[cell viewWithTag:101];
-    txt_gender.text = userDetail.gender;
+    txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
     [txt_gender addTarget:self
                       action:@selector(validateFields:)
             forControlEvents:UIControlEventEditingChanged];
@@ -510,19 +516,8 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 {
   [picker dismissViewControllerAnimated:YES completion:^{
     UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
-    imageCropVC.delegate = self;
     
-    if (!isEditingProfilePic) {
-      
-      imageCropVC.cropMode = RSKImageCropModeCustom;
-      imageCropVC.dataSource = self;
-    }
-    
-    //[self.navigationController pushViewController:imageCropVC animated:YES];
-    [self presentViewController:imageCropVC animated:YES completion:nil];
-    
-    [self customizeCropViewUI:imageCropVC];
+    [self showImageCropViewWithImage:originalImage];
   }];
 }
 
@@ -533,7 +528,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 - (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
 {
   CGSize maskSize;
-  maskSize = CGSizeMake(350, 250);
+  maskSize = CGSizeMake(self.view.frame.size.width-50, 165);
   
   
   CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
@@ -543,7 +538,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                                (viewHeight - maskSize.height) * 0.5f,
                                maskSize.width,
                                maskSize.height);
-  
   return maskRect;
 }
 

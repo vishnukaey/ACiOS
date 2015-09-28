@@ -41,6 +41,7 @@ NSString *const kFriendsURL = @"api/user/friend";
 NSString *const kEventsURL = @"api/event";
 NSString *const kRejectFriendURL = @"api/user/friend/decline";
 NSString *const kAcceptFriendURL = @"api/user/friend/accept";
+NSString *const kCancelFriendURL = @"api/user/friend/cancel";
 NSString *const kUnfollowEventURL = @"api/event/unfollow";
 NSString *const kFollowEventURL = @"api/event/follow";
 NSString *const kAddUsersToEventURL = @"api/event/users";

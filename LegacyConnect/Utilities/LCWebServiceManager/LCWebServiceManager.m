@@ -104,5 +104,36 @@
 }
 
 
+- (void)performDeleteOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  if ([LCUtilityManager isNetworkAvailable])
+  {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    [manager DELETE:urlString
+         parameters:params
+            success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      success(responseObject);
+      
+    }
+    failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      failure([error localizedDescription]);
+    }];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+  }
+}
+
+
 
 @end
