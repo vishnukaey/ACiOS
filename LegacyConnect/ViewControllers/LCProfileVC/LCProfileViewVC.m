@@ -28,9 +28,6 @@
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
-  friendsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-  impactsButton.titleLabel.textAlignment = NSTextAlignmentCenter;
-  
   backButton.hidden = true;
   
   [self addTabMenu];
@@ -111,6 +108,10 @@
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
                           [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.location]];
+    
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
+    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
+    
     
     [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
                   placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
@@ -352,9 +353,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
   if (tableView == milestonesTable) {
   
+    //MILESTONES
     static NSString *MyIdentifier = @"LCFeedCell";
     LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil)
@@ -366,11 +367,16 @@
     cell.delegate = self;
     [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
     
+    if (currentProfileState == PROFILE_SELF) {
+      cell.moreButton.hidden = NO;
+    }
+      
     return cell;
     
   }
   else if (tableView == interestsTable){
     
+    //INTERESTS
     static NSString *MyIdentifier = @"LCInterestsCell";
     LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil)
@@ -393,6 +399,7 @@
   
   else if (tableView == actionsTable){
     
+    //ACTIONS
     static NSString *MyIdentifier = @"LCActionsCell";
     LCActionsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil)
@@ -416,6 +423,34 @@
 - (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
 {
   NSLog(@"actionType--->>>%@", type);
+  if (type == kFeedCellActionMore) {
+    
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    actionSheet.view.tintColor = [UIColor blackColor];
+    
+    UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      
+    }];
+    
+    [actionSheet addAction:editPost];
+    
+    UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      
+    }];
+    [actionSheet addAction:removeMilestone];
+    
+    UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+
+    }];
+    [actionSheet addAction:deletePost];
+    
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [actionSheet addAction:cancelAction];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+  }
+  
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails
