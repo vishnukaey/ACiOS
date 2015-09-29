@@ -12,7 +12,7 @@
 #import "LCWebServiceManager.h"
 #import "LCConstants.h"
 
-#import "LCChooseCausesVC.h"
+#import "LCConnectFriendsVC.h"
 
 @interface LCLoginHomeViewController ()
 
@@ -148,9 +148,14 @@
 
 - (IBAction)signInButtonClicked:(id)sender
 {
-//  [LCDataManager sharedDataManager].userToken = @"df16cd47b6390a079042d6351a4b61c066af69224d1fb3c847f0322f4627e1fa0bbb7d4fcd172f8206d676ab5a0ccf90";
-//  LCChooseCausesVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCChooseCausesVC"];
+//#if DEBUG
+//  //testing community
+//  [LCDataManager sharedDataManager].userToken = @"d3cc6a2b6ac3ef5100b31dbac2ab13e18e19589114da0165e06948a00181b5a3d5eca53c30f2da96a680e5bf709d0e64";
+//  LCConnectFriendsVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"connectFriends"];
 //  [self.navigationController pushViewController:loginVC animated:YES];
+//  return;
+//#endif
+ 
   
   LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
   [self.navigationController pushViewController:loginVC animated:YES];

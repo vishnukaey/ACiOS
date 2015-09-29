@@ -12,7 +12,7 @@
 @interface LCContactsListVC : UIViewController<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate>
 {
   NSArray *contactsArray;
-  LCMultipleSelectionTable *contactsTable;
+  IBOutlet LCMultipleSelectionTable *contactsTable;
 }
 
 @end

@@ -14,7 +14,6 @@
 {
   return @{
            @"userID": @"userId",
-           @"postID": @"postId",
            @"firstName": @"firstName",
            @"lastName": @"lastName",
            @"message": @"message",
@@ -26,7 +25,8 @@
            @"image": @"image",
            @"entityType": @"entityType",
            @"entityID": @"entityId",
-           @"entityName": @"entityName",
+           @"interestID": @"interestId",
+           @"interestName": @"interestName",
            @"caption": @"caption",
            @"location": @"location",
            @"didLike": @"didLike",

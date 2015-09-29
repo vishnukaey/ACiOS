@@ -12,6 +12,8 @@
 
 @property(nonatomic, retain)NSMutableArray *selectedIDs;
 @property(nonatomic, retain)UIButton *selectedButton;
+@property(nonatomic, retain)UIImage *checkedImage, *uncheckedImage;
+
 
 - (void)AddOrRemoveID :(id)ID_;
 - (void)setStatusForButton:(UIButton *)button byCheckingIDs:(NSArray *)IDs;

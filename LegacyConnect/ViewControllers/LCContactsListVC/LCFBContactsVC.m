@@ -1,4 +1,4 @@
-//
+ //
 //  LCFBContactsVC.m
 //  LegacyConnect
 //
@@ -11,14 +11,29 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCContact.h"
 
+#pragma mark - LCInviteFromContactsCell class
+@interface LCFBContactsCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *contactLocationLabel;
+@property(nonatomic, strong)IBOutlet UILabel *contactNameLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *conatctPhotoView;
+@property(nonatomic, strong)IBOutlet UIButton *checkButton;
+@end
+
+@implementation LCFBContactsCell
+@end
+
 
 @implementation LCFBContactsVC
+{
+  NSMutableArray *selectedContacts;
+}
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.navigationController setNavigationBarHidden:NO];
-
+  selectedContacts = [[NSMutableArray alloc] init];
+  [_friendsTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+  [self.navigationController setNavigationBarHidden:YES];
   //request permission for accessing the friends list of the user. No need to ask permission everytime. Should store the status once the permission is granted and avoid this step from next access
   if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"user_friends"])
   {
@@ -48,20 +63,15 @@
       }
     }];
   }
-
-  friendsTable = [[UITableView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
-  friendsTable.layer.borderColor = [UIColor greenColor].CGColor;
-  friendsTable.layer.borderWidth = 3;
-  friendsTable.delegate = self;
-  friendsTable.dataSource = self;
 }
 
 -(void)getFacebookFriendsList
 {
+  [MBProgressHUD showHUDAddedTo:_friendsTable animated:YES];
   //get the friends list
   NSDictionary *params1 = @{@"access_token": [[FBSDKAccessToken currentAccessToken] tokenString],@"fields": @"id,name,picture.type(large)"
   };
-
+  finalFriendsArray = [[NSMutableArray alloc] init];
   FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"/me/friends" parameters:params1 HTTPMethod:@"GET"];
   [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error)
   {
@@ -74,17 +84,17 @@
       {
         LCContact * con = [[LCContact alloc] init];
         con.P_name = [[friendsArray objectAtIndex:i] valueForKey:@"name"];
-        NSURL *imageURL = [NSURL URLWithString:[[[[friendsArray objectAtIndex:i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"]];//image url;
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        UIImage *image = [UIImage imageWithData:imageData];
-        con.P_image = image;
+        con.P_id = [[friendsArray objectAtIndex:i] valueForKey:@"id"];
+        con.P_imageURL = [[[[friendsArray objectAtIndex:i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
         [finalFriendsArray addObject:con];
+         [self.friendsTable reloadData];
       }
-      [self.view addSubview:friendsTable];
+      [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
     }
     else
     {
       NSLog(@"error-->>>%@", error);
+      [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
       // Handle the result
     }
   }];
@@ -111,48 +121,61 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  static NSString *MyIdentifier = @"LCFBContactsCell";
+  LCFBContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    cell = [[LCFBContactsCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:MyIdentifier];
   }
-
-  [[cell viewWithTag:10] removeFromSuperview];
-  UIView *friendCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
-
-  UIImageView *friendImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
   LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
-  friendImage.image = con.P_image;
-  [friendCell addSubview:friendImage];
-
-  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, self.view.frame.size.width - 80, 20)];
-  nameLabel.text = con.P_name;
-  [friendCell addSubview:nameLabel];
-  [cell addSubview:friendCell];
-  friendCell.tag = 10;
-
+  cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
+  cell.conatctPhotoView.clipsToBounds = YES;
+  [cell.conatctPhotoView sd_setImageWithURL:[NSURL URLWithString:con.P_imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+  cell.contactNameLabel.text = con.P_name;
+  if([selectedContacts containsObject:con.P_id])
+  {
+    [cell.checkButton setSelected:YES];
+  }
+  else
+  {
+    [cell.checkButton setSelected:NO];
+  }
   return cell;
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 80;
+  return 93;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  
+  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
+  LCFBContactsCell *cell = (LCFBContactsCell*)[_friendsTable cellForRowAtIndexPath:indexPath];
+  if([selectedContacts containsObject:con.P_id])
+  {
+    [cell.checkButton setSelected:NO];
+    [selectedContacts removeObject:con.P_id];
+  }
+  else
+  {
+    [cell.checkButton setSelected:YES];
+    [selectedContacts addObject:con.P_id];
+  }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)doneButtonTapped:(id)sender
+{
+  [LCAPIManager sendFriendRequestToFBFriends:selectedContacts withSuccess:^(id response) {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+  }];
 }
-*/
 
 @end
