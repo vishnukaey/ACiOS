@@ -35,8 +35,11 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   profilePic.layer.borderWidth = 3.0f;
   profilePic.layer.borderColor = [[UIColor colorWithRed:235.0f/255.0 green:236.0f/255.0 blue:235.0f/255.0 alpha:1.0] CGColor];
   
+  genderTypes = @[@"Male",@"Female"];
+  
   self.navigationController.navigationBarHidden = YES;
   [self loadUserData];
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -61,6 +64,23 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   NSLog(@"header background - %@",img_headerBG.image);
   NSLog(@"birthday - %@",txt_birthday.text);
   NSLog(@"gender - %@",txt_gender.text);
+  
+  
+//  NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
+//  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
+//  
+//  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//  [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
+//    NSLog(@"%@",response);
+////    [self.signupButton setEnabled:true];
+////    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//  } andFailure:^(NSString *error) {
+//    NSLog(@"%@",error);
+////    [self.signupButton setEnabled:true];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//  }];
+
   
 }
 
@@ -485,7 +505,12 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     [txt_gender addTarget:self
                       action:@selector(validateFields:)
             forControlEvents:UIControlEventEditingChanged];
-    txt_gender.enabled = NO;
+    //+kctxt_gender.enabled = NO;
+    
+    genderPicker = [[UIPickerView alloc] init];
+    genderPicker.dataSource = self;
+    genderPicker.delegate = self;
+    txt_gender.inputView = genderPicker;
 
   }
   
@@ -506,7 +531,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   else if (indexPath.section == SECTION_GENDER) {
     
     [self.view endEditing:YES];
-    [self performSelector:@selector(showGenderSelection) withObject:nil afterDelay:0];
+    //+kc[self performSelector:@selector(showGenderSelection) withObject:nil afterDelay:0];
   }
 }
 
@@ -528,7 +553,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 - (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
 {
   CGSize maskSize;
-  maskSize = CGSizeMake(self.view.frame.size.width-50, 165);
+  maskSize = CGSizeMake(self.view.frame.size.width, 165);
   
   
   CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
@@ -564,7 +589,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 // Crop image has been canceled.
 - (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
 {
-  //[self.navigationController popViewControllerAnimated:YES];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -573,8 +597,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                    didCropImage:(UIImage *)croppedImage
                   usingCropRect:(CGRect)cropRect
 {
-  //[self.navigationController popViewControllerAnimated:NO];
-  //+kc[self invokeUploadImageAPIWithImage:croppedImage];
   [self dismissViewControllerAnimated:YES completion:^{
     if (isEditingProfilePic) {
       
@@ -594,9 +616,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                   usingCropRect:(CGRect)cropRect
                   rotationAngle:(CGFloat)rotationAngle
 {
-  //[self.navigationController popViewControllerAnimated:NO];
-  //+kc[self invokeUploadImageAPIWithImage:croppedImage];
-  
   [self dismissViewControllerAnimated:YES completion:^{
     if (isEditingProfilePic) {
       
@@ -608,6 +627,28 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
   }];
+}
+
+
+#pragma mark - Picker View Delegate
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+  return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+  return genderTypes.count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+  return [genderTypes objectAtIndex:row];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+  
+  txt_gender.text = [genderTypes objectAtIndex:row];
 }
 
 

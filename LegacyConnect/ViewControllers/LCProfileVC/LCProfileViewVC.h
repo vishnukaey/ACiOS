@@ -24,6 +24,8 @@ typedef enum profileStateTypes
   IBOutlet UITableView *milestonesTable;
   IBOutlet UITableView *interestsTable;
   IBOutlet UITableView *actionsTable;
+  IBOutlet UIView *emptyDataView;
+  IBOutlet UILabel *emptyDataLabel;
   
   IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *profilePicBorderView;

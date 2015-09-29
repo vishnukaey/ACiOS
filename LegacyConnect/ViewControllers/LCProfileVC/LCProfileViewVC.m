@@ -118,16 +118,15 @@
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
                        placeholderImage:[UIImage imageNamed:@"headerImage"]];
     
+    if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_WAITING;
+    }
+    
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
-  
-  
-  if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
-  {
-    [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
-    currentProfileState = PROFILE_OTHER_WAITING;
-  }
 }
 
 - (void)addTabMenu
@@ -164,11 +163,17 @@
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
    {
-     NSLog(@"%@",response);
+     //NSLog(@"%@",response);
      interestsArray = response;
-     [interestsTable reloadData];
+     if (interestsArray.count == 0) {
+       emptyDataView.hidden = NO;
+       emptyDataLabel.text = @"Search and add interests from the menu";
+     }
+     else {
+       emptyDataView.hidden = YES;
+       [interestsTable reloadData];
+     }
      [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-     
    }
    andFailure:^(NSString *error)
    {
@@ -185,7 +190,15 @@
   
   [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
     mileStoneFeeds = response;
-    [milestonesTable reloadData];
+    
+    if (mileStoneFeeds.count == 0) {
+      emptyDataView.hidden = NO;
+      emptyDataLabel.text = @"Tap \"...\" in any of your posts to add as a milestone";
+    }
+    else {
+      emptyDataView.hidden = YES;
+      [milestonesTable reloadData];
+    }
     [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
@@ -427,7 +440,7 @@
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    actionSheet.view.tintColor = [UIColor blackColor];
+    //actionSheet.view.tintColor = [UIColor blackColor];
     
     UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
       
