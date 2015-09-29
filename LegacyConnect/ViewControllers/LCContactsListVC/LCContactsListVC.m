@@ -9,24 +9,30 @@
 #import "LCContactsListVC.h"
 #import <AddressBook/AddressBook.h>
 #import "LCContact.h"
+#import "LCFeedsHomeViewController.h"
 
+#pragma mark - LCInviteFromContactsCell class
+@interface LCInviteFromContactsCell : UITableViewCell
+@property(nonatomic, strong)IBOutlet UILabel *contactLocationLabel;
+@property(nonatomic, strong)IBOutlet UILabel *contactNameLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *conatctPhotoView;
+@property(nonatomic, strong)IBOutlet UIButton *checkButton;
+@end
+
+@implementation LCInviteFromContactsCell
+@end
+
+
+#pragma mark - LCContactsListVC class
 @implementation LCContactsListVC
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.navigationController setNavigationBarHidden:NO];
-
   [self loadContacts];
-  contactsTable = [[LCMultipleSelectionTable alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
-
-  contactsTable.layer.borderColor = [UIColor greenColor].CGColor;
-  contactsTable.layer.borderWidth = 3;
-  contactsTable.delegate = self;
-  contactsTable.dataSource = self;
-  [self.view addSubview:contactsTable];
-  
+  contactsTable.checkedImage = [UIImage imageNamed:@"contact_tick"];
+  contactsTable.uncheckedImage = [UIImage imageNamed:@"contact_plus"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,9 +70,9 @@
   }
   else
   {
-    NSLog(@"---->>>The user has previously denied access");
     // The user has previously denied access
     // Send an alert telling user to change privacy setting in settings app
+    [LCUtilityManager showAlertViewWithTitle:@"Request access" andMessage:@"Please allow access to contacts from Settings application."];
   }
 }
 
@@ -98,6 +104,21 @@
     }
 }
 
+- (IBAction)doneButtonAction
+{
+  NSArray *selectedMailIDs = contactsTable.selectedIDs;
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager sendFriendRequestFromContacts:selectedMailIDs withSuccess:^(id response) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    [self.navigationController pushViewController:vc animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"%@",error);
+  }];
+}
+
 #pragma mark - UIActionSheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -122,64 +143,37 @@
 - (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  static NSString *MyIdentifier = @"contactsCell";
+  LCInviteFromContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
-  cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+  cell = [[LCInviteFromContactsCell alloc] initWithStyle:UITableViewCellStyleDefault
                             reuseIdentifier:MyIdentifier];
   }
 
-  [[cell viewWithTag:10] removeFromSuperview];
-  UIView *contactCell = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 80)];
-
-  UIImageView *contactImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 60, 60)];
-  LCContact *con = [contactsArray objectAtIndex:indexPath.row];
-  contactImage.image = con.P_image;
-  [contactCell addSubview:contactImage];
-
-  UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 10, self.view.frame.size.width - 80, 20)];
-  nameLabel.text = con.P_name;
-  [contactCell addSubview:nameLabel];
-
-  UILabel *numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 30, self.view.frame.size.width - 80, 20)];
-  numberLabel.text = [con.P_numbers objectAtIndex:0];
-  [contactCell addSubview:numberLabel];
-
-  UILabel *emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 50, self.view.frame.size.width - 80, 20)];
-  emailLabel.text = [con.P_emails objectAtIndex:0];
-  [contactCell addSubview:emailLabel];
   
-  UIButton *checkbutton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+
+  LCContact *con = [contactsArray objectAtIndex:indexPath.row];
+  cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
+  cell.conatctPhotoView.clipsToBounds = YES;
+  cell.conatctPhotoView.image = con.P_image;
+
+  cell.contactNameLabel.text = con.P_name;
+  
+  cell.contactLocationLabel.text = con.P_address;
+  
+  UIButton *checkbutton = cell.checkButton;
   checkbutton.tag = indexPath.row;
-  checkbutton.center = CGPointMake(tableView.frame.size.width - 50, 40);
   [checkbutton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   [tableView setStatusForButton:checkbutton byCheckingIDs:con.P_emails];
-  [contactCell addSubview:checkbutton];
-  [cell addSubview:contactCell];
-  contactCell.tag = 10;
 
   return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 80;
+  return 93;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
