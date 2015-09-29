@@ -9,7 +9,7 @@
 #import "LCMultipleSelectionTable.h"
 
 @implementation LCMultipleSelectionTable
-@synthesize selectedIDs, selectedButton;
+@synthesize selectedIDs, selectedButton, checkedImage, uncheckedImage;
 
 #pragma mark - Construction
 
@@ -43,11 +43,11 @@
   if ([selectedIDs containsObject:ID_])
   {
     [selectedIDs removeObject:ID_];
-    [selectedButton setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
+    [selectedButton setImage:uncheckedImage forState:UIControlStateNormal];
   }else
   {
     [selectedIDs addObject:ID_];
-    [selectedButton setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+    [selectedButton setImage:checkedImage forState:UIControlStateNormal];
   }
 }
 
@@ -57,11 +57,11 @@
   {
     if ([selectedIDs containsObject:ID_])
     {
-      [button setImage:[UIImage imageNamed:@"check_box.png"] forState:UIControlStateNormal];
+      [button setImage:checkedImage forState:UIControlStateNormal];
       return;
     }
   }
-  [button setImage:[UIImage imageNamed:@"uncheck_box.png"] forState:UIControlStateNormal];
+  [button setImage:uncheckedImage forState:UIControlStateNormal];
 }
 
 /*

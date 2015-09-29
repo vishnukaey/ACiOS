@@ -31,6 +31,8 @@ extern NSString *const kCancelFriendURL;
 extern NSString *const kUnfollowEventURL;
 extern NSString *const kFollowEventURL;
 extern NSString *const kAddUsersToEventURL;
+extern NSString *const kContactFriendsURL;
+extern NSString *const kFBContactFriendsURL;
 
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;
@@ -60,6 +62,7 @@ extern NSString *const kFeedsKey;
 extern NSString *const kFriendIDKey;
 extern NSString *const kPasswordResetCodeKey;
 extern NSString *const kEventsKey;
+extern NSString *const kContactEmailsKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;
@@ -78,6 +81,7 @@ extern NSString *const kPasswordKey;
 extern NSString *const kDobKey;
 extern NSString *const kAccessTokenKey;
 extern NSString *const kFBUserIDKey;
+extern NSString *const kFBIDsKey;
 extern NSString *const kFBAvatarImageUrlKey;
 extern NSString *const kFBAccessTokenKey;
 extern NSString *const kUserImageData;

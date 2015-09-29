@@ -8,6 +8,12 @@
 
 #import "LCGIButton.h"
 
+@interface LCGIButton ()
+{
+  UIButton *activeLayer;
+  BOOL menuOpen;
+}
+@end
 
 @implementation LCGIButton
 @synthesize communityButton, postStatusButton, postPhotoButton;
@@ -17,9 +23,10 @@
   self = [super initWithFrame:frame];
   if (self)
   {
-    self.backgroundColor = [UIColor redColor];
-    self.layer.cornerRadius = frame.size.width/2;
     [self addTarget:self action:@selector(toggle) forControlEvents:UIControlEventTouchUpInside];
+    [self setBackgroundImage:[UIImage imageNamed:@"GI_button_active"] forState:UIControlStateSelected];
+    [self setBackgroundImage:[UIImage imageNamed:@"GI_button_inactive"] forState:UIControlStateNormal];
+  
   }
   return self;
 }
@@ -34,49 +41,59 @@
 
 -(void)setUpMenu
 {
-  communityButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 10, self.frame.size.width - 10)];
+  CGSize screenSize = [self superview].frame.size;
+  float sizeDiff = 5;
+  activeLayer = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
+  [activeLayer setBackgroundImage:[UIImage imageNamed:@"GI_active_layer"] forState:UIControlStateNormal];
+  [self.superview addSubview:activeLayer];
+  activeLayer.hidden = true;
+  [activeLayer addTarget:self action:@selector(hideMenu) forControlEvents:UIControlEventTouchUpInside];
+  
+  communityButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-sizeDiff , self.frame.size.width-sizeDiff )];
   communityButton.center = self.center;
   [[self superview] addSubview:communityButton];
-  //    P_community.alpha = 0;
-  communityButton.backgroundColor = [UIColor yellowColor];
-  communityButton.layer.cornerRadius = communityButton.frame.size.width/2;
+  [communityButton setBackgroundImage:[UIImage imageNamed:@"gi_create_event_button"] forState:UIControlStateNormal];
 
-  postStatusButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 10, self.frame.size.width - 10)];
+  postStatusButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-sizeDiff , self.frame.size.width-sizeDiff )];
   postStatusButton.center = self.center;
   [[self superview] addSubview:postStatusButton];
-  //    P_status.alpha = 0;
-  postStatusButton.backgroundColor = [UIColor greenColor];
-  postStatusButton.layer.cornerRadius = postStatusButton.frame.size.width/2;
+  [postStatusButton setBackgroundImage:[UIImage imageNamed:@"gi_text_post_button"] forState:UIControlStateNormal];
 
-  postPhotoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width - 10, self.frame.size.width - 10)];
+  postPhotoButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-sizeDiff , self.frame.size.width-sizeDiff )];
   postPhotoButton.center = self.center;
   [[self superview] addSubview:postPhotoButton];
-  //    P_video.alpha = 0;
-  postPhotoButton.backgroundColor = [UIColor blueColor];
-  postPhotoButton.layer.cornerRadius = postPhotoButton.frame.size.width/2;
+  [postPhotoButton setBackgroundImage:[UIImage imageNamed:@"gi_photo_post_button"] forState:UIControlStateNormal];
 
+  
+  postPhotoButton.alpha = 0;
+  postStatusButton.alpha = 0;
+  communityButton.alpha = 0;
+  
   [[self superview] bringSubviewToFront:self];
 }
 
 -(void)showMenu
 {
-  CGPoint comm_p, video_p, status_p;
+  CGPoint comm_p, photo_p, status_p;
   float sep_ = 30;
 
-  comm_p = CGPointMake(self.center.x - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_, self.center.y);
-  video_p = CGPointMake(self.center.x, self.center.y - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_);
-  sep_ = sep_ - 15;//adjust 10 to show the middle button on the round
-  status_p = CGPointMake(self.center.x - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_, self.center.y - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_);
+  status_p  = CGPointMake(self.center.x - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_, self.center.y);
+  comm_p = CGPointMake(self.center.x, self.center.y - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_);
+  sep_ = sep_ - 20;//adjust 10 to show the middle button on the round
+  photo_p = CGPointMake(self.center.x - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_, self.center.y - self.frame.size.width/2 - communityButton.frame.size.width/2 - sep_);
 
+  postPhotoButton.alpha = 1;
+  postStatusButton.alpha = 1;
+  communityButton.alpha = 1;
   [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:25.0
   options: UIViewAnimationOptionCurveEaseInOut animations:^
         {
-        //P_community.alpha = 1.0;
+        [self setSelected:YES];
+        activeLayer.hidden = false;
         communityButton.center = comm_p;
-        //P_video.alpha = 1.0;
-        postPhotoButton.center = video_p;
-        //P_status.alpha = 1.0;
+        postPhotoButton.center = photo_p;
         postStatusButton.center = status_p;
+        menuOpen = true;
         }
   completion:^(BOOL finished) {
   //Completion Block
@@ -85,15 +102,19 @@
 
 -(void)hideMenu
 {
-  [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1.5 initialSpringVelocity:5.0
+  [UIView animateWithDuration:0.2 delay:0 usingSpringWithDamping:1.5 initialSpringVelocity:5.0
   options: UIViewAnimationOptionCurveEaseInOut animations:^
         {
-        //P_community.alpha = 0.0;
+        [self setSelected:NO];
+        activeLayer.hidden = true;
         communityButton.center = self.center;
-        //P_video.alpha = 0.0;
         postPhotoButton.center = self.center;
-        //P_status.alpha = 0.0;
         postStatusButton.center = self.center;
+        menuOpen = false;
+          
+        postPhotoButton.alpha = 0;
+        postStatusButton.alpha = 0;
+        communityButton.alpha = 0;
         }
   completion:^(BOOL finished) {
   //Completion Block
@@ -102,14 +123,12 @@
 
 -(void)toggle
 {
-  if (self.tag ==0)
+  if (!menuOpen)
   {
-    self.tag = 1;
     [self showMenu];
   }
   else
   {
-    self.tag = 0 ;
     [self hideMenu];
   }
 }

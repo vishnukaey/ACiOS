@@ -9,6 +9,6 @@
 #import "LCContact.h"
 
 @implementation LCContact
-@synthesize P_address, P_name, P_image, P_emails, P_numbers;
+@synthesize P_address, P_name, P_image, P_emails, P_numbers, P_imageURL, P_id;
 
 @end
