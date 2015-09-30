@@ -122,7 +122,6 @@ static LCAPIManager *sharedManager = nil;
 
 
 
-
 #pragma mark - Interests and Causes
 
 
