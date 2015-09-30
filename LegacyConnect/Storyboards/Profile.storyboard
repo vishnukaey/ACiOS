@@ -51,14 +51,18 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j9U-9r-QED" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerImage" translatesAutoresizingMaskIntoConstraints="NO" id="hv9-pK-e80" userLabel="Header Image View">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hv9-pK-e80" userLabel="Header Image View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
-                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j1z-Cw-BHG" userLabel="Header Image Overlay">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+                                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kcm-Tc-W3C" userLabel="Profile Pic Border View">
                                         <rect key="frame" x="135" y="32" width="106" height="106"/>
                                         <subviews>
-                                            <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="moX-4w-sux">
+                                            <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="moX-4w-sux">
                                                 <rect key="frame" x="3" y="3" width="100" height="100"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="0zx-JZ-xrl"/>
@@ -87,22 +91,22 @@
                                             <action selector="editClicked:" destination="R7c-NE-Puc" eventType="touchUpInside" id="NSj-rE-Nwh"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-pB-GE9" userLabel="Frends Count View">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Ri-pB-GE9" userLabel="Frends Count View">
                                         <rect key="frame" x="271" y="71" width="51" height="28"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD6-bz-MvO">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iD6-bz-MvO">
                                                 <rect key="frame" x="20" y="0.0" width="11" height="15"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRIENDS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bj-eT-Dd4">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="FRIENDS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bj-eT-Dd4">
                                                 <rect key="frame" x="0.0" y="17" width="51" height="11"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
                                                 <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="riI-wT-TVE" customClass="UI">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="riI-wT-TVE" customClass="UI">
                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="28"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
@@ -130,10 +134,10 @@
                                             <constraint firstAttribute="bottom" secondItem="riI-wT-TVE" secondAttribute="bottom" id="vVz-qU-MNn"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JR2-Bi-aKn" userLabel="Impacts Count VIew">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JR2-Bi-aKn" userLabel="Impacts Count VIew">
                                         <rect key="frame" x="54" y="71" width="51" height="28"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Qs-Od-1Y6">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Qs-Od-1Y6">
                                                 <rect key="frame" x="0.0" y="0.0" width="51" height="28"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <state key="normal">
@@ -144,13 +148,13 @@
                                                     <action selector="impactsButtonClicked" destination="R7c-NE-Puc" eventType="touchUpInside" id="O6l-Fi-laI"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAm-WM-7bJ">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAm-WM-7bJ">
                                                 <rect key="frame" x="20" y="0.0" width="11" height="15"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMPACTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Swf-Lh-92f">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="IMPACTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Swf-Lh-92f">
                                                 <rect key="frame" x="0.0" y="17" width="51" height="11"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -177,6 +181,8 @@
                                 <constraints>
                                     <constraint firstItem="6Ri-pB-GE9" firstAttribute="centerY" secondItem="Kcm-Tc-W3C" secondAttribute="centerY" id="33V-uA-Gsp"/>
                                     <constraint firstItem="JR2-Bi-aKn" firstAttribute="centerY" secondItem="Kcm-Tc-W3C" secondAttribute="centerY" id="A7D-1h-npm"/>
+                                    <constraint firstItem="j1z-Cw-BHG" firstAttribute="leading" secondItem="j9U-9r-QED" secondAttribute="leading" id="C8g-ba-Ptt"/>
+                                    <constraint firstAttribute="trailing" secondItem="j1z-Cw-BHG" secondAttribute="trailing" id="J8y-4o-B3r"/>
                                     <constraint firstItem="Kcm-Tc-W3C" firstAttribute="leading" secondItem="JR2-Bi-aKn" secondAttribute="trailing" constant="30" id="NEE-7K-UCK"/>
                                     <constraint firstItem="6Ri-pB-GE9" firstAttribute="leading" secondItem="Kcm-Tc-W3C" secondAttribute="trailing" constant="30" id="Oui-dT-jeC"/>
                                     <constraint firstAttribute="centerY" secondItem="Kcm-Tc-W3C" secondAttribute="centerY" id="WZ8-W6-48K"/>
@@ -184,6 +190,8 @@
                                     <constraint firstItem="hv9-pK-e80" firstAttribute="top" secondItem="j9U-9r-QED" secondAttribute="top" id="arw-Gn-tkE"/>
                                     <constraint firstAttribute="bottom" secondItem="hv9-pK-e80" secondAttribute="bottom" id="faL-AN-H93"/>
                                     <constraint firstItem="uGR-xf-bgQ" firstAttribute="leading" secondItem="moX-4w-sux" secondAttribute="trailing" constant="-34" id="jDg-pt-ANb"/>
+                                    <constraint firstItem="j1z-Cw-BHG" firstAttribute="top" secondItem="j9U-9r-QED" secondAttribute="top" id="lPw-FK-Y6a"/>
+                                    <constraint firstAttribute="bottom" secondItem="j1z-Cw-BHG" secondAttribute="bottom" id="le6-ZE-hdd"/>
                                     <constraint firstAttribute="trailing" secondItem="hv9-pK-e80" secondAttribute="trailing" id="pcv-Dn-MsL"/>
                                     <constraint firstItem="moX-4w-sux" firstAttribute="centerY" secondItem="uGR-xf-bgQ" secondAttribute="centerY" constant="-35" id="u4F-gX-1Ym"/>
                                     <constraint firstAttribute="height" constant="170" id="ubh-6C-xe0"/>
@@ -204,39 +212,6 @@
                                     <action selector="backAction:" destination="R7c-NE-Puc" eventType="touchUpInside" id="3yT-A3-EJb"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyh-5I-8lK" userLabel="UserDetailView">
-                                <rect key="frame" x="0.0" y="170" width="375" height="80"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JSON ROGERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73e-Pq-r0a">
-                                        <rect key="frame" x="135" y="19" width="106" height="15"/>
-                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Member since 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTO-QN-Nhd">
-                                        <rect key="frame" x="126" y="38" width="124" height="13"/>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
-                                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MALE . 21. NEW YORK, NY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rb-el-Qms">
-                                        <rect key="frame" x="114" y="54" width="147" height="11"/>
-                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="11"/>
-                                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="9Rb-el-Qms" firstAttribute="top" secondItem="iTO-QN-Nhd" secondAttribute="bottom" constant="3" id="ECb-2I-KRG"/>
-                                    <constraint firstAttribute="centerX" secondItem="iTO-QN-Nhd" secondAttribute="centerX" id="Nkf-We-dU7"/>
-                                    <constraint firstAttribute="centerX" secondItem="9Rb-el-Qms" secondAttribute="centerX" id="Tdk-V1-DnC"/>
-                                    <constraint firstAttribute="height" constant="80" id="ZGk-O2-vHa"/>
-                                    <constraint firstItem="73e-Pq-r0a" firstAttribute="top" secondItem="lyh-5I-8lK" secondAttribute="top" constant="19" id="fbz-VT-7us"/>
-                                    <constraint firstItem="iTO-QN-Nhd" firstAttribute="top" secondItem="73e-Pq-r0a" secondAttribute="bottom" constant="4" id="gC2-xw-M25"/>
-                                    <constraint firstAttribute="centerX" secondItem="73e-Pq-r0a" secondAttribute="centerX" id="jxF-v1-odu"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vWl-hy-a97" userLabel="Border Line View">
                                 <rect key="frame" x="0.0" y="250" width="375" height="1"/>
                                 <color key="backgroundColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -247,7 +222,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTW-Ak-bXz" userLabel="TabBarMenu">
                                 <rect key="frame" x="0.0" y="251" width="375" height="44"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qF5-c5-j3e">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qF5-c5-j3e">
                                         <rect key="frame" x="0.0" y="10" width="125" height="24"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <state key="normal" title="MILESTONES">
@@ -258,7 +233,7 @@
                                             <action selector="mileStonesClicked:" destination="R7c-NE-Puc" eventType="touchUpInside" id="EjW-wf-CHT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-5V-TWq">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahY-5V-TWq">
                                         <rect key="frame" x="250" y="10" width="125" height="24"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <state key="normal" title="ACTIONS">
@@ -269,7 +244,7 @@
                                             <action selector="actionsClicked:" destination="R7c-NE-Puc" eventType="touchUpInside" id="fha-bF-eAq"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ell-GU-fLx">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ell-GU-fLx">
                                         <rect key="frame" x="125" y="10" width="125" height="24"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <state key="normal" title="INTERESTS">
@@ -347,6 +322,39 @@
                                     <constraint firstAttribute="trailing" secondItem="0xU-Cu-4L9" secondAttribute="trailing" id="y26-Yn-Fx2"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyh-5I-8lK" userLabel="UserDetailView">
+                                <rect key="frame" x="0.0" y="170" width="375" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="JSON ROGERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73e-Pq-r0a">
+                                        <rect key="frame" x="135" y="19" width="106" height="15"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Member since 2013" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iTO-QN-Nhd">
+                                        <rect key="frame" x="126" y="38" width="124" height="13"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MALE . 21. NEW YORK, NY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Rb-el-Qms">
+                                        <rect key="frame" x="114" y="54" width="147" height="11"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="11"/>
+                                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="9Rb-el-Qms" firstAttribute="top" secondItem="iTO-QN-Nhd" secondAttribute="bottom" constant="3" id="ECb-2I-KRG"/>
+                                    <constraint firstAttribute="centerX" secondItem="iTO-QN-Nhd" secondAttribute="centerX" id="Nkf-We-dU7"/>
+                                    <constraint firstAttribute="centerX" secondItem="9Rb-el-Qms" secondAttribute="centerX" id="Tdk-V1-DnC"/>
+                                    <constraint firstAttribute="height" constant="80" id="ZGk-O2-vHa"/>
+                                    <constraint firstItem="73e-Pq-r0a" firstAttribute="top" secondItem="lyh-5I-8lK" secondAttribute="top" constant="19" id="fbz-VT-7us"/>
+                                    <constraint firstItem="iTO-QN-Nhd" firstAttribute="top" secondItem="73e-Pq-r0a" secondAttribute="bottom" constant="4" id="gC2-xw-M25"/>
+                                    <constraint firstAttribute="centerX" secondItem="73e-Pq-r0a" secondAttribute="centerX" id="jxF-v1-odu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -355,6 +363,7 @@
                             <constraint firstItem="xTW-Ak-bXz" firstAttribute="leading" secondItem="QL2-xM-HQP" secondAttribute="leading" id="799-pj-goz"/>
                             <constraint firstItem="eAg-gO-u6z" firstAttribute="leading" secondItem="QL2-xM-HQP" secondAttribute="leading" id="9iK-Ig-CrE"/>
                             <constraint firstItem="vWl-hy-a97" firstAttribute="top" secondItem="lyh-5I-8lK" secondAttribute="bottom" id="9pq-9l-V56"/>
+                            <constraint firstItem="lyh-5I-8lK" firstAttribute="top" secondItem="j9U-9r-QED" secondAttribute="bottom" id="Be8-Dz-dxw"/>
                             <constraint firstItem="lyh-5I-8lK" firstAttribute="leading" secondItem="QL2-xM-HQP" secondAttribute="leading" id="C4s-uP-ewj"/>
                             <constraint firstItem="j9U-9r-QED" firstAttribute="leading" secondItem="QL2-xM-HQP" secondAttribute="leading" id="Cpb-VK-Go1"/>
                             <constraint firstItem="Iu0-iZ-idC" firstAttribute="leading" secondItem="QL2-xM-HQP" secondAttribute="leading" id="EaT-KE-1Mc"/>
@@ -369,7 +378,6 @@
                             <constraint firstItem="vi4-x4-cdn" firstAttribute="top" secondItem="QL2-xM-HQP" secondAttribute="top" constant="31" id="enP-J7-QGB"/>
                             <constraint firstAttribute="trailing" secondItem="xTW-Ak-bXz" secondAttribute="trailing" id="mgr-UA-nTg"/>
                             <constraint firstItem="xTW-Ak-bXz" firstAttribute="top" secondItem="vWl-hy-a97" secondAttribute="bottom" id="mqv-zd-QDz"/>
-                            <constraint firstItem="lyh-5I-8lK" firstAttribute="top" secondItem="hv9-pK-e80" secondAttribute="bottom" id="xAa-ca-ngG"/>
                             <constraint firstAttribute="trailing" secondItem="eAg-gO-u6z" secondAttribute="trailing" id="znr-EH-4Of"/>
                         </constraints>
                     </view>
@@ -565,7 +573,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bF-4z-BW1" userLabel="NaviagationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1N-kj-Yf4">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1N-kj-Yf4">
                                         <rect key="frame" x="8" y="26" width="57" height="30"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
                                         <state key="normal" title="Cancel">
@@ -576,7 +584,7 @@
                                             <action selector="cancelAction:" destination="A4e-XW-bFg" eventType="touchUpInside" id="TxO-El-1dl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8y-hy-hIV">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c8y-hy-hIV">
                                         <rect key="frame" x="327" y="26" width="40" height="30"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
                                         <state key="normal" title="Save">
@@ -602,7 +610,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U38-aK-mFM">
                                 <rect key="frame" x="0.0" y="64" width="375" height="96"/>
                                 <subviews>
-                                    <button opaque="NO" alpha="0.50196099999999999" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwF-D2-jE4">
+                                    <button opaque="NO" alpha="0.50196099999999999" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwF-D2-jE4">
                                         <rect key="frame" x="147" y="81" width="82" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="ED1-9D-Hje"/>
@@ -622,7 +630,7 @@
                                     <constraint firstAttribute="bottom" secondItem="EwF-D2-jE4" secondAttribute="bottom" id="ttm-23-pum"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="pRT-6B-fF8">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="pRT-6B-fF8">
                                 <rect key="frame" x="135" y="32" width="106" height="106"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="106" id="5Hh-Sx-O7f"/>
@@ -640,13 +648,13 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="has-UF-nNK" id="lNj-R7-BG5">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqn-OE-7Ca">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Section Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqn-OE-7Ca">
                                                     <rect key="frame" x="8" y="24" width="86" height="11"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTs-wC-gsz">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="(Optional)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NTs-wC-gsz">
                                                     <rect key="frame" x="97" y="24" width="57" height="11"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="11"/>
                                                     <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
@@ -732,8 +740,9 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IGb-rn-qdL" id="QuT-Td-eXs">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerImage" translatesAutoresizingMaskIntoConstraints="NO" id="6pd-kX-xzQ">
+                                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6pd-kX-xzQ">
                                                     <rect key="frame" x="8" y="8" width="165" height="72"/>
+                                                    <color key="backgroundColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="165" id="Sek-uT-aCX"/>
                                                         <constraint firstAttribute="height" constant="72" id="qGo-DG-opv"/>
@@ -997,9 +1006,8 @@
     <resources>
         <image name="backButton" width="12" height="21"/>
         <image name="backButton.png" width="23" height="40"/>
-        <image name="headerImage" width="375" height="165"/>
-        <image name="manplaceholder.jpg" width="100" height="100"/>
         <image name="profileSettings" width="37" height="37"/>
         <image name="profileTick.png" width="110" height="110"/>
+        <image name="userProfilePic" width="100" height="100"/>
     </resources>
 </document>

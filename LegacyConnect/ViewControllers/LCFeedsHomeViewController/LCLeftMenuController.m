@@ -8,58 +8,139 @@
 
 #import "LCLeftMenuController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LCMenuItemCell.h"
 
+@interface LCLeftMenuController ()
+@property (weak, nonatomic) IBOutlet UIImageView *coverPhoto;
+@property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UITableView *menuTable;
+@end
+
+static NSString *kCoverPhotoPlaceholder = @"photoPost_dummy.png";
+static NSString *kProfilePicPlaceholder = @"manplaceholder.jpg";
+static CGFloat kProfilePicBorderWidth = 3.0f;
+static CGFloat kCellHeight = 44.0f;
+static CGFloat kNumberOfCells = 5.0;
+static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
+
+#define kSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1]
+#define kDeSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:0.8]
+
+
+#define kIconSelectionColor [UIColor colorWithRed:239.0f/255 green:100.0f/255 blue:77.0f/255 alpha:1]
+#define kIconDeSelectionColor [UIColor colorWithRed:247.0f/255 green:247.0f/255 blue:247.0f/255 alpha:1]
 
 @implementation LCLeftMenuController
+@synthesize delegate_;
 
-@synthesize menuwidth, delegate_;
+#pragma mark - private method implementation
+- (void)initialUISetUp
+{
+  //-- Profile Photo -- //
+  self.profilePicture.layer.cornerRadius = CGRectGetWidth(self.profilePicture.frame) / 2;
+  self.profilePicture.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.profilePicture.layer.borderWidth = kProfilePicBorderWidth;
+  self.profilePicture.clipsToBounds = YES;
+  
+  //-- Name Label -- //
+  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",[LCDataManager sharedDataManager].firstName,[LCDataManager sharedDataManager].lastName] uppercaseString]];
+  [self refreshUserImages];
+  
+  [self.menuTable setBackgroundColor:kDeSelectionColor];
+  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+}
 
+- (void)refreshUserImages
+{
+  //-- Cover Photo -- //
+  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
+  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:kCoverPhotoPlaceholder]];
+  
+  //-- Profile Image--//
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
+  [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:[UIImage imageNamed:kProfilePicPlaceholder]];
+}
+
+- (void)addUserImageChangeNitification
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserImageChangeNotification object:nil];
+}
+
+- (void)removeUserImageChangeNitification
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserImageChangeNotification object:nil];
+}
+
+- (void)refreshUserImages:(NSNotification*)notification
+{
+  [self refreshUserImages];
+}
+
+#pragma mark - view life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.view setFrame:[[UIScreen mainScreen] bounds]];
-  [self.view setBackgroundColor:[UIColor lightTextColor]];
-  
-  
-  NSArray *titles_ = [[NSArray alloc] initWithObjects:@"Home", @"Profile", @"Interests", @"Notifications", @"Logout", nil];
-
-  float y_margin = 2;
-  float but_height = 50;
-  _userImageView = [[UIImageView alloc] initWithFrame:CGRectMake(50, 50, 70, 70)];
-  [self.view addSubview:_userImageView];
-  self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
-  self.userImageView.clipsToBounds = YES;
-  
-  for (int i = 0; i<titles_.count; i++) {
-    UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(0, 150+y_margin*(i+1) + i * but_height, menuwidth, but_height)];
-    but.backgroundColor = [UIColor whiteColor];
-    [but setTitle:[titles_ objectAtIndex:i] forState:UIControlStateNormal];
-    [self.view addSubview:but];
-    but.tag = i;
-    [but addTarget:self action:@selector(buttonActions:) forControlEvents:UIControlEventTouchUpInside];
-    [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-  }
-}
-
-
-- (void) viewWillAppear:(BOOL)animated
-
-{
-  [super viewWillAppear:animated];
-  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
-  [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-}
-
-
--(void)buttonActions :(UIButton *)sender
-{
-  [delegate_ leftMenuButtonActions:sender];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self initialUISetUp];
+  [self addUserImageChangeNitification];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [self removeUserImageChangeNitification];
+  [super viewWillDisappear:animated];
+}
+
+- (IBAction)profileButtonTapped:(id)sender {
+  [delegate_ leftMenuItemSelectedAtIndex:5];
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return kNumberOfCells;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCMenuItemCell * cell = (LCMenuItemCell*)[tableView dequeueReusableCellWithIdentifier:kMenuCellIdentifier];
+  if (cell == nil) {
+    cell = [[LCMenuItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kMenuCellIdentifier];
+  }
+  [cell setIndex:indexPath.row];
+  [cell setBackgroundColor:kDeSelectionColor];
+  return cell;
+}
+
+#pragma mark - UITableViewDelegate implementation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCMenuItemCell * selectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
+  [selectedCell setSelected:NO];
+  [selectedCell setBackgroundColor:kSelectionColor];
+  [selectedCell.itemIcon setTintColor:kIconSelectionColor];
+  [delegate_ leftMenuItemSelectedAtIndex:indexPath.row];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
+  [deSelectedCell setBackgroundColor:kDeSelectionColor];
+  [deSelectedCell.itemIcon setTintColor:kIconDeSelectionColor];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return kCellHeight;
+}
 
 @end

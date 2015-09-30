@@ -97,7 +97,7 @@
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     userDetail = response;
     NSLog(@"user details - %@",response);
-  
+    
     userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]];
@@ -114,20 +114,19 @@
     
     
     [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+                  placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
-                       placeholderImage:[UIImage imageNamed:@"headerImage"]];
+                       placeholderImage:nil];
     
+    if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
+    {
+      [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
+      currentProfileState = PROFILE_OTHER_WAITING;
+    }
+        
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
-  
-  
-  if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
-  {
-    [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
-    currentProfileState = PROFILE_OTHER_WAITING;
-  }
 }
 
 - (void)addTabMenu
@@ -164,11 +163,10 @@
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
    {
-     NSLog(@"%@",response);
+     //NSLog(@"%@",response);
      interestsArray = response;
      [interestsTable reloadData];
      [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-     
    }
    andFailure:^(NSString *error)
    {
@@ -203,10 +201,10 @@
   friendsVC.userId = self.userDetail.userID;
   [self.navigationController pushViewController:friendsVC animated:YES];
   
-//  NSLog(@"friends clicked----->");
-//  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-//  LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCUserFriendsVC"];
-//  [self.navigationController pushViewController:vc animated:YES];
+  //  NSLog(@"friends clicked----->");
+  //  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  //  LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCUserFriendsVC"];
+  //  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)impactsButtonClicked
@@ -262,15 +260,15 @@
     friend.avatarURL = userDetail.avatarURL;
     
     [LCAPIManager removeFried:friend withSuccess:^(NSArray *response)
-    {
-      NSLog(@"%@",response);
-      [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
-      currentProfileState = PROFILE_OTHER_NON_FRIEND;
-    }
-    andFailure:^(NSString *error)
-    {
-      NSLog(@"%@",error);
-    }];
+     {
+       NSLog(@"%@",response);
+       [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+       currentProfileState = PROFILE_OTHER_NON_FRIEND;
+     }
+                   andFailure:^(NSString *error)
+     {
+       NSLog(@"%@",error);
+     }];
   }
   else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
   {
@@ -339,9 +337,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
   if (tableView == milestonesTable) {
+    
+    if (mileStoneFeeds.count == 0) {
+      return 1;
+    }
     return mileStoneFeeds.count;
   }
   else if (tableView == interestsTable) {
+    if (interestsArray.count == 0) {
+      return 1;
+    }
     return interestsArray.count;
   }
   else if (tableView == actionsTable) {
@@ -354,47 +359,85 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (tableView == milestonesTable) {
-  
-    //MILESTONES
-    static NSString *MyIdentifier = @"LCFeedCell";
-    LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
-      // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-      cell = [topLevelObjects objectAtIndex:0];
-    }
-    cell.delegate = self;
-    [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
     
-    if (currentProfileState == PROFILE_SELF) {
-      cell.moreButton.hidden = NO;
-    }
+    //MILESTONES
+    if (mileStoneFeeds.count == 0) {
       
-    return cell;
+      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      if (currentProfileState == PROFILE_SELF) {
+        cell.textLabel.text = @"Tap \"...\" in any of your posts to add as a milestone.";
+      }
+      else {
+        cell.textLabel.text = @"No milestones available.";
+      }
+      cell.textLabel.textAlignment =NSTextAlignmentCenter;
+      cell.textLabel.numberOfLines = 3;
+      
+      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+      tableView.allowsSelection = NO;
+      return cell;
+    }
+    
+    else {
+      
+      static NSString *MyIdentifier = @"LCFeedCell";
+      LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      if (cell == nil)
+      {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
+        // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+        cell = [topLevelObjects objectAtIndex:0];
+      }
+      cell.delegate = self;
+      [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+      
+      if (currentProfileState == PROFILE_SELF) {
+        cell.moreButton.hidden = NO;
+      }
+      
+      return cell;
+    }
     
   }
   else if (tableView == interestsTable){
     
     //INTERESTS
-    static NSString *MyIdentifier = @"LCInterestsCell";
-    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-      cell = [topLevelObjects objectAtIndex:0];
-
+    if (interestsArray.count == 0) {
+      
+      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      if (currentProfileState == PROFILE_SELF) {
+        cell.textLabel.text = @"Search and add interests from the menu.";
+      }
+      else {
+        cell.textLabel.text = @"No interests available.";
+      }
+      cell.textLabel.textAlignment =NSTextAlignmentCenter;
+      cell.textLabel.numberOfLines = 3;
+      
+      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+      tableView.allowsSelection = NO;
+      return cell;
     }
-    
-    LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
-    
-    cell.interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
-    cell.interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",
-                                     [LCUtilityManager performNullCheckAndSetValue:interstObj.followers]];
-    [cell.interestsBG sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge]
-                        placeholderImage:[UIImage imageNamed:@"headerImage"]];
-
-    return cell;
+    else {
+      static NSString *MyIdentifier = @"LCInterestsCell";
+      LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      if (cell == nil)
+      {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+        
+      }
+      
+      LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+      
+      cell.interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
+      cell.interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",
+                                       [LCUtilityManager performNullCheckAndSetValue:interstObj.followers]];
+      [cell.interestsBG sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge]
+                          placeholderImage:nil];
+      
+      return cell;
+    }
   }
   
   else if (tableView == actionsTable){
@@ -407,7 +450,7 @@
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
       cell = [topLevelObjects objectAtIndex:0];
     }
-
+    
     return cell;
   }
   
@@ -427,7 +470,7 @@
     
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
-    actionSheet.view.tintColor = [UIColor blackColor];
+    //actionSheet.view.tintColor = [UIColor blackColor];
     
     UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
       
@@ -441,7 +484,7 @@
     [actionSheet addAction:removeMilestone];
     
     UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-
+      
     }];
     [actionSheet addAction:deletePost];
     

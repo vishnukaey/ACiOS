@@ -20,6 +20,7 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCLoginViewController.h"
 #import "LCAppLaunchHelper.h"
+#import "LCNotificationsViewController.h"
 
 @interface LCEmptyViewController ()
 {
@@ -74,19 +75,21 @@
          LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
          navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
          
-         LCLeftMenuController *leftSideMenuViewController = [[LCLeftMenuController alloc] init];
-         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
+         LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
+//         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
          leftSideMenuViewController.delegate_ = self;
          
          mainContainer = [MFSideMenuContainerViewController
                           containerWithCenterViewController:navigationRoot
                           leftMenuViewController:nil
                           rightMenuViewController:leftSideMenuViewController];
-         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
+//         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
+         mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
          appdel.window.rootViewController = mainContainer;
          [appdel.window makeKeyAndVisible];
          
          [self addfloatingButtons];
+         [self addMenuButton:navigationRoot];
          mainContainer.panMode = MFSideMenuPanModeNone;
          
        } andFailure:^(NSString *error) {
@@ -126,14 +129,20 @@
   giButton.postStatusButton.tag = 2;
   [giButton.postStatusButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
   
+}
+
+- (void)addMenuButton:(UIViewController*)vc
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   //menu poper button
-  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 40,30, 30, 30)];
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 60,30, 50, 50)];
+
   menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
-  menuButton.backgroundColor = [UIColor grayColor];
-  [appdel.window addSubview:menuButton];
+  menuButton.backgroundColor = [UIColor clearColor];
+  [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  [menuButton setImage:[UIImage imageNamed:@"menuButton_dummy.png"] forState:UIControlStateNormal];
+  [menuButton setBackgroundImage:[UIImage imageNamed:@"MenuButton"] forState:UIControlStateNormal];
   menuButton.badgeLabel.text = @"2";
 }
 
@@ -188,37 +197,31 @@
 }
 
 #pragma mark - leftmenu delegates
-- (void)leftMenuButtonActions:(UIButton *)sender
+- (void)leftMenuItemSelectedAtIndex:(NSInteger)index
 {
-  NSLog(@"left menu sender tag-->>%d", (int)sender.tag);
   [mainContainer setMenuState:MFSideMenuStateClosed];
-  if (sender.tag == 0)//home
+  if (index == 0)//home
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (sender.tag == 1)//profile
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateInitialViewController];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = [LCDataManager sharedDataManager].userID;
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-  }
-  else if (sender.tag == 2)//Interests
+  else if (index == 1)//Interests
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    LCAllInterestVC *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (sender.tag == 3)//notifications
+  else if (index == 2)//notifications
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (sender.tag == 4)//logout
+  else if (index == 3)//notifications
+  {
+  }
+  else if (index == 4)//logout
   {
     [LCUtilityManager clearUserDefaultsForCurrentUser];
     if ([FBSDKAccessToken currentAccessToken])
@@ -231,6 +234,18 @@
     appdel.window.rootViewController = myStoryBoardInitialViewController;
     [appdel.window makeKeyAndVisible];
   }
+  else if (index == 5)//profile
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = [LCDataManager sharedDataManager].userID;
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+  }
+  
+  //added to bring menu button to top on menu item selection.
+  [navigationRoot.view bringSubviewToFront:menuButton];
+
 }
 
 
@@ -269,9 +284,7 @@
   else
   {
     //Logout
-    UIButton * dummyLogoutButton = [UIButton new];
-    [dummyLogoutButton setTag:4];
-    [self leftMenuButtonActions:dummyLogoutButton];
+    [self leftMenuItemSelectedAtIndex:4];
     [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
   }
 }

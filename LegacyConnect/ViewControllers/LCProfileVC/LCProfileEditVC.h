@@ -19,7 +19,7 @@ typedef enum profileSectionTypes
 } sectionType;
 
 
-@interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate>
+@interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate>
 {
   
   IBOutlet UIImageView *profilePic;
@@ -36,6 +36,9 @@ typedef enum profileSectionTypes
   
   UIDatePicker *datePicker;
   NSString *dobTimeStamp;
+  
+  UIPickerView *genderPicker;
+  NSArray *genderTypes;
   
   BOOL isEditingProfilePic;
   

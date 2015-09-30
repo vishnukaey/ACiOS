@@ -19,6 +19,7 @@ static NSString * const kCellIdentifierHeaderBG = @"LCProfileHeaderBGCell";
 static NSString * const kCellIdentifierBirthday = @"LCProfileBirthdayCell";
 static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
+static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 @implementation LCProfileEditVC
 
@@ -35,8 +36,11 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   profilePic.layer.borderWidth = 3.0f;
   profilePic.layer.borderColor = [[UIColor colorWithRed:235.0f/255.0 green:236.0f/255.0 blue:235.0f/255.0 alpha:1.0] CGColor];
   
+  genderTypes = @[@"Male",@"Female"];
+  
   self.navigationController.navigationBarHidden = YES;
   [self loadUserData];
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,6 +66,23 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   NSLog(@"birthday - %@",txt_birthday.text);
   NSLog(@"gender - %@",txt_gender.text);
   
+  
+//  NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
+//  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
+//  
+//  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//  [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
+//    NSLog(@"%@",response);
+////    [self.signupButton setEnabled:true];
+////    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//  } andFailure:^(NSString *error) {
+//    NSLog(@"%@",error);
+////    [self.signupButton setEnabled:true];
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+//  }];
+
+  
 }
 
 - (IBAction)editPictureAction:(id)sender {
@@ -75,8 +96,8 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
 - (void)loadUserData {
   
-  [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                  placeholderImage:nil];
 }
 
 
@@ -88,7 +109,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
   [datePicker setMaximumDate:[NSDate date]];
-  NSString *str =@"1900-01-01";
+  NSString *str =kDOBFormat;
   NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
   [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
@@ -133,7 +154,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 -(void) updateTextFieldWithDate:(id) picker
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
-  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"MM/dd/yyyy"];
+  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
 }
 
 
@@ -149,32 +170,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   else {
     buttonSave.enabled = NO;
   }
-}
-
-
-- (void) showGenderSelection {
-  
-  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-  
-  UIAlertAction *maleAction = [UIAlertAction actionWithTitle:@"Male" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    txt_gender.text = @"Male";
-    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
-  }];
-  [actionSheet addAction:maleAction];
-  
-  UIAlertAction *femaleAction = [UIAlertAction actionWithTitle:@"Female" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    txt_gender.text = @"Female";
-    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
-  }];
-  [actionSheet addAction:femaleAction];
-  
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-  [actionSheet addAction:cancelAction];
-  
-  [self presentViewController:actionSheet animated:YES completion:nil];
-  
 }
 
 
@@ -231,10 +226,10 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     
     if (isEditingProfilePic) {
-      profilePic.image = [UIImage imageNamed:@"manplaceholder.jpg"];
+      profilePic.image = nil;
     }
     else {
-      img_headerBG.image = [UIImage imageNamed:@"headerImage"];
+      img_headerBG.image = nil;
     }
     
   }];
@@ -450,7 +445,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     img_headerBG = (UIImageView*)[cell viewWithTag:101];
-    [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
   }
   
   else if(indexPath.section == SECTION_BIRTHDAY){
@@ -463,7 +458,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     txt_birthday = (UITextField*)[cell viewWithTag:101];
-    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:@"MM/dd/yyyy"];
+    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:kDOBFormat];
     [txt_birthday addTarget:self
                      action:@selector(validateFields:)
            forControlEvents:UIControlEventEditingChanged];
@@ -485,7 +480,11 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     [txt_gender addTarget:self
                       action:@selector(validateFields:)
             forControlEvents:UIControlEventEditingChanged];
-    txt_gender.enabled = NO;
+    
+    genderPicker = [[UIPickerView alloc] init];
+    genderPicker.dataSource = self;
+    genderPicker.delegate = self;
+    txt_gender.inputView = genderPicker;
 
   }
   
@@ -501,12 +500,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     isEditingProfilePic = NO;
     [self showEditingPictureOptions];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  }
-  
-  else if (indexPath.section == SECTION_GENDER) {
-    
-    [self.view endEditing:YES];
-    [self performSelector:@selector(showGenderSelection) withObject:nil afterDelay:0];
   }
 }
 
@@ -528,7 +521,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 - (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
 {
   CGSize maskSize;
-  maskSize = CGSizeMake(self.view.frame.size.width-50, 165);
+  maskSize = CGSizeMake(self.view.frame.size.width, 165);
   
   
   CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
@@ -564,7 +557,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 // Crop image has been canceled.
 - (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
 {
-  //[self.navigationController popViewControllerAnimated:YES];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -573,8 +565,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                    didCropImage:(UIImage *)croppedImage
                   usingCropRect:(CGRect)cropRect
 {
-  //[self.navigationController popViewControllerAnimated:NO];
-  //+kc[self invokeUploadImageAPIWithImage:croppedImage];
   [self dismissViewControllerAnimated:YES completion:^{
     if (isEditingProfilePic) {
       
@@ -594,9 +584,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
                   usingCropRect:(CGRect)cropRect
                   rotationAngle:(CGFloat)rotationAngle
 {
-  //[self.navigationController popViewControllerAnimated:NO];
-  //+kc[self invokeUploadImageAPIWithImage:croppedImage];
-  
   [self dismissViewControllerAnimated:YES completion:^{
     if (isEditingProfilePic) {
       
@@ -608,6 +595,28 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
   }];
+}
+
+
+#pragma mark - Picker View Delegate
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
+  return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
+  return genderTypes.count;
+}
+
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+  return [genderTypes objectAtIndex:row];
+}
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+  
+  txt_gender.text = [genderTypes objectAtIndex:row];
 }
 
 

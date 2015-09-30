@@ -12,15 +12,13 @@
 //---------protocols
 @protocol leftMenuDelegate <NSObject>
 
--(void)leftMenuButtonActions:(UIButton *)sender;//this function will be defined in the homefeed controller
+-(void)leftMenuItemSelectedAtIndex:(NSInteger)index;//this function will be defined in the homefeed controller
 
 @end
 
 //------interface
 @interface LCLeftMenuController : UIViewController
 
-@property(nonatomic, assign)float menuwidth;
 @property(nonatomic, retain)id delegate_;
-@property (nonatomic, strong) UIImageView *userImageView;
 
 @end

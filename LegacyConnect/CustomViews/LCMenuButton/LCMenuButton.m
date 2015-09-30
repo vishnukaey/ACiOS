@@ -17,7 +17,7 @@
   if (self)
   {
     badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width/2, 0, frame.size.width/2, frame.size.width/2)];
-    badgeLabel.backgroundColor = [UIColor blackColor];
+    badgeLabel.backgroundColor = [UIColor clearColor];
     badgeLabel.textColor = [UIColor whiteColor];
     badgeLabel.font = [UIFont systemFontOfSize:10];
     badgeLabel.text = @"";
@@ -25,6 +25,7 @@
     badgeLabel.layer.cornerRadius = frame.size.width/4;
     badgeLabel.textAlignment = NSTextAlignmentCenter;
     badgeLabel.clipsToBounds = YES;
+    [badgeLabel setHidden:YES];
   }
   return self;
 }

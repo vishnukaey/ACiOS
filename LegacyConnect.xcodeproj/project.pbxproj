@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
+		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
 		0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2902761BB90F8800E80684 /* LCActionsCellView.m */; };
 		0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */; };
@@ -172,6 +173,8 @@
 		0B001B161B7C9E6800E8E569 /* LCFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeed.m; path = Models/LCFeed/LCFeed.m; sourceTree = "<group>"; };
 		0B001B191B7CA70400E8E569 /* LCTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTag.h; path = Models/LCTag/LCTag.h; sourceTree = "<group>"; };
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
+		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
+		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B288C711BA92660001A8E9D /* LCProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileEditVC.h; path = ViewControllers/LCProfileVC/LCProfileEditVC.h; sourceTree = "<group>"; };
 		0B288C721BA92660001A8E9D /* LCProfileEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileEditVC.m; path = ViewControllers/LCProfileVC/LCProfileEditVC.m; sourceTree = "<group>"; };
 		0B2902751BB90F8800E80684 /* LCActionsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCActionsCellView.h; path = CustomViews/LCActionsCellView/LCActionsCellView.h; sourceTree = "<group>"; };
@@ -451,6 +454,16 @@
 				0B001B1A1B7CA70400E8E569 /* LCTag.m */,
 			);
 			name = LCTag;
+			sourceTree = "<group>";
+		};
+		0B212EE41BBACA4B00B4237E /* LCMenuItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */,
+				0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */,
+			);
+			name = LCMenuItemCell;
+			path = CustomViews/LCMenuItemCell;
 			sourceTree = "<group>";
 		};
 		0B2902741BB90F1500E80684 /* LCActionsCellView */ = {
@@ -1290,6 +1303,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0B212EE41BBACA4B00B4237E /* LCMenuItemCell */,
 				0B4F045F1BB2DF1900A7E27B /* LCLoadMoreCell */,
 				0BF8C8191BB0026C00C29746 /* LCFriendsCell */,
 				0B822CA11BA9408D00D78536 /* LCSpecialContainerView */,
@@ -1541,6 +1555,7 @@
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				96BD145D1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
+				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
