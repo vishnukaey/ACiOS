@@ -18,3 +18,10 @@
 
 "ok" = "OK";
 
+//-- Menu Item --//
+
+"Feed" = "Feed";
+"Interests" = "Interests";
+"Notifications" = "Notifications";
+"Settings" = "Settings";
+"Logout" = "Logout";

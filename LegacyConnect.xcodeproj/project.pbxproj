@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
+		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
 		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
@@ -163,6 +164,8 @@
 		0B001B161B7C9E6800E8E569 /* LCFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeed.m; path = Models/LCFeed/LCFeed.m; sourceTree = "<group>"; };
 		0B001B191B7CA70400E8E569 /* LCTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTag.h; path = Models/LCTag/LCTag.h; sourceTree = "<group>"; };
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
+		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
+		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
 		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
 		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
@@ -427,6 +430,16 @@
 				0B001B1A1B7CA70400E8E569 /* LCTag.m */,
 			);
 			name = LCTag;
+			sourceTree = "<group>";
+		};
+		0B212EE41BBACA4B00B4237E /* LCMenuItemCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */,
+				0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */,
+			);
+			name = LCMenuItemCell;
+			path = CustomViews/LCMenuItemCell;
 			sourceTree = "<group>";
 		};
 		0B35941D1B4E6AE00098C484 /* LCFeedsHomeViewController */ = {
@@ -1212,6 +1225,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0B212EE41BBACA4B00B4237E /* LCMenuItemCell */,
 				0B822CA11BA9408D00D78536 /* LCSpecialContainerView */,
 				0B8575071B9D64C600FD8766 /* LCCausesTableViewCell */,
 				0B8575031B9D645500FD8766 /* LCInterestsTableViewCell */,
@@ -1456,6 +1470,7 @@
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				96BD145D1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
+				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
