@@ -42,11 +42,11 @@
 #pragma mark - setup functions
 - (void)loadFriendsList
 {
-  [LCAPIManager getFriendsWithSuccess:^(id response) {
+  [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
     NSLog(@"%@",response);
     friendsArray = response;
     [friendsTableView reloadData];
-  } andFailure:^(NSString *error) {
+  } andfailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
 }
