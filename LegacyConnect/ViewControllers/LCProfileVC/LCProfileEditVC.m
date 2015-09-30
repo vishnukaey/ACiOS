@@ -19,6 +19,7 @@ static NSString * const kCellIdentifierHeaderBG = @"LCProfileHeaderBGCell";
 static NSString * const kCellIdentifierBirthday = @"LCProfileBirthdayCell";
 static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
+static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 @implementation LCProfileEditVC
 
@@ -95,8 +96,8 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
 - (void)loadUserData {
   
-  [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                  placeholderImage:nil];
 }
 
 
@@ -108,7 +109,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
   [datePicker setMaximumDate:[NSDate date]];
-  NSString *str =@"1900-01-01";
+  NSString *str =kDOBFormat;
   NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
   [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
@@ -153,7 +154,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 -(void) updateTextFieldWithDate:(id) picker
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
-  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"MM/dd/yyyy"];
+  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
 }
 
 
@@ -169,32 +170,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   else {
     buttonSave.enabled = NO;
   }
-}
-
-
-- (void) showGenderSelection {
-  
-  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-  
-  UIAlertAction *maleAction = [UIAlertAction actionWithTitle:@"Male" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    txt_gender.text = @"Male";
-    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
-  }];
-  [actionSheet addAction:maleAction];
-  
-  UIAlertAction *femaleAction = [UIAlertAction actionWithTitle:@"Female" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    txt_gender.text = @"Female";
-    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
-  }];
-  [actionSheet addAction:femaleAction];
-  
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-  [actionSheet addAction:cancelAction];
-  
-  [self presentViewController:actionSheet animated:YES completion:nil];
-  
 }
 
 
@@ -251,10 +226,10 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     
     if (isEditingProfilePic) {
-      profilePic.image = [UIImage imageNamed:@"manplaceholder.jpg"];
+      profilePic.image = nil;
     }
     else {
-      img_headerBG.image = [UIImage imageNamed:@"headerImage"];
+      img_headerBG.image = nil;
     }
     
   }];
@@ -470,7 +445,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     img_headerBG = (UIImageView*)[cell viewWithTag:101];
-    [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
   }
   
   else if(indexPath.section == SECTION_BIRTHDAY){
@@ -483,7 +458,7 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     }
     
     txt_birthday = (UITextField*)[cell viewWithTag:101];
-    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:@"MM/dd/yyyy"];
+    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:kDOBFormat];
     [txt_birthday addTarget:self
                      action:@selector(validateFields:)
            forControlEvents:UIControlEventEditingChanged];
@@ -505,7 +480,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     [txt_gender addTarget:self
                       action:@selector(validateFields:)
             forControlEvents:UIControlEventEditingChanged];
-    //+kctxt_gender.enabled = NO;
     
     genderPicker = [[UIPickerView alloc] init];
     genderPicker.dataSource = self;
@@ -526,12 +500,6 @@ static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
     isEditingProfilePic = NO;
     [self showEditingPictureOptions];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  }
-  
-  else if (indexPath.section == SECTION_GENDER) {
-    
-    [self.view endEditing:YES];
-    //+kc[self performSelector:@selector(showGenderSelection) withObject:nil afterDelay:0];
   }
 }
 
