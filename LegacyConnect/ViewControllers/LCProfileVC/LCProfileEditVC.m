@@ -97,7 +97,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void)loadUserData {
   
   [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:nil];
+                  placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
 }
 
 
