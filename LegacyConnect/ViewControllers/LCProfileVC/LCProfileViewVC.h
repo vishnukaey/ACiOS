@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
+#import "LCInterestsCellView.h"
+#import "LCActionsCellView.h"
 
 typedef enum profileStateTypes
 {
@@ -20,12 +22,22 @@ typedef enum profileStateTypes
 @interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
 {
   IBOutlet UITableView *milestonesTable;
-  IBOutlet UICollectionView *interestsCollectionView;
+  IBOutlet UITableView *interestsTable;
+  IBOutlet UITableView *actionsTable;
+  
   IBOutlet UIImageView *profilePic, *headerImageView;
+  IBOutlet UIView *profilePicBorderView;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  IBOutlet UIButton *impactsButton, *friendsButton, *editButton, *backButton;
+  IBOutlet UIButton *editButton, *backButton;
+  IBOutlet UILabel *impactsCountLabel;
+  IBOutlet UILabel *friendsCountLabel;
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
+  
+  IBOutlet UIButton *mileStonesButton;
+  IBOutlet UIButton *interestsButton;
+  IBOutlet UIButton *actionsButton;
+  
   NSArray *mileStoneFeeds;
   NSArray *interestsArray;
   
@@ -38,5 +50,9 @@ typedef enum profileStateTypes
 - (IBAction)editClicked:(UIButton *)sender;
 - (IBAction)friendsButtonClicked;
 - (IBAction)impactsButtonClicked;
+
+- (IBAction)mileStonesClicked:(id)sender;
+- (IBAction)interestsClicked:(id)sender;
+- (IBAction)actionsClicked:(id)sender;
 
 @end

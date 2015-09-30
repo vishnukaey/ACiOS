@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, constraintType) {
+  constraintForMiddle,
+  constraintForLeft,
+  constraintForRight
+};
+
 @interface LCTabMenuView : UIView
 
 @property(nonatomic, strong)NSArray *menuButtons;

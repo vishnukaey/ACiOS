@@ -10,7 +10,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LCFeedCellView
-@synthesize delegate, feedObject;
+@synthesize delegate, feedObject, moreButton;
 
 - (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
 {
@@ -121,6 +121,11 @@
 - (IBAction)imageFullscreenAction
 {
   [delegate feedCellActionWithType:kFeedCellActionImage andFeed:feedObject];
+}
+
+- (IBAction)moreButtonAction
+{
+  [delegate feedCellActionWithType:kFeedCellActionMore andFeed:feedObject];
 }
 
 /* use thi code if need to get the view by code

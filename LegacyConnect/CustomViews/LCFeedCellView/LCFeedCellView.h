@@ -22,6 +22,7 @@
 {
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
+  IBOutlet UIImageView *moreIcon;
   IBOutlet UILabel  *timeLabel, *thanksLabel, *commentsLabel;
   IBOutlet LCTaggedLabel *usernameLabel, *createdLabel, *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
@@ -29,10 +30,8 @@
 
 @property(nonatomic, retain)id delegate;
 @property(nonatomic, weak)LCFeed *feedObject;
+@property(nonatomic, weak)IBOutlet UIButton *moreButton;
 
 - (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType;
-- (IBAction)likeAction;
-- (IBAction)commentAction;
-- (IBAction)imageFullscreenAction;
 
 @end

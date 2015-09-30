@@ -10,11 +10,18 @@
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
+		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
+		0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2902761BB90F8800E80684 /* LCActionsCellView.m */; };
+		0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */; };
+		0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B29027E1BB9370100E80684 /* LCInterestsCellView.m */; };
+		0B2902811BB9370100E80684 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B29027F1BB9370100E80684 /* LCInterestsCellView.xib */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
 		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
+		0B4F04631BB2DF1900A7E27B /* LCLoadMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B4F04611BB2DF1900A7E27B /* LCLoadMoreCell.m */; };
+		0B4F04641BB2DF1900A7E27B /* LCLoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4F04621BB2DF1900A7E27B /* LCLoadMoreCell.xib */; };
 		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
 		0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A7FC1B6A45E40065C231 /* LCRecentNotificationTVC.m */; };
@@ -97,6 +104,8 @@
 		0BF05A7D1B4E645400FF7B39 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF05A7A1B4E645400FF7B39 /* main.m */; };
 		0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */; };
 		0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A801B4E64A000FF7B39 /* Main.storyboard */; };
+		0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C8171BAFFCB000C29746 /* LCFriendsListViewController.m */; };
+		0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */; };
 		0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBC7B81B81BC5100E75179 /* LCFriend.m */; };
 		16B8206A1BB9601000C651F4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 16B820691BB9601000C651F4 /* placeholder.png */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -166,6 +175,14 @@
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
 		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
+		0B288C711BA92660001A8E9D /* LCProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileEditVC.h; path = ViewControllers/LCProfileVC/LCProfileEditVC.h; sourceTree = "<group>"; };
+		0B288C721BA92660001A8E9D /* LCProfileEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileEditVC.m; path = ViewControllers/LCProfileVC/LCProfileEditVC.m; sourceTree = "<group>"; };
+		0B2902751BB90F8800E80684 /* LCActionsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCActionsCellView.h; path = CustomViews/LCActionsCellView/LCActionsCellView.h; sourceTree = "<group>"; };
+		0B2902761BB90F8800E80684 /* LCActionsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCActionsCellView.m; path = CustomViews/LCActionsCellView/LCActionsCellView.m; sourceTree = "<group>"; };
+		0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCActionsCellView.xib; path = CustomViews/LCActionsCellView/LCActionsCellView.xib; sourceTree = "<group>"; };
+		0B29027D1BB9370100E80684 /* LCInterestsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestsCellView.h; path = CustomViews/LCInterestsCellView/LCInterestsCellView.h; sourceTree = "<group>"; };
+		0B29027E1BB9370100E80684 /* LCInterestsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestsCellView.m; path = CustomViews/LCInterestsCellView/LCInterestsCellView.m; sourceTree = "<group>"; };
+		0B29027F1BB9370100E80684 /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
 		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
 		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
 		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
@@ -176,6 +193,9 @@
 		0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLoginViewController.m; path = ViewControllers/LCLoginViewController/LCLoginViewController.m; sourceTree = "<group>"; };
 		0B35942C1B4E731C0098C484 /* LCEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEmptyViewController.h; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.h; sourceTree = "<group>"; };
 		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
+		0B4F04601BB2DF1900A7E27B /* LCLoadMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLoadMoreCell.h; sourceTree = "<group>"; };
+		0B4F04611BB2DF1900A7E27B /* LCLoadMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCLoadMoreCell.m; sourceTree = "<group>"; };
+		0B4F04621BB2DF1900A7E27B /* LCLoadMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadMoreCell.xib; sourceTree = "<group>"; };
 		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
 		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
 		0B56A7F91B6A31CF0065C231 /* Notification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Notification.storyboard; path = Storyboards/Notification.storyboard; sourceTree = "<group>"; };
@@ -295,6 +315,10 @@
 		0BF05A7A1B4E645400FF7B39 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SupportingFiles/main.m; sourceTree = "<group>"; };
 		0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LaunchScreen.xib; path = Storyboards/LaunchScreen.xib; sourceTree = "<group>"; };
 		0BF05A801B4E64A000FF7B39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Storyboards/Main.storyboard; sourceTree = "<group>"; };
+		0BF8C8161BAFFCB000C29746 /* LCFriendsListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCFriendsListViewController.h; sourceTree = "<group>"; };
+		0BF8C8171BAFFCB000C29746 /* LCFriendsListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCFriendsListViewController.m; sourceTree = "<group>"; };
+		0BF8C81A1BB0028000C29746 /* LCFriendsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCFriendsCell.h; sourceTree = "<group>"; };
+		0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCFriendsCell.m; sourceTree = "<group>"; };
 		0BFBC7B71B81BC5100E75179 /* LCFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFriend.h; path = Models/LCFriend/LCFriend.h; sourceTree = "<group>"; };
 		0BFBC7B81B81BC5100E75179 /* LCFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFriend.m; path = Models/LCFriend/LCFriend.m; sourceTree = "<group>"; };
 		16B820691BB9601000C651F4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
@@ -442,6 +466,26 @@
 			path = CustomViews/LCMenuItemCell;
 			sourceTree = "<group>";
 		};
+		0B2902741BB90F1500E80684 /* LCActionsCellView */ = {
+			isa = PBXGroup;
+			children = (
+				0B2902751BB90F8800E80684 /* LCActionsCellView.h */,
+				0B2902761BB90F8800E80684 /* LCActionsCellView.m */,
+				0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */,
+			);
+			name = LCActionsCellView;
+			sourceTree = "<group>";
+		};
+		0B29027A1BB9365A00E80684 /* LCInterestsCellView */ = {
+			isa = PBXGroup;
+			children = (
+				0B29027D1BB9370100E80684 /* LCInterestsCellView.h */,
+				0B29027E1BB9370100E80684 /* LCInterestsCellView.m */,
+				0B29027F1BB9370100E80684 /* LCInterestsCellView.xib */,
+			);
+			name = LCInterestsCellView;
+			sourceTree = "<group>";
+		};
 		0B35941D1B4E6AE00098C484 /* LCFeedsHomeViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +535,17 @@
 				0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */,
 			);
 			name = LCEmptyViewController;
+			sourceTree = "<group>";
+		};
+		0B4F045F1BB2DF1900A7E27B /* LCLoadMoreCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B4F04601BB2DF1900A7E27B /* LCLoadMoreCell.h */,
+				0B4F04611BB2DF1900A7E27B /* LCLoadMoreCell.m */,
+				0B4F04621BB2DF1900A7E27B /* LCLoadMoreCell.xib */,
+			);
+			name = LCLoadMoreCell;
+			path = CustomViews/LCLoadMoreCell;
 			sourceTree = "<group>";
 		};
 		0B5571431B8D9F1B00445958 /* LCSearchViewController */ = {
@@ -983,6 +1038,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0BF8C8151BAFFC8E00C29746 /* LCFriendsList */,
 				0B5571431B8D9F1B00445958 /* LCSearchViewController */,
 				0B56A8061B6A46B80065C231 /* LCNotificationsViewController */,
 				CEBCEC5E1B6898FD00F0116E /* LCInterestsVC */,
@@ -1023,6 +1079,26 @@
 				0BC7557F1B563907009CE7F3 /* Localizable.strings */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		0BF8C8151BAFFC8E00C29746 /* LCFriendsList */ = {
+			isa = PBXGroup;
+			children = (
+				0BF8C8161BAFFCB000C29746 /* LCFriendsListViewController.h */,
+				0BF8C8171BAFFCB000C29746 /* LCFriendsListViewController.m */,
+			);
+			name = LCFriendsList;
+			path = ViewControllers/LCFriendsList;
+			sourceTree = "<group>";
+		};
+		0BF8C8191BB0026C00C29746 /* LCFriendsCell */ = {
+			isa = PBXGroup;
+			children = (
+				0BF8C81A1BB0028000C29746 /* LCFriendsCell.h */,
+				0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */,
+			);
+			name = LCFriendsCell;
+			path = CustomViews/LCFriendsCell;
 			sourceTree = "<group>";
 		};
 		0BFBC7BD1B820CA700E75179 /* LCEvent */ = {
@@ -1150,6 +1226,8 @@
 				CEE358001B86E41900405239 /* LCUserFriendsVC.m */,
 				CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */,
 				CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */,
+				0B288C711BA92660001A8E9D /* LCProfileEditVC.h */,
+				0B288C721BA92660001A8E9D /* LCProfileEditVC.m */,
 			);
 			name = LCProfileVC;
 			sourceTree = "<group>";
@@ -1226,6 +1304,8 @@
 			isa = PBXGroup;
 			children = (
 				0B212EE41BBACA4B00B4237E /* LCMenuItemCell */,
+				0B4F045F1BB2DF1900A7E27B /* LCLoadMoreCell */,
+				0BF8C8191BB0026C00C29746 /* LCFriendsCell */,
 				0B822CA11BA9408D00D78536 /* LCSpecialContainerView */,
 				0B8575071B9D64C600FD8766 /* LCCausesTableViewCell */,
 				0B8575031B9D645500FD8766 /* LCInterestsTableViewCell */,
@@ -1242,6 +1322,8 @@
 				CEBCE1A51B6A24DC00730FD5 /* LCMenuButton */,
 				0BE2B9B91B58F7BC0026E607 /* LCChooseCausesCollectionViewCell */,
 				0BB7B3711B57DEC800261658 /* LCFeedCellView */,
+				0B2902741BB90F1500E80684 /* LCActionsCellView */,
+				0B29027A1BB9365A00E80684 /* LCInterestsCellView */,
 				0BB7B3701B57DEB100261658 /* LCGIButton */,
 			);
 			name = CustomViews;
@@ -1343,6 +1425,7 @@
 				0BB33DDB1BA81401009E6D0C /* fbButton.png in Resources */,
 				0BB33DE11BA81401009E6D0C /* menuButton_dummy.png in Resources */,
 				0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */,
+				0B4F04641BB2DF1900A7E27B /* LCLoadMoreCell.xib in Resources */,
 				0BB33DA11BA812A3009E6D0C /* Gotham-BookItalic.otf in Resources */,
 				0BB33DA01BA812A3009E6D0C /* Gotham-Book.otf in Resources */,
 				0BB33DEC1BA81401009E6D0C /* star.png in Resources */,
@@ -1364,6 +1447,7 @@
 				0BB33DE21BA81401009E6D0C /* photo.jpg in Resources */,
 				0BB33DB51BA81359009E6D0C /* Interests.storyboard in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
+				0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */,
 				0BB33DA51BA812A3009E6D0C /* Gotham-MediumItalic.otf in Resources */,
 				0BB33DD51BA81401009E6D0C /* check_box.png in Resources */,
 				0BB33DE61BA81401009E6D0C /* profileTick.png in Resources */,
@@ -1379,6 +1463,7 @@
 				0BB33DB71BA81359009E6D0C /* SignUp.storyboard in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
 				0BB33DE41BA81401009E6D0C /* profileAdd.png in Resources */,
+				0B2902811BB9370100E80684 /* LCInterestsCellView.xib in Resources */,
 				0BB33DEA1BA81401009E6D0C /* search-icon_white_64.png in Resources */,
 				0BB33DEB1BA81401009E6D0C /* simple-green-check-button-th.png in Resources */,
 				0BB33DDD1BA81401009E6D0C /* heart_dummy.png in Resources */,
@@ -1495,6 +1580,7 @@
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
+				0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */,
 				0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */,
 				0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */,
 				96BD14551B72166B004D5CFA /* MTLModel.m in Sources */,
@@ -1509,23 +1595,28 @@
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				96BD145F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m in Sources */,
+				0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				CEBED6A71B5FADBB0012FEBB /* LCChooseCommunityInterest.m in Sources */,
 				CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */,
 				0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */,
+				0B4F04631BB2DF1900A7E27B /* LCLoadMoreCell.m in Sources */,
 				0BB33DAB1BA8132A009E6D0C /* LCFeedCellView.m in Sources */,
 				0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */,
+				0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
 				96BD14361B721659004D5CFA /* EXTScope.m in Sources */,
 				96BD14571B72166B004D5CFA /* MTLReflection.m in Sources */,
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
 				96BD14581B72166B004D5CFA /* MTLTransformerErrorHandling.m in Sources */,
+				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
 				CEBED6A41B5FAD0B0012FEBB /* LCInviteToCommunity.m in Sources */,
 				96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */,
+				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
 				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
 			);

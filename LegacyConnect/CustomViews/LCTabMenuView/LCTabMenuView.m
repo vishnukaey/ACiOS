@@ -7,11 +7,11 @@
 //
 
 #import "LCTabMenuView.h"
-#define BAR_LENGTH_MULTIPLIER 13
 
 @interface LCTabMenuView ()
 {
   UIView *bottomBar;
+  NSLayoutConstraint *botbarXcenterConstraint;
 }
 @end
 
@@ -61,14 +61,14 @@
       NSLayoutConstraint *botbar_bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:bottomBar attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
       [self addConstraint:botbar_bottom];
       
-      NSLayoutConstraint *botbar_width =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:button.titleLabel.text.length*BAR_LENGTH_MULTIPLIER];
-      [bottomBar addConstraint:botbar_width];
+      NSLayoutConstraint *botbar_width =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+      [self addConstraint:botbar_width];
       
       NSLayoutConstraint *botbar_height =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:3];
-      [bottomBar addConstraint:botbar_height];
+      [self addConstraint:botbar_height];
       
-      NSLayoutConstraint *botbar_Xcenter =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
-      [self addConstraint:botbar_Xcenter];
+      botbarXcenterConstraint = [NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+      [self addConstraint:botbarXcenterConstraint];
     }
     else if (i==menuButtons.count-1)
     {
@@ -186,6 +186,7 @@
     return;
   }
   
+  nextView.hidden = false;
   [UIView animateWithDuration:0.5 delay:0 options: UIViewAnimationOptionCurveEaseInOut animations:^
    {
      currentView.center = currentViewPointTo;
@@ -193,15 +194,22 @@
      [[menuButtons objectAtIndex:(int)_currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
      [[menuButtons objectAtIndex:index] setTitleColor:highlightColor forState:UIControlStateNormal];
      UIButton *nextBut = [menuButtons objectAtIndex:index];
-     [bottomBar setFrame:CGRectMake(nextBut.center.x - nextBut.titleLabel.text.length*BAR_LENGTH_MULTIPLIER/2, bottomBar.frame.origin.y, nextBut.titleLabel.text.length*BAR_LENGTH_MULTIPLIER, bottomBar.frame.size.height)];
+     botbarXcenterConstraint.constant = nextBut.frame.origin.x;
    }
    completion:^(BOOL finished)
    {
       //Completion Block
+     for (UIView *v in views) {
+       if (v!=nextView) {
+         v.hidden = true;
+       }
+     }
    }];
   _currentIndex = index;
   
 }
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

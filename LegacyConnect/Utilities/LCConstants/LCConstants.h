@@ -27,6 +27,7 @@ extern NSString *const kFriendsURL;
 extern NSString *const kEventsURL;
 extern NSString *const kRejectFriendURL;
 extern NSString *const kAcceptFriendURL;
+extern NSString *const kCancelFriendURL;
 extern NSString *const kUnfollowEventURL;
 extern NSString *const kFollowEventURL;
 extern NSString *const kAddUsersToEventURL;
@@ -94,6 +95,7 @@ extern NSString *const kCommentsfeedCellID;
 
 extern NSString *const kFeedCellActionLike;
 extern NSString *const kFeedCellActionComment;
+extern NSString *const kFeedCellActionMore;
 extern NSString *const kFeedCellActionImage;
 
 extern NSString *const kFeedTagTypeCause;
