@@ -16,6 +16,7 @@
 + (void)getHomeFeedsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getUserDetailsOfUser:(NSString*)userID WithSuccess:(void (^)(LCUserDetail* responses))success andFailure:(void (^)(NSString *error))failure;
 + (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure;
++ (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 
 #pragma mark - Interests and Causes
@@ -30,7 +31,7 @@
 + (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
 + (void)sendFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)cancelFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
-+ (void)removeFried:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)removeFriend:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)acceptFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)rejectFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)sendFriendRequestFromContacts:(NSArray *)emailList withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
