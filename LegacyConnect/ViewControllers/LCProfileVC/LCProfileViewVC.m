@@ -9,7 +9,6 @@
 #import "LCProfileViewVC.h"
 #import "LCTabMenuView.h"
 #import "LCCommunityInterestCell.h"
-#import "LCUserFriendsVC.h"
 #import "LCProfileEditVC.h"
 #import "LCImapactsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
@@ -225,10 +224,6 @@
   friendsVC.userId = self.userDetail.userID;
   [self.navigationController pushViewController:friendsVC animated:YES];
   
-  //  NSLog(@"friends clicked----->");
-  //  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  //  LCUserFriendsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCUserFriendsVC"];
-  //  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)impactsButtonClicked

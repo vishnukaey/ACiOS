@@ -44,6 +44,12 @@
   [super viewDidAppear:animated];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:MFSideMenuStateNotificationEvent object:nil];
+  [super viewWillDisappear:animated];
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
@@ -91,6 +97,8 @@
          [self addfloatingButtons];
          [self addMenuButton:navigationRoot];
          mainContainer.panMode = MFSideMenuPanModeNone;
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+
          
        } andFailure:^(NSString *error) {
          NSLog(@" error:  %@",error);
@@ -105,6 +113,12 @@
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
     }
   }
+}
+
+- (void)menuEventNotification:(NSNotification*)notification
+{
+  //added to bring menu button to top on menu item selection.
+  [navigationRoot.view bringSubviewToFront:menuButton];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -135,7 +149,7 @@
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   //menu poper button
-  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 60,30, 50, 50)];
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 45, 28, 25, 25)];
 
   menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor clearColor];
@@ -245,7 +259,6 @@
   
   //added to bring menu button to top on menu item selection.
   [navigationRoot.view bringSubviewToFront:menuButton];
-
 }
 
 
