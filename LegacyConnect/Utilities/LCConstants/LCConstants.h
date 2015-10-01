@@ -23,6 +23,8 @@ extern NSString *const kUpdatePasswordURL;
 extern NSString *const kForgotPasswordURL;
 extern NSString *const kLogOutURL;
 extern NSString *const kGetFeedsURL;
+extern NSString *const kGetMilestonesURL;
+extern NSString *const kGetImpactsURL;
 extern NSString *const kFriendsURL;
 extern NSString *const kEventsURL;
 extern NSString *const kRejectFriendURL;

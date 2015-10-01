@@ -280,7 +280,7 @@
       LCFriend *friend = [[LCFriend alloc] init];
       friend.userID = userDetail.userID;
       
-      [LCAPIManager removeFried:friend withSuccess:^(NSArray *response)
+      [LCAPIManager removeFriend:friend withSuccess:^(NSArray *response)
        {
          NSLog(@"%@",response);
          currentProfileState = PROFILE_OTHER_NON_FRIEND;
