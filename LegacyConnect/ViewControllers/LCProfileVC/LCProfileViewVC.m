@@ -259,7 +259,7 @@
     friend.lastName = userDetail.lastName;
     friend.avatarURL = userDetail.avatarURL;
     
-    [LCAPIManager removeFried:friend withSuccess:^(NSArray *response)
+    [LCAPIManager removeFriend:friend withSuccess:^(NSArray *response)
      {
        NSLog(@"%@",response);
        [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
