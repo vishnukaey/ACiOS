@@ -13,7 +13,6 @@ typedef enum profileSectionTypes
 {
   SECTION_NAME,
   SECTION_LOCATION,
-  SECTION_HEADER_BACKGROUND,
   SECTION_BIRTHDAY,
   SECTION_GENDER
 } sectionType;
@@ -23,13 +22,14 @@ typedef enum profileSectionTypes
 {
   
   IBOutlet UIImageView *profilePic;
+  IBOutlet UIView *profilePicBorderView;
   IBOutlet UIButton *buttonSave;
+  IBOutlet UIImageView *headerBGImage;
   
   
   UITextField *txt_firstName;
   UITextField *txt_lastName;
   UITextField *txt_location;
-  UIImageView *img_headerBG;
   UITextField *txt_birthday;
   UITextField *txt_gender;
   
@@ -50,6 +50,7 @@ typedef enum profileSectionTypes
 
 - (IBAction)cancelAction:(id)sender;
 - (IBAction)saveAction:(id)sender;
-- (IBAction)editPictureAction:(id)sender;
+- (IBAction)editProfilePicAction:(id)sender;
+- (IBAction)editHeaderBGAction:(id)sender;
 
 @end

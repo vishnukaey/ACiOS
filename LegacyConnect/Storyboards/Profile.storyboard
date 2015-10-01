@@ -18,6 +18,7 @@
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
+            <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
@@ -614,7 +615,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-pK-R3h">
-                                <rect key="frame" x="0.0" y="312" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="amk-tV-yrk"/>
                                 </items>
@@ -628,7 +629,21 @@
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdu-nU-CD9" userLabel="Header Image Overlay">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siv-ZI-C7C" userLabel="ProfilePic Edit Button">
+                                                <rect key="frame" x="341" y="54" width="24" height="22"/>
+                                                <state key="normal" image="editHeaderBG">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="editHeaderBGAction:" destination="f4U-mc-t21" eventType="touchUpInside" id="cEG-Q0-DHY"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="siv-ZI-C7C" secondAttribute="trailing" constant="10" id="w4Z-jJ-C5Z"/>
+                                        </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qwr-TH-TEo" userLabel="Profile Pic Border View">
                                         <rect key="frame" x="135" y="55" width="106" height="106"/>
@@ -649,17 +664,17 @@
                                             <constraint firstAttribute="bottom" secondItem="eyz-my-FYN" secondAttribute="bottom" constant="3" id="yxy-kp-QWw"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ9-y9-AEJ" userLabel="Profile Action Button">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQ9-y9-AEJ" userLabel="ProfilePic Edit Button">
                                         <rect key="frame" x="204" y="124" width="38" height="38"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="38" id="Xlj-OA-iGM"/>
-                                            <constraint firstAttribute="height" constant="38" id="hpw-3b-dVL"/>
+                                            <constraint firstAttribute="height" constant="38" id="UdE-Fa-DVR"/>
+                                            <constraint firstAttribute="width" constant="38" id="gCZ-AC-UdS"/>
                                         </constraints>
-                                        <state key="normal" image="profileSettings">
+                                        <state key="normal" image="editProfilePic">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="editClicked:" destination="CU0-BO-pMc" eventType="touchUpInside" id="LA5-Uz-xTS"/>
+                                            <action selector="editProfilePicAction:" destination="f4U-mc-t21" eventType="touchUpInside" id="gi4-xc-zQQ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -683,8 +698,14 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5tm-mb-Q2J" userLabel="NaviagationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EDIT PROFILE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yyr-mP-zZ6">
+                                        <rect key="frame" x="148" y="40" width="80" height="11"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wdA-UZ-hHR">
-                                        <rect key="frame" x="8" y="26" width="57" height="30"/>
+                                        <rect key="frame" x="8" y="31" width="57" height="29"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -695,7 +716,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VsG-eU-TnH">
-                                        <rect key="frame" x="327" y="26" width="40" height="30"/>
+                                        <rect key="frame" x="327" y="31" width="40" height="29"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="0.94117647059999998" green="0.3921568627" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -709,12 +730,12 @@
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="1de-ZM-WJ0"/>
-                                    <constraint firstItem="wdA-UZ-hHR" firstAttribute="top" secondItem="5tm-mb-Q2J" secondAttribute="top" constant="26" id="Ehk-s1-5Ns"/>
-                                    <constraint firstAttribute="bottom" secondItem="wdA-UZ-hHR" secondAttribute="bottom" constant="8" id="IrA-Bk-6nI"/>
-                                    <constraint firstAttribute="bottom" secondItem="VsG-eU-TnH" secondAttribute="bottom" constant="8" id="Q1y-1G-2fn"/>
-                                    <constraint firstItem="VsG-eU-TnH" firstAttribute="top" secondItem="5tm-mb-Q2J" secondAttribute="top" constant="26" id="asg-fT-3Mm"/>
+                                    <constraint firstItem="Yyr-mP-zZ6" firstAttribute="centerY" secondItem="5tm-mb-Q2J" secondAttribute="centerY" constant="13" id="5bb-sr-34z"/>
+                                    <constraint firstItem="Yyr-mP-zZ6" firstAttribute="centerY" secondItem="wdA-UZ-hHR" secondAttribute="centerY" id="Kz1-t9-Cp1"/>
                                     <constraint firstAttribute="trailing" secondItem="VsG-eU-TnH" secondAttribute="trailing" constant="8" id="fEO-a2-Van"/>
+                                    <constraint firstItem="Yyr-mP-zZ6" firstAttribute="centerX" secondItem="5tm-mb-Q2J" secondAttribute="centerX" id="o3r-Y5-CtH"/>
                                     <constraint firstItem="wdA-UZ-hHR" firstAttribute="leading" secondItem="5tm-mb-Q2J" secondAttribute="leading" constant="8" id="pDw-YX-ktZ"/>
+                                    <constraint firstItem="VsG-eU-TnH" firstAttribute="centerY" secondItem="Yyr-mP-zZ6" secondAttribute="centerY" id="vRC-xg-VEz"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="fS6-Vm-zpD">
@@ -878,6 +899,7 @@
                             <constraint firstItem="Cju-rD-UP2" firstAttribute="top" secondItem="fS6-Vm-zpD" secondAttribute="bottom" id="bo8-wd-pmr"/>
                             <constraint firstItem="iJf-ru-it8" firstAttribute="leading" secondItem="P9q-yW-xl5" secondAttribute="leading" id="cyc-Kb-Eiz"/>
                             <constraint firstAttribute="trailing" secondItem="fS6-Vm-zpD" secondAttribute="trailing" id="eHF-cl-P3B"/>
+                            <constraint firstItem="siv-ZI-C7C" firstAttribute="top" secondItem="5tm-mb-Q2J" secondAttribute="bottom" constant="10" id="ncC-oq-DFv"/>
                             <constraint firstItem="iJf-ru-it8" firstAttribute="top" secondItem="mCt-b3-wbg" secondAttribute="bottom" id="o9m-HU-atE"/>
                             <constraint firstItem="5tm-mb-Q2J" firstAttribute="top" secondItem="P9q-yW-xl5" secondAttribute="top" id="wC2-nW-h30"/>
                         </constraints>
@@ -885,6 +907,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="buttonSave" destination="VsG-eU-TnH" id="QUD-k0-nzS"/>
+                        <outlet property="headerBGImage" destination="Arj-9v-Zms" id="zLe-s7-5Mp"/>
+                        <outlet property="profilePic" destination="eyz-my-FYN" id="Pcu-wQ-jFn"/>
+                        <outlet property="profilePicBorderView" destination="Qwr-TH-TEo" id="opJ-UG-OZ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q2w-lj-ULx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -895,6 +920,8 @@
     <resources>
         <image name="backButton" width="12" height="21"/>
         <image name="backButton.png" width="23" height="40"/>
+        <image name="editHeaderBG" width="24" height="19"/>
+        <image name="editProfilePic" width="37" height="37"/>
         <image name="profileSettings" width="37" height="37"/>
         <image name="userProfilePic" width="100" height="100"/>
     </resources>
