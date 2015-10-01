@@ -41,6 +41,7 @@ typedef enum profileSectionTypes
   NSArray *genderTypes;
   
   BOOL isEditingProfilePic;
+  UIImage *profilePicPlaceholder;
   
 }
 

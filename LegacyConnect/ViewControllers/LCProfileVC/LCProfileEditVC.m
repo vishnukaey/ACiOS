@@ -39,8 +39,10 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   genderTypes = @[@"Male",@"Female"];
   
   self.navigationController.navigationBarHidden = YES;
-  [self loadUserData];
   
+  profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                placeholderImage:profilePicPlaceholder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,23 +68,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   NSLog(@"birthday - %@",txt_birthday.text);
   NSLog(@"gender - %@",txt_gender.text);
   
-  
-//  NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
-//  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
-//  
-//  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//  [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
-//    NSLog(@"%@",response);
-////    [self.signupButton setEnabled:true];
-////    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//  } andFailure:^(NSString *error) {
-//    NSLog(@"%@",error);
-////    [self.signupButton setEnabled:true];
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//  }];
-
-  
 }
 
 - (IBAction)editPictureAction:(id)sender {
@@ -94,22 +79,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 #pragma mark -
 
-- (void)loadUserData {
-  
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-}
-
-
-#pragma mark -
-
 - (void) setDobTextFieldWithInputView
 {
   
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
   [datePicker setMaximumDate:[NSDate date]];
-  NSString *str =kDOBFormat;
+  NSString *str = kDOBFormat;
   NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
   [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
@@ -176,6 +152,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void) showEditingPictureOptions {
   
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
@@ -191,8 +168,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     [self showImageCropViewWithImage:originalImage];
     
   }];
-  [actionSheet addAction:editAction];
-  
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
@@ -207,8 +182,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     }
     
   }];
-  [actionSheet addAction:takeAction];
-  
   
   UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
@@ -220,23 +193,38 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     [self presentViewController:imagePicker animated:YES completion:nil];
     
   }];
-  [actionSheet addAction:chooseAction];
-  
   
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     
     if (isEditingProfilePic) {
-      profilePic.image = nil;
+      profilePic.image = profilePicPlaceholder;
     }
     else {
       img_headerBG.image = nil;
     }
-    
   }];
-  [actionSheet addAction:removeAction];
-  
-  
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  
+  
+  BOOL isImageAvailable;
+  
+  if (isEditingProfilePic) {
+    NSData *profilePicData = UIImagePNGRepresentation(profilePic.image);
+    NSData *placeHolderData = UIImagePNGRepresentation(profilePicPlaceholder);
+    isImageAvailable = (![profilePicData isEqual:placeHolderData]);
+  }
+  else {
+    isImageAvailable = (img_headerBG.image != nil);
+  }
+  
+  if (isImageAvailable){
+    [actionSheet addAction:editAction];
+  }
+  [actionSheet addAction:takeAction];
+  [actionSheet addAction:chooseAction];
+  if (isImageAvailable) {
+    [actionSheet addAction:removeAction];
+  }
   [actionSheet addAction:cancelAction];
   
   [self presentViewController:actionSheet animated:YES completion:nil];
@@ -585,12 +573,11 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
                   rotationAngle:(CGFloat)rotationAngle
 {
   [self dismissViewControllerAnimated:YES completion:^{
+    
     if (isEditingProfilePic) {
-      
       profilePic.image = croppedImage;
     }
     else {
-      
       img_headerBG.image = croppedImage;
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
