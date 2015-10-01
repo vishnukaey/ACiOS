@@ -19,7 +19,6 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
     [manager POST:urlString parameters:params
@@ -48,7 +47,6 @@
   {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
@@ -74,33 +72,38 @@
   }
 }
 
-
-
 - (void)performPutOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andImageData:(NSData*)imageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   if ([LCUtilityManager isNetworkAvailable])
   {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:30];
+    [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+    manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
-    id block = ^(id<AFMultipartFormData> formData) {
-      [formData appendPartWithFileData:imageData
-                                  name:@"image"
-                              fileName:@"image"
-                              mimeType:@"image/jpeg"];
-    };
+//    id block = ^(id<AFMultipartFormData> formData) {
+//      [formData appendPartWithFileData:imageData
+//                                  name:@"image"
+//                              fileName:@"image"
+//                              mimeType:@"image/jpeg"];
+//    };
     
     NSMutableURLRequest *request = [manager.requestSerializer
                                     multipartFormRequestWithMethod:@"PUT"
                                     URLString:url
-                                    parameters:nil
-                                    constructingBodyWithBlock:block
+                                    parameters:params
+                                    constructingBodyWithBlock:nil
                                     error:nil];
+    
+    
     [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-             success(responseObject);
+      success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-             failure([error localizedDescription]);
+      failure([error localizedDescription]);
     }];
   }
 }
@@ -112,7 +115,6 @@
   {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
@@ -133,6 +135,45 @@
   else
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+  }
+}
+
+
+- (void)performPutOperationForProfileWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andHeaderImageData:(NSData*)headerImageData andAvtarImageData:(NSData*)avtarImageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  if ([LCUtilityManager isNetworkAvailable])
+  {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager.requestSerializer setTimeoutInterval:30];
+    [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
+    id block = ^(id<AFMultipartFormData> formData) {
+      [formData appendPartWithFileData:headerImageData
+                                  name:@"image"
+                              fileName:@"image"
+                              mimeType:@"image/jpeg"];
+    };
+    NSError *error;
+    NSMutableURLRequest *request = [manager.requestSerializer
+                                    multipartFormRequestWithMethod:@"PUT"
+                                    URLString:url
+                                    parameters:params
+                                    constructingBodyWithBlock:nil
+                                    error:&error];
+    NSLog(@"%@",error);
+    [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+          NSLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
+        }];
+      success(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      failure([error localizedDescription]);
+    }];
+
   }
 }
 
