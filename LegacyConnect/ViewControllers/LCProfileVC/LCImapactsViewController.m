@@ -14,12 +14,16 @@
 @end
 
 @implementation LCImapactsViewController
-@synthesize impactsTableView;
+@synthesize impactsTableView, customNavigationHeight;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+  
   [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
     impactsArray = response;
@@ -31,6 +35,7 @@
   [impactsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   impactsTableView.estimatedRowHeight = 44.0;
   impactsTableView.rowHeight = UITableViewAutomaticDimension;
+
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -86,7 +91,7 @@
   }
   cell.delegate = self;
   [cell setData:[impactsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
-  
+ 
   return cell;
 }
 
