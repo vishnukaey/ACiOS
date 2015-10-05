@@ -224,10 +224,10 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-#warning not working
+
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kprofileEditURL];
   NSError *error = nil;
   NSDictionary *tempDict = [MTLJSONAdapter JSONDictionaryFromModel:user error:&error];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:tempDict];

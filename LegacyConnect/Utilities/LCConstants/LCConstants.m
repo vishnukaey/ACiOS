@@ -56,6 +56,7 @@ NSString *const kUpdatePasswordURL = @"api/user/resetPassword";
 NSString *const kLogOutURL = @"";
 NSString *const kContactFriendsURL = @"api/user/friends";
 NSString *const kFBContactFriendsURL = @"api/user/fbFriends";
+NSString *const kprofileEditURL = @"api/user/edit";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
