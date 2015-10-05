@@ -35,6 +35,7 @@ extern NSString *const kFollowEventURL;
 extern NSString *const kAddUsersToEventURL;
 extern NSString *const kContactFriendsURL;
 extern NSString *const kFBContactFriendsURL;
+extern NSString *const kprofileEditURL;
 
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;
@@ -65,6 +66,7 @@ extern NSString *const kFriendIDKey;
 extern NSString *const kPasswordResetCodeKey;
 extern NSString *const kEventsKey;
 extern NSString *const kContactEmailsKey;
+extern NSString *const kMileStonesKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;

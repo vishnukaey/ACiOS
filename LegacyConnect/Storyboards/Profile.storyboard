@@ -628,12 +628,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jYJ-pK-R3h">
-                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
-                                <items>
-                                    <navigationItem title="Title" id="amk-tV-yrk"/>
-                                </items>
-                            </navigationBar>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJf-ru-it8" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="175"/>
                                 <subviews>
@@ -741,7 +735,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="0.95999999999999996" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="1de-ZM-WJ0"/>
                                     <constraint firstItem="Yyr-mP-zZ6" firstAttribute="centerY" secondItem="5tm-mb-Q2J" secondAttribute="centerY" constant="13" id="5bb-sr-34z"/>
@@ -904,7 +898,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="iJf-ru-it8" secondAttribute="trailing" id="6Ct-mk-CF0"/>
                             <constraint firstItem="5tm-mb-Q2J" firstAttribute="leading" secondItem="P9q-yW-xl5" secondAttribute="leading" id="7VG-nz-Nyi"/>

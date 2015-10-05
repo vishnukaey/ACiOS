@@ -204,6 +204,7 @@
          v.hidden = true;
        }
      }
+     nextView.hidden = false;
    }];
   _currentIndex = index;
   
