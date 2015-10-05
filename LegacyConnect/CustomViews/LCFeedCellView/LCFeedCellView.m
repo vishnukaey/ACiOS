@@ -49,7 +49,7 @@
   }
   else
   {
-    [postPhoto sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];
   }
   if ([pageType isEqualToString:kHomefeedCellID])
   {

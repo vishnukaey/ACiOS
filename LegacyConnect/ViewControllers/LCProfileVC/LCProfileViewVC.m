@@ -185,25 +185,25 @@
 {
   [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
 
-//  [LCAPIManager getMilestonesForUser:userDetail.userID
-//                  andLastMilestoneID:nil with:^(NSArray *response) {
-//                    mileStoneFeeds = response;
-//                    [milestonesTable reloadData];
-//                    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-//                  }
-//                          andFailure:^(NSString *error) {
-//                            [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-//                            NSLog(@"%@",error);
-//                          }];
+  [LCAPIManager getMilestonesForUser:userDetail.userID
+                  andLastMilestoneID:nil with:^(NSArray *response) {
+                    mileStoneFeeds = response;
+                    [milestonesTable reloadData];
+                    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+                  }
+                          andFailure:^(NSString *error) {
+                            [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+                            NSLog(@"%@",error);
+                          }];
   
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-    mileStoneFeeds = response;
-    [milestonesTable reloadData];
-    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-    NSLog(@"%@",error);
-  }];
+//  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+//    mileStoneFeeds = response;
+//    [milestonesTable reloadData];
+//    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+//  } andFailure:^(NSString *error) {
+//    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+//    NSLog(@"%@",error);
+//  }];
 }
 
 - (void)loadInterests

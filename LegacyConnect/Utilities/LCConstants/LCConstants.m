@@ -83,6 +83,7 @@ NSString *const kLastCauseIDKey = @"lastCauseId";
 NSString *const kFriendsKey = @"friends";
 NSString *const kFriendIDKey = @"friendId";
 NSString *const kFeedsKey = @"feeds";
+NSString *const kMileStonesKey = @"milestones";
 
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";

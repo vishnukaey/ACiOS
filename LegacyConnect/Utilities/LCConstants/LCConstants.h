@@ -65,6 +65,7 @@ extern NSString *const kFriendIDKey;
 extern NSString *const kPasswordResetCodeKey;
 extern NSString *const kEventsKey;
 extern NSString *const kContactEmailsKey;
+extern NSString *const kMileStonesKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;
