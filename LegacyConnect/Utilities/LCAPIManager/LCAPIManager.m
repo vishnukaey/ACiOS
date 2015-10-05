@@ -357,6 +357,11 @@ static LCAPIManager *sharedManager = nil;
 + (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success
                andfailure:(void (^)(NSString *error))failure
 {
+#warning remove this hard coded value
+  userId = @"7143";
+  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
+  //  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, kFriendsURL];
   if (userId) {
@@ -366,11 +371,13 @@ static LCAPIManager *sharedManager = nil;
     [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
   }
   if (lastUserId) {
-    [url appendString:[NSString stringWithFormat:@"&searchKey=%@",lastUserId]];
+    [url appendString:[NSString stringWithFormat:@"&lastUserId=%@",lastUserId]];
   }
 
   
-  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+
+  
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
