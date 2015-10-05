@@ -27,7 +27,13 @@ static CGFloat kAvatarImageCornerRadius = 31.5f;
   [self.friendsLocationLabel setText:@"Test Location"];
   [self.friendsImageView sd_setImageWithURL:[NSURL URLWithString:friendObj.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
   UIImage * addRemoveFriendBtnImg =[LCFriend isAlreadyFriend:friendObj] ? [UIImage imageNamed:@"AddFriendButton"] : [UIImage imageNamed:@"profileFriend"];
-  [self.addRemoveFriendBtn setImage:addRemoveFriendBtnImg forState:UIControlStateNormal];
+  [self.addFriendBtn setImage:addRemoveFriendBtnImg forState:UIControlStateNormal];
+}
+
+- (IBAction)friendButtontapped:(id)sender
+{
+  if (![LCFriend isAlreadyFriend:self.friendObj]) {
+  }
 }
 
 @end
