@@ -13,5 +13,6 @@
   NSArray *impactsArray;
 }
 @property(nonatomic, weak)IBOutlet  UITableView *impactsTableView;
+@property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 
 @end

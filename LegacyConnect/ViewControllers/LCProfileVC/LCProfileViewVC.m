@@ -181,9 +181,35 @@
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
 
+-(void)loadMileStones
+{
+  [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
+
+//  [LCAPIManager getMilestonesForUser:userDetail.userID
+//                  andLastMilestoneID:nil with:^(NSArray *response) {
+//                    mileStoneFeeds = response;
+//                    [milestonesTable reloadData];
+//                    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+//                  }
+//                          andFailure:^(NSString *error) {
+//                            [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+//                            NSLog(@"%@",error);
+//                          }];
+  
+  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+    mileStoneFeeds = response;
+    [milestonesTable reloadData];
+    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+    NSLog(@"%@",error);
+  }];
+}
+
 - (void)loadInterests
 {
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
+  
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
    {
      //NSLog(@"%@",response);
@@ -199,19 +225,23 @@
    ];
 }
 
-
--(void)loadMileStones
-{
-  [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
+- (void) loadEvents {
   
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-    mileStoneFeeds = response;
-    [milestonesTable reloadData];
-    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-    NSLog(@"%@",error);
-  }];
+//  [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
+//  
+//  [LCAPIManager getEventDetailsForEventWithID:userDetail.userID withSuccess:^(NSArray *response)
+//   {
+//     //NSLog(@"%@",response);
+////     interestsArray = response;
+////     [interestsTable reloadData];
+//     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+//   }
+//                                   andFailure:^(NSString *error)
+//   {
+//     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+//     NSLog(@"%@",error);
+//   }
+//   ];
 }
 
 
@@ -253,7 +283,7 @@
 
 - (IBAction)actionsClicked:(id)sender
 {
-  
+  [self loadEvents];
 }
 
 
@@ -280,7 +310,7 @@
       LCFriend *friend = [[LCFriend alloc] init];
       friend.userID = userDetail.userID;
       
-      [LCAPIManager removeFried:friend withSuccess:^(NSArray *response)
+      [LCAPIManager removeFriend:friend withSuccess:^(NSArray *response)
        {
          NSLog(@"%@",response);
          currentProfileState = PROFILE_OTHER_NON_FRIEND;
@@ -464,8 +494,9 @@
       LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
       
       cell.interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
-      cell.interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %@ people",
-                                       [LCUtilityManager performNullCheckAndSetValue:interstObj.followers]];
+      
+      cell.interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %ld people",
+                                       [interstObj.followers integerValue]];
       [cell.interestsBG sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge]
                           placeholderImage:nil];
       
