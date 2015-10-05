@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -18,28 +19,37 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHN-Et-Xdj" id="q57-38-zWc">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CiG-Df-6fP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
+                        <color key="backgroundColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BbB-Yv-25d" userLabel="Overlay View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="126"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                    </view>
                     <label opaque="NO" userInteractionEnabled="NO" tag="102" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INTEREST NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gc-qP-e4y">
-                        <rect key="frame" x="117" y="45" width="141" height="21"/>
+                        <rect key="frame" x="111" y="45" width="154" height="18"/>
                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="18"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="103" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Followed by # people" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9hF-Pz-cUm">
-                        <rect key="frame" x="120" y="74" width="135" height="17"/>
+                        <rect key="frame" x="111" y="71" width="154" height="15"/>
                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CiG-Df-6fP">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="124"/>
-                        <color key="backgroundColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
-                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="CiG-Df-6fP" secondAttribute="bottom" constant="10" id="0dG-iY-jeu"/>
+                    <constraint firstAttribute="bottom" secondItem="CiG-Df-6fP" secondAttribute="bottom" constant="8" id="0dG-iY-jeu"/>
+                    <constraint firstAttribute="trailing" secondItem="BbB-Yv-25d" secondAttribute="trailing" id="7Ax-MV-gFf"/>
+                    <constraint firstItem="BbB-Yv-25d" firstAttribute="leading" secondItem="q57-38-zWc" secondAttribute="leading" id="91t-Cx-PNA"/>
                     <constraint firstItem="3gc-qP-e4y" firstAttribute="top" secondItem="q57-38-zWc" secondAttribute="top" constant="45" id="9vF-qI-Cfm"/>
+                    <constraint firstAttribute="bottom" secondItem="BbB-Yv-25d" secondAttribute="bottom" constant="8" id="HQn-aQ-69i"/>
+                    <constraint firstItem="BbB-Yv-25d" firstAttribute="top" secondItem="q57-38-zWc" secondAttribute="top" id="M6J-Vc-uVc"/>
                     <constraint firstAttribute="trailing" secondItem="CiG-Df-6fP" secondAttribute="trailing" id="S2d-NB-TuM"/>
                     <constraint firstAttribute="centerX" secondItem="9hF-Pz-cUm" secondAttribute="centerX" id="Xq7-5W-OdV"/>
                     <constraint firstItem="9hF-Pz-cUm" firstAttribute="top" secondItem="3gc-qP-e4y" secondAttribute="bottom" constant="8" id="gc6-vN-2If"/>
@@ -53,7 +63,7 @@
                 <outlet property="interestNameLabel" destination="3gc-qP-e4y" id="QoD-Gk-Vc5"/>
                 <outlet property="interestsBG" destination="CiG-Df-6fP" id="vPU-qf-BJG"/>
             </connections>
-            <point key="canvasLocation" x="193.5" y="169.5"/>
+            <point key="canvasLocation" x="114.5" y="26.5"/>
         </tableViewCell>
     </objects>
 </document>

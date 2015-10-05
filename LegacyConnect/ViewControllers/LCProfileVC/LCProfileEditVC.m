@@ -32,15 +32,17 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   NSLog(@"user deatils in editvc - %@",self.userDetail);
   
-  profilePic.layer.cornerRadius = profilePic.frame.size.width / 2.0;
-  profilePic.layer.borderWidth = 3.0f;
-  profilePic.layer.borderColor = [[UIColor colorWithRed:235.0f/255.0 green:236.0f/255.0 blue:235.0f/255.0 alpha:1.0] CGColor];
+  profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
+  profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
   genderTypes = @[@"Male",@"Female"];
   
   self.navigationController.navigationBarHidden = YES;
-  [self loadUserData];
   
+  profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                placeholderImage:profilePicPlaceholder];
+  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,42 +64,129 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   NSLog(@"full name - %@ %@",txt_firstName.text,txt_lastName.text);
   NSLog(@"location - %@",txt_location.text);
-  NSLog(@"header background - %@",img_headerBG.image);
+  NSLog(@"header background - %@",headerBGImage.image);
   NSLog(@"birthday - %@",txt_birthday.text);
   NSLog(@"gender - %@",txt_gender.text);
   
-  
-//  NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
-//  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
-//  
-//  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-//  [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
-//    NSLog(@"%@",response);
-////    [self.signupButton setEnabled:true];
-////    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//  } andFailure:^(NSString *error) {
-//    NSLog(@"%@",error);
-////    [self.signupButton setEnabled:true];
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
-//  }];
-
-  
 }
 
-- (IBAction)editPictureAction:(id)sender {
+- (IBAction)editProfilePicAction:(id)sender {
 
   isEditingProfilePic = YES;
-  [self showEditingPictureOptions];
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    [self showImageCropViewWithImage:profilePic.image];
+    
+  }];
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+      
+      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+      imagePicker.delegate = self;
+      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+      imagePicker.allowsEditing = NO;
+      
+      [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
+  }];
+  
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.allowsEditing = NO;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+  }];
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Profile Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+    profilePic.image = profilePicPlaceholder;
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  
+  NSData *profilePicData = UIImagePNGRepresentation(profilePic.image);
+  NSData *placeHolderData = UIImagePNGRepresentation(profilePicPlaceholder);
+  BOOL isImageAvailable = (![profilePicData isEqual:placeHolderData]);
+  
+  if (isImageAvailable){
+    [actionSheet addAction:editAction];
+  }
+  [actionSheet addAction:takeAction];
+  [actionSheet addAction:chooseAction];
+  if (isImageAvailable) {
+    [actionSheet addAction:removeAction];
+  }
+  [actionSheet addAction:cancelAction];
+  
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
-
-#pragma mark -
-
-- (void)loadUserData {
+- (IBAction)editHeaderBGAction:(id)sender {
   
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:nil];
+  isEditingProfilePic = NO;
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    [self showImageCropViewWithImage:headerBGImage.image];
+    
+  }];
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+      
+      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+      imagePicker.delegate = self;
+      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+      imagePicker.allowsEditing = NO;
+      
+      [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
+  }];
+  
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.allowsEditing = NO;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+  }];
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+      headerBGImage.image = nil;
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  
+  
+  BOOL isImageAvailable = (headerBGImage.image != nil);
+  
+  if (isImageAvailable){
+    [actionSheet addAction:editAction];
+  }
+  [actionSheet addAction:takeAction];
+  [actionSheet addAction:chooseAction];
+  if (isImageAvailable) {
+    [actionSheet addAction:removeAction];
+  }
+  [actionSheet addAction:cancelAction];
+  
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 
@@ -109,7 +198,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
   [datePicker setMaximumDate:[NSDate date]];
-  NSString *str =kDOBFormat;
+  NSString *str = kDOBFormat;
   NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
   [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
@@ -170,76 +259,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   else {
     buttonSave.enabled = NO;
   }
-}
-
-
-- (void) showEditingPictureOptions {
-  
-  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-  
-  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    UIImage *originalImage;
-    
-    if (isEditingProfilePic) {
-      originalImage = profilePic.image;
-    }
-    else {
-      originalImage = img_headerBG.image;
-    }
-    
-    [self showImageCropViewWithImage:originalImage];
-    
-  }];
-  [actionSheet addAction:editAction];
-  
-  
-  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-      
-      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-      imagePicker.delegate = self;
-      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-      imagePicker.allowsEditing = NO;
-      
-      [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-    
-  }];
-  [actionSheet addAction:takeAction];
-  
-  
-  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.allowsEditing = NO;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
-    
-  }];
-  [actionSheet addAction:chooseAction];
-  
-  
-  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
-    if (isEditingProfilePic) {
-      profilePic.image = nil;
-    }
-    else {
-      img_headerBG.image = nil;
-    }
-    
-  }];
-  [actionSheet addAction:removeAction];
-  
-  
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-  [actionSheet addAction:cancelAction];
-  
-  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 
@@ -329,7 +348,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 5;    //count of section
+  return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -339,15 +358,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   
-  return 44;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (indexPath.section == SECTION_HEADER_BACKGROUND) {
-    
-    return 88;
-  }
   return 44;
 }
 
@@ -372,9 +382,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     case SECTION_LOCATION:
       sectionLabel.text = @"LOCATION";
       optionalLabel.hidden = NO;
-      break;
-    case SECTION_HEADER_BACKGROUND:
-      sectionLabel.text = @"HEADER BACKGROUND";
       break;
     case SECTION_BIRTHDAY:
       sectionLabel.text = @"BIRHTDAY";
@@ -435,19 +442,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     
   }
   
-  else if(indexPath.section == SECTION_HEADER_BACKGROUND){
-    
-    NSString *cellIdentifier = kCellIdentifierHeaderBG;
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    
-    img_headerBG = (UIImageView*)[cell viewWithTag:101];
-    [img_headerBG sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
-  }
-  
   else if(indexPath.section == SECTION_BIRTHDAY){
     
     NSString *cellIdentifier = kCellIdentifierBirthday;
@@ -494,13 +488,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  if (indexPath.section == SECTION_HEADER_BACKGROUND) {
-    
-    [self.view endEditing:YES];
-    isEditingProfilePic = NO;
-    [self showEditingPictureOptions];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-  }
 }
 
 
@@ -572,7 +559,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     }
     else {
       
-      img_headerBG.image = croppedImage;
+      headerBGImage.image = croppedImage;
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
   }];
@@ -585,13 +572,12 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
                   rotationAngle:(CGFloat)rotationAngle
 {
   [self dismissViewControllerAnimated:YES completion:^{
+    
     if (isEditingProfilePic) {
-      
       profilePic.image = croppedImage;
     }
     else {
-      
-      img_headerBG.image = croppedImage;
+      headerBGImage.image = croppedImage;
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
   }];
