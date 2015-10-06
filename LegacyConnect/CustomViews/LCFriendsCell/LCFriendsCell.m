@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
+
 #import "LCFriendsCell.h"
 static CGFloat kAvatarImageCornerRadius = 31.5f;
 
@@ -24,10 +25,9 @@ static CGFloat kAvatarImageCornerRadius = 31.5f;
 {
   _friendObj = friendObj;
   [self.friendsNameLabel setText:[NSString stringWithFormat:@"%@ %@",friendObj.firstName,friendObj.lastName]];
-  [self.friendsLocationLabel setText:@"Test Location"];
+  [self.friendsLocationLabel setText:friendObj.location];
   [self.friendsImageView sd_setImageWithURL:[NSURL URLWithString:friendObj.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
-  UIImage * addRemoveFriendBtnImg =[LCFriend isAlreadyFriend:friendObj] ? [UIImage imageNamed:@"AddFriendButton"] : [UIImage imageNamed:@"profileFriend"];
-  [self.addRemoveFriendBtn setImage:addRemoveFriendBtnImg forState:UIControlStateNormal];
+  [self.changeFriendStatusBtn setfriendStatusButtonImageForStatus:(FriendStatus)[self.friendObj.isFriend integerValue]];
 }
 
 @end

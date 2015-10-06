@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFriend.h"
+#import "LCfriendButton.h"
+
 
 @interface LCFriendsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *friendsImageView;
 @property (weak, nonatomic) IBOutlet UILabel * friendsNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel * friendsLocationLabel;
-@property (weak, nonatomic) IBOutlet UIButton * addRemoveFriendBtn;
+@property (weak, nonatomic) IBOutlet LCfriendButton * changeFriendStatusBtn;
 @property (weak, nonatomic) LCFriend * friendObj;
 
 @end

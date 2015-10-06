@@ -8,6 +8,7 @@
 
 #import "LCFeedCellView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "NSDate+TimeAgo.h"
 
 @implementation LCFeedCellView
 @synthesize delegate, feedObject, moreButton;
@@ -15,20 +16,24 @@
 - (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
 {
   self.feedObject = feed;
-  NSString  *userName = [NSString stringWithFormat:@"%@ %@", feed.firstName, feed.lastName];
-  NSString *cause = feed.interestName;
-  NSString *time_ = feed.createdAt;
-  NSString *thanks_ = feed.likeCount;
-  NSString *comments_ = feed.commentCount;
+  NSString  *userName = [NSString stringWithFormat:@"%@ %@",
+                         [LCUtilityManager performNullCheckAndSetValue:feed.firstName],
+                         [LCUtilityManager performNullCheckAndSetValue:feed.lastName]];
+  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:feed.interestName];
+  NSString *time_ = [LCUtilityManager performNullCheckAndSetValue:feed.createdAt];
+  NSString *thanks_ = [LCUtilityManager performNullCheckAndSetValue:feed.likeCount];
+  NSString *comments_ = [LCUtilityManager performNullCheckAndSetValue:feed.commentCount];
+  
   //set profile pic
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:feed.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:feed.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
+  
   //set user name
   NSMutableAttributedString * userNameAttributtedString = [[NSMutableAttributedString alloc] initWithString:userName];
   NSRange tagRangeUserName = NSMakeRange(0, userName.length);
   [userNameAttributtedString addAttributes:@{
-                                     NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                     NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                      } range:NSMakeRange(0, userNameAttributtedString.length)];
   
   NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
@@ -40,6 +45,7 @@
   usernameLabel.nameTagTapped = ^(int index) {
     [weakSelf.delegate tagTapped:dic_user];
   };
+  
   //if photo post or just plain text post
   NSString *typeString = @"Added a Photo in ";
   if ([feed.postType isEqualToString:@"0"])//not a photopost
@@ -51,6 +57,7 @@
   {
     [postPhoto sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];
   }
+  
   if ([pageType isEqualToString:kHomefeedCellID])
   {
     bottomBorderHeight.constant = 0;
@@ -67,7 +74,7 @@
   [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, typeString.length)];
   [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:tagRangeCreatedAt];
   [attributtedString addAttributes:@{
-                                         NSFontAttributeName : [UIFont systemFontOfSize:14],
+                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
                                          } range:NSMakeRange(0, attributtedString.length)];
   
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
@@ -79,7 +86,10 @@
     [weakSelf.delegate tagTapped:dic_createdAt];
   };
   //time label
-  [timeLabel setText:time_];
+  NSDate *date = [NSDate dateWithTimeIntervalSince1970:time_.longLongValue/1000];
+  NSString *timeAgo = [date timeAgo];
+  [timeLabel setText:timeAgo];
+  
   //thanks count label
   [thanksLabel setText:thanks_];
   //comments count label
@@ -98,7 +108,7 @@
     [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRangePost];
   }
   [postDescriptionString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-light" size:14],
+                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:13],
                                         } range:NSMakeRange(0, postDescriptionString.length)];
   postDescription.tagsArray  = postDescriptionTagsWithRanges;
   [postDescription setAttributedText:postDescriptionString];

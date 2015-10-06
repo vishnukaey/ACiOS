@@ -19,6 +19,6 @@
 @property (nonatomic, strong) NSString *avatarURL;
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *isFriend;
+@property (nonatomic, strong) NSString *location;
 
-+ (BOOL)isAlreadyFriend:(LCFriend*)friendObj;
 @end
