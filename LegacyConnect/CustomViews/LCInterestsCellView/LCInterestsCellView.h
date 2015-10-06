@@ -14,4 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *interestNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *interestFollowLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *interestsBG;
+
+- (void)setData: (LCInterest *) interest;
 @end

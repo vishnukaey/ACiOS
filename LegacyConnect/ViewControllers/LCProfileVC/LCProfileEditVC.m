@@ -244,6 +244,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
   txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
+  [self performSelector:@selector(validateFields:) withObject:self afterDelay:0];
 }
 
 
@@ -453,9 +454,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     
     txt_birthday = (UITextField*)[cell viewWithTag:101];
     txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:kDOBFormat];
-    [txt_birthday addTarget:self
-                     action:@selector(validateFields:)
-           forControlEvents:UIControlEventEditingChanged];
     
     [self setDobTextFieldWithInputView];
   }
@@ -471,9 +469,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     
     txt_gender = (UITextField*)[cell viewWithTag:101];
     txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
-    [txt_gender addTarget:self
-                      action:@selector(validateFields:)
-            forControlEvents:UIControlEventEditingChanged];
     
     genderPicker = [[UIPickerView alloc] init];
     genderPicker.dataSource = self;
@@ -601,8 +596,8 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-  
   txt_gender.text = [genderTypes objectAtIndex:row];
+  [self performSelector:@selector(validateFields:) withObject:self afterDelay:0];
 }
 
 

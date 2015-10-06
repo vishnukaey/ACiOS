@@ -499,13 +499,7 @@
       }
       
       LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
-      
-      cell.interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interstObj.name];
-      
-      cell.interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %ld people",
-                                       [interstObj.followers integerValue]];
-      [cell.interestsBG sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge]
-                          placeholderImage:nil];
+      [cell setData:interstObj];
       
       return cell;
     }

@@ -20,4 +20,14 @@
     // Configure the view for the selected state
 }
 
+- (void)setData: (LCInterest *) interest {
+  
+  _interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interest.name];
+  
+  _interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %ld people",
+                                   [interest.followers integerValue]];
+  [_interestsBG sd_setImageWithURL:[NSURL URLWithString:interest.logoURLLarge]
+                      placeholderImage:nil];
+}
+
 @end
