@@ -243,13 +243,6 @@
   
   if (currentProfileState == PROFILE_SELF)
   {
-      [LCAPIManager updateProfile:userDetail havingHeaderPhoto:[UIImage imageNamed:@"profileTick"] removedState:YES andAvtarImage:[UIImage imageNamed:@"profileTick"] removedState:YES withSuccess:^(id response) {
-        NSLog(@"Success yesy");
-      } andFailure:^(NSString *error) {
-        NSLog(@"Fail update");
-      }];
-    return;
-    
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
     vc.userDetail = self.userDetail;
