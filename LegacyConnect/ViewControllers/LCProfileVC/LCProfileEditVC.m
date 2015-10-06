@@ -68,6 +68,8 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
       });
     }
   });
+  
+  dobTimeStamp = userDetail.dob;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,22 +89,14 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 - (IBAction)saveAction:(id)sender {
   
-  NSLog(@"full name - %@ %@",txt_firstName.text,txt_lastName.text);
-  NSLog(@"location - %@",txt_location.text);
-  NSLog(@"header background - %@",headerBGImage.image);
-  NSLog(@"birthday - %@",txt_birthday.text);
-  NSLog(@"gender - %@",txt_gender.text);
-  
   userDetail.firstName = txt_firstName.text;
   userDetail.lastName = txt_lastName.text;
-  userDetail.dob = txt_birthday.text;
+  userDetail.dob = dobTimeStamp;
   userDetail.gender = txt_gender.text;
   userDetail.location = txt_location.text;
   
-  
   UIImage *avatarToPass = nil, *headerToPass = nil;
   BOOL isAvatarRemoved = NO, isHeaderRemoved = NO;
-  
   
   if (avatarPicState == IMAGE_REMOVED)
   {
@@ -266,13 +260,8 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
   [datePicker setMinimumDate:date];
-  NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-  NSDateComponents *components = [[NSDateComponents alloc] init];
-  [components setYear:1950];
-  [components setMonth:1];
-  [components setDay:1];
-  NSDate *defualtDate = [calendar dateFromComponents:components];
-  datePicker.date = defualtDate;
+
+  datePicker.date = [NSDate dateWithTimeIntervalSince1970:dobTimeStamp.longLongValue/1000];
   txt_birthday.inputView = datePicker;
   [self createDatePickerInputAccessoryView];
 }
@@ -295,19 +284,15 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void) setDateAndDismissDatePickerView:(id)sender
 {
   [txt_birthday resignFirstResponder];
-  [self updateTextFieldWithDate:self];
+  dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
+  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
+  [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
 }
 
 - (void)dismissDatePickerView:(id)sender
 {
   [txt_birthday resignFirstResponder];
-}
-
--(void) updateTextFieldWithDate:(id) picker
-{
-  dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
-  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
-  [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  datePicker.date = [NSDate dateWithTimeIntervalSince1970:dobTimeStamp.longLongValue/1000];
 }
 
 

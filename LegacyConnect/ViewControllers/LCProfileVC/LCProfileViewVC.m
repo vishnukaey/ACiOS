@@ -27,11 +27,9 @@
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
-  [self loadEmptyDetails];
-  [self loadUserDetails];
-  [self loadMileStones];
-  //[self loadInterests];
+  [self loadUserData];
   
+  [self loadMileStones];
   [self addTabMenu];
   
   // Do any additional setup after loading the view.
@@ -67,17 +65,15 @@
 
 #pragma mark - setup functions
 
-- (void) loadEmptyDetails {
+- (void) loadUserData {
   
-  userNameLabel.text = @"";
+  NSString *firstName = [LCDataManager sharedDataManager].firstName;
+  NSString *lastName = [LCDataManager sharedDataManager].lastName;
+  userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
+                        [LCUtilityManager performNullCheckAndSetValue:firstName],
+                        [LCUtilityManager performNullCheckAndSetValue:lastName]];
   memeberSincelabel.text = @"";
   locationLabel.text = @"";
-  
-}
-
-
-- (void)loadUserDetails
-{
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
@@ -93,6 +89,13 @@
     currentProfileState = PROFILE_OTHER_NON_FRIEND;
     [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
   }
+  
+  [self loadUserDetails];
+}
+
+
+- (void)loadUserDetails
+{
   
   NSLog(@"userID<<<-->>>%@", userDetail.userID);
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
@@ -158,7 +161,7 @@
 
 -(void)updateUserData:(NSNotification *)notification {
   
-  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
     [self loadUserDetails];
   });
   
@@ -513,15 +516,33 @@
   else if (tableView == actionsTable)
   {
     //ACTIONS
-    static NSString *MyIdentifier = @"LCActionsCell";
-    LCActionsCellView *cell = (LCActionsCellView*)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
-      cell = [topLevelObjects objectAtIndex:0];
+    if (actionsArray.count == 0) {
+      
+      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      if (currentProfileState == PROFILE_SELF) {
+        cell.textLabel.text = @"Take action by selecting the Global Impact button from the bottom right.";
+      }
+      else {
+        cell.textLabel.text = @"No actions available.";
+      }
+      cell.textLabel.textAlignment =NSTextAlignmentCenter;
+      cell.textLabel.numberOfLines = 3;
+      
+      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+      tableView.allowsSelection = NO;
+      return cell;
     }
-    [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
-    return cell;
+    else {
+      static NSString *MyIdentifier = @"LCActionsCell";
+      LCActionsCellView *cell = (LCActionsCellView*)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      if (cell == nil)
+      {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
+        cell = [topLevelObjects objectAtIndex:0];
+      }
+      [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
+      return cell;
+    }
   }
   
   return nil;

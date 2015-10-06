@@ -731,30 +731,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LCProfileHeaderBGCell" rowHeight="88" id="KuB-06-fX4">
-                                        <rect key="frame" x="0.0" y="182" width="375" height="88"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KuB-06-fX4" id="bc6-1l-duo">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="87"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="101" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="t2O-3O-Xq6">
-                                                    <rect key="frame" x="8" y="8" width="165" height="72"/>
-                                                    <color key="backgroundColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="72" id="OhH-dB-Q4s"/>
-                                                        <constraint firstAttribute="width" constant="165" id="PAX-6U-4FU"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="t2O-3O-Xq6" firstAttribute="top" secondItem="bc6-1l-duo" secondAttribute="topMargin" id="Ah4-To-vIV"/>
-                                                <constraint firstItem="t2O-3O-Xq6" firstAttribute="leading" secondItem="bc6-1l-duo" secondAttribute="leadingMargin" id="bNI-2c-wry"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LCProfileBirthdayCell" id="wwn-tU-LYY">
-                                        <rect key="frame" x="0.0" y="270" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="182" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wwn-tU-LYY" id="hSa-HM-gXy">
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
