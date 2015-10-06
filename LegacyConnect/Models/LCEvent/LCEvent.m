@@ -14,6 +14,9 @@
 {
   return @{
            @"name": @"name",
+           @"eventID" : @"id",
+           @"headerPhoto" : @"headerPhoto",
+           @"supportersCount" : @"supportersCount",
            @"eventDescription": @"description",
            @"website": @"website",
            @"time": @"time",

@@ -43,6 +43,7 @@ NSString *const kSaveIneterestsURL = @"api/user/interests";
 NSString *const kGetFeedsURL = @"api/feed";
 NSString *const kGetMilestonesURL = @"api/user/milestone";
 NSString *const kGetImpactsURL = @"api/user/impact";
+NSString *const kGetUserEventsURL = @"api/user/events";
 NSString *const kFriendsURL = @"api/user/friend";
 NSString *const kEventsURL = @"api/event";
 NSString *const kRejectFriendURL = @"api/user/friend/decline";

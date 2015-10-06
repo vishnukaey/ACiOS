@@ -11,8 +11,10 @@
 @interface LCEvent : MTLModel <MTLJSONSerializing>
 
 @property (nonatomic, strong) NSString *eventID;
+@property (nonatomic, strong) NSString *headerPhoto;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *eventDescription;
+@property (nonatomic, strong) NSString *supportersCount;
 @property (nonatomic, strong) NSString *website;
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic, strong) NSString *interestID;
