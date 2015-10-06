@@ -226,7 +226,7 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEditProfileURL];
   NSError *error = nil;
   NSDictionary *tempDict = [MTLJSONAdapter JSONDictionaryFromModel:user error:&error];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:tempDict];
@@ -242,9 +242,12 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationForProfileWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andHeaderImageData:headerImageData andAvtarImageData:avtarImageData withSuccess:^(id response) {
     NSLog(@"Success!");
+    success(response);
   } andFailure:^(NSString *error) {
     NSLog(@"Failure");
+    failure(error);
   }];
+
 }
 
 

@@ -147,10 +147,10 @@
                                          name:@"headphoto"
                                      fileName:@"headphoto"
                                      mimeType:@"image/jpeg"];
-      [formData appendPartWithFileData:headerImageData
-                                  name:@"avatarUrl"
-                              fileName:@"avatarUrl"
-                              mimeType:@"image/jpeg"];
+//      [formData appendPartWithFileData:avtarImageData
+//                                  name:@"avatarUrl"
+//                              fileName:@"avatarUrl"
+//                              mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       success(responseObject);
