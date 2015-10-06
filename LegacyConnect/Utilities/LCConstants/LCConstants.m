@@ -133,4 +133,6 @@ NSString *const kResetPasswordNotificationName = @"password_reset_notification";
 
 NSString *const kUserImageChangeNotification = @"user_image_change_notification";
 
+NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
+
 @end

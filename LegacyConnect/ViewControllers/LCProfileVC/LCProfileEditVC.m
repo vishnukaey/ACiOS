@@ -126,11 +126,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   [LCAPIManager updateProfile:userDetail havingHeaderPhoto:headerToPass removedState:isHeaderRemoved andAvtarImage:avatarToPass removedState:isAvatarRemoved withSuccess:^(NSArray *response) {
     NSLog(@"ress-->>>%@",response);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self dismissViewControllerAnimated:YES completion:^{
+      [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:nil];
+    }];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"%@",error);
   }];
-  
 }
 
 - (IBAction)editProfilePicAction:(id)sender {
@@ -305,7 +307,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
   txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
-  [self performSelector:@selector(validateFields:) withObject:self afterDelay:0];
+  [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
 }
 
 
@@ -664,7 +666,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
   txt_gender.text = [genderTypes objectAtIndex:row];
-  [self performSelector:@selector(validateFields:) withObject:self afterDelay:0];
+  [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
 }
 
 

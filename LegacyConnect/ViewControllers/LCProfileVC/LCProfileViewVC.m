@@ -49,6 +49,8 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:NO];
   [appdel.menuButton setHidden:NO];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -58,6 +60,8 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
+  
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
 }
 
 
@@ -151,6 +155,15 @@
     NSLog(@"%@",error);
   }];
 }
+
+-(void)updateUserData:(NSNotification *)notification {
+  
+  dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+    [self loadUserDetails];
+  });
+  
+}
+
 
 - (void)addTabMenu
 {
