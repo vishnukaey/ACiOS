@@ -587,6 +587,48 @@ static LCAPIManager *sharedManager = nil;
 
 #pragma mark - Events
 
++ (void)getUserEeventsForUserId:(NSString*)userId andLastEventId:(NSString*)lastEventId
+                    withSuccess:(void(^)(NSArray *response))success andFailure:(void(^)(NSString* error))failure
+{
+  LCWebServiceManager * webService = [[LCWebServiceManager alloc] init];
+  NSMutableString * urlString = [NSMutableString stringWithFormat:@"%@%@/?",kBaseURL,kGetUserEventsURL];
+  if (userId) {
+    [urlString appendString:[NSString stringWithFormat:@"userId=%@",userId]];
+  }
+  if (lastEventId) {
+    [urlString appendString:[NSString stringWithFormat:@"&lastId=%@",lastEventId]];
+  }
+  NSString * finalString = (NSString*)urlString;
+  finalString = [finalString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+  [webService performGetOperationWithUrl:finalString andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+  {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      NSError *error = nil;
+      NSDictionary *dict= response[kResponseData];
+      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
+      if(!error)
+      {
+        NSLog(@"Getting Event details successful! ");
+        success(responsesArray);
+      }
+      else
+      {
+        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+      }
+    }
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
+}
+
 + (void)getEventDetailsForEventWithID:(NSString*)eventID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
