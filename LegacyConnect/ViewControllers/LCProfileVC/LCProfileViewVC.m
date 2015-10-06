@@ -240,21 +240,18 @@
 
 - (void) loadEvents {
   
-//  [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
-//  
-//  [LCAPIManager getEventDetailsForEventWithID:userDetail.userID withSuccess:^(NSArray *response)
-//   {
-//     //NSLog(@"%@",response);
-////     interestsArray = response;
-////     [interestsTable reloadData];
-//     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-//   }
-//                                   andFailure:^(NSString *error)
-//   {
-//     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-//     NSLog(@"%@",error);
-//   }
-//   ];
+  [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
+  
+
+  [LCAPIManager getUserEventsForUserId:userDetail.userID andLastEventId:nil withSuccess:^(NSArray *response) {
+    
+    actionsArray = response;
+    [actionsTable reloadData];
+    [MBProgressHUD hideHUDForView:actionsTable animated:YES];
+  } andFailure:^(NSString *error) {
+    
+    [MBProgressHUD hideHUDForView:actionsTable animated:YES];
+  }];
 }
 
 
@@ -425,7 +422,10 @@
     return interestsArray.count;
   }
   else if (tableView == actionsTable) {
-    return 5;
+    if (actionsArray.count == 0) {
+      return 1;
+    }
+    return actionsArray.count;
   }
   
   return 0;
@@ -510,17 +510,17 @@
     }
   }
   
-  else if (tableView == actionsTable){
-    
+  else if (tableView == actionsTable)
+  {
     //ACTIONS
     static NSString *MyIdentifier = @"LCActionsCell";
-    LCActionsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    LCActionsCellView *cell = (LCActionsCellView*)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     if (cell == nil)
     {
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
       cell = [topLevelObjects objectAtIndex:0];
     }
-    
+    [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
     return cell;
   }
   

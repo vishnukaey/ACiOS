@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCEvent.h"
 
 @interface LCActionsCellView : UITableViewCell
 
-
+@property (nonatomic, weak) LCEvent *event;
 
 @end
