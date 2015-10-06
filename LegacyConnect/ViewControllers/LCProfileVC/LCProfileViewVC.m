@@ -292,19 +292,11 @@
   
   if (currentProfileState == PROFILE_SELF)
   {
-    userDetail.firstName = @"pr";
-    [LCAPIManager updateProfile:userDetail havingHeaderPhoto:nil removedState:NO andAvtarImage:[UIImage imageNamed:@"backButton.png"] removedState:NO withSuccess:^(NSArray *response) {
-      NSLog(@"ress-->>>%@",response);
-      [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-    } andFailure:^(NSString *error) {
-      [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-      NSLog(@"%@",error);
-    }];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-//    LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
-//    vc.userDetail = self.userDetail;
-//    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [self presentViewController:navC animated:YES completion:nil];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
+    vc.userDetail = self.userDetail;
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:navC animated:YES completion:nil];
   }
   else if (currentProfileState == PROFILE_OTHER_FRIEND)
   {

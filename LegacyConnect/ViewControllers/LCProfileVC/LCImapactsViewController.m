@@ -24,12 +24,15 @@
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
+  [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
   [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
     impactsArray = response;
     [impactsTableView reloadData];
+    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
+    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
   }];
   
   [impactsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
