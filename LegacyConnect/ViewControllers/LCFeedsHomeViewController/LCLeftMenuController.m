@@ -17,7 +17,6 @@
 @property (weak, nonatomic) IBOutlet UITableView *menuTable;
 @end
 
-static NSString *kCoverPhotoPlaceholder = @"photoPost_dummy.png";
 static NSString *kProfilePicPlaceholder = @"manplaceholder.jpg";
 static CGFloat kProfilePicBorderWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
@@ -54,8 +53,8 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (void)refreshUserImages
 {
   //-- Cover Photo -- //
-  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
-  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:kCoverPhotoPlaceholder]];
+  NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].headerPhotoURL];
+  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:nil];
   
   //-- Profile Image--//
   NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
@@ -64,12 +63,12 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)addUserImageChangeNitification
 {
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserImageChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserDataUpdatedNotification object:nil];
 }
 
 - (void)removeUserImageChangeNitification
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserImageChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserDataUpdatedNotification object:nil];
 }
 
 - (void)refreshUserImages:(NSNotification*)notification

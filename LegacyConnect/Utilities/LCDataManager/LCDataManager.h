@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *dob;
 @property (strong, nonatomic) NSString *avatarUrl;
+@property (nonatomic, strong) NSString *headerPhotoURL;
 @property (strong, nonatomic) NSString *userEmail;
 @property (strong, nonatomic) NSString *userID;
 @property (strong, nonatomic) NSString *userFBID;
