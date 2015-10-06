@@ -33,9 +33,8 @@
 {
   _event = event;
   [self.eventNameLabel setText:_event.name];
-  NSDate *date = [NSDate dateWithTimeIntervalSince1970:_event.time.longLongValue/1000];
-  NSString *timeAgo = [date timeAgo];
-  [self.eventTimeLabel setText:timeAgo];
+  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.time WithFormat:@"MMM dd yyyy hh:mm a"];
+  [self.eventTimeLabel setText:displayDate];
   [self.supportersCountLabel setText:[NSString stringWithFormat:@"Supported by %@ People",_event.supportersCount]];
   [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:@"event_placeholder"]];
 }
