@@ -13,6 +13,7 @@
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
+extern NSString *const kEditProfileURL;
 extern NSString *const kFBLoginURL;
 extern NSString *const kGetUserDetailsURL;
 extern NSString *const kGetInterestsURL;
@@ -110,7 +111,7 @@ extern NSString *const kLCUrlScheme;
 extern NSString *const kResetPasswordTokenKey;
 extern NSString *const kResetPasswordNotificationName;
 
-extern NSString *const kUserImageChangeNotification;
+extern NSString *const kUserDataUpdatedNotification;
 
 extern NSString *const kUserProfileUpdateNotification;
 

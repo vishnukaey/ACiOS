@@ -32,6 +32,11 @@
   return kEmptyStringValue;
 }
 
++ (NSString*) getStringValueOfBOOL:(BOOL)value
+{
+  int boolInt = (int) value;
+  return [NSString stringWithFormat:@"%d",boolInt];;
+}
 
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message
 {
@@ -63,6 +68,15 @@
   [LCDataManager sharedDataManager].lastName = user.lastName;
   [LCDataManager sharedDataManager].dob = user.dob;
   [LCDataManager sharedDataManager].avatarUrl = user.avatarURL;
+  [LCDataManager sharedDataManager].headerPhotoURL = user.headerPhotoURL;
+  
+  /**
+   * Once the user details changes, the User avatar and cover photo in Navigation menu should be refreshed.
+   * For this, on each user profile update, a notification will be triggered from here and the navigation menu 
+   * class will update the the required assets.
+   */
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUserDataUpdatedNotification object:nil];
+
 }
 
 

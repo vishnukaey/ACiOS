@@ -99,6 +99,7 @@
   
   NSLog(@"userID<<<-->>>%@", userDetail.userID);
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
+    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     userDetail = response;
     NSLog(@"user details - %@",response);
     

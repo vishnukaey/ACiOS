@@ -72,7 +72,7 @@
   }
 }
 
-- (void)performPutOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andImageData:(NSData*)imageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+- (void)performPutOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   if ([LCUtilityManager isNetworkAvailable])
   {
@@ -83,13 +83,6 @@
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
-//    id block = ^(id<AFMultipartFormData> formData) {
-//      [formData appendPartWithFileData:imageData
-//                                  name:@"image"
-//                              fileName:@"image"
-//                              mimeType:@"image/jpeg"];
-//    };
-    
     NSMutableURLRequest *request = [manager.requestSerializer
                                     multipartFormRequestWithMethod:@"PUT"
                                     URLString:url
@@ -139,7 +132,7 @@
 }
 
 
-- (void)performPutOperationForProfileWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andHeaderImageData:(NSData*)headerImageData andAvtarImageData:(NSData*)avtarImageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+- (void)performPostOperationForProfileWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andHeaderImageData:(NSData*)headerImageData andAvtarImageData:(NSData*)avtarImageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   if ([LCUtilityManager isNetworkAvailable])
   {
@@ -151,51 +144,25 @@
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.securityPolicy.allowInvalidCertificates = YES;
-    
-    [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+      [formData appendPartWithFileData:headerImageData
+                                         name:@"headphoto"
+                                     fileName:@"headphoto"
+                                     mimeType:@"image/jpeg"];
       [formData appendPartWithFileData:avtarImageData
                                   name:@"avatarUrl"
-                              fileName:@"avatarUrl" mimeType:@"image/jpeg"];
-      // etc.
+                              fileName:@"avatarUrl"
+                              mimeType:@"image/jpeg"];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-      NSLog(@"Response: %@", responseObject);
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      NSLog(@"Error: %@", error);
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            failure([error localizedDescription]);
     }];
-
-   /*
-//    NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
-//    id block = ^(id<AFMultipartFormData> formData) {
-//      [formData appendPartWithFileData:headerImageData
-//                                  name:@"image"
-//                              fileName:@"image"
-//                              mimeType:@"image/jpeg"];
-//    };
-//    NSError *error;
-//    NSMutableURLRequest *request = [manager.requestSerializer
-//                                    multipartFormRequestWithMethod:@"PUT"
-//                                    URLString:url
-//                                    parameters:params
-//                                    constructingBodyWithBlock:nil
-//                                    error:&error];
-//    NSLog(@"%@",error);
-//    [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//      [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-//          NSLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
-//        }];
-//      success(responseObject);
-//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-//      failure([error localizedDescription]);
-//    }];
-
-    
-    
-    */
   }
 }
-
 
 
 @end

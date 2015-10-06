@@ -15,6 +15,7 @@
 + (NSString *)performNullCheckAndSetValue:(NSString *)value;
 + (BOOL)validateEmail:(NSString*)emailString;
 + (BOOL)validatePassword:(NSString*)passwordString;
++ (NSString*) getStringValueOfBOOL:(BOOL)value;
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message;
 + (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format;
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date;
