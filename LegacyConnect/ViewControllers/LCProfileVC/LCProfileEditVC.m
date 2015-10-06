@@ -40,9 +40,34 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   self.navigationController.navigationBarHidden = YES;
   
   profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                placeholderImage:profilePicPlaceholder];
-  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
+  profilePic.image = profilePicPlaceholder;
+//  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+//                placeholderImage:profilePicPlaceholder];
+//  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
+  
+  avatarPicState = IMAGE_UNTOUCHED;
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+    NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: userDetail.avatarURL]];
+    if ( data != nil )
+    {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        profilePic.image = [UIImage imageWithData: data];
+        actualAvatarImage = [UIImage imageWithData: data];
+      });
+    }
+  });
+  
+  headerPicState = IMAGE_UNTOUCHED;
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+    NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: userDetail.headerPhotoURL]];
+    if ( data != nil )
+    {
+      dispatch_async(dispatch_get_main_queue(), ^{
+        headerBGImage.image = [UIImage imageWithData: data];
+        actualHeaderImage = [UIImage imageWithData: data];
+      });
+    }
+  });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -68,6 +93,44 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   NSLog(@"birthday - %@",txt_birthday.text);
   NSLog(@"gender - %@",txt_gender.text);
   
+  userDetail.firstName = txt_firstName.text;
+  userDetail.lastName = txt_lastName.text;
+  userDetail.dob = txt_birthday.text;
+  userDetail.gender = txt_gender.text;
+  userDetail.location = txt_location.text;
+  
+  
+  UIImage *avatarToPass = nil, *headerToPass = nil;
+  BOOL isAvatarRemoved = NO, isHeaderRemoved = NO;
+  
+  
+  if (avatarPicState == IMAGE_REMOVED)
+  {
+    isAvatarRemoved = YES;
+  }
+  else if (avatarPicState == IMAGE_EDITED)
+  {
+    avatarToPass = actualAvatarImage;
+  }
+  
+  if (headerPicState == IMAGE_REMOVED)
+  {
+    isHeaderRemoved = YES;
+  }
+  else if (headerPicState == IMAGE_EDITED)
+  {
+    headerToPass = actualHeaderImage;
+  }
+  
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager updateProfile:userDetail havingHeaderPhoto:headerToPass removedState:isHeaderRemoved andAvtarImage:avatarToPass removedState:isAvatarRemoved withSuccess:^(NSArray *response) {
+    NSLog(@"ress-->>>%@",response);
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    NSLog(@"%@",error);
+  }];
+  
 }
 
 - (IBAction)editProfilePicAction:(id)sender {
@@ -78,7 +141,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    [self showImageCropViewWithImage:profilePic.image];
+    [self showImageCropViewWithImage:actualAvatarImage];
     
   }];
   
@@ -108,21 +171,19 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   }];
   
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Profile Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
+    avatarPicState = IMAGE_REMOVED;
+    actualAvatarImage = nil;
     profilePic.image = profilePicPlaceholder;
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
-  NSData *profilePicData = UIImagePNGRepresentation(profilePic.image);
-  NSData *placeHolderData = UIImagePNGRepresentation(profilePicPlaceholder);
-  BOOL isImageAvailable = (![profilePicData isEqual:placeHolderData]);
   
-  if (isImageAvailable){
+  if (actualAvatarImage){
     [actionSheet addAction:editAction];
   }
   [actionSheet addAction:takeAction];
   [actionSheet addAction:chooseAction];
-  if (isImageAvailable) {
+  if (actualAvatarImage) {
     [actionSheet addAction:removeAction];
   }
   [actionSheet addAction:cancelAction];
@@ -138,7 +199,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    [self showImageCropViewWithImage:headerBGImage.image];
+    [self showImageCropViewWithImage:actualHeaderImage];
     
   }];
   
@@ -168,20 +229,20 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   }];
   
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
+      headerPicState = IMAGE_REMOVED;
+      actualHeaderImage = nil;
       headerBGImage.image = nil;
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
   
-  BOOL isImageAvailable = (headerBGImage.image != nil);
   
-  if (isImageAvailable){
+  if (actualHeaderImage){
     [actionSheet addAction:editAction];
   }
   [actionSheet addAction:takeAction];
   [actionSheet addAction:chooseAction];
-  if (isImageAvailable) {
+  if (actualHeaderImage) {
     [actionSheet addAction:removeAction];
   }
   [actionSheet addAction:cancelAction];
@@ -554,11 +615,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   [self dismissViewControllerAnimated:YES completion:^{
     if (isEditingProfilePic) {
-      
+      avatarPicState = IMAGE_EDITED;
+      actualAvatarImage = croppedImage;
       profilePic.image = croppedImage;
     }
     else {
-      
+      headerPicState = IMAGE_EDITED;
+      actualHeaderImage = croppedImage;
       headerBGImage.image = croppedImage;
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
@@ -574,9 +637,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   [self dismissViewControllerAnimated:YES completion:^{
     
     if (isEditingProfilePic) {
+      avatarPicState = IMAGE_EDITED;
+      actualAvatarImage = croppedImage;
       profilePic.image = croppedImage;
     }
     else {
+      headerPicState = IMAGE_EDITED;
+      actualHeaderImage = croppedImage;
       headerBGImage.image = croppedImage;
     }
     [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];

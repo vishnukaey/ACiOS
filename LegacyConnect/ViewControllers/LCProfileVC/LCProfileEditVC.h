@@ -17,6 +17,12 @@ typedef enum profileSectionTypes
   SECTION_GENDER
 } sectionType;
 
+typedef enum imageEditStates
+{
+  IMAGE_REMOVED,
+  IMAGE_EDITED,
+  IMAGE_UNTOUCHED
+} imageEditState;
 
 @interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate>
 {
@@ -41,8 +47,10 @@ typedef enum profileSectionTypes
   NSArray *genderTypes;
   
   BOOL isEditingProfilePic;
-  UIImage *profilePicPlaceholder;
+  imageEditState avatarPicState, headerPicState;
+  UIImage *actualHeaderImage, *actualAvatarImage;
   
+  UIImage *profilePicPlaceholder;
 }
 
 
