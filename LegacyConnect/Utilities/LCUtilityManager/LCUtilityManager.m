@@ -32,6 +32,11 @@
   return kEmptyStringValue;
 }
 
++ (NSString*) getStringValueOfBOOL:(BOOL)value
+{
+  int boolInt = (int) value;
+  return [NSString stringWithFormat:@"%d",boolInt];;
+}
 
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message
 {

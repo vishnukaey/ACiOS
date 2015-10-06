@@ -224,15 +224,15 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-#warning not working
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRegisterURL];
   NSError *error = nil;
   NSDictionary *tempDict = [MTLJSONAdapter JSONDictionaryFromModel:user error:&error];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:tempDict];
-  [dict setValue:@"0" forKey:@"removeAvatar"];
-  [dict setValue:@"0" forKey:@"removeHeader"];
+  
+  [dict setValue:[LCUtilityManager getStringValueOfBOOL:avtarImageState] forKey:@"removeAvatar"];
+  [dict setValue:[LCUtilityManager getStringValueOfBOOL:headerPhotoState] forKey:@"removeHeader"];
   if(error)
   {
     NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
@@ -240,12 +240,11 @@ static LCAPIManager *sharedManager = nil;
   NSData *headerImageData = UIImagePNGRepresentation(headerPhoto);
   NSData *avtarImageData = UIImagePNGRepresentation(avtarImage);
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performPutOperationForProfileWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andHeaderImageData:headerImageData andAvtarImageData:avtarImageData withSuccess:^(id response) {
+  [webService performPostOperationForProfileWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andHeaderImageData:headerImageData andAvtarImageData:avtarImageData withSuccess:^(id response) {
     NSLog(@"Success!");
   } andFailure:^(NSString *error) {
     NSLog(@"Failure");
   }];
-
 }
 
 
@@ -695,35 +694,35 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-
-+ (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
-{
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
-  NSError *error = nil;
-  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
-  if(error)
-  {
-    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-  }
-  NSData *imageData = UIImagePNGRepresentation(headerPhoto);
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performPutOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andImageData:imageData withSuccess:^(id response) {
-    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-    {
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-      failure(response[kResponseMessage]);
-    }
-    else
-    {
-      NSLog(@"Event update success! %@",response);
-      success(response);
-    }
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-    failure(error);
-  }];
-}
+/*not working*/
+//+ (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+//{
+//  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
+//  NSError *error = nil;
+//  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
+//  if(error)
+//  {
+//    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+//  }
+//  NSData *imageData = UIImagePNGRepresentation(headerPhoto);
+//  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+//  [webService performPutOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andImageData:imageData withSuccess:^(id response) {
+//    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+//    {
+//      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+//      failure(response[kResponseMessage]);
+//    }
+//    else
+//    {
+//      NSLog(@"Event update success! %@",response);
+//      success(response);
+//    }
+//  } andFailure:^(NSString *error) {
+//    NSLog(@"%@",error);
+//    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+//    failure(error);
+//  }];
+//}
 
 
 + (void)followEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
