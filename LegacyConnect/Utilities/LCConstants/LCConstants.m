@@ -35,6 +35,7 @@ NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
+NSString *const kEditProfileURL = @"api/user/edit";
 NSString *const kFBLoginURL = @"api/user/fbLogin";
 NSString *const kUploadUserImageURL = @"api/user/profileImage";
 NSString *const kGetInterestsURL = @"api/interests";
