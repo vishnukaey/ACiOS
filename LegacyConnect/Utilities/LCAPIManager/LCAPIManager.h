@@ -39,7 +39,7 @@
 
 #pragma mark - Events
 
-+ (void)getUserEeventsForUserId:(NSString*)userId andLastEventId:(NSString*)lastEventId
++ (void)getUserEventsForUserId:(NSString*)userId andLastEventId:(NSString*)lastEventId
                     withSuccess:(void(^)(NSArray *response))success andFailure:(void(^)(NSString* error))failure;
 + (void)createEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

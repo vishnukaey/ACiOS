@@ -587,7 +587,7 @@ static LCAPIManager *sharedManager = nil;
 
 #pragma mark - Events
 
-+ (void)getUserEeventsForUserId:(NSString*)userId andLastEventId:(NSString*)lastEventId
++ (void)getUserEventsForUserId:(NSString*)userId andLastEventId:(NSString*)lastEventId
                     withSuccess:(void(^)(NSArray *response))success andFailure:(void(^)(NSString* error))failure
 {
   LCWebServiceManager * webService = [[LCWebServiceManager alloc] init];

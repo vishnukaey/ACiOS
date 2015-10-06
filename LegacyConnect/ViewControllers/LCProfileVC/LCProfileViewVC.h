@@ -40,6 +40,7 @@ typedef enum profileStateTypes
   
   NSArray *mileStoneFeeds;
   NSArray *interestsArray;
+  NSArray *actionsArray;
   
   profileState currentProfileState;
 }
