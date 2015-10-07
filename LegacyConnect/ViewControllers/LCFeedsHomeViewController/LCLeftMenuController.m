@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *menuTable;
+@property (nonatomic, assign) BOOL isFirstLaunch;
 @end
 
 static NSString *kProfilePicPlaceholder = @"userProfilePic";
@@ -47,6 +48,8 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   
   [self.menuTable setBackgroundColor:kDeSelectionColor];
   [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+  
+  self.isFirstLaunch = YES;
 }
 
 - (void)refreshUserInfo
@@ -118,12 +121,19 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   }
   [cell setIndex:indexPath.row];
   [cell setBackgroundColor:kDeSelectionColor];
+  if (self.isFirstLaunch && indexPath.row == 0) {
+    //Set 'Feeds' selected by default.
+    [cell setBackgroundColor:kSelectionColor];
+    [cell.itemIcon setTintColor:kIconSelectionColor];
+  }
+  
   return cell;
 }
 
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  self.isFirstLaunch = NO;
   LCMenuItemCell * selectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
   [selectedCell setSelected:NO];
   [selectedCell setBackgroundColor:kSelectionColor];

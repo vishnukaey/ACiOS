@@ -690,7 +690,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-k7-6Sl">
-                                        <rect key="frame" x="137" y="33" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="G5t-TF-z75"/>
                                             <constraint firstAttribute="height" constant="100" id="IGR-fU-cDx"/>
@@ -698,6 +698,12 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="G5t-TF-z75"/>
+                                                <exclude reference="IGR-fU-cDx"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="profileButtonTapped:" destination="oRs-pM-3Ty" eventType="touchUpInside" id="SmU-WD-jIq"/>
                                         </connections>
@@ -711,15 +717,25 @@
                                     <constraint firstAttribute="bottom" secondItem="bcg-sA-xGH" secondAttribute="bottom" id="F4s-lB-9Z7"/>
                                     <constraint firstItem="k8t-x1-bzK" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="Hx5-4K-dtd"/>
                                     <constraint firstItem="zbT-Jh-Ifn" firstAttribute="top" secondItem="SaK-0r-E77" secondAttribute="top" id="KYH-nD-ayF"/>
+                                    <constraint firstAttribute="trailing" secondItem="R5P-k7-6Sl" secondAttribute="trailing" id="Lff-Ts-5M3"/>
                                     <constraint firstItem="bcg-sA-xGH" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="Qkj-zR-fgZ"/>
                                     <constraint firstItem="zbT-Jh-Ifn" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="SZ9-j2-N2K"/>
                                     <constraint firstAttribute="height" constant="216" id="UoX-2U-yeE"/>
                                     <constraint firstAttribute="centerX" secondItem="R5P-k7-6Sl" secondAttribute="centerX" id="Wxa-ke-S04"/>
                                     <constraint firstAttribute="centerY" secondItem="dlK-FF-KdW" secondAttribute="centerY" constant="25" id="XS0-w9-Qyf"/>
                                     <constraint firstAttribute="trailing" secondItem="zbT-Jh-Ifn" secondAttribute="trailing" id="aot-D4-FIF"/>
+                                    <constraint firstAttribute="bottom" secondItem="R5P-k7-6Sl" secondAttribute="bottom" id="hKz-hB-qDB"/>
+                                    <constraint firstItem="R5P-k7-6Sl" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="ieu-i6-FBR"/>
                                     <constraint firstAttribute="trailing" secondItem="k8t-x1-bzK" secondAttribute="trailing" id="omI-0W-U5v"/>
+                                    <constraint firstItem="R5P-k7-6Sl" firstAttribute="top" secondItem="SaK-0r-E77" secondAttribute="top" id="qg7-Nt-fHD"/>
                                     <constraint firstAttribute="trailing" secondItem="bcg-sA-xGH" secondAttribute="trailing" id="vaC-Oo-P57"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Bbx-LC-zWC"/>
+                                        <exclude reference="Wxa-ke-S04"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Xg2-fU-H8Q">
                                 <rect key="frame" x="0.0" y="216" width="375" height="451"/>
