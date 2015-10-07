@@ -17,7 +17,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *menuTable;
 @end
 
-static NSString *kProfilePicPlaceholder = @"manplaceholder.jpg";
+static NSString *kProfilePicPlaceholder = @"userProfilePic";
 static CGFloat kProfilePicBorderWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
 static CGFloat kNumberOfCells = 5.0;
