@@ -15,6 +15,7 @@
 "password_mismatch" = "Passwords doesn't match.";
 "no_interests_selected" = "Causes will appear here based on the interests you choose";
 "no_causes_available" = "No causes to display";
+"no_friends_available" = "No friends to display";
 
 "ok" = "OK";
 
