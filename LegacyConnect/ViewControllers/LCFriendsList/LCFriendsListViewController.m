@@ -33,6 +33,7 @@ static NSString *kTitle = @"FRIENDS";
 #pragma mark - private method implementation
 - (void)addPullToRefresh
 {
+  [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
   [self.tableView addPullToRefreshWithActionHandler:^{
     [self.friendsList removeAllObjects];
     [self.tableView reloadData];
@@ -41,7 +42,7 @@ static NSString *kTitle = @"FRIENDS";
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       [self getFriendsListWithLastLastUserId:nil];
     });
-  }withBackgroundColor:[UIColor colorWithRed:255.0/255 green:75.0/255 blue:67/255.0 alpha:1]];
+  }withBackgroundColor:[UIColor lightGrayColor]];
 
 }
 
@@ -113,17 +114,27 @@ static NSString *kTitle = @"FRIENDS";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (self.friendsList.count == 0) {
+    return 1;
+  }
+  
   return self.friendsList.count + ((self.loadMoreFriends && self.tableView.pullToRefreshView.state != KoaPullToRefreshStateLoading) ?  kRowForLoadingCell : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (self.friendsList.count == 0)
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_friends_available", nil)];
+    }
+  
   if (indexPath.row == self.friendsList.count) {
     LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:kLoadingCellIdentifier forIndexPath:indexPath];
     if (loadingCell == nil) {
       loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLoadingCellIdentifier];
     }
-    [loadingCell.loadingindicator startAnimating];
+    [MBProgressHUD hideHUDForView:loadingCell animated:YES];
+    [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
     return loadingCell;
   }
   else
@@ -150,7 +161,7 @@ static NSString *kTitle = @"FRIENDS";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.row == self.friendsList.count - 1 && self.loadMoreFriends && !self.isLoadingMoreFriends) {
-    [self getFriendsListWithLastLastUserId:[(LCFriend*)[self.friendsList objectAtIndex:self.friendsList.count - 1] userID]];
+    [self getFriendsListWithLastLastUserId:[(LCFriend*)[self.friendsList objectAtIndex:self.friendsList.count - 1] friendId]];
   }
 }
 
@@ -189,12 +200,7 @@ static NSString *kTitle = @"FRIENDS";
     //change button image
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
     
-#warning remove this dummy obj with original obj
-    
-    LCFriend * fri = [[LCFriend alloc] init];
-    fri.userID = @"23234324";
-    
-    [LCAPIManager removeFriend:fri withSuccess:^(NSArray *response)
+    [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
        [self.tableView beginUpdates];
@@ -229,7 +235,7 @@ static NSString *kTitle = @"FRIENDS";
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
 
     
-    [LCAPIManager cancelFriendRequest:friendObj withSuccess:^(NSArray *response) {
+    [LCAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
       friendObj.isFriend = kFriendStatusNonFriend;
       [self.tableView beginUpdates];
@@ -257,7 +263,7 @@ static NSString *kTitle = @"FRIENDS";
 
   [friendBtn setfriendStatusButtonImageForStatus:kIsFriend];
 
-  [LCAPIManager sendFriendRequest:friendObj withSuccess:^(NSArray *response) {
+  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
     friendObj.isFriend = kFriendStatusMyFriend;
   } andFailure:^(NSString *error) {
