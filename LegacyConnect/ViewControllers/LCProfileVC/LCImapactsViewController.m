@@ -15,7 +15,7 @@
 @end
 
 @implementation LCImapactsViewController
-@synthesize impactsTableView, customNavigationHeight;
+@synthesize impactsTableView, customNavigationHeight, userDetail;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -26,7 +26,7 @@
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
   [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:nil with:^(NSArray *response) {
     NSLog(@"%@",response);
     impactsArray = response;
     [impactsTableView reloadData];
@@ -80,11 +80,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (impactsArray.count == 0) {
+    return 1;
+  }
   return impactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (impactsArray.count == 0)
+  {
+    NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
+    if ([nativeUserId isEqualToString:userDetail.userID])//self profile
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_self", nil)];
+    }
+    else
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
+    }
+  }
   static NSString *MyIdentifier = @"LCFeedCell";
   LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)

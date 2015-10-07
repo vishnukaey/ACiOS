@@ -14,8 +14,10 @@
 "invalid_password" = "Password should be minimum of 8 characters.";
 "password_mismatch" = "Passwords doesn't match.";
 "no_interests_selected" = "Causes will appear here based on the interests you choose";
-"no_causes_available" = "No causes to display";
-"no_friends_available" = "No friends to display";
+"no_causes_available" = "No causes to display.";
+"no_friends_available" = "No friends to display.";
+"no_impacts_available_self" = "Create Impacts by selecting the Global Impact button from the bottom right.";
+"no_impacts_available_others" = "No Impacts to available.";
 
 "ok" = "OK";
 

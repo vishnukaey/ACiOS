@@ -201,16 +201,15 @@
 
 -(void)loadMileStones
 {
-  [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
   [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
   [LCAPIManager getMilestonesForUser:userDetail.userID
                   andLastMilestoneID:nil withSuccess:^(NSArray *response) {
                     mileStoneFeeds = response;
                     [milestonesTable reloadData];
-                    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+                    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
                   }
                           andFailure:^(NSString *error) {
-                            [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+                            [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
                             NSLog(@"%@",error);
                           }];
 }
@@ -218,20 +217,18 @@
 
 - (void)loadInterests
 {
-  [MBProgressHUD hideHUDForView:interestsTable animated:YES];
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
     interestsArray = responses;
     [interestsTable reloadData];
-    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
   } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
     NSLog(@"%@",error);
   }];
 }
 
 - (void) loadEvents {
-  [MBProgressHUD hideHUDForView:actionsTable animated:YES];
   [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
   
 
@@ -239,10 +236,10 @@
     
     actionsArray = response;
     [actionsTable reloadData];
-    [MBProgressHUD hideHUDForView:actionsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
   } andFailure:^(NSString *error) {
     
-    [MBProgressHUD hideHUDForView:actionsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
   }];
 }
 
@@ -263,6 +260,7 @@
   NSLog(@"impacts clicked----->");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
   LCImapactsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
+  vc.userDetail = userDetail;
   [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -422,15 +420,15 @@
     //MILESTONES
     if (mileStoneFeeds.count == 0) {
       
-      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      NSString *message;
       if (currentProfileState == PROFILE_SELF) {
-        cell.textLabel.text = @"Tap \"...\" in any of your posts to add as a milestone.";
+        message = @"Tap \"...\" in any of your posts to add as a milestone.";
+        
       }
       else {
-        cell.textLabel.text = @"No milestones available.";
+        message = @"No milestones available.";
       }
-      cell.textLabel.textAlignment =NSTextAlignmentCenter;
-      cell.textLabel.numberOfLines = 3;
+      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
@@ -454,6 +452,9 @@
         cell.moreButton.hidden = NO;
       }
       
+      tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+      tableView.allowsSelection = YES;
+      
       return cell;
     }
     
@@ -463,15 +464,15 @@
     //INTERESTS
     if (interestsArray.count == 0) {
       
-      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      NSString *message;
       if (currentProfileState == PROFILE_SELF) {
-        cell.textLabel.text = @"Search and add interests from the menu.";
+        message = @"Search and add interests from the menu.";
+        
       }
       else {
-        cell.textLabel.text = @"No interests available.";
+        message = @"No interests available.";
       }
-      cell.textLabel.textAlignment =NSTextAlignmentCenter;
-      cell.textLabel.numberOfLines = 3;
+      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
@@ -490,6 +491,9 @@
       LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
       [cell setData:interstObj];
       
+      tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+      tableView.allowsSelection = YES;
+      
       return cell;
     }
   }
@@ -499,15 +503,15 @@
     //ACTIONS
     if (actionsArray.count == 0) {
       
-      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      NSString *message;
       if (currentProfileState == PROFILE_SELF) {
-        cell.textLabel.text = @"Take action by selecting the Global Impact button from the bottom right.";
+        message = @"Take action by selecting the Global Impact button from the bottom right.";
+        
       }
       else {
-        cell.textLabel.text = @"No actions available.";
+        message = @"No actions available.";
       }
-      cell.textLabel.textAlignment =NSTextAlignmentCenter;
-      cell.textLabel.numberOfLines = 3;
+      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
@@ -522,6 +526,9 @@
         cell = [topLevelObjects objectAtIndex:0];
       }
       [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
+      
+      tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+      tableView.allowsSelection = YES;
       return cell;
     }
   }
