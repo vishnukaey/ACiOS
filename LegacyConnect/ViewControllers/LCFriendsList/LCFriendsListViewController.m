@@ -150,7 +150,7 @@ static NSString *kTitle = @"FRIENDS";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.row == self.friendsList.count - 1 && self.loadMoreFriends && !self.isLoadingMoreFriends) {
-    [self getFriendsListWithLastLastUserId:[(LCFriend*)[self.friendsList objectAtIndex:self.friendsList.count - 1] userID]];
+    [self getFriendsListWithLastLastUserId:[(LCFriend*)[self.friendsList objectAtIndex:self.friendsList.count - 1] friendId]];
   }
 }
 
