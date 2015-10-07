@@ -201,8 +201,8 @@
 
 -(void)loadMileStones
 {
+  [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
   [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
-
   [LCAPIManager getMilestonesForUser:userDetail.userID
                   andLastMilestoneID:nil withSuccess:^(NSArray *response) {
                     mileStoneFeeds = response;
@@ -218,6 +218,7 @@
 
 - (void)loadInterests
 {
+  [MBProgressHUD hideHUDForView:interestsTable animated:YES];
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
     interestsArray = responses;
@@ -230,7 +231,7 @@
 }
 
 - (void) loadEvents {
-  
+  [MBProgressHUD hideHUDForView:actionsTable animated:YES];
   [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
   
 

@@ -182,6 +182,17 @@
   return [LCUtilityManager encodeToBase64String:appendedString];
 }
 
++ (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text
+{
+  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+  cell.textLabel.text = text;
+  [cell.textLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
+  [cell.textLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
+  cell.textLabel.textAlignment =NSTextAlignmentCenter;
+  cell.textLabel.numberOfLines = 2;
+  return cell;
+}
+
 //+(NSNumber*) getNSNumberFromString:(NSString*)string
 //{
 //  NSNumberFormatter *format = [[NSNumberFormatter alloc] init];

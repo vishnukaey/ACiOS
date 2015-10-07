@@ -113,17 +113,27 @@ static NSString *kTitle = @"FRIENDS";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (self.friendsList.count == 0) {
+    return 1;
+  }
+  
   return self.friendsList.count + ((self.loadMoreFriends && self.tableView.pullToRefreshView.state != KoaPullToRefreshStateLoading) ?  kRowForLoadingCell : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (self.friendsList.count == 0)
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_friends_available", nil)];
+    }
+  
   if (indexPath.row == self.friendsList.count) {
     LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:kLoadingCellIdentifier forIndexPath:indexPath];
     if (loadingCell == nil) {
       loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLoadingCellIdentifier];
     }
-    [loadingCell.loadingindicator startAnimating];
+    [MBProgressHUD hideHUDForView:loadingCell animated:YES];
+    [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
     return loadingCell;
   }
   else

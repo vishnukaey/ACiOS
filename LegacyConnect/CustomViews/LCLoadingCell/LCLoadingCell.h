@@ -10,5 +10,4 @@
 
 @interface LCLoadingCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingindicator;
 @end
