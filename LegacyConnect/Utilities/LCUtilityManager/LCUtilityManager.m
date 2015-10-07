@@ -262,7 +262,7 @@
             }
             
             if (!contact_.P_image) {
-                contact_.P_image = [UIImage imageNamed:@"manplaceholder.jpg"];
+                contact_.P_image = [UIImage imageNamed:@"userProfilePic"];
             }
             
             
