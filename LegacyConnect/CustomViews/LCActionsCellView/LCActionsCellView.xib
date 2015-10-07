@@ -24,19 +24,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEET UP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eI7-kg-zvK">
-                        <rect key="frame" x="115" y="23" width="60" height="13"/>
+                        <rect key="frame" x="115" y="24" width="57" height="16"/>
                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="13"/>
                         <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thursday at 5:00pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cf5-Bs-MX1">
-                        <rect key="frame" x="115" y="46" width="131" height="13"/>
+                        <rect key="frame" x="115" y="45" width="117" height="16"/>
                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                         <color key="textColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.10980392156862745" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Supported by 24 People" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2M-v8-fBt">
-                        <rect key="frame" x="115" y="69" width="157" height="13"/>
+                        <rect key="frame" x="115" y="66" width="142" height="16"/>
                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                         <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -50,11 +50,11 @@
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="W2M-v8-fBt" firstAttribute="top" secondItem="cf5-Bs-MX1" secondAttribute="bottom" constant="10" id="6CG-QH-3eH"/>
+                    <constraint firstItem="W2M-v8-fBt" firstAttribute="top" secondItem="cf5-Bs-MX1" secondAttribute="bottom" constant="5" id="6CG-QH-3eH"/>
                     <constraint firstItem="cf5-Bs-MX1" firstAttribute="leading" secondItem="X3V-9U-zgf" secondAttribute="trailing" constant="20" id="9YP-fE-Jp3"/>
                     <constraint firstItem="X3V-9U-zgf" firstAttribute="leading" secondItem="Hu2-md-SWi" secondAttribute="leading" constant="20" id="F96-nr-HM4"/>
                     <constraint firstItem="cf5-Bs-MX1" firstAttribute="leading" secondItem="W2M-v8-fBt" secondAttribute="leading" id="REV-6F-7fW"/>
-                    <constraint firstItem="cf5-Bs-MX1" firstAttribute="top" secondItem="eI7-kg-zvK" secondAttribute="bottom" constant="10" id="Vg5-nu-Nuq"/>
+                    <constraint firstItem="cf5-Bs-MX1" firstAttribute="top" secondItem="eI7-kg-zvK" secondAttribute="bottom" constant="5" id="Vg5-nu-Nuq"/>
                     <constraint firstItem="cf5-Bs-MX1" firstAttribute="centerY" secondItem="X3V-9U-zgf" secondAttribute="centerY" id="cLc-rr-opd"/>
                     <constraint firstItem="X3V-9U-zgf" firstAttribute="top" secondItem="Hu2-md-SWi" secondAttribute="top" constant="15" id="p3r-oF-SxQ"/>
                     <constraint firstItem="cf5-Bs-MX1" firstAttribute="leading" secondItem="eI7-kg-zvK" secondAttribute="leading" id="rFN-K7-xaM"/>

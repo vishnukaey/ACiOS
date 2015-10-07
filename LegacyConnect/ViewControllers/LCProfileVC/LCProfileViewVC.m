@@ -69,9 +69,9 @@
   
   NSString *firstName = [LCDataManager sharedDataManager].firstName;
   NSString *lastName = [LCDataManager sharedDataManager].lastName;
-  userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
+  userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
                         [LCUtilityManager performNullCheckAndSetValue:firstName],
-                        [LCUtilityManager performNullCheckAndSetValue:lastName]];
+                        [LCUtilityManager performNullCheckAndSetValue:lastName]]uppercaseString];
   memeberSincelabel.text = @"";
   locationLabel.text = @"";
   
@@ -103,9 +103,9 @@
     userDetail = response;
     NSLog(@"user details - %@",response);
     
-    userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
+    userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]];
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]]uppercaseString];
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
                               [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
