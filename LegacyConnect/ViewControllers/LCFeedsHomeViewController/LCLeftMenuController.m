@@ -43,15 +43,16 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   self.profilePicture.clipsToBounds = YES;
   
   //-- Name Label -- //
-  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",[LCDataManager sharedDataManager].firstName,[LCDataManager sharedDataManager].lastName] uppercaseString]];
-  [self refreshUserImages];
+  [self refreshUserInfo];
   
   [self.menuTable setBackgroundColor:kDeSelectionColor];
   [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
 }
 
-- (void)refreshUserImages
+- (void)refreshUserInfo
 {
+  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",[LCDataManager sharedDataManager].firstName,[LCDataManager sharedDataManager].lastName] uppercaseString]];
+
   //-- Cover Photo -- //
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].headerPhotoURL];
   [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:nil];
@@ -73,7 +74,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)refreshUserImages:(NSNotification*)notification
 {
-  [self refreshUserImages];
+  [self refreshUserInfo];
 }
 
 #pragma mark - view life cycle
