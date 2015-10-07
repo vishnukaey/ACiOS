@@ -23,7 +23,7 @@
 
 //-- Menu Item --//
 
-"Feed" = "Feeds";
+"Feed" = "Feed";
 "Interests" = "Interests";
 "Notifications" = "Notifications";
 "Settings" = "Settings";
