@@ -263,6 +263,7 @@
   NSLog(@"impacts clicked----->");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
   LCImapactsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
+  vc.userDetail = userDetail;
   [self.navigationController pushViewController:vc animated:YES];
 }
 

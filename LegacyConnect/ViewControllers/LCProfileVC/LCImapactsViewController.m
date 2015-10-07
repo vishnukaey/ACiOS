@@ -15,7 +15,7 @@
 @end
 
 @implementation LCImapactsViewController
-@synthesize impactsTableView, customNavigationHeight;
+@synthesize impactsTableView, customNavigationHeight, userDetail;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -26,7 +26,7 @@
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
   [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:nil with:^(NSArray *response) {
     NSLog(@"%@",response);
     impactsArray = response;
     [impactsTableView reloadData];
@@ -85,6 +85,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  
+  //  NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
+  //  NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
+  //  if ([nativeUserId isEqualToString:userDetail.userID])
+  //  {
+  //    currentProfileState = PROFILE_SELF;
+  
+  
+  
   static NSString *MyIdentifier = @"LCFeedCell";
   LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
