@@ -10,7 +10,7 @@
 #import "LCWebServiceManager.h"
 
 static LCAPIManager *sharedManager = nil;
-
+NSDictionary *dict;
 @implementation LCAPIManager
 
 
@@ -120,7 +120,7 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)getMilestonesForUser:(NSString *)userID andLastMilestoneID:(NSString*)lastID with:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getMilestonesForUser:(NSString *)userID andLastMilestoneID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?userid=%@", kBaseURL,kGetMilestonesURL,userID];
@@ -393,10 +393,10 @@ static LCAPIManager *sharedManager = nil;
 + (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success
                andfailure:(void (^)(NSString *error))failure
 {
-#warning remove this hard coded value
-  userId = @"7143";
-  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
-  //  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+//  userId = @"7143";
+//  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
+  
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, kFriendsURL];
@@ -409,9 +409,6 @@ static LCAPIManager *sharedManager = nil;
   if (lastUserId) {
     [url appendString:[NSString stringWithFormat:@"&lastUserId=%@",lastUserId]];
   }
-
-  
-
   
   [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
    {
@@ -445,11 +442,11 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)sendFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)sendFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
-  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+  NSDictionary *dict = @{kFriendIDKey: friendID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -469,11 +466,11 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)cancelFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)cancelFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kCancelFriendURL];
-  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+  NSDictionary *dict = @{kFriendIDKey: friendID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -494,12 +491,12 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
-+ (void)removeFriend:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)removeFriend:(NSString *)FriendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
-  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+   dict = @{kFriendIDKey: FriendID};
 
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -521,11 +518,11 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)acceptFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)acceptFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kAcceptFriendURL];
-  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+  NSDictionary *dict = @{kFriendIDKey: friendID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -546,11 +543,11 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)rejectFriendRequest:(LCFriend *)userFriend withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)rejectFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kRejectFriendURL];
-  NSDictionary *dict = @{kFriendIDKey: userFriend.userID};
+  NSDictionary *dict = @{kFriendIDKey: friendID};
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
