@@ -28,7 +28,7 @@
 {
   [super viewDidLoad];
   
-  UILabel *construction_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, [[UIScreen mainScreen] bounds].size.width, 80)];
+  UILabel *construction_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, [[UIScreen mainScreen] bounds].size.width, 80)];
   construction_.text = @"Under development...";
   construction_.textAlignment = NSTextAlignmentCenter;
   [self.view addSubview:construction_];
@@ -47,14 +47,14 @@
   feedsTable.estimatedRowHeight = 44.0;
   feedsTable.rowHeight = UITableViewAutomaticDimension;
   
-  
   [feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       [feedsTable.pullToRefreshView stopAnimating];
     });
-  }withBackgroundColor:[UIColor colorWithRed:255.0/255 green:75.0/255 blue:67/255.0 alpha:1]];
+  }withBackgroundColor:[UIColor lightGrayColor]];
+  
 }
 
 - (void) viewWillAppear:(BOOL)animated

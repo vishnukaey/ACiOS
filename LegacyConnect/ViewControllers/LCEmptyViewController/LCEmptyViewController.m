@@ -222,18 +222,29 @@
   }
   else if (index == 1)//Interests
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-    LCAllInterestVC *vc = [sb instantiateInitialViewController];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+//    LCAllInterestVC *vc = [sb instantiateInitialViewController];
+//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 2)//notifications
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
-    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
+//    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
+//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 3)//notifications
   {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 4)//logout
   {
