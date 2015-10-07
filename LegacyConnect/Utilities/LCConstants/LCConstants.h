@@ -13,6 +13,7 @@
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
+extern NSString *const kEditProfileURL;
 extern NSString *const kFBLoginURL;
 extern NSString *const kGetUserDetailsURL;
 extern NSString *const kGetInterestsURL;
