@@ -33,6 +33,7 @@ static NSString *kTitle = @"FRIENDS";
 #pragma mark - private method implementation
 - (void)addPullToRefresh
 {
+  [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
   [self.tableView addPullToRefreshWithActionHandler:^{
     [self.friendsList removeAllObjects];
     [self.tableView reloadData];
@@ -41,7 +42,7 @@ static NSString *kTitle = @"FRIENDS";
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       [self getFriendsListWithLastLastUserId:nil];
     });
-  }withBackgroundColor:[UIColor colorWithRed:255.0/255 green:75.0/255 blue:67/255.0 alpha:1]];
+  }withBackgroundColor:[UIColor lightGrayColor]];
 
 }
 
