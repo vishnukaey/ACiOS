@@ -13,19 +13,18 @@
 @end
 
 @implementation LCFullScreenImageVC
-@synthesize selectedImage;
+@synthesize imageView;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
+  imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.origin.y + self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - self.navigationController.navigationBar.frame.size.height - self.navigationController.navigationBar.frame.origin.y)];
   
   [self.view addSubview:imageView];
-  imageView.image = selectedImage;
   imageView.contentMode = UIViewContentModeScaleAspectFit;
-  [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+  [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
   [imageView setBackgroundColor:[UIColor clearColor]];
   
   UIButton *doneBut = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, 0, 100, 40)];

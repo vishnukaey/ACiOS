@@ -13,6 +13,7 @@
 #import "LCImapactsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFriendsListViewController.h"
+#import "LCFullScreenImageVC.h"
 
 @implementation LCProfileViewVC
 @synthesize userDetail;
@@ -69,9 +70,9 @@
   
   NSString *firstName = [LCDataManager sharedDataManager].firstName;
   NSString *lastName = [LCDataManager sharedDataManager].lastName;
-  userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
+  userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
                         [LCUtilityManager performNullCheckAndSetValue:firstName],
-                        [LCUtilityManager performNullCheckAndSetValue:lastName]];
+                        [LCUtilityManager performNullCheckAndSetValue:lastName]]uppercaseString];
   memeberSincelabel.text = @"";
   locationLabel.text = @"";
   
@@ -103,9 +104,9 @@
     userDetail = response;
     NSLog(@"user details - %@",response);
     
-    userNameLabel.text = [NSString stringWithFormat:@"%@ %@",
+    userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]];
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]]uppercaseString];
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
                               [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
@@ -226,20 +227,14 @@
 - (void)loadInterests
 {
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
-  
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
-   {
-     //NSLog(@"%@",response);
-     interestsArray = response;
-     [interestsTable reloadData];
-     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-   }
-                             andFailure:^(NSString *error)
-   {
-     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-     NSLog(@"%@",error);
-   }
-   ];
+  [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
+    interestsArray = responses;
+    [interestsTable reloadData];
+    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+    NSLog(@"%@",error);
+  }];
 }
 
 - (void) loadEvents {
@@ -583,6 +578,16 @@
     [actionSheet addAction:cancelAction];
     
     [self presentViewController:actionSheet animated:YES completion:nil];
+  }
+  else if ([type isEqualToString:kFeedCellActionImage])
+  {
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appdel.GIButton setHidden:YES];
+    [appdel.menuButton setHidden:YES];
+    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:vc animated:YES completion:nil];
+    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
   }
   
 }

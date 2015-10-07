@@ -114,16 +114,16 @@
     [manager DELETE:urlString
          parameters:params
             success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-      success(responseObject);
-      
-    }
-    failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-      failure([error localizedDescription]);
-    }];
+     {
+       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+       success(responseObject);
+       
+     }
+            failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+       failure([error localizedDescription]);
+     }];
   }
   else
   {
@@ -146,20 +146,26 @@
     manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-      [formData appendPartWithFileData:headerImageData
-                                         name:@"headphoto"
-                                     fileName:@"headphoto"
-                                     mimeType:@"image/jpeg"];
-      [formData appendPartWithFileData:avtarImageData
-                                  name:@"avatarUrl"
-                              fileName:@"avatarUrl"
-                              mimeType:@"image/jpeg"];
+      if(headerImageData)
+      {
+        [formData appendPartWithFileData:headerImageData
+                                    name:@"headphoto"
+                                fileName:@"headphoto"
+                                mimeType:@"image/jpeg"];
+      }
+      if(avtarImageData)
+      {
+        [formData appendPartWithFileData:avtarImageData
+                                    name:@"avatarUrl"
+                                fileName:@"avatarUrl"
+                                mimeType:@"image/jpeg"];
+      }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            failure([error localizedDescription]);
+      failure([error localizedDescription]);
     }];
   }
 }

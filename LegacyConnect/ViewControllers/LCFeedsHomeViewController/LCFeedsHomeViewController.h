@@ -16,5 +16,6 @@
 }
 
 @property(nonatomic, weak)IBOutlet  UITableView *feedsTable;
+@property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 
 @end

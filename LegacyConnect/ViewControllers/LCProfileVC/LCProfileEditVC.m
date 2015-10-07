@@ -170,6 +170,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     avatarPicState = IMAGE_REMOVED;
     actualAvatarImage = nil;
     profilePic.image = profilePicPlaceholder;
+    [self validateFields];
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
@@ -196,7 +197,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     [self showImageCropViewWithImage:actualHeaderImage];
-    
+    [self validateFields];
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -228,6 +229,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
       headerPicState = IMAGE_REMOVED;
       actualHeaderImage = nil;
       headerBGImage.image = nil;
+      [self validateFields];
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
@@ -286,7 +288,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   [txt_birthday resignFirstResponder];
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
   txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
-  [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  [self performSelector:@selector(validateFields) withObject:nil afterDelay:0];
 }
 
 - (void)dismissDatePickerView:(id)sender
@@ -298,7 +300,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 #pragma mark -
 
-- (void)validateFields:(id)sender
+- (void)validateFields
 {
   
   if (txt_firstName.text.length != 0 && txt_lastName.text.length != 0 && txt_birthday.text.length != 0) {
@@ -464,13 +466,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     txt_firstName = (UITextField*)[cell viewWithTag:101];
     txt_firstName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName];
     [txt_firstName addTarget:self
-                      action:@selector(validateFields:)
+                      action:@selector(validateFields)
             forControlEvents:UIControlEventEditingChanged];
     
     txt_lastName = (UITextField*)[cell viewWithTag:102];
     txt_lastName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName];
     [txt_lastName addTarget:self
-                     action:@selector(validateFields:)
+                     action:@selector(validateFields)
            forControlEvents:UIControlEventEditingChanged];
   }
   
@@ -486,7 +488,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     txt_location = (UITextField*)[cell viewWithTag:101];
     txt_location.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.location];
     [txt_location addTarget:self
-                      action:@selector(validateFields:)
+                      action:@selector(validateFields)
             forControlEvents:UIControlEventEditingChanged];
     
   }
@@ -606,7 +608,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
       actualHeaderImage = croppedImage;
       headerBGImage.image = croppedImage;
     }
-    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+    [self validateFields];
   }];
 }
 
@@ -628,7 +630,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
       actualHeaderImage = croppedImage;
       headerBGImage.image = croppedImage;
     }
-    [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+    [self validateFields];
   }];
 }
 
@@ -651,7 +653,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
   txt_gender.text = [genderTypes objectAtIndex:row];
-  [self performSelector:@selector(validateFields:) withObject:nil afterDelay:0];
+  [self validateFields];
 }
 
 

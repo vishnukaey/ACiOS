@@ -71,8 +71,10 @@
   NSString *createsAtString = [NSString stringWithFormat:@"%@%@", typeString, cause];
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:createsAtString];
   NSRange tagRangeCreatedAt = NSMakeRange(createsAtString.length - cause.length, cause.length);
-  [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor grayColor] range:NSMakeRange(0, typeString.length)];
-  [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor greenColor] range:tagRangeCreatedAt];
+  [attributtedString addAttribute:NSForegroundColorAttributeName
+                            value:[UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
+                            range:NSMakeRange(0, typeString.length)];
+  [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1] range:tagRangeCreatedAt];
   [attributtedString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
                                          } range:NSMakeRange(0, attributtedString.length)];
