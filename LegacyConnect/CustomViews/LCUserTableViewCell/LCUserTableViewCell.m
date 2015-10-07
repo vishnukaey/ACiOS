@@ -23,7 +23,7 @@
 -(void)setUser:(LCUserDetail *)user
 {
   _user = user;
-  [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   _userNameLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
   _userLocationLabel.text = [NSString stringWithFormat:@"%@ ",user.location];
 }

@@ -114,8 +114,7 @@
 - (void)registerUserOnline
 {
   [self.signupButton setEnabled:false];
-  NSString *dob = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MM-yyyy"];
-  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dob] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
+  NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dobTimeStamp] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);

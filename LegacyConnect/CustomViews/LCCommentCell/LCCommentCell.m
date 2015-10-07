@@ -28,7 +28,7 @@
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
-  [profilePic setImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [profilePic setImage:[UIImage imageNamed:@"userProfilePic"]];
   [timeLabel setText:time_];
   [commentLabel setText:comments_];
   [userNameLabel setText:userName];

@@ -27,17 +27,25 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-    feedsArray = response;
-    [feedsTable reloadData];
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
+  
+  UILabel *construction_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, [[UIScreen mainScreen] bounds].size.width, 80)];
+  construction_.text = @"Under development...";
+  construction_.textAlignment = NSTextAlignmentCenter;
+  [self.view addSubview:construction_];
+  
+//  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+//    feedsArray = response;
+//    [feedsTable reloadData];
+//  } andFailure:^(NSString *error) {
+//    NSLog(@"%@",error);
+//  }];
+  
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
   [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   feedsTable.estimatedRowHeight = 44.0;
   feedsTable.rowHeight = UITableViewAutomaticDimension;
-  
   
   [feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
@@ -45,7 +53,8 @@
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       [feedsTable.pullToRefreshView stopAnimating];
     });
-  }withBackgroundColor:[UIColor colorWithRed:255.0/255 green:75.0/255 blue:67/255.0 alpha:1]];
+  }withBackgroundColor:[UIColor lightGrayColor]];
+  
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -135,7 +144,7 @@
     [appdel.GIButton setHidden:YES];
     [appdel.menuButton setHidden:YES];
     LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.selectedImage = [UIImage imageNamed:@"photoPost_dummy.png"];
+    vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
   }
@@ -226,8 +235,8 @@ ACAccount *facebookAccount;
 
 -(IBAction)search:(id)sender
 {
-  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
-  [self.navigationController pushViewController:searchVC animated:NO];
+//  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
+//  [self.navigationController pushViewController:searchVC animated:NO];
 }
 
 

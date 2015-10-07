@@ -34,7 +34,7 @@
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
-  [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+  [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
     interests = response;
     [self.interestsCollectionView reloadData];
