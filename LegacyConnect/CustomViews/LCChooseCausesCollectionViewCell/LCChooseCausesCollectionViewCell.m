@@ -30,7 +30,17 @@
 -(void)setCause:(LCCause *)cause
 {
   _cause = cause;
-  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+  
+  CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+  UIGraphicsBeginImageContext(rect.size);
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0] CGColor]);
+  CGContextFillRect(context, rect);
+  UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  
+  
+  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image];//no placeholder needed. background color is placeholder itself
 }
 
 - (void)setCellSelected :(BOOL)selected
