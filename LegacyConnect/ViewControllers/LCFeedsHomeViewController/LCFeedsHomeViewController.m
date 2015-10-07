@@ -27,12 +27,21 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-    feedsArray = response;
-    [feedsTable reloadData];
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
+  
+  UILabel *construction_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, [[UIScreen mainScreen] bounds].size.width, 80)];
+  construction_.text = @"Under development...";
+  construction_.textAlignment = NSTextAlignmentCenter;
+  [self.view addSubview:construction_];
+  
+//  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+//    feedsArray = response;
+//    [feedsTable reloadData];
+//  } andFailure:^(NSString *error) {
+//    NSLog(@"%@",error);
+//  }];
+  
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
   [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   feedsTable.estimatedRowHeight = 44.0;
@@ -135,7 +144,7 @@
     [appdel.GIButton setHidden:YES];
     [appdel.menuButton setHidden:YES];
     LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.selectedImage = [UIImage imageNamed:@"photoPost_dummy.png"];
+    vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
   }
@@ -226,8 +235,8 @@ ACAccount *facebookAccount;
 
 -(IBAction)search:(id)sender
 {
-  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
-  [self.navigationController pushViewController:searchVC animated:NO];
+//  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
+//  [self.navigationController pushViewController:searchVC animated:NO];
 }
 
 

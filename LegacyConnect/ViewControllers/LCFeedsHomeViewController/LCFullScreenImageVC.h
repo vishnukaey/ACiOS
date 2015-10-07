@@ -10,6 +10,6 @@
 
 @interface LCFullScreenImageVC : UIViewController
 
-@property(nonatomic, retain)UIImage *selectedImage;
+@property(nonatomic, retain)UIImageView *imageView;
 
 @end

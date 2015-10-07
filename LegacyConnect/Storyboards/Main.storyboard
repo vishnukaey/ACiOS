@@ -6,6 +6,9 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Gotham-Bold.otf">
+            <string>Gotham-Bold</string>
+        </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
         </mutableArray>
@@ -87,12 +90,16 @@
                                             <constraint firstAttribute="width" constant="150" id="fhX-Bg-NsJ"/>
                                             <constraint firstAttribute="height" constant="21" id="h5z-0t-M0f"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-Ah-7Lb">
-                                        <rect key="frame" x="11" y="26" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-Ah-7Lb">
+                                        <rect key="frame" x="15" y="33" width="21" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="21" id="tG0-26-6uE"/>
+                                            <constraint firstAttribute="height" constant="21" id="tHT-mT-kQW"/>
+                                        </constraints>
                                         <state key="normal" backgroundImage="search-icon_white_64.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -103,8 +110,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="ohl-Ah-7Lb" firstAttribute="leading" secondItem="5F3-Ck-Mhb" secondAttribute="leading" constant="15" id="NVS-Oa-nC5"/>
                                     <constraint firstAttribute="height" constant="64" id="OIL-1U-G4m"/>
                                     <constraint firstAttribute="bottom" secondItem="i7z-nM-tf3" secondAttribute="bottom" constant="8" id="XvQ-eH-owv"/>
+                                    <constraint firstAttribute="bottom" secondItem="ohl-Ah-7Lb" secondAttribute="bottom" constant="10" id="r1O-fV-bQk"/>
                                     <constraint firstAttribute="centerX" secondItem="i7z-nM-tf3" secondAttribute="centerX" id="x8j-zj-YwC"/>
                                 </constraints>
                             </view>
@@ -124,6 +133,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="customNavigationHeight" destination="OIL-1U-G4m" id="gSy-ko-xKi"/>
                         <outlet property="feedsTable" destination="hVO-KL-Fml" id="zaD-SA-ksj"/>
                     </connections>
                 </viewController>

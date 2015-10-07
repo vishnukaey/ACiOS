@@ -53,7 +53,9 @@
       {
         // First time access has been granted, add the contact
         contactsArray = [LCUtilityManager getPhoneContacts];
-        [contactsTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [contactsTable reloadData];
+        });
       }
       else
       {
