@@ -226,7 +226,7 @@
 - (void)loadInterests
 {
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
-  [LCAPIManager getInterestsForUser:@"7138" withSuccess:^(NSArray *responses) {
+  [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
     interestsArray = responses;
     [interestsTable reloadData];
     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
