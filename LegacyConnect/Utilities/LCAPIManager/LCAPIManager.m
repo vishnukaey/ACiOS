@@ -10,7 +10,6 @@
 #import "LCWebServiceManager.h"
 
 static LCAPIManager *sharedManager = nil;
-NSDictionary *dict;
 @implementation LCAPIManager
 
 
@@ -496,7 +495,7 @@ NSDictionary *dict;
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
-   dict = @{kFriendIDKey: FriendID};
+  NSDictionary *dict = @{kFriendIDKey: FriendID};
 
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
