@@ -27,7 +27,7 @@
   [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
   [imageView setBackgroundColor:[UIColor clearColor]];
   
-  UIButton *doneBut = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 100, 0, 100, 40)];
+  UIButton *doneBut = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 80, 20, 100, 40)];
   [doneBut setTitle:@"Done" forState:UIControlStateNormal];
   [self.view addSubview:doneBut];
   [doneBut addTarget:self action:@selector(doneAction) forControlEvents:UIControlEventTouchUpInside];
