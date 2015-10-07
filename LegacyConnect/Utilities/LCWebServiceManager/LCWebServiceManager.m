@@ -155,7 +155,7 @@
       }
       if(avtarImageData)
       {
-        [formData appendPartWithFileData:headerImageData
+        [formData appendPartWithFileData:avtarImageData
                                     name:@"avatarUrl"
                                 fileName:@"avatarUrl"
                                 mimeType:@"image/jpeg"];
