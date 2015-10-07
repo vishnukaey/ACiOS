@@ -420,15 +420,15 @@
     //MILESTONES
     if (mileStoneFeeds.count == 0) {
       
-      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      NSString *message;
       if (currentProfileState == PROFILE_SELF) {
-        cell.textLabel.text = @"Tap \"...\" in any of your posts to add as a milestone.";
+        message = @"Tap \"...\" in any of your posts to add as a milestone.";
+        
       }
       else {
-        cell.textLabel.text = @"No milestones available.";
+        message = @"No milestones available.";
       }
-      cell.textLabel.textAlignment =NSTextAlignmentCenter;
-      cell.textLabel.numberOfLines = 3;
+      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
@@ -452,6 +452,9 @@
         cell.moreButton.hidden = NO;
       }
       
+      tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+      tableView.allowsSelection = YES;
+      
       return cell;
     }
     
@@ -461,15 +464,15 @@
     //INTERESTS
     if (interestsArray.count == 0) {
       
-      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      NSString *message;
       if (currentProfileState == PROFILE_SELF) {
-        cell.textLabel.text = @"Search and add interests from the menu.";
+        message = @"Search and add interests from the menu.";
+        
       }
       else {
-        cell.textLabel.text = @"No interests available.";
+        message = @"No interests available.";
       }
-      cell.textLabel.textAlignment =NSTextAlignmentCenter;
-      cell.textLabel.numberOfLines = 3;
+      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
@@ -488,6 +491,9 @@
       LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
       [cell setData:interstObj];
       
+      tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+      tableView.allowsSelection = YES;
+      
       return cell;
     }
   }
@@ -497,15 +503,15 @@
     //ACTIONS
     if (actionsArray.count == 0) {
       
-      UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+      NSString *message;
       if (currentProfileState == PROFILE_SELF) {
-        cell.textLabel.text = @"Take action by selecting the Global Impact button from the bottom right.";
+        message = @"Take action by selecting the Global Impact button from the bottom right.";
+        
       }
       else {
-        cell.textLabel.text = @"No actions available.";
+        message = @"No actions available.";
       }
-      cell.textLabel.textAlignment =NSTextAlignmentCenter;
-      cell.textLabel.numberOfLines = 3;
+      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
@@ -520,6 +526,9 @@
         cell = [topLevelObjects objectAtIndex:0];
       }
       [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
+      
+      tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+      tableView.allowsSelection = YES;
       return cell;
     }
   }
