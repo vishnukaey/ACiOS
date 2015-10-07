@@ -161,19 +161,14 @@
 - (void)loadInterests
 {
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
-   {
-     //NSLog(@"%@",response);
-     interestsArray = response;
-     [interestsTable reloadData];
-     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-   }
-   andFailure:^(NSString *error)
-   {
-     [MBProgressHUD hideHUDForView:interestsTable animated:YES];
-     NSLog(@"%@",error);
-   }
-   ];
+  [LCAPIManager getInterestsForUser:@"7138" withSuccess:^(NSArray *responses) {
+    interestsArray = responses;
+    [interestsTable reloadData];
+    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+    NSLog(@"%@",error);
+  }];
 }
 
 
