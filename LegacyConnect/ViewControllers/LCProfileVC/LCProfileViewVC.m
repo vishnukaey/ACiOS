@@ -13,6 +13,7 @@
 #import "LCImapactsViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFriendsListViewController.h"
+#import "LCFullScreenImageVC.h"
 
 @implementation LCProfileViewVC
 @synthesize userDetail;
@@ -561,6 +562,16 @@
     [actionSheet addAction:cancelAction];
     
     [self presentViewController:actionSheet animated:YES completion:nil];
+  }
+  else if ([type isEqualToString:kFeedCellActionImage])
+  {
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appdel.GIButton setHidden:YES];
+    [appdel.menuButton setHidden:YES];
+    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:vc animated:YES completion:nil];
+    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
   }
   
 }
