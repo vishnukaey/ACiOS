@@ -201,16 +201,15 @@
 
 -(void)loadMileStones
 {
-  [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
   [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
   [LCAPIManager getMilestonesForUser:userDetail.userID
                   andLastMilestoneID:nil withSuccess:^(NSArray *response) {
                     mileStoneFeeds = response;
                     [milestonesTable reloadData];
-                    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+                    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
                   }
                           andFailure:^(NSString *error) {
-                            [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
+                            [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
                             NSLog(@"%@",error);
                           }];
 }
@@ -218,20 +217,18 @@
 
 - (void)loadInterests
 {
-  [MBProgressHUD hideHUDForView:interestsTable animated:YES];
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
     interestsArray = responses;
     [interestsTable reloadData];
-    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
   } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:interestsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
     NSLog(@"%@",error);
   }];
 }
 
 - (void) loadEvents {
-  [MBProgressHUD hideHUDForView:actionsTable animated:YES];
   [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
   
 
@@ -239,10 +236,10 @@
     
     actionsArray = response;
     [actionsTable reloadData];
-    [MBProgressHUD hideHUDForView:actionsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
   } andFailure:^(NSString *error) {
     
-    [MBProgressHUD hideHUDForView:actionsTable animated:YES];
+    [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
   }];
 }
 

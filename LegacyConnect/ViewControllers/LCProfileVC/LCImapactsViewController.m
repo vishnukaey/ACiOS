@@ -80,20 +80,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (impactsArray.count == 0) {
+    return 1;
+  }
   return impactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-  //  NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
-  //  NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
-  //  if ([nativeUserId isEqualToString:userDetail.userID])
-  //  {
-  //    currentProfileState = PROFILE_SELF;
-  
-  
-  
+  if (impactsArray.count == 0)
+  {
+    NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
+    if ([nativeUserId isEqualToString:userDetail.userID])//self profile
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_self", nil)];
+    }
+    else
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
+    }
+  }
   static NSString *MyIdentifier = @"LCFeedCell";
   LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
