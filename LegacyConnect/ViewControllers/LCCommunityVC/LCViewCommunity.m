@@ -225,7 +225,7 @@
     cell.commentTimeLabel.text = commentsArray[indexPath.row][@"time"];
     cell.commentDescriptionLabel.text = commentsArray[indexPath.row][@"comment"];
     cell.commentUserImageView.layer.cornerRadius = cell.commentUserImageView.frame.size.width/2;
-    [cell.commentUserImageView sd_setImageWithURL:[NSURL URLWithString:commentsArray[indexPath.row][@"profile_pic"]] placeholderImage:[UIImage imageNamed:@"manplaceholder.jpg"]];
+    [cell.commentUserImageView sd_setImageWithURL:[NSURL URLWithString:commentsArray[indexPath.row][@"profile_pic"]] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
     return cell;
   }
   
