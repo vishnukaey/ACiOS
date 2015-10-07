@@ -290,6 +290,41 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
++ (void)getInterestsForUser:(NSString*)userID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?userId=%@", kBaseURL, kUserInterestsURL,userID];
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
+       if(!error)
+       {
+         NSLog(@"Getting Interests successful! ");
+         success(responsesArray);
+       }
+       else
+       {
+         NSLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
 
 + (void)getCausesForInterestID:(NSString*)InterestID andLastCauseID:(NSString*)lastCauseID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
