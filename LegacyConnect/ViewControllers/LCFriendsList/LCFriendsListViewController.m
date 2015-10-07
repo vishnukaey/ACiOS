@@ -189,12 +189,7 @@ static NSString *kTitle = @"FRIENDS";
     //change button image
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
     
-#warning remove this dummy obj with original obj
-    
-    LCFriend * fri = [[LCFriend alloc] init];
-    fri.userID = @"23234324";
-    
-    [LCAPIManager removeFriend:fri withSuccess:^(NSArray *response)
+    [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
        [self.tableView beginUpdates];
@@ -229,7 +224,7 @@ static NSString *kTitle = @"FRIENDS";
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
 
     
-    [LCAPIManager cancelFriendRequest:friendObj withSuccess:^(NSArray *response) {
+    [LCAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
       friendObj.isFriend = kFriendStatusNonFriend;
       [self.tableView beginUpdates];
@@ -257,7 +252,7 @@ static NSString *kTitle = @"FRIENDS";
 
   [friendBtn setfriendStatusButtonImageForStatus:kIsFriend];
 
-  [LCAPIManager sendFriendRequest:friendObj withSuccess:^(NSArray *response) {
+  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
     friendObj.isFriend = kFriendStatusMyFriend;
   } andFailure:^(NSString *error) {

@@ -204,7 +204,7 @@
   [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
 
   [LCAPIManager getMilestonesForUser:userDetail.userID
-                  andLastMilestoneID:nil with:^(NSArray *response) {
+                  andLastMilestoneID:nil withSuccess:^(NSArray *response) {
                     mileStoneFeeds = response;
                     [milestonesTable reloadData];
                     [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
@@ -213,16 +213,8 @@
                             [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
                             NSLog(@"%@",error);
                           }];
-  
-//  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-//    mileStoneFeeds = response;
-//    [milestonesTable reloadData];
-//    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-//  } andFailure:^(NSString *error) {
-//    [MBProgressHUD hideHUDForView:milestonesTable animated:YES];
-//    NSLog(@"%@",error);
-//  }];
 }
+
 
 - (void)loadInterests
 {
@@ -315,10 +307,7 @@
     
     UIAlertAction *removeFriend = [UIAlertAction actionWithTitle:@"Remove Friend" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
       
-      LCFriend *friend = [[LCFriend alloc] init];
-      friend.userID = userDetail.userID;
-      
-      [LCAPIManager removeFriend:friend withSuccess:^(NSArray *response)
+      [LCAPIManager removeFriend:userDetail.userID withSuccess:^(NSArray *response)
        {
          NSLog(@"%@",response);
          currentProfileState = PROFILE_OTHER_NON_FRIEND;
@@ -338,11 +327,9 @@
   }
   else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
   {
-    //send friend request
-    LCFriend *friend = [[LCFriend alloc] init];
-    friend.userID = userDetail.userID;
+    //send friend request;
     
-    [LCAPIManager sendFriendRequest:friend withSuccess:^(NSArray *response) {
+    [LCAPIManager sendFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
       currentProfileState = PROFILE_OTHER_WAITING;
       [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
@@ -358,10 +345,7 @@
     
     UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:@"Cancel Friend Request" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
       
-      LCFriend *friend = [[LCFriend alloc] init];
-      friend.userID = userDetail.userID;
-      
-      [LCAPIManager cancelFriendRequest:friend withSuccess:^(NSArray *response) {
+      [LCAPIManager cancelFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
         NSLog(@"%@",response);
         currentProfileState = PROFILE_OTHER_NON_FRIEND;
         [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
