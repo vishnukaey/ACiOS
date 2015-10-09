@@ -16,75 +16,89 @@
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 
-#if DEBUG
-#import "LCViewCommunity.h"
-#endif
+static CGFloat kFeedCellRowHeight = 44.0f;
+static CGFloat kNumberOfSectionsInFeeds = 1;
+static NSString *kFeedCellIdentifier = @"LCFeedCell";
+static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 @implementation LCFeedsHomeViewController
 @synthesize feedsTable;
 
-#pragma mark - controller life cycle
-- (void)viewDidLoad
+#pragma mark - private method implementation
+- (void)fetchHomeFeedsWithLastFeedId:(NSString*)lastId
 {
-  [super viewDidLoad];
-  
-  UILabel *construction_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, [[UIScreen mainScreen] bounds].size.width, 80)];
-  construction_.text = @"Under development...";
-  construction_.textAlignment = NSTextAlignmentCenter;
-  [self.view addSubview:construction_];
-  
-//  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-//    feedsArray = response;
-//    [feedsTable reloadData];
-//  } andFailure:^(NSString *error) {
-//    NSLog(@"%@",error);
-//  }];
-  
+  [LCAPIManager getHomeFeedsWithLastFeedId:lastId success:^(NSArray *response) {
+    [feedsArray addObjectsFromArray:response];;
+    [feedsTable reloadData];
+    
+    if (self.feedsTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+      [self.feedsTable.pullToRefreshView stopAnimating];
+    }
+
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+    //TO DO :
+    // Implement func to user tap to refresh or something.
+  }];
+}
+
+- (void)initialUISetUp
+{
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-  
   [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  feedsTable.estimatedRowHeight = 44.0;
+  feedsTable.estimatedRowHeight = kFeedCellRowHeight;
   feedsTable.rowHeight = UITableViewAutomaticDimension;
   
+  // Pull to Refresh Interface to Feeds TableView.
   [feedsTable addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
       [feedsTable.pullToRefreshView stopAnimating];
     });
-  }withBackgroundColor:[UIColor lightGrayColor]];
-  
+  } withBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (void)setGIAndMenuButtonVisibilityStatus:(BOOL)isHidden
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:isHidden];
+  [appdel.menuButton setHidden:isHidden];
+}
+
+#pragma mark - controller life cycle
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  feedsArray = [[NSMutableArray alloc] init];
+  [self fetchHomeFeedsWithLastFeedId:nil];
+  [self initialUISetUp];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
+  self.navigationController.navigationBarHidden = YES;
+  [self setGIAndMenuButtonVisibilityStatus:NO];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:true];
-  [appdel.menuButton setHidden:true];
+  [self setGIAndMenuButtonVisibilityStatus:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - TableView delegates
+#pragma mark - UITableViewDataSource implementation
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return kNumberOfSectionsInFeeds;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -94,20 +108,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"LCFeedCell";
-  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellIdentifier];
   if (cell == nil)
   {
-    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
-    // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
     cell = [topLevelObjects objectAtIndex:0];
   }
   cell.delegate = self;
   [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
-
   return cell;
 }
 
+#pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSLog(@"selected row-->>>%d", (int)indexPath.row);
@@ -129,14 +141,7 @@
   
   else if ([type isEqualToString:kFeedCellActionLike])
   {
-#if DEBUG
-    //testing community
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-    LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
-    vc.eventID = @"e82de0d2-4fd4-11e5-9852-3d5d64aee29a";
-    [self.navigationController pushViewController:vc animated:YES];
-#endif
-//    [self postMessage];
+    [self postMessage];
   }
   else if ([type isEqualToString:kFeedCellActionImage])
   {
@@ -168,6 +173,14 @@
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////                                                                                                  ////////////////////
+////////////////                        TEST DATA - To be removed                                                 ////////////////////
+////////////////                                                                                                  ////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //following is the code for other screens
 ACAccount *facebookAccount;
