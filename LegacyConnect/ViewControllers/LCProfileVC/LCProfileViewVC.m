@@ -115,10 +115,10 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
                               [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
-    locationLabel.text = [NSString stringWithFormat:@"%@ . %@ . %@",
+    locationLabel.text = [[NSString stringWithFormat:@"%@ \u2022 %@ \u2022 %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
                           [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.location]];
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.location]] uppercaseString];
     
     impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
     friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
