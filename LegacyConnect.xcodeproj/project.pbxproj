@@ -107,7 +107,6 @@
 		0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C8171BAFFCB000C29746 /* LCFriendsListViewController.m */; };
 		0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */; };
 		0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBC7B81B81BC5100E75179 /* LCFriend.m */; };
-		169A451D1BC79D21001FFC14 /* build in Resources */ = {isa = PBXBuildFile; fileRef = 169A451C1BC79D21001FFC14 /* build */; settings = {ASSET_TAGS = (); }; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -321,7 +320,6 @@
 		0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCFriendsCell.m; sourceTree = "<group>"; };
 		0BFBC7B71B81BC5100E75179 /* LCFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFriend.h; path = Models/LCFriend/LCFriend.h; sourceTree = "<group>"; };
 		0BFBC7B81B81BC5100E75179 /* LCFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFriend.m; path = Models/LCFriend/LCFriend.m; sourceTree = "<group>"; };
-		169A451C1BC79D21001FFC14 /* build */ = {isa = PBXFileReference; lastKnownFileType = folder; path = build; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -997,7 +995,6 @@
 		0BF05A3F1B4E622200FF7B39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				169A451C1BC79D21001FFC14 /* build */,
 				0BB594241B71E4EC0067744B /* Mantle */,
 				8F70C2AF88FA9740E76A5CA2 /* Frameworks */,
 				AA0D4ABFB4BBC81C1666D4C8 /* Pods */,
@@ -1441,7 +1438,6 @@
 				0BB33DE51BA81401009E6D0C /* profileSettings.png in Resources */,
 				0BB33DD81BA81401009E6D0C /* communityMemebrs.png in Resources */,
 				0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */,
-				169A451D1BC79D21001FFC14 /* build in Resources */,
 				0BB33DDF1BA81401009E6D0C /* locationIcon.png in Resources */,
 				0BB33DE81BA81401009E6D0C /* rsz_lc-logo.png in Resources */,
 				0BB33DA41BA812A3009E6D0C /* Gotham-Medium.otf in Resources */,
