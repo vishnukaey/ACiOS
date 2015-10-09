@@ -107,8 +107,6 @@
 		0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C8171BAFFCB000C29746 /* LCFriendsListViewController.m */; };
 		0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */; };
 		0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBC7B81B81BC5100E75179 /* LCFriend.m */; };
-		169A45211BC79EF3001FFC14 /* LegacyConnect.plist in Resources */ = {isa = PBXBuildFile; fileRef = 169A451F1BC79EF3001FFC14 /* LegacyConnect.plist */; settings = {ASSET_TAGS = (); }; };
-		169A45221BC79EF3001FFC14 /* S3_LegacyConnect_Distribution.html in Resources */ = {isa = PBXBuildFile; fileRef = 169A45201BC79EF3001FFC14 /* S3_LegacyConnect_Distribution.html */; settings = {ASSET_TAGS = (); }; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -322,8 +320,6 @@
 		0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCFriendsCell.m; sourceTree = "<group>"; };
 		0BFBC7B71B81BC5100E75179 /* LCFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFriend.h; path = Models/LCFriend/LCFriend.h; sourceTree = "<group>"; };
 		0BFBC7B81B81BC5100E75179 /* LCFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFriend.m; path = Models/LCFriend/LCFriend.m; sourceTree = "<group>"; };
-		169A451F1BC79EF3001FFC14 /* LegacyConnect.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = LegacyConnect.plist; sourceTree = "<group>"; };
-		169A45201BC79EF3001FFC14 /* S3_LegacyConnect_Distribution.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = S3_LegacyConnect_Distribution.html; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -999,7 +995,6 @@
 		0BF05A3F1B4E622200FF7B39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				169A451E1BC79EF3001FFC14 /* build */,
 				0BB594241B71E4EC0067744B /* Mantle */,
 				8F70C2AF88FA9740E76A5CA2 /* Frameworks */,
 				AA0D4ABFB4BBC81C1666D4C8 /* Pods */,
@@ -1118,15 +1113,6 @@
 			);
 			name = LCEvent;
 			sourceTree = "<group>";
-		};
-		169A451E1BC79EF3001FFC14 /* build */ = {
-			isa = PBXGroup;
-			children = (
-				169A451F1BC79EF3001FFC14 /* LegacyConnect.plist */,
-				169A45201BC79EF3001FFC14 /* S3_LegacyConnect_Distribution.html */,
-			);
-			path = build;
-			sourceTree = SOURCE_ROOT;
 		};
 		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -1443,7 +1429,6 @@
 				0BB33DE11BA81401009E6D0C /* menuButton_dummy.png in Resources */,
 				0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */,
 				0BB33DA11BA812A3009E6D0C /* Gotham-BookItalic.otf in Resources */,
-				169A45211BC79EF3001FFC14 /* LegacyConnect.plist in Resources */,
 				0BB33DA01BA812A3009E6D0C /* Gotham-Book.otf in Resources */,
 				0BB33DEC1BA81401009E6D0C /* star.png in Resources */,
 				0BB33DE31BA81401009E6D0C /* photoPost_dummy.png in Resources */,
@@ -1458,7 +1443,6 @@
 				0BB33DA41BA812A3009E6D0C /* Gotham-Medium.otf in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
 				0BB33DD91BA81401009E6D0C /* communityWebsite.png in Resources */,
-				169A45221BC79EF3001FFC14 /* S3_LegacyConnect_Distribution.html in Resources */,
 				0BB33DDC1BA81401009E6D0C /* GIButton_dummy.png in Resources */,
 				0BB33DA71BA81315009E6D0C /* LCCommentCellXIB.xib in Resources */,
 				0BB33DE71BA81401009E6D0C /* profileWaiting.png in Resources */,
