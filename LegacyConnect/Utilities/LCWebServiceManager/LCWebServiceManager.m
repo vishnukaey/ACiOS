@@ -170,5 +170,38 @@
   }
 }
 
+- (void)performImageUploadWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params image:(UIImage*)image andImageName:(NSString*)imageName withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure{
+  
+  if ([LCUtilityManager isNetworkAvailable])
+  {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setTimeoutInterval:30];
+    [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    
+    [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+      [formData appendPartWithFileData:imageData
+                                  name:imageName
+                              fileName:imageName
+                              mimeType:@"image/png"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      success(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      failure([error localizedDescription]);
+    }];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil
+                                  andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+  }
+}
+
 
 @end

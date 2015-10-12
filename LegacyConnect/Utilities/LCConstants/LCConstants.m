@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER DEV_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -58,6 +58,7 @@ NSString *const kLogOutURL = @"";
 NSString *const kContactFriendsURL = @"api/user/friends";
 NSString *const kFBContactFriendsURL = @"api/user/fbFriends";
 NSString *const kprofileEditURL = @"api/user/edit";
+NSString *const kPostURL = @"api/post";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";

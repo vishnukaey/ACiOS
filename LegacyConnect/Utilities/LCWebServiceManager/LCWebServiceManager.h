@@ -23,4 +23,6 @@
 
 - (void)performPostOperationForProfileWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andHeaderImageData:(NSData*)headerImageData andAvtarImageData:(NSData*)avtarImageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
+- (void)performImageUploadWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params image:(UIImage*)image andImageName:(NSString*)imageName withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
+
 @end
