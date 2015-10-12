@@ -375,7 +375,7 @@
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="106" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="E97-AZ-OMD" userLabel="Actions Table">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
-                                        <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="CU0-BO-pMc" id="5zp-ZW-C3o"/>
                                             <outlet property="delegate" destination="CU0-BO-pMc" id="uul-BQ-ITk"/>
@@ -383,32 +383,28 @@
                                     </tableView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="q6a-U1-CO6" userLabel="Interests Table">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
-                                        <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="CU0-BO-pMc" id="xQ4-4N-611"/>
                                             <outlet property="delegate" destination="CU0-BO-pMc" id="CJO-yV-4B1"/>
                                         </connections>
                                     </tableView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-wa-SdJ" userLabel="Milestones Table">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-wa-SdJ" userLabel="Milestones Table">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
-                                        <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="CU0-BO-pMc" id="oNL-sF-eHo"/>
                                             <outlet property="delegate" destination="CU0-BO-pMc" id="3e7-Ws-O50"/>
                                         </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="q6a-U1-CO6" firstAttribute="leading" secondItem="HvW-d7-oeq" secondAttribute="leading" id="31T-gY-TpC"/>
-                                    <constraint firstAttribute="bottom" secondItem="DcZ-wa-SdJ" secondAttribute="bottom" id="BWU-k5-5Hd"/>
-                                    <constraint firstItem="DcZ-wa-SdJ" firstAttribute="top" secondItem="HvW-d7-oeq" secondAttribute="top" id="BqJ-RH-RZu"/>
                                     <constraint firstAttribute="bottom" secondItem="E97-AZ-OMD" secondAttribute="bottom" id="Bqd-8F-aph"/>
-                                    <constraint firstItem="DcZ-wa-SdJ" firstAttribute="leading" secondItem="HvW-d7-oeq" secondAttribute="leading" id="LNR-fw-FOd"/>
                                     <constraint firstItem="q6a-U1-CO6" firstAttribute="top" secondItem="HvW-d7-oeq" secondAttribute="top" id="Ow2-GJ-HGp"/>
                                     <constraint firstItem="E97-AZ-OMD" firstAttribute="top" secondItem="HvW-d7-oeq" secondAttribute="top" id="XaG-oq-U3f"/>
                                     <constraint firstAttribute="trailing" secondItem="q6a-U1-CO6" secondAttribute="trailing" id="Z8J-O4-2RG"/>
-                                    <constraint firstAttribute="trailing" secondItem="DcZ-wa-SdJ" secondAttribute="trailing" id="dJC-Nw-Xpc"/>
                                     <constraint firstAttribute="trailing" secondItem="E97-AZ-OMD" secondAttribute="trailing" id="f3K-eq-a1h"/>
                                     <constraint firstItem="E97-AZ-OMD" firstAttribute="leading" secondItem="HvW-d7-oeq" secondAttribute="leading" id="nMU-wH-g0d"/>
                                     <constraint firstAttribute="bottom" secondItem="q6a-U1-CO6" secondAttribute="bottom" id="zoY-bE-2Fq"/>

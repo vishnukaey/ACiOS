@@ -435,6 +435,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       }
       UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
+      tableView.backgroundColor = [UIColor whiteColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
       return cell;
@@ -457,6 +458,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
         cell.moreButton.hidden = NO;
       }
       
+      tableView.backgroundColor = [UIColor clearColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
       tableView.allowsSelection = YES;
       
@@ -479,6 +481,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       }
       UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
+      tableView.backgroundColor = [UIColor whiteColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
       return cell;
@@ -496,6 +499,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
       [cell setData:interstObj];
       
+      tableView.backgroundColor = [UIColor clearColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
       tableView.allowsSelection = YES;
       
@@ -518,6 +522,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       }
       UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
+      tableView.backgroundColor = [UIColor whiteColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
       return cell;
@@ -532,6 +537,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       }
       [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
       
+      tableView.backgroundColor = [UIColor clearColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
       tableView.allowsSelection = YES;
       return cell;
