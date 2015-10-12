@@ -45,20 +45,23 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   avatarPicState = IMAGE_UNTOUCHED;
   headerPicState = IMAGE_UNTOUCHED;
   
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
+
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
                 placeholderImage:profilePicPlaceholder
                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                          actualAvatarImage = image;
                        }];
+  NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
   
-  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
+  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:headerUrlString]
                    placeholderImage:nil
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                             actualHeaderImage = image;
                           }];
-  
   dobTimeStamp = userDetail.dob;
 }
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -66,6 +69,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
