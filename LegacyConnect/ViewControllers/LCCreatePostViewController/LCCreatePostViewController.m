@@ -20,6 +20,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+  [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+  
+  _popUpView.layer.cornerRadius = 5;
+  
   [_postTextView becomeFirstResponder];
     // Do any additional setup after loading the view.
 }
@@ -71,14 +75,7 @@
 #pragma mark - textview delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
-  if (textView.text.length>0)
-  {
-    _placeHolderText.hidden = YES;
-  }
-  else
-  {
-    _placeHolderText.hidden = NO;
-  }
+
 }
 
 

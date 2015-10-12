@@ -179,16 +179,16 @@
   [mainContainer setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
-//  [appdel.GIButton setHidden:YES];
-//  if (sender.tag == 1)
-//  {
+  
+  if (sender.tag == 0)//create event
+  {
 //    [appdel.menuButton setHidden:YES];
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
 //    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
 //    [navigationRoot pushViewController:vc animated:YES];
-//  }
-//  else if (sender.tag == 2)
-//  {
+  }
+  else if (sender.tag == 1)//photo post
+  {
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
 //    createPostVC = [sb instantiateInitialViewController];
 //
@@ -200,13 +200,21 @@
 //    createPostVC.view.frame = frame;
 //    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 //    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-//  }
-//  else
-//  {
-//    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-//    [view setBackgroundColor:[UIColor blackColor]];
-//    [mainContainer.view addSubview:view];
-//  }
+  }
+  else if(sender.tag == 2)//text post
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    createPostVC = [sb instantiateInitialViewController];
+    
+    createPostVC.delegate = self;
+    giButton.hidden = YES;
+    menuButton.hidden = YES;
+//    CGRect frame = createPostVC.view.frame;
+//    frame.origin.y = 20;
+//    createPostVC.view.frame = frame;
+    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+  }
   
 }
 
