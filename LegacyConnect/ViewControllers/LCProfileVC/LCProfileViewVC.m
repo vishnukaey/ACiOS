@@ -445,8 +445,15 @@
         // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
         cell = [topLevelObjects objectAtIndex:0];
       }
-      cell.delegate = self;
       [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+      __weak typeof(self) weakSelf = self;
+      cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+        [weakSelf feedCellActionWithType:actionType andFeed:feed];
+      };
+      cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+        [weakSelf tagTapped:tagDetails];
+      };
+
       
       if (currentProfileState == PROFILE_SELF) {
         cell.moreButton.hidden = NO;
@@ -542,46 +549,58 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%@", type);
-  if (type == kFeedCellActionMore) {
-    
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    actionSheet.view.tintColor = [UIColor blackColor];
-    
-    UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  switch (type) {
+    case kkFeedCellActionLoadMore:
+      [self showEditPostActionSheet];
+      break;
       
-    }];
-    
-    [actionSheet addAction:editPost];
-    
-    UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      case kkFeedCellActionViewImage:
+      [self showFullScreenImage:feed];
+      break;
       
-    }];
-    [actionSheet addAction:removeMilestone];
-    
-    UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      
-    }];
-    [actionSheet addAction:deletePost];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-    [actionSheet addAction:cancelAction];
-    
-    [self presentViewController:actionSheet animated:YES completion:nil];
+    default:
+      break;
   }
-  else if ([type isEqualToString:kFeedCellActionImage])
-  {
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdel.GIButton setHidden:YES];
-    [appdel.menuButton setHidden:YES];
-    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:vc animated:YES completion:nil];
-    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
-  }
+}
+
+- (void)showFullScreenImage:(LCFeed*)feed
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:YES];
+  [appdel.menuButton setHidden:YES];
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
+  [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
+}
+
+- (void)showEditPostActionSheet
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
   
+  UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+  }];
+  
+  [actionSheet addAction:editPost];
+  
+  UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+  }];
+  [actionSheet addAction:removeMilestone];
+  
+  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+  }];
+  [actionSheet addAction:deletePost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

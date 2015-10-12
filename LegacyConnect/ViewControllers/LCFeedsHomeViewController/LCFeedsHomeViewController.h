@@ -10,7 +10,7 @@
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
 
-@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
+@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   NSMutableArray *feedsArray;
 }

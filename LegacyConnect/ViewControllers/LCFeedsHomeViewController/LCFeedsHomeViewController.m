@@ -114,45 +114,62 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
     cell = [topLevelObjects objectAtIndex:0];
   }
-  cell.delegate = self;
   [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+
+  __weak typeof(self) weakSelf = self;
+  cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+    [weakSelf feedCellActionWithType:actionType andFeed:feed];
+  };
+  cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+    [weakSelf tagTapped:tagDetails];
+  };
+
   return cell;
 }
 
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
-#pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%@", type);
-  
-  if ([type isEqualToString:kFeedCellActionComment])//comments
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-    [next setFeedObject:feed];
-    [self.navigationController pushViewController:next animated:YES];
+  switch (type) {
+      
+    case kFeedCellActionComment:
+      [self showFeedCommentsWithFeed:feed];
+      break;
+      
+      case kFeedCellActionLike:
+      [self postMessage];
+      break;
+      
+      case kkFeedCellActionViewImage:
+#warning replace this with proper image.
+      [self showFullScreenImage:[UIImage imageNamed:@"photoPost_dummy.png"]];
+      break;
+      
+    default:
+      break;
   }
-  
-  else if ([type isEqualToString:kFeedCellActionLike])
-  {
-    [self postMessage];
-  }
-  else if ([type isEqualToString:kFeedCellActionImage])
-  {
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdel.GIButton setHidden:YES];
-    [appdel.menuButton setHidden:YES];
-    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
-    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:vc animated:YES completion:nil];
-  }
+}
+
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+  [self.navigationController pushViewController:next animated:YES];
+}
+
+- (void)showFullScreenImage:(UIImage*)image
+{
+  [self setGIAndMenuButtonVisibilityStatus:YES];
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.imageView.image = image;
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

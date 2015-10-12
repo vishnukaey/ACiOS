@@ -133,8 +133,15 @@
       // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
       feedCell = [topLevelObjects objectAtIndex:0];
     }
-    feedCell.delegate = self;
     [feedCell setData:[cellsData objectAtIndex:indexPath.row] forPage:kCommentsfeedCellID];
+    __weak typeof(self) weakSelf = self;
+    feedCell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+      [weakSelf feedCellActionWithType:actionType andFeed:feed];
+    };
+    feedCell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+      [weakSelf tagTapped:tagDetails];
+    };
+
     return feedCell;
   }
   else //comment cell
@@ -159,11 +166,9 @@
 }
 
 #pragma mark - feedCell delegates
--(void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed*)feed
 {
-  NSLog(@"actionTypecommentpage--->>>%@", type);
-  if ([type isEqualToString:kFeedCellActionComment])
-  {
+  if (type == kFeedCellActionComment) {
     if (!commmentTextField.isFirstResponder) {
       [commmentTextField_dup becomeFirstResponder];
     }

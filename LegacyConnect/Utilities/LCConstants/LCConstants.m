@@ -120,11 +120,6 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
-NSString *const kFeedCellActionLike = @"feedCellLike";
-NSString *const kFeedCellActionComment = @"feedCellComment";
-NSString *const kFeedCellActionMore = @"feedCellmore";
-NSString *const kFeedCellActionImage = @"feedCellImage";
-
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeUser = @"user";
 

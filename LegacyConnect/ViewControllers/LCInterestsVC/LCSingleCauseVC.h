@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 
-@interface LCSingleCauseVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
+@interface LCSingleCauseVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   IBOutlet UITableView *feedsTable;
   NSMutableArray *cellsViewArray;

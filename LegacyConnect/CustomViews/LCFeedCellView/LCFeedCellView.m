@@ -43,7 +43,7 @@
   [usernameLabel setAttributedText:userNameAttributtedString];
   __weak typeof(self) weakSelf = self;
   usernameLabel.nameTagTapped = ^(int index) {
-    [weakSelf.delegate tagTapped:dic_user];
+    weakSelf.feedCellTagAction(dic_user);
   };
   
   //if photo post or just plain text post
@@ -80,12 +80,12 @@
                                          } range:NSMakeRange(0, attributtedString.length)];
   
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dic_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"id", @"cause", @"text", kFeedTagTypeCause, @"type", [NSValue valueWithRange:tagRangeCreatedAt], @"range", nil];
-  [createdAtLabelTagsWithRanges addObject:dic_createdAt];
+  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"id", @"cause", @"text", kFeedTagTypeCause, @"type", [NSValue valueWithRange:tagRangeCreatedAt], @"range", nil];
+  [createdAtLabelTagsWithRanges addObject:dict_createdAt];
   createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
   [createdLabel setAttributedText:attributtedString];
   createdLabel.nameTagTapped = ^(int index) {
-    [weakSelf.delegate tagTapped:dic_createdAt];
+    weakSelf.feedCellTagAction(dict_createdAt);
   };
   //time label
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:time_.longLongValue/1000];
@@ -115,29 +115,41 @@
   postDescription.tagsArray  = postDescriptionTagsWithRanges;
   [postDescription setAttributedText:postDescriptionString];
   postDescription.nameTagTapped = ^(int index) {
-    [weakSelf.delegate tagTapped:weakSelf.feedObject.postTags[index]];
+    weakSelf.feedCellTagAction(weakSelf.feedObject.postTags[index]);
   };
   
 }
 
 - (IBAction)likeAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionLike andFeed:feedObject];
+  if (self.feedCellAction)
+  {
+    self.feedCellAction(kFeedCellActionLike,feedObject);
+  }
 }
 
 - (IBAction)commentAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionComment andFeed:feedObject];
+  if (self.feedCellAction)
+  {
+    self.feedCellAction(kFeedCellActionComment,feedObject);
+  }
 }
 
 - (IBAction)imageFullscreenAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionImage andFeed:feedObject];
+  if (self.feedCellAction)
+  {
+    self.feedCellAction(kkFeedCellActionViewImage,feedObject);
+  }
 }
 
 - (IBAction)moreButtonAction
 {
-  [delegate feedCellActionWithType:kFeedCellActionMore andFeed:feedObject];
+  if (self.feedCellAction)
+  {
+    self.feedCellAction(kkFeedCellActionLoadMore,feedObject);
+  }
 }
 
 /* use thi code if need to get the view by code

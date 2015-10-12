@@ -9,15 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "LCTaggedLabel.h"
 
-//--------------protocols
-@protocol feedCellDelegate <NSObject>
+typedef enum {
+  kFeedCellActionLike,
+  kFeedCellActionComment,
+  kkFeedCellActionViewImage,
+  kkFeedCellActionLoadMore
+} kkFeedCellActionType;
 
--(void)feedCellActionWithType :(NSString *)type andFeed:(LCFeed *)feed;
--(void)tagTapped :(NSDictionary *)tagDetails;
+typedef enum
+{
+  kkFeedTagTypeCause,
+  kkFeedTagTypeUser
+} kkFeedTagType;
 
-@end
+typedef void (^FeedCellAction)(kkFeedCellActionType feedCellAction, LCFeed * feed);
+typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
 
-//---------------interface
 @interface LCFeedCellView : UITableViewCell
 {
   IBOutlet UIImageView *profilePic;
@@ -31,6 +38,8 @@
 @property(nonatomic, retain)id delegate;
 @property(nonatomic, weak)LCFeed *feedObject;
 @property(nonatomic, weak)IBOutlet UIButton *moreButton;
+@property (readwrite, copy) FeedCellAction feedCellAction;
+@property (readwrite, copy) FeedCellTagAction feedCellTagAction;
 
 - (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType;
 
