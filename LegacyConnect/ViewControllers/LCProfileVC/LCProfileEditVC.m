@@ -41,35 +41,30 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
   profilePic.image = profilePicPlaceholder;
-//  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-//                placeholderImage:profilePicPlaceholder];
-//  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL] placeholderImage:nil];
   
   avatarPicState = IMAGE_UNTOUCHED;
-  dispatch_async(dispatch_get_global_queue(0,0), ^{
-    NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: userDetail.avatarURL]];
-    if ( data != nil )
-    {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        profilePic.image = [UIImage imageWithData: data];
-        actualAvatarImage = [UIImage imageWithData: data];
-      });
-    }
-  });
-  
   headerPicState = IMAGE_UNTOUCHED;
-  dispatch_async(dispatch_get_global_queue(0,0), ^{
-    NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: userDetail.headerPhotoURL]];
-    if ( data != nil )
-    {
-      dispatch_async(dispatch_get_main_queue(), ^{
-        headerBGImage.image = [UIImage imageWithData: data];
-        actualHeaderImage = [UIImage imageWithData: data];
-      });
-    }
-  });
+  
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+                placeholderImage:profilePicPlaceholder
+                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                         actualAvatarImage = image;
+                       }];
+  
+  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
+                   placeholderImage:nil
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            actualHeaderImage = image;
+                          }];
   
   dobTimeStamp = userDetail.dob;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -288,7 +283,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   [txt_birthday resignFirstResponder];
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
   txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:kDOBFormat];
-  [self performSelector:@selector(validateFields) withObject:nil afterDelay:0];
+  [self validateFields];
 }
 
 - (void)dismissDatePickerView:(id)sender
