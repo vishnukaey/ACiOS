@@ -452,7 +452,6 @@ static LCAPIManager *sharedManager = nil;
 //  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
   
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
-  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, kFriendsURL];
   if (userId) {

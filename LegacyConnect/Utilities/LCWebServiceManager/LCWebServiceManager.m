@@ -36,6 +36,7 @@
   else
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
+    failure(NSLocalizedString(@"no_network_alert_msg", @""));
   }
 }
 
@@ -69,6 +70,7 @@
   else
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
+    failure(NSLocalizedString(@"no_network_alert_msg", @""));
   }
 }
 
@@ -98,6 +100,11 @@
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       failure([error localizedDescription]);
     }];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
+    failure(NSLocalizedString(@"no_network_alert_msg", @""));
   }
 }
 
@@ -130,6 +137,7 @@
   else
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"No_network_alert_msg", @"")];
+    failure(NSLocalizedString(@"no_network_alert_msg", @""));
   }
 }
 
@@ -167,6 +175,11 @@
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       failure([error localizedDescription]);
     }];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"no_network_alert_msg", @"")];
+    failure(NSLocalizedString(@"no_network_alert_msg", @""));
   }
 }
 

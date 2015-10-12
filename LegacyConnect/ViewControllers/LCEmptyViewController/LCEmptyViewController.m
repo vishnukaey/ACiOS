@@ -149,15 +149,20 @@
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   //menu poper button
-  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 45, 28, 25, 25)];
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 65, statusBarViewRect.size.height, 65, self.navigationController.navigationBar.frame.size.height)];
 
-  menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor clearColor];
   [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  [menuButton setBackgroundImage:[UIImage imageNamed:@"MenuButton"] forState:UIControlStateNormal];
   menuButton.badgeLabel.text = @"2";
+  
+  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(10, menuButton.frame.size.height/2 - 12, 25, 25)];
+  icon_.image = [UIImage imageNamed:@"MenuButton"];
+  [menuButton addSubview:icon_];
+//  [menuButton setBackgroundColor:[UIColor blueColor]];
 }
 
 #pragma mark - button actions
