@@ -118,10 +118,14 @@
     impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
     friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
     
+    NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
     
-    [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
                   placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
+    
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
                        placeholderImage:nil];
     
     if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
