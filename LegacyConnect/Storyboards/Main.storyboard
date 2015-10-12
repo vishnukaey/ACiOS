@@ -6,6 +6,9 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Gotham-Bold.otf">
+            <string>Gotham-Bold</string>
+        </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
         </mutableArray>
@@ -87,12 +90,16 @@
                                             <constraint firstAttribute="width" constant="150" id="fhX-Bg-NsJ"/>
                                             <constraint firstAttribute="height" constant="21" id="h5z-0t-M0f"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-Ah-7Lb">
-                                        <rect key="frame" x="11" y="26" width="30" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-Ah-7Lb">
+                                        <rect key="frame" x="15" y="33" width="21" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="21" id="tG0-26-6uE"/>
+                                            <constraint firstAttribute="height" constant="21" id="tHT-mT-kQW"/>
+                                        </constraints>
                                         <state key="normal" backgroundImage="search-icon_white_64.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -103,8 +110,10 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="ohl-Ah-7Lb" firstAttribute="leading" secondItem="5F3-Ck-Mhb" secondAttribute="leading" constant="15" id="NVS-Oa-nC5"/>
                                     <constraint firstAttribute="height" constant="64" id="OIL-1U-G4m"/>
                                     <constraint firstAttribute="bottom" secondItem="i7z-nM-tf3" secondAttribute="bottom" constant="8" id="XvQ-eH-owv"/>
+                                    <constraint firstAttribute="bottom" secondItem="ohl-Ah-7Lb" secondAttribute="bottom" constant="10" id="r1O-fV-bQk"/>
                                     <constraint firstAttribute="centerX" secondItem="i7z-nM-tf3" secondAttribute="centerX" id="x8j-zj-YwC"/>
                                 </constraints>
                             </view>
@@ -124,6 +133,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="customNavigationHeight" destination="OIL-1U-G4m" id="gSy-ko-xKi"/>
                         <outlet property="feedsTable" destination="hVO-KL-Fml" id="zaD-SA-ksj"/>
                     </connections>
                 </viewController>
@@ -680,7 +690,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-k7-6Sl">
-                                        <rect key="frame" x="137" y="33" width="100" height="100"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="G5t-TF-z75"/>
                                             <constraint firstAttribute="height" constant="100" id="IGR-fU-cDx"/>
@@ -688,6 +698,12 @@
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="G5t-TF-z75"/>
+                                                <exclude reference="IGR-fU-cDx"/>
+                                            </mask>
+                                        </variation>
                                         <connections>
                                             <action selector="profileButtonTapped:" destination="oRs-pM-3Ty" eventType="touchUpInside" id="SmU-WD-jIq"/>
                                         </connections>
@@ -701,15 +717,25 @@
                                     <constraint firstAttribute="bottom" secondItem="bcg-sA-xGH" secondAttribute="bottom" id="F4s-lB-9Z7"/>
                                     <constraint firstItem="k8t-x1-bzK" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="Hx5-4K-dtd"/>
                                     <constraint firstItem="zbT-Jh-Ifn" firstAttribute="top" secondItem="SaK-0r-E77" secondAttribute="top" id="KYH-nD-ayF"/>
+                                    <constraint firstAttribute="trailing" secondItem="R5P-k7-6Sl" secondAttribute="trailing" id="Lff-Ts-5M3"/>
                                     <constraint firstItem="bcg-sA-xGH" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="Qkj-zR-fgZ"/>
                                     <constraint firstItem="zbT-Jh-Ifn" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="SZ9-j2-N2K"/>
                                     <constraint firstAttribute="height" constant="216" id="UoX-2U-yeE"/>
                                     <constraint firstAttribute="centerX" secondItem="R5P-k7-6Sl" secondAttribute="centerX" id="Wxa-ke-S04"/>
                                     <constraint firstAttribute="centerY" secondItem="dlK-FF-KdW" secondAttribute="centerY" constant="25" id="XS0-w9-Qyf"/>
                                     <constraint firstAttribute="trailing" secondItem="zbT-Jh-Ifn" secondAttribute="trailing" id="aot-D4-FIF"/>
+                                    <constraint firstAttribute="bottom" secondItem="R5P-k7-6Sl" secondAttribute="bottom" id="hKz-hB-qDB"/>
+                                    <constraint firstItem="R5P-k7-6Sl" firstAttribute="leading" secondItem="SaK-0r-E77" secondAttribute="leading" id="ieu-i6-FBR"/>
                                     <constraint firstAttribute="trailing" secondItem="k8t-x1-bzK" secondAttribute="trailing" id="omI-0W-U5v"/>
+                                    <constraint firstItem="R5P-k7-6Sl" firstAttribute="top" secondItem="SaK-0r-E77" secondAttribute="top" id="qg7-Nt-fHD"/>
                                     <constraint firstAttribute="trailing" secondItem="bcg-sA-xGH" secondAttribute="trailing" id="vaC-Oo-P57"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Bbx-LC-zWC"/>
+                                        <exclude reference="Wxa-ke-S04"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Xg2-fU-H8Q">
                                 <rect key="frame" x="0.0" y="216" width="375" height="451"/>

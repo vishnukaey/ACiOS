@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LCUserDetail.h"
+#import <UIKit/UIKit.h>
 
 @interface LCUtilityManager : NSObject
 
@@ -27,6 +28,7 @@
 + (void)clearUserDefaultsForCurrentUser;
 + (void)saveUserDefaultsForNewUser;
 
++ (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text;
 
 //+(NSNumber*) getNSNumberFromString:(NSString*)string;
 

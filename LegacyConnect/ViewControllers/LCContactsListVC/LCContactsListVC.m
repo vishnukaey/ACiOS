@@ -53,7 +53,9 @@
       {
         // First time access has been granted, add the contact
         contactsArray = [LCUtilityManager getPhoneContacts];
-        [contactsTable reloadData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [contactsTable reloadData];
+        });
       }
       else
       {
@@ -110,9 +112,9 @@
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager sendFriendRequestFromContacts:selectedMailIDs withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-    [self.navigationController pushViewController:vc animated:YES];
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+//    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    [self.navigationController popToRootViewControllerAnimated:YES];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"%@",error);

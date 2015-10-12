@@ -14,5 +14,6 @@
 }
 @property(nonatomic, weak)IBOutlet  UITableView *impactsTableView;
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
+@property(nonatomic, retain)LCUserDetail *userDetail;
 
 @end

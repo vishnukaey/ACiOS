@@ -8,13 +8,14 @@
 
 #import "LCImapactsViewController.h"
 #import "LCFeedCellView.h"
+#import "LCFullScreenImageVC.h"
 
 @interface LCImapactsViewController ()
 
 @end
 
 @implementation LCImapactsViewController
-@synthesize impactsTableView, customNavigationHeight;
+@synthesize impactsTableView, customNavigationHeight, userDetail;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -25,7 +26,7 @@
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
   [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
-  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:nil with:^(NSArray *response) {
     NSLog(@"%@",response);
     impactsArray = response;
     [impactsTableView reloadData];
@@ -79,11 +80,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (impactsArray.count == 0) {
+    return 1;
+  }
   return impactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (impactsArray.count == 0)
+  {
+    NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
+    if ([nativeUserId isEqualToString:userDetail.userID])//self profile
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_self", nil)];
+    }
+    else
+    {
+      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
+    }
+  }
   static NSString *MyIdentifier = @"LCFeedCell";
   LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
@@ -106,7 +122,38 @@
 #pragma mark - feedCell delegates
 - (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%@", type);
+    NSLog(@"actionType--->>>%@", type);
+    
+    if ([type isEqualToString:kFeedCellActionComment])//comments
+    {
+//      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+//                                                    bundle:nil];
+//      LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+//      [next setFeedObject:feed];
+//      [self.navigationController pushViewController:next animated:YES];
+    }
+    
+    else if ([type isEqualToString:kFeedCellActionLike])
+    {
+//#if DEBUG
+//      //testing community
+//      UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+//      LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
+//      vc.eventID = @"e82de0d2-4fd4-11e5-9852-3d5d64aee29a";
+//      [self.navigationController pushViewController:vc animated:YES];
+//#endif
+      //    [self postMessage];
+    }
+    else if ([type isEqualToString:kFeedCellActionImage])
+    {
+      LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+      [appdel.GIButton setHidden:YES];
+      [appdel.menuButton setHidden:YES];
+      LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+      vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
+      vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+      [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

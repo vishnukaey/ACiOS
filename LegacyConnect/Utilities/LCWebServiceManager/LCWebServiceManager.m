@@ -117,7 +117,9 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+    manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
     manager.securityPolicy.allowInvalidCertificates = YES;
+    
     [manager DELETE:urlString
          parameters:params
             success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -144,8 +146,6 @@
 {
   if ([LCUtilityManager isNetworkAvailable])
   {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];

@@ -95,7 +95,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="65" id="0ik-ft-H1z"/>
                                     <constraint firstItem="wEf-Oz-o0z" firstAttribute="centerY" secondItem="0iH-NS-2S5" secondAttribute="centerY" id="3rq-ji-Nih"/>
@@ -184,22 +184,22 @@
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqa-Yi-O7Q" userLabel="Frends Count View">
-                                        <rect key="frame" x="271" y="79" width="51" height="28"/>
+                                        <rect key="frame" x="271" y="77" width="60" height="32"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W0E-3r-8OY">
-                                                <rect key="frame" x="20" y="0.0" width="11" height="15"/>
+                                                <rect key="frame" x="25" y="0.0" width="11" height="15"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRIENDS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxY-tc-cQH">
-                                                <rect key="frame" x="0.0" y="17" width="51" height="11"/>
-                                                <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
+                                                <rect key="frame" x="0.0" y="19" width="60" height="13"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="13"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="z4M-O6-xmW" customClass="UI">
-                                                <rect key="frame" x="0.0" y="0.0" width="51" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="32"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <state key="normal">
@@ -214,7 +214,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="W0E-3r-8OY" firstAttribute="top" secondItem="fqa-Yi-O7Q" secondAttribute="top" id="2PM-El-GZN"/>
-                                            <constraint firstItem="jxY-tc-cQH" firstAttribute="top" secondItem="W0E-3r-8OY" secondAttribute="bottom" constant="2" id="6BB-8T-KrF"/>
+                                            <constraint firstItem="jxY-tc-cQH" firstAttribute="top" secondItem="W0E-3r-8OY" secondAttribute="bottom" constant="4" id="6BB-8T-KrF"/>
                                             <constraint firstAttribute="centerX" secondItem="jxY-tc-cQH" secondAttribute="centerX" id="7KG-T1-x24"/>
                                             <constraint firstAttribute="bottom" secondItem="jxY-tc-cQH" secondAttribute="bottom" id="87u-Ta-Q7W"/>
                                             <constraint firstAttribute="trailing" secondItem="z4M-O6-xmW" secondAttribute="trailing" id="AMi-eN-xAv"/>
@@ -227,10 +227,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mKz-hK-DcD" userLabel="Impacts Count VIew">
-                                        <rect key="frame" x="54" y="79" width="51" height="28"/>
+                                        <rect key="frame" x="45" y="77" width="60" height="32"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="VQc-r9-LSG">
-                                                <rect key="frame" x="0.0" y="0.0" width="51" height="28"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="32"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,14 +241,14 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k0b-wM-GAe">
-                                                <rect key="frame" x="20" y="0.0" width="11" height="15"/>
+                                                <rect key="frame" x="25" y="0.0" width="11" height="15"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMPACTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7nX-qr-jGw">
-                                                <rect key="frame" x="0.0" y="17" width="51" height="11"/>
-                                                <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
+                                                <rect key="frame" x="0.0" y="19" width="60" height="13"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="13"/>
                                                 <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -261,7 +261,7 @@
                                             <constraint firstAttribute="centerX" secondItem="k0b-wM-GAe" secondAttribute="centerX" id="5yj-u3-m6B"/>
                                             <constraint firstAttribute="bottom" secondItem="VQc-r9-LSG" secondAttribute="bottom" id="Htd-QD-uyv"/>
                                             <constraint firstAttribute="bottom" secondItem="7nX-qr-jGw" secondAttribute="bottom" id="SbV-rL-bM2"/>
-                                            <constraint firstItem="7nX-qr-jGw" firstAttribute="top" secondItem="k0b-wM-GAe" secondAttribute="bottom" constant="2" id="Xa1-c4-op6"/>
+                                            <constraint firstItem="7nX-qr-jGw" firstAttribute="top" secondItem="k0b-wM-GAe" secondAttribute="bottom" constant="4" id="Xa1-c4-op6"/>
                                             <constraint firstAttribute="trailing" secondItem="VQc-r9-LSG" secondAttribute="trailing" id="aGM-JF-eby"/>
                                             <constraint firstAttribute="centerX" secondItem="7nX-qr-jGw" secondAttribute="centerX" id="dIg-Qx-0BZ"/>
                                             <constraint firstItem="VQc-r9-LSG" firstAttribute="top" secondItem="mKz-hK-DcD" secondAttribute="top" id="dp2-t4-ka6"/>
@@ -840,7 +840,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="Dul-5a-CRm"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
-                                                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.13725490196078433" green="0.12156862745098039" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fV9-dH-iL7">
@@ -895,21 +895,8 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aVz-V0-DvZ" id="CNX-q2-WVj">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Cvv-zo-rgn">
-                                                    <rect key="frame" x="177" y="12" width="20" height="20"/>
-                                                    <color key="color" red="0.93725490199999995" green="0.3921568627" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                </activityIndicatorView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="Cvv-zo-rgn" firstAttribute="centerY" secondItem="CNX-q2-WVj" secondAttribute="centerY" id="2yw-fp-T7g"/>
-                                                <constraint firstItem="Cvv-zo-rgn" firstAttribute="centerX" secondItem="CNX-q2-WVj" secondAttribute="centerX" id="hpV-MV-Zac"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="loadingindicator" destination="Cvv-zo-rgn" id="A5a-SY-l15"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

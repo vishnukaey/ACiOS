@@ -15,9 +15,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *menuTable;
+@property (nonatomic, assign) BOOL isFirstLaunch;
 @end
 
-static NSString *kProfilePicPlaceholder = @"manplaceholder.jpg";
+static NSString *kProfilePicPlaceholder = @"userProfilePic";
 static CGFloat kProfilePicBorderWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
 static CGFloat kNumberOfCells = 5.0;
@@ -43,15 +44,18 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   self.profilePicture.clipsToBounds = YES;
   
   //-- Name Label -- //
-  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",[LCDataManager sharedDataManager].firstName,[LCDataManager sharedDataManager].lastName] uppercaseString]];
-  [self refreshUserImages];
+  [self refreshUserInfo];
   
   [self.menuTable setBackgroundColor:kDeSelectionColor];
   [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+  
+  self.isFirstLaunch = YES;
 }
 
-- (void)refreshUserImages
+- (void)refreshUserInfo
 {
+  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",[LCDataManager sharedDataManager].firstName,[LCDataManager sharedDataManager].lastName] uppercaseString]];
+
   //-- Cover Photo -- //
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].headerPhotoURL];
   [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:nil];
@@ -73,7 +77,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)refreshUserImages:(NSNotification*)notification
 {
-  [self refreshUserImages];
+  [self refreshUserInfo];
 }
 
 #pragma mark - view life cycle
@@ -117,12 +121,26 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   }
   [cell setIndex:indexPath.row];
   [cell setBackgroundColor:kDeSelectionColor];
+  if (self.isFirstLaunch && indexPath.row == 0) {
+    //Set 'Feeds' selected by default.
+    [cell setBackgroundColor:kSelectionColor];
+    [cell.itemIcon setTintColor:kIconSelectionColor];
+  }
+  
   return cell;
 }
 
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (self.isFirstLaunch) {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+    LCMenuItemCell * cell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setBackgroundColor:kDeSelectionColor];
+    [cell.itemIcon setTintColor:kIconDeSelectionColor];
+  }
+
+  self.isFirstLaunch = NO;
   LCMenuItemCell * selectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
   [selectedCell setSelected:NO];
   [selectedCell setBackgroundColor:kSelectionColor];

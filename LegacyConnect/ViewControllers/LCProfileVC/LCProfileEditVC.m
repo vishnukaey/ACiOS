@@ -523,7 +523,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     genderPicker = [[UIPickerView alloc] init];
     genderPicker.dataSource = self;
     genderPicker.delegate = self;
+    
+    if([genderTypes containsObject:userDetail.gender]){
+      NSInteger selection = [genderTypes indexOfObject:userDetail.gender];
+      [genderPicker selectRow:selection inComponent:0 animated:NO];
+    }
     txt_gender.inputView = genderPicker;
+
 
   }
   

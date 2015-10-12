@@ -94,7 +94,7 @@
          appdel.window.rootViewController = mainContainer;
          [appdel.window makeKeyAndVisible];
          
-         [self addfloatingButtons];
+         [self addGIButton];
          [self addMenuButton:navigationRoot];
          mainContainer.panMode = MFSideMenuPanModeNone;
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
@@ -126,12 +126,12 @@
   // Dispose of any resources that can be recreated.
 }
 
-- (void)addfloatingButtons
+- (void)addGIButton
 {
   //global impact button
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 60, appdel.window.frame.size.height - 60, 56, 56)];
-  [appdel.window addSubview:giButton];
+  giButton = [[LCGIButton alloc]initWithFrame:CGRectMake(appdel.window.frame.size.width - 76, appdel.window.frame.size.height - 76, 56, 56)];
+  [mainContainer.view addSubview:giButton];
   [giButton setUpMenu];
   giButton.communityButton.tag = 0;
   [giButton.communityButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -222,18 +222,29 @@
   }
   else if (index == 1)//Interests
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-    LCAllInterestVC *vc = [sb instantiateInitialViewController];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+//    LCAllInterestVC *vc = [sb instantiateInitialViewController];
+//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 2)//notifications
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
-    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
+//    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
+//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 3)//notifications
   {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 4)//logout
   {
