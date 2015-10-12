@@ -243,6 +243,7 @@ static LCAPIManager *sharedManager = nil;
     success(response);
   } andFailure:^(NSString *error) {
     NSLog(@"Failure");
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
 
