@@ -136,7 +136,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
     
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
-                       placeholderImage:nil];
+                       placeholderImage:headerImageView.image];
 
     
     switch ([userDetail.isFriend integerValue]) {

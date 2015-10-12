@@ -24,8 +24,8 @@ static CGFloat kCellHeight = 44.0f;
 static CGFloat kNumberOfCells = 5.0;
 static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
-#define kSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1]
-#define kDeSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:0.8]
+#define kSelectionColor [UIColor colorWithRed:0.0f/255 green:0.0f/255 blue:0.0f/255 alpha:1]
+#define kDeSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1]
 
 
 #define kIconSelectionColor [UIColor colorWithRed:239.0f/255 green:100.0f/255 blue:77.0f/255 alpha:1]
@@ -46,8 +46,10 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   //-- Name Label -- //
   [self refreshUserInfo];
   
+  self.menuTable.opaque = NO;
   [self.menuTable setBackgroundColor:kDeSelectionColor];
-  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+//  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+//  self.menuTable.backgroundView = nil;
   
   self.isFirstLaunch = YES;
 }
