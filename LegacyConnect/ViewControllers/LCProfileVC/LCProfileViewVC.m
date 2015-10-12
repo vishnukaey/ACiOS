@@ -30,6 +30,11 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   milestonesTable.estimatedRowHeight = 44.0;
   milestonesTable.rowHeight = UITableViewAutomaticDimension;
   
+  UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
+  milestonesTable.tableFooterView = zeroRectView;
+  interestsTable.tableFooterView = zeroRectView;
+  actionsTable.tableFooterView = zeroRectView;
+  
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
@@ -175,7 +180,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   
   LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [tabMenuContainer addSubview:tabmenu];
-  [tabmenu setBackgroundColor:[UIColor whiteColor]];
+  //[tabmenu setBackgroundColor:[UIColor whiteColor]];
   tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
   tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
   
