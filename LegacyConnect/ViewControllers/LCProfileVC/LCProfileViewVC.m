@@ -599,7 +599,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
-    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
+    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:nil];;
   }
   
 }
