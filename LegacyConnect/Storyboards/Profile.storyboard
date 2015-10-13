@@ -622,7 +622,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="0.95999999999999996" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="1de-ZM-WJ0"/>
                                     <constraint firstItem="Yyr-mP-zZ6" firstAttribute="centerY" secondItem="5tm-mb-Q2J" secondAttribute="centerY" constant="13" id="5bb-sr-34z"/>
@@ -782,6 +782,7 @@
                     <connections>
                         <outlet property="buttonSave" destination="VsG-eU-TnH" id="QUD-k0-nzS"/>
                         <outlet property="headerBGImage" destination="Arj-9v-Zms" id="zLe-s7-5Mp"/>
+                        <outlet property="navigationBar" destination="5tm-mb-Q2J" id="2um-We-gNu"/>
                         <outlet property="profilePic" destination="eyz-my-FYN" id="Pcu-wQ-jFn"/>
                         <outlet property="profilePicBorderView" destination="Qwr-TH-TEo" id="opJ-UG-OZ7"/>
                     </connections>

@@ -66,16 +66,27 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+-(void) viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  [self fillGradientForNavigation];
+}
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
 
+-(void)fillGradientForNavigation
+{
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = navigationBar.bounds;
+  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
+  [navigationBar.layer insertSublayer:gradient atIndex:0];
+}
 
 
 #pragma mark - button actions
