@@ -583,7 +583,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+  if(indexPath.section == SECTION_BIRTHDAY){
+    
+    [txt_birthday becomeFirstResponder];
+  }
+  else if(indexPath.section == SECTION_GENDER){
+    [txt_gender becomeFirstResponder];
+  }
 }
 
 
