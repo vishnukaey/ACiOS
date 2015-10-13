@@ -60,6 +60,8 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
                             actualHeaderImage = image;
                           }];
   dobTimeStamp = userDetail.dob;
+  [self fillGradientForNavigation];
+  [self fillGradientForNavigation];
 }
 
 
@@ -67,7 +69,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   [super viewWillAppear:animated];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-  [self fillGradientForNavigation];
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -84,7 +85,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, navigationBar.bounds.size.height);
-  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0] CGColor],(id)[[UIColor clearColor] CGColor], nil];
+  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
   [navigationBar.layer insertSublayer:gradient atIndex:0];
 } 
 

@@ -519,7 +519,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                                         <color key="backgroundColor" red="0.35294117650000001" green="0.35294117650000001" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                     </imageView>
-                                    <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdu-nU-CD9" userLabel="Header Image Overlay">
+                                    <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kdu-nU-CD9" userLabel="Header Image Overlay">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="siv-ZI-C7C" userLabel="ProfilePic Edit Button">
