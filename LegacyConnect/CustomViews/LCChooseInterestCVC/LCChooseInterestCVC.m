@@ -32,7 +32,7 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:[UIImage imageNamed:@""]];//no placeholder needed. background color is placeholder itself
+  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];//no placeholder needed. background color is placeholder itself
   _interestNameLabel.text = interest.name;
 }
 

@@ -22,5 +22,7 @@
 @property (strong, nonatomic) NSString *userToken;
 @property (strong, nonatomic) NSString *createdDateTime;
 @property (strong, nonatomic) NSData *userImageData;
+@property (nonatomic, retain) UIImage *userAvatarImage;
+@property (nonatomic, retain) UIImage *userHeaderImage;
 @property (assign) BOOL isActive;
 @end
