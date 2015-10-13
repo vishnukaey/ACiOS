@@ -86,7 +86,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   gradient.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, navigationBar.bounds.size.height);
   gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0] CGColor],(id)[[UIColor clearColor] CGColor], nil];
   [navigationBar.layer insertSublayer:gradient atIndex:0];
-}
+} 
 
 
 #pragma mark - button actions
