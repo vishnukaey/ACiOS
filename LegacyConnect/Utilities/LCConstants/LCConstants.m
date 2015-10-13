@@ -85,6 +85,7 @@ NSString *const kEventIDKey = @"eventId";
 NSString *const kLastCauseIDKey = @"lastCauseId";
 NSString *const kFriendsKey = @"friends";
 NSString *const kFriendIDKey = @"friendId";
+NSString *const kPostIDKey = @"postId";
 NSString *const kFeedsKey = @"feeds";
 NSString *const kMileStonesKey = @"milestones";
 

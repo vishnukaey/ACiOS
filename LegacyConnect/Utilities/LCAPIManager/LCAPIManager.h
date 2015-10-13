@@ -24,6 +24,7 @@
 
 + (void)getPostDetails:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
 + (void)createNewPost:(NSDictionary*)params image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 #pragma mark - Interests and Causes
 

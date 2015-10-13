@@ -261,11 +261,10 @@ static LCAPIManager *sharedManager = nil;
     {
       NSLog(@"%@",response[kResponseMessage]);
       NSError *error = nil;
-      LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:response[kResponseData] error:&error];
       if(!error)
       {
         NSLog(@"Successfully created new post");
-        success(feed);
+        success(response);
       }
       else
       {
@@ -277,32 +276,32 @@ static LCAPIManager *sharedManager = nil;
     failure(error);
   }];
   
-//  [webService performPostOperationWithUrl:url andAccessToken:kEmptyStringValue withParameters:params withSuccess:^(id response)
-//   {
-//     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-//     {
-//       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-//       failure(response[kResponseMessage]);
-//     }
-//     else
-//     {
-//       NSLog(@"%@",response[kResponseMessage]);
-//       NSError *error = nil;
-//       LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
-//       if(!error)
-//       {
-//         NSLog(@"Successfully registered new user");
-//         success(user);
-//       }
-//       else
-//       {
-//         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-//       }
-//     }
-//   } andFailure:^(NSString *error){
-//     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-//     failure(error);
-//   }];
+}
+
++ (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
+  NSDictionary *dict = @{kPostIDKey: postId};
+  
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Post deleted..- %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
 }
 
 

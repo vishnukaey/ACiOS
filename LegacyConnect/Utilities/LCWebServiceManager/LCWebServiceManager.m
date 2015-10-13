@@ -197,10 +197,12 @@
     NSData *imageData = UIImagePNGRepresentation(image);
     
     [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-      [formData appendPartWithFileData:imageData
+      if (imageData) {
+        [formData appendPartWithFileData:imageData
                                   name:imageName
-                              fileName:imageName
+                              fileName:@"image.png"
                               mimeType:@"image/png"];
+      }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       success(responseObject);

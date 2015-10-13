@@ -98,7 +98,63 @@
          [self addMenuButton:navigationRoot];
          mainContainer.panMode = MFSideMenuPanModeNone;
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+         
+         
+         
+         
+//**********************************************************************
+         
 
+//         [LCAPIManager getPostDetails:@"1d235923-70dc-11e5-bc20-5d366641d516" WithSuccess:^(LCFeed *responses) {
+//           NSLog(@"getting post details success - %@",responses);
+//         } andFailure:^(NSString *error) {
+//           NSLog(@"getting post details error - %@",error);
+//         }];
+         
+         
+//         NSDictionary *d1 = [NSDictionary dictionaryWithObjectsAndKeys:
+//                             @"", @"",
+//                             [permissions allObjects], fbsdkdfl_ACFacebookPermissionsKey(),
+//                             defaultAudience, fbsdkdfl_ACFacebookAudienceKey(), // must end on this key/value due to audience possibly being nil
+//                             nil];
+//
+         
+         NSDictionary *tag1 = @{@"id":@"1",
+                               @"type":@"cause",
+                               @"text":@"cause name 1"
+                                };
+         NSDictionary *tag2 = @{@"id":@"2",
+                                @"type":@"cause",
+                                @"text":@"cause name 2"
+                                };
+         NSDictionary *dict = @{
+                                @"message":@"new post 111",
+                                @"entityType":@"",
+                                @"entityId":@"1",
+                                @"postTags":@[tag1,tag2],
+                                @"location":@"Kochi",
+                                @"isMilestone":@"1"
+                                };
+         UIImage *image = [UIImage imageNamed:@"profileFriend"];
+         
+         [LCAPIManager createNewPost:dict image:nil withSuccess:^(id response) {
+           NSLog(@"pos creation success - %@",response);
+         } andFailure:^(NSString *error) {
+           NSLog(@"post creation failed - %@",error);
+         }];  
+         
+         
+         
+         
+         
+         [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+           NSLog(@"feeds - %@",response);
+         } andFailure:^(NSString *error) {
+           
+         }];
+//**********************************************************************
+         
+      
          
        } andFailure:^(NSString *error) {
          NSLog(@" error:  %@",error);
