@@ -131,7 +131,14 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     NSLog(@"ress-->>>%@",response);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
-      [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:nil];
+      NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+      if (profilePic.image) {
+        userInfo[@"profilePic"] = profilePic.image;
+      }
+      if (profilePic.image) {
+        userInfo[@"headerBGImage"] = headerBGImage.image;
+      }
+      [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:userInfo];
     }];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];

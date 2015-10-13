@@ -100,7 +100,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     currentProfileState = PROFILE_OTHER_NON_FRIEND;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
   }
-  
+  profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   [self loadUserDetails];
 }
 
@@ -134,7 +134,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
     
     [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
-                  placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+                  placeholderImage:profilePic.image];
     
     NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
     
@@ -174,9 +174,11 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 }
 
 -(void)updateUserData:(NSNotification *)notification {
-  
+  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
   dispatch_async(dispatch_get_global_queue(0,0), ^{
     [self loadUserDetails];
+    
   });
   
 }

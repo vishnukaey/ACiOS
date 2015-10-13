@@ -42,7 +42,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   self.profilePicture.layer.borderColor = [UIColor whiteColor].CGColor;
   self.profilePicture.layer.borderWidth = kProfilePicBorderWidth;
   self.profilePicture.clipsToBounds = YES;
-  
+  self.profilePicture.image = [UIImage imageNamed:kProfilePicPlaceholder];
   //-- Name Label -- //
   [self refreshUserInfo];
   
@@ -52,7 +52,10 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 //  self.menuTable.backgroundView = nil;
   
   self.isFirstLaunch = YES;
-}
+  
+  
+  
+  }
 
 - (void)refreshUserInfo
 {
@@ -60,11 +63,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
   //-- Cover Photo -- //
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].headerPhotoURL];
-  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:nil];
+  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.coverPhoto.image];
   
   //-- Profile Image--//
   NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
-  [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:[UIImage imageNamed:kProfilePicPlaceholder]];
+  [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:self.profilePicture.image];
 }
 
 - (void)addUserImageChangeNitification
@@ -82,6 +85,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [self refreshUserInfo];
 }
 
+-(void)updateHeaderAndAvatarOnEdit:(NSNotification *)notification {
+  self.profilePicture.image = (UIImage *)notification.userInfo[@"profilePic"];
+  self.coverPhoto.image = (UIImage *)notification.userInfo[@"headerBGImage"];
+}
+
 #pragma mark - view life cycle
 - (void)viewDidLoad
 {
@@ -97,10 +105,12 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [super viewWillAppear:animated];
   [self initialUISetUp];
   [self addUserImageChangeNitification];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderAndAvatarOnEdit:) name:kUserProfileUpdateNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
   [self removeUserImageChangeNitification];
   [super viewWillDisappear:animated];
 }

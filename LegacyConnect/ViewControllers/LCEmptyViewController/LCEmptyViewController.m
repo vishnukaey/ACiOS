@@ -22,6 +22,7 @@
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
 
+
 @interface LCEmptyViewController ()
 {
   LCCreatePostViewController *createPostVC;
@@ -53,7 +54,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-
+  
+  [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
@@ -72,6 +74,7 @@
     //Fetch additional userdetails if user is logged-in
     if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
     {
+      
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
          [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
@@ -142,7 +145,7 @@
   
   giButton.postStatusButton.tag = 2;
   [giButton.postStatusButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
-  
+  [giButton addTarget:self action:@selector(GIButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)addMenuButton:(UIViewController*)vc
@@ -166,6 +169,11 @@
 }
 
 #pragma mark - button actions
+- (void)GIButtonClicked
+{
+  [mainContainer setMenuState:MFSideMenuStateClosed];
+}
+
 - (void)menuButtonAction
 {
   if (mainContainer.menuState == MFSideMenuStateClosed) {
