@@ -16,6 +16,7 @@
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
+#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static CGFloat kNumberOfSectionsInFeeds = 1;
@@ -41,6 +42,8 @@ static NSInteger kRowForLoadingCell = 1;
     }
     isLoadingMoreFriends = NO;
   } andFailure:^(NSString *error) {
+    [feedsTable.bottomRefreshControl endRefreshing];
+    
     NSLog(@"----------loading more fail");
     loadMoreFriends = YES;
     isLoadingMoreFriends = NO;
@@ -50,6 +53,21 @@ static NSInteger kRowForLoadingCell = 1;
     //TO DO :
     // Implement func to user tap to refresh or something.
   }];
+}
+
+- (void)addBottonrefreshControl
+{
+  UIRefreshControl *refreshControl = [UIRefreshControl new];
+  refreshControl.triggerVerticalOffset = 100.;
+  [refreshControl addTarget:self action:@selector(bottomRefresh) forControlEvents:UIControlEventValueChanged];
+  feedsTable.bottomRefreshControl = refreshControl;
+}
+
+- (void)bottomRefresh
+{
+  if (loadMoreFriends && !isLoadingMoreFriends) {
+    [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
+  }
 }
 
 - (void)initialUISetUp
@@ -68,6 +86,8 @@ static NSInteger kRowForLoadingCell = 1;
       [feedsTable.pullToRefreshView stopAnimating];
     });
   } withBackgroundColor:[UIColor lightGrayColor]];
+  
+  [self addBottonrefreshControl];
 }
 
 - (void)setGIAndMenuButtonVisibilityStatus:(BOOL)isHidden
@@ -118,7 +138,7 @@ static NSInteger kRowForLoadingCell = 1;
     return 1;
   }
   
-  return feedsArray.count + ((loadMoreFriends && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading) ?  kRowForLoadingCell : 0);
+  return feedsArray.count ;//+ ((loadMoreFriends && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading) ?  kRowForLoadingCell : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -164,7 +184,6 @@ static NSInteger kRowForLoadingCell = 1;
 {
   NSLog(@"indexpath row : %li",indexPath.row);
   if (indexPath.row == feedsArray.count - 1 && loadMoreFriends && !isLoadingMoreFriends) {
-    NSLog(@"------- loading more cell");
 //    [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
   }
 }
