@@ -136,7 +136,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
       if (profilePic.image) {
         userInfo[@"profilePic"] = profilePic.image;
       }
-      if (profilePic.image) {
+      if (headerBGImage.image) {
         userInfo[@"headerBGImage"] = headerBGImage.image;
       }
       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:userInfo];
