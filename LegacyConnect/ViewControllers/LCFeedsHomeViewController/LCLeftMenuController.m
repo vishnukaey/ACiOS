@@ -60,7 +60,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (void)refreshUserInfo
 {
   NSString *firstName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].firstName];
-    NSString *lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].firstName];
+    NSString *lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].lastName];
   [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",firstName, lastName] uppercaseString]];
 
   //-- Cover Photo -- //
