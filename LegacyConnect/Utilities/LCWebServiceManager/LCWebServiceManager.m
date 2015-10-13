@@ -20,7 +20,7 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-    manager.securityPolicy.allowInvalidCertificates = YES;
+//    manager.securityPolicy.allowInvalidCertificates = YES;
     [manager POST:urlString parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
@@ -51,8 +51,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-    manager.securityPolicy.allowInvalidCertificates = YES;
-    
+//    manager.securityPolicy.allowInvalidCertificates = YES;
     [manager GET:urlString parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {

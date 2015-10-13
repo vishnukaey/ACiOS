@@ -235,8 +235,8 @@ ACAccount *facebookAccount;
 
 -(IBAction)search:(id)sender
 {
-//  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
-//  [self.navigationController pushViewController:searchVC animated:NO];
+  LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
+  [self.navigationController pushViewController:searchVC animated:NO];
 }
 
 
