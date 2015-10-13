@@ -67,12 +67,12 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   [super viewWillAppear:animated];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [self fillGradientForNavigation];
 }
 
--(void) viewDidLayoutSubviews
+-(void) viewDidAppear:(BOOL)animated
 {
-  [super viewDidLayoutSubviews];
-  [self fillGradientForNavigation];
+  [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,8 +83,8 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 -(void)fillGradientForNavigation
 {
   CAGradientLayer *gradient = [CAGradientLayer layer];
-  gradient.frame = navigationBar.bounds;
-  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
+  gradient.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, navigationBar.bounds.size.height);
+  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1.0] CGColor],(id)[[UIColor clearColor] CGColor], nil];
   [navigationBar.layer insertSublayer:gradient atIndex:0];
 }
 
