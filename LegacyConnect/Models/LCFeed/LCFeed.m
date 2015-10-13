@@ -32,7 +32,7 @@
            @"location": @"location",
            @"didLike": @"didLike",
            @"postType": @"postType",
-           @"postTags": @"posttags",
+           @"postTags": @"postTags",
            @"id": @"id",
            };
 }
