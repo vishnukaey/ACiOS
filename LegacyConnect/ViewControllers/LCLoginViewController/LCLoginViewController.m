@@ -83,7 +83,7 @@
     /*
      Temporarily added alert, remove after sprint 1.
      */
-    [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+//    [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
     [loginBtn setEnabled:true];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
