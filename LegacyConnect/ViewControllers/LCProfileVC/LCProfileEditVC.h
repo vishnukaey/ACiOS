@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <RSKImageCropper/RSKImageCropper.h>
+#import "IQUIView+IQKeyboardToolbar.h"
 
 typedef enum profileSectionTypes
 {
