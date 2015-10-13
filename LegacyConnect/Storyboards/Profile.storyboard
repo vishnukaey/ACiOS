@@ -389,7 +389,7 @@
                                             <outlet property="delegate" destination="CU0-BO-pMc" id="CJO-yV-4B1"/>
                                         </connections>
                                     </tableView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-wa-SdJ" userLabel="Milestones Table">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DcZ-wa-SdJ" userLabel="Milestones Table">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -403,9 +403,13 @@
                                     <constraint firstItem="q6a-U1-CO6" firstAttribute="leading" secondItem="HvW-d7-oeq" secondAttribute="leading" id="31T-gY-TpC"/>
                                     <constraint firstAttribute="bottom" secondItem="E97-AZ-OMD" secondAttribute="bottom" id="Bqd-8F-aph"/>
                                     <constraint firstItem="q6a-U1-CO6" firstAttribute="top" secondItem="HvW-d7-oeq" secondAttribute="top" id="Ow2-GJ-HGp"/>
+                                    <constraint firstItem="DcZ-wa-SdJ" firstAttribute="leading" secondItem="HvW-d7-oeq" secondAttribute="leading" id="S0a-O9-ogX"/>
                                     <constraint firstItem="E97-AZ-OMD" firstAttribute="top" secondItem="HvW-d7-oeq" secondAttribute="top" id="XaG-oq-U3f"/>
                                     <constraint firstAttribute="trailing" secondItem="q6a-U1-CO6" secondAttribute="trailing" id="Z8J-O4-2RG"/>
+                                    <constraint firstItem="DcZ-wa-SdJ" firstAttribute="top" secondItem="HvW-d7-oeq" secondAttribute="top" id="e8R-Pd-Goa"/>
                                     <constraint firstAttribute="trailing" secondItem="E97-AZ-OMD" secondAttribute="trailing" id="f3K-eq-a1h"/>
+                                    <constraint firstAttribute="trailing" secondItem="DcZ-wa-SdJ" secondAttribute="trailing" id="htP-5D-bpk"/>
+                                    <constraint firstAttribute="bottom" secondItem="DcZ-wa-SdJ" secondAttribute="bottom" id="km9-gk-gL5"/>
                                     <constraint firstItem="E97-AZ-OMD" firstAttribute="leading" secondItem="HvW-d7-oeq" secondAttribute="leading" id="nMU-wH-g0d"/>
                                     <constraint firstAttribute="bottom" secondItem="q6a-U1-CO6" secondAttribute="bottom" id="zoY-bE-2Fq"/>
                                 </constraints>
@@ -618,7 +622,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.11372549019607843" green="0.11372549019607843" blue="0.11372549019607843" alpha="0.95999999999999996" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="1de-ZM-WJ0"/>
                                     <constraint firstItem="Yyr-mP-zZ6" firstAttribute="centerY" secondItem="5tm-mb-Q2J" secondAttribute="centerY" constant="13" id="5bb-sr-34z"/>
@@ -635,10 +639,10 @@
                                 <color key="sectionIndexBackgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCProfileSectionHeader" id="0Gh-XD-dYI">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Gh-XD-dYI" id="b6Z-zR-XlB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wv5-iU-siz">
@@ -664,10 +668,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LCProfileNameCell" id="1Xb-6h-cEX">
-                                        <rect key="frame" x="0.0" y="94" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Xb-6h-cEX" id="irE-Pl-MBB">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OSk-gZ-fCC" userLabel="Seperator View">
@@ -708,10 +712,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LCProfileLocationCell" id="Sj4-Pb-5rG">
-                                        <rect key="frame" x="0.0" y="138" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Sj4-Pb-5rG" id="khL-uX-zTE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="8vT-JD-lBc">
@@ -731,10 +735,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LCProfileBirthdayCell" id="wwn-tU-LYY">
-                                        <rect key="frame" x="0.0" y="182" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="181.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wwn-tU-LYY" id="hSa-HM-gXy">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aP2-Me-enl">
@@ -778,6 +782,7 @@
                     <connections>
                         <outlet property="buttonSave" destination="VsG-eU-TnH" id="QUD-k0-nzS"/>
                         <outlet property="headerBGImage" destination="Arj-9v-Zms" id="zLe-s7-5Mp"/>
+                        <outlet property="navigationBar" destination="5tm-mb-Q2J" id="2um-We-gNu"/>
                         <outlet property="profilePic" destination="eyz-my-FYN" id="Pcu-wQ-jFn"/>
                         <outlet property="profilePicBorderView" destination="Qwr-TH-TEo" id="opJ-UG-OZ7"/>
                     </connections>

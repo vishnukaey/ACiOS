@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <RSKImageCropper/RSKImageCropper.h>
+#import "IQUIView+IQKeyboardToolbar.h"
 
 typedef enum profileSectionTypes
 {
@@ -31,7 +32,7 @@ typedef enum imageEditStates
   IBOutlet UIView *profilePicBorderView;
   IBOutlet UIButton *buttonSave;
   IBOutlet UIImageView *headerBGImage;
-  
+  IBOutlet UIView *navigationBar;
   
   UITextField *txt_firstName;
   UITextField *txt_lastName;
