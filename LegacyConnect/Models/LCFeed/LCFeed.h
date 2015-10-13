@@ -10,6 +10,7 @@
 #import "LCTag.h"
 
 @interface LCFeed : MTLModel <MTLJSONSerializing>
+@property (nonatomic, strong) NSString *feedId;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;

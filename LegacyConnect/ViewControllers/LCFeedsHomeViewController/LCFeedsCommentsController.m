@@ -15,20 +15,32 @@
 @implementation LCFeedsCommentsController
 @synthesize feedObject;
 
+#pragma mark - private method implementation
+- (void)initialUISetUp
+{
+  [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  mainTable.rowHeight = UITableViewAutomaticDimension;
+  mainTable.estimatedRowHeight = 76.0;
+}
+
+- (void)addKeyBoardNotificationObserver
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(changeFirstResponder)
+                                               name:UIKeyboardDidShowNotification
+                                             object:nil];
+}
+
+- (void)removeKeyBoardNotificationObserver
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];;
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-
-  [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-
-  mainTable.rowHeight = UITableViewAutomaticDimension;
-  mainTable.estimatedRowHeight = 76.0;
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                   selector:@selector(changeFirstResponder)
-                                       name:UIKeyboardDidShowNotification
-                                     object:nil];
-
+  [self initialUISetUp];
   [self loadFeedAndComments];
 }
 
@@ -39,15 +51,17 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:NO];
+  [self addKeyBoardNotificationObserver];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-  [super viewWillDisappear:animated];
+  [self removeKeyBoardNotificationObserver];
   self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
+  [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning {

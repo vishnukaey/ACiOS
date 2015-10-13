@@ -15,11 +15,13 @@
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
+#import "LCLoadingCell.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static CGFloat kNumberOfSectionsInFeeds = 1;
 static NSString *kFeedCellIdentifier = @"LCFeedCell";
 static NSString *kFeedCellXibName = @"LCFeedcellXIB";
+static NSInteger kRowForLoadingCell = 1;
 
 @implementation LCFeedsHomeViewController
 @synthesize feedsTable;
@@ -27,15 +29,23 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 #pragma mark - private method implementation
 - (void)fetchHomeFeedsWithLastFeedId:(NSString*)lastId
 {
+  isLoadingMoreFriends = YES;
   [LCAPIManager getHomeFeedsWithLastFeedId:lastId success:^(NSArray *response) {
+    NSLog(@"----------loading more success");
+    loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
     [feedsArray addObjectsFromArray:response];;
     [feedsTable reloadData];
     
     if (self.feedsTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
       [self.feedsTable.pullToRefreshView stopAnimating];
     }
-
+    isLoadingMoreFriends = NO;
   } andFailure:^(NSString *error) {
+    NSLog(@"----------loading more fail");
+    loadMoreFriends = YES;
+    isLoadingMoreFriends = NO;
+    [feedsTable reloadData];
+
     NSLog(@"%@",error);
     //TO DO :
     // Implement func to user tap to refresh or something.
@@ -72,6 +82,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewDidLoad];
   feedsArray = [[NSMutableArray alloc] init];
+  loadMoreFriends = YES;
   [self fetchHomeFeedsWithLastFeedId:nil];
   [self initialUISetUp];
 }
@@ -103,28 +114,59 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-  return feedsArray.count;
+  if (feedsArray.count == 0) {
+    return 1;
+  }
+  
+  return feedsArray.count + ((loadMoreFriends && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading) ?  kRowForLoadingCell : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellIdentifier];
-  if (cell == nil)
+  
+  if (feedsArray.count == 0)
   {
-    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
+    return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_feeds_available", nil)];
   }
-  [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  
+  if (indexPath.row == feedsArray.count) {
+    LCLoadingCell *loadingCell = [tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier]];
+    if (loadingCell == nil) {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
+      loadingCell = [topLevelObjects objectAtIndex:0];
+    }
+    [loadingCell setBackgroundColor:[UIColor greenColor]];
+    [MBProgressHUD hideHUDForView:loadingCell animated:NO];
+    [MBProgressHUD showHUDAddedTo:loadingCell animated:NO];
+    return loadingCell;
+  }
+  else
+  {
+    LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellIdentifier];
+    if (cell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+    }
+    [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+    __weak typeof(self) weakSelf = self;
+    cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+      [weakSelf feedCellActionWithType:actionType andFeed:feed];
+    };
+    cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+      [weakSelf tagTapped:tagDetails];
+    };
+    return cell;
+  }
+}
 
-  __weak typeof(self) weakSelf = self;
-  cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
-    [weakSelf feedCellActionWithType:actionType andFeed:feed];
-  };
-  cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
-    [weakSelf tagTapped:tagDetails];
-  };
-
-  return cell;
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  NSLog(@"indexpath row : %li",indexPath.row);
+  if (indexPath.row == feedsArray.count - 1 && loadMoreFriends && !isLoadingMoreFriends) {
+    NSLog(@"------- loading more cell");
+//    [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
+  }
 }
 
 #pragma mark - UITableViewDelegate implementation

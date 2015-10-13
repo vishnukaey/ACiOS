@@ -25,7 +25,6 @@ static NSInteger kRowForLoadingCell = 1;
 static NSInteger kRowHeightFriendsCell= 88;
 static NSInteger kRowHeightLoadingCell= 45;
 static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
-static NSString *kLoadingCellIdentifier = @"LoadingCell";
 static NSString *kTitle = @"FRIENDS";
 
 @implementation LCFriendsListViewController
@@ -129,9 +128,9 @@ static NSString *kTitle = @"FRIENDS";
     }
   
   if (indexPath.row == self.friendsList.count) {
-    LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:kLoadingCellIdentifier forIndexPath:indexPath];
+    LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier] forIndexPath:indexPath];
     if (loadingCell == nil) {
-      loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLoadingCellIdentifier];
+      loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[LCLoadingCell getFeedCellidentifier]];
     }
     [MBProgressHUD hideHUDForView:loadingCell animated:YES];
     [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];

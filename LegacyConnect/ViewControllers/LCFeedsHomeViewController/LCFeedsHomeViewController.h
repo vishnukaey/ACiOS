@@ -13,6 +13,8 @@
 @interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   NSMutableArray *feedsArray;
+  BOOL loadMoreFriends;
+  BOOL isLoadingMoreFriends;
 }
 
 @property(nonatomic, weak)IBOutlet  UITableView *feedsTable;

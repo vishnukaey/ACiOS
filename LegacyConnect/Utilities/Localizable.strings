@@ -18,6 +18,7 @@
 "no_friends_available" = "No friends to display.";
 "no_impacts_available_self" = "Create Impacts by selecting the Global Impact button from the bottom right.";
 "no_impacts_available_others" = "No Impacts to available.";
+"no_feeds_available" = "No Feeds to available.";
 
 "ok" = "OK";
 
