@@ -109,9 +109,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 {
   
   NSLog(@"userID<<<-->>>%@", userDetail.userID);
+  editButton.enabled = NO;
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
+    
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     userDetail = response;
+    editButton.enabled = YES;
     NSLog(@"user details - %@",response);
     
     userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
