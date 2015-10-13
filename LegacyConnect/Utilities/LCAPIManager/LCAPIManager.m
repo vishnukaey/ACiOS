@@ -1,3 +1,4 @@
+
 //
 //  LCAPIManager.m
 //  LegacyConnect
@@ -246,12 +247,24 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)createNewPost:(NSDictionary*)params image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *imageName = @"image";
+  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
-  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:params image:image andImageName:imageName withSuccess:^(id response) {
+  
+  NSError *error = nil;
+  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
+  NSLog(@"%@",dict);
+  NSError * err;
+  NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:dict options:0 error:&err];
+  NSString * myString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
+  
+  NSLog(@"String is %@",myString);
+  
+  
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -275,6 +288,7 @@ static LCAPIManager *sharedManager = nil;
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
+  
   
 }
 

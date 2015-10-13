@@ -119,30 +119,55 @@
 //                             nil];
 //
          
-         NSDictionary *tag1 = @{@"id":@"1",
-                               @"type":@"cause",
-                               @"text":@"cause name 1"
-                                };
-         NSDictionary *tag2 = @{@"id":@"2",
-                                @"type":@"cause",
-                                @"text":@"cause name 2"
-                                };
-         NSDictionary *dict = @{
-                                @"message":@"new post 111",
-                                @"entityType":@"",
-                                @"entityId":@"1",
-                                @"postTags":@[tag1,tag2],
-                                @"location":@"Kochi",
-                                @"isMilestone":@"1"
-                                };
+//         NSDictionary *tag1 = @{@"id":@"1",
+//                               @"type":@"cause",
+//                               @"text":@"cause name 1"
+//                                };
+//         NSDictionary *tag2 = @{@"id":@"2",
+//                                @"type":@"cause",
+//                                @"text":@"cause name 2"
+//                                };
+//         NSDictionary *dict = @{
+//                                @"message":@"new post 111",
+//                                @"entityType":@"",
+//                                @"entityId":@"1",
+//                                @"postTags":@[tag1,tag2],
+//                                @"location":@"Kochi",
+//                                @"isMilestone":@"1"
+//         
+//                                };
+         
          UIImage *image = [UIImage imageNamed:@"profileFriend"];
          
-         [LCAPIManager createNewPost:dict image:nil withSuccess:^(id response) {
-           NSLog(@"pos creation success - %@",response);
+         LCNewPost *newPost = [[LCNewPost alloc] init];
+         newPost.message = @"new post 119";
+         newPost.entityType = @"";
+         newPost.entityID = @"1";
+         newPost.location = @"Kochi";
+         newPost.isMilestone = @"1";
+         
+         LCTag *tag1 = [[LCTag alloc] init];
+         tag1.tagID = @"1";
+         tag1.type = @"cause";
+         tag1.text = @"my cause";
+         
+         LCTag *tag2 = [[LCTag alloc] init];
+         tag2.tagID = @"2";
+         tag2.type = @"cause";
+         tag2.text = @"my cause 2";
+         
+         newPost.postTags = @[tag1,tag2];
+         
+         
+         
+         
+         
+         [LCAPIManager createNewPost:newPost image:nil withSuccess:^(id response) {
+           NSLog(@"post creation success - %@",response);
          } andFailure:^(NSString *error) {
            NSLog(@"post creation failed - %@",error);
          }];  
-         
+
          
          
          
