@@ -77,33 +77,10 @@
       
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
-         [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
          [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
-         
-         LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
-         navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-         
-         LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
-//         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
-         leftSideMenuViewController.delegate_ = self;
-         
-         mainContainer = [MFSideMenuContainerViewController
-                          containerWithCenterViewController:navigationRoot
-                          leftMenuViewController:nil
-                          rightMenuViewController:leftSideMenuViewController];
-//         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
-         mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
-         appdel.window.rootViewController = mainContainer;
-         [appdel.window makeKeyAndVisible];
-         
-         [self addGIButton];
-         [self addMenuButton:navigationRoot];
-         mainContainer.panMode = MFSideMenuPanModeNone;
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
-
-         
+         [self addSideMenuVIewController];
        } andFailure:^(NSString *error) {
+         [self addSideMenuVIewController];
          NSLog(@" error:  %@",error);
        }];
     }
@@ -116,6 +93,32 @@
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
     }
   }
+}
+
+
+-(void) addSideMenuVIewController
+{
+  [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
+  navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+  
+  LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
+  leftSideMenuViewController.delegate_ = self;
+  
+  mainContainer = [MFSideMenuContainerViewController
+                   containerWithCenterViewController:navigationRoot
+                   leftMenuViewController:nil
+                   rightMenuViewController:leftSideMenuViewController];
+  mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
+  appdel.window.rootViewController = mainContainer;
+  [appdel.window makeKeyAndVisible];
+  
+  [self addGIButton];
+  [self addMenuButton:navigationRoot];
+  mainContainer.panMode = MFSideMenuPanModeNone;
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
 }
 
 - (void)menuEventNotification:(NSNotification*)notification

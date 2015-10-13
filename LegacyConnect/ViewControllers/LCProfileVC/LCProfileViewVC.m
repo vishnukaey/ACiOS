@@ -89,7 +89,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
-  if ([nativeUserId isEqualToString:userDetail.userID])
+  if ([nativeUserId isEqualToString:userDetail.userID] || !userDetail.userID)
   {
     currentProfileState = PROFILE_SELF;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
