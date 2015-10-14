@@ -419,6 +419,31 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
++ (void)deleteCommentWithId:(NSString *)commentId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostCommentURL];
+  NSDictionary *dict = @{kPostCommentIdKey: commentId};
+  
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"comment deleted..- %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
 
 
 #pragma mark - Interests and Causes

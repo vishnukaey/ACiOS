@@ -92,6 +92,7 @@ NSString *const kPostIDKey = @"postId";
 NSString *const kFeedsKey = @"feeds";
 NSString *const kMileStonesKey = @"milestones";
 NSString *const kPostCommentKey = @"comment";
+NSString *const kPostCommentIdKey = @"commentId";
 
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";

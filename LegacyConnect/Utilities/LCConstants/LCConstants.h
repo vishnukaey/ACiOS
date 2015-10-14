@@ -75,6 +75,7 @@ extern NSString *const kEventsKey;
 extern NSString *const kContactEmailsKey;
 extern NSString *const kMileStonesKey;
 extern NSString *const kPostCommentKey;
+extern NSString *const kPostCommentIdKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;
