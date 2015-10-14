@@ -1,3 +1,4 @@
+
 //
 //  LCAPIManager.m
 //  LegacyConnect
@@ -47,43 +48,6 @@ static LCAPIManager *sharedManager = nil;
      failure(error);
    }];
 }
-
-
-+ (void)getPostDetails:(NSString*)postID WithSuccess:(void (^)(LCUserDetail* responses))success andFailure:(void (^)(NSString *error))failure
-{
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, @"api/post/",postID];
-  [webService performGetOperationWithUrl:url andAccessToken:[[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey] withParameters:nil withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-       failure(response[kResponseMessage]);
-     }
-     else
-     {
-       NSError *error = nil;
-#warning  post model
-       LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
-       if(!error)
-       {
-         NSLog(@"Post details Fetch success! ");
-         success(user);
-       }
-       else
-       {
-         [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
-         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-       }
-     }
-   } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-     failure(error);
-   }];
-}
-
-
 
 + (void)getHomeFeedsWithLastFeedId:(NSString*)lastId success:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
@@ -246,11 +210,217 @@ static LCAPIManager *sharedManager = nil;
     success(response);
   } andFailure:^(NSString *error) {
     NSLog(@"Failure");
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
 
 }
 
+#pragma mark - Post
+
++ (void)getPostDetails:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kPostURL,postID];
+  [webService performGetOperationWithUrl:url andAccessToken:[[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey] withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:response[kResponseData] error:&error];
+       if(!error)
+       {
+         NSLog(@"Post details Fetch success! ");
+         success(feed);
+       }
+       else
+       {
+         [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *imageName = @"image";
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
+  
+  NSError *error = nil;
+  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
+  
+  NSError *error1;
+  NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error1];
+    
+  
+//  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
+//    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+//    {
+//      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+//      failure(response[kResponseMessage]);
+//    }
+//    else
+//    {
+//      NSLog(@"%@",response[kResponseMessage]);
+//      NSError *error = nil;
+//      if(!error)
+//      {
+//        NSLog(@"Successfully created new post");
+//        success(response);
+//      }
+//      else
+//      {
+//        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+//      }
+//    }
+//  } andFailure:^(NSString *error) {
+//    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+//    failure(error);
+//  }];
+  
+  
+  
+  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict image:image andImageName:imageName withSuccess:^(id response) {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      NSLog(@"%@",response[kResponseMessage]);
+      NSError *error = nil;
+      if(!error)
+      {
+        NSLog(@"Successfully created new post");
+        success(response);
+      }
+      else
+      {
+        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+      }
+    }
+  } andFailure:^(NSString *error) {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
+  
+  
+}
+
++ (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
+  NSDictionary *dict = @{kPostIDKey: postId};
+  
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Post deleted..- %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)likePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostLikeURL];
+  NSDictionary *dict = @{kPostIDKey: postId};
+  
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Post liked..- %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+
+}
+
++ (void) unlikePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostUnlikeURL];
+  NSDictionary *dict = @{kPostIDKey: postId};
+  
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Post unliked..- %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)commentPost:(NSString *)postId comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostCommentURL];
+  NSDictionary *dict = @{kPostIDKey: postId, kPostCommentKey:comment};
+  
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSLog(@"Post commented..- %@",response);
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
 
 
 
@@ -399,7 +569,6 @@ static LCAPIManager *sharedManager = nil;
 //  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
   
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
-  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, kFriendsURL];
   if (userId) {

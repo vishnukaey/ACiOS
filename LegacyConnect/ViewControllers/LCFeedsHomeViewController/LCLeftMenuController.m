@@ -24,8 +24,8 @@ static CGFloat kCellHeight = 44.0f;
 static CGFloat kNumberOfCells = 5.0;
 static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
-#define kSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1]
-#define kDeSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:0.8]
+#define kSelectionColor [UIColor colorWithRed:0.0f/255 green:0.0f/255 blue:0.0f/255 alpha:1]
+#define kDeSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1]
 
 
 #define kIconSelectionColor [UIColor colorWithRed:239.0f/255 green:100.0f/255 blue:77.0f/255 alpha:1]
@@ -42,27 +42,34 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   self.profilePicture.layer.borderColor = [UIColor whiteColor].CGColor;
   self.profilePicture.layer.borderWidth = kProfilePicBorderWidth;
   self.profilePicture.clipsToBounds = YES;
-  
+  self.profilePicture.image = [UIImage imageNamed:kProfilePicPlaceholder];
   //-- Name Label -- //
   [self refreshUserInfo];
   
+  self.menuTable.opaque = NO;
   [self.menuTable setBackgroundColor:kDeSelectionColor];
-  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+//  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+//  self.menuTable.backgroundView = nil;
   
   self.isFirstLaunch = YES;
-}
+  
+  
+  
+  }
 
 - (void)refreshUserInfo
 {
-  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",[LCDataManager sharedDataManager].firstName,[LCDataManager sharedDataManager].lastName] uppercaseString]];
+  NSString *firstName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].firstName];
+    NSString *lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].lastName];
+  [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",firstName, lastName] uppercaseString]];
 
   //-- Cover Photo -- //
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].headerPhotoURL];
-  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:nil];
+  [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.coverPhoto.image];
   
   //-- Profile Image--//
   NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
-  [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:[UIImage imageNamed:kProfilePicPlaceholder]];
+  [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:self.profilePicture.image];
 }
 
 - (void)addUserImageChangeNitification
@@ -80,6 +87,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [self refreshUserInfo];
 }
 
+-(void)updateHeaderAndAvatarOnEdit:(NSNotification *)notification {
+  self.profilePicture.image = (UIImage *)notification.userInfo[@"profilePic"];
+  self.coverPhoto.image = (UIImage *)notification.userInfo[@"headerBGImage"];
+}
+
 #pragma mark - view life cycle
 - (void)viewDidLoad
 {
@@ -95,10 +107,12 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [super viewWillAppear:animated];
   [self initialUISetUp];
   [self addUserImageChangeNitification];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderAndAvatarOnEdit:) name:kUserProfileUpdateNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
   [self removeUserImageChangeNitification];
   [super viewWillDisappear:animated];
 }

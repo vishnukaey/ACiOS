@@ -20,6 +20,7 @@
            @"message": @"message",
            @"avatarURL": @"avatarUrl",
            @"commentCount": @"commentCount",
+           @"comments": @"comments",
            @"likeCount": @"likeCount",
            @"createdAt": @"createdAt",
            @"isMilestone": @"isMilestone",
@@ -32,7 +33,8 @@
            @"location": @"location",
            @"didLike": @"didLike",
            @"postType": @"postType",
-           @"postTags": @"posttags",
+           @"postTags": @"postTags",
+           @"id": @"id",
            };
 }
 

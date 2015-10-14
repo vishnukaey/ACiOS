@@ -21,6 +21,7 @@
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
 		0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */; settings = {ASSET_TAGS = (); }; };
+		0B3982241BCCD37A002D828B /* LCNewPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3982231BCCD37A002D828B /* LCNewPost.m */; settings = {ASSET_TAGS = (); }; };
 		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
 		0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A7FC1B6A45E40065C231 /* LCRecentNotificationTVC.m */; };
@@ -193,6 +194,8 @@
 		0B35942C1B4E731C0098C484 /* LCEmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEmptyViewController.h; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.h; sourceTree = "<group>"; };
 		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
 		0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadingCell.xib; sourceTree = "<group>"; };
+		0B3982221BCCD37A002D828B /* LCNewPost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCNewPost.h; path = Models/LCNewPost/LCNewPost.h; sourceTree = "<group>"; };
+		0B3982231BCCD37A002D828B /* LCNewPost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCNewPost.m; path = Models/LCNewPost/LCNewPost.m; sourceTree = "<group>"; };
 		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
 		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
 		0B56A7F91B6A31CF0065C231 /* Notification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Notification.storyboard; path = Storyboards/Notification.storyboard; sourceTree = "<group>"; };
@@ -533,6 +536,15 @@
 				0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */,
 			);
 			name = LCEmptyViewController;
+			sourceTree = "<group>";
+		};
+		0B3982251BCCD382002D828B /* LCNewPost */ = {
+			isa = PBXGroup;
+			children = (
+				0B3982221BCCD37A002D828B /* LCNewPost.h */,
+				0B3982231BCCD37A002D828B /* LCNewPost.m */,
+			);
+			name = LCNewPost;
 			sourceTree = "<group>";
 		};
 		0B5571431B8D9F1B00445958 /* LCSearchViewController */ = {
@@ -1071,6 +1083,7 @@
 				0BBDC0731B70BF960004C4B6 /* LCCause */,
 				0B5FA6E31B57BA7100DDC2B1 /* LCFriend */,
 				0B5FA6E21B57BA6400DDC2B1 /* Contact */,
+				0B3982251BCCD382002D828B /* LCNewPost */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1549,6 +1562,7 @@
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
 				0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */,
+				0B3982241BCCD37A002D828B /* LCNewPost.m in Sources */,
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,

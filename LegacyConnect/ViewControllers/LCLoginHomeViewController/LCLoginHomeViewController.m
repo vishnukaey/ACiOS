@@ -79,7 +79,7 @@
            /*
             Temporarily added alert, remove after sprint 1.
             */
-           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+//           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
 
          } andFailure:^(NSString *error) {
            NSLog(@"");
@@ -100,7 +100,7 @@
   [LCDataManager sharedDataManager].userFBID = [LCUtilityManager performNullCheckAndSetValue:userInfo[kIDKey]];
   [LCDataManager sharedDataManager].firstName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].firstName];
   [LCDataManager sharedDataManager].lastName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].lastName];
-  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"//graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
+  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
   [LCDataManager sharedDataManager].dob = [LCUtilityManager performNullCheckAndSetValue:userInfo[kDobKey]];
 }
 

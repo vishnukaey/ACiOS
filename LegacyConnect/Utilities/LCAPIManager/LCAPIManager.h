@@ -19,6 +19,16 @@
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getImpactsForUser:(NSString *)userID andLastMilestoneID:(NSString*)lastID with:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;
 
+
+#pragma mark - Post
+
++ (void)getPostDetails:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)likePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void) unlikePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)commentPost:(NSString *)postId comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
+
 #pragma mark - Interests and Causes
 
 + (void)getInterestsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;
