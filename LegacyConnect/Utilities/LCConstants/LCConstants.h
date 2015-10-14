@@ -39,6 +39,9 @@ extern NSString *const kContactFriendsURL;
 extern NSString *const kFBContactFriendsURL;
 extern NSString *const kprofileEditURL;
 extern NSString *const kPostURL;
+extern NSString *const kPostLikeURL;
+extern NSString *const kPostUnlikeURL;
+extern NSString *const kPostCommentURL;
 
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;
@@ -71,6 +74,7 @@ extern NSString *const kPasswordResetCodeKey;
 extern NSString *const kEventsKey;
 extern NSString *const kContactEmailsKey;
 extern NSString *const kMileStonesKey;
+extern NSString *const kPostCommentKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;

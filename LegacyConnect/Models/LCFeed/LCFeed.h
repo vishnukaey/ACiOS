@@ -30,5 +30,5 @@
 @property (nonatomic, strong) NSString *didLike;
 @property (nonatomic, strong) NSString *postType;
 @property (nonatomic, strong) NSArray *postTags;
-@property (nonatomic, strong) NSDictionary *id;
+@property (nonatomic, strong) NSString *id;
 @end

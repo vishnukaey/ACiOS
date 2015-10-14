@@ -17,6 +17,7 @@
   {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
@@ -186,12 +187,17 @@
   
   if ([LCUtilityManager isNetworkAvailable])
   {
+//    NSError *error;
+//    NSData *serializedData = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *JSONString = [[NSString alloc] initWithData:serializedData encoding:NSUTF8StringEncoding];
+    
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    //manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-    manager.securityPolicy.allowInvalidCertificates = YES;
+    //manager.securityPolicy.allowInvalidCertificates = YES;
     
     NSData *imageData = UIImagePNGRepresentation(image);
     
@@ -209,6 +215,34 @@
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       failure([error localizedDescription]);
     }];
+    
+    
+    
+    
+    
+//    NSData *imageData = UIImagePNGRepresentation(image);
+//    NSMutableURLRequest *request = [[AFJSONRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+//
+//      
+//      /*[formData appendPartWithFileData:imageData
+//                                         name:imageName
+//                                     fileName:@"image.png"
+//                                     mimeType:@"image/png"];*/
+//    } error:nil];
+//    [request setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+//    
+//    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    NSProgress *progress = nil;
+//    
+//    NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+//      if (error) {
+//        NSLog(@"Error: %@", error);
+//      } else {
+//        NSLog(@"%@ %@", response, responseObject);
+//      }
+//    }];
+//    
+//    [uploadTask resume];
   }
   else
   {

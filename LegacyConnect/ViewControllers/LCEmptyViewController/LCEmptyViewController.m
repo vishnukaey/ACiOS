@@ -78,110 +78,45 @@
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
          [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
-         
-         LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
-         navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-         
-         LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
-//         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
-         leftSideMenuViewController.delegate_ = self;
-         
-         mainContainer = [MFSideMenuContainerViewController
-                          containerWithCenterViewController:navigationRoot
-                          leftMenuViewController:nil
-                          rightMenuViewController:leftSideMenuViewController];
-//         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
-         mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
-         appdel.window.rootViewController = mainContainer;
-         [appdel.window makeKeyAndVisible];
-         
-         [self addGIButton];
-         [self addMenuButton:navigationRoot];
-         mainContainer.panMode = MFSideMenuPanModeNone;
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
-         
-         
-         
+         [self addSideMenuVIewController];
+
          
 //**********************************************************************
+       // API Test
          
-
-//         [LCAPIManager getPostDetails:@"1d235923-70dc-11e5-bc20-5d366641d516" WithSuccess:^(LCFeed *responses) {
-//           NSLog(@"getting post details success - %@",responses);
+//         UIImage *image = [UIImage imageNamed:@"profileFriend"];
+//         
+//         LCNewPost *newPost = [[LCNewPost alloc] init];
+//         newPost.message = @"new post 200";
+//         newPost.entityType = @"";
+//         newPost.entityID = @"1";
+//         newPost.location = @"Kochi";
+//         newPost.isMilestone = @"1";
+//         
+//         LCTag *tag1 = [[LCTag alloc] init];
+//         tag1.tagID = @"1";
+//         tag1.type = @"cause";
+//         tag1.text = @"my cause";
+//         
+//         LCTag *tag2 = [[LCTag alloc] init];
+//         tag2.tagID = @"2";
+//         tag2.type = @"cause";
+//         tag2.text = @"my cause 2";
+//         
+//         newPost.postTags = @[tag1,tag2];
+//         
+//         
+//         
+//         [LCAPIManager createNewPost:newPost image:image withSuccess:^(id response) {
+//           NSLog(@"post creation success - %@",response);
 //         } andFailure:^(NSString *error) {
-//           NSLog(@"getting post details error - %@",error);
+//           NSLog(@"post creation failed - %@",error);
 //         }];
          
          
-//         NSDictionary *d1 = [NSDictionary dictionaryWithObjectsAndKeys:
-//                             @"", @"",
-//                             [permissions allObjects], fbsdkdfl_ACFacebookPermissionsKey(),
-//                             defaultAudience, fbsdkdfl_ACFacebookAudienceKey(), // must end on this key/value due to audience possibly being nil
-//                             nil];
-//
-         
-//         NSDictionary *tag1 = @{@"id":@"1",
-//                               @"type":@"cause",
-//                               @"text":@"cause name 1"
-//                                };
-//         NSDictionary *tag2 = @{@"id":@"2",
-//                                @"type":@"cause",
-//                                @"text":@"cause name 2"
-//                                };
-//         NSDictionary *dict = @{
-//                                @"message":@"new post 111",
-//                                @"entityType":@"",
-//                                @"entityId":@"1",
-//                                @"postTags":@[tag1,tag2],
-//                                @"location":@"Kochi",
-//                                @"isMilestone":@"1"
-//         
-//                                };
-         
-         UIImage *image = [UIImage imageNamed:@"profileFriend"];
-         
-         LCNewPost *newPost = [[LCNewPost alloc] init];
-         newPost.message = @"new post 119";
-         newPost.entityType = @"";
-         newPost.entityID = @"1";
-         newPost.location = @"Kochi";
-         newPost.isMilestone = @"1";
-         
-         LCTag *tag1 = [[LCTag alloc] init];
-         tag1.tagID = @"1";
-         tag1.type = @"cause";
-         tag1.text = @"my cause";
-         
-         LCTag *tag2 = [[LCTag alloc] init];
-         tag2.tagID = @"2";
-         tag2.type = @"cause";
-         tag2.text = @"my cause 2";
-         
-         newPost.postTags = @[tag1,tag2];
-         
-         
-         
-         
-         
-         [LCAPIManager createNewPost:newPost image:nil withSuccess:^(id response) {
-           NSLog(@"post creation success - %@",response);
-         } andFailure:^(NSString *error) {
-           NSLog(@"post creation failed - %@",error);
-         }];  
+//**********************************************************************
 
          
-         
-         
-         
-         [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-           NSLog(@"feeds - %@",response);
-         } andFailure:^(NSString *error) {
-           
-         }];
-//**********************************************************************
-         
-      
          
        } andFailure:^(NSString *error) {
          [self addSideMenuVIewController];
