@@ -39,6 +39,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   isLoadingMoreFriends = YES;
   [LCAPIManager getHomeFeedsWithLastFeedId:lastId success:^(NSArray *response) {
+    NSLog(@"%@",response);
     loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
     [self stopRefreshingViews];
     
@@ -48,7 +49,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     isLoadingMoreFriends = NO;
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
-    loadMoreFriends = YES;
+    [feedsTable reloadData];
+    loadMoreFriends = feedsArray.count < 10 ? NO : YES;
     isLoadingMoreFriends = NO;
   }];
 }
@@ -198,7 +200,9 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       break;
       
       case kFeedCellActionLike:
-      [self postMessage];
+      /**
+       * Like/Unlike actions will be handled from 'LCFeedCellView' class.
+       */
       break;
       
       case kkFeedCellActionViewImage:

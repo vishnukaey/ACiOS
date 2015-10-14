@@ -169,9 +169,6 @@ static NSString *kPostTypeTextOnly = @"0";
 - (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
 {
   self.feedObject = feed;
-  NSString *thanks_ = [LCUtilityManager performNullCheckAndSetValue:feed.likeCount];
-  NSString *comments_ = [LCUtilityManager performNullCheckAndSetValue:feed.commentCount];
-  
   [self setProfilePic];
   [self setFeedUserName];
   [self setFeedInfoDetails];
@@ -179,17 +176,42 @@ static NSString *kPostTypeTextOnly = @"0";
   [self setFeedTimeLabel];
   
   // -- Thanks & Comments count label -- //
+  NSString *thanks_ = [LCUtilityManager performNullCheckAndSetValue:feed.likeCount];
+  NSString *comments_ = [LCUtilityManager performNullCheckAndSetValue:feed.commentCount];
+  UIImage * iconImage = [[UIImage imageNamed:@"ThanksIcon_enabled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  [thanksBtnImage setImage:iconImage];
+  [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
   [thanksLabel setText:thanks_];
   [commentsLabel setText:comments_];
-  
   [self setPostDescription];
 }
 
 - (IBAction)likeAction
 {
-  if (self.feedCellAction)
+  if ([self.feedObject.didLike boolValue]) {
+    [thanksBtnImage setLikeUnlikeStatusImage:kUnLikedStatus];
+    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
+    [thanksLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] -1]];
+    [LCAPIManager unlikePost:self.feedObject.entityID withSuccess:^(id response) {
+      self.feedObject.didLike = kUnLikedStatus;
+      self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+    } andFailure:^(NSString *error) {
+      [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
+      [thanksLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount]];
+    }];
+  }
+  else
   {
-    self.feedCellAction(kFeedCellActionLike,feedObject);
+    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
+    [thanksLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
+    [thanksBtnImage setLikeUnlikeStatusImage:kLikedStatus];
+    [LCAPIManager likePost:self.feedObject.entityID withSuccess:^(id response) {
+      self.feedObject.didLike = kLikedStatus;
+      self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+    } andFailure:^(NSString *error) {
+      [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
+      [thanksLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount]];
+    }];
   }
 }
 

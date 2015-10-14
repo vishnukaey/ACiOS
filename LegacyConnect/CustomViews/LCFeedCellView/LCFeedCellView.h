@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LCTaggedLabel.h"
+#import "LCThanksButtonImage.h"
 
 typedef enum {
   kFeedCellActionLike,
@@ -30,9 +31,11 @@ typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
   IBOutlet UIImageView *moreIcon;
+  LCThanksButtonImage *thanksBtnImage;
   IBOutlet UILabel  *timeLabel, *thanksLabel, *commentsLabel;
   IBOutlet LCTaggedLabel *usernameLabel, *createdLabel, *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
+  IBOutlet UIButton * likeBtn;
 }
 
 @property(nonatomic, retain)id delegate;

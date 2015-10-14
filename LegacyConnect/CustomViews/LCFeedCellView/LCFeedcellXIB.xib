@@ -148,7 +148,7 @@
                                     <action selector="commentAction" destination="Eee-dM-J0u" eventType="touchUpInside" id="pJ1-GC-7XI"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThanksIcon_enabled" translatesAutoresizingMaskIntoConstraints="NO" id="WHf-Ix-jfR">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThanksIcon_enabled" translatesAutoresizingMaskIntoConstraints="NO" id="WHf-Ix-jfR" customClass="LCThanksButtonImage">
                                 <rect key="frame" x="10" y="13" width="20" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="nyA-9u-B5j"/>
@@ -254,11 +254,13 @@
                 <outlet property="bottomBorderHeight" destination="PHx-9p-Jf8" id="SK0-os-cYX"/>
                 <outlet property="commentsLabel" destination="ALI-21-bQD" id="1ZY-SX-mJ9"/>
                 <outlet property="createdLabel" destination="Sok-jq-UiD" id="Jeb-8Z-rlV"/>
+                <outlet property="likeBtn" destination="s4Y-bI-bWO" id="QJS-af-uzg"/>
                 <outlet property="moreButton" destination="drK-gf-Qhn" id="pJg-VF-fZZ"/>
                 <outlet property="postDescription" destination="pNa-Mb-cau" id="1gG-83-Ai5"/>
                 <outlet property="postPhoto" destination="QfK-NE-qaz" id="5lu-VW-YD8"/>
                 <outlet property="postPhotoHeight" destination="kZ1-xh-J3Y" id="LUt-0B-fUR"/>
                 <outlet property="profilePic" destination="5bn-gW-4lj" id="MhW-Ui-yBI"/>
+                <outlet property="thanksBtnImage" destination="WHf-Ix-jfR" id="HwT-RQ-Izm"/>
                 <outlet property="thanksLabel" destination="BQi-BN-dl2" id="JlV-Ou-xpd"/>
                 <outlet property="timeLabel" destination="aKp-8U-1B4" id="7Of-Jz-KmU"/>
                 <outlet property="topBorderheight" destination="t7J-lj-xjU" id="GhD-eA-v93"/>
