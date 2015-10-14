@@ -217,6 +217,7 @@
   [LCAPIManager uploadImage:croppedImage ofUser:[LCDataManager sharedDataManager].userID
                 withSuccess:^(id response) {
                   [self saveUserDetailsToDataManagerFromResponse:response];
+                  [LCDataManager sharedDataManager].userAvatarImage = croppedImage;
                   [self performSegueWithIdentifier:@"chooseCauses" sender:self];
                   [MBProgressHUD hideHUDForView:self.view animated:YES];
                 } andFailure:^(NSString *error) {

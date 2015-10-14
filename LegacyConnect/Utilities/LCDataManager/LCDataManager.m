@@ -11,7 +11,7 @@
 static LCDataManager *sharedManager = nil;
 
 @implementation LCDataManager
-
+@synthesize userHeaderImage, userAvatarImage;
 + (LCDataManager *)sharedDataManager
 {
   if (!sharedManager)

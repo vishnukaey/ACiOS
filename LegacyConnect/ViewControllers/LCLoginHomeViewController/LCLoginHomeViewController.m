@@ -79,7 +79,7 @@
            /*
             Temporarily added alert, remove after sprint 1.
             */
-           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
+//           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
 
          } andFailure:^(NSString *error) {
            NSLog(@"");

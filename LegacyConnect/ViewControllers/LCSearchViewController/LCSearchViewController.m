@@ -123,6 +123,14 @@
         sectionName = @"Causes";
         break;
     }
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] > 0)
+    {
+      return sectionName;
+    }
+    else
+    {
+      return nil;
+    }
     return sectionName;
   }
   return nil;

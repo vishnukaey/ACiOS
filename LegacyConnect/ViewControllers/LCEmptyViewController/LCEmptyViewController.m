@@ -22,6 +22,7 @@
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
 
+
 @interface LCEmptyViewController ()
 {
   LCCreatePostViewController *createPostVC;
@@ -53,7 +54,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-
+  
+  [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
@@ -72,9 +74,9 @@
     //Fetch additional userdetails if user is logged-in
     if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
     {
+      
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
-         [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
          [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
          
          LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -182,6 +184,7 @@
       
          
        } andFailure:^(NSString *error) {
+         [self addSideMenuVIewController];
          NSLog(@" error:  %@",error);
        }];
     }
@@ -194,6 +197,32 @@
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
     }
   }
+}
+
+
+-(void) addSideMenuVIewController
+{
+  [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
+  navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+  
+  LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
+  leftSideMenuViewController.delegate_ = self;
+  
+  mainContainer = [MFSideMenuContainerViewController
+                   containerWithCenterViewController:navigationRoot
+                   leftMenuViewController:nil
+                   rightMenuViewController:leftSideMenuViewController];
+  mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
+  appdel.window.rootViewController = mainContainer;
+  [appdel.window makeKeyAndVisible];
+  
+  [self addGIButton];
+  [self addMenuButton:navigationRoot];
+  mainContainer.panMode = MFSideMenuPanModeNone;
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
 }
 
 - (void)menuEventNotification:(NSNotification*)notification
@@ -223,7 +252,7 @@
   
   giButton.postStatusButton.tag = 2;
   [giButton.postStatusButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
-  
+  [giButton addTarget:self action:@selector(GIButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)addMenuButton:(UIViewController*)vc
@@ -247,6 +276,11 @@
 }
 
 #pragma mark - button actions
+- (void)GIButtonClicked
+{
+  [mainContainer setMenuState:MFSideMenuStateClosed];
+}
+
 - (void)menuButtonAction
 {
   if (mainContainer.menuState == MFSideMenuStateClosed) {

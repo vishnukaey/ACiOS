@@ -45,26 +45,35 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   avatarPicState = IMAGE_UNTOUCHED;
   headerPicState = IMAGE_UNTOUCHED;
   
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
+
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
                 placeholderImage:profilePicPlaceholder
                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                          actualAvatarImage = image;
                        }];
+  NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
   
-  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
+  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:headerUrlString]
                    placeholderImage:nil
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                             actualHeaderImage = image;
                           }];
-  
   dobTimeStamp = userDetail.dob;
+  [self fillGradientForNavigation];
+  [self fillGradientForNavigation];
 }
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,6 +81,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   // Dispose of any resources that can be recreated.
 }
 
+-(void)fillGradientForNavigation
+{
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, navigationBar.bounds.size.height);
+  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
+  [navigationBar.layer insertSublayer:gradient atIndex:0];
+} 
 
 
 #pragma mark - button actions
@@ -116,7 +132,14 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     NSLog(@"ress-->>>%@",response);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:^{
-      [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:nil];
+      NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
+      if (profilePic.image) {
+        userInfo[@"profilePic"] = profilePic.image;
+      }
+      if (headerBGImage.image) {
+        userInfo[@"headerBGImage"] = headerBGImage.image;
+      }
+      [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:userInfo];
     }];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -257,24 +280,25 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   [formatter setDateFormat:kDefaultDateFormat];
   NSDate *date = [formatter dateFromString:str];
   [datePicker setMinimumDate:date];
-
-  datePicker.date = [NSDate dateWithTimeIntervalSince1970:dobTimeStamp.longLongValue/1000];
+  
+  NSDate *defualtDate;
+  if(dobTimeStamp) {
+    defualtDate = [NSDate dateWithTimeIntervalSince1970:dobTimeStamp.longLongValue/1000];
+  }
+  else {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:1970];
+    [components setMonth:1];
+    [components setDay:1];
+    defualtDate = [calendar dateFromComponents:components];
+  }
+  
+  datePicker.date = defualtDate;
+  
   txt_birthday.inputView = datePicker;
-  [self createDatePickerInputAccessoryView];
-}
-
-
--(void)createDatePickerInputAccessoryView
-{
-  UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
-  accessoryView.barStyle = UIBarStyleDefault;
-  UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
-  [doneButton setTintColor:[UIColor blackColor]];
-  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
-  [cancelButton setTintColor:[UIColor blackColor]];
-  [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
-  [txt_birthday setInputAccessoryView:accessoryView];
+  [txt_birthday addCancelDoneOnKeyboardWithTarget:self cancelAction:@selector(dismissDatePickerView:) doneAction:@selector(setDateAndDismissDatePickerView:)];
+  
 }
 
 
@@ -289,7 +313,51 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 - (void)dismissDatePickerView:(id)sender
 {
   [txt_birthday resignFirstResponder];
-  datePicker.date = [NSDate dateWithTimeIntervalSince1970:dobTimeStamp.longLongValue/1000];
+  
+  NSDate *defualtDate;
+  if(dobTimeStamp) {
+    defualtDate = [NSDate dateWithTimeIntervalSince1970:dobTimeStamp.longLongValue/1000];
+  }
+  else {
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setYear:1970];
+    [components setMonth:1];
+    [components setDay:1];
+    defualtDate = [calendar dateFromComponents:components];
+  }
+  
+  datePicker.date = defualtDate;
+}
+
+
+- (void) setGenderPickerTextFieldWithInputView {
+  
+  genderPicker = [[UIPickerView alloc] init];
+  genderPicker.dataSource = self;
+  genderPicker.delegate = self;
+  
+  if([genderTypes containsObject:userDetail.gender]){
+    NSInteger selection = [genderTypes indexOfObject:userDetail.gender];
+    [genderPicker selectRow:selection inComponent:0 animated:NO];
+  }
+  txt_gender.inputView = genderPicker;
+  [txt_gender addCancelDoneOnKeyboardWithTarget:self cancelAction:@selector(genderSelectionCancelled:) doneAction:@selector(genderSelected:)];
+}
+
+- (void) genderSelected:(id)sender
+{
+  [txt_gender resignFirstResponder];
+  txt_gender.text = [genderTypes objectAtIndex:[genderPicker selectedRowInComponent:0]];
+  [self validateFields];
+}
+
+- (void) genderSelectionCancelled:(id)sender {
+  [txt_gender resignFirstResponder];
+  if([genderTypes containsObject:userDetail.gender]){
+    NSInteger selection = [genderTypes indexOfObject:userDetail.gender];
+    [genderPicker selectRow:selection inComponent:0 animated:NO];
+  }
 }
 
 
@@ -515,17 +583,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     txt_gender = (UITextField*)[cell viewWithTag:101];
     txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
     
-    genderPicker = [[UIPickerView alloc] init];
-    genderPicker.dataSource = self;
-    genderPicker.delegate = self;
-    
-    if([genderTypes containsObject:userDetail.gender]){
-      NSInteger selection = [genderTypes indexOfObject:userDetail.gender];
-      [genderPicker selectRow:selection inComponent:0 animated:NO];
-    }
-    txt_gender.inputView = genderPicker;
-
-
+    [self setGenderPickerTextFieldWithInputView];
   }
   
   return cell;
@@ -533,7 +591,13 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+  if(indexPath.section == SECTION_BIRTHDAY){
+    
+    [txt_birthday becomeFirstResponder];
+  }
+  else if(indexPath.section == SECTION_GENDER){
+    [txt_gender becomeFirstResponder];
+  }
 }
 
 
@@ -651,12 +715,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   return [genderTypes objectAtIndex:row];
 }
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-  txt_gender.text = [genderTypes objectAtIndex:row];
-  [self validateFields];
-}
-
 
 /*
  #pragma mark - Navigation

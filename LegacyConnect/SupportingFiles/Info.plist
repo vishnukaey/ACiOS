@@ -23,7 +23,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb781451981972910</string>
+				<string>fb535164313296078</string>
 			</array>
 		</dict>
 		<dict>
@@ -38,9 +38,11 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>781451981972910</string>
+	<string>535164313296078</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>FacebookDisplayName</key>
-	<string>LegacyConnectDev</string>
+	<string>LegacyConnect</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
@@ -50,7 +52,7 @@
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>facebook.com</key>
@@ -61,6 +63,13 @@
 				<true/>
 			</dict>
 			<key>staging.legacyconnect.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>s3.amazonaws.com</key>
 			<dict>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>

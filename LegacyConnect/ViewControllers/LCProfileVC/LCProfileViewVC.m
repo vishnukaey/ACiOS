@@ -89,7 +89,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
-  if ([nativeUserId isEqualToString:userDetail.userID])
+  if ([nativeUserId isEqualToString:userDetail.userID] || !userDetail.userID)
   {
     currentProfileState = PROFILE_SELF;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
@@ -100,7 +100,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     currentProfileState = PROFILE_OTHER_NON_FRIEND;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
   }
-  
+  profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   [self loadUserDetails];
 }
 
@@ -109,9 +109,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 {
   
   NSLog(@"userID<<<-->>>%@", userDetail.userID);
+  editButton.enabled = NO;
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
+    
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     userDetail = response;
+    editButton.enabled = YES;
     NSLog(@"user details - %@",response);
     
     userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
@@ -131,12 +134,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
     
     [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
-                  placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+                  placeholderImage:profilePic.image];
     
     NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
     
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
-                       placeholderImage:nil];
+                       placeholderImage:headerImageView.image];
 
     
     switch ([userDetail.isFriend integerValue]) {
@@ -171,9 +174,11 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 }
 
 -(void)updateUserData:(NSNotification *)notification {
-  
+  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
   dispatch_async(dispatch_get_global_queue(0,0), ^{
     [self loadUserDetails];
+    
   });
   
 }
@@ -594,7 +599,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
     vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:vc animated:YES completion:nil];
-    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
+    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:nil];;
   }
   
 }
