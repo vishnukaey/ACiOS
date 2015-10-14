@@ -121,7 +121,7 @@ static NSString *kPostTypeTextOnly = @"0";
   };
 }
 
-- (void)setBottomBorderHeight:(NSString*)pageType
+- (void)setBottomBorderHeightFor:(NSString*)pageType
 {
   if ([pageType isEqualToString:kHomefeedCellID])
   {
@@ -175,7 +175,7 @@ static NSString *kPostTypeTextOnly = @"0";
   [self setProfilePic];
   [self setFeedUserName];
   [self setFeedInfoDetails];
-  [self setBottomBorderHeight:pageType];
+  [self setBottomBorderHeightFor:pageType];
   [self setFeedTimeLabel];
   
   // -- Thanks & Comments count label -- //

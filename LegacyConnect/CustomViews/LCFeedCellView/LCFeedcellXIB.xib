@@ -55,7 +55,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Created Post in" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sok-jq-UiD" customClass="LCTaggedLabel">
-                                <rect key="frame" x="58" y="19" width="92" height="12"/>
+                                <rect key="frame" x="58" y="19" width="383" height="12"/>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -91,6 +91,7 @@
                             <constraint firstAttribute="bottom" secondItem="5bn-gW-4lj" secondAttribute="bottom" constant="10" id="Q02-vI-u7L"/>
                             <constraint firstItem="5bn-gW-4lj" firstAttribute="top" secondItem="H45-oW-g99" secondAttribute="top" id="RoK-e8-7hx"/>
                             <constraint firstItem="YdG-Pp-IrC" firstAttribute="top" secondItem="Sok-jq-UiD" secondAttribute="bottom" constant="2" id="Zt2-TI-RET"/>
+                            <constraint firstAttribute="trailing" secondItem="Sok-jq-UiD" secondAttribute="trailing" constant="13" id="dGE-6g-yna"/>
                             <constraint firstItem="aKp-8U-1B4" firstAttribute="leading" secondItem="YdG-Pp-IrC" secondAttribute="trailing" constant="5" id="gbp-DO-NWe"/>
                             <constraint firstItem="aKp-8U-1B4" firstAttribute="centerY" secondItem="YdG-Pp-IrC" secondAttribute="centerY" id="mis-Af-nHZ"/>
                             <constraint firstItem="xcg-BE-PLJ" firstAttribute="leading" secondItem="5bn-gW-4lj" secondAttribute="trailing" constant="8" symbolic="YES" id="r22-9N-Qc8"/>
