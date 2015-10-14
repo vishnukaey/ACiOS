@@ -121,6 +121,7 @@ NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
 NSString *const kFeedTagTypeCause = @"cause";
+NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
 
 NSString *const kLCUrlScheme = @"legacyconnect";
@@ -130,5 +131,10 @@ NSString *const kResetPasswordNotificationName = @"password_reset_notification";
 NSString *const kUserDataUpdatedNotification = @"user_data_updated_notification";
 
 NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
+
+// -- Tag Dictionary keys -- //
+NSString *const kTagobjId = @"tag_object_id";
+NSString *const kTagobjText= @"tag_object_text";
+NSString *const kTagobjType = @"tag_object_type";
 
 @end

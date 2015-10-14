@@ -10,34 +10,40 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSDate+TimeAgo.h"
 
+#define kNormalPostTextColor [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
+#define kTagsTextColor [UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1]
+#define kFeedUserTextFont [UIFont fontWithName:@"Gotham-Medium" size:13]
+#define kPostInfoFont [UIFont fontWithName:@"Gotham-Book" size:12]
+
+static NSString *kAddedAPhotoIn = @"Added a Photo in ";
+static NSString *kCreatedAPostIn = @"Created a Post in ";
+static NSString *kPostTypeTextOnly = @"0";
+
 @implementation LCFeedCellView
 @synthesize delegate, feedObject, moreButton;
 
-- (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
+- (void)setProfilePic
 {
-  self.feedObject = feed;
-  NSString  *userName = [NSString stringWithFormat:@"%@ %@",
-                         [LCUtilityManager performNullCheckAndSetValue:feed.firstName],
-                         [LCUtilityManager performNullCheckAndSetValue:feed.lastName]];
-  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:feed.interestName];
-  NSString *time_ = [LCUtilityManager performNullCheckAndSetValue:feed.createdAt];
-  NSString *thanks_ = [LCUtilityManager performNullCheckAndSetValue:feed.likeCount];
-  NSString *comments_ = [LCUtilityManager performNullCheckAndSetValue:feed.commentCount];
-  
   //set profile pic
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:feed.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:self.feedObject.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
+}
+
+- (void)setFeedUserName
+{
+  NSString  *userName = [NSString stringWithFormat:@"%@ %@",
+                         [LCUtilityManager performNullCheckAndSetValue:self.feedObject.firstName],
+                         [LCUtilityManager performNullCheckAndSetValue:self.feedObject.lastName]];
   
-  //set user name
   NSMutableAttributedString * userNameAttributtedString = [[NSMutableAttributedString alloc] initWithString:userName];
   NSRange tagRangeUserName = NSMakeRange(0, userName.length);
   [userNameAttributtedString addAttributes:@{
-                                     NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
-                                     } range:NSMakeRange(0, userNameAttributtedString.length)];
+                                             NSFontAttributeName : kFeedUserTextFont,
+                                             } range:NSMakeRange(0, userNameAttributtedString.length)];
   
   NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:feed.userID, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.userID, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
   [userNameLabelTagsWithRanges addObject:dic_user];
   usernameLabel.tagsArray  = userNameLabelTagsWithRanges;
   [usernameLabel setAttributedText:userNameAttributtedString];
@@ -45,19 +51,78 @@
   usernameLabel.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(dic_user);
   };
-  
-  //if photo post or just plain text post
-  NSString *typeString = @"Added a Photo in ";
-  if ([feed.postType isEqualToString:@"0"])//not a photopost
+}
+
+- (void)setFeedInfoDetails
+{
+  NSString *typeString = kAddedAPhotoIn;
+  if ([self.feedObject.postType isEqualToString:kPostTypeTextOnly])
   {
-    typeString = @"Created a Post in ";
+    typeString = kCreatedAPostIn;
     postPhotoHeight.constant = 0;
   }
   else
   {
-    [postPhoto sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil];
   }
   
+  
+  //never ever forget to add the font attribute to the tagged label
+  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.interestName];
+
+  NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
+  NSString * postInfoString = postTypeAndCause;
+  
+  
+  NSString * atString = @" at ";
+  NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];
+
+  if (location.length > 0) {
+    NSString * atLocation = [NSString stringWithFormat:@"%@%@",atString,location];
+    postInfoString = [NSString stringWithFormat:@"%@%@",postTypeAndCause,atLocation];
+  }
+  NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:postInfoString];
+  
+  // -- Add Font -- //
+  [attributtedString addAttributes:@{
+                                     NSFontAttributeName : kPostInfoFont,
+                                     } range:NSMakeRange(0, attributtedString.length)];
+
+  // -- Text color for typeString string -- //
+  [attributtedString addAttribute:NSForegroundColorAttributeName
+                            value:kNormalPostTextColor
+                            range:NSMakeRange(0, typeString.length)];
+  
+  // -- Text color for cause tag -- //
+  NSRange tagRangeCause = [postInfoString rangeOfString:cause];
+  [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:tagRangeCause];
+  
+  
+  if (location.length > 0) {
+    // -- text color for 'at' string -- //
+    NSRange atStringRange = [postInfoString rangeOfString:atString];
+    [attributtedString addAttribute:NSForegroundColorAttributeName value:kNormalPostTextColor range:atStringRange];
+    
+    // -- text color for Location tag -- //
+    NSRange locationTagRange = [postInfoString rangeOfString:location];
+    [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
+  }
+  
+  
+  NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
+  
+  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.interestID, kTagobjId, self.feedObject.interestName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
+  [createdAtLabelTagsWithRanges addObject:dict_createdAt];
+  createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
+  [createdLabel setAttributedText:attributtedString];
+  __weak typeof(self) weakSelf = self;
+  createdLabel.nameTagTapped = ^(int index) {
+    weakSelf.feedCellTagAction(dict_createdAt);
+  };
+}
+
+- (void)setBottomBorderHeight:(NSString*)pageType
+{
   if ([pageType isEqualToString:kHomefeedCellID])
   {
     bottomBorderHeight.constant = 0;
@@ -66,58 +131,58 @@
   {
     topBorderheight.constant = 0;
   }
-  //created at a cause label
-  //never ever forget to add the font attribute to the tagged label
-  NSString *createsAtString = [NSString stringWithFormat:@"%@%@", typeString, cause];
-  NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:createsAtString];
-  NSRange tagRangeCreatedAt = NSMakeRange(createsAtString.length - cause.length, cause.length);
-  [attributtedString addAttribute:NSForegroundColorAttributeName
-                            value:[UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
-                            range:NSMakeRange(0, typeString.length)];
-  [attributtedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1] range:tagRangeCreatedAt];
-  [attributtedString addAttributes:@{
-                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
-                                         } range:NSMakeRange(0, attributtedString.length)];
-  
-  NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:@"test", @"id", @"cause", @"text", kFeedTagTypeCause, @"type", [NSValue valueWithRange:tagRangeCreatedAt], @"range", nil];
-  [createdAtLabelTagsWithRanges addObject:dict_createdAt];
-  createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
-  [createdLabel setAttributedText:attributtedString];
-  createdLabel.nameTagTapped = ^(int index) {
-    weakSelf.feedCellTagAction(dict_createdAt);
-  };
-  //time label
+}
+
+- (void)setFeedTimeLabel
+{
+  NSString *time_ = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.createdAt];
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:time_.longLongValue/1000];
   NSString *timeAgo = [date timeAgo];
   [timeLabel setText:timeAgo];
-  
-  //thanks count label
-  [thanksLabel setText:thanks_];
-  //comments count label
-  [commentsLabel setText:comments_];
-  //post desritpion
+}
+
+- (void)setPostDescription
+{
   //never ever forget to add the font attribute to the tagged label
-  NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:feed.message];
- 
+  NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:self.feedObject.message];
+  
   NSMutableArray *postDescriptionTagsWithRanges = [[NSMutableArray alloc] init];
-  for (int i = 0; i<feed.postTags.count; i++)
+  for (int i = 0; i<self.feedObject.postTags.count; i++)
   {
-    NSRange tagRangePost = [feed.message rangeOfString:feed.postTags[i][@"text"]];
-    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:feed.postTags[i][@"id"], @"id", feed.postTags[i][@"text"], @"text", feed.postTags[i][@"type"], @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
+    NSRange tagRangePost = [self.feedObject.message rangeOfString:self.feedObject.postTags[i][@"text"]];
+    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postTags[i][@"id"], @"id", self.feedObject.postTags[i][@"text"], @"text", self.feedObject.postTags[i][@"type"], @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
     [postDescriptionTagsWithRanges addObject:dic_post];
     
     [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRangePost];
   }
   [postDescriptionString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:13],
-                                        } range:NSMakeRange(0, postDescriptionString.length)];
+                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:13],
+                                         } range:NSMakeRange(0, postDescriptionString.length)];
   postDescription.tagsArray  = postDescriptionTagsWithRanges;
   [postDescription setAttributedText:postDescriptionString];
+  __weak typeof(self) weakSelf = self;
   postDescription.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(weakSelf.feedObject.postTags[index]);
   };
+}
+
+- (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
+{
+  self.feedObject = feed;
+  NSString *thanks_ = [LCUtilityManager performNullCheckAndSetValue:feed.likeCount];
+  NSString *comments_ = [LCUtilityManager performNullCheckAndSetValue:feed.commentCount];
   
+  [self setProfilePic];
+  [self setFeedUserName];
+  [self setFeedInfoDetails];
+  [self setBottomBorderHeight:pageType];
+  [self setFeedTimeLabel];
+  
+  // -- Thanks & Comments count label -- //
+  [thanksLabel setText:thanks_];
+  [commentsLabel setText:comments_];
+  
+  [self setPostDescription];
 }
 
 - (IBAction)likeAction
