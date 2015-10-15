@@ -21,7 +21,7 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-//    manager.securityPolicy.allowInvalidCertificates = YES;
+    //manager.securityPolicy.allowInvalidCertificates = YES;
     [manager POST:urlString parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
@@ -49,10 +49,10 @@
   {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    //manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-//    manager.securityPolicy.allowInvalidCertificates = YES;
+    //manager.securityPolicy.allowInvalidCertificates = YES;
     [manager GET:urlString parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
@@ -83,7 +83,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-//    manager.securityPolicy.allowInvalidCertificates = YES;
+    //manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
     NSMutableURLRequest *request = [manager.requestSerializer
                                     multipartFormRequestWithMethod:@"PUT"
@@ -118,7 +118,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
     manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
-//    manager.securityPolicy.allowInvalidCertificates = YES;
+    //manager.securityPolicy.allowInvalidCertificates = YES;
     
     [manager DELETE:urlString
          parameters:params
@@ -151,7 +151,7 @@
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-//    manager.securityPolicy.allowInvalidCertificates = YES;
+    //manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
     [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
       if(headerImageData)

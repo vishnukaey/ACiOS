@@ -92,6 +92,7 @@ NSString *const kFriendIDKey = @"friendId";
 NSString *const kPostIDKey = @"postId";
 NSString *const kFeedsKey = @"feeds";
 NSString *const kMileStonesKey = @"milestones";
+NSString *const kImpactsKey = @"impacts";
 NSString *const kPostCommentKey = @"comment";
 NSString *const kPostCommentIdKey = @"commentId";
 

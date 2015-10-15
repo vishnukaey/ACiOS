@@ -13,6 +13,7 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
+           @"feedId" : @"id",
            @"userID": @"userId",
            @"firstName": @"firstName",
            @"lastName": @"lastName",
@@ -33,7 +34,6 @@
            @"didLike": @"didLike",
            @"postType": @"postType",
            @"postTags": @"postTags",
-           @"id": @"id",
            };
 }
 

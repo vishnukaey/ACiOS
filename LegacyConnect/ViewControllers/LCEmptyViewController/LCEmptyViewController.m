@@ -87,11 +87,11 @@
 //         UIImage *image = [UIImage imageNamed:@"profileFriend"];
 //         
 //         LCNewPost *newPost = [[LCNewPost alloc] init];
-//         newPost.message = @"new post 102";
+//         newPost.message = @"new post 103";
 //         newPost.entityType = @"";
 //         newPost.entityID = @"1";
 //         newPost.location = @"Kochi";
-//         newPost.isMilestone = @"1";
+//         newPost.isMilestone = @"0";
 //         
 //         LCTag *tag1 = [[LCTag alloc] init];
 //         tag1.tagID = @"1";
@@ -107,7 +107,7 @@
 //         
 //         
 //         
-//         [LCAPIManager createNewPost:newPost image:image withSuccess:^(id response) {
+//         [LCAPIManager createNewPost:newPost image:nil withSuccess:^(id response) {
 //           NSLog(@"post creation success - %@",response);
 //         } andFailure:^(NSString *error) {
 //           NSLog(@"post creation failed - %@",error);
@@ -118,7 +118,14 @@
 //         } andFailure:^(NSString *error) {
 //
 //         }];
+
          
+
+//         [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
+//           
+//         } andFailure:^(NSString *error) {
+//           
+//         }];
          
 //         [LCAPIManager getPostDetails:@"1444882985488" WithSuccess:^(LCFeed *responses) {
 //           
