@@ -42,6 +42,7 @@ extern NSString *const kPostURL;
 extern NSString *const kPostLikeURL;
 extern NSString *const kPostUnlikeURL;
 extern NSString *const kPostCommentURL;
+extern NSString *const kPostMilestoneURL;
 
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;

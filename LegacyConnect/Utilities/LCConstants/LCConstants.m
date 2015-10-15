@@ -62,6 +62,7 @@ NSString *const kPostURL = @"api/post";
 NSString *const kPostLikeURL = @"api/post/like";
 NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";
+NSString *const kPostMilestoneURL = @"api/post/milestone";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";

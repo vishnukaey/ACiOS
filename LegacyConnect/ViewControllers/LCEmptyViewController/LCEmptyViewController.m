@@ -87,7 +87,7 @@
 //         UIImage *image = [UIImage imageNamed:@"profileFriend"];
 //         
 //         LCNewPost *newPost = [[LCNewPost alloc] init];
-//         newPost.message = @"new post 200";
+//         newPost.message = @"new post 102";
 //         newPost.entityType = @"";
 //         newPost.entityID = @"1";
 //         newPost.location = @"Kochi";
@@ -112,6 +112,21 @@
 //         } andFailure:^(NSString *error) {
 //           NSLog(@"post creation failed - %@",error);
 //         }];
+         
+//         [LCAPIManager getMilestonesForUser:[LCDataManager sharedDataManager].userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+//           
+//         } andFailure:^(NSString *error) {
+//
+//         }];
+         
+         
+//         [LCAPIManager getPostDetails:@"1444882985488" WithSuccess:^(LCFeed *responses) {
+//           
+//         } andFailure:^(NSString *error) {
+//           
+//         }];
+//         
+         
          
          
 //**********************************************************************
