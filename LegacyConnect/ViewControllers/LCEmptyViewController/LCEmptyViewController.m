@@ -112,29 +112,7 @@
 //         } andFailure:^(NSString *error) {
 //           NSLog(@"post creation failed - %@",error);
 //         }];
-         
-//         [LCAPIManager getMilestonesForUser:[LCDataManager sharedDataManager].userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
-//           
-//         } andFailure:^(NSString *error) {
-//
-//         }];
-
-         
-
-//         [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-//           
-//         } andFailure:^(NSString *error) {
-//           
-//         }];
-         
-//         [LCAPIManager getPostDetails:@"1444882985488" WithSuccess:^(LCFeed *responses) {
-//           
-//         } andFailure:^(NSString *error) {
-//           
-//         }];
-//         
-         
-         
+                  
          
 //**********************************************************************
 
