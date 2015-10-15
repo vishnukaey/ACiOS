@@ -58,8 +58,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:NO];
   [appdel.menuButton setHidden:NO];
+  if (self.navigationController.viewControllers.count <= 1) {
+    [backButton setHidden:YES];
+  }
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
+  
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -78,11 +82,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (void) loadUserInfo {
   
-  NSString *firstName = [LCDataManager sharedDataManager].firstName;
-  NSString *lastName = [LCDataManager sharedDataManager].lastName;
-  userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
-                        [LCUtilityManager performNullCheckAndSetValue:firstName],
-                        [LCUtilityManager performNullCheckAndSetValue:lastName]]uppercaseString];
+  userNameLabel.text = @"";
   memeberSincelabel.text = @"";
   locationLabel.text = @"";
   
@@ -93,7 +93,6 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   {
     currentProfileState = PROFILE_SELF;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
-    backButton.hidden = YES;
   }
   else
   {
@@ -112,7 +111,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   editButton.enabled = NO;
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     
-    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
+    if(currentProfileState == PROFILE_SELF) {
+      [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
+    }
     userDetail = response;
     editButton.enabled = YES;
     NSLog(@"user details - %@",response);
@@ -146,7 +147,6 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       case 0:
         currentProfileState = PROFILE_SELF;
         [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
-        backButton.hidden = YES;
         break;
         
       case 1:
