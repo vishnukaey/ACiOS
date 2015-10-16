@@ -412,8 +412,20 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Post commented..- %@",response);
-       success(response);
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       LCComment *comment = [MTLJSONAdapter modelOfClass:[LCComment class] fromJSONDictionary:dict[@"comment"] error:&error];
+
+       if(!error)
+       {
+         NSLog(@"Getting Interests successful! ");
+         success(comment);
+       }
+       else
+       {
+         NSLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -422,11 +434,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-
-
 #pragma mark - Interests and Causes
-
-
 + (void)getInterestsWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];

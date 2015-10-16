@@ -10,6 +10,7 @@
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
+		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; settings = {ASSET_TAGS = (); }; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
 		0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2902761BB90F8800E80684 /* LCActionsCellView.m */; };
 		0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */; };
@@ -176,6 +177,8 @@
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
 		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
+		0B223C391BCFA6220022B8F6 /* LCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComment.h; sourceTree = "<group>"; };
+		0B223C3A1BCFA6220022B8F6 /* LCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCComment.m; sourceTree = "<group>"; };
 		0B288C711BA92660001A8E9D /* LCProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileEditVC.h; path = ViewControllers/LCProfileVC/LCProfileEditVC.h; sourceTree = "<group>"; };
 		0B288C721BA92660001A8E9D /* LCProfileEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileEditVC.m; path = ViewControllers/LCProfileVC/LCProfileEditVC.m; sourceTree = "<group>"; };
 		0B2902751BB90F8800E80684 /* LCActionsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCActionsCellView.h; path = CustomViews/LCActionsCellView/LCActionsCellView.h; sourceTree = "<group>"; };
@@ -468,6 +471,16 @@
 			);
 			name = LCMenuItemCell;
 			path = CustomViews/LCMenuItemCell;
+			sourceTree = "<group>";
+		};
+		0B223C381BCFA5F80022B8F6 /* LCComment */ = {
+			isa = PBXGroup;
+			children = (
+				0B223C391BCFA6220022B8F6 /* LCComment.h */,
+				0B223C3A1BCFA6220022B8F6 /* LCComment.m */,
+			);
+			name = LCComment;
+			path = Models/LCComment;
 			sourceTree = "<group>";
 		};
 		0B2902741BB90F1500E80684 /* LCActionsCellView */ = {
@@ -1087,6 +1100,7 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0B223C381BCFA5F80022B8F6 /* LCComment */,
 				0BB8BF701B96ED3C00A27F1F /* LCSearchResult */,
 				0BFBC7BD1B820CA700E75179 /* LCEvent */,
 				0B001B1C1B7CA70A00E8E569 /* LCTag */,
@@ -1561,6 +1575,7 @@
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				0BB33DAF1BA8133F009E6D0C /* LCGIButton.m in Sources */,
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
+				0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */,

@@ -10,18 +10,26 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "NSDate+TimeAgo.h"
 
-#define kNormalPostTextColor [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
+#define kNormalPostTextColor [UIColor colorWithRed:35/255.0 green:31/255.0 blue:32/255.0 alpha:1]
 #define kTagsTextColor [UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1]
 #define kFeedUserTextFont [UIFont fontWithName:@"Gotham-Medium" size:13]
-#define kPostInfoFont [UIFont fontWithName:@"Gotham-Book" size:12]
+#define kPostInfoFont [UIFont fontWithName:@"Gotham-Book" size:13]
 
 static NSString *kAddedAPhotoIn = @"Added a Photo in ";
 static NSString *kCreatedAPostIn = @"Created a Post in ";
 static NSString *kPostTypeTextOnly = @"0";
 
+static NSString *kFeedCellIdentifier = @"LCFeedCell";
+
 @implementation LCFeedCellView
 @synthesize delegate, feedObject, moreButton;
+#pragma mark - public method implementation
++ (NSString*)getFeedCellIdentifier
+{
+  return kFeedCellIdentifier;
+}
 
+#pragma mark - private method implementation
 - (void)setProfilePic
 {
   //set profile pic
@@ -63,6 +71,7 @@ static NSString *kPostTypeTextOnly = @"0";
   }
   else
   {
+    postPhotoHeight.constant = 200;
     [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil];
   }
   
@@ -166,7 +175,7 @@ static NSString *kPostTypeTextOnly = @"0";
   };
 }
 
-- (void)setData :(LCFeed *)feed forPage :(NSString *)pageType
+- (void)setData:(LCFeed *)feed forPage :(NSString *)pageType
 {
   self.feedObject = feed;
   [self setProfilePic];

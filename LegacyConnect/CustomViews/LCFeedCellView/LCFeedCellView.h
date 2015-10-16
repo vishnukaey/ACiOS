@@ -44,6 +44,8 @@ typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
 @property (readwrite, copy) FeedCellAction feedCellAction;
 @property (readwrite, copy) FeedCellTagAction feedCellTagAction;
 
-- (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType;
++ (NSString*)getFeedCellIdentifier;
+
+- (void)setData :(LCFeed *)dic forPage :(NSString *)pageType;
 
 @end

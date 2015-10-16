@@ -452,8 +452,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     
     else {
       
-      static NSString *MyIdentifier = @"LCFeedCell";
-      LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
       if (cell == nil)
       {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];

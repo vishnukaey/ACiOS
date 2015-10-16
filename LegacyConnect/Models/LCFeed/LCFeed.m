@@ -34,13 +34,12 @@
            @"didLike": @"didLike",
            @"postType": @"postType",
            @"postTags": @"postTags",
-           @"id": @"id",
            };
 }
 
-+ (NSValueTransformer *)posttagsJSONTransformer
++ (NSValueTransformer *)commentsJSONTransformer
 {
-  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCTag class]];
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCComment class]];
 }
 
 @end

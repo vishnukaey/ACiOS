@@ -11,6 +11,17 @@
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
 
+static CGFloat kCommentFieldHeight = 45.0f;
+static CGFloat kCellForPostDetails = 1;
+static CGFloat kIndexForPostDetails = 0;
+
+#define kPostButtonBGColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
+#define kPostButtonTextColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
+#define kPostBtnFont [UIFont fontWithName:@"Gotham-Book" size:12.0f]
+#define kCommentFieldBGColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
+#define kCommentFieldBorderColor [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1]
+#define kCommentsFieldTextColor [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1]
+#define kCommentsFieldFont [UIFont fontWithName:@"Gotham-Book" size:16]
 
 @implementation LCFeedsCommentsController
 @synthesize feedObject;
@@ -20,7 +31,8 @@
 {
   [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   mainTable.rowHeight = UITableViewAutomaticDimension;
-  mainTable.estimatedRowHeight = 76.0;
+  mainTable.estimatedRowHeight = 68.0;
+  [self setUpCpmmentsUI];
 }
 
 - (void)addKeyBoardNotificationObserver
@@ -33,7 +45,59 @@
 
 - (void)removeKeyBoardNotificationObserver
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];;
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void)loadFeedAndComments
+{
+  commentsArray = [[NSMutableArray alloc]init];
+  [LCAPIManager getPostDetails:feedObject.entityID WithSuccess:^(LCFeed *responses) {
+    [commentsArray replaceObjectsInRange:NSMakeRange(0,0) withObjectsFromArray:[self getReverseSortedArray:responses.comments]];
+    [mainTable reloadData];
+  } andFailure:^(NSString *error) {
+    [mainTable reloadData];
+  }];
+}
+
+- (NSArray*)getReverseSortedArray:(NSArray*)array
+{
+  return [[array reverseObjectEnumerator] allObjects];
+}
+
+- (void)setUpCpmmentsUI
+{
+  UIView* commentField = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, kCommentFieldHeight)];
+  [commentField setBackgroundColor:kCommentFieldBGColor];
+  [commentField.layer setBorderColor:kCommentFieldBorderColor.CGColor];
+  [commentField.layer setBorderWidth:1.0f];
+  
+  float com_IC_hight = 20;
+  float postBut_width = 60;
+  float cellMargin_x = 8;
+  UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(cellMargin_x, (commentField.frame.size.height - com_IC_hight)/2, com_IC_hight, com_IC_hight)];
+  [commentIcon setImage:[UIImage imageNamed:@"CommentIcon"]];
+  [commentField addSubview:commentIcon];
+  
+  commentTextField = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, commentField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, commentField.frame.size.height)];
+  [commentField addSubview:commentTextField];
+  commentTextField.delegate = self;
+  [commentTextField setBackgroundColor:[UIColor whiteColor]];
+  [commentTextField setPlaceholder:@"Comment"];
+  [commentTextField setTextColor:kCommentsFieldTextColor];
+  [commentTextField setFont:kCommentsFieldFont];
+  
+  UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(commentField.frame.size.width - postBut_width, 0, postBut_width, commentField.frame.size.height)];
+  [postButton setBackgroundColor:kPostButtonBGColor];
+  [postButton.titleLabel setFont:kPostBtnFont];
+  [commentField addSubview:postButton];
+  [postButton setTitle:@"POST" forState:UIControlStateNormal];
+  [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  
+  commentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(-100, 0, 50, 50)];
+  [self.view addSubview:commentTextField_dup];
+  commentTextField_dup.delegate = self;
+  commentTextField_dup.inputAccessoryView = commentField;
+  [commentTextField_dup becomeFirstResponder];
 }
 
 #pragma mark - controller life cycle
@@ -41,7 +105,6 @@
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  [self loadFeedAndComments];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -52,6 +115,7 @@
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:NO];
   [self addKeyBoardNotificationObserver];
+  [self loadFeedAndComments];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -66,54 +130,26 @@
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - setup functions
--(void)loadFeedAndComments
-{
-  cellsData = [[NSMutableArray alloc]init];
-  [cellsData addObject:feedObject];
-  [cellsData addObjectsFromArray:[LCDummyValues dummyCommentArray]];
-  [mainTable reloadData];
-
-  UIView* commentntField = [[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 40)];
-  [commentntField setBackgroundColor:[UIColor orangeColor]];
-
-  float com_IC_hight = 25;
-  float postBut_width = 60;
-  float cellMargin_x = 8;
-  UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(cellMargin_x, (commentntField.frame.size.height - com_IC_hight)/2, com_IC_hight, com_IC_hight)];
-  [commentIcon setImage:[UIImage imageNamed:@"clock.jpg"]];
-  [commentntField addSubview:commentIcon];
-
-  commmentTextField = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, commentntField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, commentntField.frame.size.height)];
-  [commentntField addSubview:commmentTextField];
-  commmentTextField.delegate = self;
-  [commmentTextField setBackgroundColor:[UIColor whiteColor]];
-
-  UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(commentntField.frame.size.width - postBut_width, 0, postBut_width, commentntField.frame.size.height)];
-  [commentntField addSubview:postButton];
-  [postButton setTitle:@"Post" forState:UIControlStateNormal];
-  [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
-
-  commmentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(-100, 0, 50, 50)];
-  [self.view addSubview:commmentTextField_dup];
-  commmentTextField_dup.delegate = self;
-  commmentTextField_dup.inputAccessoryView = commentntField;
-  [commmentTextField_dup becomeFirstResponder];
 }
 
 #pragma mark - button actions
 -(void)postAction
 {
-  [commmentTextField resignFirstResponder];
-  [commmentTextField_dup resignFirstResponder];
+  [commentTextField resignFirstResponder];
+  [commentTextField_dup resignFirstResponder];
+  
+  [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
+    [commentsArray addObject:(LCComment*)response];
+    self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
+    [mainTable reloadData];
+  } andFailure:^(NSString *error) {
+    NSLog(@"----- Fail to add new comment");
+  }];
 }
 
 -(void)changeFirstResponder
 {
-  [commmentTextField becomeFirstResponder]; //will return YES;
+  [commentTextField becomeFirstResponder]; //will return YES;
 }
 
 - (IBAction)backAction
@@ -124,30 +160,27 @@
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-  return cellsData.count;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return kCellForPostDetails + commentsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCFeedCellView *feedCell;
   LCCommentCell *commentCell;
-  if (indexPath.row == 0)//feedcell
+  if (indexPath.row == kIndexForPostDetails)
   {
-    
-    static NSString *MyIdentifier = @"LCFeedCell";
-    feedCell = (LCFeedCellView *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    LCFeedCellView *feedCell;
+    feedCell = (LCFeedCellView *)[tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
     if (feedCell == nil)
     {
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
-      // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
       feedCell = [topLevelObjects objectAtIndex:0];
     }
-    [feedCell setData:[cellsData objectAtIndex:indexPath.row] forPage:kCommentsfeedCellID];
+    [feedCell setData:feedObject forPage:kCommentsfeedCellID];
     __weak typeof(self) weakSelf = self;
     feedCell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
       [weakSelf feedCellActionWithType:actionType andFeed:feed];
@@ -155,7 +188,6 @@
     feedCell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
       [weakSelf tagTapped:tagDetails];
     };
-
     return feedCell;
   }
   else //comment cell
@@ -165,10 +197,9 @@
     if (commentCell == nil)
     {
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-      // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
       commentCell = [topLevelObjects objectAtIndex:0];
     }
-    [commentCell setData:[cellsData objectAtIndex:indexPath.row]];
+    [commentCell setComment:[commentsArray objectAtIndex:indexPath.row -1]];
     return commentCell;
   }
   return commentCell;
@@ -183,8 +214,8 @@
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed*)feed
 {
   if (type == kFeedCellActionComment) {
-    if (!commmentTextField.isFirstResponder) {
-      [commmentTextField_dup becomeFirstResponder];
+    if (!commentTextField.isFirstResponder) {
+      [commentTextField_dup becomeFirstResponder];
     }
   }
 }
@@ -211,20 +242,9 @@
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-  [commmentTextField resignFirstResponder];
-  [commmentTextField_dup resignFirstResponder];
-
+  [commentTextField resignFirstResponder];
+  [commentTextField_dup resignFirstResponder];
   return YES;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

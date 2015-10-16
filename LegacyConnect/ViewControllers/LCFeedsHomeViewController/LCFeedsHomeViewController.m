@@ -19,7 +19,6 @@
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static CGFloat kNumberOfSectionsInFeeds = 1;
-static NSString *kFeedCellIdentifier = @"LCFeedCell";
 static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 @implementation LCFeedsHomeViewController
@@ -108,6 +107,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = YES;
   [self setGIAndMenuButtonVisibilityStatus:NO];
+  [feedsTable reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -160,7 +160,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   }
   else
   {
-    LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:kFeedCellIdentifier];
+    LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
     if (cell == nil)
     {
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
@@ -206,8 +206,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       break;
       
       case kkFeedCellActionViewImage:
-#warning replace this with proper image.
-      [self showFullScreenImage:[UIImage imageNamed:@"photoPost_dummy.png"]];
+      [self showFullScreenImage:feed.image];
       break;
       
     default:
@@ -224,11 +223,11 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self.navigationController pushViewController:next animated:YES];
 }
 
-- (void)showFullScreenImage:(UIImage*)image
+- (void)showFullScreenImage:(NSString*)imageUrl
 {
   [self setGIAndMenuButtonVisibilityStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.imageView.image = image;
+  vc.imageUrlString = imageUrl;
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
 }

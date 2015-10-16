@@ -24,8 +24,11 @@
   
   [self.view addSubview:imageView];
   imageView.contentMode = UIViewContentModeScaleAspectFit;
-  [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
+  [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
   [imageView setBackgroundColor:[UIColor clearColor]];
+  
+  [imageView sd_setImageWithURL:[NSURL URLWithString:self.imageUrlString] placeholderImage:nil];
+  
   
   UIButton *doneBut = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width - 80, 20, 100, 40)];
   [doneBut setTitle:@"Done" forState:UIControlStateNormal];
