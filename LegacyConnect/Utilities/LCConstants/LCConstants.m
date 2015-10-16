@@ -62,6 +62,7 @@ NSString *const kPostURL = @"api/post";
 NSString *const kPostLikeURL = @"api/post/like";
 NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";
+NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
@@ -94,7 +95,9 @@ NSString *const kFeedsKey = @"feeds";
 NSString *const kMileStonesKey = @"milestones";
 NSString *const kImpactsKey = @"impacts";
 NSString *const kPostCommentKey = @"comment";
+NSString *const kPostCommentsKey = @"comments";
 NSString *const kPostCommentIdKey = @"commentId";
+NSString *const kLastIdKey = @"lastId";
 
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";

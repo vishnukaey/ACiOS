@@ -253,6 +253,7 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
+#warning  correct issue with postTags array format
   NSString *imageName = @"image";
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
@@ -260,10 +261,6 @@ static LCAPIManager *sharedManager = nil;
   
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
-  
-  NSError *error1;
-  NSData *data = [NSJSONSerialization dataWithJSONObject:dict options:0 error:&error1];
-    
   
 //  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
 //    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -451,6 +448,49 @@ static LCAPIManager *sharedManager = nil;
      {
        NSLog(@"comment deleted..- %@",response);
        success(response);
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)getCommentsForPost:(NSString*)postId lastCommentId:(NSString*)lastId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
+{
+  
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@?", kBaseURL, kPostCommentsURL];
+  if (postId) {
+    [url appendString:[NSString stringWithFormat:@"%@=%@", kPostIDKey, postId]];
+  }
+  if (lastId) {
+    [url appendString:[NSString stringWithFormat:@"&%@=%@", kLastIdKey, lastId]];
+  }
+  
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:dict[kPostCommentsKey] error:&error];
+       if(!error)
+       {
+         NSLog(@"Getting Comments successful! ");
+         success(responsesArray);
+       }
+       else
+       {
+         NSLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
