@@ -7,6 +7,7 @@
 //
 
 #import "LCCommentCell.h"
+#import "NSDate+TimeAgo.h"
 
 @implementation LCCommentCell
 
@@ -20,19 +21,19 @@
     // Configure the view for the selected state
 }
 
-- (void)setData :(NSDictionary *)dic
+- (void)setComment:(LCComment *)comment
 {
-  NSString  *userName = [dic valueForKey:@"user_name"];
-  NSString *time_ = [dic valueForKey:@"time"];
-  NSString *comments_ = [dic valueForKey:@"comment"];
-  
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
-  [profilePic setImage:[UIImage imageNamed:@"userProfilePic"]];
-  [timeLabel setText:time_];
-  [commentLabel setText:comments_];
-  [userNameLabel setText:userName];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:comment.avatarUrl] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   
+  NSString *time_ = [LCUtilityManager performNullCheckAndSetValue:comment.createdAt];
+  NSDate *date = [NSDate dateWithTimeIntervalSince1970:time_.longLongValue/1000];
+  NSString *timeAgo = [date timeAgo];
+  [timeLabel setText:timeAgo];
+  [commentLabel setText:comment.commentText];
+  NSString * userName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:comment.firstName],[LCUtilityManager performNullCheckAndSetValue:comment.lastName]] ;
+  [userNameLabel setText:userName];
 }
 
 @end

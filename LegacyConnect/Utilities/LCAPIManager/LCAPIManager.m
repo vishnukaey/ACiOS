@@ -49,10 +49,13 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)getHomeFeedsWithSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getHomeFeedsWithLastFeedId:(NSString*)lastId success:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetFeedsURL, kUserIDKey,[LCDataManager sharedDataManager].userID];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL,kGetFeedsURL];
+  if (lastId) {
+    url = [NSString stringWithFormat:@"%@?lastId=%@",url,lastId];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -409,8 +412,20 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Post commented..- %@",response);
-       success(response);
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       LCComment *comment = [MTLJSONAdapter modelOfClass:[LCComment class] fromJSONDictionary:dict[@"comment"] error:&error];
+
+       if(!error)
+       {
+         NSLog(@"Getting Interests successful! ");
+         success(comment);
+       }
+       else
+       {
+         NSLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
      }
    } andFailure:^(NSString *error) {
      NSLog(@"%@",error);
@@ -496,11 +511,7 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
-
-
 #pragma mark - Interests and Causes
-
-
 + (void)getInterestsWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];

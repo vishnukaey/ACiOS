@@ -37,9 +37,9 @@
            };
 }
 
-+ (NSValueTransformer *)posttagsJSONTransformer
++ (NSValueTransformer *)commentsJSONTransformer
 {
-  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCTag class]];
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCComment class]];
 }
 
 @end

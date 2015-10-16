@@ -19,7 +19,7 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
+@interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   IBOutlet UITableView *milestonesTable;
   IBOutlet UITableView *interestsTable;

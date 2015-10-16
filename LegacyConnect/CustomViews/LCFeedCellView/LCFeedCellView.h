@@ -8,30 +8,44 @@
 
 #import <UIKit/UIKit.h>
 #import "LCTaggedLabel.h"
+#import "LCThanksButtonImage.h"
 
-//--------------protocols
-@protocol feedCellDelegate <NSObject>
+typedef enum {
+  kFeedCellActionLike,
+  kFeedCellActionComment,
+  kkFeedCellActionViewImage,
+  kkFeedCellActionLoadMore
+} kkFeedCellActionType;
 
--(void)feedCellActionWithType :(NSString *)type andFeed:(LCFeed *)feed;
--(void)tagTapped :(NSDictionary *)tagDetails;
+typedef enum
+{
+  kkFeedTagTypeCause,
+  kkFeedTagTypeUser
+} kkFeedTagType;
 
-@end
+typedef void (^FeedCellAction)(kkFeedCellActionType feedCellAction, LCFeed * feed);
+typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
 
-//---------------interface
 @interface LCFeedCellView : UITableViewCell
 {
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
   IBOutlet UIImageView *moreIcon;
+  LCThanksButtonImage *thanksBtnImage;
   IBOutlet UILabel  *timeLabel, *thanksLabel, *commentsLabel;
   IBOutlet LCTaggedLabel *usernameLabel, *createdLabel, *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
+  IBOutlet UIButton * likeBtn;
 }
 
 @property(nonatomic, retain)id delegate;
 @property(nonatomic, weak)LCFeed *feedObject;
 @property(nonatomic, weak)IBOutlet UIButton *moreButton;
+@property (readwrite, copy) FeedCellAction feedCellAction;
+@property (readwrite, copy) FeedCellTagAction feedCellTagAction;
 
-- (void)setData :(NSDictionary *)dic forPage :(NSString *)pageType;
++ (NSString*)getFeedCellIdentifier;
+
+- (void)setData :(LCFeed *)dic forPage :(NSString *)pageType;
 
 @end

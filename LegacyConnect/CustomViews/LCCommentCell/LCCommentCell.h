@@ -14,6 +14,8 @@
   IBOutlet UILabel *userNameLabel, *timeLabel, *commentLabel;
 }
 
-- (void)setData :(NSDictionary *)dic;
+@property (nonatomic, strong) LCComment * comment;
+
+- (void)setComment:(LCComment *)comment;
 
 @end

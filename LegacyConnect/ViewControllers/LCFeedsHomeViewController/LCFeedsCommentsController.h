@@ -10,12 +10,13 @@
 #import "LCFeedCellView.h"
 
 
-@interface LCFeedsCommentsController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate, UITextFieldDelegate>
+@interface LCFeedsCommentsController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
-  NSMutableArray *cellsData;
+  NSMutableArray *commentsArray;
   IBOutlet UITableView *mainTable;
-  UITextField *commmentTextField, *commmentTextField_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
+  UITextField *commentTextField, *commentTextField_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
 }
+
 @property(nonatomic, retain)LCFeed *feedObject;
 
 - (IBAction)backAction;

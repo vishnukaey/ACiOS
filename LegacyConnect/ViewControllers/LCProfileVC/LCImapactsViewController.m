@@ -100,16 +100,22 @@
       return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
     }
   }
-  static NSString *MyIdentifier = @"LCFeedCell";
-  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
     // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
     cell = [topLevelObjects objectAtIndex:0];
   }
-  cell.delegate = self;
   [cell setData:[impactsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  __weak typeof(self) weakSelf = self;
+  cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+    [weakSelf feedCellActionWithType:actionType andFeed:feed];
+  };
+  cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+    [weakSelf tagTapped:tagDetails];
+  };
+
  
   return cell;
 }
@@ -120,40 +126,41 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-    NSLog(@"actionType--->>>%@", type);
-    
-    if ([type isEqualToString:kFeedCellActionComment])//comments
-    {
-//      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-//                                                    bundle:nil];
-//      LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-//      [next setFeedObject:feed];
-//      [self.navigationController pushViewController:next animated:YES];
-    }
-    
-    else if ([type isEqualToString:kFeedCellActionLike])
-    {
-//#if DEBUG
-//      //testing community
-//      UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-//      LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
-//      vc.eventID = @"e82de0d2-4fd4-11e5-9852-3d5d64aee29a";
-//      [self.navigationController pushViewController:vc animated:YES];
-//#endif
+  
+  switch (type) {
+    case kFeedCellActionComment:
+      //      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+      //                                                    bundle:nil];
+      //      LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+      //      [next setFeedObject:feed];
+      //      [self.navigationController pushViewController:next animated:YES];
+      break;
+      
+      case kFeedCellActionLike:
       //    [self postMessage];
-    }
-    else if ([type isEqualToString:kFeedCellActionImage])
-    {
-      LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-      [appdel.GIButton setHidden:YES];
-      [appdel.menuButton setHidden:YES];
-      LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-      vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
-      vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-      [self presentViewController:vc animated:YES completion:nil];
-    }
+      break;
+      
+      case kkFeedCellActionViewImage:
+      [self showFullScreenImage:nil];
+      break;
+      
+    default:
+      break;
+  }
+}
+
+- (void)showFullScreenImage:(NSString*)imageUrl
+{
+#warning remove this with proper image url obje
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:YES];
+  [appdel.menuButton setHidden:YES];
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails
