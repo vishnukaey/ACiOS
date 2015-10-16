@@ -53,7 +53,14 @@
   {
     LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
 //    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
-    celViewFinal.delegate = self;
+    __weak typeof(self) weakSelf = self;
+    celViewFinal.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+      [weakSelf feedCellActionWithType:actionType andFeed:feed];
+    };
+    celViewFinal.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+      [weakSelf tagTapped:tagDetails];
+    };
+
     [cellsViewArray addObject:celViewFinal];
   }
 }
@@ -134,9 +141,9 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%@", type);
+  NSLog(@"actionType--->>>%u", type);
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

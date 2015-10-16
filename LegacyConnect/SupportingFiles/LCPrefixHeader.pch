@@ -24,6 +24,7 @@
 #import "LCTag.h" 
 #import "LCNewPost.h"
 #import "LCSearchResult.h"
+#import "LCComment.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #import "LCAPIManager.h"

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 
-@interface LCSingleInterestVC : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
+@interface LCSingleInterestVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   IBOutlet UITableView *feedsTable;
   IBOutlet UIScrollView *causesScrollView;

@@ -10,4 +10,6 @@
 
 @interface LCLoadingCell : UITableViewCell
 
++ (NSString*)getFeedCellidentifier;
+
 @end

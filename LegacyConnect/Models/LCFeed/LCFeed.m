@@ -37,9 +37,14 @@
            };
 }
 
-+ (NSValueTransformer *)posttagsJSONTransformer
++ (NSValueTransformer *)postTagsJSONTransformer
 {
   return [MTLJSONAdapter arrayTransformerWithModelClass:[LCTag class]];
+}
+
++ (NSValueTransformer *)commentsJSONTransformer
+{
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCComment class]];
 }
 
 @end

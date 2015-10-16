@@ -10,9 +10,11 @@
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
 
-@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, feedCellDelegate>
+@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
-  NSArray *feedsArray;
+  NSMutableArray *feedsArray;
+  BOOL loadMoreFriends;
+  BOOL isLoadingMoreFriends;
 }
 
 @property(nonatomic, weak)IBOutlet  UITableView *feedsTable;
