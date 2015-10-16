@@ -59,6 +59,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   usernameLabel.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(dic_user);
   };
+  
+  //-- Milestone -- //
+  [milestoneImage setHidden:![self.feedObject.isMilestone boolValue]];
 }
 
 - (void)setFeedInfoDetails
@@ -71,8 +74,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
   else
   {
+    [postPhoto setContentMode:UIViewContentModeScaleAspectFit];
     postPhotoHeight.constant = 200;
-    [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil];
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+      [postPhoto setBackgroundColor:[UIColor clearColor]];
+    }];
   }
   
   

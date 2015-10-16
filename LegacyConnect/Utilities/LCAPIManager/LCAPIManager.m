@@ -456,7 +456,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)getCommentsForPost:(NSString*)postId lastCommentId:(NSString*)lastId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
++ (void)getCommentsForPost:(NSString*)postId lastCommentId:(NSString*)lastId withSuccess:(void (^)(id response, BOOL isMore))success andfailure:(void (^)(NSString *error))failure
 {
   
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
@@ -480,11 +480,13 @@ static LCAPIManager *sharedManager = nil;
      {
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:dict[kPostCommentsKey] error:&error];
+       NSDictionary * comments = dict[kPostCommentsKey];
+       BOOL isMorePresent = [[comments objectForKey:@"more"] boolValue];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:comments[kPostCommentsKey] error:&error];
        if(!error)
        {
          NSLog(@"Getting Comments successful! ");
-         success(responsesArray);
+         success(responsesArray,isMorePresent);
        }
        else
        {

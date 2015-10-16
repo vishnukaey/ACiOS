@@ -15,6 +15,7 @@
   NSMutableArray *commentsArray;
   IBOutlet UITableView *mainTable;
   UITextField *commentTextField, *commentTextField_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
+  BOOL moreCommentsPresent;
 }
 
 @property(nonatomic, retain)LCFeed *feedObject;

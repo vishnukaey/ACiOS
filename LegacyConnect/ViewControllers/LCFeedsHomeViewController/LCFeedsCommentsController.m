@@ -10,9 +10,11 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCLoadPreviousCell.h"
 
 static CGFloat kCommentFieldHeight = 45.0f;
 static CGFloat kCellForPostDetails = 1;
+static CGFloat kCellForLoadMoreBtn = 1;
 static CGFloat kIndexForPostDetails = 0;
 
 #define kPostButtonBGColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
@@ -48,13 +50,13 @@ static CGFloat kIndexForPostDetails = 0;
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 }
 
--(void)loadFeedAndComments
+-(void)loadFeedAndCommentsWithLastCommentId:(NSString*)lastId
 {
-  commentsArray = [[NSMutableArray alloc]init];
-  [LCAPIManager getPostDetails:feedObject.entityID WithSuccess:^(LCFeed *responses) {
-    [commentsArray replaceObjectsInRange:NSMakeRange(0,0) withObjectsFromArray:[self getReverseSortedArray:responses.comments]];
+  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:lastId withSuccess:^(id response, BOOL isMore) {
+    moreCommentsPresent = isMore;
+    [commentsArray replaceObjectsInRange:NSMakeRange(0,0) withObjectsFromArray:[self getReverseSortedArray:(NSArray*)response]];
     [mainTable reloadData];
-  } andFailure:^(NSString *error) {
+  } andfailure:^(NSString *error) {
     [mainTable reloadData];
   }];
 }
@@ -100,11 +102,19 @@ static CGFloat kIndexForPostDetails = 0;
   [commentTextField_dup becomeFirstResponder];
 }
 
+-(void)changeFirstResponder
+{
+  [commentTextField becomeFirstResponder]; //will return YES;
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   [self initialUISetUp];
+  commentsArray = [[NSMutableArray alloc]init];
+  moreCommentsPresent = YES;
+  [self loadFeedAndCommentsWithLastCommentId:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -115,7 +125,6 @@ static CGFloat kIndexForPostDetails = 0;
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:NO];
   [self addKeyBoardNotificationObserver];
-  [self loadFeedAndComments];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -135,26 +144,28 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - button actions
 -(void)postAction
 {
-  [commentTextField resignFirstResponder];
-  [commentTextField_dup resignFirstResponder];
-  
-  [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
-    [commentsArray addObject:(LCComment*)response];
-    self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
-    [mainTable reloadData];
-  } andFailure:^(NSString *error) {
-    NSLog(@"----- Fail to add new comment");
-  }];
-}
-
--(void)changeFirstResponder
-{
-  [commentTextField becomeFirstResponder]; //will return YES;
+  if (commentTextField.text.length > 0) {
+    [commentTextField resignFirstResponder];
+    [commentTextField_dup resignFirstResponder];
+    
+    [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
+      [commentsArray addObject:(LCComment*)response];
+      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
+      [mainTable reloadData];
+    } andFailure:^(NSString *error) {
+      NSLog(@"----- Fail to add new comment");
+    }];
+  }
 }
 
 - (IBAction)backAction
 {
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)loadPreviousComments:(UIButton*)sender
+{
+  [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray firstObject] commentId]];
 }
 
 #pragma mark - TableView delegates
@@ -165,12 +176,11 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return kCellForPostDetails + commentsArray.count;
+  return kCellForPostDetails + commentsArray.count + (moreCommentsPresent ? kCellForLoadMoreBtn : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCCommentCell *commentCell;
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -192,17 +202,34 @@ static CGFloat kIndexForPostDetails = 0;
   }
   else //comment cell
   {
-    static NSString *MyIdentifier = @"LCCommentCell";
-    commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (commentCell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-      commentCell = [topLevelObjects objectAtIndex:0];
+    if (moreCommentsPresent && indexPath.row == 1) {
+      static NSString *cellIdentifier = @"LCLoadPreviousCell";
+      LCLoadPreviousCell * loadPreviousCell = (LCLoadPreviousCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+      if (loadPreviousCell == nil) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadPreviousCell" owner:self options:nil];
+        loadPreviousCell = [topLevelObjects objectAtIndex:0];
+      }
+      __weak typeof(self) weakSelf = self;
+      loadPreviousCell.loadPrevousAction = ^ (UIButton * sender) {
+        [weakSelf loadPreviousComments:sender];
+      };
+      return loadPreviousCell;
     }
-    [commentCell setComment:[commentsArray objectAtIndex:indexPath.row -1]];
-    return commentCell;
+    else
+    {
+      LCCommentCell *commentCell;
+      static NSString *MyIdentifier = @"LCCommentCell";
+      commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      if (commentCell == nil)
+      {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
+        commentCell = [topLevelObjects objectAtIndex:0];
+      }
+      NSInteger rowNo = moreCommentsPresent ? indexPath.row - 2 : indexPath.row - 1;
+      [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
+      return commentCell;
+    }
   }
-  return commentCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

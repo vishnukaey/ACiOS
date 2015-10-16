@@ -30,7 +30,7 @@ typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
 {
   IBOutlet UIImageView *profilePic;
   IBOutlet UIImageView *postPhoto;
-  IBOutlet UIImageView *moreIcon;
+  IBOutlet UIImageView *moreIcon,*milestoneImage;
   LCThanksButtonImage *thanksBtnImage;
   IBOutlet UILabel  *timeLabel, *thanksLabel, *commentsLabel;
   IBOutlet LCTaggedLabel *usernameLabel, *createdLabel, *postDescription;
