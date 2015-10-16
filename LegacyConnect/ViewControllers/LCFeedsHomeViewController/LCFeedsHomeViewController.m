@@ -62,8 +62,10 @@
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
+  if (!appdel.isCreatePostOpen) {
+    [appdel.GIButton setHidden:NO];
+    [appdel.menuButton setHidden:NO];
+  }
 }
 
 - (void) viewWillDisappear:(BOOL)animated

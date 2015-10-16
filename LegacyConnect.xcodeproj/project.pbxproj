@@ -132,6 +132,7 @@
 		96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
+		CE4B529A1BCE7AB700F279FB /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE4B52991BCE7AB700F279FB /* CoreText.framework */; };
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
 		CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
@@ -368,6 +369,7 @@
 		96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
 		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
+		CE4B52991BCE7AB700F279FB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		CE4EB6751B5E28D900B8A725 /* LCLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLeftMenuController.h; path = ViewControllers/LCFeedsHomeViewController/LCLeftMenuController.h; sourceTree = "<group>"; };
 		CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLeftMenuController.m; path = ViewControllers/LCFeedsHomeViewController/LCLeftMenuController.m; sourceTree = "<group>"; };
 		CE5954D41B6F608B00D839DD /* LCMultipleSelectionTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMultipleSelectionTable.h; path = CustomViews/LCMultipleSelectionTable/LCMultipleSelectionTable.h; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE4B529A1BCE7AB700F279FB /* CoreText.framework in Frameworks */,
 				B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -960,6 +963,7 @@
 		0BF05A331B4E622200FF7B39 = {
 			isa = PBXGroup;
 			children = (
+				CE4B52991BCE7AB700F279FB /* CoreText.framework */,
 				0BF05A3E1B4E622200FF7B39 /* LegacyConnect */,
 				0BF05A581B4E622200FF7B39 /* LegacyConnectTests */,
 				0BF05A3D1B4E622200FF7B39 /* Products */,

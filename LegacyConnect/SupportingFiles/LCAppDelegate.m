@@ -27,7 +27,7 @@
 @end
 
 @implementation LCAppDelegate
-@synthesize menuButton, GIButton;
+@synthesize menuButton, GIButton, isCreatePostOpen;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

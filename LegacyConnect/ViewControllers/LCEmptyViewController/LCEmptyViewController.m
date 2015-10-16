@@ -214,6 +214,7 @@
 //    createPostVC.view.frame = frame;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+    appdel.isCreatePostOpen = YES;
   }
   
 }
@@ -281,10 +282,12 @@
 }
 
 
-- (void)dismissView
+- (void)dismissCreatePostView
 {
   giButton.hidden = NO;
   menuButton.hidden = NO;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  appdel.isCreatePostOpen = false;
 }
 
 #pragma mark - Passwor reset implementation

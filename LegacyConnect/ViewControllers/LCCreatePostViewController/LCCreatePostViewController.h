@@ -10,7 +10,7 @@
 
 @protocol createPostDelegate <NSObject>
 
-- (void)dismissView;
+- (void)dismissCreatePostView;
 
 @end
 
@@ -18,10 +18,10 @@
 
 
 @property (nonatomic, unsafe_unretained) NSObject <createPostDelegate> *delegate;
-
 @property(nonatomic,retain) IBOutlet UIView *popUpView;
-
-@property(nonatomic,retain) IBOutlet UITextView *postTextView;
-
+@property(nonatomic,retain) IBOutlet UIScrollView *postScrollView;
+@property(nonatomic,retain) IBOutlet NSLayoutConstraint *popUpViewHeightConstraint;
+@property(nonatomic,retain) NSMutableArray *friendsTagArray, *causesTagArray;
+@property(nonatomic,retain) NSMutableString *taggedLocation;
 
 @end
