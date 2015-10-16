@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
-		0B0DEDB41BD0D13000FA05B6 /* LCLoadPreviousCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B0DEDB31BD0D13000FA05B6 /* LCLoadPreviousCell.m */; settings = {ASSET_TAGS = (); }; };
-		0B0DEDB61BD0D13F00FA05B6 /* LCLoadPreviousCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B0DEDB51BD0D13F00FA05B6 /* LCLoadPreviousCell.xib */; settings = {ASSET_TAGS = (); }; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
 		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; settings = {ASSET_TAGS = (); }; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
@@ -177,9 +175,6 @@
 		0B001B161B7C9E6800E8E569 /* LCFeed.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeed.m; path = Models/LCFeed/LCFeed.m; sourceTree = "<group>"; };
 		0B001B191B7CA70400E8E569 /* LCTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTag.h; path = Models/LCTag/LCTag.h; sourceTree = "<group>"; };
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
-		0B0DEDB21BD0D13000FA05B6 /* LCLoadPreviousCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLoadPreviousCell.h; sourceTree = "<group>"; };
-		0B0DEDB31BD0D13000FA05B6 /* LCLoadPreviousCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCLoadPreviousCell.m; sourceTree = "<group>"; };
-		0B0DEDB51BD0D13F00FA05B6 /* LCLoadPreviousCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadPreviousCell.xib; sourceTree = "<group>"; };
 		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B223C391BCFA6220022B8F6 /* LCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComment.h; sourceTree = "<group>"; };
@@ -466,17 +461,6 @@
 				0B001B1A1B7CA70400E8E569 /* LCTag.m */,
 			);
 			name = LCTag;
-			sourceTree = "<group>";
-		};
-		0B0DEDB11BD0D10E00FA05B6 /* LCLoadPreviousCell */ = {
-			isa = PBXGroup;
-			children = (
-				0B0DEDB21BD0D13000FA05B6 /* LCLoadPreviousCell.h */,
-				0B0DEDB31BD0D13000FA05B6 /* LCLoadPreviousCell.m */,
-				0B0DEDB51BD0D13F00FA05B6 /* LCLoadPreviousCell.xib */,
-			);
-			name = LCLoadPreviousCell;
-			path = CustomViews/LCLoadPreviousCell;
 			sourceTree = "<group>";
 		};
 		0B212EE41BBACA4B00B4237E /* LCMenuItemCell */ = {
@@ -1364,7 +1348,6 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				0B0DEDB11BD0D10E00FA05B6 /* LCLoadPreviousCell */,
 				0BA86F031BCE7BEE00B24454 /* LCThanksButtonImage */,
 				0B8AA05A1BC299C600C284DF /* LCFriendButton */,
 				0B58BCDE1BC267A0007F60E3 /* LCLoadingCell */,
@@ -1531,7 +1514,6 @@
 				0BB33DEB1BA81401009E6D0C /* simple-green-check-button-th.png in Resources */,
 				0BB33DDD1BA81401009E6D0C /* heart_dummy.png in Resources */,
 				0BB33DED1BA81401009E6D0C /* uncheck_box.png in Resources */,
-				0B0DEDB61BD0D13F00FA05B6 /* LCLoadPreviousCell.xib in Resources */,
 				0BB33DA31BA812A3009E6D0C /* Gotham-LightItalic.otf in Resources */,
 				0BB33DB41BA81359009E6D0C /* Community.storyboard in Resources */,
 				0BB33DDE1BA81401009E6D0C /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
@@ -1680,7 +1662,6 @@
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
 				CEBED6A41B5FAD0B0012FEBB /* LCInviteToCommunity.m in Sources */,
-				0B0DEDB41BD0D13000FA05B6 /* LCLoadPreviousCell.m in Sources */,
 				96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */,

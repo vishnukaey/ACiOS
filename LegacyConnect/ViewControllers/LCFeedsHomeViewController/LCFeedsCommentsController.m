@@ -10,7 +10,7 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
-#import "LCLoadPreviousCell.h"
+#import "LCLoadingCell.h"
 
 static CGFloat kCommentFieldHeight = 45.0f;
 static CGFloat kCellForPostDetails = 1;
@@ -52,19 +52,22 @@ static CGFloat kIndexForPostDetails = 0;
 
 -(void)loadFeedAndCommentsWithLastCommentId:(NSString*)lastId
 {
+  isLoadingMoreComments = YES;
   [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:lastId withSuccess:^(id response, BOOL isMore) {
+    isLoadingMoreComments = NO;
     moreCommentsPresent = isMore;
-    [commentsArray replaceObjectsInRange:NSMakeRange(0,0) withObjectsFromArray:[self getReverseSortedArray:(NSArray*)response]];
+    [commentsArray addObjectsFromArray:(NSArray*)response];
     [mainTable reloadData];
   } andfailure:^(NSString *error) {
+    isLoadingMoreComments = NO;
     [mainTable reloadData];
   }];
 }
 
-- (NSArray*)getReverseSortedArray:(NSArray*)array
-{
-  return [[array reverseObjectEnumerator] allObjects];
-}
+//- (NSArray*)getReverseSortedArray:(NSArray*)array
+//{
+//  return [[array reverseObjectEnumerator] allObjects];
+//}
 
 - (void)setUpCpmmentsUI
 {
@@ -146,11 +149,12 @@ static CGFloat kIndexForPostDetails = 0;
 {
   if (commentTextField.text.length > 0) {
     [commentTextField resignFirstResponder];
-    [commentTextField_dup resignFirstResponder];
+//    [commentTextField_dup resignFirstResponder];
     
     [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
-      [commentsArray addObject:(LCComment*)response];
+      [commentsArray insertObject:(LCComment*)response atIndex:0];
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
+      [commentTextField setText:nil];
       [mainTable reloadData];
     } andFailure:^(NSString *error) {
       NSLog(@"----- Fail to add new comment");
@@ -181,6 +185,8 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  
+  NSLog(@"index path row : %li",indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -202,18 +208,16 @@ static CGFloat kIndexForPostDetails = 0;
   }
   else //comment cell
   {
-    if (moreCommentsPresent && indexPath.row == 1) {
-      static NSString *cellIdentifier = @"LCLoadPreviousCell";
-      LCLoadPreviousCell * loadPreviousCell = (LCLoadPreviousCell*)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-      if (loadPreviousCell == nil) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadPreviousCell" owner:self options:nil];
-        loadPreviousCell = [topLevelObjects objectAtIndex:0];
+    if (moreCommentsPresent && indexPath.row -1 == commentsArray.count)
+    {
+      LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier]];
+      if (loadingCell == nil) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
+        loadingCell = [topLevelObjects objectAtIndex:0];
       }
-      __weak typeof(self) weakSelf = self;
-      loadPreviousCell.loadPrevousAction = ^ (UIButton * sender) {
-        [weakSelf loadPreviousComments:sender];
-      };
-      return loadPreviousCell;
+      [MBProgressHUD hideHUDForView:loadingCell animated:YES];
+      [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
+      return loadingCell;
     }
     else
     {
@@ -225,10 +229,18 @@ static CGFloat kIndexForPostDetails = 0;
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
         commentCell = [topLevelObjects objectAtIndex:0];
       }
-      NSInteger rowNo = moreCommentsPresent ? indexPath.row - 2 : indexPath.row - 1;
+      NSInteger rowNo = indexPath.row - 1;
       [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
       return commentCell;
     }
+  }
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.row  == commentsArray.count && moreCommentsPresent && !isLoadingMoreComments) {
+
+    [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray lastObject] commentId]];
   }
 }
 
