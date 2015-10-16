@@ -22,7 +22,7 @@
 
 #pragma mark - Post
 
-+ (void)getPostDetails:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getPostDetailsOfPost:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
 + (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)likePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
@@ -40,6 +40,15 @@
 + (void)saveCauses:(NSArray *)causes andInterests:(NSArray*)interests ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getMilestonesForUser:(NSString *)userID andLastMilestoneID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getInterestsForUser:(NSString*)userID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getCausesForUser:(NSString*)userID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getCauseDetailsOfCause:(NSString*)causeId WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)followInterest:(NSString *)interestId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)unfollowInterest:(NSString *)interestId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)supportCause:(NSString *)causeId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)unsupportCause:(NSString *)causeId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)getInterestFolowersOfInterest:(NSString*)interestId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getCauseFolowersOfCause:(NSString*)causeId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
 
 #pragma mark- Friends and Requests
 

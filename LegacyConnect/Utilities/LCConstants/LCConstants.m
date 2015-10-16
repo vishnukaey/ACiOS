@@ -37,9 +37,21 @@ NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";
 NSString *const kFBLoginURL = @"api/user/fbLogin";
 NSString *const kUploadUserImageURL = @"api/user/profileImage";
+
+NSString *const kGetInterestURL = @"api/interest";
 NSString *const kGetInterestsURL = @"api/interests";
+NSString *const kGetUserInterestsURL = @"api/user/interests";
+NSString *const kGetInterestFollowersURL = @"api/interest/users";
+NSString *const kIneterestsFollowURL = @"api/interest/follow";
+NSString *const kIneterestsUnfollowURL = @"api/interest/unfollow";
+
+NSString *const kGetCauseURL = @"api/cause";
 NSString *const kGetCausesURL = @"api/causes";
-NSString *const kSaveIneterestsURL = @"api/user/interests";
+NSString *const kGetUserCausesURL = @"api/user/causes";
+NSString *const kGetCauseFollowersURL = @"api/cause/users";
+NSString *const kCauseSuppotURL = @"api/cause/support";
+NSString *const kCauseUnsuppotURL = @"api/cause/unsupport";
+
 NSString *const kGetFeedsURL = @"api/feed";
 NSString *const kGetMilestonesURL = @"api/user/milestone";
 NSString *const kGetImpactsURL = @"api/user/impact";
@@ -65,6 +77,8 @@ NSString *const kPostCommentURL = @"api/post/comment";
 NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
 
+
+
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
 NSString *const kProfileStoryBoardIdentifier = @"Profile";
@@ -73,19 +87,25 @@ NSString *const kCommunityStoryBoardIdentifier = @"Community";
 NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 
+
+
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
 NSString *const kChooseCommunityStoryBoardID = @"LCChooseCommunityInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
 
+
+
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
 NSString *const kResponseData = @"data";
+NSString *const kUsersKey = @"users";
 NSString *const kInterestsKey = @"interests";
 NSString *const kCausesKey = @"causes";
 NSString *const kInterestIDKey = @"interestId";
+NSString *const kCauseIDKey = @"causeId";
 NSString *const kEventIDKey = @"eventId";
 NSString *const kLastCauseIDKey = @"lastCauseId";
 NSString *const kFriendsKey = @"friends";

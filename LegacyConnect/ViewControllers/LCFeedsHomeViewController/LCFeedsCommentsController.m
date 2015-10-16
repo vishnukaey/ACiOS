@@ -51,7 +51,7 @@ static CGFloat kIndexForPostDetails = 0;
 -(void)loadFeedAndComments
 {
   commentsArray = [[NSMutableArray alloc]init];
-  [LCAPIManager getPostDetails:feedObject.entityID WithSuccess:^(LCFeed *responses) {
+  [LCAPIManager getPostDetailsOfPost:feedObject.entityID WithSuccess:^(LCFeed *responses) {
     [commentsArray replaceObjectsInRange:NSMakeRange(0,0) withObjectsFromArray:[self getReverseSortedArray:responses.comments]];
     [mainTable reloadData];
   } andFailure:^(NSString *error) {

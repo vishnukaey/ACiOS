@@ -15,10 +15,22 @@ extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
 extern NSString *const kEditProfileURL;
 extern NSString *const kFBLoginURL;
+
 extern NSString *const kGetUserDetailsURL;
+extern NSString *const kGetInterestURL;
 extern NSString *const kGetInterestsURL;
+extern NSString *const kGetUserInterestsURL;
+extern NSString *const kGetInterestFollowersURL;
+extern NSString *const kIneterestsFollowURL;
+extern NSString *const kIneterestsUnfollowURL;
+
+extern NSString *const kGetCauseURL;
 extern NSString *const kGetCausesURL;
-extern NSString *const kSaveIneterestsURL;
+extern NSString *const kGetUserCausesURL;
+extern NSString *const kGetCauseFollowersURL;
+extern NSString *const kCauseSuppotURL;
+extern NSString *const kCauseUnsuppotURL;
+
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
 extern NSString *const kForgotPasswordURL;
@@ -45,6 +57,8 @@ extern NSString *const kPostCommentURL;
 extern NSString *const kPostCommentsURL;
 extern NSString *const kPostMilestoneURL;
 
+
+
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;
 extern NSString *const kProfileStoryBoardIdentifier;
@@ -53,17 +67,23 @@ extern NSString *const kCommunityStoryBoardIdentifier;
 extern NSString *const kNotificationStoryBoardIdentifier;
 extern NSString *const kCreatePostStoryBoardIdentifier;
 
+
+
 extern NSString *const kHomeFeedsStoryBoardID;
 extern NSString *const kChooseCommunityStoryBoardID;
 extern NSString *const kUpdatePasswordStoryBoardID;
 extern NSString *const kLoginStoryBoardID;
 extern NSString *const kForgotPasswordStoryBoardID;
 
+
+
 extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;
 extern NSString *const kResponseData;
+extern NSString *const kUsersKey;
 extern NSString *const kInterestsKey;
+extern NSString *const kCauseIDKey;
 extern NSString *const kCausesKey;
 extern NSString *const kInterestIDKey;
 extern NSString *const kEventIDKey;
