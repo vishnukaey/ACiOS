@@ -37,7 +37,7 @@
            };
 }
 
-+ (NSValueTransformer *)posttagsJSONTransformer
++ (NSValueTransformer *)postTagsJSONTransformer
 {
   return [MTLJSONAdapter arrayTransformerWithModelClass:[LCTag class]];
 }
