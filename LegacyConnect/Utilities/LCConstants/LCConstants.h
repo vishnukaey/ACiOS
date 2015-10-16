@@ -108,12 +108,9 @@ extern NSString *const kDefaultDateFormat;
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
 
-extern NSString *const kFeedCellActionLike;
-extern NSString *const kFeedCellActionComment;
-extern NSString *const kFeedCellActionMore;
-extern NSString *const kFeedCellActionImage;
 
 extern NSString *const kFeedTagTypeCause;
+extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;
 
 extern NSString *const kLCUrlScheme;
@@ -123,6 +120,11 @@ extern NSString *const kResetPasswordNotificationName;
 extern NSString *const kUserDataUpdatedNotification;
 
 extern NSString *const kUserProfileUpdateNotification;
+
+extern NSString *const kTagobjId;
+extern NSString *const kTagobjText;
+extern NSString *const kTagobjType;
+
 
 #define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)480) < DBL_EPSILON)
 #define IS_IPHONE_5 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)568) < DBL_EPSILON)

@@ -20,7 +20,7 @@
            @"eventDescription": @"description",
            @"website": @"website",
            @"time": @"time",
-           @"interestID": @"interestId",
+           @"interestID": @"interestId"
            };
 }
 

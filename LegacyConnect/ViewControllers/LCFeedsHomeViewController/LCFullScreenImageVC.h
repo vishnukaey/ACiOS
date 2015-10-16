@@ -10,6 +10,10 @@
 
 @interface LCFullScreenImageVC : UIViewController
 
+
+@property(nonatomic, retain) NSString *imageUrlString;
+
+#warning remove this field and replace with 'imageUrl'
 @property(nonatomic, retain)UIImageView *imageView;
 
 @end
