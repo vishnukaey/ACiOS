@@ -7,10 +7,11 @@
 //
 
 #import "LCListLocationsToTagVC.h"
+#import "LCMultipleSelectionTable.h"
 
 @interface LCListLocationsToTagVC ()
 {
-  IBOutlet UITableView *locationsTable;
+  IBOutlet LCMultipleSelectionTable *locationsTable;
   NSMutableArray *locationsArray;
 }
 
@@ -19,6 +20,7 @@
 #pragma mark - LCLocationCell class
 @interface LCLocationCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *locationLabel;
+@property(nonatomic, strong)IBOutlet UIButton *checkButton;
 @end
 
 @implementation LCLocationCell
@@ -28,12 +30,20 @@
 
 #pragma mark - controller life cycle
 @implementation LCListLocationsToTagVC
-
+@synthesize alreadyTaggedLocation, delegate;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  locationsTable.checkedImage = [UIImage imageNamed:@"contact_tick"];
+  locationsTable.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   locationsArray = [[NSMutableArray alloc] init];
+  if (alreadyTaggedLocation.length>0)
+  {
+    [locationsArray addObject:alreadyTaggedLocation];
+    [locationsTable.selectedIDs addObject:alreadyTaggedLocation];
+  }
+  
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +55,15 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSLog(@"done button clicked-->>>");
+  if (locationsTable.selectedIDs.count>0)
+  {
+    [delegate didfinishPickingLocation:[locationsTable.selectedIDs objectAtIndex:0]];//only one location will be available in selected ids(here id is the location name itself as no id for a location is used)
+  }
+  else
+  {
+    [delegate didfinishPickingLocation:@""];
+  }
+  
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -54,11 +72,37 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)checkbuttonAction :(UIButton *)sender
+{
+  if (locationsTable.selectedIDs.count>0)
+  {
+    
+    if ([[locationsTable.selectedIDs objectAtIndex:0] isEqualToString:[locationsArray objectAtIndex:sender.tag]]) {
+      [locationsTable.selectedIDs removeAllObjects];
+    }
+    else
+    {
+      [locationsTable.selectedIDs removeAllObjects];
+      [locationsTable.selectedIDs addObject:[locationsArray objectAtIndex:sender.tag]];
+    }
+  }
+  else
+  {
+    [locationsTable.selectedIDs addObject:[locationsArray objectAtIndex:sender.tag]];
+  }
+  [locationsTable reloadData];
+}
+
 #pragma mark - locationSearchField delegates
 - (void)recievedLocations:(NSArray *)locations
 {
   [locationsArray removeAllObjects];
+  [locationsArray addObjectsFromArray:locationsTable.selectedIDs];
   [locationsArray addObjectsFromArray:locations];
+  NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:locationsArray];
+  NSArray *arrayWithoutDuplicates = [orderedSet array];
+  [locationsArray removeAllObjects];
+  [locationsArray addObjectsFromArray:arrayWithoutDuplicates];
   [locationsTable reloadData];
   NSLog(@"locations--->>>>%@", locations);
 }
@@ -80,7 +124,7 @@
   return locationsArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
+- (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *MyIdentifier = @"LCLocationCell";
@@ -91,6 +135,9 @@
                                             reuseIdentifier:MyIdentifier];
   }
   cell.locationLabel.text = [locationsArray objectAtIndex:indexPath.row];
+  [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+  cell.checkButton.tag = indexPath.row;
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:[locationsArray objectAtIndex:indexPath.row], nil]];
   return cell;
 }
 

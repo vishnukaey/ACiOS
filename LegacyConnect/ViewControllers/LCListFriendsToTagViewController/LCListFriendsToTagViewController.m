@@ -23,14 +23,22 @@
 #pragma mark - LCListFriendsToTagViewController class
 
 @implementation LCListFriendsToTagViewController
-
+@synthesize delegate, alreadySelectedFriends;
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  friendsTableView.checkedImage = [UIImage imageNamed:@"contact_tick"];
+  friendsTableView.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
+  for (LCFriend *friend in alreadySelectedFriends)
+  {
+    [friendsTableView.selectedIDs addObject:friend.userID];
+  }
   // Do any additional setup after loading the view.
-  [self loadFriendsList];
   searchResultsArray = [[NSMutableArray alloc] init];
+  [self loadFriendsList];
+  
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -74,6 +82,19 @@
 -(IBAction)doneButtonAction
 {
   NSLog(@"done button clicked-->>>");
+  NSMutableArray *arrayToPass = [[NSMutableArray alloc] init];
+  for (NSString *userId in friendsTableView.selectedIDs)
+  {
+    for (LCFriend *friend in friendsArray)
+    {
+      if ([friend.userID isEqualToString:userId])
+      {
+        [arrayToPass addObject:friend];
+        break;
+      }
+    }
+  }
+  [delegate didFinishPickingFriends:arrayToPass];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 

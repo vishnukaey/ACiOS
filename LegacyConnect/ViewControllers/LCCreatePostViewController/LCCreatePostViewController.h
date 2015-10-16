@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCListFriendsToTagViewController.h"
+#import "LCListLocationsToTagVC.h"
 
 @protocol createPostDelegate <NSObject>
 
@@ -14,14 +16,12 @@
 
 @end
 
-@interface LCCreatePostViewController : UIViewController <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface LCCreatePostViewController : UIViewController <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LCListFriendsToTagViewControllerDelegate, LCListLocationsToTagVCDelegate>
 
 
 @property (nonatomic, unsafe_unretained) NSObject <createPostDelegate> *delegate;
 @property(nonatomic,retain) IBOutlet UIView *popUpView;
 @property(nonatomic,retain) IBOutlet UIScrollView *postScrollView;
 @property(nonatomic,retain) IBOutlet NSLayoutConstraint *popUpViewHeightConstraint;
-@property(nonatomic,retain) NSMutableArray *friendsTagArray, *causesTagArray;
-@property(nonatomic,retain) NSMutableString *taggedLocation;
 
 @end

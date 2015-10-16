@@ -672,6 +672,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="checkButton" destination="q5x-ft-a33" id="nME-zR-JoW"/>
                                             <outlet property="locationLabel" destination="ip3-7K-GdU" id="AWq-BD-t1V"/>
                                         </connections>
                                     </tableViewCell>

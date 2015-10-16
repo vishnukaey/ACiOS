@@ -7,26 +7,27 @@
 //
 
 #import "LCCreatePostViewController.h"
-#import "LCListFriendsToTagViewController.h"
-#import "LCListLocationsToTagVC.h"
-#import <CoreText/CoreText.h>
 
+
+#define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:12]
 @interface LCCreatePostViewController ()
 {
-  LCListFriendsToTagViewController *contactListVC;
-  
   UIImageView *interstIconImageView;
   UITextView *postTextView;
   UILabel *tagsLabel;
   UIImageView *postImageView;
   
   int keyBoardHeight;
+  NSArray *taggedFriendsArray;
+  
+  UILabel *placeHolderLabel;
+  
+  NSString *taggedLocation;
 }
 @end
 
 #pragma mark - lifecycle methods
 @implementation LCCreatePostViewController
-@synthesize taggedLocation, friendsTagArray, causesTagArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
   [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
@@ -53,8 +54,7 @@
   [self initialiseScrollSubviewsForPosting];
   [postTextView becomeFirstResponder];
   taggedLocation = [[NSMutableString alloc] initWithString:@""];
-  friendsTagArray = [[NSMutableArray alloc] init];
-  causesTagArray = [[NSMutableArray alloc] init];
+  
     // Do any additional setup after loading the view.
 }
 
@@ -77,9 +77,18 @@
   postTextView = [[UITextView alloc] initWithFrame:CGRectMake(interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8, topmargin, _postScrollView.frame.size.width - (interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8), 35)];
   postTextView.text = @"";
   [postTextView setFrame:CGRectMake(postTextView.frame.origin.x, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.contentSize.height)];
+  [postTextView setFont:POSTTEXT_FONT];
+  
 //  postTextView.backgroundColor = [UIColor yellowColor];
   [_postScrollView addSubview:postTextView];
   postTextView.delegate = self;
+  
+  placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x+5, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.frame.size.height)];
+  [placeHolderLabel setFont:POSTTEXT_FONT];
+  [placeHolderLabel setText:@"Share your legacy"];
+  [placeHolderLabel setTextColor:[UIColor lightGrayColor]];
+  [_postScrollView addSubview:placeHolderLabel];
+
   
   tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x, postTextView.frame.origin.y + postTextView.frame.size.height, postTextView.frame.size.width, 0)];
   tagsLabel.numberOfLines = 0;
@@ -128,11 +137,10 @@
 - (void)arrangeTaggedLabel
 {
   NSString *tagsString = @"";
-  for (NSString *cause in causesTagArray) {
-    tagsString = [NSString stringWithFormat:@"%@ @%@",tagsString, cause];
-  }
-  for (NSString *friend in friendsTagArray) {
-    tagsString = [NSString stringWithFormat:@"%@ @%@",tagsString, friend];
+  for (LCFriend *friend in taggedFriendsArray)
+  {
+    NSString *friend_name = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    tagsString = [NSString stringWithFormat:@"%@ @%@",tagsString, friend_name];
   }
   
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:@""];
@@ -202,23 +210,21 @@
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
 {
-  [friendsTagArray addObject:@"friend1"];
-  [friendsTagArray addObject:@"friend2"];
-  [friendsTagArray addObject:@"friend3"];
-  [self arrangeTaggedLabel];
-//  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-//  contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
-//  [self presentViewController:contactListVC animated:YES completion:nil];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListFriendsToTagViewController *contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
+  contactListVC.alreadySelectedFriends = taggedFriendsArray;
+  contactListVC.delegate = self;
+  [self presentViewController:contactListVC animated:YES completion:nil];
   
 }
 
 - (IBAction)addLocationToPostButtonClicked:(id)sender
 {
-  taggedLocation = [@"cochin" mutableCopy];
-  [self arrangeTaggedLabel];
-//  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-//  LCListLocationsToTagVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
-//  [self presentViewController:vc animated:YES completion:nil];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListLocationsToTagVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
+  vc.alreadyTaggedLocation = taggedLocation;
+  vc.delegate = self;
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (IBAction)postPhotoButtonClicked
@@ -231,6 +237,14 @@
 #pragma mark - textview delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
+  if ([textView.text isEqualToString:@""])
+  {
+    placeHolderLabel.hidden = false;
+  }
+  else
+  {
+    placeHolderLabel.hidden = true;
+  }
   [self adjustScrollViewOffsetWhileTextEditing:textView];
   
   CGRect frame = textView.frame;
@@ -280,6 +294,20 @@
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   [postImageView setImage:chosenImage];
   [self arrangePostImageView];
+}
+
+#pragma mark - LCListFriendsToTagViewControllerDelegate
+- (void)didFinishPickingFriends:(NSArray *)friendsArray
+{
+  taggedFriendsArray = [NSArray arrayWithArray:friendsArray];
+  [self arrangeTaggedLabel];
+}
+
+#pragma mark - LCListLocationsToTagVCDelegate
+- (void)didfinishPickingLocation:(NSString *)location
+{
+  taggedLocation = location;
+  [self arrangeTaggedLabel];
 }
 
 @end
