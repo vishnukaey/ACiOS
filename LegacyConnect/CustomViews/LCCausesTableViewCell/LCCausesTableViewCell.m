@@ -23,7 +23,7 @@
 -(void)setCause:(LCCause *)cause
 {
   _cause = cause;
-  [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+  [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:nil];
   _causeNameLabel.text = [NSString stringWithFormat:@"%@",cause.name];
   _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ supporters",cause.supporters];
 }

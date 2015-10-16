@@ -339,7 +339,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="87" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="j8m-vM-4Bb">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j8m-vM-4Bb">
                                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4p-Fl-n8k">
@@ -355,7 +355,7 @@
                                                 </view>
                                                 <connections>
                                                     <outlet property="causesImageView" destination="j8m-vM-4Bb" id="iq7-qJ-mbu"/>
-                                                    <outlet property="selectionButton" destination="K4p-Fl-n8k" id="EJS-sL-QtJ"/>
+                                                    <outlet property="selectionButton" destination="K4p-Fl-n8k" id="ObP-XC-OJo"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -396,19 +396,10 @@
                                                                 <action selector="addButtonTapped:" destination="1TY-aP-ZMK" eventType="touchUpInside" id="2Gz-no-OEm"/>
                                                             </connections>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r7r-up-B9Y">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r7r-up-B9Y">
                                                             <rect key="frame" x="8" y="8" width="91" height="95"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="95" id="piE-aG-0YM"/>
-                                                                <constraint firstAttribute="width" constant="91" id="qM8-bx-mOW"/>
-                                                            </constraints>
                                                         </imageView>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="r7r-up-B9Y" firstAttribute="leading" secondItem="1Zv-qc-UDj" secondAttribute="leadingMargin" id="3TR-KZ-nAE"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="r7r-up-B9Y" secondAttribute="bottom" constant="-2" id="LuO-ZU-s9w"/>
-                                                        <constraint firstItem="r7r-up-B9Y" firstAttribute="top" secondItem="1Zv-qc-UDj" secondAttribute="topMargin" id="sx5-VM-dZF"/>
-                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="userAddButton" destination="qix-a8-CbJ" id="ZLA-gF-pfX"/>
@@ -440,12 +431,8 @@
                                                                 <action selector="followButtonTapped:" destination="0yd-GT-cD8" eventType="touchUpInside" id="sjj-8D-Pm9"/>
                                                             </connections>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p5P-Il-WMe">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p5P-Il-WMe">
                                                             <rect key="frame" x="8" y="8" width="91" height="95"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="91" id="Cvk-1E-8Vv"/>
-                                                                <constraint firstAttribute="height" constant="95" id="hm2-A3-306"/>
-                                                            </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aG6-uq-C4a">
                                                             <rect key="frame" x="107" y="58" width="151" height="21"/>
@@ -454,11 +441,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstItem="p5P-Il-WMe" firstAttribute="leading" secondItem="9xn-L1-jy3" secondAttribute="leadingMargin" id="Gcr-N2-EcY"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="p5P-Il-WMe" secondAttribute="bottom" constant="-2" id="aUP-Dz-zwl"/>
-                                                        <constraint firstItem="p5P-Il-WMe" firstAttribute="top" secondItem="9xn-L1-jy3" secondAttribute="topMargin" id="sHK-AF-med"/>
-                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="interestFollowButton" destination="vdO-he-uFd" id="zuV-98-WTm"/>
@@ -490,12 +472,8 @@
                                                                 <action selector="supportButtonTapped:" destination="twQ-Rt-dFp" eventType="touchUpInside" id="OAS-hY-3Nn"/>
                                                             </connections>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZmH-6h-15y">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZmH-6h-15y">
                                                             <rect key="frame" x="8" y="8" width="91" height="95"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="95" id="qj9-aa-GQY"/>
-                                                                <constraint firstAttribute="width" constant="91" id="w4W-LE-aeh"/>
-                                                            </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uil-pw-THy">
                                                             <rect key="frame" x="107" y="59" width="140" height="21"/>
@@ -504,11 +482,6 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="ZmH-6h-15y" secondAttribute="bottom" constant="-2" id="0ng-fS-lrS"/>
-                                                        <constraint firstItem="ZmH-6h-15y" firstAttribute="leading" secondItem="9NI-iv-pTn" secondAttribute="leadingMargin" id="BSV-Qa-KI0"/>
-                                                        <constraint firstItem="ZmH-6h-15y" firstAttribute="top" secondItem="9NI-iv-pTn" secondAttribute="topMargin" id="Srh-mu-tJJ"/>
-                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="causeImageView" destination="ZmH-6h-15y" id="fHv-Ir-HFP"/>
@@ -852,7 +825,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="placeholder.png" width="400" height="290"/>
         <image name="profileAdd.png" width="110" height="107"/>
         <image name="search-icon_white_64.png" width="64" height="64"/>
         <image name="simple-green-check-button-th.png" width="100" height="100"/>

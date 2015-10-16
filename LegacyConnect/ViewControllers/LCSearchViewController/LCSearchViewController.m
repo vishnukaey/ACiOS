@@ -45,6 +45,7 @@
   self.tabMenu.highlightColor = [UIColor orangeColor];
   self.tabMenu.normalColor = [UIColor blackColor];
   
+  
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -57,9 +58,6 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  self.topTableView.rowHeight = UITableViewAutomaticDimension;
-  self.usersTableView.rowHeight = UITableViewAutomaticDimension;
-  self.interestsTableView.rowHeight = UITableViewAutomaticDimension;
   [self reloadAllViews];
 }
 
@@ -134,6 +132,12 @@
     return sectionName;
   }
   return nil;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 110.0;
 }
 
 
@@ -267,7 +271,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  [LCAPIManager searchForItem:@"" withSuccess:^(LCSearchResult *searchResult) {
+  [LCAPIManager searchForItem:searchText withSuccess:^(LCSearchResult *searchResult) {
     searchResultObject = searchResult;
     [self reloadAllViews];
   } andFailure:^(NSString *error) {

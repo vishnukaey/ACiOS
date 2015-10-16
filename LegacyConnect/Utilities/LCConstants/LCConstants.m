@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER QA_SERVER
+#define CURRENT_SERVER DEV_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */

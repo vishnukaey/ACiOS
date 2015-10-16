@@ -49,10 +49,9 @@
   {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    //manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     [manager.requestSerializer setTimeoutInterval:30];
     [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-    //manager.securityPolicy.allowInvalidCertificates = YES;
     [manager GET:urlString parameters:params
          success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
@@ -73,6 +72,7 @@
     failure(NSLocalizedString(@"no_network_alert_msg", @""));
   }
 }
+
 
 - (void)performPutOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {

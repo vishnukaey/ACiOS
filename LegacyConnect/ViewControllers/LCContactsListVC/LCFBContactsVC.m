@@ -131,7 +131,7 @@
   LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
   cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
   cell.conatctPhotoView.clipsToBounds = YES;
-  [cell.conatctPhotoView sd_setImageWithURL:[NSURL URLWithString:con.P_imageURL] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+  [cell.conatctPhotoView sd_setImageWithURL:[NSURL URLWithString:con.P_imageURL] placeholderImage:nil];
   [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
   cell.contactNameLabel.text = con.P_name;
   if([selectedContacts containsObject:con.P_id])
