@@ -14,7 +14,7 @@
 #import "LCSingleCauseVC.h"
 #import "LCSingleInterestVC.h"
 #import "LCProfileViewVC.h"
-
+#import "LCChooseInterestCVC.h"
 
 @interface LCSearchViewController ()
 {
@@ -40,7 +40,7 @@
   [causesButton setTitle:@"Causes" forState:UIControlStateNormal];
   
   self.tabMenu.menuButtons = @[topButton,usersButton ,interestsButton, causesButton];
-  self.tabMenu.views = @[_topTableView, _usersTableView, _interestsTableView, _collectionView];
+  self.tabMenu.views = @[_topTableView, _usersTableView, _interestsCollectionView, _causesCollectionView];
   
   self.tabMenu.highlightColor = [UIColor orangeColor];
   self.tabMenu.normalColor = [UIColor blackColor];
@@ -48,7 +48,6 @@
   
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  self.interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
   // Do any additional setup after loading the view.
 }
@@ -93,13 +92,9 @@
     else
       return searchResultObject.causesArray.count;
   }
-  else  if([tableView isEqual:_usersTableView])
-  {
-    return searchResultObject.usersArray.count;
-  }
   else
   {
-    return searchResultObject.interestsArray.count;
+    return searchResultObject.usersArray.count;
   }
 }
 
@@ -137,7 +132,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 110.0;
+  if([tableView isEqual:_topTableView])
+  {
+    if(indexPath.section == 0)
+    {
+      return 44.0;
+    }
+    else
+    {
+      return 80.0;
+    }
+  }
+  return 80.0;
 }
 
 
@@ -170,20 +176,12 @@
       return cell;
     }
   }
-  else if([tableView isEqual:_usersTableView])
+  else
   {
     LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     LCUserDetail *user = searchResultObject.usersArray[indexPath.row];
     cell.user = user;
-    return cell;
-  }
-  else
-  {
-    LCInterestsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCInterestsTableViewCell"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCInterest *interest = searchResultObject.interestsArray[indexPath.row];
-    cell.interest = interest;
     return cell;
   }
 }
@@ -225,18 +223,12 @@
     }
     
   }
-  else if([tableView isEqual:_usersTableView])
+  else
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = @"6994";
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-  else
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
@@ -246,37 +238,78 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return searchResultObject.causesArray.count;
+  if([collectionView isEqual:_causesCollectionView])
+  {
+    return searchResultObject.causesArray.count;
+  }
+  else
+  {
+    return searchResultObject.interestsArray.count;
+  }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+  UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+  header.textLabel.font = [UIFont boldSystemFontOfSize:14];
+  CGRect headerFrame = header.frame;
+  header.textLabel.frame = headerFrame;
+}
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *identifier = @"causesCollectionViewCell";
-  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-  
-  cell.cause = searchResultObject.causesArray[indexPath.item];
-  
-  return cell;
+  if([collectionView isEqual:_causesCollectionView])
+  {
+    static NSString *identifier = @"causesCollectionViewCell";
+    LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    
+    cell.cause = searchResultObject.causesArray[indexPath.item];
+    
+    return cell;
+  }
+  else
+  {
+    static NSString *identifier = @"interestsCollectionViewCell";
+    LCChooseInterestCVC *cell = (LCChooseInterestCVC*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    cell.interest = searchResultObject.interestsArray[indexPath.item];
+    return cell;
+  }
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-  [self.navigationController pushViewController:vc animated:YES];
+  if([collectionView isEqual:_causesCollectionView])
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:vc animated:YES];  }
+  else
+  {
+        UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+        LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+        [self.navigationController pushViewController:vc animated:YES];
+  }
+
 }
 
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  [LCAPIManager searchForItem:searchText withSuccess:^(LCSearchResult *searchResult) {
-    searchResultObject = searchResult;
+  if(searchBar.text.length == 0)
+  {
+    searchResultObject = nil;
     [self reloadAllViews];
-  } andFailure:^(NSString *error) {
-    NSLog(@"");
-  }];
+  }
+  else
+  {
+    [LCAPIManager searchForItem:searchText withSuccess:^(LCSearchResult *searchResult) {
+      searchResultObject = searchResult;
+      [self reloadAllViews];
+    } andFailure:^(NSString *error) {
+      NSLog(@"");
+    }];
+  }
 }
 
 
@@ -289,7 +322,7 @@
 {
   [self.topTableView reloadData];
   [self.usersTableView reloadData];
-  [self.interestsTableView reloadData];
-  [self.collectionView reloadData];
+  [self.interestsCollectionView reloadData];
+  [self.causesCollectionView reloadData];
 }
 @end
