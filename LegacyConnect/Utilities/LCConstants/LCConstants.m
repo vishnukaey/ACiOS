@@ -58,6 +58,12 @@ NSString *const kLogOutURL = @"";
 NSString *const kContactFriendsURL = @"api/user/friends";
 NSString *const kFBContactFriendsURL = @"api/user/fbFriends";
 NSString *const kprofileEditURL = @"api/user/edit";
+NSString *const kPostURL = @"api/post";
+NSString *const kPostLikeURL = @"api/post/like";
+NSString *const kPostUnlikeURL = @"api/post/unlike";
+NSString *const kPostCommentURL = @"api/post/comment";
+NSString *const kPostCommentsURL = @"api/post/comments";
+NSString *const kPostMilestoneURL = @"api/post/milestone";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -84,8 +90,14 @@ NSString *const kEventIDKey = @"eventId";
 NSString *const kLastCauseIDKey = @"lastCauseId";
 NSString *const kFriendsKey = @"friends";
 NSString *const kFriendIDKey = @"friendId";
+NSString *const kPostIDKey = @"postId";
 NSString *const kFeedsKey = @"feeds";
 NSString *const kMileStonesKey = @"milestones";
+NSString *const kImpactsKey = @"impacts";
+NSString *const kPostCommentKey = @"comment";
+NSString *const kPostCommentsKey = @"comments";
+NSString *const kPostCommentIdKey = @"commentId";
+NSString *const kLastIdKey = @"lastId";
 
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";
@@ -120,12 +132,8 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
-NSString *const kFeedCellActionLike = @"feedCellLike";
-NSString *const kFeedCellActionComment = @"feedCellComment";
-NSString *const kFeedCellActionMore = @"feedCellmore";
-NSString *const kFeedCellActionImage = @"feedCellImage";
-
 NSString *const kFeedTagTypeCause = @"cause";
+NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
 
 NSString *const kLCUrlScheme = @"legacyconnect";
@@ -135,5 +143,10 @@ NSString *const kResetPasswordNotificationName = @"password_reset_notification";
 NSString *const kUserDataUpdatedNotification = @"user_data_updated_notification";
 
 NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
+
+// -- Tag Dictionary keys -- //
+NSString *const kTagobjId = @"tag_object_id";
+NSString *const kTagobjText= @"tag_object_text";
+NSString *const kTagobjType = @"tag_object_type";
 
 @end

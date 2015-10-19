@@ -49,7 +49,7 @@ static NSString *kSettingsIcon = @"SettingsIcon";
       
     default:
       cellText = NSLocalizedString(@"Logout", nil) ;
-      cellIconImag = [UIImage imageNamed:@""];
+      cellIconImag = nil;
       break;
   }
   [self.itemName setText:cellText];

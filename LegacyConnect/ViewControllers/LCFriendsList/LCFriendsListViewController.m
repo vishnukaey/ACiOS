@@ -10,6 +10,7 @@
 #import "LCFriendsCell.h"
 #import "LCAPIManager.h"
 #import "LCLoadingCell.h"
+#import "LCProfileViewVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 @interface LCFriendsListViewController ()
@@ -25,7 +26,6 @@ static NSInteger kRowForLoadingCell = 1;
 static NSInteger kRowHeightFriendsCell= 88;
 static NSInteger kRowHeightLoadingCell= 45;
 static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
-static NSString *kLoadingCellIdentifier = @"LoadingCell";
 static NSString *kTitle = @"FRIENDS";
 
 @implementation LCFriendsListViewController
@@ -129,9 +129,9 @@ static NSString *kTitle = @"FRIENDS";
     }
   
   if (indexPath.row == self.friendsList.count) {
-    LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:kLoadingCellIdentifier forIndexPath:indexPath];
+    LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier] forIndexPath:indexPath];
     if (loadingCell == nil) {
-      loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kLoadingCellIdentifier];
+      loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[LCLoadingCell getFeedCellidentifier]];
     }
     [MBProgressHUD hideHUDForView:loadingCell animated:YES];
     [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
@@ -163,6 +163,17 @@ static NSString *kTitle = @"FRIENDS";
   if (indexPath.row == self.friendsList.count - 1 && self.loadMoreFriends && !self.isLoadingMoreFriends) {
     [self getFriendsListWithLastLastUserId:[(LCFriend*)[self.friendsList objectAtIndex:self.friendsList.count - 1] friendId]];
   }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  LCProfileViewVC *vc = [sb instantiateInitialViewController];
+  vc.userDetail = [[LCUserDetail alloc] init];
+  LCFriend *friend = [self.friendsList objectAtIndex:indexPath.row];
+  vc.userDetail.userID = friend.friendId;
+  [self.navigationController pushViewController:vc animated:YES];
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - add/remove/canel friends.

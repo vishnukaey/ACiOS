@@ -15,141 +15,221 @@
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
+#import "LCLoadingCell.h"
 
-#if DEBUG
-#import "LCViewCommunity.h"
-#endif
+static CGFloat kFeedCellRowHeight = 44.0f;
+static CGFloat kNumberOfSectionsInFeeds = 1;
+static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 @implementation LCFeedsHomeViewController
 @synthesize feedsTable;
+
+#pragma mark - private method implementation
+
+- (void)stopRefreshingViews
+{
+  // -- Stop Refreshing Views -- //
+  if (self.feedsTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.feedsTable.pullToRefreshView stopAnimating];
+  }
+}
+
+- (void)fetchHomeFeedsWithLastFeedId:(NSString*)lastId
+{
+  isLoadingMoreFriends = YES;
+  [LCAPIManager getHomeFeedsWithLastFeedId:lastId success:^(NSArray *response) {
+    NSLog(@"%@",response);
+    loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
+    [self stopRefreshingViews];
+    
+    // -- Update Data Source -- //
+    [feedsArray addObjectsFromArray:response];
+    [feedsTable reloadData];
+    isLoadingMoreFriends = NO;
+  } andFailure:^(NSString *error) {
+    [self stopRefreshingViews];
+    [feedsTable reloadData];
+    loadMoreFriends = feedsArray.count < 10 ? NO : YES;
+    isLoadingMoreFriends = NO;
+  }];
+}
+
+- (void)bottomRefresh
+{
+  if (loadMoreFriends && !isLoadingMoreFriends) {
+    [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
+  }
+  else
+  {
+    [self stopRefreshingViews];
+  }
+}
+
+- (void)initialUISetUp
+{
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+  [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  feedsTable.estimatedRowHeight = kFeedCellRowHeight;
+  feedsTable.rowHeight = UITableViewAutomaticDimension;
+  
+  // Pull to Refresh Interface to Feeds TableView.
+  [feedsTable addPullToRefreshWithActionHandler:^{
+    [feedsArray removeAllObjects];
+    [feedsTable reloadData];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [self fetchHomeFeedsWithLastFeedId:nil];
+    });
+  } withBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (void)setGIAndMenuButtonVisibilityStatus:(BOOL)isHidden
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:isHidden];
+  [appdel.menuButton setHidden:isHidden];
+}
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  UILabel *construction_ = [[UILabel alloc] initWithFrame:CGRectMake(0, 200, [[UIScreen mainScreen] bounds].size.width, 80)];
-  construction_.text = @"Under development...";
-  construction_.textAlignment = NSTextAlignmentCenter;
-  [self.view addSubview:construction_];
-  
-//  [LCAPIManager getHomeFeedsWithSuccess:^(NSArray *response) {
-//    feedsArray = response;
-//    [feedsTable reloadData];
-//  } andFailure:^(NSString *error) {
-//    NSLog(@"%@",error);
-//  }];
-  
-  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-  
-  [feedsTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  feedsTable.estimatedRowHeight = 44.0;
-  feedsTable.rowHeight = UITableViewAutomaticDimension;
-  
-  [feedsTable addPullToRefreshWithActionHandler:^{
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [feedsTable.pullToRefreshView stopAnimating];
-    });
-  }withBackgroundColor:[UIColor lightGrayColor]];
-  
+  feedsArray = [[NSMutableArray alloc] init];
+  loadMoreFriends = YES;
+  [self fetchHomeFeedsWithLastFeedId:nil];
+  [self initialUISetUp];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  if (!appdel.isCreatePostOpen) {
-    [appdel.GIButton setHidden:NO];
-    [appdel.menuButton setHidden:NO];
-  }
+  self.navigationController.navigationBarHidden = YES;
+  [self setGIAndMenuButtonVisibilityStatus:NO];
+  [feedsTable reloadData];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:true];
-  [appdel.menuButton setHidden:true];
+  [self setGIAndMenuButtonVisibilityStatus:YES];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - TableView delegates
+#pragma mark - UITableViewDataSource implementation
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return kNumberOfSectionsInFeeds;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
+  if (feedsArray.count == 0 && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading) {
+    return 1;
+  }
+  
   return feedsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"LCFeedCell";
-  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
+  
+  NSLog(@"index path ----- %li",indexPath.row);
+  
+  if (feedsArray.count == 0)
   {
-    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
-    // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-    cell = [topLevelObjects objectAtIndex:0];
+    return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_feeds_available", nil)];
   }
-  cell.delegate = self;
-  [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
-
-  return cell;
+  
+  if (indexPath.row == feedsArray.count) {
+    LCLoadingCell *loadingCell = [tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier]];
+    if (loadingCell == nil) {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
+      loadingCell = [topLevelObjects objectAtIndex:0];
+    }
+    [loadingCell setBackgroundColor:[UIColor greenColor]];
+    [MBProgressHUD hideHUDForView:loadingCell animated:NO];
+    [MBProgressHUD showHUDAddedTo:loadingCell animated:NO];
+    return loadingCell;
+  }
+  else
+  {
+    LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
+    if (cell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+    }
+    [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+    __weak typeof(self) weakSelf = self;
+    cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+      [weakSelf feedCellActionWithType:actionType andFeed:feed];
+    };
+    cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+      [weakSelf tagTapped:tagDetails];
+    };
+    return cell;
+  }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.row == feedsArray.count - 1 && loadMoreFriends && !isLoadingMoreFriends) {
+    NSLog(@" >>>>>>>>>>>>>>>> more fetch >>>>>>>>>>>");
+    [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
+  }
+}
+
+#pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
-#pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%@", type);
-  
-  if ([type isEqualToString:kFeedCellActionComment])//comments
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-    [next setFeedObject:feed];
-    [self.navigationController pushViewController:next animated:YES];
+  switch (type) {
+      
+    case kFeedCellActionComment:
+      [self showFeedCommentsWithFeed:feed];
+      break;
+      
+      case kFeedCellActionLike:
+      /**
+       * Like/Unlike actions will be handled from 'LCFeedCellView' class.
+       */
+      break;
+      
+      case kkFeedCellActionViewImage:
+      [self showFullScreenImage:feed.image];
+      break;
+      
+    default:
+      break;
   }
-  
-  else if ([type isEqualToString:kFeedCellActionLike])
-  {
-#if DEBUG
-    //testing community
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-    LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
-    vc.eventID = @"e82de0d2-4fd4-11e5-9852-3d5d64aee29a";
-    [self.navigationController pushViewController:vc animated:YES];
-#endif
-//    [self postMessage];
-  }
-  else if ([type isEqualToString:kFeedCellActionImage])
-  {
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdel.GIButton setHidden:YES];
-    [appdel.menuButton setHidden:YES];
-    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
-    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:vc animated:YES completion:nil];
-  }
+}
+
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+  [self.navigationController pushViewController:next animated:YES];
+}
+
+- (void)showFullScreenImage:(NSString*)imageUrl
+{
+  [self setGIAndMenuButtonVisibilityStatus:YES];
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.imageUrlString = imageUrl;
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails
@@ -170,6 +250,14 @@
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////                                                                                                  ////////////////////
+////////////////                        TEST DATA - To be removed                                                 ////////////////////
+////////////////                                                                                                  ////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //following is the code for other screens
 ACAccount *facebookAccount;

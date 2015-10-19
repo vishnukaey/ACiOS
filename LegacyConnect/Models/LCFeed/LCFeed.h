@@ -10,12 +10,14 @@
 #import "LCTag.h"
 
 @interface LCFeed : MTLModel <MTLJSONSerializing>
+@property (nonatomic, strong) NSString *feedId;
 @property (nonatomic, strong) NSString *userID;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *avatarURL;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *commentCount;
+@property (nonatomic, strong) NSArray *comments;
 @property (nonatomic, strong) NSString *likeCount;
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *isMilestone;
@@ -29,4 +31,5 @@
 @property (nonatomic, strong) NSString *didLike;
 @property (nonatomic, strong) NSString *postType;
 @property (nonatomic, strong) NSArray *postTags;
+
 @end

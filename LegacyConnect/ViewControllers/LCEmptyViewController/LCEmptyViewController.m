@@ -22,6 +22,7 @@
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
 
+
 @interface LCEmptyViewController ()
 {
   LCCreatePostViewController *createPostVC;
@@ -53,7 +54,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-
+  
+  [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
@@ -72,35 +74,52 @@
     //Fetch additional userdetails if user is logged-in
     if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
     {
+      
       [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
-         [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
          [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
-         
-         LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-         LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
-         navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-         
-         LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
-//         leftSideMenuViewController.menuwidth = appdel.window.frame.size.width*2/3;
-         leftSideMenuViewController.delegate_ = self;
-         
-         mainContainer = [MFSideMenuContainerViewController
-                          containerWithCenterViewController:navigationRoot
-                          leftMenuViewController:nil
-                          rightMenuViewController:leftSideMenuViewController];
-//         mainContainer.rightMenuWidth = leftSideMenuViewController.menuwidth;
-         mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
-         appdel.window.rootViewController = mainContainer;
-         [appdel.window makeKeyAndVisible];
-         
-         [self addGIButton];
-         [self addMenuButton:navigationRoot];
-         mainContainer.panMode = MFSideMenuPanModeNone;
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+         [self addSideMenuVIewController];
 
          
+//**********************************************************************
+       // API Test
+         
+//         UIImage *image = [UIImage imageNamed:@"profileFriend"];
+//         
+//         LCNewPost *newPost = [[LCNewPost alloc] init];
+//         newPost.message = @"new post 103";
+//         newPost.entityType = @"";
+//         newPost.entityID = @"1";
+//         newPost.location = @"Kochi";
+//         newPost.isMilestone = @"0";
+//         
+//         LCTag *tag1 = [[LCTag alloc] init];
+//         tag1.tagID = @"1";
+//         tag1.type = @"cause";
+//         tag1.text = @"my cause";
+//         
+//         LCTag *tag2 = [[LCTag alloc] init];
+//         tag2.tagID = @"2";
+//         tag2.type = @"cause";
+//         tag2.text = @"my cause 2";
+//         
+//         newPost.postTags = @[tag1,tag2];
+//         
+//         
+//         
+//         [LCAPIManager createNewPost:newPost image:nil withSuccess:^(id response) {
+//           NSLog(@"post creation success - %@",response);
+//         } andFailure:^(NSString *error) {
+//           NSLog(@"post creation failed - %@",error);
+//         }];
+                  
+         
+//**********************************************************************
+
+         
+         
        } andFailure:^(NSString *error) {
+         [self addSideMenuVIewController];
          NSLog(@" error:  %@",error);
        }];
     }
@@ -113,6 +132,32 @@
       [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
     }
   }
+}
+
+
+-(void) addSideMenuVIewController
+{
+  [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
+  navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
+  
+  LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
+  leftSideMenuViewController.delegate_ = self;
+  
+  mainContainer = [MFSideMenuContainerViewController
+                   containerWithCenterViewController:navigationRoot
+                   leftMenuViewController:nil
+                   rightMenuViewController:leftSideMenuViewController];
+  mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
+  appdel.window.rootViewController = mainContainer;
+  [appdel.window makeKeyAndVisible];
+  
+  [self addGIButton];
+  [self addMenuButton:navigationRoot];
+  mainContainer.panMode = MFSideMenuPanModeNone;
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
 }
 
 - (void)menuEventNotification:(NSNotification*)notification
@@ -142,25 +187,35 @@
   
   giButton.postStatusButton.tag = 2;
   [giButton.postStatusButton addTarget:self action:@selector(GIBComponentsAction:) forControlEvents:UIControlEventTouchUpInside];
-  
+  [giButton addTarget:self action:@selector(GIButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)addMenuButton:(UIViewController*)vc
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   //menu poper button
-  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 45, 28, 25, 25)];
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 65, statusBarViewRect.size.height, 65, self.navigationController.navigationBar.frame.size.height)];
 
-  menuButton.layer.cornerRadius = menuButton.frame.size.width/2;
   menuButton.backgroundColor = [UIColor clearColor];
   [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  [menuButton setBackgroundImage:[UIImage imageNamed:@"MenuButton"] forState:UIControlStateNormal];
   menuButton.badgeLabel.text = @"2";
+  
+  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(10, menuButton.frame.size.height/2 - 12, 25, 25)];
+  icon_.image = [UIImage imageNamed:@"MenuButton"];
+  [menuButton addSubview:icon_];
+//  [menuButton setBackgroundColor:[UIColor blueColor]];
 }
 
 #pragma mark - button actions
+- (void)GIButtonClicked
+{
+  [mainContainer setMenuState:MFSideMenuStateClosed];
+}
+
 - (void)menuButtonAction
 {
   if (mainContainer.menuState == MFSideMenuStateClosed) {

@@ -15,6 +15,11 @@
 #import "LCFriendsListViewController.h"
 #import "LCFullScreenImageVC.h"
 
+static NSString * const kImageNameProfileSettings = @"profileSettings";
+static NSString * const kImageNameProfileAdd = @"profileAdd";
+static NSString * const kImageNameProfileFriend = @"profileFriend";
+static NSString * const kImageNameProfileWaiting = @"profileWaiting";
+
 @implementation LCProfileViewVC
 @synthesize userDetail;
 
@@ -25,10 +30,15 @@
   milestonesTable.estimatedRowHeight = 44.0;
   milestonesTable.rowHeight = UITableViewAutomaticDimension;
   
+  UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
+  milestonesTable.tableFooterView = zeroRectView;
+  interestsTable.tableFooterView = zeroRectView;
+  actionsTable.tableFooterView = zeroRectView;
+  
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
-  [self loadUserData];
+  [self loadUserInfo];
   
   [self loadMileStones];
   [self addTabMenu];
@@ -48,8 +58,12 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:NO];
   [appdel.menuButton setHidden:NO];
+  if (self.navigationController.viewControllers.count <= 1) {
+    [backButton setHidden:YES];
+  }
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
+  
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -66,31 +80,26 @@
 
 #pragma mark - setup functions
 
-- (void) loadUserData {
+- (void) loadUserInfo {
   
-  NSString *firstName = [LCDataManager sharedDataManager].firstName;
-  NSString *lastName = [LCDataManager sharedDataManager].lastName;
-  userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
-                        [LCUtilityManager performNullCheckAndSetValue:firstName],
-                        [LCUtilityManager performNullCheckAndSetValue:lastName]]uppercaseString];
+  userNameLabel.text = @"";
   memeberSincelabel.text = @"";
   locationLabel.text = @"";
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   NSLog(@"nativeUserId-->>%@ userDetail.userID-->>%@",nativeUserId, userDetail.userID);
-  if ([nativeUserId isEqualToString:userDetail.userID])
+  if ([nativeUserId isEqualToString:userDetail.userID] || !userDetail.userID)
   {
     currentProfileState = PROFILE_SELF;
-    [editButton setImage:[UIImage imageNamed:@"profileSettings"] forState:UIControlStateNormal];
-    backButton.hidden = YES;
+    [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
   }
   else
   {
     currentProfileState = PROFILE_OTHER_NON_FRIEND;
-    [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
   }
-  
+  profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   [self loadUserDetails];
 }
 
@@ -99,9 +108,14 @@
 {
   
   NSLog(@"userID<<<-->>>%@", userDetail.userID);
+  editButton.enabled = NO;
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
-    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
+    
+    if(currentProfileState == PROFILE_SELF) {
+      [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
+    }
     userDetail = response;
+    editButton.enabled = YES;
     NSLog(@"user details - %@",response);
     
     userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
@@ -110,46 +124,44 @@
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
                               [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
-    locationLabel.text = [NSString stringWithFormat:@"%@ . %@ . %@",
+    locationLabel.text = [[NSString stringWithFormat:@"%@ \u2022 %@ \u2022 %@",
                           [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
                           [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.location]];
+                          [LCUtilityManager performNullCheckAndSetValue:userDetail.location]] uppercaseString];
     
     impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
     friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
     
+    NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
     
-    [profilePic sd_setImageWithURL:[NSURL URLWithString:userDetail.avatarURL]
-                  placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-    [headerImageView sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
-                       placeholderImage:nil];
+    [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
+                  placeholderImage:profilePic.image];
     
-    if ([userDetail.isFriend isEqualToString:@"Friend request pending"])
-    {
-      [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
-      currentProfileState = PROFILE_OTHER_WAITING;
-    }
+    NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
+    
+    [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
+                       placeholderImage:headerImageView.image];
+
     
     switch ([userDetail.isFriend integerValue]) {
       case 0:
         currentProfileState = PROFILE_SELF;
-        [editButton setImage:[UIImage imageNamed:@"profileSettings"] forState:UIControlStateNormal];
-        backButton.hidden = YES;
+        [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
         break;
         
       case 1:
         currentProfileState = PROFILE_OTHER_FRIEND;
-        [editButton setImage:[UIImage imageNamed:@"profileFriend"] forState:UIControlStateNormal];
+        [editButton setImage:[UIImage imageNamed:kImageNameProfileFriend] forState:UIControlStateNormal];
         break;
         
       case 2:
         currentProfileState = PROFILE_OTHER_NON_FRIEND;
-        [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+        [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
         break;
         
       case 3:
         currentProfileState = PROFILE_OTHER_WAITING;
-        [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
+        [editButton setImage:[UIImage imageNamed:kImageNameProfileWaiting] forState:UIControlStateNormal];
         break;
         
       default:
@@ -162,9 +174,11 @@
 }
 
 -(void)updateUserData:(NSNotification *)notification {
-  
+  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
   dispatch_async(dispatch_get_global_queue(0,0), ^{
     [self loadUserDetails];
+    
   });
   
 }
@@ -175,7 +189,7 @@
   
   LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [tabMenuContainer addSubview:tabmenu];
-  [tabmenu setBackgroundColor:[UIColor whiteColor]];
+  //[tabmenu setBackgroundColor:[UIColor whiteColor]];
   tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
   tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
   
@@ -310,7 +324,7 @@
        {
          NSLog(@"%@",response);
          currentProfileState = PROFILE_OTHER_NON_FRIEND;
-         [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+         [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
        }
                      andFailure:^(NSString *error)
        {
@@ -331,7 +345,7 @@
     [LCAPIManager sendFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
       currentProfileState = PROFILE_OTHER_WAITING;
-      [editButton setImage:[UIImage imageNamed:@"profileWaiting"] forState:UIControlStateNormal];
+      [editButton setImage:[UIImage imageNamed:kImageNameProfileWaiting] forState:UIControlStateNormal];
     } andFailure:^(NSString *error) {
       NSLog(@"%@",error);
     }];
@@ -347,7 +361,7 @@
       [LCAPIManager cancelFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
         NSLog(@"%@",response);
         currentProfileState = PROFILE_OTHER_NON_FRIEND;
-        [editButton setImage:[UIImage imageNamed:@"profileAdd"] forState:UIControlStateNormal];
+        [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
       } andFailure:^(NSString *error) {
         NSLog(@"%@",error);
       }];
@@ -430,6 +444,7 @@
       }
       UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
+      tableView.backgroundColor = [UIColor whiteColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
       return cell;
@@ -437,21 +452,28 @@
     
     else {
       
-      static NSString *MyIdentifier = @"LCFeedCell";
-      LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
       if (cell == nil)
       {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
         // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
         cell = [topLevelObjects objectAtIndex:0];
       }
-      cell.delegate = self;
       [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+      __weak typeof(self) weakSelf = self;
+      cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+        [weakSelf feedCellActionWithType:actionType andFeed:feed];
+      };
+      cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+        [weakSelf tagTapped:tagDetails];
+      };
+
       
       if (currentProfileState == PROFILE_SELF) {
         cell.moreButton.hidden = NO;
       }
       
+      tableView.backgroundColor = [UIColor clearColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
       tableView.allowsSelection = YES;
       
@@ -474,6 +496,7 @@
       }
       UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
+      tableView.backgroundColor = [UIColor whiteColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
       return cell;
@@ -491,6 +514,7 @@
       LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
       [cell setData:interstObj];
       
+      tableView.backgroundColor = [UIColor clearColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
       tableView.allowsSelection = YES;
       
@@ -513,6 +537,7 @@
       }
       UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
       
+      tableView.backgroundColor = [UIColor whiteColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
       tableView.allowsSelection = NO;
       return cell;
@@ -527,6 +552,7 @@
       }
       [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
       
+      tableView.backgroundColor = [UIColor clearColor];
       tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
       tableView.allowsSelection = YES;
       return cell;
@@ -542,46 +568,57 @@
 }
 
 #pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(NSString *)type andFeed:(LCFeed *)feed
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%@", type);
-  if (type == kFeedCellActionMore) {
-    
-    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    actionSheet.view.tintColor = [UIColor blackColor];
-    
-    UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  switch (type) {
+    case kkFeedCellActionLoadMore:
+      [self feedCellMoreAction];
+      break;
       
-    }];
-    
-    [actionSheet addAction:editPost];
-    
-    UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      case kkFeedCellActionViewImage:
+      [self showFullScreenImage:feed];
+      break;
       
-    }];
-    [actionSheet addAction:removeMilestone];
-    
-    UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      
-    }];
-    [actionSheet addAction:deletePost];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-    [actionSheet addAction:cancelAction];
-    
-    [self presentViewController:actionSheet animated:YES completion:nil];
+    default:
+      break;
   }
-  else if ([type isEqualToString:kFeedCellActionImage])
-  {
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appdel.GIButton setHidden:YES];
-    [appdel.menuButton setHidden:YES];
-    LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-    vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:vc animated:YES completion:nil];
-    [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:[UIImage imageNamed:@""]];;
-  }
+}
+
+- (void)showFullScreenImage:(LCFeed*)feed
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden:YES];
+  [appdel.menuButton setHidden:YES];
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
+  [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:nil];;
+}
+
+- (void)feedCellMoreAction
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
   
+  UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+  }];
+  
+  [actionSheet addAction:editPost];
+  
+  UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+  }];
+  [actionSheet addAction:removeMilestone];
+  
+  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+  }];
+  [actionSheet addAction:deletePost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

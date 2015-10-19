@@ -13,12 +13,14 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
+           @"feedId" : @"id",
            @"userID": @"userId",
            @"firstName": @"firstName",
            @"lastName": @"lastName",
            @"message": @"message",
            @"avatarURL": @"avatarUrl",
            @"commentCount": @"commentCount",
+           @"comments": @"comments",
            @"likeCount": @"likeCount",
            @"createdAt": @"createdAt",
            @"isMilestone": @"isMilestone",
@@ -31,13 +33,18 @@
            @"location": @"location",
            @"didLike": @"didLike",
            @"postType": @"postType",
-           @"postTags": @"posttags",
+           @"postTags": @"postTags",
            };
 }
 
-+ (NSValueTransformer *)posttagsJSONTransformer
++ (NSValueTransformer *)postTagsJSONTransformer
 {
   return [MTLJSONAdapter arrayTransformerWithModelClass:[LCTag class]];
+}
+
++ (NSValueTransformer *)commentsJSONTransformer
+{
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCComment class]];
 }
 
 @end
