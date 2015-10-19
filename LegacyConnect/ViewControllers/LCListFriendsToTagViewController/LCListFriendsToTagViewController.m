@@ -33,7 +33,7 @@
   friendsTableView.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   for (LCFriend *friend in alreadySelectedFriends)
   {
-    [friendsTableView.selectedIDs addObject:friend.userID];
+    [friendsTableView.selectedIDs addObject:friend.friendId];
   }
   // Do any additional setup after loading the view.
   searchResultsArray = [[NSMutableArray alloc] init];
@@ -87,7 +87,7 @@
   {
     for (LCFriend *friend in friendsArray)
     {
-      if ([friend.userID isEqualToString:userId])
+      if ([friend.friendId isEqualToString:userId])
       {
         [arrayToPass addObject:friend];
         break;
@@ -107,7 +107,7 @@
 {
   friendsTableView.selectedButton = sender;
   LCFriend *friend = searchResultsArray[sender.tag];
-  [friendsTableView AddOrRemoveID:friend.userID];
+  [friendsTableView AddOrRemoveID:friend.friendId];
 }
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -164,7 +164,7 @@
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   cell.checkButton.tag = indexPath.row;
-  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friend.userID, nil]];
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friend.friendId, nil]];
   
   return cell;
 }

@@ -23,13 +23,20 @@
   UILabel *placeHolderLabel;
   
   NSString *taggedLocation;
+  
+  IBOutlet UIImageView *tagFriendsIcon, *cameraIcon, *tagLocationIcon, *milestoneIcon;
 }
 @end
 
-#pragma mark - lifecycle methods
+static NSString *ktagFriendIconImageName = @"createPost_tagFriends";
+static NSString *ktagLocationIconImageName = @"createPost_location";
+static NSString *kcameraIconImageName = @"createPost_cameraGrey";
+static NSString *kmilestoneIconImageName = @"MilestoneIcon";
+
 @implementation LCCreatePostViewController
+#pragma mark - lifecycle methods
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
   [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
   
   _popUpView.layer.cornerRadius = 5;
@@ -187,6 +194,44 @@
   [postImageView setFrame:CGRectMake(0, postImageYorigin, _postScrollView.frame.size.width, postImageView.frame.size.height)];
   
   [_postScrollView setContentSize:CGSizeMake(_postScrollView.contentSize.width, postImageView.frame.origin.y + postImageView.frame.size.height)];
+  
+  UIImage *tagfirends_im = [UIImage imageNamed:ktagFriendIconImageName];
+  tagfirends_im = [tagfirends_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  tagFriendsIcon.image = tagfirends_im;
+  [tagFriendsIcon setTintColor:[UIColor grayColor]];
+  
+  UIImage *cam_im = [UIImage imageNamed:kcameraIconImageName];
+  cam_im = [cam_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  cameraIcon.image = cam_im;
+  [cameraIcon setTintColor:[UIColor grayColor]];
+  
+  UIImage *tagloc_im = [UIImage imageNamed:ktagLocationIconImageName];
+  tagloc_im = [tagloc_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  tagLocationIcon.image = tagloc_im;
+  [tagLocationIcon setTintColor:[UIColor grayColor]];
+  
+  UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImageName];
+  miles_im = [miles_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  milestoneIcon.image = miles_im;
+  [milestoneIcon setTintColor:[UIColor grayColor]];
+
+  if (taggedFriendsArray.count > 0) {
+    [tagFriendsIcon setTintColor:[UIColor blackColor]];
+  }
+  
+  if (taggedLocation.length>0)
+  {
+    [tagLocationIcon setTintColor:[UIColor blackColor]];
+  }
+  
+  if (postImageView.image)
+  {
+    [cameraIcon setTintColor:[UIColor blackColor]];
+  }
+  
+  if (1) {
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+  }
 }
 
 - (void)adjustScrollViewOffsetWhileTextEditing :(UITextView *)textView
@@ -232,6 +277,13 @@
   [postTextView resignFirstResponder];
   UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
   [sheet showInView:self.view];
+}
+
+- (IBAction)intersestDownArrowClicked
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListInterestsAndCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListInterestsAndCausesVC"];
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - textview delegate

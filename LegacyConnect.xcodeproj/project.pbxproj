@@ -135,6 +135,7 @@
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
 		CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
+		CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F388B1BD4D45700574526 /* LCListInterestsAndCausesVC.m */; settings = {ASSET_TAGS = (); }; };
 		CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA30E2F1B7366C100DAA4BA /* LCCommunityInterestCell.m */; };
 		CEB9B6A91B79E4E900C61BA0 /* LCTabMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB9B6A81B79E4E900C61BA0 /* LCTabMenuView.m */; };
 		CEBA92C91B660F0500C02F93 /* LCProfileViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */; };
@@ -375,6 +376,8 @@
 		CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMultipleSelectionTable.m; path = CustomViews/LCMultipleSelectionTable/LCMultipleSelectionTable.m; sourceTree = "<group>"; };
 		CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImapactsViewController.h; path = ViewControllers/LCProfileVC/LCImapactsViewController.h; sourceTree = "<group>"; };
 		CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImapactsViewController.m; path = ViewControllers/LCProfileVC/LCImapactsViewController.m; sourceTree = "<group>"; };
+		CE8F388A1BD4D45700574526 /* LCListInterestsAndCausesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListInterestsAndCausesVC.h; path = ViewControllers/LCListInterestsAndCausesVC/LCListInterestsAndCausesVC.h; sourceTree = "<group>"; };
+		CE8F388B1BD4D45700574526 /* LCListInterestsAndCausesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListInterestsAndCausesVC.m; path = ViewControllers/LCListInterestsAndCausesVC/LCListInterestsAndCausesVC.m; sourceTree = "<group>"; };
 		CEA30E2E1B7366C100DAA4BA /* LCCommunityInterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommunityInterestCell.h; path = CustomViews/LCCommunityInterestCell/LCCommunityInterestCell.h; sourceTree = "<group>"; };
 		CEA30E2F1B7366C100DAA4BA /* LCCommunityInterestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityInterestCell.m; path = CustomViews/LCCommunityInterestCell/LCCommunityInterestCell.m; sourceTree = "<group>"; };
 		CEB9B6A71B79E4E900C61BA0 /* LCTabMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTabMenuView.h; path = CustomViews/LCTabMenuView/LCTabMenuView.h; sourceTree = "<group>"; };
@@ -1155,6 +1158,7 @@
 		96B86A221B7A2106003EF7CA /* CreatePost */ = {
 			isa = PBXGroup;
 			children = (
+				CE8F388D1BD4D5A700574526 /* LCListInterestsAndCausesVC */,
 				CEBB4FF71B8C752200C1552E /* LCListLocationsToTagVC */,
 				96B86A1F1B79CF77003EF7CA /* LCCreatePostViewController */,
 				96B86A261B7A2353003EF7CA /* LCListFriendsToTagViewController */,
@@ -1188,6 +1192,15 @@
 				CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */,
 			);
 			name = LCMultipleSelectionTable;
+			sourceTree = "<group>";
+		};
+		CE8F388D1BD4D5A700574526 /* LCListInterestsAndCausesVC */ = {
+			isa = PBXGroup;
+			children = (
+				CE8F388A1BD4D45700574526 /* LCListInterestsAndCausesVC.h */,
+				CE8F388B1BD4D45700574526 /* LCListInterestsAndCausesVC.m */,
+			);
+			name = LCListInterestsAndCausesVC;
 			sourceTree = "<group>";
 		};
 		CE96C9101BA2C515004964CC /* Font Files */ = {
@@ -1541,6 +1554,7 @@
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
 				96BD14591B72166B004D5CFA /* MTLValueTransformer.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
+				CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */,
 				96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */,
 				0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */,
 				CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */,

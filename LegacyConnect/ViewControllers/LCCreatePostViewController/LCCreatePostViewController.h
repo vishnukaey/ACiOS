@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LCListFriendsToTagViewController.h"
 #import "LCListLocationsToTagVC.h"
+#import "LCListInterestsAndCausesVC.h"
 
 @protocol createPostDelegate <NSObject>
 
