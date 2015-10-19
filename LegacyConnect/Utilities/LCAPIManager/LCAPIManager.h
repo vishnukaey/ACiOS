@@ -23,7 +23,7 @@
 #pragma mark - Post
 
 + (void)getPostDetailsOfPost:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure;
-+ (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)createNewPost:(LCPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)likePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void) unlikePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

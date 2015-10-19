@@ -251,7 +251,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)createNewPost:(LCNewPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)createNewPost:(LCPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
 #warning  correct issue with postTags array format
   NSString *imageName = @"image";
