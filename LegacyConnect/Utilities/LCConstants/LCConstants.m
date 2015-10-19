@@ -44,6 +44,7 @@ NSString *const kGetUserInterestsURL = @"api/user/interests";
 NSString *const kGetInterestFollowersURL = @"api/interest/users";
 NSString *const kIneterestsFollowURL = @"api/interest/follow";
 NSString *const kIneterestsUnfollowURL = @"api/interest/unfollow";
+NSString *const kGetInterestsAndCausesURL = @"api/user/getUserInterestsWithCauses";
 
 NSString *const kGetCauseURL = @"api/cause";
 NSString *const kGetCausesURL = @"api/causes";
@@ -71,6 +72,7 @@ NSString *const kContactFriendsURL = @"api/user/friends";
 NSString *const kFBContactFriendsURL = @"api/user/fbFriends";
 NSString *const kprofileEditURL = @"api/user/edit";
 NSString *const kPostURL = @"api/post";
+NSString *const kPostEditURL = @"api/post/edit";
 NSString *const kPostLikeURL = @"api/post/like";
 NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";

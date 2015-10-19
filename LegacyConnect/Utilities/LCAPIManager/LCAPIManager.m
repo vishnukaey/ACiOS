@@ -218,7 +218,7 @@ static LCAPIManager *sharedManager = nil;
 
 #pragma mark - Post
 
-+ (void)getPostDetailsOfPost:(NSString*)postID WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getPostDetailsOfPost:(NSString*)postID WithSuccess:(void (^)(LCFeed* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kPostURL,postID];
@@ -251,7 +251,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)createNewPost:(LCPost*)post image:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)createNewPost:(LCPost*)post WithImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
 #warning  correct issue with postTags array format
   NSString *imageName = @"image";
@@ -302,6 +302,45 @@ static LCAPIManager *sharedManager = nil;
       if(!error)
       {
         NSLog(@"Successfully created new post");
+        success(response);
+      }
+      else
+      {
+        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+      }
+    }
+  } andFailure:^(NSString *error) {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
+  
+  
+}
+
++ (void)updatePost:(LCPost*)post WithImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+  NSString *imageName = @"image";
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostEditURL];
+  
+  NSError *error = nil;
+  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
+  
+  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict image:image andImageName:imageName withSuccess:^(id response) {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      NSLog(@"%@",response[kResponseMessage]);
+      NSError *error = nil;
+      if(!error)
+      {
+        NSLog(@"Successfully updated post");
         success(response);
       }
       else
@@ -658,6 +697,40 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
++ (void)getUserInterestsAndCausesWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetInterestsAndCausesURL];
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
+       if(!error)
+       {
+         NSLog(@"Getting Interests successful! ");
+         success(responsesArray);
+       }
+       else
+       {
+         NSLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     NSLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
 
 + (void)saveCauses:(NSArray *)causes andInterests:(NSArray*)interests ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
@@ -718,7 +791,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCFeed* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kGetInterestURL,interestId];
@@ -751,7 +824,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)getCauseDetailsOfCause:(NSString*)causeId WithSuccess:(void (^)(LCFeed* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getCauseDetailsOfCause:(NSString*)causeId WithSuccess:(void (^)(LCFeed* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kGetCauseURL,causeId];

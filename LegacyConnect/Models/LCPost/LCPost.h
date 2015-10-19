@@ -10,6 +10,7 @@
 
 @interface LCPost : MTLModel <MTLJSONSerializing>
 
+@property (nonatomic, strong) NSString *postID;
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSString *isMilestone;
 @property (nonatomic, strong) NSString *postToType;

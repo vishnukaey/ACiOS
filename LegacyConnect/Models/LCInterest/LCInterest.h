@@ -18,5 +18,6 @@
 @property (nonatomic, strong) NSString *logoURLSmall;
 @property (nonatomic, strong) NSString *followers;
 @property (nonatomic, strong) NSArray *causes;
+@property (nonatomic, strong) NSString *events;
 @property (nonatomic, assign) BOOL isDeleted;
 @end

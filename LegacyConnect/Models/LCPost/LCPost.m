@@ -13,12 +13,13 @@
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
+           @"postID": @"postId",
            @"message": @"message",
            @"isMilestone": @"isMilestone",
            @"postToType": @"postToType",
            @"postToID": @"postToId",
            @"location": @"location",
-           @"postTags": @"postTags",
+           @"postTags": @"postTags"
            };
 }
 
