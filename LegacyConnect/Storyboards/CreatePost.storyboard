@@ -764,7 +764,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="IQc-kc-iet" id="8HN-Oj-zaP"/>
+                                    <outlet property="delegate" destination="C2E-jM-Jem" id="CyN-hu-gil"/>
                                 </connections>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nif-MQ-ztM">
@@ -886,9 +886,13 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
+                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="YhI-gu-R5y" secondAttribute="trailing" id="2Vw-jj-6wv"/>
                                     <constraint firstItem="zq1-Re-mZm" firstAttribute="top" secondItem="RhF-Nu-QEE" secondAttribute="top" id="3Zi-I2-L2H"/>

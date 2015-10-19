@@ -8,6 +8,7 @@
 
 #import "LCListInterestsAndCausesVC.h"
 #import "LCTabMenuView.h"
+#import "LCInterestsCellView.h"
 
 @interface LCListInterestsAndCausesVC ()
 {
@@ -16,8 +17,16 @@
   IBOutlet UITableView *interestsTableView;
   
   IBOutlet UIButton *interestsButton, *causesButton;
+  
+  NSArray *interestsArray;
+  NSMutableArray *interestsSearchArray;
+  
+  LCInterest *selectedInterest;
 }
 @end
+
+static NSString *kUnCheckedImageName = @"tagFirend_unselected";
+static NSString *kCheckedImageName = @"contact_tick";
 
 @implementation LCListInterestsAndCausesVC
 #pragma mark - lifecycle methods
@@ -25,8 +34,12 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  
+  interestsSearchArray = [[NSMutableArray alloc] init];
   [self addTabMenu];
+  [self loadInterests];
+  
+  UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
+  interestsTableView.tableFooterView = zeroRectView;
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,6 +78,20 @@
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
 
+- (void)loadInterests
+{
+  [MBProgressHUD showHUDAddedTo:interestsTableView animated:YES];
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses) {
+    interestsArray = responses;
+    [interestsSearchArray addObjectsFromArray:responses];
+    [interestsTableView reloadData];
+    [MBProgressHUD hideAllHUDsForView:interestsTableView animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:interestsTableView animated:YES];
+    NSLog(@"%@",error);
+  }];
+}
+
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
@@ -76,14 +103,104 @@
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - searchfield delegates
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+  [interestsSearchArray removeAllObjects];
+  if([searchText length] != 0) {
+    for (int i = 0; i<interestsArray.count ; i++)
+    {
+      LCInterest *interest = interestsArray[i];
+      NSString * tempStr = interest.name;
+      NSComparisonResult result = [tempStr compare:searchBar.text options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchBar.text length])];
+      if (result == NSOrderedSame)
+      {
+        [interestsSearchArray addObject:interest];
+      }
+    }
+  }
+  else
+  {
+    [interestsSearchArray addObjectsFromArray:interestsArray];
+  }
+  [interestsTableView reloadData];
 }
-*/
+
+#pragma mark - TableView delegates
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 1;    //count of section
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  if (interestsArray.count==0)
+  {
+    return 1;
+  }
+  return interestsSearchArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (interestsArray.count == 0)
+  {
+    NSString * message = @"Search and add interests from the menu.";
+    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelection = NO;
+    return cell;
+  }
+  else
+  {
+    static NSString *MyIdentifier = @"LCInterestsCell";
+    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+    }
+    
+    LCInterest *interstObj = [interestsSearchArray objectAtIndex:indexPath.row];
+    [cell setData:interstObj];
+    tableView.backgroundColor = [tableView.superview backgroundColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tableView.allowsSelection = YES;
+    
+    UIView *sel_but = [cell viewWithTag:10];
+    [sel_but removeFromSuperview];
+    
+    UIButton *selectionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    selectionButton.center = CGPointMake(cell.frame.size.width - 30, cell.frame.size.height/2 - 8);
+    [cell addSubview:selectionButton];
+    selectionButton.tag = 10;
+    selectionButton.userInteractionEnabled = NO;
+    if ([interstObj isEqual:selectedInterest])
+    {
+      [selectionButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+    }
+    else
+    {
+      [selectionButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+    }
+    
+    return cell;
+  }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 135;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  selectedInterest = [interestsSearchArray objectAtIndex:indexPath.row];
+  
+  [interestsTableView reloadData];
+}
 
 @end
