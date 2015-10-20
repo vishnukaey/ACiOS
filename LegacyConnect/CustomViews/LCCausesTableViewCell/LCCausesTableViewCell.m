@@ -47,6 +47,7 @@
   [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
     _cause.isSupporting =YES;
   } andFailure:^(NSString *error) {
+    [_causeSupportButton setSelected:NO];
   }];
 }
 

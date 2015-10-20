@@ -47,6 +47,7 @@
   [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
     _interest.isFollowing =YES;
   } andFailure:^(NSString *error) {
+    [_interestFollowButton setSelected:NO];
   }];
 }
 

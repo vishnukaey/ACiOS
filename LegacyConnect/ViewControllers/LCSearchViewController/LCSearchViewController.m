@@ -28,7 +28,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.searchBar becomeFirstResponder];
   
   UIButton *topButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [topButton setTitle:@"TOP" forState:UIControlStateNormal];
@@ -216,12 +215,14 @@
       {
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
         LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-        vc.userDetail = [[LCUserDetail alloc] init];
-        vc.userDetail.userID = @"6994";
+        vc.userDetail = searchResultObject.usersArray[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
       }
         break;
         
+        // Uncomment for Interests and causes
+        
+        /*
       case 1:
       {
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
@@ -237,6 +238,7 @@
         [self.navigationController pushViewController:vc animated:YES];
       }
         break;
+        */
         
       default:
         break;
@@ -292,6 +294,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  
+  // Uncomment for Selection of interest and cause
+  
+  
+  /*
   if([collectionView isEqual:_causesCollectionView])
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
@@ -303,6 +310,7 @@
         LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
         [self.navigationController pushViewController:vc animated:YES];
   }
+   */
 
 }
 
