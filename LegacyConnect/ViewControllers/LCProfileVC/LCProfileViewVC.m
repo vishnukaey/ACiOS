@@ -590,9 +590,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   [appdel.GIButton setHidden:YES];
   [appdel.menuButton setHidden:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.imageUrlString = feed.image;
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
-  [vc.imageView sd_setImageWithURL:[NSURL URLWithString:feed.image] placeholderImage:nil];;
 }
 
 - (void)feedCellMoreAction

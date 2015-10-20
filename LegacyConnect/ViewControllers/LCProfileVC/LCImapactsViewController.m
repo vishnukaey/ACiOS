@@ -153,12 +153,11 @@
 
 - (void)showFullScreenImage:(NSString*)imageUrl
 {
-#warning remove this with proper image url obje
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:YES];
   [appdel.menuButton setHidden:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.imageView.image = [UIImage imageNamed:@"photoPost_dummy.png"];
+  vc.imageUrlString = imageUrl;
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
 }

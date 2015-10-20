@@ -21,6 +21,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import "LCSpecialContainerView.h"
 #import "LCLoginViewController.h"
+#import "LCFeedsCommentsController.h"
 
 @interface LCAppDelegate ()
 
@@ -33,6 +34,8 @@
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
   [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[LCLoginViewController class]];
+  [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCFeedsCommentsController class]];
+
   [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[LCSpecialContainerView class]];
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
   return [[FBSDKApplicationDelegate sharedInstance] application:application

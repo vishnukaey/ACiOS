@@ -268,6 +268,7 @@
                 <outlet property="commentsLabel" destination="ALI-21-bQD" id="1ZY-SX-mJ9"/>
                 <outlet property="createdLabel" destination="Sok-jq-UiD" id="Jeb-8Z-rlV"/>
                 <outlet property="likeBtn" destination="s4Y-bI-bWO" id="QJS-af-uzg"/>
+                <outlet property="milestoneImage" destination="Bdg-zj-WBm" id="gwq-mO-FP7"/>
                 <outlet property="moreButton" destination="drK-gf-Qhn" id="pJg-VF-fZZ"/>
                 <outlet property="postDescription" destination="pNa-Mb-cau" id="1gG-83-Ai5"/>
                 <outlet property="postPhoto" destination="QfK-NE-qaz" id="5lu-VW-YD8"/>

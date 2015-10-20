@@ -130,7 +130,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {    
-  if (feedsArray.count == 0 && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading) {
+  if (feedsArray.count == 0 && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading && !isLoadingMoreFriends) {
     return 1;
   }
   

@@ -6,19 +6,20 @@
 //  Copyright © 2015 Gist. All rights reserved.
 //
 
-#import "LCNewPost.h"
+#import "LCPost.h"
 
-@implementation LCNewPost
+@implementation LCPost
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
   return @{
+           @"postID": @"postId",
            @"message": @"message",
            @"isMilestone": @"isMilestone",
-           @"entityType": @"entityType",
-           @"entityID": @"entityId",
+           @"postToType": @"postToType",
+           @"postToID": @"postToId",
            @"location": @"location",
-           @"postTags": @"postTags",
+           @"postTags": @"postTags"
            };
 }
 
