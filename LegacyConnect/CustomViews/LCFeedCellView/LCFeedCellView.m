@@ -59,6 +59,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   usernameLabel.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(dic_user);
   };
+  
+  //-- Milestone -- //
+  [milestoneImage setHidden:![self.feedObject.isMilestone boolValue]];
 }
 
 - (void)setFeedInfoDetails
@@ -71,13 +74,16 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
   else
   {
+    [postPhoto setContentMode:UIViewContentModeScaleAspectFit];
     postPhotoHeight.constant = 200;
-    [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil];
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+      [postPhoto setBackgroundColor:[UIColor clearColor]];
+    }];
   }
   
   
   //never ever forget to add the font attribute to the tagged label
-  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.interestName];
+  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
 
   NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
   NSString * postInfoString = postTypeAndCause;
@@ -120,7 +126,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
   
-  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.interestID, kTagobjId, self.feedObject.interestName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
+  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
   [createdAtLabelTagsWithRanges addObject:dict_createdAt];
   createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
   [createdLabel setAttributedText:attributtedString];

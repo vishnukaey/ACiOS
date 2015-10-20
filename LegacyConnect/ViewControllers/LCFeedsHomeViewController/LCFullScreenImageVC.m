@@ -9,6 +9,7 @@
 #import "LCFullScreenImageVC.h"
 
 @interface LCFullScreenImageVC ()
+@property(nonatomic, retain)UIImageView *imageView;
 
 @end
 

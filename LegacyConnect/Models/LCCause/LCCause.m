@@ -21,7 +21,8 @@
            @"logoURLSmall": @"causeLogoSmall",
            @"isDeleted": @"isDeleted",
            @"isSupporting": @"isSupporting",
-           @"supporters": @"supporters"
+           @"supporters": @"supporters",
+           @"userID": @"userId"
            };
 }
 

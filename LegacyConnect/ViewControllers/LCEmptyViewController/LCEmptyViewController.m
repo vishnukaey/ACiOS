@@ -86,12 +86,12 @@
          
 //         UIImage *image = [UIImage imageNamed:@"profileFriend"];
 //         
-//         LCNewPost *newPost = [[LCNewPost alloc] init];
-//         newPost.message = @"new post 103";
-//         newPost.entityType = @"";
-//         newPost.entityID = @"1";
+//         LCPost *newPost = [[LCPost alloc] init];
+//         newPost.message = @"new post 105";
+//         newPost.postToType = @"interest";
+//         newPost.postToID = @"1";
 //         newPost.location = @"Kochi";
-//         newPost.isMilestone = @"0";
+//         newPost.isMilestone = @"1";
 //         
 //         LCTag *tag1 = [[LCTag alloc] init];
 //         tag1.tagID = @"1";
@@ -112,7 +112,7 @@
 //         } andFailure:^(NSString *error) {
 //           NSLog(@"post creation failed - %@",error);
 //         }];
-                  
+         
          
 //**********************************************************************
 

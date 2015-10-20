@@ -43,7 +43,6 @@ static NSString *kTitle = @"FRIENDS";
       [self getFriendsListWithLastLastUserId:nil];
     });
   }withBackgroundColor:[UIColor lightGrayColor]];
-
 }
 
 - (void)initialUISetUp
@@ -210,24 +209,16 @@ static NSString *kTitle = @"FRIENDS";
   UIAlertAction *removeFriend = [UIAlertAction actionWithTitle:@"Remove Friend" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     //change button image
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
-    
     [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
-       [self.tableView beginUpdates];
-       [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:btn.tag inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-       [self.friendsList removeObject:friendObj];
-       [self.tableView endUpdates];
-     }
-                    andFailure:^(NSString *error)
-     {
+     } andFailure:^(NSString *error) {
        //Set previous button state
        [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
        NSLog(@"%@",error);
      }];
   }];
   [actionSheet addAction:removeFriend];
-  
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
@@ -237,23 +228,14 @@ static NSString *kTitle = @"FRIENDS";
 {
   //cancel friend request
   LCfriendButton * friendBtn = btn;
-
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:@"Cancel Friend Request" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
-
-    
     [LCAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
       friendObj.isFriend = kFriendStatusNonFriend;
-      [self.tableView beginUpdates];
-      [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:btn.tag inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
-      [self.friendsList removeObject:friendObj];
-      [self.tableView endUpdates];
-
     } andFailure:^(NSString *error) {
       //Set previous button state
       [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
@@ -265,15 +247,13 @@ static NSString *kTitle = @"FRIENDS";
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
-
 }
 
 - (void)addFriend:(LCFriend*)friendObj andFriendButton:(LCfriendButton*)btn
 {
   LCfriendButton * friendBtn = btn;
-
   [friendBtn setfriendStatusButtonImageForStatus:kIsFriend];
-
+  
   [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
     friendObj.isFriend = kFriendStatusMyFriend;
@@ -281,7 +261,6 @@ static NSString *kTitle = @"FRIENDS";
     NSLog(@"%@",error);
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
   }];
-
 }
 
 @end

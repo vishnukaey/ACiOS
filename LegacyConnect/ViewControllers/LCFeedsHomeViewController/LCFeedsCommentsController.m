@@ -10,9 +10,11 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCLoadingCell.h"
 
 static CGFloat kCommentFieldHeight = 45.0f;
 static CGFloat kCellForPostDetails = 1;
+static CGFloat kCellForLoadMoreBtn = 1;
 static CGFloat kIndexForPostDetails = 0;
 
 #define kPostButtonBGColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
@@ -48,21 +50,24 @@ static CGFloat kIndexForPostDetails = 0;
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 }
 
--(void)loadFeedAndComments
+-(void)loadFeedAndCommentsWithLastCommentId:(NSString*)lastId
 {
-  commentsArray = [[NSMutableArray alloc]init];
-  [LCAPIManager getPostDetails:feedObject.entityID WithSuccess:^(LCFeed *responses) {
-    [commentsArray replaceObjectsInRange:NSMakeRange(0,0) withObjectsFromArray:[self getReverseSortedArray:responses.comments]];
+  isLoadingMoreComments = YES;
+  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:lastId withSuccess:^(id response, BOOL isMore) {
+    isLoadingMoreComments = NO;
+    moreCommentsPresent = isMore;
+    [commentsArray addObjectsFromArray:(NSArray*)response];
     [mainTable reloadData];
-  } andFailure:^(NSString *error) {
+  } andfailure:^(NSString *error) {
+    isLoadingMoreComments = NO;
     [mainTable reloadData];
   }];
 }
 
-- (NSArray*)getReverseSortedArray:(NSArray*)array
-{
-  return [[array reverseObjectEnumerator] allObjects];
-}
+//- (NSArray*)getReverseSortedArray:(NSArray*)array
+//{
+//  return [[array reverseObjectEnumerator] allObjects];
+//}
 
 - (void)setUpCpmmentsUI
 {
@@ -92,12 +97,45 @@ static CGFloat kIndexForPostDetails = 0;
   [commentField addSubview:postButton];
   [postButton setTitle:@"POST" forState:UIControlStateNormal];
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  [self createDummyCommentFieldViewWithinputAccessoryView:commentField];
+}
+
+- (void)createDummyCommentFieldViewWithinputAccessoryView:(UIView*)view
+{
   
-  commentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(-100, 0, 50, 50)];
-  [self.view addSubview:commentTextField_dup];
+  UIView* dummyCommentField = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
+  [dummyCommentField setBackgroundColor:kCommentFieldBGColor];
+  [dummyCommentField.layer setBorderColor:kCommentFieldBorderColor.CGColor];
+  [dummyCommentField.layer setBorderWidth:1.0f];
+  
+  float com_IC_hight = 20;
+  float postBut_width = 60;
+  float cellMargin_x = 8;
+  UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(cellMargin_x, (dummyCommentField.frame.size.height - com_IC_hight)/2, com_IC_hight, com_IC_hight)];
+  [commentIcon setImage:[UIImage imageNamed:@"CommentIcon"]];
+  [dummyCommentField addSubview:commentIcon];
+  
+  commentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, dummyCommentField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, dummyCommentField.frame.size.height)];
+  [dummyCommentField addSubview:commentTextField_dup];
   commentTextField_dup.delegate = self;
-  commentTextField_dup.inputAccessoryView = commentField;
-  [commentTextField_dup becomeFirstResponder];
+  [commentTextField_dup setBackgroundColor:[UIColor whiteColor]];
+  [commentTextField_dup setPlaceholder:@"Comment"];
+  [commentTextField_dup setTextColor:kCommentsFieldTextColor];
+  [commentTextField_dup setFont:kCommentsFieldFont];
+  commentTextField_dup.inputAccessoryView = view;
+  
+  UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(dummyCommentField.frame.size.width - postBut_width, 0, postBut_width, dummyCommentField.frame.size.height)];
+  [postButton setBackgroundColor:kPostButtonBGColor];
+  [postButton.titleLabel setFont:kPostBtnFont];
+  [dummyCommentField addSubview:postButton];
+  [postButton setTitle:@"POST" forState:UIControlStateNormal];
+  [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  [self.view addSubview:dummyCommentField];
+}
+
+-(void)changeFirstResponder
+{
+  [commentTextField becomeFirstResponder]; //will return YES;
 }
 
 #pragma mark - controller life cycle
@@ -105,6 +143,9 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super viewDidLoad];
   [self initialUISetUp];
+  commentsArray = [[NSMutableArray alloc]init];
+  moreCommentsPresent = YES;
+  [self loadFeedAndCommentsWithLastCommentId:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -115,7 +156,6 @@ static CGFloat kIndexForPostDetails = 0;
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:NO];
   [self addKeyBoardNotificationObserver];
-  [self loadFeedAndComments];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -135,26 +175,29 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - button actions
 -(void)postAction
 {
-  [commentTextField resignFirstResponder];
-  [commentTextField_dup resignFirstResponder];
-  
-  [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
-    [commentsArray addObject:(LCComment*)response];
-    self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
-    [mainTable reloadData];
-  } andFailure:^(NSString *error) {
-    NSLog(@"----- Fail to add new comment");
-  }];
-}
-
--(void)changeFirstResponder
-{
-  [commentTextField becomeFirstResponder]; //will return YES;
+  if (commentTextField.text.length > 0) {
+    [self resignAllResponders];
+    
+    [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
+      [commentsArray insertObject:(LCComment*)response atIndex:0];
+      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
+      [commentTextField setText:nil];
+      [commentTextField_dup setText:nil];
+      [mainTable reloadData];
+    } andFailure:^(NSString *error) {
+      NSLog(@"----- Fail to add new comment");
+    }];
+  }
 }
 
 - (IBAction)backAction
 {
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)loadPreviousComments:(UIButton*)sender
+{
+  [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray firstObject] commentId]];
 }
 
 #pragma mark - TableView delegates
@@ -165,12 +208,13 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return kCellForPostDetails + commentsArray.count;
+  return kCellForPostDetails + commentsArray.count + (moreCommentsPresent ? kCellForLoadMoreBtn : 0);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCCommentCell *commentCell;
+  
+  NSLog(@"index path row : %li",indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -192,17 +236,41 @@ static CGFloat kIndexForPostDetails = 0;
   }
   else //comment cell
   {
-    static NSString *MyIdentifier = @"LCCommentCell";
-    commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (commentCell == nil)
+    if (moreCommentsPresent && indexPath.row -1 == commentsArray.count)
     {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-      commentCell = [topLevelObjects objectAtIndex:0];
+      LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier]];
+      if (loadingCell == nil) {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
+        loadingCell = [topLevelObjects objectAtIndex:0];
+      }
+      [MBProgressHUD hideHUDForView:loadingCell animated:YES];
+      [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
+      return loadingCell;
     }
-    [commentCell setComment:[commentsArray objectAtIndex:indexPath.row -1]];
-    return commentCell;
+    else
+    {
+      LCCommentCell *commentCell;
+      static NSString *MyIdentifier = @"LCCommentCell";
+      commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+      if (commentCell == nil)
+      {
+        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
+        commentCell = [topLevelObjects objectAtIndex:0];
+      }
+      NSInteger rowNo = indexPath.row - 1;
+      [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
+      [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+      return commentCell;
+    }
   }
-  return commentCell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.row  == commentsArray.count && moreCommentsPresent && !isLoadingMoreComments) {
+
+    [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray lastObject] commentId]];
+  }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -242,9 +310,20 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+  [self resignAllResponders];
+  return YES;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  [self resignAllResponders];
+}
+
+- (void)resignAllResponders
+{
   [commentTextField resignFirstResponder];
   [commentTextField_dup resignFirstResponder];
-  return YES;
+  [commentTextField_dup setText:commentTextField.text];
 }
 
 @end
