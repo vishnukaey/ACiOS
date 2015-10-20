@@ -164,8 +164,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   NSMutableArray *postDescriptionTagsWithRanges = [[NSMutableArray alloc] init];
   for (int i = 0; i<self.feedObject.postTags.count; i++)
   {
-    NSRange tagRangePost = [self.feedObject.message rangeOfString:self.feedObject.postTags[i][@"text"]];
-    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postTags[i][@"id"], @"id", self.feedObject.postTags[i][@"text"], @"text", self.feedObject.postTags[i][@"type"], @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
+    LCTag * tag = self.feedObject.postTags[i];
+    NSRange tagRangePost = [self.feedObject.message rangeOfString:[tag text]];
+    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:tag.tagID, @"id", tag.text, @"text", tag.type, @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
     [postDescriptionTagsWithRanges addObject:dic_post];
     
     [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRangePost];
