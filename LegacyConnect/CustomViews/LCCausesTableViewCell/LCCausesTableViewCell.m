@@ -43,12 +43,15 @@
 
 -(IBAction)supportButtonTapped:(id)sender
 {
-  [_causeSupportButton setSelected:YES];
-  [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
-    _cause.isSupporting =YES;
-  } andFailure:^(NSString *error) {
-    [_causeSupportButton setSelected:NO];
-  }];
+  if(!_causeSupportButton.selected)
+  {
+    [_causeSupportButton setSelected:YES];
+    [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
+      _cause.isSupporting =YES;
+    } andFailure:^(NSString *error) {
+      [_causeSupportButton setSelected:NO];
+    }];
+  }
 }
 
 

@@ -43,12 +43,15 @@
 
 -(IBAction)followButtonTapped:(id)sender
 {
-  [_interestFollowButton setSelected:YES];
-  [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
-    _interest.isFollowing =YES;
-  } andFailure:^(NSString *error) {
-    [_interestFollowButton setSelected:NO];
-  }];
+  if(!_interestFollowButton.selected)
+  {
+    [_interestFollowButton setSelected:YES];
+    [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
+      _interest.isFollowing =YES;
+    } andFailure:^(NSString *error) {
+      [_interestFollowButton setSelected:NO];
+    }];
+  }
 }
 
 
