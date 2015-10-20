@@ -30,11 +30,24 @@
   [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
   _interestNameLabel.text = [NSString stringWithFormat:@"%@ ",interest.name];
   _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",interest.followers];
+  if(_interest.isFollowing)
+  {
+    [_interestFollowButton setSelected:YES];
+  }
+  else
+  {
+    [_interestFollowButton setSelected:NO];
+  }
 }
 
 
 -(IBAction)followButtonTapped:(id)sender
 {
+  [_interestFollowButton setSelected:YES];
+  [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
+    _interest.isFollowing =YES;
+  } andFailure:^(NSString *error) {
+  }];
 }
 
 

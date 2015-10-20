@@ -30,12 +30,24 @@
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:nil];
   _causeNameLabel.text = [NSString stringWithFormat:@"%@",cause.name];
   _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",cause.supporters];
+  if(_cause.isSupporting)
+  {
+    [_causeSupportButton setSelected:YES];
+  }
+  else
+  {
+    [_causeSupportButton setSelected:NO];
+  }
 }
 
 
 -(IBAction)supportButtonTapped:(id)sender
 {
-  
+  [_causeSupportButton setSelected:YES];
+  [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
+    _cause.isSupporting =YES;
+  } andFailure:^(NSString *error) {
+  }];
 }
 
 

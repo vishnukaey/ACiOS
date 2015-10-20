@@ -54,7 +54,8 @@
   
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  
+  _searchBar.layer.cornerRadius = 6.0;
+  _searchBar.clipsToBounds = YES;
   // Do any additional setup after loading the view.
 }
 
@@ -107,7 +108,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
   UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-  header.backgroundColor = [UIColor whiteColor];
+  header.contentView.backgroundColor = [UIColor whiteColor];
   header.textLabel.font = [UIFont boldSystemFontOfSize:14];
   header.textLabel.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
   CGRect headerFrame = header.frame;
