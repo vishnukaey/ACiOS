@@ -21,6 +21,8 @@
   [super awakeFromNib];
   imageSuperView.clipsToBounds = YES;
   imageSuperView.layer.cornerRadius = 6;
+  _interestsImageView.layer.cornerRadius = 6;
+  _interestsImageView.clipsToBounds = YES;
   outerBorder.backgroundColor = [UIColor clearColor];
   outerBorder.hidden = true;
   outerBorder.layer.cornerRadius = 8;

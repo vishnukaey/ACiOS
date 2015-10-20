@@ -23,6 +23,8 @@
 -(void)setUser:(LCUserDetail *)user
 {
   _user = user;
+  self.userImageView.layer.cornerRadius = self.userImageView.frame.size.width / 2;
+  self.userImageView.clipsToBounds = YES;
   [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   _userNameLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
   _userLocationLabel.text = [NSString stringWithFormat:@"%@ ",user.location];
@@ -36,6 +38,7 @@
   
   switch (status) {
 //    case kIsFriend:
+      
 //      [self removeUserFriend:_user andFriendButton:_userAddButton];
 //      break;
 //      
