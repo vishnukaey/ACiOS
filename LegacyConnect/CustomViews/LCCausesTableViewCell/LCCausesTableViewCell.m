@@ -10,8 +10,12 @@
 
 @implementation LCCausesTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+  [_causeSupportButton setBackgroundColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
+  _causeSupportButton.layer.cornerRadius = 5.0;
+  _causeSupportButton.layer.borderColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0].CGColor;
+  _causeSupportButton.layer.borderWidth = 1.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -25,7 +29,7 @@
   _cause = cause;
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:nil];
   _causeNameLabel.text = [NSString stringWithFormat:@"%@",cause.name];
-  _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ supporters",cause.supporters];
+  _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",cause.supporters];
 }
 
 

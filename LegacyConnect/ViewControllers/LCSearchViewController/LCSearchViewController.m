@@ -31,19 +31,26 @@
   [self.searchBar becomeFirstResponder];
   
   UIButton *topButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [topButton setTitle:@"Top" forState:UIControlStateNormal];
+  [topButton setTitle:@"TOP" forState:UIControlStateNormal];
+  [topButton.titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
   UIButton *usersButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [usersButton setTitle:@"Users" forState:UIControlStateNormal];
+  [usersButton setTitle:@"USERS" forState:UIControlStateNormal];
+  [usersButton.titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
+
   UIButton *interestsButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [interestsButton setTitle:@"Interests" forState:UIControlStateNormal];
+  [interestsButton setTitle:@"INTERESTS" forState:UIControlStateNormal];
+  [interestsButton.titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
+
   UIButton *causesButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [causesButton setTitle:@"Causes" forState:UIControlStateNormal];
+  [causesButton setTitle:@"CAUSES" forState:UIControlStateNormal];
+  [causesButton.titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
+
   
   self.tabMenu.menuButtons = @[topButton,usersButton ,interestsButton, causesButton];
   self.tabMenu.views = @[_topTableView, _usersTableView, _interestsCollectionView, _causesCollectionView];
-  
-  self.tabMenu.highlightColor = [UIColor orangeColor];
-  self.tabMenu.normalColor = [UIColor blackColor];
+  self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
+  self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
+  self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
   
   
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
