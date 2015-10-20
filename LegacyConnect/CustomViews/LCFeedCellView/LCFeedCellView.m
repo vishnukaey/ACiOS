@@ -83,7 +83,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   
   
   //never ever forget to add the font attribute to the tagged label
-  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.interestName];
+  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
 
   NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
   NSString * postInfoString = postTypeAndCause;
@@ -126,7 +126,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
   
-  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.interestID, kTagobjId, self.feedObject.interestName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
+  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
   [createdAtLabelTagsWithRanges addObject:dict_createdAt];
   createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
   [createdLabel setAttributedText:attributtedString];

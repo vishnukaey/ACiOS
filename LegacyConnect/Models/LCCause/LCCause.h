@@ -20,5 +20,6 @@
 @property (nonatomic, strong) NSString *supporters;
 @property (nonatomic, assign) BOOL isDeleted;
 @property (nonatomic, assign) BOOL isSupporting;
+@property (nonatomic, strong) NSString *userID;
 
 @end

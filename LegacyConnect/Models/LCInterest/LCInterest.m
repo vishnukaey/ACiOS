@@ -20,13 +20,15 @@
            @"logoURLLarge": @"interestLogoLarge",
            @"logoURLSmall": @"interestLogoSmall",
            @"isDeleted": @"isDeleted",
-           @"followers": @"followers"
+           @"followers": @"followers",
+           @"causes": @"causes",
+           @"events": @"events"
            };
 }
 
-//+ (NSValueTransformer *)causesJSONTransformer
-//{
-//  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCCause class]];
-//}
++ (NSValueTransformer *)causesJSONTransformer
+{
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCCause class]];
+}
 
 @end
