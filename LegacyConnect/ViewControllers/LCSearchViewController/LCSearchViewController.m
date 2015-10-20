@@ -52,7 +52,6 @@
   self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
   self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
   
-  
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
@@ -105,12 +104,25 @@
   }
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+  UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
+  header.backgroundColor = [UIColor whiteColor];
+  header.textLabel.font = [UIFont boldSystemFontOfSize:14];
+  header.textLabel.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+  CGRect headerFrame = header.frame;
+  header.textLabel.frame = headerFrame;
+}
+
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
   if([tableView isEqual:_topTableView])
   {
     NSString *sectionName;
     switch (section)
+    
+    
     {
       case 0:
         sectionName = @"Users";
@@ -255,13 +267,6 @@
   }
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
-{
-  UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-  header.textLabel.font = [UIFont boldSystemFontOfSize:14];
-  CGRect headerFrame = header.frame;
-  header.textLabel.frame = headerFrame;
-}
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {

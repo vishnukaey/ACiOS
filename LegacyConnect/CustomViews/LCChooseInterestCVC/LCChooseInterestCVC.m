@@ -34,7 +34,7 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-
+  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
   _interestNameLabel.text = interest.name;
 }
 

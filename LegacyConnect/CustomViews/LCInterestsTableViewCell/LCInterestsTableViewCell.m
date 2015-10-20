@@ -27,7 +27,7 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+  [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
   _interestNameLabel.text = [NSString stringWithFormat:@"%@ ",interest.name];
   _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",interest.followers];
 }
