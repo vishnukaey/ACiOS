@@ -25,6 +25,7 @@
   NSString *taggedLocation;
   
   IBOutlet UIImageView *tagFriendsIcon, *cameraIcon, *tagLocationIcon, *milestoneIcon;
+  IBOutlet UILabel *postingToLabel;
 }
 @end
 
@@ -283,6 +284,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
   LCListInterestsAndCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListInterestsAndCausesVC"];
+  vc.delegate = self;
   [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -360,6 +362,18 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   taggedLocation = location;
   [self arrangeTaggedLabel];
+}
+
+#pragma mark - LCListInterestsAndCausesVCDelegate
+- (void)didfinishPickingInterest:(LCInterest *)interest andCause:(LCCause *)cause
+{
+  if (interest) {
+    postingToLabel.text = interest.name;
+  }
+  else if (cause)
+  {
+    postingToLabel.text = cause.name;
+  }
 }
 
 @end
