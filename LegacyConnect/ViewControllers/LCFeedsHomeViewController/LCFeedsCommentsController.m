@@ -97,12 +97,40 @@ static CGFloat kIndexForPostDetails = 0;
   [commentField addSubview:postButton];
   [postButton setTitle:@"POST" forState:UIControlStateNormal];
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  [self createDummyCommentFieldViewWithinputAccessoryView:commentField];
+}
+
+- (void)createDummyCommentFieldViewWithinputAccessoryView:(UIView*)view
+{
   
-  commentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(-100, 0, 50, 50)];
-  [self.view addSubview:commentTextField_dup];
+  UIView* dummyCommentField = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
+  [dummyCommentField setBackgroundColor:kCommentFieldBGColor];
+  [dummyCommentField.layer setBorderColor:kCommentFieldBorderColor.CGColor];
+  [dummyCommentField.layer setBorderWidth:1.0f];
+  
+  float com_IC_hight = 20;
+  float postBut_width = 60;
+  float cellMargin_x = 8;
+  UIImageView *commentIcon = [[UIImageView alloc] initWithFrame:CGRectMake(cellMargin_x, (dummyCommentField.frame.size.height - com_IC_hight)/2, com_IC_hight, com_IC_hight)];
+  [commentIcon setImage:[UIImage imageNamed:@"CommentIcon"]];
+  [dummyCommentField addSubview:commentIcon];
+  
+  commentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, dummyCommentField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, dummyCommentField.frame.size.height)];
+  [dummyCommentField addSubview:commentTextField_dup];
   commentTextField_dup.delegate = self;
-  commentTextField_dup.inputAccessoryView = commentField;
-  [commentTextField_dup becomeFirstResponder];
+  [commentTextField_dup setBackgroundColor:[UIColor whiteColor]];
+  [commentTextField_dup setPlaceholder:@"Comment"];
+  [commentTextField_dup setTextColor:kCommentsFieldTextColor];
+  [commentTextField_dup setFont:kCommentsFieldFont];
+  commentTextField_dup.inputAccessoryView = view;
+  
+  UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(dummyCommentField.frame.size.width - postBut_width, 0, postBut_width, dummyCommentField.frame.size.height)];
+  [postButton setBackgroundColor:kPostButtonBGColor];
+  [postButton.titleLabel setFont:kPostBtnFont];
+  [dummyCommentField addSubview:postButton];
+  [postButton setTitle:@"POST" forState:UIControlStateNormal];
+  [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  [self.view addSubview:dummyCommentField];
 }
 
 -(void)changeFirstResponder
@@ -148,13 +176,13 @@ static CGFloat kIndexForPostDetails = 0;
 -(void)postAction
 {
   if (commentTextField.text.length > 0) {
-    [commentTextField resignFirstResponder];
-//    [commentTextField_dup resignFirstResponder];
+    [self resignAllResponders];
     
     [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
       [commentsArray insertObject:(LCComment*)response atIndex:0];
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
       [commentTextField setText:nil];
+      [commentTextField_dup setText:nil];
       [mainTable reloadData];
     } andFailure:^(NSString *error) {
       NSLog(@"----- Fail to add new comment");
@@ -231,6 +259,7 @@ static CGFloat kIndexForPostDetails = 0;
       }
       NSInteger rowNo = indexPath.row - 1;
       [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
+      [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
       return commentCell;
     }
   }
@@ -281,9 +310,20 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+  [self resignAllResponders];
+  return YES;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  [self resignAllResponders];
+}
+
+- (void)resignAllResponders
+{
   [commentTextField resignFirstResponder];
   [commentTextField_dup resignFirstResponder];
-  return YES;
+  [commentTextField_dup setText:commentTextField.text];
 }
 
 @end
