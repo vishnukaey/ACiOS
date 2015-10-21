@@ -84,11 +84,11 @@
 //**********************************************************************
        // API Test
          
-//         UIImage *image = [UIImage imageNamed:@"profileFriend"];
+//         UIImage *image = [UIImage imageNamed:@"userProfilePic"];
 //         
-//         LCPost *newPost = [[LCPost alloc] init];
-//         newPost.message = @"new post 105";
-//         newPost.postToType = @"interest";
+//         LCFeed *newPost = [[LCFeed alloc] init];
+//         newPost.message = @"good afternoon...";
+//         newPost.postToType = @"cause";
 //         newPost.postToID = @"1";
 //         newPost.location = @"Kochi";
 //         newPost.isMilestone = @"1";
@@ -107,12 +107,13 @@
 //         
 //         
 //         
-//         [LCAPIManager createNewPost:newPost image:nil withSuccess:^(id response) {
+//         [LCAPIManager createNewPost:newPost withImage:image withSuccess:^(id response) {
 //           NSLog(@"post creation success - %@",response);
+//           
 //         } andFailure:^(NSString *error) {
 //           NSLog(@"post creation failed - %@",error);
-//         }];
-         
+//           
+//         }]; 
          
 //**********************************************************************
 
