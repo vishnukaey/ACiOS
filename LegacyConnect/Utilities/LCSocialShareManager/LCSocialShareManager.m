@@ -9,6 +9,8 @@
 #import "LCSocialShareManager.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @implementation LCSocialShareManager
 
@@ -22,9 +24,77 @@
   return NO;
 }
 
+
++ (void)checkFacebookAvailabilityWithSuccess:(void (^)(BOOL canPost))completionHandler
+{
+  if ([FBSDKAccessToken currentAccessToken]) {
+    completionHandler(YES);
+  }
+  
+  ACAccountStore *accountStore = [[ACAccountStore alloc] init];
+  
+  
+  ACAccountType *accountTypeFacebook = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+  
+  NSDictionary *options = @{
+                            ACFacebookAppIdKey: @"535164313296078",
+                            ACFacebookPermissionsKey: @[@"publish_actions"],
+                            ACFacebookAudienceKey: ACFacebookAudienceOnlyMe //change to everyone
+                            };
+  [accountStore requestAccessToAccountsWithType:accountTypeFacebook options:options completion:^(BOOL granted, NSError *error) {
+    if (granted) {
+      completionHandler(YES);
+    }
+    else {
+      NSLog(@"[%@]",[error localizedDescription]);
+      if (error.code == ACErrorAccountNotFound) {
+        [self loginToFacebookWithSuccess:^(id response) {
+          
+          
+        } andFailure:^(NSString *error) {
+          
+        }];
+      }
+    }
+  }];
+  
+}
+
++ (void)loginToFacebookWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+  FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+  [login logOut];
+  LCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  [login logInWithReadPermissions:@[kEmailKey,@"public_profile",@"user_friends"] fromViewController:appDelegate.window.rootViewController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    if (error)
+    {
+      NSLog(@"error %@",error);
+      failure(error.localizedDescription);
+    }
+    else if (result.isCancelled)
+    {
+      NSLog(@"Cancelled");
+      failure(@"Cancelled");
+    }
+    else
+    {
+      if ([result.grantedPermissions containsObject:kEmailKey])
+      {
+        success(result);
+        //[LCDataManager sharedDataManager].userFBID = result.token.tokenString;
+        //NSLog(@"token 2--%@",[FBSDKAccessToken currentAccessToken].tokenString);
+      }
+    }
+  }];
+}
+
 + (void)shareToFacebookWithData:(NSDictionary*)data
 {
-  UIImage *postImage = [UIImage imageNamed:@"userProfilePic"];
+  
+  NSLog(@"token 1--%@",[FBSDKAccessToken currentAccessToken].tokenString);
+  NSString *postMessage = @"test post";
+  UIImage *postImage = nil;//[UIImage imageNamed:@"userProfilePic"];
   
   ACAccountStore *accountStore = [[ACAccountStore alloc] init];
   
@@ -39,14 +109,12 @@
   [accountStore requestAccessToAccountsWithType:accountTypeFacebook options:options completion:^(BOOL granted, NSError *error) {
     
     if(granted) {
-      
-      
-      
       NSArray *accounts = [accountStore
                            accountsWithAccountType:accountTypeFacebook];
       ACAccount * facebookAccount = [accounts lastObject];
       
-      NSDictionary *parameters = @{@"message": @"new post from app with image"};
+      NSDictionary *parameters = @{@"access_token" : facebookAccount.credential.oauthToken,
+                                   @"message": postMessage};
       
       SLRequest *feedRequest;
       if (postImage) {
@@ -70,7 +138,6 @@
                                                    URL:feedURL
                                             parameters:parameters];
       }
-      feedRequest.account = facebookAccount;
       
       [feedRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
         
@@ -78,9 +145,20 @@
         NSLog(@"FB Request completed, %@ \n\n %@", [urlResponse description],newStr);
         
       }];
+      
     } else {
       NSLog(@"[%@]",[error localizedDescription]);
-      [LCUtilityManager showAlertViewWithTitle:@"Can't Post To Facebook" andMessage:[error localizedDescription]];
+      if (error.code == ACErrorAccountNotFound) {
+        [self loginToFacebookWithSuccess:^(id response) {
+          
+        } andFailure:^(NSString *error) {
+          
+        }];
+      }
+      else {
+        [LCUtilityManager showAlertViewWithTitle:@"Can't Post To Facebook" andMessage:[error localizedDescription]];
+      }
+      
       //      switch (error.code) {
       //        case ACErrorAccountNotFound: {
       //          dispatch_async(dispatch_get_main_queue(), ^{
@@ -99,8 +177,9 @@
       //      }
     }
   }];
-  
 }
+
+
 
 + (void)shareToTwitterWithData:(NSDictionary*)data
 {
