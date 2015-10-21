@@ -21,6 +21,8 @@
   [super awakeFromNib];
   imageSuperView.clipsToBounds = YES;
   imageSuperView.layer.cornerRadius = 6;
+  _interestsImageView.layer.cornerRadius = 6;
+  _interestsImageView.clipsToBounds = YES;
   outerBorder.backgroundColor = [UIColor clearColor];
   outerBorder.hidden = true;
   outerBorder.layer.cornerRadius = 8;
@@ -32,7 +34,7 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];//no placeholder needed. background color is placeholder itself
+  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
   _interestNameLabel.text = interest.name;
 }
 

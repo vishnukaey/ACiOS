@@ -30,6 +30,7 @@
            @"postToType": @"postToType",
            @"postToID": @"postToId",
            @"postToName": @"postToName",
+           @"postToImageURL": @"postToImage",
            @"caption": @"caption",
            @"location": @"location",
            @"didLike": @"didLike",

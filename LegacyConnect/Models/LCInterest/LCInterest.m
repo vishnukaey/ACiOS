@@ -22,7 +22,8 @@
            @"isDeleted": @"isDeleted",
            @"followers": @"followers",
            @"causes": @"causes",
-           @"events": @"events"
+           @"events": @"events",
+           @"isFollowing": @"isFollowing"
            };
 }
 
