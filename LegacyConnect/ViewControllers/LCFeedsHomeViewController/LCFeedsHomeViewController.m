@@ -167,6 +167,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       cell = [topLevelObjects objectAtIndex:0];
     }
     [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+    NSLog(@"\n%@n\n",[feedsArray objectAtIndex:indexPath.row]);
     __weak typeof(self) weakSelf = self;
     cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
       [weakSelf feedCellActionWithType:actionType andFeed:feed];

@@ -87,6 +87,7 @@
 		0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC06E1B70BF730004C4B6 /* LCInterest.m */; };
 		0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0711B70BF910004C4B6 /* LCCause.m */; };
 		0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0761B70C4910004C4B6 /* LCUserDetail.m */; };
+		0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */; settings = {ASSET_TAGS = (); }; };
 		0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755621B56291C009CE7F3 /* LCSignUpUserPhotoVC.m */; };
 		0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755661B56297C009CE7F3 /* LCChooseCausesVC.m */; };
 		0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7556A1B5629D9009CE7F3 /* LCConnectFriendsVC.m */; };
@@ -285,6 +286,8 @@
 		0BBDC0711B70BF910004C4B6 /* LCCause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCause.m; path = Models/LCCause/LCCause.m; sourceTree = "<group>"; };
 		0BBDC0751B70C4910004C4B6 /* LCUserDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserDetail.h; path = Models/LCUserDetail/LCUserDetail.h; sourceTree = "<group>"; };
 		0BBDC0761B70C4910004C4B6 /* LCUserDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUserDetail.m; path = Models/LCUserDetail/LCUserDetail.m; sourceTree = "<group>"; };
+		0BC4C4681BD6738B00F9AA90 /* LCSocialShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCSocialShareManager.h; sourceTree = "<group>"; };
+		0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCSocialShareManager.m; sourceTree = "<group>"; };
 		0BC755611B56291C009CE7F3 /* LCSignUpUserPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSignUpUserPhotoVC.h; path = ViewControllers/LCSignUpUserPhotoVC/LCSignUpUserPhotoVC.h; sourceTree = "<group>"; };
 		0BC755621B56291C009CE7F3 /* LCSignUpUserPhotoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSignUpUserPhotoVC.m; path = ViewControllers/LCSignUpUserPhotoVC/LCSignUpUserPhotoVC.m; sourceTree = "<group>"; };
 		0BC755651B56297C009CE7F3 /* LCChooseCausesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseCausesVC.h; path = ViewControllers/LCChooseCausesVC/LCChooseCausesVC.h; sourceTree = "<group>"; };
@@ -845,6 +848,16 @@
 			name = LCUserDetail;
 			sourceTree = "<group>";
 		};
+		0BC4C4671BD6735F00F9AA90 /* LCSocialShareManager */ = {
+			isa = PBXGroup;
+			children = (
+				0BC4C4681BD6738B00F9AA90 /* LCSocialShareManager.h */,
+				0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */,
+			);
+			name = LCSocialShareManager;
+			path = Utilities/LCSocialShareManager;
+			sourceTree = "<group>";
+		};
 		0BC755641B562921009CE7F3 /* LCSignUpUserPhotoVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1118,6 +1131,7 @@
 		0BF05A691B4E628C00FF7B39 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0BC4C4671BD6735F00F9AA90 /* LCSocialShareManager */,
 				0BBDC0681B70A84E0004C4B6 /* LCAPIManager */,
 				0BDB98D31B5E5AF2006F62FD /* LCWebServiceManager */,
 				0BC7557E1B56335A009CE7F3 /* LCUtilityManager */,
@@ -1582,6 +1596,7 @@
 				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
+				0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */,
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
 				96BD14591B72166B004D5CFA /* MTLValueTransformer.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
