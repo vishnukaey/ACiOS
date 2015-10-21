@@ -68,12 +68,15 @@
 #pragma mark - setup functions
 - (void) loadFriendsList
 {
+  [MBProgressHUD showHUDAddedTo:friendsTableView animated:YES];
   [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
     friendsArray = response;
     [searchResultsArray addObjectsFromArray:response];
     [friendsTableView reloadData];
+    [MBProgressHUD hideAllHUDsForView:friendsTableView animated:YES];
   } andfailure:^(NSString *error) {
     NSLog(@"%@",error);
+    [MBProgressHUD hideAllHUDsForView:friendsTableView animated:YES];
   }];
 }
 

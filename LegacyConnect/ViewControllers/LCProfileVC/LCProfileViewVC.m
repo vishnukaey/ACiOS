@@ -14,6 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFriendsListViewController.h"
 #import "LCFullScreenImageVC.h"
+#import "LCCreatePostViewController.h"
 
 static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";
@@ -601,7 +602,13 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
     
+    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:createPostVC animated:YES completion:nil];
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appdel.isCreatePostOpen = false;
   }];
   
   [actionSheet addAction:editPost];

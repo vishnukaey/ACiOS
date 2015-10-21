@@ -10,6 +10,7 @@
 
 
 #define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:12]
+#define ICONBACK_COLOR [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]
 @interface LCCreatePostViewController ()
 {
   UIImageView *interstIconImageView;
@@ -59,9 +60,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
                                              object:nil];
   
   
-  [self initialiseScrollSubviewsForPosting];
-  [self setCurrentContexts];
-  [postTextView becomeFirstResponder];
+  
   taggedLocation = [[NSMutableString alloc] initWithString:@""];
   postingToLabel.text = @"";
   
@@ -69,7 +68,10 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     _postFeedObject = [[LCFeed alloc] init];
   }
-    // Do any additional setup after loading the view.
+  
+  [self initialiseScrollSubviewsForPosting];
+  [self setCurrentContexts];
+  [postTextView becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -86,7 +88,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   float topmargin = 8;
   interstIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 8, 50, 50)];
   [_postScrollView addSubview:interstIconImageView];
-  interstIconImageView.backgroundColor = [UIColor blackColor];
+  interstIconImageView.backgroundColor = ICONBACK_COLOR;
+  interstIconImageView.layer.cornerRadius = 4;
   
   postTextView = [[UITextView alloc] initWithFrame:CGRectMake(interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8, topmargin, _postScrollView.frame.size.width - (interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8), 35)];
   postTextView.text = @"";
@@ -124,6 +127,68 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [self arrangePostImageView];
     _photoPostPhoto = nil;
   }
+  if (_postFeedObject.postToID)
+  {
+    if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeCause])
+    {
+      _selectedCause = [[LCCause alloc] init];
+      _selectedCause.causeID = _postFeedObject.postToID;
+      _selectedCause.name = _postFeedObject.postToName;
+      _selectedCause.logoURLSmall = _postFeedObject.postToImageURL;
+    }
+    else if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeInterest])
+    {
+      _selectedInterest = [[LCInterest alloc] init];
+      _selectedInterest.interestID = _postFeedObject.postToID;
+      _selectedInterest.name = _postFeedObject.postToName;
+      _selectedInterest.logoURLSmall = _postFeedObject.postToImageURL;
+    }
+  }
+  [self didfinishPickingInterest:_selectedInterest andCause:_selectedCause];
+  
+  if (_postFeedObject.image.length)
+  {
+    [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, postImageView.frame.size.width, 100)];
+    [postImageView setBackgroundColor:ICONBACK_COLOR];
+    [self arrangeScrollSubviewsForPosting];
+    [interstIconImageView sd_setImageWithURL:[NSURL URLWithString:_postFeedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+     {
+       [postImageView setBackgroundColor:[UIColor clearColor]];
+       [self arrangeScrollSubviewsForPosting];
+     }];
+   }
+  
+  if (_postFeedObject.message.length)
+  {
+    postTextView.text = _postFeedObject.message;
+    CGRect frame = postTextView.frame;
+    frame.size.height = postTextView.contentSize.height;
+    postTextView.frame = frame;
+    [self arrangeScrollSubviewsForPosting];
+  }
+  
+  if (_postFeedObject.postTags.count)
+  {
+    NSMutableArray *freinds_tageed = [[NSMutableArray alloc] init];
+    for (LCTag *tag in _postFeedObject.postTags)//now only handling friends tagged. will need separate handling for other types
+    {
+      if ([tag.type isEqualToString:kFeedTagTypeUser]) {
+        LCFriend *friend = [[LCFriend alloc] init];
+        friend.friendId = tag.tagID;
+        friend.firstName = tag.text;
+        [freinds_tageed addObject:friend];
+      }
+    }
+    taggedFriendsArray = [freinds_tageed copy];
+    [self arrangeTaggedLabel];
+  }
+  
+  if (_postFeedObject.location.length)
+  {
+    taggedLocation = _postFeedObject.location;
+    [self arrangeTaggedLabel];
+  }
+  
 }
 
 #pragma mark - keyboard functions
@@ -324,6 +389,58 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [self presentViewController:vc animated:YES completion:nil];
 }
 
+- (IBAction)postButtonAction
+{
+  if (_selectedInterest)
+  {
+    _postFeedObject.postToType = kFeedTagTypeInterest;
+    _postFeedObject.postToID = _selectedInterest.interestID;
+  }
+  else if (_selectedCause)
+  {
+    _postFeedObject.postToType = kFeedTagTypeCause;
+    _postFeedObject.postToID = _selectedCause.causeID;
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
+    return;
+  }
+  _postFeedObject.message = postTextView.text;
+  _postFeedObject.location = taggedLocation;
+  NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
+  for (LCFriend *friend in taggedFriendsArray)
+  {
+    LCTag *tag = [[LCTag alloc] init];
+    tag.type = kFeedTagTypeUser;
+    tag.tagID = friend.friendId;
+    tag.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    [posttags_ addObject:tag];
+  }
+  _postFeedObject.postTags = [posttags_ copy];
+  
+  //posting api
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  if (_isEditing)
+  {
+    [LCAPIManager updatePost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self closeButtonClicked:nil];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+  }
+  else//new
+  {
+    [LCAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self closeButtonClicked:nil];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+  }
+}
+
 #pragma mark - textview delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -403,14 +520,20 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - LCListInterestsAndCausesVCDelegate
 - (void)didfinishPickingInterest:(LCInterest *)interest andCause:(LCCause *)cause
 {
+  [interstIconImageView setBackgroundColor:ICONBACK_COLOR];
   if (interest) {
     postingToLabel.font = [UIFont fontWithName:@"Gotham-Bold" size:13];
     postingToLabel.text = interest.name;
+    [interstIconImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
   }
   else if (cause)
   {
     postingToLabel.font = [UIFont fontWithName:@"Gotham-Book" size:13];
     postingToLabel.text = cause.name;
+    [interstIconImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+    {
+      [interstIconImageView setBackgroundColor:[UIColor whiteColor]];
+    }];
   }
   _selectedCause = cause;
   _selectedInterest = interest;
