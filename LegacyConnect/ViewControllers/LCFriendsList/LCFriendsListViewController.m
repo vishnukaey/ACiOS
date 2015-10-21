@@ -252,11 +252,11 @@ static NSString *kTitle = @"FRIENDS";
 - (void)addFriend:(LCFriend*)friendObj andFriendButton:(LCfriendButton*)btn
 {
   LCfriendButton * friendBtn = btn;
-  [friendBtn setfriendStatusButtonImageForStatus:kIsFriend];
+  [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
   
   [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
-    friendObj.isFriend = kFriendStatusMyFriend;
+    friendObj.isFriend = kFriendStatusWaiting;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];

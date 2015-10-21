@@ -38,7 +38,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   isLoadingMoreFriends = YES;
   [LCAPIManager getHomeFeedsWithLastFeedId:lastId success:^(NSArray *response) {
-    NSLog(@"%@",response);
     loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
     [self stopRefreshingViews];
     
@@ -140,8 +139,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  NSLog(@"index path ----- %li",indexPath.row);
-  
   if (feedsArray.count == 0)
   {
     return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_feeds_available", nil)];
@@ -181,7 +178,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.row == feedsArray.count - 1 && loadMoreFriends && !isLoadingMoreFriends) {
-    NSLog(@" >>>>>>>>>>>>>>>> more fetch >>>>>>>>>>>");
     [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
   }
 }
