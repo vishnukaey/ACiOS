@@ -29,9 +29,9 @@
   ACAccountType *accountTypeFacebook = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
   
   NSDictionary *options = @{
-                            ACFacebookAppIdKey: @"1408366702711751",
-                            ACFacebookPermissionsKey: @[@"publish_stream", @"publish_actions"],
-                            ACFacebookAudienceKey: ACFacebookAudienceFriends
+                            ACFacebookAppIdKey: @"535164313296078",
+                            ACFacebookPermissionsKey: @[@"publish_actions"],
+                            ACFacebookAudienceKey: ACFacebookAudienceOnlyMe
                             };
   
   [accountStore requestAccessToAccountsWithType:accountTypeFacebook options:options completion:^(BOOL granted, NSError *error) {
@@ -43,7 +43,7 @@
       ACAccount * _facebookAccount = [accounts lastObject];
       
       NSDictionary *parameters = @{@"access_token":_facebookAccount.credential.oauthToken,
-                                   @"message": @"Test post from app"};
+                                   @"message": @"new post from app"};
       
       NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
       SLRequest *feedRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
@@ -51,12 +51,12 @@
                                                             URL:feedURL
                                                      parameters:parameters];
       
-      //            [feedRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
-      //
-      //              NSString* newStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-      //              NSLog(@"Request completed, %@ \n\n %@", [urlResponse description],newStr);
-      //
-      //            }];
+      [feedRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
+        
+        NSString* newStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"FB Request completed, %@ \n\n %@", [urlResponse description],newStr);
+        
+      }];
     } else {
       NSLog(@"[%@]",[error localizedDescription]);
       [LCUtilityManager showAlertViewWithTitle:@"Can't Post To Facebook" andMessage:[error localizedDescription]];
@@ -83,6 +83,9 @@
 
 + (void)shareToTwitterWithData:(NSDictionary*)data
 {
+  UIImage *postImage = [UIImage imageNamed:@"userProfilePic"];
+  
+  
   ACAccountStore *account = [[ACAccountStore alloc] init];
   ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
   
@@ -96,18 +99,58 @@
         
         ACAccount *twitterAccount = [arrayOfAccounts lastObject];
         
-        NSDictionary *message = @{@"status": @"My First Twitter post from iOS"};
+        NSDictionary *message = @{@"status": @"Twitter post from iOS without image"};
+        SLRequest *postRequest;
         
-        NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1/statuses/update.json"];
+        if (postImage) {
+          
+          NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update_with_media.json"];
+          SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                      requestMethod:SLRequestMethodPOST
+                                                                URL:requestURL
+                                                         parameters:nil];
+          
+          NSData *imageData = UIImagePNGRepresentation(postImage);
+          
+          [postRequest addMultipartData:imageData withName:@"media" type:@"image/png" filename:@"image.png"];
+          [postRequest addMultipartData:imageData
+                               withName:@"media[]"
+                                   type:@"multipart/form-data"
+                               filename:@"image.png"];
+          
+          [postRequest addMultipartData:[@"my post" dataUsingEncoding:NSUTF8StringEncoding]
+                               withName:@"status"
+                                   type:@"multipart/form-data"
+                               filename:nil];
+
+        }
+        else {
+          
+          NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json"];
+          postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                      requestMethod:SLRequestMethodPOST
+                                                                URL:requestURL
+                                                         parameters:message];
+        }
         
-        SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                    requestMethod:SLRequestMethodPOST
-                                                              URL:requestURL parameters:message];
+        
+        
         postRequest.account = twitterAccount;
         
         [postRequest performRequestWithHandler:^(NSData *responseData,NSHTTPURLResponse *urlResponse, NSError *error){
           NSString* newStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
           NSLog(@"Twitter HTTP response: %li \n %@", (long)[urlResponse statusCode], newStr);
+          if (error) {
+            [LCUtilityManager showAlertViewWithTitle:@"" andMessage:[error localizedDescription]];
+          }
+          else {
+            if ([urlResponse statusCode] == 200) {
+              NSLog(@"Posted to twitter successfully.");
+            }
+            else {
+              NSLog(@"Posting to twitter failed.");
+            }
+          }
           
         }];
       }

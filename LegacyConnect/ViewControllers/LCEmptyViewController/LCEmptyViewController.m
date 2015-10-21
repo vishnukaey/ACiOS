@@ -283,7 +283,7 @@
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
 
 #warning  remove this call
-    [LCSocialShareManager shareToTwitterWithData:nil];
+    [LCSocialShareManager shareToFacebookWithData:nil];
     
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
 //    LCAllInterestVC *vc = [sb instantiateInitialViewController];

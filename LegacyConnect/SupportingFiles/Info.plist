@@ -23,7 +23,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1408366702711751</string>
+				<string>fb535164313296078</string>
 			</array>
 		</dict>
 		<dict>
@@ -38,9 +38,9 @@
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
-	<string>1408366702711751</string>
+	<string>535164313296078</string>
 	<key>FacebookDisplayName</key>
-	<string>GmgTestApp</string>
+	<string>LegacyConnect</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
