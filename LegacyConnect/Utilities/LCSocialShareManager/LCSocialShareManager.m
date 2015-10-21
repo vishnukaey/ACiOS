@@ -18,9 +18,12 @@
   return NO;
 }
 
-+ (BOOL)canShareToTwitter
++ (void)canShareToTwitter:(CanShareToTwitter)canShare
 {
-  return NO;
+  ACAccountStore *account = [[ACAccountStore alloc] init];
+  ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
+  NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
+   canShare(arrayOfAccounts.count > 0);
 }
 
 + (void)shareToFacebookWithData:(NSDictionary*)data
@@ -103,7 +106,7 @@
   
 }
 
-+ (void)shareToTwitterWithData:(NSDictionary*)data
++ (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
   
   ACAccountStore *account = [[ACAccountStore alloc] init];
@@ -111,14 +114,14 @@
   
   [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
     
-    if (granted == YES) {
+    if (granted) {
       
       NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
       
       if ([arrayOfAccounts count] > 0) {
         
         ACAccount *twitterAccount = [arrayOfAccounts lastObject];
-        NSDictionary *message = @{@"status": [data objectForKey:KShareDescription]};
+        NSDictionary *message = @{@"status": status};
         
         NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update_with_media.json"];
         SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
@@ -127,10 +130,9 @@
                                                        parameters:message];
         postRequest.account = twitterAccount;
         
-        if ([data objectForKey:KShareImage]) {
-          UIImage * postImage = [data objectForKey:KShareImage];
+        if (image) {
           
-          NSData *myData = UIImagePNGRepresentation(postImage);
+          NSData *myData = UIImagePNGRepresentation(image);
           [postRequest addMultipartData:myData withName:@"media" type:@"image/png" filename:@"TestImage"];
         }
         
@@ -152,9 +154,18 @@
           
         }];
       }
+      else
+      {
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must login to Twitter account"];
+        });
+      }
     }
     else {
-      [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must login to Twitter account"];
+      dispatch_async(dispatch_get_main_queue(), ^{
+        [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must grant access to use Twitter account for Legacy Connect. Please visit Settings > Twitter > and allow access to Legacy Connect "];
+      });
+
       /*
        switch (error.code) {
        case ACErrorAccountNotFound: {

@@ -8,17 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-static NSString * KShareImage = @"share_image";
-static NSString * KShareDescription = @"share_description";
-
+typedef void (^CanShareToTwitter) (BOOL canShare);
 
 @interface LCSocialShareManager : NSObject
 
 + (BOOL)canShareToFacebook;
-+ (BOOL)canShareToTwitter;
++ (void)canShareToTwitter:(CanShareToTwitter)canShare;
 
 + (void)shareToFacebookWithData:(NSDictionary*)data;
-+ (void)shareToTwitterWithData:(NSDictionary*)data;
++ (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
 
 
 @end
