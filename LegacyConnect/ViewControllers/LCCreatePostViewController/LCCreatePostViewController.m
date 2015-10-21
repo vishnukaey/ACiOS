@@ -151,15 +151,16 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, postImageView.frame.size.width, 100)];
     [postImageView setBackgroundColor:ICONBACK_COLOR];
     [self arrangeScrollSubviewsForPosting];
-    [interstIconImageView sd_setImageWithURL:[NSURL URLWithString:_postFeedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+    [postImageView sd_setImageWithURL:[NSURL URLWithString:_postFeedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
      {
        [postImageView setBackgroundColor:[UIColor clearColor]];
-       [self arrangeScrollSubviewsForPosting];
+       [self arrangePostImageView];
      }];
    }
   
   if (_postFeedObject.message.length)
   {
+    placeHolderLabel.hidden = true;
     postTextView.text = _postFeedObject.message;
     CGRect frame = postTextView.frame;
     frame.size.height = postTextView.contentSize.height;
@@ -229,7 +230,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   NSString *tagsString = @"";
   for (LCFriend *friend in taggedFriendsArray)
   {
-    NSString *friend_name = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    NSString *friend_name = [NSString stringWithFormat:@"%@ %@", [LCUtilityManager performNullCheckAndSetValue:friend.firstName],
+                             [LCUtilityManager performNullCheckAndSetValue:friend.lastName]];
     tagsString = [NSString stringWithFormat:@"%@ @%@",tagsString, friend_name];
   }
   

@@ -573,7 +573,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 {
   switch (type) {
     case kkFeedCellActionLoadMore:
-      [self feedCellMoreAction];
+      [self feedCellMoreAction :feed];
       break;
       
       case kkFeedCellActionViewImage:
@@ -596,7 +596,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)feedCellMoreAction
+- (void)feedCellMoreAction :(LCFeed *)feed
 {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
@@ -604,7 +604,8 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
     LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
-    
+    createPostVC.isEditing = YES;
+    createPostVC.postFeedObject = feed;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:createPostVC animated:YES completion:nil];
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
