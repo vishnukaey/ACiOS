@@ -21,6 +21,7 @@
 #import "LCLoginViewController.h"
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
+#import "LCSocialShareManager.h"
 
 
 @interface LCEmptyViewController ()
@@ -277,9 +278,12 @@
   }
   else if (index == 1)//Interests
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+//    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+
+#warning  remove this call
+    [LCSocialShareManager shareToTwitterWithData:nil];
     
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
 //    LCAllInterestVC *vc = [sb instantiateInitialViewController];
