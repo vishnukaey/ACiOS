@@ -17,7 +17,7 @@ static NSString * kWaitingFriend = @"profileWaiting";
 - (void)setfriendStatusButtonImageForStatus:(FriendStatus)status
 {
   FriendStatus currentStatus = status;
-  NSString * btnImageName = @"";
+  NSString *btnImageName = nil;
   switch (currentStatus) {
       
     case kIsFriend:
@@ -35,7 +35,10 @@ static NSString * kWaitingFriend = @"profileWaiting";
     default:
       break;
   }
-  [self setImage:[UIImage imageNamed:btnImageName] forState:UIControlStateNormal];
+  if(btnImageName)
+  {
+    [self setImage:[UIImage imageNamed:btnImageName] forState:UIControlStateNormal];
+  }
 }
 
 

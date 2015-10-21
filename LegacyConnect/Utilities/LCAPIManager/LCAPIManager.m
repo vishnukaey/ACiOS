@@ -157,7 +157,7 @@ static LCAPIManager *sharedManager = nil;
 + (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL,@"/api/search"];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL,@"api/search",@"searchKey",searchItem];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -169,7 +169,6 @@ static LCAPIManager *sharedManager = nil;
      {
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
-       
        LCSearchResult *searchresult = [MTLJSONAdapter modelOfClass:[LCSearchResult class] fromJSONDictionary:dict error:&error];
        if(!error)
        {

@@ -10,8 +10,12 @@
 
 @implementation LCInterestsTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+  [_interestFollowButton setBackgroundColor:[UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0]];
+  _interestFollowButton.layer.cornerRadius = 5.0;
+  _interestFollowButton.layer.borderColor = [UIColor colorWithRed:204.0/255.0 green:204.0/255.0 blue:204.0/255.0 alpha:1.0].CGColor;
+  _interestFollowButton.layer.borderWidth = 1.0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -23,15 +27,31 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+  [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
   _interestNameLabel.text = [NSString stringWithFormat:@"%@ ",interest.name];
-  _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ supporters",interest.followers];
+  _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",interest.followers];
+  if(_interest.isFollowing)
+  {
+    [_interestFollowButton setSelected:YES];
+  }
+  else
+  {
+    [_interestFollowButton setSelected:NO];
+  }
 }
 
 
 -(IBAction)followButtonTapped:(id)sender
 {
-  
+  if(!_interestFollowButton.selected)
+  {
+    [_interestFollowButton setSelected:YES];
+    [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
+      _interest.isFollowing =YES;
+    } andFailure:^(NSString *error) {
+      [_interestFollowButton setSelected:NO];
+    }];
+  }
 }
 
 

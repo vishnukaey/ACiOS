@@ -20,4 +20,5 @@
 @property (nonatomic, strong) NSArray *causes;
 @property (nonatomic, strong) NSString *events;
 @property (nonatomic, assign) BOOL isDeleted;
+@property (nonatomic, assign) BOOL isFollowing;
 @end
