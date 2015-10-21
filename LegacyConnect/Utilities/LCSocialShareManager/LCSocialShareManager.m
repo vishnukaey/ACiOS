@@ -24,6 +24,8 @@
 
 + (void)shareToFacebookWithData:(NSDictionary*)data
 {
+  UIImage *postImage = [UIImage imageNamed:@"userProfilePic"];
+  
   ACAccountStore *accountStore = [[ACAccountStore alloc] init];
   
   ACAccountType *accountTypeFacebook = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
@@ -38,18 +40,37 @@
     
     if(granted) {
       
+      
+      
       NSArray *accounts = [accountStore
                            accountsWithAccountType:accountTypeFacebook];
-      ACAccount * _facebookAccount = [accounts lastObject];
+      ACAccount * facebookAccount = [accounts lastObject];
       
-      NSDictionary *parameters = @{@"access_token":_facebookAccount.credential.oauthToken,
-                                   @"message": @"new post from app"};
+      NSDictionary *parameters = @{@"message": @"new post from app with image"};
       
-      NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
-      SLRequest *feedRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
-                                                  requestMethod:SLRequestMethodPOST
-                                                            URL:feedURL
-                                                     parameters:parameters];
+      SLRequest *feedRequest;
+      if (postImage) {
+        
+        NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/photos"];
+        feedRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
+                                         requestMethod:SLRequestMethodPOST
+                                                   URL:feedURL
+                                            parameters:parameters];
+        NSData *imageData = UIImagePNGRepresentation(postImage);
+        [feedRequest addMultipartData:imageData
+                             withName:@"source"
+                                 type:@"multipart/form-data"
+                             filename:@"image.png"];
+        
+      }
+      else {
+        NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
+        feedRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
+                                         requestMethod:SLRequestMethodPOST
+                                                   URL:feedURL
+                                            parameters:parameters];
+      }
+      feedRequest.account = facebookAccount;
       
       [feedRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
         
@@ -100,8 +121,8 @@
         ACAccount *twitterAccount = [arrayOfAccounts lastObject];
         
         NSDictionary *message = @{@"status": @"Twitter post from iOS without image"};
-        SLRequest *postRequest;
         
+        SLRequest *postRequest;
         if (postImage) {
           
           NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update_with_media.json"];
@@ -112,7 +133,10 @@
           
           NSData *imageData = UIImagePNGRepresentation(postImage);
           
-          [postRequest addMultipartData:imageData withName:@"media" type:@"image/png" filename:@"image.png"];
+          [postRequest addMultipartData:imageData
+                               withName:@"media"
+                                   type:@"image/png"
+                               filename:@"image.png"];
           [postRequest addMultipartData:imageData
                                withName:@"media[]"
                                    type:@"multipart/form-data"
