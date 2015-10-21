@@ -60,9 +60,15 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   
   
   [self initialiseScrollSubviewsForPosting];
+  [self setCurrentContexts];
   [postTextView becomeFirstResponder];
   taggedLocation = [[NSMutableString alloc] initWithString:@""];
+  postingToLabel.text = @"";
   
+  if (!_postFeedObject)
+  {
+    _postFeedObject = [[LCFeed alloc] init];
+  }
     // Do any additional setup after loading the view.
 }
 
@@ -107,6 +113,17 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 //  postImageView.backgroundColor = [UIColor greenColor];
   [_postScrollView addSubview:postImageView];
   
+}
+
+- (void)setCurrentContexts//image, interests, causes etc
+{
+  //photo
+  if (_photoPostPhoto)
+  {
+    [postImageView setImage:_photoPostPhoto];
+    [self arrangePostImageView];
+    _photoPostPhoto = nil;
+  }
 }
 
 #pragma mark - keyboard functions
@@ -230,7 +247,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [cameraIcon setTintColor:[UIColor blackColor]];
   }
   
-  if (1) {
+  if (milestoneIcon.tag) {
     [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
   }
 }
@@ -280,11 +297,30 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [sheet showInView:self.view];
 }
 
+- (IBAction)milestonesButtonClicked
+{
+  if (milestoneIcon.tag == 0)
+  {
+    milestoneIcon.tag = 1;
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+  }
+  else
+  {
+    milestoneIcon.tag = 0;
+    UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImageName];
+    miles_im = [miles_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    milestoneIcon.image = miles_im;
+    [milestoneIcon setTintColor:[UIColor grayColor]];
+  }
+}
+
 - (IBAction)intersestDownArrowClicked
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
   LCListInterestsAndCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListInterestsAndCausesVC"];
   vc.delegate = self;
+  vc.selectedCause = _selectedCause;
+  vc.selectedInterest = _selectedInterest;
   [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -368,12 +404,16 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 - (void)didfinishPickingInterest:(LCInterest *)interest andCause:(LCCause *)cause
 {
   if (interest) {
+    postingToLabel.font = [UIFont fontWithName:@"Gotham-Bold" size:13];
     postingToLabel.text = interest.name;
   }
   else if (cause)
   {
+    postingToLabel.font = [UIFont fontWithName:@"Gotham-Book" size:13];
     postingToLabel.text = cause.name;
   }
+  _selectedCause = cause;
+  _selectedInterest = interest;
 }
 
 @end

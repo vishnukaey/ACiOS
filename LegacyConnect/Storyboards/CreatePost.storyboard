@@ -98,6 +98,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPx-id-ow6">
                                         <rect key="frame" x="0.0" y="41" width="345" height="46"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tp-eg-rvN">
+                                                <rect key="frame" x="0.0" y="0.0" width="262" height="46"/>
+                                                <connections>
+                                                    <action selector="intersestDownArrowClicked" destination="qhF-9Z-rbX" eventType="touchUpInside" id="8hx-Xs-cdM"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vo5-vY-Une">
                                                 <rect key="frame" x="300" y="8" width="30" height="30"/>
                                                 <constraints>
@@ -129,31 +135,23 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLw-QU-E1u">
-                                                <rect key="frame" x="85" y="17" width="72" height="13"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="72" id="75d-11-4wv"/>
-                                                </constraints>
+                                                <rect key="frame" x="85" y="17" width="66" height="13"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.78823529411764703" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createPost_downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Cty-th-wKk">
-                                                <rect key="frame" x="165" y="0.0" width="10" height="46"/>
+                                                <rect key="frame" x="159" y="0.0" width="10" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="lGK-Fx-9RF"/>
                                                 </constraints>
                                             </imageView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Tp-eg-rvN">
-                                                <rect key="frame" x="0.0" y="0.0" width="262" height="46"/>
-                                                <connections>
-                                                    <action selector="intersestDownArrowClicked" destination="qhF-9Z-rbX" eventType="touchUpInside" id="8hx-Xs-cdM"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="Sum-tm-Kmg" firstAttribute="top" secondItem="bPx-id-ow6" secondAttribute="top" constant="8" id="1uO-bD-cTN"/>
                                             <constraint firstItem="Cty-th-wKk" firstAttribute="top" secondItem="bPx-id-ow6" secondAttribute="top" id="2My-ij-hIT"/>
+                                            <constraint firstItem="Sum-tm-Kmg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cty-th-wKk" secondAttribute="trailing" constant="8" id="665-Os-nsw"/>
                                             <constraint firstItem="8Tp-eg-rvN" firstAttribute="leading" secondItem="bPx-id-ow6" secondAttribute="leading" id="DvB-zv-4J2"/>
                                             <constraint firstItem="Cty-th-wKk" firstAttribute="leading" secondItem="iLw-QU-E1u" secondAttribute="trailing" constant="8" id="Fv9-CX-abM"/>
                                             <constraint firstAttribute="bottom" secondItem="Cty-th-wKk" secondAttribute="bottom" id="HHH-mu-OUT"/>
@@ -288,6 +286,9 @@
                                                         <state key="normal">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="milestonesButtonClicked" destination="qhF-9Z-rbX" eventType="touchUpInside" id="VwA-cd-PVw"/>
+                                                        </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createPost_milestoneGray" translatesAutoresizingMaskIntoConstraints="NO" id="A4V-sD-tkZ">
                                                         <rect key="frame" x="34" y="14" width="18" height="17"/>
@@ -868,14 +869,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhF-Nu-QEE">
                                 <rect key="frame" x="0.0" y="157" width="375" height="510"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
-                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
-                                        </connections>
-                                    </tableView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zq1-Re-mZm">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -893,7 +886,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jwW-HD-dvn">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jwW-HD-dvn">
                                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </imageView>
@@ -905,15 +898,6 @@
                                                             </constraints>
                                                             <state key="normal" image="contact_tick"/>
                                                         </button>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ub1-dC-SF6">
-                                                            <rect key="frame" x="8" y="58" width="84" height="21"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="height" constant="21" id="66L-FN-fBu"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -923,16 +907,12 @@
                                                     <constraint firstAttribute="trailing" secondItem="jwW-HD-dvn" secondAttribute="trailing" id="5Wd-Ix-Kl6"/>
                                                     <constraint firstAttribute="bottom" secondItem="jwW-HD-dvn" secondAttribute="bottom" id="EpO-2g-ctg"/>
                                                     <constraint firstAttribute="trailing" secondItem="9R3-VC-qeI" secondAttribute="trailing" constant="8" id="Lba-Uu-rpE"/>
-                                                    <constraint firstAttribute="bottomMargin" secondItem="Ub1-dC-SF6" secondAttribute="bottom" constant="13" id="PBw-4o-ia7"/>
-                                                    <constraint firstItem="Ub1-dC-SF6" firstAttribute="leading" secondItem="Wqx-Wb-5fA" secondAttribute="leadingMargin" id="SmF-YT-Nnb"/>
                                                     <constraint firstItem="9R3-VC-qeI" firstAttribute="top" secondItem="Wqx-Wb-5fA" secondAttribute="top" constant="8" id="fUB-IQ-CNc"/>
                                                     <constraint firstItem="jwW-HD-dvn" firstAttribute="leading" secondItem="Wqx-Wb-5fA" secondAttribute="leading" id="g16-pJ-S7p"/>
-                                                    <constraint firstAttribute="trailingMargin" secondItem="Ub1-dC-SF6" secondAttribute="trailing" id="sT7-pO-SGp"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="causeImageView" destination="jwW-HD-dvn" id="oxv-NB-hnN"/>
                                                     <outlet property="checkButton" destination="9R3-VC-qeI" id="FOq-Rb-6fV"/>
-                                                    <outlet property="testlabel" destination="Ub1-dC-SF6" id="xbR-Sf-r3f"/>
                                                 </connections>
                                             </collectionViewCell>
                                         </cells>
@@ -966,6 +946,14 @@
                                             <outlet property="delegate" destination="C2E-jM-Jem" id="fSx-94-Zfq"/>
                                         </connections>
                                     </collectionView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
+                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

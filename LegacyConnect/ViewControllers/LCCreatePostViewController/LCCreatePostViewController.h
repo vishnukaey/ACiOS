@@ -24,5 +24,9 @@
 @property(nonatomic,retain) IBOutlet UIView *popUpView;
 @property(nonatomic,retain) IBOutlet UIScrollView *postScrollView;
 @property(nonatomic,retain) IBOutlet NSLayoutConstraint *popUpViewHeightConstraint;
+@property(nonatomic, retain) LCFeed *postFeedObject;
+@property(nonatomic, retain) UIImage *photoPostPhoto;
+@property(nonatomic, retain) LCInterest *selectedInterest;
+@property(nonatomic, retain) LCCause *selectedCause;
 
 @end

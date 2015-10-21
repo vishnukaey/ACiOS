@@ -244,17 +244,8 @@
   }
   else if (sender.tag == 1)//photo post
   {
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-//    createPostVC = [sb instantiateInitialViewController];
-//
-//    createPostVC.delegate = self;
-//    giButton.hidden = YES;
-//    menuButton.hidden = YES;
-//    CGRect frame = createPostVC.view.frame;
-//    frame.origin.y = 20;
-//    createPostVC.view.frame = frame;
-//    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
+    [sheet showInView:navigationRoot.view];
   }
   else if(sender.tag == 2)//text post
   {
@@ -264,14 +255,54 @@
     createPostVC.delegate = self;
     giButton.hidden = YES;
     menuButton.hidden = YES;
-//    CGRect frame = createPostVC.view.frame;
-//    frame.origin.y = 20;
-//    createPostVC.view.frame = frame;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
     appdel.isCreatePostOpen = YES;
   }
   
+}
+
+#pragma mark - UIActionSheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if (buttonIndex < 2)
+  {
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    UIImagePickerControllerSourceType type;
+    switch (buttonIndex)
+    {
+      case 0:
+        type = UIImagePickerControllerSourceTypePhotoLibrary;
+        break;
+      case 1:
+        type = UIImagePickerControllerSourceTypeCamera;
+        break;
+        
+      default:
+        break;
+    }
+    imagePicker.sourceType = type;
+    imagePicker.delegate = self;
+    [navigationRoot presentViewController:imagePicker animated:YES completion:^{ }];
+  }
+}
+
+#pragma mark - UIImagePickerController delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [picker dismissViewControllerAnimated:YES completion:NULL];
+  UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  createPostVC = [sb instantiateInitialViewController];
+  
+  createPostVC.delegate = self;
+  giButton.hidden = YES;
+  menuButton.hidden = YES;
+  createPostVC.photoPostPhoto = chosenImage;
+  createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+  appdel.isCreatePostOpen = YES;
 }
 
 #pragma mark - leftmenu delegates

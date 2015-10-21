@@ -88,8 +88,10 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void)setGIAndMenuButtonVisibilityStatus:(BOOL)isHidden
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:isHidden];
-  [appdel.menuButton setHidden:isHidden];
+  if (!appdel.isCreatePostOpen) {
+    [appdel.GIButton setHidden:isHidden];
+    [appdel.menuButton setHidden:isHidden];
+  }
 }
 
 #pragma mark - controller life cycle

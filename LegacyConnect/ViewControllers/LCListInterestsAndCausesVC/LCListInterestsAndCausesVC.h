@@ -17,4 +17,6 @@
 @interface LCListInterestsAndCausesVC : UIViewController
 
 @property(nonatomic, retain) id delegate;
+@property(nonatomic, retain) LCInterest *selectedInterest;
+@property(nonatomic, retain) LCCause *selectedCause;
 @end

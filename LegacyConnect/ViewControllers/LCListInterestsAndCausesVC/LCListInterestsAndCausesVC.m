@@ -21,8 +21,7 @@
   NSArray *interestsArray, *causesArray;
   NSMutableArray *interestsSearchArray, *causesSearchArray;
   
-  LCInterest *selectedInterest;
-  LCCause *selectedCause;
+  
 }
 @end
 
@@ -33,7 +32,6 @@ static NSString *kCheckedImageName = @"contact_tick";
 @interface LCTagCauseCollectionCell : UICollectionViewCell
 @property(nonatomic, strong)IBOutlet UIImageView *causeImageView;
 @property(nonatomic, strong)IBOutlet UIButton *checkButton;
-@property(nonatomic, strong)IBOutlet UILabel *testlabel;
 @property(nonatomic, strong) LCCause *cause;
 @end
 
@@ -50,8 +48,6 @@ static NSString *kCheckedImageName = @"contact_tick";
   UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   
-  _testlabel.text = cause.name;
-  
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image];//no placeholder needed. background color is placeholder itself
 }
 @end
@@ -67,7 +63,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 
 #pragma mark - LCListInterestsAndCausesVC class
 @implementation LCListInterestsAndCausesVC
-@synthesize delegate;
+@synthesize delegate, selectedInterest, selectedCause;
 #pragma mark - lifecycle methods
 - (void)viewDidLoad
 {
@@ -157,11 +153,14 @@ static NSString *kCheckedImageName = @"contact_tick";
                                                  ascending:YES];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [interest.causes sortedArrayUsingDescriptors:sortDescriptors];
-    if ([sortedArray containsObject:selectedCause]) {
-      NSMutableArray *arrayto_rearrange = [[NSMutableArray alloc] initWithArray:sortedArray];
-      [arrayto_rearrange removeObject:selectedCause];
-      [arrayto_rearrange insertObject:selectedCause atIndex:0];
-      sortedArray = [arrayto_rearrange copy];
+    for (LCCause *cause_ in sortedArray)
+    {
+      if ([cause_.causeID isEqualToString:selectedCause.causeID]) {
+        NSMutableArray *arrayto_rearrange = [[NSMutableArray alloc] initWithArray:sortedArray];
+        [arrayto_rearrange removeObject:selectedCause];
+        [arrayto_rearrange insertObject:selectedCause atIndex:0];
+        sortedArray = [arrayto_rearrange copy];
+      }
     }
     interest.causes = sortedArray;
   }
@@ -291,7 +290,7 @@ static NSString *kCheckedImageName = @"contact_tick";
     [cell addSubview:selectionButton];
     selectionButton.tag = 10;
     selectionButton.userInteractionEnabled = NO;
-    if ([interstObj isEqual:selectedInterest])
+    if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
     {
       [selectionButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
     }
@@ -342,7 +341,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   LCInterest *interstObj = [causesSearchArray objectAtIndex:indexPath.section];
   LCCause *causeObj = [interstObj.causes objectAtIndex:indexPath.row];
   [cell setCause:causeObj];
-  if ([causeObj isEqual:selectedCause])
+  if ([causeObj.causeID isEqualToString:selectedCause.causeID])
   {
     [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
   }
