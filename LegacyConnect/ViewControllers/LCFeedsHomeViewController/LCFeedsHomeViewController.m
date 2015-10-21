@@ -16,6 +16,7 @@
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
+#import "LCSocialShareManager.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static CGFloat kNumberOfSectionsInFeeds = 1;
@@ -190,6 +191,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  UIImage * shareImage = [UIImage imageNamed:@"ThanksIcon_enabled"];
+  NSDictionary * shareInfo = [[NSDictionary alloc] initWithObjectsAndKeys:shareImage, KShareImage, @"This is a test share", KShareDescription, nil];
+  
+  [LCSocialShareManager shareToTwitterWithData:shareInfo];
+  
+  
 }
 
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+static NSString * KShareImage = @"share_image";
+static NSString * KShareDescription = @"share_description";
+
+
 @interface LCSocialShareManager : NSObject
 
 + (BOOL)canShareToFacebook;

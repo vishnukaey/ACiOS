@@ -10,6 +10,7 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 
+
 @implementation LCSocialShareManager
 
 + (BOOL)canShareToFacebook
@@ -104,13 +105,11 @@
 
 + (void)shareToTwitterWithData:(NSDictionary*)data
 {
-  UIImage *postImage = [UIImage imageNamed:@"userProfilePic"];
-  
   
   ACAccountStore *account = [[ACAccountStore alloc] init];
   ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
   
-  [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error){
+  [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
     
     if (granted == YES) {
       
@@ -119,55 +118,30 @@
       if ([arrayOfAccounts count] > 0) {
         
         ACAccount *twitterAccount = [arrayOfAccounts lastObject];
+        NSDictionary *message = @{@"status": [data objectForKey:KShareDescription]};
         
-        NSDictionary *message = @{@"status": @"Twitter post from iOS without image"};
-        
-        SLRequest *postRequest;
-        if (postImage) {
-          
-          NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update_with_media.json"];
-          SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                      requestMethod:SLRequestMethodPOST
-                                                                URL:requestURL
-                                                         parameters:nil];
-          
-          NSData *imageData = UIImagePNGRepresentation(postImage);
-          
-          [postRequest addMultipartData:imageData
-                               withName:@"media"
-                                   type:@"image/png"
-                               filename:@"image.png"];
-          [postRequest addMultipartData:imageData
-                               withName:@"media[]"
-                                   type:@"multipart/form-data"
-                               filename:@"image.png"];
-          
-          [postRequest addMultipartData:[@"my post" dataUsingEncoding:NSUTF8StringEncoding]
-                               withName:@"status"
-                                   type:@"multipart/form-data"
-                               filename:nil];
-
-        }
-        else {
-          
-          NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json"];
-          postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
-                                                      requestMethod:SLRequestMethodPOST
-                                                                URL:requestURL
-                                                         parameters:message];
-        }
-        
-        
-        
+        NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update_with_media.json"];
+        SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
+                                                    requestMethod:SLRequestMethodPOST
+                                                              URL:requestURL
+                                                       parameters:message];
         postRequest.account = twitterAccount;
         
-        [postRequest performRequestWithHandler:^(NSData *responseData,NSHTTPURLResponse *urlResponse, NSError *error){
+        if ([data objectForKey:KShareImage]) {
+          UIImage * postImage = [data objectForKey:KShareImage];
+          
+          NSData *myData = UIImagePNGRepresentation(postImage);
+          [postRequest addMultipartData:myData withName:@"media" type:@"image/png" filename:@"TestImage"];
+        }
+        
+        [postRequest performRequestWithHandler:^(NSData *responseData,NSHTTPURLResponse *urlResponse, NSError *error) {
           NSString* newStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
           NSLog(@"Twitter HTTP response: %li \n %@", (long)[urlResponse statusCode], newStr);
           if (error) {
             [LCUtilityManager showAlertViewWithTitle:@"" andMessage:[error localizedDescription]];
           }
-          else {
+          else
+          {
             if ([urlResponse statusCode] == 200) {
               NSLog(@"Posted to twitter successfully.");
             }
@@ -180,24 +154,19 @@
       }
     }
     else {
-      NSLog(@"[%@]",[error localizedDescription]);
-      switch (error.code) {
-        case ACErrorAccountNotFound: {
-          dispatch_async(dispatch_get_main_queue(), ^{
-            //                                          SLComposeViewController *composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
-            //                                          [self presentViewController:composeViewController animated:NO completion:^{
-            //                                            [composeViewController dismissViewControllerAnimated:NO completion:nil];
-            //                                          }];
-          });
-          break;
-        }
-        default: {
-          NSLog(@"%s %x %@", __PRETTY_FUNCTION__, granted, error);
-          //[[[UIAlertView alloc] initWithTitle:@"D:" message:error.localizedFailureReason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-          break;
-        }
-      }
-      
+      [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must login to Twitter account"];
+      /*
+       switch (error.code) {
+       case ACErrorAccountNotFound: {
+       dispatch_async(dispatch_get_main_queue(), ^{
+       });
+       break;
+       }
+       default: {
+       break;
+       }
+       }
+       */
     }
   }];
 }
