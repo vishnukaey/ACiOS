@@ -250,7 +250,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)createNewPost:(LCPost*)post WithImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)createNewPost:(LCFeed*)post withImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
 #warning  correct issue with postTags array format
   NSString *imageName = @"image";
@@ -260,7 +260,12 @@ static LCAPIManager *sharedManager = nil;
   
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
-  
+  //the tag array of dictionary is formatted json the AFNetworking not handling this as per the current assumption
+  NSMutableDictionary *dict_mut = [[NSMutableDictionary alloc] initWithDictionary:dict];
+  NSArray *tags = [dict_mut objectForKey:@"postTags"];
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags options:NSJSONWritingPrettyPrinted error:&error];
+  NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  [dict_mut setObject:jsonString forKey:@"postTags"];
 //  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
 //    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
 //    {
@@ -288,7 +293,7 @@ static LCAPIManager *sharedManager = nil;
   
   
   
-  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict image:image andImageName:imageName withSuccess:^(id response) {
+  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict_mut image:image andImageName:imageName withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -296,7 +301,7 @@ static LCAPIManager *sharedManager = nil;
     }
     else
     {
-      NSLog(@"%@",response[kResponseMessage]);
+      NSLog(@"---%@",response[kResponseMessage]);
       NSError *error = nil;
       if(!error)
       {
@@ -316,7 +321,7 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
-+ (void)updatePost:(LCPost*)post WithImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)updatePost:(LCFeed*)post withImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   
   NSString *imageName = @"image";
@@ -326,8 +331,14 @@ static LCAPIManager *sharedManager = nil;
   
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
+  //the tag array of dictionary is formatted json the AFNetworking not handling this as per the current assumption
+  NSMutableDictionary *dict_mut = [[NSMutableDictionary alloc] initWithDictionary:dict];
+  NSArray *tags = [dict_mut objectForKey:@"postTags"];
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags options:NSJSONWritingPrettyPrinted error:&error];
+  NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  [dict_mut setObject:jsonString forKey:@"postTags"];
   
-  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict image:image andImageName:imageName withSuccess:^(id response) {
+  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict_mut image:image andImageName:imageName withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];

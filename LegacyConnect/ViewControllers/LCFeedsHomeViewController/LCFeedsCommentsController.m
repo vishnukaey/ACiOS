@@ -17,7 +17,8 @@ static CGFloat kCellForPostDetails = 1;
 static CGFloat kCellForLoadMoreBtn = 1;
 static CGFloat kIndexForPostDetails = 0;
 
-#define kPostButtonBGColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
+#define kPostButtonDisabledColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
+#define kPostButtonEnabledColor [UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]
 #define kPostButtonTextColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
 #define kPostBtnFont [UIFont fontWithName:@"Gotham-Book" size:12.0f]
 #define kCommentFieldBGColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
@@ -86,17 +87,18 @@ static CGFloat kIndexForPostDetails = 0;
   commentTextField = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, commentField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, commentField.frame.size.height)];
   [commentField addSubview:commentTextField];
   commentTextField.delegate = self;
-  [commentTextField setBackgroundColor:[UIColor whiteColor]];
+  [commentTextField setBackgroundColor:[UIColor clearColor]];
   [commentTextField setPlaceholder:@"Comment"];
   [commentTextField setTextColor:kCommentsFieldTextColor];
   [commentTextField setFont:kCommentsFieldFont];
   
   UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(commentField.frame.size.width - postBut_width, 0, postBut_width, commentField.frame.size.height)];
-  [postButton setBackgroundColor:kPostButtonBGColor];
+  [postButton setBackgroundColor:kPostButtonDisabledColor];
   [postButton.titleLabel setFont:kPostBtnFont];
   [commentField addSubview:postButton];
   [postButton setTitle:@"POST" forState:UIControlStateNormal];
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  postBtn = postButton;
   [self createDummyCommentFieldViewWithinputAccessoryView:commentField];
 }
 
@@ -118,24 +120,46 @@ static CGFloat kIndexForPostDetails = 0;
   commentTextField_dup = [[UITextField alloc] initWithFrame:CGRectMake(commentIcon.frame.origin.x + commentIcon.frame.size.width + 10, 0, dummyCommentField.frame.size.width - (commentIcon.frame.origin.x + commentIcon.frame.size.width + 10) - postBut_width, dummyCommentField.frame.size.height)];
   [dummyCommentField addSubview:commentTextField_dup];
   commentTextField_dup.delegate = self;
-  [commentTextField_dup setBackgroundColor:[UIColor whiteColor]];
+  [commentTextField_dup setBackgroundColor:[UIColor clearColor]];
   [commentTextField_dup setPlaceholder:@"Comment"];
   [commentTextField_dup setTextColor:kCommentsFieldTextColor];
   [commentTextField_dup setFont:kCommentsFieldFont];
   commentTextField_dup.inputAccessoryView = view;
   
   UIButton *postButton = [[UIButton alloc] initWithFrame:CGRectMake(dummyCommentField.frame.size.width - postBut_width, 0, postBut_width, dummyCommentField.frame.size.height)];
-  [postButton setBackgroundColor:kPostButtonBGColor];
+  [postButton setBackgroundColor:kPostButtonDisabledColor];
   [postButton.titleLabel setFont:kPostBtnFont];
   [dummyCommentField addSubview:postButton];
   [postButton setTitle:@"POST" forState:UIControlStateNormal];
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
+  dummyPostBtn = postButton;
   [self.view addSubview:dummyCommentField];
 }
 
 -(void)changeFirstResponder
 {
   [commentTextField becomeFirstResponder]; //will return YES;
+}
+
+- (void)addTextFieldTextDidChangeNotifiaction
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(changeUpdateButtonState)
+                                               name:UITextFieldTextDidChangeNotification
+                                             object:nil];
+}
+
+- (void)removeTextFieldTextDidChangeNotifiaction
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:UITextFieldTextDidChangeNotification
+                                                object:nil];
+}
+
+- (void)changeUpdateButtonState
+{
+  [postBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
+  [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
 }
 
 #pragma mark - controller life cycle
@@ -156,6 +180,7 @@ static CGFloat kIndexForPostDetails = 0;
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:NO];
   [self addKeyBoardNotificationObserver];
+  [self addTextFieldTextDidChangeNotifiaction];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -165,6 +190,7 @@ static CGFloat kIndexForPostDetails = 0;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
+  [self removeTextFieldTextDidChangeNotifiaction];
   [super viewWillDisappear:animated];
 }
 

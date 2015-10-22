@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSString *postToType;
 @property (nonatomic, strong) NSString *postToName;
 @property (nonatomic, strong) NSString *postToID;
+@property (nonatomic, strong) NSString *postToImageURL;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *didLike;

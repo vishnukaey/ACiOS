@@ -7,34 +7,27 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCListFriendsToTagViewController.h"
+#import "LCListLocationsToTagVC.h"
+#import "LCListInterestsAndCausesVC.h"
 
 @protocol createPostDelegate <NSObject>
 
-- (void)dismissView;
+- (void)dismissCreatePostView;
 
 @end
 
-@interface LCCreatePostViewController : UIViewController <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
+@interface LCCreatePostViewController : UIViewController <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LCListFriendsToTagViewControllerDelegate, LCListLocationsToTagVCDelegate, LCListInterestsAndCausesVCDelegate>
 
 
 @property (nonatomic, unsafe_unretained) NSObject <createPostDelegate> *delegate;
-
-@property(nonatomic,retain) IBOutlet UIButton *closeButton;
-@property(nonatomic,retain) IBOutlet UIButton *postButton;
-@property(nonatomic,retain) IBOutlet UIButton *postToFacebook;
-@property(nonatomic,retain) IBOutlet UIButton *postToTwitter;
-@property(nonatomic,retain) IBOutlet UIButton *selectInterest;
-
-@property(nonatomic,retain) IBOutlet UIButton *addFriendsToPost;
-@property(nonatomic,retain) IBOutlet UIButton *addImageToPost;
-@property(nonatomic,retain) IBOutlet UIButton *addLocationToPost;
-@property(nonatomic,retain) IBOutlet UIButton *addMilestone;
-
-@property(nonatomic,retain) IBOutlet UIImageView *interestImageView;
-@property(nonatomic,retain) IBOutlet UIImageView *postImageView;
-
-@property(nonatomic,retain) IBOutlet UITextView *postTextView;
-@property(nonatomic,retain) IBOutlet UILabel *placeHolderText;
-
+@property(nonatomic,retain) IBOutlet UIView *popUpView;
+@property(nonatomic,retain) IBOutlet UIScrollView *postScrollView;
+@property(nonatomic,retain) IBOutlet NSLayoutConstraint *popUpViewHeightConstraint;
+@property(nonatomic, retain) LCFeed *postFeedObject;
+@property(nonatomic, retain) UIImage *photoPostPhoto;
+@property(nonatomic, retain) LCInterest *selectedInterest;
+@property(nonatomic, retain) LCCause *selectedCause;
+@property(nonatomic, assign) BOOL isEditing;
 
 @end

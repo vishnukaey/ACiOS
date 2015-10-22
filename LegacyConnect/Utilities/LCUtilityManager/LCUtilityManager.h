@@ -34,6 +34,6 @@
 
 
 + (NSArray *)getPhoneContacts;
-
++ (void)setGIAndMenuButtonVisibilityStatus:(BOOL)GIisHidden MenuVisibilityStatus:(BOOL)menuisHidden;
 
 @end

@@ -14,6 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFriendsListViewController.h"
 #import "LCFullScreenImageVC.h"
+#import "LCCreatePostViewController.h"
 
 static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";
@@ -55,9 +56,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
   if (self.navigationController.viewControllers.count <= 1) {
     [backButton setHidden:YES];
   }
@@ -70,9 +69,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:true];
-  [appdel.menuButton setHidden:true];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
   
   [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
 }
@@ -186,7 +183,6 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (void)addTabMenu
 {
-  
   LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [tabMenuContainer addSubview:tabmenu];
   //[tabmenu setBackgroundColor:[UIColor whiteColor]];
@@ -280,8 +276,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (IBAction)backAction:(id)sender
 {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -572,7 +567,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 {
   switch (type) {
     case kkFeedCellActionLoadMore:
-      [self feedCellMoreAction];
+      [self feedCellMoreAction :feed];
       break;
       
       case kkFeedCellActionViewImage:
@@ -586,33 +581,52 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:YES];
-  [appdel.menuButton setHidden:YES];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.imageUrlString = feed.image;
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)feedCellMoreAction
+- (void)feedCellMoreAction :(LCFeed *)feed
 {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
+    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
+    createPostVC.isEditing = YES;
+    createPostVC.postFeedObject = feed;
+    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:createPostVC animated:YES completion:nil];
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appdel.isCreatePostOpen = false;
   }];
   
   [actionSheet addAction:editPost];
   
   UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
+    [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
+    [LCAPIManager removeMilestoneFromPost:feed.entityID withSuccess:^(NSArray *response) {
+      [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+    }
+    andFailure:^(NSString *error) {
+     [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+      NSLog(@"%@",error);
+    }];
   }];
   [actionSheet addAction:removeMilestone];
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
+    [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
+    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
+      [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+    }
+    andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+                                 NSLog(@"%@",error);
+    }];
   }];
   [actionSheet addAction:deletePost];
   

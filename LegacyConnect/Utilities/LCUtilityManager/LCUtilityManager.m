@@ -349,4 +349,14 @@
     return items;
 }
 
+#pragma mark- GIButton visibility
++ (void)setGIAndMenuButtonVisibilityStatus:(BOOL)GIisHidden MenuVisibilityStatus:(BOOL)menuisHidden
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  if (!appdel.isCreatePostOpen) {
+    [appdel.GIButton setHidden:GIisHidden];
+    [appdel.menuButton setHidden:menuisHidden];
+  }
+}
+
 @end
