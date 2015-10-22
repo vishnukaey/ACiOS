@@ -7,15 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
 
 typedef void (^CanShareToTwitter) (BOOL canShare);
 
-@interface LCSocialShareManager : NSObject
+@interface LCSocialShareManager : NSObject <FBSDKSharingDelegate>
 
-+ (BOOL)canShareToFacebook;
 + (void)canShareToTwitter:(CanShareToTwitter)canShare;
 
-+ (void)shareToFacebookWithData:(NSDictionary*)data;
++ (void)canShareToFacebook:(void (^)(BOOL canPost))completionHandler;
+- (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image;
+
 + (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
 
 

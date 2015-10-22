@@ -13,12 +13,13 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 
+NSString * const kFBPublishActionsPermissionKey = @"publish_actions";
+NSString * const kFBMessageKey = @"message";
+
 @implementation LCSocialShareManager
 
-+ (BOOL)canShareToFacebook
-{
-  return NO;
-}
+
+#pragma mark- Twitter
 
 + (void)canShareToTwitter:(CanShareToTwitter)canShare
 {
@@ -26,161 +27,6 @@
   ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
   NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
    canShare(arrayOfAccounts.count > 0);
-}
-
-
-+ (void)checkFacebookAvailabilityWithSuccess:(void (^)(BOOL canPost))completionHandler
-{
-  if ([FBSDKAccessToken currentAccessToken]) {
-    completionHandler(YES);
-  }
-  
-  ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-  
-  
-  ACAccountType *accountTypeFacebook = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-  
-  NSDictionary *options = @{
-                            ACFacebookAppIdKey: @"535164313296078",
-                            ACFacebookPermissionsKey: @[@"publish_actions"],
-                            ACFacebookAudienceKey: ACFacebookAudienceOnlyMe //change to everyone
-                            };
-  [accountStore requestAccessToAccountsWithType:accountTypeFacebook options:options completion:^(BOOL granted, NSError *error) {
-    if (granted) {
-      completionHandler(YES);
-    }
-    else {
-      NSLog(@"[%@]",[error localizedDescription]);
-      if (error.code == ACErrorAccountNotFound) {
-        [self loginToFacebookWithSuccess:^(id response) {
-          
-          
-        } andFailure:^(NSString *error) {
-          
-        }];
-      }
-    }
-  }];
-  
-}
-
-+ (void)loginToFacebookWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
-{
-  
-  FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-  [login logOut];
-  LCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [login logInWithReadPermissions:@[kEmailKey,@"public_profile",@"user_friends"] fromViewController:appDelegate.window.rootViewController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
-    if (error)
-    {
-      NSLog(@"error %@",error);
-      failure(error.localizedDescription);
-    }
-    else if (result.isCancelled)
-    {
-      NSLog(@"Cancelled");
-      failure(@"Cancelled");
-    }
-    else
-    {
-      if ([result.grantedPermissions containsObject:kEmailKey])
-      {
-        success(result);
-        //[LCDataManager sharedDataManager].userFBID = result.token.tokenString;
-        //NSLog(@"token 2--%@",[FBSDKAccessToken currentAccessToken].tokenString);
-      }
-    }
-  }];
-}
-
-+ (void)shareToFacebookWithData:(NSDictionary*)data
-{
-  
-  NSLog(@"token 1--%@",[FBSDKAccessToken currentAccessToken].tokenString);
-  NSString *postMessage = @"test post";
-  UIImage *postImage = nil;//[UIImage imageNamed:@"userProfilePic"];
-  
-  ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-  
-  ACAccountType *accountTypeFacebook = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
-  
-  NSDictionary *options = @{
-                            ACFacebookAppIdKey: @"535164313296078",
-                            ACFacebookPermissionsKey: @[@"publish_actions"],
-                            ACFacebookAudienceKey: ACFacebookAudienceOnlyMe
-                            };
-  
-  [accountStore requestAccessToAccountsWithType:accountTypeFacebook options:options completion:^(BOOL granted, NSError *error) {
-    
-    if(granted) {
-      NSArray *accounts = [accountStore
-                           accountsWithAccountType:accountTypeFacebook];
-      ACAccount * facebookAccount = [accounts lastObject];
-      
-      NSDictionary *parameters = @{@"access_token" : facebookAccount.credential.oauthToken,
-                                   @"message": postMessage};
-      
-      SLRequest *feedRequest;
-      if (postImage) {
-        
-        NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/photos"];
-        feedRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
-                                         requestMethod:SLRequestMethodPOST
-                                                   URL:feedURL
-                                            parameters:parameters];
-        NSData *imageData = UIImagePNGRepresentation(postImage);
-        [feedRequest addMultipartData:imageData
-                             withName:@"source"
-                                 type:@"multipart/form-data"
-                             filename:@"image.png"];
-        
-      }
-      else {
-        NSURL *feedURL = [NSURL URLWithString:@"https://graph.facebook.com/me/feed"];
-        feedRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
-                                         requestMethod:SLRequestMethodPOST
-                                                   URL:feedURL
-                                            parameters:parameters];
-      }
-      
-      [feedRequest performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error){
-        
-        NSString* newStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"FB Request completed, %@ \n\n %@", [urlResponse description],newStr);
-        
-      }];
-      
-    } else {
-      NSLog(@"[%@]",[error localizedDescription]);
-      if (error.code == ACErrorAccountNotFound) {
-        [self loginToFacebookWithSuccess:^(id response) {
-          
-        } andFailure:^(NSString *error) {
-          
-        }];
-      }
-      else {
-        [LCUtilityManager showAlertViewWithTitle:@"Can't Post To Facebook" andMessage:[error localizedDescription]];
-      }
-      
-      //      switch (error.code) {
-      //        case ACErrorAccountNotFound: {
-      //          dispatch_async(dispatch_get_main_queue(), ^{
-      ////            SLComposeViewController *composeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-      ////            [self presentViewController:composeViewController animated:NO completion:^{
-      ////              //[composeViewController dismissViewControllerAnimated:NO completion:nil];
-      ////            }];
-      //          });
-      //          break;
-      //        }
-      //        default: {
-      //          NSLog(@"%s %x %@", __PRETTY_FUNCTION__, granted, error);
-      //          //[[[UIAlertView alloc] initWithTitle:@"D:" message:error.localizedFailureReason delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-      //          break;
-      //        }
-      //      }
-    }
-  }];
 }
 
 + (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
@@ -242,7 +88,7 @@
       dispatch_async(dispatch_get_main_queue(), ^{
         [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must grant access to use Twitter account for Legacy Connect. Please visit Settings > Twitter > and allow access to Legacy Connect "];
       });
-
+      
       /*
        switch (error.code) {
        case ACErrorAccountNotFound: {
@@ -258,5 +104,117 @@
     }
   }];
 }
+
+
+#pragma mark- Facebook
+
++ (void)canShareToFacebook:(void (^)(BOOL canPost))completionHandler
+{
+  FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
+  if (accessToken && [accessToken hasGranted:kFBPublishActionsPermissionKey]) {
+    
+    NSLog(@"have the facces token...");
+    completionHandler(YES);
+    
+  }
+  else {
+    
+    [self loginToFacebookWithSuccess:^(id response) {
+      
+      NSLog(@"got access token");
+      completionHandler(YES);
+      
+    } andFailure:^(NSString *error) {
+      completionHandler(NO);
+    }];
+  }
+  
+}
+
++ (void)loginToFacebookWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSLog(@"logging in to facebook");
+  FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+  LCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+  [login logInWithPublishPermissions:@[kFBPublishActionsPermissionKey] fromViewController:appDelegate.window.rootViewController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+    if (error)
+    {
+      NSLog(@"error %@",error);
+      failure(error.localizedDescription);
+    }
+    else if (result.isCancelled)
+    {
+      NSLog(@"Cancelled");
+      failure(@"Cancelled");
+    }
+    else
+    {
+      if ([result.grantedPermissions containsObject:kFBPublishActionsPermissionKey])
+      {
+        success(result);
+      }
+    }
+  }];
+}
+
+- (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image
+{
+  
+  //NSString *postMessage = @"good night friends";
+  //UIImage *postImage = [UIImage imageNamed:@"profileFriend"];
+  
+  if (image) {
+  
+      FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+      photo.caption = message;
+      photo.image = image;
+      photo.userGenerated = YES;
+      FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+      content.photos = @[photo];
+    
+      BOOL ok = [FBSDKShareAPI shareWithContent:content delegate:self];
+      if (ok) {
+        NSLog(@"Posted to facebook successfully.");
+      }
+      else {
+        NSLog(@"Posting to facebook failed.");
+      }
+  }
+  else {
+    
+    NSDictionary *params = @{kFBMessageKey : message};
+      FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"/me/feed"
+                                                                     parameters:params
+                                                                     HTTPMethod:@"POST"];
+      [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+        if (error) {
+          NSLog(@"Posting to facebook failed.");
+        }
+        else{
+          NSLog(@"Posted to facebook successfully.- %@",result);
+        }
+      }];
+  }
+}
+
+
+#pragma mark- FBSDKSharingDelegate
+
+- (void) sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+  
+  NSLog(@"Facebook sharing completed: %@", results);
+}
+
+- (void) sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+  
+  NSLog(@"Facebook sharing failed: %@", error);
+}
+
+- (void) sharerDidCancel:(id<FBSDKSharing>)sharer {
+  
+  NSLog(@"Facebook sharing cancelled.");
+}
+
+
 
 @end
