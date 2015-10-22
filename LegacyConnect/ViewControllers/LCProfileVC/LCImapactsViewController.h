@@ -10,7 +10,7 @@
 
 @interface LCImapactsViewController : UIViewController
 {
-  NSArray *impactsArray;
+  NSMutableArray *impactsArray;
 }
 @property(nonatomic, weak)IBOutlet  UITableView *impactsTableView;
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;

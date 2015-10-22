@@ -14,6 +14,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFriendsListViewController.h"
 #import "LCFullScreenImageVC.h"
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";
@@ -38,9 +39,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
+  [self addPullToRefreshForMileStonesTable];
+  
   [self loadUserInfo];
   
-  [self loadMileStones];
+  mileStoneFeeds = [[NSMutableArray alloc] init];
+  [self mileStonesClicked:nil];
   [self addTabMenu];
   
   // Do any additional setup after loading the view.
@@ -79,6 +83,20 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 
 #pragma mark - setup functions
+
+- (void)addPullToRefreshForMileStonesTable
+{
+  [milestonesTable.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  __weak typeof (self) weakSelf = self;
+  [milestonesTable addPullToRefreshWithActionHandler:^{
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [weakSelf loadMileStonesWithLastId:nil];
+    });
+  }withBackgroundColor:[UIColor lightGrayColor]];
+}
+
 
 - (void) loadUserInfo {
   
@@ -213,19 +231,22 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
 
--(void)loadMileStones
+-(void)loadMileStonesWithLastId:(NSString*)lastId
 {
-  [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
-  [LCAPIManager getMilestonesForUser:userDetail.userID
-                  andLastMilestoneID:nil withSuccess:^(NSArray *response) {
-                    mileStoneFeeds = response;
-                    [milestonesTable reloadData];
-                    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
-                  }
-                          andFailure:^(NSString *error) {
-                            [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
-                            NSLog(@"%@",error);
-                          }];
+  [LCAPIManager getMilestonesForUser:userDetail.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+    if (milestonesTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+      [mileStoneFeeds removeAllObjects];
+      [milestonesTable reloadData];
+      [milestonesTable.pullToRefreshView stopAnimating];
+    }
+
+    [mileStoneFeeds addObjectsFromArray:response];
+    [milestonesTable reloadData];
+    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+    NSLog(@"%@",error);
+  }];
 }
 
 
@@ -287,7 +308,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (IBAction)mileStonesClicked:(id)sender
 {
-  [self loadMileStones];
+  [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
+  if (mileStoneFeeds) {
+    [mileStoneFeeds removeAllObjects];
+    [milestonesTable reloadData];
+  }
+  [self loadMileStonesWithLastId:nil];
 }
 
 - (IBAction)interestsClicked:(id)sender
@@ -378,6 +404,13 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+  
+
+  if (scrollView.contentOffset.y <= 0 && collapseViewHeight.constant >=170) //Added this line to KOAPullToRefresh to work correctly.
+  {
+    return;
+  }
+  
   float collapseConstant = 0;;
   if (collapseViewHeight.constant>0)
   {
@@ -398,6 +431,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     collapseConstant = 170;
   }
   collapseViewHeight.constant = collapseConstant;
+  
 }
 
 

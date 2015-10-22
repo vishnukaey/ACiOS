@@ -9,6 +9,7 @@
 #import "LCImapactsViewController.h"
 #import "LCFeedCellView.h"
 #import "LCFullScreenImageVC.h"
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 @interface LCImapactsViewController ()
 
@@ -16,6 +17,38 @@
 
 @implementation LCImapactsViewController
 @synthesize impactsTableView, customNavigationHeight, userDetail;
+
+#pragma mark - private method implementation
+- (void)addPullToRefresh
+{
+  [self.impactsTableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  [self.impactsTableView addPullToRefreshWithActionHandler:^{
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [self loadImpactsWithLastId:nil];
+    });
+  }withBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (void)loadImpactsWithLastId:(NSString*)lastId
+{
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:lastId with:^(NSArray *response) {
+    // -- Stop Refreshing Views -- //
+    if (self.impactsTableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+      [impactsArray removeAllObjects];
+      [self.impactsTableView.pullToRefreshView stopAnimating];
+      [impactsTableView reloadData];
+    }
+    [impactsArray addObjectsFromArray:response];
+    [impactsTableView reloadData];
+    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
+  }];
+}
+
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -25,21 +58,14 @@
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   
-  [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
-  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:nil with:^(NSArray *response) {
-    NSLog(@"%@",response);
-    impactsArray = response;
-    [impactsTableView reloadData];
-    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
-  } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
-  }];
-  
   [impactsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   impactsTableView.estimatedRowHeight = 44.0;
   impactsTableView.rowHeight = UITableViewAutomaticDimension;
-
+  
+  [self addPullToRefresh];
+  impactsArray= [[NSMutableArray alloc] init];
+  [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
+  [self loadImpactsWithLastId:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated

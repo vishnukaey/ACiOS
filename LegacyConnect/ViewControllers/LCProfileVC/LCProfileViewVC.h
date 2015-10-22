@@ -38,7 +38,7 @@ typedef enum profileStateTypes
   IBOutlet UIButton *interestsButton;
   IBOutlet UIButton *actionsButton;
   
-  NSArray *mileStoneFeeds;
+  NSMutableArray *mileStoneFeeds;
   NSArray *interestsArray;
   NSArray *actionsArray;
   

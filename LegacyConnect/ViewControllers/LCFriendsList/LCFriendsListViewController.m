@@ -35,8 +35,6 @@ static NSString *kTitle = @"FRIENDS";
 {
   [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
   [self.tableView addPullToRefreshWithActionHandler:^{
-    [self.friendsList removeAllObjects];
-    [self.tableView reloadData];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -71,6 +69,8 @@ static NSString *kTitle = @"FRIENDS";
     self.loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
     [self.friendsList addObjectsFromArray:(NSArray*)response];
     if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+      [self.friendsList removeAllObjects];
+      [self.tableView reloadData];
       [self.tableView.pullToRefreshView stopAnimating];
     }
     self.isLoadingMoreFriends = NO;
