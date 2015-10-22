@@ -420,7 +420,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [posttags_ addObject:tag];
   }
   _postFeedObject.postTags = [posttags_ copy];
-  
+  _postFeedObject.isMilestone = [NSString stringWithFormat:@"%ld",(long)milestoneIcon.tag];
   //posting api
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   if (_isEditing)
