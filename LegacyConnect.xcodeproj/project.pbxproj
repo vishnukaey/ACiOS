@@ -29,6 +29,7 @@
 		0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56A8041B6A46AD0065C231 /* LCNotificationsViewController.m */; };
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; settings = {ASSET_TAGS = (); }; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
+		0B6F8C671BD90AB000A0F33E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F8C661BD90AB000A0F33E /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
 		0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B822C9F1BA9408200D78536 /* LCSpecialContainerView.m */; };
 		0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */; };
 		0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */; };
@@ -157,7 +158,6 @@
 		CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */; };
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
-		CED259171BD8EA320082E622 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CED259161BD8EA320082E622 /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
 /* End PBXBuildFile section */
 
@@ -213,6 +213,7 @@
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
+		0B6F8C661BD90AB000A0F33E /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		0B822C9E1BA9408200D78536 /* LCSpecialContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSpecialContainerView.h; path = CustomViews/LCSpecialContainerView/LCSpecialContainerView.h; sourceTree = "<group>"; };
 		0B822C9F1BA9408200D78536 /* LCSpecialContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSpecialContainerView.m; path = CustomViews/LCSpecialContainerView/LCSpecialContainerView.m; sourceTree = "<group>"; };
 		0B8574FC1B9D62B000FD8766 /* LCUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserTableViewCell.h; path = CustomViews/LCUserTableViewCell/LCUserTableViewCell.h; sourceTree = "<group>"; };
@@ -424,7 +425,6 @@
 		CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityDateSelection.m; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
-		CED259161BD8EA320082E622 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
 		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1073,7 +1073,7 @@
 		0BF05A651B4E623D00FF7B39 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				CED259161BD8EA320082E622 /* Profile.storyboard */,
+				0B6F8C661BD90AB000A0F33E /* Profile.storyboard */,
 				0BB33DB01BA81359009E6D0C /* Community.storyboard */,
 				0BB33DB11BA81359009E6D0C /* Interests.storyboard */,
 				0BB33DB31BA81359009E6D0C /* SignUp.storyboard */,
@@ -1502,7 +1502,7 @@
 				0BB33DE81BA81401009E6D0C /* rsz_lc-logo.png in Resources */,
 				0BB33DA41BA812A3009E6D0C /* Gotham-Medium.otf in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
-				CED259171BD8EA320082E622 /* Profile.storyboard in Resources */,
+				0B6F8C671BD90AB000A0F33E /* Profile.storyboard in Resources */,
 				0BB33DD91BA81401009E6D0C /* communityWebsite.png in Resources */,
 				0BB33DDC1BA81401009E6D0C /* GIButton_dummy.png in Resources */,
 				0BB33DA71BA81315009E6D0C /* LCCommentCellXIB.xib in Resources */,
