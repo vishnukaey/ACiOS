@@ -183,9 +183,7 @@
   }];
 }
 
-
-
-+ (void)shareToTwitterWithData:(NSDictionary*)data
++ (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
   
   ACAccountStore *account = [[ACAccountStore alloc] init];
