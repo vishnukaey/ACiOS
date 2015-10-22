@@ -84,15 +84,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   } withBackgroundColor:[UIColor lightGrayColor]];
 }
 
-- (void)setGIAndMenuButtonVisibilityStatus:(BOOL)isHidden
-{
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  if (!appdel.isCreatePostOpen) {
-    [appdel.GIButton setHidden:isHidden];
-    [appdel.menuButton setHidden:isHidden];
-  }
-}
-
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -107,7 +98,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = YES;
-  [self setGIAndMenuButtonVisibilityStatus:NO];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
   [feedsTable reloadData];
 }
 
@@ -115,7 +106,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  [self setGIAndMenuButtonVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -223,7 +214,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)showFullScreenImage:(NSString*)imageUrl
 {
-  [self setGIAndMenuButtonVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.imageUrlString = imageUrl;
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;

@@ -190,6 +190,11 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [self arrangeTaggedLabel];
   }
   
+  if ([_postFeedObject.isMilestone integerValue])
+  {
+    milestoneIcon.tag = 1;
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+  }
 }
 
 #pragma mark - keyboard functions
