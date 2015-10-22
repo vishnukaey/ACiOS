@@ -30,6 +30,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   // -- Stop Refreshing Views -- //
   if (self.feedsTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [feedsArray removeAllObjects];
+    [feedsTable reloadData];
     [self.feedsTable.pullToRefreshView stopAnimating];
   }
 }
@@ -74,8 +76,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   
   // Pull to Refresh Interface to Feeds TableView.
   [feedsTable addPullToRefreshWithActionHandler:^{
-    [feedsArray removeAllObjects];
-    [feedsTable reloadData];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){

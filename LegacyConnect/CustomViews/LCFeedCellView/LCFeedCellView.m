@@ -158,18 +158,29 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 
 - (void)setPostDescription
 {
+  
+  NSMutableString * friendsTotag = [[NSMutableString alloc] init];
+  for (LCTag * tag in self.feedObject.postTags) {
+    [friendsTotag appendString:[NSString stringWithFormat:@" @%@",tag.text]];
+  }
+  
   //never ever forget to add the font attribute to the tagged label
-  NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:self.feedObject.message];
+  NSMutableString * completeFeedMessage = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",self.feedObject.message,friendsTotag]];
+  NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:completeFeedMessage];
+  
+  if (friendsTotag.length > 0) {
+    NSRange locationTagRange = [completeFeedMessage rangeOfString:friendsTotag];
+    [postDescriptionString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
+  }
   
   NSMutableArray *postDescriptionTagsWithRanges = [[NSMutableArray alloc] init];
   for (int i = 0; i<self.feedObject.postTags.count; i++)
   {
     LCTag * tag = self.feedObject.postTags[i];
-    NSRange tagRangePost = [self.feedObject.message rangeOfString:[tag text]];
+    NSRange tagRangePost = [completeFeedMessage rangeOfString:[tag text]];
     NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:tag.tagID, @"id", tag.text, @"text", tag.type, @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
     [postDescriptionTagsWithRanges addObject:dic_post];
     
-    [postDescriptionString addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:tagRangePost];
   }
   [postDescriptionString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:13],
@@ -178,7 +189,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [postDescription setAttributedText:postDescriptionString];
   __weak typeof(self) weakSelf = self;
   postDescription.nameTagTapped = ^(int index) {
-    weakSelf.feedCellTagAction(weakSelf.feedObject.postTags[index]);
+    if (weakSelf.feedCellTagAction) {
+      weakSelf.feedCellTagAction(postDescriptionTagsWithRanges[index]);
+    }
   };
 }
 
