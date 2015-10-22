@@ -250,7 +250,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)createNewPost:(LCPost*)post WithImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)createNewPost:(LCFeed*)post withImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
 #warning  correct issue with postTags array format
   NSString *imageName = @"image";
@@ -316,7 +316,7 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
-+ (void)updatePost:(LCPost*)post WithImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)updatePost:(LCFeed*)post withImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   
   NSString *imageName = @"image";
