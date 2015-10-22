@@ -30,6 +30,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   // -- Stop Refreshing Views -- //
   if (self.feedsTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [feedsArray removeAllObjects];
+    [feedsTable reloadData];
     [self.feedsTable.pullToRefreshView stopAnimating];
   }
 }
@@ -38,7 +40,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   isLoadingMoreFriends = YES;
   [LCAPIManager getHomeFeedsWithLastFeedId:lastId success:^(NSArray *response) {
-    NSLog(@"%@",response);
     loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
     [self stopRefreshingViews];
     
@@ -75,8 +76,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   
   // Pull to Refresh Interface to Feeds TableView.
   [feedsTable addPullToRefreshWithActionHandler:^{
-    [feedsArray removeAllObjects];
-    [feedsTable reloadData];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -142,8 +141,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  NSLog(@"index path ----- %li",indexPath.row);
-  
   if (feedsArray.count == 0)
   {
     return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_feeds_available", nil)];
@@ -183,7 +180,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.row == feedsArray.count - 1 && loadMoreFriends && !isLoadingMoreFriends) {
-    NSLog(@" >>>>>>>>>>>>>>>> more fetch >>>>>>>>>>>");
     [self fetchHomeFeedsWithLastFeedId:[(LCFeed*)[feedsArray lastObject] feedId]];
   }
 }
