@@ -447,6 +447,24 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     }];
   }
 }
+- (IBAction)facebookButtonAction:(id)sender {
+  
+  if (self.facebookButton.selected) {
+    
+    self.facebookButton.selected = NO;
+  }
+  else{
+    
+    [LCSocialShareManager canShareToFacebook:^(BOOL canPost) {
+      if (canPost) {
+        self.facebookButton.selected = YES;
+      }
+    }];
+  }
+}
+
+- (IBAction)twitterButtonAction:(id)sender {
+}
 
 #pragma mark - textview delegate
 - (void)textViewDidChange:(UITextView *)textView

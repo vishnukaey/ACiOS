@@ -10,6 +10,7 @@
 #import "LCListFriendsToTagViewController.h"
 #import "LCListLocationsToTagVC.h"
 #import "LCListInterestsAndCausesVC.h"
+#import "LCSocialShareManager.h"
 
 @protocol createPostDelegate <NSObject>
 
@@ -24,6 +25,10 @@
 @property(nonatomic,retain) IBOutlet UIView *popUpView;
 @property(nonatomic,retain) IBOutlet UIScrollView *postScrollView;
 @property(nonatomic,retain) IBOutlet NSLayoutConstraint *popUpViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
+
+
 @property(nonatomic, retain) LCFeed *postFeedObject;
 @property(nonatomic, retain) UIImage *photoPostPhoto;
 @property(nonatomic, retain) LCInterest *selectedInterest;
