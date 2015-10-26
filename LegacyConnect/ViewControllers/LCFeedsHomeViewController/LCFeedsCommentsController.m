@@ -52,24 +52,29 @@ static CGFloat kIndexForPostDetails = 0;
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 }
 
--(void)loadFeedAndCommentsWithLastCommentId:(NSString*)lastId
+-(void)loadFeedAndCommentsWithLastCommentId:(NSString*)lastId ofCell:(LCLoadingCell*)cell
 {
+  if(!cell)
+  {
+    cell = (LCLoadingCell*)[[UIView alloc] init];
+  }
+  
+  [MBProgressHUD showHUDAddedTo:cell animated:YES];
   isLoadingMoreComments = YES;
   [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:lastId withSuccess:^(id response, BOOL isMore) {
     isLoadingMoreComments = NO;
     moreCommentsPresent = isMore;
     [commentsArray addObjectsFromArray:(NSArray*)response];
+    [MBProgressHUD hideAllHUDsForView:cell animated:YES];
     [mainTable reloadData];
-  } andfailure:^(NSString *error) {
+    }andfailure:^(NSString *error){
     isLoadingMoreComments = NO;
+    [MBProgressHUD hideAllHUDsForView:cell animated:YES];
     [mainTable reloadData];
   }];
 }
 
-//- (NSArray*)getReverseSortedArray:(NSArray*)array
-//{
-//  return [[array reverseObjectEnumerator] allObjects];
-//}
+
 
 - (void)setUpCpmmentsUI
 {
@@ -102,6 +107,7 @@ static CGFloat kIndexForPostDetails = 0;
   postBtn = postButton;
   [self createDummyCommentFieldViewWithinputAccessoryView:commentField];
 }
+
 
 - (void)createDummyCommentFieldViewWithinputAccessoryView:(UIView*)view
 {
@@ -170,7 +176,8 @@ static CGFloat kIndexForPostDetails = 0;
   [self initialUISetUp];
   commentsArray = [[NSMutableArray alloc]init];
   moreCommentsPresent = YES;
-  [self loadFeedAndCommentsWithLastCommentId:nil];
+  [self loadFeedAndCommentsWithLastCommentId:nil ofCell:nil];
+  
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -222,10 +229,6 @@ static CGFloat kIndexForPostDetails = 0;
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)loadPreviousComments:(UIButton*)sender
-{
-  [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray firstObject] commentId]];
-}
 
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -270,8 +273,6 @@ static CGFloat kIndexForPostDetails = 0;
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
         loadingCell = [topLevelObjects objectAtIndex:0];
       }
-      [MBProgressHUD hideHUDForView:loadingCell animated:YES];
-      [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
       return loadingCell;
     }
     else
@@ -295,8 +296,10 @@ static CGFloat kIndexForPostDetails = 0;
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.row  == commentsArray.count && moreCommentsPresent && !isLoadingMoreComments) {
-
-    [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray lastObject] commentId]];
+    if([LCUtilityManager isNetworkAvailable])
+    {
+      [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray lastObject] commentId] ofCell:(LCLoadingCell*)cell];
+    }
   }
 }
 
