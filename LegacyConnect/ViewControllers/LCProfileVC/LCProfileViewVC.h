@@ -10,6 +10,7 @@
 #import "LCFeedCellView.h"
 #import "LCInterestsCellView.h"
 #import "LCActionsCellView.h"
+#import "LCTabMenuView.h"
 
 typedef enum profileStateTypes
 {
@@ -41,6 +42,8 @@ typedef enum profileStateTypes
   NSMutableArray *mileStoneFeeds;
   NSArray *interestsArray;
   NSArray *actionsArray;
+  
+  LCTabMenuView *tabmenu;
   
   profileState currentProfileState;
 }

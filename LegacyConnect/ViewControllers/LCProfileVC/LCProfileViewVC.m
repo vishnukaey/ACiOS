@@ -7,7 +7,6 @@
 //
 
 #import "LCProfileViewVC.h"
-#import "LCTabMenuView.h"
 #import "LCCommunityInterestCell.h"
 #import "LCProfileEditVC.h"
 #import "LCImapactsViewController.h"
@@ -22,6 +21,7 @@ static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";
 static NSString * const kImageNameProfileFriend = @"profileFriend";
 static NSString * const kImageNameProfileWaiting = @"profileWaiting";
+static NSInteger const kMilestoneIndex = 0;
 
 @implementation LCProfileViewVC
 @synthesize userDetail;
@@ -67,7 +67,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   }
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
-  
+  if (tabmenu.currentIndex == kMilestoneIndex) {
+    [milestonesTable reloadData];
+  }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -202,7 +204,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (void)addTabMenu
 {
-  LCTabMenuView *tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+  tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
   [tabMenuContainer addSubview:tabmenu];
   //[tabmenu setBackgroundColor:[UIColor whiteColor]];
   tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
@@ -646,7 +648,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     if (show) {
       [self showFeedCommentsWithFeed:viewController.feed];
     } else {
-      [milestonesTable reloadData];
+      if (tabmenu.currentIndex == kMilestoneIndex) {
+        [milestonesTable reloadData];
+      }
     }
   }];
 }

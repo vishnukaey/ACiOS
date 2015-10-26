@@ -35,7 +35,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bkd-hw-Yo1">
-                            <rect key="frame" x="295" y="18" width="65" height="30"/>
+                            <rect key="frame" x="295" y="28" width="65" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="65" id="RBL-3M-gsC"/>
                                 <constraint firstAttribute="height" constant="30" id="rZC-6H-C7Y"/>
@@ -49,7 +49,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FCC-Ir-vn6">
-                            <rect key="frame" x="112" y="22" width="150" height="21"/>
+                            <rect key="frame" x="112" y="32" width="150" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="6zb-8w-hDY"/>
                                 <constraint firstAttribute="width" constant="150" id="SQS-mx-jQx"/>
@@ -63,9 +63,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="65" id="7Rx-5k-2qk"/>
                         <constraint firstAttribute="trailing" secondItem="Bkd-hw-Yo1" secondAttribute="trailing" constant="15" id="pz3-Pp-PuT"/>
-                        <constraint firstItem="FCC-Ir-vn6" firstAttribute="centerY" secondItem="sfg-mM-Ea1" secondAttribute="centerY" id="qSA-Qg-h0z"/>
+                        <constraint firstItem="FCC-Ir-vn6" firstAttribute="centerY" secondItem="sfg-mM-Ea1" secondAttribute="centerY" constant="10" id="qSA-Qg-h0z"/>
                         <constraint firstItem="FCC-Ir-vn6" firstAttribute="centerX" secondItem="sfg-mM-Ea1" secondAttribute="centerX" id="wNT-eZ-HcL"/>
-                        <constraint firstItem="Bkd-hw-Yo1" firstAttribute="centerY" secondItem="sfg-mM-Ea1" secondAttribute="centerY" id="wnD-8Z-ppG"/>
+                        <constraint firstItem="Bkd-hw-Yo1" firstAttribute="centerY" secondItem="sfg-mM-Ea1" secondAttribute="centerY" constant="10" id="wnD-8Z-ppG"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ggg-Zp-dos">
