@@ -9,9 +9,6 @@
 #import "LCSocialShareManager.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
-
 
 NSString * const kFBPublishActionsPermissionKey = @"publish_actions";
 NSString * const kFBMessageKey = @"message";
@@ -122,7 +119,7 @@ NSString * const kFBMessageKey = @"message";
   FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
   if (accessToken && [accessToken hasGranted:kFBPublishActionsPermissionKey]) {
     
-    NSLog(@"have the facebook facces token...");
+    NSLog(@"have facebook access token.");
     completionHandler(YES);
     
   }
@@ -163,6 +160,10 @@ NSString * const kFBMessageKey = @"message";
       {
         success(result);
       }
+      else
+      {
+        failure(@"Permission Denied.");
+      }
     }
   }];
 }
@@ -170,38 +171,38 @@ NSString * const kFBMessageKey = @"message";
 - (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image
 {
   if (image) {
-  
-      FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
-      photo.caption = message;
-      photo.image = image;
-      photo.userGenerated = YES;
-      FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
-      content.photos = @[photo];
     
-      BOOL ok = [[FBSDKShareAPI shareWithContent:content delegate:self] share];
-      if (ok) {
-        NSLog(@"Posted to facebook successfully.");
-      }
-      else {
-        NSLog(@"Posting to facebook failed.");
-        [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
-      }
+    FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
+    photo.caption = message;
+    photo.image = image;
+    photo.userGenerated = YES;
+    FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
+    content.photos = @[photo];
+    
+    BOOL ok = [[FBSDKShareAPI shareWithContent:content delegate:self] share];
+    if (ok) {
+      NSLog(@"Posted to facebook successfully.");
+    }
+    else {
+      NSLog(@"Posting to facebook failed.");
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
+    }
   }
   else {
     
     NSDictionary *params = @{kFBMessageKey : message};
-      FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"/me/feed"
-                                                                     parameters:params
-                                                                     HTTPMethod:@"POST"];
-      [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (error) {
-          NSLog(@"Posting to facebook failed. %@",error);
-          [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
-        }
-        else{
-          NSLog(@"Posted to facebook successfully.- %@",result);
-        }
-      }];
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"/me/feed"
+                                                                   parameters:params
+                                                                   HTTPMethod:@"POST"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+      if (error) {
+        NSLog(@"Posting to facebook failed. %@",error);
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
+      }
+      else{
+        NSLog(@"Posted to facebook successfully.- %@",result);
+      }
+    }];
   }
 }
 
