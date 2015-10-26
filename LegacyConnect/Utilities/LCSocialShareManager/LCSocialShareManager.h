@@ -13,12 +13,12 @@ typedef void (^CanShareToTwitter) (BOOL canShare);
 
 @interface LCSocialShareManager : NSObject <FBSDKSharingDelegate>
 
-+ (void)canShareToTwitter:(CanShareToTwitter)canShare;
-
-+ (void)canShareToFacebook:(void (^)(BOOL canPost))completionHandler;
-- (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image;
-
++ (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler;
 + (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
+
+
++ (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler;
+- (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image;
 
 
 @end

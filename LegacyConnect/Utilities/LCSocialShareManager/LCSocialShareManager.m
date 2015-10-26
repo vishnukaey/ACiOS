@@ -21,12 +21,20 @@ NSString * const kFBMessageKey = @"message";
 
 #pragma mark- Twitter
 
-+ (void)canShareToTwitter:(CanShareToTwitter)canShare
++ (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler
 {
   ACAccountStore *account = [[ACAccountStore alloc] init];
   ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
   NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-   canShare(arrayOfAccounts.count > 0);
+  
+  if (arrayOfAccounts.count >0) {
+    
+    completionHandler(YES);
+  }
+  else {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"You must login to Twitter account"];
+    completionHandler(NO);
+  }
 }
 
 + (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
@@ -72,6 +80,7 @@ NSString * const kFBMessageKey = @"message";
             }
             else {
               NSLog(@"Posting to twitter failed.");
+              [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
             }
           }
           
@@ -108,12 +117,12 @@ NSString * const kFBMessageKey = @"message";
 
 #pragma mark- Facebook
 
-+ (void)canShareToFacebook:(void (^)(BOOL canPost))completionHandler
++ (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler
 {
   FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
   if (accessToken && [accessToken hasGranted:kFBPublishActionsPermissionKey]) {
     
-    NSLog(@"have the facces token...");
+    NSLog(@"have the facebook facces token...");
     completionHandler(YES);
     
   }
@@ -121,7 +130,7 @@ NSString * const kFBMessageKey = @"message";
     
     [self loginToFacebookWithSuccess:^(id response) {
       
-      NSLog(@"got access token");
+      NSLog(@"got fb access token");
       completionHandler(YES);
       
     } andFailure:^(NSString *error) {
@@ -140,6 +149,7 @@ NSString * const kFBMessageKey = @"message";
     if (error)
     {
       NSLog(@"error %@",error);
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
       failure(error.localizedDescription);
     }
     else if (result.isCancelled)
@@ -159,10 +169,6 @@ NSString * const kFBMessageKey = @"message";
 
 - (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image
 {
-  
-  //NSString *postMessage = @"good night friends";
-  //UIImage *postImage = [UIImage imageNamed:@"profileFriend"];
-  
   if (image) {
   
       FBSDKSharePhoto *photo = [[FBSDKSharePhoto alloc] init];
@@ -172,12 +178,13 @@ NSString * const kFBMessageKey = @"message";
       FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
       content.photos = @[photo];
     
-      BOOL ok = [FBSDKShareAPI shareWithContent:content delegate:self];
+      BOOL ok = [[FBSDKShareAPI shareWithContent:content delegate:self] share];
       if (ok) {
         NSLog(@"Posted to facebook successfully.");
       }
       else {
         NSLog(@"Posting to facebook failed.");
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
       }
   }
   else {
@@ -188,7 +195,8 @@ NSString * const kFBMessageKey = @"message";
                                                                      HTTPMethod:@"POST"];
       [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
         if (error) {
-          NSLog(@"Posting to facebook failed.");
+          NSLog(@"Posting to facebook failed. %@",error);
+          [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
         }
         else{
           NSLog(@"Posted to facebook successfully.- %@",result);
@@ -200,21 +208,19 @@ NSString * const kFBMessageKey = @"message";
 
 #pragma mark- FBSDKSharingDelegate
 
-- (void) sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results {
+- (void)sharer:(id<FBSDKSharing>)sharer didCompleteWithResults:(NSDictionary *)results{
   
   NSLog(@"Facebook sharing completed: %@", results);
 }
 
-- (void) sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error {
+- (void)sharer:(id<FBSDKSharing>)sharer didFailWithError:(NSError *)error{
   
   NSLog(@"Facebook sharing failed: %@", error);
+  [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
 }
 
-- (void) sharerDidCancel:(id<FBSDKSharing>)sharer {
+- (void)sharerDidCancel:(id<FBSDKSharing>)sharer{
   
   NSLog(@"Facebook sharing cancelled.");
 }
-
-
-
 @end

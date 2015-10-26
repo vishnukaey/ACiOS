@@ -180,17 +180,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#warning remove this test call
-  UIImage * shareImage = [UIImage imageNamed:@"ThanksIcon_enabled"];
-  [LCSocialShareManager canShareToTwitter:^(BOOL canShare) {
-    if (canShare) {
-      [LCSocialShareManager shareToTwitterWithStatus:@"This is a test share" andImage:shareImage];
-    }
-    else
-    {
-      [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must login to Twitter account"];
-    }
-  }];
+
 }
 
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed

@@ -116,6 +116,7 @@
                                                 <state key="normal" image="Twitter_unselected">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <state key="selected" image="Twitter_selected"/>
                                                 <connections>
                                                     <action selector="twitterButtonAction:" destination="qhF-9Z-rbX" eventType="touchUpInside" id="3NL-rG-mWw"/>
                                                 </connections>
@@ -1017,6 +1018,7 @@
     <resources>
         <image name="Facebook_selected" width="30" height="30"/>
         <image name="Facebook_unselected" width="30" height="30"/>
+        <image name="Twitter_selected" width="30" height="30"/>
         <image name="Twitter_unselected" width="30" height="30"/>
         <image name="contact_tick" width="37" height="37"/>
         <image name="createPost_cameraGrey" width="23" height="18"/>
