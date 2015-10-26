@@ -359,4 +359,24 @@
   }
 }
 
+#pragma mark- twitter url proccess
++ (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString {
+  
+  NSMutableDictionary *md = [NSMutableDictionary dictionary];
+  
+  NSArray *queryComponents = [queryString componentsSeparatedByString:@"&"];
+  
+  for(NSString *s in queryComponents) {
+    NSArray *pair = [s componentsSeparatedByString:@"="];
+    if([pair count] != 2) continue;
+    
+    NSString *key = pair[0];
+    NSString *value = pair[1];
+    
+    md[key] = value;
+  }
+  
+  return md;
+}
+
 @end

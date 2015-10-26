@@ -35,4 +35,6 @@
 @property(nonatomic, retain) LCCause *selectedCause;
 @property(nonatomic, assign) BOOL isEditing;
 
+@property(nonatomic, retain)LCSocialShareManager *TWsocialShare;
+
 @end

@@ -10,6 +10,9 @@
 
 @interface LCConstants : NSObject
 
+extern NSString *const kTWConsumerKey;
+extern NSString *const kTWConsumerSecretKey;
+
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
@@ -138,13 +141,17 @@ extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;
 
+extern NSString *const kTwitterUrlScheme;
 extern NSString *const kLCUrlScheme;
 extern NSString *const kResetPasswordTokenKey;
 extern NSString *const kResetPasswordNotificationName;
 
 extern NSString *const kUserDataUpdatedNotification;
-
+extern NSString *const kTwitterCallbackNotification;
 extern NSString *const kUserProfileUpdateNotification;
+
+extern NSString *const kTWOauthTokenSecretKey;
+extern NSString *const kTWOauthTokenKey;
 
 extern NSString *const kTagobjId;
 extern NSString *const kTagobjText;

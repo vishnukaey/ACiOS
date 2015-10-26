@@ -8,13 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import "STTwitter.h"
 
 typedef void (^CanShareToTwitter) (BOOL canShare);
 
 @interface LCSocialShareManager : NSObject <FBSDKSharingDelegate>
+@property(nonatomic, strong)UIView *viewToPresent;
 
-+ (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler;
-+ (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
+- (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler;
+- (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
 
 
 + (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler;

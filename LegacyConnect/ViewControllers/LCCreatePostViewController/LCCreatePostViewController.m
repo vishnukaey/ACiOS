@@ -458,7 +458,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   //twitter sharing
   if (_twitterButton.isSelected) {
     
-    [LCSocialShareManager shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
+    [self.TWsocialShare shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
   }
 }
 
@@ -486,8 +486,9 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     _twitterButton.selected = NO;
   }
   else {
-    
-    [LCSocialShareManager canShareToTwitter:^(BOOL canShare) {
+    self.TWsocialShare = [[LCSocialShareManager alloc] init];
+    self.TWsocialShare.viewToPresent = self.view;
+    [self.TWsocialShare canShareToTwitter:^(BOOL canShare) {
       
       if (canShare) {
         _twitterButton.selected = YES;
