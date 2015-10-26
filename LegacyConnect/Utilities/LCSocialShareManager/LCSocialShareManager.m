@@ -29,11 +29,11 @@ NSString * const kFBMessageKey = @"message";
   //check if already granted permissions
   if ([[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey]) {
     self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey consumerSecret:kTWConsumerSecretKey oauthToken:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey] oauthTokenSecret:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenSecretKey]];
-    [self.twitterAPI verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
+//    [self.twitterAPI verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
       completionHandler(YES);
-    } errorBlock:^(NSError *error) {
-      [self getTwitterPermissions];
-    }];
+//    } errorBlock:^(NSError *error) {
+//      [self getTwitterPermissions];
+//    }];
     return;
   }
   [self getTwitterPermissions];
@@ -42,11 +42,7 @@ NSString * const kFBMessageKey = @"message";
 
 - (void)getTwitterPermissions
 {
-  //check in iOS accounts
   [self loginOnTheWeb];
-  //Check in twitter app
-  
-  //check in browser
 }
 
 - (void)loginWithiOSAccount:(ACAccount *)account withError:(NSString *)error
@@ -64,10 +60,8 @@ NSString * const kFBMessageKey = @"message";
 }
 
 - (void)chooseAccount {
-  
   ACAccountStore *accountStore = [[ACAccountStore alloc] init];
   ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-  
   ACAccountStoreRequestAccessCompletionHandler accountStoreRequestCompletionHandler = ^(BOOL granted, NSError *error) {
     [[NSOperationQueue mainQueue] addOperationWithBlock:^{
       
@@ -75,7 +69,6 @@ NSString * const kFBMessageKey = @"message";
         [self loginWithiOSAccount:nil withError:@"Acccess not granted."];
         return;
       }
-      
       self.twitterAccounts = [accountStore accountsWithAccountType:accountType];
       
       if([self.twitterAccounts count] >0) {
@@ -171,10 +164,18 @@ NSString * const kFBMessageKey = @"message";
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
   if (image) {
-    [self.twitterAPI postStatusUpdate:status mediaDataArray:[NSArray arrayWithObjects:image, nil] possiblySensitive:nil inReplyToStatusID:nil latitude:nil longitude:nil placeID:nil displayCoordinates:nil uploadProgressBlock:nil successBlock:^(NSDictionary *status) {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"postImage.png"];
+    
+    // Save image.
+    [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+    
+    NSURL *url_ = [NSURL fileURLWithPath:filePath];
+    [self.twitterAPI postStatusUpdate:status inReplyToStatusID:nil mediaURL:url_ placeID:nil latitude:nil longitude:nil uploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+    } successBlock:^(NSDictionary *status) {
       
     } errorBlock:^(NSError *error) {
-      
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
     }];
   }
   else
@@ -182,82 +183,9 @@ NSString * const kFBMessageKey = @"message";
     [self.twitterAPI postStatusUpdate:status inReplyToStatusID:nil latitude:nil longitude:nil placeID:nil displayCoordinates:nil trimUser:[NSNumber numberWithInteger:140] successBlock:^(NSDictionary *status) {
       
     } errorBlock:^(NSError *error) {
-      
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
     }];
   }
-  
-//  ACAccountStore *account = [[ACAccountStore alloc] init];
-//  ACAccountType *accountType = [account accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-//  
-//  [account requestAccessToAccountsWithType:accountType options:nil completion:^(BOOL granted, NSError *error) {
-//    
-//    if (granted) {
-//      
-//      NSArray *arrayOfAccounts = [account accountsWithAccountType:accountType];
-//      
-//      if ([arrayOfAccounts count] > 0) {
-//        
-//        ACAccount *twitterAccount = [arrayOfAccounts lastObject];
-//        NSDictionary *message = @{@"status": status};
-//        
-//        NSURL *requestURL = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update_with_media.json"];
-//        SLRequest *postRequest = [SLRequest requestForServiceType:SLServiceTypeTwitter
-//                                                    requestMethod:SLRequestMethodPOST
-//                                                              URL:requestURL
-//                                                       parameters:message];
-//        postRequest.account = twitterAccount;
-//        
-//        if (image) {
-//          
-//          NSData *myData = UIImagePNGRepresentation(image);
-//          [postRequest addMultipartData:myData withName:@"media" type:@"image/png" filename:@"TestImage"];
-//        }
-//        
-//        [postRequest performRequestWithHandler:^(NSData *responseData,NSHTTPURLResponse *urlResponse, NSError *error) {
-//          NSString* newStr = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-//          NSLog(@"Twitter HTTP response: %li \n %@", (long)[urlResponse statusCode], newStr);
-//          if (error) {
-//            [LCUtilityManager showAlertViewWithTitle:@"" andMessage:[error localizedDescription]];
-//          }
-//          else
-//          {
-//            if ([urlResponse statusCode] == 200) {
-//              NSLog(@"Posted to twitter successfully.");
-//            }
-//            else {
-//              NSLog(@"Posting to twitter failed.");
-//              [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
-//            }
-//          }
-//          
-//        }];
-//      }
-//      else
-//      {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//          [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must login to Twitter account"];
-//        });
-//      }
-//    }
-//    else {
-//      dispatch_async(dispatch_get_main_queue(), ^{
-//        [LCUtilityManager showAlertViewWithTitle:@"" andMessage:@"You must grant access to use Twitter account for Legacy Connect. Please visit Settings > Twitter > and allow access to Legacy Connect "];
-//      });
-//      
-//      /*
-//       switch (error.code) {
-//       case ACErrorAccountNotFound: {
-//       dispatch_async(dispatch_get_main_queue(), ^{
-//       });
-//       break;
-//       }
-//       default: {
-//       break;
-//       }
-//       }
-//       */
-//    }
-//  }];
 }
 
 #pragma mark- Facebook
