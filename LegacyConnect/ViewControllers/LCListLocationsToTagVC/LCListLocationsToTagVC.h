@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "LCLocationSearchField.h"
 
+@protocol LCListLocationsToTagVCDelegate <NSObject>
+
+- (void)didfinishPickingLocation :(NSString *)location;
+
+@end
+
 @interface LCListLocationsToTagVC : UIViewController<locationsSearchFieldDelegate>
 
+@property(nonatomic, retain) id delegate;
+@property(nonatomic, retain) NSString *alreadyTaggedLocation;
 @end

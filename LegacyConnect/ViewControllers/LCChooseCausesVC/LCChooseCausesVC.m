@@ -223,7 +223,11 @@
 -(IBAction) nextButtonTapped:(id)sender
 {
   NSArray *selectedInterestIDs = [selectedItems allKeys];
-  NSArray *selectedCauseIDs = [selectedItems allValues];
+  
+  NSMutableArray *selectedCauseIDs = [[NSMutableArray alloc] init];
+  for (NSArray *causeIDS in [selectedItems allValues]) {
+    [selectedCauseIDs addObjectsFromArray:causeIDS];
+  }
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager saveCauses:selectedCauseIDs andInterests:selectedInterestIDs ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];

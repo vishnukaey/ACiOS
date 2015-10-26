@@ -235,35 +235,75 @@
   [mainContainer setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];
-//  [appdel.GIButton setHidden:YES];
-//  if (sender.tag == 1)
-//  {
+  
+  if (sender.tag == 0)//create event
+  {
 //    [appdel.menuButton setHidden:YES];
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
 //    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
 //    [navigationRoot pushViewController:vc animated:YES];
-//  }
-//  else if (sender.tag == 2)
-//  {
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-//    createPostVC = [sb instantiateInitialViewController];
-//
-//    createPostVC.delegate = self;
-//    giButton.hidden = YES;
-//    menuButton.hidden = YES;
-//    CGRect frame = createPostVC.view.frame;
-//    frame.origin.y = 20;
-//    createPostVC.view.frame = frame;
-//    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-//  }
-//  else
-//  {
-//    UIView *view =[[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 200)];
-//    [view setBackgroundColor:[UIColor blackColor]];
-//    [mainContainer.view addSubview:view];
-//  }
+  }
+  else if (sender.tag == 1)//photo post
+  {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
+    [sheet showInView:navigationRoot.view];
+  }
+  else if(sender.tag == 2)//text post
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    createPostVC = [sb instantiateInitialViewController];
+    
+    createPostVC.delegate = self;
+    giButton.hidden = YES;
+    menuButton.hidden = YES;
+    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+    appdel.isCreatePostOpen = YES;
+  }
   
+}
+
+#pragma mark - UIActionSheet delegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if (buttonIndex < 2)
+  {
+    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    UIImagePickerControllerSourceType type;
+    switch (buttonIndex)
+    {
+      case 0:
+        type = UIImagePickerControllerSourceTypePhotoLibrary;
+        break;
+      case 1:
+        type = UIImagePickerControllerSourceTypeCamera;
+        break;
+        
+      default:
+        break;
+    }
+    imagePicker.sourceType = type;
+    imagePicker.delegate = self;
+    [navigationRoot presentViewController:imagePicker animated:YES completion:^{ }];
+  }
+}
+
+#pragma mark - UIImagePickerController delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [picker dismissViewControllerAnimated:YES completion:NULL];
+  UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  createPostVC = [sb instantiateInitialViewController];
+  
+  createPostVC.delegate = self;
+  giButton.hidden = YES;
+  menuButton.hidden = YES;
+  createPostVC.photoPostPhoto = chosenImage;
+  createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+  appdel.isCreatePostOpen = YES;
 }
 
 #pragma mark - leftmenu delegates
@@ -329,10 +369,12 @@
 }
 
 
-- (void)dismissView
+- (void)dismissCreatePostView
 {
   giButton.hidden = NO;
   menuButton.hidden = NO;
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  appdel.isCreatePostOpen = false;
 }
 
 #pragma mark - Passwor reset implementation
