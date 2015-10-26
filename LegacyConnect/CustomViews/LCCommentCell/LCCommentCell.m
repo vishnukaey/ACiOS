@@ -33,6 +33,24 @@
   [timeLabel setText:timeAgo];
   [commentLabel setText:comment.commentText];
   NSString * userName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:comment.firstName],[LCUtilityManager performNullCheckAndSetValue:comment.lastName]] ;
+  
+  
+//  NSMutableAttributedString * userNameAttributtedString = [[NSMutableAttributedString alloc] initWithString:userName];
+//  NSRange tagRangeUserName = NSMakeRange(0, userName.length);
+//  [userNameAttributtedString addAttributes:@{
+//                                             NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
+//                                             } range:NSMakeRange(0, userNameAttributtedString.length)];
+//  
+//  NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
+//  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:comment.userID, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
+//  [userNameLabelTagsWithRanges addObject:dic_user];
+//  usernameLabel.tagsArray  = userNameLabelTagsWithRanges;
+//  [usernameLabel setAttributedText:userNameAttributtedString];
+//  __weak typeof(self) weakSelf = self;
+//  usernameLabel.nameTagTapped = ^(int index) {
+//    weakSelf.feedCellTagAction(dic_user);
+//  };
+
   [userNameLabel setText:userName];
 }
 

@@ -11,6 +11,7 @@
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
 #import "LCLoadingCell.h"
+#import "LCFullScreenImageVC.h"
 
 static CGFloat kCommentFieldHeight = 45.0f;
 static CGFloat kCellForPostDetails = 1;
@@ -312,7 +313,24 @@ static CGFloat kIndexForPostDetails = 0;
       [commentTextField_dup becomeFirstResponder];
     }
   }
+  else if (type == kkFeedCellActionViewImage)
+  {
+    [self showFullScreenImage:feed];
+  }
 }
+
+- (void)showFullScreenImage:(LCFeed*)feed
+{
+  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.feed = feed;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [sender dismissViewControllerAnimated:YES completion:nil];
+  };
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
+}
+
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {

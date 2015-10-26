@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCTaggedLabel.h"
 
 @interface LCCommentCell : UITableViewCell
 {
   IBOutlet UIImageView *profilePic;
-  IBOutlet UILabel *userNameLabel, *timeLabel, *commentLabel;
+  IBOutlet LCTaggedLabel *userNameLabel;
+  IBOutlet UILabel*timeLabel, *commentLabel;
 }
 
 @property (nonatomic, strong) LCComment * comment;
