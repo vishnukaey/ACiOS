@@ -21,6 +21,7 @@
 #import "LCLoginViewController.h"
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
+#import "LCSocialShareManager.h"
 
 
 @interface LCEmptyViewController ()

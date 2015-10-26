@@ -47,6 +47,16 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   BOOL boolValue = false;
+  
+  if ([[url scheme] caseInsensitiveCompare:kTwitterUrlScheme] == NSOrderedSame)
+  {
+    NSDictionary *userInfo = [LCUtilityManager parametersDictionaryFromQueryString:[url query]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kTwitterCallbackNotification
+                                                        object:nil
+                                                      userInfo:userInfo];
+    return YES;
+  }
+  
   if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
   {
     boolValue = true;

@@ -34,15 +34,21 @@
 				<string>legacyconnect</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>twitterUrlScheme</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>FacebookAppID</key>
 	<string>535164313296078</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>FacebookDisplayName</key>
 	<string>LegacyConnect</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbauth2</string>
@@ -62,14 +68,14 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>staging.legacyconnect.com</key>
+			<key>s3.amazonaws.com</key>
 			<dict>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>s3.amazonaws.com</key>
+			<key>staging.legacyconnect.com</key>
 			<dict>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>

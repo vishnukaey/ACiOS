@@ -116,6 +116,10 @@
                                                 <state key="normal" image="Twitter_unselected">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <state key="selected" image="Twitter_selected"/>
+                                                <connections>
+                                                    <action selector="twitterButtonAction:" destination="qhF-9Z-rbX" eventType="touchUpInside" id="3NL-rG-mWw"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sum-tm-Kmg">
                                                 <rect key="frame" x="262" y="8" width="30" height="30"/>
@@ -124,8 +128,12 @@
                                                     <constraint firstAttribute="height" constant="30" id="VUb-Z2-FO8"/>
                                                 </constraints>
                                                 <state key="normal" image="Facebook_unselected">
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="titleShadowColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <state key="selected" image="Facebook_selected"/>
+                                                <connections>
+                                                    <action selector="facebookButtonAction:" destination="qhF-9Z-rbX" eventType="touchUpInside" id="1WC-Fw-md3"/>
+                                                </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Post To:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jQB-rb-FCf">
                                                 <rect key="frame" x="24" y="12" width="53" height="21"/>
@@ -178,9 +186,6 @@
                                             <constraint firstAttribute="height" constant="1" id="Bvo-uW-ArA"/>
                                         </constraints>
                                     </view>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tz6-cW-1uT">
-                                        <rect key="frame" x="21" y="87" width="309" height="168"/>
-                                    </scrollView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lX8-Yo-xoA">
                                         <rect key="frame" x="0.0" y="254" width="345" height="1"/>
                                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -333,6 +338,9 @@
                                             <constraint firstItem="Hvd-V3-kTc" firstAttribute="top" secondItem="dKN-qD-xcP" secondAttribute="top" id="zwM-7W-yKU"/>
                                         </constraints>
                                     </view>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tz6-cW-1uT">
+                                        <rect key="frame" x="21" y="87" width="309" height="168"/>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -379,6 +387,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="cameraIcon" destination="zKe-SD-78p" id="LyA-Wh-OxH"/>
+                        <outlet property="facebookButton" destination="Sum-tm-Kmg" id="yHz-rs-sKw"/>
                         <outlet property="milestoneIcon" destination="A4V-sD-tkZ" id="Wgl-PC-6g8"/>
                         <outlet property="popUpView" destination="4FT-hR-M8g" id="hTU-ti-7v8"/>
                         <outlet property="popUpViewHeightConstraint" destination="mry-6p-Q0w" id="3xx-il-bI7"/>
@@ -386,6 +395,7 @@
                         <outlet property="postingToLabel" destination="iLw-QU-E1u" id="PW9-43-l1b"/>
                         <outlet property="tagFriendsIcon" destination="QwH-Vc-iZG" id="dG9-aR-0Kd"/>
                         <outlet property="tagLocationIcon" destination="mN1-6M-jil" id="yEe-cH-mpm"/>
+                        <outlet property="twitterButton" destination="Vo5-vY-Une" id="ToL-1g-Dth"/>
                         <outlet property="view" destination="1If-JH-g0B" id="a4a-U0-yyw"/>
                     </connections>
                 </viewController>
@@ -1006,7 +1016,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Facebook_selected" width="30" height="30"/>
         <image name="Facebook_unselected" width="30" height="30"/>
+        <image name="Twitter_selected" width="30" height="30"/>
         <image name="Twitter_unselected" width="30" height="30"/>
         <image name="contact_tick" width="37" height="37"/>
         <image name="createPost_cameraGrey" width="23" height="18"/>

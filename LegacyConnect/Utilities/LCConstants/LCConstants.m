@@ -30,7 +30,8 @@ NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
 NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 
 #endif
-
+NSString *const kTWConsumerKey = @"IiYfEw17iKn2jTcWjp4H2QfYo";
+NSString *const kTWConsumerSecretKey = @"pBPJNqVUXdfkeulFZuXf4Epd0SSXsLwOXYqgeNkCWC4QlUJmiv";
 
 #ifdef DEBUG
 #define LCDLog(...) NSLog(s, ##__VA_ARGS__)
@@ -166,14 +167,18 @@ NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
 
+NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
 NSString *const kResetPasswordNotificationName = @"password_reset_notification";
+NSString *const kTwitterCallbackNotification = @"twitter_callback_notification";
 
 NSString *const kUserDataUpdatedNotification = @"user_data_updated_notification";
 
 NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
 
+NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
+NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 // -- Tag Dictionary keys -- //
 NSString *const kTagobjId = @"tag_object_id";
 NSString *const kTagobjText= @"tag_object_text";

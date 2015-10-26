@@ -16,6 +16,7 @@
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
+#import "LCSocialShareManager.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static CGFloat kNumberOfSectionsInFeeds = 1;
@@ -157,6 +158,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       cell = [topLevelObjects objectAtIndex:0];
     }
     [cell setData:[feedsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+    NSLog(@"\n%@n\n",[feedsArray objectAtIndex:indexPath.row]);
     __weak typeof(self) weakSelf = self;
     cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
       [weakSelf feedCellActionWithType:actionType andFeed:feed];
@@ -178,6 +180,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+
 }
 
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed

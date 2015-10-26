@@ -424,6 +424,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     tag.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
     [posttags_ addObject:tag];
   }
+  
   _postFeedObject.postTags = [posttags_ copy];
   _postFeedObject.isMilestone = [NSString stringWithFormat:@"%ld",(long)milestoneIcon.tag];
   //posting api
@@ -444,6 +445,54 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+  }
+  
+  //facebook sharing
+  if (_facebookButton.isSelected) {
+    
+    LCSocialShareManager *socialShare = [[LCSocialShareManager alloc] init];
+    [socialShare shareToFacebookWithMessage:_postFeedObject.message andImage:postImageView.image];
+  }
+  
+  //twitter sharing
+  if (_twitterButton.isSelected) {
+    
+    [self.TWsocialShare shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
+  }
+}
+
+- (IBAction)facebookButtonAction:(id)sender {
+  
+  if (_facebookButton.isSelected) {
+    
+    _facebookButton.selected = NO;
+  }
+  else{
+    
+    [LCSocialShareManager canShareToFacebook:^(BOOL canShare) {
+      
+      if (canShare) {
+        _facebookButton.selected = YES;
+      }
+    }];
+  }
+}
+
+- (IBAction)twitterButtonAction:(id)sender {
+  
+  if (_twitterButton.isSelected) {
+    
+    _twitterButton.selected = NO;
+  }
+  else {
+    self.TWsocialShare = [[LCSocialShareManager alloc] init];
+    self.TWsocialShare.viewToPresent = self.view;
+    [self.TWsocialShare canShareToTwitter:^(BOOL canShare) {
+      
+      if (canShare) {
+        _twitterButton.selected = YES;
+      }
     }];
   }
 }
