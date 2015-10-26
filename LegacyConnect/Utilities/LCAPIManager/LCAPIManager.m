@@ -252,48 +252,13 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)createNewPost:(LCFeed*)post withImage:(UIImage*)image withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-#warning  correct issue with postTags array format
   NSString *imageName = @"image";
-  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
   
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
-  //the tag array of dictionary is formatted json the AFNetworking not handling this as per the current assumption
-  NSMutableDictionary *dict_mut = [[NSMutableDictionary alloc] initWithDictionary:dict];
-  NSArray *tags = [dict_mut objectForKey:@"postTags"];
-  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags options:NSJSONWritingPrettyPrinted error:&error];
-  NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  [dict_mut setObject:jsonString forKey:@"postTags"];
-//  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
-//    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-//    {
-//      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-//      failure(response[kResponseMessage]);
-//    }
-//    else
-//    {
-//      NSLog(@"%@",response[kResponseMessage]);
-//      NSError *error = nil;
-//      if(!error)
-//      {
-//        NSLog(@"Successfully created new post");
-//        success(response);
-//      }
-//      else
-//      {
-//        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-//      }
-//    }
-//  } andFailure:^(NSString *error) {
-//    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-//    failure(error);
-//  }];
-  
-  
-  
-  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict_mut image:image andImageName:imageName withSuccess:^(id response) {
+  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict image:image andImageName:imageName withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
