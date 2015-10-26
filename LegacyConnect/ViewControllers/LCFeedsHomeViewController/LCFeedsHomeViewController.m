@@ -202,7 +202,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       break;
       
       case kkFeedCellActionViewImage:
-      [self showFullScreenImage:feed.image];
+      [self showFullScreenImage:feed];
       break;
       
     default:
@@ -219,13 +219,29 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self.navigationController pushViewController:next animated:YES];
 }
 
-- (void)showFullScreenImage:(NSString*)imageUrl
+- (void)showFullScreenImage:(LCFeed*)feed
 {
   [self setGIAndMenuButtonVisibilityStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.imageUrlString = imageUrl;
+  vc.feed = feed;
+  __weak typeof (self) weakSelf = self;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [weakSelf fullScreenAction:sender andShowComments:showComments];
+  };
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
+{
+  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
+  [viewController dismissViewControllerAnimated:!show completion:^{
+    if (show) {
+      [self showFeedCommentsWithFeed:viewController.feed];
+    } else {
+      [feedsTable reloadData];
+    }
+  }];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

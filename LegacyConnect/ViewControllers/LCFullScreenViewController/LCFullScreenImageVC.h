@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCFeed.h"
+
+typedef void (^ FullScreenFinishAction)(id sender, BOOL showComments);
 
 @interface LCFullScreenImageVC : UIViewController
 
-@property(nonatomic, retain) NSString *imageUrlString;
+@property (nonatomic, strong) LCFeed * feed;
+@property (readwrite, copy) FullScreenFinishAction commentAction;
 
 @end

@@ -15,6 +15,7 @@
 #import "LCFriendsListViewController.h"
 #import "LCFullScreenImageVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCFeedsCommentsController.h"
 
 static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";
@@ -613,9 +614,21 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       [self showFullScreenImage:feed];
       break;
       
+    case kFeedCellActionComment:
+      [self showFullScreenImage:feed];
+      
     default:
       break;
   }
+}
+
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+  [self.navigationController pushViewController:next animated:YES];
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
@@ -624,10 +637,27 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   [appdel.GIButton setHidden:YES];
   [appdel.menuButton setHidden:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.imageUrlString = feed.image;
+  vc.feed = feed;
+  __weak typeof (self) weakSelf = self;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [weakSelf fullScreenAction:sender andShowComments:showComments];
+  };
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
 }
+
+- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
+{
+  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
+  [viewController dismissViewControllerAnimated:!show completion:^{
+    if (show) {
+      [self showFeedCommentsWithFeed:viewController.feed];
+    } else {
+      [milestonesTable reloadData];
+    }
+  }];
+}
+
 
 - (void)feedCellMoreAction
 {

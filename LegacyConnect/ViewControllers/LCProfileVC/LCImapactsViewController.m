@@ -10,6 +10,7 @@
 #import "LCFeedCellView.h"
 #import "LCFullScreenImageVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCFeedsCommentsController.h"
 
 @interface LCImapactsViewController ()
 
@@ -157,11 +158,7 @@
   
   switch (type) {
     case kFeedCellActionComment:
-      //      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-      //                                                    bundle:nil];
-      //      LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-      //      [next setFeedObject:feed];
-      //      [self.navigationController pushViewController:next animated:YES];
+      [self showFeedCommentsWithFeed:feed];
       break;
       
       case kFeedCellActionLike:
@@ -169,7 +166,7 @@
       break;
       
       case kkFeedCellActionViewImage:
-      [self showFullScreenImage:nil];
+      [self showFullScreenImage:feed];
       break;
       
     default:
@@ -177,16 +174,42 @@
   }
 }
 
-- (void)showFullScreenImage:(NSString*)imageUrl
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+  [self.navigationController pushViewController:next animated:YES];
+}
+
+- (void)showFullScreenImage:(LCFeed*)feed
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:YES];
   [appdel.menuButton setHidden:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.imageUrlString = imageUrl;
+  vc.feed = feed;
+  __weak typeof (self) weakSelf = self;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [weakSelf fullScreenAction:sender andShowComments:showComments];
+  };
   vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:vc animated:YES completion:nil];
 }
+
+- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
+{
+  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
+  [viewController dismissViewControllerAnimated:!show completion:^{
+    if (show) {
+      [self showFeedCommentsWithFeed:viewController.feed];
+    } else {
+      [impactsTableView reloadData];
+    }
+  }];
+}
+
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {

@@ -111,6 +111,8 @@
 		0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C8171BAFFCB000C29746 /* LCFriendsListViewController.m */; };
 		0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */; };
 		0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFBC7B81B81BC5100E75179 /* LCFriend.m */; };
+		0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */; settings = {ASSET_TAGS = (); }; };
+		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; settings = {ASSET_TAGS = (); }; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -144,7 +146,6 @@
 		CEBA92C91B660F0500C02F93 /* LCProfileViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA92C81B660F0500C02F93 /* LCProfileViewVC.m */; };
 		CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */; };
 		CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */; };
-		CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */; };
 		CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */; };
 		CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC601B68994500F0116E /* LCAllInterestVC.m */; };
 		CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */; };
@@ -331,6 +332,9 @@
 		0BF8C81B1BB0028000C29746 /* LCFriendsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCFriendsCell.m; sourceTree = "<group>"; };
 		0BFBC7B71B81BC5100E75179 /* LCFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFriend.h; path = Models/LCFriend/LCFriend.h; sourceTree = "<group>"; };
 		0BFBC7B81B81BC5100E75179 /* LCFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFriend.m; path = Models/LCFriend/LCFriend.m; sourceTree = "<group>"; };
+		0BFDF94B1BDDFB51001E1067 /* LCFullScreenImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCFullScreenImageVC.h; sourceTree = "<group>"; };
+		0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCFullScreenImageVC.m; sourceTree = "<group>"; };
+		0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFullScreenImageVC.xib; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -395,8 +399,6 @@
 		CEBB4FF91B8C75BD00C1552E /* LCListLocationsToTagVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListLocationsToTagVC.m; path = ViewControllers/LCListLocationsToTagVC/LCListLocationsToTagVC.m; sourceTree = "<group>"; };
 		CEBBBFAD1B6B377B001C91E1 /* LCLocationSearchField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLocationSearchField.h; path = CustomViews/LCLocationSearchField/LCLocationSearchField.h; sourceTree = "<group>"; };
 		CEBBBFAE1B6B377B001C91E1 /* LCLocationSearchField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLocationSearchField.m; path = CustomViews/LCLocationSearchField/LCLocationSearchField.m; sourceTree = "<group>"; };
-		CEBBBFB01B6B9041001C91E1 /* LCFullScreenImageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFullScreenImageVC.h; path = ViewControllers/LCFeedsHomeViewController/LCFullScreenImageVC.h; sourceTree = "<group>"; };
-		CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFullScreenImageVC.m; path = ViewControllers/LCFeedsHomeViewController/LCFullScreenImageVC.m; sourceTree = "<group>"; };
 		CEBCE1A61B6A252100730FD5 /* LCMenuButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMenuButton.h; path = CustomViews/LCMenuButton/LCMenuButton.h; sourceTree = "<group>"; };
 		CEBCE1A71B6A252100730FD5 /* LCMenuButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMenuButton.m; path = CustomViews/LCMenuButton/LCMenuButton.m; sourceTree = "<group>"; };
 		CEBCEC5F1B68994500F0116E /* LCAllInterestVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAllInterestVC.h; path = ViewControllers/LCInterestsVC/LCAllInterestVC.h; sourceTree = "<group>"; };
@@ -512,8 +514,6 @@
 				CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */,
 				CE4EB6751B5E28D900B8A725 /* LCLeftMenuController.h */,
 				CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */,
-				CEBBBFB01B6B9041001C91E1 /* LCFullScreenImageVC.h */,
-				CEBBBFB11B6B9041001C91E1 /* LCFullScreenImageVC.m */,
 			);
 			name = LCFeedsHomeViewController;
 			sourceTree = "<group>";
@@ -1083,6 +1083,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0BFDF94A1BDDFB51001E1067 /* LCFullScreenViewController */,
 				0BF8C8151BAFFC8E00C29746 /* LCFriendsList */,
 				0B5571431B8D9F1B00445958 /* LCSearchViewController */,
 				0B56A8061B6A46B80065C231 /* LCNotificationsViewController */,
@@ -1155,6 +1156,17 @@
 				0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */,
 			);
 			name = LCEvent;
+			sourceTree = "<group>";
+		};
+		0BFDF94A1BDDFB51001E1067 /* LCFullScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0BFDF94B1BDDFB51001E1067 /* LCFullScreenImageVC.h */,
+				0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */,
+				0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */,
+			);
+			name = LCFullScreenViewController;
+			path = ViewControllers/LCFullScreenViewController;
 			sourceTree = "<group>";
 		};
 		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
@@ -1507,6 +1519,7 @@
 				0BB33D9F1BA812A3009E6D0C /* Gotham-BoldItalic.otf in Resources */,
 				0BB33DEF1BA81401009E6D0C /* warning@3x.png in Resources */,
 				0BB33DB71BA81359009E6D0C /* SignUp.storyboard in Resources */,
+				0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
 				0BB33DE41BA81401009E6D0C /* profileAdd.png in Resources */,
 				0B2902811BB9370100E80684 /* LCInterestsCellView.xib in Resources */,
@@ -1587,7 +1600,6 @@
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */,
 				0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */,
-				CEBBBFB21B6B9041001C91E1 /* LCFullScreenImageVC.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
 				0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */,
@@ -1631,6 +1643,7 @@
 				0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */,
 				0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */,
 				96BD14551B72166B004D5CFA /* MTLModel.m in Sources */,
+				0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */,
 				CEBED6AA1B5FAE0C0012FEBB /* LCViewCommunity.m in Sources */,
 				CEB9B6A91B79E4E900C61BA0 /* LCTabMenuView.m in Sources */,
 				CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */,
