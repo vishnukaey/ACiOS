@@ -39,7 +39,7 @@ static LCAPIManager *sharedManager = nil;
        }
        else
        {
-         [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
@@ -196,7 +196,7 @@ static LCAPIManager *sharedManager = nil;
   NSError *error = nil;
   NSDictionary *tempDict = [MTLJSONAdapter JSONDictionaryFromModel:user error:&error];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:tempDict];
-  
+
   [dict setValue:[LCUtilityManager getStringValueOfBOOL:avtarImageState] forKey:@"removeAvatar"];
   [dict setValue:[LCUtilityManager getStringValueOfBOOL:headerPhotoState] forKey:@"removeHeader"];
   if(error)
@@ -419,7 +419,7 @@ static LCAPIManager *sharedManager = nil;
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
-  
+
 }
 
 + (void) unlikePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
@@ -465,7 +465,7 @@ static LCAPIManager *sharedManager = nil;
        NSError *error = nil;
        NSDictionary *dict= response[kResponseData];
        LCComment *comment = [MTLJSONAdapter modelOfClass:[LCComment class] fromJSONDictionary:dict[@"comment"] error:&error];
-       
+
        if(!error)
        {
          LCDLog(@"Getting Interests successful! ");
@@ -1050,8 +1050,8 @@ static LCAPIManager *sharedManager = nil;
 + (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success
                andfailure:(void (^)(NSString *error))failure
 {
-  //  userId = @"7143";
-  //  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
+//  userId = @"7143";
+//  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
   
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
@@ -1153,7 +1153,7 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kFriendsURL];
   NSDictionary *dict = @{kFriendIDKey: FriendID};
-  
+
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -1277,7 +1277,7 @@ static LCAPIManager *sharedManager = nil;
 #pragma mark - Events
 
 + (void)getUserEventsForUserId:(NSString*)userId andLastEventId:(NSString*)lastEventId
-                   withSuccess:(void(^)(NSArray *response))success andFailure:(void(^)(NSString* error))failure
+                    withSuccess:(void(^)(NSArray *response))success andFailure:(void(^)(NSString* error))failure
 {
   LCWebServiceManager * webService = [[LCWebServiceManager alloc] init];
   NSMutableString * urlString = [NSMutableString stringWithFormat:@"%@%@/?",kBaseURL,kGetUserEventsURL];
@@ -1290,32 +1290,32 @@ static LCAPIManager *sharedManager = nil;
   NSString * finalString = (NSString*)urlString;
   finalString = [finalString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
   [webService performGetOperationWithUrl:finalString andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-       failure(response[kResponseMessage]);
-     }
-     else
-     {
-       NSError *error = nil;
-       NSDictionary *dict= response[kResponseData];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
-       if(!error)
-       {
-         LCDLog(@"Getting Event details successful! ");
-         success(responsesArray);
-       }
-       else
-       {
-         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-       }
-     }
-   } andFailure:^(NSString *error) {
-     LCDLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-     failure(error);
-   }];
+  {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      NSError *error = nil;
+      NSDictionary *dict= response[kResponseData];
+      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
+      if(!error)
+      {
+        LCDLog(@"Getting Event details successful! ");
+        success(responsesArray);
+      }
+      else
+      {
+        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+      }
+    }
+  } andFailure:^(NSString *error) {
+    LCDLog(@"%@",error);
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
 }
 
 + (void)getEventDetailsForEventWithID:(NSString*)eventID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
@@ -1582,7 +1582,7 @@ static LCAPIManager *sharedManager = nil;
      LCDLog(@"%@",error);
      failure(error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-   }];
+   }];  
 }
 
 
@@ -1655,7 +1655,7 @@ static LCAPIManager *sharedManager = nil;
   NSDictionary *parameters = @{kUserIDKey: userID};
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
-  [manager.requestSerializer setTimeoutInterval:5.0];
+    [manager.requestSerializer setTimeoutInterval:5.0];
   [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
   [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -1672,14 +1672,14 @@ static LCAPIManager *sharedManager = nil;
       success(responseObject);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    LCDLog(@"%@",error);
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+      LCDLog(@"%@",error);
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
     failure(error.localizedDescription);
   }];
   
-  //  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-  //    LCDLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
-  //  }];
+//  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
+//    LCDLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
+//  }];
 }
 
 
