@@ -486,13 +486,13 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     _twitterButton.selected = NO;
   }
   else {
+    _twitterButton.enabled = NO;
     self.TWsocialShare = [[LCSocialShareManager alloc] init];
-    self.TWsocialShare.viewToPresent = self.view;
     [self.TWsocialShare canShareToTwitter:^(BOOL canShare) {
-      
       if (canShare) {
         _twitterButton.selected = YES;
       }
+      _twitterButton.enabled = YES;
     }];
   }
 }

@@ -120,7 +120,21 @@ NSString * const kFBMessageKey = @"message";
     NSLog(@"-- url: %@", url);
     NSLog(@"-- oauthToken: %@", oauthToken);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OauthVerification:) name:kTwitterCallbackNotification object:nil];
-      [[UIApplication sharedApplication] openURL:url];
+    
+    NSArray *splitedUrl = [[url absoluteString] componentsSeparatedByString:@"https://api.twitter.com/oauth/"];
+    NSString *TWAppUrl;
+    if(splitedUrl.count>1)
+    {
+      TWAppUrl = [NSString stringWithFormat:@"%@",splitedUrl[1]];
+    }
+    NSURL *urlApp = [NSURL URLWithString: [NSString stringWithFormat:@"twitter:///%@",TWAppUrl]];
+    if ([[UIApplication sharedApplication] canOpenURL:urlApp]){
+     [[UIApplication sharedApplication] openURL:urlApp];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    }
   } authenticateInsteadOfAuthorize:NO
                   forceLogin:@(YES)
                   screenName:nil
@@ -137,8 +151,8 @@ NSString * const kFBMessageKey = @"message";
   NSString *verifier = userInfo[@"oauth_verifier"];
   [_twitterAPI postAccessTokenRequestWithPIN:verifier successBlock:^(NSString *oauthToken, NSString *oauthTokenSecret, NSString *userID, NSString *screenName) {
     NSLog(@"-- screenName: %@", screenName);
-    [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessToken forKey:kTWOauthTokenKey];
-    [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessTokenSecret forKey:kTWOauthTokenSecretKey];
+//    [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessToken forKey:kTWOauthTokenKey];
+//    [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessTokenSecret forKey:kTWOauthTokenSecretKey];
     self.canShareTwitterBlock(YES);
     /*
      At this point, the user can use the API and you can read his access tokens with:
