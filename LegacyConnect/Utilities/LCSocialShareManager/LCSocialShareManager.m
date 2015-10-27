@@ -120,7 +120,21 @@ NSString * const kFBMessageKey = @"message";
     NSLog(@"-- url: %@", url);
     NSLog(@"-- oauthToken: %@", oauthToken);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OauthVerification:) name:kTwitterCallbackNotification object:nil];
-      [[UIApplication sharedApplication] openURL:url];
+    
+//    NSArray *splitedUrl = [[url absoluteString] componentsSeparatedByString:@"https://api.twitter.com/oauth/"];
+//    NSString *TWAppUrl;
+//    if(splitedUrl.count>1)
+//    {
+//      TWAppUrl = [NSString stringWithFormat:@"%@",splitedUrl[1]];
+//    }
+//    NSURL *urlApp = [NSURL URLWithString: [NSString stringWithFormat:@"twitter://%@",TWAppUrl]];
+//    if ([[UIApplication sharedApplication] canOpenURL:urlApp]){
+//     [[UIApplication sharedApplication] openURL:urlApp];
+//    }
+//    else
+//    {
+        [[UIApplication sharedApplication] openURL:url];
+//    }
   } authenticateInsteadOfAuthorize:NO
                   forceLogin:@(YES)
                   screenName:nil
