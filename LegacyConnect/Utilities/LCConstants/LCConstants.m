@@ -33,14 +33,6 @@ NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 NSString *const kTWConsumerKey = @"IiYfEw17iKn2jTcWjp4H2QfYo";
 NSString *const kTWConsumerSecretKey = @"pBPJNqVUXdfkeulFZuXf4Epd0SSXsLwOXYqgeNkCWC4QlUJmiv";
 
-#ifdef DEBUG
-#define LCDLog(...) NSLog(s, ##__VA_ARGS__)
-#else
-#define LCDLog(...)
-#endif
-
-
-
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";
