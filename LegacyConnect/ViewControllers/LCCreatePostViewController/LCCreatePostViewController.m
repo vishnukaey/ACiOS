@@ -413,6 +413,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
     return;
   }
+  [postTextView resignFirstResponder];
   _postFeedObject.message = postTextView.text;
   _postFeedObject.location = taggedLocation;
   NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
