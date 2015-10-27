@@ -243,14 +243,12 @@
   com.eventDescription = aboutCommunityField.text;
   com.time = self.communityDate;
   [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
-    NSLog(@"%@",response);
     com.eventID = response[@"data"][@"id"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
     LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
     vc.eventToInvite = com;
     [self.navigationController pushViewController:vc animated:YES];
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
   }];
 
 }
@@ -306,18 +304,7 @@
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   headerPhotoImageView.image = chosenImage;
-//  NSLog(@"image picked-->>%@", chosenImage);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
 

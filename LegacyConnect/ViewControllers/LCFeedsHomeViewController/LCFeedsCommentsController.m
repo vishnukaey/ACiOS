@@ -219,7 +219,7 @@ static CGFloat kIndexForPostDetails = 0;
       [commentTextField_dup setText:nil];
       [mainTable reloadData];
     } andFailure:^(NSString *error) {
-      NSLog(@"----- Fail to add new comment");
+      LCDLog(@"----- Fail to add new comment");
     }];
   }
 }
@@ -244,7 +244,7 @@ static CGFloat kIndexForPostDetails = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  NSLog(@"index path row : %li",indexPath.row);
+  LCDLog(@"index path row : %li",indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -305,7 +305,7 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 #pragma mark - feedCell delegates
@@ -337,7 +337,7 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
+  LCDLog(@"tag details-->>%@", tagDetails);
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];

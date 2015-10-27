@@ -21,19 +21,15 @@
   
   //mine interst api call
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
-//    NSLog(@"%@",response);
     interestsMine = response;
     [self showMyInterests];
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
   }];
   
   //all interests api call
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
-//    NSLog(@"%@",response);
     interestsAll = response;
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
   }];
 }
 
