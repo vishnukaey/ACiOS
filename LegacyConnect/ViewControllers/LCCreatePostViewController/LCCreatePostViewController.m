@@ -27,6 +27,8 @@
   
   IBOutlet UIImageView *tagFriendsIcon, *cameraIcon, *tagLocationIcon, *milestoneIcon;
   IBOutlet UILabel *postingToLabel;
+  
+  BOOL GIButton_preState, menuButton_preState;
 }
 @end
 
@@ -68,15 +70,34 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     _postFeedObject = [[LCFeed alloc] init];
   }
-  
-  [self initialiseScrollSubviewsForPosting];
-  [self setCurrentContexts];
-  [postTextView becomeFirstResponder];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  GIButton_preState = [appdel.GIButton isHidden];
+  menuButton_preState = [appdel.menuButton isHidden];
+  [appdel.GIButton setHidden: true];
+  [appdel.menuButton setHidden: true];
+  appdel.isCreatePostOpen = true;
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self initialiseScrollSubviewsForPosting];
+  [self setCurrentContexts];
+  [postTextView becomeFirstResponder];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden: GIButton_preState];
+  [appdel.menuButton setHidden: menuButton_preState];
+  appdel.isCreatePostOpen = false;
 }
 
 #pragma mark - initial setup
@@ -121,7 +142,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 - (void)setCurrentContexts//image, interests, causes etc
 {
   //photo
-  if (_photoPostPhoto)
+  if (_photoPostPhoto)//if coming from photopost flow
   {
     [postImageView setImage:_photoPostPhoto];
     [self arrangePostImageView];
@@ -153,8 +174,15 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [self arrangeScrollSubviewsForPosting];
     [postImageView sd_setImageWithURL:[NSURL URLWithString:_postFeedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
      {
-       [postImageView setBackgroundColor:[UIColor clearColor]];
-       [self arrangePostImageView];
+       if (postImageView.image) {
+         [postImageView setBackgroundColor:[UIColor clearColor]];
+         [self arrangePostImageView];
+       }
+       else
+       {
+         [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, postImageView.frame.size.width, 0)];
+         [self arrangeScrollSubviewsForPosting];
+       }
      }];
    }
   
@@ -339,7 +367,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
-  [self.delegate dismissCreatePostView];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -421,7 +448,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     LCTag *tag = [[LCTag alloc] init];
     tag.type = kFeedTagTypeUser;
     tag.tagID = friend.friendId;
-    tag.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    tag.text = [NSString stringWithFormat:@"%@ %@", [LCUtilityManager performNullCheckAndSetValue:friend.firstName],
+                [LCUtilityManager performNullCheckAndSetValue:friend.lastName]];
     [posttags_ addObject:tag];
   }
   

@@ -10,6 +10,6 @@
 #import "LCLeftMenuController.h"
 #import "LCCreatePostViewController.h"
 
-@interface LCEmptyViewController : UIViewController<createPostDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface LCEmptyViewController : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
