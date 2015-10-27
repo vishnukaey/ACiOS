@@ -440,6 +440,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
     return;
   }
+  [postTextView resignFirstResponder];
   _postFeedObject.message = postTextView.text;
   _postFeedObject.location = taggedLocation;
   NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
@@ -514,13 +515,13 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     _twitterButton.selected = NO;
   }
   else {
+    _twitterButton.enabled = NO;
     self.TWsocialShare = [[LCSocialShareManager alloc] init];
-    self.TWsocialShare.viewToPresent = self.view;
     [self.TWsocialShare canShareToTwitter:^(BOOL canShare) {
-      
       if (canShare) {
         _twitterButton.selected = YES;
       }
+      _twitterButton.enabled = YES;
     }];
   }
 }
