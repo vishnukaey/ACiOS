@@ -704,10 +704,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zxp-XQ-3NM">
-                                        <rect key="frame" x="15" y="33" width="13" height="21"/>
+                                        <rect key="frame" x="0.0" y="20" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="13" id="2A4-Qu-6En"/>
-                                            <constraint firstAttribute="height" constant="21" id="mIh-Nw-4Jk"/>
+                                            <constraint firstAttribute="width" constant="44" id="2A4-Qu-6En"/>
+                                            <constraint firstAttribute="height" constant="44" id="mIh-Nw-4Jk"/>
                                         </constraints>
                                         <state key="normal" image="backButton_image">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -720,10 +720,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Zxp-XQ-3NM" firstAttribute="leading" secondItem="602-j7-Fca" secondAttribute="leading" constant="15" id="Mby-1N-gmu"/>
+                                    <constraint firstItem="Zxp-XQ-3NM" firstAttribute="leading" secondItem="602-j7-Fca" secondAttribute="leading" id="Mby-1N-gmu"/>
                                     <constraint firstAttribute="height" constant="64" id="TNG-JX-BrK"/>
                                     <constraint firstAttribute="bottom" secondItem="foe-JZ-2dc" secondAttribute="bottom" constant="8" id="pu9-g2-bTG"/>
-                                    <constraint firstAttribute="bottom" secondItem="Zxp-XQ-3NM" secondAttribute="bottom" constant="10" id="ryD-h7-D2s"/>
+                                    <constraint firstAttribute="bottom" secondItem="Zxp-XQ-3NM" secondAttribute="bottom" id="ryD-h7-D2s"/>
                                     <constraint firstAttribute="centerX" secondItem="foe-JZ-2dc" secondAttribute="centerX" id="xJF-qf-ifF"/>
                                 </constraints>
                             </view>
