@@ -38,7 +38,6 @@
 
 - (void)viewDidLoad
 {
-  LCDLog(@"Hurray !!!!");
   [super viewDidLoad];
   [self addPasswordResetNotificationObserver];
 }
