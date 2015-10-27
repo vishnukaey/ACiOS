@@ -99,7 +99,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = YES;
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [feedsTable reloadData];
 }
 
@@ -107,7 +107,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -218,7 +218,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;
