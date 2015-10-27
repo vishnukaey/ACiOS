@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "LCTaggedLabel.h"
 
+typedef void (^CommentCellTagAction)(NSDictionary* tagDetails);
+
 @interface LCCommentCell : UITableViewCell
 {
   IBOutlet UIImageView *profilePic;
@@ -17,6 +19,7 @@
 }
 
 @property (nonatomic, strong) LCComment * comment;
+@property (readwrite, copy) CommentCellTagAction commentCellTagAction;
 
 - (void)setComment:(LCComment *)comment;
 

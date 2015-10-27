@@ -74,8 +74,6 @@ static CGFloat kIndexForPostDetails = 0;
   }];
 }
 
-
-
 - (void)setUpCpmmentsUI
 {
   UIView* commentField = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, kCommentFieldHeight)];
@@ -217,6 +215,7 @@ static CGFloat kIndexForPostDetails = 0;
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
+      [self changeUpdateButtonState];
       [mainTable reloadData];
     } andFailure:^(NSString *error) {
       LCDLog(@"----- Fail to add new comment");
@@ -288,6 +287,10 @@ static CGFloat kIndexForPostDetails = 0;
       NSInteger rowNo = indexPath.row - 1;
       [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
       [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+      __weak typeof(self) weakSelf = self;
+      commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
+        [weakSelf tagTapped:tagDetails];
+      };
       return commentCell;
     }
   }
