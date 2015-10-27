@@ -179,7 +179,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  [self checkbuttonAction:cell.checkButton];
 }
 
 /*
