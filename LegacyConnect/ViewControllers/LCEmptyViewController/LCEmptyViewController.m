@@ -158,7 +158,7 @@
   //menu poper button
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   
-  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 65, statusBarViewRect.size.height, 65, self.navigationController.navigationBar.frame.size.height)];
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 50, statusBarViewRect.size.height, 50, self.navigationController.navigationBar.frame.size.height)];
 
   menuButton.backgroundColor = [UIColor clearColor];
   [vc.view addSubview:menuButton];

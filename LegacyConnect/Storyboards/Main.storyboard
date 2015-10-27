@@ -105,13 +105,13 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-Ah-7Lb">
-                                        <rect key="frame" x="15" y="33" width="21" height="21"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ohl-Ah-7Lb">
+                                        <rect key="frame" x="0.0" y="20" width="44" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="21" id="tG0-26-6uE"/>
-                                            <constraint firstAttribute="height" constant="21" id="tHT-mT-kQW"/>
+                                            <constraint firstAttribute="width" constant="44" id="tG0-26-6uE"/>
+                                            <constraint firstAttribute="height" constant="44" id="tHT-mT-kQW"/>
                                         </constraints>
-                                        <state key="normal" backgroundImage="search-icon_white_64.png">
+                                        <state key="normal" image="SearchIcon">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -121,10 +121,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ohl-Ah-7Lb" firstAttribute="leading" secondItem="5F3-Ck-Mhb" secondAttribute="leading" constant="15" id="NVS-Oa-nC5"/>
+                                    <constraint firstItem="ohl-Ah-7Lb" firstAttribute="leading" secondItem="5F3-Ck-Mhb" secondAttribute="leading" id="NVS-Oa-nC5"/>
                                     <constraint firstAttribute="height" constant="64" id="OIL-1U-G4m"/>
                                     <constraint firstAttribute="bottom" secondItem="i7z-nM-tf3" secondAttribute="bottom" constant="8" id="XvQ-eH-owv"/>
-                                    <constraint firstAttribute="bottom" secondItem="ohl-Ah-7Lb" secondAttribute="bottom" constant="10" id="r1O-fV-bQk"/>
+                                    <constraint firstAttribute="bottom" secondItem="ohl-Ah-7Lb" secondAttribute="bottom" id="r1O-fV-bQk"/>
                                     <constraint firstAttribute="centerX" secondItem="i7z-nM-tf3" secondAttribute="centerX" id="x8j-zj-YwC"/>
                                 </constraints>
                             </view>
@@ -347,7 +347,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="321" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EJO-PG-eHL" id="NhE-dF-P3f">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="993-ZP-VMh">
@@ -424,7 +424,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="321" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1TY-aP-ZMK" id="1Zv-qc-UDj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gn-UY-LFL">
@@ -478,7 +478,7 @@
                                                 <rect key="frame" x="0.0" y="66" width="321" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0yd-GT-cD8" id="9xn-L1-jy3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGH-Jd-Tu8">
@@ -549,7 +549,7 @@
                                                 <rect key="frame" x="0.0" y="146" width="321" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="twQ-Rt-dFp" id="9NI-iv-pTn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0K-WU-fPW">
@@ -975,9 +975,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SearchIcon" width="20" height="20"/>
         <image name="backButton_image" width="12" height="21"/>
         <image name="profileTick" width="64" height="64"/>
-        <image name="search-icon_white_64.png" width="64" height="64"/>
         <image name="simple-green-check-button-th.png" width="100" height="100"/>
     </resources>
 </document>
