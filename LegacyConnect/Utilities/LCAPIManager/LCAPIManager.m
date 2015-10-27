@@ -33,7 +33,7 @@ static LCAPIManager *sharedManager = nil;
        LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
-         NSLog(@"User details Fetch success! ");
+         LCDLog(@"User details Fetch success!");
          success(user);
        }
        else
@@ -43,7 +43,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -70,7 +70,7 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kFeedsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Fetching Home Feeds successful! ");
+         LCDLog(@"Fetching Home Feeds successful! ");
          success(responsesArray);
        }
        else
@@ -79,7 +79,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -104,7 +104,7 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kMileStonesKey] error:&error];
        if(!error)
        {
-         NSLog(@"Milestones fetch success! ");
+         LCDLog(@"Milestones fetch success! ");
          success(responsesArray);
        }
        else
@@ -113,7 +113,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -138,7 +138,7 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kImpactsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Impacts fetch success! ");
+         LCDLog(@"Impacts fetch success! ");
          success(responsesArray);
        }
        else
@@ -147,7 +147,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -172,17 +172,17 @@ static LCAPIManager *sharedManager = nil;
        LCSearchResult *searchresult = [MTLJSONAdapter modelOfClass:[LCSearchResult class] fromJSONDictionary:dict error:&error];
        if(!error)
        {
-         NSLog(@"Search success! ");
+         LCDLog(@"Search success! ");
          success(searchresult);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -199,16 +199,16 @@ static LCAPIManager *sharedManager = nil;
   [dict setValue:[LCUtilityManager getStringValueOfBOOL:headerPhotoState] forKey:@"removeHeader"];
   if(error)
   {
-    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
   NSData *headerImageData = UIImagePNGRepresentation(headerPhoto);
   NSData *avtarImageData = UIImagePNGRepresentation(avtarImage);
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationForProfileWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andHeaderImageData:headerImageData andAvtarImageData:avtarImageData withSuccess:^(id response) {
-    NSLog(@"Success!");
+    LCDLog(@"Success!");
     success(response);
   } andFailure:^(NSString *error) {
-    NSLog(@"Failure");
+    LCDLog(@"Failure");
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
@@ -234,7 +234,7 @@ static LCAPIManager *sharedManager = nil;
        LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
-         NSLog(@"Post details Fetch success! ");
+         LCDLog(@"Post details Fetch success! ");
          success(feed);
        }
        else
@@ -244,7 +244,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -266,11 +266,11 @@ static LCAPIManager *sharedManager = nil;
     }
     else
     {
-      NSLog(@"---%@",response[kResponseMessage]);
+      LCDLog(@"---%@",response[kResponseMessage]);
       NSError *error = nil;
       if(!error)
       {
-        NSLog(@"Successfully created new post");
+        LCDLog(@"Successfully created new post");
         success(response);
       }
       else
@@ -311,11 +311,11 @@ static LCAPIManager *sharedManager = nil;
     }
     else
     {
-      NSLog(@"%@",response[kResponseMessage]);
+      LCDLog(@"%@",response[kResponseMessage]);
       NSError *error = nil;
       if(!error)
       {
-        NSLog(@"Successfully updated post");
+        LCDLog(@"Successfully updated post");
         success(response);
       }
       else
@@ -347,11 +347,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Post deleted");
+       LCDLog(@"Post deleted");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -372,11 +372,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Post liked.");
+       LCDLog(@"Post liked.");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -398,11 +398,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Post unliked.");
+       LCDLog(@"Post unliked.");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -429,17 +429,17 @@ static LCAPIManager *sharedManager = nil;
 
        if(!error)
        {
-         NSLog(@"Getting Interests successful! ");
+         LCDLog(@"Getting Interests successful! ");
          success(comment);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -460,11 +460,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"comment deleted.");
+       LCDLog(@"comment deleted.");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -499,17 +499,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:comments[kPostCommentsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Comments successful! ");
+         LCDLog(@"Getting Comments successful! ");
          success(responsesArray,isMorePresent);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -530,11 +530,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Marked as milestone.");
+       LCDLog(@"Marked as milestone.");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -556,11 +556,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Removed milestone.");
+       LCDLog(@"Removed milestone.");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -586,17 +586,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Interests successful! ");
+         LCDLog(@"Getting Interests successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -620,17 +620,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Interests successful! ");
+         LCDLog(@"Getting Interests successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -658,17 +658,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCCause class] fromJSONArray:dict[kCausesKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Causes successful! ");
+         LCDLog(@"Getting Causes successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -692,17 +692,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Interests successful! ");
+         LCDLog(@"Getting Interests successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -723,11 +723,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Save Causes Success! \n %@",response);
+       LCDLog(@"Save Causes Success! \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -752,17 +752,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCCause class] fromJSONArray:dict[kCausesKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Causes successful! ");
+         LCDLog(@"Getting Causes successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -785,7 +785,7 @@ static LCAPIManager *sharedManager = nil;
        LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCInterest class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
-         NSLog(@"Interest details Fetch success! ");
+         LCDLog(@"Interest details Fetch success! ");
          success(feed);
        }
        else
@@ -795,7 +795,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -818,7 +818,7 @@ static LCAPIManager *sharedManager = nil;
        LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCCause class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
-         NSLog(@"Cause details Fetch success! ");
+         LCDLog(@"Cause details Fetch success! ");
          success(feed);
        }
        else
@@ -828,7 +828,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -849,11 +849,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Interest followed successfully");
+       LCDLog(@"Interest followed successfully");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -874,11 +874,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Interest unfollowed successfully");
+       LCDLog(@"Interest unfollowed successfully");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -899,11 +899,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Cause Supported successfully");
+       LCDLog(@"Cause Supported successfully");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -924,11 +924,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Cause Unsupported successfully");
+       LCDLog(@"Cause Unsupported successfully");
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -953,17 +953,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:dict[kUsersKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Interests Followers successful! ");
+         LCDLog(@"Getting Interests Followers successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -988,17 +988,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:dict[kUsersKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Cause Followers successful! ");
+         LCDLog(@"Getting Cause Followers successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1042,17 +1042,17 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:friendsDict[@"users"] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Friends successful! ");
+         LCDLog(@"Getting Friends successful! ");
          success(responsesArray);
        }
        else
        {
-         NSLog(@"%@",error);
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1073,11 +1073,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Friend request sent %@",response);
+       LCDLog(@"Friend request sent %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1097,11 +1097,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Friend request cancelled \n %@",response);
+       LCDLog(@"Friend request cancelled \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1124,11 +1124,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Friend request sent %@",response);
+       LCDLog(@"Friend request sent %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1149,11 +1149,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Accept Friend request success! \n %@",response);
+       LCDLog(@"Accept Friend request success! \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1174,11 +1174,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Reject friend request success ! \n%@",response);
+       LCDLog(@"Reject friend request success ! \n%@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1199,11 +1199,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Contacts emails sent %@",response);
+       LCDLog(@"Contacts emails sent %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1224,11 +1224,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Contacts IDs sent %@",response);
+       LCDLog(@"Contacts IDs sent %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1264,7 +1264,7 @@ static LCAPIManager *sharedManager = nil;
       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
       if(!error)
       {
-        NSLog(@"Getting Event details successful! ");
+        LCDLog(@"Getting Event details successful! ");
         success(responsesArray);
       }
       else
@@ -1273,7 +1273,7 @@ static LCAPIManager *sharedManager = nil;
       }
     }
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
@@ -1298,7 +1298,7 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kFeedsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting Event details successful! ");
+         LCDLog(@"Getting Event details successful! ");
          success(responsesArray);
        }
        else
@@ -1307,7 +1307,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1321,7 +1321,7 @@ static LCAPIManager *sharedManager = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   if(error)
   {
-    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
   if(headerPhoto)
   {
@@ -1339,7 +1339,7 @@ static LCAPIManager *sharedManager = nil;
       }
       else
       {
-        NSLog(@"Create event successful \n %@",responseObject);
+        LCDLog(@"Create event successful \n %@",responseObject);
         success(responseObject);
       }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -1358,11 +1358,11 @@ static LCAPIManager *sharedManager = nil;
        }
        else
        {
-         NSLog(@"Create event successful \n %@",response);
+         LCDLog(@"Create event successful \n %@",response);
          success(response);
        }
      } andFailure:^(NSString *error) {
-       NSLog(@"%@",error);
+       LCDLog(@"%@",error);
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
        failure(error);
      }];
@@ -1384,11 +1384,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Users succcesfully added to Event \n %@",response);
+       LCDLog(@"Users succcesfully added to Event \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1402,7 +1402,7 @@ static LCAPIManager *sharedManager = nil;
 //  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
 //  if(error)
 //  {
-//    NSLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+//    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
 //  }
 //  NSData *imageData = UIImagePNGRepresentation(headerPhoto);
 //  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
@@ -1414,11 +1414,11 @@ static LCAPIManager *sharedManager = nil;
 //    }
 //    else
 //    {
-//      NSLog(@"Event update success! %@",response);
+//      LCDLog(@"Event update success! %@",response);
 //      success(response);
 //    }
 //  } andFailure:^(NSString *error) {
-//    NSLog(@"%@",error);
+//    LCDLog(@"%@",error);
 //    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
 //    failure(error);
 //  }];
@@ -1439,11 +1439,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Following Event ! \n %@",response);
+       LCDLog(@"Following Event ! \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1464,7 +1464,7 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Unfollowing Event ! \n %@",response);
+       LCDLog(@"Unfollowing Event ! \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -1494,7 +1494,7 @@ static LCAPIManager *sharedManager = nil;
        NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kEventsKey] error:&error];
        if(!error)
        {
-         NSLog(@"Getting events success! ");
+         LCDLog(@"Getting events success! ");
          success(responsesArray);
        }
        else
@@ -1503,7 +1503,7 @@ static LCAPIManager *sharedManager = nil;
        }
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1530,7 +1530,7 @@ static LCAPIManager *sharedManager = nil;
        LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
-         NSLog(@"Login success ! ");
+         LCDLog(@"Login success ! ");
          success(user);
        }
        else
@@ -1540,7 +1540,7 @@ static LCAPIManager *sharedManager = nil;
      }
      
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      failure(error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
    }];  
@@ -1561,7 +1561,7 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"%@",response);
+       LCDLog(@"%@",response);
        NSDictionary *responseData = response[kResponseData];
        [LCDataManager sharedDataManager].avatarUrl = responseData[kFBAvatarImageUrlKey];
        [LCDataManager sharedDataManager].userID = responseData[kUserIDKey];
@@ -1569,7 +1569,7 @@ static LCAPIManager *sharedManager = nil;
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      failure(error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
    }];
@@ -1590,12 +1590,12 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"%@",response[kResponseMessage]);
+       LCDLog(@"%@",response[kResponseMessage]);
        NSError *error = nil;
        LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
        if(!error)
        {
-         NSLog(@"Successfully registered new user");
+         LCDLog(@"Successfully registered new user");
          success(user);
        }
        else
@@ -1629,17 +1629,17 @@ static LCAPIManager *sharedManager = nil;
     }
     else
     {
-      NSLog(@"Image upload success! \n %@",responseObject);
+      LCDLog(@"Image upload success! \n %@",responseObject);
       success(responseObject);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      NSLog(@"%@",error);
+      LCDLog(@"%@",error);
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
     failure(error.localizedDescription);
   }];
   
 //  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-//    NSLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
+//    LCDLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
 //  }];
 }
 
@@ -1658,11 +1658,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Email request sent! \n %@",response);
+       LCDLog(@"Email request sent! \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
@@ -1683,11 +1683,11 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
-       NSLog(@"Password updated! \n %@",response);
+       LCDLog(@"Password updated! \n %@",response);
        success(response);
      }
    } andFailure:^(NSString *error) {
-     NSLog(@"%@",error);
+     LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];

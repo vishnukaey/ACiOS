@@ -239,7 +239,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
+  LCDLog(@"tag details-->>%@", tagDetails);
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
@@ -283,7 +283,7 @@ ACAccount *facebookAccount;
   [accountStore requestAccessToAccountsWithType:facebookAccountType
                                         options:options completion:^(BOOL granted, NSError *e) {
                                           if (granted) {
-                                            NSLog(@"granted-->>>");
+                                            LCDLog(@"granted-->>>");
                                             NSArray *accounts = [accountStore
                                                                  accountsWithAccountType:facebookAccountType];
                                              facebookAccount = [accounts lastObject];
@@ -306,7 +306,7 @@ ACAccount *facebookAccount;
                                                            {
                                                              // Handle response
                                                              NSString *res = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-                                                             NSLog(@"response-->>>%@   error-->>%@", res, error);
+                                                             LCDLog(@"response-->>>%@   error-->>%@", res, error);
                                                            }];
                                           }
                                           else
@@ -314,7 +314,7 @@ ACAccount *facebookAccount;
                                             dispatch_async(dispatch_get_main_queue(), ^{
                                               
                                               // Fail gracefully...
-                                              NSLog(@"%@",e.description);
+                                              LCDLog(@"%@",e.description);
 //                                              if([e code]== ACErrorAccountNotFound)
 //                                                [self throwAlertWithTitle:@"Error" message:@"Account not found. Please setup your account in settings app."];
 //                                              else
@@ -349,7 +349,7 @@ ACAccount *facebookAccount;
 //       if (error)
 //       {
 //         // Process error
-//         NSLog(@"permissionError-->>");
+//         LCDLog(@"permissionError-->>");
 //       } else if (result.isCancelled)
 //       {
 //         // Handle cancellations
@@ -360,7 +360,7 @@ ACAccount *facebookAccount;
 //         if ([result.grantedPermissions containsObject:@"publish_actions"])
 //         {
 //           // Do work
-//           NSLog(@"permission granted-->>");
+//           LCDLog(@"permission granted-->>");
 //           [self postToFB];
 //         }
 //       }
@@ -387,7 +387,7 @@ ACAccount *facebookAccount;
 ////    HTTPMethod:@"POST"]
 ////   startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
 ////     if (!error) {
-////       NSLog(@"Post id:%@", result[@"id"]);
+////       LCDLog(@"Post id:%@", result[@"id"]);
 ////     }
 ////   }];
 //}

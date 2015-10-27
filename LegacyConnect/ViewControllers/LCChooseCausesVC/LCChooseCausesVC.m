@@ -39,7 +39,6 @@
     interests = response;
     [self.interestsCollectionView reloadData];
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
   }];
 }
 
@@ -191,7 +190,6 @@
         [self.interestsCollectionView reloadData];
       } andFailure:^(NSString *error) {
         [MBProgressHUD hideHUDForView:self.view animated:YES];
-        NSLog(@"%@",error);
       }];
       
     }
@@ -234,7 +232,6 @@
     [self performSegueWithIdentifier:@"connectFriends" sender:self];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    NSLog(@"%@",error);
   }];
 }
 

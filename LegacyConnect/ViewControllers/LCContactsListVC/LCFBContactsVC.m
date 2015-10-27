@@ -46,7 +46,7 @@
       if (error)
       {
         // Process error
-        NSLog(@"permissionError-->>");
+        LCDLog(@"permissionError-->>");
       } else if (result.isCancelled)
       {
         // Handle cancellations
@@ -57,7 +57,7 @@
         if ([result.grantedPermissions containsObject:@"user_friends"])
         {
           // Do work
-          NSLog(@"permission granted-->>");
+          LCDLog(@"permission granted-->>");
           [self getFacebookFriendsList];
         }
       }
@@ -77,7 +77,7 @@
   {
     if (!error)
     {
-      NSLog(@"fetched user:%@", result);
+      LCDLog(@"fetched user:%@", result);
       finalFriendsArray = [[NSMutableArray alloc] init];
       NSArray *friendsArray = [result objectForKey:@"data"];
       for (int i = 0; i<friendsArray.count; i++)
@@ -93,7 +93,7 @@
     }
     else
     {
-      NSLog(@"error-->>>%@", error);
+      LCDLog(@"error-->>>%@", error);
       [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
       // Handle the result
     }
@@ -153,7 +153,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
   
   LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
   LCFBContactsCell *cell = (LCFBContactsCell*)[_friendsTable cellForRowAtIndexPath:indexPath];
@@ -174,7 +174,7 @@
   [LCAPIManager sendFriendRequestToFBFriends:selectedContacts withSuccess:^(id response) {
     [self.navigationController popToRootViewControllerAnimated:YES];
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
   }];
 }
 

@@ -31,15 +31,6 @@ NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 
 #endif
 
-
-#ifdef DEBUG
-#define LCDLog(...) NSLog(s, ##__VA_ARGS__)
-#else
-#define LCDLog(...)
-#endif
-
-
-
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";

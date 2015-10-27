@@ -467,14 +467,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [self arrangeScrollSubviewsForPosting];
 }
 
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-////  if ([text isEqualToString:@"\n"]) {
-//////    NSLog(@"Return pressed, do whatever you like here");
-////    return NO; // or true, whetever you's like
-////  }
-//  
-//  return YES;
-//}
 
 #pragma mark - UIActionSheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

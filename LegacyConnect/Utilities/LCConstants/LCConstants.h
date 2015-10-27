@@ -10,6 +10,13 @@
 
 @interface LCConstants : NSObject
 
+#ifdef DEBUG
+#define LCDLog(s,...) NSLog(s, ##__VA_ARGS__)
+#else
+#define LCDLog(...)
+#endif
+
+
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
