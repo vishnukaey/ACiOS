@@ -255,14 +255,7 @@ NSString * const kFBMessageKey = @"message";
     FBSDKSharePhotoContent *content = [[FBSDKSharePhotoContent alloc] init];
     content.photos = @[photo];
     
-    BOOL ok = [[FBSDKShareAPI shareWithContent:content delegate:self] share];
-    if (ok) {
-      NSLog(@"Posted to facebook successfully.");
-    }
-    else {
-      NSLog(@"Posting to facebook failed.");
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Facebook sharing failed."];
-    }
+    [FBSDKShareAPI shareWithContent:content delegate:self];
   }
   else {
     
