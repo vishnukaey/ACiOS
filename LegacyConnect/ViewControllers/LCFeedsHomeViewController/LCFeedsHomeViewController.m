@@ -125,9 +125,10 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {    
   if (feedsArray.count == 0 && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading && !isLoadingMoreFriends) {
     return 1;
-  } else if (self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading && isLoadingMoreFriends) {
-    return feedsArray.count + 1;
   }
+//  else if (self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading && isLoadingMoreFriends) {
+//    return feedsArray.count + 1;
+//  }
   
   return feedsArray.count;
 }
