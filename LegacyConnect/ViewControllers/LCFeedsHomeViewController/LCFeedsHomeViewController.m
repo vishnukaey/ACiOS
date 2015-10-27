@@ -125,6 +125,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {    
   if (feedsArray.count == 0 && self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading && !isLoadingMoreFriends) {
     return 1;
+  } else if (self.feedsTable.pullToRefreshView.state != KoaPullToRefreshStateLoading && isLoadingMoreFriends) {
+    return feedsArray.count + 1;
   }
   
   return feedsArray.count;
@@ -144,7 +146,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
       loadingCell = [topLevelObjects objectAtIndex:0];
     }
-    [loadingCell setBackgroundColor:[UIColor greenColor]];
     [MBProgressHUD hideHUDForView:loadingCell animated:NO];
     [MBProgressHUD showHUDAddedTo:loadingCell animated:NO];
     return loadingCell;
