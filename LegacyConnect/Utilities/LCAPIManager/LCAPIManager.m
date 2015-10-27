@@ -9,6 +9,7 @@
 
 #import "LCAPIManager.h"
 #import "LCWebServiceManager.h"
+#import "LCImage.h"
 
 static LCAPIManager *sharedManager = nil;
 @implementation LCAPIManager
@@ -48,6 +49,7 @@ static LCAPIManager *sharedManager = nil;
      failure(error);
    }];
 }
+
 
 + (void)getHomeFeedsWithLastFeedId:(NSString*)lastId success:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
@@ -194,17 +196,35 @@ static LCAPIManager *sharedManager = nil;
   NSError *error = nil;
   NSDictionary *tempDict = [MTLJSONAdapter JSONDictionaryFromModel:user error:&error];
   NSMutableDictionary *dict = [[NSMutableDictionary alloc] initWithDictionary:tempDict];
-  
+
   [dict setValue:[LCUtilityManager getStringValueOfBOOL:avtarImageState] forKey:@"removeAvatar"];
   [dict setValue:[LCUtilityManager getStringValueOfBOOL:headerPhotoState] forKey:@"removeHeader"];
   if(error)
   {
     LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
-  NSData *headerImageData = UIImagePNGRepresentation(headerPhoto);
-  NSData *avtarImageData = UIImagePNGRepresentation(avtarImage);
+  
+  NSMutableArray *images = [[NSMutableArray alloc] init];
+  LCImage *headPhotoImage;
+  if(headerPhoto)
+  {
+    headPhotoImage = [[LCImage alloc] init];
+    headPhotoImage.image = headerPhoto;
+    headPhotoImage.imageKey= @"headphoto";
+    [images addObject:headPhotoImage];
+  }
+  
+  LCImage *avtarPhotoImage;
+  if(avtarImage)
+  {
+    avtarPhotoImage = [[LCImage alloc] init];
+    avtarPhotoImage.image = avtarImage;
+    avtarPhotoImage.imageKey= @"avatarUrl";
+    [images addObject:avtarPhotoImage];
+  }
+  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performPostOperationForProfileWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andHeaderImageData:headerImageData andAvtarImageData:avtarImageData withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
     LCDLog(@"Success!");
     success(response);
   } andFailure:^(NSString *error) {
@@ -212,7 +232,6 @@ static LCAPIManager *sharedManager = nil;
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
-
 }
 
 #pragma mark - Post
@@ -258,7 +277,18 @@ static LCAPIManager *sharedManager = nil;
   
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
-  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict image:image andImageName:imageName withSuccess:^(id response) {
+  
+  NSMutableArray *images = [[NSMutableArray alloc] init];
+  LCImage *postImage;
+  if(image)
+  {
+    postImage = [[LCImage alloc] init];
+    postImage.image = image;
+    postImage.imageKey= imageName;
+    [images addObject:postImage];
+  }
+  
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -303,7 +333,17 @@ static LCAPIManager *sharedManager = nil;
   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
   [dict_mut setObject:jsonString forKey:@"postTags"];
   
-  [webService performImageUploadWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict_mut image:image andImageName:imageName withSuccess:^(id response) {
+  NSMutableArray *images = [[NSMutableArray alloc] init];
+  LCImage *postImage;
+  if(image)
+  {
+    postImage = [[LCImage alloc] init];
+    postImage.image = image;
+    postImage.imageKey= imageName;
+    [images addObject:postImage];
+  }
+  
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -327,9 +367,8 @@ static LCAPIManager *sharedManager = nil;
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
-  
-  
 }
+
 
 + (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
