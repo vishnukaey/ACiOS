@@ -20,15 +20,12 @@
   
   [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
     {
-      NSLog(@"%@",response);
       interestsArray = response;
       [interstsCollection reloadData];
     }
     andFailure:^(NSString *error)
     {
-      NSLog(@"%@",error);
-    }
-  ];
+    }];
 }
 
 - (void) viewWillAppear:(BOOL)animated

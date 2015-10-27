@@ -38,6 +38,7 @@
 
 - (void)viewDidLoad
 {
+  LCDLog(@"Hurray !!!!");
   [super viewDidLoad];
   [self addPasswordResetNotificationObserver];
 }
@@ -80,49 +81,8 @@
        {
          [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
          [self addSideMenuVIewController];
-
-         
-//**********************************************************************
-       // API Test
-         
-//         UIImage *image = [UIImage imageNamed:@"userProfilePic"];
-//         
-//         LCFeed *newPost = [[LCFeed alloc] init];
-//         newPost.message = @"good afternoon...";
-//         newPost.postToType = @"cause";
-//         newPost.postToID = @"1";
-//         newPost.location = @"Kochi";
-//         newPost.isMilestone = @"1";
-//         
-//         LCTag *tag1 = [[LCTag alloc] init];
-//         tag1.tagID = @"1";
-//         tag1.type = @"cause";
-//         tag1.text = @"my cause";
-//         
-//         LCTag *tag2 = [[LCTag alloc] init];
-//         tag2.tagID = @"2";
-//         tag2.type = @"cause";
-//         tag2.text = @"my cause 2";
-//         
-//         newPost.postTags = @[tag1,tag2];
-//         
-//         
-//         
-//         [LCAPIManager createNewPost:newPost withImage:image withSuccess:^(id response) {
-//           NSLog(@"post creation success - %@",response);
-//           
-//         } andFailure:^(NSString *error) {
-//           NSLog(@"post creation failed - %@",error);
-//           
-//         }]; 
-         
-//**********************************************************************
-
-         
-         
        } andFailure:^(NSString *error) {
          [self addSideMenuVIewController];
-         NSLog(@" error:  %@",error);
        }];
     }
     else
@@ -198,7 +158,7 @@
   //menu poper button
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   
-  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 65, statusBarViewRect.size.height, 65, self.navigationController.navigationBar.frame.size.height)];
+  menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 50, statusBarViewRect.size.height, 50, self.navigationController.navigationBar.frame.size.height)];
 
   menuButton.backgroundColor = [UIColor clearColor];
   [vc.view addSubview:menuButton];
@@ -232,7 +192,7 @@
 
 - (void)GIBComponentsAction :(UIButton *)sender
 {
-  NSLog(@"tag-->>%d", (int)sender.tag);
+  LCDLog(@"tag-->>%d", (int)sender.tag);
   [mainContainer setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton toggle];

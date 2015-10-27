@@ -38,7 +38,14 @@
 {
   [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  [manager.requestSerializer setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
+  if([LCUtilityManager isNetworkAvailable])
+  {
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+  }
+  else
+  {
+    [manager.requestSerializer setCachePolicy:NSURLRequestReturnCacheDataElseLoad];
+  }
   manager.responseSerializer = [AFJSONResponseSerializer serializer];
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];

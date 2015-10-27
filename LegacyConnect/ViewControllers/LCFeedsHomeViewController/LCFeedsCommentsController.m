@@ -74,8 +74,6 @@ static CGFloat kIndexForPostDetails = 0;
   }];
 }
 
-
-
 - (void)setUpCpmmentsUI
 {
   UIView* commentField = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, kCommentFieldHeight)];
@@ -217,9 +215,10 @@ static CGFloat kIndexForPostDetails = 0;
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
+      [self changeUpdateButtonState];
       [mainTable reloadData];
     } andFailure:^(NSString *error) {
-      NSLog(@"----- Fail to add new comment");
+      LCDLog(@"----- Fail to add new comment");
     }];
   }
 }
@@ -244,7 +243,7 @@ static CGFloat kIndexForPostDetails = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  NSLog(@"index path row : %li",indexPath.row);
+  LCDLog(@"index path row : %li",indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -288,6 +287,10 @@ static CGFloat kIndexForPostDetails = 0;
       NSInteger rowNo = indexPath.row - 1;
       [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
       [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+      __weak typeof(self) weakSelf = self;
+      commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
+        [weakSelf tagTapped:tagDetails];
+      };
       return commentCell;
     }
   }
@@ -305,7 +308,7 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 #pragma mark - feedCell delegates
@@ -337,7 +340,7 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
+  LCDLog(@"tag details-->>%@", tagDetails);
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];

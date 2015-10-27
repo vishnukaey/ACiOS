@@ -18,7 +18,8 @@
            @"commentText" : @"comment",
            @"createdAt" : @"createdAt",
            @"firstName" : @"firstName",
-           @"lastName": @"lastName"
+           @"lastName": @"lastName",
+           @"userId" : @"userId"
            };
 }
 
