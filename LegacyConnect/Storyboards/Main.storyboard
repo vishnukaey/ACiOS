@@ -760,6 +760,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="commentTitleLabel" destination="foe-JZ-2dc" id="ZD6-pl-Ue8"/>
                         <outlet property="mainTable" destination="HuG-7V-Jiv" id="J5H-Y7-2zJ"/>
                     </connections>
                 </viewController>
