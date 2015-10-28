@@ -21,12 +21,12 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
@@ -72,9 +72,9 @@
                                             <constraint firstAttribute="height" constant="25" id="6Eg-m8-R2f"/>
                                             <constraint firstAttribute="width" constant="44" id="fOX-SC-0ns"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="15"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
                                         <state key="normal" title="Post">
-                                            <color key="titleColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="0.98999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -87,8 +87,8 @@
                                             <constraint firstAttribute="width" constant="230" id="KzI-qp-DPu"/>
                                             <constraint firstAttribute="height" constant="20" id="ORD-CS-27P"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="12"/>
+                                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogP-v5-ByS">
@@ -127,17 +127,17 @@
                                                     <constraint firstAttribute="height" constant="21" id="XOh-oR-taI"/>
                                                     <constraint firstAttribute="width" constant="53" id="isM-VK-CTE"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
-                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
+                                                <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLw-QU-E1u">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLw-QU-E1u">
                                                 <rect key="frame" x="85" y="17" width="66" height="13"/>
-                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.78823529411764703" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createPost_downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Cty-th-wKk">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="createPost_downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Cty-th-wKk">
                                                 <rect key="frame" x="159" y="0.0" width="10" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="lGK-Fx-9RF"/>
@@ -790,10 +790,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT INTEREST OR CAUSE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uqh-Tc-C9P">
-                                        <rect key="frame" x="89" y="34" width="197" height="14"/>
+                                        <rect key="frame" x="78" y="34" width="233" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="14" id="1yM-Mg-zmd"/>
-                                            <constraint firstAttribute="width" constant="197" id="LKN-a5-eb1"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -830,9 +829,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Fzy-7f-Lce" firstAttribute="leading" secondItem="uqh-Tc-C9P" secondAttribute="trailing" id="7xx-E7-FZO"/>
                                     <constraint firstAttribute="centerX" secondItem="uqh-Tc-C9P" secondAttribute="centerX" id="8p9-R3-CRD"/>
                                     <constraint firstAttribute="bottom" secondItem="uqh-Tc-C9P" secondAttribute="bottom" constant="16" id="BUL-1U-CHs"/>
                                     <constraint firstAttribute="bottom" secondItem="g1d-QQ-euN" secondAttribute="bottom" id="F0I-YX-HXn"/>
+                                    <constraint firstItem="uqh-Tc-C9P" firstAttribute="leading" secondItem="g1d-QQ-euN" secondAttribute="trailing" id="OBk-rg-z5H"/>
                                     <constraint firstItem="g1d-QQ-euN" firstAttribute="leading" secondItem="nif-MQ-ztM" secondAttribute="leading" constant="15" id="bJs-Od-1s1"/>
                                     <constraint firstItem="g1d-QQ-euN" firstAttribute="top" secondItem="nif-MQ-ztM" secondAttribute="top" constant="22" id="hRj-vS-uj5"/>
                                     <constraint firstAttribute="trailing" secondItem="Fzy-7f-Lce" secondAttribute="trailing" constant="15" id="hzP-eb-6CK"/>
@@ -840,6 +841,11 @@
                                     <constraint firstAttribute="bottom" secondItem="Fzy-7f-Lce" secondAttribute="bottom" id="qwU-lO-IuW"/>
                                     <constraint firstItem="Fzy-7f-Lce" firstAttribute="top" secondItem="nif-MQ-ztM" secondAttribute="top" constant="22" id="z7V-JU-6tY"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="8p9-R3-CRD"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xTA-63-BqU">
                                 <rect key="frame" x="0.0" y="108" width="375" height="48"/>

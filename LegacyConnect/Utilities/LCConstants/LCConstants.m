@@ -15,19 +15,28 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER QA_SERVER
+#define CURRENT_SERVER DEV_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
 NSString *const kBaseURL = @"http://10.3.0.55:8000/";
+NSString *const kFBAppID = @"785925134858928";
+NSString *const kFBAppDisplayName = @"LegacyConnectGreeshmaLocal";
+NSString *const kFBURLScheme = @"fb785925134858928";
 
 #elif CURRENT_SERVER == DEV_SERVER
 ///* Development url */
 NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
+NSString *const kFBAppID = @"781451981972910";
+NSString *const kFBAppDisplayName = @"LegacyConnectDev";
+NSString *const kFBURLScheme = @"fb781451981972910";
 
 #elif CURRENT_SERVER == STAGING_SERVER
 ///* Staging url */
 NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
+NSString *const kFBAppID = @"535164313296078";
+NSString *const kFBAppDisplayName = @"LegacyConnect";
+NSString *const kFBURLScheme = @"fb535164313296078";
 
 #endif
 NSString *const kTWConsumerKey = @"IiYfEw17iKn2jTcWjp4H2QfYo";

@@ -7,6 +7,7 @@
 //
 
 #import "LCWebServiceManager.h"
+#import "LCImage.h"
 
 @implementation LCWebServiceManager
 
@@ -113,8 +114,7 @@
    }];
 }
 
-
-- (void)performPostOperationForProfileWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params andHeaderImageData:(NSData*)headerImageData andAvtarImageData:(NSData*)avtarImageData withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+- (void)performPostOperationWithUrl:(NSString *)urlString accessToken:(NSString*)accessToken parameters:(NSDictionary *)params andImagesArray:(NSMutableArray*)imagesArray withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -122,53 +122,45 @@
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
   NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
-  [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-    if(headerImageData)
-    {
-      [formData appendPartWithFileData:headerImageData
-                                  name:@"headphoto"
-                              fileName:@"headphoto"
-                              mimeType:@"image/jpeg"];
-    }
-    if(avtarImageData)
-    {
-      [formData appendPartWithFileData:avtarImageData
-                                  name:@"avatarUrl"
-                              fileName:@"avatarUrl"
-                              mimeType:@"image/jpeg"];
-    }
-  } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    success(responseObject);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    failure([error localizedDescription]);
-  }];
+  
+  // MultiPart upload if there are images
+  if(imagesArray && imagesArray.count > 0)
+  {
+    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+      for(LCImage *image in imagesArray)
+      {
+        if(image)
+        {
+          [formData appendPartWithFileData:UIImagePNGRepresentation(image.image)
+                                      name:image.imageKey
+                                  fileName:image.imageKey
+                                  mimeType:@"image/jpeg"];
+        }
+      }
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      success(responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+      failure([error localizedDescription]);
+    }];
+  }
+  else
+  {
+    // Oridinary Post in case of no images
+    
+    [manager POST:urlString parameters:params
+          success:^(AFHTTPRequestOperation *operation, id responseObject)
+     {
+       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+       success(responseObject);
+     }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error)
+     {
+       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+       failure([error localizedDescription]);
+     }];
+  }
 }
-
-
-- (void)performImageUploadWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params image:(UIImage*)image andImageName:(NSString*)imageName withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure{
-  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFJSONRequestSerializer serializer];
-  [manager.requestSerializer setTimeoutInterval:30];
-  [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
-  NSData *imageData = UIImagePNGRepresentation(image);
-  [manager POST:urlString parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-    if (imageData) {
-      [formData appendPartWithFileData:imageData
-                                  name:imageName
-                              fileName:@"image.png"
-                              mimeType:@"image/png"];
-    }
-  } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    success(responseObject);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    failure([error localizedDescription]);
-  }];
-}
-
 
 @end
