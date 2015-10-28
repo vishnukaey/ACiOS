@@ -145,7 +145,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="customNavigationHeight" destination="OIL-1U-G4m" id="gSy-ko-xKi"/>
-                        <outlet property="feedsTable" destination="hVO-KL-Fml" id="zaD-SA-ksj"/>
+                        <outlet property="tableView" destination="hVO-KL-Fml" id="DIW-8o-wUk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

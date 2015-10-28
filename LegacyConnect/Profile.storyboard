@@ -110,7 +110,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="customNavigationHeight" destination="0ik-ft-H1z" id="WIK-eW-wDe"/>
-                        <outlet property="impactsTableView" destination="nSx-t3-kRF" id="P6z-i8-2d4"/>
+                        <outlet property="tableView" destination="nSx-t3-kRF" id="gtX-Wj-PQW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5F-Jp-T3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
