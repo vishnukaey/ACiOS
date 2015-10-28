@@ -14,6 +14,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *interestNameLabel;
 @property (strong, nonatomic) IBOutlet UILabel *interestFollowLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *interestsBG;
+@property (strong, nonatomic) IBOutlet UIButton *checkButton;//for select interest in create post flow
 
 - (void)setData: (LCInterest *) interest;
 @end
