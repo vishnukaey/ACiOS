@@ -13,32 +13,62 @@
 #import "LCProfileViewVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 
-@interface LCFriendsListViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray * friendsList;
-@property (nonatomic, assign) BOOL loadMoreFriends;
-@property (nonatomic, assign) BOOL isLoadingMoreFriends;
-
-@end
-
 static CGFloat kNumberOfSections = 1;
-static NSInteger kRowForLoadingCell = 1;
 static NSInteger kRowHeightFriendsCell= 88;
-static NSInteger kRowHeightLoadingCell= 45;
 static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 static NSString *kTitle = @"FRIENDS";
 
 @implementation LCFriendsListViewController
 
+#pragma mark - API calls and Pagination
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchResults:response haveMoreData:hasMoreData];
+  } andfailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andfailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+  }];
+}
+
 #pragma mark - private method implementation
+- (void)stopRefreshingViews
+{
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
+}
+
 - (void)addPullToRefresh
 {
   [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [self getFriendsListWithLastLastUserId:nil];
+      [weakSelf startFetchingResults];
     });
   }withBackgroundColor:[UIColor lightGrayColor]];
 }
@@ -57,37 +87,16 @@ static NSString *kTitle = @"FRIENDS";
   self.navigationItem.leftBarButtonItem = backBtnItem;
 }
 
+#pragma mark - Button actions
 - (void)backButtonTapped:(id)sender
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)getFriendsListWithLastLastUserId:(NSString*)lastUserId
-{
-  self.isLoadingMoreFriends = YES;
-  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:lastUserId withSuccess:^(id response) {
-    self.loadMoreFriends = ([(NSArray*)response count] > 0) ? YES : NO;
-    [self.friendsList addObjectsFromArray:(NSArray*)response];
-    if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
-      [self.friendsList removeAllObjects];
-      [self.tableView reloadData];
-      [self.tableView.pullToRefreshView stopAnimating];
-    }
-    self.isLoadingMoreFriends = NO;
-    [self.tableView reloadData];
-  } andfailure:^(NSString *error) {
-    NSLog(@"%@",error);
-    self.isLoadingMoreFriends = NO;
-    self.loadMoreFriends = YES;
-  }];
-}
-
 #pragma mark - view lifecycle
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.friendsList = [[NSMutableArray alloc] init];
-  self.loadMoreFriends = YES;
-  [self getFriendsListWithLastLastUserId:nil];
+  [self startFetchingResults];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,57 +120,23 @@ static NSString *kTitle = @"FRIENDS";
   return kNumberOfSections;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  if (self.friendsList.count == 0) {
-    return 1;
-  }
-  
-  return self.friendsList.count + ((self.loadMoreFriends && self.tableView.pullToRefreshView.state != KoaPullToRefreshStateLoading) ?  kRowForLoadingCell : 0);
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (self.friendsList.count == 0)
-    {
-      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_friends_available", nil)];
-    }
-  
-  if (indexPath.row == self.friendsList.count) {
-    LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier] forIndexPath:indexPath];
-    if (loadingCell == nil) {
-      loadingCell = [[LCLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[LCLoadingCell getFeedCellidentifier]];
-    }
-    [MBProgressHUD hideHUDForView:loadingCell animated:YES];
-    [MBProgressHUD showHUDAddedTo:loadingCell animated:YES];
-    return loadingCell;
+  JTTABLEVIEW_cellForRowAtIndexPath
+
+  LCFriendsCell * friendsCell = (LCFriendsCell*)[tableView dequeueReusableCellWithIdentifier:kFriendsCellIdentifier forIndexPath:indexPath];
+  if (friendsCell == nil) {
+    friendsCell = [[LCFriendsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kFriendsCellIdentifier];
   }
-  else
-  {
-    LCFriendsCell * friendsCell = (LCFriendsCell*)[tableView dequeueReusableCellWithIdentifier:kFriendsCellIdentifier forIndexPath:indexPath];
-    if (friendsCell == nil) {
-      friendsCell = [[LCFriendsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kFriendsCellIdentifier];
-    }
-    friendsCell.friendObj = [self.friendsList objectAtIndex:indexPath.row];
-    [friendsCell.changeFriendStatusBtn setTag:indexPath.row];
-    [friendsCell.changeFriendStatusBtn addTarget:self action:@selector(changeFriendStatusButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    return friendsCell;
-  }
+  friendsCell.friendObj = [self.results objectAtIndex:indexPath.row];
+  [friendsCell.changeFriendStatusBtn setTag:indexPath.row];
+  [friendsCell.changeFriendStatusBtn addTarget:self action:@selector(changeFriendStatusButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+  return friendsCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (indexPath.row == self.friendsList.count) {
-    return kRowHeightLoadingCell;
-  }
   return kRowHeightFriendsCell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (indexPath.row == self.friendsList.count - 1 && self.loadMoreFriends && !self.isLoadingMoreFriends) {
-    [self getFriendsListWithLastLastUserId:[(LCFriend*)[self.friendsList objectAtIndex:self.friendsList.count - 1] friendId]];
-  }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -169,7 +144,7 @@ static NSString *kTitle = @"FRIENDS";
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
   LCProfileViewVC *vc = [sb instantiateInitialViewController];
   vc.userDetail = [[LCUserDetail alloc] init];
-  LCFriend *friend = [self.friendsList objectAtIndex:indexPath.row];
+  LCFriend *friend = [self.results objectAtIndex:indexPath.row];
   vc.userDetail.userID = friend.friendId;
   [self.navigationController pushViewController:vc animated:YES];
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -178,7 +153,7 @@ static NSString *kTitle = @"FRIENDS";
 #pragma mark - add/remove/canel friends.
 - (void)changeFriendStatusButtonTapped:(LCfriendButton*)btn
 {
-  LCFriend * friendObj = [self.friendsList objectAtIndex:btn.tag];
+  LCFriend * friendObj = [self.results objectAtIndex:btn.tag];
   FriendStatus status = (FriendStatus)[friendObj.isFriend integerValue];
   
   switch (status) {
@@ -193,7 +168,7 @@ static NSString *kTitle = @"FRIENDS";
     case kNonFriend:
       [self addFriend:friendObj andFriendButton:btn];
       break;
-
+      
     default:
       break;
   }

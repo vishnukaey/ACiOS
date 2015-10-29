@@ -146,7 +146,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="customNavigationHeight" destination="OIL-1U-G4m" id="gSy-ko-xKi"/>
-                        <outlet property="feedsTable" destination="hVO-KL-Fml" id="zaD-SA-ksj"/>
+                        <outlet property="tableView" destination="hVO-KL-Fml" id="DIW-8o-wUk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -361,7 +361,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="321" height="80"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EJO-PG-eHL" id="NhE-dF-P3f">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="993-ZP-VMh">
@@ -438,7 +438,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="321" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1TY-aP-ZMK" id="1Zv-qc-UDj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gn-UY-LFL">
@@ -492,7 +492,7 @@
                                                 <rect key="frame" x="0.0" y="66" width="321" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0yd-GT-cD8" id="9xn-L1-jy3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BGH-Jd-Tu8">
@@ -563,7 +563,7 @@
                                                 <rect key="frame" x="0.0" y="146" width="321" height="80"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="twQ-Rt-dFp" id="9NI-iv-pTn">
-                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="321" height="79"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0K-WU-fPW">
@@ -777,7 +777,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="commentTitleLabel" destination="foe-JZ-2dc" id="ZD6-pl-Ue8"/>
-                        <outlet property="mainTable" destination="HuG-7V-Jiv" id="J5H-Y7-2zJ"/>
+                        <outlet property="tableView" destination="HuG-7V-Jiv" id="O8C-4V-KQH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qh5-jg-lT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
