@@ -121,7 +121,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4F-cD-sDb">
                         <rect key="frame" x="15" y="132" width="454" height="200"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="200" id="kZ1-xh-J3Y"/>
+                            <constraint firstAttribute="height" priority="999" constant="200" id="kZ1-xh-J3Y"/>
                         </constraints>
                         <state key="normal">
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
