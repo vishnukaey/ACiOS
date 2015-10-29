@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JTTableViewController.h>
 
-@interface LCImapactsViewController : UIViewController
-{
-  NSMutableArray *impactsArray;
-}
-@property(nonatomic, weak)IBOutlet  UITableView *impactsTableView;
+@interface LCImapactsViewController : JTTableViewController
+
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 @property(nonatomic, retain)LCUserDetail *userDetail;
 

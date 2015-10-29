@@ -9,15 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
+#import <JTTableViewController.h>
 
-@interface LCFeedsHomeViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCFeedsHomeViewController : JTTableViewController<UITableViewDataSource, UITableViewDelegate>
 {
   NSMutableArray *feedsArray;
-  BOOL loadMoreFriends;
-  BOOL isLoadingMoreFriends;
 }
 
-@property(nonatomic, weak)IBOutlet  UITableView *feedsTable;
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 
 @end
