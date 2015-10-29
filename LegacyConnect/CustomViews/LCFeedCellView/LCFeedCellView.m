@@ -75,7 +75,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
   else
   {
-    [postPhoto setContentMode:UIViewContentModeScaleAspectFit];
+    [postPhoto setContentMode:UIViewContentModeScaleAspectFill];
     postPhotoHeight.constant = 200;
     [self retryLoadingFeedImage:nil];
   }
@@ -219,7 +219,8 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   if ([self.feedObject.didLike boolValue]) {
     [thanksBtnImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
-    [thanksLabel setText:[NSString stringWithFormat:@"%i",[likeCount integerValue] -1]];
+    NSInteger thanksCount = [likeCount integerValue] > 0 ? [likeCount integerValue] -1 : 0;
+    [thanksLabel setText:[NSString stringWithFormat:@"%li",thanksCount]];
     [LCAPIManager unlikePost:self.feedObject.entityID withSuccess:^(id response) {
       self.feedObject.didLike = kUnLikedStatus;
       self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
@@ -231,7 +232,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   else
   {
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
-    [thanksLabel setText:[NSString stringWithFormat:@"%i",[likeCount integerValue] + 1]];
+    [thanksLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
     [thanksBtnImage setLikeUnlikeStatusImage:kLikedStatus];
     [LCAPIManager likePost:self.feedObject.entityID withSuccess:^(id response) {
       self.feedObject.didLike = kLikedStatus;
@@ -273,8 +274,10 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   imageLoadingActivity.hidden = false;
   [imageLoadingActivity startAnimating];
   [postPhoto setBackgroundColor:kImageLoadingBackColor];
+  [postPhoto.layer setCornerRadius:5];
+  [postPhoto setClipsToBounds:YES];
   retryButton.hidden = true;
-  NSString *imageURL = self.feedObject.image;//url for testing nill image - @"http://10.3.0.55:8000/picture/people-and-the-gloe1.gif.png";
+  NSString *imageURL = self.feedObject.thumbImage;//url for testing nill image - @"http://10.3.0.55:8000/picture/people-and-the-gloe1.gif.png";
   if (sender)//controlled caching for retry failed or null images
   {
     [postPhoto sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

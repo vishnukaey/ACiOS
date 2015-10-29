@@ -68,6 +68,11 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
+  
+  [self.nextPageLoaderCell setBackgroundColor:[UIColor redColor]];
+  [self.nextPageLoaderCell.contentView setBackgroundColor:[UIColor redColor]];
+
+  
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{
@@ -165,6 +170,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   self.navigationController.navigationBarHidden = YES;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [self.tableView reloadData];
@@ -213,8 +219,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCFeed * feed = [feedsArray objectAtIndex:indexPath.row];
-  [self showFeedCommentsWithFeed:feed];
+//  LCFeed * feed = [feedsArray objectAtIndex:indexPath.row];
+//  [self showFeedCommentsWithFeed:feed];
 }
 
 
