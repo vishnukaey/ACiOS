@@ -913,7 +913,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="tableView" destination="mDt-6Y-eQ8" id="MSf-Fs-d2W"/>
+                        <outlet property="tableView" destination="mDt-6Y-eQ8" id="rGp-EK-vT2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bog-G6-zfV" userLabel="First Responder" sceneMemberID="firstResponder"/>

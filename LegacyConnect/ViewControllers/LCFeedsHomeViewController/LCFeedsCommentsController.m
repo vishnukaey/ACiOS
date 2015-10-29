@@ -14,8 +14,6 @@
 #import "LCFullScreenImageVC.h"
 
 static CGFloat kCommentFieldHeight = 45.0f;
-static CGFloat kCellForPostDetails = 1;
-static CGFloat kCellForLoadMoreBtn = 1;
 static CGFloat kIndexForPostDetails = 0;
 
 #define kPostButtonDisabledColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
@@ -30,14 +28,41 @@ static CGFloat kIndexForPostDetails = 0;
 @implementation LCFeedsCommentsController
 @synthesize feedObject;
 
+#pragma mark - API calls and Pagination
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFetchResults:response haveMoreData:isMore];
+  } andfailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  
+  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andfailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
 #pragma mark - private method implementation
 - (void)initialUISetUp
 {
-  [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  mainTable.rowHeight = UITableViewAutomaticDimension;
-  mainTable.estimatedRowHeight = 68.0;
+  [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 68.0;
   [commentTitleLabel setText:[[LCUtilityManager performNullCheckAndSetValue:feedObject.firstName] uppercaseString]];
   [self setUpCpmmentsUI];
+  [self.tableView reloadData];
 }
 
 - (void)addKeyBoardNotificationObserver
@@ -53,27 +78,6 @@ static CGFloat kIndexForPostDetails = 0;
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 }
 
--(void)loadFeedAndCommentsWithLastCommentId:(NSString*)lastId ofCell:(LCLoadingCell*)cell
-{
-  if(!cell)
-  {
-    cell = (LCLoadingCell*)[[UIView alloc] init];
-  }
-  
-  [MBProgressHUD showHUDAddedTo:cell animated:YES];
-  isLoadingMoreComments = YES;
-  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:lastId withSuccess:^(id response, BOOL isMore) {
-    isLoadingMoreComments = NO;
-    moreCommentsPresent = isMore;
-    [commentsArray addObjectsFromArray:(NSArray*)response];
-    [MBProgressHUD hideAllHUDsForView:cell animated:YES];
-    [mainTable reloadData];
-    }andfailure:^(NSString *error){
-    isLoadingMoreComments = NO;
-    [MBProgressHUD hideAllHUDsForView:cell animated:YES];
-    [mainTable reloadData];
-  }];
-}
 
 - (void)setUpCpmmentsUI
 {
@@ -173,10 +177,7 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  commentsArray = [[NSMutableArray alloc]init];
-  moreCommentsPresent = YES;
-  [self loadFeedAndCommentsWithLastCommentId:nil ofCell:nil];
-  
+  [self startFetchingResults];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -210,14 +211,13 @@ static CGFloat kIndexForPostDetails = 0;
 {
   if (commentTextField.text.length > 0) {
     [self resignAllResponders];
-    
     [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
-      [commentsArray insertObject:(LCComment*)response atIndex:0];
-      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[commentsArray count]];
+      [self.results insertObject:(LCComment*)response atIndex:0];
+      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
-      [mainTable reloadData];
+      [self.tableView reloadData];
     } andFailure:^(NSString *error) {
       LCDLog(@"----- Fail to add new comment");
     }];
@@ -231,20 +231,19 @@ static CGFloat kIndexForPostDetails = 0;
 
 
 #pragma mark - TableView delegates
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return [super tableView:tableView numberOfRowsInSection:section] + 1;
+}
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  return kCellForPostDetails + commentsArray.count + (moreCommentsPresent ? kCellForLoadMoreBtn : 0);
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  LCDLog(@"index path row : %li",(long)indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -266,17 +265,7 @@ static CGFloat kIndexForPostDetails = 0;
   }
   else //comment cell
   {
-    if (moreCommentsPresent && indexPath.row -1 == commentsArray.count)
-    {
-      LCLoadingCell * loadingCell = (LCLoadingCell*)[tableView dequeueReusableCellWithIdentifier:[LCLoadingCell getFeedCellidentifier]];
-      if (loadingCell == nil) {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCLoadingCell" owner:self options:nil];
-        loadingCell = [topLevelObjects objectAtIndex:0];
-      }
-      return loadingCell;
-    }
-    else
-    {
+    JTTABLEVIEW_cellForRowAtIndexPath
       LCCommentCell *commentCell;
       static NSString *MyIdentifier = @"LCCommentCell";
       commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -286,24 +275,13 @@ static CGFloat kIndexForPostDetails = 0;
         commentCell = [topLevelObjects objectAtIndex:0];
       }
       NSInteger rowNo = indexPath.row - 1;
-      [commentCell setComment:[commentsArray objectAtIndex:rowNo]];
+      [commentCell setComment:[self.results objectAtIndex:rowNo]];
       [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
       __weak typeof(self) weakSelf = self;
       commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
         [weakSelf tagTapped:tagDetails];
       };
       return commentCell;
-    }
-  }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (indexPath.row  == commentsArray.count && moreCommentsPresent && !isLoadingMoreComments) {
-    if([LCUtilityManager isNetworkAvailable])
-    {
-      [self loadFeedAndCommentsWithLastCommentId:[(LCComment*)[commentsArray lastObject] commentId] ofCell:(LCLoadingCell*)cell];
-    }
   }
 }
 

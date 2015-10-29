@@ -122,6 +122,8 @@ static NSString *kTitle = @"FRIENDS";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  JTTABLEVIEW_cellForRowAtIndexPath
+
   LCFriendsCell * friendsCell = (LCFriendsCell*)[tableView dequeueReusableCellWithIdentifier:kFriendsCellIdentifier forIndexPath:indexPath];
   if (friendsCell == nil) {
     friendsCell = [[LCFriendsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kFriendsCellIdentifier];

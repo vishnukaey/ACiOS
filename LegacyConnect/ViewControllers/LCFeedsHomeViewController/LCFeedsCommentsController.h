@@ -8,14 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
+#import <JTTableViewController.h>
 
-
-@interface LCFeedsCommentsController : UIViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface LCFeedsCommentsController : JTTableViewController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
-  NSMutableArray *commentsArray;
-  IBOutlet UITableView *mainTable;
   UITextField *commentTextField, *commentTextField_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
-  BOOL moreCommentsPresent, isLoadingMoreComments;
   UIButton * postBtn,*dummyPostBtn;
   __weak IBOutlet UILabel *commentTitleLabel;
 }
