@@ -20,7 +20,7 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:nil with:^(NSArray *response) {
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:nil with:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -35,7 +35,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:[(LCFeed*)[self.results lastObject] feedId] with:^(NSArray *response) {
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:[(LCFeed*)[self.results lastObject] entityID] with:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
