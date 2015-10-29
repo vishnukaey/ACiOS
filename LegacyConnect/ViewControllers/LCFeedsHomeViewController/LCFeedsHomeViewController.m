@@ -182,7 +182,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+  LCFeed * feed = [feedsArray objectAtIndex:indexPath.row];
+  [self showFeedCommentsWithFeed:feed];
 }
 
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed

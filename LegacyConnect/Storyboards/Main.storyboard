@@ -729,7 +729,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HuG-7V-Jiv">
                                 <rect key="frame" x="0.0" y="64" width="320" height="459"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.8666666666666667" green="0.8666666666666667" blue="0.8666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LoadMoreCommentsCell" id="oiY-ve-MRp">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
@@ -760,6 +760,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="commentTitleLabel" destination="foe-JZ-2dc" id="ZD6-pl-Ue8"/>
                         <outlet property="mainTable" destination="HuG-7V-Jiv" id="J5H-Y7-2zJ"/>
                     </connections>
                 </viewController>
