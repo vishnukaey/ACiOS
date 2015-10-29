@@ -22,6 +22,7 @@
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
 #import "LCSocialShareManager.h"
+#import "LCSettingsViewController.h"
 
 
 @interface LCEmptyViewController ()
@@ -287,10 +288,10 @@
 //    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 3)//notifications
+  else if (index == 3)//settings
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
+    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 4)//logout

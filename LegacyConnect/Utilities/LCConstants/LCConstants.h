@@ -78,6 +78,7 @@ extern NSString *const kInterestsStoryBoardIdentifier;
 extern NSString *const kCommunityStoryBoardIdentifier;
 extern NSString *const kNotificationStoryBoardIdentifier;
 extern NSString *const kCreatePostStoryBoardIdentifier;
+extern NSString *const kSettingsStoryBoardIdentifier;
 
 
 
@@ -86,6 +87,7 @@ extern NSString *const kChooseCommunityStoryBoardID;
 extern NSString *const kUpdatePasswordStoryBoardID;
 extern NSString *const kLoginStoryBoardID;
 extern NSString *const kForgotPasswordStoryBoardID;
+extern NSString *const kSettingsStoryBoardID;
 
 
 
@@ -163,6 +165,19 @@ extern NSString *const kTWOauthTokenKey;
 extern NSString *const kTagobjId;
 extern NSString *const kTagobjText;
 extern NSString *const kTagobjType;
+
+
+// Settings Section //
+extern NSString *const kSettingsScreenTitle;
+extern NSString *const kEmailUpdateScreenTitle;
+
+extern NSString *const kAccountTitle;
+extern NSString *const kEmailAddress;
+extern NSString *const kChangePassword;
+extern NSString *const kMyLegacyURL;
+extern NSString *const kPrivacy;
+extern NSString *const kSignOut;
+
 
 
 #define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)480) < DBL_EPSILON)
