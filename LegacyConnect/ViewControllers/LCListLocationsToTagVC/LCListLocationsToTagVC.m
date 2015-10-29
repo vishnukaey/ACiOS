@@ -43,7 +43,6 @@
     [locationsArray addObject:alreadyTaggedLocation];
     [locationsTable.selectedIDs addObject:alreadyTaggedLocation];
   }
-  
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +62,6 @@
   {
     [delegate didfinishPickingLocation:@""];
   }
-  
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -104,12 +102,10 @@
   [locationsArray removeAllObjects];
   [locationsArray addObjectsFromArray:arrayWithoutDuplicates];
   [locationsTable reloadData];
-  NSLog(@"locations--->>>>%@", locations);
 }
 
 - (void)searchBar:(LCLocationSearchField *)searchBar textDidChange:(NSString *)searchText
 {
-  NSLog(@"searchbar delegate");
   [searchBar searchForLocations:searchText];
 }
 

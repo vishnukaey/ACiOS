@@ -658,7 +658,7 @@
                                     <constraint firstAttribute="trailing" secondItem="mZp-N9-YT6" secondAttribute="trailing" constant="15" id="reH-35-h2e"/>
                                 </constraints>
                             </view>
-                            <searchBar contentMode="redraw" text="" placeholder="Search Locations" translatesAutoresizingMaskIntoConstraints="NO" id="WlL-y0-rRX" customClass="LCLocationSearchField">
+                            <searchBar contentMode="redraw" text="" placeholder="Search Locations" translatesAutoresizingMaskIntoConstraints="NO" id="WlL-y0-rRX">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
