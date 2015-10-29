@@ -92,11 +92,17 @@
   if([tableView isEqual:_topTableView])
   {
     if(section == 0)
-      return searchResultObject.usersArray.count;
+    {
+      return searchResultObject.usersArray.count>3 ? 3 : searchResultObject.usersArray.count;
+    }
     else if(section == 1)
-      return searchResultObject.interestsArray.count;
+    {
+      return searchResultObject.interestsArray.count>3 ? 3 : searchResultObject.interestsArray.count;
+    }
     else
-      return searchResultObject.causesArray.count;
+    {
+      return searchResultObject.causesArray.count>3 ? 3 : searchResultObject.causesArray.count;
+    }
   }
   else
   {
