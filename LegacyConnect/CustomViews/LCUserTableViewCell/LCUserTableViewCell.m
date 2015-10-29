@@ -34,6 +34,7 @@
   }
   else
   {
+    _userAddButton.hidden = NO;
     [self updateAddButtonImage];
   }
 }
