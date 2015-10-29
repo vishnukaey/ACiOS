@@ -11,6 +11,7 @@
 #import "LCFullScreenImageVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import "LCFeedsCommentsController.h"
+#import "LCCreatePostViewController.h"
 
 @interface LCImapactsViewController ()
 
@@ -99,6 +100,40 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)feedCellMoreAction :(LCFeed *)feed
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
+    createPostVC.isEditing = YES;
+    createPostVC.postFeedObject = feed;
+    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:createPostVC animated:YES completion:nil];
+  }];
+  
+  [actionSheet addAction:editPost];
+  
+  
+  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
+    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
+      [MBProgressHUD hideAllHUDsForView:impactsTableView animated:YES];
+    }
+                  andFailure:^(NSString *error) {
+                    [MBProgressHUD hideAllHUDsForView:impactsTableView animated:YES];
+                    NSLog(@"%@",error);
+                  }];
+  }];
+  [actionSheet addAction:deletePost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -143,7 +178,13 @@
     [weakSelf tagTapped:tagDetails];
   };
 
- 
+  //self profile check
+  if ([userDetail.isFriend integerValue] == 0) {
+    
+    cell.moreButton.hidden = NO;
+  }
+
+
   return cell;
 }
 
@@ -157,6 +198,11 @@
 {
   
   switch (type) {
+      
+    case kkFeedCellActionLoadMore:
+      [self feedCellMoreAction :feed];
+      break;
+      
     case kFeedCellActionComment:
       [self showFeedCommentsWithFeed:feed];
       break;

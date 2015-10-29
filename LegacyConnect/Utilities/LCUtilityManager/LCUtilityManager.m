@@ -126,7 +126,7 @@
                                      fromDate:dob
                                      toDate:now
                                      options:0];
-    age = [NSString stringWithFormat: @"%ld", [ageComponents year]];
+    age = [NSString stringWithFormat: @"%ld", (long)[ageComponents year]];
   }
   return age;
 }

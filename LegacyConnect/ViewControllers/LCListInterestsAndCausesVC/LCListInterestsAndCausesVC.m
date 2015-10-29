@@ -96,19 +96,6 @@ static NSString *kCheckedImageName = @"contact_tick";
   tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
   tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
   
-  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:top];
-  
-  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:bottom];
-  
-  NSLayoutConstraint *left =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:left];
-  
-  NSLayoutConstraint *right =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:right];
-  
-  
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:interestsButton, causesButton, nil];
   tabmenu.views = [[NSArray alloc] initWithObjects:interestsTableView,  causesCollectionView, nil];
   
@@ -131,8 +118,7 @@ static NSString *kCheckedImageName = @"contact_tick";
         [nonZeroCausedInterests addObject:interest];
       }
     }
-    causesArray = [nonZeroCausedInterests copy];
-    causesArray = [self sortedInterestCauses:causesArray];
+    causesArray = [self sortedInterestCauses:[nonZeroCausedInterests copy]];
     [causesSearchArray addObjectsFromArray:causesArray];
     [causesCollectionView reloadData];
     [MBProgressHUD hideAllHUDsForView:interestsTableView.superview animated:YES];
@@ -162,14 +148,12 @@ static NSString *kCheckedImageName = @"contact_tick";
     }
     interest.causes = sortedArray;
   }
-  
   return Interests;
 }
 
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSLog(@"done button clicked-->>>");
   [delegate didfinishPickingInterest:selectedInterest andCause:selectedCause];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -252,8 +236,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   return interestsSearchArray.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (interestsArray.count == 0)
   {
@@ -321,7 +304,6 @@ static NSString *kCheckedImageName = @"contact_tick";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
   LCInterest *interest_ = [causesSearchArray objectAtIndex:section];
-  NSLog(@"interest-->>>%@", interest_);
   return [interest_.causes count];
 }
 
@@ -341,10 +323,6 @@ static NSString *kCheckedImageName = @"contact_tick";
   {
     [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
   }
-  
-//  cell.layer.borderColor = [UIColor blackColor].CGColor;
-//  cell.layer.borderWidth = 2;
-  
   return cell;
 }
 
@@ -388,7 +366,7 @@ static NSString *kCheckedImageName = @"contact_tick";
     [causesCollectionView reloadData];
   }];
 }
-
+//adding section header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
   UICollectionReusableView *reusableview = nil;
@@ -406,7 +384,5 @@ static NSString *kCheckedImageName = @"contact_tick";
   }
   return reusableview;
 }
-
-
 
 @end

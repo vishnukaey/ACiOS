@@ -231,6 +231,7 @@ NSString * const kFBMessageKey = @"message";
 {
   NSLog(@"logging in to facebook");
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+  [login logOut];
   LCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
   [login logInWithPublishPermissions:@[kFBPublishActionsPermissionKey] fromViewController:appDelegate.window.rootViewController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
