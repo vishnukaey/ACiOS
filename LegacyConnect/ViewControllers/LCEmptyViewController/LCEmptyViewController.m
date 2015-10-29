@@ -23,6 +23,7 @@
 #import "LCNotificationsViewController.h"
 #import "LCSocialShareManager.h"
 
+static NSString *kTitle = @"MY FEED";
 
 @interface LCEmptyViewController ()
 {
@@ -55,7 +56,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
+  [self initialUISetUp];
   [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
@@ -95,6 +96,14 @@
   }
 }
 
+- (void)initialUISetUp
+{
+  [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0]];
+  [self.navigationController setNavigationBarHidden:NO];
+  self.title = kTitle;
+  [self.navigationController.navigationBar setTitleTextAttributes:
+   @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
 
 -(void) addSideMenuVIewController
 {

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JTTableViewController.h>
 
-@interface LCFriendsListViewController : UIViewController
+@interface LCFriendsListViewController : JTTableViewController
 
 @property (nonatomic, strong) NSString * userId;
 
