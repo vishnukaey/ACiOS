@@ -38,7 +38,6 @@
 
 - (void)viewDidLoad
 {
-  LCDLog(@"Hurray !!!!");
   [super viewDidLoad];
   [self addPasswordResetNotificationObserver];
 }
@@ -214,12 +213,8 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
     createPostVC = [sb instantiateInitialViewController];
     
-    createPostVC.delegate = self;
-    giButton.hidden = YES;
-    menuButton.hidden = YES;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-    appdel.isCreatePostOpen = YES;
   }
   
 }
@@ -252,19 +247,14 @@
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
   createPostVC = [sb instantiateInitialViewController];
   
-  createPostVC.delegate = self;
-  giButton.hidden = YES;
-  menuButton.hidden = YES;
   createPostVC.photoPostPhoto = chosenImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-  appdel.isCreatePostOpen = YES;
 }
 
 #pragma mark - leftmenu delegates
@@ -327,15 +317,6 @@
   
   //added to bring menu button to top on menu item selection.
   [navigationRoot.view bringSubviewToFront:menuButton];
-}
-
-
-- (void)dismissCreatePostView
-{
-  giButton.hidden = NO;
-  menuButton.hidden = NO;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  appdel.isCreatePostOpen = false;
 }
 
 #pragma mark - Passwor reset implementation

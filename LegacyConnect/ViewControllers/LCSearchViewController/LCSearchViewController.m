@@ -270,6 +270,11 @@
   }
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  [_searchBar resignFirstResponder];
+}
+
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -317,6 +322,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+ searchText = [searchText stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
   if(searchBar.text.length == 0)
   {
     searchResultObject = nil;
@@ -328,10 +334,10 @@
       searchResultObject = searchResult;
       [self reloadAllViews];
     } andFailure:^(NSString *error) {
-      NSLog(@"");
     }];
   }
 }
+
 
 
 - (IBAction)searchCancelButtonClicked:(UIButton *)cancelButton

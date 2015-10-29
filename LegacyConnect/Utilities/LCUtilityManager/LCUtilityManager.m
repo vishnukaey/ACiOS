@@ -126,7 +126,7 @@
                                      fromDate:dob
                                      toDate:now
                                      options:0];
-    age = [NSString stringWithFormat: @"%ld", [ageComponents year]];
+    age = [NSString stringWithFormat: @"%ld", (long)[ageComponents year]];
   }
   return age;
 }
@@ -350,7 +350,7 @@
 }
 
 #pragma mark- GIButton visibility
-+ (void)setGIAndMenuButtonVisibilityStatus:(BOOL)GIisHidden MenuVisibilityStatus:(BOOL)menuisHidden
++ (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   if (!appdel.isCreatePostOpen) {

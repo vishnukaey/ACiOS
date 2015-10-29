@@ -61,7 +61,7 @@ static NSInteger const kMilestoneIndex = 0;
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   if (self.navigationController.viewControllers.count <= 1) {
     [backButton setHidden:YES];
   }
@@ -76,7 +76,7 @@ static NSInteger const kMilestoneIndex = 0;
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   
   [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
 }
@@ -300,7 +300,6 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (IBAction)backAction:(id)sender
 {
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
   [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -630,7 +629,7 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;
@@ -667,8 +666,6 @@ static NSInteger const kMilestoneIndex = 0;
     createPostVC.postFeedObject = feed;
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [self presentViewController:createPostVC animated:YES completion:nil];
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appdel.isCreatePostOpen = false;
   }];
   
   [actionSheet addAction:editPost];

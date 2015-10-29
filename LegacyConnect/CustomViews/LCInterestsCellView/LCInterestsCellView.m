@@ -25,7 +25,7 @@
   _interestNameLabel.text = [LCUtilityManager performNullCheckAndSetValue:interest.name];
   
   _interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %ld people",
-                                   [interest.followers integerValue]];
+                                   (long)[interest.followers integerValue]];
   [_interestsBG sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall]
                       placeholderImage:nil];
 }

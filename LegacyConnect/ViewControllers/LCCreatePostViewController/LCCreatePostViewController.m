@@ -27,6 +27,8 @@
   
   IBOutlet UIImageView *tagFriendsIcon, *cameraIcon, *tagLocationIcon, *milestoneIcon;
   IBOutlet UILabel *postingToLabel;
+  
+  BOOL GIButton_preState, menuButton_preState;
 }
 @end
 
@@ -40,26 +42,17 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.8]];
-  
   _popUpView.layer.cornerRadius = 5;
-  
-  
   _popUpViewHeightConstraint.constant = 500;
-  
-  
-  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(keyboardShown:)
                                                name:UIKeyboardWillShowNotification
                                              object:nil];
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(keyboardHidden:)
                                                name:UIKeyboardWillHideNotification
                                              object:nil];
-  
-  
   
   taggedLocation = [[NSMutableString alloc] initWithString:@""];
   postingToLabel.text = @"";
@@ -68,10 +61,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     _postFeedObject = [[LCFeed alloc] init];
   }
-  
-  [self initialiseScrollSubviewsForPosting];
-  [self setCurrentContexts];
-  [postTextView becomeFirstResponder];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  GIButton_preState = [appdel.GIButton isHidden];
+  menuButton_preState = [appdel.menuButton isHidden];
+  [appdel.GIButton setHidden: true];
+  [appdel.menuButton setHidden: true];
+  appdel.isCreatePostOpen = true;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,12 +74,26 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   // Dispose of any resources that can be recreated.
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self initialiseScrollSubviewsForPosting];
+  [self setCurrentContexts];
+  [postTextView becomeFirstResponder];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden: GIButton_preState];
+  [appdel.menuButton setHidden: menuButton_preState];
+  appdel.isCreatePostOpen = false;
+}
+
 #pragma mark - initial setup
 - (void)initialiseScrollSubviewsForPosting
 {
-//  _postScrollView.layer.borderColor = [UIColor redColor].CGColor;
-//  _postScrollView.layer.borderWidth = 3;
-  
   float topmargin = 8;
   interstIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 8, 50, 50)];
   [_postScrollView addSubview:interstIconImageView];
@@ -95,10 +104,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   postTextView.text = @"";
   [postTextView setFrame:CGRectMake(postTextView.frame.origin.x, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.contentSize.height)];
   [postTextView setFont:POSTTEXT_FONT];
-  
-//  postTextView.backgroundColor = [UIColor yellowColor];
-  [_postScrollView addSubview:postTextView];
   postTextView.delegate = self;
+  [_postScrollView addSubview:postTextView];
   
   placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x+5, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.frame.size.height)];
   [placeHolderLabel setFont:POSTTEXT_FONT];
@@ -106,27 +113,20 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [placeHolderLabel setTextColor:[UIColor lightGrayColor]];
   [_postScrollView addSubview:placeHolderLabel];
 
-  
   tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x, postTextView.frame.origin.y + postTextView.frame.size.height, postTextView.frame.size.width, 0)];
   tagsLabel.numberOfLines = 0;
-//  tagsLabel.backgroundColor = [UIColor orangeColor];
   [_postScrollView addSubview:tagsLabel];
   
   postImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, interstIconImageView.frame.origin.y + interstIconImageView.frame.size.height + 8, _postScrollView.frame.size.width, 0)];
-//  postImageView.backgroundColor = [UIColor greenColor];
   [_postScrollView addSubview:postImageView];
-  
 }
 
 - (void)setCurrentContexts//image, interests, causes etc
 {
-  //photo
-  if (_photoPostPhoto)
-  {
+  //if coming from photopost flow
     [postImageView setImage:_photoPostPhoto];
     [self arrangePostImageView];
     _photoPostPhoto = nil;
-  }
   if (_postFeedObject.postToID)
   {
     if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeCause])
@@ -150,11 +150,10 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, postImageView.frame.size.width, 100)];
     [postImageView setBackgroundColor:ICONBACK_COLOR];
-    [self arrangeScrollSubviewsForPosting];
     [postImageView sd_setImageWithURL:[NSURL URLWithString:_postFeedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
      {
-       [postImageView setBackgroundColor:[UIColor clearColor]];
-       [self arrangePostImageView];
+         [postImageView setBackgroundColor:[UIColor clearColor]];
+         [self arrangePostImageView];
      }];
    }
   
@@ -165,7 +164,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     CGRect frame = postTextView.frame;
     frame.size.height = postTextView.contentSize.height;
     postTextView.frame = frame;
-    [self arrangeScrollSubviewsForPosting];
   }
   
   if (_postFeedObject.postTags.count)
@@ -181,13 +179,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       }
     }
     taggedFriendsArray = [freinds_tageed copy];
-    [self arrangeTaggedLabel];
+    
   }
   
   if (_postFeedObject.location.length)
   {
     taggedLocation = _postFeedObject.location;
-    [self arrangeTaggedLabel];
   }
   
   if ([_postFeedObject.isMilestone integerValue])
@@ -195,6 +192,9 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     milestoneIcon.tag = 1;
     [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
   }
+  
+  [self arrangeTaggedLabel];
+  [self arrangePostImageView];
 }
 
 #pragma mark - keyboard functions
@@ -202,7 +202,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   // Get the size of the keyboard.
   CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
-  //Given size may not account for screen rotation
   keyBoardHeight = MIN(keyboardSize.height,keyboardSize.width);
   
   float duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -226,8 +225,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
      _popUpViewHeightConstraint.constant = self.view.frame.size.height - 2 *_popUpView.frame.origin.y;
      [self.view layoutIfNeeded];
    }];
-   
-  }
+}
 
 #pragma mark - view arrangement
 - (void)arrangeTaggedLabel
@@ -266,11 +264,18 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 
 - (void)arrangePostImageView
 {
-  float ratio = postImageView.image.size.width / postImageView.frame.size.width;
-  float height = postImageView.image.size.height / ratio;
-  CGSize size = CGSizeMake(postImageView.frame.size.width, height);
-  [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, size.width, size.height)];
-  [self arrangeScrollSubviewsForPosting];
+  if (postImageView.image) {
+    float ratio = postImageView.image.size.width / postImageView.frame.size.width;
+    float height = postImageView.image.size.height / ratio;
+    CGSize size = CGSizeMake(postImageView.frame.size.width, height);
+    [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, size.width, size.height)];
+    [self arrangeScrollSubviewsForPosting];
+  }
+  else
+  {
+    [postImageView setFrame:CGRectMake(postImageView.frame.origin.x, postImageView.frame.origin.y, 0, 0)];
+    [self arrangeScrollSubviewsForPosting];
+  }
 }
 
 - (void)arrangeScrollSubviewsForPosting
@@ -339,7 +344,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
-  [self.delegate dismissCreatePostView];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -411,8 +415,9 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   else
   {
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
-    return;
+//    return;
   }
+  [postTextView resignFirstResponder];
   _postFeedObject.message = postTextView.text;
   _postFeedObject.location = taggedLocation;
   NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
@@ -421,7 +426,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     LCTag *tag = [[LCTag alloc] init];
     tag.type = kFeedTagTypeUser;
     tag.tagID = friend.friendId;
-    tag.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    tag.text = [NSString stringWithFormat:@"%@ %@", [LCUtilityManager performNullCheckAndSetValue:friend.firstName],
+                [LCUtilityManager performNullCheckAndSetValue:friend.lastName]];
     [posttags_ addObject:tag];
   }
   
@@ -465,7 +471,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 - (IBAction)facebookButtonAction:(id)sender {
   
   if (_facebookButton.isSelected) {
-    
     _facebookButton.selected = NO;
   }
   else{
@@ -486,13 +491,13 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     _twitterButton.selected = NO;
   }
   else {
+    _twitterButton.enabled = NO;
     self.TWsocialShare = [[LCSocialShareManager alloc] init];
-    self.TWsocialShare.viewToPresent = self.view;
     [self.TWsocialShare canShareToTwitter:^(BOOL canShare) {
-      
       if (canShare) {
         _twitterButton.selected = YES;
       }
+      _twitterButton.enabled = YES;
     }];
   }
 }

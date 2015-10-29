@@ -3,9 +3,9 @@
 
 target 'LegacyConnect' do
 pod 'AFNetworking', '~> 2.6'
-pod 'FBSDKCoreKit', '~> 4.6'
-pod 'FBSDKLoginKit', '~> 4.6'
-pod 'FBSDKShareKit', '~> 4.6'
+pod 'FBSDKCoreKit', '~> 4.7.1'
+pod 'FBSDKLoginKit', '~> 4.7.1'
+pod 'FBSDKShareKit', '~> 4.7.1'
 pod 'MFSideMenu'
 pod 'Reachability', '~> 3.2'
 pod 'MBProgressHUD', '~> 0.9'

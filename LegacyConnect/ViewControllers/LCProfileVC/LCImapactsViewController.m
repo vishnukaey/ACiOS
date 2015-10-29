@@ -11,6 +11,7 @@
 #import "LCFullScreenImageVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import "LCFeedsCommentsController.h"
+#import "LCCreatePostViewController.h"
 
 @implementation LCImapactsViewController
 @synthesize customNavigationHeight, userDetail;
@@ -47,7 +48,6 @@
 }
 
 #pragma mark - private method implementation
-
 - (void)stopRefreshingViews
 {
   //-- Stop Refreshing Views -- //
@@ -105,6 +105,42 @@
   }];
 }
 
+- (void)feedCellMoreAction :(LCFeed *)feed
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
+    createPostVC.isEditing = YES;
+    createPostVC.postFeedObject = feed;
+    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [self presentViewController:createPostVC animated:YES completion:nil];
+  }];
+  
+  [actionSheet addAction:editPost];
+  
+  
+  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
+      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    }
+                  andFailure:^(NSString *error) {
+                    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                    NSLog(@"%@",error);
+                  }];
+  }];
+  [actionSheet addAction:deletePost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -124,18 +160,14 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:true];
-  [appdel.menuButton setHidden:true];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,21 +182,15 @@
 }
 
 #pragma mark - UITableViewDataSource implementation
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 1;    //count of section
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
   JTTABLEVIEW_cellForRowAtIndexPath
-
-//    NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
-//    if ([nativeUserId isEqualToString:userDetail.userID])//self profile
-//    {
-//      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_self", nil)];
-//    }
-//    else
-//    {
-//      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
-//    }
-  
   
   LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
   if (cell == nil)
@@ -181,6 +207,12 @@
   cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
   };
+  //self profile check
+  if ([userDetail.isFriend integerValue] == 0) {
+    
+    cell.moreButton.hidden = NO;
+  }
+
   return cell;
 }
 
@@ -188,6 +220,11 @@
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
   switch (type) {
+      
+    case kkFeedCellActionLoadMore:
+      [self feedCellMoreAction :feed];
+      break;
+      
     case kFeedCellActionComment:
       [self showFeedCommentsWithFeed:feed];
       break;
@@ -207,7 +244,6 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
 }
 
 @end

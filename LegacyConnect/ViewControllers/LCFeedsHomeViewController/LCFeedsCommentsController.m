@@ -36,6 +36,7 @@ static CGFloat kIndexForPostDetails = 0;
   [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   mainTable.rowHeight = UITableViewAutomaticDimension;
   mainTable.estimatedRowHeight = 68.0;
+  [commentTitleLabel setText:[[LCUtilityManager performNullCheckAndSetValue:feedObject.firstName] uppercaseString]];
   [self setUpCpmmentsUI];
 }
 
@@ -212,7 +213,7 @@ static CGFloat kIndexForPostDetails = 0;
     
     [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
       [commentsArray insertObject:(LCComment*)response atIndex:0];
-      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
+      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[commentsArray count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
@@ -243,7 +244,7 @@ static CGFloat kIndexForPostDetails = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  LCDLog(@"index path row : %li",indexPath.row);
+  LCDLog(@"index path row : %li",(long)indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
@@ -327,7 +328,7 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   vc.commentAction = ^ (id sender, BOOL showComments) {

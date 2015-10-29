@@ -419,7 +419,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MALE . 21. NEW YORK, NY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbS-oA-QoP">
-                                        <rect key="frame" x="114" y="55" width="147" height="11"/>
+                                        <rect key="frame" x="15" y="55" width="345" height="11"/>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="11"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -427,6 +427,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="VbS-oA-QoP" firstAttribute="leading" secondItem="FxI-8d-GI0" secondAttribute="leading" constant="15" id="3FD-W2-Asd"/>
                                     <constraint firstAttribute="centerX" secondItem="VbS-oA-QoP" secondAttribute="centerX" id="Ecs-7A-KxD"/>
                                     <constraint firstAttribute="height" constant="80" id="Pwu-qV-36E"/>
                                     <constraint firstItem="coA-nJ-DKH" firstAttribute="top" secondItem="lgq-1K-QWR" secondAttribute="bottom" constant="4" id="Q7b-by-gcP"/>
@@ -434,6 +435,7 @@
                                     <constraint firstItem="lgq-1K-QWR" firstAttribute="top" secondItem="FxI-8d-GI0" secondAttribute="top" constant="19" id="alB-yW-3zN"/>
                                     <constraint firstItem="VbS-oA-QoP" firstAttribute="top" secondItem="coA-nJ-DKH" secondAttribute="bottom" constant="4" id="byY-WI-Jmz"/>
                                     <constraint firstAttribute="centerX" secondItem="coA-nJ-DKH" secondAttribute="centerX" id="k3F-vy-6Gu"/>
+                                    <constraint firstAttribute="trailing" secondItem="VbS-oA-QoP" secondAttribute="trailing" constant="15" id="lxs-jA-zA1"/>
                                 </constraints>
                             </view>
                         </subviews>

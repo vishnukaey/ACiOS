@@ -24,21 +24,11 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 @implementation LCFeedsHomeViewController
 
-
-- (void)logId:(NSArray*)array
-{
-  NSLog(@"------------------");
-  for (LCFeed * feed in array) {
-    NSLog(@"id > %@",feed.feedId);
-  }
-}
-
 #pragma mark - API calls and Pagination
 - (void)startFetchingResults
 {
   [super startFetchingResults];
   [LCAPIManager getHomeFeedsWithLastFeedId:nil success:^(NSArray *response) {
-    [self logId:response];
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
@@ -52,7 +42,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super startFetchingNextResults];
   [LCAPIManager getHomeFeedsWithLastFeedId:[(LCFeed*)[self.results lastObject] feedId] success:^(NSArray *response) {
-    [self logId:response];
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -124,7 +113,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;
@@ -149,7 +138,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  LCDLog(@"tag details-->>%@", tagDetails);
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
@@ -178,7 +166,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = YES;
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:NO MenuVisibilityStatus:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [self.tableView reloadData];
 }
 
@@ -186,7 +174,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonVisibilityStatus:YES MenuVisibilityStatus:YES];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -221,6 +209,14 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   };
   return cell;
 }
+
+#pragma mark - UITableViewDelegate implementation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCFeed * feed = [feedsArray objectAtIndex:indexPath.row];
+  [self showFeedCommentsWithFeed:feed];
+}
+
 
 #pragma mark - Button Actions
 -(IBAction)search:(id)sender
