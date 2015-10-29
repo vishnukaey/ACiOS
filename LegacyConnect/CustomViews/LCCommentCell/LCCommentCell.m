@@ -30,6 +30,9 @@
   NSString *time_ = [LCUtilityManager performNullCheckAndSetValue:comment.createdAt];
   NSDate *date = [NSDate dateWithTimeIntervalSince1970:time_.longLongValue/1000];
   NSString *timeAgo = [date timeAgo];
+  timeAgo = [timeAgo stringByReplacingOccurrencesOfString:@"ago" withString:@""];
+  timeAgo = [timeAgo stringByReplacingOccurrencesOfString:@"minutes" withString:@"mins"];
+
   [timeLabel setText:timeAgo];
   [commentLabel setText:comment.commentText];
   NSString * userName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:comment.firstName],[LCUtilityManager performNullCheckAndSetValue:comment.lastName]] ;
