@@ -120,22 +120,6 @@
 		96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */; };
 		96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */; };
 		96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */; };
-		96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */; };
-		96BD14361B721659004D5CFA /* EXTScope.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14331B721659004D5CFA /* EXTScope.m */; };
-		96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14391B72166B004D5CFA /* MTLJSONAdapter.m */; };
-		96BD14551B72166B004D5CFA /* MTLModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD143B1B72166B004D5CFA /* MTLModel.m */; };
-		96BD14561B72166B004D5CFA /* MTLModel+NSCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD143D1B72166B004D5CFA /* MTLModel+NSCoding.m */; };
-		96BD14571B72166B004D5CFA /* MTLReflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD143F1B72166B004D5CFA /* MTLReflection.m */; };
-		96BD14581B72166B004D5CFA /* MTLTransformerErrorHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14411B72166B004D5CFA /* MTLTransformerErrorHandling.m */; };
-		96BD14591B72166B004D5CFA /* MTLValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14431B72166B004D5CFA /* MTLValueTransformer.m */; };
-		96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14451B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m */; };
-		96BD145B1B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14471B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.m */; };
-		96BD145C1B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14491B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m */; };
-		96BD145D1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD144B1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m */; };
-		96BD145E1B72166B004D5CFA /* NSError+MTLModelException.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD144D1B72166B004D5CFA /* NSError+MTLModelException.m */; };
-		96BD145F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD144F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m */; };
-		96BD14601B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14511B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m */; };
-		96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
@@ -349,44 +333,8 @@
 		96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreatePostViewController.m; path = ViewControllers/LCCreatePostViewController/LCCreatePostViewController.m; sourceTree = "<group>"; };
 		96B86A231B7A232C003EF7CA /* LCListFriendsToTagViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListFriendsToTagViewController.h; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.h; sourceTree = "<group>"; };
 		96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListFriendsToTagViewController.m; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.m; sourceTree = "<group>"; };
-		96BD142F1B721659004D5CFA /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTKeyPathCoding.h; sourceTree = "<group>"; };
-		96BD14301B721659004D5CFA /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTRuntimeExtensions.h; sourceTree = "<group>"; };
-		96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTRuntimeExtensions.m; sourceTree = "<group>"; };
-		96BD14321B721659004D5CFA /* EXTScope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXTScope.h; sourceTree = "<group>"; };
-		96BD14331B721659004D5CFA /* EXTScope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EXTScope.m; sourceTree = "<group>"; };
-		96BD14341B721659004D5CFA /* metamacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = metamacros.h; sourceTree = "<group>"; };
-		96BD14371B72166B004D5CFA /* Mantle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mantle.h; sourceTree = "<group>"; };
-		96BD14381B72166B004D5CFA /* MTLJSONAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLJSONAdapter.h; sourceTree = "<group>"; };
-		96BD14391B72166B004D5CFA /* MTLJSONAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLJSONAdapter.m; sourceTree = "<group>"; };
-		96BD143A1B72166B004D5CFA /* MTLModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLModel.h; sourceTree = "<group>"; };
-		96BD143B1B72166B004D5CFA /* MTLModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLModel.m; sourceTree = "<group>"; };
-		96BD143C1B72166B004D5CFA /* MTLModel+NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MTLModel+NSCoding.h"; sourceTree = "<group>"; };
-		96BD143D1B72166B004D5CFA /* MTLModel+NSCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MTLModel+NSCoding.m"; sourceTree = "<group>"; };
-		96BD143E1B72166B004D5CFA /* MTLReflection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLReflection.h; sourceTree = "<group>"; };
-		96BD143F1B72166B004D5CFA /* MTLReflection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLReflection.m; sourceTree = "<group>"; };
-		96BD14401B72166B004D5CFA /* MTLTransformerErrorHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLTransformerErrorHandling.h; sourceTree = "<group>"; };
-		96BD14411B72166B004D5CFA /* MTLTransformerErrorHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLTransformerErrorHandling.m; sourceTree = "<group>"; };
-		96BD14421B72166B004D5CFA /* MTLValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLValueTransformer.h; sourceTree = "<group>"; };
-		96BD14431B72166B004D5CFA /* MTLValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLValueTransformer.m; sourceTree = "<group>"; };
-		96BD14441B72166B004D5CFA /* NSArray+MTLManipulationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
-		96BD14451B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+MTLManipulationAdditions.m"; sourceTree = "<group>"; };
-		96BD14461B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MTLJSONKeyPath.h"; sourceTree = "<group>"; };
-		96BD14471B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MTLJSONKeyPath.m"; sourceTree = "<group>"; };
-		96BD14481B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
-		96BD14491B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MTLManipulationAdditions.m"; sourceTree = "<group>"; };
-		96BD144A1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+MTLMappingAdditions.h"; sourceTree = "<group>"; };
-		96BD144B1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+MTLMappingAdditions.m"; sourceTree = "<group>"; };
-		96BD144C1B72166B004D5CFA /* NSError+MTLModelException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MTLModelException.h"; sourceTree = "<group>"; };
-		96BD144D1B72166B004D5CFA /* NSError+MTLModelException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MTLModelException.m"; sourceTree = "<group>"; };
-		96BD144E1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+MTLComparisonAdditions.h"; sourceTree = "<group>"; };
-		96BD144F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+MTLComparisonAdditions.m"; sourceTree = "<group>"; };
-		96BD14501B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+MTLInversionAdditions.h"; sourceTree = "<group>"; };
-		96BD14511B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLInversionAdditions.m"; sourceTree = "<group>"; };
-		96BD14521B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
-		96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValueTransformer+MTLPredefinedTransformerAdditions.m"; sourceTree = "<group>"; };
 		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
-		CE4B52991BCE7AB700F279FB /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		CE4EB6751B5E28D900B8A725 /* LCLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLeftMenuController.h; path = ViewControllers/LCFeedsHomeViewController/LCLeftMenuController.h; sourceTree = "<group>"; };
 		CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLeftMenuController.m; path = ViewControllers/LCFeedsHomeViewController/LCLeftMenuController.m; sourceTree = "<group>"; };
 		CE5954D41B6F608B00D839DD /* LCMultipleSelectionTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMultipleSelectionTable.h; path = CustomViews/LCMultipleSelectionTable/LCMultipleSelectionTable.h; sourceTree = "<group>"; };
@@ -735,56 +683,6 @@
 			path = LCDummyValues;
 			sourceTree = "<group>";
 		};
-		0BB594241B71E4EC0067744B /* Mantle */ = {
-			isa = PBXGroup;
-			children = (
-				96BD14371B72166B004D5CFA /* Mantle.h */,
-				96BD14381B72166B004D5CFA /* MTLJSONAdapter.h */,
-				96BD14391B72166B004D5CFA /* MTLJSONAdapter.m */,
-				96BD143A1B72166B004D5CFA /* MTLModel.h */,
-				96BD143B1B72166B004D5CFA /* MTLModel.m */,
-				96BD143C1B72166B004D5CFA /* MTLModel+NSCoding.h */,
-				96BD143D1B72166B004D5CFA /* MTLModel+NSCoding.m */,
-				96BD143E1B72166B004D5CFA /* MTLReflection.h */,
-				96BD143F1B72166B004D5CFA /* MTLReflection.m */,
-				96BD14401B72166B004D5CFA /* MTLTransformerErrorHandling.h */,
-				96BD14411B72166B004D5CFA /* MTLTransformerErrorHandling.m */,
-				96BD14421B72166B004D5CFA /* MTLValueTransformer.h */,
-				96BD14431B72166B004D5CFA /* MTLValueTransformer.m */,
-				96BD14441B72166B004D5CFA /* NSArray+MTLManipulationAdditions.h */,
-				96BD14451B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m */,
-				96BD14461B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.h */,
-				96BD14471B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.m */,
-				96BD14481B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.h */,
-				96BD14491B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m */,
-				96BD144A1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.h */,
-				96BD144B1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m */,
-				96BD144C1B72166B004D5CFA /* NSError+MTLModelException.h */,
-				96BD144D1B72166B004D5CFA /* NSError+MTLModelException.m */,
-				96BD144E1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.h */,
-				96BD144F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m */,
-				96BD14501B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.h */,
-				96BD14511B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m */,
-				96BD14521B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */,
-				96BD14531B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m */,
-				0BB594251B71E4EC0067744B /* extobjc */,
-			);
-			path = Mantle;
-			sourceTree = "<group>";
-		};
-		0BB594251B71E4EC0067744B /* extobjc */ = {
-			isa = PBXGroup;
-			children = (
-				96BD142F1B721659004D5CFA /* EXTKeyPathCoding.h */,
-				96BD14301B721659004D5CFA /* EXTRuntimeExtensions.h */,
-				96BD14311B721659004D5CFA /* EXTRuntimeExtensions.m */,
-				96BD14321B721659004D5CFA /* EXTScope.h */,
-				96BD14331B721659004D5CFA /* EXTScope.m */,
-				96BD14341B721659004D5CFA /* metamacros.h */,
-			);
-			path = extobjc;
-			sourceTree = "<group>";
-		};
 		0BB7B3701B57DEB100261658 /* LCGIButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,7 +913,6 @@
 		0BF05A331B4E622200FF7B39 = {
 			isa = PBXGroup;
 			children = (
-				CE4B52991BCE7AB700F279FB /* CoreText.framework */,
 				0BF05A3E1B4E622200FF7B39 /* LegacyConnect */,
 				0BF05A581B4E622200FF7B39 /* LegacyConnectTests */,
 				0BF05A3D1B4E622200FF7B39 /* Products */,
@@ -1051,7 +948,6 @@
 		0BF05A3F1B4E622200FF7B39 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0BB594241B71E4EC0067744B /* Mantle */,
 				8F70C2AF88FA9740E76A5CA2 /* Frameworks */,
 				AA0D4ABFB4BBC81C1666D4C8 /* Pods */,
 				0BF05A771B4E645400FF7B39 /* LCAppDelegate.h */,
@@ -1624,17 +1520,14 @@
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
-				96BD14611B72166B004D5CFA /* NSValueTransformer+MTLPredefinedTransformerAdditions.m in Sources */,
 				0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */,
 				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */,
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
-				96BD14591B72166B004D5CFA /* MTLValueTransformer.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */,
-				96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */,
 				0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */,
@@ -1644,24 +1537,17 @@
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,
-				96BD145C1B72166B004D5CFA /* NSDictionary+MTLManipulationAdditions.m in Sources */,
 				0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */,
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
-				96BD145D1B72166B004D5CFA /* NSDictionary+MTLMappingAdditions.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
-				96BD145B1B72166B004D5CFA /* NSDictionary+MTLJSONKeyPath.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
-				96BD14601B72166B004D5CFA /* NSValueTransformer+MTLInversionAdditions.m in Sources */,
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
 				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
-				96BD145E1B72166B004D5CFA /* NSError+MTLModelException.m in Sources */,
-				96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
-				96BD14561B72166B004D5CFA /* MTLModel+NSCoding.m in Sources */,
 				0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				1618309D1BDF45D4002D3539 /* LCImage.m in Sources */,
@@ -1679,7 +1565,6 @@
 				0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */,
 				0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */,
 				0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */,
-				96BD14551B72166B004D5CFA /* MTLModel.m in Sources */,
 				0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */,
 				CEBED6AA1B5FAE0C0012FEBB /* LCViewCommunity.m in Sources */,
 				CEB9B6A91B79E4E900C61BA0 /* LCTabMenuView.m in Sources */,
@@ -1694,7 +1579,6 @@
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
-				96BD145F1B72166B004D5CFA /* NSObject+MTLComparisonAdditions.m in Sources */,
 				0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
@@ -1705,14 +1589,10 @@
 				0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */,
 				0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
-				96BD14361B721659004D5CFA /* EXTScope.m in Sources */,
-				96BD14571B72166B004D5CFA /* MTLReflection.m in Sources */,
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
-				96BD14581B72166B004D5CFA /* MTLTransformerErrorHandling.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
 				CEBED6A41B5FAD0B0012FEBB /* LCInviteToCommunity.m in Sources */,
-				96BD14541B72166B004D5CFA /* MTLJSONAdapter.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */,
 				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
