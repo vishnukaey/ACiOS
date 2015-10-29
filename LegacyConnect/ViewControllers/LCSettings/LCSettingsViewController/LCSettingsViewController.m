@@ -16,6 +16,8 @@
 #define kIndexSectionSignOut 1
 #define kStoryVoardId @"LCSettingsVC"
 #define kSettingsCellIdentifier @"LCSettingsCell"
+#define kSettingsSignOutCellIdentifier @"LCSettingsSignOutCell"
+#define kSettingsHeaderCellIdentifier @"LCSettingsHeaderCell"
 
 #define kTextLeft @"left_text"
 #define kTextRight @"right_text"
@@ -42,31 +44,28 @@ static CGFloat kNumberOfSection =2;
 
 - (void)doneButtonPressed:(id)sender
 {
-
+  
 }
 
 - (void)initialUISetUp
 {
-  self.clearsSelectionOnViewWillAppear = NO;
-  self.navigationController.navigationBarHidden = false;
+  //self.clearsSelectionOnViewWillAppear = NO;
+  _settingsTableView.dataSource = self;
+  _settingsTableView.delegate = self;
+  // self.navigationController.navigationBarHidden = false;
   //self.title = kSettingsScreenTitle;
-  UIBarButtonItem * doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
-                                                                               target:self
-                                                                               action:@selector(doneButtonPressed:)];
-  [doneButton setTintColor:[UIColor blackColor]];
-  self.navigationItem.rightBarButtonItem = doneButton;
+  
 }
 
 - (void)prepareDataSource {
   
-  NSString * userEmail = [LCDataManager sharedDataManager].userEmail ? [LCDataManager sharedDataManager].userEmail : kEmptyStringValue;
-  NSString * firstName = [LCDataManager sharedDataManager].firstName ? [LCDataManager sharedDataManager].firstName : kEmptyStringValue;
-  NSString * lastName = [LCDataManager sharedDataManager].lastName ? [LCDataManager sharedDataManager].lastName : kEmptyStringValue;
+  NSString * userEmail = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].userEmail];
+  NSString * firstName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].firstName];
+  NSString * lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].lastName];
   
   self.accountDataSource = @[ @{kTextLeft : kEmailAddress, kTextRight : userEmail},
                               @{kTextLeft : kChangePassword, kTextRight : kEmptyStringValue},
-                              @{kTextLeft : kMyLegacyURL, kTextRight : [NSString stringWithFormat:@"%@ %@",firstName,
-                                                                        lastName]},
+                              @{kTextLeft : kMyLegacyURL, kTextRight : [NSString stringWithFormat:@"%@ %@",firstName, lastName]},
                               @{kTextLeft : kPrivacy, kTextRight : kEmptyStringValue} ];
   
   self.signOutDataSource = @[ @{kTextLeft : kSignOut, kTextRight : kEmptyStringValue} ];
@@ -79,7 +78,14 @@ static CGFloat kNumberOfSection =2;
   [super viewDidLoad];
   [self initialUISetUp];
   [self prepareDataSource];
-  [self.tableView reloadData];
+  [_settingsTableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  
+  [super viewWillAppear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.menuButton setHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,58 +108,95 @@ static CGFloat kNumberOfSection =2;
       return self.accountDataSource.count;
       break;
       
-      default:
-      return self.signOutDataSource.count;
+    default:
+      return 1;
       break;
   }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSettingsCellIdentifier forIndexPath:indexPath];
-  if (cell == nil) {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsCellIdentifier];
+  
+  UITableViewCell *cell = nil;
+  
+  if (indexPath.section == kIndexSectionAccount) {
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:kSettingsCellIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsCellIdentifier];
+    }
+    [cell.textLabel setText:[(NSDictionary*)[_accountDataSource objectAtIndex:indexPath.row] objectForKey:kTextLeft]];
+    [cell.detailTextLabel setText:[(NSDictionary*)[_accountDataSource objectAtIndex:indexPath.row] objectForKey:kTextRight]];
+  }
+  else if (indexPath.section == kIndexSectionSignOut) {
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:kSettingsSignOutCellIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsSignOutCellIdentifier];
+    }
   }
   
-  NSArray * currentDataSource = nil;
   
-  switch (indexPath.section)
-  {
-    case kIndexSectionAccount:
-      currentDataSource = self.accountDataSource;
-      break;
-      
-    case kIndexSectionSignOut:
-      currentDataSource = self.signOutDataSource;
-      break;
-
-    default:
-      break;
-  }
-  
-  [cell.textLabel setText:[(NSDictionary*)[currentDataSource objectAtIndex:indexPath.row] objectForKey:kTextLeft]];
-  [cell.detailTextLabel setText:[(NSDictionary*)[currentDataSource objectAtIndex:indexPath.row] objectForKey:kTextRight]];
-  
-  if (indexPath.section == kIndexSectionSignOut)
-  {
-    cell.accessoryType = UITableViewCellAccessoryNone;
-  }
-  
+  //  if (cell == nil) {
+  //    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsCellIdentifier];
+  //  }
+  //
+  //  NSArray * currentDataSource = nil;
+  //
+  //  switch (indexPath.section)
+  //  {
+  //    case kIndexSectionAccount:
+  //      currentDataSource = self.accountDataSource;
+  //      break;
+  //
+  //    case kIndexSectionSignOut:
+  //      currentDataSource = self.signOutDataSource;
+  //      break;
+  //
+  //    default:
+  //      break;
+  //  }
+  //
+  //  [cell.textLabel setText:[(NSDictionary*)[currentDataSource objectAtIndex:indexPath.row] objectForKey:kTextLeft]];
+  //  [cell.detailTextLabel setText:[(NSDictionary*)[currentDataSource objectAtIndex:indexPath.row] objectForKey:kTextRight]];
+  //
+  //  if (indexPath.section == kIndexSectionSignOut)
+  //  {
+  //    cell.accessoryType = UITableViewCellAccessoryNone;
+  //  }
+  //
   return cell;
 }
 
-- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+  
+  return 44;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+  
+  NSString *cellIdentifier = kSettingsHeaderCellIdentifier;
+  UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (headerView == nil) {
+    headerView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    
+  }
+  
+  UILabel *sectionLabel = (UILabel *)[headerView viewWithTag:100];
   switch (section)
   {
     case kIndexSectionAccount:
-      return kAccountTitle;
+      sectionLabel.text = kAccountTitle;
       break;
       
     default:
-      return kEmptyStringValue;
+      sectionLabel.text = kEmptyStringValue;
       break;
   }
+  
+  return  headerView ;
 }
+
 
 #pragma mark - UITableViewDelegate implementation
 
@@ -174,7 +217,7 @@ static CGFloat kNumberOfSection =2;
       case 2:
         [self showLegacyURLScreen];
         break;
-
+        
       case 3:
         [self showPrivacyScreen];
         break;

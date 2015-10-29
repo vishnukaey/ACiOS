@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCSettingsViewController : UITableViewController
+@interface LCSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 + (NSString*)getStoryBoardIdentifier;
+@property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
 
 @end

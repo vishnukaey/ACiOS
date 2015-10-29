@@ -191,7 +191,7 @@ NSString *const kTagobjType = @"tag_object_type";
 NSString *const kSettingsScreenTitle = @"SETTINGS";
 NSString *const kEmailUpdateScreenTitle = @"EMAIL ADDRESS";
 
-NSString *const kAccountTitle = @"Account";
+NSString *const kAccountTitle = @"ACCOUNT";
 NSString *const kEmailAddress = @"Email Address";
 NSString *const kChangePassword = @"Change Password";
 NSString *const kMyLegacyURL = @"My Legacy URL";
