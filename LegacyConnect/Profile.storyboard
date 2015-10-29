@@ -479,10 +479,10 @@
                         <outlet property="locationLabel" destination="VbS-oA-QoP" id="bPH-Ep-IWa"/>
                         <outlet property="memeberSincelabel" destination="coA-nJ-DKH" id="4ld-lM-1Gy"/>
                         <outlet property="mileStonesButton" destination="m3Q-xH-UCR" id="Dqn-py-8bx"/>
-                        <outlet property="milestonesTable" destination="DcZ-wa-SdJ" id="oSL-xy-GHi"/>
                         <outlet property="profilePic" destination="CW0-eS-nLs" id="AuJ-Zp-htN"/>
                         <outlet property="profilePicBorderView" destination="xiW-N0-Bv4" id="bua-YE-fl9"/>
                         <outlet property="tabMenuContainer" destination="D7h-fV-Soh" id="ckm-Rv-AYD"/>
+                        <outlet property="tableView" destination="DcZ-wa-SdJ" id="0bO-w2-f9e"/>
                         <outlet property="userNameLabel" destination="lgq-1K-QWR" id="gk0-vi-K7U"/>
                         <outlet property="viewToCollapse" destination="OPF-0c-AjY" id="7zu-uj-fyJ"/>
                     </connections>
