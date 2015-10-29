@@ -52,6 +52,15 @@
       [_causeSupportButton setSelected:NO];
     }];
   }
+  else
+  {
+    [_causeSupportButton setSelected:NO];
+    [LCAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
+      _cause.isSupporting =NO;
+    } andFailure:^(NSString *error) {
+      [_causeSupportButton setSelected:YES];
+    }];
+  }
 }
 
 
