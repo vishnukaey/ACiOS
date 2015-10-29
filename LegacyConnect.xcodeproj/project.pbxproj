@@ -113,6 +113,7 @@
 		0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; settings = {ASSET_TAGS = (); }; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; settings = {ASSET_TAGS = (); }; };
+		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -338,6 +339,7 @@
 		0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFullScreenImageVC.xib; sourceTree = "<group>"; };
 		1618309B1BDF45D4002D3539 /* LCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImage.h; path = Models/LCImage/LCImage.h; sourceTree = "<group>"; };
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
+		16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SupportingFiles/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -1055,6 +1057,7 @@
 				8F70C2AF88FA9740E76A5CA2 /* Frameworks */,
 				AA0D4ABFB4BBC81C1666D4C8 /* Pods */,
 				0BF05A771B4E645400FF7B39 /* LCAppDelegate.h */,
+				16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */,
 				0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */,
 				0BF05A791B4E645400FF7B39 /* Info.plist */,
 				0BF05A7A1B4E645400FF7B39 /* main.m */,
@@ -1530,6 +1533,7 @@
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0BB33DE51BA81401009E6D0C /* profileSettings.png in Resources */,
 				0BB33DD81BA81401009E6D0C /* communityMemebrs.png in Resources */,
+				16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */,
 				0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */,
 				0BB33DDF1BA81401009E6D0C /* locationIcon.png in Resources */,
 				0BB33DE81BA81401009E6D0C /* rsz_lc-logo.png in Resources */,

@@ -31,13 +31,24 @@
 @synthesize menuButton, GIButton, isCreatePostOpen;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  
+  // Status bar style white
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  
+  // Configure keyboard with toolbar
   [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
   [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[LCLoginViewController class]];
   [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCFeedsCommentsController class]];
-
   [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[LCSpecialContainerView class]];
+  
+  // Configure FBProfile update listener
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+  
+  // Configure tracker from GoogleService-Info.plist.
+  NSError *configureError;
+  [[GGLContext sharedInstance] configureWithError:&configureError];
+  NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }
