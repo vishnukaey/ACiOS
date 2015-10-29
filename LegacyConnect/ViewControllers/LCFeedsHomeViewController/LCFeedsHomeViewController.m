@@ -68,6 +68,11 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
+  
+  [self.nextPageLoaderCell setBackgroundColor:[UIColor redColor]];
+  [self.nextPageLoaderCell.contentView setBackgroundColor:[UIColor redColor]];
+
+  
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{

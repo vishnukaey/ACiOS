@@ -412,7 +412,6 @@ static LCAPIManager *sharedManager = nil;
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
        failure(response[kResponseMessage]);
      }
      else
@@ -422,7 +421,6 @@ static LCAPIManager *sharedManager = nil;
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
 
@@ -438,7 +436,6 @@ static LCAPIManager *sharedManager = nil;
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
        failure(response[kResponseMessage]);
      }
      else
@@ -448,7 +445,6 @@ static LCAPIManager *sharedManager = nil;
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
 }

@@ -220,7 +220,8 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   if ([self.feedObject.didLike boolValue]) {
     [thanksBtnImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
-    [thanksLabel setText:[NSString stringWithFormat:@"%i",[likeCount integerValue] -1]];
+    NSInteger thanksCount = [likeCount integerValue] > 0 ? [likeCount integerValue] -1 : 0;
+    [thanksLabel setText:[NSString stringWithFormat:@"%li",thanksCount]];
     [LCAPIManager unlikePost:self.feedObject.entityID withSuccess:^(id response) {
       self.feedObject.didLike = kUnLikedStatus;
       self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
@@ -232,7 +233,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   else
   {
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
-    [thanksLabel setText:[NSString stringWithFormat:@"%i",[likeCount integerValue] + 1]];
+    [thanksLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
     [thanksBtnImage setLikeUnlikeStatusImage:kLikedStatus];
     [LCAPIManager likePost:self.feedObject.entityID withSuccess:^(id response) {
       self.feedObject.didLike = kLikedStatus;
