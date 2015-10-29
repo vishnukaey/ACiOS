@@ -213,7 +213,7 @@ static CGFloat kIndexForPostDetails = 0;
     
     [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
       [commentsArray insertObject:(LCComment*)response atIndex:0];
-      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",[commentsArray count]];
+      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[commentsArray count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
@@ -244,7 +244,7 @@ static CGFloat kIndexForPostDetails = 0;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  LCDLog(@"index path row : %li",indexPath.row);
+  LCDLog(@"index path row : %li",(long)indexPath.row);
   if (indexPath.row == kIndexForPostDetails)
   {
     LCFeedCellView *feedCell;
