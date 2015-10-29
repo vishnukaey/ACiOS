@@ -55,6 +55,15 @@ static CGFloat kIndexForPostDetails = 0;
 }
 
 #pragma mark - private method implementation
+
+- (void)enableCommentField:(BOOL)enable
+{
+  [commentTextField setEnabled:enable];
+  [commentTextField_dup setEnabled:enable];
+  [postBtn setEnabled:enable];
+  [dummyPostBtn setEnabled:enable];
+}
+
 - (void)initialUISetUp
 {
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -211,6 +220,7 @@ static CGFloat kIndexForPostDetails = 0;
 {
   if (commentTextField.text.length > 0) {
     [self resignAllResponders];
+    [self enableCommentField:NO];
     [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
       [self.results insertObject:(LCComment*)response atIndex:0];
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
@@ -218,8 +228,10 @@ static CGFloat kIndexForPostDetails = 0;
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
       [self.tableView reloadData];
+      [self enableCommentField:YES];
     } andFailure:^(NSString *error) {
       LCDLog(@"----- Fail to add new comment");
+      [self enableCommentField:YES];
     }];
   }
 }
