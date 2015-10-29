@@ -52,6 +52,15 @@
       [_interestFollowButton setSelected:NO];
     }];
   }
+  else
+  {
+    [_interestFollowButton setSelected:NO];
+    [LCAPIManager unfollowInterest:_interest.interestID withSuccess:^(id response) {
+      _interest.isFollowing = NO;
+    } andFailure:^(NSString *error) {
+      [_interestFollowButton setSelected:YES];
+    }];
+  }
 }
 
 
