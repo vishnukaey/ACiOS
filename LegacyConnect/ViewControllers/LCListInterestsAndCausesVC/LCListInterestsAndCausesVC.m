@@ -20,8 +20,6 @@
   
   NSArray *interestsArray, *causesArray;
   NSMutableArray *interestsSearchArray, *causesSearchArray;
-  
-  
 }
 @end
 
@@ -282,21 +280,15 @@ static NSString *kCheckedImageName = @"contact_tick";
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tableView.allowsSelection = YES;
     
-    UIView *sel_but = [cell viewWithTag:10];
-    [sel_but removeFromSuperview];
-    
-    UIButton *selectionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
-    selectionButton.center = CGPointMake(cell.frame.size.width - 30, cell.frame.size.height/2 - 8);
-    [cell addSubview:selectionButton];
-    selectionButton.tag = 10;
-    selectionButton.userInteractionEnabled = NO;
+    cell.checkButton.hidden = NO;
+    cell.checkButton.userInteractionEnabled = NO;
     if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
     {
-      [selectionButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
     }
     else
     {
-      [selectionButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
     }
     
     return cell;

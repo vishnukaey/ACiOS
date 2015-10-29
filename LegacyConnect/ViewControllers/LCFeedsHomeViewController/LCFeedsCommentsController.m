@@ -36,6 +36,7 @@ static CGFloat kIndexForPostDetails = 0;
   [mainTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   mainTable.rowHeight = UITableViewAutomaticDimension;
   mainTable.estimatedRowHeight = 68.0;
+  [commentTitleLabel setText:[[LCUtilityManager performNullCheckAndSetValue:feedObject.firstName] uppercaseString]];
   [self setUpCpmmentsUI];
 }
 
