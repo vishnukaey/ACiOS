@@ -203,6 +203,7 @@ static NSString *kTitle = @"FRIENDS";
     [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
+    
      } andFailure:^(NSString *error) {
        //Set previous button state
        [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];

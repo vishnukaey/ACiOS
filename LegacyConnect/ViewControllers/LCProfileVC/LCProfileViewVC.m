@@ -111,9 +111,9 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void) loadUserInfo {
   
-  userNameLabel.text = @"";
-  memeberSincelabel.text = @"";
-  locationLabel.text = @"";
+  userNameLabel.text = kEmptyStringValue;
+  memeberSincelabel.text = kEmptyStringValue;
+  locationLabel.text = kEmptyStringValue;
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
@@ -122,6 +122,19 @@ static NSInteger const kMilestoneIndex = 0;
   {
     currentProfileState = PROFILE_SELF;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
+    
+    //Add Notification observers
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserData:)
+                                                 name:kUserProfileUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateFriendsCount:)
+                                                 name:kUserProfileFrinendsUpdateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateImpactsCount:)
+                                                 name:kUserProfileImpactsUpdateNotification
+                                               object:nil];
   }
   else
   {
@@ -199,16 +212,6 @@ static NSInteger const kMilestoneIndex = 0;
   }];
 }
 
--(void)updateUserData:(NSNotification *)notification {
-  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
-  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
-  dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self loadUserDetails];
-    
-  });
-  
-}
-
 - (void)addTabMenu
 {
   tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -266,6 +269,42 @@ static NSInteger const kMilestoneIndex = 0;
   }];
 }
 
+
+#pragma mark - Notification Receivers
+
+-(void)updateUserData:(NSNotification *)notification {
+  
+  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+    [self loadUserDetails];
+    
+  });
+}
+
+-(void)updateFriendsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [userDetail.friendCount integerValue] - 1;
+    userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
+  }
+}
+
+-(void)updateImpactsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [userDetail.impactCount integerValue] - 1;
+    userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
+  }
+}
+
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -304,7 +343,6 @@ static NSInteger const kMilestoneIndex = 0;
   if (self.navigationController.viewControllers.count <= 1) {
     [backButton setHidden:YES];
   }
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
   if (tabmenu.currentIndex == kMilestoneIndex) {
     [self.tableView reloadData];
   }
@@ -315,7 +353,20 @@ static NSInteger const kMilestoneIndex = 0;
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
+}
+
+- (void)dealloc {
+  
+  //Notifications
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kUserProfileUpdateNotification
+                                                object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kUserProfileFrinendsUpdateNotification
+                                                  object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kUserProfileImpactsUpdateNotification
+                                                object:nil];
 }
 
 #pragma mark - button actions

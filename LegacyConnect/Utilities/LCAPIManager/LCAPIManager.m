@@ -394,6 +394,9 @@ static LCAPIManager *sharedManager = nil;
      {
        LCDLog(@"Post deleted");
        success(response);
+       //Notify Profile
+       NSDictionary *userInfo = @{@"status":@"deleted"};
+       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileImpactsUpdateNotification object:nil userInfo:userInfo];
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -1167,6 +1170,9 @@ static LCAPIManager *sharedManager = nil;
      {
        LCDLog(@"Friend request sent %@",response);
        success(response);
+       //Notify Profile
+       NSDictionary *userInfo = @{@"status":@"deleted"};
+       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileFrinendsUpdateNotification object:nil userInfo:userInfo];
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
