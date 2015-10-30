@@ -439,6 +439,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     [LCAPIManager updatePost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self shareToSocialMedia];
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -448,23 +449,11 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     [LCAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self shareToSocialMedia];
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-  }
-  
-  //facebook sharing
-  if (_facebookButton.isSelected) {
-    
-    LCSocialShareManager *socialShare = [[LCSocialShareManager alloc] init];
-    [socialShare shareToFacebookWithMessage:_postFeedObject.message andImage:postImageView.image];
-  }
-  
-  //twitter sharing
-  if (_twitterButton.isSelected) {
-    
-    [self.TWsocialShare shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
   }
 }
 
@@ -499,6 +488,22 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       }
       _twitterButton.enabled = YES;
     }];
+  }
+}
+
+- (void)shareToSocialMedia {
+  
+  //facebook sharing
+  if (_facebookButton.isSelected) {
+    
+    LCSocialShareManager *socialShare = [[LCSocialShareManager alloc] init];
+    [socialShare shareToFacebookWithMessage:_postFeedObject.message andImage:postImageView.image];
+  }
+  
+  //twitter sharing
+  if (_twitterButton.isSelected) {
+    
+    [self.TWsocialShare shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
   }
 }
 
