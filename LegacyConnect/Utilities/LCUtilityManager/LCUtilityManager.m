@@ -13,7 +13,7 @@
 #import "LCContact.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-
+static CGFloat kNoResultViewHeight = 60.0f;
 
 @implementation LCUtilityManager
 
@@ -377,6 +377,19 @@
   }
   
   return md;
+}
+
++ (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width
+{
+  UIView * noResultView = [[UIView alloc] init];
+  UILabel * noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, kNoResultViewHeight)];
+  [noResultLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
+  [noResultLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
+  noResultLabel.textAlignment = NSTextAlignmentCenter;
+  noResultLabel.numberOfLines = 2;
+  [noResultLabel setText:text];
+  [noResultView addSubview:noResultLabel];
+  return noResultView;
 }
 
 @end

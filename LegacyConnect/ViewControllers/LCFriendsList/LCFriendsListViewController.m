@@ -29,10 +29,12 @@ static NSString *kTitle = @"FRIENDS";
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andfailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
@@ -51,6 +53,16 @@ static NSString *kTitle = @"FRIENDS";
   }];
 }
 
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else{
+    [self showNoResultsView];
+  }
+}
+
 #pragma mark - private method implementation
 - (void)stopRefreshingViews
 {
@@ -65,6 +77,7 @@ static NSString *kTitle = @"FRIENDS";
   [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -85,6 +98,7 @@ static NSString *kTitle = @"FRIENDS";
   [backButton addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
   UIBarButtonItem * backBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   self.navigationItem.leftBarButtonItem = backBtnItem;
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
 }
 
 #pragma mark - Button actions

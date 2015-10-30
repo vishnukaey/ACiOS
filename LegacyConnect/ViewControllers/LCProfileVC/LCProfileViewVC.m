@@ -35,10 +35,12 @@ static NSInteger const kMilestoneIndex = 0;
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
@@ -56,6 +58,17 @@ static NSInteger const kMilestoneIndex = 0;
     [self didFailedToFetchResults];
   }];
 }
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else{
+    [self showNoResultsView];
+  }
+}
+
 
 #pragma mark - private method implementation
 
@@ -79,6 +92,16 @@ static NSInteger const kMilestoneIndex = 0;
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
+  
+  NSString *message;
+  if (currentProfileState == PROFILE_SELF) {
+    message = NSLocalizedString(@"no_milestones_available_self", nil);
+  }
+  else {
+    message = NSLocalizedString(@"no_milestones_available_others", nil);
+  }
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+
 }
 
 - (void)addPullToRefreshForMileStonesTable
@@ -86,6 +109,7 @@ static NSInteger const kMilestoneIndex = 0;
   [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
   __weak typeof (self) weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -480,27 +504,6 @@ static NSInteger const kMilestoneIndex = 0;
 {
   if (tableView == self.tableView) {
     
-    //MILESTONES
-    if (self.results.count == 0) {
-      
-      NSString *message;
-      if (currentProfileState == PROFILE_SELF) {
-        message = @"Tap \"...\" in any of your posts to add as a milestone.";
-        
-      }
-      else {
-        message = @"No milestones available.";
-      }
-      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
-      
-      tableView.backgroundColor = [UIColor whiteColor];
-      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-      tableView.allowsSelection = NO;
-      return cell;
-    }
-    
-    else {
-      
       JTTABLEVIEW_cellForRowAtIndexPath
       
       LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
@@ -529,7 +532,6 @@ static NSInteger const kMilestoneIndex = 0;
       tableView.allowsSelection = YES;
       
       return cell;
-    }
     
   }
   else if (tableView == interestsTable){
