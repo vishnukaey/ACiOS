@@ -13,8 +13,6 @@
 #import "LCContact.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-static CGFloat kNoResultViewHeight = 60.0f;
-
 @implementation LCUtilityManager
 
 + (BOOL)isNetworkAvailable
