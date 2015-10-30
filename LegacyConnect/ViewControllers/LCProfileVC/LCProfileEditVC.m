@@ -155,8 +155,17 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    [self showImageCropViewWithImage:actualAvatarImage];
-    
+    NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                          options:0
+                         progress:nil
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                          if (image) {
+                            [self showImageCropViewWithImage:image];
+                          }
+                          [MBProgressHUD hideHUDForView:self.view animated:YES];                      }];
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -214,8 +223,17 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    [self showImageCropViewWithImage:actualHeaderImage];
-    [self validateFields];
+    NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.headerPhotoURL];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                          options:0
+                         progress:nil
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                          if (image) {
+                            [self showImageCropViewWithImage:image];
+                          }
+                          [MBProgressHUD hideHUDForView:self.view animated:YES];                      }];
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
