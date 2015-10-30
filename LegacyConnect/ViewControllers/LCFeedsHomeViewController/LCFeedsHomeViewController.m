@@ -29,11 +29,13 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super startFetchingResults];
   [LCAPIManager getHomeFeedsWithLastFeedId:nil success:^(NSArray *response) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
@@ -81,6 +83,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  
+//  UITableViewCell * loaderCell = [[UITableViewCell alloc] init];
+//  [loaderCell setBackgroundColor:[UIColor redColor]];
+//  [loaderCell.contentView setBackgroundColor:[UIColor greenColor]];
+//  self.nextPageLoaderCell = loaderCell;
+  
   
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;
@@ -174,6 +182,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewDidLoad];
   [self initialUISetUp];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [self startFetchingResults];
 }
 
