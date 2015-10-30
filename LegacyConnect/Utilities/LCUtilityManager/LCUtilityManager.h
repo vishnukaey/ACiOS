@@ -39,4 +39,5 @@
 + (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString;
 
 + (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width;
++ (UITableViewCell*)getNextPageLoaderCell;
 @end

@@ -76,6 +76,8 @@
 
 - (IBAction)likeButtonClicked:(id)sender
 {
+  UIButton * btn = (UIButton*)sender;
+  [btn setEnabled:NO];
   if ([self.feed.didLike boolValue]) {
     [self.thanksButtonImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
@@ -83,9 +85,11 @@
     [LCAPIManager unlikePost:self.feed.entityID withSuccess:^(id response) {
       self.feed.didLike = kUnLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
       [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+      [btn setEnabled:YES];
     }];
   }
   else
@@ -96,9 +100,11 @@
     [LCAPIManager likePost:self.feed.entityID withSuccess:^(id response) {
       self.feed.didLike = kLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
       [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+      [btn setEnabled:YES];
     }];
   }
 }

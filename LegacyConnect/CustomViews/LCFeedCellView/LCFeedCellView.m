@@ -214,8 +214,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [self setPostDescription];
 }
 
-- (IBAction)likeAction
+- (IBAction)likeAction:(id)sender
 {
+  UIButton *btn = (UIButton*)sender;
+  [btn setEnabled:NO];
+  
   if ([self.feedObject.didLike boolValue]) {
     [thanksBtnImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
@@ -224,9 +227,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [LCAPIManager unlikePost:self.feedObject.entityID withSuccess:^(id response) {
       self.feedObject.didLike = kUnLikedStatus;
       self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
       [thanksLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount]];
+      [btn setEnabled:YES];
     }];
   }
   else
@@ -237,9 +242,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [LCAPIManager likePost:self.feedObject.entityID withSuccess:^(id response) {
       self.feedObject.didLike = kLikedStatus;
       self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
       [thanksLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount]];
+      [btn setEnabled:YES];
     }];
   }
 }
