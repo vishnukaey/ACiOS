@@ -101,6 +101,7 @@ static NSString *kTitle = @"FRIENDS";
   UIBarButtonItem * backBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   self.navigationItem.leftBarButtonItem = backBtnItem;
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
 
 #pragma mark - Button actions

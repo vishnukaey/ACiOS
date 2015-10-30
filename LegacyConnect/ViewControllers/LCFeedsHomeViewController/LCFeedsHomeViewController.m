@@ -46,12 +46,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super startFetchingNextResults];
   [LCAPIManager getHomeFeedsWithLastFeedId:[(LCFeed*)[self.results lastObject] feedId] success:^(NSArray *response) {
-    [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-    [self didFetchNextResults:response haveMoreData:hasMoreData];
+//    [self stopRefreshingViews];
+//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+//    [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
-    [self stopRefreshingViews];
-    [self didFailedToFetchResults];
+//    [self stopRefreshingViews];
+//    [self didFailedToFetchResults];
   }];
 }
 
@@ -83,12 +83,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
-  
-//  UITableViewCell * loaderCell = [[UITableViewCell alloc] init];
-//  [loaderCell setBackgroundColor:[UIColor redColor]];
-//  [loaderCell.contentView setBackgroundColor:[UIColor greenColor]];
-//  self.nextPageLoaderCell = loaderCell;
-  
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;
