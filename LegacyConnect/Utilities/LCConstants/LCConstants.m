@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER QA_SERVER
+#define CURRENT_SERVER DEV_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -177,6 +177,8 @@ NSString *const kTwitterCallbackNotification = @"twitter_callback_notification";
 NSString *const kUserDataUpdatedNotification = @"user_data_updated_notification";
 
 NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
+NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpdated";
+NSString *const kUserProfileImpactsUpdateNotification = @"userProfileImpactsUpdated";
 
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";
