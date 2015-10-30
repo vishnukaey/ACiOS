@@ -32,9 +32,11 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
@@ -50,6 +52,17 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     [self didFailedToFetchResults];
   }];
 }
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else{
+    [self showNoResultsView];
+  }
+}
+
 
 #pragma mark - private method implementation
 - (void)stopRefreshingViews
@@ -67,15 +80,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  
-  
-  [self.nextPageLoaderCell setBackgroundColor:[UIColor redColor]];
-  [self.nextPageLoaderCell.contentView setBackgroundColor:[UIColor redColor]];
-
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
   
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;
   [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -172,6 +182,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [super viewWillAppear:animated];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   self.navigationController.navigationBarHidden = YES;
+  
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [self.tableView reloadData];
 }
