@@ -48,7 +48,6 @@
 		0BB33DA51BA812A3009E6D0C /* Gotham-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D9D1BA812A3009E6D0C /* Gotham-MediumItalic.otf */; };
 		0BB33DA71BA81315009E6D0C /* LCCommentCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DA61BA81315009E6D0C /* LCCommentCellXIB.xib */; };
 		0BB33DAB1BA8132A009E6D0C /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB33DA91BA8132A009E6D0C /* LCFeedCellView.m */; };
-		0BB33DAC1BA8132A009E6D0C /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DAA1BA8132A009E6D0C /* LCFeedcellXIB.xib */; };
 		0BB33DAF1BA8133F009E6D0C /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB33DAE1BA8133F009E6D0C /* LCGIButton.m */; };
 		0BB33DB41BA81359009E6D0C /* Community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB01BA81359009E6D0C /* Community.storyboard */; };
 		0BB33DB51BA81359009E6D0C /* Interests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB11BA81359009E6D0C /* Interests.storyboard */; };
@@ -143,6 +142,7 @@
 		CEBED6AD1B5FAE200012FEBB /* LCCommunityMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AC1B5FAE200012FEBB /* LCCommunityMembers.m */; };
 		CEBED6B01B5FAE460012FEBB /* LCCommunityDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
+		CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */; settings = {ASSET_TAGS = (); }; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
 /* End PBXBuildFile section */
 
@@ -225,7 +225,6 @@
 		0BB33DA61BA81315009E6D0C /* LCCommentCellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCCommentCellXIB.xib; path = CustomViews/LCCommentCell/LCCommentCellXIB.xib; sourceTree = "<group>"; };
 		0BB33DA81BA8132A009E6D0C /* LCFeedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedCellView.h; path = CustomViews/LCFeedCellView/LCFeedCellView.h; sourceTree = "<group>"; };
 		0BB33DA91BA8132A009E6D0C /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView/LCFeedCellView.m; sourceTree = "<group>"; };
-		0BB33DAA1BA8132A009E6D0C /* LCFeedcellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCFeedcellXIB.xib; path = CustomViews/LCFeedCellView/LCFeedcellXIB.xib; sourceTree = "<group>"; };
 		0BB33DAD1BA8133F009E6D0C /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton/LCGIButton.h; sourceTree = "<group>"; };
 		0BB33DAE1BA8133F009E6D0C /* LCGIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGIButton.m; path = CustomViews/LCGIButton/LCGIButton.m; sourceTree = "<group>"; };
 		0BB33DB01BA81359009E6D0C /* Community.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Community.storyboard; path = Storyboards/Community.storyboard; sourceTree = "<group>"; };
@@ -377,6 +376,7 @@
 		CEBED6AF1B5FAE460012FEBB /* LCCommunityDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommunityDateSelection.m; path = ViewControllers/LCCommunityVC/LCCommunityDateSelection.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
+		CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCFeedcellXIB.xib; path = CustomViews/LCFeedCellView/LCFeedcellXIB.xib; sourceTree = "<group>"; };
 		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
 		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -695,9 +695,9 @@
 		0BB7B3711B57DEC800261658 /* LCFeedCellView */ = {
 			isa = PBXGroup;
 			children = (
+				CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */,
 				0BB33DA81BA8132A009E6D0C /* LCFeedCellView.h */,
 				0BB33DA91BA8132A009E6D0C /* LCFeedCellView.m */,
-				0BB33DAA1BA8132A009E6D0C /* LCFeedcellXIB.xib */,
 			);
 			name = LCFeedCellView;
 			sourceTree = "<group>";
@@ -1448,7 +1448,7 @@
 				0BB33DDA1BA81401009E6D0C /* default-placeholder.png in Resources */,
 				0BB33DEE1BA81401009E6D0C /* warning@2x.png in Resources */,
 				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,
-				0BB33DAC1BA8132A009E6D0C /* LCFeedcellXIB.xib in Resources */,
+				CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */,
 				0BB33D9F1BA812A3009E6D0C /* Gotham-BoldItalic.otf in Resources */,
 				0BB33DEF1BA81401009E6D0C /* warning@3x.png in Resources */,
 				0BB33DB71BA81359009E6D0C /* SignUp.storyboard in Resources */,

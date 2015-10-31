@@ -32,16 +32,13 @@ static CGFloat kIndexForPostDetails = 0;
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [self setNoResultViewHidden:YES];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
-    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andfailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFailedToFetchResults];
-    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
@@ -55,16 +52,6 @@ static CGFloat kIndexForPostDetails = 0;
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];
   }];
-}
-
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else{
-    [self showNoResultsView];
-  }
 }
 
 #pragma mark - private method implementation
@@ -131,7 +118,6 @@ static CGFloat kIndexForPostDetails = 0;
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
   postBtn = postButton;
   [self createDummyCommentFieldViewWithinputAccessoryView:commentField];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_comments_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
 }
 
 

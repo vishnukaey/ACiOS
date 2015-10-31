@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *thanksCountLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *commentIconImahe;
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingActivity;
+@property (weak, nonatomic) IBOutlet UIButton *retryButton;
+
 
 @end
 
@@ -25,7 +28,6 @@
 
 - (void)dataPopulation
 {
-  [self.fullScreenImageView sd_setImageWithURL:[NSURL URLWithString:self.feed.image] placeholderImage:nil];
   
   NSString * user = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:self.feed.firstName],[LCUtilityManager performNullCheckAndSetValue:self.feed.lastName]];
   
@@ -41,10 +43,45 @@
   [self.commentCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.commentCount]];
 }
 
+- (IBAction)tryImageLoading:(id)sender
+{
+  
+  self.imageLoadingActivity.hidden = false;
+  [self.imageLoadingActivity startAnimating];
+  self.retryButton.hidden = true;
+  if (sender)//controlled caching for retry failed or null images
+  {
+    [self.fullScreenImageView sd_setImageWithURL:[NSURL URLWithString:self.feed.image] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+      [self.imageLoadingActivity stopAnimating];
+      self.imageLoadingActivity.hidden = true;
+      if (!image) {
+        self.retryButton.layer.cornerRadius = 5;
+        self.retryButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.retryButton.layer.borderWidth = 3;
+        self.retryButton.hidden = false;
+      }
+    }];
+  }
+  else//default behaviour
+  {
+    [self.fullScreenImageView sd_setImageWithURL:[NSURL URLWithString:self.feed.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+      [self.imageLoadingActivity stopAnimating];
+      self.imageLoadingActivity.hidden = true;
+      if (!image) {
+        self.retryButton.layer.cornerRadius = 5;
+        self.retryButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.retryButton.layer.borderWidth = 3;
+        self.retryButton.hidden = false;
+      }
+    }];
+  }
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self tryImageLoading:nil];
   [self dataPopulation];
 }
 
@@ -76,6 +113,8 @@
 
 - (IBAction)likeButtonClicked:(id)sender
 {
+  UIButton * btn = (UIButton*)sender;
+  [btn setEnabled:NO];
   if ([self.feed.didLike boolValue]) {
     [self.thanksButtonImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
@@ -83,9 +122,11 @@
     [LCAPIManager unlikePost:self.feed.entityID withSuccess:^(id response) {
       self.feed.didLike = kUnLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
       [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+      [btn setEnabled:YES];
     }];
   }
   else
@@ -96,9 +137,11 @@
     [LCAPIManager likePost:self.feed.entityID withSuccess:^(id response) {
       self.feed.didLike = kLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
       [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+      [btn setEnabled:YES];
     }];
   }
 }

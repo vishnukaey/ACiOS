@@ -24,7 +24,9 @@ static NSString *kTitle = @"FRIENDS";
 - (void)startFetchingResults
 {
   [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -99,6 +101,7 @@ static NSString *kTitle = @"FRIENDS";
   UIBarButtonItem * backBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   self.navigationItem.leftBarButtonItem = backBtnItem;
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
 
 #pragma mark - Button actions
@@ -201,6 +204,7 @@ static NSString *kTitle = @"FRIENDS";
     [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
+    
      } andFailure:^(NSString *error) {
        //Set previous button state
        [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];

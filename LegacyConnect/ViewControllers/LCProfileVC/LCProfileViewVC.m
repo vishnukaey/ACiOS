@@ -64,7 +64,8 @@ static NSInteger const kMilestoneIndex = 0;
   if (hidded) {
     [self hideNoResultsView];
   }
-  else{
+  else
+  {
     [self showNoResultsView];
   }
 }
@@ -92,16 +93,6 @@ static NSInteger const kMilestoneIndex = 0;
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
-  
-  NSString *message;
-  if (currentProfileState == PROFILE_SELF) {
-    message = NSLocalizedString(@"no_milestones_available_self", nil);
-  }
-  else {
-    message = NSLocalizedString(@"no_milestones_available_others", nil);
-  }
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
-
 }
 
 - (void)addPullToRefreshForMileStonesTable
@@ -120,9 +111,9 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void) loadUserInfo {
   
-  userNameLabel.text = @"";
-  memeberSincelabel.text = @"";
-  locationLabel.text = @"";
+  userNameLabel.text = kEmptyStringValue;
+  memeberSincelabel.text = kEmptyStringValue;
+  locationLabel.text = kEmptyStringValue;
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
@@ -131,6 +122,19 @@ static NSInteger const kMilestoneIndex = 0;
   {
     currentProfileState = PROFILE_SELF;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
+    
+    //Add Notification observers
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserData:)
+                                                 name:kUserProfileUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateFriendsCount:)
+                                                 name:kUserProfileFrinendsUpdateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateImpactsCount:)
+                                                 name:kUserProfileImpactsUpdateNotification
+                                               object:nil];
   }
   else
   {
@@ -208,16 +212,6 @@ static NSInteger const kMilestoneIndex = 0;
   }];
 }
 
--(void)updateUserData:(NSNotification *)notification {
-  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
-  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
-  dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self loadUserDetails];
-    
-  });
-  
-}
-
 - (void)addTabMenu
 {
   tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -248,6 +242,7 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)loadInterests
 {
+  [self setNoResultViewHidden:YES];
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
     interestsArray = responses;
@@ -260,9 +255,9 @@ static NSInteger const kMilestoneIndex = 0;
 }
 
 - (void) loadEvents {
+  
+  [self setNoResultViewHidden:YES];
   [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
-  
-  
   [LCAPIManager getUserEventsForUserId:userDetail.userID andLastEventId:nil withSuccess:^(NSArray *response) {
     
     actionsArray = response;
@@ -274,6 +269,42 @@ static NSInteger const kMilestoneIndex = 0;
   }];
 }
 
+
+#pragma mark - Notification Receivers
+
+-(void)updateUserData:(NSNotification *)notification {
+  
+  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+    [self loadUserDetails];
+    
+  });
+}
+
+-(void)updateFriendsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [userDetail.friendCount integerValue] - 1;
+    userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
+  }
+}
+
+-(void)updateImpactsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [userDetail.impactCount integerValue] - 1;
+    userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
+  }
+}
+
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -283,6 +314,21 @@ static NSInteger const kMilestoneIndex = 0;
   [self loadUserInfo];
   [self mileStonesClicked:nil];
   [self addTabMenu];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  if (!self.noResultsView) {
+    NSString *message;
+    if (currentProfileState == PROFILE_SELF) {
+      message = NSLocalizedString(@"no_milestones_available_self", nil);
+    }
+    else {
+      message = NSLocalizedString(@"no_milestones_available_others", nil);
+    }
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  }
+  [super viewDidAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -297,7 +343,6 @@ static NSInteger const kMilestoneIndex = 0;
   if (self.navigationController.viewControllers.count <= 1) {
     [backButton setHidden:YES];
   }
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
   if (tabmenu.currentIndex == kMilestoneIndex) {
     [self.tableView reloadData];
   }
@@ -308,7 +353,20 @@ static NSInteger const kMilestoneIndex = 0;
   [super viewWillDisappear:animated];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
+}
+
+- (void)dealloc {
+  
+  //Notifications
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kUserProfileUpdateNotification
+                                                object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kUserProfileFrinendsUpdateNotification
+                                                  object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kUserProfileImpactsUpdateNotification
+                                                object:nil];
 }
 
 #pragma mark - button actions
@@ -485,13 +543,16 @@ static NSInteger const kMilestoneIndex = 0;
     return self.results.count;
   }
   else if (tableView == interestsTable) {
-    if (interestsArray.count == 0) {
+    if (interestsArray.count == 0 && tabmenu.currentIndex == 1) {
+      /**
+       * added tabmenu.currentIndex to temp fix the no results mix isssues.
+       */
       return 1;
     }
     return interestsArray.count;
   }
   else if (tableView == actionsTable) {
-    if (actionsArray.count == 0) {
+    if (actionsArray.count == 0 && tabmenu.currentIndex == 2) {
       return 1;
     }
     return actionsArray.count;
