@@ -12,6 +12,7 @@
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import "LCFeedsCommentsController.h"
 #import "LCCreatePostViewController.h"
+#import "LCProfileViewVC.h"
 
 @implementation LCImapactsViewController
 @synthesize customNavigationHeight, userDetail;
@@ -152,7 +153,21 @@
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
-
+- (void)feedUpdatedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
+  for (int i = 0; i<self.results.count ; i++) {
+    LCFeed *feed = self.results[i];
+    if ([feed.entityID isEqualToString:newfeed.entityID])
+    {
+      [self.results replaceObjectAtIndex:i withObject:newfeed];
+    }
+  }
+  CGPoint offset = self.tableView.contentOffset;
+  [self.tableView reloadData];
+  [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+  [self.tableView setContentOffset:offset];
+}
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -168,6 +183,8 @@
   [self addPullToRefresh];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [self startFetchingResults];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -187,6 +204,10 @@
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - button actions
@@ -258,6 +279,18 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
+  {
+    
+  }
+  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 @end

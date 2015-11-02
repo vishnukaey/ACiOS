@@ -12,9 +12,7 @@
 #import <JTTableViewController.h>
 
 @interface LCFeedsHomeViewController : JTTableViewController<UITableViewDataSource, UITableViewDelegate>
-{
-  NSMutableArray *feedsArray;
-}
+
 
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 

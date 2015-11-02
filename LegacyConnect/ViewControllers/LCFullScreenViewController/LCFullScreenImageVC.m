@@ -103,13 +103,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
   }
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
-  [super viewWillDisappear:animated];
-}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+//  [appdel.GIButton setHidden:NO];
+//  [appdel.menuButton setHidden:NO];
+//  [super viewWillDisappear:animated];
+//}
 
 - (IBAction)likeButtonClicked:(id)sender
 {
@@ -119,7 +119,7 @@
     [self.thanksButtonImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
     [self.thanksCountLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] -1]];
-    [LCAPIManager unlikePost:self.feed.entityID withSuccess:^(id response) {
+    [LCAPIManager unlikePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kUnLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];
@@ -134,7 +134,7 @@
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
     [self.thanksCountLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
     [self.thanksButtonImage setLikeUnlikeStatusImage:kLikedStatus];
-    [LCAPIManager likePost:self.feed.entityID withSuccess:^(id response) {
+    [LCAPIManager likePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];

@@ -157,7 +157,9 @@ static CGFloat kIndexForPostDetails = 0;
 
 -(void)changeFirstResponder
 {
-  [commentTextField becomeFirstResponder]; //will return YES;
+  if (commentTextField_dup.isFirstResponder) {
+    [commentTextField becomeFirstResponder]; //will return YES;
+  }
 }
 
 - (void)addTextFieldTextDidChangeNotifiaction
@@ -181,12 +183,27 @@ static CGFloat kIndexForPostDetails = 0;
   [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
 }
 
+- (void)feedUpdatedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
+  if ([self.feedObject.entityID isEqualToString:newfeed.entityID])
+  {
+    self.feedObject = newfeed;
+  }
+  CGPoint offset = self.tableView.contentOffset;
+  [self.tableView reloadData];
+  [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+  [self.tableView setContentOffset:offset];
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   [self initialUISetUp];
   [self startFetchingResults];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -215,13 +232,17 @@ static CGFloat kIndexForPostDetails = 0;
   [super didReceiveMemoryWarning];
 }
 
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - button actions
 -(void)postAction
 {
   if (commentTextField.text.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
-    [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
+    [LCAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {
       [self.results insertObject:(LCComment*)response atIndex:0];
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
       [commentTextField setText:nil];
@@ -362,8 +383,11 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)resignAllResponders
 {
+  [commentTextField setEnabled:NO];
+  [commentTextField_dup setEnabled:NO];
   [commentTextField resignFirstResponder];
-  [commentTextField_dup resignFirstResponder];
+  [commentTextField setEnabled:YES];
+  [commentTextField_dup setEnabled:YES];
   [commentTextField_dup setText:commentTextField.text];
 }
 

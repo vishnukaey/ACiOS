@@ -130,7 +130,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="likeAction" destination="Eee-dM-J0u" eventType="touchUpInside" id="JK6-dz-klw"/>
+                                    <action selector="likeAction:" destination="Eee-dM-J0u" eventType="touchUpInside" id="Xyz-tg-fjJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaI-a7-PHn">
