@@ -134,14 +134,22 @@
   
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
-      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-    }
-                  andFailure:^(NSString *error) {
-                    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-                    NSLog(@"%@",error);
-                  }];
+                    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Post" message:@"Are you sure you want to permanently remove this post from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                      [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+                      [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
+                        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                      }
+                                    andFailure:^(NSString *error) {
+                                      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                                      NSLog(@"%@",error);
+                                    }];
+                    }];
+                    [deleteAlert addAction:deletePostActionFinal];
+                    
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+                    [deleteAlert addAction:cancelAction];
+                    [self presentViewController:deleteAlert animated:YES completion:nil];
   }];
   [actionSheet addAction:deletePost];
   
