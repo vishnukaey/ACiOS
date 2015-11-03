@@ -29,6 +29,8 @@
 {
   [super viewDidLoad];
   
+  friendsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
   friendsTableView.checkedImage = [UIImage imageNamed:@"contact_tick"];
   friendsTableView.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   for (LCFriend *friend in alreadySelectedFriends)
@@ -179,6 +181,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   [self checkbuttonAction:cell.checkButton];
 }

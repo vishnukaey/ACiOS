@@ -36,6 +36,7 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  locationsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   locationsTable.checkedImage = [UIImage imageNamed:@"contact_tick"];
   locationsTable.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   locationsArray = [[NSMutableArray alloc] init];

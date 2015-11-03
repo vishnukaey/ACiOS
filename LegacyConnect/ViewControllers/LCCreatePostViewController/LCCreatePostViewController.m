@@ -247,11 +247,15 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [attributtedString appendAttributedString:attributtedTagString];
   if (taggedLocation.length>0)
   {
-    NSAttributedString *attributtedLocationString = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"%Cat %@",0x2014, taggedLocation]
+    NSAttributedString *atString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %C at ",0x2014] attributes:@{
+                                                                                                                                       NSFontAttributeName : POSTTEXT_FONT,
+                                                                                                                                       NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],}];
+    NSAttributedString *attributtedLocationString = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"%@", taggedLocation]
                                                                                     attributes : @{
                                                                                                    NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                                                                                    NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],
                                                                                                    }];
+    [attributtedString appendAttributedString:atString];
     [attributtedString appendAttributedString:attributtedLocationString];
   }
   [tagsLabel setAttributedText:attributtedString];
