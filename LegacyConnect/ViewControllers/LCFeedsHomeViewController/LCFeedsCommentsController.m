@@ -157,7 +157,9 @@ static CGFloat kIndexForPostDetails = 0;
 
 -(void)changeFirstResponder
 {
-  [commentTextField becomeFirstResponder]; //will return YES;
+  if (commentTextField_dup.isFirstResponder) {
+    [commentTextField becomeFirstResponder]; //will return YES;
+  }
 }
 
 - (void)addTextFieldTextDidChangeNotifiaction
@@ -221,7 +223,7 @@ static CGFloat kIndexForPostDetails = 0;
   if (commentTextField.text.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
-    [LCAPIManager commentPost:self.feedObject.entityID comment:commentTextField.text withSuccess:^(id response) {
+    [LCAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {
       [self.results insertObject:(LCComment*)response atIndex:0];
       self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
       [commentTextField setText:nil];
@@ -318,7 +320,6 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   vc.commentAction = ^ (id sender, BOOL showComments) {
@@ -362,8 +363,11 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)resignAllResponders
 {
+  [commentTextField setEnabled:NO];
+  [commentTextField_dup setEnabled:NO];
   [commentTextField resignFirstResponder];
-  [commentTextField_dup resignFirstResponder];
+  [commentTextField setEnabled:YES];
+  [commentTextField_dup setEnabled:YES];
   [commentTextField_dup setText:commentTextField.text];
 }
 

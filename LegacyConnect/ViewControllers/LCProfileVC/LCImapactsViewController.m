@@ -12,6 +12,7 @@
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import "LCFeedsCommentsController.h"
 #import "LCCreatePostViewController.h"
+#import "LCProfileViewVC.h"
 
 @implementation LCImapactsViewController
 @synthesize customNavigationHeight, userDetail;
@@ -152,8 +153,6 @@
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
-
-
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -258,6 +257,18 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
+  {
+    
+  }
+  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 @end

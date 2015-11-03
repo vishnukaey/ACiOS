@@ -131,7 +131,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;
@@ -149,7 +148,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     if (show) {
       [self showFeedCommentsWithFeed:viewController.feed];
     } else {
-      [self.tableView reloadData];
+//      [self.tableView reloadData];
     }
   }];
 }
@@ -188,7 +187,9 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   self.navigationController.navigationBarHidden = YES;
   
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self.tableView reloadData];
+//  [self.tableView reloadData];
+  
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

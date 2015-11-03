@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
-#import <JTTableViewController.h>
+#import "LCFeedTableViewController.h"
 
-@interface LCFeedsHomeViewController : JTTableViewController<UITableViewDataSource, UITableViewDelegate>
-{
-  NSMutableArray *feedsArray;
-}
+@interface LCFeedsHomeViewController : LCFeedTableViewController<UITableViewDataSource, UITableViewDelegate>
+
 
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 

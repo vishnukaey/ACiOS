@@ -158,6 +158,8 @@ extern NSString *const kTwitterCallbackNotification;
 extern NSString *const kUserProfileUpdateNotification;
 extern NSString *const kUserProfileFrinendsUpdateNotification;
 extern NSString *const kUserProfileImpactsUpdateNotification;
+extern NSString *const kfeedUpdatedotification;
+
 
 extern NSString *const kTWOauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;

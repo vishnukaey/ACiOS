@@ -10,6 +10,9 @@
 #import "LCThanksButtonImage.h"
 
 @interface LCFullScreenImageVC ()
+{
+   BOOL GIButton_preState, menuButton_preState;
+}
 @property(nonatomic, retain)UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *fullScreenImageView;
@@ -19,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingActivity;
 @property (weak, nonatomic) IBOutlet UIButton *retryButton;
-
 
 @end
 
@@ -83,12 +85,26 @@
   [super viewDidLoad];
   [self tryImageLoading:nil];
   [self dataPopulation];
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  GIButton_preState = [appdel.GIButton isHidden];
+  menuButton_preState = [appdel.menuButton isHidden];
+  [appdel.GIButton setHidden: true];
+  [appdel.menuButton setHidden: true];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden: GIButton_preState];
+  [appdel.menuButton setHidden: menuButton_preState];
 }
 
 #pragma mark - button actions
@@ -103,13 +119,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
   }
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
-  [super viewWillDisappear:animated];
-}
+//
+//- (void)viewWillDisappear:(BOOL)animated {
+//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+//  [appdel.GIButton setHidden:NO];
+//  [appdel.menuButton setHidden:NO];
+//  [super viewWillDisappear:animated];
+//}
 
 - (IBAction)likeButtonClicked:(id)sender
 {
@@ -119,7 +135,7 @@
     [self.thanksButtonImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
     [self.thanksCountLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] -1]];
-    [LCAPIManager unlikePost:self.feed.entityID withSuccess:^(id response) {
+    [LCAPIManager unlikePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kUnLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];
@@ -134,7 +150,7 @@
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
     [self.thanksCountLabel setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
     [self.thanksButtonImage setLikeUnlikeStatusImage:kLikedStatus];
-    [LCAPIManager likePost:self.feed.entityID withSuccess:^(id response) {
+    [LCAPIManager likePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];

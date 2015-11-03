@@ -405,11 +405,11 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)likePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)likePost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostLikeURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -420,6 +420,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Post liked.");
+       [LCNotificationManager postLikedNotificationfromResponse:response forPost:post];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -429,11 +430,11 @@ static LCAPIManager *sharedManager = nil;
 
 }
 
-+ (void) unlikePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void) unlikePost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostUnlikeURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -444,6 +445,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Post unliked.");
+       [LCNotificationManager postUnLikedNotificationfromResponse:response forPost:post];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -452,11 +454,11 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)commentPost:(NSString *)postId comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)commentPost:(LCFeed *)post comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostCommentURL];
-  NSDictionary *dict = @{kPostIDKey: postId, kPostCommentKey:comment};
+  NSDictionary *dict = @{kPostIDKey: post.entityID, kPostCommentKey:comment};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -473,7 +475,7 @@ static LCAPIManager *sharedManager = nil;
 
        if(!error)
        {
-         LCDLog(@"Getting Interests successful! ");
+         [LCNotificationManager postCommentedNotificationforPost:post];
          success(comment);
        }
        else
