@@ -35,11 +35,17 @@ static NSInteger const kMilestoneIndex = 0;
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
+    if (tabmenu.currentIndex != kMilestoneIndex) {
+      [self setNoResultViewHidden:YES];
+    }
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
+    if (tabmenu.currentIndex != kMilestoneIndex) {
+      [self setNoResultViewHidden:YES];
+    }
     [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
