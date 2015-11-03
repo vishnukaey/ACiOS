@@ -64,7 +64,7 @@ static NSInteger const kMilestoneIndex = 0;
   if (hidded) {
     [self hideNoResultsView];
   }
-  else
+  else if (tabmenu.currentIndex == kMilestoneIndex)
   {
     [self showNoResultsView];
   }
@@ -245,6 +245,7 @@ static NSInteger const kMilestoneIndex = 0;
   [self setNoResultViewHidden:YES];
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
+    [self setNoResultViewHidden:YES];// -- Temp Fix: No result over laping issue--//
     interestsArray = responses;
     [interestsTable reloadData];
     [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
@@ -259,7 +260,7 @@ static NSInteger const kMilestoneIndex = 0;
   [self setNoResultViewHidden:YES];
   [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
   [LCAPIManager getUserEventsForUserId:userDetail.userID andLastEventId:nil withSuccess:^(NSArray *response) {
-    
+    [self setNoResultViewHidden:YES]; // -- Temp Fix: No result over laping issue--//
     actionsArray = response;
     [actionsTable reloadData];
     [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];

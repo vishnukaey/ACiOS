@@ -264,6 +264,12 @@ static NSString *kTitle = @"MY FEED";
   createPostVC.photoPostPhoto = chosenImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - leftmenu delegates

@@ -89,6 +89,7 @@
             <connections>
                 <outlet property="commentLabel" destination="MmC-iR-XFX" id="FN3-ep-41j"/>
                 <outlet property="profilePic" destination="7tr-BC-ppO" id="pyF-jO-Pvc"/>
+                <outlet property="seperator" destination="TJL-Yg-CTM" id="ZBD-MD-Gj9"/>
                 <outlet property="timeLabel" destination="MtL-zH-fbZ" id="Fhd-AT-eda"/>
                 <outlet property="userNameLabel" destination="SPp-c3-CKE" id="B0O-k1-O5N"/>
             </connections>
