@@ -59,6 +59,7 @@
   
   _searchBar.layer.cornerRadius = 6.0;
   _searchBar.clipsToBounds = YES;
+  [_searchBar setReturnKeyType:UIReturnKeyDone];
   // Do any additional setup after loading the view.
 }
 
@@ -401,7 +402,10 @@
   }
 }
 
-
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+  [searchBar resignFirstResponder];
+}
 
 - (IBAction)searchCancelButtonClicked:(UIButton *)cancelButton
 {
