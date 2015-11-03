@@ -131,7 +131,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;

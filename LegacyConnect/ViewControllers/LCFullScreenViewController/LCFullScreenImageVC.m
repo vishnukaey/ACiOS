@@ -10,6 +10,9 @@
 #import "LCThanksButtonImage.h"
 
 @interface LCFullScreenImageVC ()
+{
+   BOOL GIButton_preState, menuButton_preState;
+}
 @property(nonatomic, retain)UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *fullScreenImageView;
@@ -19,7 +22,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingActivity;
 @property (weak, nonatomic) IBOutlet UIButton *retryButton;
-
 
 @end
 
@@ -83,12 +85,26 @@
   [super viewDidLoad];
   [self tryImageLoading:nil];
   [self dataPopulation];
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  GIButton_preState = [appdel.GIButton isHidden];
+  menuButton_preState = [appdel.menuButton isHidden];
+  [appdel.GIButton setHidden: true];
+  [appdel.menuButton setHidden: true];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden: GIButton_preState];
+  [appdel.menuButton setHidden: menuButton_preState];
 }
 
 #pragma mark - button actions
