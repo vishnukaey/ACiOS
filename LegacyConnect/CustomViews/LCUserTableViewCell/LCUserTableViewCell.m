@@ -71,19 +71,19 @@
 - (void)addFriend:(LCUserDetail*)friendObj andFriendButton:(LCfriendButton*)btn
 {
   LCfriendButton * friendBtn = btn;
-  
+  btn.userInteractionEnabled = NO;
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
-  
   [LCAPIManager sendFriendRequest:friendObj.userID withSuccess:^(NSArray *response) {
     NSLog(@"%@",response);
+    btn.userInteractionEnabled = YES;
     friendObj.isFriend = kFriendStatusWaiting;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
+    btn.userInteractionEnabled = YES;
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
   }];
   
 }
-//
 
 
 @end

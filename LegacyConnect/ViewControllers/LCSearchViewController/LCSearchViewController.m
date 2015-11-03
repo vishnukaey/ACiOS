@@ -53,6 +53,10 @@
   
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
+  // For fixing unnecessary border above search bar
+  [_searchBar setBackgroundImage:[UIImage new]];
+  
   _searchBar.layer.cornerRadius = 6.0;
   _searchBar.clipsToBounds = YES;
   // Do any additional setup after loading the view.
@@ -357,5 +361,9 @@
   [self.usersTableView reloadData];
   [self.interestsCollectionView reloadData];
   [self.causesCollectionView reloadData];
+  if(searchResultObject.usersArray.count == 0)
+  {
+    
+  }
 }
 @end
