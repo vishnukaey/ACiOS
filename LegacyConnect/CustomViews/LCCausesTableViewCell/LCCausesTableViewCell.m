@@ -48,7 +48,7 @@
   {
     _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Supporters",[_cause.supporters intValue]+1];
     [_causeSupportButton setSelected:YES];
-    [LCAPIManager followInterest:_cause.causeID withSuccess:^(id response) {
+    [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
       _cause.isSupporting =YES;
       _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]+1];
       _causeSupportButton.userInteractionEnabled = YES;
@@ -62,7 +62,7 @@
   {
     _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Supporters",[_cause.supporters intValue]-1];
     [_causeSupportButton setSelected:NO];
-    [LCAPIManager unfollowInterest:_cause.causeID withSuccess:^(id response) {
+    [LCAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
       _causeSupportButton.userInteractionEnabled = YES;
       _cause.isSupporting = NO;
       _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]-1];
