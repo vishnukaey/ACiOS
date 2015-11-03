@@ -25,6 +25,58 @@
 
 @implementation LCSearchViewController
 
+
+
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  
+//  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+//  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
+//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+//    [self stopRefreshingViews];
+//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+//    [self didFetchResults:response haveMoreData:hasMoreData];
+//    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
+//  } andfailure:^(NSString *error) {
+//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+//    [self stopRefreshingViews];
+//    [self didFailedToFetchResults];
+//    [self setNoResultViewHidden:[self.results count] != 0];
+//  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCAPIManager searchUserUsingsearchKey:_searchBar.text lastUserId:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(id response) {
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andfailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFailedToFetchResults];
+  }];
+  
+//  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+//    [self stopRefreshingViews];
+//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+//    [self didFetchNextResults:response haveMoreData:hasMoreData];
+//  } andfailure:^(NSString *error) {
+//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+//    [self stopRefreshingViews];
+//    [self didFailedToFetchResults];
+//  }];
+  
+  
+}
+
+
+
+
+
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -46,13 +98,13 @@
 
   
   self.tabMenu.menuButtons = @[topButton,usersButton ,interestsButton, causesButton];
-  self.tabMenu.views = @[_topTableView, _usersTableView, _interestsCollectionView, _causesCollectionView];
+  self.tabMenu.views = @[_topTableView, self.tableView, _interestsCollectionView, _causesCollectionView];
   self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
   self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
   self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
   
   self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  self.usersTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
   // For fixing unnecessary border above search bar
   [_searchBar setBackgroundImage:[UIImage new]];
@@ -111,7 +163,7 @@
     if (prev) {
       [prev removeFromSuperview];
     }
-    if (!searchResultObject.usersArray.count && !searchResultObject.interestsArray.count && !searchResultObject.causesArray.count) {
+    if (!self.results.count && !searchResultObject.interestsArray.count && !searchResultObject.causesArray.count) {
       UIView *noResultView = [self getNOResultLabel];
       noResultView.tag = 122;
       noResultView.center = CGPointMake(tableView.frame.size.width/2, noResultView.center.y);
@@ -120,7 +172,7 @@
     
     if(section == 0)
     {
-      return searchResultObject.usersArray.count>3 ? 3 : searchResultObject.usersArray.count;
+      return self.results.count>3 ? 3 : self.results.count;
     }
     else if(section == 1)
     {
@@ -134,16 +186,17 @@
   else
   {
     UIView *prev = [tableView viewWithTag:122];
-    if (prev) {
+    if (prev)
+    {
       [prev removeFromSuperview];
     }
-    if (!searchResultObject.usersArray.count) {
+    if (!self.results.count) {
       UIView *noResultView = [self getNOResultLabel];
       noResultView.tag = 122;
       noResultView.center = CGPointMake(tableView.frame.size.width/2, noResultView.center.y);
       [tableView addSubview:noResultView];
     }
-    return searchResultObject.usersArray.count;
+    return [super tableView:tableView numberOfRowsInSection:section];
   }
 }
 
@@ -217,7 +270,7 @@
     {
       LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
       [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-      LCUserDetail *user = searchResultObject.usersArray[indexPath.row];
+      LCUserDetail *user = self.results[indexPath.row];
       cell.user = user;
       return cell;
     }
@@ -240,9 +293,10 @@
   }
   else
   {
+    JTTABLEVIEW_cellForRowAtIndexPath
     LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCUserDetail *user = searchResultObject.usersArray[indexPath.row];
+    LCUserDetail *user = self.results[indexPath.row];
     cell.user = user;
     return cell;
   }
@@ -258,7 +312,7 @@
       {
         UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
         LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-        vc.userDetail = searchResultObject.usersArray[indexPath.row];
+        vc.userDetail = self.results[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
       }
         break;
@@ -389,12 +443,17 @@
   if(searchBar.text.length == 0)
   {
     searchResultObject = nil;
+    [self.results removeAllObjects];
     [self reloadAllViews];
   }
   else
   {
     [LCAPIManager searchForItem:searchText withSuccess:^(LCSearchResult *searchResult) {
       searchResultObject = searchResult;
+      [self.results removeAllObjects];
+      [super startFetchingResults];
+      BOOL hasMoreData = ([(NSArray*)searchResult.usersArray count] < 10) ? NO : YES;
+      [self didFetchResults:searchResult.usersArray haveMoreData:hasMoreData];
       [self reloadAllViews];
     } andFailure:^(NSString *error) {
     }];
@@ -411,12 +470,8 @@
 -(void)reloadAllViews
 {
   [self.topTableView reloadData];
-  [self.usersTableView reloadData];
+  [self.tableView reloadData];
   [self.interestsCollectionView reloadData];
   [self.causesCollectionView reloadData];
-  if(searchResultObject.usersArray.count == 0)
-  {
-    
-  }
 }
 @end
