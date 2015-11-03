@@ -9,7 +9,7 @@
 #import "LCCreatePostViewController.h"
 
 
-#define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:12]
+#define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:13]
 #define ICONBACK_COLOR [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]
 @interface LCCreatePostViewController ()
 {
@@ -241,7 +241,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:@""];
   NSAttributedString *attributtedTagString = [[NSAttributedString alloc] initWithString : tagsString
                                                                              attributes : @{
-                                                                                            NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
+                                                                                            NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                                                                             NSForegroundColorAttributeName : [UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1],
                                                                                             }];
   [attributtedString appendAttributedString:attributtedTagString];
@@ -249,7 +249,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     NSAttributedString *attributtedLocationString = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"%Cat %@",0x2014, taggedLocation]
                                                                                     attributes : @{
-                                                                                                   NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
+                                                                                                   NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                                                                                    NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],
                                                                                                    }];
     [attributtedString appendAttributedString:attributtedLocationString];

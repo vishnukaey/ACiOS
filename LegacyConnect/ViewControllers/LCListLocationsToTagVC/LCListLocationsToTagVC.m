@@ -13,6 +13,7 @@
 {
   IBOutlet LCMultipleSelectionTable *locationsTable;
   NSMutableArray *locationsArray;
+  IBOutlet LCLocationSearchField *searchTextField;
 }
 
 @end
@@ -43,6 +44,7 @@
     [locationsArray addObject:alreadyTaggedLocation];
     [locationsTable.selectedIDs addObject:alreadyTaggedLocation];
   }
+  [searchTextField setReturnKeyType:UIReturnKeyDone];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,6 +111,11 @@
   [searchBar searchForLocations:searchText];
 }
 
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+  [searchBar resignFirstResponder];
+}
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

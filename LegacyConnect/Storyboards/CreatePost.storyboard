@@ -481,7 +481,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Select friends to add to your post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T0-WY-sFu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                        <color key="backgroundColor" red="0.96862745098039216" green="1" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="QlF-tY-VnZ"/>
                                         </constraints>
@@ -489,6 +489,13 @@
                                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAm-9p-lpX">
+                                        <rect key="frame" x="0.0" y="43" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="UIu-Vj-Bvp"/>
+                                        </constraints>
+                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4N0-M0-Sgk" customClass="LCMultipleSelectionTable">
                                         <rect key="frame" x="0.0" y="44" width="375" height="515"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -573,9 +580,12 @@
                                 <constraints>
                                     <constraint firstItem="4N0-M0-Sgk" firstAttribute="leading" secondItem="peP-Nb-tp6" secondAttribute="leading" id="6Vo-an-3vv"/>
                                     <constraint firstItem="4N0-M0-Sgk" firstAttribute="top" secondItem="3T0-WY-sFu" secondAttribute="bottom" id="Acx-jj-hsA"/>
+                                    <constraint firstAttribute="trailing" secondItem="rAm-9p-lpX" secondAttribute="trailing" id="Och-RY-bkf"/>
+                                    <constraint firstItem="rAm-9p-lpX" firstAttribute="bottom" secondItem="3T0-WY-sFu" secondAttribute="bottom" id="Sci-S6-gep"/>
                                     <constraint firstItem="3T0-WY-sFu" firstAttribute="top" secondItem="peP-Nb-tp6" secondAttribute="top" id="WZY-lx-toj"/>
                                     <constraint firstAttribute="trailing" secondItem="4N0-M0-Sgk" secondAttribute="trailing" id="bRm-Qu-Dyl"/>
                                     <constraint firstAttribute="bottom" secondItem="4N0-M0-Sgk" secondAttribute="bottom" id="dWc-6J-Zdx"/>
+                                    <constraint firstItem="rAm-9p-lpX" firstAttribute="leading" secondItem="peP-Nb-tp6" secondAttribute="leading" id="duf-X9-sBW"/>
                                     <constraint firstAttribute="trailing" secondItem="3T0-WY-sFu" secondAttribute="trailing" id="jIA-6X-45G"/>
                                     <constraint firstItem="3T0-WY-sFu" firstAttribute="leading" secondItem="peP-Nb-tp6" secondAttribute="leading" id="sEW-CR-Bf3"/>
                                 </constraints>
@@ -774,6 +784,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="locationsTable" destination="mZm-E1-ZHg" id="10n-As-Zjw"/>
+                        <outlet property="searchTextField" destination="WlL-y0-rRX" id="tKb-i1-AEu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NKK-K1-zax" userLabel="First Responder" sceneMemberID="firstResponder"/>
