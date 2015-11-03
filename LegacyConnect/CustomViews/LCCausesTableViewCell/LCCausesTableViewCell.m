@@ -43,24 +43,36 @@
 
 -(IBAction)supportButtonTapped:(id)sender
 {
+  _causeSupportButton.userInteractionEnabled = NO;
   if(!_causeSupportButton.selected)
   {
+    _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Supporters",[_cause.supporters intValue]+1];
     [_causeSupportButton setSelected:YES];
-    [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
+    [LCAPIManager followInterest:_cause.causeID withSuccess:^(id response) {
       _cause.isSupporting =YES;
+      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]+1];
+      _causeSupportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       [_causeSupportButton setSelected:NO];
+      _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",_cause.supporters];
+      _causeSupportButton.userInteractionEnabled = YES;
     }];
   }
   else
   {
+    _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Supporters",[_cause.supporters intValue]-1];
     [_causeSupportButton setSelected:NO];
-    [LCAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
-      _cause.isSupporting =NO;
+    [LCAPIManager unfollowInterest:_cause.causeID withSuccess:^(id response) {
+      _causeSupportButton.userInteractionEnabled = YES;
+      _cause.isSupporting = NO;
+      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]-1];
     } andFailure:^(NSString *error) {
+      _causeSupportButton.userInteractionEnabled = YES;
+      _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",_cause.supporters];
       [_causeSupportButton setSelected:YES];
     }];
   }
+
 }
 
 
