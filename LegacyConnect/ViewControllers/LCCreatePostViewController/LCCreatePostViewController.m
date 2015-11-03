@@ -559,6 +559,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   [postImageView setImage:chosenImage];
   [self arrangePostImageView];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - LCListFriendsToTagViewControllerDelegate
