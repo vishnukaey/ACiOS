@@ -172,22 +172,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   }
 }
 
-- (void)feedUpdatedNotificationReceived :(NSNotification *)notification
-{
-  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
-  for (int i = 0; i<self.results.count ; i++) {
-    LCFeed *feed = self.results[i];
-    if ([feed.entityID isEqualToString:newfeed.entityID])
-    {
-      [self.results replaceObjectAtIndex:i withObject:newfeed];
-    }
-  }
-  CGPoint offset = self.tableView.contentOffset;
-  [self.tableView reloadData];
-  [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
-  [self.tableView setContentOffset:offset];
-}
-
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -195,7 +179,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self initialUISetUp];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [self startFetchingResults];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -220,10 +203,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - UITableViewDataSource implementation

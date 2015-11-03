@@ -11,7 +11,7 @@
 #import "LCInterestsCellView.h"
 #import "LCActionsCellView.h"
 #import "LCTabMenuView.h"
-#import <JTTableViewController.h>
+#import "LCFeedTableViewController.h"
 
 typedef enum profileStateTypes
 {
@@ -21,7 +21,7 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : JTTableViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCProfileViewVC : LCFeedTableViewController<UITableViewDataSource, UITableViewDelegate>
 {
   IBOutlet UITableView *interestsTable;
   IBOutlet UITableView *actionsTable;
