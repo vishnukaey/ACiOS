@@ -183,27 +183,12 @@ static CGFloat kIndexForPostDetails = 0;
   [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
 }
 
-- (void)feedUpdatedNotificationReceived :(NSNotification *)notification
-{
-  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
-  if ([self.feedObject.entityID isEqualToString:newfeed.entityID])
-  {
-    self.feedObject = newfeed;
-  }
-  CGPoint offset = self.tableView.contentOffset;
-  [self.tableView reloadData];
-  [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
-  [self.tableView setContentOffset:offset];
-}
-
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   [self initialUISetUp];
   [self startFetchingResults];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -230,10 +215,6 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
-}
-
-- (void)dealloc {
-  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - button actions
@@ -339,7 +320,6 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   vc.commentAction = ^ (id sender, BOOL showComments) {

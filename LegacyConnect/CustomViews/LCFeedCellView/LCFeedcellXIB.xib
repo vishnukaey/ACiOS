@@ -60,15 +60,15 @@
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ClockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="YdG-Pp-IrC">
-                                <rect key="frame" x="65" y="33" width="20" height="20"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ClockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="YdG-Pp-IrC">
+                                <rect key="frame" x="65" y="33" width="13" height="20"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="GeS-6o-bJp"/>
+                                    <constraint firstAttribute="width" constant="13" id="GeS-6o-bJp"/>
                                     <constraint firstAttribute="height" constant="20" id="i4l-IV-8cd"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKp-8U-1B4">
-                                <rect key="frame" x="93" y="35" width="346" height="17"/>
+                                <rect key="frame" x="86" y="35" width="353" height="17"/>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="11"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>

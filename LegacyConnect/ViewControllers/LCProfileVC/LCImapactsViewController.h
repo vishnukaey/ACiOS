@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JTTableViewController.h>
+#import "LCFeedTableViewController.h"
 
-@interface LCImapactsViewController : JTTableViewController
+@interface LCImapactsViewController : LCFeedTableViewController
 
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 @property(nonatomic, retain)LCUserDetail *userDetail;

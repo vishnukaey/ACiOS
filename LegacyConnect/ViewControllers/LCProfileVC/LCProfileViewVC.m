@@ -269,36 +269,6 @@ static NSInteger const kMilestoneIndex = 0;
   }];
 }
 
-- (void)feedUpdatedNotificationReceived :(NSNotification *)notification
-{
-  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
-  for (int i = 0; i<self.results.count ; i++) {
-    LCFeed *feed = self.results[i];
-    if ([feed.entityID isEqualToString:newfeed.entityID])
-    {
-      [self.results replaceObjectAtIndex:i withObject:newfeed];
-    }
-  }
-  CGPoint offset = self.tableView.contentOffset;
-  [self.tableView reloadData];
-  [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
-  [self.tableView setContentOffset:offset];
-}
-
-- (void)clearNaviGationStack
-{
-  NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-  for (int i =0; i<navigationArray.count-1; i++)
-  {
-    UIViewController *controller_ = (UIViewController *)[navigationArray objectAtIndex:i];
-    if ([controller_ isKindOfClass:[LCProfileViewVC class]])
-    {
-      [navigationArray removeObjectsInRange:NSMakeRange(i, navigationArray.count-2)];
-      break;
-    }
-  }
-  self.navigationController.viewControllers = navigationArray;
-}
 
 #pragma mark - Notification Receivers
 
@@ -344,8 +314,6 @@ static NSInteger const kMilestoneIndex = 0;
   [self loadUserInfo];
   [self mileStonesClicked:nil];
   [self addTabMenu];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -378,8 +346,6 @@ static NSInteger const kMilestoneIndex = 0;
   if (tabmenu.currentIndex == kMilestoneIndex) {
     [self.tableView reloadData];
   }
-  
-  [self clearNaviGationStack];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -401,7 +367,6 @@ static NSInteger const kMilestoneIndex = 0;
   [[NSNotificationCenter defaultCenter] removeObserver:self
                                                   name:kUserProfileImpactsUpdateNotification
                                                 object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - button actions
