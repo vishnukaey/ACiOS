@@ -181,6 +181,10 @@ NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpd
 NSString *const kUserProfileImpactsUpdateNotification = @"userProfileImpactsUpdated";
 NSString *const kfeedUpdatedotification = @"feedUpdated";
 
+NSString *const kfeedUpdateEventKey = @"updated_feed";
+NSString *const kfeedDeletedEventKey = @"deleted_feed";
+NSString *const kmilestoneRemovedEventKey = @"milestone_removed";
+
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 // -- Tag Dictionary keys -- //

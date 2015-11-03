@@ -361,7 +361,12 @@ static LCAPIManager *sharedManager = nil;
       NSError *error = nil;
       if(!error)
       {
+        NSError *error_1 = nil;
         LCDLog(@"Successfully updated post");
+        NSDictionary *data_dic= response[kResponseData];
+        NSDictionary *data_post= data_dic[@"post"];
+        LCFeed *updated_post = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:data_post error:&error_1];
+        [LCNotificationManager postPostEditedNotificationForPost:updated_post];
         success(response);
       }
       else
@@ -376,12 +381,12 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)deletePost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -393,10 +398,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Post deleted");
+       [LCNotificationManager postPostDeletedNotificationforPost:post];
        success(response);
        //Notify Profile
-       NSDictionary *userInfo = @{@"status":@"deleted"};
-       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileImpactsUpdateNotification object:nil userInfo:userInfo];
+       
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -587,11 +592,11 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
-+ (void)removeMilestoneFromPost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)removeMilestoneFromPost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostMilestoneURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -603,6 +608,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Removed milestone.");
+       [LCNotificationManager postRemoveMilestoneNotificationForPost:post];
        success(response);
      }
    } andFailure:^(NSString *error) {

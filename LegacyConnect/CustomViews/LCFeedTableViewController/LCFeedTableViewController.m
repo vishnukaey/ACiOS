@@ -38,10 +38,30 @@
       LCFeed *feed = self.results[i];
       if ([feed.entityID isEqualToString:newfeed.entityID])
       {
-        [self.results replaceObjectAtIndex:i withObject:newfeed];
+        if ([[notification.userInfo objectForKey:@"event"] isEqualToString:kfeedDeletedEventKey]) {
+          [self.results removeObjectAtIndex:i];
+        }
+        else if ([[notification.userInfo objectForKey:@"event"] isEqualToString:kfeedUpdateEventKey])
+        {
+          [self.results replaceObjectAtIndex:i withObject:newfeed];
+        }
+        else if ([[notification.userInfo objectForKey:@"event"] isEqualToString:kmilestoneRemovedEventKey])
+        {
+          if ([self isKindOfClass:[LCProfileViewVC class]]) {
+            [self.results removeObjectAtIndex:i];
+          }
+        }
+        else
+        {
+          continue;
+        }
+        break;
       }
     }
   }
+  
+  
+  
   CGPoint offset = self.tableView.contentOffset;
   [self.tableView reloadData];
   [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.

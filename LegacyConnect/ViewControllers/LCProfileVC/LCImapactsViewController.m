@@ -138,7 +138,7 @@
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
+    [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     }
                   andFailure:^(NSString *error) {

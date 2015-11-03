@@ -479,8 +479,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peP-Nb-tp6">
                                 <rect key="frame" x="0.0" y="108" width="375" height="559"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select friends to add to your post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T0-WY-sFu">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="44"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Select friends to add to your post" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3T0-WY-sFu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <color key="backgroundColor" red="0.96862745098039216" green="1" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="QlF-tY-VnZ"/>
                                         </constraints>
@@ -575,8 +576,8 @@
                                     <constraint firstItem="3T0-WY-sFu" firstAttribute="top" secondItem="peP-Nb-tp6" secondAttribute="top" id="WZY-lx-toj"/>
                                     <constraint firstAttribute="trailing" secondItem="4N0-M0-Sgk" secondAttribute="trailing" id="bRm-Qu-Dyl"/>
                                     <constraint firstAttribute="bottom" secondItem="4N0-M0-Sgk" secondAttribute="bottom" id="dWc-6J-Zdx"/>
-                                    <constraint firstAttribute="trailing" secondItem="3T0-WY-sFu" secondAttribute="trailing" constant="15" id="jIA-6X-45G"/>
-                                    <constraint firstItem="3T0-WY-sFu" firstAttribute="leading" secondItem="peP-Nb-tp6" secondAttribute="leading" constant="15" id="sEW-CR-Bf3"/>
+                                    <constraint firstAttribute="trailing" secondItem="3T0-WY-sFu" secondAttribute="trailing" id="jIA-6X-45G"/>
+                                    <constraint firstItem="3T0-WY-sFu" firstAttribute="leading" secondItem="peP-Nb-tp6" secondAttribute="leading" id="sEW-CR-Bf3"/>
                                 </constraints>
                             </view>
                         </subviews>

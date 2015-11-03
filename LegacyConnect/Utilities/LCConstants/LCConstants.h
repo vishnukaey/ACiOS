@@ -160,6 +160,9 @@ extern NSString *const kUserProfileFrinendsUpdateNotification;
 extern NSString *const kUserProfileImpactsUpdateNotification;
 extern NSString *const kfeedUpdatedotification;
 
+extern NSString *const kfeedUpdateEventKey;
+extern NSString *const kfeedDeletedEventKey;
+extern NSString *const kmilestoneRemovedEventKey;
 
 extern NSString *const kTWOauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;

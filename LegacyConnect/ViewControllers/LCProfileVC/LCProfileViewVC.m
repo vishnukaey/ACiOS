@@ -754,7 +754,7 @@ static NSInteger const kMilestoneIndex = 0;
   
   UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCAPIManager removeMilestoneFromPost:feed.entityID withSuccess:^(NSArray *response) {
+    [LCAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     }
     andFailure:^(NSString *error) {
@@ -766,7 +766,7 @@ static NSInteger const kMilestoneIndex = 0;
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
+    [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     }
     andFailure:^(NSString *error) {
