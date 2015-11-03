@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER DEV_SERVER
+#define CURRENT_SERVER STAGING_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -183,7 +183,6 @@ NSString *const kfeedUpdatedotification = @"feedUpdated";
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";
-NSString *const kmilestoneRemovedEventKey = @"milestone_removed";
 
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";

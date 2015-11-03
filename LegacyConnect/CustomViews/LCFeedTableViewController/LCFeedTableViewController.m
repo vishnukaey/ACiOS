@@ -45,12 +45,6 @@
         {
           [self.results replaceObjectAtIndex:i withObject:newfeed];
         }
-        else if ([[notification.userInfo objectForKey:@"event"] isEqualToString:kmilestoneRemovedEventKey])
-        {
-          if ([self isKindOfClass:[LCProfileViewVC class]]) {
-            [self.results removeObjectAtIndex:i];
-          }
-        }
         else
         {
           continue;
@@ -58,8 +52,18 @@
         break;
       }
     }
+   }
+  //new milestone added
+  if ([self isKindOfClass:[LCProfileViewVC class]])
+  {
+    for (int i = 0; i<self.results.count; i++)
+    {
+      LCFeed *feed = self.results[i];
+      if (![feed.isMilestone boolValue]) {
+        [self.results removeObjectAtIndex:i];
+      }
+    }
   }
-  
   
   
   CGPoint offset = self.tableView.contentOffset;
