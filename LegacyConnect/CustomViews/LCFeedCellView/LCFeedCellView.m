@@ -196,6 +196,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 
 - (void)setData:(LCFeed *)feed forPage :(NSString *)pageType
 {
+  
+  [self layoutIfNeeded];
+  
   self.feedObject = feed;
   [self setProfilePic];
   [self setFeedUserName];
