@@ -712,7 +712,6 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;

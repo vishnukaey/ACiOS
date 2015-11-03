@@ -77,6 +77,18 @@
 }
 
 
+- (UIView *)getNOResultLabel
+{
+  UILabel * noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
+  [noResultLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
+  [noResultLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
+  noResultLabel.textAlignment = NSTextAlignmentCenter;
+  noResultLabel.numberOfLines = 2;
+  [noResultLabel setText:@"No Results Found"];
+  return noResultLabel;
+}
+
+
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -95,6 +107,17 @@
 {
   if([tableView isEqual:_topTableView])
   {
+    UIView *prev = [tableView viewWithTag:122];
+    if (prev) {
+      [prev removeFromSuperview];
+    }
+    if (!searchResultObject.usersArray.count && !searchResultObject.interestsArray.count && !searchResultObject.causesArray.count) {
+      UIView *noResultView = [self getNOResultLabel];
+      noResultView.tag = 122;
+      noResultView.center = CGPointMake(tableView.frame.size.width/2, noResultView.center.y);
+      [tableView addSubview:noResultView];
+    }
+    
     if(section == 0)
     {
       return searchResultObject.usersArray.count>3 ? 3 : searchResultObject.usersArray.count;
@@ -110,6 +133,16 @@
   }
   else
   {
+    UIView *prev = [tableView viewWithTag:122];
+    if (prev) {
+      [prev removeFromSuperview];
+    }
+    if (!searchResultObject.usersArray.count) {
+      UIView *noResultView = [self getNOResultLabel];
+      noResultView.tag = 122;
+      noResultView.center = CGPointMake(tableView.frame.size.width/2, noResultView.center.y);
+      [tableView addSubview:noResultView];
+    }
     return searchResultObject.usersArray.count;
   }
 }
@@ -272,10 +305,30 @@
 {
   if([collectionView isEqual:_causesCollectionView])
   {
+    UIView *prev = [collectionView viewWithTag:122];
+    if (prev) {
+      [prev removeFromSuperview];
+    }
+    if (!searchResultObject.causesArray.count) {
+      UIView *noResultView = [self getNOResultLabel];
+      noResultView.tag = 122;
+      noResultView.center = CGPointMake(collectionView.frame.size.width/2, noResultView.center.y);
+      [collectionView addSubview:noResultView];
+    }
     return searchResultObject.causesArray.count;
   }
   else
   {
+    UIView *prev = [collectionView viewWithTag:122];
+    if (prev) {
+      [prev removeFromSuperview];
+    }
+    if (!searchResultObject.interestsArray.count) {
+      UIView *noResultView = [self getNOResultLabel];
+      noResultView.tag = 122;
+      noResultView.center = CGPointMake(collectionView.frame.size.width/2, noResultView.center.y);
+      [collectionView addSubview:noResultView];
+    }
     return searchResultObject.interestsArray.count;
   }
 }

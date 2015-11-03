@@ -94,9 +94,6 @@
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:YES];
-  [appdel.menuButton setHidden:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;
