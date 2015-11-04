@@ -92,6 +92,9 @@ static LCAPIManager *sharedManager = nil;
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetMilestonesURL, kUserIDKey, userID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&lastId=%@",url,lastID];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -122,10 +125,13 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)getImpactsForUser:(NSString *)userID andLastMilestoneID:(NSString*)lastID with:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getImpactsForUser:(NSString *)userID andLastImpactsID:(NSString*)lastID with:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetImpactsURL, kUserIDKey,userID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&lastId=%@",url,lastID];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
@@ -189,6 +195,55 @@ static LCAPIManager *sharedManager = nil;
      failure(error);
    }];
 }
+
+
+
++ (void)searchUserUsingsearchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
+{
+  //  userId = @"7143";
+  //  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
+  
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, @"api/search/user"];
+  if (searchKey) {
+    [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
+  }
+  if (lastUserId) {
+    [url appendString:[NSString stringWithFormat:@"&lastId=%@",lastUserId]];
+  }
+  url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
+  
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:response[kResponseData] error:&error];
+       if(!error)
+       {
+         LCDLog(@"Getting Friends successful! ");
+         success(responsesArray);
+       }
+       else
+       {
+         LCDLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
 
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
@@ -355,7 +410,12 @@ static LCAPIManager *sharedManager = nil;
       NSError *error = nil;
       if(!error)
       {
+        NSError *error_1 = nil;
         LCDLog(@"Successfully updated post");
+        NSDictionary *data_dic= response[kResponseData];
+        NSDictionary *data_post= data_dic[@"post"];
+        LCFeed *updated_post = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:data_post error:&error_1];
+        [LCNotificationManager postPostEditedNotificationForPost:updated_post];
         success(response);
       }
       else
@@ -370,12 +430,12 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)deletePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)deletePost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -387,7 +447,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Post deleted");
+       [LCNotificationManager postPostDeletedNotificationforPost:post];
        success(response);
+       //Notify Profile
+       
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -396,62 +459,60 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)likePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)likePost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostLikeURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
        failure(response[kResponseMessage]);
      }
      else
      {
        LCDLog(@"Post liked.");
+       [LCNotificationManager postLikedNotificationfromResponse:response forPost:post];
        success(response);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
 
 }
 
-+ (void) unlikePost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void) unlikePost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostUnlikeURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
        failure(response[kResponseMessage]);
      }
      else
      {
        LCDLog(@"Post unliked.");
+       [LCNotificationManager postUnLikedNotificationfromResponse:response forPost:post];
        success(response);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
-     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
 }
 
-+ (void)commentPost:(NSString *)postId comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)commentPost:(LCFeed *)post comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostCommentURL];
-  NSDictionary *dict = @{kPostIDKey: postId, kPostCommentKey:comment};
+  NSDictionary *dict = @{kPostIDKey: post.entityID, kPostCommentKey:comment};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -468,7 +529,7 @@ static LCAPIManager *sharedManager = nil;
 
        if(!error)
        {
-         LCDLog(@"Getting Interests successful! ");
+         [LCNotificationManager postCommentedNotificationforPost:post];
          success(comment);
        }
        else
@@ -580,11 +641,11 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
-+ (void)removeMilestoneFromPost:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)removeMilestoneFromPost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostMilestoneURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: post.entityID};
   
   [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -596,6 +657,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Removed milestone.");
+       [LCNotificationManager postRemoveMilestoneNotificationForPost:post];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -1065,6 +1127,7 @@ static LCAPIManager *sharedManager = nil;
   if (lastUserId) {
     [url appendString:[NSString stringWithFormat:@"&lastUserId=%@",lastUserId]];
   }
+  url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
   
   [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
    {
@@ -1165,6 +1228,9 @@ static LCAPIManager *sharedManager = nil;
      {
        LCDLog(@"Friend request sent %@",response);
        success(response);
+       //Notify Profile
+       NSDictionary *userInfo = @{@"status":@"deleted"};
+       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileFrinendsUpdateNotification object:nil userInfo:userInfo];
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

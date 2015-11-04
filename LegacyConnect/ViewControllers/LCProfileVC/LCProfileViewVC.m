@@ -26,83 +26,100 @@ static NSInteger const kMilestoneIndex = 0;
 @implementation LCProfileViewVC
 @synthesize userDetail;
 
-#pragma mark - controller life cycle
-- (void)viewDidLoad
+#pragma mark - API and Pagination
+- (void)startFetchingResults
 {
-  [super viewDidLoad];
-  milestonesTable.estimatedRowHeight = 44.0;
-  milestonesTable.rowHeight = UITableViewAutomaticDimension;
+  [super startFetchingResults];
+  [LCAPIManager getMilestonesForUser:userDetail.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchResults:response haveMoreData:hasMoreData];
+    if (tabmenu.currentIndex != kMilestoneIndex) {
+      [self setNoResultViewHidden:YES];
+    }
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+    if (tabmenu.currentIndex != kMilestoneIndex) {
+      [self setNoResultViewHidden:YES];
+    }
+    [self setNoResultViewHidden:[self.results count] != 0];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCAPIManager getMilestonesForUser:userDetail.userID andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else if (tabmenu.currentIndex == kMilestoneIndex)
+  {
+    [self showNoResultsView];
+  }
+}
+
+
+#pragma mark - private method implementation
+
+- (void)stopRefreshingViews
+{
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
+}
+
+- (void)initialUISetUp
+{
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
-  milestonesTable.tableFooterView = zeroRectView;
+  self.tableView.tableFooterView = zeroRectView;
   interestsTable.tableFooterView = zeroRectView;
   actionsTable.tableFooterView = zeroRectView;
   
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
-  
-  [self addPullToRefreshForMileStonesTable];
-  
-  [self loadUserInfo];
-  
-  mileStoneFeeds = [[NSMutableArray alloc] init];
-  [self mileStonesClicked:nil];
-  [self addTabMenu];
-  
-  // Do any additional setup after loading the view.
 }
-
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  if (self.navigationController.viewControllers.count <= 1) {
-    [backButton setHidden:YES];
-  }
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserData:) name:kUserProfileUpdateNotification object:nil];
-  if (tabmenu.currentIndex == kMilestoneIndex) {
-    [milestonesTable reloadData];
-  }
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-  [super viewWillDisappear:animated];
-  self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
-  
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
-}
-
-
-#pragma mark - setup functions
 
 - (void)addPullToRefreshForMileStonesTable
 {
-  [milestonesTable.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
   __weak typeof (self) weakSelf = self;
-  [milestonesTable addPullToRefreshWithActionHandler:^{
+  [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
     double delayInSeconds = 2.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [weakSelf loadMileStonesWithLastId:nil];
+      [weakSelf startFetchingResults];
     });
   }withBackgroundColor:[UIColor lightGrayColor]];
 }
 
-
 - (void) loadUserInfo {
   
-  userNameLabel.text = @"";
-  memeberSincelabel.text = @"";
-  locationLabel.text = @"";
+  userNameLabel.text = kEmptyStringValue;
+  memeberSincelabel.text = kEmptyStringValue;
+  locationLabel.text = kEmptyStringValue;
   
   //for testing as user ID is not persisting
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
@@ -111,6 +128,19 @@ static NSInteger const kMilestoneIndex = 0;
   {
     currentProfileState = PROFILE_SELF;
     [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
+    
+    //Add Notification observers
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateUserData:)
+                                                 name:kUserProfileUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateFriendsCount:)
+                                                 name:kUserProfileFrinendsUpdateNotification
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateImpactsCount:)
+                                                 name:kUserProfileImpactsUpdateNotification
+                                               object:nil];
   }
   else
   {
@@ -121,11 +151,8 @@ static NSInteger const kMilestoneIndex = 0;
   [self loadUserDetails];
 }
 
-
 - (void)loadUserDetails
 {
-  
-  NSLog(@"userID<<<-->>>%@", userDetail.userID);
   editButton.enabled = NO;
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     
@@ -137,15 +164,15 @@ static NSInteger const kMilestoneIndex = 0;
     NSLog(@"user details - %@",response);
     
     userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]]uppercaseString];
+                           [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
+                           [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]]uppercaseString];
     memeberSincelabel.text = [NSString stringWithFormat:@"Member Since %@",
                               [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
     locationLabel.text = [[NSString stringWithFormat:@"%@ \u2022 %@ \u2022 %@",
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
-                          [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
-                          [LCUtilityManager performNullCheckAndSetValue:userDetail.location]] uppercaseString];
+                           [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
+                           [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
+                           [LCUtilityManager performNullCheckAndSetValue:userDetail.location]] uppercaseString];
     
     impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
     friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
@@ -159,7 +186,7 @@ static NSInteger const kMilestoneIndex = 0;
     
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
                        placeholderImage:headerImageView.image];
-
+    
     
     switch ([userDetail.isFriend integerValue]) {
       case 0:
@@ -191,17 +218,6 @@ static NSInteger const kMilestoneIndex = 0;
   }];
 }
 
--(void)updateUserData:(NSNotification *)notification {
-  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
-  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
-  dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self loadUserDetails];
-    
-  });
-  
-}
-
-
 - (void)addTabMenu
 {
   tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -224,35 +240,18 @@ static NSInteger const kMilestoneIndex = 0;
   
   //  tabmenu.layer.borderWidth = 3;
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, actionsButton, nil];
-  tabmenu.views = [[NSArray alloc] initWithObjects:milestonesTable,  interestsTable, actionsTable, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:self.tableView,  interestsTable, actionsTable, nil];
   
   tabmenu.highlightColor = [UIColor colorWithRed:239.0f/255.0 green:100.0f/255.0 blue:77.0f/255.0 alpha:1.0];
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
 
--(void)loadMileStonesWithLastId:(NSString*)lastId
-{
-  [LCAPIManager getMilestonesForUser:userDetail.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
-    if (milestonesTable.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
-      [mileStoneFeeds removeAllObjects];
-      [milestonesTable reloadData];
-      [milestonesTable.pullToRefreshView stopAnimating];
-    }
-
-    [mileStoneFeeds addObjectsFromArray:response];
-    [milestonesTable reloadData];
-    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
-    NSLog(@"%@",error);
-  }];
-}
-
-
 - (void)loadInterests
 {
+  [self setNoResultViewHidden:YES];
   [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
   [LCAPIManager getInterestsForUser:userDetail.userID withSuccess:^(NSArray *responses) {
+    [self setNoResultViewHidden:YES];// -- Temp Fix: No result over laping issue--//
     interestsArray = responses;
     [interestsTable reloadData];
     [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
@@ -263,11 +262,11 @@ static NSInteger const kMilestoneIndex = 0;
 }
 
 - (void) loadEvents {
-  [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
   
-
+  [self setNoResultViewHidden:YES];
+  [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
   [LCAPIManager getUserEventsForUserId:userDetail.userID andLastEventId:nil withSuccess:^(NSArray *response) {
-    
+    [self setNoResultViewHidden:YES]; // -- Temp Fix: No result over laping issue--//
     actionsArray = response;
     [actionsTable reloadData];
     [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
@@ -278,15 +277,111 @@ static NSInteger const kMilestoneIndex = 0;
 }
 
 
-#pragma mark - button actions
+#pragma mark - Notification Receivers
 
+-(void)updateUserData:(NSNotification *)notification {
+  
+  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
+  dispatch_async(dispatch_get_global_queue(0,0), ^{
+    [self loadUserDetails];
+    
+  });
+}
+
+-(void)updateFriendsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [userDetail.friendCount integerValue] - 1;
+    userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
+  }
+}
+
+-(void)updateImpactsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [userDetail.impactCount integerValue] - 1;
+    userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
+  }
+}
+
+
+#pragma mark - controller life cycle
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  [self initialUISetUp];
+  [self addPullToRefreshForMileStonesTable];
+  [self loadUserInfo];
+  [self mileStonesClicked:nil];
+  [self addTabMenu];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  if (!self.noResultsView) {
+    NSString *message;
+    if (currentProfileState == PROFILE_SELF) {
+      message = NSLocalizedString(@"no_milestones_available_self", nil);
+    }
+    else {
+      message = NSLocalizedString(@"no_milestones_available_others", nil);
+    }
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  }
+  [super viewDidAppear:animated];
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+  if (self.navigationController.viewControllers.count <= 1) {
+    [backButton setHidden:YES];
+  }
+  if (tabmenu.currentIndex == kMilestoneIndex) {
+    [self.tableView reloadData];
+  }
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+}
+
+- (void)dealloc {
+  
+  //Notifications
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kUserProfileUpdateNotification
+                                                object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:kUserProfileFrinendsUpdateNotification
+                                                  object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kUserProfileImpactsUpdateNotification
+                                                object:nil];
+}
+
+#pragma mark - button actions
 - (IBAction)friendsButtonClicked
 {
-  
   LCFriendsListViewController * friendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCFriendsListVC"];
   friendsVC.userId = self.userDetail.userID;
   [self.navigationController pushViewController:friendsVC animated:YES];
-  
 }
 
 - (IBAction)impactsButtonClicked
@@ -305,12 +400,12 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (IBAction)mileStonesClicked:(id)sender
 {
-  [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
-  if (mileStoneFeeds) {
-    [mileStoneFeeds removeAllObjects];
-    [milestonesTable reloadData];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  if (self.results) {
+    [self.results removeAllObjects];
+    [self.tableView reloadData];
   }
-  [self loadMileStonesWithLastId:nil];
+  [self startFetchingResults];
 }
 
 - (IBAction)interestsClicked:(id)sender
@@ -322,7 +417,6 @@ static NSInteger const kMilestoneIndex = 0;
 {
   [self loadEvents];
 }
-
 
 - (IBAction)editClicked:(UIButton *)sender
 {
@@ -402,7 +496,6 @@ static NSInteger const kMilestoneIndex = 0;
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
   
-
   if (scrollView.contentOffset.y <= 0 && collapseViewHeight.constant >=170) //Added this line to KOAPullToRefresh to work correctly.
   {
     return;
@@ -428,28 +521,45 @@ static NSInteger const kMilestoneIndex = 0;
     collapseConstant = 170;
   }
   collapseViewHeight.constant = collapseConstant;
-  
 }
 
 
 #pragma mark - TableView delegates
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (tableView == actionsTable)
+  {
+    return 106.0f;
+  }
+  else if (tableView == interestsTable)
+  {
+    return 135.0f;
+  }
+  else
+  {
+    JTTABLEVIEW_heightForRowAtIndexPath
+    return [super tableView:tableView heightForRowAtIndexPath:indexPath];
+  }
+
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  if (tableView == milestonesTable) {
-    if (mileStoneFeeds.count == 0) {
-      return 1;
-    }
-    return mileStoneFeeds.count;
+  if (tableView == self.tableView) {
+    return self.results.count;
   }
   else if (tableView == interestsTable) {
-    if (interestsArray.count == 0) {
+    if (interestsArray.count == 0 && tabmenu.currentIndex == 1) {
+      /**
+       * added tabmenu.currentIndex to temp fix the no results mix isssues.
+       */
       return 1;
     }
     return interestsArray.count;
   }
   else if (tableView == actionsTable) {
-    if (actionsArray.count == 0) {
+    if (actionsArray.count == 0 && tabmenu.currentIndex == 2) {
       return 1;
     }
     return actionsArray.count;
@@ -460,28 +570,9 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (tableView == milestonesTable) {
+  if (tableView == self.tableView) {
     
-    //MILESTONES
-    if (mileStoneFeeds.count == 0) {
-      
-      NSString *message;
-      if (currentProfileState == PROFILE_SELF) {
-        message = @"Tap \"...\" in any of your posts to add as a milestone.";
-        
-      }
-      else {
-        message = @"No milestones available.";
-      }
-      UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
-      
-      tableView.backgroundColor = [UIColor whiteColor];
-      tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-      tableView.allowsSelection = NO;
-      return cell;
-    }
-    
-    else {
+      JTTABLEVIEW_cellForRowAtIndexPath
       
       LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
       if (cell == nil)
@@ -490,7 +581,7 @@ static NSInteger const kMilestoneIndex = 0;
         // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
         cell = [topLevelObjects objectAtIndex:0];
       }
-      [cell setData:[mileStoneFeeds objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+      [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
       __weak typeof(self) weakSelf = self;
       cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
         [weakSelf feedCellActionWithType:actionType andFeed:feed];
@@ -509,7 +600,6 @@ static NSInteger const kMilestoneIndex = 0;
       tableView.allowsSelection = YES;
       
       return cell;
-    }
     
   }
   else if (tableView == interestsTable){
@@ -595,7 +685,6 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 #pragma mark - feedCell delegates
@@ -629,7 +718,6 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
   vc.feed = feed;
   __weak typeof (self) weakSelf = self;
@@ -648,7 +736,7 @@ static NSInteger const kMilestoneIndex = 0;
       [self showFeedCommentsWithFeed:viewController.feed];
     } else {
       if (tabmenu.currentIndex == kMilestoneIndex) {
-        [milestonesTable reloadData];
+        [self.tableView reloadData];
       }
     }
   }];
@@ -671,26 +759,35 @@ static NSInteger const kMilestoneIndex = 0;
   [actionSheet addAction:editPost];
   
   UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
-    [LCAPIManager removeMilestoneFromPost:feed.entityID withSuccess:^(NSArray *response) {
-      [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [LCAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
+      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     }
     andFailure:^(NSString *error) {
-     [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
+     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
       NSLog(@"%@",error);
     }];
   }];
   [actionSheet addAction:removeMilestone];
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    [MBProgressHUD showHUDAddedTo:milestonesTable animated:YES];
-    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
-      [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
-    }
-    andFailure:^(NSString *error) {
-      [MBProgressHUD hideAllHUDsForView:milestonesTable animated:YES];
-                                 NSLog(@"%@",error);
-    }];
+               UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Post" message:@"Are you sure you want to permanently remove this post from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
+               UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+                [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
+                  [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                }
+                              andFailure:^(NSString *error) {
+                                [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                                NSLog(@"%@",error);
+                              }];
+              }];
+             [deleteAlert addAction:deletePostActionFinal];
+    
+              UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+              [deleteAlert addAction:cancelAction];
+              [self presentViewController:deleteAlert animated:YES completion:nil];
+    
   }];
   [actionSheet addAction:deletePost];
   

@@ -8,6 +8,7 @@
 
 #import "LCLocationSearchField.h"
 #define MINIMUM_SEARCHLENGTH 2
+#define SEARCH_SPAN_MILES 1000
 
 @interface LCLocationSearchField()
 {
@@ -90,11 +91,13 @@
   request.naturalLanguageQuery = string;
   
   MKCoordinateRegion region;
-  MKCoordinateSpan span;
-  span.latitudeDelta = 0.005;
-  span.longitudeDelta = 0.005;
-  region.span = span;
-  region.center = newLocation.coordinate;
+//  MKCoordinateSpan span;
+//  span.latitudeDelta = 0.005;
+//  span.longitudeDelta = 0.005;
+//  region.span = span;
+//  region.center = newLocation.coordinate;
+  request.region = MKCoordinateRegionMakeWithDistance(newLocation.coordinate,
+                                                      1609.34*SEARCH_SPAN_MILES, 1609.34*SEARCH_SPAN_MILES);
   request.region = region;
   
   MKLocalSearch *search =

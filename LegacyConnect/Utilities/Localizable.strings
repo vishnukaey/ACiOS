@@ -19,6 +19,11 @@
 "no_impacts_available_self" = "Create Impacts by selecting the Global Impact button from the bottom right.";
 "no_impacts_available_others" = "No Impacts to display.";
 "no_feeds_available" = "No Feeds to display.";
+"no_comments_available" = "No Comments to display.";
+
+"no_milestones_available_self" = "Tap \"...\" in any of your posts to add as a milestone.";
+"no_milestones_available_others" = "No milestones available.";
+
 
 "ok" = "OK";
 

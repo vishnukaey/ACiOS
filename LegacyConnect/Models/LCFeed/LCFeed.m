@@ -36,6 +36,7 @@
            @"didLike": @"didLike",
            @"postType": @"postType",
            @"postTags": @"postTags",
+           @"thumbImage" : @"thumbImage"
            };
 }
 

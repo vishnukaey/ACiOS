@@ -12,92 +12,108 @@
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import "LCFeedsCommentsController.h"
 #import "LCCreatePostViewController.h"
-
-@interface LCImapactsViewController ()
-
-@end
+#import "LCProfileViewVC.h"
 
 @implementation LCImapactsViewController
-@synthesize impactsTableView, customNavigationHeight, userDetail;
+@synthesize customNavigationHeight, userDetail;
 
-#pragma mark - private method implementation
-- (void)addPullToRefresh
+#pragma mark - API calls and Pagination
+- (void)startFetchingResults
 {
-  [self.impactsTableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
-  [self.impactsTableView addPullToRefreshWithActionHandler:^{
-    double delayInSeconds = 2.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [self loadImpactsWithLastId:nil];
-    });
-  }withBackgroundColor:[UIColor lightGrayColor]];
-}
-
-- (void)loadImpactsWithLastId:(NSString*)lastId
-{
-  [LCAPIManager getImpactsForUser:userDetail.userID andLastMilestoneID:lastId with:^(NSArray *response) {
-    // -- Stop Refreshing Views -- //
-    if (self.impactsTableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
-      [impactsArray removeAllObjects];
-      [self.impactsTableView.pullToRefreshView stopAnimating];
-      [impactsTableView reloadData];
-    }
-    [impactsArray addObjectsFromArray:response];
-    [impactsTableView reloadData];
-    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
+  [super startFetchingResults];
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:nil with:^(NSArray *response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchResults:response haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
-    [MBProgressHUD hideHUDForView:impactsTableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
-
-#pragma mark - controller life cycle
-- (void)viewDidLoad
+- (void)startFetchingNextResults
 {
-  [super viewDidLoad];
-  
-  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
-  
-  [impactsTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-  impactsTableView.estimatedRowHeight = 44.0;
-  impactsTableView.rowHeight = UITableViewAutomaticDimension;
-  
-  [self addPullToRefresh];
-  impactsArray= [[NSMutableArray alloc] init];
-  [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
-  [self loadImpactsWithLastId:nil];
+  [super startFetchingNextResults];
+  [LCAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:[(LCFeed*)[self.results lastObject] entityID] with:^(NSArray *response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+  }];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)setNoResultViewHidden:(BOOL)hidded
 {
-  [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
-  [appdel.menuButton setHidden:NO];
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else{
+    [self showNoResultsView];
+  }
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+#pragma mark - private method implementation
+- (void)stopRefreshingViews
 {
-  [super viewWillDisappear:animated];
-  self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:true];
-  [appdel.menuButton setHidden:true];
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
 }
 
-- (void)didReceiveMemoryWarning
+- (void)addPullToRefresh
 {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
+  [self.tableView .pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  __weak typeof(self) weakSelf = self;
+  [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [weakSelf startFetchingResults];
+    });
+  } withBackgroundColor:[UIColor lightGrayColor]];
 }
 
-#pragma mark - button actions
-- (IBAction)backButtonAction
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+  [self.navigationController pushViewController:next animated:YES];
+}
+
+- (void)showFullScreenImage:(LCFeed*)feed
+{
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.feed = feed;
+  __weak typeof (self) weakSelf = self;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [weakSelf fullScreenAction:sender andShowComments:showComments];
+  };
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
+{
+  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
+  [viewController dismissViewControllerAnimated:!show completion:^{
+    if (show) {
+      [self showFeedCommentsWithFeed:viewController.feed];
+    } else {
+      [self.tableView reloadData];
+    }
+  }];
 }
 
 - (void)feedCellMoreAction :(LCFeed *)feed
@@ -118,14 +134,22 @@
   
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    [MBProgressHUD showHUDAddedTo:impactsTableView animated:YES];
-    [LCAPIManager deletePost:feed.entityID withSuccess:^(NSArray *response) {
-      [MBProgressHUD hideAllHUDsForView:impactsTableView animated:YES];
-    }
-                  andFailure:^(NSString *error) {
-                    [MBProgressHUD hideAllHUDsForView:impactsTableView animated:YES];
-                    NSLog(@"%@",error);
-                  }];
+                    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Post" message:@"Are you sure you want to permanently remove this post from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                      [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+                      [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
+                        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                      }
+                                    andFailure:^(NSString *error) {
+                                      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                                      NSLog(@"%@",error);
+                                    }];
+                    }];
+                    [deleteAlert addAction:deletePostActionFinal];
+                    
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+                    [deleteAlert addAction:cancelAction];
+                    [self presentViewController:deleteAlert animated:YES completion:nil];
   }];
   [actionSheet addAction:deletePost];
   
@@ -134,34 +158,58 @@
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
-#pragma mark - TableView delegates
+#pragma mark - controller life cycle
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
+  [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  
+  [self addPullToRefresh];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [self startFetchingResults];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+#pragma mark - button actions
+- (IBAction)backButtonAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - UITableViewDataSource implementation
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
   return 1;    //count of section
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  if (impactsArray.count == 0) {
-    return 1;
-  }
-  return impactsArray.count;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (impactsArray.count == 0)
-  {
-    NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
-    if ([nativeUserId isEqualToString:userDetail.userID])//self profile
-    {
-      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_self", nil)];
-    }
-    else
-    {
-      return [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
-    }
-  }
+  
+  JTTABLEVIEW_cellForRowAtIndexPath
+  
   LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
   if (cell == nil)
   {
@@ -169,7 +217,7 @@
     // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
     cell = [topLevelObjects objectAtIndex:0];
   }
-  [cell setData:[impactsArray objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   __weak typeof(self) weakSelf = self;
   cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
     [weakSelf feedCellActionWithType:actionType andFeed:feed];
@@ -177,26 +225,18 @@
   cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
   };
-
   //self profile check
   if ([userDetail.isFriend integerValue] == 0) {
     
     cell.moreButton.hidden = NO;
   }
 
-
   return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 #pragma mark - feedCell delegates
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  
   switch (type) {
       
     case kkFeedCellActionLoadMore:
@@ -220,56 +260,20 @@
   }
 }
 
-- (void)showFeedCommentsWithFeed:(LCFeed*)feed
-{
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                bundle:nil];
-  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-  [next setFeedObject:feed];
-  [self.navigationController pushViewController:next animated:YES];
-}
-
-- (void)showFullScreenImage:(LCFeed*)feed
-{
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:YES];
-  [appdel.menuButton setHidden:YES];
-  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.feed = feed;
-  __weak typeof (self) weakSelf = self;
-  vc.commentAction = ^ (id sender, BOOL showComments) {
-    [weakSelf fullScreenAction:sender andShowComments:showComments];
-  };
-  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-  [self presentViewController:vc animated:YES completion:nil];
-}
-
-- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
-{
-  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
-  [viewController dismissViewControllerAnimated:!show completion:^{
-    if (show) {
-      [self showFeedCommentsWithFeed:viewController.feed];
-    } else {
-      [impactsTableView reloadData];
-    }
-  }];
-}
-
-
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
+  {
+    
+  }
+  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

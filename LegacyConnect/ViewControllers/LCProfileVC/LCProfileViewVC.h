@@ -11,6 +11,7 @@
 #import "LCInterestsCellView.h"
 #import "LCActionsCellView.h"
 #import "LCTabMenuView.h"
+#import "LCFeedTableViewController.h"
 
 typedef enum profileStateTypes
 {
@@ -20,9 +21,8 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCProfileViewVC : LCFeedTableViewController<UITableViewDataSource, UITableViewDelegate>
 {
-  IBOutlet UITableView *milestonesTable;
   IBOutlet UITableView *interestsTable;
   IBOutlet UITableView *actionsTable;
   
@@ -39,7 +39,6 @@ typedef enum profileStateTypes
   IBOutlet UIButton *interestsButton;
   IBOutlet UIButton *actionsButton;
   
-  NSMutableArray *mileStoneFeeds;
   NSArray *interestsArray;
   NSArray *actionsArray;
   

@@ -12,6 +12,7 @@
 
 #define kNormalPostTextColor [UIColor colorWithRed:35/255.0 green:31/255.0 blue:32/255.0 alpha:1]
 #define kTagsTextColor [UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1]
+#define kImageLoadingBackColor [UIColor colorWithRed:90.0f/255.0f green:90.0f/255.0f blue:90.0f/255.0f alpha:1.0]
 #define kFeedUserTextFont [UIFont fontWithName:@"Gotham-Medium" size:13]
 #define kPostInfoFont [UIFont fontWithName:@"Gotham-Book" size:13]
 
@@ -74,11 +75,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
   else
   {
-    [postPhoto setContentMode:UIViewContentModeScaleAspectFit];
+    [postPhoto setContentMode:UIViewContentModeScaleAspectFill];
     postPhotoHeight.constant = 200;
-    [postPhoto sd_setImageWithURL:[NSURL URLWithString:self.feedObject.image] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-      [postPhoto setBackgroundColor:[UIColor clearColor]];
-    }];
+    [self retryLoadingFeedImage:nil];
   }
   
   
@@ -197,6 +196,9 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 
 - (void)setData:(LCFeed *)feed forPage :(NSString *)pageType
 {
+  
+  [self layoutIfNeeded];
+  
   self.feedObject = feed;
   [self setProfilePic];
   [self setFeedUserName];
@@ -215,31 +217,54 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [self setPostDescription];
 }
 
-- (IBAction)likeAction
+- (IBAction)likeAction:(id)sender
 {
-  if ([self.feedObject.didLike boolValue]) {
-    [thanksBtnImage setLikeUnlikeStatusImage:kUnLikedStatus];
-    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
-    [thanksLabel setText:[NSString stringWithFormat:@"%i",[likeCount integerValue] -1]];
-    [LCAPIManager unlikePost:self.feedObject.entityID withSuccess:^(id response) {
-      self.feedObject.didLike = kUnLikedStatus;
-      self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+  __weak typeof(self.feedObject) feedObject_ = self.feedObject;
+//  LCFeed *feedObject_ = self.feedObject;
+  UIButton *btonsender = (UIButton*)sender;
+  __weak typeof(btonsender) btn = btonsender;
+  btn.userInteractionEnabled = NO;
+  __weak typeof(thanksBtnImage) tankImageView_ref = thanksBtnImage;
+//  LCThanksButtonImage *tankImageView_ref =thanksBtnImage;
+  tankImageView_ref.alpha = 0.6;
+  __weak typeof(thanksLabel) thanksLabel_ref = thanksLabel;
+  
+  if ([feedObject_.didLike boolValue]) {
+    [tankImageView_ref setLikeUnlikeStatusImage:kUnLikedStatus];
+    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
+    NSInteger thanksCount = [likeCount integerValue] > 0 ? [likeCount integerValue] -1 : 0;
+    [thanksLabel_ref setText:[NSString stringWithFormat:@"%li",thanksCount]];
+    [LCAPIManager unlikePost:feedObject_ withSuccess:^(id response) {
+      feedObject_.didLike = kUnLikedStatus;
+      feedObject_.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
+      btn.userInteractionEnabled = YES;
+      tankImageView_ref.alpha = 1.0;
+//      LCDLog(@"unlikefinished--->>>%@",feedObject_);
     } andFailure:^(NSString *error) {
-      [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
-      [thanksLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount]];
+      [tankImageView_ref setLikeUnlikeStatusImage:feedObject_.didLike];
+      [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
+      btn.userInteractionEnabled = YES;
+      tankImageView_ref.alpha = 1.0;
     }];
   }
   else
   {
-    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount];
-    [thanksLabel setText:[NSString stringWithFormat:@"%i",[likeCount integerValue] + 1]];
-    [thanksBtnImage setLikeUnlikeStatusImage:kLikedStatus];
-    [LCAPIManager likePost:self.feedObject.entityID withSuccess:^(id response) {
-      self.feedObject.didLike = kLikedStatus;
-      self.feedObject.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
+    [thanksLabel_ref setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
+    [tankImageView_ref setLikeUnlikeStatusImage:kLikedStatus];
+    [LCAPIManager likePost:feedObject_ withSuccess:^(id response) {
+      feedObject_.didLike = kLikedStatus;
+      feedObject_.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
+      [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
+      btn.userInteractionEnabled = YES;
+      tankImageView_ref.alpha = 1.0;
+//      LCDLog(@"likefinished--->>>%@",feedObject_);
     } andFailure:^(NSString *error) {
-      [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
-      [thanksLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feedObject.likeCount]];
+      [tankImageView_ref setLikeUnlikeStatusImage:feedObject_.didLike];
+      [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
+      btn.userInteractionEnabled = YES;
+      tankImageView_ref.alpha = 1.0;
     }];
   }
 }
@@ -266,6 +291,53 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   {
     self.feedCellAction(kkFeedCellActionLoadMore,feedObject);
   }
+}
+
+- (IBAction)retryLoadingFeedImage: (id)sender
+{
+ 
+  imageLoadingActivity.hidden = false;
+  [imageLoadingActivity startAnimating];
+  [postPhoto setBackgroundColor:kImageLoadingBackColor];
+  [postPhoto.layer setCornerRadius:5];
+  [postPhoto setClipsToBounds:YES];
+  retryButton.hidden = true;
+  NSString *imageURL = self.feedObject.thumbImage;//url for testing nill image - @"http://10.3.0.55:8000/picture/people-and-the-gloe1.gif.png";
+  if (sender)//controlled caching for retry failed or null images
+  {
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+      [imageLoadingActivity stopAnimating];
+      imageLoadingActivity.hidden = true;
+      if (image) {
+        [postPhoto setBackgroundColor:[UIColor clearColor]];
+      }
+      else
+      {
+        retryButton.layer.cornerRadius = 5;
+        retryButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        retryButton.layer.borderWidth = 3;
+        retryButton.hidden = false;
+      }
+    }];
+  }
+  else//default behaviour
+  {
+    [postPhoto sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+      [imageLoadingActivity stopAnimating];
+      imageLoadingActivity.hidden = true;
+      if (image) {
+        [postPhoto setBackgroundColor:[UIColor clearColor]];
+      }
+      else
+      {
+        retryButton.layer.cornerRadius = 5;
+        retryButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        retryButton.layer.borderWidth = 3;
+        retryButton.hidden = false;
+      }
+    }];
+  }
+  
 }
 
 /* use thi code if need to get the view by code

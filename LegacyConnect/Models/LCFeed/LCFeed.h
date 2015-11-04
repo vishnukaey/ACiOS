@@ -33,5 +33,7 @@
 @property (nonatomic, strong) NSString *didLike;
 @property (nonatomic, strong) NSString *postType;
 @property (nonatomic, strong) NSArray *postTags;
+@property (nonatomic, strong) NSString *thumbImage;
+
 
 @end

@@ -43,13 +43,33 @@
 
 -(IBAction)followButtonTapped:(id)sender
 {
+  _interestFollowButton.userInteractionEnabled = NO;
   if(!_interestFollowButton.selected)
   {
+    _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%d Followers",[_interest.followers intValue]+1];
     [_interestFollowButton setSelected:YES];
     [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
       _interest.isFollowing =YES;
+      _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]+1];
+      _interestFollowButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       [_interestFollowButton setSelected:NO];
+      _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",_interest.followers];
+      _interestFollowButton.userInteractionEnabled = YES;
+    }];
+  }
+  else
+  {
+    _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%d Followers",[_interest.followers intValue]-1];
+    [_interestFollowButton setSelected:NO];
+    [LCAPIManager unfollowInterest:_interest.interestID withSuccess:^(id response) {
+      _interestFollowButton.userInteractionEnabled = YES;
+      _interest.isFollowing = NO;
+      _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]-1];
+    } andFailure:^(NSString *error) {
+      _interestFollowButton.userInteractionEnabled = YES;
+      _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",_interest.followers];
+      [_interestFollowButton setSelected:YES];
     }];
   }
 }

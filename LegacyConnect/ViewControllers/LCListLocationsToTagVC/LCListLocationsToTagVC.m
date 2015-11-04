@@ -13,6 +13,7 @@
 {
   IBOutlet LCMultipleSelectionTable *locationsTable;
   NSMutableArray *locationsArray;
+  IBOutlet LCLocationSearchField *searchTextField;
 }
 
 @end
@@ -35,6 +36,7 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  locationsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   locationsTable.checkedImage = [UIImage imageNamed:@"contact_tick"];
   locationsTable.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   locationsArray = [[NSMutableArray alloc] init];
@@ -43,6 +45,7 @@
     [locationsArray addObject:alreadyTaggedLocation];
     [locationsTable.selectedIDs addObject:alreadyTaggedLocation];
   }
+  [searchTextField setReturnKeyType:UIReturnKeyDone];
 }
 
 - (void)didReceiveMemoryWarning
@@ -109,6 +112,11 @@
   [searchBar searchForLocations:searchText];
 }
 
+
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+  [searchBar resignFirstResponder];
+}
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

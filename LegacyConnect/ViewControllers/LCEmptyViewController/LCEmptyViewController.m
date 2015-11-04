@@ -24,6 +24,7 @@
 #import "LCSocialShareManager.h"
 #import "LCSettingsViewController.h"
 
+static NSString *kTitle = @"MY FEED";
 
 @interface LCEmptyViewController ()
 {
@@ -56,7 +57,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
+  [self initialUISetUp];
   [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
@@ -96,6 +97,14 @@
   }
 }
 
+- (void)initialUISetUp
+{
+  [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0]];
+  [self.navigationController setNavigationBarHidden:NO];
+  self.title = kTitle;
+  [self.navigationController.navigationBar setTitleTextAttributes:
+   @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
 
 -(void) addSideMenuVIewController
 {
@@ -256,6 +265,12 @@
   createPostVC.photoPostPhoto = chosenImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - leftmenu delegates
