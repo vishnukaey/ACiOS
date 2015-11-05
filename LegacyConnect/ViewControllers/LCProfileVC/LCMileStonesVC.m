@@ -286,11 +286,4 @@
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
-
-#pragma mark - scrollview delegates
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-  
-}
-
 @end
