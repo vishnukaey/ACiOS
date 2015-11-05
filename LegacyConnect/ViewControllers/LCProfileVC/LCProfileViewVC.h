@@ -13,6 +13,10 @@
 #import "LCTabMenuView.h"
 #import "LCFeedTableViewController.h"
 
+#import "LCMileStonesVC.h"
+#import "LCInterestsVC.h"
+#import "LCActionsVC.h"
+
 typedef enum profileStateTypes
 {
   PROFILE_SELF,
@@ -23,8 +27,6 @@ typedef enum profileStateTypes
 
 @interface LCProfileViewVC : LCFeedTableViewController<UITableViewDataSource, UITableViewDelegate>
 {
-  IBOutlet UITableView *interestsTable;
-  IBOutlet UITableView *actionsTable;
   
   IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *profilePicBorderView;
@@ -35,12 +37,23 @@ typedef enum profileStateTypes
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   
+  
   IBOutlet UIButton *mileStonesButton;
   IBOutlet UIButton *interestsButton;
   IBOutlet UIButton *actionsButton;
   
+  IBOutlet UIView *milestonesContainer;
+  IBOutlet UIView *interestsContainer;
+  IBOutlet UIView *actionsContainer;
+  
+  LCMileStonesVC *mileStonesVC;
+  LCInterestsVC *interestsVC;
+  LCActionsVC *actionsVC;
+  
+  
   NSArray *interestsArray;
   NSArray *actionsArray;
+  
   
   LCTabMenuView *tabmenu;
   
