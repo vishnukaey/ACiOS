@@ -13,7 +13,7 @@
 #import "MFSideMenu.h"
 #import "LCGIButton.h"
 #import "LCMenuButton.h"
-#import "LCChooseCommunityInterest.h"
+#import "LCChooseActionsInterest.h"
 #import "LCProfileViewVC.h"
 #import "LCAllInterestVC.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -209,7 +209,7 @@ static NSString *kTitle = @"MY FEED";
   {
 //    [appdel.menuButton setHidden:YES];
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-//    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+//    LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
 //    [navigationRoot pushViewController:vc animated:YES];
   }
   else if (sender.tag == 1)//photo post

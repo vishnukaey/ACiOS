@@ -102,7 +102,7 @@ NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
-NSString *const kChooseCommunityStoryBoardID = @"LCChooseCommunityInterest";
+NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";

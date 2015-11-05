@@ -9,7 +9,7 @@
         <!--Choose Interest-->
         <scene sceneID="SUc-Qg-vMM">
             <objects>
-                <viewController storyboardIdentifier="LCChooseCommunityInterest" title="Choose Interest" id="9uJ-2n-Xif" customClass="LCChooseCommunityInterest" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCChooseActionsInterest" title="Choose Interest" id="9uJ-2n-Xif" customClass="LCChooseActionsInterest" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y5j-kG-el1"/>
                         <viewControllerLayoutGuide type="bottom" id="jzd-bd-eyD"/>
@@ -128,7 +128,7 @@
         <!--Invite to Community-->
         <scene sceneID="cm0-bS-llD">
             <objects>
-                <viewController storyboardIdentifier="LCInviteToCommunity" title="Invite to Community" id="d1r-qX-Qev" customClass="LCInviteToCommunity" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCInviteToActions" title="Invite to Community" id="d1r-qX-Qev" customClass="LCInviteToActions" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HHg-16-yad"/>
                         <viewControllerLayoutGuide type="bottom" id="5c4-Yp-7Jl"/>
@@ -206,7 +206,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WAD-tq-IKj" id="Wjj-Jm-0kY">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-4R-LMo">
@@ -304,7 +304,7 @@
         <!--View Community-->
         <scene sceneID="BDI-0l-X5X">
             <objects>
-                <viewController storyboardIdentifier="LCViewCommunity" title="View Community" id="k8j-y9-80a" customClass="LCViewCommunity" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCViewActions" title="View Community" id="k8j-y9-80a" customClass="LCViewActions" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7yi-tA-9bl"/>
                         <viewControllerLayoutGuide type="bottom" id="0eE-nU-e7d"/>
@@ -432,7 +432,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Zju-By-f2F" id="n9k-eQ-bjz">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUq-RH-aMx">
@@ -457,7 +457,7 @@
                                         <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="BXm-bu-j3l" id="T43-bj-lFb">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="communityMemebrs.png" translatesAutoresizingMaskIntoConstraints="NO" id="1wE-m5-hwc">
@@ -491,7 +491,7 @@
                                         <rect key="frame" x="0.0" y="110" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DvU-ep-sDn" id="1dV-Ko-XuA">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="communityWebsite.png" translatesAutoresizingMaskIntoConstraints="NO" id="eDt-n1-nzc">
@@ -525,7 +525,7 @@
                                         <rect key="frame" x="0.0" y="154" width="320" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sL7-DB-F9g" id="Jpf-DI-vVi">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Vl-k1-i6L">
@@ -620,7 +620,7 @@
         <!--Select date-->
         <scene sceneID="eJA-ja-AJ5">
             <objects>
-                <viewController storyboardIdentifier="LCCommunityDateSelection" title="Select date" id="kff-62-AYo" customClass="LCCommunityDateSelection" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCActionsDateSelection" title="Select date" id="kff-62-AYo" customClass="LCActionsDateSelection" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0JJ-Hp-AZJ"/>
                         <viewControllerLayoutGuide type="bottom" id="V2G-ov-kjC"/>
@@ -654,7 +654,7 @@
         <!--Create Community-->
         <scene sceneID="bnf-bP-pJf">
             <objects>
-                <viewController storyboardIdentifier="LCCreateCommunity" title="Create Community" id="oPb-ft-J98" customClass="LCCreateCommunity" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCCreateActions" title="Create Community" id="oPb-ft-J98" customClass="LCCreateActions" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KNE-2w-IgT"/>
                         <viewControllerLayoutGuide type="bottom" id="hVY-XU-FoF"/>
