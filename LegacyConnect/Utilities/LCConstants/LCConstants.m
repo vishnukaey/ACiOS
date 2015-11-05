@@ -95,7 +95,7 @@ NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
 NSString *const kProfileStoryBoardIdentifier = @"Profile";
 NSString *const kInterestsStoryBoardIdentifier = @"Interests";
-NSString *const kCommunityStoryBoardIdentifier = @"Community";
+NSString *const kCommunityStoryBoardIdentifier = @"Actions";
 NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 

@@ -55,7 +55,7 @@
 		0BB33DA71BA81315009E6D0C /* LCCommentCellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DA61BA81315009E6D0C /* LCCommentCellXIB.xib */; };
 		0BB33DAB1BA8132A009E6D0C /* LCFeedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB33DA91BA8132A009E6D0C /* LCFeedCellView.m */; };
 		0BB33DAF1BA8133F009E6D0C /* LCGIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB33DAE1BA8133F009E6D0C /* LCGIButton.m */; };
-		0BB33DB41BA81359009E6D0C /* Community.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB01BA81359009E6D0C /* Community.storyboard */; };
+		0BB33DB41BA81359009E6D0C /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB01BA81359009E6D0C /* Actions.storyboard */; };
 		0BB33DB51BA81359009E6D0C /* Interests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB11BA81359009E6D0C /* Interests.storyboard */; };
 		0BB33DB71BA81359009E6D0C /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB31BA81359009E6D0C /* SignUp.storyboard */; };
 		0BB33DD41BA81401009E6D0C /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB81BA81400009E6D0C /* backButton.png */; };
@@ -241,7 +241,7 @@
 		0BB33DA91BA8132A009E6D0C /* LCFeedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedCellView.m; path = CustomViews/LCFeedCellView/LCFeedCellView.m; sourceTree = "<group>"; };
 		0BB33DAD1BA8133F009E6D0C /* LCGIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButton.h; path = CustomViews/LCGIButton/LCGIButton.h; sourceTree = "<group>"; };
 		0BB33DAE1BA8133F009E6D0C /* LCGIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGIButton.m; path = CustomViews/LCGIButton/LCGIButton.m; sourceTree = "<group>"; };
-		0BB33DB01BA81359009E6D0C /* Community.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Community.storyboard; path = Storyboards/Community.storyboard; sourceTree = "<group>"; };
+		0BB33DB01BA81359009E6D0C /* Actions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Actions.storyboard; path = Storyboards/Actions.storyboard; sourceTree = "<group>"; };
 		0BB33DB11BA81359009E6D0C /* Interests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Interests.storyboard; path = Storyboards/Interests.storyboard; sourceTree = "<group>"; };
 		0BB33DB31BA81359009E6D0C /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = Storyboards/SignUp.storyboard; sourceTree = "<group>"; };
 		0BB33DB81BA81400009E6D0C /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
@@ -1006,7 +1006,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6F8C661BD90AB000A0F33E /* Profile.storyboard */,
-				0BB33DB01BA81359009E6D0C /* Community.storyboard */,
+				0BB33DB01BA81359009E6D0C /* Actions.storyboard */,
 				0BB33DB11BA81359009E6D0C /* Interests.storyboard */,
 				0BB33DB31BA81359009E6D0C /* SignUp.storyboard */,
 				0BF05A801B4E64A000FF7B39 /* Main.storyboard */,
@@ -1487,7 +1487,7 @@
 				0BB33DDD1BA81401009E6D0C /* heart_dummy.png in Resources */,
 				0BB33DED1BA81401009E6D0C /* uncheck_box.png in Resources */,
 				0BB33DA31BA812A3009E6D0C /* Gotham-LightItalic.otf in Resources */,
-				0BB33DB41BA81359009E6D0C /* Community.storyboard in Resources */,
+				0BB33DB41BA81359009E6D0C /* Actions.storyboard in Resources */,
 				0BB33DDE1BA81401009E6D0C /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */,
 				0BB33D951BA81142009E6D0C /* camera-icon.png in Resources */,
 				0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */,

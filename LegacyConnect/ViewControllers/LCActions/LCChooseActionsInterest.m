@@ -107,7 +107,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCCreateActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateActions"];
   LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
   vc.interestId = interstObj.interestID;

@@ -244,7 +244,7 @@
   com.time = self.communityDate;
   [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
     com.eventID = response[@"data"][@"id"];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
     vc.eventToInvite = com;
     [self.navigationController pushViewController:vc animated:YES];
@@ -260,7 +260,7 @@
 
 - (void)dateSelection
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCActionsDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCActionsDateSelection"];
   communityDate = [[NSMutableString alloc]initWithString:@"test"];;
   vc.datePointer = communityDate;

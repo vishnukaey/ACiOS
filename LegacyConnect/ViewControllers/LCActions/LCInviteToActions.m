@@ -79,7 +79,7 @@
   NSLog(@"friendsTableView.selectedIDs-->>>%@", friendsTableView.selectedIDs);
   [LCAPIManager addUsersWithUserIDs:friendsTableView.selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
     NSLog(@"%@",response);
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
     vc.eventID = self.eventToInvite.eventID;
     [self.navigationController pushViewController:vc animated:YES];
