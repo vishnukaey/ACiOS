@@ -128,13 +128,19 @@ static CGFloat kCommentFieldHeight = 45.0f;
 -(void)changeFirstResponder
 {
   if (commentTextField_dup.isFirstResponder) {
-    [commentTextField becomeFirstResponder]; //will return YES;
+    [commentTextField becomeFirstResponder];
   }
 }
 
 - (void)postAction
 {
   
+}
+
+- (void)changeUpdateButtonState
+{
+  [postBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
+  [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
 }
 
 #pragma mark - textfield delegates
@@ -150,6 +156,8 @@ static CGFloat kCommentFieldHeight = 45.0f;
   [self resignAllResponders];
 }
 
+#pragma maek - Notification add/remove methods
+
 - (void)addTextFieldTextDidChangeNotifiaction
 {
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -158,18 +166,11 @@ static CGFloat kCommentFieldHeight = 45.0f;
                                              object:nil];
 }
 
-#pragma maek - Notification add/remove methods
 - (void)removeTextFieldTextDidChangeNotifiaction
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self
                                                   name:UITextFieldTextDidChangeNotification
                                                 object:nil];
-}
-
-- (void)changeUpdateButtonState
-{
-  [postBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
-  [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
 }
 
 

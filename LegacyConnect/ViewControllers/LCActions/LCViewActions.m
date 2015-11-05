@@ -49,37 +49,37 @@ static CGFloat kActionSectionTitleOffset = 10;
 #pragma mark - Event Comments API and pagination
 - (void)startFetchingResults
 {
-//  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-//  [super startFetchingResults];
-//  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(NSArray *response) {
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-//    [self didFetchResults:response haveMoreData:hasMoreData];
-//  } andFailure:^(NSString *error) {
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    [self didFailedToFetchResults];
-//  }];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [super startFetchingResults];
+  [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:nil withSuccess:^(id response, BOOL isMore) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFetchResults:response haveMoreData:isMore];
+  } andfailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFailedToFetchResults];
+  }];
 }
 
 - (void)startFetchingNextResults
 {
-//  [super startFetchingNextResults];
-//  
-//  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(NSArray *response) {
-//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-//    [self didFetchNextResults:response haveMoreData:hasMoreData];
-//  } andFailure:^(NSString *error) {
-//    [self didFailedToFetchResults];
-//  }];
+  [super startFetchingNextResults];
+  [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(id response, BOOL isMore) {
+    [self didFetchNextResults:response haveMoreData:isMore];
+  } andfailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
 }
 
 #pragma mark - Event Details API call
 -(void)getEventDetails
 {
-  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(id response){
-    self.eventObject = response;
+  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(LCEvent *responses) {
+    self.eventObject = responses;
+    [self dataPopulation];
     [self.tableView reloadData];
-  }andFailure:^(NSString *error){
+    [self startFetchingResults];
+  } andFailure:^(NSString *error) {
+    [self startFetchingResults];
     LCDLog(@"%@",error);
   }];
 }
@@ -368,7 +368,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   {
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
-//  cell.communityMemebersCountLabel.text = self.eventObject.supportersCount;
+  cell.communityMemebersCountLabel.text = self.eventObject.followerCount;
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   return cell;
 }

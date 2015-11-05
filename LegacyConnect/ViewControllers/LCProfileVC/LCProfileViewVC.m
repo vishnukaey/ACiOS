@@ -693,6 +693,7 @@ static NSInteger const kMilestoneIndex = 0;
   if (tableView == actionsTable) {
     UIStoryboard * actionsSB = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCViewActions * actions = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    actions.eventObject = actionsArray[indexPath.row];
     [self.navigationController pushViewController:actions animated:YES];
   }
 }
