@@ -545,6 +545,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
+
 + (void)deleteCommentWithId:(NSString *)commentId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
@@ -774,6 +775,45 @@ static LCAPIManager *sharedManager = nil;
      failure(error);
    }];
 }
+
+
++ (void)getMembersForEventID:(NSString*)eventID andLastEventID:(NSString*)lastEventID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *params = [NSString stringWithFormat:@"?%@=%@&%@=%@",kEventIDKey,eventID,@"lastUserId",lastEventID];
+  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, @"api/event/users",params];
+  
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:dict[@"eventMembers"] error:&error];
+       if(!error)
+       {
+         LCDLog(@"Getting Users successful! ");
+         success(responsesArray);
+       }
+       else
+       {
+         LCDLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
 
 + (void)getUserInterestsAndCausesWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
@@ -1369,7 +1409,7 @@ static LCAPIManager *sharedManager = nil;
       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
       if(!error)
       {
-        LCDLog(@"Getting Event details successful! ");
+        LCDLog(@"Getting Events successful! ");
         success(responsesArray);
       }
       else
@@ -1384,8 +1424,55 @@ static LCAPIManager *sharedManager = nil;
   }];
 }
 
-+ (void)getEventDetailsForEventWithID:(NSString*)eventID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getCommentsForEvent:(NSString*)eventID lastCommentID:(NSString*)lastID withSuccess:(void (^)(id response, BOOL isMore))success andfailure:(void (^)(NSString *error))failure
 {
+  
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@?", kBaseURL, @"api/event/comments"];
+  if (eventID) {
+    [url appendString:[NSString stringWithFormat:@"%@=%@", @"eventId", eventID]];
+  }
+  if (lastID) {
+    [url appendString:[NSString stringWithFormat:@"&%@=%@", kLastIdKey, lastID]];
+  }
+  
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSDictionary * comments = dict[kPostCommentsKey];
+       BOOL isMorePresent = [[comments objectForKey:@"more"] boolValue];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:comments[kPostCommentsKey] error:&error];
+       if(!error)
+       {
+         LCDLog(@"Getting Comments successful! ");
+         success(responsesArray,isMorePresent);
+       }
+       else
+       {
+         LCDLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
+
++ (void)getEventDetailsForEventWithID:(NSString*)eventID withSuccess:(void (^)(LCEvent* responses))success andFailure:(void (^)(NSString *error))failure{
+  
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *urlString = [NSString stringWithFormat:@"%@%@/%@", kBaseURL,kEventsURL,eventID];
   urlString = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
@@ -1399,15 +1486,88 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        NSError *error = nil;
-       NSDictionary *dict= response[kResponseData];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kFeedsKey] error:&error];
+       NSDictionary *dict = response[kResponseData];
+       LCEvent *event = [MTLJSONAdapter modelOfClass:[LCEvent class] fromJSONDictionary:dict[@"event"] error:&error];
        if(!error)
        {
          LCDLog(@"Getting Event details successful! ");
-         success(responsesArray);
+         success(event);
        }
        else
        {
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
++ (void)createEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
+  NSError *error = nil;
+  NSMutableArray *imagesArray = [[NSMutableArray alloc] init];
+  if(headerPhoto)
+  {
+    [imagesArray addObject:headerPhoto];
+  }
+  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
+  if(error)
+  {
+    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+  }
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesArray withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+         LCDLog(@"Getting Event details successful! ");
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+  
+}
+
++ (void)postCommentToEvent:(NSString *)eventID comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/event/comment"];
+  NSDictionary *dict = @{@"eventId": eventID, kPostCommentKey:comment};
+  
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       LCComment *comment = [MTLJSONAdapter modelOfClass:[LCComment class] fromJSONDictionary:dict error:&error];
+       
+       if(!error)
+       {
+         success(comment);
+       }
+       else
+       {
+         LCDLog(@"%@",error);
          failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
        }
      }
@@ -1419,59 +1579,29 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)createEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)deleteEvent:(LCEvent *)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
-  NSError *error = nil;
-  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
-  if(error)
-  {
-    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-  }
-  if(headerPhoto)
-  {
-    NSData *imageData = UIImagePNGRepresentation(headerPhoto);
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
-    [manager POST:url parameters:dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-      [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-      if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
-      {
-        [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
-        failure(responseObject[kResponseMessage]);
-      }
-      else
-      {
-        LCDLog(@"Create event successful \n %@",responseObject);
-        success(responseObject);
-      }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      failure(error.localizedRecoverySuggestion);
-    }];
-  }
-  else
-  {
-    LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-    [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, @"api/event/",event.eventID];
+  
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
      {
-       if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-       {
-         [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-         failure(response[kResponseMessage]);
-       }
-       else
-       {
-         LCDLog(@"Create event successful \n %@",response);
-         success(response);
-       }
-     } andFailure:^(NSString *error) {
-       LCDLog(@"%@",error);
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-       failure(error);
-     }];
-  }
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       LCDLog(@"Event deleted");
+       success(response);
+       //Notify Profile
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
 }
 
 
@@ -1499,35 +1629,38 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-/*not working*/
-//+ (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
-//{
-//  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kEventsURL];
-//  NSError *error = nil;
-//  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
-//  if(error)
-//  {
-//    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
-//  }
-//  NSData *imageData = UIImagePNGRepresentation(headerPhoto);
-//  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-//  [webService performPutOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict andImageData:imageData withSuccess:^(id response) {
-//    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-//    {
-//      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
-//      failure(response[kResponseMessage]);
-//    }
-//    else
-//    {
-//      LCDLog(@"Event update success! %@",response);
-//      success(response);
-//    }
-//  } andFailure:^(NSString *error) {
-//    LCDLog(@"%@",error);
-//    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
-//    failure(error);
-//  }];
-//}
++ (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/editEvent"];
+  NSError *error = nil;
+  NSMutableArray *imagesAray =[[NSMutableArray alloc] init];
+  if (headerPhoto)
+  {
+    [imagesAray addObject:headerPhoto];
+  }
+  NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
+  if(error)
+  {
+    LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+  }
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesAray withSuccess:^(id response) {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      LCDLog(@"Event update success! %@",response);
+      success(response);
+    }
+  } andFailure:^(NSString *error) {
+    LCDLog(@"%@",error);
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
+}
 
 
 + (void)followEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure

@@ -327,6 +327,7 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+  [super viewDidAppear:animated];
   if (!self.noResultsView) {
     NSString *message;
     if (currentProfileState == PROFILE_SELF) {
@@ -337,8 +338,13 @@ static NSInteger const kMilestoneIndex = 0;
     }
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
   }
-  [super viewDidAppear:animated];
+  if (self.navCount <= 1)
+  {
+    [backButton setHidden:YES];
+  }
 }
+
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
@@ -349,9 +355,6 @@ static NSInteger const kMilestoneIndex = 0;
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  if (self.navigationController.viewControllers.count <= 1) {
-    [backButton setHidden:YES];
-  }
   if (tabmenu.currentIndex == kMilestoneIndex) {
     [self.tableView reloadData];
   }
