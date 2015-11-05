@@ -19,8 +19,7 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   
-  interestsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  [self initailSetup];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,6 +27,16 @@
   // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - private method implementation
+
+- (void) initailSetup {
+  
+  interestsTable.estimatedRowHeight = 44.0;
+  interestsTable.rowHeight = UITableViewAutomaticDimension;
+  
+  interestsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+}
 
 - (void)loadInterests
 {
@@ -45,11 +54,6 @@
 
 
 #pragma mark - TableView delegates
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  return 135.0f;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
@@ -97,15 +101,5 @@
   
   return cell;
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

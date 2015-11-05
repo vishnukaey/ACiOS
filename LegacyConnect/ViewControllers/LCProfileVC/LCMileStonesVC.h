@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCFeedTableViewController.h"
 
-@interface LCMileStonesVC : UIViewController
+@interface LCMileStonesVC : LCFeedTableViewController
+{
+  BOOL isSelfProfile;
+}
+
+@property(nonatomic, retain)NSString *userID;
 
 @end

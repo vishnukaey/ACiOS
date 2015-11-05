@@ -45,7 +45,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   avatarPicState = IMAGE_UNTOUCHED;
   headerPicState = IMAGE_UNTOUCHED;
   
-  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
 
   [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
                 placeholderImage:profilePicPlaceholder

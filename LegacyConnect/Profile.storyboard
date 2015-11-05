@@ -481,7 +481,6 @@
                         <outlet property="profilePic" destination="CW0-eS-nLs" id="AuJ-Zp-htN"/>
                         <outlet property="profilePicBorderView" destination="xiW-N0-Bv4" id="bua-YE-fl9"/>
                         <outlet property="tabMenuContainer" destination="D7h-fV-Soh" id="ckm-Rv-AYD"/>
-                        <outlet property="tableView" destination="5k3-9Z-9Dm" id="BMo-pe-fak"/>
                         <outlet property="userNameLabel" destination="lgq-1K-QWR" id="gk0-vi-K7U"/>
                         <outlet property="viewToCollapse" destination="OPF-0c-AjY" id="7zu-uj-fyJ"/>
                     </connections>
@@ -931,8 +930,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hHJ-I0-tlG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hHJ-I0-tlG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="P11-bt-qtc" id="SRr-vq-hRB"/>
+                                    <outlet property="delegate" destination="P11-bt-qtc" id="8Dx-2e-qh0"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <constraints>
@@ -942,6 +946,9 @@
                             <constraint firstItem="hHJ-I0-tlG" firstAttribute="top" secondItem="JtX-xj-wzr" secondAttribute="bottom" id="xA7-X5-Cqh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="hHJ-I0-tlG" id="vVV-PH-zaU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uF1-S9-R47" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -959,8 +966,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fgG-xl-gzG">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fgG-xl-gzG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="kvZ-aX-cyx" id="5FO-P0-qkM"/>
                                     <outlet property="delegate" destination="kvZ-aX-cyx" id="AbU-Nb-UH5"/>
@@ -996,6 +1004,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MZ5-DI-Yu0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="dataSource" destination="T6B-Ys-ePM" id="oUk-fr-D9N"/>
                                     <outlet property="delegate" destination="T6B-Ys-ePM" id="T8f-aI-1FV"/>

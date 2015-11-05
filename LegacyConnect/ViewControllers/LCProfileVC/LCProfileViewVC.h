@@ -25,7 +25,7 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : LCFeedTableViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCProfileViewVC : UIViewController
 {
   
   IBOutlet UIImageView *profilePic, *headerImageView;
@@ -61,14 +61,5 @@ typedef enum profileStateTypes
 }
 
 @property(nonatomic, retain)LCUserDetail *userDetail;
-
-- (IBAction)backAction:(id)sender;
-- (IBAction)editClicked:(UIButton *)sender;
-- (IBAction)friendsButtonClicked;
-- (IBAction)impactsButtonClicked;
-
-- (IBAction)mileStonesClicked:(id)sender;
-- (IBAction)interestsClicked:(id)sender;
-- (IBAction)actionsClicked:(id)sender;
 
 @end
