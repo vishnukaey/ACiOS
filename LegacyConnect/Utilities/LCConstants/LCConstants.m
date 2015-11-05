@@ -139,6 +139,7 @@ NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
 
 NSString *const kIDKey = @"id";
+NSString *const kRange = @"range";
 NSString *const kMeKey = @"me";
 NSString *const kUserIDKey = @"userId";
 NSString *const kFirstNameKey = @"firstName";
@@ -164,6 +165,7 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
+NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";

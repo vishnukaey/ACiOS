@@ -34,3 +34,7 @@
 "Notifications" = "Notifications";
 "Settings" = "Settings";
 "Logout" = "Logout";
+
+// -- Actions -- //
+"details_caps" = "DETAILS";
+"comments_caps" = "COMMENTS";

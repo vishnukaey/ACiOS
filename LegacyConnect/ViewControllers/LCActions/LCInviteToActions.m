@@ -81,7 +81,7 @@
     NSLog(@"%@",response);
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
-    vc.eventID = self.eventToInvite.eventID;
+    vc.eventObject = self.eventToInvite;
     [self.navigationController pushViewController:vc animated:YES];
   }andFailure:^(NSString *error){
     NSLog(@"%@",error);

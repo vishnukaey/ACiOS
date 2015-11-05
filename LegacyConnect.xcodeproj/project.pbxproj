@@ -15,6 +15,7 @@
 		0B05D7511BEB1D4100FD5AE1 /* LCCreateActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7491BEB1D4100FD5AE1 /* LCCreateActions.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7531BEB1D4100FD5AE1 /* LCViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74D1BEB1D4100FD5AE1 /* LCViewActions.m */; settings = {ASSET_TAGS = (); }; };
+		0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */; settings = {ASSET_TAGS = (); }; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
 		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; settings = {ASSET_TAGS = (); }; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
@@ -175,6 +176,8 @@
 		0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCInviteToActions.m; sourceTree = "<group>"; };
 		0B05D74C1BEB1D4100FD5AE1 /* LCViewActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCViewActions.h; sourceTree = "<group>"; };
 		0B05D74D1BEB1D4100FD5AE1 /* LCViewActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCViewActions.m; sourceTree = "<group>"; };
+		0B05D7551BEB70D900FD5AE1 /* LCCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCommentsController.h; sourceTree = "<group>"; };
+		0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCommentsController.m; sourceTree = "<group>"; };
 		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B223C391BCFA6220022B8F6 /* LCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComment.h; sourceTree = "<group>"; };
@@ -443,6 +446,16 @@
 			);
 			name = LCActions;
 			path = ViewControllers/LCActions;
+			sourceTree = "<group>";
+		};
+		0B05D7541BEB70C500FD5AE1 /* LCCommentsController */ = {
+			isa = PBXGroup;
+			children = (
+				0B05D7551BEB70D900FD5AE1 /* LCCommentsController.h */,
+				0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */,
+			);
+			name = LCCommentsController;
+			path = ViewControllers/LCCommentsController;
 			sourceTree = "<group>";
 		};
 		0B212EE41BBACA4B00B4237E /* LCMenuItemCell */ = {
@@ -1020,6 +1033,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B05D7541BEB70C500FD5AE1 /* LCCommentsController */,
 				0B05D7411BEB1D4100FD5AE1 /* LCActions */,
 				0BFDF94A1BDDFB51001E1067 /* LCFullScreenViewController */,
 				0BF8C8151BAFFC8E00C29746 /* LCFriendsList */,
@@ -1556,6 +1570,7 @@
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */,
+				0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */,
 				0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
 				CE44ACD91BE78CCE00D22EE8 /* LCNotificationManager.m in Sources */,

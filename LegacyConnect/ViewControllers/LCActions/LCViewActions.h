@@ -7,22 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCCommentsController.h"
+#import "LCTaggedLabel.h"
 
 
-@interface LCViewActions : UIViewController
+@interface LCViewActions : LCCommentsController
 {
-  IBOutlet UITableView *mainTableView;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  LCEvent * eventObject;
-  NSMutableArray *commentsArray;
+  __weak IBOutlet UILabel *eventNameLabel;
+  __weak IBOutlet LCTaggedLabel *eventCreatedByLabel;
+  __weak IBOutlet UIImageView *eventPhoto;
+  __weak IBOutlet UIButton *settingsButton;
 }
 
-@property(nonatomic, retain)NSString *eventID;
+@property(nonatomic, retain) LCEvent *eventObject;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)settingsAction:(id)sender;
-- (IBAction)membersAction:(id)sender;
-- (IBAction)websiteLinkAction:(id)sender;
 
 @end

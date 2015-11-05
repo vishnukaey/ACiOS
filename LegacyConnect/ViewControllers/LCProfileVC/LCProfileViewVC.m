@@ -16,6 +16,8 @@
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 #import "LCFeedsCommentsController.h"
 #import "LCCreatePostViewController.h"
+#import "LCViewActions.h"
+
 
 static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";
@@ -685,6 +687,11 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (tableView == actionsTable) {
+    UIStoryboard * actionsSB = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions * actions = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    [self.navigationController pushViewController:actions animated:YES];
+  }
 }
 
 #pragma mark - feedCell delegates

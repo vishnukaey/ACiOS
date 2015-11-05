@@ -8,70 +8,214 @@
 
 #import "LCViewActions.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LCCommentCell.h"
+#import "LCSingleCauseVC.h"
+#import "LCProfileViewVC.h"
+
+static CGFloat kActionSectionHeight = 30;
+static CGFloat kActionSectionTitleOffset = 10;
+
+#define kActionsHeaderBG [UIColor colorWithRed:235/255.0 green:236/255.0 blue:237/255.0 alpha:1]
+#define kActionsHeaderText [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
+#define kActionsHeaderTextFont [UIFont fontWithName:@"Gotham-Medium" size:11]
 
 #pragma mark - LCCommunityDetailCell class
-@interface LCCommunityDetailCell : UITableViewCell
+@interface LCActionsDetailsCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityDetailsLabel;
 @end
 
-@implementation LCCommunityDetailCell
+@implementation LCActionsDetailsCell
 @end
 
 #pragma mark - LCCommunityMemebersCountCell class
-@interface LCCommunityMemebersCountCell : UITableViewCell
+@interface LCActionsMembersCountCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
 @end
 
-@implementation LCCommunityMemebersCountCell
+@implementation LCActionsMembersCountCell
 @end
 
 #pragma mark - LCCommunityWebsiteCell class
-@interface LCCommunityWebsiteCell : UITableViewCell
+@interface LCActionsWebsiteCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityWebsiteLabel;
 @end
 
-@implementation LCCommunityWebsiteCell
-@end
-
-#pragma mark - LCCommunityCommentsCell class
-@interface LCCommunityCommentsCell : UITableViewCell
-@property(nonatomic, strong)IBOutlet UILabel *commentDescriptionLabel;
-@property(nonatomic, strong)IBOutlet UILabel *commentTimeLabel;
-@property(nonatomic, strong)IBOutlet UILabel *commentUserNameLabel;
-@property(nonatomic, strong)IBOutlet UIImageView *commentUserImageView;
-@end
-
-@implementation LCCommunityCommentsCell
+@implementation LCActionsWebsiteCell
 @end
 
 #pragma mark - LCViewActions class implementation
-#define SECTION_HEIGHT 30
 @implementation LCViewActions
-@synthesize eventID;
+
+#pragma mark - Event Comments API and pagination
+- (void)startFetchingResults
+{
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [super startFetchingResults];
+  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(NSArray *response) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchResults:response haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  
+  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(NSArray *response) {
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
+#pragma mark - Event Details API call
+-(void)getEventDetails
+{
+  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(id response){
+    self.eventObject = response;
+    [self.tableView reloadData];
+  }andFailure:^(NSString *error){
+    LCDLog(@"%@",error);
+  }];
+}
+
+- (void)postAction
+{
+  
+}
+
+#pragma mark - Private method implementation
+- (void)initialUISetUp
+{
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.tableFooterView = zeroRectView;
+}
+
+- (void)dataPopulation
+{
+  [eventNameLabel setText:self.eventObject.name];
+  [eventPhoto sd_setImageWithURL:[NSURL URLWithString:self.eventObject.headerPhoto] placeholderImage:nil];
+  [settingsButton.layer setCornerRadius:5.0f];
+  
+  // -------- Created By 'Owner' in 'Interest' -------- //
+  NSString * eventCreatedBy = @"Event Created by ";
+  NSString  *eventOwnerName;
+  NSString * inText = @"in ";
+  NSString * interest = @"Water";
+  if ([self.eventObject.eventID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+    eventOwnerName = @"You ";
+  }
+  else
+  {
+    eventOwnerName = [NSString stringWithFormat:@"%@ %@ ",
+                      [LCUtilityManager performNullCheckAndSetValue:@"YOU"],
+                      [LCUtilityManager performNullCheckAndSetValue:@""]];
+  }
+  
+  NSString * eventinfoString = [NSString stringWithFormat:@"%@%@%@%@",eventCreatedBy,eventOwnerName,inText,interest];
+  NSMutableAttributedString * eventInfoAttribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
+  
+  
+  NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
+  [eventInfoAttribString addAttributes:@{
+                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
+                                         NSForegroundColorAttributeName : [UIColor colorWithRed:235/255.0f green:236/255.0f blue:237/255.0f alpha:1]
+                                         } range:tagRangeCreatedBy];
+  
+  NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
+  [eventInfoAttribString addAttributes:@{
+                                             NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
+                                             NSForegroundColorAttributeName : [UIColor colorWithRed:239/255.0f green:100/255.0f blue:77/255.0f alpha:1]
+                                             } range:tagRangeUserName];
+  
+  
+  NSRange tagRangeinText = [eventinfoString rangeOfString:inText];
+  [eventInfoAttribString addAttributes:@{
+                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
+                                         NSForegroundColorAttributeName : [UIColor colorWithRed:235/255.0f green:236/255.0f blue:237/255.0f alpha:1]
+                                         } range:tagRangeinText];
+
+
+  NSRange tagRangeinterest = [eventinfoString rangeOfString:interest];
+  [eventInfoAttribString addAttributes:@{
+                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
+                                         NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
+                                         } range:tagRangeinterest];
+  
+  NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
+  // -- User Info Tag -- //
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.eventID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, nil];
+  [tagsWithRanges addObject:dic_user];
+  // -- Interest Info Tag -- //
+  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kIDKey, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
+  [tagsWithRanges addObject:dic_interest];
+  
+  eventCreatedByLabel.tagsArray  = tagsWithRanges;
+  [eventCreatedByLabel setAttributedText:eventInfoAttribString];
+  __weak typeof(self) weakSelf = self;
+  eventCreatedByLabel.nameTagTapped = ^(int index) {
+    [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
+  };
+}
+
+- (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
+{
+  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), kActionSectionHeight)];
+  [view setBackgroundColor:kActionsHeaderBG];
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kActionSectionTitleOffset, 0, CGRectGetWidth(self.tableView.frame) - kActionSectionTitleOffset, kActionSectionHeight)];
+  [label setBackgroundColor:[UIColor clearColor]];
+  [label setTextColor:kActionsHeaderText];
+  [label setFont:kActionsHeaderTextFont];
+  [label setText:title];
+  [view addSubview:label];
+  return view;
+}
+
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeCause])
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeUser])
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  mainTableView.estimatedRowHeight = 44.0;
-  mainTableView.rowHeight = UITableViewAutomaticDimension;
-  eventObject = [[LCEvent alloc] init];
-  eventObject.eventDescription = @"";
-  [self loadCommunityData];
+  [self initialUISetUp];
+  [self dataPopulation];
+  [self getEventDetails];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.menuButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -79,163 +223,26 @@
   [super viewWillDisappear:animated];
 }
 
-#pragma mark - setup functions
--(void)loadCommunityData
-{
-  [LCAPIManager getEventDetailsForEventWithID:eventID withSuccess:^(id response){
-    NSLog(@"%@",response);
-    eventObject = response;
-    commentsArray = [[NSMutableArray alloc] initWithArray:[LCDummyValues dummyCommentArray]];
-    [mainTableView reloadData];
-  }andFailure:^(NSString *error){
-    NSLog(@"%@",error);
-  }];
-}
-
 #pragma mark - button actions
 - (IBAction)backAction:(id)sender
 {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)settingsAction:(id)sender
 {
-  NSLog(@"settings clicked-->>");
+  LCDLog(@"settings clicked-->>");
 }
 
-- (IBAction)membersAction:(id)sender
+- (void)membersAction
 {
-  NSLog(@"members clicked-->>");
+  LCDLog(@"members clicked-->>");
 }
 
-- (IBAction)websiteLinkAction:(id)sender
+- (void)websiteLinkAction
 {
-  NSLog(@"website link clicked-->>");
-}
-
-#pragma mark - TableView delegates
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 2;    //count of section
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  if (section == 0)//first 3 cells
-  {
-    return 3;
-  }
-  return commentsArray.count;
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-  return SECTION_HEIGHT;
-}
-
--(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, SECTION_HEIGHT)];
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(8, 0, tableView.frame.size.width - 8, SECTION_HEIGHT)];
-  [label setFont:[UIFont boldSystemFontOfSize:12]];
-  switch (section)
-  {
-    case 0:
-    {
-      label.text = @"DETAILS";
-    }
-      break;
-      
-      case 1:
-    {
-      label.text = @"COMMENTS";
-    }
-      break;
-      
-    default:
-      break;
-  }
-  [label setTextColor:[UIColor grayColor]];
-  [view addSubview:label];
-  [view setBackgroundColor:[UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]];
-  return view;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if (indexPath.section == 0)
-  {
-    switch (indexPath.row)
-    {
-      case 0:
-      {
-        static NSString *MyIdentifier = @"LCCommunityDetailCell";
-        LCCommunityDetailCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        if (cell == nil)
-        {
-          cell = [[LCCommunityDetailCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-        }
-        NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:eventObject.eventDescription];
-        cell.communityDetailsLabel.attributedText = attributedString;
-        return cell;
-      }
-        break;
-        
-      case 1:
-      {
-        static NSString *MyIdentifier = @"LCCommunityMemebersCountCell";
-        LCCommunityMemebersCountCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        if (cell == nil)
-        {
-          cell = [[LCCommunityMemebersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-        }
-        cell.communityMemebersCountLabel.text = eventObject.eventID;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        return cell;
-      }
-        break;
-        
-      case 2:
-      {
-        static NSString *MyIdentifier = @"LCCommunityWebsiteCell";
-        LCCommunityWebsiteCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        if (cell == nil)
-        {
-          cell = [[LCCommunityWebsiteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-        }
-        cell.communityWebsiteLabel.text = eventObject.website;
-        return cell;
-      }
-        break;
-        
-      default:
-        break;
-    }
-  }
-  else//comments
-  {
-    static NSString *MyIdentifier = @"LCCommunityCommentsCell";
-    LCCommunityCommentsCell * cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      cell = [[LCCommunityCommentsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-    }
-    cell.commentUserNameLabel.text = commentsArray[indexPath.row][@"user_name"];
-    cell.commentTimeLabel.text = commentsArray[indexPath.row][@"time"];
-    cell.commentDescriptionLabel.text = commentsArray[indexPath.row][@"comment"];
-    cell.commentUserImageView.layer.cornerRadius = cell.commentUserImageView.frame.size.width/2;
-    [cell.commentUserImageView sd_setImageWithURL:[NSURL URLWithString:commentsArray[indexPath.row][@"profile_pic"]] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-    return cell;
-  }
-  
-  
-  return nil;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  LCDLog(@"website link clicked-->>");
 }
 
 #pragma mark - scrollview delegates
@@ -263,14 +270,119 @@
   collapseViewHeight.constant = collapseConstant;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - TableView delegates
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 2;
 }
-*/
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  if (section == 0)
+  {
+    return 3;
+  }
+  return self.results.count;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return kActionSectionHeight;
+}
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+  NSString * headerText;
+  switch (section)
+  {
+    case 0:
+      headerText = NSLocalizedString(@"details_caps", nil);
+      break;
+      
+    default:
+      headerText = NSLocalizedString(@"comments_caps", nil);
+      break;
+  }
+  return [self getHeaderViewWithHeaderTitle:headerText];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (indexPath.section == 0)
+  {
+    switch (indexPath.row)
+    {
+      case 0:
+        return [self getActionsDetailsCell];
+        break;
+        
+      case 1:
+        return [self getActionsMembersCountCell];
+        break;
+        
+      default:
+        return [self getActionsWebsiteCell];
+        break;
+    }
+  }
+  
+  JTTABLEVIEW_cellForRowAtIndexPath
+  LCCommentCell *commentCell;
+  static NSString *MyIdentifier = @"LCCommentCell";
+  commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (commentCell == nil)
+  {
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
+    commentCell = [topLevelObjects objectAtIndex:0];
+  }
+  NSInteger rowNo = indexPath.row - 1;
+  [commentCell setComment:[self.results objectAtIndex:rowNo]];
+  [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+  __weak typeof(self) weakSelf = self;
+  commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
+    [weakSelf tagTapped:tagDetails];
+  };
+  [commentCell.seperator setHidden:self.results.count == indexPath.row];
+  return commentCell;
+}
+
+
+- (LCActionsDetailsCell*)getActionsDetailsCell
+{
+  static NSString *MyIdentifier = @"LCActionsDetailsCell";
+  LCActionsDetailsCell * cell = [self.tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+    cell = [[LCActionsDetailsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+  }
+  NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:[LCUtilityManager performNullCheckAndSetValue:self.eventObject.eventDescription]];
+  cell.communityDetailsLabel.attributedText = attributedString;
+  return cell;
+}
+
+- (LCActionsMembersCountCell*)getActionsMembersCountCell
+{
+  static NSString *MyIdentifier = @"LCActionsMembersCountCell";
+  LCActionsMembersCountCell * cell = [self.tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+    cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+  }
+  cell.communityMemebersCountLabel.text = self.eventObject.supportersCount;
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  return cell;
+}
+
+- (LCActionsWebsiteCell*)getActionsWebsiteCell
+{
+  static NSString *MyIdentifier = @"LCActionsWebsiteCell";
+  LCActionsWebsiteCell * cell = [self.tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+    cell = [[LCActionsWebsiteCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+  }
+  cell.communityWebsiteLabel.text = self.eventObject.website;
+  return cell;
+}
 
 @end
