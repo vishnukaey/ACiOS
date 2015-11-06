@@ -16,4 +16,7 @@
 
 }
 
+- (void)resignAllResponders;
+- (void)enableCommentField:(BOOL)enable;
+- (void)changeUpdateButtonState;
 @end

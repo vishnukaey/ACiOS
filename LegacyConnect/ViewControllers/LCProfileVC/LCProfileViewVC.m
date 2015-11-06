@@ -690,12 +690,12 @@ static NSInteger const kMilestoneIndex = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (tableView == actionsTable) {
+//  if (tableView == actionsTable) {
     UIStoryboard * actionsSB = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCViewActions * actions = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
-    actions.eventObject = actionsArray[indexPath.row];
+//    actions.eventObject = actionsArray[indexPath.row];
     [self.navigationController pushViewController:actions animated:YES];
-  }
+//  }
 }
 
 #pragma mark - feedCell delegates
