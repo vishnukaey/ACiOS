@@ -1,14 +1,14 @@
 //
-//  LCCreateCommunity.m
+//  LCCreateActions.m
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCCreateCommunity.h"
-#import "LCInviteToCommunity.h"
-#import "LCCommunityDateSelection.h"
+#import "LCCreateActions.h"
+#import "LCInviteToActions.h"
+#import "LCActionsDateSelection.h"
 
 #pragma mark - insetLabel class
 @interface insetLabel : UILabel
@@ -81,9 +81,9 @@
 @end
 
 
-#pragma mark - LCCreateCommunity class
+#pragma mark - LCCreateActions class
 
-@interface LCCreateCommunity ()
+@interface LCCreateActions ()
 {
   insetTextField *communityNameField;
   insetTextField *aboutCommunityField;
@@ -93,7 +93,7 @@
 
 @end
 
-@implementation LCCreateCommunity
+@implementation LCCreateActions
 @synthesize communityDate, interestId;
 
 #pragma mark - controller life cycle
@@ -244,8 +244,8 @@
   com.time = self.communityDate;
   [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
     com.eventID = response[@"data"][@"id"];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-    LCInviteToCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToCommunity"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
     vc.eventToInvite = com;
     [self.navigationController pushViewController:vc animated:YES];
   } andFailure:^(NSString *error) {
@@ -260,8 +260,8 @@
 
 - (void)dateSelection
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCCommunityDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCCommunityDateSelection"];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+  LCActionsDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCActionsDateSelection"];
   communityDate = [[NSMutableString alloc]initWithString:@"test"];;
   vc.datePointer = communityDate;
   [self.navigationController pushViewController:vc animated:YES];

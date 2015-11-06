@@ -1,13 +1,13 @@
 //
-//  LCInviteToCommunity.m
+//  LCInviteToActions.m
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCInviteToCommunity.h"
-#import "LCViewCommunity.h"
+#import "LCInviteToActions.h"
+#import "LCViewActions.h"
 
 
 
@@ -21,9 +21,9 @@
 @implementation LCInviteCommunityFriendCell
 @end
 
-#pragma mark - LCInviteToCommunity class
+#pragma mark - LCInviteToActions class
 
-@implementation LCInviteToCommunity
+@implementation LCInviteToActions
 @synthesize eventToInvite;
 
 #pragma mark - controller life cycle
@@ -79,9 +79,9 @@
   NSLog(@"friendsTableView.selectedIDs-->>>%@", friendsTableView.selectedIDs);
   [LCAPIManager addUsersWithUserIDs:friendsTableView.selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
     NSLog(@"%@",response);
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-    LCViewCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewCommunity"];
-    vc.eventID = self.eventToInvite.eventID;
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    vc.eventObject = self.eventToInvite;
     [self.navigationController pushViewController:vc animated:YES];
   }andFailure:^(NSString *error){
     NSLog(@"%@",error);

@@ -1,15 +1,15 @@
 //
-//  LCCommunityDateSelection.m
+//  LCActionsDateSelection.m
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCCommunityDateSelection.h"
+#import "LCActionsDateSelection.h"
 
 
-@implementation LCCommunityDateSelection
+@implementation LCActionsDateSelection
 @synthesize datePointer;
 
 #pragma mark - controller life cycle

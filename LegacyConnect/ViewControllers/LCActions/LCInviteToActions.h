@@ -1,5 +1,5 @@
 //
-//  LCInviteToCommunity.h
+//  LCInviteToActions.h
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
@@ -10,7 +10,7 @@
 #import "LCMultipleSelectionTable.h"
 
 
-@interface LCInviteToCommunity : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCInviteToActions : UIViewController<UITableViewDataSource, UITableViewDelegate>
 {
   IBOutlet LCMultipleSelectionTable *friendsTableView;
   NSArray *friendsArray;

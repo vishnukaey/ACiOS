@@ -95,14 +95,14 @@ NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
 NSString *const kProfileStoryBoardIdentifier = @"Profile";
 NSString *const kInterestsStoryBoardIdentifier = @"Interests";
-NSString *const kCommunityStoryBoardIdentifier = @"Community";
+NSString *const kCommunityStoryBoardIdentifier = @"Actions";
 NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 
 
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
-NSString *const kChooseCommunityStoryBoardID = @"LCChooseCommunityInterest";
+NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
@@ -139,6 +139,7 @@ NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
 
 NSString *const kIDKey = @"id";
+NSString *const kRange = @"range";
 NSString *const kMeKey = @"me";
 NSString *const kUserIDKey = @"userId";
 NSString *const kFirstNameKey = @"firstName";
@@ -164,6 +165,7 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
+NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";

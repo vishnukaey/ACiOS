@@ -12,6 +12,9 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCFriendsListViewController.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCFeedsCommentsController.h"
+#import "LCCreatePostViewController.h"
+#import "LCViewActions.h"
 
 static NSString * const kImageNameProfileSettings = @"profileSettings";
 static NSString * const kImageNameProfileAdd = @"profileAdd";

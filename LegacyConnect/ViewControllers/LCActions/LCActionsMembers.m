@@ -1,15 +1,15 @@
 //
-//  LCCommunityMembers.m
+//  LCActionsMembers.m
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCCommunityMembers.h"
+#import "LCActionsMembers.h"
 
 
-@implementation LCCommunityMembers
+@implementation LCActionsMembers
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad

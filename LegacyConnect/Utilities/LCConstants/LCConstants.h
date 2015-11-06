@@ -121,6 +121,7 @@ extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;
 
 extern NSString *const kIDKey;
+extern NSString *const kRange;
 extern NSString *const kMeKey;
 extern NSString *const kUserIDKey;
 extern NSString *const kFirstNameKey;
@@ -143,7 +144,7 @@ extern NSString *const kDefaultDateFormat;
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
 
-
+extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;
