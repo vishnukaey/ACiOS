@@ -25,7 +25,7 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : UIViewController
+@interface LCProfileViewVC : LCFeedTableViewController <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
 {
   
   IBOutlet UIImageView *profilePic, *headerImageView;

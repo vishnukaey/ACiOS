@@ -73,16 +73,19 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     
     mileStonesVC = segue.destinationViewController;
     mileStonesVC.userID = userDetail.userID;
+    mileStonesVC.delegate = self;
   }
   else if ([segue.identifier isEqualToString:@"LCInterestsSegue"]) {
     
     interestsVC = segue.destinationViewController;
     interestsVC.userID = userDetail.userID;
+    interestsVC.delegate = self;
   }
   else if ([segue.identifier isEqualToString:@"LCActionsSegue"]) {
     
     actionsVC = segue.destinationViewController;
     actionsVC.userID = userDetail.userID;
+    actionsVC.delegate = self;
   }
 }
 
@@ -377,9 +380,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 }
 
 
-#pragma mark - scrollview delegates
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
+#pragma mark - ScrollView Custom Delelgate 
+
+- (void)scrollViewScrolled:(UIScrollView *)scrollView {
   
   if (scrollView.contentOffset.y <= 0 && collapseViewHeight.constant >=170) //Added this line to KOAPullToRefresh to work correctly.
   {

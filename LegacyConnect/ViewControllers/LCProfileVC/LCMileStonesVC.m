@@ -279,11 +279,18 @@
   NSLog(@"tag details-->>%@", tagDetails);
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
+
+#pragma mark - ScrollView delegates
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  [self.delegate scrollViewScrolled:scrollView];
+}
+
 @end

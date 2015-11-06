@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ActionsDelegate <NSObject>
+- (void)scrollViewScrolled:(UIScrollView *)scrollView;
+@end
+
 @interface LCActionsVC : UIViewController
 {
   __weak IBOutlet UITableView *actionsTable;
@@ -16,6 +20,7 @@
 }
 
 @property(nonatomic, retain)NSString *userID;
+@property (nonatomic, assign) id<ActionsDelegate> delegate;
 
 - (void) loadActions;
 

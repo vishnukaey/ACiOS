@@ -9,11 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedTableViewController.h"
 
+@protocol MileStonesDelegate <NSObject>
+- (void)scrollViewScrolled:(UIScrollView *)scrollView;
+@end
+
 @interface LCMileStonesVC : LCFeedTableViewController
 {
   BOOL isSelfProfile;
 }
 
 @property(nonatomic, retain)NSString *userID;
+@property (nonatomic, assign) id<MileStonesDelegate> delegate;
 
 @end

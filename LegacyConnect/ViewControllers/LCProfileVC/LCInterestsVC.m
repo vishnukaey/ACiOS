@@ -102,4 +102,10 @@
   return cell;
 }
 
+#pragma mark - ScrollView delegates
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  [self.delegate scrollViewScrolled:scrollView];
+}
+
 @end

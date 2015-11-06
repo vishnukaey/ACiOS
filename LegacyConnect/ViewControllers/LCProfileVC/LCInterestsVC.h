@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol InterestsDelegate <NSObject>
+- (void)scrollViewScrolled:(UIScrollView *)scrollView;
+@end
+
 @interface LCInterestsVC : UIViewController
 {
   __weak IBOutlet UITableView *interestsTable;
@@ -16,6 +20,7 @@
 }
 
 @property(nonatomic, retain)NSString *userID;
+@property (nonatomic, assign) id<InterestsDelegate> delegate;
 
 - (void) loadInterests;
 @end
