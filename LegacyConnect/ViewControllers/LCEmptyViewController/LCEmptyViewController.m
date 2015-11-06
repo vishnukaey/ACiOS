@@ -208,9 +208,9 @@ static NSString *kTitle = @"MY FEED";
   if (sender.tag == 0)//create event
   {
 //    [appdel.menuButton setHidden:YES];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-//    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
-//    [navigationRoot pushViewController:vc animated:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+    [navigationRoot pushViewController:vc animated:YES];
   }
   else if (sender.tag == 1)//photo post
   {
