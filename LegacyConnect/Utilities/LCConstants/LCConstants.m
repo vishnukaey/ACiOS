@@ -193,4 +193,6 @@ NSString *const kTagobjId = @"tag_object_id";
 NSString *const kTagobjText= @"tag_object_text";
 NSString *const kTagobjType = @"tag_object_type";
 
+NSString *const kBulletUnicode = @"\u2022";
+
 @end
