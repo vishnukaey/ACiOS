@@ -1,5 +1,5 @@
 //
-//  LCChooseCommunityInterest.h
+//  LCChooseActionsInterest.h
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LCChooseCommunityInterest : UIViewController
+@interface LCChooseActionsInterest : UIViewController
 {
   IBOutlet UICollectionView * interstsCollection;
   NSArray *interestsArray;

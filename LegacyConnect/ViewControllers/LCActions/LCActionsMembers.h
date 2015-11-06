@@ -1,5 +1,5 @@
 //
-//  LCCommunityMembers.h
+//  LCActionsMembers.h
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LCCommunityMembers : UIViewController
+@interface LCActionsMembers : UIViewController
 
 @end

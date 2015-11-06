@@ -1,17 +1,17 @@
 //
-//  LCChooseCommunityInterest.m
+//  LCChooseActionsInterest.m
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCChooseCommunityInterest.h"
-#import "LCCreateCommunity.h"
+#import "LCChooseActionsInterest.h"
+#import "LCCreateActions.h"
 #import "LCCommunityInterestCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-@implementation LCChooseCommunityInterest
+@implementation LCChooseActionsInterest
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -107,8 +107,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Community" bundle:nil];
-  LCCreateCommunity *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateCommunity"];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+  LCCreateActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateActions"];
   LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
   vc.interestId = interstObj.interestID;
   [self.navigationController pushViewController:vc animated:YES];

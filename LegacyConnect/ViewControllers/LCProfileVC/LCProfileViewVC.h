@@ -58,4 +58,5 @@ typedef enum profileStateTypes
 - (IBAction)interestsClicked:(id)sender;
 - (IBAction)actionsClicked:(id)sender;
 
+@property (nonatomic) NSInteger navCount;
 @end

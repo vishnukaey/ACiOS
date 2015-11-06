@@ -1,5 +1,5 @@
 //
-//  LCCreateCommunity.h
+//  LCCreateActions.h
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LCCreateCommunity : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface LCCreateActions : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property(nonatomic, retain)NSMutableString *communityDate;
 @property(nonatomic, retain)NSString *interestId;

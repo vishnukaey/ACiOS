@@ -86,16 +86,17 @@
   }
   NSLog(@"navigationArray-->>>%@", navigationArray);
   self.navigationController.viewControllers = navigationArray;
+  LCProfileViewVC *lcp = (LCProfileViewVC*)self;
+  lcp.navCount = navigationArray.count;
 }
 
 
 - (void) viewWillAppear:(BOOL)animated
 {
-  
   [super viewWillAppear:animated];
   if ([self isKindOfClass:[LCProfileViewVC class]])
   {
-     [self clearNaviGationStack];
+    [self clearNaviGationStack];
   }
 }
 /*

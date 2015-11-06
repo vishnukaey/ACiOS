@@ -1,5 +1,5 @@
 //
-//  LCCommunityDateSelection.h
+//  LCActionsDateSelection.h
 //  LegacyConnect
 //
 //  Created by User on 7/22/15.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface LCCommunityDateSelection : UIViewController
+@interface LCActionsDateSelection : UIViewController
 
 @property(nonatomic, retain)NSMutableString *datePointer;
 
