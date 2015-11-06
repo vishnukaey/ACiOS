@@ -62,4 +62,15 @@ typedef enum profileStateTypes
 
 @property(nonatomic, retain)LCUserDetail *userDetail;
 
+- (IBAction)backAction:(id)sender;
+- (IBAction)editClicked:(UIButton *)sender;
+- (IBAction)friendsButtonClicked;
+- (IBAction)impactsButtonClicked;
+
+- (IBAction)mileStonesClicked:(id)sender;
+- (IBAction)interestsClicked:(id)sender;
+- (IBAction)actionsClicked:(id)sender;
+
+@property (nonatomic) NSInteger navCount;
+
 @end

@@ -20,6 +20,7 @@
 {
   LCSearchResult *searchResultObject;
   NSArray *tableData;
+  NSTimer *searchTimer;
 }
 @end
 
@@ -348,7 +349,7 @@
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = self.results[indexPath.row];
+    vc.userDetail = self.results[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
@@ -440,8 +441,13 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
  searchText = [searchText stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
-  if(searchBar.text.length == 0)
+  if(searchBar.text.length == 0 || searchText == nil)
   {
     searchResultObject = nil;
     [self.results removeAllObjects];
@@ -449,17 +455,24 @@
   }
   else
   {
-    [LCAPIManager searchForItem:searchText withSuccess:^(LCSearchResult *searchResult) {
-      searchResultObject = searchResult;
-      [self.results removeAllObjects];
-      [super startFetchingResults];
-      BOOL hasMoreData = ([(NSArray*)searchResult.usersArray count] < 10) ? NO : YES;
-      [self didFetchResults:searchResult.usersArray haveMoreData:hasMoreData];
-      [self reloadAllViews];
-    } andFailure:^(NSString *error) {
-    }];
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:searchText repeats:NO];
   }
 }
+
+
+-(void) searchRequest:(NSTimer*)sender
+{
+  [LCAPIManager searchForItem:sender.userInfo withSuccess:^(LCSearchResult *searchResult) {
+    searchResultObject = searchResult;
+    [self.results removeAllObjects];
+    [super startFetchingResults];
+    BOOL hasMoreData = ([(NSArray*)searchResult.usersArray count] < 10) ? NO : YES;
+    [self didFetchResults:searchResult.usersArray haveMoreData:hasMoreData];
+    [self reloadAllViews];
+  } andFailure:^(NSString *error) {
+  }];
+}
+
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {

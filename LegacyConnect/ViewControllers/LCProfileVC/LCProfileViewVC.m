@@ -40,7 +40,8 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  if (self.navigationController.viewControllers.count <= 1) {
+  if (self.navCount <= 1)
+  {
     [backButton setHidden:YES];
   }
 }
@@ -105,7 +106,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   userNameLabel.text = kEmptyStringValue;
   memeberSincelabel.text = kEmptyStringValue;
   locationLabel.text = kEmptyStringValue;
-
+  
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   if ([nativeUserId isEqualToString:userDetail.userID] || !userDetail.userID)
   {
@@ -151,7 +152,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                            [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
                            [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]] uppercaseString];
     memeberSincelabel.text = [NSString stringWithFormat:@"%@ %@",
-                               NSLocalizedString(@"member_since", nil),
+                              NSLocalizedString(@"member_since", nil),
                               [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
     
     locationLabel.text = [[NSString stringWithFormat:@"%@ %@ %@ %@ %@",
@@ -380,7 +381,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 }
 
 
-#pragma mark - ScrollView Custom Delelgate 
+#pragma mark - ScrollView Custom Delelgate
 
 - (void)scrollViewScrolled:(UIScrollView *)scrollView {
   
