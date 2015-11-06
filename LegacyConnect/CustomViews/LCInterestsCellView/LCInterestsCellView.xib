@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="135"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHN-Et-Xdj" id="q57-38-zWc">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="134.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CiG-Df-6fP">
@@ -37,7 +37,7 @@
                                 </constraints>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="0.20000000000000001" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="0.40000000000000002" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="emU-pd-Pbs" secondAttribute="trailing" constant="45" id="qSm-SU-sUX"/>
                         </constraints>
