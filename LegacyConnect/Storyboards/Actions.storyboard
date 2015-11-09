@@ -57,7 +57,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="cancelAction" destination="9uJ-2n-Xif" eventType="touchUpInside" id="cEH-XZ-qAe"/>
+                                            <action selector="nextAction" destination="9uJ-2n-Xif" eventType="touchUpInside" id="B2T-Za-7xX"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE ACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8s-ol-1ee">
