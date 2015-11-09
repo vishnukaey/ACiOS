@@ -86,7 +86,6 @@ static CGFloat kActionSectionTitleOffset = 10;
 
 - (void)postAction
 {
-  
   if (commentTextField.text.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];

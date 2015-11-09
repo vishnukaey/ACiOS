@@ -15,7 +15,6 @@
   UIButton * postBtn,*dummyPostBtn;
 
 }
-
 - (void)resignAllResponders;
 - (void)enableCommentField:(BOOL)enable;
 - (void)changeUpdateButtonState;

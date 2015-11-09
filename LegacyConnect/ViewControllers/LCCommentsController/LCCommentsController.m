@@ -25,7 +25,7 @@ static CGFloat kCommentFieldHeight = 45.0f;
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self setUpCpmmentsUI];
+  [self setUpCommentsUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,7 +48,7 @@ static CGFloat kCommentFieldHeight = 45.0f;
 
 
 #pragma maek - private methods
-- (void)setUpCpmmentsUI
+- (void)setUpCommentsUI
 {
   UIView* commentField = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, kCommentFieldHeight)];
   [commentField setBackgroundColor:kCommentFieldBGColor];
@@ -83,7 +83,6 @@ static CGFloat kCommentFieldHeight = 45.0f;
 
 - (void)createDummyCommentFieldViewWithinputAccessoryView:(UIView*)view
 {
-  
   UIView* dummyCommentField = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
   [dummyCommentField setBackgroundColor:kCommentFieldBGColor];
   [dummyCommentField.layer setBorderColor:kCommentFieldBorderColor.CGColor];
@@ -181,7 +180,6 @@ static CGFloat kCommentFieldHeight = 45.0f;
                                                   name:UITextFieldTextDidChangeNotification
                                                 object:nil];
 }
-
 
 - (void)addKeyBoardNotificationObserver
 {
