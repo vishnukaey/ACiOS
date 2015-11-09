@@ -163,10 +163,4 @@
     searchCausesVC = segue.destinationViewController;
   }
 }
-
-#warning keyboard dismissing issue
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-  [_searchBar resignFirstResponder];
-}
 @end
