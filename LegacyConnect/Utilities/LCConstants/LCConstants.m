@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER STAGING_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -192,5 +192,7 @@ NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 NSString *const kTagobjId = @"tag_object_id";
 NSString *const kTagobjText= @"tag_object_text";
 NSString *const kTagobjType = @"tag_object_type";
+
+NSString *const kBulletUnicode = @"\u2022";
 
 @end

@@ -143,6 +143,15 @@ static CGFloat kCommentFieldHeight = 45.0f;
   [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
 }
 
+- (void)enableCommentField:(BOOL)enable
+{
+  [commentTextField setEnabled:enable];
+  [commentTextField_dup setEnabled:enable];
+  [postBtn setEnabled:enable];
+  [dummyPostBtn setEnabled:enable];
+}
+
+
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
