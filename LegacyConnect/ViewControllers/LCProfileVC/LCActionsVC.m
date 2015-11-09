@@ -8,80 +8,113 @@
 
 #import "LCActionsVC.h"
 #import "LCActionsCellView.h"
-
-@interface LCActionsVC ()
-
-@end
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 @implementation LCActionsVC
 
-- (void)viewDidLoad {
-  [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  [self initailSetup];
-}
+#pragma mark - API call and Pagination
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - private method implementation
-
-- (void) initailSetup {
-  
-  actionsTable.estimatedRowHeight = 44.0;
-  actionsTable.rowHeight = UITableViewAutomaticDimension;
-  
-  actionsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
-}
-
-- (void) loadActions {
-  
-  [MBProgressHUD showHUDAddedTo:actionsTable animated:YES];
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCAPIManager getUserEventsForUserId:self.userID andLastEventId:nil withSuccess:^(NSArray *response) {
-    
-    actionsArray = response;
-    [actionsTable reloadData];
-    [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchResults:response haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
-    
-    [MBProgressHUD hideAllHUDsForView:actionsTable animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
-
-#pragma mark - TableView delegates
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-  if (actionsArray.count == 0) {
-    return 1;
-  }
-  return actionsArray.count;
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCAPIManager getUserEventsForUserId:self.userID andLastEventId:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+  }];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - View Lifecycle
+- (void)viewDidLoad
 {
-  if (actionsArray.count == 0) {
-    
-    NSString *message;
+  [super viewDidLoad];
+  [self initailSetup];
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+#pragma mark - private method implementation
+- (void) initailSetup {
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  if (!self.noResultsView) {
+    NSString *message = NSLocalizedString(@"no_actions_available_others", nil);
     if (isSelfProfile) {
       message = NSLocalizedString(@"no_actions_available_self", nil);
-      
     }
-    else {
-      message = NSLocalizedString(@"no_actions_available_others", nil);
-    }
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
-    
-    tableView.backgroundColor = [UIColor whiteColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.allowsSelection = NO;
-    return cell;
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
   }
-  
+  [self addPullToRefreshForActionsTable];
+}
+
+- (void)stopRefreshingViews
+{
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else
+  {
+    [self showNoResultsView];
+  }
+}
+
+- (void)addPullToRefreshForActionsTable
+{
+  [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  __weak typeof (self) weakSelf = self;
+  [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [weakSelf startFetchingResults];
+    });
+  }withBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (void)loadActions
+{
+  [self startFetchingResults];
+}
+
+#pragma mark - TableView delegates
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  JTTABLEVIEW_cellForRowAtIndexPath
   static NSString *MyIdentifier = @"LCActionsCell";
   LCActionsCellView *cell = (LCActionsCellView*)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
@@ -89,14 +122,12 @@
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
     cell = [topLevelObjects objectAtIndex:0];
   }
-  [cell setEvent:[actionsArray objectAtIndex:indexPath.row]];
-  
+  [cell setEvent:[self.results objectAtIndex:indexPath.row]];
   tableView.backgroundColor = [UIColor clearColor];
   tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
   tableView.allowsSelection = YES;
   return cell;
 }
-
 
 #pragma mark - ScrollView delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

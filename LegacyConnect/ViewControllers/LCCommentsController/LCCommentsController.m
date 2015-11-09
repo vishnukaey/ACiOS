@@ -7,8 +7,9 @@
 //
 
 #import "LCCommentsController.h"
+#import "LCSingleCauseVC.h"
+#import "LCProfileViewVC.h"
 
-//--------------//
 static CGFloat kCommentFieldHeight = 45.0f;
 #define kPostButtonDisabledColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
 #define kPostButtonEnabledColor [UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]
@@ -18,14 +19,13 @@ static CGFloat kCommentFieldHeight = 45.0f;
 #define kCommentFieldBorderColor [UIColor colorWithRed:169/255.0 green:169/255.0 blue:169/255.0 alpha:1]
 #define kCommentsFieldTextColor [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1]
 #define kCommentsFieldFont [UIFont fontWithName:@"Gotham-Book" size:16]
-//------------//
-
 
 @implementation LCCommentsController
 
+#pragma mark - view life cycle
 - (void)viewDidLoad {
   [super viewDidLoad];
-  [self setUpCpmmentsUI];
+  [self setUpCommentsUI];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,14 +41,15 @@ static CGFloat kCommentFieldHeight = 45.0f;
 
 - (void) viewWillDisappear:(BOOL)animated
 {
+  [self resignAllResponders];
   [self removeTextFieldTextDidChangeNotifiaction];
   [self removeKeyBoardNotificationObserver];
   [super viewWillDisappear:animated];
 }
 
-
-#pragma maek - private methods
-- (void)setUpCpmmentsUI
+#pragma mark - private methods
+#pragma mark - Comment fields setup
+- (void)setUpCommentsUI
 {
   UIView* commentField = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, kCommentFieldHeight)];
   [commentField setBackgroundColor:kCommentFieldBGColor];
@@ -77,13 +78,12 @@ static CGFloat kCommentFieldHeight = 45.0f;
   [postButton setTitle:@"POST" forState:UIControlStateNormal];
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
   postBtn = postButton;
+  commentFieldView = commentField;
   [self createDummyCommentFieldViewWithinputAccessoryView:commentField];
 }
 
-
 - (void)createDummyCommentFieldViewWithinputAccessoryView:(UIView*)view
 {
-  
   UIView* dummyCommentField = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 45, self.view.frame.size.width, 45)];
   [dummyCommentField setBackgroundColor:kCommentFieldBGColor];
   [dummyCommentField.layer setBorderColor:kCommentFieldBorderColor.CGColor];
@@ -113,6 +113,19 @@ static CGFloat kCommentFieldHeight = 45.0f;
   [postButton addTarget:self action:@selector(postAction) forControlEvents:UIControlEventTouchUpInside];
   dummyPostBtn = postButton;
   [self.view addSubview:dummyCommentField];
+  dummyCommentFieldView = dummyCommentField;
+}
+
+- (void)hideCommentsFields
+{
+  [commentFieldView setHidden:YES];
+  [dummyCommentFieldView setHidden:YES];
+}
+
+- (void)showCommentsField
+{
+  [commentFieldView setHidden:NO];
+  [dummyCommentFieldView setHidden:NO];
 }
 
 - (void)resignAllResponders
@@ -132,11 +145,6 @@ static CGFloat kCommentFieldHeight = 45.0f;
   }
 }
 
-- (void)postAction
-{
-  
-}
-
 - (void)changeUpdateButtonState
 {
   [postBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
@@ -151,6 +159,10 @@ static CGFloat kCommentFieldHeight = 45.0f;
   [dummyPostBtn setEnabled:enable];
 }
 
+- (void)postAction
+{
+  
+}
 
 #pragma mark - textfield delegates
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -182,7 +194,6 @@ static CGFloat kCommentFieldHeight = 45.0f;
                                                 object:nil];
 }
 
-
 - (void)addKeyBoardNotificationObserver
 {
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -196,5 +207,23 @@ static CGFloat kCommentFieldHeight = 45.0f;
   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardDidShowNotification object:nil];
 }
 
+#pragma mark - other private methods
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeCause])//go to cause page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+}
 
 @end

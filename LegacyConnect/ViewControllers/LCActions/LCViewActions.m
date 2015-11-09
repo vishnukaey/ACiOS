@@ -77,16 +77,19 @@ static CGFloat kActionSectionTitleOffset = 10;
     self.eventObject = responses;
     [self dataPopulation];
     [self.tableView reloadData];
-    [self startFetchingResults];
+    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
+      [self startFetchingResults];
+    }
   } andFailure:^(NSString *error) {
-    [self startFetchingResults];
+    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
+      [self startFetchingResults];
+    }
     LCDLog(@"%@",error);
   }];
 }
 
 - (void)postAction
 {
-  
   if (commentTextField.text.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
@@ -112,13 +115,22 @@ static CGFloat kActionSectionTitleOffset = 10;
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
+  [settingsButton.layer setCornerRadius:5.0f];
 }
 
 - (void)dataPopulation
 {
+  [settingsButton setTitle:NSLocalizedString(@"settings", @"settings Button Titile") forState:UIControlStateNormal];
+  if (!self.eventObject.isOwner) {
+    [self hideCommentsFields];
+    if (self.eventObject.isFollowing) {
+      [self showCommentsField];
+    }
+    [settingsButton setTitle:self.eventObject.isFollowing ? NSLocalizedString(@"attending", @"Attending button title") : NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+  }
+
   [eventNameLabel setText:self.eventObject.name];
   [eventPhoto sd_setImageWithURL:[NSURL URLWithString:self.eventObject.headerPhoto] placeholderImage:nil];
-  [settingsButton.layer setCornerRadius:5.0f];
   
   // -------- Created By 'Owner' in 'Interest' -------- //
   NSString * eventCreatedBy = @"Event Created by ";
@@ -194,24 +206,6 @@ static CGFloat kActionSectionTitleOffset = 10;
   return view;
 }
 
-- (void)tagTapped:(NSDictionary *)tagDetails
-{
-  if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeCause])
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-  else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeUser])
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-}
-
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -252,7 +246,36 @@ static CGFloat kActionSectionTitleOffset = 10;
 
 - (IBAction)settingsAction:(id)sender
 {
-  LCDLog(@"settings clicked-->>");
+  if (self.eventObject.isOwner) {
+    // Go To Edit Event Screen
+    return;
+  }
+  
+  [settingsButton setUserInteractionEnabled:NO];
+  if (self.eventObject.isFollowing) {
+    [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+    [LCAPIManager unfollowEventWithEventID:self.eventObject.eventID withSuccess:^(id response) {
+      self.eventObject.isFollowing = NO;
+      [self hideCommentsFields];
+      [self.results removeAllObjects];
+      [self.tableView reloadData];
+      [settingsButton setUserInteractionEnabled:YES];
+    } andFailure:^(NSString *error) {
+      [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
+      [settingsButton setUserInteractionEnabled:YES];
+    }];
+  } else {
+    [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
+    [LCAPIManager followEventWithEventID:self.eventObject.eventID withSuccess:^(id response) {
+      self.eventObject.isFollowing = YES;
+      [self showCommentsField];
+      [settingsButton setUserInteractionEnabled:YES];
+      [self startFetchingResults];
+    } andFailure:^(NSString *error) {
+      [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+      [settingsButton setUserInteractionEnabled:YES];
+    }];
+  }
 }
 
 - (void)membersAction
@@ -307,7 +330,11 @@ static CGFloat kActionSectionTitleOffset = 10;
   {
     return 3;
   }
-  return [super tableView:tableView numberOfRowsInSection:section];
+  if (self.eventObject.isFollowing) {
+    return [super tableView:tableView numberOfRowsInSection:section];
+  }
+  return 1;//Cell for 'Follow the event to view and post comments' message.
+  
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -349,6 +376,12 @@ static CGFloat kActionSectionTitleOffset = 10;
         return [self getActionsWebsiteCell];
         break;
     }
+  }
+  
+  if (!self.eventObject.isFollowing) {
+    UITableViewCell * followEventCell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
+    [followEventCell setBackgroundColor:[UIColor clearColor]];
+    return followEventCell;
   }
   
   JTTABLEVIEW_cellForRowAtIndexPath

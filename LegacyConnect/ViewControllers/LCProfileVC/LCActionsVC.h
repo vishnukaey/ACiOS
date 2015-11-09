@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCFeedTableViewController.h"
 
 @protocol ActionsDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCActionsVC : UIViewController
+@interface LCActionsVC : LCFeedTableViewController
 {
-  __weak IBOutlet UITableView *actionsTable;
-  NSArray *actionsArray;
   BOOL isSelfProfile;
 }
 
