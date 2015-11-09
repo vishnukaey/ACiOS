@@ -40,6 +40,10 @@
 		0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */; };
 		0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */; };
 		0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */; };
+		0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BCFF1BEC8EF600217897 /* LCSearchTopViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD021BEC8F1D00217897 /* LCSearchUsersViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B85BD061BEC8F4400217897 /* LCSearchInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */; };
 		0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8AA05C1BC299EE00C284DF /* LCfriendButton.m */; settings = {ASSET_TAGS = (); }; };
 		0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */; settings = {ASSET_TAGS = (); }; };
@@ -226,6 +230,14 @@
 		0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestsTableViewCell.m; path = CustomViews/LCInterestsTableViewCell/LCInterestsTableViewCell.m; sourceTree = "<group>"; };
 		0B8575041B9D64BD00FD8766 /* LCCausesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCausesTableViewCell.h; path = CustomViews/LCCausesTableViewCell/LCCausesTableViewCell.h; sourceTree = "<group>"; };
 		0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCausesTableViewCell.m; path = CustomViews/LCCausesTableViewCell/LCCausesTableViewCell.m; sourceTree = "<group>"; };
+		0B85BCFE1BEC8EF600217897 /* LCSearchTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchTopViewController.h; path = ViewControllers/LCSearchViewController/LCSearchTopViewController.h; sourceTree = "<group>"; };
+		0B85BCFF1BEC8EF600217897 /* LCSearchTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchTopViewController.m; path = ViewControllers/LCSearchViewController/LCSearchTopViewController.m; sourceTree = "<group>"; };
+		0B85BD011BEC8F1D00217897 /* LCSearchUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchUsersViewController.h; path = ViewControllers/LCSearchViewController/LCSearchUsersViewController.h; sourceTree = "<group>"; };
+		0B85BD021BEC8F1D00217897 /* LCSearchUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchUsersViewController.m; path = ViewControllers/LCSearchViewController/LCSearchUsersViewController.m; sourceTree = "<group>"; };
+		0B85BD041BEC8F4400217897 /* LCSearchInterestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchInterestsViewController.h; path = ViewControllers/LCSearchViewController/LCSearchInterestsViewController.h; sourceTree = "<group>"; };
+		0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchInterestsViewController.m; path = ViewControllers/LCSearchViewController/LCSearchInterestsViewController.m; sourceTree = "<group>"; };
+		0B85BD071BEC8F5C00217897 /* LCSearchCausesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchCausesViewController.h; path = ViewControllers/LCSearchViewController/LCSearchCausesViewController.h; sourceTree = "<group>"; };
+		0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchCausesViewController.m; path = ViewControllers/LCSearchViewController/LCSearchCausesViewController.m; sourceTree = "<group>"; };
 		0B86A4EC1B86EE73005D4BD7 /* LCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEvent.h; path = Models/LCEvent/LCEvent.h; sourceTree = "<group>"; };
 		0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEvent.m; path = Models/LCEvent/LCEvent.m; sourceTree = "<group>"; };
 		0B8AA05B1BC299EE00C284DF /* LCfriendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCfriendButton.h; sourceTree = "<group>"; };
@@ -570,6 +582,14 @@
 			children = (
 				0B5571441B8D9F5D00445958 /* LCSearchViewController.h */,
 				0B5571451B8D9F5D00445958 /* LCSearchViewController.m */,
+				0B85BCFE1BEC8EF600217897 /* LCSearchTopViewController.h */,
+				0B85BCFF1BEC8EF600217897 /* LCSearchTopViewController.m */,
+				0B85BD011BEC8F1D00217897 /* LCSearchUsersViewController.h */,
+				0B85BD021BEC8F1D00217897 /* LCSearchUsersViewController.m */,
+				0B85BD041BEC8F4400217897 /* LCSearchInterestsViewController.h */,
+				0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */,
+				0B85BD071BEC8F5C00217897 /* LCSearchCausesViewController.h */,
+				0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */,
 			);
 			name = LCSearchViewController;
 			sourceTree = "<group>";
@@ -1603,6 +1623,7 @@
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
+				0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
@@ -1627,6 +1648,7 @@
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
 				0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */,
+				0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */,
 				0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */,
 				0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */,
 				0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */,
@@ -1641,6 +1663,7 @@
 				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
+				0B85BD061BEC8F4400217897 /* LCSearchInterestsViewController.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */,
 				0B05D7511BEB1D4100FD5AE1 /* LCCreateActions.m in Sources */,
@@ -1660,6 +1683,7 @@
 				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
 				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
+				0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
