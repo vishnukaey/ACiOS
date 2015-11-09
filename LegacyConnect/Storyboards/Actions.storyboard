@@ -595,7 +595,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="gqn-ta-z3E" secondAttribute="trailing" constant="15" id="32n-lv-OAX"/>
                             <constraint firstItem="00e-o7-C0e" firstAttribute="top" secondItem="6wS-uI-7qm" secondAttribute="top" id="4DR-c1-tSF"/>
