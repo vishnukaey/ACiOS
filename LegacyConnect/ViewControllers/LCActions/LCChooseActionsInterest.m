@@ -35,6 +35,7 @@ static NSString *kCheckedImageName = @"contact_tick";
     andFailure:^(NSString *error)
     {
     }];
+  interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void) viewWillAppear:(BOOL)animated

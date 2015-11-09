@@ -31,21 +31,6 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  
-//  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-//  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    [self stopRefreshingViews];
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-//    [self didFetchResults:response haveMoreData:hasMoreData];
-//    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
-//  } andfailure:^(NSString *error) {
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    [self stopRefreshingViews];
-//    [self didFailedToFetchResults];
-//    [self setNoResultViewHidden:[self.results count] != 0];
-//  }];
 }
 
 - (void)startFetchingNextResults
@@ -58,25 +43,7 @@
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFailedToFetchResults];
   }];
-  
-//  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
-//    [self stopRefreshingViews];
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-//    [self didFetchNextResults:response haveMoreData:hasMoreData];
-//  } andfailure:^(NSString *error) {
-//    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-//    [self stopRefreshingViews];
-//    [self didFailedToFetchResults];
-//  }];
-  
-  
 }
-
-
-
-
-
 
 - (void)viewDidLoad
 {
