@@ -254,11 +254,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   [settingsButton setUserInteractionEnabled:NO];
   if (self.eventObject.isFollowing) {
     [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
-    [LCAPIManager unfollowEventWithEventID:self.eventObject.eventID withSuccess:^(id response) {
-      self.eventObject.isFollowing = NO;
-      [self hideCommentsFields];
-      [self.results removeAllObjects];
-      [self.tableView reloadData];
+    [LCAPIManager unfollowEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
@@ -266,9 +262,7 @@ static CGFloat kActionSectionTitleOffset = 10;
     }];
   } else {
     [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
-    [LCAPIManager followEventWithEventID:self.eventObject.eventID withSuccess:^(id response) {
-      self.eventObject.isFollowing = YES;
-      [self showCommentsField];
+    [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
       [self startFetchingResults];
     } andFailure:^(NSString *error) {

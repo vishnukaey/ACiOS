@@ -1663,10 +1663,10 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)followEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)followEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL,kFollowEventURL];
-  NSDictionary *dict = @{kEventIDKey:eventID};
+  NSDictionary *dict = @{kEventIDKey:event.eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -1678,6 +1678,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Following Event ! \n %@",response);
+       event.isFollowing = YES;
+       NSDictionary *dict= response[kResponseData];
+       event.followerCount = dict[@"followerscount"];
+       [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -1688,10 +1692,10 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)unfollowEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)unfollowEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUnfollowEventURL];
-  NSDictionary *dict = @{kEventIDKey:eventID};
+  NSDictionary *dict = @{kEventIDKey:event.eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -1703,6 +1707,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Unfollowing Event ! \n %@",response);
+       event.isFollowing = NO;
+       NSDictionary *dict= response[kResponseData];
+       event.followerCount = dict[@"followerscount"];
+       [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }
    } andFailure:^(NSString *error) {
