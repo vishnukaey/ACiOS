@@ -8,205 +8,43 @@
 
 #import "LCCreateActions.h"
 #import "LCInviteToActions.h"
-#import "LCActionsDateSelection.h"
-
-#pragma mark - insetLabel class
-@interface insetLabel : UILabel
-
-@property (nonatomic, assign) UIEdgeInsets edgeInsets;
-
-@end
-
-@implementation insetLabel
-
-- (id)initWithFrame:(CGRect)frame{
-  self = [super initWithFrame:frame];
-  if (self) {
-    self.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-  }
-  return self;
-}
-
-- (void)drawTextInRect:(CGRect)rect {
-  [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.edgeInsets)];
-}
-
-- (CGSize)intrinsicContentSize
-{
-  CGSize size = [super intrinsicContentSize];
-  size.width  += self.edgeInsets.left + self.edgeInsets.right;
-  size.height += self.edgeInsets.top + self.edgeInsets.bottom;
-  return size;
-}
-
-@end
-
-#pragma mark - insetTextField class
-@interface insetTextField : UITextField
-
-@property (nonatomic, assign) UIEdgeInsets edgeInsets;
-- (void)addBorderLinesWithColor :(UIColor *)color;
-
-@end
-
-@implementation insetTextField
-
-- (id)initWithFrame:(CGRect)frame{
-  self = [super initWithFrame:frame];
-  if (self) {
-    self.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-  }
-  return self;
-}
-
-- (void)addBorderLinesWithColor :(UIColor *)color;
-{
-  UIView *topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 1)];
-  [topLine setBackgroundColor:color];
-  [self addSubview:topLine];
-  
-  UIView *botLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
-  [botLine setBackgroundColor:color];
-  [self addSubview:botLine];
-}
-
-- (CGRect)textRectForBounds:(CGRect)bounds {
-  return [super textRectForBounds:UIEdgeInsetsInsetRect(bounds, self.edgeInsets)];
-}
-
-- (CGRect)editingRectForBounds:(CGRect)bounds {
-  return [super editingRectForBounds:UIEdgeInsetsInsetRect(bounds, self.edgeInsets)];
-}
-
-@end
-
-
-#pragma mark - LCCreateActions class
 
 @interface LCCreateActions ()
 {
-  insetTextField *communityNameField;
-  insetTextField *aboutCommunityField;
-  insetTextField *communityWebsiteField;
-  UIImageView *headerPhotoImageView;
+  IBOutlet UITextField *actionNameField;
+  IBOutlet UITextView *actionAboutField;
+  IBOutlet UITextField *actionWebsiteField;
+  IBOutlet UITextField *actionDateField;
+  IBOutlet UITextField *actionTypeField;
+  IBOutlet UITextField *headerImagePlaceholder;
+  IBOutlet UITextField *aboutPlaceholder;
+  IBOutlet UIImageView *headerPhotoImageView;
+  IBOutlet UITableView *formTableView;
+  IBOutlet UIButton *nextButton;
+  NSDate *startDate, *endDate;
 }
 
 @end
 
+static NSString * const kCellIdentifierName = @"LCActionNameCell";
+static NSString * const kCellIdentifierType = @"LCActionTypeCell";
+static NSString * const kCellIdentifierDate = @"LCActionDateCell";
+static NSString * const kCellIdentifierWebsite = @"LCActionWebsiteCell";
+static NSString * const kCellIdentifierHeaderBG = @"LCActionHeaderCell";
+static NSString * const kCellIdentifierAbout = @"LCActionAboutCell";
+static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
+
 @implementation LCCreateActions
-@synthesize communityDate, interestId;
+@synthesize selectedInterest;
+
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  
-  float topSpace = 64;
-  float titleheight = 40;
-  UIEdgeInsets edgeInsetLabel = UIEdgeInsetsMake(0, 10, -20, 0);
-  UIEdgeInsets edgeInsetTextField = UIEdgeInsetsMake(0, 10, 0, 0);
-  UIFont *titleFont = [UIFont boldSystemFontOfSize:12];
-  UIFont *valueFont = [UIFont systemFontOfSize:14];
-  UIColor *titleColor = [UIColor darkGrayColor];
-  UIColor *titleBackGroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1.0];
-  UIColor *lineColor = [UIColor lightGrayColor];
-  //name
-  insetLabel *nameLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
-  nameLabel.text = @"NAME";
-  nameLabel.edgeInsets = edgeInsetLabel;
-  nameLabel.font = titleFont;
-  nameLabel.textColor = titleColor;
-  nameLabel.backgroundColor = titleBackGroundColor;
-  [self.view addSubview:nameLabel];
-  topSpace += nameLabel.frame.size.height;
-  
-  communityNameField = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
-  communityNameField.placeholder = @"Enter the name of your community";
-  communityNameField.edgeInsets = edgeInsetTextField;
-  communityNameField.font = valueFont;
-  [communityNameField addBorderLinesWithColor:lineColor];
-  [self.view addSubview:communityNameField];
-  topSpace += communityNameField.frame.size.height;
-  //about
-  insetLabel *aboutLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
-  aboutLabel.text = @"ABOUT";
-  aboutLabel.edgeInsets = edgeInsetLabel;
-  aboutLabel.font = titleFont;
-  aboutLabel.textColor = titleColor;
-  aboutLabel.backgroundColor = titleBackGroundColor;
-  [self.view addSubview:aboutLabel];
-  topSpace += aboutLabel.frame.size.height;
-  
-  aboutCommunityField = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 60)];
-  aboutCommunityField.placeholder = @"Tell people a little about it";
-  aboutCommunityField.edgeInsets = edgeInsetTextField;
-  aboutCommunityField.font = valueFont;
-  [aboutCommunityField addBorderLinesWithColor:lineColor];
-  [self.view addSubview:aboutCommunityField];
-  topSpace += aboutCommunityField.frame.size.height;
-  //date
-  insetLabel *dateLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
-  dateLabel.text = @"DATE & TIME(Optional)";
-  dateLabel.edgeInsets = edgeInsetLabel;
-  dateLabel.font = titleFont;
-  dateLabel.textColor = titleColor;
-  dateLabel.backgroundColor = titleBackGroundColor;
-  [self.view addSubview:dateLabel];
-  topSpace += dateLabel.frame.size.height;
-  
-  insetTextField *dateSelection = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
-  dateSelection.placeholder = @"None";
-  dateSelection.edgeInsets = edgeInsetTextField;
-  dateSelection.font = valueFont;
-  [dateSelection addBorderLinesWithColor:lineColor];
-  [self.view addSubview:dateSelection];
-  dateSelection.userInteractionEnabled = NO;
-  UIButton *dateSelectionButton = [[UIButton alloc] initWithFrame:dateSelection.frame];
-  [self.view addSubview:dateSelectionButton];
-  [dateSelectionButton addTarget:self action:@selector(dateSelection) forControlEvents:UIControlEventTouchUpInside];
-  topSpace += dateSelection.frame.size.height;
-  //website
-  insetLabel *websiteLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
-  websiteLabel.text = @"WEBSITE(Optional)";
-  websiteLabel.edgeInsets = edgeInsetLabel;
-  websiteLabel.font = titleFont;
-  websiteLabel.textColor = titleColor;
-  websiteLabel.backgroundColor = titleBackGroundColor;
-  [self.view addSubview:websiteLabel];
-  topSpace += websiteLabel.frame.size.height;
-  
-  communityWebsiteField = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
-  communityWebsiteField.placeholder = @"Enter the community website";
-  communityWebsiteField.edgeInsets = edgeInsetTextField;
-  communityWebsiteField.font = valueFont;
-  [communityWebsiteField addBorderLinesWithColor:lineColor];
-  [self.view addSubview:communityWebsiteField];
-  topSpace += communityWebsiteField.frame.size.height;
-  //headerphoto
-  insetLabel *headerphotoLabel = [[insetLabel alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, titleheight)];
-  headerphotoLabel.text = @"HEADER PHOTO(Optional)";
-  headerphotoLabel.edgeInsets = edgeInsetLabel;
-  headerphotoLabel.font = titleFont;
-  headerphotoLabel.textColor = titleColor;
-  headerphotoLabel.backgroundColor = titleBackGroundColor;
-  [self.view addSubview:headerphotoLabel];
-  topSpace += headerphotoLabel.frame.size.height;
-  
-  insetTextField *headerphotoSelection = [[insetTextField alloc] initWithFrame:CGRectMake(0, topSpace, self.view.frame.size.width, 40)];
-  headerphotoSelection.placeholder = @"Add a background header photo";
-  headerphotoSelection.edgeInsets = edgeInsetTextField;
-  headerphotoSelection.font = valueFont;
-  [headerphotoSelection addBorderLinesWithColor:lineColor];
-  [self.view addSubview:headerphotoSelection];
-  UIButton *headerphotoSelectionButton = [[UIButton alloc] initWithFrame:headerphotoSelection.frame];
-  [self.view addSubview:headerphotoSelectionButton];
-  [headerphotoSelectionButton addTarget:self action:@selector(headerPhotoSelection) forControlEvents:UIControlEventTouchUpInside];
-  
-  headerPhotoImageView = [[UIImageView alloc] initWithFrame:CGRectMake(self.view.frame.size.width - headerphotoSelectionButton.frame.size.height, headerphotoSelectionButton.frame.origin.y, headerphotoSelectionButton.frame.size.height, headerphotoSelectionButton.frame.size.height)];
-  [self.view addSubview:headerPhotoImageView];
-  
-  topSpace += headerphotoSelection.frame.size.height;
+   formTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  nextButton.enabled = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -237,11 +75,11 @@
 - (IBAction)nextButtonAction
 {
   LCEvent *com = [[LCEvent alloc] init];
-  com.name = communityNameField.text;
-  com.interestID = self.interestId;
-  com.website = communityWebsiteField.text;
-  com.eventDescription = aboutCommunityField.text;
-  com.time = self.communityDate;
+  com.name = actionNameField.text;
+  com.interestID = self.selectedInterest.interestID;
+  com.website = actionWebsiteField.text;
+  com.eventDescription = actionAboutField.text;
+  com.time = @"";
   [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
     com.eventID = response[@"data"][@"id"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
@@ -262,54 +100,324 @@
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCActionsDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCActionsDateSelection"];
-  communityDate = [[NSMutableString alloc]initWithString:@"test"];;
-  vc.datePointer = communityDate;
+  vc.startDate = startDate;
+  vc.endDate = endDate;
+  vc.delegate = self;
   [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)headerPhotoSelection
 {
-  UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
-  [sheet showInView:self.view];
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+      
+      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+      imagePicker.delegate = self;
+      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+      imagePicker.allowsEditing = NO;
+      
+      [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
+  }];
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.allowsEditing = NO;
+    
+    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+  }];
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    [self setHeaderImage:nil];
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  
+  [actionSheet addAction:takeAction];
+  [actionSheet addAction:chooseAction];
+  if (headerPhotoImageView.image) {
+    [actionSheet addAction:removeAction];
+  }
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
-#pragma mark - UIActionSheet delegate
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionTypeSelection
 {
-  if (buttonIndex < 2)
-  {
-    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
-    UIImagePickerControllerSourceType type;
-    switch (buttonIndex)
-    {
-      case 0:
-        type = UIImagePickerControllerSourceTypePhotoLibrary;
-        break;
-      case 1:
-        type = UIImagePickerControllerSourceTypeCamera;
-        break;
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *eventAction = [UIAlertAction actionWithTitle:@"Event" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    actionTypeField.text = action.title;
+  }];
+  UIAlertAction *challengeAction = [UIAlertAction actionWithTitle:@"Challenge" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    actionTypeField.text = action.title;
+  }];
+  UIAlertAction *pollAction = [UIAlertAction actionWithTitle:@"Poll" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    actionTypeField.text = action.title;
+  }];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:eventAction];
+  [actionSheet addAction:challengeAction];
+    [actionSheet addAction:pollAction];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
+}
 
-      default:
-        break;
-    }
-    imagePicker.sourceType = type;
-    imagePicker.delegate = self;
-    [self presentViewController:imagePicker animated:YES completion:^{ }];
+- (void)setHeaderImage :(UIImage *)image
+{
+  if (image)
+  {
+    headerImagePlaceholder.hidden = true;
+  }
+  else
+  {
+    headerImagePlaceholder.hidden = false;
+  }
+  headerPhotoImageView.image = image;
+}
+
+- (void)validateFields
+{
+  if (actionAboutField.text.length && actionNameField.text.length)
+  {
+    nextButton.enabled = YES;
+  }
+  else
+  {
+    nextButton.enabled = NO;
   }
 }
 
+#pragma mark - textview delegate
+- (void)textViewDidChange:(UITextView *)textView
+{
+  if ([textView.text isEqualToString:@""])
+  {
+    aboutPlaceholder.hidden = false;
+  }
+  else
+  {
+    aboutPlaceholder.hidden = true;
+  }
+  [self validateFields];
+}
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  headerPhotoImageView.image = chosenImage;
+  [self setHeaderImage:chosenImage];
+  [formTableView reloadData];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+#pragma mark - date selection delegate
+- (void)actionDateSelected:(NSDate *)start :(NSDate *)end
+{
+  startDate = start;
+  endDate = end;
+  
+  NSDateFormatter *format = [[NSDateFormatter alloc] init];
+  [format setDateFormat:@"EEEE, MMM dd, yyyy    HH:mm aa"];
+  NSString *dateString = [format stringFromDate:startDate];
+  actionDateField.text = dateString;
+}
+#pragma mark - TableView delegates
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 6;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+  
+  return 44;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+  if (indexPath.section == SECTION_HEADER && headerPhotoImageView.image)
+  {
+    return 88;
+  }
+  if (indexPath.section == SECTION_ABOUT) {
+    return 88;
+  }
+  return 44;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+  
+  NSString *cellIdentifier = kCellIdentifierSection;
+  UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (headerView == nil) {
+    headerView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    
+  }
+  UIView *topLine = [headerView viewWithTag:111];
+  UIView *botLine = [headerView viewWithTag:112];
+  [topLine removeFromSuperview];
+  [botLine removeFromSuperview];
+  
+  topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 1)];
+  [topLine setBackgroundColor:[UIColor colorWithRed:128.0f/255 green:128.0f/255 blue:128.0f/255 alpha:0.5]];
+  [headerView addSubview:topLine];
+  topLine.tag = 111;
+  
+  botLine = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height - 1, tableView.frame.size.width, 1)];
+  [botLine setBackgroundColor:[UIColor colorWithRed:128.0f/255 green:128.0f/255 blue:128.0f/255 alpha:0.5]];
+  [headerView addSubview:botLine];
+  botLine.tag = 111;
+  
+  UILabel *sectionLabel = (UILabel *)[headerView viewWithTag:100];
+  UILabel *optionalLabel = (UILabel *)[headerView viewWithTag:101];
+  switch (section) {
+    case SECTION_NAME:
+      sectionLabel.text = @"NAME";
+      optionalLabel.text = @"";
+      [topLine removeFromSuperview];
+      break;
+    case SECTION_ACTIONTYPE:
+      sectionLabel.text = @"TYPE OF ACTION";
+      optionalLabel.text = @"";
+      break;
+    case SECTION_DATE:
+      sectionLabel.text = @"DATE & TIME";
+      optionalLabel.text = @"(Optional)";
+      break;
+    case SECTION_WEBSITE:
+      sectionLabel.text = @"WEBSITE";
+      optionalLabel.text = @"(Optional)";
+      break;
+    case SECTION_HEADER:
+      sectionLabel.text = @"HEADER PHOTO";
+      optionalLabel.text = @"(Optional)";
+      break;
+    case SECTION_ABOUT:
+      sectionLabel.text = @"ABOUT";
+      optionalLabel.text = @"";
+      break;
+      
+    default:
+      break;
+  }
+  return  headerView ;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  
+  UITableViewCell *cell = nil;
+  
+  if(indexPath.section == SECTION_NAME){
+    
+    NSString *cellIdentifier = kCellIdentifierName;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:cellIdentifier];
+    }
+    
+    actionNameField = (UITextField*)[cell viewWithTag:100];
+    [actionNameField addTarget:self
+                            action:@selector(validateFields)
+                  forControlEvents:UIControlEventEditingChanged];
+  }
+  
+  else if(indexPath.section == SECTION_ACTIONTYPE){
+    
+    NSString *cellIdentifier = kCellIdentifierType;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:cellIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    actionTypeField = (UITextField*)[cell viewWithTag:100];
+  }
+  
+  else if(indexPath.section == SECTION_DATE){
+    
+    NSString *cellIdentifier = kCellIdentifierDate;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:cellIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    actionDateField = (UITextField*)[cell viewWithTag:100];
+  }
+  
+  else if(indexPath.section == SECTION_WEBSITE){
+    
+    NSString *cellIdentifier = kCellIdentifierWebsite;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:cellIdentifier];
+    }
+    
+    actionWebsiteField = (UITextField*)[cell viewWithTag:100];
+  }
+  else if(indexPath.section == SECTION_HEADER){
+    
+    NSString *cellIdentifier = kCellIdentifierHeaderBG;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:cellIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    headerImagePlaceholder = (UITextField*)[cell viewWithTag:100];
+    headerPhotoImageView = (UIImageView*)[cell viewWithTag:101];
+  }
+  else if(indexPath.section == SECTION_ABOUT){
+    
+    NSString *cellIdentifier = kCellIdentifierAbout;
+    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                    reuseIdentifier:cellIdentifier];
+    }
+    
+    aboutPlaceholder = (UITextField*)[cell viewWithTag:100];
+    actionAboutField = (UITextView*)[cell viewWithTag:101];
+    actionAboutField.delegate = self;
+  }
+  return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if(indexPath.section == SECTION_ACTIONTYPE){
+    [self actionTypeSelection];
+  }
+  else if(indexPath.section == SECTION_DATE){
+    [self dateSelection];
+  }
+  else if(indexPath.section == SECTION_HEADER){
+    [self headerPhotoSelection];
+  }
 }
 
 @end

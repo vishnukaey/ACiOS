@@ -46,7 +46,7 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
-  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];;
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   
   if (!self.noResultsView) {

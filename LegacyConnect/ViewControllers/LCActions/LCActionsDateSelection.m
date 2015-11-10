@@ -10,25 +10,23 @@
 
 
 @implementation LCActionsDateSelection
-@synthesize datePointer;
+@synthesize delegate;
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  UIBarButtonItem *anotherButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonAction)];
-  self.navigationItem.rightBarButtonItem = anotherButton;
-  
-  UIBarButtonItem *barButton = [[UIBarButtonItem alloc] init];
-  barButton.title = @"Cancel";
-  self.navigationController.navigationBar.topItem.backBarButtonItem = barButton;
+  if (_startDate) {
+    datePicker.date = _startDate;
+  }
+  removeButton.layer.cornerRadius = 5;
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = true;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
@@ -50,10 +48,49 @@
 }
 
 #pragma mark - button actions
-- (void)doneButtonAction
+- (IBAction)doneButtonAction
 {
-  [datePointer setString:@"dddddd"];
+  [delegate actionDateSelected:_startDate :_endDate];
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)backAction
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)removeAction
+{
+  [delegate actionDateSelected:nil :nil];
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - datepicker action
+- (IBAction)dateIsChanged:(UIDatePicker *)sender{
+  if (startEndSegment.selectedSegmentIndex == 0)//start
+  {
+    _startDate = sender.date;
+  }
+  else
+  {
+    _endDate = sender.date;
+  }
+}
+
+#pragma mark - segment action
+- (IBAction)segmentChanged:(UISegmentedControl *)sender{
+  if (sender.selectedSegmentIndex == 0)//start
+  {
+    if (_startDate) {
+     [datePicker setDate:_startDate];
+    }
+  }
+  else
+  {
+    if (_endDate) {
+      [datePicker setDate:_endDate];
+    }
+  }
 }
 /*
 #pragma mark - Navigation

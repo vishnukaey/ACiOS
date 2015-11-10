@@ -20,6 +20,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 @implementation LCChooseActionsInterest
 {
   LCInterest *selectedInterest;
+  IBOutlet UIButton *nextButton;
 }
 
 #pragma mark - controller life cycle
@@ -27,14 +28,16 @@ static NSString *kCheckedImageName = @"contact_tick";
 {
   [super viewDidLoad];
   
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
-    {
-      interestsArray = response;
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses)
+  {
+      interestsArray = responses;
       [interestsTableView reloadData];
     }
     andFailure:^(NSString *error)
     {
     }];
+  interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  nextButton.enabled = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -63,12 +66,10 @@ static NSString *kCheckedImageName = @"contact_tick";
 
 - (IBAction)nextAction
 {
-  /* 
-   
-   Push to create community page
-   
-   */
-
+  UIStoryboard*  s_board = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+  LCCreateActions *controller = [s_board instantiateViewControllerWithIdentifier:@"LCCreateActions"];
+  controller.selectedInterest = selectedInterest;
+  [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - TableView delegates
@@ -121,6 +122,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 {
   selectedInterest = [interestsArray objectAtIndex:indexPath.row];
   [interestsTableView reloadData];
+  nextButton.enabled = YES;
 }
 
 
