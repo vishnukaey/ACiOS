@@ -33,7 +33,14 @@
   // Do any additional setup after loading the view.
   NSLog(@"event-->>%@", eventToInvite);
   [self loadFriendsList];
+  
+  
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
   searchResultsArray = [[NSMutableArray alloc] init];
+  if (!selectedIDs) {
+    selectedIDs = [[NSMutableArray alloc] init];
+  }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -66,7 +73,7 @@
   [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
     friendsArray = response;
     [searchResultsArray addObjectsFromArray:response];
-    [friendsTableView reloadData];
+    [self.tableView reloadData];
   } andfailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
@@ -76,8 +83,8 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSLog(@"friendsTableView.selectedIDs-->>>%@", friendsTableView.selectedIDs);
-  [LCAPIManager addUsersWithUserIDs:friendsTableView.selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
+  NSLog(@"friendsTableView.selectedIDs-->>>%@", selectedIDs);
+  [LCAPIManager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
     NSLog(@"%@",response);
     UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
@@ -88,17 +95,47 @@
   }];
 }
 
-- (IBAction)cancelAction
+- (IBAction)backButtonAction
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)checkbuttonAction :(UIButton *)sender
-{
-  friendsTableView.selectedButton = sender;
-  LCFriend *friend = searchResultsArray[sender.tag];
-  [friendsTableView AddOrRemoveID:friend.userID];
-}
+//- (void)checkbuttonAction :(UIButton *)sender
+//{
+//  selectedButton = sender;
+//  LCFriend *friend = searchResultsArray[sender.tag];
+//  [self AddOrRemoveID:friend.userID];
+//}
+
+//- (void)AddOrRemoveID :(id)ID_
+//{
+//  if ([selectedIDs containsObject:ID_])
+//  {
+//    [selectedIDs removeObject:ID_];
+//    [selectedButton setImage:uncheckedImage forState:UIControlStateNormal];
+//  }else
+//  {
+//    [selectedIDs addObject:ID_];
+//    [selectedButton setImage:checkedImage forState:UIControlStateNormal];
+//  }
+//
+//  NSLog(@"id----- > %@",selectedIDs);
+//}
+
+//- (void)setStatusForButton:(UIButton *)button byCheckingIDs:(NSArray *)IDs
+//{
+//  for (id ID_ in IDs)
+//  {
+//    if ([selectedIDs containsObject:ID_])
+//    {
+//      [button setImage:checkedImage forState:UIControlStateNormal];
+//      return;
+//    }
+//  }
+//  [button setImage:uncheckedImage forState:UIControlStateNormal];
+//}
+
+
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -110,7 +147,7 @@
   {
     [searchResultsArray addObjectsFromArray:friendsArray];
   }
-  [friendsTableView reloadData];
+  [self.tableView reloadData];
 }
 
 - (void)searchTableList :(NSString *)text
@@ -128,55 +165,53 @@
 }
 
 #pragma mark - TableView delegates
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;    //count of section
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   return searchResultsArray.count;
 }
 
-- (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *MyIdentifier = @"LCInviteCommunityFriendCell";
   LCInviteCommunityFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
     cell = [[LCInviteCommunityFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:MyIdentifier];
+                                              reuseIdentifier:MyIdentifier];
   }
+  
   LCFriend *friend = searchResultsArray[indexPath.row];
   cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-  [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
-  cell.checkButton.tag = indexPath.row;
-  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:friend.userID, nil]];
+  
+  if ([selectedIDs containsObject:friend.friendId]) {
+    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [cell.checkButton setSelected:YES];
+  }
+  else {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [cell.checkButton setSelected:NO];
+  }
   
   return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  return 76;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
+  
+  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  LCFriend *friend = searchResultsArray[indexPath.row];
+  [selectedIDs addObject:friend.friendId];
+  [cell.checkButton setSelected:YES];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  LCFriend *friend = searchResultsArray[indexPath.row];
+  [selectedIDs removeObject:friend.friendId];
+  [cell.checkButton setSelected:NO];
 }
-*/
-
 @end
