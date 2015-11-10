@@ -151,6 +151,7 @@
   searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:nil repeats:NO];
 }
 
+
 -(void) searchRequest:(NSTimer*)sender
 {
   [self startFetchingResults];
@@ -158,10 +159,10 @@
 
 #pragma mark - TableView delegates
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  return self.results.count;
-}
+//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+//{
+//  return self.results.count;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

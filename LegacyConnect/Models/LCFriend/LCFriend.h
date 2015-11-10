@@ -20,6 +20,5 @@
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *isFriend;
 @property (nonatomic, strong) NSString *location;
-@property (nonatomic, strong) NSString *isMember;
 
 @end
