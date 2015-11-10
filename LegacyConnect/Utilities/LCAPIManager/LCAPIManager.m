@@ -1151,13 +1151,10 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success
                andfailure:(void (^)(NSString *error))failure
-{
-//  userId = @"7143";
-//  NSString * userToken = @"22bcbe1caa29cb599b8f2b9f42671e1c79082eba2da606a0c28220eb4977aab2e87f7ae02b2dcf7a3daac5b7719c060b";
-  
+{  
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, kFriendsURL];
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@?", kBaseURL, kFriendsURL];
   if (userId) {
     [url appendString:[NSString stringWithFormat:@"userId=%@",userId]];
   }
@@ -1755,6 +1752,52 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
++ (void)getMemberFriendsForEventID:(NSString*)eventID searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
+{
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@?", kBaseURL, @"api/user/friend/event"];
+  if (eventID) {
+    [url appendString:[NSString stringWithFormat:@"eventId=%@",eventID]];
+  }
+  if (searchKey) {
+    [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
+  }
+  if (lastUserId) {
+    [url appendString:[NSString stringWithFormat:@"&lastUserId=%@",lastUserId]];
+  }
+  url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
+  
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary *dict= response[kResponseData];
+       NSDictionary *friendsDict= dict[kFriendsKey];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:friendsDict[@"users"] error:&error];
+       if(!error)
+       {
+         LCDLog(@"Getting Friends successful! ");
+         success(responsesArray);
+       }
+       else
+       {
+         LCDLog(@"%@",error);
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
 
 
 #pragma mark - Registration
