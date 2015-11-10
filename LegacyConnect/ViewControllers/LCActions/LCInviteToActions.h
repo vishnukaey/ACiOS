@@ -13,13 +13,10 @@
 
 @interface LCInviteToActions : JTTableViewController
 {
-  //IBOutlet LCMultipleSelectionTable *friendsTableView;
   NSArray *friendsArray;
   NSMutableArray *searchResultsArray;
   
   NSMutableArray *selectedIDs;
-  UIButton *selectedButton;
-  UIImage *checkedImage, *uncheckedImage;
 
 }
 @property(nonatomic, retain)LCEvent *eventToInvite;

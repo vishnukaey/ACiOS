@@ -33,13 +33,13 @@
   // Do any additional setup after loading the view.
   NSLog(@"event-->>%@", eventToInvite);
   [self loadFriendsList];
-  searchResultsArray = [[NSMutableArray alloc] init];
-  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  checkedImage = [UIImage imageNamed:@"contact_tick"];
-  uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   
+  
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
+  searchResultsArray = [[NSMutableArray alloc] init];
   if (!selectedIDs) {
-    selectedIDs = [[NSMutableArray alloc]init];
+    selectedIDs = [[NSMutableArray alloc] init];
   }
 }
 
@@ -189,6 +189,10 @@
   if ([selectedIDs containsObject:friend.friendId]) {
     [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     [cell.checkButton setSelected:YES];
+  }
+  else {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [cell.checkButton setSelected:NO];
   }
   
   return cell;
