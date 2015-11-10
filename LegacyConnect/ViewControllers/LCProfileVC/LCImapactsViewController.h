@@ -7,12 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCFeedTableViewController.h"
 
-@interface LCImapactsViewController : UIViewController
-{
-  NSMutableArray *impactsArray;
-}
-@property(nonatomic, weak)IBOutlet  UITableView *impactsTableView;
+@interface LCImapactsViewController : LCFeedTableViewController
+
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 @property(nonatomic, retain)LCUserDetail *userDetail;
 

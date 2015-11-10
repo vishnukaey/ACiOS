@@ -37,4 +37,7 @@
 + (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden;
 
 + (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString;
+
++ (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width;
++ (UITableViewCell*)getNextPageLoaderCell;
 @end

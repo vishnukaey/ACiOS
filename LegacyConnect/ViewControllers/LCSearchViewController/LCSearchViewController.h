@@ -11,9 +11,11 @@
 
 @interface LCSearchViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
-@property (weak, nonatomic) IBOutlet UITableView *topTableView;
-@property (weak, nonatomic) IBOutlet UITableView *usersTableView;
-@property (weak, nonatomic) IBOutlet UICollectionView *interestsCollectionView;
-@property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
 @property (weak, nonatomic) IBOutlet LCTabMenuView *tabMenu;
+
+@property (weak, nonatomic) IBOutlet UIView *topContainer;
+@property (weak, nonatomic) IBOutlet UIView *usersContainer;
+@property (weak, nonatomic) IBOutlet UIView *interestsContainer;
+@property (weak, nonatomic) IBOutlet UIView *causesContainer;
+
 @end

@@ -2,6 +2,8 @@
 # platform :ios, ‘7.0’
 
 target 'LegacyConnect' do
+  
+pod 'Mantle', '~> 2.0'
 pod 'AFNetworking', '~> 2.6'
 pod 'FBSDKCoreKit', '~> 4.7.1'
 pod 'FBSDKLoginKit', '~> 4.7.1'
@@ -16,6 +18,7 @@ pod 'IQKeyboardManager', '~> 3.3'
 pod 'NSDate+TimeAgo', '~> 1.0.3'
 pod 'STTwitter', '~> 0.2.2'
 pod 'Google/Analytics', '~> 1.0.0'
+pod 'JTTableViewController', '~> 1.0'
 end
 
 target 'LegacyConnectTests' do

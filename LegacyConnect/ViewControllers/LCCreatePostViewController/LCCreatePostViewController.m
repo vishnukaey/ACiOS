@@ -9,7 +9,7 @@
 #import "LCCreatePostViewController.h"
 
 
-#define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:12]
+#define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:13]
 #define ICONBACK_COLOR [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]
 @interface LCCreatePostViewController ()
 {
@@ -241,17 +241,21 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:@""];
   NSAttributedString *attributtedTagString = [[NSAttributedString alloc] initWithString : tagsString
                                                                              attributes : @{
-                                                                                            NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
+                                                                                            NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                                                                             NSForegroundColorAttributeName : [UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1],
                                                                                             }];
   [attributtedString appendAttributedString:attributtedTagString];
   if (taggedLocation.length>0)
   {
-    NSAttributedString *attributtedLocationString = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"--at %@", taggedLocation]
+    NSAttributedString *atString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %C at ",0x2014] attributes:@{
+                                                                                                                                       NSFontAttributeName : POSTTEXT_FONT,
+                                                                                                                                       NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],}];
+    NSAttributedString *attributtedLocationString = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"%@", taggedLocation]
                                                                                     attributes : @{
-                                                                                                   NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:12],
+                                                                                                   NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                                                                                    NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],
                                                                                                    }];
+    [attributtedString appendAttributedString:atString];
     [attributtedString appendAttributedString:attributtedLocationString];
   }
   [tagsLabel setAttributedText:attributtedString];
@@ -415,7 +419,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   else
   {
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
-//    return;
+    return;
   }
   [postTextView resignFirstResponder];
   _postFeedObject.message = postTextView.text;
@@ -439,6 +443,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     [LCAPIManager updatePost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self shareToSocialMedia];
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -448,23 +453,11 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     [LCAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self shareToSocialMedia];
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];
-  }
-  
-  //facebook sharing
-  if (_facebookButton.isSelected) {
-    
-    LCSocialShareManager *socialShare = [[LCSocialShareManager alloc] init];
-    [socialShare shareToFacebookWithMessage:_postFeedObject.message andImage:postImageView.image];
-  }
-  
-  //twitter sharing
-  if (_twitterButton.isSelected) {
-    
-    [self.TWsocialShare shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
   }
 }
 
@@ -499,6 +492,22 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       }
       _twitterButton.enabled = YES;
     }];
+  }
+}
+
+- (void)shareToSocialMedia {
+  
+  //facebook sharing
+  if (_facebookButton.isSelected) {
+    
+    LCSocialShareManager *socialShare = [[LCSocialShareManager alloc] init];
+    [socialShare shareToFacebookWithMessage:_postFeedObject.message andImage:postImageView.image];
+  }
+  
+  //twitter sharing
+  if (_twitterButton.isSelected) {
+    
+    [self.TWsocialShare shareToTwitterWithStatus:_postFeedObject.message andImage:postImageView.image];
   }
 }
 
@@ -554,6 +563,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   [postImageView setImage:chosenImage];
   [self arrangePostImageView];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - LCListFriendsToTagViewControllerDelegate

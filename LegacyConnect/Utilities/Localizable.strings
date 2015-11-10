@@ -19,8 +19,19 @@
 "no_impacts_available_self" = "Create Impacts by selecting the Global Impact button from the bottom right.";
 "no_impacts_available_others" = "No Impacts to display.";
 "no_feeds_available" = "No Feeds to display.";
+"no_comments_available" = "No Comments to display.";
+
+"no_milestones_available_self" = "Tap \"...\" in any of your posts to add as a milestone.";
+"no_milestones_available_others" = "No milestones available.";
+"no_interests_available_self" = "Search and add interests from the menu.";
+"no_interests_available_others" = "No interests available.";
+"no_actions_available_self" = "Take action by selecting the Global Impact button from the bottom right.";
+"no_actions_available_others" = "No actions available.";
+
 
 "ok" = "OK";
+"cancel" = "Cancel";
+"member_since" = "Member Since";
 
 //-- Menu Item --//
 
@@ -29,3 +40,11 @@
 "Notifications" = "Notifications";
 "Settings" = "Settings";
 "Logout" = "Logout";
+
+// -- Actions -- //
+"details_caps" = "DETAILS";
+"comments_caps" = "COMMENTS";
+"settings" = "Settings";
+"attend" = "Attend";
+"attending" = "Attending";
+"follow_event_message" = "Follow the event to view and post comments";

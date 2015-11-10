@@ -13,7 +13,7 @@
 #import "MFSideMenu.h"
 #import "LCGIButton.h"
 #import "LCMenuButton.h"
-#import "LCChooseCommunityInterest.h"
+#import "LCChooseActionsInterest.h"
 #import "LCProfileViewVC.h"
 #import "LCAllInterestVC.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -23,6 +23,7 @@
 #import "LCNotificationsViewController.h"
 #import "LCSocialShareManager.h"
 
+static NSString *kTitle = @"MY FEED";
 
 @interface LCEmptyViewController ()
 {
@@ -55,7 +56,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
+  [self initialUISetUp];
   [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
@@ -95,6 +96,14 @@
   }
 }
 
+- (void)initialUISetUp
+{
+  [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0]];
+  [self.navigationController setNavigationBarHidden:NO];
+  self.title = kTitle;
+  [self.navigationController.navigationBar setTitleTextAttributes:
+   @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+}
 
 -(void) addSideMenuVIewController
 {
@@ -198,9 +207,13 @@
   
   if (sender.tag == 0)//create event
   {
-//    [appdel.menuButton setHidden:YES];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-//    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+    [appdel.menuButton setHidden:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+    [navigationRoot pushViewController:vc animated:YES];
+    
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+//    LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
 //    [navigationRoot pushViewController:vc animated:YES];
   }
   else if (sender.tag == 1)//photo post
@@ -255,6 +268,12 @@
   createPostVC.photoPostPhoto = chosenImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - leftmenu delegates

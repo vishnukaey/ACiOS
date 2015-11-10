@@ -36,6 +36,9 @@ typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
   IBOutlet LCTaggedLabel *usernameLabel, *createdLabel, *postDescription;
   IBOutlet NSLayoutConstraint *postPhotoHeight, *topBorderheight, *bottomBorderHeight;
   IBOutlet UIButton * likeBtn;
+  IBOutlet UIButton *fullScreenImageButton;
+  IBOutlet UIButton *retryButton;
+  IBOutlet UIActivityIndicatorView *imageLoadingActivity;
 }
 
 @property(nonatomic, retain)id delegate;
@@ -47,5 +50,4 @@ typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
 + (NSString*)getFeedCellIdentifier;
 
 - (void)setData :(LCFeed *)dic forPage :(NSString *)pageType;
-
 @end

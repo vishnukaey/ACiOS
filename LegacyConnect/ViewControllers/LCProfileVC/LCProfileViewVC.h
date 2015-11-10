@@ -11,6 +11,11 @@
 #import "LCInterestsCellView.h"
 #import "LCActionsCellView.h"
 #import "LCTabMenuView.h"
+#import "LCFeedTableViewController.h"
+
+#import "LCMileStonesVC.h"
+#import "LCInterestsVC.h"
+#import "LCActionsVC.h"
 
 typedef enum profileStateTypes
 {
@@ -20,11 +25,8 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCProfileViewVC : LCFeedTableViewController <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
 {
-  IBOutlet UITableView *milestonesTable;
-  IBOutlet UITableView *interestsTable;
-  IBOutlet UITableView *actionsTable;
   
   IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *profilePicBorderView;
@@ -35,13 +37,23 @@ typedef enum profileStateTypes
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   
+  
   IBOutlet UIButton *mileStonesButton;
   IBOutlet UIButton *interestsButton;
   IBOutlet UIButton *actionsButton;
   
-  NSMutableArray *mileStoneFeeds;
+  IBOutlet UIView *milestonesContainer;
+  IBOutlet UIView *interestsContainer;
+  IBOutlet UIView *actionsContainer;
+  
+  LCMileStonesVC *mileStonesVC;
+  LCInterestsVC *interestsVC;
+  LCActionsVC *actionsVC;
+  
+  
   NSArray *interestsArray;
   NSArray *actionsArray;
+  
   
   LCTabMenuView *tabmenu;
   
@@ -58,5 +70,7 @@ typedef enum profileStateTypes
 - (IBAction)mileStonesClicked:(id)sender;
 - (IBAction)interestsClicked:(id)sender;
 - (IBAction)actionsClicked:(id)sender;
+
+@property (nonatomic) NSInteger navCount;
 
 @end

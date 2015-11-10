@@ -22,6 +22,7 @@
 #import "LCSpecialContainerView.h"
 #import "LCLoginViewController.h"
 #import "LCFeedsCommentsController.h"
+#import "LCViewActions.h"
 
 @interface LCAppDelegate ()
 
@@ -39,6 +40,8 @@
   [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
   [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[LCLoginViewController class]];
   [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCFeedsCommentsController class]];
+  [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCViewActions class]];
+
   [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[LCSpecialContainerView class]];
   
   // Configure FBProfile update listener

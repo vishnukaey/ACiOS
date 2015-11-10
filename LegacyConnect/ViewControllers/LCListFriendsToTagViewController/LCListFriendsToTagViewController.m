@@ -29,6 +29,8 @@
 {
   [super viewDidLoad];
   
+  friendsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
   friendsTableView.checkedImage = [UIImage imageNamed:@"contact_tick"];
   friendsTableView.uncheckedImage = [UIImage imageNamed:@"tagFirend_unselected"];
   for (LCFriend *friend in alreadySelectedFriends)
@@ -68,15 +70,15 @@
 #pragma mark - setup functions
 - (void) loadFriendsList
 {
-  [MBProgressHUD showHUDAddedTo:friendsTableView animated:YES];
+  [MBProgressHUD showHUDAddedTo:friendsTableView.superview animated:YES];
   [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
     friendsArray = response;
     [searchResultsArray addObjectsFromArray:response];
     [friendsTableView reloadData];
-    [MBProgressHUD hideAllHUDsForView:friendsTableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:friendsTableView.superview animated:YES];
   } andfailure:^(NSString *error) {
     NSLog(@"%@",error);
-    [MBProgressHUD hideAllHUDsForView:friendsTableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:friendsTableView.superview animated:YES];
   }];
 }
 
@@ -179,6 +181,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
   LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   [self checkbuttonAction:cell.checkButton];
 }

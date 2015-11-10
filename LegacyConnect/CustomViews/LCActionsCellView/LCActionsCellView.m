@@ -39,7 +39,7 @@ static NSString *kSupportedByPeople = @"Supported by %@ People";
   [self.eventNameLabel setText:_event.name];
   NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.time WithFormat:kActionsDateFormat];
   [self.eventTimeLabel setText:displayDate];
-  [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,_event.supportersCount]];
+  [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,[LCUtilityManager performNullCheckAndSetValue:_event.followerCount]]];
   [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:kEventPlaceholderImage]];
 }
 

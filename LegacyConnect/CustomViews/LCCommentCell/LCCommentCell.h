@@ -20,6 +20,7 @@ typedef void (^CommentCellTagAction)(NSDictionary* tagDetails);
 
 @property (nonatomic, strong) LCComment * comment;
 @property (readwrite, copy) CommentCellTagAction commentCellTagAction;
+@property (weak, nonatomic) IBOutlet UIImageView *seperator;
 
 - (void)setComment:(LCComment *)comment;
 

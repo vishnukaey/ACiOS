@@ -20,6 +20,8 @@
                 <outlet property="commentCountLabel" destination="ro2-O4-6UZ" id="ikd-5m-X5V"/>
                 <outlet property="commentIconImahe" destination="Igg-YJ-ChP" id="Nwd-Gy-o1r"/>
                 <outlet property="fullScreenImageView" destination="Ggg-Zp-dos" id="JJb-iq-vsr"/>
+                <outlet property="imageLoadingActivity" destination="r4g-S4-kWI" id="XJ3-jH-MNc"/>
+                <outlet property="retryButton" destination="mSe-bV-Hhg" id="Gjt-kf-Kov"/>
                 <outlet property="thanksButtonImage" destination="zX7-FN-DZD" id="TTk-yB-Hhm"/>
                 <outlet property="thanksCountLabel" destination="WXU-WS-uDJ" id="G6E-Yz-HAe"/>
                 <outlet property="titleLabel" destination="FCC-Ir-vn6" id="2zK-PN-Akt"/>
@@ -68,10 +70,40 @@
                         <constraint firstItem="Bkd-hw-Yo1" firstAttribute="centerY" secondItem="sfg-mM-Ea1" secondAttribute="centerY" constant="10" id="wnD-8Z-ppG"/>
                     </constraints>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ggg-Zp-dos">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Zq-gg-0Mj">
                     <rect key="frame" x="0.0" y="65" width="375" height="557"/>
-                    <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                </imageView>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ggg-Zp-dos">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="557"/>
+                            <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        </imageView>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mSe-bV-Hhg">
+                            <rect key="frame" x="144" y="259" width="86" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="l6d-4h-y0u"/>
+                                <constraint firstAttribute="width" constant="86" id="mcJ-XO-KuL"/>
+                            </constraints>
+                            <state key="normal" title="Retry"/>
+                            <connections>
+                                <action selector="tryImageLoading:" destination="-1" eventType="touchUpInside" id="VSe-yP-6Wa"/>
+                            </connections>
+                        </button>
+                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="r4g-S4-kWI">
+                            <rect key="frame" x="177" y="269" width="20" height="20"/>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="mSe-bV-Hhg" firstAttribute="centerX" secondItem="0Zq-gg-0Mj" secondAttribute="centerX" id="2sn-3B-pgL"/>
+                        <constraint firstAttribute="trailing" secondItem="Ggg-Zp-dos" secondAttribute="trailing" id="GGD-h2-fpb"/>
+                        <constraint firstItem="Ggg-Zp-dos" firstAttribute="leading" secondItem="0Zq-gg-0Mj" secondAttribute="leading" id="N8e-D5-uBx"/>
+                        <constraint firstItem="Ggg-Zp-dos" firstAttribute="top" secondItem="0Zq-gg-0Mj" secondAttribute="top" id="XUt-ez-J2u"/>
+                        <constraint firstAttribute="bottom" secondItem="Ggg-Zp-dos" secondAttribute="bottom" id="cZO-uZ-UzQ"/>
+                        <constraint firstItem="r4g-S4-kWI" firstAttribute="centerY" secondItem="0Zq-gg-0Mj" secondAttribute="centerY" id="owT-1r-cHh"/>
+                        <constraint firstItem="mSe-bV-Hhg" firstAttribute="centerY" secondItem="0Zq-gg-0Mj" secondAttribute="centerY" id="tzs-Mf-hK1"/>
+                        <constraint firstItem="r4g-S4-kWI" firstAttribute="centerX" secondItem="0Zq-gg-0Mj" secondAttribute="centerX" id="z3A-SN-d0d"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CXl-rR-yaS">
                     <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                     <subviews>
@@ -151,23 +183,17 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="CXl-rR-yaS" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1OO-pP-HxX"/>
-                <constraint firstItem="Ggg-Zp-dos" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9BV-he-DdE"/>
                 <constraint firstAttribute="bottom" secondItem="CXl-rR-yaS" secondAttribute="bottom" id="CRe-oT-9MD"/>
+                <constraint firstItem="0Zq-gg-0Mj" firstAttribute="top" secondItem="sfg-mM-Ea1" secondAttribute="bottom" id="JUf-RP-kga"/>
                 <constraint firstAttribute="trailing" secondItem="sfg-mM-Ea1" secondAttribute="trailing" id="YZQ-dv-XTm"/>
-                <constraint firstAttribute="trailing" secondItem="Ggg-Zp-dos" secondAttribute="trailing" id="aBM-fZ-Yf7"/>
-                <constraint firstAttribute="bottom" secondItem="Ggg-Zp-dos" secondAttribute="bottom" constant="45" id="cWy-om-4e3"/>
+                <constraint firstItem="0Zq-gg-0Mj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZgS-Qa-Hgd"/>
                 <constraint firstAttribute="trailing" secondItem="CXl-rR-yaS" secondAttribute="trailing" id="e1B-tB-oBY"/>
-                <constraint firstItem="Ggg-Zp-dos" firstAttribute="top" secondItem="sfg-mM-Ea1" secondAttribute="bottom" id="fF7-2K-rrk"/>
+                <constraint firstItem="CXl-rR-yaS" firstAttribute="top" secondItem="0Zq-gg-0Mj" secondAttribute="bottom" id="hqq-aI-2B4"/>
                 <constraint firstItem="sfg-mM-Ea1" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="m2F-MI-bd0"/>
-                <constraint firstItem="CXl-rR-yaS" firstAttribute="top" secondItem="Ggg-Zp-dos" secondAttribute="bottom" id="p65-kD-fGh"/>
+                <constraint firstAttribute="trailing" secondItem="0Zq-gg-0Mj" secondAttribute="trailing" id="odZ-gm-Cf8"/>
                 <constraint firstItem="sfg-mM-Ea1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vm0-xM-0gW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="cWy-om-4e3"/>
-                </mask>
-            </variation>
         </view>
     </objects>
     <resources>
