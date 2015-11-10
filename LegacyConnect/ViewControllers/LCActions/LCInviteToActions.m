@@ -32,16 +32,8 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   NSLog(@"event-->>%@", eventToInvite);
-//  [self loadFriendsList];
-  [self startFetchingResults];
   
-  
-  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  
-  searchResultsArray = [[NSMutableArray alloc] init];
-  if (!selectedIDs) {
-    selectedIDs = [[NSMutableArray alloc] init];
-  }
+  [self initialSerup];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -69,43 +61,60 @@
 }
 
 #pragma mark - setup functions
-- (void) loadFriendsList
-{
-  [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
-    friendsArray = response;
-    [searchResultsArray addObjectsFromArray:response];
-    [self.tableView reloadData];
-  } andfailure:^(NSString *error) {
-    NSLog(@"%@",error);
-  }];
+
+- (void) initialSerup {
+  
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
+  if (!selectedIDs) {
+    selectedIDs = [[NSMutableArray alloc] init];
+  }
+  NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  
+  [self startFetchingResults];
 }
+
 
 #pragma mark - API and Pagination
 - (void)startFetchingResults
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCAPIManager searchUserUsingsearchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
+#warning remove hardcoded value
+  [LCAPIManager getMemberFriendsForEventID:@"1447139069739" searchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
-    //[self setNoResultViewHidden:[(NSArray*)response count] != 0];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andfailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFailedToFetchResults];
-    //[self setNoResultViewHidden:[self.results count] != 0];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager searchUserUsingsearchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] userID] withSuccess:^(id response) {
+#warning remove hardcoded value
+  [LCAPIManager getMemberFriendsForEventID:@"1447139069739" searchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];
   }];
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else
+  {
+    [self showNoResultsView];
+  }
 }
 
 
@@ -129,70 +138,22 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-//- (void)checkbuttonAction :(UIButton *)sender
-//{
-//  selectedButton = sender;
-//  LCFriend *friend = searchResultsArray[sender.tag];
-//  [self AddOrRemoveID:friend.userID];
-//}
-
-//- (void)AddOrRemoveID :(id)ID_
-//{
-//  if ([selectedIDs containsObject:ID_])
-//  {
-//    [selectedIDs removeObject:ID_];
-//    [selectedButton setImage:uncheckedImage forState:UIControlStateNormal];
-//  }else
-//  {
-//    [selectedIDs addObject:ID_];
-//    [selectedButton setImage:checkedImage forState:UIControlStateNormal];
-//  }
-//
-//  NSLog(@"id----- > %@",selectedIDs);
-//}
-
-//- (void)setStatusForButton:(UIButton *)button byCheckingIDs:(NSArray *)IDs
-//{
-//  for (id ID_ in IDs)
-//  {
-//    if ([selectedIDs containsObject:ID_])
-//    {
-//      [button setImage:checkedImage forState:UIControlStateNormal];
-//      return;
-//    }
-//  }
-//  [button setImage:uncheckedImage forState:UIControlStateNormal];
-//}
-
 
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-//  [searchResultsArray removeAllObjects];
-//  if([searchText length] != 0) {
-//    [self searchTableList:searchBar.text];
-//  }
-//  else
-//  {
-//    [searchResultsArray addObjectsFromArray:friendsArray];
-//  }
-//  [self.tableView reloadData];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
   
-  [self startFetchingResults];
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:nil repeats:NO];
 }
 
-- (void)searchTableList :(NSString *)text
+-(void) searchRequest:(NSTimer*)sender
 {
-  for (int i = 0; i<friendsArray.count ; i++)
-  {
-    LCFriend *friend = friendsArray[i];
-    NSString * tempStr = [NSString stringWithFormat:@"%@ %@",friend.firstName, friend.lastName];
-    NSComparisonResult result = [tempStr compare:text options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [text length])];
-    if (result == NSOrderedSame)
-    {
-      [searchResultsArray addObject:friend];
-    }
-  }
+  [self startFetchingResults];
 }
 
 #pragma mark - TableView delegates
@@ -219,32 +180,32 @@
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   
-//  if ([selectedIDs containsObject:friend.friendId]) {
-//    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-//    [cell.checkButton setSelected:YES];
-//  }
-//  else {
-//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-//    [cell.checkButton setSelected:NO];
-//  }
+  if ([selectedIDs containsObject:friend.friendId]) {
+    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    [cell.checkButton setSelected:YES];
+  }
+  else {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [cell.checkButton setSelected:NO];
+  }
   
   return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  
-//  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//  LCFriend *friend = searchResultsArray[indexPath.row];
-//  [selectedIDs addObject:friend.friendId];
-//  [cell.checkButton setSelected:YES];
-//}
-//
-//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//  LCFriend *friend = searchResultsArray[indexPath.row];
-//  [selectedIDs removeObject:friend.friendId];
-//  [cell.checkButton setSelected:NO];
-//}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  
+  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  LCFriend *friend = self.results[indexPath.row];
+  [selectedIDs addObject:friend.friendId];
+  [cell.checkButton setSelected:YES];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  LCFriend *friend = self.results[indexPath.row];
+  [selectedIDs removeObject:friend.friendId];
+  [cell.checkButton setSelected:NO];
+}
 @end
