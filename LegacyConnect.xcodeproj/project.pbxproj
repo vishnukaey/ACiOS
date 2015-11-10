@@ -22,7 +22,6 @@
 		0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2902761BB90F8800E80684 /* LCActionsCellView.m */; };
 		0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */; };
 		0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B29027E1BB9370100E80684 /* LCInterestsCellView.m */; };
-		0B2902811BB9370100E80684 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B29027F1BB9370100E80684 /* LCInterestsCellView.xib */; };
 		0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */; };
 		0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35941F1B4E6BBF0098C484 /* LCLoginHomeViewController.m */; };
 		0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594251B4E6D920098C484 /* LCSignupViewController.m */; };
@@ -41,6 +40,10 @@
 		0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */; };
 		0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */; };
 		0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */; };
+		0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BCFF1BEC8EF600217897 /* LCSearchTopViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD021BEC8F1D00217897 /* LCSearchUsersViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B85BD061BEC8F4400217897 /* LCSearchInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */; };
 		0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8AA05C1BC299EE00C284DF /* LCfriendButton.m */; settings = {ASSET_TAGS = (); }; };
 		0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */; settings = {ASSET_TAGS = (); }; };
@@ -101,9 +104,13 @@
 		0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */; };
 		0BC755801B563907009CE7F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BC7557F1B563907009CE7F3 /* Localizable.strings */; };
 		0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */; };
+		0BDB92301BECD0E900D26D4C /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */; settings = {ASSET_TAGS = (); }; };
 		0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */; };
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
 		0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE437151B5D30090072600C /* LCTutorialContainerVC.m */; };
+		0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */; settings = {ASSET_TAGS = (); }; };
+		0BEA5C901BEA1B0F00669C57 /* LCInterestsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C8F1BEA1B0F00669C57 /* LCInterestsVC.m */; settings = {ASSET_TAGS = (); }; };
+		0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C921BEA1B3B00669C57 /* LCActionsVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEC736E1BA0306C00D97BCA /* LCAppLaunchHelper.m */; };
 		0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BED515D1B74D3F600DA125B /* LCChooseInterestCVC.m */; };
 		0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0BF05A4C1B4E622200FF7B39 /* Images.xcassets */; };
@@ -119,6 +126,7 @@
 		0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; settings = {ASSET_TAGS = (); }; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; settings = {ASSET_TAGS = (); }; };
+		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; settings = {ASSET_TAGS = (); }; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -189,7 +197,6 @@
 		0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCActionsCellView.xib; path = CustomViews/LCActionsCellView/LCActionsCellView.xib; sourceTree = "<group>"; };
 		0B29027D1BB9370100E80684 /* LCInterestsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestsCellView.h; path = CustomViews/LCInterestsCellView/LCInterestsCellView.h; sourceTree = "<group>"; };
 		0B29027E1BB9370100E80684 /* LCInterestsCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestsCellView.m; path = CustomViews/LCInterestsCellView/LCInterestsCellView.m; sourceTree = "<group>"; };
-		0B29027F1BB9370100E80684 /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
 		0B35941A1B4E6AD20098C484 /* LCFeedsHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsHomeViewController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.h; sourceTree = "<group>"; };
 		0B35941B1B4E6AD20098C484 /* LCFeedsHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsHomeViewController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsHomeViewController.m; sourceTree = "<group>"; };
 		0B35941E1B4E6BBF0098C484 /* LCLoginHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLoginHomeViewController.h; path = ViewControllers/LCLoginHomeViewController/LCLoginHomeViewController.h; sourceTree = "<group>"; };
@@ -224,6 +231,14 @@
 		0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestsTableViewCell.m; path = CustomViews/LCInterestsTableViewCell/LCInterestsTableViewCell.m; sourceTree = "<group>"; };
 		0B8575041B9D64BD00FD8766 /* LCCausesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCausesTableViewCell.h; path = CustomViews/LCCausesTableViewCell/LCCausesTableViewCell.h; sourceTree = "<group>"; };
 		0B8575051B9D64BD00FD8766 /* LCCausesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCausesTableViewCell.m; path = CustomViews/LCCausesTableViewCell/LCCausesTableViewCell.m; sourceTree = "<group>"; };
+		0B85BCFE1BEC8EF600217897 /* LCSearchTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchTopViewController.h; path = ViewControllers/LCSearchViewController/LCSearchTopViewController.h; sourceTree = "<group>"; };
+		0B85BCFF1BEC8EF600217897 /* LCSearchTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchTopViewController.m; path = ViewControllers/LCSearchViewController/LCSearchTopViewController.m; sourceTree = "<group>"; };
+		0B85BD011BEC8F1D00217897 /* LCSearchUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchUsersViewController.h; path = ViewControllers/LCSearchViewController/LCSearchUsersViewController.h; sourceTree = "<group>"; };
+		0B85BD021BEC8F1D00217897 /* LCSearchUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchUsersViewController.m; path = ViewControllers/LCSearchViewController/LCSearchUsersViewController.m; sourceTree = "<group>"; };
+		0B85BD041BEC8F4400217897 /* LCSearchInterestsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchInterestsViewController.h; path = ViewControllers/LCSearchViewController/LCSearchInterestsViewController.h; sourceTree = "<group>"; };
+		0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchInterestsViewController.m; path = ViewControllers/LCSearchViewController/LCSearchInterestsViewController.m; sourceTree = "<group>"; };
+		0B85BD071BEC8F5C00217897 /* LCSearchCausesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchCausesViewController.h; path = ViewControllers/LCSearchViewController/LCSearchCausesViewController.h; sourceTree = "<group>"; };
+		0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchCausesViewController.m; path = ViewControllers/LCSearchViewController/LCSearchCausesViewController.m; sourceTree = "<group>"; };
 		0B86A4EC1B86EE73005D4BD7 /* LCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEvent.h; path = Models/LCEvent/LCEvent.h; sourceTree = "<group>"; };
 		0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEvent.m; path = Models/LCEvent/LCEvent.m; sourceTree = "<group>"; };
 		0B8AA05B1BC299EE00C284DF /* LCfriendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCfriendButton.h; sourceTree = "<group>"; };
@@ -304,12 +319,19 @@
 		0BC7557F1B563907009CE7F3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Utilities/Localizable.strings; sourceTree = "<group>"; };
 		0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFinalTutorialVC.h; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.h; sourceTree = "<group>"; };
 		0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFinalTutorialVC.m; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.m; sourceTree = "<group>"; };
+		0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
 		0BDB98D01B5E5AEB006F62FD /* LCWebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCWebServiceManager.h; path = Utilities/LCWebServiceManager/LCWebServiceManager.h; sourceTree = "<group>"; };
 		0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCWebServiceManager.m; path = Utilities/LCWebServiceManager/LCWebServiceManager.m; sourceTree = "<group>"; };
 		0BE2B9B61B58F7B80026E607 /* LCChooseCausesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseCausesCollectionViewCell.h; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.h; sourceTree = "<group>"; };
 		0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCChooseCausesCollectionViewCell.m; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.m; sourceTree = "<group>"; };
 		0BE437141B5D30090072600C /* LCTutorialContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialContainerVC.h; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.h; sourceTree = "<group>"; };
 		0BE437151B5D30090072600C /* LCTutorialContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialContainerVC.m; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.m; sourceTree = "<group>"; };
+		0BEA5C8B1BEA1ACB00669C57 /* LCMileStonesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMileStonesVC.h; path = ViewControllers/LCProfileVC/LCMileStonesVC.h; sourceTree = "<group>"; };
+		0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMileStonesVC.m; path = ViewControllers/LCProfileVC/LCMileStonesVC.m; sourceTree = "<group>"; };
+		0BEA5C8E1BEA1B0F00669C57 /* LCInterestsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestsVC.h; path = ViewControllers/LCProfileVC/LCInterestsVC.h; sourceTree = "<group>"; };
+		0BEA5C8F1BEA1B0F00669C57 /* LCInterestsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestsVC.m; path = ViewControllers/LCProfileVC/LCInterestsVC.m; sourceTree = "<group>"; };
+		0BEA5C911BEA1B3B00669C57 /* LCActionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCActionsVC.h; path = ViewControllers/LCProfileVC/LCActionsVC.h; sourceTree = "<group>"; };
+		0BEA5C921BEA1B3B00669C57 /* LCActionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCActionsVC.m; path = ViewControllers/LCProfileVC/LCActionsVC.m; sourceTree = "<group>"; };
 		0BEC736D1BA0306C00D97BCA /* LCAppLaunchHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAppLaunchHelper.h; path = Helpers/LCAppLaunchHelper/LCAppLaunchHelper.h; sourceTree = "<group>"; };
 		0BEC736E1BA0306C00D97BCA /* LCAppLaunchHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAppLaunchHelper.m; path = Helpers/LCAppLaunchHelper/LCAppLaunchHelper.m; sourceTree = "<group>"; };
 		0BED515C1B74D3F600DA125B /* LCChooseInterestCVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseInterestCVC.h; path = CustomViews/LCChooseInterestCVC/LCChooseInterestCVC.h; sourceTree = "<group>"; };
@@ -338,6 +360,8 @@
 		0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFullScreenImageVC.xib; sourceTree = "<group>"; };
 		1618309B1BDF45D4002D3539 /* LCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImage.h; path = Models/LCImage/LCImage.h; sourceTree = "<group>"; };
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
+		169607E11BF06A1E0007A278 /* LCEventMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEventMembersViewController.h; path = LCEventMembersVC/LCEventMembersViewController.h; sourceTree = "<group>"; };
+		169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventMembersViewController.m; path = LCEventMembersVC/LCEventMembersViewController.m; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -431,6 +455,7 @@
 		0B05D7411BEB1D4100FD5AE1 /* LCActions */ = {
 			isa = PBXGroup;
 			children = (
+				169607E41BF06A240007A278 /* LCEventMembers */,
 				0B05D7421BEB1D4100FD5AE1 /* LCActionsDateSelection.h */,
 				0B05D7431BEB1D4100FD5AE1 /* LCActionsDateSelection.m */,
 				0B05D7441BEB1D4100FD5AE1 /* LCActionsMembers.h */,
@@ -493,7 +518,7 @@
 			children = (
 				0B29027D1BB9370100E80684 /* LCInterestsCellView.h */,
 				0B29027E1BB9370100E80684 /* LCInterestsCellView.m */,
-				0B29027F1BB9370100E80684 /* LCInterestsCellView.xib */,
+				0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */,
 			);
 			name = LCInterestsCellView;
 			sourceTree = "<group>";
@@ -561,6 +586,14 @@
 			children = (
 				0B5571441B8D9F5D00445958 /* LCSearchViewController.h */,
 				0B5571451B8D9F5D00445958 /* LCSearchViewController.m */,
+				0B85BCFE1BEC8EF600217897 /* LCSearchTopViewController.h */,
+				0B85BCFF1BEC8EF600217897 /* LCSearchTopViewController.m */,
+				0B85BD011BEC8F1D00217897 /* LCSearchUsersViewController.h */,
+				0B85BD021BEC8F1D00217897 /* LCSearchUsersViewController.m */,
+				0B85BD041BEC8F4400217897 /* LCSearchInterestsViewController.h */,
+				0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */,
+				0B85BD071BEC8F5C00217897 /* LCSearchCausesViewController.h */,
+				0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */,
 			);
 			name = LCSearchViewController;
 			sourceTree = "<group>";
@@ -1132,6 +1165,15 @@
 			name = LCImage;
 			sourceTree = "<group>";
 		};
+		169607E41BF06A240007A278 /* LCEventMembers */ = {
+			isa = PBXGroup;
+			children = (
+				169607E11BF06A1E0007A278 /* LCEventMembersViewController.h */,
+				169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */,
+			);
+			name = LCEventMembers;
+			sourceTree = "<group>";
+		};
 		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1276,6 +1318,12 @@
 				CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */,
 				0B288C711BA92660001A8E9D /* LCProfileEditVC.h */,
 				0B288C721BA92660001A8E9D /* LCProfileEditVC.m */,
+				0BEA5C8B1BEA1ACB00669C57 /* LCMileStonesVC.h */,
+				0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */,
+				0BEA5C8E1BEA1B0F00669C57 /* LCInterestsVC.h */,
+				0BEA5C8F1BEA1B0F00669C57 /* LCInterestsVC.m */,
+				0BEA5C911BEA1B3B00669C57 /* LCActionsVC.h */,
+				0BEA5C921BEA1B3B00669C57 /* LCActionsVC.m */,
 			);
 			name = LCProfileVC;
 			sourceTree = "<group>";
@@ -1454,6 +1502,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BDB92301BECD0E900D26D4C /* LCInterestsCellView.xib in Resources */,
 				0BB33DDB1BA81401009E6D0C /* fbButton.png in Resources */,
 				0BB33DE11BA81401009E6D0C /* menuButton_dummy.png in Resources */,
 				0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */,
@@ -1496,7 +1545,6 @@
 				0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
 				0BB33DE41BA81401009E6D0C /* profileAdd.png in Resources */,
-				0B2902811BB9370100E80684 /* LCInterestsCellView.xib in Resources */,
 				0BB33DEB1BA81401009E6D0C /* simple-green-check-button-th.png in Resources */,
 				0BB33DDD1BA81401009E6D0C /* heart_dummy.png in Resources */,
 				0BB33DED1BA81401009E6D0C /* uncheck_box.png in Resources */,
@@ -1556,12 +1604,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
+				0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */,
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				0BB33DAF1BA8133F009E6D0C /* LCGIButton.m in Sources */,
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
 				0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */,
+				169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */,
 				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
@@ -1587,13 +1637,16 @@
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
+				0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
 				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
+				0BEA5C901BEA1B0F00669C57 /* LCInterestsVC.m in Sources */,
 				0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */,
+				0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				1618309D1BDF45D4002D3539 /* LCImage.m in Sources */,
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
@@ -1609,6 +1662,7 @@
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
 				0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */,
+				0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */,
 				0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */,
 				0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */,
 				0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */,
@@ -1623,6 +1677,7 @@
 				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
+				0B85BD061BEC8F4400217897 /* LCSearchInterestsViewController.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */,
 				0B05D7511BEB1D4100FD5AE1 /* LCCreateActions.m in Sources */,
@@ -1642,6 +1697,7 @@
 				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
 				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
+				0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

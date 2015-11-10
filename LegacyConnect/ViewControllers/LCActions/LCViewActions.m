@@ -63,7 +63,7 @@ static CGFloat kActionSectionTitleOffset = 10;
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(id response, BOOL isMore) {
+  [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
     [self didFetchNextResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];
@@ -77,16 +77,34 @@ static CGFloat kActionSectionTitleOffset = 10;
     self.eventObject = responses;
     [self dataPopulation];
     [self.tableView reloadData];
-    [self startFetchingResults];
+    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
+      [self startFetchingResults];
+    }
   } andFailure:^(NSString *error) {
-    [self startFetchingResults];
+    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
+      [self startFetchingResults];
+    }
     LCDLog(@"%@",error);
   }];
 }
 
 - (void)postAction
 {
-  
+  if (commentTextField.text.length > 0) {
+    [self resignAllResponders];
+    [self enableCommentField:NO];
+    [LCAPIManager postCommentToEvent:self.eventObject.eventID comment:commentTextField.text withSuccess:^(id response) {
+      [self.results insertObject:(LCComment*)response atIndex:0];
+      [commentTextField setText:nil];
+      [commentTextField_dup setText:nil];
+      [self changeUpdateButtonState];
+      [self.tableView reloadData];
+      [self enableCommentField:YES];
+    } andFailure:^(NSString *error) {
+      LCDLog(@"----- Fail to add new comment");
+      [self enableCommentField:YES];
+    }];
+  }
 }
 
 #pragma mark - Private method implementation
@@ -97,27 +115,36 @@ static CGFloat kActionSectionTitleOffset = 10;
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
+  [settingsButton.layer setCornerRadius:5.0f];
 }
 
 - (void)dataPopulation
 {
+  [settingsButton setTitle:NSLocalizedString(@"settings", @"settings Button Titile") forState:UIControlStateNormal];
+  if (!self.eventObject.isOwner) {
+    [self hideCommentsFields];
+    if (self.eventObject.isFollowing) {
+      [self showCommentsField];
+    }
+    [settingsButton setTitle:self.eventObject.isFollowing ? NSLocalizedString(@"attending", @"Attending button title") : NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+  }
+
   [eventNameLabel setText:self.eventObject.name];
   [eventPhoto sd_setImageWithURL:[NSURL URLWithString:self.eventObject.headerPhoto] placeholderImage:nil];
-  [settingsButton.layer setCornerRadius:5.0f];
   
   // -------- Created By 'Owner' in 'Interest' -------- //
   NSString * eventCreatedBy = @"Event Created by ";
   NSString  *eventOwnerName;
   NSString * inText = @"in ";
-  NSString * interest = @"Water";
-  if ([self.eventObject.eventID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+  NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
+  if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
     eventOwnerName = @"You ";
   }
   else
   {
     eventOwnerName = [NSString stringWithFormat:@"%@ %@ ",
-                      [LCUtilityManager performNullCheckAndSetValue:@"YOU"],
-                      [LCUtilityManager performNullCheckAndSetValue:@""]];
+                      [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerFirstName],
+                      [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerLastName]];
   }
   
   NSString * eventinfoString = [NSString stringWithFormat:@"%@%@%@%@",eventCreatedBy,eventOwnerName,inText,interest];
@@ -127,7 +154,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
   [eventInfoAttribString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                         NSForegroundColorAttributeName : [UIColor colorWithRed:235/255.0f green:236/255.0f blue:237/255.0f alpha:1]
+                                         NSForegroundColorAttributeName : [UIColor whiteColor]
                                          } range:tagRangeCreatedBy];
   
   NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
@@ -140,7 +167,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   NSRange tagRangeinText = [eventinfoString rangeOfString:inText];
   [eventInfoAttribString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                         NSForegroundColorAttributeName : [UIColor colorWithRed:235/255.0f green:236/255.0f blue:237/255.0f alpha:1]
+                                         NSForegroundColorAttributeName : [UIColor whiteColor]
                                          } range:tagRangeinText];
 
 
@@ -179,27 +206,14 @@ static CGFloat kActionSectionTitleOffset = 10;
   return view;
 }
 
-- (void)tagTapped:(NSDictionary *)tagDetails
-{
-  if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeCause])
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-  else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeUser])
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
-  }
-}
-
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
+#warning remove this hard coaded vlue
+  LCEvent * event  = [[LCEvent alloc] init];
+  event.eventID = @"1446792810533";
+  self.eventObject = event;
+  
   [super viewDidLoad];
   [self initialUISetUp];
   [self dataPopulation];
@@ -232,7 +246,36 @@ static CGFloat kActionSectionTitleOffset = 10;
 
 - (IBAction)settingsAction:(id)sender
 {
-  LCDLog(@"settings clicked-->>");
+  if (self.eventObject.isOwner) {
+    // Go To Edit Event Screen
+    return;
+  }
+  
+  [settingsButton setUserInteractionEnabled:NO];
+  if (self.eventObject.isFollowing) {
+    [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+    [LCAPIManager unfollowEventWithEventID:self.eventObject.eventID withSuccess:^(id response) {
+      self.eventObject.isFollowing = NO;
+      [self hideCommentsFields];
+      [self.results removeAllObjects];
+      [self.tableView reloadData];
+      [settingsButton setUserInteractionEnabled:YES];
+    } andFailure:^(NSString *error) {
+      [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
+      [settingsButton setUserInteractionEnabled:YES];
+    }];
+  } else {
+    [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
+    [LCAPIManager followEventWithEventID:self.eventObject.eventID withSuccess:^(id response) {
+      self.eventObject.isFollowing = YES;
+      [self showCommentsField];
+      [settingsButton setUserInteractionEnabled:YES];
+      [self startFetchingResults];
+    } andFailure:^(NSString *error) {
+      [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+      [settingsButton setUserInteractionEnabled:YES];
+    }];
+  }
 }
 
 - (void)membersAction
@@ -242,7 +285,12 @@ static CGFloat kActionSectionTitleOffset = 10;
 
 - (void)websiteLinkAction
 {
-  LCDLog(@"website link clicked-->>");
+  if (self.eventObject.website) {
+    NSURL * url = [NSURL URLWithString:self.eventObject.website];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+      [[UIApplication sharedApplication] openURL:url];
+    }
+  }
 }
 
 #pragma mark - scrollview delegates
@@ -282,7 +330,11 @@ static CGFloat kActionSectionTitleOffset = 10;
   {
     return 3;
   }
-  return self.results.count;
+  if (self.eventObject.isFollowing) {
+    return [super tableView:tableView numberOfRowsInSection:section];
+  }
+  return 1;//Cell for 'Follow the event to view and post comments' message.
+  
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -326,6 +378,12 @@ static CGFloat kActionSectionTitleOffset = 10;
     }
   }
   
+  if (!self.eventObject.isFollowing) {
+    UITableViewCell * followEventCell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
+    [followEventCell setBackgroundColor:[UIColor clearColor]];
+    return followEventCell;
+  }
+  
   JTTABLEVIEW_cellForRowAtIndexPath
   LCCommentCell *commentCell;
   static NSString *MyIdentifier = @"LCCommentCell";
@@ -335,14 +393,13 @@ static CGFloat kActionSectionTitleOffset = 10;
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
     commentCell = [topLevelObjects objectAtIndex:0];
   }
-  NSInteger rowNo = indexPath.row - 1;
-  [commentCell setComment:[self.results objectAtIndex:rowNo]];
+  [commentCell setComment:[self.results objectAtIndex:indexPath.row]];
   [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
   __weak typeof(self) weakSelf = self;
   commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
   };
-  [commentCell.seperator setHidden:self.results.count == indexPath.row];
+  [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;
 }
 
@@ -355,8 +412,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   {
     cell = [[LCActionsDetailsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
-  NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:[LCUtilityManager performNullCheckAndSetValue:self.eventObject.eventDescription]];
-  cell.communityDetailsLabel.attributedText = attributedString;
+  cell.communityDetailsLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.eventDescription];
   return cell;
 }
 
@@ -368,8 +424,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   {
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
-  cell.communityMemebersCountLabel.text = self.eventObject.followerCount;
-  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
   return cell;
 }
 
@@ -383,6 +438,22 @@ static CGFloat kActionSectionTitleOffset = 10;
   }
   cell.communityWebsiteLabel.text = self.eventObject.website;
   return cell;
+}
+
+#pragma mark - UITableViewDelegate implementation
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  [tableView deselectRowAtIndexPath:indexPath animated:NO];
+  if (indexPath.section == 0) {
+    switch (indexPath.row) {
+      case 2:
+        [self websiteLinkAction];
+        break;
+        
+      default:
+        break;
+    }
+  }
 }
 
 @end

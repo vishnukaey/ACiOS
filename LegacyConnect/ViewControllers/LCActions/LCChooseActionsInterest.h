@@ -11,7 +11,7 @@
 
 @interface LCChooseActionsInterest : UIViewController
 {
-  IBOutlet UICollectionView * interstsCollection;
+  IBOutlet UITableView * interestsTableView;
   NSArray *interestsArray;
 }
 

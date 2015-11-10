@@ -10,22 +10,32 @@
 #import "LCCreateActions.h"
 #import "LCCommunityInterestCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LCInterestsCellView.h"
+
+
+static NSString *kUnCheckedImageName = @"tagFirend_unselected";
+static NSString *kCheckedImageName = @"contact_tick";
+
 
 @implementation LCChooseActionsInterest
+{
+  LCInterest *selectedInterest;
+}
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
-    {
-      interestsArray = response;
-      [interstsCollection reloadData];
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses)
+  {
+      interestsArray = responses;
+      [interestsTableView reloadData];
     }
     andFailure:^(NSString *error)
     {
     }];
+  interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -46,82 +56,73 @@
   [appdel.menuButton setHidden:true];
 }
 
-#pragma mark - Initial setup functions
-/* use this function if need to add in a scrollview
-- (void)displayInterestsFromResponse :(NSArray *)response
-{
-  float x_margin = 10, y_margin = 10;
-  float icon_size = (interstsScroll.frame.size.width - 4*x_margin)/3;
-  float labelHeight = 30;
-
-  for (int i = 0; i<response.count; i++)
-  {
-    UIButton *interestView = [[UIButton alloc] initWithFrame:CGRectMake((i%3 + 1)*x_margin + icon_size*(i%3), (i/3 + 1)*y_margin + (icon_size + labelHeight) * (i/3), icon_size, (icon_size + labelHeight))];
-    [interestView addTarget:self action:@selector(interestSelected:) forControlEvents:UIControlEventTouchUpInside];
-    [interstsScroll addSubview:interestView];
-    
-    LCInterest *interstObj = [response objectAtIndex:i];
-    
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, icon_size, icon_size)];
-    [interestView addSubview:imageView];
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:interstObj.logoURL]];
-    imageView.image = [UIImage imageWithData:imageData];
-    
-    UILabel *interestLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, icon_size, icon_size, labelHeight)];
-    interestLabel.font = [UIFont systemFontOfSize:10];
-    [interestView addSubview:interestLabel];
-    interestLabel.text = interstObj.name;
-    interestLabel.textAlignment = NSTextAlignmentCenter;
-  }
-}
- */
-
 #pragma mark - button actions
 - (IBAction)cancelAction
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - collection view delegates
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (IBAction)nextAction
+{
+  /* 
+   
+   Push to create community page
+   
+   */
+
+}
+
+#pragma mark - TableView delegates
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 1;    //count of section
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   return interestsArray.count;
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *cellIdentifier = @"LCCommunityInterestCell";
-  LCCommunityInterestCell *cell = (LCCommunityInterestCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-  if (cell == nil)
-  {
-    NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCCommunityInterestCell class]) owner:nil options:nil];
-    cell=cells[0];
-  }
-  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
-  cell.interestNameLabel.text = interstObj.name;
-  
-  [cell.interestIcon sd_setImageWithURL:[NSURL URLWithString:interstObj.logoURLLarge] placeholderImage:nil];
-  
-  return cell;
+    static NSString *MyIdentifier = @"LCInterestsCell";
+    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+    }
+    
+    LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+    [cell setData:interstObj];
+    tableView.backgroundColor = [tableView.superview backgroundColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tableView.allowsSelection = YES;
+    
+    cell.checkButton.hidden = NO;
+    cell.checkButton.userInteractionEnabled = NO;
+    if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
+    {
+      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+    }
+    else
+    {
+      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+    }
+    
+    return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-  LCCreateActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCCreateActions"];
-  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
-  vc.interestId = interstObj.interestID;
-  [self.navigationController pushViewController:vc animated:YES];
+  return 135;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  selectedInterest = [interestsArray objectAtIndex:indexPath.row];
+  [interestsTableView reloadData];
 }
-*/
+
 
 @end
