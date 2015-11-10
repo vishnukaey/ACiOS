@@ -109,14 +109,8 @@
   [self.delegate scrollViewScrolled:scrollView];
 }
 
-
-#warning remove this hard coaded value
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-  LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
-  [self.navigationController pushViewController:actions animated:YES];
 }
 
 @end

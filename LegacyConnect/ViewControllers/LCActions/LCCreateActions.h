@@ -7,12 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCActionsDateSelection.h"
 
+typedef enum actionSectionTypes
+{
+  SECTION_NAME,
+  SECTION_ACTIONTYPE,
+  SECTION_DATE,
+  SECTION_WEBSITE,
+  SECTION_HEADER,
+  SECTION_ABOUT
+} sectionType;
 
-@interface LCCreateActions : UIViewController<UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface LCCreateActions : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, actionDateDelegate>
 
-@property(nonatomic, retain)NSMutableString *communityDate;
-@property(nonatomic, retain)NSString *interestId;
+@property(nonatomic, retain)LCInterest *selectedInterest;
 
 - (IBAction)cancelAction;
 - (IBAction)nextButtonAction;

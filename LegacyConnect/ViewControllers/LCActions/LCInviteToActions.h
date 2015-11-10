@@ -8,17 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "LCMultipleSelectionTable.h"
+#import "JTTableViewController.h"
 
 
-@interface LCInviteToActions : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCInviteToActions : JTTableViewController
 {
-  IBOutlet LCMultipleSelectionTable *friendsTableView;
   NSArray *friendsArray;
   NSMutableArray *searchResultsArray;
+  
+  NSMutableArray *selectedIDs;
+
 }
 @property(nonatomic, retain)LCEvent *eventToInvite;
-
-- (IBAction)cancelAction;
--(IBAction)doneButtonAction;
 
 @end
