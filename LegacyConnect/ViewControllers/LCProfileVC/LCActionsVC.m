@@ -9,6 +9,7 @@
 #import "LCActionsVC.h"
 #import "LCActionsCellView.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCViewActions.h"
 
 @implementation LCActionsVC
 
@@ -26,6 +27,7 @@
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
   }];
@@ -36,7 +38,6 @@
   [super startFetchingNextResults];
   [LCAPIManager getUserEventsForUserId:self.userID andLastEventId:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
@@ -127,6 +128,14 @@
   tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
   tableView.allowsSelection = YES;
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+  LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+  actions.eventObject = self.results[indexPath.row];
+  [self.navigationController pushViewController:actions animated:YES];
 }
 
 #pragma mark - ScrollView delegates

@@ -209,11 +209,6 @@ static CGFloat kActionSectionTitleOffset = 10;
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
-#warning remove this hard coaded vlue
-  LCEvent * event  = [[LCEvent alloc] init];
-  event.eventID = @"1446792810533";
-  self.eventObject = event;
-  
   [super viewDidLoad];
   [self initialUISetUp];
   [self dataPopulation];
