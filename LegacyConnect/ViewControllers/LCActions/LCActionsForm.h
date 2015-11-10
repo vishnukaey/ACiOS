@@ -19,7 +19,7 @@ typedef enum actionSectionTypes
   SECTION_ABOUT
 } sectionType;
 
-@interface LCCreateActions : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, actionDateDelegate>
+@interface LCActionsForm : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, actionDateDelegate>
 
 @property(nonatomic, retain)LCInterest *selectedInterest;
 

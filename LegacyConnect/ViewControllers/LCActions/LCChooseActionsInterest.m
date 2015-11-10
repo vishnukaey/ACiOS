@@ -7,7 +7,7 @@
 //
 
 #import "LCChooseActionsInterest.h"
-#import "LCCreateActions.h"
+//#import "LCCreateActions.h"
 #import "LCCommunityInterestCell.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCInterestsCellView.h"
@@ -67,9 +67,9 @@ static NSString *kCheckedImageName = @"contact_tick";
 - (IBAction)nextAction
 {
   UIStoryboard*  s_board = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-  LCCreateActions *controller = [s_board instantiateViewControllerWithIdentifier:@"LCCreateActions"];
-  controller.selectedInterest = selectedInterest;
-  [self.navigationController pushViewController:controller animated:YES];
+//  LCCreateActions *controller = [s_board instantiateViewControllerWithIdentifier:@"LCCreateActions"];
+//  controller.selectedInterest = selectedInterest;
+//  [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - TableView delegates

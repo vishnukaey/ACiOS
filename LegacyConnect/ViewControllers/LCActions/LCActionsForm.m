@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCCreateActions.h"
+#import "LCActionsForm.h"
 #import "LCInviteToActions.h"
 
-@interface LCCreateActions ()
+@interface LCActionsForm ()
 {
   IBOutlet UITextField *actionNameField;
   IBOutlet UITextView *actionAboutField;
@@ -34,7 +34,7 @@ static NSString * const kCellIdentifierHeaderBG = @"LCActionHeaderCell";
 static NSString * const kCellIdentifierAbout = @"LCActionAboutCell";
 static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
 
-@implementation LCCreateActions
+@implementation LCActionsForm
 @synthesize selectedInterest;
 
 

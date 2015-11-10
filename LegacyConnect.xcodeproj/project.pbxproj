@@ -12,7 +12,7 @@
 		0B05D74E1BEB1D4100FD5AE1 /* LCActionsDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7431BEB1D4100FD5AE1 /* LCActionsDateSelection.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D74F1BEB1D4100FD5AE1 /* LCActionsMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7451BEB1D4100FD5AE1 /* LCActionsMembers.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7471BEB1D4100FD5AE1 /* LCChooseActionsInterest.m */; settings = {ASSET_TAGS = (); }; };
-		0B05D7511BEB1D4100FD5AE1 /* LCCreateActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7491BEB1D4100FD5AE1 /* LCCreateActions.m */; settings = {ASSET_TAGS = (); }; };
+		0B05D7511BEB1D4100FD5AE1 /* LCActionsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7491BEB1D4100FD5AE1 /* LCActionsForm.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7531BEB1D4100FD5AE1 /* LCViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74D1BEB1D4100FD5AE1 /* LCViewActions.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */; settings = {ASSET_TAGS = (); }; };
@@ -135,6 +135,7 @@
 		96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */; };
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
+		CE1AFB5A1BF1D9A20039A47F /* LCEditActionController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1AFB591BF1D9A20039A47F /* LCEditActionController.m */; settings = {ASSET_TAGS = (); }; };
 		CE386ABD1BE87A8600EDE506 /* LCFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE386ABC1BE87A8600EDE506 /* LCFeedTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CE44ACD91BE78CCE00D22EE8 /* LCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44ACD81BE78CCE00D22EE8 /* LCNotificationManager.m */; settings = {ASSET_TAGS = (); }; };
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
@@ -178,8 +179,8 @@
 		0B05D7451BEB1D4100FD5AE1 /* LCActionsMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsMembers.m; sourceTree = "<group>"; };
 		0B05D7461BEB1D4100FD5AE1 /* LCChooseActionsInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCChooseActionsInterest.h; sourceTree = "<group>"; };
 		0B05D7471BEB1D4100FD5AE1 /* LCChooseActionsInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCChooseActionsInterest.m; sourceTree = "<group>"; };
-		0B05D7481BEB1D4100FD5AE1 /* LCCreateActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCreateActions.h; sourceTree = "<group>"; };
-		0B05D7491BEB1D4100FD5AE1 /* LCCreateActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCreateActions.m; sourceTree = "<group>"; };
+		0B05D7481BEB1D4100FD5AE1 /* LCActionsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsForm.h; sourceTree = "<group>"; };
+		0B05D7491BEB1D4100FD5AE1 /* LCActionsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsForm.m; sourceTree = "<group>"; };
 		0B05D74A1BEB1D4100FD5AE1 /* LCInviteToActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCInviteToActions.h; sourceTree = "<group>"; };
 		0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCInviteToActions.m; sourceTree = "<group>"; };
 		0B05D74C1BEB1D4100FD5AE1 /* LCViewActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCViewActions.h; sourceTree = "<group>"; };
@@ -374,6 +375,8 @@
 		96B86A241B7A232C003EF7CA /* LCListFriendsToTagViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListFriendsToTagViewController.m; path = ViewControllers/LCListFriendsToTagViewController/LCListFriendsToTagViewController.m; sourceTree = "<group>"; };
 		CE0374551B5647070031FFC7 /* LCFeedsCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedsCommentsController.h; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.h; sourceTree = "<group>"; };
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
+		CE1AFB581BF1D9A20039A47F /* LCEditActionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEditActionController.h; path = LCEditActionController/LCEditActionController.h; sourceTree = "<group>"; };
+		CE1AFB591BF1D9A20039A47F /* LCEditActionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEditActionController.m; path = LCEditActionController/LCEditActionController.m; sourceTree = "<group>"; };
 		CE386ABB1BE87A8600EDE506 /* LCFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedTableViewController.h; path = CustomViews/LCFeedTableViewController/LCFeedTableViewController.h; sourceTree = "<group>"; };
 		CE386ABC1BE87A8600EDE506 /* LCFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedTableViewController.m; path = CustomViews/LCFeedTableViewController/LCFeedTableViewController.m; sourceTree = "<group>"; };
 		CE44ACD71BE78CCE00D22EE8 /* LCNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCNotificationManager.h; path = Utilities/LCNotificationManager/LCNotificationManager.h; sourceTree = "<group>"; };
@@ -455,6 +458,7 @@
 		0B05D7411BEB1D4100FD5AE1 /* LCActions */ = {
 			isa = PBXGroup;
 			children = (
+				CE1AFB5B1BF1D9A90039A47F /* LCEditActionController */,
 				169607E41BF06A240007A278 /* LCEventMembers */,
 				0B05D7421BEB1D4100FD5AE1 /* LCActionsDateSelection.h */,
 				0B05D7431BEB1D4100FD5AE1 /* LCActionsDateSelection.m */,
@@ -462,8 +466,8 @@
 				0B05D7451BEB1D4100FD5AE1 /* LCActionsMembers.m */,
 				0B05D7461BEB1D4100FD5AE1 /* LCChooseActionsInterest.h */,
 				0B05D7471BEB1D4100FD5AE1 /* LCChooseActionsInterest.m */,
-				0B05D7481BEB1D4100FD5AE1 /* LCCreateActions.h */,
-				0B05D7491BEB1D4100FD5AE1 /* LCCreateActions.m */,
+				0B05D7481BEB1D4100FD5AE1 /* LCActionsForm.h */,
+				0B05D7491BEB1D4100FD5AE1 /* LCActionsForm.m */,
 				0B05D74A1BEB1D4100FD5AE1 /* LCInviteToActions.h */,
 				0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */,
 				0B05D74C1BEB1D4100FD5AE1 /* LCViewActions.h */,
@@ -1240,6 +1244,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		CE1AFB5B1BF1D9A90039A47F /* LCEditActionController */ = {
+			isa = PBXGroup;
+			children = (
+				CE1AFB581BF1D9A20039A47F /* LCEditActionController.h */,
+				CE1AFB591BF1D9A20039A47F /* LCEditActionController.m */,
+			);
+			name = LCEditActionController;
+			sourceTree = "<group>";
+		};
 		CE386ABE1BE87A9700EDE506 /* LCFeedTableViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1677,10 +1690,11 @@
 				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
 				0B56A7FD1B6A45E40065C231 /* LCRecentNotificationTVC.m in Sources */,
+				CE1AFB5A1BF1D9A20039A47F /* LCEditActionController.m in Sources */,
 				0B85BD061BEC8F4400217897 /* LCSearchInterestsViewController.m in Sources */,
 				0B3594201B4E6BBF0098C484 /* LCLoginHomeViewController.m in Sources */,
 				0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */,
-				0B05D7511BEB1D4100FD5AE1 /* LCCreateActions.m in Sources */,
+				0B05D7511BEB1D4100FD5AE1 /* LCActionsForm.m in Sources */,
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */,

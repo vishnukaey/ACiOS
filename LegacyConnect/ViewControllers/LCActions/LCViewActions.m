@@ -11,6 +11,7 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCEditActionController.h"
 
 static CGFloat kActionSectionHeight = 30;
 static CGFloat kActionSectionTitleOffset = 10;
@@ -209,10 +210,10 @@ static CGFloat kActionSectionTitleOffset = 10;
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
-#warning remove this hard coaded vlue
-  LCEvent * event  = [[LCEvent alloc] init];
-  event.eventID = @"1446792810533";
-  self.eventObject = event;
+//#warning remove this hard coaded vlue
+//  LCEvent * event  = [[LCEvent alloc] init];
+//  event.eventID = @"1446792810533";
+//  self.eventObject = event;
   
   [super viewDidLoad];
   [self initialUISetUp];
@@ -247,7 +248,9 @@ static CGFloat kActionSectionTitleOffset = 10;
 - (IBAction)settingsAction:(id)sender
 {
   if (self.eventObject.isOwner) {
-    // Go To Edit Event Screen
+    UIStoryboard *s_board = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCEditActionController *controller = [s_board instantiateViewControllerWithIdentifier:@"LCCreateActions"];
+    [self.navigationController pushViewController:controller animated:YES];
     return;
   }
   
