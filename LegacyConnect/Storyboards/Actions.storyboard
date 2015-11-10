@@ -11,8 +11,6 @@
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
-        </mutableArray>
-        <mutableArray key="Gotham-Bold.otf">
             <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
@@ -983,7 +981,7 @@
         <!--Create Community-->
         <scene sceneID="xv7-IK-MkC">
             <objects>
-                <viewController storyboardIdentifier="LCCreateActions" title="Create Community" id="tE9-7p-HzV" customClass="LCCreateActions" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LCActionsForm" title="Create Community" id="tE9-7p-HzV" customClass="LCActionsForm" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2YE-z5-uKM"/>
                         <viewControllerLayoutGuide type="bottom" id="EMk-1g-7ez"/>

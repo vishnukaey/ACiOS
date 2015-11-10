@@ -11,6 +11,7 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCEditActionController.h"
 
 static CGFloat kActionSectionHeight = 30;
 static CGFloat kActionSectionTitleOffset = 10;
@@ -127,6 +128,8 @@ static CGFloat kActionSectionTitleOffset = 10;
       [self showCommentsField];
     }
     [settingsButton setTitle:self.eventObject.isFollowing ? NSLocalizedString(@"attending", @"Attending button title") : NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+  } else {
+    [self showCommentsField];
   }
 
   [eventNameLabel setText:self.eventObject.name];
@@ -242,7 +245,9 @@ static CGFloat kActionSectionTitleOffset = 10;
 - (IBAction)settingsAction:(id)sender
 {
   if (self.eventObject.isOwner) {
-    // Go To Edit Event Screen
+    UIStoryboard *s_board = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCEditActionController *controller = [s_board instantiateViewControllerWithIdentifier:@"LCCreateActions"];
+    [self.navigationController pushViewController:controller animated:YES];
     return;
   }
   
