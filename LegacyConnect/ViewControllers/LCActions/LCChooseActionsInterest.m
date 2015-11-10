@@ -27,14 +27,15 @@ static NSString *kCheckedImageName = @"contact_tick";
 {
   [super viewDidLoad];
   
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response)
-    {
-      interestsArray = response;
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses)
+  {
+      interestsArray = responses;
       [interestsTableView reloadData];
     }
     andFailure:^(NSString *error)
     {
     }];
+  interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void) viewWillAppear:(BOOL)animated
