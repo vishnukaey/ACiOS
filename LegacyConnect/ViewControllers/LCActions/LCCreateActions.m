@@ -20,6 +20,7 @@
   IBOutlet UITextField *aboutPlaceholder;
   IBOutlet UIImageView *headerPhotoImageView;
   IBOutlet UITableView *formTableView;
+  IBOutlet UIButton *nextButton;
   NSDate *startDate, *endDate;
 }
 
@@ -34,7 +35,7 @@ static NSString * const kCellIdentifierAbout = @"LCActionAboutCell";
 static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
 
 @implementation LCCreateActions
-@synthesize interestId;
+@synthesize selectedInterest;
 
 
 #pragma mark - controller life cycle
@@ -43,6 +44,7 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
   [super viewDidLoad];
   // Do any additional setup after loading the view.
    formTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  nextButton.enabled = NO;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -72,20 +74,20 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
 #pragma mark - button actions
 - (IBAction)nextButtonAction
 {
-//  LCEvent *com = [[LCEvent alloc] init];
-//  com.name = communityNameField.text;
-//  com.interestID = self.interestId;
-//  com.website = communityWebsiteField.text;
-//  com.eventDescription = aboutCommunityField.text;
-//  com.time = self.communityDate;
-//  [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
-//    com.eventID = response[@"data"][@"id"];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-//    LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
-//    vc.eventToInvite = com;
-//    [self.navigationController pushViewController:vc animated:YES];
-//  } andFailure:^(NSString *error) {
-//  }];
+  LCEvent *com = [[LCEvent alloc] init];
+  com.name = actionNameField.text;
+  com.interestID = self.selectedInterest.interestID;
+  com.website = actionWebsiteField.text;
+  com.eventDescription = actionAboutField.text;
+  com.time = @"";
+  [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
+    com.eventID = response[@"data"][@"id"];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
+    vc.eventToInvite = com;
+    [self.navigationController pushViewController:vc animated:YES];
+  } andFailure:^(NSString *error) {
+  }];
 
 }
 
@@ -183,6 +185,18 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
   headerPhotoImageView.image = image;
 }
 
+- (void)validateFields
+{
+  if (actionAboutField.text.length && actionNameField.text.length)
+  {
+    nextButton.enabled = YES;
+  }
+  else
+  {
+    nextButton.enabled = NO;
+  }
+}
+
 #pragma mark - textview delegate
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -194,6 +208,7 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
   {
     aboutPlaceholder.hidden = true;
   }
+  [self validateFields];
 }
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -324,16 +339,9 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     }
     
     actionNameField = (UITextField*)[cell viewWithTag:100];
-//    txt_firstName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName];
-//    [txt_firstName addTarget:self
-//                      action:@selector(validateFields)
-//            forControlEvents:UIControlEventEditingChanged];
-//    
-//    txt_lastName = (UITextField*)[cell viewWithTag:102];
-//    txt_lastName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName];
-//    [txt_lastName addTarget:self
-//                     action:@selector(validateFields)
-//           forControlEvents:UIControlEventEditingChanged];
+    [actionNameField addTarget:self
+                            action:@selector(validateFields)
+                  forControlEvents:UIControlEventEditingChanged];
   }
   
   else if(indexPath.section == SECTION_ACTIONTYPE){
@@ -346,11 +354,6 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     actionTypeField = (UITextField*)[cell viewWithTag:100];
-//    txt_location.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.location];
-//    [txt_location addTarget:self
-//                     action:@selector(validateFields)
-//           forControlEvents:UIControlEventEditingChanged];
-    
   }
   
   else if(indexPath.section == SECTION_DATE){
@@ -363,9 +366,6 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     actionDateField = (UITextField*)[cell viewWithTag:100];
-//    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:kDOBFormat];
-//    
-//    [self setDobTextFieldWithInputView];
   }
   
   else if(indexPath.section == SECTION_WEBSITE){
@@ -378,9 +378,6 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     }
     
     actionWebsiteField = (UITextField*)[cell viewWithTag:100];
-//    txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
-//    
-//    [self setGenderPickerTextFieldWithInputView];
   }
   else if(indexPath.section == SECTION_HEADER){
     
@@ -393,9 +390,6 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     headerImagePlaceholder = (UITextField*)[cell viewWithTag:100];
     headerPhotoImageView = (UIImageView*)[cell viewWithTag:101];
-    //    txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
-    //
-    //    [self setGenderPickerTextFieldWithInputView];
   }
   else if(indexPath.section == SECTION_ABOUT){
     
@@ -409,11 +403,7 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     aboutPlaceholder = (UITextField*)[cell viewWithTag:100];
     actionAboutField = (UITextView*)[cell viewWithTag:101];
     actionAboutField.delegate = self;
-    //    txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
-    //
-    //    [self setGenderPickerTextFieldWithInputView];
   }
-  
   return cell;
 }
 

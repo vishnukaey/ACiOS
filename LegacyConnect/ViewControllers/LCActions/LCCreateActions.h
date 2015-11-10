@@ -21,7 +21,7 @@ typedef enum actionSectionTypes
 
 @interface LCCreateActions : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate, actionDateDelegate>
 
-@property(nonatomic, retain)NSString *interestId;
+@property(nonatomic, retain)LCInterest *selectedInterest;
 
 - (IBAction)cancelAction;
 - (IBAction)nextButtonAction;
