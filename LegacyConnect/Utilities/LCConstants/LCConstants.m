@@ -186,6 +186,8 @@ NSString *const kfeedUpdatedotification = @"feedUpdated";
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";
 
+NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
+
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 // -- Tag Dictionary keys -- //

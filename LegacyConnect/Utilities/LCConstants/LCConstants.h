@@ -164,6 +164,8 @@ extern NSString *const kfeedUpdatedotification;
 extern NSString *const kfeedUpdateEventKey;
 extern NSString *const kfeedDeletedEventKey;
 
+extern NSString *const kEventMemberCountUpdatedNotification;
+
 extern NSString *const kTWOauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;
 
