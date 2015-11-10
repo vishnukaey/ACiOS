@@ -13,12 +13,14 @@
 
 @interface LCInviteToActions : JTTableViewController
 {
+  IBOutlet UISearchBar *searchBar;
   NSArray *friendsArray;
   NSMutableArray *searchResultsArray;
   
   NSMutableArray *selectedIDs;
 
 }
+
 @property(nonatomic, retain)LCEvent *eventToInvite;
 
 @end
