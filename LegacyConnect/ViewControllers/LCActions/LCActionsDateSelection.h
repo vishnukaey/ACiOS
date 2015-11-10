@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol actionDateDelegate <NSObject>
+
+- (void)actionDateSelected :(NSDate *)start :(NSDate *)end;
+
+@end
 
 @interface LCActionsDateSelection : UIViewController
+{
+  IBOutlet UISegmentedControl *startEndSegment;
+  IBOutlet UIDatePicker *datePicker;
+  IBOutlet UIButton *removeButton;
+}
 
-@property(nonatomic, retain)NSMutableString *datePointer;
+@property(nonatomic, retain)id delegate;
+@property(nonatomic, retain)NSDate *startDate, *endDate;
 
 @end
