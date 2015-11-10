@@ -127,6 +127,8 @@ static CGFloat kActionSectionTitleOffset = 10;
       [self showCommentsField];
     }
     [settingsButton setTitle:self.eventObject.isFollowing ? NSLocalizedString(@"attending", @"Attending button title") : NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+  } else {
+    [self showCommentsField];
   }
 
   [eventNameLabel setText:self.eventObject.name];
