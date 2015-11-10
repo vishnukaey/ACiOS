@@ -1633,10 +1633,13 @@ static LCAPIManager *sharedManager = nil;
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/editEvent"];
   NSError *error = nil;
-  NSMutableArray *imagesAray =[[NSMutableArray alloc] init];
-  if (headerPhoto)
+  NSMutableArray *imagesArray =[[NSMutableArray alloc] init];
+  if(headerPhoto)
   {
-    [imagesAray addObject:headerPhoto];
+    LCImage *image = [[LCImage alloc] init];
+    image.image = headerPhoto;
+    image.imageKey = @"image";
+    [imagesArray addObject:image];
   }
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   if(error)
@@ -1644,7 +1647,7 @@ static LCAPIManager *sharedManager = nil;
     LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesAray withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesArray withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
