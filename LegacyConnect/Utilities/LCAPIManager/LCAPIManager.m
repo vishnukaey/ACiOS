@@ -1511,7 +1511,10 @@ static LCAPIManager *sharedManager = nil;
   NSMutableArray *imagesArray = [[NSMutableArray alloc] init];
   if(headerPhoto)
   {
-    [imagesArray addObject:headerPhoto];
+    LCImage *image = [[LCImage alloc] init];
+    image.image = headerPhoto;
+    image.imageKey = @"image";
+    [imagesArray addObject:image];
   }
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   if(error)
