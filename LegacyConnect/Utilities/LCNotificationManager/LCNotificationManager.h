@@ -17,4 +17,7 @@
 + (void)postPostEditedNotificationForPost :(LCFeed *)post;
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post;
 
+// ------- Event ------//
++ (void)postEventMembersCountUpdatedNotification:(LCEvent*)event;
+
 @end

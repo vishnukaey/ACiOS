@@ -89,6 +89,7 @@
 		0BB33DEF1BA81401009E6D0C /* warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DD31BA81401009E6D0C /* warning@3x.png */; };
 		0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB33DF21BA81423009E6D0C /* LCDummyValues.m */; };
 		0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */; };
+		0BBB0E6E1BF0A9D100E4052D /* LCEventDetailsBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBB0E6D1BF0A9D100E4052D /* LCEventDetailsBaseController.m */; settings = {ASSET_TAGS = (); }; };
 		0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0661B70A8490004C4B6 /* LCAPIManager.m */; };
 		0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC06E1B70BF730004C4B6 /* LCInterest.m */; };
 		0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0711B70BF910004C4B6 /* LCCause.m */; };
@@ -292,6 +293,8 @@
 		0BB33DF21BA81423009E6D0C /* LCDummyValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCDummyValues.m; sourceTree = "<group>"; };
 		0BB8BF6D1B96ED3800A27F1F /* LCSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchResult.h; path = Models/LCSearchResult/LCSearchResult.h; sourceTree = "<group>"; };
 		0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchResult.m; path = Models/LCSearchResult/LCSearchResult.m; sourceTree = "<group>"; };
+		0BBB0E6C1BF0A9D100E4052D /* LCEventDetailsBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCEventDetailsBaseController.h; sourceTree = "<group>"; };
+		0BBB0E6D1BF0A9D100E4052D /* LCEventDetailsBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCEventDetailsBaseController.m; sourceTree = "<group>"; };
 		0BBDC0651B70A8490004C4B6 /* LCAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAPIManager.h; path = Utilities/LCAPIManager/LCAPIManager.h; sourceTree = "<group>"; };
 		0BBDC0661B70A8490004C4B6 /* LCAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAPIManager.m; path = Utilities/LCAPIManager/LCAPIManager.m; sourceTree = "<group>"; };
 		0BBDC06D1B70BF730004C4B6 /* LCInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterest.h; path = Models/LCInterest/LCInterest.h; sourceTree = "<group>"; };
@@ -787,6 +790,16 @@
 			name = LCSearchResult;
 			sourceTree = "<group>";
 		};
+		0BBB0E6B1BF0A9B400E4052D /* LCEventDetailsBaseController */ = {
+			isa = PBXGroup;
+			children = (
+				0BBB0E6C1BF0A9D100E4052D /* LCEventDetailsBaseController.h */,
+				0BBB0E6D1BF0A9D100E4052D /* LCEventDetailsBaseController.m */,
+			);
+			name = LCEventDetailsBaseController;
+			path = ViewControllers/LCEventDetailsBaseController;
+			sourceTree = "<group>";
+		};
 		0BBDC0681B70A84E0004C4B6 /* LCAPIManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,6 +1083,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0BBB0E6B1BF0A9B400E4052D /* LCEventDetailsBaseController */,
 				0B05D7541BEB70C500FD5AE1 /* LCCommentsController */,
 				0B05D7411BEB1D4100FD5AE1 /* LCActions */,
 				0BFDF94A1BDDFB51001E1067 /* LCFullScreenViewController */,
@@ -1627,6 +1641,7 @@
 				169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */,
 				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
 				0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */,
+				0BBB0E6E1BF0A9D100E4052D /* LCEventDetailsBaseController.m in Sources */,
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */,
 				0B05D7531BEB1D4100FD5AE1 /* LCViewActions.m in Sources */,

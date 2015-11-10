@@ -1511,7 +1511,10 @@ static LCAPIManager *sharedManager = nil;
   NSMutableArray *imagesArray = [[NSMutableArray alloc] init];
   if(headerPhoto)
   {
-    [imagesArray addObject:headerPhoto];
+    LCImage *image = [[LCImage alloc] init];
+    image.image = headerPhoto;
+    image.imageKey = @"image";
+    [imagesArray addObject:image];
   }
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   if(error)
@@ -1630,10 +1633,13 @@ static LCAPIManager *sharedManager = nil;
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/editEvent"];
   NSError *error = nil;
-  NSMutableArray *imagesAray =[[NSMutableArray alloc] init];
-  if (headerPhoto)
+  NSMutableArray *imagesArray =[[NSMutableArray alloc] init];
+  if(headerPhoto)
   {
-    [imagesAray addObject:headerPhoto];
+    LCImage *image = [[LCImage alloc] init];
+    image.image = headerPhoto;
+    image.imageKey = @"image";
+    [imagesArray addObject:image];
   }
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   if(error)
@@ -1641,7 +1647,7 @@ static LCAPIManager *sharedManager = nil;
     LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesAray withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesArray withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -1660,10 +1666,10 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)followEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)followEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL,kFollowEventURL];
-  NSDictionary *dict = @{kEventIDKey:eventID};
+  NSDictionary *dict = @{kEventIDKey:event.eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -1675,6 +1681,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Following Event ! \n %@",response);
+       event.isFollowing = YES;
+       NSDictionary *dict= response[kResponseData];
+       event.followerCount = dict[@"followerCount"];
+       [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -1685,10 +1695,10 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)unfollowEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)unfollowEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUnfollowEventURL];
-  NSDictionary *dict = @{kEventIDKey:eventID};
+  NSDictionary *dict = @{kEventIDKey:event.eventID};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -1700,6 +1710,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Unfollowing Event ! \n %@",response);
+       event.isFollowing = NO;
+       NSDictionary *dict= response[kResponseData];
+       event.followerCount = dict[@"followerCount"];
+       [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }
    } andFailure:^(NSString *error) {
