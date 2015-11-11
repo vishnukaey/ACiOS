@@ -11,7 +11,8 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
-#import "LCEditActionController.h"
+#import "LCActionsForm.h"
+#import "LCActionsFormPresenter.h"
 
 static CGFloat kActionSectionHeight = 30;
 static CGFloat kActionSectionTitleOffset = 10;
@@ -245,9 +246,8 @@ static CGFloat kActionSectionTitleOffset = 10;
 - (IBAction)settingsAction:(id)sender
 {
   if (self.eventObject.isOwner) {
-    UIStoryboard *s_board = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-    LCEditActionController *controller = [s_board instantiateViewControllerWithIdentifier:@"LCCreateActions"];
-    [self.navigationController pushViewController:controller animated:YES];
+    LCActionsForm *createController = [LCActionsFormPresenter getEditActionsControllerWithEvent:self.eventObject];
+    [self.navigationController pushViewController:createController animated:YES];
     return;
   }
   

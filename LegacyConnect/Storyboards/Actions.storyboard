@@ -34,6 +34,7 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
@@ -1030,7 +1031,22 @@
                                             <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
-                                            <action selector="nextButtonAction" destination="tE9-7p-HzV" eventType="touchUpInside" id="qes-gt-gcu"/>
+                                            <action selector="nextButtonOutletAction" destination="tE9-7p-HzV" eventType="touchUpInside" id="Dom-vc-4gx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7QX-Ve-FSX">
+                                        <rect key="frame" x="8" y="20" width="58" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="58" id="a0Y-4L-Pym"/>
+                                            <constraint firstAttribute="height" constant="44" id="nq5-VZ-RLr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelAction" destination="tE9-7p-HzV" eventType="touchUpInside" id="UIM-zZ-tfw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1038,9 +1054,11 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="59O-1i-0So" secondAttribute="trailing" constant="8" id="5xy-kd-rYH"/>
                                     <constraint firstAttribute="bottom" secondItem="qcz-ec-ggp" secondAttribute="bottom" id="BTW-PT-BA6"/>
+                                    <constraint firstItem="7QX-Ve-FSX" firstAttribute="leading" secondItem="Qgg-hS-W0S" secondAttribute="leading" constant="8" id="M8Q-wy-1zv"/>
                                     <constraint firstAttribute="centerY" secondItem="we0-T8-VxF" secondAttribute="centerY" constant="-9" id="Nx4-8m-EHK"/>
                                     <constraint firstItem="59O-1i-0So" firstAttribute="centerY" secondItem="qcz-ec-ggp" secondAttribute="centerY" id="POT-Im-uti"/>
                                     <constraint firstAttribute="centerX" secondItem="we0-T8-VxF" secondAttribute="centerX" constant="-1" id="fZZ-JB-rWO"/>
+                                    <constraint firstItem="7QX-Ve-FSX" firstAttribute="top" secondItem="Qgg-hS-W0S" secondAttribute="top" constant="20" id="fuV-JK-wfO"/>
                                     <constraint firstAttribute="height" constant="65" id="pFF-dx-qmL"/>
                                     <constraint firstItem="qcz-ec-ggp" firstAttribute="leading" secondItem="Qgg-hS-W0S" secondAttribute="leading" id="pYE-ZZ-Vu9"/>
                                 </constraints>
@@ -1185,15 +1203,20 @@
                                                         <constraint firstAttribute="width" constant="200" id="ZMK-Fn-ZzS"/>
                                                     </constraints>
                                                 </imageView>
+                                                <activityIndicatorView opaque="NO" tag="103" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="WcU-Ml-mgV">
+                                                    <rect key="frame" x="177" y="34" width="20" height="20"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="f3M-Ih-4fa" secondAttribute="bottom" constant="8" id="GDy-cM-bLF"/>
                                                 <constraint firstItem="f3M-Ih-4fa" firstAttribute="top" secondItem="snT-uC-gRD" secondAttribute="top" constant="8" id="J4z-sN-Y28"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="tQK-1x-hgi" secondAttribute="bottom" id="QgA-UN-4uT"/>
+                                                <constraint firstItem="WcU-Ml-mgV" firstAttribute="centerX" secondItem="snT-uC-gRD" secondAttribute="centerX" id="Rze-XD-DZZ"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="tQK-1x-hgi" secondAttribute="trailing" constant="15" id="gKg-lf-WoJ"/>
                                                 <constraint firstItem="f3M-Ih-4fa" firstAttribute="leading" secondItem="snT-uC-gRD" secondAttribute="leading" constant="15" id="hhf-2W-cQb"/>
                                                 <constraint firstItem="tQK-1x-hgi" firstAttribute="top" secondItem="snT-uC-gRD" secondAttribute="topMargin" id="hkk-Ll-302"/>
                                                 <constraint firstItem="tQK-1x-hgi" firstAttribute="leading" secondItem="snT-uC-gRD" secondAttribute="leading" constant="15" id="k2E-fj-6bW"/>
+                                                <constraint firstItem="WcU-Ml-mgV" firstAttribute="centerY" secondItem="snT-uC-gRD" secondAttribute="centerY" id="rzs-KQ-Ty1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1241,9 +1264,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <sections/>
                                 <connections>
-                                    <outlet property="dataSource" destination="tE9-7p-HzV" id="jQ2-mR-eG3"/>
-                                    <outlet property="delegate" destination="tE9-7p-HzV" id="xtz-ck-Ud0"/>
+                                    <outlet property="dataSource" destination="tE9-7p-HzV" id="NSt-iQ-J0D"/>
+                                    <outlet property="delegate" destination="tE9-7p-HzV" id="26n-r9-6iP"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -1260,6 +1284,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="backButton" destination="qcz-ec-ggp" id="MBD-JI-JtW"/>
+                        <outlet property="cancelButton" destination="7QX-Ve-FSX" id="L0b-j1-hn0"/>
                         <outlet property="formTableView" destination="he7-0Z-I9P" id="9dR-ut-u5g"/>
                         <outlet property="nextButton" destination="59O-1i-0So" id="Xb1-la-ePT"/>
                     </connections>
