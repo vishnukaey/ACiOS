@@ -22,6 +22,7 @@
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
 #import "LCSocialShareManager.h"
+#import "UIImage+LCImageFix.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -262,18 +263,20 @@ static NSString *kTitle = @"MY FEED";
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  UIImage *normalzedImage = [chosenImage normalizedImage];
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
   createPostVC = [sb instantiateInitialViewController];
   
-  createPostVC.photoPostPhoto = chosenImage;
+  createPostVC.photoPostPhoto = normalzedImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 #pragma mark - leftmenu delegates

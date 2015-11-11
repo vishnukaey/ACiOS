@@ -32,7 +32,8 @@
 @synthesize menuButton, GIButton, isCreatePostOpen;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  
+  [LCUtilityManager setLCStatusBarStyle];
   [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
   [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[LCLoginViewController class]];
   [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCFeedsCommentsController class]];

@@ -191,6 +191,11 @@
   return cell;
 }
 
++ (void)setLCStatusBarStyle {
+  
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
 //+(NSNumber*) getNSNumberFromString:(NSString*)string
 //{
 //  NSNumberFormatter *format = [[NSNumberFormatter alloc] init];

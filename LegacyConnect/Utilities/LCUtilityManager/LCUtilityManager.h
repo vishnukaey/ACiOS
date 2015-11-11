@@ -29,6 +29,7 @@
 + (void)saveUserDefaultsForNewUser;
 
 + (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text;
++ (void)setLCStatusBarStyle;
 
 //+(NSNumber*) getNSNumberFromString:(NSString*)string;
 

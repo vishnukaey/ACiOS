@@ -8,6 +8,7 @@
 
 #import "LCCreateActions.h"
 #import "LCInviteToActions.h"
+#import "UIImage+LCImageFix.h"
 
 @interface LCCreateActions ()
 {
@@ -215,14 +216,16 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  [self setHeaderImage:chosenImage];
+  UIImage *normalzedImage = [chosenImage normalizedImage];
+  [self setHeaderImage:normalzedImage];
   [formTableView reloadData];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 #pragma mark - date selection delegate
