@@ -1657,6 +1657,7 @@ static LCAPIManager *sharedManager = nil;
     {
       LCDLog(@"Event update success! %@",response);
       success(response);
+      
     }
   } andFailure:^(NSString *error) {
     LCDLog(@"%@",error);

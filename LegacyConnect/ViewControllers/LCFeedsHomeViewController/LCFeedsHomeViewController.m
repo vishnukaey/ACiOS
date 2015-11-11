@@ -185,11 +185,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [super viewWillAppear:animated];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   self.navigationController.navigationBarHidden = YES;
-  
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-//  [self.tableView reloadData];
-  
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated

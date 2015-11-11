@@ -27,8 +27,9 @@
 #import "LCComment.h"
 #import "LCNotificationManager.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "LCGAManager.h"
+
 
 #import "LCAPIManager.h"
-#import <Google/Analytics.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 #endif

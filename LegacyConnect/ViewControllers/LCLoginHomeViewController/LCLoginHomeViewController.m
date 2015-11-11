@@ -36,11 +36,6 @@
 -(void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
-  // GA Tracker
-  id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-  [tracker set:kGAIScreenName value:@"LOGIN HOME"];
-  [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
 
 - (IBAction)continueWithFBAction

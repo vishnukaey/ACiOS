@@ -23,6 +23,7 @@
 #import "LCLoginViewController.h"
 #import "LCFeedsCommentsController.h"
 #import "LCViewActions.h"
+#import <Google/Analytics.h>
 
 @interface LCAppDelegate ()
 
