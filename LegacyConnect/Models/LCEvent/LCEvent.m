@@ -19,6 +19,7 @@
            @"supportersCount" : @"supportersCount",
            @"eventDescription": @"description",
            @"website": @"website",
+           @"type": @"type",
            @"startDate": @"startDate",
            @"endDate": @"endDate",
            @"interestID": @"interestId",

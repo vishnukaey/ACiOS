@@ -30,8 +30,9 @@
   com.website = actionForm.actionWebsiteField.text;
   com.eventDescription = actionForm.actionAboutField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-  [LCAPIManager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
+  [LCAPIManager updateEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
     [actionForm.navigationController popViewControllerAnimated:YES];
+    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   }];
@@ -68,6 +69,17 @@
   }];
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Header Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    NSString *headerUrlString = eventToEdit.headerPhoto;
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                          options:0
+                         progress:nil
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                          if (image) {
+//                            [self showImageCropViewWithImage:image];
+                          }
+                          [MBProgressHUD hideHUDForView:actionForm.view animated:YES];                      }];
     
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
