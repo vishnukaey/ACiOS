@@ -71,6 +71,7 @@
     }
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
   }
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self addPullToRefreshForActionsTable];
 }
 

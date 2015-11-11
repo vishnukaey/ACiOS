@@ -63,4 +63,10 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kEventMemberCountUpdatedNotification object:nil userInfo:userInfo];
 }
 
++ (void)postEventDetailsUpdatedNotification:(LCEvent*)event
+{
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kEventDetailsUpdatedNotification object:nil userInfo:userInfo];
+}
+
 @end

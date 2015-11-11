@@ -15,4 +15,6 @@
 
 @property (nonatomic, retain) LCEvent *eventObject;
 
+- (void)refreshEventDetails;
+
 @end

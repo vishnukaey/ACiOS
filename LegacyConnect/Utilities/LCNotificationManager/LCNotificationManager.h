@@ -19,5 +19,6 @@
 
 // ------- Event ------//
 + (void)postEventMembersCountUpdatedNotification:(LCEvent*)event;
++ (void)postEventDetailsUpdatedNotification:(LCEvent*)event;
 
 @end

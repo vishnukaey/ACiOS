@@ -75,7 +75,7 @@ static CGFloat kActionSectionTitleOffset = 10;
 {
   [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(LCEvent *responses) {
     self.eventObject = responses;
-    [self dataPopulation];
+    [self refreshEventDetails];
     [self.tableView reloadData];
     if (self.eventObject.isFollowing || self.eventObject.isOwner) {
       [self startFetchingResults];
@@ -118,7 +118,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   [settingsButton.layer setCornerRadius:5.0f];
 }
 
-- (void)dataPopulation
+- (void)refreshEventDetails
 {
   [settingsButton setTitle:NSLocalizedString(@"settings", @"settings Button Titile") forState:UIControlStateNormal];
   if (!self.eventObject.isOwner) {
@@ -213,7 +213,7 @@ static CGFloat kActionSectionTitleOffset = 10;
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  [self dataPopulation];
+  [self refreshEventDetails];
   [self getEventDetails];
 }
 
