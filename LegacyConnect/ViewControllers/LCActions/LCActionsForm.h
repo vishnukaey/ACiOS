@@ -58,6 +58,6 @@ static NSString *  kCellIdentifierSection = @"LCActionSectionHeader";
 - (IBAction)cancelAction;
 - (void)setHeaderImage :(UIImage *)image;
 - (void)validateFields;
-
+- (NSString *)getActionFormatedDateString :(NSDate *)date;
 
 @end
