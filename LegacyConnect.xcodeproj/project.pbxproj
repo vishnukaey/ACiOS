@@ -10,7 +10,6 @@
 		0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B161B7C9E6800E8E569 /* LCFeed.m */; };
 		0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B001B1A1B7CA70400E8E569 /* LCTag.m */; };
 		0B05D74E1BEB1D4100FD5AE1 /* LCActionsDateSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7431BEB1D4100FD5AE1 /* LCActionsDateSelection.m */; settings = {ASSET_TAGS = (); }; };
-		0B05D74F1BEB1D4100FD5AE1 /* LCActionsMembers.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7451BEB1D4100FD5AE1 /* LCActionsMembers.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7471BEB1D4100FD5AE1 /* LCChooseActionsInterest.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7511BEB1D4100FD5AE1 /* LCActionsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7491BEB1D4100FD5AE1 /* LCActionsForm.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */; settings = {ASSET_TAGS = (); }; };
@@ -179,8 +178,6 @@
 		0B001B1A1B7CA70400E8E569 /* LCTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTag.m; path = Models/LCTag/LCTag.m; sourceTree = "<group>"; };
 		0B05D7421BEB1D4100FD5AE1 /* LCActionsDateSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsDateSelection.h; sourceTree = "<group>"; };
 		0B05D7431BEB1D4100FD5AE1 /* LCActionsDateSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsDateSelection.m; sourceTree = "<group>"; };
-		0B05D7441BEB1D4100FD5AE1 /* LCActionsMembers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsMembers.h; sourceTree = "<group>"; };
-		0B05D7451BEB1D4100FD5AE1 /* LCActionsMembers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsMembers.m; sourceTree = "<group>"; };
 		0B05D7461BEB1D4100FD5AE1 /* LCChooseActionsInterest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCChooseActionsInterest.h; sourceTree = "<group>"; };
 		0B05D7471BEB1D4100FD5AE1 /* LCChooseActionsInterest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCChooseActionsInterest.m; sourceTree = "<group>"; };
 		0B05D7481BEB1D4100FD5AE1 /* LCActionsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsForm.h; sourceTree = "<group>"; };
@@ -477,8 +474,6 @@
 				169607E41BF06A240007A278 /* LCEventMembers */,
 				0B05D7421BEB1D4100FD5AE1 /* LCActionsDateSelection.h */,
 				0B05D7431BEB1D4100FD5AE1 /* LCActionsDateSelection.m */,
-				0B05D7441BEB1D4100FD5AE1 /* LCActionsMembers.h */,
-				0B05D7451BEB1D4100FD5AE1 /* LCActionsMembers.m */,
 				0B05D7461BEB1D4100FD5AE1 /* LCChooseActionsInterest.h */,
 				0B05D7471BEB1D4100FD5AE1 /* LCChooseActionsInterest.m */,
 				0B05D7481BEB1D4100FD5AE1 /* LCActionsForm.h */,
@@ -1714,7 +1709,6 @@
 				1618309D1BDF45D4002D3539 /* LCImage.m in Sources */,
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				0B05D74E1BEB1D4100FD5AE1 /* LCActionsDateSelection.m in Sources */,
-				0B05D74F1BEB1D4100FD5AE1 /* LCActionsMembers.m in Sources */,
 				CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */,
 				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				CE386ABD1BE87A8600EDE506 /* LCFeedTableViewController.m in Sources */,

@@ -13,6 +13,7 @@
 #import "LCProfileViewVC.h"
 #import "LCActionsForm.h"
 #import "LCActionsFormPresenter.h"
+#import "LCEventMembersViewController.h"
 
 static CGFloat kActionSectionHeight = 30;
 static CGFloat kActionSectionTitleOffset = 10;
@@ -287,6 +288,15 @@ static CGFloat kActionSectionTitleOffset = 10;
   }
 }
 
+- (void)gotoMembersScreen
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+  LCEventMembersViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCEventMembersViewController"];
+  vc.event = self.eventObject;
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -442,6 +452,11 @@ static CGFloat kActionSectionTitleOffset = 10;
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
   if (indexPath.section == 0) {
     switch (indexPath.row) {
+        
+      case 1:
+        [self gotoMembersScreen];
+        break;
+
       case 2:
         [self websiteLinkAction];
         break;
