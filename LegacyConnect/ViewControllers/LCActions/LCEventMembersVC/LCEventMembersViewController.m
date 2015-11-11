@@ -80,6 +80,7 @@
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
   LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
+  vc.eventToInvite = self.event;
   [self.navigationController pushViewController:vc animated:YES];
 }
 

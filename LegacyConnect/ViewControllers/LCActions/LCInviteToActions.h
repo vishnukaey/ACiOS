@@ -14,6 +14,7 @@
 @interface LCInviteToActions : JTTableViewController
 {
   IBOutlet UISearchBar *searchBar;
+  __weak IBOutlet UIButton *backButton;
   NSTimer *searchTimer;
   
   NSMutableArray *selectedIDs;
