@@ -84,6 +84,13 @@
   [actionForm presentViewController:actionSheet animated:YES completion:nil];
 }
 
+- (void)startImageEditing :(UIImage *)image
+{
+  imageCroper = [[LCActionsImageEditer alloc] init];
+  imageCroper.delegate = self;
+  [imageCroper presentImageEditorOnController:actionForm witImage:image];
+}
+
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -95,7 +102,13 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+  [picker dismissViewControllerAnimated:YES completion:NULL];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)RSKFinishedPickingImage:(UIImage *)image
+{
+  [actionForm setHeaderImage:image];
 }
 
 #pragma mark - tableview delegate

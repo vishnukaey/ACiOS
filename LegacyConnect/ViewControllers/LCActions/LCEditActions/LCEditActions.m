@@ -30,7 +30,7 @@
   com.website = actionForm.actionWebsiteField.text;
   com.eventDescription = actionForm.actionAboutField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-  [LCAPIManager updateEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
+  [LCAPIManager updateEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image andImageStatus:YES withSuccess:^(id response) {
     [actionForm.navigationController popViewControllerAnimated:YES];
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {
@@ -44,31 +44,8 @@
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
-  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-      
-      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-      imagePicker.delegate = self;
-      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-      imagePicker.allowsEditing = NO;
-      
-      [actionForm presentViewController:imagePicker animated:YES completion:nil];
-    }
-    
-  }];
-  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.allowsEditing = NO;
-    
-    [actionForm presentViewController:imagePicker animated:YES completion:nil];
-    
-  }];
-  
-  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Header Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     NSString *headerUrlString = eventToEdit.headerPhoto;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
     [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
@@ -77,20 +54,56 @@
                          progress:nil
                         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                           if (image) {
-//                            [self showImageCropViewWithImage:image];
+                            [self startImageEditing:image];
                           }
                           [MBProgressHUD hideHUDForView:actionForm.view animated:YES];                      }];
+  }];
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+      
+      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+      imagePicker.delegate = self;
+      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+      imagePicker.allowsEditing = NO;
+      [actionForm presentViewController:imagePicker animated:YES completion:nil];
+    }
+    
+  }];
+  
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.allowsEditing = NO;
+    [actionForm presentViewController:imagePicker animated:YES completion:nil];
+    
+  }];
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    headerImageEdited = YES;
+    [actionForm setHeaderImage:nil];
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
+  if (actionForm.headerPhotoImageView.image){
+    [actionSheet addAction:editAction];
+    [actionSheet addAction:removeAction];
+  }
   [actionSheet addAction:takeAction];
   [actionSheet addAction:chooseAction];
-  if (actionForm.headerPhotoImageView.image) {
-    [actionSheet addAction:editAction];
-  }
   [actionSheet addAction:cancelAction];
+  
   [actionForm presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void)startImageEditing :(UIImage *)image
+{
+  imageCroper = [[LCActionsImageEditer alloc] init];
+  imageCroper.delegate = self;
+  [imageCroper presentImageEditorOnController:actionForm witImage:image];
 }
 
 #pragma mark - UIImagePickerController delegate
@@ -98,13 +111,20 @@
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  [actionForm setHeaderImage:chosenImage];
+  [self startImageEditing:chosenImage];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+  [picker dismissViewControllerAnimated:YES completion:NULL];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+- (void)RSKFinishedPickingImage:(UIImage *)image
+{
+  headerImageEdited = YES;
+  [actionForm setHeaderImage:image];
 }
 
 #pragma mark - TableView delegates
@@ -241,6 +261,9 @@
      }];
   }
 }
+
+
+
 /*
 #pragma mark - Navigation
 
