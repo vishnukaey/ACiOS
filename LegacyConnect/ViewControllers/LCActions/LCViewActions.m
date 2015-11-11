@@ -11,6 +11,8 @@
 #import "LCCommentCell.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCActionsForm.h"
+#import "LCActionsFormPresenter.h"
 
 static CGFloat kActionSectionHeight = 30;
 static CGFloat kActionSectionTitleOffset = 10;
@@ -244,7 +246,8 @@ static CGFloat kActionSectionTitleOffset = 10;
 - (IBAction)settingsAction:(id)sender
 {
   if (self.eventObject.isOwner) {
-    // Go To Edit Event Screen
+    LCActionsForm *createController = [LCActionsFormPresenter getEditActionsControllerWithEvent:self.eventObject];
+    [self.navigationController pushViewController:createController animated:YES];
     return;
   }
   

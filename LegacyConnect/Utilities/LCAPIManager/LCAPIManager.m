@@ -1770,7 +1770,7 @@ static LCAPIManager *sharedManager = nil;
     [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
   }
   if (lastUserId) {
-    [url appendString:[NSString stringWithFormat:@"&lastUserId=%@",lastUserId]];
+    [url appendString:[NSString stringWithFormat:@"&%@=%@",kLastIdKey, lastUserId]];
   }
   url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
   
@@ -1784,12 +1784,10 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        NSError *error = nil;
-       NSDictionary *dict= response[kResponseData];
-       NSDictionary *friendsDict= dict[kFriendsKey];
-       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:friendsDict[@"users"] error:&error];
+       NSArray *data= response[kResponseData];
+       NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:data error:&error];
        if(!error)
        {
-         LCDLog(@"Getting Friends successful! ");
          success(responsesArray);
        }
        else
