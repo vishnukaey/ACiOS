@@ -12,6 +12,8 @@
 @synthesize actionForm, eventToEdit;
 - (void)delegatedViewDidLoad {
   actionForm.backButton.hidden = true;
+  actionForm.deleteActionBut.layer.cornerRadius = 5;
+  [actionForm.nextButton setTitle:@"Save" forState:UIControlStateNormal];
   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
   [dateFormatter setDateFormat:@"EEEE MMM dd yyyy    HH:mm aa"];
   actionForm.startDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.startDate.longLongValue/1000];
@@ -20,17 +22,33 @@
  
 }
 
+- (void)deleteActionEvent
+{
+  [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+
+  [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
+    [actionForm.navigationController popViewControllerAnimated:YES];
+    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
+  }];
+}
+
 - (void)nextButtonAction
 {
-  LCEvent *com = [[LCEvent alloc] init];
-  com.name = actionForm.actionNameField.text;
-  com.type = actionForm.actionTypeField.text;
-  com.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
-  com.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
-  com.website = actionForm.actionWebsiteField.text;
-  com.eventDescription = actionForm.actionAboutField.text;
+  eventToEdit.name = actionForm.actionNameField.text;
+  eventToEdit.type = actionForm.actionTypeField.text;
+  eventToEdit.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
+  eventToEdit.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
+  eventToEdit.website = actionForm.actionWebsiteField.text;
+  eventToEdit.eventDescription = actionForm.actionAboutField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-  [LCAPIManager updateEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image andImageStatus:YES withSuccess:^(id response) {
+  
+  UIImage *imagetoUpload = actionForm.headerPhotoImageView.image;
+  if (!headerImageEdited) {
+    imagetoUpload = nil;
+  }
+  [LCAPIManager updateEvent:eventToEdit havingHeaderPhoto:imagetoUpload andImageStatus:headerImageEdited withSuccess:^(id response) {
     [actionForm.navigationController popViewControllerAnimated:YES];
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {

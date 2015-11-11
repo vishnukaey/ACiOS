@@ -21,6 +21,7 @@
   actionForm.nextButton.enabled = NO;
   actionForm.cancelButton.hidden = true;
   actionForm.imageLoadingIndicator.hidden = true;
+  actionForm.deleteActionConstraint.constant = 0;
 }
 
 - (void)nextButtonAction
