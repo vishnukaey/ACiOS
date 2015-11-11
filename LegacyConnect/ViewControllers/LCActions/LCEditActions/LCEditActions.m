@@ -30,7 +30,7 @@
   com.website = actionForm.actionWebsiteField.text;
   com.eventDescription = actionForm.actionAboutField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-  [LCAPIManager updateEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
+  [LCAPIManager updateEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image andImageStatus:YES withSuccess:^(id response) {
     [actionForm.navigationController popViewControllerAnimated:YES];
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {

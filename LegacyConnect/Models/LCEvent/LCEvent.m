@@ -16,7 +16,7 @@
            @"name": @"name",
            @"eventID" : @"eventId",
            @"headerPhoto" : @"headerPhoto",
-           @"supportersCount" : @"supportersCount",
+           @"followerCount" : @"followerCount",
            @"eventDescription": @"description",
            @"website": @"website",
            @"type": @"type",

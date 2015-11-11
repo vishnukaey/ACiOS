@@ -8,6 +8,7 @@
 
 #import "LCSignUpUserPhotoVC.h"
 #import "RSKImageCropViewController.h"
+#import "UIImage+LCImageFix.h"
 
 @interface LCSignUpUserPhotoVC ()
 @property (weak, nonatomic) IBOutlet UIButton *chooseFromLibraryBtn;
@@ -52,7 +53,7 @@
   /**
    * When a Imagepicker is displayed the status bar appearance style is changed to nil Hence we applied this fix.
    */
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -147,14 +148,23 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:^{
-    UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:originalImage];
+    UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *normalzedImage = [originalImage normalizedImage];
+    RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:normalzedImage];
     imageCropVC.delegate = self;
     [self.navigationController pushViewController:imageCropVC animated:YES];
   
     [self customizeCropViewUI:imageCropVC];
   }];
+  [LCUtilityManager setLCStatusBarStyle];
 }
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
+}
+
 
 - (void)saveUserDetailsToDataManagerFromResponse:(id)response
 {

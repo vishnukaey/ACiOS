@@ -41,6 +41,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [LCUtilityManager setLCStatusBarStyle];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   if (self.navCount <= 1)

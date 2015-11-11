@@ -1629,7 +1629,7 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)updateEvent:(LCEvent*)event havingHeaderPhoto:(UIImage*)headerPhoto andImageStatus:(bool)status withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/editEvent"];
   NSError *error = nil;
@@ -1642,12 +1642,15 @@ static LCAPIManager *sharedManager = nil;
     [imagesArray addObject:image];
   }
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
+  NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
+  [tempDict setValue:[LCUtilityManager getStringValueOfBOOL:status] forKey:@"removeImage"];
+
   if(error)
   {
     LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesArray withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:tempDict andImagesArray:imagesArray withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -1683,7 +1686,7 @@ static LCAPIManager *sharedManager = nil;
        LCDLog(@"Following Event ! \n %@",response);
        event.isFollowing = YES;
        NSDictionary *dict= response[kResponseData];
-       event.supportersCount = dict[@"supportersCount"];
+       event.followerCount = dict[@"followerCount"];
        [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }
@@ -1712,7 +1715,7 @@ static LCAPIManager *sharedManager = nil;
        LCDLog(@"Unfollowing Event ! \n %@",response);
        event.isFollowing = NO;
        NSDictionary *dict= response[kResponseData];
-       event.supportersCount = dict[@"supportersCount"];
+       event.followerCount = dict[@"followerCount"];
        [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }

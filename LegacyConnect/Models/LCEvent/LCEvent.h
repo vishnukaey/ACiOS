@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSString *headerPhoto;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *eventDescription;
-@property (nonatomic, strong) NSString *supportersCount;
+@property (nonatomic, strong) NSString *followerCount;
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *website;
 @property (nonatomic, strong) NSString *endDate;

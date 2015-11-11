@@ -68,7 +68,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.coverPhoto.image];
   
   //-- Profile Image--//
-  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",[LCDataManager sharedDataManager].avatarUrl];
   [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:self.profilePicture.image];
 }
 

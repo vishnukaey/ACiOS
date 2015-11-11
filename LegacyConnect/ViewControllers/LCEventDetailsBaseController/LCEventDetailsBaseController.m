@@ -50,7 +50,7 @@
   LCEvent *modifiedEvent = [userInfo objectForKey:@"event"];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
-    self.eventObject.supportersCount = modifiedEvent.supportersCount;
+    self.eventObject.followerCount = modifiedEvent.followerCount;
     if (self.eventObject.isFollowing) {
       [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
       [self showCommentsField];

@@ -183,7 +183,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
   self.navigationController.navigationBarHidden = YES;
   
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
