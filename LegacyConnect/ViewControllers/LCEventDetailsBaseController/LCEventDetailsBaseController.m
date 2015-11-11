@@ -14,6 +14,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self addEventMembersUpdateNotificationObserver];
+  [self addEventDetailsUpdatdeNotificationObserver];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -23,9 +24,16 @@
 - (void)dealloc
 {
   [self removeEventMembersUpdateNotificationObserver];
+  [self removeEventDetailsUpdatedNotificationObserver];
 }
 
-#pragma mark - private method implementation
+- (void)refreshEventDetails
+{
+  
+}
+
+#pragma mark - 
+#pragma mark - Event member count updated actions
 - (void)addEventMembersUpdateNotificationObserver
 {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventMembersCountUpdated:) name:kEventMemberCountUpdatedNotification object:nil];
@@ -42,7 +50,7 @@
   LCEvent *modifiedEvent = [userInfo objectForKey:@"event"];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
-    self.eventObject.followerCount = modifiedEvent.followerCount;
+    self.eventObject.supportersCount = modifiedEvent.supportersCount;
     if (self.eventObject.isFollowing) {
       [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
       [self showCommentsField];
@@ -52,6 +60,27 @@
       [self.results removeAllObjects];
     }
     [self.tableView reloadData];
+  }
+}
+
+#pragma mark - Event details updated actions
+- (void)addEventDetailsUpdatdeNotificationObserver
+{
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventMembersCountUpdated:) name:kEventDetailsUpdatedNotification object:nil];
+}
+
+- (void)removeEventDetailsUpdatedNotificationObserver
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kEventDetailsUpdatedNotification object:nil];
+}
+
+- (void)eventDetailsUpdated:(NSNotification*)notification
+{
+  NSDictionary * userInfo = notification.userInfo;
+  LCEvent *modifiedEvent = [userInfo objectForKey:@"event"];
+  if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
+    self.eventObject = modifiedEvent;
+    [self refreshEventDetails];
   }
 }
 
