@@ -8,7 +8,7 @@
 
 #import "LCInviteToActions.h"
 #import "LCViewActions.h"
-
+#import "LCActionsForm.h"
 
 
 #pragma mark - LCInviteCommunityFriendCell class
@@ -72,6 +72,12 @@
   NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage andViewWidth:CGRectGetWidth(self.tableView.frame)];
   
+  NSArray * stack = self.navigationController.viewControllers;
+  if ([[stack objectAtIndex:stack.count-2] isKindOfClass:[LCActionsForm class]]) {
+    
+    [backButton setHidden:YES];
+  }
+  
   [self startFetchingResults];
 }
 
@@ -81,8 +87,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-#warning remove hardcoded value
-  [LCAPIManager getMemberFriendsForEventID:@"1447139069739" searchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
+  [LCAPIManager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
@@ -97,8 +102,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-#warning remove hardcoded value
-  [LCAPIManager getMemberFriendsForEventID:@"1447139069739" searchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+  [LCAPIManager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
