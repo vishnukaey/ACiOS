@@ -79,7 +79,7 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
   com.interestID = self.selectedInterest.interestID;
   com.website = actionWebsiteField.text;
   com.eventDescription = actionAboutField.text;
-  com.time = @"";
+//  com.time = @"";
   [LCAPIManager createEvent:com havingHeaderPhoto:headerPhotoImageView.image withSuccess:^(id response) {
     com.eventID = response[@"data"][@"id"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];

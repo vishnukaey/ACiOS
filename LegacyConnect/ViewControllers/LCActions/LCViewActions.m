@@ -415,7 +415,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   {
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
-  cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
+  cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.supportersCount];
   return cell;
 }
 

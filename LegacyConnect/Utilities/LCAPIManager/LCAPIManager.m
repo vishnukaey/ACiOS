@@ -1683,7 +1683,7 @@ static LCAPIManager *sharedManager = nil;
        LCDLog(@"Following Event ! \n %@",response);
        event.isFollowing = YES;
        NSDictionary *dict= response[kResponseData];
-       event.followerCount = dict[@"followerCount"];
+       event.supportersCount = dict[@"supportersCount"];
        [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }
@@ -1712,7 +1712,7 @@ static LCAPIManager *sharedManager = nil;
        LCDLog(@"Unfollowing Event ! \n %@",response);
        event.isFollowing = NO;
        NSDictionary *dict= response[kResponseData];
-       event.followerCount = dict[@"followerCount"];
+       event.supportersCount = dict[@"supportersCount"];
        [LCNotificationManager postEventMembersCountUpdatedNotification:event];
        success(response);
      }

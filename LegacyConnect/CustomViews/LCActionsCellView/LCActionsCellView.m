@@ -34,10 +34,10 @@ static NSString *kSupportedByPeople = @"Supported by %@ People";
 {
   _event = event;
   [self.eventNameLabel setText:_event.name];
-  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.time WithFormat:kActionsDateFormat];
+  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.endDate WithFormat:kActionsDateFormat];
   [self.eventTimeLabel setText:displayDate];
-  if (_event.followerCount && [_event.followerCount integerValue] > 0) {
-    [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,event.followerCount]];
+  if (_event.supportersCount && [_event.supportersCount integerValue] > 0) {
+    [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,event.supportersCount]];
   }
   [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:kEventPlaceholderImage]];
 }
