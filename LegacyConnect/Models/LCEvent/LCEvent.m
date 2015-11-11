@@ -28,7 +28,8 @@
            @"userID" : @"userId",
            @"isOwner": @"isOwner",
            @"isFollowing": @"isFollowing",
-           @"comments": @"comments"
+           @"comments": @"comments",
+           @"type" : @"type"
            };
 }
 

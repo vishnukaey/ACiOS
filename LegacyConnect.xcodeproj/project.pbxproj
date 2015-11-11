@@ -16,6 +16,7 @@
 		0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74B1BEB1D4100FD5AE1 /* LCInviteToActions.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7531BEB1D4100FD5AE1 /* LCViewActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D74D1BEB1D4100FD5AE1 /* LCViewActions.m */; settings = {ASSET_TAGS = (); }; };
 		0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */; settings = {ASSET_TAGS = (); }; };
+		0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */; settings = {ASSET_TAGS = (); }; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
 		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; settings = {ASSET_TAGS = (); }; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
@@ -190,6 +191,8 @@
 		0B05D74D1BEB1D4100FD5AE1 /* LCViewActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCViewActions.m; sourceTree = "<group>"; };
 		0B05D7551BEB70D900FD5AE1 /* LCCommentsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCommentsController.h; sourceTree = "<group>"; };
 		0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCommentsController.m; sourceTree = "<group>"; };
+		0B1859411BF34855006A4905 /* UIImage+LCImageFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+LCImageFix.h"; path = "Utilities/LCCategories/UIImage+LCImageFix.h"; sourceTree = "<group>"; };
+		0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+LCImageFix.m"; path = "Utilities/LCCategories/UIImage+LCImageFix.m"; sourceTree = "<group>"; };
 		0B212EE51BBACA5F00B4237E /* LCMenuItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMenuItemCell.h; sourceTree = "<group>"; };
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B223C391BCFA6220022B8F6 /* LCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComment.h; sourceTree = "<group>"; };
@@ -497,6 +500,15 @@
 			);
 			name = LCCommentsController;
 			path = ViewControllers/LCCommentsController;
+			sourceTree = "<group>";
+		};
+		0B1859401BF34802006A4905 /* LCCategories */ = {
+			isa = PBXGroup;
+			children = (
+				0B1859411BF34855006A4905 /* UIImage+LCImageFix.h */,
+				0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */,
+			);
+			name = LCCategories;
 			sourceTree = "<group>";
 		};
 		0B212EE41BBACA4B00B4237E /* LCMenuItemCell */ = {
@@ -1131,6 +1143,7 @@
 		0BF05A691B4E628C00FF7B39 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0B1859401BF34802006A4905 /* LCCategories */,
 				CE44ACDA1BE78CD500D22EE8 /* LCNotificationManager */,
 				0BC4C4671BD6735F00F9AA90 /* LCSocialShareManager */,
 				0BBDC0681B70A84E0004C4B6 /* LCAPIManager */,
@@ -1683,6 +1696,7 @@
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
+				0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,

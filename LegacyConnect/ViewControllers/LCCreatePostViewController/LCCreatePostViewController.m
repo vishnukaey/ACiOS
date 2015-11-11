@@ -7,6 +7,7 @@
 //
 
 #import "LCCreatePostViewController.h"
+#import "UIImage+LCImageFix.h"
 
 
 #define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:13]
@@ -561,14 +562,17 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  [postImageView setImage:chosenImage];
+  UIImage *normalzedImage = [chosenImage normalizedImage];
+  
+  [postImageView setImage:normalzedImage];
   [self arrangePostImageView];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 #pragma mark - LCListFriendsToTagViewControllerDelegate

@@ -613,11 +613,15 @@
         <scene sceneID="p7d-B5-7dI">
             <objects>
                 <viewController id="v5a-tp-cqy" customClass="LCSearchCausesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7SS-9g-eaZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Mhq-xU-aFq"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3Rp-UV-gl2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e3C-3l-Qx3">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e3C-3l-Qx3">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="COU-eE-5nj">
@@ -685,17 +689,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tb-RI-4uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682.5" y="-55.5"/>
+            <point key="canvasLocation" x="2274" y="548"/>
         </scene>
         <!--Search Interests View Controller-->
         <scene sceneID="eKw-Rw-PR0">
             <objects>
                 <viewController id="nmE-pD-2YK" customClass="LCSearchInterestsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Exq-xl-eQZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="srC-mi-C9J"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="acK-os-XgC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NSB-mx-iVI">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NSB-mx-iVI">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="10" id="B5d-s2-cFC">
@@ -782,17 +790,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8a-4t-6w6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2103" y="-56"/>
+            <point key="canvasLocation" x="1819" y="548"/>
         </scene>
         <!--Search Users View Controller-->
         <scene sceneID="tGO-BE-Qh0">
             <objects>
                 <viewController id="isX-ye-YFV" customClass="LCSearchUsersViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Ry-nb-Erl"/>
+                        <viewControllerLayoutGuide type="bottom" id="wQx-3O-vt3"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5K1-d4-xVK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-pr-av2" userLabel="UsersTable View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0ne-pr-av2" userLabel="UsersTable View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -884,17 +896,21 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7QC-k0-1dv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1682" y="596"/>
+            <point key="canvasLocation" x="2274" y="-156"/>
         </scene>
         <!--Search Top View Controller-->
         <scene sceneID="mOx-Fe-EZd">
             <objects>
                 <viewController id="h0L-QI-gaH" customClass="LCSearchTopViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gQE-OS-u7L"/>
+                        <viewControllerLayoutGuide type="bottom" id="18v-pR-iZA"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SQc-aq-fm0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oMY-22-SaQ" userLabel="TopTable View">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oMY-22-SaQ" userLabel="TopTable View">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1112,7 +1128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aO6-Re-xCW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2103" y="596"/>
+            <point key="canvasLocation" x="1819" y="-156"/>
         </scene>
     </scenes>
     <resources>

@@ -8,6 +8,7 @@
 
 #import "LCProfileEditVC.h"
 #import "RSKImageCropViewController.h"
+#import "UIImage+LCImageFix.h"
 
 @interface LCProfileEditVC ()
 
@@ -42,7 +43,7 @@ NSInteger const kHeightForHeader = 44;
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -616,9 +617,16 @@ NSInteger const kHeightForHeader = 44;
 {
   [picker dismissViewControllerAnimated:YES completion:^{
     UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    [self showImageCropViewWithImage:originalImage];
+    UIImage *normalzedImage = [originalImage normalizedImage];
+    [self showImageCropViewWithImage:normalzedImage];
   }];
+  [LCUtilityManager setLCStatusBarStyle];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 

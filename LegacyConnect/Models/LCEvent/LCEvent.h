@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSString *ownerLastName;
 @property (nonatomic, strong) NSString *interestName;
 @property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSString *type;
 @property (assign) BOOL isOwner;
 @property (assign) BOOL isFollowing;
 @property (nonatomic, strong) NSArray *comments;
