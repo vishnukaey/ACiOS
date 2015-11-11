@@ -30,7 +30,9 @@
   com.interestID = self.selectedInterest.interestID;
   com.website = actionForm.actionWebsiteField.text;
   com.eventDescription = actionForm.actionAboutField.text;
-  com.time = @"";
+  com.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
+  com.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
+  com.type = actionForm.actionTypeField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
   [LCAPIManager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
     com.eventID = response[@"data"][@"id"];

@@ -12,24 +12,29 @@
 @synthesize actionForm, eventToEdit;
 - (void)delegatedViewDidLoad {
   actionForm.backButton.hidden = true;
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  [dateFormatter setDateFormat:@"EEEE MMM dd yyyy    HH:mm aa"];
+  actionForm.startDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.startDate.longLongValue/1000];
+  actionForm.endDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.endDate.longLongValue/1000];
     // Do any additional setup after loading the view.
  
 }
 
 - (void)nextButtonAction
 {
-//  LCEvent *com = [[LCEvent alloc] init];
-//  com.name = actionForm.actionNameField.text;
-//  com.interestID = actionForm.selectedInterest.interestID;
-//  com.website = actionForm.actionWebsiteField.text;
-//  com.eventDescription = actionForm.actionAboutField.text;
-//  com.time = @"";
-//  [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-//  [LCAPIManager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
-//    [actionForm.navigationController popViewControllerAnimated:YES];
-//  } andFailure:^(NSString *error) {
-//    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
-//  }];
+  LCEvent *com = [[LCEvent alloc] init];
+  com.name = actionForm.actionNameField.text;
+  com.type = actionForm.actionTypeField.text;
+  com.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
+  com.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
+  com.website = actionForm.actionWebsiteField.text;
+  com.eventDescription = actionForm.actionAboutField.text;
+  [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+  [LCAPIManager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
+    [actionForm.navigationController popViewControllerAnimated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
+  }];
   
 }
 
@@ -125,7 +130,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (!actionForm.actionTypeField) {
       actionForm.actionTypeField = (UITextField*)[cell viewWithTag:100];
-//      actionForm.actionTypeField.text = eventToEdit.eventType;
+      actionForm.actionTypeField.text = eventToEdit.type;
     }
   }
   
@@ -140,7 +145,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (!actionForm.actionDateField) {
       actionForm.actionDateField = (UITextField*)[cell viewWithTag:100];
-//      actionForm.actionAboutField.text = eventToEdit.startDate;
+      actionForm.actionDateField.text = [actionForm getActionFormatedDateString:actionForm.startDate];
     }
   }
   

@@ -147,12 +147,17 @@
 {
   self.startDate = start;
   self.endDate = end;
-  
+  self.actionDateField.text = [self getActionFormatedDateString:self.startDate];
+}
+
+- (NSString *)getActionFormatedDateString :(NSDate *)date
+{
   NSDateFormatter *format = [[NSDateFormatter alloc] init];
   [format setDateFormat:@"EEEE, MMM dd, yyyy    HH:mm aa"];
   NSString *dateString = [format stringFromDate:self.startDate];
-  self.actionDateField.text = dateString;
+  return dateString;
 }
+
 #pragma mark - TableView delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
