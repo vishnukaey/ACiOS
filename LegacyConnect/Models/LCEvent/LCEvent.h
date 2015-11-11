@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *eventDescription;
 @property (nonatomic, strong) NSString *followerCount;
+@property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) NSString *website;
 @property (nonatomic, strong) NSString *endDate;
 @property (nonatomic, strong) NSString *startDate;
@@ -23,7 +24,6 @@
 @property (nonatomic, strong) NSString *ownerLastName;
 @property (nonatomic, strong) NSString *interestName;
 @property (nonatomic, strong) NSString *userID;
-@property (nonatomic, strong) NSString *type;
 @property (assign) BOOL isOwner;
 @property (assign) BOOL isFollowing;
 @property (nonatomic, strong) NSArray *comments;
