@@ -17,8 +17,13 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  [datePicker setMinimumDate: [NSDate date]];
   if (_startDate) {
     datePicker.date = _startDate;
+  }
+  else
+  {
+    _startDate = datePicker.date;
   }
   removeButton.layer.cornerRadius = 5;
 }
@@ -89,6 +94,9 @@
   {
     if (_endDate) {
       [datePicker setDate:_endDate];
+    }else
+    {
+      _endDate = datePicker.date;
     }
   }
 }
