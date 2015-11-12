@@ -53,6 +53,10 @@
   [[GGLContext sharedInstance] configureWithError:&configureError];
   NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
   
+  
+  //GA Tracking
+  [LCGAManager ga_trackEventWithCategory:@"Launch" action:@"Success" andLabel:@"Application Launched Successfully"];
+  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }

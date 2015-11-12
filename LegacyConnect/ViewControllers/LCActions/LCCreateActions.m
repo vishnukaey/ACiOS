@@ -85,6 +85,10 @@ static NSString * const kCellIdentifierSection = @"LCActionSectionHeader";
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
     vc.eventToInvite = com;
+
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@" Action Created" andLabel:@"New Action created"];
+
     [self.navigationController pushViewController:vc animated:YES];
   } andFailure:^(NSString *error) {
   }];

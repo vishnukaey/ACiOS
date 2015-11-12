@@ -186,6 +186,9 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
   self.navigationController.navigationBarHidden = YES;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+  
+  //GATracking
+  [LCGAManager ga_trackViewWithName:@"Feeds Home"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

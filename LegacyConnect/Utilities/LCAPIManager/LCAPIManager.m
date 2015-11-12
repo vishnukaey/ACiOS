@@ -281,6 +281,10 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
     LCDLog(@"Success!");
+    
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Profile" action:@"Profile updated" andLabel:@"User profile updated"];
+
     success(response);
   } andFailure:^(NSString *error) {
     LCDLog(@"Failure");
@@ -864,6 +868,9 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
+       //GA Tracking
+       [LCGAManager ga_trackEventWithCategory:@"Interests" action:@"Added" andLabel:@"User added interests"];
+
        LCDLog(@"Save Causes Success! \n %@",response);
        success(response);
      }

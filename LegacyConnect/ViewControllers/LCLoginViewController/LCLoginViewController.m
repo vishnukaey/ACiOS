@@ -32,6 +32,9 @@
                          action:@selector(textFieldDidChange:)
                forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
+  
+  //GATracking
+  [LCGAManager ga_trackViewWithName:@"SignIn"];
 }
 
 
@@ -80,11 +83,11 @@
     NSLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
-    /*
-     Temporarily added alert, remove after sprint 1.
-     */
-//    [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
     [loginBtn setEnabled:true];
+
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"SignIn" action:@"Success" andLabel:@"User Sign-in successful"];
+
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
   } andFailure:^(NSString *error) {
