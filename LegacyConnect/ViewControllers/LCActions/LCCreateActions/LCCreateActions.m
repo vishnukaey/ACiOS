@@ -36,7 +36,7 @@
   com.type = actionForm.actionTypeField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
   [LCAPIManager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
-    com.eventID = response[@"data"][@"id"];
+    com.eventID = response[@"data"][@"eventId"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
     vc.eventToInvite = com;

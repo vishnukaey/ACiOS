@@ -51,18 +51,18 @@
 - (IBAction)doneButtonAction
 {
   [delegate actionDateSelected:_startDate :_endDate];
-  [self.navigationController popViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)backAction
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)removeAction
 {
   [delegate actionDateSelected:nil :nil];
-  [self.navigationController popViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - datepicker action

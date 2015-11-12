@@ -70,21 +70,24 @@
 
 - (void)dateSelection
 {
+  [self.formTableView endEditing:YES];
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCActionsDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCActionsDateSelection"];
   vc.startDate = self.startDate;
   vc.endDate = self.endDate;
   vc.delegate = self;
-  [self.navigationController pushViewController:vc animated:YES];
+  [self presentViewController:vc animated:YES completion:nil];
 }
 
 - (void)headerPhotoSelection
 {
+  [self.formTableView endEditing:YES];
   [delegate selectHeaderPhoto];
 }
 
 - (void)actionTypeSelection
 {
+  [self.formTableView endEditing:YES];
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
