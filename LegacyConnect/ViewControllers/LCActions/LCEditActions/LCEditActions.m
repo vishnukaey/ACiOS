@@ -24,14 +24,22 @@
 
 - (void)deleteActionEvent
 {
-  [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Action" message:@"Are you sure you want to permanently remove this action from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+      [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+      
+      [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
+        [actionForm.navigationController popViewControllerAnimated:YES];
+        [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
+      } andFailure:^(NSString *error) {
+        [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
+      }];
 
-  [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
-    [actionForm.navigationController popViewControllerAnimated:YES];
-    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
-  }];
+    }];
+    [deleteAlert addAction:deletePostActionFinal];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    [deleteAlert addAction:cancelAction];
+    [actionForm presentViewController:deleteAlert animated:YES completion:nil];  
 }
 
 - (void)nextButtonAction
@@ -273,7 +281,7 @@
        [actionForm.imageLoadingIndicator stopAnimating];
        actionForm.imageLoadingIndicator.hidden = true;
        actionForm.isImageLoading = false;
-       if (image) {
+       if (image && !actionForm.headerPhotoImageView.image) {
          [actionForm setHeaderImage:image];
        }
      }];
