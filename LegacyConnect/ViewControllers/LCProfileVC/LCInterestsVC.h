@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCFeedTableViewController.h"
 
 @protocol InterestsDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCInterestsVC : UIViewController
+@interface LCInterestsVC : LCFeedTableViewController
 {
-  __weak IBOutlet UITableView *interestsTable;
-  NSArray *interestsArray;
   BOOL isSelfProfile;
 }
 

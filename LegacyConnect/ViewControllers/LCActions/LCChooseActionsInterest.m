@@ -62,7 +62,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - button actions
 - (IBAction)cancelAction
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)nextAction

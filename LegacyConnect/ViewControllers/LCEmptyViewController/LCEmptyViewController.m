@@ -211,11 +211,9 @@ static NSString *kTitle = @"MY FEED";
     [appdel.menuButton setHidden:YES];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
     LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
-    [navigationRoot pushViewController:vc animated:YES];
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [navigationRoot presentViewController:navC animated:YES completion:nil];
  
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-//    LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
-//    [navigationRoot pushViewController:vc animated:YES];
   }
   else if (sender.tag == 1)//photo post
   {

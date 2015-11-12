@@ -15,9 +15,11 @@
 {
   IBOutlet UISearchBar *searchBar;
   __weak IBOutlet UIButton *backButton;
+  __weak IBOutlet UIButton *doneButton;
   NSTimer *searchTimer;
   
   NSMutableArray *selectedIDs;
+  BOOL isCreatingAction;
 }
 
 @property(nonatomic, retain)LCEvent *eventToInvite;

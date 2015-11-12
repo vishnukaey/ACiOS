@@ -371,7 +371,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (IBAction)mileStonesClicked:(id)sender
 {
-  [mileStonesVC startFetchingResults];
+  [mileStonesVC loadMileStones];
 }
 
 - (IBAction)interestsClicked:(id)sender
