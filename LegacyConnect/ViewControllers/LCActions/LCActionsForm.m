@@ -158,7 +158,7 @@
 - (NSString *)getActionFormatedDateString :(NSDate *)date
 {
   NSDateFormatter *format = [[NSDateFormatter alloc] init];
-  [format setDateFormat:@"EEEE, MMM dd, yyyy    HH:mm aa"];
+  [format setDateFormat:@"EEEE, MMM dd, yyyy    hh:mm aa"];
   NSString *dateString = [format stringFromDate:self.startDate];
   return dateString;
 }

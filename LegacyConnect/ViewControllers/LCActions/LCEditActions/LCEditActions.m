@@ -14,10 +14,13 @@
   actionForm.backButton.hidden = true;
   actionForm.deleteActionBut.layer.cornerRadius = 5;
   [actionForm.nextButton setTitle:@"Save" forState:UIControlStateNormal];
-  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-  [dateFormatter setDateFormat:@"EEEE MMM dd yyyy    HH:mm aa"];
-  actionForm.startDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.startDate.longLongValue/1000];
-  actionForm.endDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.endDate.longLongValue/1000];
+  
+  if ([eventToEdit.startDate integerValue] != 0) {
+    actionForm.startDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.startDate.longLongValue/1000];
+  }
+  if ([eventToEdit.endDate integerValue] != 0) {
+    actionForm.endDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.endDate.longLongValue/1000];
+  }
     // Do any additional setup after loading the view.
  
 }
