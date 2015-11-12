@@ -63,8 +63,12 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kEventMemberCountUpdatedNotification object:nil userInfo:userInfo];
 }
 
-+ (void)postEventDetailsUpdatedNotification:(LCEvent*)event
++ (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event
 {
+  NSDictionary *dict= response[kResponseData];
+  NSDictionary * idDict = dict[kIDKey];
+  NSString *newHeaderPhoto = idDict[@"headerPhoto"];
+  event.headerPhoto = ([newHeaderPhoto isEqual:[NSNull null]] ? nil : newHeaderPhoto);
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kEventDetailsUpdatedNotification object:nil userInfo:userInfo];
 }
