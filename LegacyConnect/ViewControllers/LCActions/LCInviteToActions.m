@@ -72,15 +72,39 @@
   NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage andViewWidth:CGRectGetWidth(self.tableView.frame)];
   
-  NSArray * stack = self.navigationController.viewControllers;
-  if ([[stack objectAtIndex:stack.count-2] isKindOfClass:[LCActionsForm class]]) {
-    
+  if (self.navigationController) {
+    isCreatingAction = YES;
     [backButton setHidden:YES];
   }
-  
+  else{
+    isCreatingAction = NO;
+  }
+
   [self startFetchingResults];
+  [self validate];
 }
 
+- (void)validate {
+  
+  if (selectedIDs.count > 0) {
+    if (isCreatingAction) {
+      [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+    }
+    else {
+      [doneButton setTitle:@"Send" forState:UIControlStateNormal];
+      [doneButton setEnabled:YES];
+    }
+  }
+  else{
+    if (isCreatingAction) {
+      [doneButton setTitle:@"Skip" forState:UIControlStateNormal];
+    }
+    else {
+      [doneButton setTitle:@"Send" forState:UIControlStateNormal];
+      [doneButton setEnabled:NO];
+    }
+  }
+}
 
 #pragma mark - API and Pagination
 - (void)startFetchingResults
@@ -126,20 +150,41 @@
 -(IBAction)doneButtonAction
 {
   NSLog(@"friendsTableView.selectedIDs-->>>%@", selectedIDs);
-  [LCAPIManager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
-    NSLog(@"%@",response);
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-    LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
-    vc.eventObject = self.eventToInvite;
-    [self.navigationController pushViewController:vc animated:YES];
-  }andFailure:^(NSString *error){
-    NSLog(@"%@",error);
-  }];
+  if (selectedIDs.count > 0) {
+    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+    [LCAPIManager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
+      NSLog(@"%@",response);
+      [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+      [self dismissInviteActionView];
+    }andFailure:^(NSString *error){
+      NSLog(@"%@",error);
+      [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    }];
+  }
+  else {
+    [self dismissInviteActionView];
+  }
 }
 
 - (IBAction)backButtonAction
 {
-  [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) dismissInviteActionView{
+  
+  if (isCreatingAction) {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    vc.eventObject = self.eventToInvite;
+    UINavigationController *nav = [[[self presentingViewController] childViewControllers] objectAtIndex:0];
+    [self dismissViewControllerAnimated:NO completion:^{
+      [nav pushViewController:vc animated:YES];
+    }];
+  }
+  else {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }
 }
 
 
@@ -204,6 +249,7 @@
   LCFriend *friend = self.results[indexPath.row];
   [selectedIDs addObject:friend.friendId];
   [cell.checkButton setSelected:YES];
+  [self validate];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -212,5 +258,6 @@
   LCFriend *friend = self.results[indexPath.row];
   [selectedIDs removeObject:friend.friendId];
   [cell.checkButton setSelected:NO];
+  [self validate];
 }
 @end

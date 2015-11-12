@@ -32,57 +32,76 @@
 
 - (void) initailSetup {
   
-  interestsTable.estimatedRowHeight = 44.0;
-  interestsTable.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
-  interestsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  
+  if (!self.noResultsView) {
+    NSString *message = NSLocalizedString(@"no_interests_available_others", nil);
+    if (isSelfProfile) {
+      message = NSLocalizedString(@"no_interests_available_self", nil);
+    }
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  }
+
 }
 
 - (void)loadInterests
 {
-  [MBProgressHUD showHUDAddedTo:interestsTable animated:YES];
+  [self startFetchingResults];
+}
+
+#pragma mark - API call and Pagination
+
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCAPIManager getInterestsForUser:self.userID withSuccess:^(NSArray *responses) {
-    
-    interestsArray = responses;
-    [interestsTable reloadData];
-    [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = NO;
+    [self didFetchResults:responses haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[self.results count] != 0];
   } andFailure:^(NSString *error) {
-    [MBProgressHUD hideAllHUDsForView:interestsTable animated:YES];
-    NSLog(@"%@",error);
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
 
+- (void)startFetchingNextResults
+{
+  //Currently no pagination required for interests
+      //  [super startFetchingNextResults];
+      //  [LCAPIManager getInterestsForUser:self.userID withSuccess:^(NSArray *responses) {
+      //    [self stopRefreshingViews];
+      //    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+      //    [self didFetchNextResults:response haveMoreData:hasMoreData];
+      //  } andFailure:^(NSString *error) {
+      //    [self stopRefreshingViews];
+      //    [self didFailedToFetchResults];
+      //  }];
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else
+  {
+    [self showNoResultsView];
+  }
+}
 
 #pragma mark - TableView delegates
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-  if (interestsArray.count == 0) {
-    return 1;
-  }
-  return interestsArray.count;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (interestsArray.count == 0) {
-    
-    NSString *message;
-    if (isSelfProfile) {
-      message = NSLocalizedString(@"no_interests_available_self", nil);
-      
-    }
-    else {
-      message = NSLocalizedString(@"no_interests_available_others", nil);
-    }
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
-    
-    tableView.backgroundColor = [UIColor whiteColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.allowsSelection = NO;
-    return cell;
-  }
+
+  JTTABLEVIEW_cellForRowAtIndexPath
   
   static NSString *MyIdentifier = @"LCInterestsCell";
   LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
@@ -93,7 +112,7 @@
     
   }
   
-  LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
+  LCInterest *interstObj = [self.results objectAtIndex:indexPath.row];
   [cell setData:interstObj];
   
   tableView.backgroundColor = [UIColor clearColor];

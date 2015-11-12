@@ -50,12 +50,9 @@
   isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   
   if (!self.noResultsView) {
-    NSString *message;
+    NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
     if (isSelfProfile) {
       message = NSLocalizedString(@"no_milestones_available_self", nil);
-    }
-    else {
-      message = NSLocalizedString(@"no_milestones_available_others", nil);
     }
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
   }
@@ -81,6 +78,10 @@
       [weakSelf startFetchingResults];
     });
   }withBackgroundColor:[UIColor lightGrayColor]];
+}
+
+- (void) loadMileStones {
+  [self startFetchingResults];
 }
 
 #pragma mark - API and Pagination
@@ -250,7 +251,7 @@
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Post" message:@"Are you sure you want to permanently remove this post from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
       [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];

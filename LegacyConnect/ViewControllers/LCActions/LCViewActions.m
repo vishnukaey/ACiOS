@@ -242,6 +242,7 @@ static CGFloat kActionSectionTitleOffset = 10;
 {
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [self.navigationController popToRootViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)settingsAction:(id)sender
