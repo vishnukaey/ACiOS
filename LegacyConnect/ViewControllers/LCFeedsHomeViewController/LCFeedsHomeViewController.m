@@ -185,11 +185,10 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [super viewWillAppear:animated];
   [LCUtilityManager setLCStatusBarStyle];
   self.navigationController.navigationBarHidden = YES;
-  
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-//  [self.tableView reloadData];
   
-
+  //GATracking
+  [LCGAManager ga_trackViewWithName:@"Feeds Home"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

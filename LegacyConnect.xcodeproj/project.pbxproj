@@ -128,6 +128,8 @@
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; settings = {ASSET_TAGS = (); }; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; settings = {ASSET_TAGS = (); }; };
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; settings = {ASSET_TAGS = (); }; };
+		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; settings = {ASSET_TAGS = (); }; };
+		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 966287241B567C0F00C91196 /* LCUpdatePasswordViewController.m */; };
@@ -371,6 +373,9 @@
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
 		169607E11BF06A1E0007A278 /* LCEventMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEventMembersViewController.h; path = LCEventMembersVC/LCEventMembersViewController.h; sourceTree = "<group>"; };
 		169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventMembersViewController.m; path = LCEventMembersVC/LCEventMembersViewController.m; sourceTree = "<group>"; };
+		16D6AF491BF3481F00DBC025 /* LCGAManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGAManager.h; path = Utilities/LCGAManager/LCGAManager.h; sourceTree = "<group>"; };
+		16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGAManager.m; path = Utilities/LCGAManager/LCGAManager.m; sourceTree = "<group>"; };
+		16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SupportingFiles/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
 		966287231B567C0F00C91196 /* LCUpdatePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUpdatePasswordViewController.h; path = ViewControllers/LCUpdatePasswordViewController/LCUpdatePasswordViewController.h; sourceTree = "<group>"; };
@@ -1074,6 +1079,7 @@
 				8F70C2AF88FA9740E76A5CA2 /* Frameworks */,
 				AA0D4ABFB4BBC81C1666D4C8 /* Pods */,
 				0BF05A771B4E645400FF7B39 /* LCAppDelegate.h */,
+				16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */,
 				0BF05A781B4E645400FF7B39 /* LCAppDelegate.m */,
 				0BF05A791B4E645400FF7B39 /* Info.plist */,
 				0BF05A7A1B4E645400FF7B39 /* main.m */,
@@ -1157,6 +1163,7 @@
 			isa = PBXGroup;
 			children = (
 				0B1859401BF34802006A4905 /* LCCategories */,
+				16D6AF4C1BF3482300DBC025 /* LCGAManager */,
 				CE44ACDA1BE78CD500D22EE8 /* LCNotificationManager */,
 				0BC4C4671BD6735F00F9AA90 /* LCSocialShareManager */,
 				0BBDC0681B70A84E0004C4B6 /* LCAPIManager */,
@@ -1225,6 +1232,15 @@
 				169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */,
 			);
 			name = LCEventMembers;
+			sourceTree = "<group>";
+		};
+		16D6AF4C1BF3482300DBC025 /* LCGAManager */ = {
+			isa = PBXGroup;
+			children = (
+				16D6AF491BF3481F00DBC025 /* LCGAManager.h */,
+				16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */,
+			);
+			name = LCGAManager;
 			sourceTree = "<group>";
 		};
 		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
@@ -1588,6 +1604,7 @@
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
 				0BB33DE51BA81401009E6D0C /* profileSettings.png in Resources */,
 				0BB33DD81BA81401009E6D0C /* communityMemebrs.png in Resources */,
+				16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */,
 				0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */,
 				0BB33DDF1BA81401009E6D0C /* locationIcon.png in Resources */,
 				0BB33DE81BA81401009E6D0C /* rsz_lc-logo.png in Resources */,
@@ -1761,6 +1778,7 @@
 				0BF05A7B1B4E645400FF7B39 /* LCAppDelegate.m in Sources */,
 				CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */,
 				CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */,
+				16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */,
 				0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */,
 				0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */,
 				0BB33DAB1BA8132A009E6D0C /* LCFeedCellView.m in Sources */,
