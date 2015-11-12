@@ -97,7 +97,7 @@
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  [actionForm setHeaderImage:chosenImage];
+  [self startImageEditing:chosenImage];
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 

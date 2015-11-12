@@ -280,13 +280,17 @@
     [actionForm.imageLoadingIndicator startAnimating];
     [actionForm.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:eventToEdit.headerPhoto] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
      {
-       actionForm.headerImagePlaceholder.hidden = false;
-       [actionForm.imageLoadingIndicator stopAnimating];
-       actionForm.imageLoadingIndicator.hidden = true;
-       actionForm.isImageLoading = false;
-       if (image && !actionForm.headerPhotoImageView.image) {
-         [actionForm setHeaderImage:image];
-       }
+       dispatch_async(dispatch_get_main_queue(), ^{
+         [actionForm.imageLoadingIndicator stopAnimating];
+         actionForm.imageLoadingIndicator.hidden = true;
+         actionForm.isImageLoading = false;
+         if (image && !actionForm.headerPhotoImageView.image)
+         {
+           [actionForm setHeaderImage:image];
+         }
+         [actionForm.formTableView reloadData];
+       });
+       
      }];
   }
 }

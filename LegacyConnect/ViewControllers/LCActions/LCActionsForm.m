@@ -55,6 +55,7 @@
 
 - (IBAction)nextButtonOutletAction
 {
+  [self.formTableView endEditing:YES];
   [delegate nextButtonAction];
 }
 
@@ -262,6 +263,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  [tableView deselectRowAtIndexPath:indexPath animated:YES]; 
   if(indexPath.section == SECTION_ACTIONTYPE){
     [self actionTypeSelection];
   }
