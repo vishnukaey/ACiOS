@@ -13,6 +13,8 @@
 #import "LCContact.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define MAX_IMAGE_SIZE 1200000.0
+
 @implementation LCUtilityManager
 
 + (BOOL)isNetworkAvailable
@@ -77,6 +79,19 @@
 
 }
 
++ (NSData*)performNormalisedImageCompression:(UIImage*)image
+{
+  NSData *data = UIImageJPEGRepresentation(image, 1.0);
+  if([data length] < MAX_IMAGE_SIZE)
+  {
+    return data;
+  }
+  else
+  {
+    CGFloat cFactor = MAX_IMAGE_SIZE/[data length];
+    return UIImageJPEGRepresentation(image, cFactor);
+  }
+}
 
 
 + (void)clearUserDefaultsForCurrentUser

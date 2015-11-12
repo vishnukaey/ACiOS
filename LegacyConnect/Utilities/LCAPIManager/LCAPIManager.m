@@ -1918,35 +1918,32 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)uploadImage:(UIImage *)image ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSData *imageData = UIImagePNGRepresentation(image);
   NSDictionary *parameters = @{kUserIDKey: userID};
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setTimeoutInterval:5.0];
-  [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
-  [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-    [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
-  } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
-    {
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
-      failure(responseObject[kResponseMessage]);
-    }
-    else
-    {
-      LCDLog(@"Image upload success! \n %@",responseObject);
-      success(responseObject);
-    }
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      LCDLog(@"%@",error);
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
-    failure(error.localizedDescription);
-  }];
+  LCImage *imageModel = [[LCImage alloc] init];
+  imageModel.imageKey = @"image";
+  imageModel.image = image;
   
-//  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-//    LCDLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
-//  }];
+  NSMutableArray *imagesArray = [[NSMutableArray alloc] initWithArray:@[imageModel]];
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:urlString accessToken:[LCDataManager sharedDataManager].userToken parameters:parameters andImagesArray:imagesArray withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       LCDLog(@"Image upload success!");
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
 }
 
 
