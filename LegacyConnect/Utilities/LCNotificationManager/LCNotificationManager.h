@@ -19,6 +19,8 @@
 
 // ------- Event ------//
 + (void)postEventMembersCountUpdatedNotification:(LCEvent*)event;
-+ (void)postEventDetailsUpdatedNotification:(LCEvent*)event;
++ (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
++ (void)postEventDeletedNotification:(LCEvent*)event;
+
 
 @end

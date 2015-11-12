@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCFeedTableViewController.h"
+#import "LCActionsTableViewController.h"
 
 @protocol ActionsDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCActionsVC : LCFeedTableViewController
+@interface LCActionsVC : LCActionsTableViewController
 {
   BOOL isSelfProfile;
 }
