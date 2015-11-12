@@ -32,7 +32,7 @@
       [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
       
       [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
-        [actionForm.navigationController popViewControllerAnimated:YES];
+        [actionForm.navigationController popToRootViewControllerAnimated:YES];
         [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
       } andFailure:^(NSString *error) {
         [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
