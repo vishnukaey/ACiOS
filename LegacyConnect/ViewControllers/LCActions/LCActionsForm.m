@@ -63,6 +63,11 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)deleteAction:(id)sender
+{
+  [delegate deleteActionEvent];
+}
+
 - (void)dateSelection
 {
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];

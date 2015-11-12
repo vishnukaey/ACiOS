@@ -26,6 +26,7 @@ typedef enum actionSectionTypes
 @optional
 - (void)nextButtonAction;
 - (void)delegatedViewDidLoad;
+- (void)deleteActionEvent;
 
 @end
 
@@ -49,8 +50,9 @@ static NSString *  kCellIdentifierSection = @"LCActionSectionHeader";
 @property(nonatomic, retain) IBOutlet UITextField *aboutPlaceholder;
 @property(nonatomic, retain) IBOutlet UIImageView *headerPhotoImageView;
 @property(nonatomic, retain) IBOutlet UITableView *formTableView;
-@property(nonatomic, retain) IBOutlet UIButton *nextButton, *cancelButton, *backButton;
+@property(nonatomic, retain) IBOutlet UIButton *nextButton, *cancelButton, *backButton, *deleteActionBut;
 @property(nonatomic, retain) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
+@property(nonatomic, retain) IBOutlet NSLayoutConstraint *deleteActionConstraint;
 @property(nonatomic, assign)BOOL isImageLoading;
 @property(nonatomic, retain) NSDate *startDate, *endDate;
 
