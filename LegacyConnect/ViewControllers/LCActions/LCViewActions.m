@@ -184,7 +184,7 @@ static CGFloat kActionSectionTitleOffset = 10;
   
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   // -- User Info Tag -- //
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.eventID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, nil];
   [tagsWithRanges addObject:dic_user];
   // -- Interest Info Tag -- //
   NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kIDKey, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
