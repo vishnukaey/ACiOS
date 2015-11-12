@@ -94,6 +94,7 @@
 		0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC06E1B70BF730004C4B6 /* LCInterest.m */; };
 		0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0711B70BF910004C4B6 /* LCCause.m */; };
 		0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0761B70C4910004C4B6 /* LCUserDetail.m */; };
+		0BC0F8D81BF47962003694D6 /* LCActionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0F8D71BF47961003694D6 /* LCActionsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */; settings = {ASSET_TAGS = (); }; };
 		0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755621B56291C009CE7F3 /* LCSignUpUserPhotoVC.m */; };
 		0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755661B56297C009CE7F3 /* LCChooseCausesVC.m */; };
@@ -306,6 +307,8 @@
 		0BBDC0711B70BF910004C4B6 /* LCCause.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCause.m; path = Models/LCCause/LCCause.m; sourceTree = "<group>"; };
 		0BBDC0751B70C4910004C4B6 /* LCUserDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserDetail.h; path = Models/LCUserDetail/LCUserDetail.h; sourceTree = "<group>"; };
 		0BBDC0761B70C4910004C4B6 /* LCUserDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUserDetail.m; path = Models/LCUserDetail/LCUserDetail.m; sourceTree = "<group>"; };
+		0BC0F8D61BF47961003694D6 /* LCActionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsTableViewController.h; sourceTree = "<group>"; };
+		0BC0F8D71BF47961003694D6 /* LCActionsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsTableViewController.m; sourceTree = "<group>"; };
 		0BC4C4681BD6738B00F9AA90 /* LCSocialShareManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCSocialShareManager.h; sourceTree = "<group>"; };
 		0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCSocialShareManager.m; sourceTree = "<group>"; };
 		0BC755611B56291C009CE7F3 /* LCSignUpUserPhotoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSignUpUserPhotoVC.h; path = ViewControllers/LCSignUpUserPhotoVC/LCSignUpUserPhotoVC.h; sourceTree = "<group>"; };
@@ -855,6 +858,16 @@
 				0BBDC0761B70C4910004C4B6 /* LCUserDetail.m */,
 			);
 			name = LCUserDetail;
+			sourceTree = "<group>";
+		};
+		0BC0F8D51BF47951003694D6 /* LCActionsTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0BC0F8D61BF47961003694D6 /* LCActionsTableViewController.h */,
+				0BC0F8D71BF47961003694D6 /* LCActionsTableViewController.m */,
+			);
+			name = LCActionsTableViewController;
+			path = CustomViews/LCActionsTableViewController;
 			sourceTree = "<group>";
 		};
 		0BC4C4671BD6735F00F9AA90 /* LCSocialShareManager */ = {
@@ -1438,6 +1451,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0BC0F8D51BF47951003694D6 /* LCActionsTableViewController */,
 				CE386ABE1BE87A9700EDE506 /* LCFeedTableViewController */,
 				0BA86F031BCE7BEE00B24454 /* LCThanksButtonImage */,
 				0B8AA05A1BC299C600C284DF /* LCFriendButton */,
@@ -1756,6 +1770,7 @@
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
+				0BC0F8D81BF47962003694D6 /* LCActionsTableViewController.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
 				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,

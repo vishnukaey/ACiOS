@@ -66,7 +66,7 @@
 #pragma mark - Event details updated actions
 - (void)addEventDetailsUpdatdeNotificationObserver
 {
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventMembersCountUpdated:) name:kEventDetailsUpdatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDetailsUpdated:) name:kEventDetailsUpdatedNotification object:nil];
 }
 
 - (void)removeEventDetailsUpdatedNotificationObserver
