@@ -186,8 +186,14 @@ NSString *const kfeedUpdatedotification = @"feedUpdated";
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";
 
+NSString *const keventUpdateEventKey = @"updated_event";
+NSString *const keventDeletedEventKey = @"deleted_event";
+
+
 NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
 NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
+NSString *const kEventDeletedNotification = @"EventDeleted";
+
 
 
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";

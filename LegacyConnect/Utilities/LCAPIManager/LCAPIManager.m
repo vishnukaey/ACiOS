@@ -1594,6 +1594,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Event deleted");
+       [LCNotificationManager postEventDeletedNotification:event];
        success(response);
        //Notify Profile
      }

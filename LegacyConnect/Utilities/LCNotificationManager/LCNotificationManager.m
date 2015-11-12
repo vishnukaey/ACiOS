@@ -73,4 +73,10 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kEventDetailsUpdatedNotification object:nil userInfo:userInfo];
 }
 
++ (void)postEventDeletedNotification:(LCEvent*)event
+{
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotification object:nil userInfo:userInfo];
+}
+
 @end
