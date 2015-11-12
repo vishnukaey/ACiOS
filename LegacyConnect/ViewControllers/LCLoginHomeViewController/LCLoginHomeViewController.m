@@ -33,6 +33,11 @@
   }
 }
 
+-(void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+}
+
 - (IBAction)continueWithFBAction
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];

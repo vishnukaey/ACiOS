@@ -456,6 +456,16 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       [self shareToSocialMedia];
       [self closeButtonClicked:nil];
+      if(postImageView.image)
+      {
+        //GA Tracking
+        [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created without media"];
+      }
+      else
+      {
+        //GA Tracking
+        [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created with media content"];
+      }
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     }];

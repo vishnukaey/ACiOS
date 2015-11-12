@@ -45,6 +45,9 @@
                          action:@selector(textFieldDidChange:)
                forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
+  
+  //GATracking
+  [LCGAManager ga_trackViewWithName:@"Registration"];
 }
 
 
@@ -118,11 +121,15 @@
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
+    
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful"];
+    
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [self.signupButton setEnabled:true];
-    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
     [self.signupButton setEnabled:true];
