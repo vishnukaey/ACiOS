@@ -253,22 +253,27 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   [settingsButton setUserInteractionEnabled:NO];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   if (self.eventObject.isFollowing) {
     [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
     [LCAPIManager unfollowEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   } else {
     [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
     [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
       [self startFetchingResults];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   }
 }
