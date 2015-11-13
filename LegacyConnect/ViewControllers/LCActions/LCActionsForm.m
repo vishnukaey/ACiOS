@@ -55,8 +55,14 @@
 
 - (IBAction)nextButtonOutletAction
 {
-  [self.formTableView endEditing:YES];
-  [delegate nextButtonAction];
+  if ([LCUtilityManager isaValidWebsiteLink:self.actionWebsiteField.text] || !self.actionWebsiteField.text.length) {
+    [self.formTableView endEditing:YES];
+    [delegate nextButtonAction];
+  }
+  else
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Please enter a valid website URL"];
+  }
 }
 
 - (IBAction)cancelAction

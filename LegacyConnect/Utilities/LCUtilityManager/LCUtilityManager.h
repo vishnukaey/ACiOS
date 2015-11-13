@@ -41,4 +41,5 @@
 
 + (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width;
 + (UITableViewCell*)getNextPageLoaderCell;
++ (BOOL)isaValidWebsiteLink :(NSString *)link;
 @end
