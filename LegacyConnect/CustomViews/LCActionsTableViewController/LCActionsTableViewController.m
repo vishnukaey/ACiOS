@@ -18,6 +18,7 @@
     [super viewDidLoad];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUpdatedNotificationReceived:) name:kEventDetailsUpdatedNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDeletedNotificationReceived:) name:kEventDeletedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kEventCreatedNotification object:nil];
 }
 
 - (void)dealloc {
@@ -57,6 +58,13 @@
       }
     }
   }
+  [self.tableView reloadData];
+}
+
+- (void)eventCreatedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *createdEvent = [notification.userInfo objectForKey:@"event"];
+  [self.results insertObject:createdEvent atIndex:0];
   [self.tableView reloadData];
 }
 

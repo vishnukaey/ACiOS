@@ -85,7 +85,9 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - button actions
 -(void)postAction
 {
-  if (commentTextField.text.length > 0) {
+  NSString * commentString = [commentTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+  ;
+  if (commentString.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
     [LCAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {

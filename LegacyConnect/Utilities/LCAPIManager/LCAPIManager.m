@@ -1538,6 +1538,7 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
+       [LCNotificationManager postEventCreatedNotificationWithEvent:event andResponse:response];
          LCDLog(@"Getting Event details successful! ");
        success(response);
      }

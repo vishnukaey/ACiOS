@@ -81,6 +81,7 @@
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject = modifiedEvent;
     [self refreshEventDetails];
+    [self.tableView reloadData];
   }
 }
 
