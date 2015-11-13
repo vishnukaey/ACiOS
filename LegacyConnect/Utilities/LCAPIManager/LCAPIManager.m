@@ -337,6 +337,12 @@ static LCAPIManager *sharedManager = nil;
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
   
+  NSMutableDictionary *dict_mut = [[NSMutableDictionary alloc] initWithDictionary:dict];
+  NSArray *tags = [dict_mut objectForKey:@"postTags"];
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags options:NSJSONWritingPrettyPrinted error:&error];
+  NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  [dict_mut setObject:jsonString forKey:@"postTags"];
+  
   NSMutableArray *images = [[NSMutableArray alloc] init];
   LCImage *postImage;
   if(image)
@@ -347,7 +353,7 @@ static LCAPIManager *sharedManager = nil;
     [images addObject:postImage];
   }
   
-  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict_mut andImagesArray:images withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];

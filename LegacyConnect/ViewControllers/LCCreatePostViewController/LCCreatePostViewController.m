@@ -28,6 +28,7 @@
   
   IBOutlet UIImageView *tagFriendsIcon, *cameraIcon, *tagLocationIcon, *milestoneIcon;
   IBOutlet UILabel *postingToLabel;
+  IBOutlet UIView *fadedActivityView;
   
   BOOL GIButton_preState, menuButton_preState;
 }
@@ -440,20 +441,24 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   _postFeedObject.isMilestone = [NSString stringWithFormat:@"%ld",(long)milestoneIcon.tag];
   //posting api
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  fadedActivityView.hidden = false;
   if (_isEditing)
   {
     [LCAPIManager updatePost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
       [self shareToSocialMedia];
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
     }];
   }
   else//new
   {
     [LCAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
       [self shareToSocialMedia];
       [self closeButtonClicked:nil];
       if(postImageView.image)
@@ -468,6 +473,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       }
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
     }];
   }
 }
