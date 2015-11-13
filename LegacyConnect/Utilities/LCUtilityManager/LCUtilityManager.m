@@ -221,6 +221,20 @@
   return false;
 }
 
++ (NSString *)getSpaceTrimmedStringFromString :(NSString *)string
+{
+  return [string stringByTrimmingCharactersInSet:
+          [NSCharacterSet whitespaceCharacterSet]];
+}
+
++ (BOOL)isEmptyString :(NSString *)string
+{
+  if ([string stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+    return NO;
+  }
+  return YES;
+}
+
 //+(NSNumber*) getNSNumberFromString:(NSString*)string
 //{
 //  NSNumberFormatter *format = [[NSNumberFormatter alloc] init];

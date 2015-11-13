@@ -132,7 +132,7 @@
 
 - (void)validateFields
 {
-  if (self.actionAboutField.text.length && self.actionNameField.text.length)
+  if (![LCUtilityManager isEmptyString:self.actionAboutField.text] && ![LCUtilityManager isEmptyString:self.actionNameField.text] )
   {
     self.nextButton.enabled = YES;
   }
