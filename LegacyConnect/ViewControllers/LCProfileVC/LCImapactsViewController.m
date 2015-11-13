@@ -226,7 +226,7 @@
     [weakSelf tagTapped:tagDetails];
   };
   //self profile check
-  if ([userDetail.isFriend integerValue] == 0) {
+  if ([[LCDataManager sharedDataManager].userID isEqualToString:userDetail.userID]) {
     
     cell.moreButton.hidden = NO;
   }

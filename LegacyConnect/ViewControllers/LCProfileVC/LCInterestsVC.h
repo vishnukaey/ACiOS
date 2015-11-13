@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCFeedTableViewController.h"
+#import "JTTableViewController.h"
 
 @protocol InterestsDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCInterestsVC : LCFeedTableViewController
+@interface LCInterestsVC : JTTableViewController
 {
   BOOL isSelfProfile;
 }

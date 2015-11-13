@@ -75,7 +75,13 @@ NSInteger const kHeightForHeader = 44;
   [headerBGImage sd_setImageWithURL:[NSURL URLWithString:headerUrlString]
                    placeholderImage:nil
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                            actualHeaderImage = image;
+                            if (headerPicState == IMAGE_UNTOUCHED) {
+                              actualHeaderImage = image;
+                            }
+                            else {
+                              //image already edited by user
+                              headerBGImage.image = actualHeaderImage;
+                            }
                           }];
   
   dobTimeStamp = userDetail.dob;

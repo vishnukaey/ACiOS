@@ -7,13 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JTTableViewController.h"
 
-
-@interface LCChooseActionsInterest : UIViewController
-{
-  IBOutlet UITableView * interestsTableView;
-  NSArray *interestsArray;
-}
+@interface LCChooseActionsInterest : JTTableViewController
 
 - (IBAction)cancelAction;
 

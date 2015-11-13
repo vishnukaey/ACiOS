@@ -161,8 +161,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="interestsTableView" destination="Tdh-43-Vyp" id="zlN-WW-QDZ"/>
                         <outlet property="nextButton" destination="6pD-hc-xci" id="X6p-Th-xUY"/>
+                        <outlet property="tableView" destination="Tdh-43-Vyp" id="Jhm-qw-COy"/>
                         <outlet property="view" destination="0nb-BT-4Gj" id="JpY-5T-RZT"/>
                     </connections>
                 </viewController>

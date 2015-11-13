@@ -29,16 +29,15 @@ static NSString *kCheckedImageName = @"contact_tick";
 {
   [super viewDidLoad];
   
-  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses)
-  {
-      interestsArray = responses;
-      [interestsTableView reloadData];
-    }
-    andFailure:^(NSString *error)
-    {
-    }];
-  interestsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   nextButton.enabled = NO;
+  
+  if (!self.noResultsView) {
+    
+    NSString *message = NSLocalizedString(@"no_interests_available_self", nil);
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  }
+  [self startFetchingResults];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -59,6 +58,40 @@ static NSString *kCheckedImageName = @"contact_tick";
   [appdel.menuButton setHidden:true];
 }
 
+#pragma mark - API call and Pagination
+
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    BOOL hasMoreData = NO;
+    [self didFetchResults:responses haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[self.results count] != 0];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  //Currently no pagination required for interests
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else
+  {
+    [self showNoResultsView];
+  }
+}
+
 #pragma mark - button actions
 - (IBAction)cancelAction
 {
@@ -77,39 +110,36 @@ static NSString *kCheckedImageName = @"contact_tick";
   return 1;    //count of section
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  return interestsArray.count;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *MyIdentifier = @"LCInterestsCell";
-    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-      cell = [topLevelObjects objectAtIndex:0];
-    }
-    
-    LCInterest *interstObj = [interestsArray objectAtIndex:indexPath.row];
-    [cell setData:interstObj];
-    tableView.backgroundColor = [tableView.superview backgroundColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    tableView.allowsSelection = YES;
-    
-    cell.checkButton.hidden = NO;
-    cell.checkButton.userInteractionEnabled = NO;
-    if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
-    {
-      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
-    }
-    else
-    {
-      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
-    }
-    
-    return cell;
+  JTTABLEVIEW_cellForRowAtIndexPath
+  static NSString *MyIdentifier = @"LCInterestsCell";
+  LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+    cell = [topLevelObjects objectAtIndex:0];
+  }
+  
+  LCInterest *interstObj = [self.results objectAtIndex:indexPath.row];
+  [cell setData:interstObj];
+  tableView.backgroundColor = [tableView.superview backgroundColor];
+  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+  tableView.allowsSelection = YES;
+  
+  cell.checkButton.hidden = NO;
+  cell.checkButton.userInteractionEnabled = NO;
+  if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
+  {
+    [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+  }
+  else
+  {
+    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+  }
+  
+  return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -119,8 +149,8 @@ static NSString *kCheckedImageName = @"contact_tick";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  selectedInterest = [interestsArray objectAtIndex:indexPath.row];
-  [interestsTableView reloadData];
+  selectedInterest = [self.results objectAtIndex:indexPath.row];
+  [self.tableView reloadData];
   nextButton.enabled = YES;
 }
 
