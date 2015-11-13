@@ -56,6 +56,16 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
 }
 
+#pragma mark - event notifications
++ (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
+{
+  NSDictionary *dict= response[kResponseData];
+  event.eventID = ([dict[@"eventId"] isEqual:[NSNull null]] ? nil : dict[@"eventId"]);
+  event.headerPhoto = ([dict[@"headerPhoto"] isEqual:[NSNull null]] ? nil : dict[@"headerPhoto"]);
+
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kEventCreatedNotification object:nil userInfo:userInfo];
+}
 
 + (void)postEventMembersCountUpdatedNotification:(LCEvent*)event
 {

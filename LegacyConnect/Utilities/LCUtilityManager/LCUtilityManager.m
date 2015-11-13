@@ -211,6 +211,16 @@
   [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
+
++ (BOOL)isaValidWebsiteLink :(NSString *)link
+{
+  NSURL *candidateURL = [NSURL URLWithString:link];
+  if (candidateURL && candidateURL.scheme && candidateURL.host) {
+    return true;
+  }
+  return false;
+}
+
 //+(NSNumber*) getNSNumberFromString:(NSString*)string
 //{
 //  NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
