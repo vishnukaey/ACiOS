@@ -22,6 +22,7 @@
   actionForm.cancelButton.hidden = true;
   actionForm.imageLoadingIndicator.hidden = true;
   actionForm.deleteActionConstraint.constant = 0;
+  actionForm.deleteActionBut.clipsToBounds= YES;
 }
 
 - (void)nextButtonAction
