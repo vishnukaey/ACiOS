@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER DEV_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -193,6 +193,7 @@ NSString *const keventDeletedEventKey = @"deleted_event";
 NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
 NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
 NSString *const kEventDeletedNotification = @"EventDeleted";
+NSString *const kEventCreatedNotification = @"EventCreated";
 
 
 

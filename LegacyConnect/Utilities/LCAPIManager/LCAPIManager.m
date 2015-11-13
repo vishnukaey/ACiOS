@@ -337,6 +337,12 @@ static LCAPIManager *sharedManager = nil;
   NSError *error = nil;
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:post error:&error];
   
+  NSMutableDictionary *dict_mut = [[NSMutableDictionary alloc] initWithDictionary:dict];
+  NSArray *tags = [dict_mut objectForKey:@"postTags"];
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags options:NSJSONWritingPrettyPrinted error:&error];
+  NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+  [dict_mut setObject:jsonString forKey:@"postTags"];
+  
   NSMutableArray *images = [[NSMutableArray alloc] init];
   LCImage *postImage;
   if(image)
@@ -347,7 +353,7 @@ static LCAPIManager *sharedManager = nil;
     [images addObject:postImage];
   }
   
-  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict_mut andImagesArray:images withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -402,7 +408,7 @@ static LCAPIManager *sharedManager = nil;
     [images addObject:postImage];
   }
   
-  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
+  [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict_mut andImagesArray:images withSuccess:^(id response) {
     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
     {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
@@ -1538,6 +1544,7 @@ static LCAPIManager *sharedManager = nil;
      }
      else
      {
+       [LCNotificationManager postEventCreatedNotificationWithEvent:event andResponse:response];
          LCDLog(@"Getting Event details successful! ");
        success(response);
      }
@@ -1918,35 +1925,32 @@ static LCAPIManager *sharedManager = nil;
 
 + (void)uploadImage:(UIImage *)image ofUser:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
-  NSData *imageData = UIImagePNGRepresentation(image);
   NSDictionary *parameters = @{kUserIDKey: userID};
-  AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-  manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    [manager.requestSerializer setTimeoutInterval:5.0];
-  [manager.requestSerializer setValue:[LCDataManager sharedDataManager].userToken forHTTPHeaderField:kAuthorizationKey];
   NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kUploadUserImageURL];
-  [manager POST:urlString parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-    [formData appendPartWithFileData:imageData name:@"image" fileName:@"image.png" mimeType:@"image/png"];
-  } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    if([responseObject[kResponseCode] isEqualToString:kStatusCodeFailure])
-    {
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
-      failure(responseObject[kResponseMessage]);
-    }
-    else
-    {
-      LCDLog(@"Image upload success! \n %@",responseObject);
-      success(responseObject);
-    }
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      LCDLog(@"%@",error);
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
-    failure(error.localizedDescription);
-  }];
+  LCImage *imageModel = [[LCImage alloc] init];
+  imageModel.imageKey = @"image";
+  imageModel.image = image;
   
-//  [operation setUploadProgressBlock:^(NSUInteger bytesWritten, long long totalBytesWritten, long long totalBytesExpectedToWrite) {
-//    LCDLog(@"tt-->>>%f", (float)totalBytesWritten/totalBytesExpectedToWrite);
-//  }];
+  NSMutableArray *imagesArray = [[NSMutableArray alloc] initWithArray:@[imageModel]];
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:urlString accessToken:[LCDataManager sharedDataManager].userToken parameters:parameters andImagesArray:imagesArray withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       LCDLog(@"Image upload success!");
+       success(response);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
 }
 
 

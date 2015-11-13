@@ -14,9 +14,10 @@
 #import "LCActionsForm.h"
 #import "LCActionsFormPresenter.h"
 #import "LCEventMembersViewController.h"
+#import "LCActionsHeader.h"
+#import "NSURL+LCURLCategory.h"
 
 static CGFloat kActionSectionHeight = 30;
-static CGFloat kActionSectionTitleOffset = 10;
 
 #define kActionsHeaderBG [UIColor colorWithRed:235/255.0 green:236/255.0 blue:237/255.0 alpha:1]
 #define kActionsHeaderText [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1]
@@ -77,6 +78,7 @@ static CGFloat kActionSectionTitleOffset = 10;
 -(void)getEventDetails
 {
   [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(LCEvent *responses) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.eventObject = responses;
     [self refreshEventDetails];
     [self.tableView reloadData];
@@ -84,6 +86,7 @@ static CGFloat kActionSectionTitleOffset = 10;
       [self startFetchingResults];
     }
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     if (self.eventObject.isFollowing || self.eventObject.isOwner) {
       [self startFetchingResults];
     }
@@ -93,7 +96,9 @@ static CGFloat kActionSectionTitleOffset = 10;
 
 - (void)postAction
 {
-  if (commentTextField.text.length > 0) {
+  NSString * commentString = [commentTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+;
+  if (commentString.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
     [LCAPIManager postCommentToEvent:self.eventObject.eventID comment:commentTextField.text withSuccess:^(id response) {
@@ -200,23 +205,17 @@ static CGFloat kActionSectionTitleOffset = 10;
 
 - (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
 {
-  UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.tableView.frame), kActionSectionHeight)];
-  [view setBackgroundColor:kActionsHeaderBG];
-  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(kActionSectionTitleOffset, 0, CGRectGetWidth(self.tableView.frame) - kActionSectionTitleOffset, kActionSectionHeight)];
-  [label setBackgroundColor:[UIColor clearColor]];
-  [label setTextColor:kActionsHeaderText];
-  [label setFont:kActionsHeaderTextFont];
-  [label setText:title];
-  [view addSubview:label];
-  return view;
+  LCActionsHeader * headerView = [[[NSBundle mainBundle] loadNibNamed:@"LCActionsHeader" owner:self options:nil] firstObject];
+  [headerView.headerTextLabel setText:title];
+  return headerView;
 }
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [self initialUISetUp];
-  [self refreshEventDetails];
   [self getEventDetails];
 }
 
@@ -282,9 +281,9 @@ static CGFloat kActionSectionTitleOffset = 10;
 - (void)websiteLinkAction
 {
   if (self.eventObject.website) {
-    NSURL * url = [NSURL URLWithString:self.eventObject.website];
-    if ([[UIApplication sharedApplication] canOpenURL:url]) {
-      [[UIApplication sharedApplication] openURL:url];
+    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
+    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
+      [[UIApplication sharedApplication] openURL:websiteURL];
     }
   }
 }

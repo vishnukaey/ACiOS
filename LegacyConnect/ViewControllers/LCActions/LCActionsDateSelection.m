@@ -55,8 +55,15 @@
 #pragma mark - button actions
 - (IBAction)doneButtonAction
 {
-  [delegate actionDateSelected:_startDate :_endDate];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  if (([_startDate compare:_endDate] == NSOrderedDescending || [_startDate compare:_endDate] == NSOrderedSame) && _startDate && _endDate)
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Start date should be before end date"];
+  }
+  else
+  {
+    [delegate actionDateSelected:_startDate :_endDate];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }
 }
 
 - (IBAction)backAction
