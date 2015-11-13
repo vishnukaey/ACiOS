@@ -147,8 +147,8 @@ static CGFloat kCommentFieldHeight = 45.0f;
 
 - (void)changeUpdateButtonState
 {
-  [postBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
-  [dummyPostBtn setBackgroundColor: commentTextField.text.length > 0 ? kPostButtonEnabledColor : kPostButtonDisabledColor];
+  [postBtn setBackgroundColor:[LCUtilityManager isEmptyString:commentTextField.text] ? kPostButtonDisabledColor : kPostButtonEnabledColor];
+  [dummyPostBtn setBackgroundColor:[LCUtilityManager isEmptyString:commentTextField.text] ? kPostButtonDisabledColor : kPostButtonEnabledColor];
 }
 
 - (void)enableCommentField:(BOOL)enable
