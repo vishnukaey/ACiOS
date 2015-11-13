@@ -22,6 +22,7 @@
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date;
 + (NSString *)getAgeFromTimeStamp:(NSString *)timeStamp;
 + (NSString *)encodeToBase64String:(NSString *)string;
++ (NSData*)performNormalisedImageCompression:(UIImage*) image;
 + (void)saveUserDetailsToDataManagerFromResponse:(LCUserDetail *)user;
 + (NSString *)decodeFromBase64String:(NSString *)string;
 + (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
