@@ -10,5 +10,6 @@
 
 @interface LCEventMembersViewController : UIViewController
 @property (weak,nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *inviteViewHeight;
 @property (weak,nonatomic) LCEvent *event;
 @end

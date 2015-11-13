@@ -24,7 +24,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  _loginButton.enabled = NO;
+  [self updateSignInButtonStatus];
   [_emailTextField addTarget:self
                       action:@selector(textFieldDidChange:)
             forControlEvents:UIControlEventEditingChanged];
@@ -143,6 +143,11 @@
 
 
 - (void)textFieldDidChange:(id)sender
+{
+  [self updateSignInButtonStatus];
+}
+
+-(void)updateSignInButtonStatus
 {
   if(_emailTextField.text.length!=0 && _passwordTextField.text.length!=0)
   {

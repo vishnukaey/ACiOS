@@ -32,6 +32,19 @@
   _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  if(_event.isFollowing)
+  {
+    _inviteViewHeight.constant = 44.0;
+  }
+  else
+  {
+   _inviteViewHeight.constant = 0.0;
+  }
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
