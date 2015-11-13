@@ -47,12 +47,12 @@
 
 - (void)nextButtonAction
 {
-  eventToEdit.name = actionForm.actionNameField.text;
+  eventToEdit.name = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionNameField.text];
   eventToEdit.type = actionForm.actionTypeField.text;
   eventToEdit.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
   eventToEdit.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
   eventToEdit.website = actionForm.actionWebsiteField.text;
-  eventToEdit.eventDescription = actionForm.actionAboutField.text;
+  eventToEdit.eventDescription = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionAboutField.text];
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
   
   UIImage *imagetoUpload = actionForm.headerPhotoImageView.image;

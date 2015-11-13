@@ -28,10 +28,10 @@
 - (void)nextButtonAction
 {
   LCEvent *com = [[LCEvent alloc] init];
-  com.name = actionForm.actionNameField.text;
+  com.name = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionNameField.text];
   com.interestID = self.selectedInterest.interestID;
   com.website = actionForm.actionWebsiteField.text;
-  com.eventDescription = actionForm.actionAboutField.text;
+  com.eventDescription = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionAboutField.text];
   com.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
   com.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
   com.type = actionForm.actionTypeField.text;
