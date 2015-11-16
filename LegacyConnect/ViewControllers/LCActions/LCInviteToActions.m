@@ -31,7 +31,7 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  NSLog(@"event-->>%@", eventToInvite);
+  LCDLog(@"event-->>%@", eventToInvite);
   
   [self initialSerup];
 }
@@ -88,19 +88,19 @@
   
   if (selectedIDs.count > 0) {
     if (isCreatingAction) {
-      [doneButton setTitle:@"Done" forState:UIControlStateNormal];
+      [doneButton setTitle:NSLocalizedString(@"done", nil) forState:UIControlStateNormal];
     }
     else {
-      [doneButton setTitle:@"Send" forState:UIControlStateNormal];
+      [doneButton setTitle:NSLocalizedString(@"send", nil) forState:UIControlStateNormal];
       [doneButton setEnabled:YES];
     }
   }
   else{
     if (isCreatingAction) {
-      [doneButton setTitle:@"Skip" forState:UIControlStateNormal];
+      [doneButton setTitle:NSLocalizedString(@"skip", nil) forState:UIControlStateNormal];
     }
     else {
-      [doneButton setTitle:@"Send" forState:UIControlStateNormal];
+      [doneButton setTitle:NSLocalizedString(@"send", nil) forState:UIControlStateNormal];
       [doneButton setEnabled:NO];
     }
   }
@@ -149,15 +149,15 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSLog(@"friendsTableView.selectedIDs-->>>%@", selectedIDs);
+  LCDLog(@"friendsTableView.selectedIDs-->>>%@", selectedIDs);
   if (selectedIDs.count > 0) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
     [LCAPIManager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
-      NSLog(@"%@",response);
+      LCDLog(@"%@",response);
       [MBProgressHUD hideHUDForView:self.tableView animated:YES];
       [self dismissInviteActionView];
     }andFailure:^(NSString *error){
-      NSLog(@"%@",error);
+      LCDLog(@"%@",error);
       [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     }];
   }

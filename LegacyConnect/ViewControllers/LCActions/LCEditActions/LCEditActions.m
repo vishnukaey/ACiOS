@@ -13,7 +13,7 @@
 - (void)delegatedViewDidLoad {
   actionForm.backButton.hidden = true;
   actionForm.deleteActionBut.layer.cornerRadius = 5;
-  [actionForm.nextButton setTitle:@"Save" forState:UIControlStateNormal];
+  [actionForm.nextButton setTitle:NSLocalizedString(@"save", @"next button title") forState:UIControlStateNormal];
   
   if ([eventToEdit.startDate integerValue] != 0) {
     actionForm.startDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.startDate.longLongValue/1000];
@@ -27,8 +27,8 @@
 
 - (void)deleteActionEvent
 {
-    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Action" message:@"Are you sure you want to permanently remove this action from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_action", nil) message:NSLocalizedString(@"delete_action_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
       
       [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
@@ -40,7 +40,7 @@
 
     }];
     [deleteAlert addAction:deletePostActionFinal];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
     [deleteAlert addAction:cancelAction];
     [actionForm presentViewController:deleteAlert animated:YES completion:nil];  
 }
@@ -73,7 +73,7 @@
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
-  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"edit_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     NSString *headerUrlString = eventToEdit.headerPhoto;
     SDWebImageManager *manager = [SDWebImageManager sharedManager];
@@ -88,7 +88,7 @@
                           [MBProgressHUD hideHUDForView:actionForm.view animated:YES];                      }];
   }];
   
-  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"take_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       
@@ -101,7 +101,7 @@
     
   }];
   
-  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"choose_from_library", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
     imagePicker.delegate = self;
@@ -111,11 +111,11 @@
     
   }];
   
-  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"remove_header_photo", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     headerImageEdited = YES;
     [actionForm setHeaderImage:nil];
   }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   
   if (actionForm.headerPhotoImageView.image){
     [actionSheet addAction:editAction];

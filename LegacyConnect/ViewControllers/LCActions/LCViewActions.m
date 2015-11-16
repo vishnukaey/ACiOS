@@ -143,12 +143,12 @@ static CGFloat kActionSectionHeight = 30;
   [eventPhoto sd_setImageWithURL:[NSURL URLWithString:self.eventObject.headerPhoto] placeholderImage:nil];
   
   // -------- Created By 'Owner' in 'Interest' -------- //
-  NSString * eventCreatedBy = @"Event Created by ";
+  NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
-  NSString * inText = @"in ";
+  NSString * inText = NSLocalizedString(@"in_", nil);
   NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
   if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
-    eventOwnerName = @"You ";
+    eventOwnerName = NSLocalizedString(@"you_", nil);
   }
   else
   {
@@ -429,7 +429,7 @@ static CGFloat kActionSectionHeight = 30;
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
   if (self.eventObject.followerCount) {
-    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
+    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ %@",self.eventObject.followerCount, NSLocalizedString(@"members_count", nil)];
   }
   return cell;
 }
