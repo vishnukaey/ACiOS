@@ -251,7 +251,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   else
   {
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
-    [thanksLabel_ref setText:[NSString stringWithFormat:@"%li",[likeCount integerValue] + 1]];
+    [thanksLabel_ref setText:[NSString stringWithFormat:@"%d",[likeCount intValue] + 1]];
     [tankImageView_ref setLikeUnlikeStatusImage:kLikedStatus];
     [LCAPIManager likePost:feedObject_ withSuccess:^(id response) {
       feedObject_.didLike = kLikedStatus;

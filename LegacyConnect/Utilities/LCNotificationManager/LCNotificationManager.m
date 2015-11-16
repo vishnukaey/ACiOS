@@ -28,7 +28,7 @@
 
 + (void)postCommentedNotificationforPost:(LCFeed *)post
 {
-  post.commentCount = [NSString stringWithFormat:@"%ld", [post.commentCount integerValue]+1];
+  post.commentCount = [NSString stringWithFormat:@"%d", [post.commentCount intValue]+1];
   NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
 }
