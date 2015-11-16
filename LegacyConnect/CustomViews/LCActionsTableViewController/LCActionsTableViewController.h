@@ -10,4 +10,6 @@
 
 @interface LCActionsTableViewController : JTTableViewController
 
+@property(nonatomic, retain)NSString *userID;
+
 @end
