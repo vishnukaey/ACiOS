@@ -135,7 +135,7 @@
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Post" message:@"Are you sure you want to permanently remove this post from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
                       [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
                         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
@@ -226,7 +226,7 @@
     [weakSelf tagTapped:tagDetails];
   };
   //self profile check
-  if ([userDetail.isFriend integerValue] == 0) {
+  if ([[LCDataManager sharedDataManager].userID isEqualToString:userDetail.userID]) {
     
     cell.moreButton.hidden = NO;
   }

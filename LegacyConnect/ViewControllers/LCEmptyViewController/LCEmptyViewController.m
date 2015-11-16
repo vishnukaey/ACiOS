@@ -13,7 +13,7 @@
 #import "MFSideMenu.h"
 #import "LCGIButton.h"
 #import "LCMenuButton.h"
-#import "LCChooseCommunityInterest.h"
+#import "LCChooseActionsInterest.h"
 #import "LCProfileViewVC.h"
 #import "LCAllInterestVC.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -23,6 +23,7 @@
 #import "LCNotificationsViewController.h"
 #import "LCSocialShareManager.h"
 #import "LCSettingsViewController.h"
+#import "UIImage+LCImageFix.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -201,6 +202,9 @@ static NSString *kTitle = @"MY FEED";
 
 - (void)GIBComponentsAction :(UIButton *)sender
 {
+  //GA Tracking
+  [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"GI Button Tapped" andLabel:@"User initiated an Impact"];
+  
   LCDLog(@"tag-->>%d", (int)sender.tag);
   [mainContainer setMenuState:MFSideMenuStateClosed];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -208,10 +212,12 @@ static NSString *kTitle = @"MY FEED";
   
   if (sender.tag == 0)//create event
   {
-//    [appdel.menuButton setHidden:YES];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-//    LCChooseCommunityInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
-//    [navigationRoot pushViewController:vc animated:YES];
+    [appdel.menuButton setHidden:YES];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [navigationRoot presentViewController:navC animated:YES completion:nil];
+ 
   }
   else if (sender.tag == 1)//photo post
   {
@@ -259,18 +265,20 @@ static NSString *kTitle = @"MY FEED";
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  UIImage *normalzedImage = [chosenImage normalizedImage];
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
   createPostVC = [sb instantiateInitialViewController];
   
-  createPostVC.photoPostPhoto = chosenImage;
+  createPostVC.photoPostPhoto = normalzedImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 #pragma mark - leftmenu delegates

@@ -7,6 +7,7 @@
 //
 
 #import "LCCreatePostViewController.h"
+#import "UIImage+LCImageFix.h"
 
 
 #define POSTTEXT_FONT [UIFont fontWithName:@"Gotham-Book" size:13]
@@ -27,6 +28,7 @@
   
   IBOutlet UIImageView *tagFriendsIcon, *cameraIcon, *tagLocationIcon, *milestoneIcon;
   IBOutlet UILabel *postingToLabel;
+  IBOutlet UIView *fadedActivityView;
   
   BOOL GIButton_preState, menuButton_preState;
 }
@@ -439,24 +441,39 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   _postFeedObject.isMilestone = [NSString stringWithFormat:@"%ld",(long)milestoneIcon.tag];
   //posting api
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  fadedActivityView.hidden = false;
   if (_isEditing)
   {
     [LCAPIManager updatePost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
       [self shareToSocialMedia];
       [self closeButtonClicked:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
     }];
   }
   else//new
   {
     [LCAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
       [self shareToSocialMedia];
       [self closeButtonClicked:nil];
+      if(postImageView.image)
+      {
+        //GA Tracking
+        [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created without media"];
+      }
+      else
+      {
+        //GA Tracking
+        [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created with media content"];
+      }
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      fadedActivityView.hidden = true;
     }];
   }
 }
@@ -561,14 +578,17 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
-  [postImageView setImage:chosenImage];
+  UIImage *normalzedImage = [chosenImage normalizedImage];
+  
+  [postImageView setImage:normalzedImage];
   [self arrangePostImageView];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 #pragma mark - LCListFriendsToTagViewControllerDelegate

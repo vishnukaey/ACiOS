@@ -123,6 +123,7 @@ extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;
 
 extern NSString *const kIDKey;
+extern NSString *const kRange;
 extern NSString *const kMeKey;
 extern NSString *const kUserIDKey;
 extern NSString *const kFirstNameKey;
@@ -145,7 +146,7 @@ extern NSString *const kDefaultDateFormat;
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
 
-
+extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;
@@ -161,9 +162,15 @@ extern NSString *const kUserProfileUpdateNotification;
 extern NSString *const kUserProfileFrinendsUpdateNotification;
 extern NSString *const kUserProfileImpactsUpdateNotification;
 extern NSString *const kfeedUpdatedotification;
+extern NSString *const kActionUpdatedotification;
 
 extern NSString *const kfeedUpdateEventKey;
 extern NSString *const kfeedDeletedEventKey;
+
+extern NSString *const kEventMemberCountUpdatedNotification;
+extern NSString *const kEventDetailsUpdatedNotification;
+extern NSString *const kEventDeletedNotification;
+extern NSString *const kEventCreatedNotification;
 
 extern NSString *const kTWOauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;
@@ -171,6 +178,8 @@ extern NSString *const kTWOauthTokenKey;
 extern NSString *const kTagobjId;
 extern NSString *const kTagobjText;
 extern NSString *const kTagobjType;
+
+extern NSString *const kBulletUnicode;
 
 
 // Settings Section //

@@ -131,7 +131,7 @@
       {
         if(image)
         {
-          [formData appendPartWithFileData:UIImagePNGRepresentation(image.image)
+          [formData appendPartWithFileData:[LCUtilityManager performNormalisedImageCompression:image.image]
                                       name:image.imageKey
                                   fileName:image.imageKey
                                   mimeType:@"image/jpeg"];

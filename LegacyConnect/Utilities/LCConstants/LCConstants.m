@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER STAGING_SERVER
+#define CURRENT_SERVER DEV_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -95,7 +95,7 @@ NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
 NSString *const kProfileStoryBoardIdentifier = @"Profile";
 NSString *const kInterestsStoryBoardIdentifier = @"Interests";
-NSString *const kCommunityStoryBoardIdentifier = @"Community";
+NSString *const kCommunityStoryBoardIdentifier = @"Actions";
 NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 NSString *const kSettingsStoryBoardIdentifier = @"Settings";
@@ -103,7 +103,7 @@ NSString *const kSettingsStoryBoardIdentifier = @"Settings";
 
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
-NSString *const kChooseCommunityStoryBoardID = @"LCChooseCommunityInterest";
+NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
@@ -141,6 +141,7 @@ NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
 
 NSString *const kIDKey = @"id";
+NSString *const kRange = @"range";
 NSString *const kMeKey = @"me";
 NSString *const kUserIDKey = @"userId";
 NSString *const kFirstNameKey = @"firstName";
@@ -166,6 +167,7 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 
+NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
@@ -186,6 +188,17 @@ NSString *const kfeedUpdatedotification = @"feedUpdated";
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";
 
+NSString *const keventUpdateEventKey = @"updated_event";
+NSString *const keventDeletedEventKey = @"deleted_event";
+
+
+NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
+NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
+NSString *const kEventDeletedNotification = @"EventDeleted";
+NSString *const kEventCreatedNotification = @"EventCreated";
+
+
+
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 // -- Tag Dictionary keys -- //
@@ -203,5 +216,7 @@ NSString *const kChangePassword = @"Change Password";
 NSString *const kMyLegacyURL = @"My Legacy URL";
 NSString *const kPrivacy = @"Privacy";
 NSString *const kSignOut = @"Sign Out";
+
+NSString *const kBulletUnicode = @"\u2022";
 
 @end

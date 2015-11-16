@@ -14,14 +14,28 @@
 {
   return @{
            @"name": @"name",
-           @"eventID" : @"id",
+           @"eventID" : @"eventId",
            @"headerPhoto" : @"headerPhoto",
-           @"supportersCount" : @"supportersCount",
+           @"followerCount" : @"followerCount",
            @"eventDescription": @"description",
            @"website": @"website",
-           @"time": @"time",
-           @"interestID": @"interestId"
+           @"type": @"type",
+           @"startDate": @"startDate",
+           @"endDate": @"endDate",
+           @"interestID": @"interestId",
+           @"ownerFirstName": @"firstName",
+           @"ownerLastName" : @"lastName",
+           @"interestName" : @"interestName",
+           @"userID" : @"userId",
+           @"isOwner": @"isOwner",
+           @"isFollowing": @"isFollowing",
+           @"comments": @"comments"
            };
+}
+
++ (NSValueTransformer *)commentsJSONTransformer
+{
+  return [MTLJSONAdapter arrayTransformerWithModelClass:[LCComment class]];
 }
 
 @end

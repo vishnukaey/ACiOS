@@ -13,6 +13,8 @@
 #import "LCContact.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
+#define MAX_IMAGE_SIZE 1200000.0
+
 @implementation LCUtilityManager
 
 + (BOOL)isNetworkAvailable
@@ -77,6 +79,19 @@
 
 }
 
++ (NSData*)performNormalisedImageCompression:(UIImage*)image
+{
+  NSData *data = UIImageJPEGRepresentation(image, 1.0);
+  if([data length] < MAX_IMAGE_SIZE)
+  {
+    return data;
+  }
+  else
+  {
+    CGFloat cFactor = MAX_IMAGE_SIZE/[data length];
+    return UIImageJPEGRepresentation(image, cFactor);
+  }
+}
 
 
 + (void)clearUserDefaultsForCurrentUser
@@ -189,6 +204,35 @@
   cell.textLabel.textAlignment =NSTextAlignmentCenter;
   cell.textLabel.numberOfLines = 2;
   return cell;
+}
+
++ (void)setLCStatusBarStyle {
+  
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
+
+
++ (BOOL)isaValidWebsiteLink :(NSString *)link
+{
+  NSURL *candidateURL = [NSURL URLWithString:link];
+  if (candidateURL && candidateURL.scheme && candidateURL.host) {
+    return true;
+  }
+  return false;
+}
+
++ (NSString *)getSpaceTrimmedStringFromString :(NSString *)string
+{
+  return [string stringByTrimmingCharactersInSet:
+          [NSCharacterSet whitespaceCharacterSet]];
+}
+
++ (BOOL)isEmptyString :(NSString *)string
+{
+  if ([string stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+    return NO;
+  }
+  return YES;
 }
 
 //+(NSNumber*) getNSNumberFromString:(NSString*)string

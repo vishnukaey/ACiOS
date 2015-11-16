@@ -17,4 +17,11 @@
 + (void)postPostEditedNotificationForPost :(LCFeed *)post;
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post;
 
+// ------- Event ------//
++ (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
++ (void)postEventMembersCountUpdatedNotification:(LCEvent*)event;
++ (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
++ (void)postEventDeletedNotification:(LCEvent*)event;
+
+
 @end

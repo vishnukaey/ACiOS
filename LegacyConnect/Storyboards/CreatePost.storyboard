@@ -374,12 +374,20 @@
                                     <constraint firstItem="lX8-Yo-xoA" firstAttribute="leading" secondItem="4FT-hR-M8g" secondAttribute="leading" id="uvt-ez-5YN"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wd3-Bo-ppF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.70435855263157898" green="0.705078125" blue="0.70579769736842102" alpha="0.5" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="7kq-tu-5AA" firstAttribute="top" secondItem="wd3-Bo-ppF" secondAttribute="bottom" id="4BI-VO-Br7"/>
                             <constraint firstItem="4FT-hR-M8g" firstAttribute="leading" secondItem="1If-JH-g0B" secondAttribute="leading" constant="15" id="60t-ya-aaW"/>
                             <constraint firstAttribute="trailing" secondItem="4FT-hR-M8g" secondAttribute="trailing" constant="15" id="GYH-vN-rts"/>
+                            <constraint firstAttribute="trailing" secondItem="wd3-Bo-ppF" secondAttribute="trailing" id="Qlh-Gg-C96"/>
+                            <constraint firstItem="wd3-Bo-ppF" firstAttribute="top" secondItem="1If-JH-g0B" secondAttribute="top" id="cPc-iL-pP2"/>
                             <constraint firstItem="4FT-hR-M8g" firstAttribute="top" secondItem="1If-JH-g0B" secondAttribute="top" constant="30" id="mJR-UK-fh2"/>
+                            <constraint firstItem="wd3-Bo-ppF" firstAttribute="leading" secondItem="1If-JH-g0B" secondAttribute="leading" id="n0d-O1-1QH"/>
                         </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -388,6 +396,7 @@
                     <connections>
                         <outlet property="cameraIcon" destination="zKe-SD-78p" id="LyA-Wh-OxH"/>
                         <outlet property="facebookButton" destination="Sum-tm-Kmg" id="yHz-rs-sKw"/>
+                        <outlet property="fadedActivityView" destination="wd3-Bo-ppF" id="9Hi-Jz-XyW"/>
                         <outlet property="milestoneIcon" destination="A4V-sD-tkZ" id="Wgl-PC-6g8"/>
                         <outlet property="popUpView" destination="4FT-hR-M8g" id="hTU-ti-7v8"/>
                         <outlet property="popUpViewHeightConstraint" destination="mry-6p-Q0w" id="3xx-il-bI7"/>
@@ -496,7 +505,7 @@
                                             <constraint firstAttribute="height" constant="1" id="UIu-Vj-Bvp"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4N0-M0-Sgk" customClass="LCMultipleSelectionTable">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4N0-M0-Sgk" customClass="LCMultipleSelectionTable">
                                         <rect key="frame" x="0.0" y="44" width="375" height="515"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>

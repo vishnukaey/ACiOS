@@ -46,12 +46,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super startFetchingNextResults];
   [LCAPIManager getHomeFeedsWithLastFeedId:[(LCFeed*)[self.results lastObject] feedId] success:^(NSArray *response) {
-//    [self stopRefreshingViews];
-//    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-//    [self didFetchNextResults:response haveMoreData:hasMoreData];
+    [self stopRefreshingViews];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
-//    [self stopRefreshingViews];
-//    [self didFailedToFetchResults];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
   }];
 }
 
@@ -183,13 +183,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  [LCUtilityManager setLCStatusBarStyle];
   self.navigationController.navigationBarHidden = YES;
-  
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-//  [self.tableView reloadData];
   
-
+  //GATracking
+  [LCGAManager ga_trackViewWithName:@"Feeds Home"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

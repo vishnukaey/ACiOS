@@ -45,6 +45,9 @@
                          action:@selector(textFieldDidChange:)
                forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
+  
+  //GATracking
+  [LCGAManager ga_trackViewWithName:@"Registration"];
 }
 
 
@@ -58,19 +61,21 @@
 {
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
-  [datePicker setMaximumDate:[NSDate date]];
-  NSString *str =@"1900-01-01";
-  NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-  [formatter setDateFormat:kDefaultDateFormat];
-  NSDate *date = [formatter dateFromString:str];
-  [datePicker setMinimumDate:date];
-  NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-  NSDateComponents *components = [[NSDateComponents alloc] init];
-  [components setYear:1950];
-  [components setMonth:1];
-  [components setDay:1];
-  NSDate *defualtDate = [calendar dateFromComponents:components];
+  
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDate *currentDate = [NSDate date];
+  NSDateComponents *comps = [[NSDateComponents alloc] init];
+  [comps setYear:-150];
+  NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+  [comps setYear:-13];
+  NSDate *maxDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+  [comps setYear:-50];
+  NSDate *defualtDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+
+  datePicker.minimumDate = minDate;
+  datePicker.maximumDate = maxDate;
   datePicker.date = defualtDate;
+  
   _dobTextField.inputView = datePicker;
   [self createDatePickerInputAccessoryView];
 }
@@ -118,11 +123,15 @@
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
+    
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful"];
+    
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [self.signupButton setEnabled:true];
-    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
     [self.signupButton setEnabled:true];

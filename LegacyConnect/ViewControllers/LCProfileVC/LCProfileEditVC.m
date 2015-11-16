@@ -8,18 +8,25 @@
 
 #import "LCProfileEditVC.h"
 #import "RSKImageCropViewController.h"
+#import "UIImage+LCImageFix.h"
 
 @interface LCProfileEditVC ()
 
 @end
 
-static NSString * const kCellIdentifierName = @"LCProfileNameCell";
-static NSString * const kCellIdentifierLocation = @"LCProfileLocationCell";
-static NSString * const kCellIdentifierHeaderBG = @"LCProfileHeaderBGCell";
-static NSString * const kCellIdentifierBirthday = @"LCProfileBirthdayCell";
-static NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
+NSString * const kCellIdentifierName = @"LCProfileNameCell";
+NSString * const kCellIdentifierLocation = @"LCProfileLocationCell";
+NSString * const kCellIdentifierHeaderBG = @"LCProfileHeaderBGCell";
+NSString * const kCellIdentifierBirthday = @"LCProfileBirthdayCell";
+NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
 
-static NSString * const kDOBFormat = @"MMMM dd, yyyy";
+NSString * const kDOBFormat = @"MMMM dd, yyyy";
+NSString * const kMaleString = @"Male";
+NSString * const kFemaleString = @"Female";
+
+NSInteger const kNumberOfSections = 4;
+NSInteger const kNumberOfRows = 1;
+NSInteger const kHeightForHeader = 44;
 
 @implementation LCProfileEditVC
 
@@ -29,51 +36,14 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  
-  NSLog(@"user deatils in editvc - %@",self.userDetail);
-  
-  profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
-  profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
-  
-  genderTypes = @[@"Male",@"Female"];
-  
-  self.navigationController.navigationBarHidden = YES;
-  
-  profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
-  profilePic.image = profilePicPlaceholder;
-  
-  avatarPicState = IMAGE_UNTOUCHED;
-  headerPicState = IMAGE_UNTOUCHED;
-  
-  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.avatarURL];
-
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
-                placeholderImage:profilePicPlaceholder
-                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                         actualAvatarImage = image;
-                       }];
-  NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
-  
-  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:headerUrlString]
-                   placeholderImage:nil
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                            actualHeaderImage = image;
-                          }];
-  dobTimeStamp = userDetail.dob;
-  [self fillGradientForNavigation];
-  [self fillGradientForNavigation];
+  [self initialSetup];
 }
 
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-}
-
--(void) viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,22 +51,144 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   // Dispose of any resources that can be recreated.
 }
 
--(void)fillGradientForNavigation
+#pragma mark - private methods
+
+- (void)initialSetup {
+  
+  self.navigationController.navigationBarHidden = YES;
+  profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
+  profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
+
+  profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
+  profilePic.image = profilePicPlaceholder;
+  avatarPicState = IMAGE_UNTOUCHED;
+  headerPicState = IMAGE_UNTOUCHED;
+  
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
+                placeholderImage:profilePicPlaceholder
+                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                         actualAvatarImage = image;
+                       }];
+  
+  NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
+  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:headerUrlString]
+                   placeholderImage:nil
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            if (headerPicState == IMAGE_UNTOUCHED) {
+                              actualHeaderImage = image;
+                            }
+                            else {
+                              //image already edited by user
+                              headerBGImage.image = actualHeaderImage;
+                            }
+                          }];
+  
+  dobTimeStamp = userDetail.dob;
+  genderTypes = @[kMaleString, kFemaleString];
+  
+  [self fillGradientForNavigation];
+  [self fillGradientForNavigation];
+}
+
+- (void)fillGradientForNavigation
 {
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, navigationBar.bounds.size.height);
   gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor clearColor] CGColor], nil];
   [navigationBar.layer insertSublayer:gradient atIndex:0];
-} 
+}
+
+- (void)customizeCropViewUI:(RSKImageCropViewController*)imageCropVC {
+  
+  [imageCropVC.view setAlpha:1];
+  [imageCropVC.cancelButton setHidden:true];
+  [imageCropVC.chooseButton setHidden:true];
+  [imageCropVC.moveAndScaleLabel setHidden:true];
+  
+  
+  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
+  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height)];
+  [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
+  
+  [topBar setUserInteractionEnabled:true];
+  
+  
+  
+  CGFloat btnWidth = 75;
+  
+  CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
+  
+  
+  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
+  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  for (id target in imageCropVC.cancelButton.allTargets) {
+    NSArray *actions = [imageCropVC.cancelButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  
+  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
+  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  
+  for (id target in imageCropVC.chooseButton.allTargets) {
+    NSArray *actions = [imageCropVC.chooseButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  
+  CGFloat screenWidth = CGRectGetWidth(topBar.frame);
+  UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
+  [titleLabel setTextAlignment:NSTextAlignmentCenter];
+  [titleLabel setTextColor:[UIColor whiteColor]];
+  [titleLabel setText:@"MOVE AND SCALE"];
+  [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
+  [titleLabel setUserInteractionEnabled:NO];
+  
+  
+  [topBar addSubview:cancelBtn];
+  [topBar addSubview:doneBtn];
+  [topBar addSubview:titleLabel];
+  [imageCropVC.view addSubview:topBar];
+}
+
+- (void) showImageCropViewWithImage:(UIImage *)image {
+  
+  RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
+  imageCropVC.delegate = self;
+  
+  if (!isEditingProfilePic) {
+    
+    imageCropVC.cropMode = RSKImageCropModeCustom;
+    imageCropVC.dataSource = self;
+  }
+  
+  [self presentViewController:imageCropVC animated:YES completion:nil];
+  [self customizeCropViewUI:imageCropVC];
+}
+
+- (void)validateFields
+{
+  if (txt_firstName.text.length != 0 && txt_lastName.text.length != 0 && txt_birthday.text.length != 0) {
+    buttonSave.enabled = YES;
+  }
+  else {
+    buttonSave.enabled = NO;
+  }
+}
 
 
 #pragma mark - button actions
-
-- (IBAction)cancelAction:(id)sender {
-  
-  [self.view endEditing:YES];
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (IBAction)saveAction:(id)sender {
   
@@ -145,6 +237,12 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"%@",error);
   }];
+}
+
+- (IBAction)cancelAction:(id)sender {
+  
+  [self.view endEditing:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)editProfilePicAction:(id)sender {
@@ -269,8 +367,6 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
-  
-  
   if (actualHeaderImage){
     [actionSheet addAction:editAction];
   }
@@ -285,7 +381,7 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 }
 
 
-#pragma mark -
+#pragma mark - DOB and Gender setup
 
 - (void) setDobTextFieldWithInputView
 {
@@ -315,8 +411,9 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   datePicker.date = defualtDate;
   
   txt_birthday.inputView = datePicker;
-  [txt_birthday addCancelDoneOnKeyboardWithTarget:self cancelAction:@selector(dismissDatePickerView:) doneAction:@selector(setDateAndDismissDatePickerView:)];
-  
+  [txt_birthday addCancelDoneOnKeyboardWithTarget:self
+                                     cancelAction:@selector(dismissDatePickerView:)
+                                       doneAction:@selector(setDateAndDismissDatePickerView:)];
 }
 
 
@@ -378,119 +475,21 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
   }
 }
 
-
-#pragma mark -
-
-- (void)validateFields
-{
-  
-  if (txt_firstName.text.length != 0 && txt_lastName.text.length != 0 && txt_birthday.text.length != 0) {
-    
-    buttonSave.enabled = YES;
-  }
-  else {
-    buttonSave.enabled = NO;
-  }
-}
-
-
-- (void) showImageCropViewWithImage:(UIImage *)image {
-  
-  RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
-  imageCropVC.delegate = self;
-  
-  if (!isEditingProfilePic) {
-    
-    imageCropVC.cropMode = RSKImageCropModeCustom;
-    imageCropVC.dataSource = self;
-  }
-  
-  //[self.navigationController pushViewController:imageCropVC animated:YES];
-  [self presentViewController:imageCropVC animated:YES completion:nil];
-  [self customizeCropViewUI:imageCropVC];
-}
-
-
-
-- (void)customizeCropViewUI:(RSKImageCropViewController*)imageCropVC {
-  
-  [imageCropVC.view setAlpha:1];
-  [imageCropVC.cancelButton setHidden:true];
-  [imageCropVC.chooseButton setHidden:true];
-  [imageCropVC.moveAndScaleLabel setHidden:true];
-  
-  
-  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height)];
-  [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
-  
-  [topBar setUserInteractionEnabled:true];
-  
-  
-  
-  CGFloat btnWidth = 75;
-  
-  CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
-  
-  
-  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
-  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
-  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
-  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
-  
-  for (id target in imageCropVC.cancelButton.allTargets) {
-    NSArray *actions = [imageCropVC.cancelButton actionsForTarget:target
-                                                  forControlEvent:UIControlEventTouchUpInside];
-    for (NSString *action in actions) {
-      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
-    }
-  }
-  
-  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
-  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
-  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
-  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
-  
-  
-  for (id target in imageCropVC.chooseButton.allTargets) {
-    NSArray *actions = [imageCropVC.chooseButton actionsForTarget:target
-                                                  forControlEvent:UIControlEventTouchUpInside];
-    for (NSString *action in actions) {
-      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
-    }
-  }
-  
-  CGFloat screenWidth = CGRectGetWidth(topBar.frame);
-  UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
-  [titleLabel setTextAlignment:NSTextAlignmentCenter];
-  [titleLabel setTextColor:[UIColor whiteColor]];
-  [titleLabel setText:@"MOVE AND SCALE"];
-  [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
-  [titleLabel setUserInteractionEnabled:NO];
-  
-  
-  [topBar addSubview:cancelBtn];
-  [topBar addSubview:doneBtn];
-  [topBar addSubview:titleLabel];
-  [imageCropVC.view addSubview:topBar];
-}
-
-
 #pragma mark - TableView delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 4;
+  return kNumberOfSections;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 1;
+  return kNumberOfRows;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   
-  return 44;
+  return kHeightForHeader;
 }
 
 
@@ -624,9 +623,16 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   [picker dismissViewControllerAnimated:YES completion:^{
     UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
-    [self showImageCropViewWithImage:originalImage];
+    UIImage *normalzedImage = [originalImage normalizedImage];
+    [self showImageCropViewWithImage:normalzedImage];
   }];
+  [LCUtilityManager setLCStatusBarStyle];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [picker dismissViewControllerAnimated:YES completion:nil];
+  [LCUtilityManager setLCStatusBarStyle];
 }
 
 
@@ -733,14 +739,4 @@ static NSString * const kDOBFormat = @"MMMM dd, yyyy";
 {
   return [genderTypes objectAtIndex:row];
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 @end

@@ -22,6 +22,8 @@
 #import "LCSpecialContainerView.h"
 #import "LCLoginViewController.h"
 #import "LCFeedsCommentsController.h"
+#import "LCViewActions.h"
+#import <Google/Analytics.h>
 
 @interface LCAppDelegate ()
 
@@ -31,13 +33,26 @@
 @synthesize menuButton, GIButton, isCreatePostOpen;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+  
+  [LCUtilityManager setLCStatusBarStyle];
   [IQKeyboardManager sharedManager].shouldShowTextFieldPlaceholder = NO;
   [[IQKeyboardManager sharedManager] disableToolbarInViewControllerClass:[LCLoginViewController class]];
   [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCFeedsCommentsController class]];
+  [[IQKeyboardManager sharedManager] disableInViewControllerClass:[LCViewActions class]];
 
   [[IQKeyboardManager sharedManager] considerToolbarPreviousNextInViewClass:[LCSpecialContainerView class]];
+  
+  // Configure FBProfile update listener
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+  
+  // Configure tracker from GoogleService-Info.plist.
+  NSError *configureError;
+  [[GGLContext sharedInstance] configureWithError:&configureError];
+  NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
+  
+  //GA Tracking
+  [LCGAManager ga_trackEventWithCategory:@"Launch" action:@"Success" andLabel:@"Application Launched Successfully"];
+  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }

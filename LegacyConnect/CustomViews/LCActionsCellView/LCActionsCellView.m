@@ -24,22 +24,21 @@ static NSString *kSupportedByPeople = @"Supported by %@ People";
 @implementation LCActionsCellView
 
 - (void)awakeFromNib {
-  // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
   [super setSelected:selected animated:animated];
-  
-  // Configure the view for the selected state
 }
 
 - (void)setEvent:(LCEvent *)event
 {
   _event = event;
   [self.eventNameLabel setText:_event.name];
-  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.time WithFormat:kActionsDateFormat];
+  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.endDate WithFormat:kActionsDateFormat];
   [self.eventTimeLabel setText:displayDate];
-  [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,_event.supportersCount]];
+  if (_event.followerCount && [_event.followerCount integerValue] > 0) {
+    [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,event.followerCount]];
+  }
   [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:kEventPlaceholderImage]];
 }
 

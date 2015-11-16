@@ -22,6 +22,7 @@
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date;
 + (NSString *)getAgeFromTimeStamp:(NSString *)timeStamp;
 + (NSString *)encodeToBase64String:(NSString *)string;
++ (NSData*)performNormalisedImageCompression:(UIImage*) image;
 + (void)saveUserDetailsToDataManagerFromResponse:(LCUserDetail *)user;
 + (NSString *)decodeFromBase64String:(NSString *)string;
 + (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
@@ -29,6 +30,7 @@
 + (void)saveUserDefaultsForNewUser;
 
 + (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text;
++ (void)setLCStatusBarStyle;
 
 //+(NSNumber*) getNSNumberFromString:(NSString*)string;
 
@@ -40,4 +42,8 @@
 
 + (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width;
 + (UITableViewCell*)getNextPageLoaderCell;
++ (BOOL)isaValidWebsiteLink :(NSString *)link;
++ (NSString *)getSpaceTrimmedStringFromString :(NSString *)string;
++ (BOOL)isEmptyString :(NSString *)string;
+
 @end
