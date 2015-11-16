@@ -34,6 +34,8 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - LCCommunityMemebersCountCell class
 @interface LCActionsMembersCountCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *seperator;
+
 @end
 
 @implementation LCActionsMembersCountCell
@@ -253,22 +255,27 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   [settingsButton setUserInteractionEnabled:NO];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   if (self.eventObject.isFollowing) {
     [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
     [LCAPIManager unfollowEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   } else {
     [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
     [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
       [self startFetchingResults];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   }
 }
@@ -332,7 +339,10 @@ static CGFloat kActionSectionHeight = 30;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0)
   {
-    return 3;
+    if (self.eventObject.website) {
+      return 3;
+    }
+    return 2;
   }
   if (self.eventObject.isFollowing) {
     return [super tableView:tableView numberOfRowsInSection:section];
@@ -431,6 +441,7 @@ static CGFloat kActionSectionHeight = 30;
   if (self.eventObject.followerCount) {
     cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
   }
+  [cell.seperator setHidden:self.eventObject.website ? NO : YES];
   return cell;
 }
 
