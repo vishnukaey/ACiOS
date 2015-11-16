@@ -227,11 +227,15 @@
 
 + (BOOL)isaValidWebsiteLink :(NSString *)link
 {
-  NSURL *candidateURL = [NSURL URLWithString:link];
-  if (candidateURL && candidateURL.scheme && candidateURL.host) {
-    return true;
-  }
-  return false;
+//  NSURL *candidateURL = [NSURL URLWithString:link];
+//  if (candidateURL && candidateURL.host) {
+//    return true;
+//  }
+//  return false;
+  NSString *urlRegEx =
+  @"((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+  NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+  return [urlTest evaluateWithObject:link];
 }
 
 + (NSString *)getSpaceTrimmedStringFromString :(NSString *)string

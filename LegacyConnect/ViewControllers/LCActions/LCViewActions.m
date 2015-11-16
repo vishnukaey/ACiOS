@@ -339,7 +339,7 @@ static CGFloat kActionSectionHeight = 30;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0)
   {
-    if (self.eventObject.website) {
+    if ([LCUtilityManager isaValidWebsiteLink:self.eventObject.website]) {
       return 3;
     }
     return 2;

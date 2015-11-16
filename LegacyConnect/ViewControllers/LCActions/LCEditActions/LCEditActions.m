@@ -56,10 +56,14 @@
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
   
   UIImage *imagetoUpload = actionForm.headerPhotoImageView.image;
+  BOOL statusRemoved = NO;
+  if (!imagetoUpload) {
+    statusRemoved = YES;
+  }
   if (!headerImageEdited) {
     imagetoUpload = nil;
   }
-  [LCAPIManager updateEvent:eventToEdit havingHeaderPhoto:imagetoUpload andImageStatus:headerImageEdited withSuccess:^(id response) {
+  [LCAPIManager updateEvent:eventToEdit havingHeaderPhoto:imagetoUpload andImageStatus:statusRemoved withSuccess:^(id response) {
     [actionForm.navigationController popViewControllerAnimated:YES];
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {
