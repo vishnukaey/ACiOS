@@ -84,8 +84,8 @@ static CGFloat kNumberOfSection =2;
 - (void)viewWillAppear:(BOOL)animated {
   
   [super viewWillAppear:animated];
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.menuButton setHidden:NO];
+  self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO];
 }
 
 - (void)didReceiveMemoryWarning
