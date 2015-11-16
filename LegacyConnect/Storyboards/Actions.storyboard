@@ -297,6 +297,7 @@
                                                             <state key="normal" image="tagFirend_unselected">
                                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                             </state>
+                                                            <state key="disabled" image="profileWaiting"/>
                                                             <state key="selected" image="contact_tick"/>
                                                         </button>
                                                     </subviews>
@@ -1357,6 +1358,7 @@
         <image name="backButton" width="12" height="21"/>
         <image name="backButton_image" width="12" height="21"/>
         <image name="contact_tick" width="37" height="37"/>
+        <image name="profileWaiting" width="37" height="37"/>
         <image name="rightChevronGrey" width="8" height="12"/>
         <image name="tagFirend_unselected" width="30" height="30"/>
         <image name="userProfilePic" width="100" height="100"/>

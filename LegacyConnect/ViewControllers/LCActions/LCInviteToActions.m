@@ -230,6 +230,13 @@
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   
+  //check already invited
+  if (friend.isInvitedToEvent) {
+    [cell.checkButton setEnabled:NO];
+    [cell setUserInteractionEnabled:NO];
+  }
+  
+  //check already selected
   if ([selectedIDs containsObject:friend.friendId]) {
     [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     [cell.checkButton setSelected:YES];
