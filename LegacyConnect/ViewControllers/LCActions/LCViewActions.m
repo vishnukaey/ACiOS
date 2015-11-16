@@ -34,6 +34,8 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - LCCommunityMemebersCountCell class
 @interface LCActionsMembersCountCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *seperator;
+
 @end
 
 @implementation LCActionsMembersCountCell
@@ -337,7 +339,10 @@ static CGFloat kActionSectionHeight = 30;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0)
   {
-    return 3;
+    if (self.eventObject.website) {
+      return 3;
+    }
+    return 2;
   }
   if (self.eventObject.isFollowing) {
     return [super tableView:tableView numberOfRowsInSection:section];
@@ -436,6 +441,7 @@ static CGFloat kActionSectionHeight = 30;
   if (self.eventObject.followerCount) {
     cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
   }
+  [cell.seperator setHidden:self.eventObject.website ? NO : YES];
   return cell;
 }
 
