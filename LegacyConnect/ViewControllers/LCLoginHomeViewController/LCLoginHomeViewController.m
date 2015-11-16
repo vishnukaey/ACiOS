@@ -105,7 +105,7 @@
   [LCDataManager sharedDataManager].userFBID = [LCUtilityManager performNullCheckAndSetValue:userInfo[kIDKey]];
   [LCDataManager sharedDataManager].firstName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].firstName];
   [LCDataManager sharedDataManager].lastName = [LCUtilityManager performNullCheckAndSetValue:[FBSDKProfile currentProfile].lastName];
-  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large",[LCDataManager sharedDataManager].userFBID];
+  [LCDataManager sharedDataManager].avatarUrl = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture",[LCDataManager sharedDataManager].userFBID];
   [LCDataManager sharedDataManager].dob = [LCUtilityManager performNullCheckAndSetValue:userInfo[kDobKey]];
 }
 
