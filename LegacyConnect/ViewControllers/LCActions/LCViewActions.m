@@ -439,7 +439,11 @@ static CGFloat kActionSectionHeight = 30;
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
   if (self.eventObject.followerCount) {
-    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
+    NSString *membersText = @"Member";
+    if ([self.eventObject.followerCount integerValue]>1) {
+      membersText = @"Members";
+    }
+    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ %@",self.eventObject.followerCount, membersText];
   }
   [cell.seperator setHidden:self.eventObject.website ? NO : YES];
   return cell;
