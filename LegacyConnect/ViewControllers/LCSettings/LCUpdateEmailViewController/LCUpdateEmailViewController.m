@@ -18,17 +18,17 @@
 
 - (void)changeSaveButtonState
 {
-  [self.navigationItem.rightBarButtonItem setEnabled:(self.emailAddressField.text.length > 0)];
+  //[self.navigationItem.rightBarButtonItem setEnabled:(self.emailAddressField.text.length > 0)];
 }
 - (void)initialUISetUp
 {
-  self.navigationController.navigationBarHidden = false;
+  //self.navigationController.navigationBarHidden = false;
   //self.title = kEmailUpdateScreenTitle;
-  UIBarButtonItem * saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                               target:self
-                                                                               action:@selector(saveButtonPressed:)];
-  [saveButton setTintColor:[UIColor blackColor]];
-  self.navigationItem.rightBarButtonItem = saveButton;
+//  UIBarButtonItem * saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+//                                                                               target:self
+//                                                                               action:@selector(saveButtonPressed:)];
+//  [saveButton setTintColor:[UIColor blackColor]];
+//  self.navigationItem.rightBarButtonItem = saveButton;
 }
 
 - (void)saveButtonPressed:(id)sender {
@@ -48,6 +48,18 @@
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
+
+- (IBAction)cancelAction:(id)sender {
+  
+  [self.emailAddressField resignFirstResponder];
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)saveAction:(id)sender {
+  
+}
+
 
 #pragma mark - UITextFieldDelegate implementation
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

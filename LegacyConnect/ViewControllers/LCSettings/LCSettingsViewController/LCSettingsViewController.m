@@ -84,7 +84,7 @@ static CGFloat kNumberOfSection =2;
 - (void)viewWillAppear:(BOOL)animated {
   
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = true;
+//  self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO];
 }
 
@@ -226,13 +226,15 @@ static CGFloat kNumberOfSection =2;
         break;
     }
   }
+  [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)showUpdateEmailScreen
 {
   LCUpdateEmailViewController * updateMailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdateEmailVC"];
   updateMailVC.emailAddress = [LCDataManager sharedDataManager].userEmail;
-  [self.navigationController pushViewController:updateMailVC animated:YES];
+  //[self.navigationController pushViewController:updateMailVC animated:YES];
+  [self presentViewController:updateMailVC animated:YES completion:nil];
 }
 
 - (void)showChangePasswordScreen
