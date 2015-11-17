@@ -55,13 +55,13 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - Event Comments API and pagination
 - (void)startFetchingResults
 {
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [super startFetchingResults];
   [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:nil withSuccess:^(id response, BOOL isMore) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }
@@ -339,7 +339,7 @@ static CGFloat kActionSectionHeight = 30;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0)
   {
-    if (self.eventObject.website) {
+    if ([LCUtilityManager isaValidWebsiteLink:self.eventObject.website]) {
       return 3;
     }
     return 2;
@@ -439,7 +439,11 @@ static CGFloat kActionSectionHeight = 30;
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
   if (self.eventObject.followerCount) {
-    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ Members",self.eventObject.followerCount];
+    NSString *membersText = @"Member";
+    if ([self.eventObject.followerCount integerValue]>1) {
+      membersText = @"Members";
+    }
+    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ %@",self.eventObject.followerCount, membersText];
   }
   [cell.seperator setHidden:self.eventObject.website ? NO : YES];
   return cell;

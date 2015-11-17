@@ -18,7 +18,6 @@
   BOOL isSelfProfile;
 }
 
-@property(nonatomic, retain)NSString *userID;
 @property (nonatomic, assign) id<ActionsDelegate> delegate;
 
 - (void) loadActions;

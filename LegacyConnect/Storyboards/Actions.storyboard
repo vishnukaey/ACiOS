@@ -399,8 +399,8 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rH2-7I-xXb">
                                         <rect key="frame" x="0.0" y="40" width="320" height="100"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BeWaterWise" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vW-y2-WNf">
-                                                <rect key="frame" x="0.0" y="20" width="320" height="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0vW-y2-WNf">
+                                                <rect key="frame" x="15" y="20" width="290" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Mrf-AN-OU7"/>
                                                 </constraints>
@@ -408,7 +408,7 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Created by you in Water" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbM-8k-bBk" customClass="LCTaggedLabel">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SbM-8k-bBk" customClass="LCTaggedLabel">
                                                 <rect key="frame" x="0.0" y="30" width="320" height="70"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="70" id="bRD-JJ-n2a"/>
@@ -421,8 +421,8 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="2Jk-AT-zir"/>
-                                            <constraint firstItem="0vW-y2-WNf" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" id="FUE-J2-20w"/>
-                                            <constraint firstAttribute="trailing" secondItem="0vW-y2-WNf" secondAttribute="trailing" id="FpC-En-OZm"/>
+                                            <constraint firstItem="0vW-y2-WNf" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" constant="15" id="FUE-J2-20w"/>
+                                            <constraint firstAttribute="trailing" secondItem="0vW-y2-WNf" secondAttribute="trailing" constant="15" id="FpC-En-OZm"/>
                                             <constraint firstItem="0vW-y2-WNf" firstAttribute="top" secondItem="rH2-7I-xXb" secondAttribute="top" id="Jc7-yr-Jro"/>
                                             <constraint firstItem="0vW-y2-WNf" firstAttribute="centerY" secondItem="rH2-7I-xXb" secondAttribute="centerY" constant="-15" id="l4L-cF-s1b"/>
                                             <constraint firstAttribute="trailing" secondItem="SbM-8k-bBk" secondAttribute="trailing" id="m2w-Ui-8bd"/>
@@ -480,7 +480,6 @@
                                             <constraint firstAttribute="height" constant="44" id="GKo-mf-Dyt"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
-                                        <state key="normal" title="Settings"/>
                                         <connections>
                                             <action selector="settingsAction:" destination="k8j-y9-80a" eventType="touchUpInside" id="DQI-bZ-oJc"/>
                                         </connections>

@@ -114,6 +114,12 @@
 }
 
 #pragma mark - TableView delegates
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  [self setNoResultViewHidden:self.results.count > 0];
+  return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   JTTABLEVIEW_cellForRowAtIndexPath

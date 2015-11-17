@@ -63,9 +63,11 @@
 
 - (void)eventCreatedNotificationReceived :(NSNotification *)notification
 {
-  LCEvent *createdEvent = [notification.userInfo objectForKey:@"event"];
-  [self.results insertObject:createdEvent atIndex:0];
-  [self.tableView reloadData];
+  if ([self.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+    LCEvent *createdEvent = [notification.userInfo objectForKey:@"event"];
+    [self.results insertObject:createdEvent atIndex:0];
+    [self.tableView reloadData];
+  }
 }
 
 @end

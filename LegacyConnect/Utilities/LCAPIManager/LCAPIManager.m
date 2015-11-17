@@ -1658,7 +1658,7 @@ static LCAPIManager *sharedManager = nil;
   }
   NSDictionary *dict = [MTLJSONAdapter JSONDictionaryFromModel:event error:&error];
   NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] initWithDictionary:dict];
-  [tempDict setValue:[LCUtilityManager getStringValueOfBOOL:status] forKey:@"removeImage"];
+  [tempDict setValue:[LCUtilityManager getStringValueOfBOOL:status] forKey:@"removeHeader"];
 
   if(error)
   {
