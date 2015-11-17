@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCSearchTopBC.h"
 
-@interface LCSearchTopViewController : UIViewController
+@interface LCSearchTopViewController : LCSearchTopBC
 
-@property (weak, nonatomic) IBOutlet UITableView *topTableView;
-@property (nonatomic,retain) LCSearchResult *searchResultObject;
+
 
 @end

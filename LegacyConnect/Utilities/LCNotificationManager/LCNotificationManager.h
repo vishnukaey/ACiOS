@@ -23,5 +23,8 @@
 + (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
 + (void)postEventDeletedNotification:(LCEvent*)event;
 
+//friends
++ (void)postFriendUpadteNotification :(NSString *)friendID forFriendStatus :(int)status;
+
 
 @end

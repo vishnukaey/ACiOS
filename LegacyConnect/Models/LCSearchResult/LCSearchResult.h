@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface LCSearchResult : MTLModel <MTLJSONSerializing>
-@property (nonatomic, strong) NSArray *usersArray;
-@property (nonatomic, strong) NSArray *interestsArray;
-@property (nonatomic, strong) NSArray *causesArray;
+@property (nonatomic, strong) NSMutableArray *usersArray;
+@property (nonatomic, strong) NSMutableArray *interestsArray;
+@property (nonatomic, strong) NSMutableArray *causesArray;
 @end

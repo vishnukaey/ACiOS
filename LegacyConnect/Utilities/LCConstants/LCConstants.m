@@ -182,6 +182,7 @@ NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
 NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpdated";
 NSString *const kUserProfileImpactsUpdateNotification = @"userProfileImpactsUpdated";
 NSString *const kfeedUpdatedotification = @"feedUpdated";
+NSString *const friendStatusUpdatedNotification = @"friendUpdated";
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";

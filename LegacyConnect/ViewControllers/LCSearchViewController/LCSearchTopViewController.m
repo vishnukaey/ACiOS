@@ -25,7 +25,7 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view.
   
-  _topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.topTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +47,7 @@
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  if([tableView isEqual:_topTableView])
+  if([tableView isEqual:self.topTableView])
   {
     return 3;
   }
@@ -64,7 +64,7 @@
   if (prev) {
     [prev removeFromSuperview];
   }
-  if (!_searchResultObject.usersArray.count && !_searchResultObject.interestsArray.count && !_searchResultObject.causesArray.count) {
+  if (!self.searchResultObject.usersArray.count && !self.searchResultObject.interestsArray.count && !self.searchResultObject.causesArray.count) {
     UIView *noResultView = [self getNOResultLabel];
     noResultView.tag = 122;
     noResultView.center = CGPointMake(tableView.frame.size.width/2, noResultView.center.y);
@@ -73,15 +73,15 @@
   
   if(section == 0)
   {
-    return _searchResultObject.usersArray.count>3 ? 3 : _searchResultObject.usersArray.count;
+    return self.searchResultObject.usersArray.count>3 ? 3 : self.searchResultObject.usersArray.count;
   }
   else if(section == 1)
   {
-    return _searchResultObject.interestsArray.count>3 ? 3 : _searchResultObject.interestsArray.count;
+    return self.searchResultObject.interestsArray.count>3 ? 3 : self.searchResultObject.interestsArray.count;
   }
   else
   {
-    return _searchResultObject.causesArray.count>3 ? 3 : _searchResultObject.causesArray.count;
+    return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
   }
   
 }
@@ -147,7 +147,7 @@
   {
     LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCUserDetail *user = _searchResultObject.usersArray[indexPath.row];
+    LCUserDetail *user = self.searchResultObject.usersArray[indexPath.row];
     cell.user = user;
     return cell;
   }
@@ -155,7 +155,7 @@
   {
     LCInterestsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCInterestsTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCInterest *interest = _searchResultObject.interestsArray[indexPath.row];
+    LCInterest *interest = self.searchResultObject.interestsArray[indexPath.row];
     cell.interest = interest;
     return cell;
   }
@@ -163,7 +163,7 @@
   {
     LCCausesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCCausesTableViewCell"];
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCCause *cause = _searchResultObject.causesArray[indexPath.row];
+    LCCause *cause = self.searchResultObject.causesArray[indexPath.row];
     cell.cause= cause;
     return cell;
   }
@@ -179,7 +179,7 @@
     {
       UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
       LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-      vc.userDetail = _searchResultObject.usersArray[indexPath.row];
+      vc.userDetail = self.searchResultObject.usersArray[indexPath.row];
       [self.navigationController pushViewController:vc animated:YES];
     }
       break;
