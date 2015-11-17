@@ -34,6 +34,8 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:true];
   [appdel.menuButton setHidden:true];
+  UITableViewCell *cell = [_formTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:5]];
+  LCDLog(@"%@",cell);
 }
 
 - (void) viewWillDisappear:(BOOL)animated
