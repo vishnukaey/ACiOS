@@ -8,13 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum {
-  kMyProfile,
-  kIsFriend,
-  kNonFriend,
-  kRequestWaiting
-}FriendStatus;
-
 static NSString * kFriendStatusMyProfile = @"0";
 static NSString * kFriendStatusMyFriend = @"1";
 static NSString * kFriendStatusNonFriend = @"2";

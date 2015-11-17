@@ -1226,6 +1226,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Friend request sent %@",response);
+       [LCNotificationManager postFriendUpadteNotification:friendID forFriendStatus:kRequestWaiting];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -1250,6 +1251,7 @@ static LCAPIManager *sharedManager = nil;
      else
      {
        LCDLog(@"Friend request cancelled \n %@",response);
+       [LCNotificationManager postFriendUpadteNotification:friendID forFriendStatus:kNonFriend];
        success(response);
      }
    } andFailure:^(NSString *error) {
@@ -1278,6 +1280,7 @@ static LCAPIManager *sharedManager = nil;
      {
        LCDLog(@"Friend request sent %@",response);
        success(response);
+       [LCNotificationManager postFriendUpadteNotification:FriendID forFriendStatus:kNonFriend];
        //Notify Profile
        NSDictionary *userInfo = @{@"status":@"deleted"};
        [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileFrinendsUpdateNotification object:nil userInfo:userInfo];
