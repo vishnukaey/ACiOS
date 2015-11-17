@@ -45,19 +45,24 @@
   [self changeSaveButtonState];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self.emailAddressField resignFirstResponder];
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
 
 - (IBAction)cancelAction:(id)sender {
   
-  [self.emailAddressField resignFirstResponder];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 - (IBAction)saveAction:(id)sender {
   
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
