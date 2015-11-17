@@ -55,13 +55,13 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - Event Comments API and pagination
 - (void)startFetchingResults
 {
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [super startFetchingResults];
   [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:nil withSuccess:^(id response, BOOL isMore) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }
