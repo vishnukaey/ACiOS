@@ -88,4 +88,14 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotification object:nil userInfo:userInfo];
 }
 
+#pragma mark - userUpdate notifications
++ (void)postFriendUpadteNotification :(NSString *)friendID forFriendStatus :(int)status
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  friend.isFriend = [NSString stringWithFormat:@"%d", status];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:friendStatusUpdatedNotification object:nil userInfo:userInfo];
+}
+
 @end
