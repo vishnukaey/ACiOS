@@ -26,7 +26,7 @@
 @property(nonatomic, retain) UIImage *photoPostPhoto;
 @property(nonatomic, retain) LCInterest *selectedInterest;
 @property(nonatomic, retain) LCCause *selectedCause;
-@property(nonatomic, assign) BOOL isEditing;
+@property(nonatomic, assign) BOOL isEditing, isImageEdited;
 
 @property(nonatomic, retain)LCSocialShareManager *TWsocialShare;
 
