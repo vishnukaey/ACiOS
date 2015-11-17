@@ -444,7 +444,11 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   fadedActivityView.hidden = false;
   if (_isEditing)
   {
-    [LCAPIManager updatePost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
+    UIImage *imageToUpload = nil;
+    if (self.isImageEdited) {
+      imageToUpload = postImageView.image;
+    }
+    [LCAPIManager updatePost:_postFeedObject withImage:imageToUpload withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
@@ -583,6 +587,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [postImageView setImage:normalzedImage];
   [self arrangePostImageView];
   [LCUtilityManager setLCStatusBarStyle];
+  
+  self.isImageEdited = YES;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
