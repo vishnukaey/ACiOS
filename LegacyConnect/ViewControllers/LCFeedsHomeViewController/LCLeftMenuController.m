@@ -117,7 +117,20 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [super viewWillDisappear:animated];
 }
 
+- (void)deselectCellAtIndexPath:(NSIndexPath*)indexpath
+{
+  if (!indexpath) {
+    indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
+  }
+  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[self.menuTable cellForRowAtIndexPath:indexpath];
+  [deSelectedCell setBackgroundColor:kDeSelectionColor];
+  [deSelectedCell.itemIcon setTintColor:kIconDeSelectionColor];
+}
+
 - (IBAction)profileButtonTapped:(id)sender {
+  
+  NSIndexPath *selectedIndexPath = [self.menuTable indexPathForSelectedRow];
+  [self deselectCellAtIndexPath:selectedIndexPath];
   [delegate_ leftMenuItemSelectedAtIndex:5];
 }
 
@@ -164,9 +177,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
-  [deSelectedCell setBackgroundColor:kDeSelectionColor];
-  [deSelectedCell.itemIcon setTintColor:kIconDeSelectionColor];
+  [self deselectCellAtIndexPath:indexPath];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
