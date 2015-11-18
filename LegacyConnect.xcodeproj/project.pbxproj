@@ -39,6 +39,12 @@
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; settings = {ASSET_TAGS = (); }; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
 		0B6F8C671BD90AB000A0F33E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F8C661BD90AB000A0F33E /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
+		0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */; settings = {ASSET_TAGS = (); }; };
+		0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B775D8F1BE1F25B008B5B6F /* LCMyLegacyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D841BE1F25B008B5B6F /* LCMyLegacyURLViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B775D901BE1F25B008B5B6F /* LCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D871BE1F25B008B5B6F /* LCSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B775D911BE1F25B008B5B6F /* LCUpdateEmailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D8A1BE1F25B008B5B6F /* LCUpdateEmailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0B775D921BE1F25B008B5B6F /* LCPrivacyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D8D1BE1F25B008B5B6F /* LCPrivacyViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B822C9F1BA9408200D78536 /* LCSpecialContainerView.m */; };
 		0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8574FD1B9D62B000FD8766 /* LCUserTableViewCell.m */; };
 		0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8575011B9D644D00FD8766 /* LCInterestsTableViewCell.m */; };
@@ -241,6 +247,17 @@
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
 		0B6F8C661BD90AB000A0F33E /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Storyboards/Settings.storyboard; sourceTree = "<group>"; };
+		0B775D801BE1F25B008B5B6F /* LCChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCChangePasswordViewController.h; sourceTree = "<group>"; };
+		0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCChangePasswordViewController.m; sourceTree = "<group>"; };
+		0B775D831BE1F25B008B5B6F /* LCMyLegacyURLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCMyLegacyURLViewController.h; sourceTree = "<group>"; };
+		0B775D841BE1F25B008B5B6F /* LCMyLegacyURLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMyLegacyURLViewController.m; sourceTree = "<group>"; };
+		0B775D861BE1F25B008B5B6F /* LCSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCSettingsViewController.h; sourceTree = "<group>"; };
+		0B775D871BE1F25B008B5B6F /* LCSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCSettingsViewController.m; sourceTree = "<group>"; };
+		0B775D891BE1F25B008B5B6F /* LCUpdateEmailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCUpdateEmailViewController.h; sourceTree = "<group>"; };
+		0B775D8A1BE1F25B008B5B6F /* LCUpdateEmailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUpdateEmailViewController.m; sourceTree = "<group>"; };
+		0B775D8C1BE1F25B008B5B6F /* LCPrivacyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCPrivacyViewController.h; sourceTree = "<group>"; };
+		0B775D8D1BE1F25B008B5B6F /* LCPrivacyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCPrivacyViewController.m; sourceTree = "<group>"; };
 		0B822C9E1BA9408200D78536 /* LCSpecialContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSpecialContainerView.h; path = CustomViews/LCSpecialContainerView/LCSpecialContainerView.h; sourceTree = "<group>"; };
 		0B822C9F1BA9408200D78536 /* LCSpecialContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSpecialContainerView.m; path = CustomViews/LCSpecialContainerView/LCSpecialContainerView.m; sourceTree = "<group>"; };
 		0B8574FC1B9D62B000FD8766 /* LCUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserTableViewCell.h; path = CustomViews/LCUserTableViewCell/LCUserTableViewCell.h; sourceTree = "<group>"; };
@@ -726,6 +743,64 @@
 			name = LCFriend;
 			sourceTree = "<group>";
 		};
+		0B775D7E1BE1F25B008B5B6F /* LCSettings */ = {
+			isa = PBXGroup;
+			children = (
+				0B775D7F1BE1F25B008B5B6F /* LCChangePassword */,
+				0B775D821BE1F25B008B5B6F /* LCMyLegacyURL */,
+				0B775D851BE1F25B008B5B6F /* LCSettingsViewController */,
+				0B775D881BE1F25B008B5B6F /* LCUpdateEmailViewController */,
+				0B775D8B1BE1F25B008B5B6F /* LCVPrivacyViewController */,
+			);
+			name = LCSettings;
+			path = ViewControllers/LCSettings;
+			sourceTree = "<group>";
+		};
+		0B775D7F1BE1F25B008B5B6F /* LCChangePassword */ = {
+			isa = PBXGroup;
+			children = (
+				0B775D801BE1F25B008B5B6F /* LCChangePasswordViewController.h */,
+				0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */,
+			);
+			path = LCChangePassword;
+			sourceTree = "<group>";
+		};
+		0B775D821BE1F25B008B5B6F /* LCMyLegacyURL */ = {
+			isa = PBXGroup;
+			children = (
+				0B775D831BE1F25B008B5B6F /* LCMyLegacyURLViewController.h */,
+				0B775D841BE1F25B008B5B6F /* LCMyLegacyURLViewController.m */,
+			);
+			path = LCMyLegacyURL;
+			sourceTree = "<group>";
+		};
+		0B775D851BE1F25B008B5B6F /* LCSettingsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B775D861BE1F25B008B5B6F /* LCSettingsViewController.h */,
+				0B775D871BE1F25B008B5B6F /* LCSettingsViewController.m */,
+			);
+			path = LCSettingsViewController;
+			sourceTree = "<group>";
+		};
+		0B775D881BE1F25B008B5B6F /* LCUpdateEmailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B775D891BE1F25B008B5B6F /* LCUpdateEmailViewController.h */,
+				0B775D8A1BE1F25B008B5B6F /* LCUpdateEmailViewController.m */,
+			);
+			path = LCUpdateEmailViewController;
+			sourceTree = "<group>";
+		};
+		0B775D8B1BE1F25B008B5B6F /* LCVPrivacyViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B775D8C1BE1F25B008B5B6F /* LCPrivacyViewController.h */,
+				0B775D8D1BE1F25B008B5B6F /* LCPrivacyViewController.m */,
+			);
+			path = LCVPrivacyViewController;
+			sourceTree = "<group>";
+		};
 		0B822CA11BA9408D00D78536 /* LCSpecialContainerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1152,6 +1227,7 @@
 				0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */,
 				0B56A7F91B6A31CF0065C231 /* Notification.storyboard */,
 				96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */,
+				0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1173,6 +1249,7 @@
 				0BC755711B562AAD009CE7F3 /* Registration */,
 				0B35942F1B4E73220098C484 /* LCEmptyViewController */,
 				96B86A221B7A2106003EF7CA /* CreatePost */,
+				0B775D7E1BE1F25B008B5B6F /* LCSettings */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1651,6 +1728,7 @@
 				0BB33DD71BA81401009E6D0C /* comment_dummy.png in Resources */,
 				0BB33DD61BA81401009E6D0C /* clock.jpg in Resources */,
 				96B86A1B1B79C344003EF7CA /* CreatePost.storyboard in Resources */,
+				0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */,
 				0BB33DE51BA81401009E6D0C /* profileSettings.png in Resources */,
 				0B2A2CD11BF5B32100D20827 /* LCActionsHeader.xib in Resources */,
 				0BB33DD81BA81401009E6D0C /* communityMemebrs.png in Resources */,
@@ -1761,6 +1839,8 @@
 				0B2A2CD41BF5B46800D20827 /* LCActionsHeader.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */,
+				96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */,
+				0B775D921BE1F25B008B5B6F /* LCPrivacyViewController.m in Sources */,
 				0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */,
 				0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */,
 				0BF05A7D1B4E645400FF7B39 /* main.m in Sources */,
@@ -1773,6 +1853,7 @@
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
+				0B775D911BE1F25B008B5B6F /* LCUpdateEmailViewController.m in Sources */,
 				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,
 				0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */,
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
@@ -1785,8 +1866,12 @@
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
+				0B775D901BE1F25B008B5B6F /* LCSettingsViewController.m in Sources */,
 				CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */,
 				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
+				0B775D8F1BE1F25B008B5B6F /* LCMyLegacyURLViewController.m in Sources */,
+				96BD145E1B72166B004D5CFA /* NSError+MTLModelException.m in Sources */,
+				96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */,
 				0BEA5C901BEA1B0F00669C57 /* LCInterestsVC.m in Sources */,
@@ -1840,6 +1925,8 @@
 				0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
+				0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */,
+				96BD14581B72166B004D5CFA /* MTLTransformerErrorHandling.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
 				0BC0F8D81BF47962003694D6 /* LCActionsTableViewController.m in Sources */,

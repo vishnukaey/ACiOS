@@ -15,7 +15,7 @@
 #define STAGING_SERVER 2
 
 /* Set server to be used */
-#define CURRENT_SERVER STAGING_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -98,6 +98,7 @@ NSString *const kInterestsStoryBoardIdentifier = @"Interests";
 NSString *const kCommunityStoryBoardIdentifier = @"Actions";
 NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
+NSString *const kSettingsStoryBoardIdentifier = @"Settings";
 
 
 
@@ -106,6 +107,7 @@ NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
+NSString *const kSettingsStoryBoardID = @"LCSettingsViewController";
 
 
 
@@ -204,6 +206,17 @@ NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 NSString *const kTagobjId = @"tag_object_id";
 NSString *const kTagobjText= @"tag_object_text";
 NSString *const kTagobjType = @"tag_object_type";
+
+// Settings Section //
+NSString *const kSettingsScreenTitle = @"SETTINGS";
+NSString *const kEmailUpdateScreenTitle = @"EMAIL ADDRESS";
+
+NSString *const kAccountTitle = @"ACCOUNT";
+NSString *const kEmailAddress = @"Email Address";
+NSString *const kChangePassword = @"Change Password";
+NSString *const kMyLegacyURL = @"My Legacy URL";
+NSString *const kPrivacy = @"Privacy";
+NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";
 
