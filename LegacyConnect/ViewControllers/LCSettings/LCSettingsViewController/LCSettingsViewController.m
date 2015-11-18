@@ -240,7 +240,7 @@ static CGFloat kNumberOfSection =2;
 - (void)showChangePasswordScreen
 {
   LCChangePasswordViewController * passwordVc = [self.storyboard instantiateViewControllerWithIdentifier:@"LCChangePasswordVC"];
-  [self.navigationController pushViewController:passwordVc animated:YES];
+  [self presentViewController:passwordVc animated:YES completion:nil];
 }
 
 - (void)showLegacyURLScreen

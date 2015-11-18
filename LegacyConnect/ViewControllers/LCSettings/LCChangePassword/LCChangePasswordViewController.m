@@ -69,6 +69,17 @@
   [super didReceiveMemoryWarning];
 }
 
+- (IBAction)cancelAction:(id)sender {
+  
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)saveAction:(id)sender {
+  
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - UITextFieldDelegate implementation
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField

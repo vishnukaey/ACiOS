@@ -14,38 +14,15 @@
 
 @implementation LCUpdateEmailViewController
 
-#pragma mark - private method implementation
-
-- (void)changeSaveButtonState
-{
-  //[self.navigationItem.rightBarButtonItem setEnabled:(self.emailAddressField.text.length > 0)];
-}
-- (void)initialUISetUp
-{
-  //self.navigationController.navigationBarHidden = false;
-  //self.title = kEmailUpdateScreenTitle;
-//  UIBarButtonItem * saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-//                                                                               target:self
-//                                                                               action:@selector(saveButtonPressed:)];
-//  [saveButton setTintColor:[UIColor blackColor]];
-//  self.navigationItem.rightBarButtonItem = saveButton;
-}
-
-- (void)saveButtonPressed:(id)sender {
-  [self.navigationController popViewControllerAnimated:YES];
-}
-
-
 #pragma mark - view life cycle
 - (void)viewDidLoad {
+  
   [super viewDidLoad];
   [self initialUISetUp];
-  [self.emailAddressField setText:self.emailAddress];
-  [self.emailAddressField becomeFirstResponder];
-  [self changeSaveButtonState];
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
+  
   [super viewWillDisappear:animated];
   [self.emailAddressField resignFirstResponder];
 }
@@ -54,6 +31,30 @@
   [super didReceiveMemoryWarning];
 }
 
+#pragma mark - private method implementation
+
+- (void)initialUISetUp
+{
+  self.navigationController.navigationBarHidden = false;
+  
+  [self.emailAddressField setText:self.emailAddress];
+  [self.emailAddressField becomeFirstResponder];
+  [self changeSaveButtonState];
+}
+
+- (void)changeSaveButtonState
+{
+  //[self.navigationItem.rightBarButtonItem setEnabled:(self.emailAddressField.text.length > 0)];
+  if ([LCUtilityManager isEmptyString:self.emailAddressField.text]) {
+    [saveButton setEnabled:NO];
+  }
+  else {
+    [saveButton setEnabled:YES];
+  }
+}
+
+
+#pragma mark - Action methods
 - (IBAction)cancelAction:(id)sender {
   
   [self dismissViewControllerAnimated:YES completion:nil];

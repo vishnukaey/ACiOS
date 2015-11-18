@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface LCUpdateEmailViewController : UIViewController
+{
+  
+  __weak IBOutlet UIButton *saveButton;
+}
 
 @property (strong, nonatomic) NSString * emailAddress;
 
