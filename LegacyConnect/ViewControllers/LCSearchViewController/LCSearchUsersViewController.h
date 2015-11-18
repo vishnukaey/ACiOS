@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JTTableViewController.h>
+#import "LCSearchUsersBC.h"
 
 @interface LCSearchUsersViewController : JTTableViewController
 
