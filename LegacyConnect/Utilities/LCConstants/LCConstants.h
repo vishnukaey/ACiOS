@@ -75,6 +75,7 @@ extern NSString *const kPostUnlikeURL;
 extern NSString *const kPostCommentURL;
 extern NSString *const kPostCommentsURL;
 extern NSString *const kPostMilestoneURL;
+extern NSString *const kGetNotificationURL;
 
 
 
@@ -179,6 +180,7 @@ extern NSString *const kEventDetailsUpdatedNotification;
 extern NSString *const kEventDeletedNotification;
 extern NSString *const kEventCreatedNotification;
 extern NSString *const friendStatusUpdatedNotification;
+extern NSString *const kNotificationCountUpdated;
 
 extern NSString *const kTWOauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;

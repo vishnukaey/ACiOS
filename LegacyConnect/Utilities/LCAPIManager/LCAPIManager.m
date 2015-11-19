@@ -245,6 +245,29 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
++ (void)getNotificationCountWithStatus:(void (^)(BOOL status))status
+{
+  NSString * url = [NSString stringWithFormat:@"%@%@",kBaseURL,kGetNotificationURL];
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       status(NO);
+     }
+     else
+     {
+       NSDictionary * dict = response[kResponseData][@"count"];
+       [[LCDataManager sharedDataManager] setNotificationCount:dict[@"notificationCount"]];
+       [[LCDataManager sharedDataManager] setRequestCount:dict[@"requestCount"]];
+       status(YES);
+     }
+   } andFailure:^(NSString *error) {
+     status(NO);
+   }];
+}
+
 
 
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure

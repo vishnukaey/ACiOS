@@ -98,4 +98,9 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:friendStatusUpdatedNotification object:nil userInfo:userInfo];
 }
 
++ (void)postNotificationCountUpdatedNotification
+{
+  [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCountUpdated object:nil userInfo:nil];
+}
+
 @end

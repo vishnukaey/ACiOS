@@ -25,4 +25,8 @@
 @property (nonatomic, retain) UIImage *userAvatarImage;
 @property (nonatomic, retain) UIImage *userHeaderImage;
 @property (assign) BOOL isActive;
+
+@property (strong, nonatomic) NSString *notificationCount;
+@property (strong, nonatomic) NSString *requestCount;
+
 @end
