@@ -136,6 +136,8 @@
 		0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; settings = {ASSET_TAGS = (); }; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; settings = {ASSET_TAGS = (); }; };
+		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; settings = {ASSET_TAGS = (); }; };
+		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; settings = {ASSET_TAGS = (); }; };
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; settings = {ASSET_TAGS = (); }; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; settings = {ASSET_TAGS = (); }; };
 		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; settings = {ASSET_TAGS = (); }; };
@@ -398,6 +400,10 @@
 		0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFullScreenImageVC.xib; sourceTree = "<group>"; };
 		1618309B1BDF45D4002D3539 /* LCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImage.h; path = Models/LCImage/LCImage.h; sourceTree = "<group>"; };
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
+		1687680D1BFDDA96001213D8 /* LCRecentNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRecentNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.h; sourceTree = "<group>"; };
+		1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRecentNotificationsVC.m; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.m; sourceTree = "<group>"; };
+		168768101BFDDAC3001213D8 /* LCRequestsNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRequestsNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRequestsNotificationsVC/LCRequestsNotificationsVC.h; sourceTree = "<group>"; };
+		168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRequestsNotificationsVC.m; path = ViewControllers/LCNotificationsViewController/LCRequestsNotificationsVC/LCRequestsNotificationsVC.m; sourceTree = "<group>"; };
 		169607E11BF06A1E0007A278 /* LCEventMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEventMembersViewController.h; path = LCEventMembersVC/LCEventMembersViewController.h; sourceTree = "<group>"; };
 		169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventMembersViewController.m; path = LCEventMembersVC/LCEventMembersViewController.m; sourceTree = "<group>"; };
 		16D6AF491BF3481F00DBC025 /* LCGAManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGAManager.h; path = Utilities/LCGAManager/LCGAManager.h; sourceTree = "<group>"; };
@@ -710,6 +716,10 @@
 			children = (
 				0B56A8031B6A46AD0065C231 /* LCNotificationsViewController.h */,
 				0B56A8041B6A46AD0065C231 /* LCNotificationsViewController.m */,
+				1687680D1BFDDA96001213D8 /* LCRecentNotificationsVC.h */,
+				1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */,
+				168768101BFDDAC3001213D8 /* LCRequestsNotificationsVC.h */,
+				168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */,
 			);
 			name = LCNotificationsViewController;
 			sourceTree = "<group>";
@@ -1827,6 +1837,7 @@
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
 				0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */,
 				0BFBC7B91B81BC5100E75179 /* LCFriend.m in Sources */,
+				1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */,
 				0B8574FE1B9D62B000FD8766 /* LCUserTableViewCell.m in Sources */,
 				169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */,
 				0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */,
@@ -1839,7 +1850,6 @@
 				0B2A2CD41BF5B46800D20827 /* LCActionsHeader.m in Sources */,
 				0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */,
 				CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */,
-				96BD14351B721659004D5CFA /* EXTRuntimeExtensions.m in Sources */,
 				0B775D921BE1F25B008B5B6F /* LCPrivacyViewController.m in Sources */,
 				0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */,
 				0B822CA01BA9408200D78536 /* LCSpecialContainerView.m in Sources */,
@@ -1870,8 +1880,6 @@
 				CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */,
 				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
 				0B775D8F1BE1F25B008B5B6F /* LCMyLegacyURLViewController.m in Sources */,
-				96BD145E1B72166B004D5CFA /* NSError+MTLModelException.m in Sources */,
-				96BD145A1B72166B004D5CFA /* NSArray+MTLManipulationAdditions.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */,
 				0BEA5C901BEA1B0F00669C57 /* LCInterestsVC.m in Sources */,
@@ -1890,6 +1898,7 @@
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
+				168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */,
 				0B2A2CD81BF5B9F800D20827 /* NSURL+LCURLCategory.m in Sources */,
 				0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */,
 				0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */,
@@ -1926,7 +1935,6 @@
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
 				0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */,
-				96BD14581B72166B004D5CFA /* MTLTransformerErrorHandling.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */,
 				0BC0F8D81BF47962003694D6 /* LCActionsTableViewController.m in Sources */,
