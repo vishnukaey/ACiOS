@@ -160,7 +160,8 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (self.isFirstLaunch) {
+  if (self.isFirstLaunch)
+  {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     LCMenuItemCell * cell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setBackgroundColor:kDeSelectionColor];
