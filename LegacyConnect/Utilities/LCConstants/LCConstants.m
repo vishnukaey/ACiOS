@@ -88,6 +88,7 @@ NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";
 NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
+NSString *const kGetNotificationURL = @"api/user/notificationCount";
 
 
 
@@ -185,6 +186,8 @@ NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpd
 NSString *const kUserProfileImpactsUpdateNotification = @"userProfileImpactsUpdated";
 NSString *const kfeedUpdatedotification = @"feedUpdated";
 NSString *const friendStatusUpdatedNotification = @"friendUpdated";
+NSString *const kNotificationCountUpdated = @"notificationCountUpdated";
+
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";

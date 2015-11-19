@@ -25,6 +25,7 @@
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -524,19 +525,20 @@
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CUx-LS-Vn6">
                                                     <rect key="frame" x="337" y="11" width="23" height="23"/>
+                                                    <color key="backgroundColor" red="0.93725490196078431" green="0.39215686274509803" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="23" id="sYg-Hf-QG2"/>
                                                         <constraint firstAttribute="height" constant="23" id="udM-ph-JAL"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fwr-8Q-mnu">
-                                                    <rect key="frame" x="327" y="11" width="23" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="Fwr-8Q-mnu">
+                                                    <rect key="frame" x="337" y="11" width="23" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="23" id="jM9-Ev-cnm"/>
                                                         <constraint firstAttribute="width" constant="23" id="v4w-KR-gGT"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="12"/>
+                                                    <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fET-TV-Lgi">
@@ -553,7 +555,7 @@
                                                 <constraint firstAttribute="centerY" secondItem="CUx-LS-Vn6" secondAttribute="centerY" id="41m-fw-ZKp"/>
                                                 <constraint firstAttribute="bottom" secondItem="fET-TV-Lgi" secondAttribute="bottom" id="66c-eD-hfZ"/>
                                                 <constraint firstAttribute="centerY" secondItem="Thu-Bd-GfT" secondAttribute="centerY" id="6tb-MB-Pp4"/>
-                                                <constraint firstAttribute="trailing" secondItem="Fwr-8Q-mnu" secondAttribute="trailing" constant="25" id="Cc8-6L-dit"/>
+                                                <constraint firstAttribute="trailing" secondItem="Fwr-8Q-mnu" secondAttribute="trailing" constant="15" id="Cc8-6L-dit"/>
                                                 <constraint firstItem="Sat-qL-U5c" firstAttribute="leading" secondItem="Thu-Bd-GfT" secondAttribute="trailing" constant="25" id="FQ3-lK-dSy"/>
                                                 <constraint firstItem="CUx-LS-Vn6" firstAttribute="leading" secondItem="Sat-qL-U5c" secondAttribute="trailing" constant="25" id="HDv-iw-QBo"/>
                                                 <constraint firstItem="fET-TV-Lgi" firstAttribute="leading" secondItem="Thu-Bd-GfT" secondAttribute="trailing" constant="10" id="Ifn-ad-4OQ"/>

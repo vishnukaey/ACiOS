@@ -176,10 +176,10 @@ static NSString *kTitle = @"MY FEED";
   appdel.menuButton = menuButton;
   menuButton.badgeLabel.text = @"2";
   
-  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(10, menuButton.frame.size.height/2 - 12, 25, 25)];
+  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(5, menuButton.frame.size.height/2 - 12, 30, 30)];
   icon_.image = [UIImage imageNamed:@"MenuButton"];
   [menuButton addSubview:icon_];
-//  [menuButton setBackgroundColor:[UIColor blueColor]];
+  [menuButton bringSubviewToFront:menuButton.badgeLabel];
 }
 
 #pragma mark - button actions
