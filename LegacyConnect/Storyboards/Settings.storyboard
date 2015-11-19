@@ -11,6 +11,7 @@
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
+            <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
             <string>Gotham-Book</string>
@@ -24,8 +25,11 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
@@ -80,7 +84,7 @@
                                             </constraints>
                                         </view>
                                         <barButtonItem key="rightBarButtonItem" width="44" style="done" id="oX6-pN-bNn">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mu0-F5-EHJ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mu0-F5-EHJ">
                                                 <rect key="frame" x="315" y="7" width="44" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
@@ -119,9 +123,6 @@
                                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="Ywk-Tk-Ost" id="guZ-Yn-ULC"/>
-                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -381,17 +382,101 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1Ed-qV-FEe">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="deviceRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCSettingsHeaderCell" id="19e-Fc-7yK">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="19e-Fc-7yK" id="QZs-Yf-tJX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFI-RO-wcL">
+                                                    <rect key="frame" x="15" y="24" width="86" height="11"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="xFI-RO-wcL" firstAttribute="leading" secondItem="QZs-Yf-tJX" secondAttribute="leading" constant="15" id="dmB-1q-82G"/>
+                                                <constraint firstAttribute="bottom" secondItem="xFI-RO-wcL" secondAttribute="bottom" constant="8" id="q13-G6-OXM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LCSettingsCell" textLabel="Rt2-1U-Sbv" detailTextLabel="BUg-uN-i0R" style="IBUITableViewCellStyleValue1" id="aVt-UO-elu">
+                                        <rect key="frame" x="0.0" y="94" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aVt-UO-elu" id="F0Q-hJ-hEJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rt2-1U-Sbv">
+                                                    <rect key="frame" x="15" y="14" width="30" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BUg-uN-i0R">
+                                                    <rect key="frame" x="299" y="14" width="41" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.75" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCSettingsSignOutCell" id="EIg-D5-tSr">
+                                        <rect key="frame" x="0.0" y="138" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EIg-D5-tSr" id="tVq-iz-cx6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FJ-fk-chh">
+                                                    <rect key="frame" x="157" y="14" width="62" height="15"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.94117647059999998" green="0.3921568627" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7FJ-fk-chh" firstAttribute="centerY" secondItem="tVq-iz-cx6" secondAttribute="centerY" id="EzC-0a-IMp"/>
+                                                <constraint firstItem="7FJ-fk-chh" firstAttribute="centerX" secondItem="tVq-iz-cx6" secondAttribute="centerX" id="RGv-46-mzs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jdy-Nc-YC4" id="Fhf-3h-BmN"/>
+                                    <outlet property="delegate" destination="jdy-Nc-YC4" id="Mtw-Td-Opa"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="ip3-Nt-3R7" firstAttribute="top" secondItem="1Ed-qV-FEe" secondAttribute="bottom" id="3fj-6a-lTA"/>
                             <constraint firstItem="ip3-Nt-3R7" firstAttribute="top" secondItem="Zu9-zp-Iu9" secondAttribute="bottom" id="AxF-GJ-eak"/>
                             <constraint firstItem="Zu9-zp-Iu9" firstAttribute="top" secondItem="f2l-DC-1Fx" secondAttribute="bottom" id="Din-0u-6Gy"/>
                             <constraint firstAttribute="trailing" secondItem="f2l-DC-1Fx" secondAttribute="trailing" id="Jdk-36-4va"/>
                             <constraint firstItem="f2l-DC-1Fx" firstAttribute="leading" secondItem="Wwe-8S-kr6" secondAttribute="leading" id="NUH-cr-2to"/>
+                            <constraint firstAttribute="trailing" secondItem="1Ed-qV-FEe" secondAttribute="trailing" id="RXf-aM-Uoz"/>
+                            <constraint firstItem="1Ed-qV-FEe" firstAttribute="leading" secondItem="Wwe-8S-kr6" secondAttribute="leading" id="ddd-Re-2lM"/>
                             <constraint firstItem="f2l-DC-1Fx" firstAttribute="top" secondItem="yoQ-Ww-7dt" secondAttribute="bottom" id="fhk-Ni-f7t"/>
                             <constraint firstItem="Zu9-zp-Iu9" firstAttribute="leading" secondItem="Wwe-8S-kr6" secondAttribute="leading" id="jfn-r1-D2i"/>
                             <constraint firstAttribute="trailing" secondItem="Zu9-zp-Iu9" secondAttribute="trailing" id="sdY-Ob-ttl"/>
+                            <constraint firstItem="1Ed-qV-FEe" firstAttribute="top" secondItem="f2l-DC-1Fx" secondAttribute="bottom" id="zAj-xf-o38"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Zu9-zp-Iu9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -464,8 +549,7 @@
                                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="saveAction:" destination="Ywk-Tk-Ost" eventType="touchUpInside" id="RmH-60-UTe"/>
-                                                    <action selector="saveAction:" destination="lNc-90-QyC" eventType="touchUpInside" id="WeJ-rw-BzL"/>
+                                                    <action selector="saveAction:" destination="lNc-90-QyC" eventType="touchUpInside" id="a9W-94-Fwi"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -504,10 +588,7 @@ Legacy Connect account</string>
                                                 </constraints>
                                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="lNc-90-QyC" id="gNc-0i-uqU"/>
-                                                </connections>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gob-eB-x5N" userLabel="Border View">
                                                 <rect key="frame" x="15" y="44" width="360" height="1"/>
@@ -516,17 +597,14 @@ Legacy Connect account</string>
                                                     <constraint firstAttribute="height" constant="1" id="rSK-Dl-vFb"/>
                                                 </constraints>
                                             </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XNZ-Ml-hHi" customClass="LCLoginTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XNZ-Ml-hHi">
                                                 <rect key="frame" x="15" y="45" width="345" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="D2a-D2-EE1"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="lNc-90-QyC" id="Ypm-OI-kdi"/>
-                                                </connections>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3c-x0-zZY" userLabel="Border View">
                                                 <rect key="frame" x="0.0" y="89" width="375" height="1"/>
@@ -584,8 +662,9 @@ Legacy Connect account</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="confirmPasswordField" destination="XNZ-Ml-hHi" id="b5L-wz-dvC"/>
-                        <outlet property="passwordField" destination="8aa-0P-H9p" id="S0N-MF-gOS"/>
+                        <outlet property="confirmPasswordField" destination="XNZ-Ml-hHi" id="hL3-aZ-fQx"/>
+                        <outlet property="newPasswordField" destination="8aa-0P-H9p" id="XgT-7T-Igo"/>
+                        <outlet property="saveButton" destination="7ZJ-9r-ziY" id="3b6-aW-PPD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVJ-qJ-LkO" userLabel="First Responder" sceneMemberID="firstResponder"/>

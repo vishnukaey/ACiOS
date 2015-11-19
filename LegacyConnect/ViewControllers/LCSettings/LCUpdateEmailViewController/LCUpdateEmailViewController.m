@@ -39,13 +39,15 @@
   
   [self.emailAddressField setText:self.emailAddress];
   [self.emailAddressField becomeFirstResponder];
-  [self changeSaveButtonState];
+  [self.emailAddressField addTarget:self
+                    action:@selector(validateFields)
+          forControlEvents:UIControlEventEditingChanged];
+  [saveButton setEnabled:NO];
 }
 
-- (void)changeSaveButtonState
+- (void)validateFields
 {
-  //[self.navigationItem.rightBarButtonItem setEnabled:(self.emailAddressField.text.length > 0)];
-  if ([LCUtilityManager isEmptyString:self.emailAddressField.text]) {
+  if ([LCUtilityManager isEmptyString:self.emailAddressField.text] || [self.emailAddressField.text isEqualToString:self.emailAddress]) {
     [saveButton setEnabled:NO];
   }
   else {
@@ -62,15 +64,15 @@
 
 
 - (IBAction)saveAction:(id)sender {
-  
-  [self dismissViewControllerAnimated:YES completion:nil];
+  if(![LCUtilityManager validateEmail:self.emailAddressField.text]) {
+    
+    [LCUtilityManager showAlertViewWithTitle:nil
+                                  andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
+  }
+  else {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }
 }
 
-
-#pragma mark - UITextFieldDelegate implementation
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-  [self changeSaveButtonState];
-  return YES;
-}
 @end
