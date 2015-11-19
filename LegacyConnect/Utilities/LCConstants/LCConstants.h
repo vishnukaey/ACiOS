@@ -77,7 +77,12 @@ extern NSString *const kPostCommentsURL;
 extern NSString *const kPostMilestoneURL;
 extern NSString *const kGetNotificationURL;
 
-
+extern NSString *const kGetSettignsURL;
+extern NSString *const kChangeEmailURL;
+extern NSString *const kChangePasswordURL;
+extern NSString *const kChangeLegacyurlURL;
+extern NSString *const kChangePrivacyURL;
+extern NSString *const kSignOutURL;
 
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;
@@ -123,6 +128,11 @@ extern NSString *const kPostCommentKey;
 extern NSString *const kPostCommentsKey;
 extern NSString *const kPostCommentIdKey;
 extern NSString *const kLastIdKey;
+
+extern NSString *const kchangeEmailKey;
+extern NSString *const kchangePasswordKey;
+extern NSString *const kchangePrivacyKey;
+extern NSString *const kchangeLCURLKey;
 
 extern NSString *const kStatusCodeSuccess;
 extern NSString *const kStatusCodeFailure;

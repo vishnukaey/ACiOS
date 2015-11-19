@@ -90,7 +90,12 @@ NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
 NSString *const kGetNotificationURL = @"api/user/notificationCount";
 
-
+NSString *const kGetSettignsURL = @"api/user/settings";
+NSString *const kChangeEmailURL = @"api/user/changeEmail";
+NSString *const kChangePasswordURL = @"api/user/changePassword";
+NSString *const kChangeLegacyurlURL = @"api/user/changeLegacyUrl";
+NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
+NSString *const kSignOutURL = @"api/signout";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -137,6 +142,10 @@ NSString *const kLastIdKey = @"lastId";
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";
 
+NSString *const kchangeEmailKey = @"email";
+NSString *const kchangePasswordKey = @"newPassword";
+NSString *const kchangeLCURLKey = @"legacyUrl";
+NSString *const kchangePrivacyKey = @"privacy";
 
 NSString *const kStatusCodeSuccess = @"success";
 NSString *const kStatusCodeFailure = @"failure";
