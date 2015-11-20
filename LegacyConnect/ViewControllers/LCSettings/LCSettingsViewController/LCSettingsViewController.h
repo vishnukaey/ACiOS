@@ -14,7 +14,7 @@
 
 
 
-@interface LCSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, LCUpdateEmailDelegate, LCUpdateLegacyURLDelegate>
+@interface LCSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, LCUpdateEmailDelegate, LCUpdateLegacyURLDelegate,LCUpdatePrivacyDelegate>
 {
   __weak IBOutlet UITableView *settingsTableView;
 }

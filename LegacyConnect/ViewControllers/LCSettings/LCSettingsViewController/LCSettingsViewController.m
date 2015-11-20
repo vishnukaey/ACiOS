@@ -224,6 +224,8 @@ static CGFloat kNumberOfSection = 2;
 - (void)showPrivacyScreen
 {
   LCPrivacyViewController * privacyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCPrivacyVC"];
+  privacyVC.settingsData = _settingsData;
+  privacyVC.delegate = self;
   [self presentViewController:privacyVC animated:YES completion:nil];
 }
 

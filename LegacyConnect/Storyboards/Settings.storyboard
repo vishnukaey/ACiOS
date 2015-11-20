@@ -31,6 +31,8 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
@@ -50,8 +52,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-BM-izc">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-BM-izc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
@@ -106,22 +108,47 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Decide who can see your profile and posts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bn0-aC-Lh3">
-                                <rect key="frame" x="8" y="82" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WA7-JA-T4V">
-                                <rect key="frame" x="0.0" y="126" width="375" height="541"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-K2-uOn" userLabel="Lable View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decide who can see your profile and posts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMj-df-3LV">
+                                        <rect key="frame" x="15" y="20" width="345" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="JCV-JO-BPP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7Qm-pT-H1G"/>
+                                    <constraint firstItem="PMj-df-3LV" firstAttribute="leading" secondItem="Qty-K2-uOn" secondAttribute="leading" constant="15" id="AIg-7K-Fup"/>
+                                    <constraint firstAttribute="bottom" secondItem="PMj-df-3LV" secondAttribute="bottom" id="K2o-37-2Ci"/>
+                                    <constraint firstAttribute="trailing" secondItem="PMj-df-3LV" secondAttribute="trailing" constant="15" id="cLW-bD-qKa"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="WA7-JA-T4V">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.93725490196078431" green="0.39215686274509803" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="LCPrivacyCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCPrivacyCell" id="nbo-B5-XCl">
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="LCPrivacyCell" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="LCPrivacyCell" textLabel="fww-cg-a3W" style="IBUITableViewCellStyleDefault" id="nbo-B5-XCl">
                                         <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nbo-B5-XCl" id="Ihg-la-Bnn">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fww-cg-a3W">
+                                                    <rect key="frame" x="15" y="0.0" width="321" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -132,7 +159,19 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.94509803920000002" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Rog-se-MYl" firstAttribute="top" secondItem="WA7-JA-T4V" secondAttribute="bottom" id="7MJ-C6-Lsj"/>
+                            <constraint firstAttribute="trailing" secondItem="IWt-BM-izc" secondAttribute="trailing" id="C8c-ze-fxZ"/>
+                            <constraint firstItem="IWt-BM-izc" firstAttribute="leading" secondItem="wZP-DY-J2w" secondAttribute="leading" id="KBI-Sf-Def"/>
+                            <constraint firstAttribute="trailing" secondItem="WA7-JA-T4V" secondAttribute="trailing" id="LKS-hB-Uxx"/>
+                            <constraint firstAttribute="trailing" secondItem="Qty-K2-uOn" secondAttribute="trailing" id="MNx-pX-isk"/>
+                            <constraint firstItem="Qty-K2-uOn" firstAttribute="leading" secondItem="wZP-DY-J2w" secondAttribute="leading" id="eAa-nx-b4O"/>
+                            <constraint firstItem="WA7-JA-T4V" firstAttribute="leading" secondItem="wZP-DY-J2w" secondAttribute="leading" id="iIx-OA-mR7"/>
+                            <constraint firstItem="WA7-JA-T4V" firstAttribute="top" secondItem="Qty-K2-uOn" secondAttribute="bottom" id="ovc-j1-iuz"/>
+                            <constraint firstItem="Qty-K2-uOn" firstAttribute="top" secondItem="IWt-BM-izc" secondAttribute="bottom" id="ozy-Mb-EjS"/>
+                            <constraint firstItem="IWt-BM-izc" firstAttribute="top" secondItem="oBF-hp-1ik" secondAttribute="bottom" id="y4I-fK-WFm"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

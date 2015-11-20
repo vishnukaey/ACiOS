@@ -11,7 +11,7 @@
 @interface LCPrivacyViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray * dataSource;
-@property (nonatomic) NSIndexPath * selectedIndexPath;
+@property (nonatomic) NSInteger selectedIndex;
 @end
 
 #define kPrivacyCellIdentifier @"LCPrivacyCell"
@@ -21,9 +21,18 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+  headerView.backgroundColor = self.tableView.separatorColor;
+  self.tableView.tableHeaderView = headerView;
+  
+  UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+  footerView.backgroundColor = self.tableView.separatorColor;
+  self.tableView.tableFooterView = footerView;
+  
   self.dataSource = @[@"Only Me", @"Friends Only", @"Public"];
-  self.selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-  [self.tableView reloadData];
+  _selectedIndex = [self.dataSource indexOfObject:_settingsData.privacy];
+  //[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +71,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPrivacyCellIdentifier];
   }
   [cell.textLabel setText:[self.dataSource objectAtIndex:indexPath.row]];
-  if (indexPath == self.selectedIndexPath)
+  if (indexPath.row == _selectedIndex)
   {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
   }
@@ -76,7 +85,7 @@
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  self.selectedIndexPath = indexPath;
+  _selectedIndex = indexPath.row;
   [self.tableView reloadData];
 }
 
