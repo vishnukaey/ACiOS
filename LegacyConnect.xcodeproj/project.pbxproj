@@ -117,7 +117,6 @@
 		0BDB92301BECD0E900D26D4C /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */; settings = {ASSET_TAGS = (); }; };
 		0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */; };
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
-		0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE437151B5D30090072600C /* LCTutorialContainerVC.m */; };
 		0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BEA5C901BEA1B0F00669C57 /* LCInterestsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C8F1BEA1B0F00669C57 /* LCInterestsVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C921BEA1B3B00669C57 /* LCActionsVC.m */; settings = {ASSET_TAGS = (); }; };
@@ -365,8 +364,6 @@
 		0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCWebServiceManager.m; path = Utilities/LCWebServiceManager/LCWebServiceManager.m; sourceTree = "<group>"; };
 		0BE2B9B61B58F7B80026E607 /* LCChooseCausesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseCausesCollectionViewCell.h; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.h; sourceTree = "<group>"; };
 		0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCChooseCausesCollectionViewCell.m; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.m; sourceTree = "<group>"; };
-		0BE437141B5D30090072600C /* LCTutorialContainerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialContainerVC.h; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.h; sourceTree = "<group>"; };
-		0BE437151B5D30090072600C /* LCTutorialContainerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialContainerVC.m; path = ViewControllers/LCTutorialContainerVC/LCTutorialContainerVC.m; sourceTree = "<group>"; };
 		0BEA5C8B1BEA1ACB00669C57 /* LCMileStonesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCMileStonesVC.h; path = ViewControllers/LCProfileVC/LCMileStonesVC.h; sourceTree = "<group>"; };
 		0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCMileStonesVC.m; path = ViewControllers/LCProfileVC/LCMileStonesVC.m; sourceTree = "<group>"; };
 		0BEA5C8E1BEA1B0F00669C57 /* LCInterestsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestsVC.h; path = ViewControllers/LCProfileVC/LCInterestsVC.h; sourceTree = "<group>"; };
@@ -1050,7 +1047,6 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				0BE437171B5D300E0072600C /* LCTutorialContainerVC */,
 				0BD5936F1B57786200658E99 /* LCFinalTutorialVC */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
@@ -1125,15 +1121,6 @@
 				0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */,
 			);
 			name = LCChooseCausesCollectionViewCell;
-			sourceTree = "<group>";
-		};
-		0BE437171B5D300E0072600C /* LCTutorialContainerVC */ = {
-			isa = PBXGroup;
-			children = (
-				0BE437141B5D30090072600C /* LCTutorialContainerVC.h */,
-				0BE437151B5D30090072600C /* LCTutorialContainerVC.m */,
-			);
-			name = LCTutorialContainerVC;
 			sourceTree = "<group>";
 		};
 		0BEC736B1BA0301400D97BCA /* Helpers */ = {
@@ -1891,7 +1878,6 @@
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
 				0B775D901BE1F25B008B5B6F /* LCSettingsViewController.m in Sources */,
 				CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */,
-				0BE437161B5D30090072600C /* LCTutorialContainerVC.m in Sources */,
 				0B775D8F1BE1F25B008B5B6F /* LCMyLegacyURLViewController.m in Sources */,
 				CEBCEC611B68994500F0116E /* LCAllInterestVC.m in Sources */,
 				CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */,

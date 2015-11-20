@@ -106,7 +106,7 @@ NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 NSString *const kSettingsStoryBoardIdentifier = @"Settings";
 
-
+NSString *const kTutorialPresentKey = @"tutorialPresented";
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
 NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";

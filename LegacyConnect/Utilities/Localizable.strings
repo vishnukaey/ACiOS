@@ -50,3 +50,7 @@
 "attend" = "Attend";
 "attending" = "Attending";
 "follow_event_message" = "Follow the event to view and post comments";
+
+//----tutorial----//
+"menu_tutorial" = "Explore Legacy Connect through the menu";
+"gibutton_tutorial" = "Create and share your impact here";

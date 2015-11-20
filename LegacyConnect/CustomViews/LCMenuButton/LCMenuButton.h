@@ -11,5 +11,6 @@
 @interface LCMenuButton : UIButton
 
 @property(nonatomic, retain)UILabel *badgeLabel;
+@property(nonatomic, retain) UIImageView *iconImage;//property used to place the tutorial page button
 
 @end

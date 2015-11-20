@@ -93,7 +93,7 @@ extern NSString *const kNotificationStoryBoardIdentifier;
 extern NSString *const kCreatePostStoryBoardIdentifier;
 extern NSString *const kSettingsStoryBoardIdentifier;
 
-
+extern NSString *const kTutorialPresentKey;
 
 extern NSString *const kHomeFeedsStoryBoardID;
 extern NSString *const kChooseCommunityStoryBoardID;
