@@ -43,12 +43,12 @@ static NSString *kSettingsIcon = @"SettingsIcon";
     case 2:
       cellText = NSLocalizedString(@"Notifications", nil) ;
       cellIconImag = [UIImage imageNamed:kNotificationsIcon];
+      [self updateNotificationCount];
       break;
       
     case 3:
       cellText = NSLocalizedString(@"Settings", nil) ;
       cellIconImag = [UIImage imageNamed:kSettingsIcon];
-      [self updateNotificationCount];
       break;
       
     default:

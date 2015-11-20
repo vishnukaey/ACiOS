@@ -245,29 +245,6 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-+ (void)getNotificationCountWithStatus:(void (^)(BOOL status))status
-{
-  NSString * url = [NSString stringWithFormat:@"%@%@",kBaseURL,kGetNotificationURL];
-  NSString * userToken = [LCDataManager sharedDataManager].userToken;
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
-   {
-     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
-     {
-       status(NO);
-     }
-     else
-     {
-       NSDictionary * dict = response[kResponseData][@"count"];
-       [[LCDataManager sharedDataManager] setNotificationCount:dict[@"notificationCount"]];
-       [[LCDataManager sharedDataManager] setRequestCount:dict[@"requestCount"]];
-       status(YES);
-     }
-   } andFailure:^(NSString *error) {
-     status(NO);
-   }];
-}
-
 
 
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
@@ -2030,6 +2007,65 @@ static LCAPIManager *sharedManager = nil;
      failure(error);
    }];
   
+}
+
++ (void)getNotificationCountWithStatus:(void (^)(BOOL status))status
+{
+  NSString * url = [NSString stringWithFormat:@"%@%@",kBaseURL,kGetNotificationCountURL];
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       status(NO);
+     }
+     else
+     {
+       NSDictionary * dict = response[kResponseData][@"count"];
+       [[LCDataManager sharedDataManager] setNotificationCount:dict[@"notificationCount"]];
+       [[LCDataManager sharedDataManager] setRequestCount:dict[@"requestCount"]];
+       status(YES);
+     }
+   } andFailure:^(NSString *error) {
+     status(NO);
+   }];
+}
+
++ (void)getRecentNotificationsWithLastId:(NSString*)lastId withSuccess:(void(^)(id response))success andFailure:(void(^)(NSString*error))failure
+{
+  NSMutableString * url = [NSMutableString stringWithFormat:@"%@%@",kBaseURL,kGetRecentNotificationsURL];
+  if (lastId) {
+    [url appendString:[NSString stringWithFormat:@"?lastId=%@",lastId]];
+  }
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response) {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      failure(response[kResponseMessage]);
+    }
+    else
+    {
+      NSError *error = nil;
+      NSArray *data= response[kResponseData];
+      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCRecentNotification class] fromJSONArray:data error:&error];
+      if(!error)
+      {
+        success(responsesArray);
+      }
+      else
+      {
+        LCDLog(@"%@",error);
+        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+      }
+    }
+  } andFailure:^(NSString *error) {
+    LCDLog(@"%@",error);
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
 }
 
 

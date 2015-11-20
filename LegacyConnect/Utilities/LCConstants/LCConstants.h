@@ -75,7 +75,8 @@ extern NSString *const kPostUnlikeURL;
 extern NSString *const kPostCommentURL;
 extern NSString *const kPostCommentsURL;
 extern NSString *const kPostMilestoneURL;
-extern NSString *const kGetNotificationURL;
+extern NSString *const kGetNotificationCountURL;
+extern NSString *const kGetRecentNotificationsURL;
 
 
 
