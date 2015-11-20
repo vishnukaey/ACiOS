@@ -7,10 +7,6 @@
 //
 
 #import "LCSettingsViewController.h"
-#import "LCUpdateEmailViewController.h"
-#import "LCChangePasswordViewController.h"
-#import "LCPrivacyViewController.h"
-#import "LCMyLegacyURLViewController.h"
 
 #define kIndexSectionAccount 0
 #define kIndexSectionSignOut 1
@@ -22,7 +18,7 @@
 #define kTextLeft @"left_text"
 #define kTextRight @"right_text"
 
-static CGFloat kNumberOfSection =2;
+static CGFloat kNumberOfSection = 2;
 
 @interface LCSettingsViewController ()
 
@@ -33,11 +29,23 @@ static CGFloat kNumberOfSection =2;
 
 @implementation LCSettingsViewController
 
-#pragma mark - private method implementation
+#pragma mark - view life cycle
 
-+ (NSString*)getStoryBoardIdentifier
+- (void)viewDidLoad
 {
-  return kStoryVoardId;
+  [super viewDidLoad];
+  [self initialSetUp];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  
+  [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO];
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
 }
 
 #pragma mark - private method implementation
@@ -47,50 +55,40 @@ static CGFloat kNumberOfSection =2;
   
 }
 
-- (void)initialUISetUp
+- (void)initialSetUp
 {
-  //self.clearsSelectionOnViewWillAppear = NO;
-  _settingsTableView.dataSource = self;
-  _settingsTableView.delegate = self;
-  // self.navigationController.navigationBarHidden = false;
-  //self.title = kSettingsScreenTitle;
+  [MBProgressHUD showHUDAddedTo:settingsTableView animated:YES];
+  [LCAPIManager getSettignsOfUserWithSuccess:^(LCSettings *responses) {
+    [MBProgressHUD hideAllHUDsForView:settingsTableView animated:YES];
+    _settingsData = responses;
+    [self prepareDataSource];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:settingsTableView animated:YES];
+    LCDLog(@"error - %@", error);
+    [self prepareDataSource];
+    [settingsTableView setAllowsSelection:NO];
+  }];
   
 }
 
 - (void)prepareDataSource {
   
-  NSString * userEmail = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].userEmail];
-  NSString * firstName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].firstName];
-  NSString * lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].lastName];
-  
-  self.accountDataSource = @[ @{kTextLeft : kEmailAddress, kTextRight : userEmail},
-                              @{kTextLeft : kChangePassword, kTextRight : kEmptyStringValue},
-                              @{kTextLeft : kMyLegacyURL, kTextRight : [NSString stringWithFormat:@"%@ %@",firstName, lastName]},
-                              @{kTextLeft : kPrivacy, kTextRight : kEmptyStringValue} ];
+  self.accountDataSource = @[ @{kTextLeft : kEmailAddress,
+                                kTextRight : [LCUtilityManager performNullCheckAndSetValue:_settingsData.email]},
+                              @{kTextLeft : kChangePassword,
+                                kTextRight : kEmptyStringValue},
+                              @{kTextLeft : kMyLegacyURL,
+                                kTextRight : [LCUtilityManager performNullCheckAndSetValue:_settingsData.legacyUrl]},
+                              @{kTextLeft : kPrivacy,
+                                kTextRight : [LCUtilityManager performNullCheckAndSetValue:_settingsData.privacy]}
+                              ];
   
   self.signOutDataSource = @[ @{kTextLeft : kSignOut, kTextRight : kEmptyStringValue} ];
+  [settingsTableView reloadData];
 }
 
-#pragma mark - view life cycle
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  [self initialUISetUp];
+- (void)updateView {
   [self prepareDataSource];
-  [_settingsTableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  
-  [super viewWillAppear:animated];
-//  self.navigationController.navigationBarHidden = true;
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO];
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
 }
 
 #pragma mark - UITableViewDataSource implementation
@@ -136,35 +134,6 @@ static CGFloat kNumberOfSection =2;
     }
   }
   
-  
-  //  if (cell == nil) {
-  //    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsCellIdentifier];
-  //  }
-  //
-  //  NSArray * currentDataSource = nil;
-  //
-  //  switch (indexPath.section)
-  //  {
-  //    case kIndexSectionAccount:
-  //      currentDataSource = self.accountDataSource;
-  //      break;
-  //
-  //    case kIndexSectionSignOut:
-  //      currentDataSource = self.signOutDataSource;
-  //      break;
-  //
-  //    default:
-  //      break;
-  //  }
-  //
-  //  [cell.textLabel setText:[(NSDictionary*)[currentDataSource objectAtIndex:indexPath.row] objectForKey:kTextLeft]];
-  //  [cell.detailTextLabel setText:[(NSDictionary*)[currentDataSource objectAtIndex:indexPath.row] objectForKey:kTextRight]];
-  //
-  //  if (indexPath.section == kIndexSectionSignOut)
-  //  {
-  //    cell.accessoryType = UITableViewCellAccessoryNone;
-  //  }
-  //
   return cell;
 }
 
@@ -202,8 +171,6 @@ static CGFloat kNumberOfSection =2;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-  NSLog(@"indexpath section : %ld and row : %ld",indexPath.section,indexPath.row);
   if (indexPath.section == kIndexSectionAccount) {
     switch (indexPath.row) {
       case 0:
@@ -226,14 +193,17 @@ static CGFloat kNumberOfSection =2;
         break;
     }
   }
+  else {
+    
+  }
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)showUpdateEmailScreen
 {
   LCUpdateEmailViewController * updateMailVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCUpdateEmailVC"];
-  updateMailVC.emailAddress = [LCDataManager sharedDataManager].userEmail;
-  //[self.navigationController pushViewController:updateMailVC animated:YES];
+  updateMailVC.settingsData = _settingsData;
+  updateMailVC.delegate = self;
   [self presentViewController:updateMailVC animated:YES completion:nil];
 }
 
@@ -246,13 +216,15 @@ static CGFloat kNumberOfSection =2;
 - (void)showLegacyURLScreen
 {
   LCMyLegacyURLViewController * legacyURLVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCMyLegacyURLVC"];
-  [self.navigationController pushViewController:legacyURLVC animated:YES];
+  legacyURLVC.settingsData = _settingsData;
+  legacyURLVC.delegate = self;
+  [self presentViewController:legacyURLVC animated:YES completion:nil];
 }
 
 - (void)showPrivacyScreen
 {
   LCPrivacyViewController * privacyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCPrivacyVC"];
-  [self.navigationController pushViewController:privacyVC animated:YES];
+  [self presentViewController:privacyVC animated:YES completion:nil];
 }
 
 

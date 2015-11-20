@@ -31,6 +31,17 @@
   [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Action methods
+- (IBAction)cancelAction:(id)sender {
+  
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)saveAction:(id)sender {
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

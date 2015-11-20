@@ -24,11 +24,8 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-  
   [super viewWillDisappear:animated];
-  //[self.emailAddressField resignFirstResponder];
-  [newPasswordField isFirstResponder] ? [newPasswordField resignFirstResponder] : [confirmPasswordField resignFirstResponder];
-  
+  [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,7 +80,16 @@
   }
   else
   {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LCAPIManager changePassword:newPasswordField.text withSuccess:^(id response) {
+      
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self dismissViewControllerAnimated:YES completion:nil];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      NSLog(@"error - %@",error);
+    }];
+
   }
 }
 

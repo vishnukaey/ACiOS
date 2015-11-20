@@ -22,9 +22,8 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-  
   [super viewWillDisappear:animated];
-  [self.emailAddressField resignFirstResponder];
+  [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,9 +34,8 @@
 
 - (void)initialUISetUp
 {
-  self.navigationController.navigationBarHidden = false;
   
-  [self.emailAddressField setText:self.emailAddress];
+  [self.emailAddressField setText:_settingsData.email];
   [self.emailAddressField becomeFirstResponder];
   [self.emailAddressField addTarget:self
                     action:@selector(validateFields)
@@ -47,7 +45,7 @@
 
 - (void)validateFields
 {
-  if ([LCUtilityManager isEmptyString:self.emailAddressField.text] || [self.emailAddressField.text isEqualToString:self.emailAddress]) {
+  if ([LCUtilityManager isEmptyString:self.emailAddressField.text] || [self.emailAddressField.text isEqualToString:_settingsData.email]) {
     [saveButton setEnabled:NO];
   }
   else {
@@ -71,7 +69,16 @@
   }
   else {
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LCAPIManager changeEmail:self.emailAddressField.text withSuccess:^(id response) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      _settingsData.email = self.emailAddressField.text;
+      [self.delegate updateView];
+      [self dismissViewControllerAnimated:YES completion:nil];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      NSLog(@"error - %@",error);
+    }];
   }
 }
 

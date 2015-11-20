@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LCUpdateLegacyURLDelegate <NSObject>
+- (void)updateView;
+@end
+
 @interface LCMyLegacyURLViewController : UIViewController
+{
+  __weak IBOutlet UITextField *legacyURLTextField;
+  __weak IBOutlet UIButton *saveButton;
+}
+
+@property (strong,nonatomic) LCSettings *settingsData;
+@property (nonatomic, assign) id<LCUpdateLegacyURLDelegate> delegate;
 
 @end
