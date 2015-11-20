@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *menuTable;
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (nonatomic, assign) BOOL isFirstLaunch;
 @end
 
@@ -52,6 +53,10 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   //  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
   //  self.menuTable.backgroundView = nil;
   self.isFirstLaunch = YES;
+  
+  NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+  NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
+  [_versionLabel setText:[NSString stringWithFormat:@"Legacy Connect %@",version]];
 }
 
 - (void)refreshUserInfo
