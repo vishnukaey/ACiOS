@@ -498,7 +498,7 @@
                                 </variation>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Xg2-fU-H8Q">
-                                <rect key="frame" x="0.0" y="216" width="375" height="451"/>
+                                <rect key="frame" x="0.0" y="216" width="375" height="413"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -587,16 +587,28 @@
                                     <outlet property="delegate" destination="oRs-pM-3Ty" id="QUG-zZ-0P9"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy Connect 0.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2Y-7Y-eib">
+                                <rect key="frame" x="45" y="637" width="284" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="fXd-Xy-jGA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Z7H-Se-eIu" firstAttribute="top" secondItem="Xg2-fU-H8Q" secondAttribute="bottom" id="8cs-0K-m9m"/>
+                            <constraint firstItem="Z7H-Se-eIu" firstAttribute="top" secondItem="Xg2-fU-H8Q" secondAttribute="bottom" constant="38" id="8cs-0K-m9m"/>
                             <constraint firstItem="Xg2-fU-H8Q" firstAttribute="top" secondItem="SaK-0r-E77" secondAttribute="bottom" id="EK0-0S-0P1"/>
                             <constraint firstAttribute="trailing" secondItem="SaK-0r-E77" secondAttribute="trailing" id="RrQ-mb-aww"/>
+                            <constraint firstAttribute="trailing" secondItem="c2Y-7Y-eib" secondAttribute="trailing" constant="46" id="W86-Dd-8Rv"/>
                             <constraint firstAttribute="trailing" secondItem="Xg2-fU-H8Q" secondAttribute="trailing" id="b2N-el-3be"/>
                             <constraint firstItem="SaK-0r-E77" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" id="g5Z-Wp-5LP"/>
                             <constraint firstItem="SaK-0r-E77" firstAttribute="top" secondItem="lV2-yE-fgJ" secondAttribute="top" id="gVO-fH-vkx"/>
+                            <constraint firstItem="c2Y-7Y-eib" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" constant="45" id="rsI-DY-QDe"/>
                             <constraint firstItem="Xg2-fU-H8Q" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" id="ufE-mb-2jX"/>
+                            <constraint firstItem="Z7H-Se-eIu" firstAttribute="top" secondItem="c2Y-7Y-eib" secondAttribute="bottom" constant="9" id="yDG-qx-826"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
@@ -605,6 +617,7 @@
                         <outlet property="menuTable" destination="Xg2-fU-H8Q" id="HuQ-gd-Dda"/>
                         <outlet property="profilePicture" destination="dlK-FF-KdW" id="cDL-YQ-I6L"/>
                         <outlet property="userNameLabel" destination="bcg-sA-xGH" id="wCQ-TZ-w6s"/>
+                        <outlet property="versionLabel" destination="c2Y-7Y-eib" id="OHP-mP-dEh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Sb-0I-yyk" userLabel="First Responder" sceneMemberID="firstResponder"/>

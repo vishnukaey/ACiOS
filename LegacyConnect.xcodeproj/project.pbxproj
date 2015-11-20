@@ -172,6 +172,7 @@
 		CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */; };
 		CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */; };
 		CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */; };
+		CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */; settings = {ASSET_TAGS = (); }; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
 		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; settings = {ASSET_TAGS = (); }; };
@@ -466,6 +467,8 @@
 		CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSingleCauseVC.m; path = ViewControllers/LCInterestsVC/LCSingleCauseVC.m; sourceTree = "<group>"; };
 		CEBED6991B5F89560012FEBB /* LCFBContactsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFBContactsVC.h; path = ViewControllers/LCContactsListVC/LCFBContactsVC.h; sourceTree = "<group>"; };
 		CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFBContactsVC.m; path = ViewControllers/LCContactsListVC/LCFBContactsVC.m; sourceTree = "<group>"; };
+		CEBEDD3F1BFDB2FF00AE9351 /* LCSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSettings.h; path = Models/LCSettings/LCSettings.h; sourceTree = "<group>"; };
+		CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSettings.m; path = Models/LCSettings/LCSettings.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
 		CEDD5F361BF1F8C100332A4E /* LCActionsFormPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsFormPresenter.h; sourceTree = "<group>"; };
@@ -1281,6 +1284,7 @@
 			isa = PBXGroup;
 			children = (
 				0BB971481BFE057C000A33A9 /* LCRecentNotification */,
+				CEBEDD421BFDB30300AE9351 /* LCSettings */,
 				1618309E1BDF45E6002D3539 /* LCImage */,
 				0B223C381BCFA5F80022B8F6 /* LCComment */,
 				0BB8BF701B96ED3C00A27F1F /* LCSearchResult */,
@@ -1604,6 +1608,15 @@
 			name = LCInterestsVC;
 			sourceTree = "<group>";
 		};
+		CEBEDD421BFDB30300AE9351 /* LCSettings */ = {
+			isa = PBXGroup;
+			children = (
+				CEBEDD3F1BFDB2FF00AE9351 /* LCSettings.h */,
+				CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */,
+			);
+			name = LCSettings;
+			sourceTree = "<group>";
+		};
 		CEC6D9961B81D1C000157F89 /* LCTaggedLabel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1901,6 +1914,7 @@
 				0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */,
 				0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
+				CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */,
 				1618309D1BDF45D4002D3539 /* LCImage.m in Sources */,
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				0B05D74E1BEB1D4100FD5AE1 /* LCActionsDateSelection.m in Sources */,

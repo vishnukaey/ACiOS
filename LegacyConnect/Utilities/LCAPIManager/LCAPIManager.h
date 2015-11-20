@@ -95,4 +95,11 @@
 + (void)getRecentNotificationsWithLastId:(NSString*)lastId withSuccess:(void(^)(id response))success andFailure:(void(^)(NSString*error))failure;
 
 
+#pragma mark - Settings
++ (void)signOutwithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)changePrivacy:(NSString *)newPrivacy withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)changeLegacyURL:(NSString *)newURL withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)changePassword:(NSString *)newPassword withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)changeEmail:(NSString *)newEmail withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)getSettignsOfUserWithSuccess:(void (^)(LCSettings * responses))success andFailure:(void (^)(NSString *error))failure;
 @end
