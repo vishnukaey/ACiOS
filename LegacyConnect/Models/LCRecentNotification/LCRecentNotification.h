@@ -23,7 +23,7 @@
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong) NSString *notificationId;
 @property (nonatomic, strong) NSString *userId;
-@property (nonatomic, assign) BOOL message;
+@property (nonatomic, strong) NSString *message;
 @property (nonatomic, assign) BOOL isRead;
 
 

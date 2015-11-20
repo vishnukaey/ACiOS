@@ -66,8 +66,8 @@ static NSString *kSettingsIcon = @"SettingsIcon";
 {
   NSInteger totalNotificationCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
   [self.notificationCount setText:[NSString stringWithFormat:@"%li",(long)totalNotificationCount]];
-  [self.notificationCount setHidden:NO];
-  [self.notificationLabelBG setHidden:NO];
+  [self.notificationCount setHidden:(totalNotificationCount ==0)];
+  [self.notificationLabelBG setHidden:(totalNotificationCount ==0)];
 }
 
 @end

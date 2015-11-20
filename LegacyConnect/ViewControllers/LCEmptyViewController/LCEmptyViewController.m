@@ -174,7 +174,6 @@ static NSString *kTitle = @"MY FEED";
   [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  menuButton.badgeLabel.text = @"2";
   
   UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(5, menuButton.frame.size.height/2 - 12, 30, 30)];
   icon_.image = [UIImage imageNamed:@"MenuButton"];

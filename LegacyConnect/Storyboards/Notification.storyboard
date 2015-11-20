@@ -227,49 +227,68 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YOH-jn-mlo">
-                                                    <rect key="frame" x="15" y="12" width="63" height="63"/>
+                                                    <rect key="frame" x="15" y="12" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="63" id="e3O-IT-OB0"/>
-                                                        <constraint firstAttribute="width" constant="63" id="pTs-Xm-bXL"/>
+                                                        <constraint firstAttribute="height" constant="50" id="e3O-IT-OB0"/>
+                                                        <constraint firstAttribute="width" constant="50" id="pTs-Xm-bXL"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCa-4b-Me7" userLabel="Name">
-                                                    <rect key="frame" x="93" y="8" width="267" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TCa-4b-Me7" userLabel="Name">
+                                                    <rect key="frame" x="80" y="8" width="280" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="VbI-U8-DqI"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                                     <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h4A-RJ-gXO" userLabel="Description">
-                                                    <rect key="frame" x="93" y="33" width="268" height="21"/>
+                                                    <rect key="frame" x="80" y="27" width="280" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="Fmv-gv-cQT"/>
+                                                        <constraint firstAttribute="height" constant="18" id="Fmv-gv-cQT"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pGj-mO-Z1y" userLabel="Details">
-                                                    <rect key="frame" x="93" y="59" width="219" height="24"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
+                                                    <rect key="frame" x="80" y="48" width="280" height="31"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="LGW-Ia-ai1"/>
+                                                        <constraint firstAttribute="height" priority="750" constant="21" id="Wd3-bf-UiX"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                                     <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="Wd3-bf-UiX"/>
+                                                        </mask>
+                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="h4A-RJ-gXO" firstAttribute="top" secondItem="TCa-4b-Me7" secondAttribute="bottom" constant="5" id="1Hv-JV-bQm"/>
+                                                <constraint firstItem="h4A-RJ-gXO" firstAttribute="top" secondItem="TCa-4b-Me7" secondAttribute="bottom" constant="1" id="1Hv-JV-bQm"/>
                                                 <constraint firstAttribute="trailing" secondItem="TCa-4b-Me7" secondAttribute="trailing" constant="15" id="3fd-rV-3vq"/>
-                                                <constraint firstAttribute="bottom" secondItem="pGj-mO-Z1y" secondAttribute="bottom" priority="999" constant="4" id="7jX-OG-5cc"/>
+                                                <constraint firstAttribute="bottom" secondItem="pGj-mO-Z1y" secondAttribute="bottom" constant="8" id="7jX-OG-5cc"/>
                                                 <constraint firstItem="pGj-mO-Z1y" firstAttribute="leading" secondItem="YOH-jn-mlo" secondAttribute="trailing" constant="15" id="E49-QM-8ga"/>
-                                                <constraint firstAttribute="trailing" secondItem="h4A-RJ-gXO" secondAttribute="trailing" constant="14" id="HW6-wp-ufA"/>
-                                                <constraint firstAttribute="trailing" secondItem="pGj-mO-Z1y" secondAttribute="trailing" constant="63" id="HfX-RA-z2k"/>
+                                                <constraint firstAttribute="trailing" secondItem="h4A-RJ-gXO" secondAttribute="trailing" constant="15" id="HW6-wp-ufA"/>
+                                                <constraint firstAttribute="trailing" secondItem="pGj-mO-Z1y" secondAttribute="trailing" constant="15" id="HfX-RA-z2k"/>
                                                 <constraint firstItem="h4A-RJ-gXO" firstAttribute="centerY" secondItem="3yj-Ze-wSu" secondAttribute="centerY" id="KSC-uG-wS9"/>
                                                 <constraint firstItem="h4A-RJ-gXO" firstAttribute="leading" secondItem="YOH-jn-mlo" secondAttribute="trailing" constant="15" id="YGh-de-W3U"/>
-                                                <constraint firstItem="pGj-mO-Z1y" firstAttribute="top" secondItem="h4A-RJ-gXO" secondAttribute="bottom" constant="5" id="bMP-Hd-t6l"/>
-                                                <constraint firstItem="TCa-4b-Me7" firstAttribute="top" secondItem="3yj-Ze-wSu" secondAttribute="top" priority="999" constant="8" id="iUa-Y1-7db"/>
+                                                <constraint firstItem="pGj-mO-Z1y" firstAttribute="top" secondItem="h4A-RJ-gXO" secondAttribute="bottom" constant="3" id="bMP-Hd-t6l"/>
+                                                <constraint firstItem="TCa-4b-Me7" firstAttribute="top" secondItem="3yj-Ze-wSu" secondAttribute="top" constant="8" id="iUa-Y1-7db"/>
                                                 <constraint firstItem="YOH-jn-mlo" firstAttribute="centerY" secondItem="3yj-Ze-wSu" secondAttribute="centerY" id="kjT-Wu-yg9"/>
                                                 <constraint firstItem="YOH-jn-mlo" firstAttribute="leading" secondItem="3yj-Ze-wSu" secondAttribute="leading" constant="15" id="nVg-JT-mMe"/>
                                                 <constraint firstItem="TCa-4b-Me7" firstAttribute="leading" secondItem="YOH-jn-mlo" secondAttribute="trailing" constant="15" id="wke-Pa-BhC"/>
+                                                <constraint firstItem="YOH-jn-mlo" firstAttribute="top" secondItem="3yj-Ze-wSu" secondAttribute="topMargin" constant="4" id="xPi-ob-msc"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="kjT-Wu-yg9"/>
+                                                    <exclude reference="KSC-uG-wS9"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="authorImageView" destination="YOH-jn-mlo" id="PzY-4m-4CL"/>

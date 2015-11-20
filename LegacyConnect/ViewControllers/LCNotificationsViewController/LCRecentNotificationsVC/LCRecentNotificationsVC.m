@@ -24,12 +24,10 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
-    hasMoreData ? [self hideNoResultsView] : [self showNoResultsView];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
-    [self showNoResultsView];
   }];
 }
 
@@ -55,10 +53,10 @@
 #pragma mark - private method implementation
 - (void)initialSetUp
 {
-  self.tableView.estimatedRowHeight = 44.0f;
+  self.tableView.estimatedRowHeight = 88.0f;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_recent_notifications_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   
   // Pull to Refresh Interface to Feeds TableView.
@@ -85,7 +83,22 @@
   [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+}
+
 #pragma mark - UITableViewDelegate implementation
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  if (self.results.count > 0) {
+    [self hideNoResultsView];
+  } else {
+    [self showNoResultsView];
+  }
+  return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   JTTABLEVIEW_cellForRowAtIndexPath
@@ -96,9 +109,9 @@
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCRecentNotificationTVC" owner:self options:nil];
     cell = [topLevelObjects objectAtIndex:0];
   }
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
   [cell setNotification:self.results[indexPath.row]];
   return cell;
-
 }
 
 @end

@@ -96,6 +96,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   LCAppDelegate * appdel = [[UIApplication sharedApplication] delegate];
   NSInteger totalNotificationCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
   [[(LCMenuButton*)appdel.menuButton badgeLabel] setText:[NSString stringWithFormat:@"%li",(long)totalNotificationCount]];
+  [[(LCMenuButton*)appdel.menuButton badgeLabel] setHidden:(totalNotificationCount == 0)];
   [self.menuTable reloadData];
 }
 
