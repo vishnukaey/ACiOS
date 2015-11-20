@@ -20,6 +20,7 @@ static NSString *kNotificationCellIdentifier = @"LCRecentNotificationTVC";
 - (void)setNotification:(LCRecentNotification *)notification
 {
   _notification = notification;
+  [self.authorImageView.layer setCornerRadius:CGRectGetWidth(self.authorImageView.frame) * 0.5f];
   [self.authorImageView sd_setImageWithURL:[NSURL URLWithString:notification.avatarUrl] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   NSString * authorName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:notification.firstName],[LCUtilityManager performNullCheckAndSetValue:notification.lastName]];
   [self.name setText:authorName];
