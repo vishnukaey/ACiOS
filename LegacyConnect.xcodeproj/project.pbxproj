@@ -137,6 +137,7 @@
 		0BFDF94D1BDDFB51001E1067 /* LCFullScreenImageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BFDF94C1BDDFB51001E1067 /* LCFullScreenImageVC.m */; settings = {ASSET_TAGS = (); }; };
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; settings = {ASSET_TAGS = (); }; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; settings = {ASSET_TAGS = (); }; };
+		1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619550B1BFEFA8C005D9944 /* LCRequest.m */; settings = {ASSET_TAGS = (); }; };
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; settings = {ASSET_TAGS = (); }; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; settings = {ASSET_TAGS = (); }; };
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -404,6 +405,8 @@
 		0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCFullScreenImageVC.xib; sourceTree = "<group>"; };
 		1618309B1BDF45D4002D3539 /* LCImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImage.h; path = Models/LCImage/LCImage.h; sourceTree = "<group>"; };
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
+		1619550A1BFEFA8C005D9944 /* LCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRequest.h; path = Models/LCRequest/LCRequest.h; sourceTree = "<group>"; };
+		1619550B1BFEFA8C005D9944 /* LCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRequest.m; path = Models/LCRequest/LCRequest.m; sourceTree = "<group>"; };
 		1687680D1BFDDA96001213D8 /* LCRecentNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRecentNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.h; sourceTree = "<group>"; };
 		1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRecentNotificationsVC.m; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.m; sourceTree = "<group>"; };
 		168768101BFDDAC3001213D8 /* LCRequestsNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRequestsNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRequestsNotificationsVC/LCRequestsNotificationsVC.h; sourceTree = "<group>"; };
@@ -1283,6 +1286,7 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1619550D1BFEFA91005D9944 /* LCRequest */,
 				0BB971481BFE057C000A33A9 /* LCRecentNotification */,
 				CEBEDD421BFDB30300AE9351 /* LCSettings */,
 				1618309E1BDF45E6002D3539 /* LCImage */,
@@ -1365,6 +1369,15 @@
 				1618309C1BDF45D4002D3539 /* LCImage.m */,
 			);
 			name = LCImage;
+			sourceTree = "<group>";
+		};
+		1619550D1BFEFA91005D9944 /* LCRequest */ = {
+			isa = PBXGroup;
+			children = (
+				1619550A1BFEFA8C005D9944 /* LCRequest.h */,
+				1619550B1BFEFA8C005D9944 /* LCRequest.m */,
+			);
+			name = LCRequest;
 			sourceTree = "<group>";
 		};
 		169607E41BF06A240007A278 /* LCEventMembers */ = {
@@ -1926,6 +1939,7 @@
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,
 				0BC755671B56297C009CE7F3 /* LCChooseCausesVC.m in Sources */,
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
+				1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
 				168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */,
 				0B2A2CD81BF5B9F800D20827 /* NSURL+LCURLCategory.m in Sources */,

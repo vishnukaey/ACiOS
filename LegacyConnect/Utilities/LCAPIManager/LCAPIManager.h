@@ -19,6 +19,8 @@
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getImpactsForUser:(NSString *)userID andLastImpactsID:(NSString*)lastID with:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;
 + (void)searchUserUsingsearchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
++ (void)getNotificationCountWithStatus:(void (^)(BOOL status))status;
++ (void)getRequestNotificationsWithLastUserId:(NSString*)lastId withSuccess:(void (^)(NSArray* responses))success andfailure:(void (^)(NSString *error))failure;
 
 #pragma mark - Post
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JTTableViewController.h"
 
-@interface LCRequestsNotificationsVC : UIViewController
+@interface LCRequestsNotificationsVC : JTTableViewController
 
 @end

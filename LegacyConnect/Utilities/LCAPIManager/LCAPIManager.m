@@ -244,6 +244,46 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
++ (void)getRequestNotificationsWithLastUserId:(NSString*)lastId withSuccess:(void (^)(NSArray* responses))success andfailure:(void (^)(NSString *error))failure
+{
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@",kBaseURL,@"api/user/requests"];
+  if (lastId)
+  {
+    [url appendString:[NSString stringWithFormat:@"&%@=%@", kLastIdKey, lastId]];
+  }
+  
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performGetOperationWithUrl:(NSString*)url andAccessToken:userToken withParameters:nil withSuccess:^(id response)
+   {
+     if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+       failure(response[kResponseMessage]);
+     }
+     else
+     {
+       NSError *error = nil;
+       NSDictionary * dict = response[kResponseData];
+       NSArray *requests = [MTLJSONAdapter modelsOfClass:[LCRequest class] fromJSONArray:dict[@"invites"] error:&error];
+       if(!error)
+       {
+         LCDLog(@"Post details Fetch success!");
+         success(requests);
+       }
+       else
+       {
+         [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
+         failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       }
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
 
 + (void)updateProfile:(LCUserDetail*)user havingHeaderPhoto:(UIImage*)headerPhoto removedState:(BOOL) headerPhotoState andAvtarImage:(UIImage*)avtarImage removedState:(BOOL)avtarImageState withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {

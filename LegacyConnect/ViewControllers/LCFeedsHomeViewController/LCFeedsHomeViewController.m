@@ -40,6 +40,13 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
   }];
+  
+  [LCAPIManager getRequestNotificationsWithLastUserId:nil withSuccess:^(id response) {
+    
+  } andfailure:^(NSString *error) {
+    
+  }];
+  
 }
 
 - (void)startFetchingNextResults
