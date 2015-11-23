@@ -2066,6 +2066,28 @@ static LCAPIManager *sharedManager = nil;
   }];
 }
 
++ (void)markNotificationAsRead:(NSString*)notificationId andStatus:(void (^)(BOOL status))status
+{
+  NSString * url = [NSString stringWithFormat:@"%@%@",kBaseURL,kMarkNotificationAsReadURL];
+  NSString * userToken = [LCDataManager sharedDataManager].userToken;
+  NSDictionary *dict = @{@"id":notificationId};
+
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:url andAccessToken:userToken withParameters:dict withSuccess:^(id response) {
+    if([response[kResponseCode] isEqualToString:kStatusCodeFailure])
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:response[kResponseMessage]];
+      status(NO);
+    }
+    else
+    {
+      status(YES);
+    }
+  } andFailure:^(NSString *error) {
+    status(NO);
+  }];
+}
+
 #pragma mark - Settings
 + (void)getSettignsOfUserWithSuccess:(void (^)(LCSettings * responses))success andFailure:(void (^)(NSString *error))failure
 {

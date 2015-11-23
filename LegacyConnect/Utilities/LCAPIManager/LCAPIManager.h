@@ -93,7 +93,7 @@
 #pragma maek - Notifications
 + (void)getNotificationCountWithStatus:(void (^)(BOOL status))status;
 + (void)getRecentNotificationsWithLastId:(NSString*)lastId withSuccess:(void(^)(id response))success andFailure:(void(^)(NSString*error))failure;
-
++ (void)markNotificationAsRead:(NSString*)notificationId andStatus:(void (^)(BOOL status))status;
 
 #pragma mark - Settings
 + (void)signOutwithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

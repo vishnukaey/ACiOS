@@ -90,6 +90,7 @@ NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
 NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
 NSString *const kGetRecentNotificationsURL = @"api/user/notification";
+NSString *const kMarkNotificationAsReadURL = @"api/user/notification/read";
 
 NSString *const kGetSettignsURL = @"api/user/settings";
 NSString *const kChangeEmailURL = @"api/user/changeEmail";
@@ -182,6 +183,11 @@ NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
+
+NSString *const kEntityTypePost = @"post";
+NSString *const kEntityTypeEvent = @"event";
+NSString *const kEntityTypeUserProfile = @"user";
+
 
 NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
 NSString *const kLCUrlScheme = @"legacyconnect";
