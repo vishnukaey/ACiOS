@@ -29,7 +29,7 @@
 #import "LCNotificationManager.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "LCGAManager.h"
-
+#import "LCRequest.h"
 
 #import "LCAPIManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
