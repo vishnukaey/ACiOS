@@ -43,12 +43,12 @@ static NSString *kSettingsIcon = @"SettingsIcon";
     case 2:
       cellText = NSLocalizedString(@"Notifications", nil) ;
       cellIconImag = [UIImage imageNamed:kNotificationsIcon];
+      [self updateNotificationCount];
       break;
       
     case 3:
       cellText = NSLocalizedString(@"Settings", nil) ;
       cellIconImag = [UIImage imageNamed:kSettingsIcon];
-      [self updateNotificationCount];
       break;
       
     default:
@@ -66,8 +66,8 @@ static NSString *kSettingsIcon = @"SettingsIcon";
 {
   NSInteger totalNotificationCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
   [self.notificationCount setText:[NSString stringWithFormat:@"%li",(long)totalNotificationCount]];
-  [self.notificationCount setHidden:NO];
-  [self.notificationLabelBG setHidden:NO];
+  [self.notificationCount setHidden:(totalNotificationCount ==0)];
+  [self.notificationLabelBG setHidden:(totalNotificationCount ==0)];
 }
 
 @end

@@ -9,4 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface LCRecentNotificationTVC : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *authorImageView;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *notificDescription;
+@property (weak, nonatomic) IBOutlet UILabel *details;
+
+@property (nonatomic, strong) LCRecentNotification * notification;
+
++ (NSString*)getCellIdentifier;
+
 @end

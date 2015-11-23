@@ -11,7 +11,7 @@
 @interface LCAPIManager : NSObject  
 
 
-#pragma mark - Feeds and Notifications
+#pragma mark - Feeds
 
 + (void)getHomeFeedsWithLastFeedId:(NSString*)lastId success:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getUserDetailsOfUser:(NSString*)userID WithSuccess:(void (^)(LCUserDetail* responses))success andFailure:(void (^)(NSString *error))failure;
@@ -91,6 +91,11 @@
 + (void)performLoginForUser:(NSDictionary*)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)forgotPasswordOfUserWithMailID:(NSString *)emailID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)resetPasswordWithPasswordResetCode:(NSString *)PasswordResetCode andNewPassword:(NSString*) password withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
+
+#pragma maek - Notifications
++ (void)getNotificationCountWithStatus:(void (^)(BOOL status))status;
++ (void)getRecentNotificationsWithLastId:(NSString*)lastId withSuccess:(void(^)(id response))success andFailure:(void(^)(NSString*error))failure;
+
 
 #pragma mark - Settings
 + (void)signOutwithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

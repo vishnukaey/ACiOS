@@ -88,7 +88,8 @@ NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";
 NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
-NSString *const kGetNotificationURL = @"api/user/notificationCount";
+NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
+NSString *const kGetRecentNotificationsURL = @"api/user/notification";
 
 NSString *const kGetSettignsURL = @"api/user/settings";
 NSString *const kChangeEmailURL = @"api/user/changeEmail";

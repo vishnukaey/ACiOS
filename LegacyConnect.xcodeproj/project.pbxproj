@@ -98,6 +98,7 @@
 		0BB33DEF1BA81401009E6D0C /* warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DD31BA81401009E6D0C /* warning@3x.png */; };
 		0BB33DF31BA81423009E6D0C /* LCDummyValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB33DF21BA81423009E6D0C /* LCDummyValues.m */; };
 		0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */; };
+		0BB9714B1BFE058E000A33A9 /* LCRecentNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9714A1BFE058E000A33A9 /* LCRecentNotification.m */; settings = {ASSET_TAGS = (); }; };
 		0BBB0E6E1BF0A9D100E4052D /* LCEventDetailsBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBB0E6D1BF0A9D100E4052D /* LCEventDetailsBaseController.m */; settings = {ASSET_TAGS = (); }; };
 		0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0661B70A8490004C4B6 /* LCAPIManager.m */; };
 		0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC06E1B70BF730004C4B6 /* LCInterest.m */; };
@@ -330,6 +331,8 @@
 		0BB33DF21BA81423009E6D0C /* LCDummyValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCDummyValues.m; sourceTree = "<group>"; };
 		0BB8BF6D1B96ED3800A27F1F /* LCSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchResult.h; path = Models/LCSearchResult/LCSearchResult.h; sourceTree = "<group>"; };
 		0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchResult.m; path = Models/LCSearchResult/LCSearchResult.m; sourceTree = "<group>"; };
+		0BB971491BFE058E000A33A9 /* LCRecentNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCRecentNotification.h; sourceTree = "<group>"; };
+		0BB9714A1BFE058E000A33A9 /* LCRecentNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCRecentNotification.m; sourceTree = "<group>"; };
 		0BBB0E6C1BF0A9D100E4052D /* LCEventDetailsBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCEventDetailsBaseController.h; sourceTree = "<group>"; };
 		0BBB0E6D1BF0A9D100E4052D /* LCEventDetailsBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCEventDetailsBaseController.m; sourceTree = "<group>"; };
 		0BBDC0651B70A8490004C4B6 /* LCAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAPIManager.h; path = Utilities/LCAPIManager/LCAPIManager.h; sourceTree = "<group>"; };
@@ -946,6 +949,16 @@
 			name = LCSearchResult;
 			sourceTree = "<group>";
 		};
+		0BB971481BFE057C000A33A9 /* LCRecentNotification */ = {
+			isa = PBXGroup;
+			children = (
+				0BB971491BFE058E000A33A9 /* LCRecentNotification.h */,
+				0BB9714A1BFE058E000A33A9 /* LCRecentNotification.m */,
+			);
+			name = LCRecentNotification;
+			path = Models/LCRecentNotification;
+			sourceTree = "<group>";
+		};
 		0BBB0E6B1BF0A9B400E4052D /* LCEventDetailsBaseController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1274,6 +1287,7 @@
 			isa = PBXGroup;
 			children = (
 				1619550D1BFEFA91005D9944 /* LCRequest */,
+				0BB971481BFE057C000A33A9 /* LCRecentNotification */,
 				CEBEDD421BFDB30300AE9351 /* LCSettings */,
 				1618309E1BDF45E6002D3539 /* LCImage */,
 				0B223C381BCFA5F80022B8F6 /* LCComment */,
@@ -1896,6 +1910,7 @@
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */,
+				0BB9714B1BFE058E000A33A9 /* LCRecentNotification.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
