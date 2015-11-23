@@ -119,7 +119,7 @@ NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
 NSString *const kSettingsStoryBoardID = @"LCSettingsViewController";
 
 NSString *const kStatusCodeKey = @"statusCode";
-NSString *const kLCVersionKey = @"version";
+NSString *const kLCVersionKey = @"lcversion";
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
