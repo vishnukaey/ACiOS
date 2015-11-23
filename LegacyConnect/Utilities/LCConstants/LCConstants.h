@@ -26,6 +26,7 @@ extern NSString *const kTWConsumerSecretKey;
 #define LCDLog(...)
 #endif
 
+extern NSString *const kLCiTunesLink;
 
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
@@ -103,8 +104,8 @@ extern NSString *const kLoginStoryBoardID;
 extern NSString *const kForgotPasswordStoryBoardID;
 extern NSString *const kSettingsStoryBoardID;
 
-
-
+extern NSString *const kStatusCodeKey;
+extern NSString *const kLCVersionKey;
 extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;
@@ -136,7 +137,7 @@ extern NSString *const kchangePrivacyKey;
 extern NSString *const kchangeLCURLKey;
 
 extern NSString *const kStatusCodeSuccess;
-extern NSString *const kStatusCodeFailure;
+extern NSString *const kStatusCodeVersionFailure;
 
 extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;

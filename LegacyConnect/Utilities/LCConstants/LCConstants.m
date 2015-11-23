@@ -39,6 +39,9 @@ NSString *const kFBAppDisplayName = @"LegacyConnect";
 NSString *const kFBURLScheme = @"fb535164313296078";
 
 #endif
+
+NSString *const kLCiTunesLink = @"https://itunes.apple.com/in/app/instagram/id389801252?mt=8";
+
 NSString *const kTWConsumerKey = @"IiYfEw17iKn2jTcWjp4H2QfYo";
 NSString *const kTWConsumerSecretKey = @"pBPJNqVUXdfkeulFZuXf4Epd0SSXsLwOXYqgeNkCWC4QlUJmiv";
 
@@ -116,8 +119,8 @@ NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
 NSString *const kSettingsStoryBoardID = @"LCSettingsViewController";
 
-
-
+NSString *const kStatusCodeKey = @"statusCode";
+NSString *const kLCVersionKey = @"version";
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
@@ -148,8 +151,8 @@ NSString *const kchangePasswordKey = @"newPassword";
 NSString *const kchangeLCURLKey = @"legacyUrl";
 NSString *const kchangePrivacyKey = @"privacy";
 
-NSString *const kStatusCodeSuccess = @"success";
-NSString *const kStatusCodeFailure = @"failure";
+NSString *const kStatusCodeSuccess = @"100";
+NSString *const kStatusCodeVersionFailure = @"102";
 
 NSString *const kIDKey = @"id";
 NSString *const kRange = @"range";
