@@ -20,11 +20,25 @@
   manager.responseSerializer = [AFJSONResponseSerializer serializer];
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+  [manager.requestSerializer setValue:[LCUtilityManager getAppVersion] forHTTPHeaderField:kLCVersionKey];
   [manager POST:urlString parameters:params
         success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
+     NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-     success(responseObject);
+     if([statusCode isEqualToString:kStatusCodeSuccess])
+     {
+       success(responseObject);
+     }
+     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     {
+       [LCUtilityManager showVersionOutdatedAlert];
+     }
+     else//101
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+       failure(responseObject[kResponseMessage]);
+     }
    }
         failure:^(AFHTTPRequestOperation *operation, NSError *error)
    {
@@ -50,18 +64,32 @@
   manager.responseSerializer = [AFJSONResponseSerializer serializer];
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+  [manager.requestSerializer setValue:[LCUtilityManager getAppVersion] forHTTPHeaderField:kLCVersionKey];
   [manager GET:urlString parameters:params
        success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
+     NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-     success(responseObject);
+     if([statusCode isEqualToString:kStatusCodeSuccess])
+     {
+       success(responseObject);
+     }
+     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     {
+       [LCUtilityManager showVersionOutdatedAlert];
+     }
+     else//101
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+       failure(responseObject[kResponseMessage]);
+     }
    }
        failure:^(AFHTTPRequestOperation *operation, NSError *error)
    {
      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
      NSString *errorMsg = operation.responseObject[kResponseMessage];
      (!errorMsg||[errorMsg isKindOfClass:[NSNull class]] ? failure([error localizedDescription]) : failure(errorMsg));
-     NSLog(@"error is %@", [error localizedDescription]);
+     LCDLog(@"error is %@", [error localizedDescription]);
    }];
 }
 
@@ -73,6 +101,7 @@
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+  [manager.requestSerializer setValue:[LCUtilityManager getAppVersion] forHTTPHeaderField:kLCVersionKey];
   NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
   NSMutableURLRequest *request = [manager.requestSerializer
                                   multipartFormRequestWithMethod:@"PUT"
@@ -83,8 +112,21 @@
   
   
   [manager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-    success(responseObject);
+    if([statusCode isEqualToString:kStatusCodeSuccess])
+    {
+      success(responseObject);
+    }
+    else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+    {
+      [LCUtilityManager showVersionOutdatedAlert];
+    }
+    else//101
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+      failure(responseObject[kResponseMessage]);
+    }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     failure([error localizedDescription]);
@@ -98,14 +140,27 @@
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+  [manager.requestSerializer setValue:[LCUtilityManager getAppVersion] forHTTPHeaderField:kLCVersionKey];
   manager.requestSerializer.HTTPMethodsEncodingParametersInURI = [NSSet setWithObjects:@"GET", @"HEAD", nil];
   [manager DELETE:urlString
        parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
+     NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-     success(responseObject);
-     
+     if([statusCode isEqualToString:kStatusCodeSuccess])
+     {
+       success(responseObject);
+     }
+     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     {
+       [LCUtilityManager showVersionOutdatedAlert];
+     }
+     else//101
+     {
+       [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+       failure(responseObject[kResponseMessage]);
+     }
    }
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
    {
@@ -121,6 +176,7 @@
   manager.requestSerializer = [AFJSONRequestSerializer serializer];
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
+  [manager.requestSerializer setValue:[LCUtilityManager getAppVersion] forHTTPHeaderField:kLCVersionKey];
   NSString *url = [[NSURL URLWithString:urlString relativeToURL:manager.baseURL] absoluteString];
   
   // MultiPart upload if there are images
@@ -138,8 +194,21 @@
         }
       }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-      success(responseObject);
+      if([statusCode isEqualToString:kStatusCodeSuccess])
+      {
+        success(responseObject);
+      }
+      else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+      {
+        [LCUtilityManager showVersionOutdatedAlert];
+      }
+      else//101
+      {
+        [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+        failure(responseObject[kResponseMessage]);
+      }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
       failure([error localizedDescription]);
@@ -152,8 +221,21 @@
     [manager POST:urlString parameters:params
           success:^(AFHTTPRequestOperation *operation, id responseObject)
      {
+       NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-       success(responseObject);
+       if([statusCode isEqualToString:kStatusCodeSuccess])
+       {
+         success(responseObject);
+       }
+       else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+       {
+         [LCUtilityManager showVersionOutdatedAlert];
+       }
+       else//101
+       {
+         [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
+         failure(responseObject[kResponseMessage]);
+       }
      }
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
