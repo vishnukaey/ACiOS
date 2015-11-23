@@ -8,10 +8,9 @@
 
 #import "LCRecentNotificationsVC.h"
 #import "LCRecentNotificationTVC.h"
-
-@interface LCRecentNotificationsVC ()
-
-@end
+#import "LCFeedsCommentsController.h"
+#import "LCViewActions.h"
+#import "LCProfileViewVC.h"
 
 @implementation LCRecentNotificationsVC
 
@@ -86,6 +85,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+  [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDelegate implementation
@@ -112,6 +113,41 @@
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   [cell setNotification:self.results[indexPath.row]];
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCRecentNotification * notification = self.results[indexPath.row];
+  if ([notification.entityType isEqualToString:kEntityTypePost]) {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                  bundle:nil];
+    LCFeedsCommentsController *commentsVC = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+    commentsVC.feedId = notification.entityId;
+    [self.navigationController pushViewController:commentsVC animated:YES];
+  } else if ([notification.entityType isEqualToString:kEntityTypeEvent]) {
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    LCEvent * event = [[LCEvent alloc] init];
+    event.eventID = notification.entityId;
+    actions.eventObject = event;
+    [self.navigationController pushViewController:actions animated:YES];
+  } else if ([notification.entityType isEqualToString:kEntityTypeUserProfile]) {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = notification.entityId;
+    [self.navigationController pushViewController:vc animated:YES];
+  }
+  [self markNotificationAsRead:notification];
+}
+
+- (void)markNotificationAsRead:(LCRecentNotification*)notification
+{
+  if (!notification.isRead) {
+    [LCAPIManager markNotificationAsRead:notification.notificationId andStatus:^(BOOL status) {
+      notification.isRead = YES;
+    }];
+  }
 }
 
 @end

@@ -78,6 +78,7 @@ extern NSString *const kPostCommentsURL;
 extern NSString *const kPostMilestoneURL;
 extern NSString *const kGetNotificationCountURL;
 extern NSString *const kGetRecentNotificationsURL;
+extern NSString *const kMarkNotificationAsReadURL;
 
 extern NSString *const kGetSettignsURL;
 extern NSString *const kChangeEmailURL;
@@ -170,6 +171,10 @@ extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;
+
+extern NSString *const kEntityTypePost;
+extern NSString *const kEntityTypeEvent;
+extern NSString *const kEntityTypeUserProfile;
 
 extern NSString *const kTwitterUrlScheme;
 extern NSString *const kLCUrlScheme;

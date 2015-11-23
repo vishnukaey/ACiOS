@@ -15,6 +15,7 @@
   __weak IBOutlet UILabel *commentTitleLabel;
 }
 
+@property(nonatomic, retain)NSString *feedId;
 @property(nonatomic, retain)LCFeed *feedObject;
 
 - (IBAction)backAction;

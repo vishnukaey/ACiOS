@@ -42,6 +42,17 @@ static CGFloat kIndexForPostDetails = 0;
   }];
 }
 
+#pragma mark - feed details API
+- (void)fetchFeedDetails
+{
+  [LCAPIManager getPostDetailsOfPost:self.feedId WithSuccess:^(LCFeed *response) {
+    self.feedObject = response;
+    [self startFetchingResults];
+  } andFailure:^(NSString *error) {
+    
+  }];
+}
+
 #pragma mark - private method implementation
 - (void)initialUISetUp
 {
@@ -57,7 +68,11 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  [self startFetchingResults];
+  if (self.feedId) {
+    [self fetchFeedDetails];
+  } else {
+    [self startFetchingResults];
+  }
 }
 
 - (void) viewWillAppear:(BOOL)animated

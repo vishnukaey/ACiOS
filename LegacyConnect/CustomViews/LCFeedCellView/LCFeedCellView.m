@@ -198,7 +198,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 {
   
   [self layoutIfNeeded];
-  
+  retryButton.hidden = true;
   self.feedObject = feed;
   [self setProfilePic];
   [self setFeedUserName];

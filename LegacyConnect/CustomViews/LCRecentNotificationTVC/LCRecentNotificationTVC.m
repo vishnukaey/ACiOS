@@ -12,6 +12,7 @@ static NSString *kNotificationCellIdentifier = @"LCRecentNotificationTVC";
 #define kUnReadNotificationCellBG [UIColor colorWithRed:254/255.0 green:249/255.0 blue:235/255.0 alpha:1]
 #define kReadNotificationCellBG [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
+
 @implementation LCRecentNotificationTVC
 
 + (NSString*)getCellIdentifier
