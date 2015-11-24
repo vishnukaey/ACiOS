@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCEventDetailsBaseController.h"
+#import "LCEventDetailsBC.h"
 #import "LCTaggedLabel.h"
 
 
-@interface LCViewActions : LCEventDetailsBaseController
+@interface LCViewActions : LCEventDetailsBC
 {
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;

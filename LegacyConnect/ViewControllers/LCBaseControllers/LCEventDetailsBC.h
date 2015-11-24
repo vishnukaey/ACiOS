@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LCCommentsController.h"
 
-@interface LCEventDetailsBaseController : LCCommentsController {
+@interface LCEventDetailsBC : LCCommentsController {
   __weak IBOutlet UIButton *settingsButton;
 }
 

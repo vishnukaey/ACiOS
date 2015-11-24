@@ -1,20 +1,18 @@
 //
-//  LCFriendsListBC.m
+//  LCEventMembersListBC.m
 //  LegacyConnect
 //
 //  Created by Jijo on 11/24/15.
 //  Copyright © 2015 Gist. All rights reserved.
 //
-/* notifications to be handled
- 1: unfriend - remove from table
- */
-#import "LCFriendsListBC.h"
 
-@interface LCFriendsListBC ()
+#import "LCEventMembersListBC.h"
+
+@interface LCEventMembersListBC ()
 
 @end
 
-@implementation LCFriendsListBC
+@implementation LCEventMembersListBC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

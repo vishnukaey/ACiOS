@@ -5,10 +5,16 @@
 //  Created by qbuser on 09/11/15.
 //  Copyright © 2015 Gist. All rights reserved.
 //
+/* notifications to be handled
+ 1: attend event
+ 2: unattend event
+ 3: edit event
+ 4: delete event
+ */
 
-#import "LCEventDetailsBaseController.h"
+#import "LCEventDetailsBC.h"
 
-@implementation LCEventDetailsBaseController
+@implementation LCEventDetailsBC
 
 #pragma mark - view life cycle
 - (void)viewDidLoad {

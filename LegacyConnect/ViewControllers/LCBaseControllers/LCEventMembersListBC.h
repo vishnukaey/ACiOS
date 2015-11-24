@@ -1,13 +1,13 @@
 //
-//  LCFriendsListBC.h
+//  LCEventMembersListBC.h
 //  LegacyConnect
 //
 //  Created by Jijo on 11/24/15.
 //  Copyright © 2015 Gist. All rights reserved.
 //
 
-#import "LCUsersListBC.h"
+#import "JTTableViewController.h"
 
-@interface LCFriendsListBC : LCUsersListBC
+@interface LCEventMembersListBC : JTTableViewController
 
 @end
