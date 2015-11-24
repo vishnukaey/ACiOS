@@ -11,6 +11,7 @@
 #import "LCFeedsCommentsController.h"
 #import "LCViewActions.h"
 #import "LCProfileViewVC.h"
+#import "MFSideMenuContainerViewController.h"
 
 @implementation LCRecentNotificationsVC
 
@@ -85,8 +86,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   [self.tableView reloadData];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  NSLog(@"%@",[appdel.menuButton isHidden] ? @"YESS" : @"NOOO");
+
 }
 
 #pragma mark - UITableViewDelegate implementation
