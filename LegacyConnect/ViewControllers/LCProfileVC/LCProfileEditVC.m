@@ -179,7 +179,9 @@ NSInteger const kHeightForHeader = 44;
 
 - (void)validateFields
 {
-  if (txt_firstName.text.length != 0 && txt_lastName.text.length != 0 && txt_birthday.text.length != 0) {
+  if(![LCUtilityManager isEmptyString:txt_firstName.text] &&
+     ![LCUtilityManager isEmptyString:txt_lastName.text] &&
+     ![LCUtilityManager isEmptyString:txt_birthday.text]){
     buttonSave.enabled = YES;
   }
   else {
