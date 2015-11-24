@@ -9,6 +9,7 @@
 #import "LCRequestsNotificationsVC.h"
 #import "LCRequestNotificationTVC.h"
 #import "LCProfileViewVC.h"
+#import "LCViewActions.h"
 
 @interface LCRequestsNotificationsVC () <LCRequestNotificationTVCDelegate>
 @end
@@ -71,7 +72,15 @@
 {
   JTTABLEVIEW_cellForRowAtIndexPath
   LCRequest *request = self.results[indexPath.row];
-    LCRequestNotificationTVC *cell = [tableView dequeueReusableCellWithIdentifier:@"LCRequestNotificationTVC"];
+  LCRequestNotificationTVC *cell;
+  if( [[LCUtilityManager performNullCheckAndSetValue:request.type] isEqualToString:@"event"])
+  {
+    cell =[tableView dequeueReusableCellWithIdentifier:@"LCRequestNotificationTVC"];
+  }
+  else
+  {
+    cell = [tableView dequeueReusableCellWithIdentifier:@"LCFriendRequestNotificationTVC"];
+  }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.request = request;
     cell.delegate = self;
@@ -80,12 +89,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard *sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCProfileViewVC *vc = [sb instantiateInitialViewController];
-  vc.userDetail = [[LCUserDetail alloc] init];
   LCRequest *request = [self.results objectAtIndex:indexPath.row];
-  vc.userDetail.userID = request.friendID;
-  [self.navigationController pushViewController:vc animated:YES];
+  
+  if([request.type isEqualToString:@"event"])
+  {
+    LCEvent *event = [[LCEvent alloc] init];
+    event.eventID =request.eventID;
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    actions.eventObject = event;
+    [self.navigationController pushViewController:actions animated:YES];
+  }
+  else
+  {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    LCRequest *request = [self.results objectAtIndex:indexPath.row];
+    vc.userDetail.userID = request.friendID;
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 -(void)requestActionedForRequest:(LCRequest *)request

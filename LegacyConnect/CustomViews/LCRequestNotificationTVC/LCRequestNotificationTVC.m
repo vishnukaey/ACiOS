@@ -61,33 +61,70 @@
 {
   [self setUserInteractionEnabled:NO];
   self.alpha = 0.5;
-  [LCAPIManager acceptFriendRequest:_request.friendID withSuccess:^(id response)
+  if([_request.type isEqualToString:@"event"])
   {
-    [self setUserInteractionEnabled:YES];
-    self.alpha = 1.0;
-    _request.requestStatus = @"1";
-    [self.delegate requestActionedForRequest:_request];
-  } andFailure:^(NSString *error)
+    LCEvent *event = [[LCEvent alloc] init];
+    event.eventID = _request.eventID;
+    [LCAPIManager followEvent:event withSuccess:^(id response) {
+      [self setUserInteractionEnabled:YES];
+      self.alpha = 1.0;
+      _request.requestStatus = @"1";
+      [self.delegate requestActionedForRequest:_request];
+      
+    } andFailure:^(NSString *error) {
+      [self setUserInteractionEnabled:YES];
+      self.alpha = 1.0;
+    }];
+  }
+  else
   {
-    [self setUserInteractionEnabled:YES];
-    self.alpha = 1.0;
-  }];
+    [LCAPIManager acceptFriendRequest:_request.friendID withSuccess:^(id response)
+     {
+       [self setUserInteractionEnabled:YES];
+       self.alpha = 1.0;
+       _request.requestStatus = @"1";
+       [self.delegate requestActionedForRequest:_request];
+     } andFailure:^(NSString *error)
+     {
+       [self setUserInteractionEnabled:YES];
+       self.alpha = 1.0;
+     }];
+  }
 }
+
+
 - (IBAction)rejectRequest:(id)sender
 {
   [self setUserInteractionEnabled:NO];
   self.alpha = 0.5;
-  [LCAPIManager rejectFriendRequest:_request.friendID withSuccess:^(id response)
-   {
-     [self setUserInteractionEnabled:YES];
-     self.alpha = 1.0;
-     _request.requestStatus = @"2";
-     [self.delegate requestActionedForRequest:_request];
-   } andFailure:^(NSString *error)
-   {
-     [self setUserInteractionEnabled:YES];
-     self.alpha = 1.0;
-   }];
+  if([_request.type isEqualToString:@"event"])
+  {
+    LCEvent *event = [[LCEvent alloc] init];
+    event.eventID = _request.eventID;
+    [LCAPIManager unfollowEvent:event withSuccess:^(id response) {
+      [self setUserInteractionEnabled:YES];
+      self.alpha = 1.0;
+      _request.requestStatus = @"2";
+      [self.delegate requestActionedForRequest:_request];
+    } andFailure:^(NSString *error) {
+      [self setUserInteractionEnabled:YES];
+      self.alpha = 1.0;
+    }];
+  }
+  else
+  {
+    [LCAPIManager rejectFriendRequest:_request.friendID withSuccess:^(id response)
+     {
+       [self setUserInteractionEnabled:YES];
+       self.alpha = 1.0;
+       _request.requestStatus = @"2";
+       [self.delegate requestActionedForRequest:_request];
+     } andFailure:^(NSString *error)
+     {
+       [self setUserInteractionEnabled:YES];
+       self.alpha = 1.0;
+     }];
+  }
 }
 
 

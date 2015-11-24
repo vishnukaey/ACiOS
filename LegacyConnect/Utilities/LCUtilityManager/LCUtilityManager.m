@@ -488,7 +488,7 @@
 {
   NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
   #warning should remove hardcoding the version.
-  appVersion = @"2.0.0";
+  appVersion = @"0.4";
   return appVersion;
 }
 
