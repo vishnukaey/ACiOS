@@ -7,6 +7,8 @@
 //
 
 #import "LCSettingsViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 #define kIndexSectionAccount 0
 #define kIndexSectionSignOut 1
@@ -195,6 +197,7 @@ static CGFloat kNumberOfSection = 2;
   }
   else {
     
+    [self signOutLegacy];
   }
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -227,6 +230,31 @@ static CGFloat kNumberOfSection = 2;
   privacyVC.settingsData = _settingsData;
   privacyVC.delegate = self;
   [self presentViewController:privacyVC animated:YES completion:nil];
+}
+
+- (void) signOutLegacy {
+  
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager signOutwithSuccess:^(id response) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    
+    //[LCUtilityManager clearUserDefaultsForCurrentUser];
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    if ([FBSDKAccessToken currentAccessToken])
+    {
+      [[FBSDKLoginManager new] logOut];
+    }
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+    appdel.window.rootViewController = myStoryBoardInitialViewController;
+    [appdel.window makeKeyAndVisible];
+
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+  }];
+   
 }
 
 

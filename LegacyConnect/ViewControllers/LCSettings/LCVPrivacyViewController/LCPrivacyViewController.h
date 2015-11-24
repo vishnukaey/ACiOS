@@ -16,7 +16,8 @@
 {
     __weak IBOutlet UIButton *saveButton;
 }
-
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) NSInteger selectedIndex;
 @property (strong,nonatomic) LCSettings *settingsData;
 @property (nonatomic, assign) id<LCUpdatePrivacyDelegate> delegate;
 @end

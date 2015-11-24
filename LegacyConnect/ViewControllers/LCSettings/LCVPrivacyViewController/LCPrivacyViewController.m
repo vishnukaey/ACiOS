@@ -8,12 +8,6 @@
 
 #import "LCPrivacyViewController.h"
 
-@interface LCPrivacyViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray * dataSource;
-@property (nonatomic) NSInteger selectedIndex;
-@end
-
 #define kPrivacyCellIdentifier @"LCPrivacyCell"
 
 @implementation LCPrivacyViewController
@@ -21,6 +15,17 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self initialUISetUp];
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+
+- (void)initialUISetUp
+{
   
   UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
   headerView.backgroundColor = self.tableView.separatorColor;
@@ -30,15 +35,20 @@
   footerView.backgroundColor = self.tableView.separatorColor;
   self.tableView.tableFooterView = footerView;
   
-  self.dataSource = @[@"Only Me", @"Friends Only", @"Public"];
-  _selectedIndex = [self.dataSource indexOfObject:_settingsData.privacy];
-  //[self.tableView reloadData];
+  _selectedIndex = [_settingsData.availablePrivacy indexOfObject:_settingsData.privacy];
+  [self validateFields];
 }
 
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
+- (void) validateFields{
+  
+  if (_selectedIndex != [_settingsData.availablePrivacy indexOfObject:_settingsData.privacy]) {
+    saveButton.enabled = YES;
+  }
+  else {
+    saveButton.enabled = NO;
+  }
 }
+
 
 #pragma mark - Action methods
 - (IBAction)cancelAction:(id)sender {
@@ -48,19 +58,27 @@
 
 
 - (IBAction)saveAction:(id)sender {
+  
+  NSString *newPrivacy = [_settingsData.availablePrivacy objectAtIndex:_selectedIndex];
+  
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager changePrivacy:newPrivacy withSuccess:^(id response) {
+    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    _settingsData.privacy = newPrivacy;
+    [self.delegate updateView];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSLog(@"error - %@",error);
+  }];
 }
-
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.dataSource.count;
+  return _settingsData.availablePrivacy.count;
 }
 
 
@@ -70,7 +88,7 @@
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPrivacyCellIdentifier];
   }
-  [cell.textLabel setText:[self.dataSource objectAtIndex:indexPath.row]];
+  [cell.textLabel setText:[_settingsData.availablePrivacy objectAtIndex:indexPath.row]];
   if (indexPath.row == _selectedIndex)
   {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -87,6 +105,7 @@
 {
   _selectedIndex = indexPath.row;
   [self.tableView reloadData];
+  [self validateFields];
 }
 
 

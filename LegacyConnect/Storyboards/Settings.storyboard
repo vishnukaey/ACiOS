@@ -111,11 +111,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-K2-uOn" userLabel="Lable View">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decide who can see your profile and posts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMj-df-3LV">
-                                        <rect key="frame" x="15" y="20" width="345" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="JCV-JO-BPP"/>
-                                        </constraints>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decide who can see your profile and posts" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMj-df-3LV">
+                                        <rect key="frame" x="15" y="25" width="345" height="15"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -125,7 +122,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="7Qm-pT-H1G"/>
                                     <constraint firstItem="PMj-df-3LV" firstAttribute="leading" secondItem="Qty-K2-uOn" secondAttribute="leading" constant="15" id="AIg-7K-Fup"/>
-                                    <constraint firstAttribute="bottom" secondItem="PMj-df-3LV" secondAttribute="bottom" id="K2o-37-2Ci"/>
+                                    <constraint firstAttribute="bottom" secondItem="PMj-df-3LV" secondAttribute="bottom" constant="4" id="K2o-37-2Ci"/>
                                     <constraint firstAttribute="trailing" secondItem="PMj-df-3LV" secondAttribute="trailing" constant="15" id="cLW-bD-qKa"/>
                                 </constraints>
                             </view>
@@ -176,7 +173,8 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="tableView" destination="WA7-JA-T4V" id="jLa-y2-zOT"/>
+                        <outlet property="saveButton" destination="d2n-AI-pPu" id="2nJ-EL-fyU"/>
+                        <outlet property="tableView" destination="WA7-JA-T4V" id="rVs-Yb-vm7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0N5-rS-aPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -754,6 +752,24 @@ Legacy Connect account</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzs-mm-jN7">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgm-hl-gz6">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit or update your email for Legacy Connect" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1l-1m-Rd4">
+                                                <rect key="frame" x="15" y="25" width="345" height="15"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="2gI-14-oFg"/>
+                                            <constraint firstAttribute="bottom" secondItem="F1l-1m-Rd4" secondAttribute="bottom" constant="4" id="fbp-Nz-5t7"/>
+                                            <constraint firstItem="F1l-1m-Rd4" firstAttribute="leading" secondItem="bgm-hl-gz6" secondAttribute="leading" constant="15" id="k72-SB-UtP"/>
+                                            <constraint firstAttribute="trailing" secondItem="F1l-1m-Rd4" secondAttribute="trailing" constant="15" id="wjT-iH-2de"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z31-mP-Yj0" userLabel="Border View">
                                         <rect key="frame" x="0.0" y="44" width="375" height="1"/>
                                         <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.5" colorSpace="calibratedRGB"/>
@@ -790,30 +806,21 @@ Legacy Connect account</string>
                                             <constraint firstAttribute="height" constant="1" id="IYy-uu-PMU"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit or update your email for Legacy Connect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1l-1m-Rd4">
-                                        <rect key="frame" x="15" y="20" width="345" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="Ztd-q2-rPO"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="xWE-ja-g5H" secondAttribute="trailing" id="0CV-io-7T1"/>
+                                    <constraint firstAttribute="trailing" secondItem="bgm-hl-gz6" secondAttribute="trailing" id="1uQ-fi-4ee"/>
                                     <constraint firstItem="EuQ-6J-qJC" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="7OO-kC-Wet"/>
                                     <constraint firstAttribute="trailing" secondItem="Z31-mP-Yj0" secondAttribute="trailing" id="Dpr-XM-K0a"/>
                                     <constraint firstItem="xWE-ja-g5H" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="EMt-M7-RlG"/>
-                                    <constraint firstAttribute="trailing" secondItem="F1l-1m-Rd4" secondAttribute="trailing" constant="15" id="LL4-RM-Gaa"/>
-                                    <constraint firstItem="Z31-mP-Yj0" firstAttribute="top" secondItem="F1l-1m-Rd4" secondAttribute="bottom" id="a7L-IB-gDH"/>
+                                    <constraint firstItem="bgm-hl-gz6" firstAttribute="top" secondItem="Wzs-mm-jN7" secondAttribute="top" id="TnK-dx-Mck"/>
                                     <constraint firstItem="Z31-mP-Yj0" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="b7h-c4-1yn"/>
                                     <constraint firstItem="EuQ-6J-qJC" firstAttribute="top" secondItem="Z31-mP-Yj0" secondAttribute="bottom" id="dpU-KK-kHl"/>
                                     <constraint firstItem="xWE-ja-g5H" firstAttribute="top" secondItem="EuQ-6J-qJC" secondAttribute="bottom" id="hTG-qu-9UA"/>
-                                    <constraint firstItem="F1l-1m-Rd4" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" constant="15" id="hpl-eP-zze"/>
+                                    <constraint firstItem="Z31-mP-Yj0" firstAttribute="top" secondItem="bgm-hl-gz6" secondAttribute="bottom" id="pq1-Mr-Lr7"/>
                                     <constraint firstAttribute="trailing" secondItem="EuQ-6J-qJC" secondAttribute="trailing" id="rDX-a3-fEn"/>
-                                    <constraint firstItem="F1l-1m-Rd4" firstAttribute="top" secondItem="Wzs-mm-jN7" secondAttribute="top" constant="20" id="zaM-Ry-nZW"/>
+                                    <constraint firstItem="bgm-hl-gz6" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="s6z-Zx-mJm"/>
                                 </constraints>
                             </view>
                         </subviews>
