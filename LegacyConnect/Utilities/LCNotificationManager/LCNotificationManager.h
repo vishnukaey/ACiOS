@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface LCNotificationManager : NSObject
-
+//--- posts --//
++ (void)postCreateNewPostNotificationfromResponse :(NSDictionary *)response;
 + (void)postLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post;
 + (void)postUnLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post;
 + (void)postCommentedNotificationforPost:(LCFeed *)post;

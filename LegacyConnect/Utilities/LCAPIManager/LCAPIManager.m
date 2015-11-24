@@ -335,6 +335,7 @@ static LCAPIManager *sharedManager = nil;
       if(!error)
       {
         LCDLog(@"Successfully created new post");
+        [LCNotificationManager postCreateNewPostNotificationfromResponse:response];
         success(response);
       }
       else

@@ -6,19 +6,32 @@
 //  Copyright © 2015 Gist. All rights reserved.
 //
 
-#import "LCFeedTableViewController.h"
+/* notifications to be handled
+ 1: liked a post
+ 2: unliked post
+ 3: commented a post
+ 4: Updated a post
+ 5: deleted a post
+ 6: created new post
+ 7: user profile updated
+ 8: remove milestone - if milestone icon is shown in homefeed
+ */
+
+#import "LCHomeFeedBC.h"
 #import "LCProfileViewVC.h"
 
-@interface LCFeedTableViewController ()
+@interface LCHomeFeedBC ()
 
 @end
 
-@implementation LCFeedTableViewController
+@implementation LCHomeFeedBC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
+  [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:knewPostCreatedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -28,6 +41,13 @@
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)newPostCreatedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newPost = notification.userInfo[@"post"];
+  [self.results insertObject:newPost atIndex:0];
+  [self.tableView reloadData];
 }
 
 - (void)feedUpdatedNotificationReceived :(NSNotification *)notification

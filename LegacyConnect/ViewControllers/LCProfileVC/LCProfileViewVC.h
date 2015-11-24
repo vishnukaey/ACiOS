@@ -11,7 +11,7 @@
 #import "LCInterestsCellView.h"
 #import "LCActionsCellView.h"
 #import "LCTabMenuView.h"
-#import "LCFeedTableViewController.h"
+#import "LCProfileViewBC.h"
 
 #import "LCMileStonesVC.h"
 #import "LCInterestsVC.h"
@@ -25,7 +25,7 @@ typedef enum profileStateTypes
   PROFILE_OTHER_WAITING
 } profileState;
 
-@interface LCProfileViewVC : LCFeedTableViewController <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
+@interface LCProfileViewVC : LCProfileViewBC <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
 {
   
   IBOutlet UIImageView *profilePic, *headerImageView;

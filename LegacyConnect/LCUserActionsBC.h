@@ -8,7 +8,7 @@
 
 #import "JTTableViewController.h"
 
-@interface LCActionsTableViewController : JTTableViewController
+@interface LCUserActionsBC : JTTableViewController
 
 @property(nonatomic, retain)NSString *userID;
 

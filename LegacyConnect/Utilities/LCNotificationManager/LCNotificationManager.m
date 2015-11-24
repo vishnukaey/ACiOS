@@ -10,6 +10,19 @@
 
 @implementation LCNotificationManager
 
+#pragma mark - post notifications
++ (void)postCreateNewPostNotificationfromResponse :(NSDictionary *)response
+{
+  NSError *error = nil;
+  NSDictionary *dict= response[kResponseData];
+  LCFeed *newPost = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:dict[@"post"] error:&error];
+  if(!error)
+  {
+    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:newPost, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+    [[NSNotificationCenter defaultCenter] postNotificationName:knewPostCreatedNotification object:nil userInfo:userInfo];
+  }
+}
+
 + (void)postUnLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post
 {
   post.likeCount = [(NSDictionary*)[response objectForKey:@"data"]objectForKey:@"likeCount"];

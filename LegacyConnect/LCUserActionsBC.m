@@ -5,14 +5,21 @@
 //  Created by qbuser on 12/11/15.
 //  Copyright © 2015 Gist. All rights reserved.
 //
+/* notifications to be handled
+ 1: updated an action - if self profile
+ 2: deleted an action - if self profile
+ 3: attend an action - if self profile
+ 4: created an action - if self profile
+ 5: un attend an action - if self profile
+ */
 
-#import "LCActionsTableViewController.h"
+#import "LCUserActionsBC.h"
 
-@interface LCActionsTableViewController ()
+@interface LCUserActionsBC ()
 
 @end
 
-@implementation LCActionsTableViewController
+@implementation LCUserActionsBC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

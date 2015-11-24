@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCFeedTableViewController.h"
+#import "LCImpactsViewBC.h"
 
-@interface LCImapactsViewController : LCFeedTableViewController
+@interface LCImapactsViewController : LCImpactsViewBC
 
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 @property(nonatomic, retain)LCUserDetail *userDetail;

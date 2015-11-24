@@ -8,6 +8,6 @@
 
 #import "JTTableViewController.h"
 
-@interface LCFeedTableViewController : JTTableViewController
+@interface LCHomeFeedBC : JTTableViewController
 
 @end
