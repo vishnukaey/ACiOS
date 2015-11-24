@@ -36,7 +36,6 @@
      }
      else//101
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
        failure(responseObject[kResponseMessage]);
      }
    }
@@ -80,7 +79,6 @@
      }
      else//101
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
        failure(responseObject[kResponseMessage]);
      }
    }
@@ -124,7 +122,6 @@
     }
     else//101
     {
-      [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
       failure(responseObject[kResponseMessage]);
     }
   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -158,7 +155,6 @@
      }
      else//101
      {
-       [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
        failure(responseObject[kResponseMessage]);
      }
    }
@@ -206,7 +202,6 @@
       }
       else//101
       {
-        [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
         failure(responseObject[kResponseMessage]);
       }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -233,7 +228,6 @@
        }
        else//101
        {
-         [LCUtilityManager showAlertViewWithTitle:nil andMessage:responseObject[kResponseMessage]];
          failure(responseObject[kResponseMessage]);
        }
      }

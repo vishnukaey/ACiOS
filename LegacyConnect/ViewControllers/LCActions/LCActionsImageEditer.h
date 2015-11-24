@@ -20,7 +20,7 @@
   UIViewController *presentingController;
 }
 
-@property(nonatomic, retain)id delegate;
+@property(nonatomic, weak)id delegate;
 
 - (void)presentImageEditorOnController :(UIViewController *)controller witImage:(UIImage *)image;
 
