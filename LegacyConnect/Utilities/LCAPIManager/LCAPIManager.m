@@ -1727,7 +1727,7 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
-       LCDLog(@"privacy updated! \n %@",response);
+       LCDLog(@"Signed out! \n %@",response);
        success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

@@ -15,7 +15,8 @@
   return @{
            @"privacy" : @"privacy",
            @"legacyUrl": @"legacyUrl",
-           @"email" : @"email"
+           @"email" : @"email",
+           @"availablePrivacy" : @"availablePrivacy"
            };
 }
 

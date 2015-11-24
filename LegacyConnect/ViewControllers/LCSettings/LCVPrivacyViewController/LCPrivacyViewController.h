@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCPrivacyViewController : UIViewController
+@protocol LCUpdatePrivacyDelegate <NSObject>
+- (void)updateView;
+@end
 
+@interface LCPrivacyViewController : UIViewController
+{
+    __weak IBOutlet UIButton *saveButton;
+}
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) NSInteger selectedIndex;
+@property (strong,nonatomic) LCSettings *settingsData;
+@property (nonatomic, assign) id<LCUpdatePrivacyDelegate> delegate;
 @end

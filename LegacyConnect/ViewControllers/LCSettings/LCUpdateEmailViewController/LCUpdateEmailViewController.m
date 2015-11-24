@@ -22,9 +22,8 @@
 }
 
 - (void) viewWillDisappear:(BOOL)animated {
-  
   [super viewWillDisappear:animated];
-  [self.emailAddressField resignFirstResponder];
+  [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -35,17 +34,18 @@
 
 - (void)initialUISetUp
 {
-  self.navigationController.navigationBarHidden = false;
   
-  [self.emailAddressField setText:self.emailAddress];
+  [self.emailAddressField setText:_settingsData.email];
   [self.emailAddressField becomeFirstResponder];
-  [self changeSaveButtonState];
+  [self.emailAddressField addTarget:self
+                    action:@selector(validateFields)
+          forControlEvents:UIControlEventEditingChanged];
+  [saveButton setEnabled:NO];
 }
 
-- (void)changeSaveButtonState
+- (void)validateFields
 {
-  //[self.navigationItem.rightBarButtonItem setEnabled:(self.emailAddressField.text.length > 0)];
-  if ([LCUtilityManager isEmptyString:self.emailAddressField.text]) {
+  if ([LCUtilityManager isEmptyString:self.emailAddressField.text] || [self.emailAddressField.text isEqualToString:_settingsData.email]) {
     [saveButton setEnabled:NO];
   }
   else {
@@ -62,15 +62,24 @@
 
 
 - (IBAction)saveAction:(id)sender {
-  
-  [self dismissViewControllerAnimated:YES completion:nil];
+  if(![LCUtilityManager validateEmail:self.emailAddressField.text]) {
+    
+    [LCUtilityManager showAlertViewWithTitle:nil
+                                  andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
+  }
+  else {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LCAPIManager changeEmail:self.emailAddressField.text withSuccess:^(id response) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      _settingsData.email = self.emailAddressField.text;
+      [self.delegate updateView];
+      [self dismissViewControllerAnimated:YES completion:nil];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      NSLog(@"error - %@",error);
+    }];
+  }
 }
 
-
-#pragma mark - UITextFieldDelegate implementation
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-  [self changeSaveButtonState];
-  return YES;
-}
 @end
