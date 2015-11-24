@@ -36,7 +36,7 @@
     }
     else
     {
-      [_responseLabel setText:@"Rejected"];
+      [_responseLabel setText:@"Removed"];
     }
   }
   else
@@ -99,9 +99,7 @@
   self.alpha = 0.5;
   if([_request.type isEqualToString:@"event"])
   {
-    LCEvent *event = [[LCEvent alloc] init];
-    event.eventID = _request.eventID;
-    [LCAPIManager unfollowEvent:event withSuccess:^(id response) {
+    [LCAPIManager rejectEventRequest:_request.eventID withSuccess:^(id response) {
       [self setUserInteractionEnabled:YES];
       self.alpha = 1.0;
       _request.requestStatus = @"2";
