@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JTTableViewController.h"
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 @interface LCRequestsNotificationsVC : JTTableViewController
 
