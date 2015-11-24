@@ -9,12 +9,14 @@
 #import "LCLeftMenuController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 #import "LCMenuItemCell.h"
+#import "LCMenuButton.h"
 
 @interface LCLeftMenuController ()
 @property (weak, nonatomic) IBOutlet UIImageView *coverPhoto;
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicture;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *menuTable;
+@property (weak, nonatomic) IBOutlet UILabel *versionLabel;
 @property (nonatomic, assign) BOOL isFirstLaunch;
 @end
 
@@ -48,21 +50,21 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   
   self.menuTable.opaque = NO;
   [self.menuTable setBackgroundColor:kDeSelectionColor];
-//  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
-//  self.menuTable.backgroundView = nil;
-  
+  //  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
+  //  self.menuTable.backgroundView = nil;
   self.isFirstLaunch = YES;
   
-  
-  
-  }
+  NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
+  NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
+  [_versionLabel setText:[NSString stringWithFormat:@"Legacy Connect %@",version]];
+}
 
 - (void)refreshUserInfo
 {
   NSString *firstName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].firstName];
-    NSString *lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].lastName];
+  NSString *lastName = [LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].lastName];
   [self.userNameLabel setText:[[NSString stringWithFormat:@"%@ %@",firstName, lastName] uppercaseString]];
-
+  
   //-- Cover Photo -- //
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].headerPhotoURL];
   [self.coverPhoto sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:self.coverPhoto.image];
@@ -72,14 +74,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [self.profilePicture sd_setImageWithURL:[NSURL URLWithString:profileUrlString] placeholderImage:self.profilePicture.image];
 }
 
-- (void)addUserImageChangeNitification
+- (void)addRequiredNotificationObserver
 {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserDataUpdatedNotification object:nil];
-}
-
-- (void)removeUserImageChangeNitification
-{
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserDataUpdatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderAndAvatarOnEdit:) name:kUserProfileUpdateNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCountUpdated) name:kNotificationCountUpdated object:nil];
 }
 
 - (void)refreshUserImages:(NSNotification*)notification
@@ -92,28 +91,38 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   self.coverPhoto.image = (UIImage *)notification.userInfo[@"headerBGImage"];
 }
 
+- (void)notificationCountUpdated
+{
+  LCAppDelegate * appdel = [[UIApplication sharedApplication] delegate];
+  NSInteger totalNotificationCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
+  [[(LCMenuButton*)appdel.menuButton badgeLabel] setText:[NSString stringWithFormat:@"%li",(long)totalNotificationCount]];
+  [self.menuTable reloadData];
+}
+
 #pragma mark - view life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self addRequiredNotificationObserver];
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   [self initialUISetUp];
-  [self addUserImageChangeNitification];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderAndAvatarOnEdit:) name:kUserProfileUpdateNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:kUserProfileUpdateNotification object:nil];
-  [self removeUserImageChangeNitification];
   [super viewWillDisappear:animated];
 }
 
@@ -160,13 +169,14 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (self.isFirstLaunch) {
+  if (self.isFirstLaunch)
+  {
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     LCMenuItemCell * cell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setBackgroundColor:kDeSelectionColor];
     [cell.itemIcon setTintColor:kIconDeSelectionColor];
   }
-
+  
   self.isFirstLaunch = NO;
   LCMenuItemCell * selectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
   [selectedCell setSelected:NO];

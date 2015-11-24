@@ -26,6 +26,7 @@ extern NSString *const kTWConsumerSecretKey;
 #define LCDLog(...)
 #endif
 
+extern NSString *const kLCiTunesLink;
 
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
@@ -75,6 +76,7 @@ extern NSString *const kPostUnlikeURL;
 extern NSString *const kPostCommentURL;
 extern NSString *const kPostCommentsURL;
 extern NSString *const kPostMilestoneURL;
+extern NSString *const kGetNotificationURL;
 
 extern NSString *const kGetSettignsURL;
 extern NSString *const kChangeEmailURL;
@@ -101,8 +103,8 @@ extern NSString *const kLoginStoryBoardID;
 extern NSString *const kForgotPasswordStoryBoardID;
 extern NSString *const kSettingsStoryBoardID;
 
-
-
+extern NSString *const kStatusCodeKey;
+extern NSString *const kLCVersionKey;
 extern NSString *const kAuthorizationKey;
 extern NSString *const kResponseCode;
 extern NSString *const kResponseMessage;
@@ -134,7 +136,7 @@ extern NSString *const kchangePrivacyKey;
 extern NSString *const kchangeLCURLKey;
 
 extern NSString *const kStatusCodeSuccess;
-extern NSString *const kStatusCodeFailure;
+extern NSString *const kStatusCodeVersionFailure;
 
 extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;
@@ -189,6 +191,7 @@ extern NSString *const kEventDetailsUpdatedNotification;
 extern NSString *const kEventDeletedNotification;
 extern NSString *const kEventCreatedNotification;
 extern NSString *const friendStatusUpdatedNotification;
+extern NSString *const kNotificationCountUpdated;
 
 extern NSString *const kTWOauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;

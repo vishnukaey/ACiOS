@@ -233,7 +233,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [tankImageView_ref setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
     NSInteger thanksCount = [likeCount integerValue] > 0 ? [likeCount integerValue] -1 : 0;
-    [thanksLabel_ref setText:[NSString stringWithFormat:@"%li",thanksCount]];
+    [thanksLabel_ref setText:[NSString stringWithFormat:@"%d",(int)thanksCount]];
     [LCAPIManager unlikePost:feedObject_ withSuccess:^(id response) {
       feedObject_.didLike = kUnLikedStatus;
       feedObject_.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];

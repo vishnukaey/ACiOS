@@ -7,8 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCTabMenuView.h"
 
 @interface LCNotificationsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) NSString *currentNotifications;
+@property (weak, nonatomic) IBOutlet LCTabMenuView *tabMenu;
+@property (weak, nonatomic) IBOutlet UIView *requestsContainer;
+@property (weak, nonatomic) IBOutlet UIView *recentContainer;
+@property (weak, nonatomic) IBOutlet UIButton *requestsButton;
+@property (weak, nonatomic) IBOutlet UIButton *recentButton;
+
 @end

@@ -176,10 +176,10 @@ static NSString *kTitle = @"MY FEED";
   appdel.menuButton = menuButton;
   menuButton.badgeLabel.text = @"2";
   
-  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(10, menuButton.frame.size.height/2 - 12, 25, 25)];
+  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(5, menuButton.frame.size.height/2 - 12, 30, 30)];
   icon_.image = [UIImage imageNamed:@"MenuButton"];
   [menuButton addSubview:icon_];
-//  [menuButton setBackgroundColor:[UIColor blueColor]];
+  [menuButton bringSubviewToFront:menuButton.badgeLabel];
 }
 
 #pragma mark - button actions
@@ -296,20 +296,15 @@ static NSString *kTitle = @"MY FEED";
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
     LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
 //    LCAllInterestVC *vc = [sb instantiateInitialViewController];
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 2)//notifications
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
+    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
-//    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
-//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 3)//settings
   {

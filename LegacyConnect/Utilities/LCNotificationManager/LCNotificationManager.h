@@ -26,5 +26,8 @@
 //friends
 + (void)postFriendUpadteNotification :(NSString *)friendID forFriendStatus :(int)status;
 
+//Notification
++ (void)postNotificationCountUpdatedNotification;
+
 
 @end
