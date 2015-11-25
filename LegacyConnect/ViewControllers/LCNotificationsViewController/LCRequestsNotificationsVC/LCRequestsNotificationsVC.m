@@ -74,7 +74,6 @@
 #pragma mark - private method implementation
 - (void)initialSetUp
 {
-  self.tableView.estimatedRowHeight = 88.0f;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_requests_pending", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
@@ -107,7 +106,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 110.0;
+  return 100.0;
 }
 
 

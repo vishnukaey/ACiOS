@@ -29,6 +29,7 @@
 "no_actions_available_others" = "No actions available.";
 "no_recent_notifications_available" = "No Recent Notifications available.";
 "no_requests_pending" = "No pending requests";
+"members_empty" = "No members yet!";
 
 
 "no_results_found" = "No results found.";
