@@ -1027,9 +1027,6 @@ static LCAPIManager *sharedManager = nil;
        LCDLog(@"Friend request sent %@",response);
        success(response);
        [LCNotificationManager postFriendUpadteNotification:FriendID forFriendStatus:kNonFriend];
-       //Notify Profile
-       NSDictionary *userInfo = @{@"status":@"deleted"};
-       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileFrinendsUpdateNotification object:nil userInfo:userInfo];
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];

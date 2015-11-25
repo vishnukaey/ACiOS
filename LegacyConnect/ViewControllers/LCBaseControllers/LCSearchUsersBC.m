@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendStatusUpdatedNotificationReceived:) name:friendStatusUpdatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendStatusUpdatedNotificationReceived:) name:kFriendStatusUpdatedNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,7 +27,7 @@
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:friendStatusUpdatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:kFriendStatusUpdatedNFK object:nil];
 }
 
 - (void)friendStatusUpdatedNotificationReceived :(NSNotification *)notification
