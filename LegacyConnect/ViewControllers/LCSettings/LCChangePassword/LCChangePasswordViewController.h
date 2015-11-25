@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface LCChangePasswordViewController : UIViewController
-
+{
+  __weak IBOutlet UITextField *newPasswordField;
+  __weak IBOutlet UITextField *confirmPasswordField;
+  __weak IBOutlet UIButton *saveButton;
+}
 @end

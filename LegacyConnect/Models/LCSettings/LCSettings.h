@@ -13,5 +13,5 @@
 @property (nonatomic, strong) NSString *privacy;
 @property (nonatomic, strong) NSString *legacyUrl;
 @property (nonatomic, strong) NSString *email;
-
+@property (nonatomic, strong) NSArray *availablePrivacy;
 @end

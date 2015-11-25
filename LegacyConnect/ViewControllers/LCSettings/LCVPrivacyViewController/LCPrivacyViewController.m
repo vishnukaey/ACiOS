@@ -8,12 +8,6 @@
 
 #import "LCPrivacyViewController.h"
 
-@interface LCPrivacyViewController ()
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSArray * dataSource;
-@property (nonatomic) NSIndexPath * selectedIndexPath;
-@end
-
 #define kPrivacyCellIdentifier @"LCPrivacyCell"
 
 @implementation LCPrivacyViewController
@@ -21,9 +15,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.dataSource = @[@"Only Me", @"Friends Only", @"Public"];
-  self.selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-  [self.tableView reloadData];
+  [self initialUISetUp];
 }
 
 - (void)didReceiveMemoryWarning
@@ -31,16 +23,62 @@
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (void)initialUISetUp
 {
-  return 1;
+  
+  UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+  headerView.backgroundColor = self.tableView.separatorColor;
+  self.tableView.tableHeaderView = headerView;
+  
+  UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+  footerView.backgroundColor = self.tableView.separatorColor;
+  self.tableView.tableFooterView = footerView;
+  
+  _selectedIndex = [_settingsData.availablePrivacy indexOfObject:_settingsData.privacy];
+  [self validateFields];
 }
+
+- (void) validateFields{
+  
+  if (_selectedIndex != [_settingsData.availablePrivacy indexOfObject:_settingsData.privacy]) {
+    saveButton.enabled = YES;
+  }
+  else {
+    saveButton.enabled = NO;
+  }
+}
+
+
+#pragma mark - Action methods
+- (IBAction)cancelAction:(id)sender {
+  
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)saveAction:(id)sender {
+  
+  NSString *newPrivacy = [_settingsData.availablePrivacy objectAtIndex:_selectedIndex];
+  
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager changePrivacy:newPrivacy withSuccess:^(id response) {
+    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    _settingsData.privacy = newPrivacy;
+    [self.delegate updateView];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSLog(@"error - %@",error);
+  }];
+}
+
+#pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.dataSource.count;
+  return _settingsData.availablePrivacy.count;
 }
 
 
@@ -50,8 +88,8 @@
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPrivacyCellIdentifier];
   }
-  [cell.textLabel setText:[self.dataSource objectAtIndex:indexPath.row]];
-  if (indexPath == self.selectedIndexPath)
+  [cell.textLabel setText:[_settingsData.availablePrivacy objectAtIndex:indexPath.row]];
+  if (indexPath.row == _selectedIndex)
   {
     cell.accessoryType = UITableViewCellAccessoryCheckmark;
   }
@@ -65,8 +103,9 @@
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  self.selectedIndexPath = indexPath;
+  _selectedIndex = indexPath.row;
   [self.tableView reloadData];
+  [self validateFields];
 }
 
 

@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCUpdateEmailViewController.h"
+#import "LCChangePasswordViewController.h"
+#import "LCPrivacyViewController.h"
+#import "LCMyLegacyURLViewController.h"
 
-@interface LCSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-+ (NSString*)getStoryBoardIdentifier;
-@property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
+
+@interface LCSettingsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, LCUpdateEmailDelegate, LCUpdateLegacyURLDelegate,LCUpdatePrivacyDelegate>
+{
+  __weak IBOutlet UITableView *settingsTableView;
+}
+
+@property (strong,nonatomic) LCSettings *settingsData;
 
 @end

@@ -201,13 +201,15 @@ static NSString *kTitle = @"FRIENDS";
   UIAlertAction *removeFriend = [UIAlertAction actionWithTitle:@"Remove Friend" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     //change button image
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
+    friendBtn.userInteractionEnabled = NO;
     [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
-    
+       friendBtn.userInteractionEnabled = YES;
      } andFailure:^(NSString *error) {
        //Set previous button state
        [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
+       friendBtn.userInteractionEnabled = YES;
        NSLog(@"%@",error);
      }];
   }];
@@ -226,12 +228,15 @@ static NSString *kTitle = @"FRIENDS";
   
   UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:@"Cancel Friend Request" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
+    friendBtn.userInteractionEnabled = NO;
     [LCAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
       NSLog(@"%@",response);
       friendObj.isFriend = kFriendStatusNonFriend;
+      friendBtn.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       //Set previous button state
       [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
+      friendBtn.userInteractionEnabled = YES;
       NSLog(@"%@",error);
     }];
   }];
@@ -246,13 +251,22 @@ static NSString *kTitle = @"FRIENDS";
 {
   LCfriendButton * friendBtn = btn;
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
-  
-  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
+  friendBtn.userInteractionEnabled = NO;
+  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSDictionary *response) {
     NSLog(@"%@",response);
-    friendObj.isFriend = kFriendStatusWaiting;
+    NSInteger isFriend = [response[kResponseData][@"isFriend"] integerValue];
+    if (isFriend == kIsFriend) {
+      friendObj.isFriend = kFriendStatusMyFriend;
+      [friendBtn setfriendStatusButtonImageForStatus:kIsFriend];
+    }
+    else {
+      friendObj.isFriend = kFriendStatusWaiting;
+    }
+    friendBtn.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
+    friendBtn.userInteractionEnabled = YES;
   }];
 }
 
