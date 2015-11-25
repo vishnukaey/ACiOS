@@ -11,50 +11,9 @@
 
 @interface LCChangePasswordViewController ()
 
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordField;
 @end
 
 @implementation LCChangePasswordViewController
-
-#pragma mark - private method implementation
-
-- (void)changeSaveButtonState {
-  if (self.passwordField.text.length > 0 && self.confirmPasswordField.text.length > 0)
-  {
-    [self.navigationItem.rightBarButtonItem setEnabled:true];
-  }
-  else
-  {
-    [self.navigationItem.rightBarButtonItem setEnabled:false];
-  }
-}
-
-- (void)initialUISetUp
-{
-  self.navigationController.navigationBarHidden = false;
-  self.title = kEmailUpdateScreenTitle;
-  //self.confirmPasswordField.isValid = YES;
-  UIBarButtonItem * saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-                                                                               target:self
-                                                                               action:@selector(saveButtonPressed:)];
-  [saveButton setTintColor:[UIColor blackColor]];
-  self.navigationItem.rightBarButtonItem = saveButton;
-  [saveButton setEnabled:false];
-}
-
-- (void)saveButtonPressed:(id)sender
-{
-  if ([self.passwordField.text isEqual:self.confirmPasswordField.text])
-  {
-    //self.confirmPasswordField.isValid = YES;
-    [self.navigationController popViewControllerAnimated:YES];
-  }
-  else
-  {
-    //self.confirmPasswordField.isValid = NO;
-  }
-}
 
 
 #pragma mark - view life cycle
@@ -64,10 +23,44 @@
   [self initialUISetUp];
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self.view endEditing:YES];
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
 }
+
+#pragma mark - private method implementation
+
+- (void)initialUISetUp
+{
+  self.navigationController.navigationBarHidden = false;
+  
+  [newPasswordField becomeFirstResponder];
+  [newPasswordField addTarget:self
+                             action:@selector(validateFields)
+                   forControlEvents:UIControlEventEditingChanged];
+  [confirmPasswordField addTarget:self
+                       action:@selector(validateFields)
+             forControlEvents:UIControlEventEditingChanged];
+  [saveButton setEnabled:NO];
+}
+
+- (void)validateFields
+{
+  if ([LCUtilityManager isEmptyString:newPasswordField.text] || [LCUtilityManager isEmptyString:confirmPasswordField.text]) {
+    [saveButton setEnabled:NO];
+  }
+  else {
+    [saveButton setEnabled:YES];
+  }
+}
+
+
+#pragma mark - Action methods
 
 - (IBAction)cancelAction:(id)sender {
   
@@ -77,19 +70,27 @@
 
 - (IBAction)saveAction:(id)sender {
   
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
+  if(![LCUtilityManager validatePassword:newPasswordField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_password", @"")];
+  }
+  else if (![newPasswordField.text isEqualToString:confirmPasswordField.text])
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"password_mismatch", @"")];
+  }
+  else
+  {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LCAPIManager changePassword:newPasswordField.text withSuccess:^(id response) {
+      
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self dismissViewControllerAnimated:YES completion:nil];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      NSLog(@"error - %@",error);
+    }];
 
-#pragma mark - UITextFieldDelegate implementation
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-  [self changeSaveButtonState];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-  [self changeSaveButtonState];
+  }
 }
 
 @end

@@ -114,8 +114,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   if ([nativeUserId isEqualToString:userDetail.userID] || !userDetail.userID)
   {
-    currentProfileState = PROFILE_SELF;
-    [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
+    [self setCurrentProfileStatus:kMyProfile];
     
     //Add Notification observers
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -132,8 +131,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   }
   else
   {
-    currentProfileState = PROFILE_OTHER_NON_FRIEND;
-    [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
+    [self setCurrentProfileStatus:kNonFriend];
   }
   profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   
@@ -142,14 +140,14 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (void)loadUserDetails
 {
-  editButton.enabled = NO;
+  friendsButton.enabled = NO;
   [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
     
-    if(currentProfileState == PROFILE_SELF) {
+    if(currentProfileStatus == kMyProfile) {
       [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     }
     userDetail = response;
-    editButton.enabled = YES;
+    friendsButton.enabled = YES;
     NSLog(@"user details - %@",response);
     
     userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
@@ -179,35 +177,42 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
                        placeholderImage:headerImageView.image];
     
-    
-    switch ([userDetail.isFriend integerValue]) {
-      case 0:
-        currentProfileState = PROFILE_SELF;
-        [editButton setImage:[UIImage imageNamed:kImageNameProfileSettings] forState:UIControlStateNormal];
-        break;
-        
-      case 1:
-        currentProfileState = PROFILE_OTHER_FRIEND;
-        [editButton setImage:[UIImage imageNamed:kImageNameProfileFriend] forState:UIControlStateNormal];
-        break;
-        
-      case 2:
-        currentProfileState = PROFILE_OTHER_NON_FRIEND;
-        [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
-        break;
-        
-      case 3:
-        currentProfileState = PROFILE_OTHER_WAITING;
-        [editButton setImage:[UIImage imageNamed:kImageNameProfileWaiting] forState:UIControlStateNormal];
-        break;
-        
-      default:
-        break;
-    }
+    [self setCurrentProfileStatus:(FriendStatus)[userDetail.isFriend integerValue]];
     
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
+}
+
+- (void) setCurrentProfileStatus:(FriendStatus)friendStatus
+{
+  currentProfileStatus = friendStatus;
+  NSString *btnImageName = nil;
+  switch (currentProfileStatus) {
+      
+    case kMyProfile:
+      btnImageName = kImageNameProfileSettings;
+      break;
+      
+    case kIsFriend:
+      btnImageName = kImageNameProfileFriend;
+      break;
+      
+    case kNonFriend:
+      btnImageName = kImageNameProfileAdd;
+      break;
+      
+    case kRequestWaiting:
+      btnImageName = kImageNameProfileWaiting;
+      break;
+      
+    default:
+      break;
+  }
+  if(btnImageName)
+  {
+    [friendsButton setImage:[UIImage imageNamed:btnImageName] forState:UIControlStateNormal];
+  }
 }
 
 - (void)addTabMenu
@@ -237,6 +242,57 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   tabmenu.highlightColor = [UIColor colorWithRed:239.0f/255.0 green:100.0f/255.0 blue:77.0f/255.0 alpha:1.0];
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
+
+- (void) sendFriendRequest {
+  
+  [self setCurrentProfileStatus:kRequestWaiting];
+  friendsButton.userInteractionEnabled = NO;
+  [LCAPIManager sendFriendRequest:userDetail.userID withSuccess:^(NSDictionary *response) {
+    
+    NSInteger isFriend = [response[kResponseData][@"isFriend"] integerValue];
+    if (isFriend == kIsFriend) {
+      [self setCurrentProfileStatus:kIsFriend];
+    }
+    userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
+    friendsButton.userInteractionEnabled = YES;
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+    [self setCurrentProfileStatus:kNonFriend];
+    friendsButton.userInteractionEnabled = YES;
+  }];
+}
+
+- (void) cancelFriendRequest {
+  
+  [self setCurrentProfileStatus:kNonFriend];
+  friendsButton.userInteractionEnabled = NO;
+  [LCAPIManager cancelFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
+    userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
+    friendsButton.userInteractionEnabled = YES;
+  } andFailure:^(NSString *error) {
+    NSLog(@"%@",error);
+    [self setCurrentProfileStatus:kRequestWaiting];
+    friendsButton.userInteractionEnabled = YES;
+  }];
+}
+
+- (void) removeFriend {
+  
+  [self setCurrentProfileStatus:kNonFriend];
+  friendsButton.userInteractionEnabled = NO;
+  [LCAPIManager removeFriend:userDetail.userID withSuccess:^(NSArray *response)
+   {
+     userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
+     friendsButton.userInteractionEnabled = YES;
+   }
+                  andFailure:^(NSString *error)
+   {
+     NSLog(@"%@",error);
+     [self setCurrentProfileStatus:kIsFriend];
+     friendsButton.userInteractionEnabled = YES;
+   }];
+}
+
 
 
 #pragma mark - Notification Receivers
@@ -298,7 +354,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 - (IBAction)editClicked:(UIButton *)sender
 {
   
-  if (currentProfileState == PROFILE_SELF)
+  if (currentProfileStatus == kMyProfile)
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
@@ -306,7 +362,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navC animated:YES completion:nil];
   }
-  else if (currentProfileState == PROFILE_OTHER_FRIEND)
+  else if (currentProfileStatus == kIsFriend)
   {
     //remove friend
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -314,19 +370,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     
     UIAlertAction *removeFriend = [UIAlertAction actionWithTitle:@"Remove Friend" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
       
-      [editButton setEnabled:NO];
-      [LCAPIManager removeFriend:userDetail.userID withSuccess:^(NSArray *response)
-       {
-         NSLog(@"%@",response);
-         currentProfileState = PROFILE_OTHER_NON_FRIEND;
-         [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
-         [editButton setEnabled:YES];
-       }
-       andFailure:^(NSString *error)
-       {
-         NSLog(@"%@",error);
-         [editButton setEnabled:YES];
-       }];
+      [self removeFriend];
     }];
     [actionSheet addAction:removeFriend];
     
@@ -335,37 +379,20 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     
     [self presentViewController:actionSheet animated:YES completion:nil];
   }
-  else if (currentProfileState == PROFILE_OTHER_NON_FRIEND)
+  else if (currentProfileStatus == kNonFriend)
   {
-    //send friend request;
-    [editButton setEnabled:NO];
-    [LCAPIManager sendFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
-      NSLog(@"%@",response);
-      currentProfileState = PROFILE_OTHER_WAITING;
-      [editButton setImage:[UIImage imageNamed:kImageNameProfileWaiting] forState:UIControlStateNormal];
-      [editButton setEnabled:YES];
-    } andFailure:^(NSString *error) {
-      NSLog(@"%@",error);
-      [editButton setEnabled:YES];
-    }];
+    //send friend request
+    [self sendFriendRequest];
   }
-  else if (currentProfileState == PROFILE_OTHER_WAITING)
+  else if (currentProfileStatus == kRequestWaiting)
   {
     //cancel friend request
     UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     actionSheet.view.tintColor = [UIColor blackColor];
     
     UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:@"Cancel Friend Request" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      [editButton setEnabled:NO];
-      [LCAPIManager cancelFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
-        NSLog(@"%@",response);
-        currentProfileState = PROFILE_OTHER_NON_FRIEND;
-        [editButton setImage:[UIImage imageNamed:kImageNameProfileAdd] forState:UIControlStateNormal];
-        [editButton setEnabled:YES];
-      } andFailure:^(NSString *error) {
-        NSLog(@"%@",error);
-        [editButton setEnabled:YES];
-      }];
+      
+      [self cancelFriendRequest];
     }];
     [actionSheet addAction:cancelFreindRequest];
     

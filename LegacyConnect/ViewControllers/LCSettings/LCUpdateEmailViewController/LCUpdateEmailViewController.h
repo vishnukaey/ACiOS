@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LCUpdateEmailDelegate <NSObject>
+- (void)updateView;
+@end
+
 @interface LCUpdateEmailViewController : UIViewController
 {
-  
   __weak IBOutlet UIButton *saveButton;
 }
 
-@property (strong, nonatomic) NSString * emailAddress;
+@property (strong,nonatomic) LCSettings *settingsData;
+@property (nonatomic, assign) id<LCUpdateEmailDelegate> delegate;
 
 @end

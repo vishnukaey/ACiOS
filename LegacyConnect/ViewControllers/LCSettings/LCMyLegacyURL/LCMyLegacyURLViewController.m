@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  [self initialUISetUp];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
+  [self.view endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +30,47 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initialUISetUp
+{
+  
+  [legacyURLTextField setText:_settingsData.legacyUrl];
+  [legacyURLTextField becomeFirstResponder];
+  [legacyURLTextField addTarget:self
+                             action:@selector(validateFields)
+                   forControlEvents:UIControlEventEditingChanged];
+  [saveButton setEnabled:NO];
 }
-*/
+
+- (void)validateFields
+{
+  if ([LCUtilityManager isEmptyString:legacyURLTextField.text] || [legacyURLTextField.text isEqualToString:_settingsData.legacyUrl]) {
+    [saveButton setEnabled:NO];
+  }
+  else {
+    [saveButton setEnabled:YES];
+  }
+}
+
+#pragma mark - Action methods
+- (IBAction)cancelAction:(id)sender {
+  
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+- (IBAction)saveAction:(id)sender {
+  
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager changeLegacyURL:legacyURLTextField.text withSuccess:^(id response) {
+    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    _settingsData.legacyUrl = legacyURLTextField.text;
+    [self.delegate updateView];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    NSLog(@"error - %@",error);
+  }];
+}
 
 @end

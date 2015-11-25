@@ -3,10 +3,11 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
+            <string>Gotham-Bold</string>
+            <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
@@ -24,173 +25,21 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Update Email View Controller-->
-        <scene sceneID="pxy-lR-BfP">
-            <objects>
-                <viewController storyboardIdentifier="LCUpdateEmailVC" id="Ywk-Tk-Ost" customClass="LCUpdateEmailViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="e1v-7C-zsP"/>
-                        <viewControllerLayoutGuide type="bottom" id="0lK-0U-RVb"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OuF-wO-haq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTc-XJ-Lab">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="barTintColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                                <items>
-                                    <navigationItem id="q03-fX-4vg">
-                                        <nil key="title"/>
-                                        <barButtonItem key="leftBarButtonItem" width="44" style="done" id="9CT-Ik-aK7">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="K2q-b0-abc">
-                                                <rect key="frame" x="16" y="7" width="57" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                                <state key="normal" title="Cancel">
-                                                    <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="cancelAction:" destination="Ywk-Tk-Ost" eventType="touchUpInside" id="XtC-fZ-rx3"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                        <view key="titleView" contentMode="scaleToFill" id="zzV-Sf-tHT">
-                                            <rect key="frame" x="122" y="6" width="131" height="33"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL ADDRESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zm1-yS-dZR">
-                                                    <rect key="frame" x="14" y="11" width="104" height="12"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="zm1-yS-dZR" firstAttribute="centerX" secondItem="zzV-Sf-tHT" secondAttribute="centerX" id="7Ft-aW-pSv"/>
-                                                <constraint firstItem="zm1-yS-dZR" firstAttribute="centerY" secondItem="zzV-Sf-tHT" secondAttribute="centerY" id="o4v-Au-tRn"/>
-                                            </constraints>
-                                        </view>
-                                        <barButtonItem key="rightBarButtonItem" width="44" style="done" id="oX6-pN-bNn">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Mu0-F5-EHJ">
-                                                <rect key="frame" x="315" y="7" width="44" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                                <state key="normal" title="Save">
-                                                    <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <state key="disabled">
-                                                    <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.5" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="saveAction:" destination="Ywk-Tk-Ost" eventType="touchUpInside" id="1WN-ey-bBv"/>
-                                                </connections>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eao-lA-xK1">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rF1-fP-3YY" userLabel="Border View">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="fDR-yT-7eA"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9V-Bg-TRg">
-                                        <rect key="frame" x="0.0" y="45" width="375" height="44"/>
-                                        <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ml5-Em-H0d">
-                                                <rect key="frame" x="15" y="0.0" width="345" height="44"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="44" id="pvP-RT-UEd"/>
-                                                </constraints>
-                                                <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="Ywk-Tk-Ost" id="guZ-Yn-ULC"/>
-                                                </connections>
-                                            </textField>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="Ml5-Em-H0d" secondAttribute="bottom" id="NIA-WW-Rcp"/>
-                                            <constraint firstItem="Ml5-Em-H0d" firstAttribute="leading" secondItem="e9V-Bg-TRg" secondAttribute="leading" constant="15" id="fSc-Wt-SHn"/>
-                                            <constraint firstAttribute="height" constant="44" id="mPf-Yx-5wW"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ml5-Em-H0d" secondAttribute="trailing" constant="15" id="nSm-GT-6UC"/>
-                                            <constraint firstItem="Ml5-Em-H0d" firstAttribute="top" secondItem="e9V-Bg-TRg" secondAttribute="top" id="pXf-aj-egC"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DoQ-9z-9FF" userLabel="Border View">
-                                        <rect key="frame" x="0.0" y="89" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.5" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="3dN-gm-vIX"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit or update your email for Legacy Connect" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ft-mm-YVK">
-                                        <rect key="frame" x="15" y="20" width="345" height="24"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="24" id="ixp-QI-Pca"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="rF1-fP-3YY" secondAttribute="trailing" id="26w-LK-7ch"/>
-                                    <constraint firstItem="DoQ-9z-9FF" firstAttribute="leading" secondItem="eao-lA-xK1" secondAttribute="leading" id="2xo-5G-nQU"/>
-                                    <constraint firstItem="rF1-fP-3YY" firstAttribute="leading" secondItem="eao-lA-xK1" secondAttribute="leading" id="JDk-Hu-tlL"/>
-                                    <constraint firstItem="e9V-Bg-TRg" firstAttribute="leading" secondItem="eao-lA-xK1" secondAttribute="leading" id="Jhk-Yk-Q4I"/>
-                                    <constraint firstAttribute="trailing" secondItem="1Ft-mm-YVK" secondAttribute="trailing" constant="15" id="KSj-7I-Wkv"/>
-                                    <constraint firstAttribute="trailing" secondItem="DoQ-9z-9FF" secondAttribute="trailing" id="TKe-lJ-rZL"/>
-                                    <constraint firstItem="DoQ-9z-9FF" firstAttribute="top" secondItem="e9V-Bg-TRg" secondAttribute="bottom" id="iPz-M1-RP0"/>
-                                    <constraint firstItem="1Ft-mm-YVK" firstAttribute="top" secondItem="eao-lA-xK1" secondAttribute="top" constant="20" id="mWC-5y-h0l"/>
-                                    <constraint firstItem="rF1-fP-3YY" firstAttribute="top" secondItem="1Ft-mm-YVK" secondAttribute="bottom" id="owy-Jr-FaR"/>
-                                    <constraint firstItem="e9V-Bg-TRg" firstAttribute="top" secondItem="rF1-fP-3YY" secondAttribute="bottom" id="qXE-od-JzJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="e9V-Bg-TRg" secondAttribute="trailing" id="rzp-Dd-jOB"/>
-                                    <constraint firstItem="1Ft-mm-YVK" firstAttribute="leading" secondItem="eao-lA-xK1" secondAttribute="leading" constant="15" id="sjh-aa-rmr"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="eao-lA-xK1" firstAttribute="leading" secondItem="OuF-wO-haq" secondAttribute="leading" id="0dS-Q2-u3V"/>
-                            <constraint firstItem="qTc-XJ-Lab" firstAttribute="top" secondItem="e1v-7C-zsP" secondAttribute="bottom" id="3gj-W8-1j9"/>
-                            <constraint firstItem="qTc-XJ-Lab" firstAttribute="leading" secondItem="OuF-wO-haq" secondAttribute="leading" id="D01-R0-hF0"/>
-                            <constraint firstItem="eao-lA-xK1" firstAttribute="top" secondItem="qTc-XJ-Lab" secondAttribute="bottom" id="QmN-kJ-Oxq"/>
-                            <constraint firstAttribute="trailing" secondItem="qTc-XJ-Lab" secondAttribute="trailing" id="TOq-rG-WAU"/>
-                            <constraint firstItem="0lK-0U-RVb" firstAttribute="top" secondItem="eao-lA-xK1" secondAttribute="bottom" id="fvJ-sr-oCU"/>
-                            <constraint firstAttribute="trailing" secondItem="eao-lA-xK1" secondAttribute="trailing" id="g4l-S0-e2o"/>
-                        </constraints>
-                    </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <connections>
-                        <outlet property="emailAddressField" destination="Ml5-Em-H0d" id="NqE-au-kaA"/>
-                        <outlet property="saveButton" destination="Mu0-F5-EHJ" id="KZ0-Ug-hZG"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sQn-0Y-aL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-303.5" y="-75.5"/>
-        </scene>
         <!--Privacy View Controller-->
         <scene sceneID="meR-01-mdm">
             <objects>
@@ -203,22 +52,100 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Decide who can see your profile and posts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bn0-aC-Lh3">
-                                <rect key="frame" x="20" y="20" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="WA7-JA-T4V">
-                                <rect key="frame" x="0.0" y="51" width="320" height="517"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWt-BM-izc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem id="CFJ-CH-4p9">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" width="44" style="done" id="Lhc-N9-mhJ">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sBS-hF-iYR">
+                                                <rect key="frame" x="16" y="7" width="57" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelAction:" destination="XlJ-ym-6re" eventType="touchUpInside" id="Haa-qO-brG"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                        <view key="titleView" contentMode="scaleToFill" id="qya-Lw-3ra">
+                                            <rect key="frame" x="122" y="6" width="131" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PRIVACY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJb-Zf-hEP">
+                                                    <rect key="frame" x="38" y="11" width="55" height="12"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="PJb-Zf-hEP" firstAttribute="centerX" secondItem="qya-Lw-3ra" secondAttribute="centerX" id="Dkk-Th-oiE"/>
+                                                <constraint firstItem="PJb-Zf-hEP" firstAttribute="centerY" secondItem="qya-Lw-3ra" secondAttribute="centerY" id="lV1-Mg-kOM"/>
+                                            </constraints>
+                                        </view>
+                                        <barButtonItem key="rightBarButtonItem" width="44" style="done" id="bKw-Je-Pcp">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="d2n-AI-pPu">
+                                                <rect key="frame" x="315" y="7" width="44" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveAction:" destination="XlJ-ym-6re" eventType="touchUpInside" id="Psn-Mz-nzZ"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qty-K2-uOn" userLabel="Lable View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Decide who can see your profile and posts" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PMj-df-3LV">
+                                        <rect key="frame" x="15" y="25" width="345" height="15"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7Qm-pT-H1G"/>
+                                    <constraint firstItem="PMj-df-3LV" firstAttribute="leading" secondItem="Qty-K2-uOn" secondAttribute="leading" constant="15" id="AIg-7K-Fup"/>
+                                    <constraint firstAttribute="bottom" secondItem="PMj-df-3LV" secondAttribute="bottom" constant="4" id="K2o-37-2Ci"/>
+                                    <constraint firstAttribute="trailing" secondItem="PMj-df-3LV" secondAttribute="trailing" constant="15" id="cLW-bD-qKa"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="WA7-JA-T4V">
+                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.93725490196078431" green="0.39215686274509803" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="LCPrivacyCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCPrivacyCell" id="nbo-B5-XCl">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="LCPrivacyCell" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="LCPrivacyCell" textLabel="fww-cg-a3W" style="IBUITableViewCellStyleDefault" id="nbo-B5-XCl">
+                                        <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nbo-B5-XCl" id="Ihg-la-Bnn">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="336" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fww-cg-a3W">
+                                                    <rect key="frame" x="15" y="0.0" width="321" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -229,12 +156,25 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.94509803920000002" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Rog-se-MYl" firstAttribute="top" secondItem="WA7-JA-T4V" secondAttribute="bottom" id="7MJ-C6-Lsj"/>
+                            <constraint firstAttribute="trailing" secondItem="IWt-BM-izc" secondAttribute="trailing" id="C8c-ze-fxZ"/>
+                            <constraint firstItem="IWt-BM-izc" firstAttribute="leading" secondItem="wZP-DY-J2w" secondAttribute="leading" id="KBI-Sf-Def"/>
+                            <constraint firstAttribute="trailing" secondItem="WA7-JA-T4V" secondAttribute="trailing" id="LKS-hB-Uxx"/>
+                            <constraint firstAttribute="trailing" secondItem="Qty-K2-uOn" secondAttribute="trailing" id="MNx-pX-isk"/>
+                            <constraint firstItem="Qty-K2-uOn" firstAttribute="leading" secondItem="wZP-DY-J2w" secondAttribute="leading" id="eAa-nx-b4O"/>
+                            <constraint firstItem="WA7-JA-T4V" firstAttribute="leading" secondItem="wZP-DY-J2w" secondAttribute="leading" id="iIx-OA-mR7"/>
+                            <constraint firstItem="WA7-JA-T4V" firstAttribute="top" secondItem="Qty-K2-uOn" secondAttribute="bottom" id="ovc-j1-iuz"/>
+                            <constraint firstItem="Qty-K2-uOn" firstAttribute="top" secondItem="IWt-BM-izc" secondAttribute="bottom" id="ozy-Mb-EjS"/>
+                            <constraint firstItem="IWt-BM-izc" firstAttribute="top" secondItem="oBF-hp-1ik" secondAttribute="bottom" id="y4I-fK-WFm"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="tableView" destination="WA7-JA-T4V" id="jLa-y2-zOT"/>
+                        <outlet property="saveButton" destination="d2n-AI-pPu" id="2nJ-EL-fyU"/>
+                        <outlet property="tableView" destination="WA7-JA-T4V" id="rVs-Yb-vm7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0N5-rS-aPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -253,23 +193,175 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add or update your personalized URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c1Q-E3-nP0">
-                                <rect key="frame" x="10" y="20" width="300" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0s-RZ-NuU">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem id="OGj-YW-7o8">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" width="44" style="done" id="2SM-da-BHg">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4b2-np-tcR">
+                                                <rect key="frame" x="16" y="7" width="57" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelAction:" destination="5OU-4q-idy" eventType="touchUpInside" id="Hvo-YS-wJK"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                        <view key="titleView" contentMode="scaleToFill" id="6hd-P0-cBS">
+                                            <rect key="frame" x="122" y="6" width="131" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY LEGACY URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRq-s4-Lrf">
+                                                    <rect key="frame" x="14" y="11" width="103" height="12"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="MRq-s4-Lrf" firstAttribute="centerY" secondItem="6hd-P0-cBS" secondAttribute="centerY" id="U98-ft-Tzu"/>
+                                                <constraint firstItem="MRq-s4-Lrf" firstAttribute="centerX" secondItem="6hd-P0-cBS" secondAttribute="centerX" id="ieb-Xa-pr2"/>
+                                            </constraints>
+                                        </view>
+                                        <barButtonItem key="rightBarButtonItem" width="44" style="done" id="3p8-lZ-Dm8">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="SCc-TH-Yvo">
+                                                <rect key="frame" x="315" y="7" width="44" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveAction:" destination="5OU-4q-idy" eventType="touchUpInside" id="dtL-Q5-RlJ"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdN-eh-kZW">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKM-28-5j4" userLabel="Lable View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.LegacyConnect.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlA-Vu-eSL">
+                                                <rect key="frame" x="15" y="56" width="345" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="4YI-v0-96w"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                                <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="vlA-Vu-eSL" secondAttribute="bottom" constant="8" id="5aF-7t-VcV"/>
+                                            <constraint firstAttribute="height" constant="88" id="PAT-WB-0d3"/>
+                                            <constraint firstItem="vlA-Vu-eSL" firstAttribute="leading" secondItem="GKM-28-5j4" secondAttribute="leading" constant="15" id="WdW-YC-oou"/>
+                                            <constraint firstAttribute="trailing" secondItem="vlA-Vu-eSL" secondAttribute="trailing" constant="15" id="fVk-K8-qE2"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add or update your personal URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2KQ-sm-zet">
+                                        <rect key="frame" x="15" y="15" width="345" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="Ses-0y-tuH"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DoQ-9z-9FF" userLabel="Border View">
+                                        <rect key="frame" x="0.0" y="88" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="3dN-gm-vIX"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e9V-Bg-TRg" userLabel="TextField View">
+                                        <rect key="frame" x="0.0" y="89" width="375" height="44"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Legacy URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ml5-Em-H0d">
+                                                <rect key="frame" x="15" y="0.0" width="345" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="pvP-RT-UEd"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Ml5-Em-H0d" secondAttribute="bottom" id="NIA-WW-Rcp"/>
+                                            <constraint firstItem="Ml5-Em-H0d" firstAttribute="leading" secondItem="e9V-Bg-TRg" secondAttribute="leading" constant="15" id="fSc-Wt-SHn"/>
+                                            <constraint firstAttribute="height" constant="44" id="mPf-Yx-5wW"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ml5-Em-H0d" secondAttribute="trailing" constant="15" id="nSm-GT-6UC"/>
+                                            <constraint firstItem="Ml5-Em-H0d" firstAttribute="top" secondItem="e9V-Bg-TRg" secondAttribute="top" id="pXf-aj-egC"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rF1-fP-3YY" userLabel="Border View">
+                                        <rect key="frame" x="0.0" y="133" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="fDR-yT-7eA"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="rF1-fP-3YY" firstAttribute="leading" secondItem="UdN-eh-kZW" secondAttribute="leading" id="B5Q-ev-Spi"/>
+                                    <constraint firstItem="rF1-fP-3YY" firstAttribute="top" secondItem="e9V-Bg-TRg" secondAttribute="bottom" id="Q53-6Q-Tuv"/>
+                                    <constraint firstAttribute="trailing" secondItem="GKM-28-5j4" secondAttribute="trailing" id="Ube-tj-cHB"/>
+                                    <constraint firstItem="GKM-28-5j4" firstAttribute="leading" secondItem="UdN-eh-kZW" secondAttribute="leading" id="Vvq-Sv-N1f"/>
+                                    <constraint firstItem="e9V-Bg-TRg" firstAttribute="top" secondItem="DoQ-9z-9FF" secondAttribute="bottom" id="X18-dT-FXx"/>
+                                    <constraint firstItem="2KQ-sm-zet" firstAttribute="leading" secondItem="UdN-eh-kZW" secondAttribute="leading" constant="15" id="ZYb-ua-gEh"/>
+                                    <constraint firstItem="GKM-28-5j4" firstAttribute="top" secondItem="UdN-eh-kZW" secondAttribute="top" id="a52-lq-x7X"/>
+                                    <constraint firstAttribute="trailing" secondItem="e9V-Bg-TRg" secondAttribute="trailing" id="bAz-US-nVO"/>
+                                    <constraint firstAttribute="trailing" secondItem="2KQ-sm-zet" secondAttribute="trailing" constant="15" id="flw-lE-0T8"/>
+                                    <constraint firstItem="e9V-Bg-TRg" firstAttribute="leading" secondItem="UdN-eh-kZW" secondAttribute="leading" id="hnF-EN-B0O"/>
+                                    <constraint firstAttribute="trailing" secondItem="DoQ-9z-9FF" secondAttribute="trailing" id="j75-xd-lO1"/>
+                                    <constraint firstItem="DoQ-9z-9FF" firstAttribute="top" secondItem="GKM-28-5j4" secondAttribute="bottom" id="tAU-gL-VYh"/>
+                                    <constraint firstAttribute="trailing" secondItem="rF1-fP-3YY" secondAttribute="trailing" id="uUl-dA-YVy"/>
+                                    <constraint firstItem="2KQ-sm-zet" firstAttribute="top" secondItem="UdN-eh-kZW" secondAttribute="top" constant="15" id="xez-os-mQD"/>
+                                    <constraint firstItem="DoQ-9z-9FF" firstAttribute="leading" secondItem="UdN-eh-kZW" secondAttribute="leading" id="zsL-Ee-SKF"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.95294117649999999" green="0.94509803920000002" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="UdN-eh-kZW" firstAttribute="leading" secondItem="1FD-OW-Cs5" secondAttribute="leading" id="0BA-be-NOd"/>
+                            <constraint firstAttribute="trailing" secondItem="UdN-eh-kZW" secondAttribute="trailing" id="EcR-oO-yF7"/>
+                            <constraint firstItem="I0s-RZ-NuU" firstAttribute="top" secondItem="njK-Kh-Uc1" secondAttribute="bottom" id="iNd-P6-rDs"/>
+                            <constraint firstItem="I0s-RZ-NuU" firstAttribute="leading" secondItem="1FD-OW-Cs5" secondAttribute="leading" id="mr9-JL-1Yy"/>
+                            <constraint firstItem="UdN-eh-kZW" firstAttribute="top" secondItem="I0s-RZ-NuU" secondAttribute="bottom" id="plt-zz-eeM"/>
+                            <constraint firstAttribute="trailing" secondItem="I0s-RZ-NuU" secondAttribute="trailing" id="sWS-Yv-R1l"/>
+                            <constraint firstItem="0OJ-mz-7Mo" firstAttribute="top" secondItem="UdN-eh-kZW" secondAttribute="bottom" id="wxs-UV-313"/>
+                        </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="legacyURLTextField" destination="Ml5-Em-H0d" id="LDS-sZ-jU6"/>
+                        <outlet property="saveButton" destination="SCc-TH-Yvo" id="fqy-bu-529"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H31-HV-ibP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-303.5" y="732.5"/>
+            <point key="canvasLocation" x="-350.5" y="732.5"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="LXW-LV-tSq">
@@ -283,77 +375,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Zu9-zp-Iu9">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="deviceRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCSettingsHeaderCell" id="Kkx-M5-25b">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kkx-M5-25b" id="0Vu-fN-dJa">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Anj-4W-GE1">
-                                                    <rect key="frame" x="8" y="24" width="86" height="11"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
-                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="Anj-4W-GE1" firstAttribute="leading" secondItem="0Vu-fN-dJa" secondAttribute="leadingMargin" id="68v-1j-0Yi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Anj-4W-GE1" secondAttribute="bottom" id="Moq-uO-aAL"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LCSettingsCell" textLabel="K2B-B5-nLi" detailTextLabel="0O0-Sf-bTW" style="IBUITableViewCellStyleValue1" id="aCL-t8-JVX">
-                                        <rect key="frame" x="0.0" y="94" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aCL-t8-JVX" id="9T1-rn-hmC">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K2B-B5-nLi">
-                                                    <rect key="frame" x="15" y="14" width="30" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                    <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0O0-Sf-bTW">
-                                                    <rect key="frame" x="299" y="14" width="41" height="15"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.75" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCSettingsSignOutCell" id="Gje-uc-uQf">
-                                        <rect key="frame" x="0.0" y="138" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gje-uc-uQf" id="yoy-kg-p6p">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dxV-qS-h4L">
-                                                    <rect key="frame" x="157" y="14" width="62" height="15"/>
-                                                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                                                    <color key="textColor" red="0.94117647058823528" green="0.39215686274509803" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="dxV-qS-h4L" firstAttribute="centerX" secondItem="yoy-kg-p6p" secondAttribute="centerX" id="Ehd-JO-9po"/>
-                                                <constraint firstItem="dxV-qS-h4L" firstAttribute="centerY" secondItem="yoy-kg-p6p" secondAttribute="centerY" id="po1-cS-v9k"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2l-DC-1Fx">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -381,21 +402,96 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="44" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="1Ed-qV-FEe">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="deviceRGB"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCSettingsHeaderCell" id="19e-Fc-7yK">
+                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="19e-Fc-7yK" id="QZs-Yf-tJX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Section Header" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xFI-RO-wcL">
+                                                    <rect key="frame" x="15" y="24" width="86" height="11"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="xFI-RO-wcL" firstAttribute="leading" secondItem="QZs-Yf-tJX" secondAttribute="leading" constant="15" id="dmB-1q-82G"/>
+                                                <constraint firstAttribute="bottom" secondItem="xFI-RO-wcL" secondAttribute="bottom" constant="8" id="q13-G6-OXM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LCSettingsCell" textLabel="Rt2-1U-Sbv" detailTextLabel="BUg-uN-i0R" style="IBUITableViewCellStyleValue1" id="aVt-UO-elu">
+                                        <rect key="frame" x="0.0" y="94" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aVt-UO-elu" id="F0Q-hJ-hEJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rt2-1U-Sbv">
+                                                    <rect key="frame" x="15" y="14" width="30" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BUg-uN-i0R">
+                                                    <rect key="frame" x="299" y="14" width="41" height="15"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.75" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCSettingsSignOutCell" id="EIg-D5-tSr">
+                                        <rect key="frame" x="0.0" y="138" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EIg-D5-tSr" id="tVq-iz-cx6">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Out" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7FJ-fk-chh">
+                                                    <rect key="frame" x="157" y="14" width="62" height="15"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                                    <color key="textColor" red="0.94117647059999998" green="0.3921568627" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="7FJ-fk-chh" firstAttribute="centerY" secondItem="tVq-iz-cx6" secondAttribute="centerY" id="EzC-0a-IMp"/>
+                                                <constraint firstItem="7FJ-fk-chh" firstAttribute="centerX" secondItem="tVq-iz-cx6" secondAttribute="centerX" id="RGv-46-mzs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="jdy-Nc-YC4" id="Fhf-3h-BmN"/>
+                                    <outlet property="delegate" destination="jdy-Nc-YC4" id="Mtw-Td-Opa"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="ip3-Nt-3R7" firstAttribute="top" secondItem="Zu9-zp-Iu9" secondAttribute="bottom" id="AxF-GJ-eak"/>
-                            <constraint firstItem="Zu9-zp-Iu9" firstAttribute="top" secondItem="f2l-DC-1Fx" secondAttribute="bottom" id="Din-0u-6Gy"/>
+                            <constraint firstItem="ip3-Nt-3R7" firstAttribute="top" secondItem="1Ed-qV-FEe" secondAttribute="bottom" id="3fj-6a-lTA"/>
                             <constraint firstAttribute="trailing" secondItem="f2l-DC-1Fx" secondAttribute="trailing" id="Jdk-36-4va"/>
                             <constraint firstItem="f2l-DC-1Fx" firstAttribute="leading" secondItem="Wwe-8S-kr6" secondAttribute="leading" id="NUH-cr-2to"/>
+                            <constraint firstAttribute="trailing" secondItem="1Ed-qV-FEe" secondAttribute="trailing" id="RXf-aM-Uoz"/>
+                            <constraint firstItem="1Ed-qV-FEe" firstAttribute="leading" secondItem="Wwe-8S-kr6" secondAttribute="leading" id="ddd-Re-2lM"/>
                             <constraint firstItem="f2l-DC-1Fx" firstAttribute="top" secondItem="yoQ-Ww-7dt" secondAttribute="bottom" id="fhk-Ni-f7t"/>
-                            <constraint firstItem="Zu9-zp-Iu9" firstAttribute="leading" secondItem="Wwe-8S-kr6" secondAttribute="leading" id="jfn-r1-D2i"/>
-                            <constraint firstAttribute="trailing" secondItem="Zu9-zp-Iu9" secondAttribute="trailing" id="sdY-Ob-ttl"/>
+                            <constraint firstItem="1Ed-qV-FEe" firstAttribute="top" secondItem="f2l-DC-1Fx" secondAttribute="bottom" id="zAj-xf-o38"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="settingsTableView" destination="Zu9-zp-Iu9" id="r6U-4k-1Vl"/>
+                        <outlet property="settingsTableView" destination="1Ed-qV-FEe" id="jXn-1s-4Ta"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zgc-fV-z2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -430,7 +526,6 @@
                                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="cancelAction:" destination="Ywk-Tk-Ost" eventType="touchUpInside" id="UMG-Rz-EaA"/>
                                                     <action selector="cancelAction:" destination="lNc-90-QyC" eventType="touchUpInside" id="lBM-YP-Soq"/>
                                                 </connections>
                                             </button>
@@ -464,8 +559,7 @@
                                                     <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.5" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="saveAction:" destination="Ywk-Tk-Ost" eventType="touchUpInside" id="RmH-60-UTe"/>
-                                                    <action selector="saveAction:" destination="lNc-90-QyC" eventType="touchUpInside" id="WeJ-rw-BzL"/>
+                                                    <action selector="saveAction:" destination="lNc-90-QyC" eventType="touchUpInside" id="a9W-94-Fwi"/>
                                                 </connections>
                                             </button>
                                         </barButtonItem>
@@ -504,10 +598,7 @@ Legacy Connect account</string>
                                                 </constraints>
                                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="lNc-90-QyC" id="gNc-0i-uqU"/>
-                                                </connections>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gob-eB-x5N" userLabel="Border View">
                                                 <rect key="frame" x="15" y="44" width="360" height="1"/>
@@ -516,17 +607,14 @@ Legacy Connect account</string>
                                                     <constraint firstAttribute="height" constant="1" id="rSK-Dl-vFb"/>
                                                 </constraints>
                                             </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XNZ-Ml-hHi" customClass="LCLoginTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm New Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XNZ-Ml-hHi">
                                                 <rect key="frame" x="15" y="45" width="345" height="44"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="44" id="D2a-D2-EE1"/>
                                                 </constraints>
                                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="lNc-90-QyC" id="Ypm-OI-kdi"/>
-                                                </connections>
+                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v3c-x0-zZY" userLabel="Border View">
                                                 <rect key="frame" x="0.0" y="89" width="375" height="1"/>
@@ -584,13 +672,181 @@ Legacy Connect account</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="confirmPasswordField" destination="XNZ-Ml-hHi" id="b5L-wz-dvC"/>
-                        <outlet property="passwordField" destination="8aa-0P-H9p" id="S0N-MF-gOS"/>
+                        <outlet property="confirmPasswordField" destination="XNZ-Ml-hHi" id="hL3-aZ-fQx"/>
+                        <outlet property="newPasswordField" destination="8aa-0P-H9p" id="XgT-7T-Igo"/>
+                        <outlet property="saveButton" destination="7ZJ-9r-ziY" id="3b6-aW-PPD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UVJ-qJ-LkO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="312.5" y="-75.5"/>
+        </scene>
+        <!--Update Email View Controller-->
+        <scene sceneID="uAG-VL-EGa">
+            <objects>
+                <viewController storyboardIdentifier="LCUpdateEmailVC" id="Htm-Xq-Lsw" customClass="LCUpdateEmailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RvB-9T-07m"/>
+                        <viewControllerLayoutGuide type="bottom" id="2o1-uh-sTl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="brG-Ne-q0U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="giM-xn-VUs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem id="ceb-4S-b9w">
+                                        <nil key="title"/>
+                                        <barButtonItem key="leftBarButtonItem" width="44" style="done" id="zRw-gq-dsu">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="nLo-cB-OTn">
+                                                <rect key="frame" x="16" y="7" width="57" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="cancelAction:" destination="Htm-Xq-Lsw" eventType="touchUpInside" id="0LQ-xJ-5lX"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                        <view key="titleView" contentMode="scaleToFill" id="7yI-yb-8aT">
+                                            <rect key="frame" x="122" y="6" width="131" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EMAIL ADDRESS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJv-Vq-tEw">
+                                                    <rect key="frame" x="14" y="11" width="104" height="12"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="qJv-Vq-tEw" firstAttribute="centerY" secondItem="7yI-yb-8aT" secondAttribute="centerY" id="2HW-6S-46Q"/>
+                                                <constraint firstItem="qJv-Vq-tEw" firstAttribute="centerX" secondItem="7yI-yb-8aT" secondAttribute="centerX" id="Rs0-Nx-7pF"/>
+                                            </constraints>
+                                        </view>
+                                        <barButtonItem key="rightBarButtonItem" width="44" style="done" id="9lY-wP-FQK">
+                                            <button key="customView" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bXG-k8-Mbh">
+                                                <rect key="frame" x="315" y="7" width="44" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                                <state key="normal" title="Save">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="disabled">
+                                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="saveAction:" destination="Htm-Xq-Lsw" eventType="touchUpInside" id="EZh-AC-zK4"/>
+                                                </connections>
+                                            </button>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wzs-mm-jN7">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bgm-hl-gz6">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit or update your email for Legacy Connect" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1l-1m-Rd4">
+                                                <rect key="frame" x="15" y="25" width="345" height="15"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="2gI-14-oFg"/>
+                                            <constraint firstAttribute="bottom" secondItem="F1l-1m-Rd4" secondAttribute="bottom" constant="4" id="fbp-Nz-5t7"/>
+                                            <constraint firstItem="F1l-1m-Rd4" firstAttribute="leading" secondItem="bgm-hl-gz6" secondAttribute="leading" constant="15" id="k72-SB-UtP"/>
+                                            <constraint firstAttribute="trailing" secondItem="F1l-1m-Rd4" secondAttribute="trailing" constant="15" id="wjT-iH-2de"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z31-mP-Yj0" userLabel="Border View">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="96J-vg-4ap"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EuQ-6J-qJC">
+                                        <rect key="frame" x="0.0" y="45" width="375" height="44"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nAh-SY-OJd">
+                                                <rect key="frame" x="15" y="0.0" width="345" height="44"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="2MZ-5D-7Mv"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="nAh-SY-OJd" firstAttribute="top" secondItem="EuQ-6J-qJC" secondAttribute="top" id="YYC-se-y40"/>
+                                            <constraint firstItem="nAh-SY-OJd" firstAttribute="leading" secondItem="EuQ-6J-qJC" secondAttribute="leading" constant="15" id="bSP-r4-fLW"/>
+                                            <constraint firstAttribute="height" constant="44" id="hkb-iU-W9A"/>
+                                            <constraint firstAttribute="bottom" secondItem="nAh-SY-OJd" secondAttribute="bottom" id="iX7-Gi-uQQ"/>
+                                            <constraint firstAttribute="trailing" secondItem="nAh-SY-OJd" secondAttribute="trailing" constant="15" id="zND-d7-650"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xWE-ja-g5H" userLabel="Border View">
+                                        <rect key="frame" x="0.0" y="89" width="375" height="1"/>
+                                        <color key="backgroundColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="IYy-uu-PMU"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="xWE-ja-g5H" secondAttribute="trailing" id="0CV-io-7T1"/>
+                                    <constraint firstAttribute="trailing" secondItem="bgm-hl-gz6" secondAttribute="trailing" id="1uQ-fi-4ee"/>
+                                    <constraint firstItem="EuQ-6J-qJC" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="7OO-kC-Wet"/>
+                                    <constraint firstAttribute="trailing" secondItem="Z31-mP-Yj0" secondAttribute="trailing" id="Dpr-XM-K0a"/>
+                                    <constraint firstItem="xWE-ja-g5H" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="EMt-M7-RlG"/>
+                                    <constraint firstItem="bgm-hl-gz6" firstAttribute="top" secondItem="Wzs-mm-jN7" secondAttribute="top" id="TnK-dx-Mck"/>
+                                    <constraint firstItem="Z31-mP-Yj0" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="b7h-c4-1yn"/>
+                                    <constraint firstItem="EuQ-6J-qJC" firstAttribute="top" secondItem="Z31-mP-Yj0" secondAttribute="bottom" id="dpU-KK-kHl"/>
+                                    <constraint firstItem="xWE-ja-g5H" firstAttribute="top" secondItem="EuQ-6J-qJC" secondAttribute="bottom" id="hTG-qu-9UA"/>
+                                    <constraint firstItem="Z31-mP-Yj0" firstAttribute="top" secondItem="bgm-hl-gz6" secondAttribute="bottom" id="pq1-Mr-Lr7"/>
+                                    <constraint firstAttribute="trailing" secondItem="EuQ-6J-qJC" secondAttribute="trailing" id="rDX-a3-fEn"/>
+                                    <constraint firstItem="bgm-hl-gz6" firstAttribute="leading" secondItem="Wzs-mm-jN7" secondAttribute="leading" id="s6z-Zx-mJm"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="giM-xn-VUs" firstAttribute="leading" secondItem="brG-Ne-q0U" secondAttribute="leading" id="2d3-hR-2eN"/>
+                            <constraint firstItem="giM-xn-VUs" firstAttribute="top" secondItem="RvB-9T-07m" secondAttribute="bottom" id="54r-la-zT6"/>
+                            <constraint firstItem="Wzs-mm-jN7" firstAttribute="leading" secondItem="brG-Ne-q0U" secondAttribute="leading" id="8Ya-gw-Xbj"/>
+                            <constraint firstAttribute="trailing" secondItem="giM-xn-VUs" secondAttribute="trailing" id="SMc-rw-eVE"/>
+                            <constraint firstItem="Wzs-mm-jN7" firstAttribute="top" secondItem="giM-xn-VUs" secondAttribute="bottom" id="Y0l-Qr-Ick"/>
+                            <constraint firstItem="2o1-uh-sTl" firstAttribute="top" secondItem="Wzs-mm-jN7" secondAttribute="bottom" id="lwd-6E-gwx"/>
+                            <constraint firstAttribute="trailing" secondItem="Wzs-mm-jN7" secondAttribute="trailing" id="ntP-5P-TT6"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="emailAddressField" destination="nAh-SY-OJd" id="uJb-Lo-Gwa"/>
+                        <outlet property="saveButton" destination="bXG-k8-Mbh" id="dB1-Lk-FBI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y0V-us-gnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-350.5" y="-75.5"/>
         </scene>
     </scenes>
 </document>
