@@ -6,14 +6,14 @@
 //  Copyright © 2015 Gist. All rights reserved.
 //
 /* notifications to be handled
- 1: liked a post
- 2: unliked post
- 3: commented a post
- 4: Updated a post - if self profile
- 5: deleted a post - if self profile
- 6: created new post - if self profile
+ 1: liked a post - handled
+ 2: unliked post - handled
+ 3: commented a post - handled
+ 4: Updated a post - handled
+ 5: deleted a post - handled
+ 6: created new post - if self profile - handled
  7: user profile updated - if self profile
- 8: remove milestone - if milestone icon is shown in impacts and is self profile
+ 8: remove milestone - handled
  */
 
 #import "LCImpactsViewBC.h"
@@ -25,13 +25,98 @@
 @implementation LCImpactsViewBC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kLikedPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kUnlikedPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kCommentPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kUpdatePostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedDeletedNotificationReceived:) name:kDeletePostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:kCreateNewPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kRemoveMileStoneNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)newPostCreatedNotificationReceived :(NSNotification *)notification
+{
+  if (![self.userDetail.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+    return;
+  }
+  LCFeed *newPost = notification.userInfo[@"post"];
+  [self.results insertObject:newPost atIndex:0];
+  [self refreshViews];
+}
+
+
+- (void)feedDeletedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
+  for (int i = 0; i<self.results.count ; i++) {
+    if ([self.results[i] isKindOfClass:[LCFeed class]]) {
+      LCFeed *feed = self.results[i];
+      if ([feed.entityID isEqualToString:newfeed.entityID])
+      {
+        [self.results removeObjectAtIndex:i];
+        break;
+      }
+    }
+  }
+  [self refreshViews];
+}
+
+- (void)updateProfileNotificationReceived :(NSNotification *)notification
+{
+  //  firstName;
+  //  lastName;
+  //  avatarURL;
+}
+
+- (void)feedUpdatedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
+  for (int i = 0; i<self.results.count ; i++) {
+    if ([self.results[i] isKindOfClass:[LCFeed class]]) {
+      LCFeed *feed = self.results[i];
+      if ([feed.entityID isEqualToString:newfeed.entityID])
+      {
+        [self.results replaceObjectAtIndex:i withObject:newfeed];
+        break;
+      }
+    }
+  }
+  [self refreshViews];
+}
+
+- (void)refreshViews
+{
+  if ([self.navigationController.topViewController isEqual:self]) {
+    CGPoint offset = self.tableView.contentOffset;
+    [self.tableView reloadData];
+    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+    [self.tableView setContentOffset:offset];
+  }
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self refreshViews];
 }
 
 /*
