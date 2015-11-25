@@ -39,10 +39,10 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kLikedPostNFK object:nil userInfo:userInfo];
 }
 
-+ (void)postCommentedNotificationforPost:(LCFeed *)post
++ (void)postCommentedNotificationforPost:(LCFeed *)post andComment:(LCComment *)comment
 {
   post.commentCount = [NSString stringWithFormat:@"%d", [post.commentCount intValue]+1];
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post,comment, nil] forKeys:[NSArray arrayWithObjects:kEntityTypePost,kPostCommentKey, nil]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kCommentPostNFK object:nil userInfo:userInfo];
 }
 

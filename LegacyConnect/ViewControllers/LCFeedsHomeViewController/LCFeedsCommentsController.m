@@ -106,12 +106,12 @@ static CGFloat kIndexForPostDetails = 0;
     [self resignAllResponders];
     [self enableCommentField:NO];
     [LCAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {
-      [self.results insertObject:(LCComment*)response atIndex:0];
-      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
+//      [self.results insertObject:(LCComment*)response atIndex:0];
+//      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
-      [self.tableView reloadData];
+//      [self.tableView reloadData];
       [self enableCommentField:YES];
     } andFailure:^(NSString *error) {
       LCDLog(@"----- Fail to add new comment");
@@ -161,22 +161,23 @@ static CGFloat kIndexForPostDetails = 0;
   else //comment cell
   {
     JTTABLEVIEW_cellForRowAtIndexPath
-      LCCommentCell *commentCell;
-      static NSString *MyIdentifier = @"LCCommentCell";
-      commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-      if (commentCell == nil)
-      {
-        NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-        commentCell = [topLevelObjects objectAtIndex:0];
-      }
-      [commentCell setComment:[self.results objectAtIndex:indexPath.row]];
-      [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-      __weak typeof(self) weakSelf = self;
-      commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
-        [weakSelf tagTapped:tagDetails];
-      };
+    LCCommentCell *commentCell;
+    static NSString *MyIdentifier = @"LCCommentCell";
+    commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (commentCell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
+      commentCell = [topLevelObjects objectAtIndex:0];
+    }
+    NSInteger rowNo = indexPath.row - 1;
+    [commentCell setComment:[self.results objectAtIndex:rowNo]];
+    [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    __weak typeof(self) weakSelf = self;
+    commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
+      [weakSelf tagTapped:tagDetails];
+    };
     [commentCell.seperator setHidden:self.results.count == indexPath.row];
-      return commentCell;
+    return commentCell;
   }
 }
 
