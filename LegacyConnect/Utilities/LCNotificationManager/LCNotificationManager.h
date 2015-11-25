@@ -13,7 +13,7 @@
 + (void)postCreateNewPostNotificationfromResponse :(NSDictionary *)response;
 + (void)postLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post;
 + (void)postUnLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post;
-+ (void)postCommentedNotificationforPost:(LCFeed *)post;
++ (void)postCommentedNotificationforPost:(LCFeed *)post andComment:(LCComment*)comment;
 + (void)postPostDeletedNotificationforPost: (LCFeed *)post;
 + (void)postPostEditedNotificationForPost :(LCFeed *)post;
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post;

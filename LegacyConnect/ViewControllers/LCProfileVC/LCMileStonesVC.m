@@ -47,11 +47,11 @@
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   
   if (!self.noResultsView) {
     NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
-    if (isSelfProfile) {
+    if (self.isSelfProfile) {
       message = NSLocalizedString(@"no_milestones_available_self", nil);
     }
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
@@ -157,7 +157,7 @@
   };
   
   
-  if (isSelfProfile) {
+  if (self.isSelfProfile) {
     cell.moreButton.hidden = NO;
   }
   

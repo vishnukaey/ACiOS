@@ -10,4 +10,6 @@
 
 @interface LCMileStonesBC : JTTableViewController
 
+@property (nonatomic, assign) BOOL isSelfProfile;
+
 @end

@@ -469,7 +469,7 @@ static LCAPIManager *sharedManager = nil;
 
        if(!error)
        {
-         [LCNotificationManager postCommentedNotificationforPost:post];
+         [LCNotificationManager postCommentedNotificationforPost:post andComment:comment];
          success(comment);
        }
        else

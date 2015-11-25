@@ -7,13 +7,13 @@
 //
 
 /* notifications to be handled
- 1: liked a post
- 2: unliked post
- 3: commented a post
- 4: Updated a post
- 5: deleted a post
- 6: created new post
- 7: user profile updated
+ 1: liked a post *** handled
+ 2: unliked post *** handled
+ 3: commented a post *** handled
+ 4: Updated a post *** handled
+ 5: deleted a post *** handled
+ 6: created new post *** handled
+ 7: user profile updated - should handle if mandatory, else if server dosent reflect the changes it may cause confusion
  8: remove milestone - if milestone icon is shown in homefeed
  */
 
@@ -29,9 +29,19 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
     // Do any additional setup after loading the view.
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kfeedUpdatedotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kLikedPostNFK object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:knewPostCreatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kUnlikedPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kCommentPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kUpdatePostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedDeletedNotificationReceived:) name:kDeletePostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:kCreateNewPostNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,7 +57,31 @@
 {
   LCFeed *newPost = notification.userInfo[@"post"];
   [self.results insertObject:newPost atIndex:0];
-  [self.tableView reloadData];
+  [self refreshViews];
+}
+
+
+- (void)feedDeletedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
+  for (int i = 0; i<self.results.count ; i++) {
+    if ([self.results[i] isKindOfClass:[LCFeed class]]) {
+      LCFeed *feed = self.results[i];
+      if ([feed.entityID isEqualToString:newfeed.entityID])
+      {
+        [self.results removeObjectAtIndex:i];
+        break;
+      }
+    }
+  }
+  [self refreshViews];
+}
+
+- (void)updateProfileNotificationReceived :(NSNotification *)notification
+{
+//  firstName;
+//  lastName;
+//  avatarURL;
 }
 
 - (void)feedUpdatedNotificationReceived :(NSNotification *)notification
@@ -58,66 +92,28 @@
       LCFeed *feed = self.results[i];
       if ([feed.entityID isEqualToString:newfeed.entityID])
       {
-        if ([[notification.userInfo objectForKey:@"event"] isEqualToString:kfeedDeletedEventKey]) {
-          [self.results removeObjectAtIndex:i];
-        }
-        else if ([[notification.userInfo objectForKey:@"event"] isEqualToString:kfeedUpdateEventKey])
-        {
-          [self.results replaceObjectAtIndex:i withObject:newfeed];
-        }
-        else
-        {
-          continue;
-        }
+        [self.results replaceObjectAtIndex:i withObject:newfeed];
         break;
       }
     }
    }
-  //new milestone added
-  if ([self isKindOfClass:[LCProfileViewVC class]])
-  {
-    for (int i = 0; i<self.results.count; i++)
-    {
-      LCFeed *feed = self.results[i];
-      if (![feed.isMilestone boolValue]) {
-        [self.results removeObjectAtIndex:i];
-      }
-    }
-  }
-  
-  
-  CGPoint offset = self.tableView.contentOffset;
-  [self.tableView reloadData];
-  [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
-  [self.tableView setContentOffset:offset];
+  [self refreshViews];
 }
 
-- (void)clearNaviGationStack
+- (void)refreshViews
 {
-  NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray: self.navigationController.viewControllers];
-  NSLog(@"navigationArray-->>>%@", navigationArray);
-  for (int i =0; i<navigationArray.count-1; i++)
-  {
-      UIViewController *controller_ = (UIViewController *)[navigationArray objectAtIndex:i];
-      if ([controller_ isKindOfClass:[LCProfileViewVC class]])
-      {
-        [navigationArray removeObjectsInRange:NSMakeRange(i, navigationArray.count-1-i)];
-      }
+  if ([self.navigationController.topViewController isEqual:self]) {
+    CGPoint offset = self.tableView.contentOffset;
+    [self.tableView reloadData];
+    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+    [self.tableView setContentOffset:offset];
   }
-  NSLog(@"navigationArray-->>>%@", navigationArray);
-  self.navigationController.viewControllers = navigationArray;
-  LCProfileViewVC *lcp = (LCProfileViewVC*)self;
-  lcp.navCount = navigationArray.count;
 }
-
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  if ([self isKindOfClass:[LCProfileViewVC class]])
-  {
-    [self clearNaviGationStack];
-  }
+  [self refreshViews];
 }
 /*
 #pragma mark - Navigation

@@ -19,7 +19,7 @@
   if(!error)
   {
     NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:newPost, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
-    [[NSNotificationCenter defaultCenter] postNotificationName:knewPostCreatedNotification object:nil userInfo:userInfo];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kCreateNewPostNFK object:nil userInfo:userInfo];
   }
 }
 
@@ -27,29 +27,29 @@
 {
   post.likeCount = [(NSDictionary*)[response objectForKey:@"data"]objectForKey:@"likeCount"];
   post.didLike = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUnlikedPostNFK object:nil userInfo:userInfo];
 }
 
 + (void)postLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post
 {
   post.likeCount = [(NSDictionary*)[response objectForKey:@"data"]objectForKey:@"likeCount"];
   post.didLike = @"1";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kLikedPostNFK object:nil userInfo:userInfo];
 }
 
-+ (void)postCommentedNotificationforPost:(LCFeed *)post
++ (void)postCommentedNotificationforPost:(LCFeed *)post andComment:(LCComment *)comment
 {
   post.commentCount = [NSString stringWithFormat:@"%d", [post.commentCount intValue]+1];
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post,comment, nil] forKeys:[NSArray arrayWithObjects:kEntityTypePost,kPostCommentKey, nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kCommentPostNFK object:nil userInfo:userInfo];
 }
 
 + (void)postPostDeletedNotificationforPost: (LCFeed *)post
 {
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedDeletedEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kDeletePostNFK  object:nil userInfo:userInfo];
   
   //to update impacts count in profile
   [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfilePostDeletedNotification object:nil userInfo:nil];
@@ -57,15 +57,15 @@
 
 + (void)postPostEditedNotificationForPost :(LCFeed *)post
 {
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:kEntityTypePost, nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUpdatePostNFK object:nil userInfo:userInfo];
 }
 
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post
 {
   post.isMilestone = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveMileStoneNFK object:nil userInfo:userInfo];
 }
 
 #pragma mark - event notifications

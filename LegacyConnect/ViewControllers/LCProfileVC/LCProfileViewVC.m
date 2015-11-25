@@ -37,7 +37,7 @@
   [LCUtilityManager setLCStatusBarStyle];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  if (self.navCount <= 1)
+  if (self.navigationController.viewControllers.count <= 1)
   {
     [backButton setHidden:YES];
   }
