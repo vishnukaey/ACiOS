@@ -10,4 +10,6 @@
 
 @interface LCFeedDetailBC : LCCommentsController
 
+@property(nonatomic, retain)LCFeed *feedObject;
+
 @end

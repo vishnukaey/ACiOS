@@ -18,30 +18,100 @@
 
 #import "LCFeedDetailBC.h"
 
-@interface LCFeedDetailBC ()
-
-@end
-
 @implementation LCFeedDetailBC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postLikeEventReceived:) name:kLikedPostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUnLikeEventReceived:) name:kUnlikedPostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCommentEventReceived:) name:kCommentPostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCommentEventReceived:) name:kCommentPostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdateEventReceived:) name:kUpdatePostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdateEventReceived:) name:kUpdateProfileNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(milestoneRemovedEventReceived:) name:kRemoveMileStoneNFK object:nil];
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Private method implementation
+- (void)refreshFeedDetails
+{
+  [self.tableView reloadData];
 }
-*/
+
+- (void)topViewOnlyRefresh
+{
+  if (self.isViewLoaded && self.view.window) {
+    [self refreshFeedDetails];
+  }
+}
+
+#pragma maek - Notification handling.
+- (void)postLikeEventReceived:(NSNotification*)notification
+{
+  LCFeed *updatedFeed = [notification.userInfo objectForKey:kEntityTypePost];
+  if ([self.feedObject.feedId isEqualToString:updatedFeed.feedId]) {
+    self.feedObject.likeCount = updatedFeed.likeCount;
+    self.feedObject.didLike = updatedFeed.didLike;
+    
+    [self topViewOnlyRefresh];
+  }
+}
+
+- (void)postUnLikeEventReceived:(NSNotification*)notification
+{
+  LCFeed *updatedFeed = [notification.userInfo objectForKey:kEntityTypePost];
+  if ([self.feedObject.feedId isEqualToString:updatedFeed.feedId]) {
+    self.feedObject.likeCount = updatedFeed.likeCount;
+    self.feedObject.didLike = updatedFeed.didLike;
+    
+    [self topViewOnlyRefresh];
+  }
+}
+
+- (void)postCommentEventReceived:(NSNotification*)notification
+{
+  NSString * postEntityId = [notification.userInfo objectForKey:kPostIDKey];
+  LCComment *newComment = [notification.userInfo objectForKey:kPostCommentKey];
+  if ([self.feedObject.entityID isEqualToString:postEntityId]) {
+    [self.results insertObject:newComment atIndex:0];
+    self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
+
+    [self topViewOnlyRefresh];
+  }
+}
+
+- (void)postUpdateEventReceived:(NSNotification*)notification
+{
+  LCFeed *updatedFeed = [notification.userInfo objectForKey:kEntityTypePost];
+  if ([self.feedObject.feedId isEqualToString:updatedFeed.feedId]) {
+    self.feedObject = updatedFeed;
+    
+    [self topViewOnlyRefresh];
+  }
+}
+
+- (void)profileUpdateEventReceived:(NSNotification*)notification
+{
+  
+}
+
+- (void)milestoneRemovedEventReceived:(NSNotification*)notification
+{
+  LCFeed *updatedFeed = [notification.userInfo objectForKey:kEntityTypePost];
+  if ([self.feedObject.feedId isEqualToString:updatedFeed.feedId]) {
+    self.feedObject.isMilestone = updatedFeed.isMilestone;
+    
+    [self topViewOnlyRefresh];
+  }
+}
+
 
 @end

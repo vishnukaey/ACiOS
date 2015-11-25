@@ -169,8 +169,7 @@ static CGFloat kIndexForPostDetails = 0;
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
         commentCell = [topLevelObjects objectAtIndex:0];
       }
-      NSInteger rowNo = indexPath.row - 1;
-      [commentCell setComment:[self.results objectAtIndex:rowNo]];
+      [commentCell setComment:[self.results objectAtIndex:indexPath.row]];
       [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
       __weak typeof(self) weakSelf = self;
       commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
