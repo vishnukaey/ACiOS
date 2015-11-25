@@ -65,8 +65,8 @@
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post
 {
   post.isMilestone = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kfeedUpdatedotification object:nil userInfo:userInfo];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveMileStoneNFK object:nil userInfo:userInfo];
 }
 
 #pragma mark - event notifications
