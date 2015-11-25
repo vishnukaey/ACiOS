@@ -9,5 +9,13 @@
 #import "JTTableViewController.h"
 
 @interface LCProfileViewBC : JTTableViewController
+{
+  IBOutlet UILabel *impactsCountLabel, *friendsCountLabel;
+  IBOutlet UIButton *friendsButton;
+  FriendStatus currentProfileStatus;
+}
+
+@property(nonatomic, retain)LCUserDetail *userDetail;
+- (void) setCurrentProfileStatus:(FriendStatus)friendStatus;
 
 @end

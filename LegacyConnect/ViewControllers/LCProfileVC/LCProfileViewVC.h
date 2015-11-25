@@ -23,9 +23,7 @@
   IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *profilePicBorderView;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  IBOutlet UIButton *friendsButton, *backButton;
-  IBOutlet UILabel *impactsCountLabel;
-  IBOutlet UILabel *friendsCountLabel;
+  IBOutlet UIButton *backButton;
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   
@@ -48,11 +46,9 @@
   
   
   LCTabMenuView *tabmenu;
-  
-  FriendStatus currentProfileStatus;
 }
 
-@property(nonatomic, retain)LCUserDetail *userDetail;
+//@property(nonatomic, retain)LCUserDetail *userDetail;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)editClicked:(UIButton *)sender;

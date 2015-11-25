@@ -16,14 +16,7 @@
 #import "LCCreatePostViewController.h"
 #import "LCViewActions.h"
 
-static NSString * const kImageNameProfileSettings = @"profileSettings";
-static NSString * const kImageNameProfileAdd = @"profileAdd";
-static NSString * const kImageNameProfileFriend = @"profileFriend";
-static NSString * const kImageNameProfileWaiting = @"profileWaiting";
-
 @implementation LCProfileViewVC
-@synthesize userDetail;
-
 
 #pragma mark - controller life cycle
 
@@ -57,39 +50,25 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 }
 
-- (void)dealloc {
-  
-  //Notifications
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:kUserProfileUpdateNotification
-                                                object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:kUserProfileFrinendsUpdateNotification
-                                                object:nil];
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:kUserProfileImpactsUpdateNotification
-                                                object:nil];
-}
-
 - (void) prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
 {
   
   if ([segue.identifier isEqualToString:@"LCMileStonesSegue"]) {
     
     mileStonesVC = segue.destinationViewController;
-    mileStonesVC.userID = userDetail.userID;
+    mileStonesVC.userID = self.userDetail.userID;
     mileStonesVC.delegate = self;
   }
   else if ([segue.identifier isEqualToString:@"LCInterestsSegue"]) {
     
     interestsVC = segue.destinationViewController;
-    interestsVC.userID = userDetail.userID;
+    interestsVC.userID = self.userDetail.userID;
     interestsVC.delegate = self;
   }
   else if ([segue.identifier isEqualToString:@"LCActionsSegue"]) {
     
     actionsVC = segue.destinationViewController;
-    actionsVC.userID = userDetail.userID;
+    actionsVC.userID = self.userDetail.userID;
     actionsVC.delegate = self;
   }
 }
@@ -112,22 +91,10 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   locationLabel.text = kEmptyStringValue;
   
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
-  if ([nativeUserId isEqualToString:userDetail.userID] || !userDetail.userID)
+  if ([nativeUserId isEqualToString:self.userDetail.userID] || !self.userDetail.userID)
   {
     [self setCurrentProfileStatus:kMyProfile];
     
-    //Add Notification observers
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateUserData:)
-                                                 name:kUserProfileUpdateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateFriendsCount:)
-                                                 name:kUserProfileFrinendsUpdateNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateImpactsCount:)
-                                                 name:kUserProfileImpactsUpdateNotification
-                                               object:nil];
   }
   else
   {
@@ -135,84 +102,53 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   }
   profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   
-  [self loadUserDetails];
+  [self loaduserDetails];
 }
 
-- (void)loadUserDetails
+- (void)loaduserDetails
 {
   friendsButton.enabled = NO;
-  [LCAPIManager getUserDetailsOfUser:userDetail.userID WithSuccess:^(id response) {
+  [LCAPIManager getUserDetailsOfUser:self.userDetail.userID WithSuccess:^(id response) {
     
     if(currentProfileStatus == kMyProfile) {
       [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     }
-    userDetail = response;
+    self.userDetail = response;
     friendsButton.enabled = YES;
     NSLog(@"user details - %@",response);
     
     userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
-                           [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName],
-                           [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName]] uppercaseString];
+                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.firstName],
+                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.lastName]] uppercaseString];
     memeberSincelabel.text = [NSString stringWithFormat:@"%@ %@",
                               NSLocalizedString(@"member_since", nil),
-                              [LCUtilityManager getDateFromTimeStamp:userDetail.activationDate WithFormat:@"YYYY"]];
+                              [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"YYYY"]];
     
     locationLabel.text = [[NSString stringWithFormat:@"%@ %@ %@ %@ %@",
-                           [LCUtilityManager performNullCheckAndSetValue:userDetail.gender],
+                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.gender],
                            kBulletUnicode,
-                           [LCUtilityManager getAgeFromTimeStamp:userDetail.dob],
+                           [LCUtilityManager getAgeFromTimeStamp:self.userDetail.dob],
                            kBulletUnicode,
-                           [LCUtilityManager performNullCheckAndSetValue:userDetail.location]] uppercaseString];
+                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.location]] uppercaseString];
     
-    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
-    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.userDetail.impactCount];
+    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.userDetail.friendCount];
     
-    NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
+    NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",self.userDetail.avatarURL];
     
     [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
                   placeholderImage:profilePic.image];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
+    NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",self.userDetail.headerPhotoURL];
     
     [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
                        placeholderImage:headerImageView.image];
     
-    [self setCurrentProfileStatus:(FriendStatus)[userDetail.isFriend integerValue]];
+    [self setCurrentProfileStatus:(FriendStatus)[self.userDetail.isFriend integerValue]];
     
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
-}
-
-- (void) setCurrentProfileStatus:(FriendStatus)friendStatus
-{
-  currentProfileStatus = friendStatus;
-  NSString *btnImageName = nil;
-  switch (currentProfileStatus) {
-      
-    case kMyProfile:
-      btnImageName = kImageNameProfileSettings;
-      break;
-      
-    case kIsFriend:
-      btnImageName = kImageNameProfileFriend;
-      break;
-      
-    case kNonFriend:
-      btnImageName = kImageNameProfileAdd;
-      break;
-      
-    case kRequestWaiting:
-      btnImageName = kImageNameProfileWaiting;
-      break;
-      
-    default:
-      break;
-  }
-  if(btnImageName)
-  {
-    [friendsButton setImage:[UIImage imageNamed:btnImageName] forState:UIControlStateNormal];
-  }
 }
 
 - (void)addTabMenu
@@ -247,13 +183,13 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   
   [self setCurrentProfileStatus:kRequestWaiting];
   friendsButton.userInteractionEnabled = NO;
-  [LCAPIManager sendFriendRequest:userDetail.userID withSuccess:^(NSDictionary *response) {
+  [LCAPIManager sendFriendRequest:self.userDetail.userID withSuccess:^(NSDictionary *response) {
     
     NSInteger isFriend = [response[kResponseData][@"isFriend"] integerValue];
     if (isFriend == kIsFriend) {
       [self setCurrentProfileStatus:kIsFriend];
     }
-    userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
+    self.userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
     friendsButton.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -266,8 +202,8 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   
   [self setCurrentProfileStatus:kNonFriend];
   friendsButton.userInteractionEnabled = NO;
-  [LCAPIManager cancelFriendRequest:userDetail.userID withSuccess:^(NSArray *response) {
-    userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
+  [LCAPIManager cancelFriendRequest:self.userDetail.userID withSuccess:^(NSArray *response) {
+    self.userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
     friendsButton.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -280,9 +216,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   
   [self setCurrentProfileStatus:kNonFriend];
   friendsButton.userInteractionEnabled = NO;
-  [LCAPIManager removeFriend:userDetail.userID withSuccess:^(NSArray *response)
+  [LCAPIManager removeFriend:self.userDetail.userID withSuccess:^(NSArray *response)
    {
-     userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
+     self.userDetail.isFriend = [NSString stringWithFormat: @"%ld", (long)currentProfileStatus];
      friendsButton.userInteractionEnabled = YES;
    }
                   andFailure:^(NSString *error)
@@ -293,47 +229,11 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
    }];
 }
 
-
-
-#pragma mark - Notification Receivers
-
--(void)updateUserData:(NSNotification *)notification {
-  
-  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
-  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
-  dispatch_async(dispatch_get_global_queue(0,0), ^{
-    [self loadUserDetails];
-    
-  });
-}
-
--(void)updateFriendsCount:(NSNotification *)notification {
-  
-  NSString *status = notification.userInfo[@"status"];
-  if ([status isEqualToString:@"deleted"]) {
-    
-    NSInteger count = [userDetail.friendCount integerValue] - 1;
-    userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
-  }
-}
-
--(void)updateImpactsCount:(NSNotification *)notification {
-  
-  NSString *status = notification.userInfo[@"status"];
-  if ([status isEqualToString:@"deleted"]) {
-    
-    NSInteger count = [userDetail.impactCount integerValue] - 1;
-    userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.impactCount];
-  }
-}
-
 #pragma mark - button actions
 - (IBAction)friendsButtonClicked
 {
   LCFriendsListViewController * friendsVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCFriendsListVC"];
-  friendsVC.userId = self.userDetail.userID;
+  friendsVC.userId = self.self.userDetail.userID;
   [self.navigationController pushViewController:friendsVC animated:YES];
 }
 
@@ -342,7 +242,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   NSLog(@"impacts clicked----->");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
   LCImapactsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
-  vc.userDetail = userDetail;
+  vc.self.userDetail = self.userDetail;
   [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -358,7 +258,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
-    vc.userDetail = self.userDetail;
+    vc.self.userDetail = self.self.userDetail;
     UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navC animated:YES completion:nil];
   }
