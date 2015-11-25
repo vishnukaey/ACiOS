@@ -58,7 +58,7 @@
 
 + (void)postPostEditedNotificationForPost :(LCFeed *)post
 {
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, kfeedUpdateEventKey, nil] forKeys:[NSArray arrayWithObjects:@"post", @"event", nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:kEntityTypePost, nil]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kUpdatePostNFK object:nil userInfo:userInfo];
 }
 

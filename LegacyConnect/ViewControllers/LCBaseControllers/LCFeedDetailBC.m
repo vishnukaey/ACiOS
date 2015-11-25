@@ -7,13 +7,13 @@
 //
 
 /* notifications to be handled
- 1: liked a post : <Implemented>
- 2: unliked post : <Implemented>
+ 1: liked a post                                                                      : <Implemented>
+ 2: unliked post                                                                      : <Implemented>
  3: commented a post - comment should be added to table and count should be increased : <Implemented>
- 4: Updated a post :
- 5: deleted a post - not included now as it will affect the navigation flow
- 6: user profile updated
- 7: remove milestone - if milestone icon is shown in feed detail
+ 4: Updated a post                                                                    : <Implemented>
+ 5: deleted a post - not included now as it will affect the navigation flow           : *Not Implemented*
+ 6: user profile updated                                                              : *Not Implemented*
+ 7: remove milestone - if milestone icon is shown in feed detail                      : <Implemented>
  */
 
 #import "LCFeedDetailBC.h"
@@ -27,6 +27,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCommentEventReceived:) name:kCommentPostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdateEventReceived:) name:kUpdatePostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdateEventReceived:) name:kUpdateProfileNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeletedEventReceived:) name:kDeletePostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(milestoneRemovedEventReceived:) name:kRemoveMileStoneNFK object:nil];
 }
 
@@ -96,7 +97,7 @@
 - (void)postUpdateEventReceived:(NSNotification*)notification
 {
   LCFeed *updatedFeed = [notification.userInfo objectForKey:kEntityTypePost];
-  if ([self.feedObject.feedId isEqualToString:updatedFeed.feedId]) {
+  if ([self.feedObject.entityID isEqualToString:updatedFeed.entityID]) {
     self.feedObject = updatedFeed;
     
     [self topViewOnlyRefresh];
@@ -111,11 +112,15 @@
 - (void)milestoneRemovedEventReceived:(NSNotification*)notification
 {
   LCFeed *updatedFeed = [notification.userInfo objectForKey:kEntityTypePost];
-  if ([self.feedObject.feedId isEqualToString:updatedFeed.feedId]) {
+  if ([self.feedObject.entityID isEqualToString:updatedFeed.entityID]) {
     self.feedObject.isMilestone = updatedFeed.isMilestone;
     
     [self topViewOnlyRefresh];
   }
+}
+
+- (void)postDeletedEventReceived:(NSNotification*)notification
+{
 }
 
 
