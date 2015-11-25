@@ -26,7 +26,6 @@ NSString *const kFollowInterestNFK = @"interest_followed";
 NSString *const kUnfollowInterestNFK = @"interest_unfollowed";
 NSString *const kSupportCauseNFK = @"cause_supported";
 NSString *const kUnsupportCauseNFK = @"cause_unsupported";
-NSString *const kFriendStatusUpdatedNFK = @"friend_status_updated";
 NSString *const kSendFriendRequestNFK = @"friend_request_sent";
 NSString *const kCancelFriendRequestNFK = @"friend_request_canceled";
 NSString *const kRemoveFriendNFK = @"friend_removed";

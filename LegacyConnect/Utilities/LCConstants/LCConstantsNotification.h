@@ -26,7 +26,6 @@ extern NSString *const kFollowInterestNFK;
 extern NSString *const kUnfollowInterestNFK;
 extern NSString *const kSupportCauseNFK;
 extern NSString *const kUnsupportCauseNFK;
-extern NSString *const kFriendStatusUpdatedNFK;
 extern NSString *const kSendFriendRequestNFK;
 extern NSString *const kCancelFriendRequestNFK;
 extern NSString *const kRemoveFriendNFK;

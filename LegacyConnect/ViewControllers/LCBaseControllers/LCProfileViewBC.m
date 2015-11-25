@@ -33,10 +33,24 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                                            selector:@selector(updateUserData:)
                                                name:kUserProfileUpdateNotification object:nil];
   
+  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(friendStatusUpdatedNotificationReceived:)
-                                               name:kFriendStatusUpdatedNFK
+                                               name:kSendFriendRequestNFK
                                              object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kCancelFriendRequestNFK
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kRemoveFriendNFK
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kAcceptFriendRequestNFK
+                                             object:nil];
+  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(incrementImpactsCount:)
@@ -118,30 +132,23 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   LCFriend *friend = notification.userInfo[@"friend"];
   if (currentProfileStatus == kMyProfile) {
     
-    NSInteger count;
-    switch ([friend.isFriend integerValue]) {
-        
-      case kNonFriend:
-        //friend removed
-        count = [_userDetail.friendCount integerValue] - 1;
-        _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-        break;
-        
-      case kIsFriend:
-        //friend added
-        count = [_userDetail.friendCount integerValue] + 1;
-        _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-        break;
-        
-      default:
-        break;
+    if (notification.name == kAcceptFriendRequestNFK) {
+      
+      NSInteger count = [_userDetail.friendCount integerValue] - 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+      friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
     }
-    
-    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
+    else if(notification.name == kRemoveFriendNFK) {
+      
+      NSInteger count = [_userDetail.friendCount integerValue] + 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+      friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
+    }
   }
   else if(_userDetail.userID == friend.friendId) {
     
     _userDetail.isFriend = friend.isFriend;
+    [self setCurrentProfileStatus:(FriendStatus)[_userDetail.isFriend integerValue]];
   }
 }
 

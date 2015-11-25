@@ -101,15 +101,43 @@
 }
 
 #pragma mark - userUpdate notifications
-+ (void)postFriendUpadteNotification :(NSString *)friendID forFriendStatus :(int)status
+
++ (void)postSendFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status
 {
   LCFriend *friend = [[LCFriend alloc] init];
   friend.friendId = friendID;
   friend.isFriend = [NSString stringWithFormat:@"%d", status];
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kFriendStatusUpdatedNFK object:nil userInfo:userInfo];
-
+  [[NSNotificationCenter defaultCenter] postNotificationName:kSendFriendRequestNFK object:nil userInfo:userInfo];
 }
+
++ (void)postCancelFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  friend.isFriend = [NSString stringWithFormat:@"%d", status];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kCancelFriendRequestNFK object:nil userInfo:userInfo];
+}
+
++ (void)postRemoveFriendNotification :(NSString *)friendID forFriendStatus :(int)status
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  friend.isFriend = [NSString stringWithFormat:@"%d", status];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveFriendNFK object:nil userInfo:userInfo];
+}
+
++ (void)postAcceptFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  friend.isFriend = [NSString stringWithFormat:@"%d", status];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kAcceptFriendRequestNFK object:nil userInfo:userInfo];
+}
+
 
 + (void)postNotificationCountUpdatedNotification
 {
