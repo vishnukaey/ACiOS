@@ -12,6 +12,5 @@
 @interface LCImapactsViewController : LCImpactsViewBC
 
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
-@property(nonatomic, retain)LCUserDetail *userDetail;
 
 @end

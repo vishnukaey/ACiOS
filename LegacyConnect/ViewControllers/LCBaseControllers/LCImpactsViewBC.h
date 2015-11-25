@@ -10,4 +10,6 @@
 
 @interface LCImpactsViewBC : JTTableViewController
 
+@property(nonatomic, retain)LCUserDetail *userDetail;
+
 @end
