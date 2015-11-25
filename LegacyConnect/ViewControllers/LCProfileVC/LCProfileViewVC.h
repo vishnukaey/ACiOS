@@ -17,21 +17,13 @@
 #import "LCInterestsVC.h"
 #import "LCActionsVC.h"
 
-typedef enum profileStateTypes
-{
-  PROFILE_SELF,
-  PROFILE_OTHER_FRIEND,
-  PROFILE_OTHER_NON_FRIEND,
-  PROFILE_OTHER_WAITING
-} profileState;
-
 @interface LCProfileViewVC : LCProfileViewBC <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
 {
   
   IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *profilePicBorderView;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  IBOutlet UIButton *editButton, *backButton;
+  IBOutlet UIButton *friendsButton, *backButton;
   IBOutlet UILabel *impactsCountLabel;
   IBOutlet UILabel *friendsCountLabel;
   IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
@@ -57,7 +49,7 @@ typedef enum profileStateTypes
   
   LCTabMenuView *tabmenu;
   
-  profileState currentProfileState;
+  FriendStatus currentProfileStatus;
 }
 
 @property(nonatomic, retain)LCUserDetail *userDetail;
