@@ -15,12 +15,11 @@
 
 @interface LCMileStonesVC : LCMileStonesBC
 {
-  BOOL isSelfProfile;
+  
 }
 
 @property(nonatomic, retain)NSString *userID;
 @property (nonatomic, assign) id<MileStonesDelegate> delegate;
-
 - (void) loadMileStones;
 
 @end

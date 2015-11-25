@@ -33,7 +33,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kUnlikedPostNFK object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedCommentedNotificationReceived:) name:kCommentPostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kCommentPostNFK object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kUpdatePostNFK object:nil];
   
@@ -60,21 +60,6 @@
   [self refreshViews];
 }
 
-- (void)feedCommentedNotificationReceived :(NSNotification *)notification
-{
-  LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
-  for (int i = 0; i<self.results.count ; i++) {
-    if ([self.results[i] isKindOfClass:[LCFeed class]]) {
-      LCFeed *feed = self.results[i];
-      if ([feed.entityID isEqualToString:newfeed.entityID])
-      {
-        [self.results replaceObjectAtIndex:i withObject:newfeed];
-        break;
-      }
-    }
-  }
-  [self refreshViews];
-}
 
 - (void)feedDeletedNotificationReceived :(NSNotification *)notification
 {
