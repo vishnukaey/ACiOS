@@ -58,4 +58,8 @@
 //-- version control --//
 "version_outdated_title" = "Version outdated";
 "version_outdated_message" = "You are using and outdated version of LegacyConnect. Please Update to the latest version.";
-"version_update_title" = "Update now";
+"version_update_title" = "Update now";"follow_event_message" = "Follow the event to view and post comments";
+
+//----tutorial----//
+"menu_tutorial" = "Explore Legacy Connect through the menu";
+"gibutton_tutorial" = "Create and share your impact here";
