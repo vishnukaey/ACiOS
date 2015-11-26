@@ -22,10 +22,12 @@
 @implementation LCUserActionsBC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUpdatedNotificationReceived:) name:kEventDetailsUpdatedNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDeletedNotificationReceived:) name:kEventDeletedNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kEventCreatedNotification object:nil];
+  [super viewDidLoad];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUpdatedNotificationReceived:) name:kUpdateEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDeletedNotificationReceived:) name:kDeleteEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kCreateEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventFollowedNotificationReceived:) name:kFollowEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUnFollowedNotificationReceived:) name:kUnfollowEventNFK object:nil];
 }
 
 - (void)dealloc {
@@ -33,47 +35,84 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+  [super didReceiveMemoryWarning];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+  [self refreshEventListing];
+}
+
+- (void)refreshEventListing
+{
+  [self.tableView reloadData];
+}
+
+- (void)refreshTopViewOnly
+{
+  if (self.view.window) {
+    [self refreshEventListing];
+  }
 }
 
 - (void)eventUpdatedNotificationReceived :(NSNotification *)notification
 {
-  LCEvent *modifiedEvent = [notification.userInfo objectForKey:@"event"];
+  LCEvent *modifiedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
   for (int i = 0; i<self.results.count ; i++) {
-    if ([self.results[i] isKindOfClass:[LCEvent class]]) {
-      LCEvent *event = self.results[i];
-      if ([event.eventID isEqualToString:modifiedEvent.eventID])
-      {
-        [self.results replaceObjectAtIndex:i withObject:modifiedEvent];
-        break;
-      }
+    LCEvent *event = self.results[i];
+    if ([event.eventID isEqualToString:modifiedEvent.eventID])
+    {
+      [self.results replaceObjectAtIndex:i withObject:modifiedEvent];
+      [self refreshTopViewOnly];
+      break;
     }
   }
-  [self.tableView reloadData];
 }
 
 - (void)eventDeletedNotificationReceived :(NSNotification *)notification
 {
-  LCEvent *deletedEvent = [notification.userInfo objectForKey:@"event"];
+  LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
   for (int i = 0; i<self.results.count ; i++) {
-    if ([self.results[i] isKindOfClass:[LCEvent class]]) {
-      LCEvent *event = self.results[i];
-      if ([event.eventID isEqualToString:deletedEvent.eventID])
-      {
-        [self.results removeObjectAtIndex:i];
-        break;
-      }
+    LCEvent *event = self.results[i];
+    if ([event.eventID isEqualToString:deletedEvent.eventID])
+    {
+      [self.results removeObjectAtIndex:i];
+      [self refreshTopViewOnly];
+      break;
     }
   }
-  [self.tableView reloadData];
 }
 
 - (void)eventCreatedNotificationReceived :(NSNotification *)notification
 {
-  if ([self.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
-    LCEvent *createdEvent = [notification.userInfo objectForKey:@"event"];
+  if (isSelfProfile) {
+    LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
     [self.results insertObject:createdEvent atIndex:0];
-    [self.tableView reloadData];
+    [self refreshTopViewOnly];
+  }
+}
+
+- (void)eventFollowedNotificationReceived :(NSNotification *)notification
+{
+  if (isSelfProfile) {
+    LCEvent *followedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+    [self.results insertObject:followedEvent atIndex:0];
+    [self refreshTopViewOnly];
+  }
+}
+
+- (void)eventUnFollowedNotificationReceived :(NSNotification *)notification
+{
+  if (isSelfProfile) {
+    LCEvent *unFollowedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+    for (int i = 0; i<self.results.count ; i++) {
+      LCEvent *event = self.results[i];
+      if ([event.eventID isEqualToString:unFollowedEvent.eventID])
+      {
+        [self.results removeObjectAtIndex:i];
+        [self refreshTopViewOnly];
+        break;
+      }
+    }
   }
 }
 

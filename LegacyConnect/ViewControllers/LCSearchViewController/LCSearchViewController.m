@@ -77,7 +77,6 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  [self reloadAllViews];
 }
 
 

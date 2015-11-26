@@ -66,6 +66,25 @@
 }
 
 #pragma mark - event notifications
++ (void)postEventFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
+{
+  event.isFollowing = YES;
+  NSDictionary *dict= response[kResponseData];
+  event.followerCount = dict[@"followerCount"];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFollowEventNFK object:nil userInfo:userInfo];
+}
+
++ (void)postEventUnFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
+{
+  event.isFollowing = NO;
+  NSDictionary *dict= response[kResponseData];
+  event.followerCount = dict[@"followerCount"];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUnfollowEventNFK object:nil userInfo:userInfo];
+}
+
+
 + (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
 {
   NSDictionary *dict= response[kResponseData];
@@ -73,13 +92,7 @@
   event.headerPhoto = ([dict[@"headerPhoto"] isEqual:[NSNull null]] ? nil : dict[@"headerPhoto"]);
 
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kEventCreatedNotification object:nil userInfo:userInfo];
-}
-
-+ (void)postEventMembersCountUpdatedNotification:(LCEvent*)event
-{
-  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kEventMemberCountUpdatedNotification object:nil userInfo:userInfo];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kCreateEventNFK object:nil userInfo:userInfo];
 }
 
 + (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event
@@ -87,14 +100,14 @@
   NSDictionary *dict= response[kResponseData];
   NSString *newHeaderPhoto = dict[@"headerPhoto"];
   event.headerPhoto = ([newHeaderPhoto isEqual:[NSNull null]] ? nil : newHeaderPhoto);
-  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kEventDetailsUpdatedNotification object:nil userInfo:userInfo];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateEventNFK object:nil userInfo:userInfo];
 }
 
 + (void)postEventDeletedNotification:(LCEvent*)event
 {
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
-  [[NSNotificationCenter defaultCenter] postNotificationName:kEventDeletedNotification object:nil userInfo:userInfo];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEventNFK object:nil userInfo:userInfo];
 }
 
 #pragma mark - userUpdate notifications

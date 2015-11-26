@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JTTableViewController.h>
+#import "LCFriendsListBC.h"
 
-@interface LCFriendsListViewController : JTTableViewController
+@interface LCFriendsListViewController : LCFriendsListBC
 
-@property (nonatomic, strong) NSString * userId;
+
 
 @end

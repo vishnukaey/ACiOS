@@ -42,10 +42,6 @@ extern NSString *const kfeedUpdatedotification;
 extern NSString *const kNotificationCountUpdated;
 extern NSString *const knewPostCreatedNotification;
 
-extern NSString *const kEventMemberCountUpdatedNotification;
-extern NSString *const kEventDetailsUpdatedNotification;
-extern NSString *const kEventDeletedNotification;
-extern NSString *const kEventCreatedNotification;
 
 extern NSString *const kResetPasswordNotificationName;
 

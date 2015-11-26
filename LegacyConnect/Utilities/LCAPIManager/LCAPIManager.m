@@ -1374,12 +1374,9 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
-     LCDLog(@"Following Event ! \n %@",response);
-     event.isFollowing = YES;
-     NSDictionary *dict= response[kResponseData];
-     event.followerCount = dict[@"followerCount"];
-     [LCNotificationManager postEventMembersCountUpdatedNotification:event];
-     success(response);
+       LCDLog(@"Following Event ! \n %@",response);
+       [LCNotificationManager postEventFollowedNotificationWithEvent:event andResponse:response];
+       success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
@@ -1396,10 +1393,7 @@ static LCAPIManager *sharedManager = nil;
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Unfollowing Event ! \n %@",response);
-     event.isFollowing = NO;
-     NSDictionary *dict= response[kResponseData];
-     event.followerCount = dict[@"followerCount"];
-     [LCNotificationManager postEventMembersCountUpdatedNotification:event];
+     [LCNotificationManager postEventUnFollowedNotificationWithEvent:event andResponse:response];
      success(response);
    } andFailure:^(NSString *error) {
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
