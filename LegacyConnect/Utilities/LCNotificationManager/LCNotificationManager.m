@@ -50,9 +50,6 @@
 {
   NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kDeletePostNFK  object:nil userInfo:userInfo];
-  
-  //to update impacts count in profile
-  [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfilePostDeletedNotification object:nil userInfo:nil];
 }
 
 + (void)postPostEditedNotificationForPost :(LCFeed *)post

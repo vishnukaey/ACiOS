@@ -51,14 +51,13 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                                                name:kAcceptFriendRequestNFK
                                              object:nil];
   
-  
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(incrementImpactsCount:)
-                                               name:kUserProfilePostCreatedNotification
+                                           selector:@selector(updateImpactsCount:)
+                                               name:kCreateNewPostNFK
                                              object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(decrementImpactsCount:)
-                                               name:kUserProfilePostDeletedNotification
+                                           selector:@selector(updateImpactsCount:)
+                                               name:kDeletePostNFK
                                              object:nil];
 }
 
@@ -115,17 +114,6 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 //  });
 }
 
--(void)updateFriendsCount:(NSNotification *)notification {
-  
-  NSString *status = notification.userInfo[@"status"];
-  if ([status isEqualToString:@"deleted"]) {
-    
-    NSInteger count = [_userDetail.friendCount integerValue] - 1;
-    _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-    //friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
-  }
-}
-
 -(void) friendStatusUpdatedNotificationReceived:(NSNotification *)notification {
   
   NSLog(@"friendStatusUpdatedNotificationReceived");
@@ -152,21 +140,23 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   }
 }
 
--(void)incrementImpactsCount:(NSNotification *)notification {
-  
-  if (currentProfileStatus == kMyProfile) {
-    NSInteger count = [_userDetail.impactCount integerValue] + 1;
-    _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
-  }
-}
 
--(void)decrementImpactsCount:(NSNotification *)notification {
+-(void)updateImpactsCount:(NSNotification *)notification {
   
   if (currentProfileStatus == kMyProfile) {
-    NSInteger count = [_userDetail.impactCount integerValue] - 1;
-    _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
+    
+    if (notification.name == kCreateNewPostNFK) {
+      
+      NSInteger count = [_userDetail.impactCount integerValue] + 1;
+      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+      impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
+    }
+    else if (notification.name == kDeletePostNFK) {
+      
+      NSInteger count = [_userDetail.impactCount integerValue] - 1;
+      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+      impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
+    }
   }
 }
 @end

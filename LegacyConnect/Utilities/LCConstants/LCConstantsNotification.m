@@ -39,9 +39,6 @@ NSString *const kFollowEventNFK = @"event_followed";
 NSString *const kUnfollowEventNFK = @"event_unfollowed";
 
 NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
-NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpdated";
-NSString *const kUserProfilePostCreatedNotification = @"userProfilePostCreated";
-NSString *const kUserProfilePostDeletedNotification = @"userProfilePostDeleted";
 NSString *const kfeedUpdatedotification = @"feedUpdated";
 NSString *const kNotificationCountUpdated = @"notificationCountUpdated";
 NSString *const knewPostCreatedNotification = @"notificationCreateNewPost";

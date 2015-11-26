@@ -76,6 +76,7 @@
   [LCAPIManager sendFriendRequest:friendObj.userID withSuccess:^(NSDictionary *response) {
     NSLog(@"%@",response);
     btn.userInteractionEnabled = YES;
+#warning can remove after completing notification handling
     NSInteger isFriend = [response[kResponseData][@"isFriend"] integerValue];
     if (isFriend == kIsFriend) {
       friendObj.isFriend = kFriendStatusMyFriend;

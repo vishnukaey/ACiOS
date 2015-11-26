@@ -254,6 +254,7 @@ static NSString *kTitle = @"FRIENDS";
   friendBtn.userInteractionEnabled = NO;
   [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSDictionary *response) {
     NSLog(@"%@",response);
+  #warning can remove after completing notification handling
     NSInteger isFriend = [response[kResponseData][@"isFriend"] integerValue];
     if (isFriend == kIsFriend) {
       friendObj.isFriend = kFriendStatusMyFriend;
