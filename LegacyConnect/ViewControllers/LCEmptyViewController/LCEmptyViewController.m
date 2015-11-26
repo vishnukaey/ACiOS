@@ -24,6 +24,7 @@
 #import "LCSocialShareManager.h"
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
+#import "LCFinalTutorialVC.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -34,6 +35,7 @@ static NSString *kTitle = @"MY FEED";
   LCMenuButton *menuButton;
   MFSideMenuContainerViewController *mainContainer;
   UINavigationController *navigationRoot;
+  LCFinalTutorialVC *tutorialVC;
 }
 @end
 
@@ -130,6 +132,20 @@ static NSString *kTitle = @"MY FEED";
   [self addMenuButton:navigationRoot];
   mainContainer.panMode = MFSideMenuPanModeNone;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+  [self presentTutorial];
+}
+
+- (void)presentTutorial
+{
+  NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+  if (![userdefaults boolForKey:kTutorialPresentKey]) {
+    [userdefaults setBool:YES forKey:kTutorialPresentKey];
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    tutorialVC = [sb instantiateViewControllerWithIdentifier:@"Tutorial"];
+    tutorialVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [appdel.window addSubview:tutorialVC.view];
+  }
 }
 
 - (void)menuEventNotification:(NSNotification*)notification
@@ -174,10 +190,6 @@ static NSString *kTitle = @"MY FEED";
   [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  
-  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(5, menuButton.frame.size.height/2 - 12, 30, 30)];
-  icon_.image = [UIImage imageNamed:@"MenuButton"];
-  [menuButton addSubview:icon_];
   [menuButton bringSubviewToFront:menuButton.badgeLabel];
 }
 
