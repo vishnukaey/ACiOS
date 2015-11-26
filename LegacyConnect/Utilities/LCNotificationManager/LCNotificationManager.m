@@ -112,6 +112,12 @@
 
 #pragma mark - userUpdate notifications
 
++ (void)postProfileUpdatedNotification :(LCUserDetail *)userDetails
+{
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:userDetails, @"userDetail", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUpdateProfileNFK object:nil userInfo:userInfo];
+}
+
 + (void)postSendFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status
 {
   LCFriend *friend = [[LCFriend alloc] init];

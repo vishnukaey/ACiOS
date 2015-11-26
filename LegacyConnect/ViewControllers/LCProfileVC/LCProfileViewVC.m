@@ -113,39 +113,11 @@
     if(currentProfileStatus == kMyProfile) {
       [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     }
-    self.userDetail = response;
-    friendsButton.enabled = YES;
+    
     NSLog(@"user details - %@",response);
-    
-    userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
-                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.firstName],
-                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.lastName]] uppercaseString];
-    memeberSincelabel.text = [NSString stringWithFormat:@"%@ %@",
-                              NSLocalizedString(@"member_since", nil),
-                              [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"YYYY"]];
-    
-    locationLabel.text = [[NSString stringWithFormat:@"%@ %@ %@ %@ %@",
-                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.gender],
-                           kBulletUnicode,
-                           [LCUtilityManager getAgeFromTimeStamp:self.userDetail.dob],
-                           kBulletUnicode,
-                           [LCUtilityManager performNullCheckAndSetValue:self.userDetail.location]] uppercaseString];
-    
-    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.userDetail.impactCount];
-    friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.userDetail.friendCount];
-    
-    NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",self.userDetail.avatarURL];
-    
-    [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
-                  placeholderImage:profilePic.image];
-    
-    NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",self.userDetail.headerPhotoURL];
-    
-    [headerImageView sd_setImageWithURL:[NSURL URLWithString:urlString]
-                       placeholderImage:headerImageView.image];
-    
-    [self setCurrentProfileStatus:(FriendStatus)[self.userDetail.isFriend integerValue]];
-    
+    self.userDetail = response;
+    [self updateUserDetailUI];
+    friendsButton.enabled = YES;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];

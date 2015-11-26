@@ -27,11 +27,11 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
-  //Add Notification observers
+
   [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(updateUserData:)
-                                               name:kUserProfileUpdateNotification object:nil];
+                                           selector:@selector(profileUpdatedNotificationReceived:)
+                                               name:kUpdateProfileNFK
+                                             object:nil];
   
   
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -50,6 +50,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                                            selector:@selector(friendStatusUpdatedNotificationReceived:)
                                                name:kAcceptFriendRequestNFK
                                              object:nil];
+  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(updateImpactsCount:)
@@ -71,6 +72,8 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Private Methods
 
 - (void) setCurrentProfileStatus:(FriendStatus)friendStatus
 {
@@ -103,40 +106,66 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   }
 }
 
+- (void) updateUserDetailUI {
+  
+  userNameLabel.text = [[NSString stringWithFormat:@"%@ %@",
+                         [LCUtilityManager performNullCheckAndSetValue:self.userDetail.firstName],
+                         [LCUtilityManager performNullCheckAndSetValue:self.userDetail.lastName]] uppercaseString];
+  memeberSincelabel.text = [NSString stringWithFormat:@"%@ %@",
+                            NSLocalizedString(@"member_since", nil),
+                            [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"YYYY"]];
+  
+  locationLabel.text = [[NSString stringWithFormat:@"%@ %@ %@ %@ %@",
+                         [LCUtilityManager performNullCheckAndSetValue:self.userDetail.gender],
+                         kBulletUnicode,
+                         [LCUtilityManager getAgeFromTimeStamp:self.userDetail.dob],
+                         kBulletUnicode,
+                         [LCUtilityManager performNullCheckAndSetValue:self.userDetail.location]] uppercaseString];
+  
+  impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.userDetail.impactCount];
+  friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.userDetail.friendCount];
+  
+  NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",self.userDetail.avatarURL];
+  [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
+                placeholderImage:profilePic.image];
+  
+  [headerImageView sd_setImageWithURL:[NSURL URLWithString:self.userDetail.headerPhotoURL]
+                     placeholderImage:headerImageView.image];
+  
+  [self setCurrentProfileStatus:(FriendStatus)[self.userDetail.isFriend integerValue]];
+}
+
 #pragma mark - Notification Receivers
 
--(void)updateUserData:(NSNotification *)notification {
-  
-//  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
-//  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
-//  dispatch_async(dispatch_get_global_queue(0,0), ^{
-//    [self loadUserDetails];
-//  });
+-(void)profileUpdatedNotificationReceived:(NSNotification *)notification {
+
+   _userDetail = notification.userInfo[@"userDetail"];
+  [self updateUserDetailUI];
+  [LCUtilityManager saveUserDetailsToDataManagerFromResponse:_userDetail];
 }
 
 -(void) friendStatusUpdatedNotificationReceived:(NSNotification *)notification {
   
-  NSLog(@"friendStatusUpdatedNotificationReceived");
   LCFriend *friend = notification.userInfo[@"friend"];
-  if (currentProfileStatus == kMyProfile) {
-    
+  if (currentProfileStatus == kMyProfile || _userDetail.userID == friend.friendId) {
+  
     if (notification.name == kAcceptFriendRequestNFK) {
-      
-      NSInteger count = [_userDetail.friendCount integerValue] - 1;
-      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-      friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
-    }
-    else if(notification.name == kRemoveFriendNFK) {
       
       NSInteger count = [_userDetail.friendCount integerValue] + 1;
       _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-      friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
     }
-  }
-  else if(_userDetail.userID == friend.friendId) {
+    else if(notification.name == kRemoveFriendNFK) {
+      
+      NSInteger count = [_userDetail.friendCount integerValue] - 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    }
     
-    _userDetail.isFriend = friend.isFriend;
-    [self setCurrentProfileStatus:(FriendStatus)[_userDetail.isFriend integerValue]];
+    
+    if(_userDetail.userID == friend.friendId) {
+
+      _userDetail.isFriend = friend.isFriend;
+    }
+    [self updateUserDetailUI];
   }
 }
 
@@ -149,14 +178,13 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       
       NSInteger count = [_userDetail.impactCount integerValue] + 1;
       _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-      impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
     }
     else if (notification.name == kDeletePostNFK) {
       
       NSInteger count = [_userDetail.impactCount integerValue] - 1;
       _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-      impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
     }
+    [self updateUserDetailUI];
   }
 }
 @end

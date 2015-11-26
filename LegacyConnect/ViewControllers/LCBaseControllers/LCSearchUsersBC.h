@@ -6,8 +6,8 @@
 //  Copyright © 2015 Gist. All rights reserved.
 //
 
-#import "JTTableViewController.h"
+#import "LCUsersListBC.h"
 
-@interface LCSearchUsersBC : JTTableViewController
+@interface LCSearchUsersBC : LCUsersListBC
 
 @end
