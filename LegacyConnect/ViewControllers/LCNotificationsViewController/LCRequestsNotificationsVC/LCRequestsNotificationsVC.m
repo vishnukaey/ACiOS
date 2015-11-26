@@ -69,13 +69,6 @@
   }
 }
 
-- (void) setUsersArray:(NSArray*) usersArray
-{
-  [super startFetchingResults];
-  BOOL hasMoreData = ([(NSArray*)usersArray count] < 10) ? NO : YES;
-  [self didFetchResults:usersArray haveMoreData:hasMoreData];
-}
-
 #pragma mark - private method implementation
 - (void)initialSetUp
 {
