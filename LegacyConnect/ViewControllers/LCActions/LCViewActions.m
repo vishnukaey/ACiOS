@@ -83,15 +83,9 @@ static CGFloat kActionSectionHeight = 30;
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.eventObject = responses;
     [self refreshEventDetails];
-    [self.tableView reloadData];
-    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
-      [self startFetchingResults];
-    }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
-      [self startFetchingResults];
-    }
+    [self refreshEventDetails];
     LCDLog(@"%@",error);
   }];
 }
@@ -203,6 +197,11 @@ static CGFloat kActionSectionHeight = 30;
   eventCreatedByLabel.nameTagTapped = ^(int index) {
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
+  
+  [self.tableView reloadData];
+  if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
+    [self startFetchingResults];
+  }
 }
 
 - (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
@@ -233,7 +232,7 @@ static CGFloat kActionSectionHeight = 30;
   [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
 }
@@ -242,7 +241,7 @@ static CGFloat kActionSectionHeight = 30;
 - (IBAction)backAction:(id)sender
 {
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self.navigationController popToRootViewControllerAnimated:YES];
+  [self.navigationController popViewControllerAnimated:YES];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -271,7 +270,6 @@ static CGFloat kActionSectionHeight = 30;
     [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
       [MBProgressHUD hideHUDForView:self.view animated:YES];
-      [self startFetchingResults];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];

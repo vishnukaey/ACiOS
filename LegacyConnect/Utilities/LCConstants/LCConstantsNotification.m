@@ -30,6 +30,7 @@ NSString *const kSendFriendRequestNFK = @"friend_request_sent";
 NSString *const kCancelFriendRequestNFK = @"friend_request_canceled";
 NSString *const kRemoveFriendNFK = @"friend_removed";
 NSString *const kAcceptFriendRequestNFK = @"friend_request_accepted";
+
 NSString *const kCreateEventNFK = @"event_created";
 NSString *const kCommentEventNFK = @"event_commented";
 NSString *const kDeleteEventNFK = @"event_deleted";
@@ -45,10 +46,6 @@ NSString *const friendStatusUpdatedNotification = @"friendUpdated";
 NSString *const kNotificationCountUpdated = @"notificationCountUpdated";
 NSString *const knewPostCreatedNotification = @"notificationCreateNewPost";
 
-NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
-NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
-NSString *const kEventDeletedNotification = @"EventDeleted";
-NSString *const kEventCreatedNotification = @"EventCreated";
 
 NSString *const kResetPasswordNotificationName = @"password_reset_notification";
 
