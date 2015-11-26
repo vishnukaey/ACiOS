@@ -10,4 +10,6 @@
 
 @interface LCFriendsListBC : LCUsersListBC
 
+@property (nonatomic, strong) NSString * userId;
+
 @end
