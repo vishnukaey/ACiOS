@@ -31,6 +31,10 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   [super viewDidLoad];
   _currentNotifications = kRecentNotifications;
   [self addTabMenuForNotifications];
+  if ([[[LCDataManager sharedDataManager] notificationCount] integerValue] > 0) {
+    [[LCDataManager sharedDataManager] setNotificationCount:@"0"];
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -48,6 +52,8 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 
 -(void) addTabMenuForNotifications
 {
+  [_requestsButton addTarget:self action:@selector(requestTabTapped) forControlEvents:UIControlEventTouchUpInside];
+  
   self.tabMenu.menuButtons = @[_recentButton,_requestsButton];
   self.tabMenu.views = @[_recentContainer, _requestsContainer];
   self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
@@ -55,6 +61,13 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
 }
 
+- (void)requestTabTapped
+{
+  if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0) {
+    [[LCDataManager sharedDataManager] setRequestCount:@"0"];
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }
+}
 
 - (void) viewWillDisappear:(BOOL)animated
 {

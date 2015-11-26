@@ -135,6 +135,9 @@
 
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date
 {
+  if (!date) {
+    return kEmptyStringValue;
+  }
   NSTimeInterval timeInterval = [date timeIntervalSince1970];
   NSString *timeStampString = [NSString stringWithFormat:@"%0.0f", timeInterval * 1000];
   return timeStampString;

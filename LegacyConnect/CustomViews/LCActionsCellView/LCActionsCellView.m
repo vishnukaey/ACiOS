@@ -36,7 +36,7 @@ static NSString *kSupportedByPerson = @"Supported by %@ Person";
   _event = event;
   [self.eventNameLabel setText:_event.name];
   NSLog(@"event obj : %@",event);
-  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.startDate WithFormat:kActionsDateFormat];
+  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.createdAt WithFormat:kActionsDateFormat];
   [self.eventTimeLabel setText:displayDate];
   if (_event.followerCount && [_event.followerCount integerValue] > 0) {
     if ([_event.followerCount integerValue] == 1) {

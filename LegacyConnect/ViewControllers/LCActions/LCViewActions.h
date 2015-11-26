@@ -16,6 +16,7 @@
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
   __weak IBOutlet UILabel *eventNameLabel;
+  __weak IBOutlet UILabel *eventdateInfoLable;
   __weak IBOutlet LCTaggedLabel *eventCreatedByLabel;
   __weak IBOutlet UIImageView *eventPhoto;
 }

@@ -35,10 +35,17 @@ static CGFloat kActionSectionHeight = 30;
 @interface LCActionsMembersCountCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
 @property(nonatomic, strong)IBOutlet UIImageView *seperator;
-
 @end
 
 @implementation LCActionsMembersCountCell
+@end
+
+#pragma mark - LCActionDateCell class
+@interface LCActionDateCell : UITableViewCell
+@property(nonatomic, strong) IBOutlet UILabel *eventDateLabel;
+@end
+
+@implementation LCActionDateCell
 @end
 
 #pragma mark - LCCommunityWebsiteCell class
@@ -197,6 +204,14 @@ static CGFloat kActionSectionHeight = 30;
   eventCreatedByLabel.nameTagTapped = ^(int index) {
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
+  
+  if (![LCUtilityManager isEmptyString:self.eventObject.startDate]) {
+    NSString * eventDateInfo = [LCUtilityManager getDateFromTimeStamp:self.eventObject.startDate WithFormat:@"MMM dd yyyy"];
+    if (![LCUtilityManager isEmptyString:self.eventObject.endDate]) {
+      eventDateInfo = [NSString stringWithFormat:@"%@ to %@",eventDateInfo,[LCUtilityManager getDateFromTimeStamp:self.eventObject.endDate WithFormat:@"MMM dd yyyy"]];
+    }
+    [eventdateInfoLable setText:eventDateInfo];
+  }
   
   [self.tableView reloadData];
 }
