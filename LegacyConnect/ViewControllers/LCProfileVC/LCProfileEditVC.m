@@ -71,8 +71,7 @@ NSInteger const kHeightForHeader = 44;
                          actualAvatarImage = image;
                        }];
   
-  NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=normal",userDetail.headerPhotoURL];
-  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:headerUrlString]
+  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
                    placeholderImage:nil
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                             if (headerPicState == IMAGE_UNTOUCHED) {
@@ -225,16 +224,7 @@ NSInteger const kHeightForHeader = 44;
   [LCAPIManager updateProfile:userDetail havingHeaderPhoto:headerToPass removedState:isHeaderRemoved andAvtarImage:avatarToPass removedState:isAvatarRemoved withSuccess:^(NSArray *response) {
     NSLog(@"ress-->>>%@",response);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self dismissViewControllerAnimated:YES completion:^{
-      NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
-      if (profilePic.image) {
-        userInfo[@"profilePic"] = profilePic.image;
-      }
-      if (headerBGImage.image) {
-        userInfo[@"headerBGImage"] = headerBGImage.image;
-      }
-      [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileUpdateNotification object:nil userInfo:userInfo];
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     NSLog(@"%@",error);

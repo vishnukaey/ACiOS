@@ -77,18 +77,12 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (void)addRequiredNotificationObserver
 {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserDataUpdatedNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderAndAvatarOnEdit:) name:kUserProfileUpdateNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCountUpdated) name:kNotificationCountUpdated object:nil];
 }
 
 - (void)refreshUserImages:(NSNotification*)notification
 {
   [self refreshUserInfo];
-}
-
--(void)updateHeaderAndAvatarOnEdit:(NSNotification *)notification {
-  self.profilePicture.image = (UIImage *)notification.userInfo[@"profilePic"];
-  self.coverPhoto.image = (UIImage *)notification.userInfo[@"headerBGImage"];
 }
 
 - (void)notificationCountUpdated

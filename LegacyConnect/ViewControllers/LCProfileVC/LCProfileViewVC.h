@@ -20,11 +20,9 @@
 @interface LCProfileViewVC : LCProfileViewBC <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
 {
   
-  IBOutlet UIImageView *profilePic, *headerImageView;
   IBOutlet UIView *profilePicBorderView;
   IBOutlet UIView *tabMenuContainer, *viewToCollapse;
   IBOutlet UIButton *backButton;
-  IBOutlet UILabel *userNameLabel, *memeberSincelabel, *locationLabel;
   IBOutlet NSLayoutConstraint *collapseViewHeight;
   
   
@@ -47,8 +45,6 @@
   
   LCTabMenuView *tabmenu;
 }
-
-//@property(nonatomic, retain)LCUserDetail *userDetail;
 
 - (IBAction)backAction:(id)sender;
 - (IBAction)editClicked:(UIButton *)sender;

@@ -265,9 +265,18 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
     LCDLog(@"Success!");
-    
     //GA Tracking
     [LCGAManager ga_trackEventWithCategory:@"Profile" action:@"Profile updated" andLabel:@"User profile updated"];
+    
+    NSError *error = nil;
+    LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
+    if(!error)
+    {
+      [LCNotificationManager postProfileUpdatedNotification:user];
+    }
+    else{
+      LCDLog(@"Error-- %@",error);
+    }
     
     success(response);
   } andFailure:^(NSString *error) {
