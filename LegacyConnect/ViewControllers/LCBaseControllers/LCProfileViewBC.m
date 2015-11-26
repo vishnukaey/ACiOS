@@ -17,30 +17,156 @@
 
 #import "LCProfileViewBC.h"
 
-@interface LCProfileViewBC ()
 
-@end
+static NSString * const kImageNameProfileSettings = @"profileSettings";
+static NSString * const kImageNameProfileAdd = @"profileAdd";
+static NSString * const kImageNameProfileFriend = @"profileFriend";
+static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 
 @implementation LCProfileViewBC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  
+  //Add Notification observers
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updateUserData:)
+                                               name:kUserProfileUpdateNotification object:nil];
+  
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kSendFriendRequestNFK
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kCancelFriendRequestNFK
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kRemoveFriendNFK
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kAcceptFriendRequestNFK
+                                             object:nil];
+  
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(incrementImpactsCount:)
+                                               name:kUserProfilePostCreatedNotification
+                                             object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(decrementImpactsCount:)
+                                               name:kUserProfilePostDeletedNotification
+                                             object:nil];
 }
+
+- (void)dealloc {
+  
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) setCurrentProfileStatus:(FriendStatus)friendStatus
+{
+  currentProfileStatus = friendStatus;
+  NSString *btnImageName = nil;
+  switch (currentProfileStatus) {
+      
+    case kMyProfile:
+      btnImageName = kImageNameProfileSettings;
+      break;
+      
+    case kIsFriend:
+      btnImageName = kImageNameProfileFriend;
+      break;
+      
+    case kNonFriend:
+      btnImageName = kImageNameProfileAdd;
+      break;
+      
+    case kRequestWaiting:
+      btnImageName = kImageNameProfileWaiting;
+      break;
+      
+    default:
+      break;
+  }
+  if(btnImageName)
+  {
+    [friendsButton setImage:[UIImage imageNamed:btnImageName] forState:UIControlStateNormal];
+  }
 }
-*/
 
+#pragma mark - Notification Receivers
+
+-(void)updateUserData:(NSNotification *)notification {
+  
+//  profilePic.image = (UIImage *)notification.userInfo[@"profilePic"];
+//  headerImageView.image = (UIImage *)notification.userInfo[@"headerBGImage"];
+//  dispatch_async(dispatch_get_global_queue(0,0), ^{
+//    [self loadUserDetails];
+//  });
+}
+
+-(void)updateFriendsCount:(NSNotification *)notification {
+  
+  NSString *status = notification.userInfo[@"status"];
+  if ([status isEqualToString:@"deleted"]) {
+    
+    NSInteger count = [_userDetail.friendCount integerValue] - 1;
+    _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    //friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.friendCount];
+  }
+}
+
+-(void) friendStatusUpdatedNotificationReceived:(NSNotification *)notification {
+  
+  NSLog(@"friendStatusUpdatedNotificationReceived");
+  LCFriend *friend = notification.userInfo[@"friend"];
+  if (currentProfileStatus == kMyProfile) {
+    
+    if (notification.name == kAcceptFriendRequestNFK) {
+      
+      NSInteger count = [_userDetail.friendCount integerValue] - 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+      friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
+    }
+    else if(notification.name == kRemoveFriendNFK) {
+      
+      NSInteger count = [_userDetail.friendCount integerValue] + 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+      friendsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.friendCount];
+    }
+  }
+  else if(_userDetail.userID == friend.friendId) {
+    
+    _userDetail.isFriend = friend.isFriend;
+    [self setCurrentProfileStatus:(FriendStatus)[_userDetail.isFriend integerValue]];
+  }
+}
+
+-(void)incrementImpactsCount:(NSNotification *)notification {
+  
+  if (currentProfileStatus == kMyProfile) {
+    NSInteger count = [_userDetail.impactCount integerValue] + 1;
+    _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
+  }
+}
+
+-(void)decrementImpactsCount:(NSNotification *)notification {
+  
+  if (currentProfileStatus == kMyProfile) {
+    NSInteger count = [_userDetail.impactCount integerValue] - 1;
+    _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    impactsCountLabel.text = [LCUtilityManager performNullCheckAndSetValue:_userDetail.impactCount];
+  }
+}
 @end

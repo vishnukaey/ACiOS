@@ -988,7 +988,7 @@ static LCAPIManager *sharedManager = nil;
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
        LCDLog(@"Friend request sent %@",response);
-       [LCNotificationManager postFriendUpadteNotification:friendID forFriendStatus:kRequestWaiting];
+      [LCNotificationManager postSendFriendRequestNotification:friendID forFriendStatus:kRequestWaiting];
        success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -1005,7 +1005,7 @@ static LCAPIManager *sharedManager = nil;
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
        LCDLog(@"Friend request cancelled \n %@",response);
-       [LCNotificationManager postFriendUpadteNotification:friendID forFriendStatus:kNonFriend];
+     [LCNotificationManager postCancelFriendRequestNotification:friendID forFriendStatus:kNonFriend];
        success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -1026,10 +1026,7 @@ static LCAPIManager *sharedManager = nil;
    {
        LCDLog(@"Friend request sent %@",response);
        success(response);
-       [LCNotificationManager postFriendUpadteNotification:FriendID forFriendStatus:kNonFriend];
-       //Notify Profile
-       NSDictionary *userInfo = @{@"status":@"deleted"};
-       [[NSNotificationCenter defaultCenter] postNotificationName:kUserProfileFrinendsUpdateNotification object:nil userInfo:userInfo];
+     [LCNotificationManager postRemoveFriendNotification:FriendID forFriendStatus:kNonFriend];
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
@@ -1046,6 +1043,7 @@ static LCAPIManager *sharedManager = nil;
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
        LCDLog(@"Accept Friend request success! \n %@",response);
+     [LCNotificationManager postAcceptFriendRequestNotification:friendID forFriendStatus:kIsFriend];
        success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

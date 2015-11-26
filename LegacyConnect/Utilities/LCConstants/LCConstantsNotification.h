@@ -39,9 +39,9 @@ extern NSString *const kUnfollowEventNFK;
 
 extern NSString *const kUserProfileUpdateNotification;
 extern NSString *const kUserProfileFrinendsUpdateNotification;
-extern NSString *const kUserProfileImpactsUpdateNotification;
+extern NSString *const kUserProfilePostCreatedNotification;
+extern NSString *const kUserProfilePostDeletedNotification;
 extern NSString *const kfeedUpdatedotification;
-extern NSString *const friendStatusUpdatedNotification;
 extern NSString *const kNotificationCountUpdated;
 extern NSString *const knewPostCreatedNotification;
 

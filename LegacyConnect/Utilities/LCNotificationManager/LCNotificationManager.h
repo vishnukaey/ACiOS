@@ -27,7 +27,10 @@
 + (void)postEventDeletedNotification:(LCEvent*)event;
 
 //friends
-+ (void)postFriendUpadteNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postSendFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postCancelFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postRemoveFriendNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postAcceptFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
 
 //Notification
 + (void)postNotificationCountUpdatedNotification;
