@@ -26,11 +26,11 @@ NSString *const kFollowInterestNFK = @"interest_followed";
 NSString *const kUnfollowInterestNFK = @"interest_unfollowed";
 NSString *const kSupportCauseNFK = @"cause_supported";
 NSString *const kUnsupportCauseNFK = @"cause_unsupported";
-NSString *const kFriendStatusUpdatedNFK = @"friend_status_updated";
 NSString *const kSendFriendRequestNFK = @"friend_request_sent";
 NSString *const kCancelFriendRequestNFK = @"friend_request_canceled";
 NSString *const kRemoveFriendNFK = @"friend_removed";
 NSString *const kAcceptFriendRequestNFK = @"friend_request_accepted";
+
 NSString *const kCreateEventNFK = @"event_created";
 NSString *const kCommentEventNFK = @"event_commented";
 NSString *const kDeleteEventNFK = @"event_deleted";
@@ -39,17 +39,10 @@ NSString *const kFollowEventNFK = @"event_followed";
 NSString *const kUnfollowEventNFK = @"event_unfollowed";
 
 NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
-NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpdated";
-NSString *const kUserProfilePostCreatedNotification = @"userProfilePostCreated";
-NSString *const kUserProfilePostDeletedNotification = @"userProfilePostDeleted";
 NSString *const kfeedUpdatedotification = @"feedUpdated";
 NSString *const kNotificationCountUpdated = @"notificationCountUpdated";
 NSString *const knewPostCreatedNotification = @"notificationCreateNewPost";
 
-NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
-NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
-NSString *const kEventDeletedNotification = @"EventDeleted";
-NSString *const kEventCreatedNotification = @"EventCreated";
 
 NSString *const kResetPasswordNotificationName = @"password_reset_notification";
 

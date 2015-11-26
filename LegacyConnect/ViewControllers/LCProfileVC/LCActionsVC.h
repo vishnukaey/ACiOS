@@ -14,9 +14,6 @@
 @end
 
 @interface LCActionsVC : LCUserActionsBC
-{
-  BOOL isSelfProfile;
-}
 
 @property (nonatomic, assign) id<ActionsDelegate> delegate;
 

@@ -19,13 +19,18 @@
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post;
 
 // ------- Event ------//
++ (void)postEventFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
++ (void)postEventUnFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
+
 + (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
-+ (void)postEventMembersCountUpdatedNotification:(LCEvent*)event;
 + (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
 + (void)postEventDeletedNotification:(LCEvent*)event;
 
 //friends
-+ (void)postFriendUpadteNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postSendFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postCancelFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postRemoveFriendNotification :(NSString *)friendID forFriendStatus :(int)status;
++ (void)postAcceptFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
 
 //Notification
 + (void)postNotificationCountUpdatedNotification;

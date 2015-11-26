@@ -26,7 +26,6 @@ extern NSString *const kFollowInterestNFK;
 extern NSString *const kUnfollowInterestNFK;
 extern NSString *const kSupportCauseNFK;
 extern NSString *const kUnsupportCauseNFK;
-extern NSString *const kFriendStatusUpdatedNFK;
 extern NSString *const kSendFriendRequestNFK;
 extern NSString *const kCancelFriendRequestNFK;
 extern NSString *const kRemoveFriendNFK;
@@ -39,17 +38,10 @@ extern NSString *const kFollowEventNFK;
 extern NSString *const kUnfollowEventNFK;
 
 extern NSString *const kUserProfileUpdateNotification;
-extern NSString *const kUserProfileFrinendsUpdateNotification;
-extern NSString *const kUserProfilePostCreatedNotification;
-extern NSString *const kUserProfilePostDeletedNotification;
 extern NSString *const kfeedUpdatedotification;
 extern NSString *const kNotificationCountUpdated;
 extern NSString *const knewPostCreatedNotification;
 
-extern NSString *const kEventMemberCountUpdatedNotification;
-extern NSString *const kEventDetailsUpdatedNotification;
-extern NSString *const kEventDeletedNotification;
-extern NSString *const kEventCreatedNotification;
 
 extern NSString *const kResetPasswordNotificationName;
 
