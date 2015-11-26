@@ -1244,6 +1244,23 @@ static LCAPIManager *sharedManager = nil;
   
 }
 
++ (void)rejectEventRequest:(NSString *)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/event/invite/reject"];
+  NSDictionary *dict = @{@"eventId": eventID};
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     LCDLog(@"Reject event request success ! \n%@",response);
+     success(response);
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
 + (void)postCommentToEvent:(NSString *)eventID comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];

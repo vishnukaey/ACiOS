@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JTTableViewController.h"
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
 
-@interface LCEventMembersViewController : UIViewController
-@property (weak,nonatomic) IBOutlet UITableView *tableView;
+@interface LCEventMembersViewController : JTTableViewController
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *inviteViewHeight;
 @property (weak,nonatomic) LCEvent *event;
 @end
