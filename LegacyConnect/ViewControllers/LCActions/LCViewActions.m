@@ -199,9 +199,6 @@ static CGFloat kActionSectionHeight = 30;
   };
   
   [self.tableView reloadData];
-  if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
-    [self startFetchingResults];
-  }
 }
 
 - (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
@@ -270,6 +267,9 @@ static CGFloat kActionSectionHeight = 30;
     [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
       [MBProgressHUD hideHUDForView:self.view animated:YES];
+      if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
+        [self startFetchingResults];
+      }
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
