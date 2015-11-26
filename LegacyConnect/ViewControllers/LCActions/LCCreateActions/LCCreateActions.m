@@ -42,6 +42,11 @@
     LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
     vc.eventToInvite = com;
     [actionForm.navigationController pushViewController:vc animated:YES];
+    
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Take Action" andLabel:@"Take Action"];
+
+    
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];

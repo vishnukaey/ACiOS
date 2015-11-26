@@ -12,25 +12,92 @@
 #import "LCInviteToActions.h"
 
 @interface LCEventMembersViewController ()
-{
-  NSArray *membersList;
-}
 @end
 
 @implementation LCEventMembersViewController
 
+
+//
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [LCAPIManager getMembersForEventID:_event.eventID andLastEventID:kEmptyStringValue withSuccess:^(NSArray *responses)
-   {
-     membersList = responses;
-     [self.tableView reloadData];
-   } andFailure:^(NSString *error)
-   {
-   }];
-  _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [self initialSetUp];
+  [self startFetchingResults];
 }
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+-(void) startFetchingResults
+{
+  [super startFetchingResults];
+  [LCAPIManager getMembersForEventID:_event.eventID andLastEventID:nil withSuccess:^(NSArray *responses) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
+    [self didFetchResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self didFailedToFetchResults];
+
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  
+  [LCAPIManager getMembersForEventID:_event.eventID andLastEventID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
+    BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
+    [self didFetchNextResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)stopRefreshingViews
+{
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
+}
+
+- (void) setUsersArray:(NSArray*) usersArray
+{
+  [super startFetchingResults];
+  BOOL hasMoreData = ([(NSArray*)usersArray count] < 10) ? NO : YES;
+  [self didFetchResults:usersArray haveMoreData:hasMoreData];
+}
+
+#pragma mark - private method implementation
+- (void)initialSetUp
+{
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"members_empty", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  
+  // Pull to Refresh Interface to Feeds TableView.
+  __weak typeof(self) weakSelf = self;
+  [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf hideNoResultsView];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [weakSelf startFetchingResults];
+    });
+  } withBackgroundColor:[UIColor lightGrayColor]];
+}
+
+
+//
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -45,45 +112,42 @@
   }
 }
 
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
+//
 
 #pragma mark - TableView delegates
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return membersList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  return 80.0;
+  if (self.results.count > 0) {
+    [self hideNoResultsView];
+  } else {
+    [self showNoResultsView];
+  }
+  return [super tableView:tableView numberOfRowsInSection:section];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCUserDetail *user = membersList[indexPath.row];
-    cell.user = user;
-    return cell;
+  JTTABLEVIEW_cellForRowAtIndexPath
+  LCUserDetail *user = self.results[indexPath.row];
+  LCUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCUserTableViewCell"];
+  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+  cell.user = user;
+  return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = membersList[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+  LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+  vc.userDetail = [self.results objectAtIndex:indexPath.row];
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 80.0;
 }
 
 

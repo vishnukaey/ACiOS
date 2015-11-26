@@ -9,6 +9,7 @@
 #import "LCRequestsNotificationsVC.h"
 #import "LCRequestNotificationTVC.h"
 #import "LCProfileViewVC.h"
+#import "LCViewActions.h"
 
 @interface LCRequestsNotificationsVC () <LCRequestNotificationTVCDelegate>
 @end
@@ -19,6 +20,8 @@
 {
   [super viewDidLoad];
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [self initialSetUp];
   [self startFetchingResults];
 }
 
@@ -31,9 +34,13 @@
 {
   [super startFetchingResults];
   [LCAPIManager getRequestNotificationsWithLastUserId:nil withSuccess:^(NSArray *responses) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }
@@ -49,6 +56,14 @@
   }];
 }
 
+- (void)stopRefreshingViews
+{
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
+}
+
 - (void) setUsersArray:(NSArray*) usersArray
 {
   [super startFetchingResults];
@@ -56,14 +71,42 @@
   [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 
-
+#pragma mark - private method implementation
+- (void)initialSetUp
+{
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_requests_pending", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  
+  // Pull to Refresh Interface to Feeds TableView.
+  __weak typeof(self) weakSelf = self;
+  [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf hideNoResultsView];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [weakSelf startFetchingResults];
+    });
+  } withBackgroundColor:[UIColor lightGrayColor]];
+}
 
 #pragma mark - TableView delegates
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  if (self.results.count > 0) {
+    [self hideNoResultsView];
+  } else {
+    [self showNoResultsView];
+  }
+  return [super tableView:tableView numberOfRowsInSection:section];
+}
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 110.0;
+  return 100.0;
 }
 
 
@@ -71,7 +114,15 @@
 {
   JTTABLEVIEW_cellForRowAtIndexPath
   LCRequest *request = self.results[indexPath.row];
-    LCRequestNotificationTVC *cell = [tableView dequeueReusableCellWithIdentifier:@"LCRequestNotificationTVC"];
+  LCRequestNotificationTVC *cell;
+  if( [[LCUtilityManager performNullCheckAndSetValue:request.type] isEqualToString:@"event"])
+  {
+    cell =[tableView dequeueReusableCellWithIdentifier:@"LCRequestNotificationTVC"];
+  }
+  else
+  {
+    cell = [tableView dequeueReusableCellWithIdentifier:@"LCFriendRequestNotificationTVC"];
+  }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     cell.request = request;
     cell.delegate = self;
@@ -80,12 +131,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard *sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCProfileViewVC *vc = [sb instantiateInitialViewController];
-  vc.userDetail = [[LCUserDetail alloc] init];
   LCRequest *request = [self.results objectAtIndex:indexPath.row];
-  vc.userDetail.userID = request.friendID;
-  [self.navigationController pushViewController:vc animated:YES];
+  
+  if([request.type isEqualToString:@"event"])
+  {
+    LCEvent *event = [[LCEvent alloc] init];
+    event.eventID =request.eventID;
+    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    actions.eventObject = event;
+    [self.navigationController pushViewController:actions animated:YES];
+  }
+  else
+  {
+    UIStoryboard *sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    LCRequest *request = [self.results objectAtIndex:indexPath.row];
+    vc.userDetail.userID = request.friendID;
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 
 -(void)requestActionedForRequest:(LCRequest *)request
