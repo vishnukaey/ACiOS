@@ -194,7 +194,8 @@
                                                 bundle:nil];
   LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
-  [self.navigationController pushViewController:next animated:YES];
+  UIViewController *profileController = (UIViewController *)self.delegate;
+  [profileController.navigationController pushViewController:next animated:YES];
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
@@ -284,7 +285,8 @@
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIViewController *profileController = (UIViewController *)self.delegate;
+    [profileController.navigationController pushViewController:vc animated:YES];
   }
 }
 

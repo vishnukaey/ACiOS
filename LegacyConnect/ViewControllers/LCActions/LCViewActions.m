@@ -242,8 +242,7 @@ static CGFloat kActionSectionHeight = 30;
 - (IBAction)backAction:(id)sender
 {
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self.navigationController popToRootViewControllerAnimated:YES];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)settingsAction:(id)sender

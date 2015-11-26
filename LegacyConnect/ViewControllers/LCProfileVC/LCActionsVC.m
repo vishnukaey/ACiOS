@@ -142,7 +142,8 @@
   UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
   actions.eventObject = self.results[indexPath.row];
-  [self.navigationController pushViewController:actions animated:YES];
+  UIViewController *profileController = (UIViewController *)self.delegate;
+  [profileController.navigationController pushViewController:actions animated:YES];
 }
 
 #pragma mark - ScrollView delegates
