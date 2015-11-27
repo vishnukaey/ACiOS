@@ -93,27 +93,45 @@
 
 - (void)eventFollowedNotificationReceived :(NSNotification *)notification
 {
+  LCEvent *followedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
   if (isSelfProfile) {
-    LCEvent *followedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
     [self.results insertObject:followedEvent atIndex:0];
-    [self refreshTopViewOnly];
   }
+  else
+  {
+    for (int i = 0; i<self.results.count ; i++) {
+      if ([self.results[i] isKindOfClass:[LCEvent class]]) {
+        LCEvent *event = self.results[i];
+        if ([event.eventID isEqualToString:followedEvent.eventID])
+        {
+          event.followerCount = [NSString stringWithFormat:@"%ld", [event.followerCount integerValue]+1];
+          break;
+        }
+      }
+    }
+  }
+  [self refreshTopViewOnly];
 }
 
 - (void)eventUnFollowedNotificationReceived :(NSNotification *)notification
 {
-  if (isSelfProfile) {
+  
     LCEvent *unFollowedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
     for (int i = 0; i<self.results.count ; i++) {
       LCEvent *event = self.results[i];
       if ([event.eventID isEqualToString:unFollowedEvent.eventID])
       {
-        [self.results removeObjectAtIndex:i];
+        if (isSelfProfile) {
+          [self.results removeObjectAtIndex:i];
+        }
+        else
+        {
+          event.followerCount = [NSString stringWithFormat:@"%ld", [event.followerCount integerValue]-1];
+        }
         [self refreshTopViewOnly];
         break;
       }
     }
-  }
 }
 
 @end

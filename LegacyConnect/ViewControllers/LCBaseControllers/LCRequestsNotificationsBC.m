@@ -25,7 +25,10 @@
 
 - (void)friendRequestUpdatedNotificationReceived :(NSNotification *)notification
 {
-  
+  if (self.isViewLoaded && self.view.window)//animation handling in subclass
+  {
+    return;
+  }
   LCFriend *updated_friend = notification.userInfo[@"friend"];
     for (int i = 0; i<self.results.count ; i++) {
       if ([self.results[i] isKindOfClass:[LCRequest class]]) {
@@ -44,7 +47,10 @@
 
 - (void)eventRequestUpdatedNotificationReceived :(NSNotification *)notification
 {
-  
+  if (self.isViewLoaded && self.view.window)//animation handling in subclass
+  {
+    return;
+  }
   LCEvent *updated_event = notification.userInfo[@"event"];
   for (int i = 0; i<self.results.count ; i++) {
     if ([self.results[i] isKindOfClass:[LCRequest class]]) {
@@ -65,10 +71,17 @@
 
 - (void)refreshViews
 {
+    // viewController is visible
     CGPoint offset = self.tableView.contentOffset;
     [self.tableView reloadData];
     [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [self refreshViews];
 }
 
 - (void)didReceiveMemoryWarning {
