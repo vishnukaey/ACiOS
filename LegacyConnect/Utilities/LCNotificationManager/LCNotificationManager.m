@@ -85,11 +85,10 @@
 }
 
 
-+ (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
++ (void)postEventCreatedNotificationWithResponse:(NSDictionary*)response
 {
-  NSDictionary *dict= response[kResponseData];
-  event.eventID = ([dict[@"eventId"] isEqual:[NSNull null]] ? nil : dict[@"eventId"]);
-  event.headerPhoto = ([dict[@"headerPhoto"] isEqual:[NSNull null]] ? nil : dict[@"headerPhoto"]);
+  NSError *error = nil;
+  LCEvent *event = [MTLJSONAdapter modelOfClass:[LCEvent class] fromJSONDictionary:response[kResponseData] error:&error];
 
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kCreateEventNFK object:nil userInfo:userInfo];

@@ -22,7 +22,7 @@
 + (void)postEventFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
 + (void)postEventUnFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
 
-+ (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
++ (void)postEventCreatedNotificationWithResponse:(NSDictionary*)response;
 + (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
 + (void)postEventDeletedNotification:(LCEvent*)event;
 + (void)postEventRejectedNotification: (NSString *)eventID;

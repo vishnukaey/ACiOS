@@ -1243,7 +1243,7 @@ static LCAPIManager *sharedManager = nil;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:imagesArray withSuccess:^(id response)
    {
-     [LCNotificationManager postEventCreatedNotificationWithEvent:event andResponse:response];
+     [LCNotificationManager postEventCreatedNotificationWithResponse:response];
      LCDLog(@"Getting Event details successful! ");
      success(response);
    } andFailure:^(NSString *error) {

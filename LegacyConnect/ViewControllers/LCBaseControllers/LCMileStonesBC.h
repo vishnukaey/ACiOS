@@ -12,4 +12,6 @@
 
 @property (nonatomic, assign) BOOL isSelfProfile;
 
+- (void)setNoResultViewHidden:(BOOL)hidded;
+
 @end

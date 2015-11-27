@@ -116,16 +116,6 @@
   }];
 }
 
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else
-  {
-    [self showNoResultsView];
-  }
-}
 
 
 #pragma mark - TableView delegates
