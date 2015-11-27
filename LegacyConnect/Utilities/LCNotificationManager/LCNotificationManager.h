@@ -25,6 +25,7 @@
 + (void)postEventCreatedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
 + (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
 + (void)postEventDeletedNotification:(LCEvent*)event;
++ (void)postEventRejectedNotification: (NSString *)eventID;
 
 //profile updated
 + (void)postProfileUpdatedNotification :(LCUserDetail *)userDetails;
@@ -34,7 +35,7 @@
 + (void)postCancelFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
 + (void)postRemoveFriendNotification :(NSString *)friendID forFriendStatus :(int)status;
 + (void)postAcceptFriendRequestNotification :(NSString *)friendID forFriendStatus :(int)status;
-
++ (void)postRejectFriendRequestNotification :(NSString *)friendID;
 //Notification
 + (void)postNotificationCountUpdatedNotification;
 

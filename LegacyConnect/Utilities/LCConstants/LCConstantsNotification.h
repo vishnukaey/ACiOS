@@ -30,12 +30,15 @@ extern NSString *const kSendFriendRequestNFK;
 extern NSString *const kCancelFriendRequestNFK;
 extern NSString *const kRemoveFriendNFK;
 extern NSString *const kAcceptFriendRequestNFK;
+extern NSString *const kRejectFriendRequestNFK;
 extern NSString *const kCreateEventNFK;
 extern NSString *const kCommentEventNFK;
 extern NSString *const kDeleteEventNFK;
 extern NSString *const kUpdateEventNFK;
 extern NSString *const kFollowEventNFK;
 extern NSString *const kUnfollowEventNFK;
+extern NSString *const kRejectEventRequestNFK;
+extern NSString *const kAcceptEventRequestNFK;
 
 extern NSString *const kUserProfileUpdateNotification;
 extern NSString *const kfeedUpdatedotification;

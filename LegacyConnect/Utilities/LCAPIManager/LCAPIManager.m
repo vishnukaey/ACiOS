@@ -1076,6 +1076,7 @@ static LCAPIManager *sharedManager = nil;
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Reject friend request success ! \n%@",response);
+     [LCNotificationManager postRejectFriendRequestNotification:friendID];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -1261,6 +1262,7 @@ static LCAPIManager *sharedManager = nil;
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Reject event request success ! \n%@",response);
+     [LCNotificationManager postEventRejectedNotification:eventID];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

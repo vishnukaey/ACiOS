@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JTTableViewController.h"
+#import "LCRequestsNotificationsBC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 
-@interface LCRequestsNotificationsVC : JTTableViewController
+@interface LCRequestsNotificationsVC : LCRequestsNotificationsBC
 
 @end

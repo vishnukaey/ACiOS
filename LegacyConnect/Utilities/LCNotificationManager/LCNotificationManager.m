@@ -110,6 +110,14 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEventNFK object:nil userInfo:userInfo];
 }
 
++ (void)postEventRejectedNotification: (NSString *)eventID
+{
+  LCEvent *event = [[LCEvent alloc] init];
+  event.eventID = eventID;
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kRejectEventRequestNFK object:nil userInfo:userInfo];
+}
+
 #pragma mark - userUpdate notifications
 
 + (void)postProfileUpdatedNotification :(LCUserDetail *)userDetails
@@ -154,6 +162,13 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kAcceptFriendRequestNFK object:nil userInfo:userInfo];
 }
 
++ (void)postRejectFriendRequestNotification :(NSString *)friendID
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kRejectFriendRequestNFK object:nil userInfo:userInfo];
+}
 
 + (void)postNotificationCountUpdatedNotification
 {
