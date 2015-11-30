@@ -203,6 +203,7 @@ static NSString *kTitle = @"MY FEED";
 {
   if (mainContainer.menuState == MFSideMenuStateClosed) {
     [mainContainer setMenuState:MFSideMenuStateRightMenuOpen];
+    [self updateNotificationCount];
   }
   else
   {
@@ -380,4 +381,19 @@ static NSString *kTitle = @"MY FEED";
   self.navigationController.viewControllers = viewArray;
 
 }
+
+#pragma mark - Notification Update API call
+/**
+ * This is a temp place to implement the 'GetNotificationCount' API. Currently each time when right menu oppens, 
+ * we call 'GetNotificationCount' API and update the notification count
+ * in NavigationMenu. Later this API call implementation will be changed to appopriate location.
+ */
+- (void)updateNotificationCount
+{
+  LCDLog(@"Get Notification Count API call and Update");
+  [LCAPIManager getNotificationCountWithStatus:^(BOOL status) {
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }];
+}
+
 @end
