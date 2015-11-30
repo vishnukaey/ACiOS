@@ -31,6 +31,7 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   [super viewDidLoad];
   _currentNotifications = kRecentNotifications;
   [self addTabMenuForNotifications];
+  [self updateRequestButtonTitle];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +43,7 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 {
   [super viewWillAppear:animated];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
+  [appdel.GIButton setHidden:YES];
   [appdel.menuButton setHidden:NO];
 }
 
@@ -75,6 +76,19 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   else if ([segue.identifier isEqualToString:@"LCRequestsNotificationsVC"]) {
     
     requestsView = segue.destinationViewController;
+  }
+}
+
+
+-(void) updateRequestButtonTitle
+{
+  if([LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].requestCount] || [[LCDataManager sharedDataManager].requestCount isEqualToString:@"0"])
+  {
+    [_requestsButton setTitle:@"REQUESTS" forState:UIControlStateNormal];
+  }
+  else
+  {
+    [_requestsButton setTitle:[NSString stringWithFormat:@"REQUESTS %@",[LCDataManager sharedDataManager].requestCount] forState:UIControlStateNormal];
   }
 }
 
