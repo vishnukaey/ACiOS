@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSString * userId;
 
+- (void)setNoResultViewHidden:(BOOL)hidded;
+
 @end

@@ -50,16 +50,6 @@
   }];
 }
 
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else{
-    [self showNoResultsView];
-  }
-}
-
 #pragma mark - private method implementation
 - (void)stopRefreshingViews
 {

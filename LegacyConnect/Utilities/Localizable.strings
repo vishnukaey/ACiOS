@@ -78,7 +78,7 @@
 "action_form_name" = "NAME";
 "action_form_action_type" = "TYPE OF ACTION";
 "action_form_date_time" = "DATE & TIME";
-"action_form_optional" = "(Optional)";
+"action_form_optional" = " (Optional)";
 "action_form_website" = "WEBSITE";
 "action_form_header_photo" = "HEADER PHOTO";
 "action_form_about" = "ABOUT";
