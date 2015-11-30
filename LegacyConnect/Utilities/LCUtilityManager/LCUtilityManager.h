@@ -46,4 +46,7 @@
 + (NSString *)getSpaceTrimmedStringFromString :(NSString *)string;
 + (BOOL)isEmptyString :(NSString *)string;
 
++ (void)showVersionOutdatedAlert;
++ (NSString *)getAppVersion;
+
 @end

@@ -198,7 +198,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 {
   
   [self layoutIfNeeded];
-  
+  retryButton.hidden = true;
   self.feedObject = feed;
   [self setProfilePic];
   [self setFeedUserName];
@@ -220,12 +220,10 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 - (IBAction)likeAction:(id)sender
 {
   __weak typeof(self.feedObject) feedObject_ = self.feedObject;
-//  LCFeed *feedObject_ = self.feedObject;
   UIButton *btonsender = (UIButton*)sender;
   __weak typeof(btonsender) btn = btonsender;
   btn.userInteractionEnabled = NO;
   __weak typeof(thanksBtnImage) tankImageView_ref = thanksBtnImage;
-//  LCThanksButtonImage *tankImageView_ref =thanksBtnImage;
   tankImageView_ref.alpha = 0.6;
   __weak typeof(thanksLabel) thanksLabel_ref = thanksLabel;
   
@@ -233,14 +231,10 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [tankImageView_ref setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
     NSInteger thanksCount = [likeCount integerValue] > 0 ? [likeCount integerValue] -1 : 0;
-    [thanksLabel_ref setText:[NSString stringWithFormat:@"%li",thanksCount]];
+    [thanksLabel_ref setText:[NSString stringWithFormat:@"%d",(int)thanksCount]];
     [LCAPIManager unlikePost:feedObject_ withSuccess:^(id response) {
-      feedObject_.didLike = kUnLikedStatus;
-      feedObject_.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
-      [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
       btn.userInteractionEnabled = YES;
       tankImageView_ref.alpha = 1.0;
-//      LCDLog(@"unlikefinished--->>>%@",feedObject_);
     } andFailure:^(NSString *error) {
       [tankImageView_ref setLikeUnlikeStatusImage:feedObject_.didLike];
       [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
@@ -254,12 +248,8 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [thanksLabel_ref setText:[NSString stringWithFormat:@"%d",[likeCount intValue] + 1]];
     [tankImageView_ref setLikeUnlikeStatusImage:kLikedStatus];
     [LCAPIManager likePost:feedObject_ withSuccess:^(id response) {
-      feedObject_.didLike = kLikedStatus;
-      feedObject_.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
-      [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];
       btn.userInteractionEnabled = YES;
       tankImageView_ref.alpha = 1.0;
-//      LCDLog(@"likefinished--->>>%@",feedObject_);
     } andFailure:^(NSString *error) {
       [tankImageView_ref setLikeUnlikeStatusImage:feedObject_.didLike];
       [thanksLabel_ref setText:[LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount]];

@@ -16,25 +16,23 @@
   self = [super initWithFrame:frame];
   if (self)
   {
-    badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width/2, 0, frame.size.width/2, frame.size.width/2)];
-    badgeLabel.backgroundColor = [UIColor clearColor];
-    badgeLabel.textColor = [UIColor whiteColor];
-    badgeLabel.font = [UIFont systemFontOfSize:10];
-    badgeLabel.text = @"";
+    badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width * .52f, 3, 20, 20)];
+    badgeLabel.backgroundColor = [UIColor whiteColor];
+    badgeLabel.textColor = [UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:1];
+    badgeLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:11];
     [self addSubview:badgeLabel];
-    badgeLabel.layer.cornerRadius = frame.size.width/4;
+    badgeLabel.layer.cornerRadius = badgeLabel.frame.size.width/2;
+    badgeLabel.layer.borderColor = [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:.5].CGColor;
+    badgeLabel.layer.borderWidth = 1;
     badgeLabel.textAlignment = NSTextAlignmentCenter;
     badgeLabel.clipsToBounds = YES;
-    [badgeLabel setHidden:YES];
+    badgeLabel.adjustsFontSizeToFitWidth = YES;
+    
+    self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.frame.size.height/2 - 12, 30, 30)];
+    self.iconImage.image = [UIImage imageNamed:@"MenuButton"];
+    [self addSubview:self.iconImage];
   }
   return self;
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

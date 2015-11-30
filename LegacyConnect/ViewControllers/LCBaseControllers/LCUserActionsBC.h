@@ -8,6 +8,10 @@
 
 #import "JTTableViewController.h"
 
-@interface LCActionsTableViewController : JTTableViewController
+@interface LCUserActionsBC : JTTableViewController {
+  BOOL isSelfProfile;
+}
+
+@property(nonatomic, retain)NSString *userID;
 
 @end

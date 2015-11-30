@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCFeedTableViewController.h"
+#import "JTTableViewController.h"
 
-@interface LCCommentsController : LCFeedTableViewController<UITextFieldDelegate>
+@interface LCCommentsController : JTTableViewController<UITextFieldDelegate>
 {
   UITextField *commentTextField, *commentTextField_dup;//h_dup is for pushing the keyboard as it wont push for commentfield as it is the input accessory view
   UIButton * postBtn,*dummyPostBtn;

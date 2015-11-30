@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CU0-BO-pMc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CU0-BO-pMc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -353,18 +354,21 @@
                                 <subviews>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HE9-VI-Mf4" userLabel="Container 3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="T6B-Ys-ePM" kind="embed" identifier="LCActionsSegue" id="xLe-At-Itm"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NVd-1J-Fvz" userLabel="Container 2">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="kvZ-aX-cyx" kind="embed" identifier="LCInterestsSegue" id="qTe-ZS-cz0"/>
                                         </connections>
                                     </containerView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9MK-mV-dA3" userLabel="Container 1">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="P11-bt-qtc" kind="embed" identifier="LCMileStonesSegue" id="8Wc-aE-hUm"/>
                                         </connections>
@@ -469,7 +473,7 @@
                         <outlet property="actionsContainer" destination="HE9-VI-Mf4" id="fv0-sv-7cN"/>
                         <outlet property="backButton" destination="3uv-3y-PWF" id="l2e-Le-c5c"/>
                         <outlet property="collapseViewHeight" destination="VGT-86-iKi" id="sCb-H8-UWX"/>
-                        <outlet property="editButton" destination="8FF-Y3-bj4" id="gHV-jQ-n7d"/>
+                        <outlet property="friendsButton" destination="8FF-Y3-bj4" id="twU-1l-xpo"/>
                         <outlet property="friendsCountLabel" destination="W0E-3r-8OY" id="Glt-Hq-dt7"/>
                         <outlet property="headerImageView" destination="341-Y3-ruw" id="gmo-9V-cYO"/>
                         <outlet property="impactsCountLabel" destination="k0b-wM-GAe" id="PmM-Zq-LSo"/>
@@ -933,6 +937,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hHJ-I0-tlG">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="376"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="P11-bt-qtc" id="SRr-vq-hRB"/>
@@ -940,7 +945,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="hHJ-I0-tlG" secondAttribute="trailing" id="7bA-AM-Ea8"/>
                             <constraint firstItem="1e8-cq-InV" firstAttribute="top" secondItem="hHJ-I0-tlG" secondAttribute="bottom" id="KUu-hC-fVz"/>
@@ -978,6 +983,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="fgG-xl-gzG" secondAttribute="trailing" id="8dd-JA-EIy"/>
                             <constraint firstItem="fgG-xl-gzG" firstAttribute="leading" secondItem="rgq-cw-nKx" secondAttribute="leading" id="hC8-iZ-1u2"/>
@@ -1015,6 +1021,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MZ5-DI-Yu0" firstAttribute="top" secondItem="iy3-ra-i7n" secondAttribute="top" id="42K-EL-gOi"/>
                             <constraint firstAttribute="trailing" secondItem="MZ5-DI-Yu0" secondAttribute="trailing" id="9pX-Dt-fVk"/>

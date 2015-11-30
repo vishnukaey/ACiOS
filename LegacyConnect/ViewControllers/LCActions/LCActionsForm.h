@@ -41,17 +41,18 @@ static NSString *  kCellIdentifierSection = @"LCActionSectionHeader";
 @interface LCActionsForm : UIViewController<UITextViewDelegate, actionDateDelegate>
 
 @property(nonatomic, retain) id delegate;
-@property(nonatomic, strong) IBOutlet UITextField *actionNameField;
-@property(nonatomic, retain) IBOutlet UITextView *actionAboutField;
-@property(nonatomic, retain) IBOutlet UITextField *actionWebsiteField;
-@property(nonatomic, retain) IBOutlet UITextField *actionDateField;
-@property(nonatomic, retain) IBOutlet UITextField *actionTypeField;
-@property(nonatomic, retain) IBOutlet UITextField *headerImagePlaceholder;
-@property(nonatomic, retain) IBOutlet UITextField *aboutPlaceholder;
-@property(nonatomic, retain) IBOutlet UIImageView *headerPhotoImageView;
+@property(nonatomic, strong)  UITextField *actionNameField;
+@property(nonatomic, retain)  UITextView *actionAboutField;
+@property(nonatomic, retain)  UITextField *actionWebsiteField;
+@property(nonatomic, retain)  UITextField *actionDateField;
+@property(nonatomic, retain)  UITextField *actionTypeField;
+@property(nonatomic, retain)  UITextField *headerImagePlaceholder;
+@property(nonatomic, retain)  UITextField *aboutPlaceholder;
+@property(nonatomic, retain)  UIImageView *headerPhotoImageView;
 @property(nonatomic, retain) IBOutlet UITableView *formTableView;
 @property(nonatomic, retain) IBOutlet UIButton *nextButton, *cancelButton, *backButton, *deleteActionBut;
-@property(nonatomic, retain) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
+@property(nonatomic, retain)
+UIActivityIndicatorView *imageLoadingIndicator;
 @property(nonatomic, retain) IBOutlet NSLayoutConstraint *deleteActionConstraint;
 @property(nonatomic, assign)BOOL isImageLoading;
 @property(nonatomic, retain) NSDate *startDate, *endDate;

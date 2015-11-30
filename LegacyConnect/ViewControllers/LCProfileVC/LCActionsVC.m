@@ -114,6 +114,12 @@
 }
 
 #pragma mark - TableView delegates
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  [self setNoResultViewHidden:self.results.count > 0];
+  return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   JTTABLEVIEW_cellForRowAtIndexPath
@@ -136,7 +142,8 @@
   UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
   actions.eventObject = self.results[indexPath.row];
-  [self.navigationController pushViewController:actions animated:YES];
+  UIViewController *profileController = (UIViewController *)self.delegate;
+  [profileController.navigationController pushViewController:actions animated:YES];
 }
 
 #pragma mark - ScrollView delegates

@@ -40,6 +40,13 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
   }];
+  
+  [LCAPIManager getRequestNotificationsWithLastUserId:nil withSuccess:^(id response) {
+    
+  } andfailure:^(NSString *error) {
+    
+  }];
+  
 }
 
 - (void)startFetchingNextResults
@@ -184,6 +191,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   [super viewWillAppear:animated];
   [LCUtilityManager setLCStatusBarStyle];
+  [self updateNotificationCount];
   self.navigationController.navigationBarHidden = YES;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   
@@ -244,6 +252,19 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   LCSearchViewController *searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCSearchViewController"];
   [self.navigationController pushViewController:searchVC animated:NO];
+}
+
+#pragma mark - Notification Update API call
+/**
+ * This is a temp place to implement the 'GetNotificationCount' API. Currently each time the 
+ * HomeFeed screen appears, we call 'GetNotificationCount' API and update the notification count
+ * in NavigationMenu and Menu button. Later this API call implementation will be changed to appopriate location.
+ */
+- (void)updateNotificationCount
+{
+  [LCAPIManager getNotificationCountWithStatus:^(BOOL status) {
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }];
 }
 
 @end

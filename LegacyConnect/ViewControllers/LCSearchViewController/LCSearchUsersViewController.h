@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <JTTableViewController.h>
+#import "LCSearchUsersBC.h"
 
-@interface LCSearchUsersViewController : JTTableViewController
+@interface LCSearchUsersViewController : LCSearchUsersBC
 
 @property (nonatomic,retain) NSString *searchKey;
 - (void)setUsersArray:(NSArray*) usersArray;

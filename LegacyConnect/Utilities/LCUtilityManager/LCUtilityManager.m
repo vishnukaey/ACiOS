@@ -13,7 +13,7 @@
 #import "LCContact.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define MAX_IMAGE_SIZE 1200000.0
+#define MAX_IMAGE_SIZE 1.2
 
 @implementation LCUtilityManager
 
@@ -79,17 +79,30 @@
 
 }
 
+
 + (NSData*)performNormalisedImageCompression:(UIImage*)image
 {
   NSData *data = UIImageJPEGRepresentation(image, 1.0);
-  if([data length] < MAX_IMAGE_SIZE)
+  if([data length] < MAX_IMAGE_SIZE*1024*1024)
   {
     return data;
   }
   else
   {
-    CGFloat cFactor = MAX_IMAGE_SIZE/[data length];
-    return UIImageJPEGRepresentation(image, cFactor);
+    CGFloat compression = 1.0f;
+    CGFloat maxCompression = 0.1f;
+    int maxFileSize = MAX_IMAGE_SIZE*1024*1024;
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, compression);
+    NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+    while ([imageData length] > maxFileSize && compression > maxCompression)
+    {
+      compression -= 0.1;
+      imageData = UIImageJPEGRepresentation(image, compression);
+      NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+    }
+    NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+    return imageData;
   }
 }
 
@@ -122,6 +135,9 @@
 
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date
 {
+  if (!date) {
+    return kEmptyStringValue;
+  }
   NSTimeInterval timeInterval = [date timeIntervalSince1970];
   NSString *timeStampString = [NSString stringWithFormat:@"%0.0f", timeInterval * 1000];
   return timeStampString;
@@ -214,11 +230,15 @@
 
 + (BOOL)isaValidWebsiteLink :(NSString *)link
 {
-  NSURL *candidateURL = [NSURL URLWithString:link];
-  if (candidateURL && candidateURL.scheme && candidateURL.host) {
-    return true;
-  }
-  return false;
+//  NSURL *candidateURL = [NSURL URLWithString:link];
+//  if (candidateURL && candidateURL.host) {
+//    return true;
+//  }
+//  return false;
+  NSString *urlRegEx =
+  @"((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+  NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
+  return [urlTest evaluateWithObject:link];
 }
 
 + (NSString *)getSpaceTrimmedStringFromString :(NSString *)string
@@ -453,6 +473,26 @@
 {
 //  UITableViewCell * loaderCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
   return nil;
+}
+
+#pragma mark- version control
++ (void)showVersionOutdatedAlert
+{
+  UIAlertController *versionAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"version_outdated_title", @"title") message:NSLocalizedString(@"version_outdated_message", @"message") preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"version_update_title", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kLCiTunesLink]];
+  }];
+  [versionAlert addAction:deletePostActionFinal];
+  
+  [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:versionAlert animated:YES completion:nil];
+}
+
++ (NSString *)getAppVersion
+{
+  NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+  #warning should remove hardcoding the version.
+  appVersion = @"0.4.0";
+  return appVersion;
 }
 
 @end

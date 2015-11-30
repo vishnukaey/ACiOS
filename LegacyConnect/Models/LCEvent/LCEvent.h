@@ -27,4 +27,5 @@
 @property (assign) BOOL isOwner;
 @property (assign) BOOL isFollowing;
 @property (nonatomic, strong) NSArray *comments;
+@property (nonatomic, strong) NSString *createdAt;
 @end

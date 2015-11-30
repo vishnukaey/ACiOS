@@ -34,9 +34,18 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - LCCommunityMemebersCountCell class
 @interface LCActionsMembersCountCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
+@property(nonatomic, strong)IBOutlet UIImageView *seperator;
 @end
 
 @implementation LCActionsMembersCountCell
+@end
+
+#pragma mark - LCActionDateCell class
+@interface LCActionDateCell : UITableViewCell
+@property(nonatomic, strong) IBOutlet UILabel *eventDateLabel;
+@end
+
+@implementation LCActionDateCell
 @end
 
 #pragma mark - LCCommunityWebsiteCell class
@@ -53,13 +62,13 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - Event Comments API and pagination
 - (void)startFetchingResults
 {
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [super startFetchingResults];
   [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:nil withSuccess:^(id response, BOOL isMore) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }
@@ -81,15 +90,9 @@ static CGFloat kActionSectionHeight = 30;
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.eventObject = responses;
     [self refreshEventDetails];
-    [self.tableView reloadData];
-    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
-      [self startFetchingResults];
-    }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
-      [self startFetchingResults];
-    }
+    [self refreshEventDetails];
     LCDLog(@"%@",error);
   }];
 }
@@ -201,6 +204,16 @@ static CGFloat kActionSectionHeight = 30;
   eventCreatedByLabel.nameTagTapped = ^(int index) {
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
+  
+  if (![LCUtilityManager isEmptyString:self.eventObject.startDate]) {
+    NSString * eventDateInfo = [LCUtilityManager getDateFromTimeStamp:self.eventObject.startDate WithFormat:@"MMM dd yyyy"];
+    if (![LCUtilityManager isEmptyString:self.eventObject.endDate]) {
+      eventDateInfo = [NSString stringWithFormat:@"%@ to %@",eventDateInfo,[LCUtilityManager getDateFromTimeStamp:self.eventObject.endDate WithFormat:@"MMM dd yyyy"]];
+    }
+    [eventdateInfoLable setText:eventDateInfo];
+  }
+  
+  [self.tableView reloadData];
 }
 
 - (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
@@ -231,7 +244,7 @@ static CGFloat kActionSectionHeight = 30;
   [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
 }
@@ -240,8 +253,7 @@ static CGFloat kActionSectionHeight = 30;
 - (IBAction)backAction:(id)sender
 {
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self.navigationController popToRootViewControllerAnimated:YES];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)settingsAction:(id)sender
@@ -253,22 +265,29 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   [settingsButton setUserInteractionEnabled:NO];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   if (self.eventObject.isFollowing) {
     [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
     [LCAPIManager unfollowEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   } else {
     [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
     [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
-      [self startFetchingResults];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+      if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
+        [self startFetchingResults];
+      }
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   }
 }
@@ -332,7 +351,10 @@ static CGFloat kActionSectionHeight = 30;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   if (section == 0)
   {
-    return 3;
+    if ([LCUtilityManager isaValidWebsiteLink:self.eventObject.website]) {
+      return 3;
+    }
+    return 2;
   }
   if (self.eventObject.isFollowing) {
     return [super tableView:tableView numberOfRowsInSection:section];
@@ -429,8 +451,13 @@ static CGFloat kActionSectionHeight = 30;
     cell = [[LCActionsMembersCountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
   if (self.eventObject.followerCount) {
-    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ %@",self.eventObject.followerCount, NSLocalizedString(@"members_count", nil)];
+    NSString *membersText = @"Member";
+    if ([self.eventObject.followerCount integerValue]>1) {
+      membersText = @"Members";
+    }
+    cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ %@",self.eventObject.followerCount, membersText];
   }
+  [cell.seperator setHidden:self.eventObject.website ? NO : YES];
   return cell;
 }
 

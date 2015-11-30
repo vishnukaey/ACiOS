@@ -10,11 +10,17 @@
 #import "LCRecentNotificationTVC.h"
 #import "LCRequestNotificationTVC.h"
 #import "LCFeedsCommentsController.h"
+#import "LCRecentNotificationsVC.h"
+#import "LCRequestsNotificationsVC.h"
 
 static NSString * const kRecentNotifications = @"recentNotifications";
 static NSString * const kRequestNotifications = @"requestNotifications";
 
 @interface LCNotificationsViewController ()
+{
+  LCRecentNotificationsVC *recentView;
+  LCRequestsNotificationsVC *requestsView;
+}
 
 @end
 
@@ -24,6 +30,11 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 {
   [super viewDidLoad];
   _currentNotifications = kRecentNotifications;
+  [self addTabMenuForNotifications];
+  if ([[[LCDataManager sharedDataManager] notificationCount] integerValue] > 0) {
+    [[LCDataManager sharedDataManager] setNotificationCount:@"0"];
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,10 +45,28 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden:NO];
   [appdel.menuButton setHidden:NO];
+}
+
+-(void) addTabMenuForNotifications
+{
+  [_requestsButton addTarget:self action:@selector(requestTabTapped) forControlEvents:UIControlEventTouchUpInside];
+  
+  self.tabMenu.menuButtons = @[_recentButton,_requestsButton];
+  self.tabMenu.views = @[_recentContainer, _requestsContainer];
+  self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
+  self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
+  self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+}
+
+- (void)requestTabTapped
+{
+  if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0) {
+    [[LCDataManager sharedDataManager] setRequestCount:@"0"];
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -49,91 +78,16 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   [appdel.menuButton setHidden:true];
 }
 
-#pragma mark - TableView delegates
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  if([_currentNotifications isEqualToString:kRecentNotifications])
-  {
-    return 5;
-  }
-  else
-  {
-    return 10;
-  }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if([_currentNotifications isEqualToString:kRecentNotifications])
-  {
-    static NSString *MyIdentifier = @"LCRecentNotificationTVC";
-    LCRecentNotificationTVC *cell = (LCRecentNotificationTVC*)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      cell = [[LCRecentNotificationTVC alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-    }
-    return cell;
-  }
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   
-  else
-  {
-    static NSString *MyIdentifier = @"LCRequestNotificationTVC";
-    LCRequestNotificationTVC *cell = (LCRequestNotificationTVC*)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      cell = [[LCRequestNotificationTVC alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-    }
-    return cell;
-  }
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if([_currentNotifications isEqualToString:kRecentNotifications])
-  {
-    return 120.0;
-  }
-  else
-  {
-    return 110.0;
-  }
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  if([_currentNotifications isEqualToString:kRecentNotifications])
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                  bundle:nil];
-    LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  if ([segue.identifier isEqualToString:@"LCRecentNotificationsVC"]) {
     
-    [self.navigationController pushViewController:next animated:YES];
+    recentView = segue.destinationViewController;
   }
-  else
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile"
-                                                  bundle:nil];
-    LCFeedsCommentsController *next = [sb instantiateInitialViewController];
+  else if ([segue.identifier isEqualToString:@"LCRequestsNotificationsVC"]) {
     
-    [self.navigationController pushViewController:next animated:YES];
-  }
-}
-
-- (IBAction)toggleNotificationTab:(id)sender
-{
-  UIButton *senderButton = (UIButton*)sender;
-  if(senderButton.tag == 1)
-  {
-    _currentNotifications = kRecentNotifications;
-    [_tableView reloadData];
-  }
-  else
-  {
-    _currentNotifications = kRequestNotifications;
-    [_tableView reloadData];
+    requestsView = segue.destinationViewController;
   }
 }
 

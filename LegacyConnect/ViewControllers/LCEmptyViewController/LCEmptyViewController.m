@@ -22,7 +22,9 @@
 #import "LCAppLaunchHelper.h"
 #import "LCNotificationsViewController.h"
 #import "LCSocialShareManager.h"
+#import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
+#import "LCFinalTutorialVC.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -33,6 +35,7 @@ static NSString *kTitle = @"MY FEED";
   LCMenuButton *menuButton;
   MFSideMenuContainerViewController *mainContainer;
   UINavigationController *navigationRoot;
+  LCFinalTutorialVC *tutorialVC;
 }
 @end
 
@@ -129,6 +132,20 @@ static NSString *kTitle = @"MY FEED";
   [self addMenuButton:navigationRoot];
   mainContainer.panMode = MFSideMenuPanModeNone;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+  [self presentTutorial];
+}
+
+- (void)presentTutorial
+{
+  NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+  if (![userdefaults boolForKey:kTutorialPresentKey]) {
+    [userdefaults setBool:YES forKey:kTutorialPresentKey];
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    tutorialVC = [sb instantiateViewControllerWithIdentifier:@"Tutorial"];
+    tutorialVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [appdel.window addSubview:tutorialVC.view];
+  }
 }
 
 - (void)menuEventNotification:(NSNotification*)notification
@@ -173,12 +190,7 @@ static NSString *kTitle = @"MY FEED";
   [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  menuButton.badgeLabel.text = @"2";
-  
-  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(10, menuButton.frame.size.height/2 - 12, 25, 25)];
-  icon_.image = [UIImage imageNamed:@"MenuButton"];
-  [menuButton addSubview:icon_];
-//  [menuButton setBackgroundColor:[UIColor blueColor]];
+  [menuButton bringSubviewToFront:menuButton.badgeLabel];
 }
 
 #pragma mark - button actions
@@ -295,25 +307,20 @@ static NSString *kTitle = @"MY FEED";
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
     LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
 //    LCAllInterestVC *vc = [sb instantiateInitialViewController];
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 2)//notifications
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
+    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
-//    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
-//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 3)//notifications
+  else if (index == 3)//settings
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
+    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 4)//logout

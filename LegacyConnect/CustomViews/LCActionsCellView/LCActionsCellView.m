@@ -12,6 +12,7 @@
 static NSString *kActionsDateFormat = @"MMM dd yyyy hh:mm a";
 static NSString *kEventPlaceholderImage = @"event_placeholder";
 static NSString *kSupportedByPeople = @"Supported by %@ People";
+static NSString *kSupportedByPerson = @"Supported by %@ Person";
 
 @interface LCActionsCellView ()
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
@@ -34,10 +35,15 @@ static NSString *kSupportedByPeople = @"Supported by %@ People";
 {
   _event = event;
   [self.eventNameLabel setText:_event.name];
-  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.endDate WithFormat:kActionsDateFormat];
+  NSLog(@"event obj : %@",event);
+  NSString * displayDate = [LCUtilityManager getDateFromTimeStamp:_event.createdAt WithFormat:kActionsDateFormat];
   [self.eventTimeLabel setText:displayDate];
   if (_event.followerCount && [_event.followerCount integerValue] > 0) {
-    [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,event.followerCount]];
+    if ([_event.followerCount integerValue] == 1) {
+      [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPerson,event.followerCount]];
+    } else {
+      [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,event.followerCount]];
+    }
   }
   [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:kEventPlaceholderImage]];
 }

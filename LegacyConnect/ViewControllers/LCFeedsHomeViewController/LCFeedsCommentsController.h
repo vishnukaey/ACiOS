@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
-#import "LCCommentsController.h"
+#import "LCFeedDetailBC.h"
 
-@interface LCFeedsCommentsController : LCCommentsController<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface LCFeedsCommentsController : LCFeedDetailBC<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 {
   __weak IBOutlet UILabel *commentTitleLabel;
 }
 
-@property(nonatomic, retain)LCFeed *feedObject;
+@property(nonatomic, retain)NSString *feedId;
 
 - (IBAction)backAction;
 

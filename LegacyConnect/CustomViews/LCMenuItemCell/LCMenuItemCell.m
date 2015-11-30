@@ -24,6 +24,9 @@ static NSString *kSettingsIcon = @"SettingsIcon";
 
 - (void)setIndex:(NSInteger)index
 {
+  [self.notificationCount setHidden:YES];
+  [self.notificationLabelBG setHidden:YES];
+  [self.notificationLabelBG.layer setCornerRadius:CGRectGetWidth(self.notificationLabelBG.frame) *0.5f];
   NSString * cellText;
   UIImage * cellIconImag;
   switch (index) {
@@ -40,6 +43,7 @@ static NSString *kSettingsIcon = @"SettingsIcon";
     case 2:
       cellText = NSLocalizedString(@"Notifications", nil) ;
       cellIconImag = [UIImage imageNamed:kNotificationsIcon];
+      [self updateNotificationCount];
       break;
       
     case 3:
@@ -56,8 +60,14 @@ static NSString *kSettingsIcon = @"SettingsIcon";
   UIImage * iconImage = [cellIconImag imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self.itemIcon setTintColor:[UIColor whiteColor]];
   [self.itemIcon setImage:iconImage];
-  [self.notificationCount setHidden:YES];
-  [self.notificationLabelBG setHidden:YES];
+}
+
+- (void)updateNotificationCount
+{
+  NSInteger totalNotificationCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
+  [self.notificationCount setText:[NSString stringWithFormat:@"%li",(long)totalNotificationCount]];
+  [self.notificationCount setHidden:(totalNotificationCount ==0)];
+  [self.notificationLabelBG setHidden:(totalNotificationCount ==0)];
 }
 
 @end

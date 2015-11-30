@@ -47,11 +47,11 @@
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   
   if (!self.noResultsView) {
     NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
-    if (isSelfProfile) {
+    if (self.isSelfProfile) {
       message = NSLocalizedString(@"no_milestones_available_self", nil);
     }
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
@@ -116,16 +116,6 @@
   }];
 }
 
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else
-  {
-    [self showNoResultsView];
-  }
-}
 
 
 #pragma mark - TableView delegates
@@ -157,7 +147,7 @@
   };
   
   
-  if (isSelfProfile) {
+  if (self.isSelfProfile) {
     cell.moreButton.hidden = NO;
   }
   
@@ -194,7 +184,8 @@
                                                 bundle:nil];
   LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
-  [self.navigationController pushViewController:next animated:YES];
+  UIViewController *profileController = (UIViewController *)self.delegate;
+  [profileController.navigationController pushViewController:next animated:YES];
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
@@ -284,7 +275,8 @@
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIViewController *profileController = (UIViewController *)self.delegate;
+    [profileController.navigationController pushViewController:vc animated:YES];
   }
 }
 

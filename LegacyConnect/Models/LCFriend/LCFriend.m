@@ -21,7 +21,8 @@
            @"avatarURL": @"avatarUrl",
            @"status" : @"status",
            @"isFriend": @"isFriend",
-           @"location":@"location"
+           @"location":@"location",
+           @"isInvitedToEvent":@"inviteStatus"
            };
 }
 

@@ -77,7 +77,6 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  [self reloadAllViews];
 }
 
 
@@ -93,7 +92,6 @@
     if ([searchTimer isValid]) { [searchTimer invalidate]; }
     searchTimer = nil;
   }
- searchText = [searchText stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
   if(searchBar.text.length == 0 || searchText == nil)
   {
     searchResultObject = nil;

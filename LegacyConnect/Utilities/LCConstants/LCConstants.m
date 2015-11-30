@@ -14,7 +14,7 @@
 #define DEV_SERVER 1
 #define STAGING_SERVER 2
 
-/* Set server to be used */ 
+/* Set server to be used */
 #define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
@@ -39,6 +39,9 @@ NSString *const kFBAppDisplayName = @"LegacyConnect";
 NSString *const kFBURLScheme = @"fb535164313296078";
 
 #endif
+
+NSString *const kLCiTunesLink = @"https://itunes.apple.com/in/app/instagram/id389801252?mt=8";
+
 NSString *const kTWConsumerKey = @"IiYfEw17iKn2jTcWjp4H2QfYo";
 NSString *const kTWConsumerSecretKey = @"pBPJNqVUXdfkeulFZuXf4Epd0SSXsLwOXYqgeNkCWC4QlUJmiv";
 
@@ -88,8 +91,16 @@ NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";
 NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
+NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
+NSString *const kGetRecentNotificationsURL = @"api/user/notification";
+NSString *const kMarkNotificationAsReadURL = @"api/user/notification/read";
 
-
+NSString *const kGetSettignsURL = @"api/user/settings";
+NSString *const kChangeEmailURL = @"api/user/changeEmail";
+NSString *const kChangePasswordURL = @"api/user/changePassword";
+NSString *const kChangeLegacyurlURL = @"api/user/changeLegacyUrl";
+NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
+NSString *const kSignOutURL = @"api/signout";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -98,17 +109,19 @@ NSString *const kInterestsStoryBoardIdentifier = @"Interests";
 NSString *const kCommunityStoryBoardIdentifier = @"Actions";
 NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
+NSString *const kSettingsStoryBoardIdentifier = @"Settings";
 
-
+NSString *const kTutorialPresentKey = @"tutorialPresented";
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
 NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
 NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
+NSString *const kSettingsStoryBoardID = @"LCSettingsViewController";
 
-
-
+NSString *const kStatusCodeKey = @"statusCode";
+NSString *const kLCVersionKey = @"lcversion";
 NSString *const kAuthorizationKey = @"Authorization";
 NSString *const kResponseCode = @"status";
 NSString *const kResponseMessage = @"message";
@@ -134,9 +147,13 @@ NSString *const kLastIdKey = @"lastId";
 NSString *const kLoginStatusKey = @"logged_in";
 NSString *const kUserTokenKey = @"user_token";
 
+NSString *const kchangeEmailKey = @"email";
+NSString *const kchangePasswordKey = @"newPassword";
+NSString *const kchangeLCURLKey = @"legacyUrl";
+NSString *const kchangePrivacyKey = @"privacy";
 
-NSString *const kStatusCodeSuccess = @"success";
-NSString *const kStatusCodeFailure = @"failure";
+NSString *const kStatusCodeSuccess = @"100";
+NSString *const kStatusCodeVersionFailure = @"102";
 
 NSString *const kIDKey = @"id";
 NSString *const kRange = @"range";
@@ -170,18 +187,14 @@ NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
 
+NSString *const kEntityTypePost = @"post";
+NSString *const kEntityTypeEvent = @"event";
+NSString *const kEntityTypeUserProfile = @"user";
+
+
 NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
-NSString *const kResetPasswordNotificationName = @"password_reset_notification";
-NSString *const kTwitterCallbackNotification = @"twitter_callback_notification";
-
-NSString *const kUserDataUpdatedNotification = @"user_data_updated_notification";
-
-NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
-NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpdated";
-NSString *const kUserProfileImpactsUpdateNotification = @"userProfileImpactsUpdated";
-NSString *const kfeedUpdatedotification = @"feedUpdated";
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";
@@ -189,20 +202,23 @@ NSString *const kfeedDeletedEventKey = @"deleted_feed";
 NSString *const keventUpdateEventKey = @"updated_event";
 NSString *const keventDeletedEventKey = @"deleted_event";
 
-
-NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
-NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
-NSString *const kEventDeletedNotification = @"EventDeleted";
-NSString *const kEventCreatedNotification = @"EventCreated";
-
-
-
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 // -- Tag Dictionary keys -- //
 NSString *const kTagobjId = @"tag_object_id";
 NSString *const kTagobjText= @"tag_object_text";
 NSString *const kTagobjType = @"tag_object_type";
+
+// Settings Section //
+NSString *const kSettingsScreenTitle = @"SETTINGS";
+NSString *const kEmailUpdateScreenTitle = @"EMAIL ADDRESS";
+
+NSString *const kAccountTitle = @"ACCOUNT";
+NSString *const kEmailAddress = @"Email Address";
+NSString *const kChangePassword = @"Change Password";
+NSString *const kMyLegacyURL = @"My Legacy URL";
+NSString *const kPrivacy = @"Privacy";
+NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";
 

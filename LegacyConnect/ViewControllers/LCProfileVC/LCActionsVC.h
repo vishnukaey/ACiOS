@@ -7,18 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCActionsTableViewController.h"
+#import "LCUserActionsBC.h"
 
 @protocol ActionsDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCActionsVC : LCActionsTableViewController
-{
-  BOOL isSelfProfile;
-}
+@interface LCActionsVC : LCUserActionsBC
 
-@property(nonatomic, retain)NSString *userID;
 @property (nonatomic, assign) id<ActionsDelegate> delegate;
 
 - (void) loadActions;
