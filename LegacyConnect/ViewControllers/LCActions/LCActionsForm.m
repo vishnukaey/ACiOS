@@ -62,7 +62,7 @@
   }
   else
   {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Please enter a valid website URL"];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"website_validation_error_message", nil)];
   }
 }
 
@@ -99,17 +99,17 @@
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
-  UIAlertAction *eventAction = [UIAlertAction actionWithTitle:@"Event" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *eventAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"action_type_event", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.actionTypeField.text = action.title;
   }];
-  UIAlertAction *challengeAction = [UIAlertAction actionWithTitle:@"Challenge" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *challengeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"action_type_challenge", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.actionTypeField.text = action.title;
   }];
-  UIAlertAction *pollAction = [UIAlertAction actionWithTitle:@"Poll" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *pollAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"action_type_poll", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.actionTypeField.text = action.title;
   }];
   
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:eventAction];
   [actionSheet addAction:challengeAction];
     [actionSheet addAction:pollAction];
@@ -231,28 +231,28 @@
   UILabel *optionalLabel = (UILabel *)[headerView viewWithTag:101];
   switch (section) {
     case SECTION_NAME:
-      sectionLabel.text = @"NAME";
+      sectionLabel.text = NSLocalizedString(@"action_form_name", nil);
       optionalLabel.text = @"";
       [topLine removeFromSuperview];
       break;
     case SECTION_ACTIONTYPE:
-      sectionLabel.text = @"TYPE OF ACTION";
+      sectionLabel.text = NSLocalizedString(@"action_form_action_type", nil);
       optionalLabel.text = @"";
       break;
     case SECTION_DATE:
-      sectionLabel.text = @"DATE & TIME";
-      optionalLabel.text = @"(Optional)";
+      sectionLabel.text = NSLocalizedString(@"action_form_date_time", nil);
+      optionalLabel.text = NSLocalizedString(@"action_form_optional", nil);
       break;
     case SECTION_WEBSITE:
-      sectionLabel.text = @"WEBSITE";
-      optionalLabel.text = @"(Optional)";
+      sectionLabel.text = NSLocalizedString(@"action_form_website", nil);
+      optionalLabel.text = NSLocalizedString(@"action_form_optional", nil);
       break;
     case SECTION_HEADER:
-      sectionLabel.text = @"HEADER PHOTO";
-      optionalLabel.text = @"(Optional)";
+      sectionLabel.text = NSLocalizedString(@"action_form_header_photo", nil);
+      optionalLabel.text = NSLocalizedString(@"action_form_optional", nil);
       break;
     case SECTION_ABOUT:
-      sectionLabel.text = @"ABOUT";
+      sectionLabel.text = NSLocalizedString(@"action_form_about", nil);
       optionalLabel.text = @"";
       break;
       

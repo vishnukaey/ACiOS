@@ -37,7 +37,23 @@
 
 "ok" = "OK";
 "cancel" = "Cancel";
+"save" = "Save";
 "member_since" = "Member Since";
+"delete" = "Delete";
+"done" = "Done";
+"send" = "Send";
+"skip" = "Skip";
+
+//---friends---//
+"remove_friend" = "Remove Friend";
+"cancel_friend_request" = "Cancel Friend Request";
+
+//--image editor---//
+"move_and_scale" = "MOVE AND SCALE";
+"take_photo" = "Take Photo";
+"choose_from_library" = "Choose From Library";
+"edit_photo" = "Edit Photo";
+"remove_header_photo" = "Remove Header Photo";
 
 //-- Menu Item --//
 
@@ -50,10 +66,30 @@
 // -- Actions -- //
 "details_caps" = "DETAILS";
 "comments_caps" = "COMMENTS";
+"post_caps" = "POST";
+"comment_placeholder" = "Comment";
 "settings" = "Settings";
 "attend" = "Attend";
 "attending" = "Attending";
 "follow_event_message" = "Follow the event to view and post comments";
+"delete_action" = "Delete Action";
+"delete_action_message" = "Are you sure you want to permanently remove this action from LegacyConnect?";
+"action_date_comparison_alert_message" = "Start date should be before end date";
+"action_form_name" = "NAME";
+"action_form_action_type" = "TYPE OF ACTION";
+"action_form_date_time" = "DATE & TIME";
+"action_form_optional" = " (Optional)";
+"action_form_website" = "WEBSITE";
+"action_form_header_photo" = "HEADER PHOTO";
+"action_form_about" = "ABOUT";
+"website_validation_error_message" = "Please enter a valid website URL";
+"action_type_event" = "Event";
+"action_type_challenge" = "Challenge";
+"action_type_poll" = "Poll";
+"event_created_by" = "Event Created by ";
+"in_" = "in ";
+"you_" = "You ";
+"members_count" = "Members";
 
 //-- version control --//
 "version_outdated_title" = "Version outdated";

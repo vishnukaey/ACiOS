@@ -12,4 +12,6 @@
 
 @property(nonatomic, retain)LCUserDetail *userDetail;
 
+- (void)setNoResultViewHidden:(BOOL)hidded;
+
 @end

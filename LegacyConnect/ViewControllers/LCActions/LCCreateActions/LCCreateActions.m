@@ -59,7 +59,7 @@
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
-  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"take_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       
@@ -72,7 +72,7 @@
     }
     
   }];
-  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"choose_from_library", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
     imagePicker.delegate = self;
@@ -83,7 +83,7 @@
     
   }];
   
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   
   [actionSheet addAction:takeAction];
   [actionSheet addAction:chooseAction];
