@@ -302,41 +302,19 @@ static NSString *kTitle = @"MY FEED";
     LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 1)//Interests
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-//    LCAllInterestVC *vc = [sb instantiateInitialViewController];
-//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-  }
-  else if (index == 2)//notifications
+  else if (index == 1)//notifications
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
     LCNotificationsViewController *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 3)//settings
+  else if (index == 2)//settings
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
     LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 4)//logout
-  {
-    [LCUtilityManager clearUserDefaultsForCurrentUser];
-    if ([FBSDKAccessToken currentAccessToken])
-    {
-      [[FBSDKLoginManager new] logOut];
-    }
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    appdel.window.rootViewController = myStoryBoardInitialViewController;
-    [appdel.window makeKeyAndVisible];
-  }
-  else if (index == 5)//profile
+  else if (index == 3)//profile
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *vc = [sb instantiateInitialViewController];
