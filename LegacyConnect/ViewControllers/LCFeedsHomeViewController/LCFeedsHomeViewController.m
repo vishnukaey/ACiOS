@@ -19,7 +19,6 @@
 #import "LCSocialShareManager.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
-static CGFloat kNumberOfSectionsInFeeds = 1;
 static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 @implementation LCFeedsHomeViewController
@@ -212,10 +211,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 }
 
 #pragma mark - UITableViewDataSource implementation
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return kNumberOfSectionsInFeeds;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

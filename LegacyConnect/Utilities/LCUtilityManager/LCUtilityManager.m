@@ -471,8 +471,12 @@
 
 + (UITableViewCell*)getNextPageLoaderCell
 {
-//  UITableViewCell * loaderCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-  return nil;
+  UITableViewCell * loaderCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+  UIActivityIndicatorView * loader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  [loaderCell addSubview:loader];
+  [loader startAnimating];
+  loader.center = loaderCell.center;
+  return loaderCell;
 }
 
 #pragma mark- version control
