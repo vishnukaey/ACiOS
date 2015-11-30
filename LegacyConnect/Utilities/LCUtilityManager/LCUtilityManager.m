@@ -135,6 +135,9 @@
 
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date
 {
+  if (!date) {
+    return kEmptyStringValue;
+  }
   NSTimeInterval timeInterval = [date timeIntervalSince1970];
   NSString *timeStampString = [NSString stringWithFormat:@"%0.0f", timeInterval * 1000];
   return timeStampString;
@@ -468,8 +471,12 @@
 
 + (UITableViewCell*)getNextPageLoaderCell
 {
-//  UITableViewCell * loaderCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-  return nil;
+  UITableViewCell * loaderCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+  UIActivityIndicatorView * loader = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+  [loaderCell addSubview:loader];
+  [loader startAnimating];
+  loader.center = loaderCell.center;
+  return loaderCell;
 }
 
 #pragma mark- version control
@@ -490,6 +497,14 @@
   #warning should remove hardcoding the version.
   appVersion = @"0.4.0";
   return appVersion;
+}
+
+ + (void)checkAppVersion
+{
+  [LCAPIManager checkVersionWithSuccess:^(id response) {
+    LCDLog(@"version checked");
+    } andFailure:^(NSString *error) {
+  }];
 }
 
 @end

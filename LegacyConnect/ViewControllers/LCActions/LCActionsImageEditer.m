@@ -49,7 +49,7 @@
   
   
   UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
-  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+  [cancelBtn setTitle:NSLocalizedString(@"cancel", nil) forState:UIControlStateNormal];
   [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
   [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
   
@@ -62,7 +62,7 @@
   }
   
   UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
-  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+  [doneBtn setTitle:NSLocalizedString(@"done", @"done button title") forState:UIControlStateNormal];
   [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
   [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
   
@@ -79,7 +79,7 @@
   UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
   [titleLabel setTextAlignment:NSTextAlignmentCenter];
   [titleLabel setTextColor:[UIColor whiteColor]];
-  [titleLabel setText:@"MOVE AND SCALE"];
+  [titleLabel setText:NSLocalizedString(@"move_and_scale", nil)];
   [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
   [titleLabel setUserInteractionEnabled:NO];
   

@@ -32,6 +32,10 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   _currentNotifications = kRecentNotifications;
   [self addTabMenuForNotifications];
   [self updateRequestButtonTitle];
+  if ([[[LCDataManager sharedDataManager] notificationCount] integerValue] > 0) {
+    [[LCDataManager sharedDataManager] setNotificationCount:@"0"];
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,13 +53,26 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 
 -(void) addTabMenuForNotifications
 {
+  [_requestsButton addTarget:self action:@selector(requestTabTapped) forControlEvents:UIControlEventTouchUpInside];
+  
   self.tabMenu.menuButtons = @[_recentButton,_requestsButton];
   self.tabMenu.views = @[_recentContainer, _requestsContainer];
   self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
   self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
   self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+  
 }
 
+- (void)requestTabTapped
+{
+  if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0)
+  {
+    [[LCDataManager sharedDataManager] setRequestCount:@"0"];
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }
+  [self updateRequestButtonTitle];
+  [requestsView getRequests];
+}
 
 - (void) viewWillDisappear:(BOOL)animated
 {
@@ -82,13 +99,14 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 
 -(void) updateRequestButtonTitle
 {
-  if([LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].requestCount] || [[LCDataManager sharedDataManager].requestCount isEqualToString:@"0"])
+  if([[LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].requestCount] isEqualToString:kEmptyStringValue] || [[LCDataManager sharedDataManager].requestCount isEqualToString:@"0"])
   {
-    [_requestsButton setTitle:@"REQUESTS" forState:UIControlStateNormal];
+    [_requestsCountLabel setHidden:YES];
   }
   else
   {
-    [_requestsButton setTitle:[NSString stringWithFormat:@"REQUESTS %@",[LCDataManager sharedDataManager].requestCount] forState:UIControlStateNormal];
+    [_requestsCountLabel setHidden:NO];
+    [_requestsCountLabel setText:[LCDataManager sharedDataManager].requestCount];
   }
 }
 

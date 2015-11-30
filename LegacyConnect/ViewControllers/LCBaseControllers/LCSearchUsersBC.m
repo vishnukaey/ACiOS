@@ -17,33 +17,15 @@
 #pragma mark - view life cycle
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendStatusUpdatedNotificationReceived:) name:friendStatusUpdatedNotification object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
 
-- (void)dealloc
+- (void)viewWillAppear:(BOOL)animated
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self name:friendStatusUpdatedNotification object:nil];
-}
-
-- (void)friendStatusUpdatedNotificationReceived :(NSNotification *)notification
-{
-  LCFriend *newFriend = notification.userInfo[@"friend"];
-  for (int i = 0; i<self.results.count ; i++) {
-    if ([self.results[i] isKindOfClass:[LCUserDetail class]]) {
-      LCUserDetail *friend = self.results[i];
-      if ([friend.userID isEqualToString:newFriend.friendId])
-      {
-        friend.isFriend = newFriend.isFriend;
-        break;
-      }
-    }
-  }
-  [self.tableView reloadData];
+  [super viewWillAppear:animated];
 }
 
 /*

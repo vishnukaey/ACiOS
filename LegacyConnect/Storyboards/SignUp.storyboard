@@ -61,6 +61,7 @@
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1323,7 +1324,7 @@ then select a few related causes.</string>
         <!--Final TutorialVC-->
         <scene sceneID="aDc-Ju-RoL">
             <objects>
-                <viewController storyboardIdentifier="page1" id="35I-eZ-UNh" customClass="LCFinalTutorialVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Tutorial" id="35I-eZ-UNh" customClass="LCFinalTutorialVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uWh-CV-F1Y"/>
                         <viewControllerLayoutGuide type="bottom" id="hvn-Br-I3y"/>
@@ -1332,69 +1333,36 @@ then select a few related causes.</string>
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas pellentesque at tellus in vestibulum." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj5-FB-632">
-                                <rect key="frame" x="16" y="337" width="280" height="81"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="sN0-d2-aUH">
-                                <rect key="frame" x="16" y="28" width="280" height="312"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2271" y="-155"/>
-        </scene>
-        <!--Tutorial ContainerVC-->
-        <scene sceneID="JsV-I3-yg1">
-            <objects>
-                <viewController storyboardIdentifier="page2" id="CSB-n7-86j" customClass="LCTutorialContainerVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="mYq-rQ-hUT"/>
-                        <viewControllerLayoutGuide type="bottom" id="beP-qa-g4n"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bxd-dC-RlD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cQq-f6-GVH">
-                                <rect key="frame" x="0.0" y="57" width="320" height="453"/>
-                                <connections>
-                                    <segue destination="jAT-tD-Nau" kind="embed" id="WjI-LB-tb5"/>
-                                </connections>
-                            </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GETTING STARTED" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxH-cA-wZg">
-                                <rect key="frame" x="84" y="28" width="152" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdk-r2-35y">
-                                <rect key="frame" x="110" y="518" width="100" height="30"/>
-                                <state key="normal" title="NEXT">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gbL-EX-w0D">
+                                <rect key="frame" x="35" y="252" width="250" height="65"/>
+                                <color key="backgroundColor" red="0.93725490196078431" green="0.39215686274509803" blue="0.30196078431372547" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="EXy-RI-lj2"/>
+                                    <constraint firstAttribute="width" constant="250" id="gng-Ug-hqG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                <state key="normal" title="Get Started">
+                                    <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                 </state>
-                                <state key="selected" title="GOT IT"/>
                                 <connections>
-                                    <action selector="nextButtonTapped:" destination="CSB-n7-86j" eventType="touchUpInside" id="nEf-Q8-sZL"/>
+                                    <action selector="getStartedAction" destination="35I-eZ-UNh" eventType="touchUpInside" id="NqE-vU-rTO"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gbL-EX-w0D" firstAttribute="centerY" secondItem="j5B-et-gCz" secondAttribute="centerY" id="DVB-Lp-3Yj"/>
+                            <constraint firstItem="gbL-EX-w0D" firstAttribute="centerX" secondItem="j5B-et-gCz" secondAttribute="centerX" id="rE8-24-wwC"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="nextButton" destination="mdk-r2-35y" id="16y-Rb-yUz"/>
+                        <outlet property="startButton" destination="gbL-EX-w0D" id="GIg-kU-CNg"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NLI-I1-il1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1381" y="-155"/>
+            <point key="canvasLocation" x="2271" y="-155"/>
         </scene>
         <!--Facebook Friends-->
         <scene sceneID="Mf4-7x-Z6K">

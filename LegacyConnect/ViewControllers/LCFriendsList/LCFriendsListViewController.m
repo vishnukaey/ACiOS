@@ -55,16 +55,6 @@ static NSString *kTitle = @"FRIENDS";
   }];
 }
 
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else{
-    [self showNoResultsView];
-  }
-}
-
 #pragma mark - private method implementation
 - (void)stopRefreshingViews
 {
@@ -198,21 +188,23 @@ static NSString *kTitle = @"FRIENDS";
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
-  UIAlertAction *removeFriend = [UIAlertAction actionWithTitle:@"Remove Friend" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+  UIAlertAction *removeFriend = [UIAlertAction actionWithTitle:NSLocalizedString(@"remove_friend", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     //change button image
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
+    friendBtn.userInteractionEnabled = NO;
     [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendObj.isFriend = kFriendStatusNonFriend;
-    
+       friendBtn.userInteractionEnabled = YES;
      } andFailure:^(NSString *error) {
        //Set previous button state
        [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
+       friendBtn.userInteractionEnabled = YES;
        NSLog(@"%@",error);
      }];
   }];
   [actionSheet addAction:removeFriend];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
@@ -224,20 +216,23 @@ static NSString *kTitle = @"FRIENDS";
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
-  UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:@"Cancel Friend Request" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+  UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel_friend_request", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
+    friendBtn.userInteractionEnabled = NO;
     [LCAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
-      NSLog(@"%@",response);
+      LCDLog(@"%@",response);
       friendObj.isFriend = kFriendStatusNonFriend;
+      friendBtn.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       //Set previous button state
       [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
+      friendBtn.userInteractionEnabled = YES;
       NSLog(@"%@",error);
     }];
   }];
   [actionSheet addAction:cancelFreindRequest];
   
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
@@ -246,13 +241,23 @@ static NSString *kTitle = @"FRIENDS";
 {
   LCfriendButton * friendBtn = btn;
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
-  
-  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
+  friendBtn.userInteractionEnabled = NO;
+  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSDictionary *response) {
     NSLog(@"%@",response);
-    friendObj.isFriend = kFriendStatusWaiting;
+  #warning can remove after completing notification handling
+    NSInteger isFriend = [response[kResponseData][@"isFriend"] integerValue];
+    if (isFriend == kIsFriend) {
+      friendObj.isFriend = kFriendStatusMyFriend;
+      [friendBtn setfriendStatusButtonImageForStatus:kIsFriend];
+    }
+    else {
+      friendObj.isFriend = kFriendStatusWaiting;
+    }
+    friendBtn.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
+    friendBtn.userInteractionEnabled = YES;
   }];
 }
 

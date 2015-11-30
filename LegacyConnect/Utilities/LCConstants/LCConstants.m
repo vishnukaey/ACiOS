@@ -102,6 +102,8 @@ NSString *const kChangeLegacyurlURL = @"api/user/changeLegacyUrl";
 NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
 NSString *const kSignOutURL = @"api/signout";
 
+NSString *const kVersionCheckURL = @"api/version";
+
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
 NSString *const kProfileStoryBoardIdentifier = @"Profile";
@@ -111,7 +113,7 @@ NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 NSString *const kSettingsStoryBoardIdentifier = @"Settings";
 
-
+NSString *const kTutorialPresentKey = @"tutorialPresented";
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
 NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
@@ -195,32 +197,12 @@ NSString *const kEntityTypeUserProfile = @"user";
 NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
-NSString *const kResetPasswordNotificationName = @"password_reset_notification";
-NSString *const kTwitterCallbackNotification = @"twitter_callback_notification";
-
-NSString *const kUserDataUpdatedNotification = @"user_data_updated_notification";
-
-NSString *const kUserProfileUpdateNotification = @"userProfileUpdated";
-NSString *const kUserProfileFrinendsUpdateNotification = @"userProfileFriendsUpdated";
-NSString *const kUserProfileImpactsUpdateNotification = @"userProfileImpactsUpdated";
-NSString *const kfeedUpdatedotification = @"feedUpdated";
-NSString *const friendStatusUpdatedNotification = @"friendUpdated";
-NSString *const kNotificationCountUpdated = @"notificationCountUpdated";
-
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";
 
 NSString *const keventUpdateEventKey = @"updated_event";
 NSString *const keventDeletedEventKey = @"deleted_event";
-
-
-NSString *const kEventMemberCountUpdatedNotification = @"EventMemberCountUpdated";
-NSString *const kEventDetailsUpdatedNotification = @"EventDetailsUpdated";
-NSString *const kEventDeletedNotification = @"EventDeleted";
-NSString *const kEventCreatedNotification = @"EventCreated";
-
-
 
 NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";

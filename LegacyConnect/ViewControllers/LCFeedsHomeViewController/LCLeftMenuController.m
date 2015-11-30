@@ -23,7 +23,7 @@
 static NSString *kProfilePicPlaceholder = @"userProfilePic";
 static CGFloat kProfilePicBorderWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
-static CGFloat kNumberOfCells = 5.0;
+static CGFloat kNumberOfCells = 3.0;
 static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 #define kSelectionColor [UIColor colorWithRed:0.0f/255 green:0.0f/255 blue:0.0f/255 alpha:1]
@@ -77,18 +77,12 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (void)addRequiredNotificationObserver
 {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserDataUpdatedNotification object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateHeaderAndAvatarOnEdit:) name:kUserProfileUpdateNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCountUpdated) name:kNotificationCountUpdated object:nil];
 }
 
 - (void)refreshUserImages:(NSNotification*)notification
 {
   [self refreshUserInfo];
-}
-
--(void)updateHeaderAndAvatarOnEdit:(NSNotification *)notification {
-  self.profilePicture.image = (UIImage *)notification.userInfo[@"profilePic"];
-  self.coverPhoto.image = (UIImage *)notification.userInfo[@"headerBGImage"];
 }
 
 - (void)notificationCountUpdated
@@ -141,7 +135,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   
   NSIndexPath *selectedIndexPath = [self.menuTable indexPathForSelectedRow];
   [self deselectCellAtIndexPath:selectedIndexPath];
-  [delegate_ leftMenuItemSelectedAtIndex:5];
+  [delegate_ leftMenuItemSelectedAtIndex:3];
 }
 
 #pragma mark - UITableViewDataSource

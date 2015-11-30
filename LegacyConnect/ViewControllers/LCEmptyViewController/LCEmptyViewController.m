@@ -24,6 +24,7 @@
 #import "LCSocialShareManager.h"
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
+#import "LCFinalTutorialVC.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -34,6 +35,7 @@ static NSString *kTitle = @"MY FEED";
   LCMenuButton *menuButton;
   MFSideMenuContainerViewController *mainContainer;
   UINavigationController *navigationRoot;
+  LCFinalTutorialVC *tutorialVC;
 }
 @end
 
@@ -130,6 +132,20 @@ static NSString *kTitle = @"MY FEED";
   [self addMenuButton:navigationRoot];
   mainContainer.panMode = MFSideMenuPanModeNone;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+  [self presentTutorial];
+}
+
+- (void)presentTutorial
+{
+  NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
+  if (![userdefaults boolForKey:kTutorialPresentKey]) {
+    [userdefaults setBool:YES forKey:kTutorialPresentKey];
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    tutorialVC = [sb instantiateViewControllerWithIdentifier:@"Tutorial"];
+    tutorialVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+    [appdel.window addSubview:tutorialVC.view];
+  }
 }
 
 - (void)menuEventNotification:(NSNotification*)notification
@@ -174,10 +190,6 @@ static NSString *kTitle = @"MY FEED";
   [vc.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
-  
-  UIImageView *icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(5, menuButton.frame.size.height/2 - 12, 30, 30)];
-  icon_.image = [UIImage imageNamed:@"MenuButton"];
-  [menuButton addSubview:icon_];
   [menuButton bringSubviewToFront:menuButton.badgeLabel];
 }
 
@@ -191,6 +203,7 @@ static NSString *kTitle = @"MY FEED";
 {
   if (mainContainer.menuState == MFSideMenuStateClosed) {
     [mainContainer setMenuState:MFSideMenuStateRightMenuOpen];
+    [self updateNotificationCount];
   }
   else
   {
@@ -290,41 +303,19 @@ static NSString *kTitle = @"MY FEED";
     LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 1)//Interests
-  {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-//    LCAllInterestVC *vc = [sb instantiateInitialViewController];
-//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-  }
-  else if (index == 2)//notifications
+  else if (index == 1)//notifications
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
     LCNotificationsViewController *vc = [sb instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 3)//settings
+  else if (index == 2)//settings
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
     LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
-  else if (index == 4)//logout
-  {
-    [LCUtilityManager clearUserDefaultsForCurrentUser];
-    if ([FBSDKAccessToken currentAccessToken])
-    {
-      [[FBSDKLoginManager new] logOut];
-    }
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    appdel.window.rootViewController = myStoryBoardInitialViewController;
-    [appdel.window makeKeyAndVisible];
-  }
-  else if (index == 5)//profile
+  else if (index == 3)//profile
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *vc = [sb instantiateInitialViewController];
@@ -390,4 +381,19 @@ static NSString *kTitle = @"MY FEED";
   self.navigationController.viewControllers = viewArray;
 
 }
+
+#pragma mark - Notification Update API call
+/**
+ * This is a temp place to implement the 'GetNotificationCount' API. Currently each time when right menu oppens, 
+ * we call 'GetNotificationCount' API and update the notification count
+ * in NavigationMenu. Later this API call implementation will be changed to appopriate location.
+ */
+- (void)updateNotificationCount
+{
+  LCDLog(@"Get Notification Count API call and Update");
+  [LCAPIManager getNotificationCountWithStatus:^(BOOL status) {
+    [LCNotificationManager postNotificationCountUpdatedNotification];
+  }];
+}
+
 @end

@@ -28,10 +28,11 @@ static NSString *kNotificationCellIdentifier = @"LCRecentNotificationTVC";
   NSString * authorName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:notification.firstName],[LCUtilityManager performNullCheckAndSetValue:notification.lastName]];
   [self.name setText:authorName];
   [self.notificDescription setText:[LCUtilityManager performNullCheckAndSetValue:notification.caption]];
+  NSString * detailsText = kEmptyStringValue;
   if (![LCUtilityManager isEmptyString:notification.message]) {
-    NSString * detailsText = [NSString stringWithFormat:@"\"%@\"",notification.message];
-    [self.details setText:detailsText];
+    detailsText = [NSString stringWithFormat:@"\"%@\"",notification.message];
   }
+  [self.details setText:detailsText];
   [self setBackgroundColor:(notification.isRead ? kReadNotificationCellBG : kUnReadNotificationCellBG)];
 }
 

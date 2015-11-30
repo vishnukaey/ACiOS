@@ -48,5 +48,6 @@
 
 + (void)showVersionOutdatedAlert;
 + (NSString *)getAppVersion;
++ (void)checkAppVersion;
 
 @end

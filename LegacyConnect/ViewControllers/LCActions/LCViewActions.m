@@ -35,10 +35,17 @@ static CGFloat kActionSectionHeight = 30;
 @interface LCActionsMembersCountCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *communityMemebersCountLabel;
 @property(nonatomic, strong)IBOutlet UIImageView *seperator;
-
 @end
 
 @implementation LCActionsMembersCountCell
+@end
+
+#pragma mark - LCActionDateCell class
+@interface LCActionDateCell : UITableViewCell
+@property(nonatomic, strong) IBOutlet UILabel *eventDateLabel;
+@end
+
+@implementation LCActionDateCell
 @end
 
 #pragma mark - LCCommunityWebsiteCell class
@@ -83,15 +90,9 @@ static CGFloat kActionSectionHeight = 30;
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.eventObject = responses;
     [self refreshEventDetails];
-    [self.tableView reloadData];
-    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
-      [self startFetchingResults];
-    }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    if (self.eventObject.isFollowing || self.eventObject.isOwner) {
-      [self startFetchingResults];
-    }
+    [self refreshEventDetails];
     LCDLog(@"%@",error);
   }];
 }
@@ -145,12 +146,12 @@ static CGFloat kActionSectionHeight = 30;
   [eventPhoto sd_setImageWithURL:[NSURL URLWithString:self.eventObject.headerPhoto] placeholderImage:nil];
   
   // -------- Created By 'Owner' in 'Interest' -------- //
-  NSString * eventCreatedBy = @"Event Created by ";
+  NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
-  NSString * inText = @"in ";
+  NSString * inText = NSLocalizedString(@"in_", nil);
   NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
   if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
-    eventOwnerName = @"You ";
+    eventOwnerName = NSLocalizedString(@"you_", nil);
   }
   else
   {
@@ -203,6 +204,16 @@ static CGFloat kActionSectionHeight = 30;
   eventCreatedByLabel.nameTagTapped = ^(int index) {
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
+  
+  if (![LCUtilityManager isEmptyString:self.eventObject.startDate]) {
+    NSString * eventDateInfo = [LCUtilityManager getDateFromTimeStamp:self.eventObject.startDate WithFormat:@"MMM dd yyyy"];
+    if (![LCUtilityManager isEmptyString:self.eventObject.endDate]) {
+      eventDateInfo = [NSString stringWithFormat:@"%@ to %@",eventDateInfo,[LCUtilityManager getDateFromTimeStamp:self.eventObject.endDate WithFormat:@"MMM dd yyyy"]];
+    }
+    [eventdateInfoLable setText:eventDateInfo];
+  }
+  
+  [self.tableView reloadData];
 }
 
 - (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
@@ -233,7 +244,7 @@ static CGFloat kActionSectionHeight = 30;
   [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
 }
@@ -242,8 +253,7 @@ static CGFloat kActionSectionHeight = 30;
 - (IBAction)backAction:(id)sender
 {
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self.navigationController popToRootViewControllerAnimated:YES];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)settingsAction:(id)sender
@@ -271,7 +281,9 @@ static CGFloat kActionSectionHeight = 30;
     [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
       [MBProgressHUD hideHUDForView:self.view animated:YES];
-      [self startFetchingResults];
+      if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
+        [self startFetchingResults];
+      }
     } andFailure:^(NSString *error) {
       [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
       [settingsButton setUserInteractionEnabled:YES];

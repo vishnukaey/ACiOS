@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
-#import "LCFeedTableViewController.h"
+#import "LCHomeFeedBC.h"
 
-@interface LCFeedsHomeViewController : LCFeedTableViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCFeedsHomeViewController : LCHomeFeedBC<UITableViewDataSource, UITableViewDelegate>
 
 
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;

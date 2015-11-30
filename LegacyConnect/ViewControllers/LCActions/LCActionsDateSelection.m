@@ -57,7 +57,7 @@
 {
   if (([_startDate compare:_endDate] == NSOrderedDescending || [_startDate compare:_endDate] == NSOrderedSame) && _startDate && _endDate)
   {
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Start date should be before end date"];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"action_date_comparison_alert_message", nil)];
   }
   else
   {

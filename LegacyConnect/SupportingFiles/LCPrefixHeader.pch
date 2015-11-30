@@ -10,6 +10,7 @@
 #define LegacyConnect_LCPrefixHeader_pch
 
 #import "LCConstants.h"
+#import "LCConstantsNotification.h"
 #import "LCFriend.h"
 #import "LCUtilityManager.h"
 #import "LCDataManager.h"

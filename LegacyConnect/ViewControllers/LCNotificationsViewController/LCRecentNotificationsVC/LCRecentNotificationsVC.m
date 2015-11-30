@@ -94,14 +94,6 @@
   [super viewWillDisappear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  NSLog(@"%@",[appdel.menuButton isHidden] ? @"YESS" : @"NOOO");
-
-}
-
 #pragma mark - UITableViewDelegate implementation
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

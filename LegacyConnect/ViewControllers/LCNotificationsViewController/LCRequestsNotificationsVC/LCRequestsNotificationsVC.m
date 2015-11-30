@@ -20,9 +20,8 @@
 {
   [super viewDidLoad];
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [self initialSetUp];
-  [self startFetchingResults];
+//  [self startFetchingResults];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,9 +29,20 @@
   [super didReceiveMemoryWarning];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+}
+
+-(void) getRequests
+{
+  [self startFetchingNextResults];
+}
+
 -(void) startFetchingResults
 {
   [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager getRequestNotificationsWithLastUserId:nil withSuccess:^(NSArray *responses) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -62,13 +72,6 @@
   if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
     [self.tableView.pullToRefreshView stopAnimating];
   }
-}
-
-- (void) setUsersArray:(NSArray*) usersArray
-{
-  [super startFetchingResults];
-  BOOL hasMoreData = ([(NSArray*)usersArray count] < 10) ? NO : YES;
-  [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 
 #pragma mark - private method implementation
