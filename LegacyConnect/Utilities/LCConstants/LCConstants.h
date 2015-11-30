@@ -87,6 +87,8 @@ extern NSString *const kChangeLegacyurlURL;
 extern NSString *const kChangePrivacyURL;
 extern NSString *const kSignOutURL;
 
+extern NSString *const kVersionCheckURL;
+
 extern NSString *const kMainStoryBoardIdentifier;
 extern NSString *const kSignupStoryBoardIdentifier;
 extern NSString *const kProfileStoryBoardIdentifier;

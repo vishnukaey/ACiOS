@@ -495,4 +495,12 @@
   return appVersion;
 }
 
+ + (void)checkAppVersion
+{
+  [LCAPIManager checkVersionWithSuccess:^(id response) {
+    LCDLog(@"version checked");
+    } andFailure:^(NSString *error) {
+  }];
+}
+
 @end

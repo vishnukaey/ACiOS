@@ -1763,5 +1763,21 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
+#pragma mark - version controll
++ (void)checkVersionWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kVersionCheckURL];
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     LCDLog(@"version checked! \n %@",response);
+     success(response);
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+//     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
 
 @end

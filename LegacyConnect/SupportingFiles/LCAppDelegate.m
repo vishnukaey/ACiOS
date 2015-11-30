@@ -45,6 +45,8 @@
   // Configure FBProfile update listener
   [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
   
+  //check version
+  [LCUtilityManager checkAppVersion];
   // Configure tracker from GoogleService-Info.plist.
   NSError *configureError;
   [[GGLContext sharedInstance] configureWithError:&configureError];
@@ -119,6 +121,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
   // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+  //check app version
+  [LCUtilityManager checkAppVersion];
 }
 
 

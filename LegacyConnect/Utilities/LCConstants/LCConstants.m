@@ -102,6 +102,8 @@ NSString *const kChangeLegacyurlURL = @"api/user/changeLegacyUrl";
 NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
 NSString *const kSignOutURL = @"api/signout";
 
+NSString *const kVersionCheckURL = @"api/version";
+
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
 NSString *const kProfileStoryBoardIdentifier = @"Profile";

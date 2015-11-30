@@ -103,4 +103,8 @@
 + (void)changePassword:(NSString *)newPassword withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)changeEmail:(NSString *)newEmail withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getSettignsOfUserWithSuccess:(void (^)(LCSettings * responses))success andFailure:(void (^)(NSString *error))failure;
+
+#pragma mark - version controll
++ (void)checkVersionWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
+
 @end
