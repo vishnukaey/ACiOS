@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Pqd-kx-WLb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Pqd-kx-WLb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -326,7 +326,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1i6-4v-Zf5">
-                                                    <rect key="frame" x="95" y="35" width="170" height="21"/>
+                                                    <rect key="frame" x="95" y="28" width="170" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="825-Lq-1lT"/>
                                                     </constraints>
@@ -335,7 +335,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QOY-B1-bCG">
-                                                    <rect key="frame" x="95" y="59" width="170" height="21"/>
+                                                    <rect key="frame" x="95" y="52" width="170" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="jSD-Ob-XKk"/>
                                                     </constraints>
@@ -406,7 +406,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="QCB-o9-710" firstAttribute="leading" secondItem="NCO-SL-cGt" secondAttribute="trailing" constant="8" id="1o4-QX-Znk"/>
-                                                <constraint firstItem="QOY-B1-bCG" firstAttribute="centerY" secondItem="WrF-Re-z1O" secondAttribute="centerY" constant="19.5" id="2Jz-MF-FuL"/>
+                                                <constraint firstItem="QOY-B1-bCG" firstAttribute="centerY" secondItem="WrF-Re-z1O" secondAttribute="centerY" constant="12.5" id="2Jz-MF-FuL"/>
                                                 <constraint firstItem="QOY-B1-bCG" firstAttribute="top" secondItem="1i6-4v-Zf5" secondAttribute="bottom" constant="3" id="3Iz-ov-L3k"/>
                                                 <constraint firstItem="FZa-XO-dTG" firstAttribute="trailing" secondItem="JBN-NY-1gY" secondAttribute="trailingMargin" id="8py-1m-zRJ"/>
                                                 <constraint firstItem="QCB-o9-710" firstAttribute="centerY" secondItem="JBN-NY-1gY" secondAttribute="centerY" id="PCi-K1-qor"/>
