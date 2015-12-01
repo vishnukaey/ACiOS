@@ -12,4 +12,6 @@
 
 @interface LCRequestsNotificationsVC : LCRequestsNotificationsBC
 
+-(void) getRequests;
+
 @end

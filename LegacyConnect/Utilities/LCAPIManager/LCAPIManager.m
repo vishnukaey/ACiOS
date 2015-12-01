@@ -165,12 +165,12 @@ static LCAPIManager *sharedManager = nil;
   
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@/?", kBaseURL, @"api/search/user"];
+  NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@?", kBaseURL, @"api/search/user"];
   if (searchKey) {
-    [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
+    [url appendString:[NSString stringWithFormat:@"searchKey=%@&",searchKey]];
   }
   if (lastUserId) {
-    [url appendString:[NSString stringWithFormat:@"&lastId=%@",lastUserId]];
+    [url appendString:[NSString stringWithFormat:@"lastId=%@",lastUserId]];
   }
   url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
   
@@ -201,7 +201,7 @@ static LCAPIManager *sharedManager = nil;
   NSMutableString *url = [NSMutableString stringWithFormat:@"%@%@",kBaseURL,@"api/user/requests"];
   if (lastId)
   {
-    [url appendString:[NSString stringWithFormat:@"&%@=%@", kLastIdKey, lastId]];
+    [url appendString:[NSString stringWithFormat:@"?%@=%@", kLastIdKey, lastId]];
   }
   
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
