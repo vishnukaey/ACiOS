@@ -31,6 +31,7 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   [super viewDidLoad];
   _currentNotifications = kRecentNotifications;
   [self addTabMenuForNotifications];
+  [self updateRequestButtonTitle];
   if ([[[LCDataManager sharedDataManager] notificationCount] integerValue] > 0) {
     [[LCDataManager sharedDataManager] setNotificationCount:@"0"];
     [LCNotificationManager postNotificationCountUpdatedNotification];
@@ -46,7 +47,7 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 {
   [super viewWillAppear:animated];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
+  [appdel.GIButton setHidden:YES];
   [appdel.menuButton setHidden:NO];
 }
 
@@ -59,14 +60,18 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
   self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
   self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+  
 }
 
 - (void)requestTabTapped
 {
-  if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0) {
+  if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0)
+  {
     [[LCDataManager sharedDataManager] setRequestCount:@"0"];
     [LCNotificationManager postNotificationCountUpdatedNotification];
   }
+  [self updateRequestButtonTitle];
+  [requestsView getRequests];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -88,6 +93,20 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   else if ([segue.identifier isEqualToString:@"LCRequestsNotificationsVC"]) {
     
     requestsView = segue.destinationViewController;
+  }
+}
+
+
+-(void) updateRequestButtonTitle
+{
+  if([[LCUtilityManager performNullCheckAndSetValue:[LCDataManager sharedDataManager].requestCount] isEqualToString:kEmptyStringValue] || [[LCDataManager sharedDataManager].requestCount isEqualToString:@"0"])
+  {
+    [_requestsCountLabel setHidden:YES];
+  }
+  else
+  {
+    [_requestsCountLabel setHidden:NO];
+    [_requestsCountLabel setText:[LCDataManager sharedDataManager].requestCount];
   }
 }
 

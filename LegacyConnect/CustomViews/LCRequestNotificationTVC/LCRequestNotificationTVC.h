@@ -24,4 +24,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailLabel;
 @property (weak, nonatomic) IBOutlet UIView *responseView;
 @property (weak, nonatomic) IBOutlet UILabel *responseLabel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *detailLabelHeight;
 @end

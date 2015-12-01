@@ -16,5 +16,5 @@
 @property (weak, nonatomic) IBOutlet UIView *recentContainer;
 @property (weak, nonatomic) IBOutlet UIButton *requestsButton;
 @property (weak, nonatomic) IBOutlet UIButton *recentButton;
-
+@property (weak, nonatomic) IBOutlet UILabel *requestsCountLabel;
 @end
