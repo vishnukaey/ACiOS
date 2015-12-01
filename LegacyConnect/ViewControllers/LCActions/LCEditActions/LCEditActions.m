@@ -14,6 +14,7 @@
   actionForm.backButton.hidden = true;
   actionForm.deleteActionBut.layer.cornerRadius = 5;
   [actionForm.nextButton setTitle:NSLocalizedString(@"save", @"next button title") forState:UIControlStateNormal];
+  actionForm.nextButton.enabled = NO;
   
   if ([eventToEdit.startDate integerValue] != 0) {
     actionForm.startDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.startDate.longLongValue/1000];
@@ -22,7 +23,7 @@
     actionForm.endDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.endDate.longLongValue/1000];
   }
     // Do any additional setup after loading the view.
- 
+  
 }
 
 - (void)deleteActionEvent
@@ -32,7 +33,7 @@
       [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
       
       [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
-        [actionForm.navigationController popViewControllerAnimated:YES];
+        [actionForm dismissViewControllerAnimated:YES completion:nil];
         [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
       } andFailure:^(NSString *error) {
         [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
@@ -64,12 +65,17 @@
     imagetoUpload = nil;
   }
   [LCAPIManager updateEvent:eventToEdit havingHeaderPhoto:imagetoUpload andImageStatus:statusRemoved withSuccess:^(id response) {
-    [actionForm.navigationController popViewControllerAnimated:YES];
+    [actionForm dismissViewControllerAnimated:YES completion:nil];
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   }];
   
+}
+
+- (void)cancelAction
+{
+  [actionForm dismissViewControllerAnimated:YES completion:nil];
 }
 
 -  (void)selectHeaderPhoto
@@ -78,18 +84,24 @@
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"edit_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    NSString *headerUrlString = eventToEdit.headerPhoto;
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
-                          options:0
-                         progress:nil
-                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                          if (image) {
-                            [self startImageEditing:image];
-                          }
-                          [MBProgressHUD hideHUDForView:actionForm.view animated:YES];                      }];
+    if (headerImageEdited) {
+        [self startImageEditing:actionForm.headerPhotoImageView.image];
+    }
+    else
+    {
+        NSString *headerUrlString = eventToEdit.headerPhoto;
+        SDWebImageManager *manager = [SDWebImageManager sharedManager];
+        [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+        [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                              options:0
+                             progress:nil
+                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                              if (image) {
+                                [self startImageEditing:image];
+                              }
+                              [MBProgressHUD hideHUDForView:actionForm.view animated:YES];
+         }];
+    }
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"take_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -225,6 +237,9 @@
     if (!actionForm.actionWebsiteField) {
       actionForm.actionWebsiteField = (UITextField*)[cell viewWithTag:100];
       actionForm.actionWebsiteField.text = eventToEdit.website;
+      [actionForm.actionWebsiteField addTarget:actionForm
+                                     action:@selector(validateFields)
+                           forControlEvents:UIControlEventEditingChanged];
     }
   }
   else if(indexPath.section == SECTION_HEADER){

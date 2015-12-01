@@ -25,6 +25,7 @@ typedef enum actionSectionTypes
 - (UITableViewCell *)tableview:(UITableView *)tableview cellForRowAtIndexPathDelegate:(NSIndexPath *)indexPath;
 @optional
 - (void)nextButtonAction;
+- (void)cancelAction;
 - (void)delegatedViewDidLoad;
 - (void)deleteActionEvent;
 
