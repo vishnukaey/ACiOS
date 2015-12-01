@@ -62,6 +62,14 @@
         break;
       }
     }
+    else if ([self.results[i] isKindOfClass:[LCFriend class]]) {
+      LCFriend *friend = self.results[i];
+      if ([friend.friendId isEqualToString:newFriend.friendId])
+      {
+        friend.isFriend = newFriend.isFriend;
+        break;
+      }
+    }
   }
   [self refreshViews];
 }
