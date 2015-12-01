@@ -36,7 +36,8 @@ static CGFloat kNumberOfSection = 2;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self initialSetUp];
+  [self prepareDataSource];
+  [self getSettingsOfUser];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -52,12 +53,7 @@ static CGFloat kNumberOfSection = 2;
 
 #pragma mark - private method implementation
 
-- (void)doneButtonPressed:(id)sender
-{
-  
-}
-
-- (void)initialSetUp
+- (void)getSettingsOfUser
 {
   [MBProgressHUD showHUDAddedTo:settingsTableView animated:YES];
   [LCAPIManager getSettignsOfUserWithSuccess:^(LCSettings *responses) {
@@ -67,7 +63,6 @@ static CGFloat kNumberOfSection = 2;
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:settingsTableView animated:YES];
     LCDLog(@"error - %@", error);
-    [self prepareDataSource];
     [settingsTableView setAllowsSelection:NO];
   }];
   
@@ -132,10 +127,10 @@ static CGFloat kNumberOfSection = 2;
     
     cell = [tableView dequeueReusableCellWithIdentifier:kSettingsSignOutCellIdentifier forIndexPath:indexPath];
     if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsSignOutCellIdentifier];
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kSettingsSignOutCellIdentifier];
     }
   }
-  
+  [cell layoutIfNeeded];
   return cell;
 }
 
