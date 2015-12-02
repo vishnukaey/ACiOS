@@ -44,10 +44,14 @@
   //-- This is implemented in child view controllers.
 }
 
+- (void)dataPopulation
+{
+  //-- This is implemented in child view controllers.
+}
 - (void)topViewOnlyRefresh
 {
   if (self.isViewLoaded && self.view.window) {
-    [self refreshEventDetails];
+    [self dataPopulation];
   }
 }
 
