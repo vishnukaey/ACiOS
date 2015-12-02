@@ -12,6 +12,7 @@
 {
   UIView *bottomBar;
   NSLayoutConstraint *botbarXcenterConstraint;
+  NSLayoutConstraint *botbarWidthConstraint;
 }
 @end
 
@@ -61,13 +62,13 @@
       NSLayoutConstraint *botbar_bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:bottomBar attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
       [self addConstraint:botbar_bottom];
       
-      NSLayoutConstraint *botbar_width =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
-      [self addConstraint:botbar_width];
+      botbarWidthConstraint =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:[self getTitleLengthForButton:button]];
+      [self addConstraint:botbarWidthConstraint];
       
       NSLayoutConstraint *botbar_height =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:3];
       [self addConstraint:botbar_height];
       
-      botbarXcenterConstraint = [NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+      botbarXcenterConstraint = [NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
       [self addConstraint:botbarXcenterConstraint];
     }
     else if (i==menuButtons.count-1)
@@ -195,6 +196,7 @@
      [[menuButtons objectAtIndex:index] setTitleColor:highlightColor forState:UIControlStateNormal];
      UIButton *nextBut = [menuButtons objectAtIndex:index];
      botbarXcenterConstraint.constant = nextBut.frame.origin.x;
+     botbarWidthConstraint.constant = [self getTitleLengthForButton:nextBut];
    }
    completion:^(BOOL finished)
    {
@@ -210,6 +212,16 @@
   
 }
 
+- (float)getTitleLengthForButton :(UIButton *)button
+{
+  NSDictionary *userAttributes = @{NSFontAttributeName: button.titleLabel.font,
+                                   NSForegroundColorAttributeName: [UIColor blackColor]};
+  NSString *text = button.titleLabel.text;
+  const CGSize textSize = [text sizeWithAttributes: userAttributes];
+  float width_ = textSize.width;
+  width_ = width_+ 20;
+  return width_;
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
