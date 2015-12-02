@@ -10,6 +10,7 @@
  2: unattend event      : <Implemented>
  3: edit event          : <Implemented>
  4: delete event        *Not Implemented*
+ 5: commented a post -  : <Implemented>
  */
 
 #import "LCEventDetailsBC.h"
@@ -22,6 +23,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventFollowNotificationReceived:) name:kFollowEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUnFollowNotificationReceived:) name:kUnfollowEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDetailsUpdatedNotificationReceived:) name:kUpdateEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCommentedNotificationReceived:) name:kCommentEventNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,10 +46,16 @@
   //-- This is implemented in child view controllers.
 }
 
+- (void)dataPopulation
+{
+  //-- This is implemented in child view controllers.
+}
 - (void)topViewOnlyRefresh
 {
   if (self.isViewLoaded && self.view.window) {
-    [self refreshEventDetails];
+    [self dataPopulation];
+  } else {
+    self.needCommentRefresh = YES;
   }
 }
 
@@ -91,6 +99,19 @@
     self.eventObject = modifiedEvent;
     [self topViewOnlyRefresh];
   }
+}
+
+- (void)eventCommentedNotificationReceived:(NSNotification*)notification
+{
+  NSDictionary * userInfo = notification.userInfo;
+  LCEvent * event = userInfo[kEntityTypeEvent];
+  LCComment *newComment = userInfo[kPostCommentKey];
+  if ([self.eventObject.eventID isEqualToString:event.eventID]) {
+    [self.results insertObject:newComment atIndex:0];
+    
+    [self topViewOnlyRefresh];
+  }
+
 }
 
 @end

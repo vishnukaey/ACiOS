@@ -1271,11 +1271,11 @@ static LCAPIManager *sharedManager = nil;
 }
 
 
-+ (void)postCommentToEvent:(NSString *)eventID comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)postCommentToEvent:(LCEvent *)event comment:(NSString*)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/event/comment"];
-  NSDictionary *dict = @{@"eventId": eventID, kPostCommentKey:comment};
+  NSDictionary *dict = @{@"eventId": event.eventID, kPostCommentKey:comment};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
@@ -1285,6 +1285,7 @@ static LCAPIManager *sharedManager = nil;
      
      if(!error)
      {
+       [LCNotificationManager postEventCommentedNotificationWithComment:comment andEvent:event];
        success(comment);
      }
      else

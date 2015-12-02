@@ -89,10 +89,16 @@ static CGFloat kActionSectionHeight = 30;
   [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(LCEvent *responses) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.eventObject = responses;
-    [self refreshEventDetails];
+    [self dataPopulation];
+    if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
+      [self startFetchingResults];
+    }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self refreshEventDetails];
+    [self dataPopulation];
+    if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
+      [self startFetchingResults];
+    }
     LCDLog(@"%@",error);
   }];
 }
@@ -104,12 +110,10 @@ static CGFloat kActionSectionHeight = 30;
   if (commentString.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
-    [LCAPIManager postCommentToEvent:self.eventObject.eventID comment:commentTextField.text withSuccess:^(id response) {
-      [self.results insertObject:(LCComment*)response atIndex:0];
+    [LCAPIManager postCommentToEvent:self.eventObject comment:commentTextField.text withSuccess:^(id response) {
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
-      [self.tableView reloadData];
       [self enableCommentField:YES];
     } andFailure:^(NSString *error) {
       LCDLog(@"----- Fail to add new comment");
@@ -130,6 +134,14 @@ static CGFloat kActionSectionHeight = 30;
 }
 
 - (void)refreshEventDetails
+{
+  [self dataPopulation];
+  if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.needCommentRefresh) {
+    [self startFetchingResults];
+  }
+}
+
+- (void)dataPopulation
 {
   [settingsButton setTitle:NSLocalizedString(@"settings", @"settings Button Titile") forState:UIControlStateNormal];
   if (!self.eventObject.isOwner) {
