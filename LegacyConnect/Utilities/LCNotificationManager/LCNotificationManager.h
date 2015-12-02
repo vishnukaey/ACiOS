@@ -26,6 +26,7 @@
 + (void)postEventDetailsUpdatedNotificationWithResponse:(NSDictionary*)response andEvent:(LCEvent*)event;
 + (void)postEventDeletedNotification:(LCEvent*)event;
 + (void)postEventRejectedNotification: (NSString *)eventID;
++ (void)postEventCommentedNotificationWithComment:(LCComment*)comment andEvent:(LCEvent*)event;
 
 //profile updated
 + (void)postProfileUpdatedNotification :(LCUserDetail *)userDetails;
