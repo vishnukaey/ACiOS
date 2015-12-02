@@ -10,4 +10,6 @@
 
 @interface LCHomeFeedBC : JTTableViewController
 
+- (void)setNoResultViewHidden:(BOOL)hidded;
+
 @end

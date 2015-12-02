@@ -260,7 +260,8 @@ static CGFloat kActionSectionHeight = 30;
 {
   if (self.eventObject.isOwner) {
     LCActionsForm *createController = [LCActionsFormPresenter getEditActionsControllerWithEvent:self.eventObject];
-    [self.navigationController pushViewController:createController animated:YES];
+    UINavigationController *naviController = [[UINavigationController alloc] initWithRootViewController:createController];
+    [self presentViewController:naviController animated:YES completion:nil];
     return;
   }
   

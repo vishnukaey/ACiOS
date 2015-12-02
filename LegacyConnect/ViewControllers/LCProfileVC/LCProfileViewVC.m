@@ -24,7 +24,7 @@
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  [mileStonesVC startFetchingResults];
+  [mileStonesVC loadMileStones];
 }
 
 - (void)didReceiveMemoryWarning {

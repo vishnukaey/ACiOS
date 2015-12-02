@@ -54,6 +54,11 @@
   
 }
 
+- (void)cancelAction
+{
+  [actionForm.navigationController popViewControllerAnimated:YES];
+}
+
 -  (void)selectHeaderPhoto
 {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];

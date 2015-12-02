@@ -107,6 +107,7 @@
     [self.tableView reloadData];
     [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
+    [self setNoResultViewHidden:[self.results count] != 0];
   }
 }
 
@@ -114,6 +115,16 @@
 {
   [super viewWillAppear:animated];
   [self refreshViews];
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else{
+    [self showNoResultsView];
+  }
 }
 /*
 #pragma mark - Navigation

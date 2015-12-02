@@ -68,7 +68,7 @@
 
 - (IBAction)cancelAction
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [delegate cancelAction];
 }
 
 - (IBAction)deleteAction:(id)sender
@@ -101,12 +101,15 @@
   
   UIAlertAction *eventAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"action_type_event", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.actionTypeField.text = action.title;
+    [self validateFields];
   }];
   UIAlertAction *challengeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"action_type_challenge", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.actionTypeField.text = action.title;
+    [self validateFields];
   }];
   UIAlertAction *pollAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"action_type_poll", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     self.actionTypeField.text = action.title;
+    [self validateFields];
   }];
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
@@ -129,10 +132,12 @@
   }
   self.headerPhotoImageView.image = image;
   [self.formTableView reloadData];
+  [self validateFields];
 }
 
 - (void)validateFields
 {
+  self.nextButton.enabled = YES;
   if (![LCUtilityManager isEmptyString:self.actionAboutField.text] && ![LCUtilityManager isEmptyString:self.actionNameField.text] )
   {
     self.nextButton.enabled = YES;
@@ -164,6 +169,7 @@
   self.startDate = start;
   self.endDate = end;
   self.actionDateField.text = [self getActionFormatedDateString:self.startDate];
+  [self validateFields];
 }
 
 - (NSString *)getActionFormatedDateString :(NSDate *)date

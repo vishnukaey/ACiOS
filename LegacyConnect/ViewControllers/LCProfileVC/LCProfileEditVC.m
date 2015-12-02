@@ -58,7 +58,7 @@ NSInteger const kHeightForHeader = 44;
   self.navigationController.navigationBarHidden = YES;
   profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
-
+  
   profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
   profilePic.image = profilePicPlaceholder;
   avatarPicState = IMAGE_UNTOUCHED;
@@ -68,7 +68,13 @@ NSInteger const kHeightForHeader = 44;
   [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
                 placeholderImage:profilePicPlaceholder
                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                         actualAvatarImage = image;
+                         if (headerPicState == IMAGE_UNTOUCHED) {
+                           actualAvatarImage = image;
+                         }
+                         else {
+                           //image already edited by user
+                           profilePic.image = actualAvatarImage;
+                         }
                        }];
   
   [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
@@ -238,24 +244,31 @@ NSInteger const kHeightForHeader = 44;
 }
 
 - (IBAction)editProfilePicAction:(id)sender {
-
+  
   isEditingProfilePic = YES;
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
-                          options:0
-                         progress:nil
-                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                          if (image) {
-                            [self showImageCropViewWithImage:image];
-                          }
-                          [MBProgressHUD hideHUDForView:self.view animated:YES];                      }];
+    if (avatarPicState == IMAGE_UNTOUCHED) {
+    
+      NSString *avatarUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
+      SDWebImageManager *manager = [SDWebImageManager sharedManager];
+      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+      [manager downloadImageWithURL:[NSURL URLWithString:avatarUrlString]
+                            options:0
+                           progress:nil
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                              [self showImageCropViewWithImage:image];
+                            }
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                          }];
+    }
+    else {
+      [self showImageCropViewWithImage:actualAvatarImage];
+    }
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -313,17 +326,24 @@ NSInteger const kHeightForHeader = 44;
   
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.headerPhotoURL];
-    SDWebImageManager *manager = [SDWebImageManager sharedManager];
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
-                          options:0
-                         progress:nil
-                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                          if (image) {
-                            [self showImageCropViewWithImage:image];
-                          }
-                          [MBProgressHUD hideHUDForView:self.view animated:YES];                      }];
+    if (headerPicState == IMAGE_UNTOUCHED) {
+      
+      NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.headerPhotoURL];
+      SDWebImageManager *manager = [SDWebImageManager sharedManager];
+      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+      [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                            options:0
+                           progress:nil
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                              [self showImageCropViewWithImage:image];
+                            }
+                            [MBProgressHUD hideHUDForView:self.view animated:YES];
+                          }];
+    }
+    else{
+      [self showImageCropViewWithImage:actualHeaderImage];
+    }
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -352,10 +372,10 @@ NSInteger const kHeightForHeader = 44;
   }];
   
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      headerPicState = IMAGE_REMOVED;
-      actualHeaderImage = nil;
-      headerBGImage.image = nil;
-      [self validateFields];
+    headerPicState = IMAGE_REMOVED;
+    actualHeaderImage = nil;
+    headerBGImage.image = nil;
+    [self validateFields];
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   
@@ -560,8 +580,8 @@ NSInteger const kHeightForHeader = 44;
     txt_location = (UITextField*)[cell viewWithTag:101];
     txt_location.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.location];
     [txt_location addTarget:self
-                      action:@selector(validateFields)
-            forControlEvents:UIControlEventEditingChanged];
+                     action:@selector(validateFields)
+           forControlEvents:UIControlEventEditingChanged];
     
   }
   
