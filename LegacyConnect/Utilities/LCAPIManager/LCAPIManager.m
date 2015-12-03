@@ -943,7 +943,33 @@ static LCAPIManager *sharedManager = nil;
    }];
 }
 
-
++ (void)getCauseSearchResultsWithSearchKey:(NSString*)searchText withFastId:(NSString*)lastId success:(void (^)(id response))success
+                                andfailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?lastId=%@&searchKey=%@", kBaseURL, kGetCauseSearchURL,lastId,searchText];
+  url = [url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
+  
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCCause class] fromJSONArray:response[kResponseData] error:&error];
+     if(!error)
+     {
+       LCDLog(@"Getting Causes successful! ");
+       success(responsesArray);
+     }
+     else
+     {
+       LCDLog(@"%@",error);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
 
 #pragma mark - Friends and Requests
 

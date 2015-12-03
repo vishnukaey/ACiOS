@@ -15,16 +15,35 @@
 
 @implementation LCSearchCausesViewController
 
+#pragma mark - API and Pagination
+- (void)setCausesArray:(NSArray*)causes
+{
+  [self startFetchingResults];
+  BOOL hasMoreData = causes.count >= 1;
+  [self didFetchResults:causes haveMoreData:hasMoreData];
+  [self.collectionView reloadData];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  
+  [LCAPIManager getCauseSearchResultsWithSearchKey:_searchKey withFastId:[(LCCause*)[self.results firstObject] causeID] success:^(id response) {
+    BOOL hasMoreData = [(NSArray*)response count] >= 1;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andfailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  self.noResultsView = [self getNOResultLabel];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
 }
-
 
 - (UIView *)getNOResultLabel
 {
@@ -37,42 +56,17 @@
   return noResultLabel;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-  
-    UIView *prev = [collectionView viewWithTag:122];
-    if (prev) {
-      [prev removeFromSuperview];
-    }
-    if (!_causesArray.count) {
-      UIView *noResultView = [self getNOResultLabel];
-      noResultView.tag = 122;
-      noResultView.center = CGPointMake(collectionView.frame.size.width/2, noResultView.center.y);
-      [collectionView addSubview:noResultView];
-    }
-    return _causesArray.count;
-}
-
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    static NSString *identifier = @"causesCollectionViewCell";
-    LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    
-    cell.cause = _causesArray[indexPath.item];
-    
-    return cell;
-
+  LCCOLLECTIONVIEW_cellForItemAtIndexPath
+  static NSString *identifier = @"causesCollectionViewCell";
+  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+  cell.cause = self.results[indexPath.item];
+  return cell;
 }
-
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-  // Uncomment for Selection of interest and cause
-  
-  
   /*
    if([collectionView isEqual:_causesCollectionView])
    {
@@ -86,7 +80,6 @@
    [self.navigationController pushViewController:vc animated:YES];
    }
    */
-  
 }
 
 @end

@@ -137,8 +137,9 @@
   searchInterestsVC.interestsArray = searchResultObject.interestsArray;
   [searchInterestsVC.interestsCollectionView reloadData];
   
-  searchCausesVC.causesArray = searchResultObject.causesArray;
-  [searchCausesVC.causesCollectionView reloadData];
+  [searchCausesVC setCausesArray:searchResultObject.causesArray];
+  searchCausesVC.searchKey = _searchBar.text;
+  [searchCausesVC.collectionView reloadData];
   
 }
 

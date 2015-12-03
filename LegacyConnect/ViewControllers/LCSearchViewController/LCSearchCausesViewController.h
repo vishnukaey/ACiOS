@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCCollectionViewController.h"
 
-@interface LCSearchCausesViewController : UIViewController
+@interface LCSearchCausesViewController : LCCollectionViewController
 
-@property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
-@property (nonatomic,retain) NSArray *causesArray;
+@property (nonatomic,retain) NSString *searchKey;
+- (void)setCausesArray:(NSArray*)causes;
 
 @end

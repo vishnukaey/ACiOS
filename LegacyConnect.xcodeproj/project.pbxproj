@@ -112,6 +112,7 @@
 		0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755781B5631AF009CE7F3 /* LCDataManager.m */; };
 		0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */; };
 		0BC755801B563907009CE7F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BC7557F1B563907009CE7F3 /* Localizable.strings */; };
+		0BCC873C1C1025FF0088D35D /* LCCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */; settings = {ASSET_TAGS = (); }; };
 		0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */; };
 		0BDB92301BECD0E900D26D4C /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */; settings = {ASSET_TAGS = (); }; };
 		0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */; };
@@ -367,6 +368,8 @@
 		0BC7557B1B563356009CE7F3 /* LCUtilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUtilityManager.h; path = Utilities/LCUtilityManager/LCUtilityManager.h; sourceTree = "<group>"; };
 		0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUtilityManager.m; path = Utilities/LCUtilityManager/LCUtilityManager.m; sourceTree = "<group>"; };
 		0BC7557F1B563907009CE7F3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Utilities/Localizable.strings; sourceTree = "<group>"; };
+		0BCC873A1C1025FF0088D35D /* LCCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCollectionViewController.h; sourceTree = "<group>"; };
+		0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCollectionViewController.m; sourceTree = "<group>"; };
 		0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFinalTutorialVC.h; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.h; sourceTree = "<group>"; };
 		0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFinalTutorialVC.m; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.m; sourceTree = "<group>"; };
 		0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
@@ -1124,6 +1127,16 @@
 			name = LCUtilityManager;
 			sourceTree = "<group>";
 		};
+		0BCC87391C1025E00088D35D /* LCCollectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0BCC873A1C1025FF0088D35D /* LCCollectionViewController.h */,
+				0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */,
+			);
+			name = LCCollectionViewController;
+			path = ViewControllers/LCCollectionViewController;
+			sourceTree = "<group>";
+		};
 		0BD5936F1B57786200658E99 /* LCFinalTutorialVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1263,6 +1276,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0BCC87391C1025E00088D35D /* LCCollectionViewController */,
 				CE72CCEC1BFB18F300A288D2 /* LCBaseControllers */,
 				0B05D7541BEB70C500FD5AE1 /* LCCommentsController */,
 				0B05D7411BEB1D4100FD5AE1 /* LCActions */,
@@ -1928,6 +1942,7 @@
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */,
 				0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */,
+				0BCC873C1C1025FF0088D35D /* LCCollectionViewController.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
