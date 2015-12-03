@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ynU-pE-0Wh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ynU-pE-0Wh">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -98,12 +98,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY FEED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7z-nM-tf3">
-                                        <rect key="frame" x="85" y="35" width="150" height="21"/>
+                                        <rect key="frame" x="85" y="31.5" width="150" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="fhX-Bg-NsJ"/>
                                             <constraint firstAttribute="height" constant="21" id="h5z-0t-M0f"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -123,12 +123,18 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="i7z-nM-tf3" firstAttribute="centerY" secondItem="5F3-Ck-Mhb" secondAttribute="centerY" constant="10" id="Jyi-Ms-FSE"/>
                                     <constraint firstItem="ohl-Ah-7Lb" firstAttribute="leading" secondItem="5F3-Ck-Mhb" secondAttribute="leading" id="NVS-Oa-nC5"/>
                                     <constraint firstAttribute="height" constant="64" id="OIL-1U-G4m"/>
                                     <constraint firstAttribute="bottom" secondItem="i7z-nM-tf3" secondAttribute="bottom" constant="8" id="XvQ-eH-owv"/>
                                     <constraint firstAttribute="bottom" secondItem="ohl-Ah-7Lb" secondAttribute="bottom" id="r1O-fV-bQk"/>
                                     <constraint firstAttribute="centerX" secondItem="i7z-nM-tf3" secondAttribute="centerX" id="x8j-zj-YwC"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XvQ-eH-owv"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -517,7 +523,7 @@
                                                         <constraint firstAttribute="height" constant="18" id="xoq-ef-bmZ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sat-qL-U5c">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sat-qL-U5c">
                                                     <rect key="frame" x="68" y="13" width="244" height="17"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
                                                     <color key="textColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
