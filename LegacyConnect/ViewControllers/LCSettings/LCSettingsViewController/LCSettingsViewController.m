@@ -191,8 +191,16 @@ static CGFloat kNumberOfSection = 2;
     }
   }
   else {
+    //sign out
+    UIAlertController *signOutAlert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"signout_alert_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"signOut", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+      [self signOutLegacy];
+    }];
+    [signOutAlert addAction:okAction];
     
-    [self signOutLegacy];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil)  style:UIAlertActionStyleCancel handler:nil];
+    [signOutAlert addAction:cancelAction];
+    [self presentViewController:signOutAlert animated:YES completion:nil];
   }
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -229,6 +237,8 @@ static CGFloat kNumberOfSection = 2;
 
 - (void) signOutLegacy {
   
+  
+  
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager signOutwithSuccess:^(id response) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -247,11 +257,10 @@ static CGFloat kNumberOfSection = 2;
     UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
     appdel.window.rootViewController = myStoryBoardInitialViewController;
     [appdel.window makeKeyAndVisible];
-
+    
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
   }];
-   
 }
 
 

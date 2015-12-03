@@ -84,6 +84,7 @@
     [LCAPIManager changePassword:newPasswordField.text withSuccess:^(id response) {
       
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"password_changed", nil)];
       [self dismissViewControllerAnimated:YES completion:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
