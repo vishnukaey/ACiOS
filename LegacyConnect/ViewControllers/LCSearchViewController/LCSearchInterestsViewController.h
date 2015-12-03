@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCCollectionViewController.h"
 
-@interface LCSearchInterestsViewController : UIViewController
+@interface LCSearchInterestsViewController : LCCollectionViewController
 
-@property (weak, nonatomic) IBOutlet UICollectionView *interestsCollectionView;
-@property (nonatomic,retain) NSArray *interestsArray;
+@property (nonatomic,retain) NSString *searchKey;
+- (void)setInterestsArray:(NSArray*)interests;
 
 @end

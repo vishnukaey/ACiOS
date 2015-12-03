@@ -15,14 +15,32 @@
 
 @implementation LCSearchInterestsViewController
 
+- (void)setInterestsArray:(NSArray*)interests
+{
+  [self startFetchingResults];
+  BOOL hasMoreData = interests.count >= 20;
+  [self didFetchResults:interests haveMoreData:hasMoreData];
+  [self.collectionView reloadData];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCAPIManager getInterestsSearchResultsWithSearchKey:_searchKey withFastId:[(LCInterest*)[self.results lastObject] interestID] success:^(id response) {
+    BOOL hasMoreData = [(NSArray*)response count] >= 20;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+  } andfailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  self.noResultsView = [self getNOResultLabel];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
 }
 
 - (UIView *)getNOResultLabel
@@ -36,41 +54,17 @@
   return noResultLabel;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-
-    UIView *prev = [collectionView viewWithTag:122];
-    if (prev) {
-      [prev removeFromSuperview];
-    }
-    if (!_interestsArray.count) {
-      UIView *noResultView = [self getNOResultLabel];
-      noResultView.tag = 122;
-      noResultView.center = CGPointMake(collectionView.frame.size.width/2, noResultView.center.y);
-      [collectionView addSubview:noResultView];
-    }
-    return _interestsArray.count;
-  
-}
-
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
- 
-    static NSString *identifier = @"interestsCollectionViewCell";
-    LCChooseInterestCVC *cell = (LCChooseInterestCVC*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-    cell.interest = _interestsArray[indexPath.item];
-    return cell;
-  
+  LCCOLLECTIONVIEW_cellForItemAtIndexPath
+  static NSString *identifier = @"interestsCollectionViewCell";
+  LCChooseInterestCVC *cell = (LCChooseInterestCVC*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+  cell.interest = self.results[indexPath.item];
+  return cell;
 }
-
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-  // Uncomment for Selection of interest and cause
-  
-  
   /*
    if([collectionView isEqual:_causesCollectionView])
    {
@@ -84,7 +78,6 @@
    [self.navigationController pushViewController:vc animated:YES];
    }
    */
-  
 }
 
 @end

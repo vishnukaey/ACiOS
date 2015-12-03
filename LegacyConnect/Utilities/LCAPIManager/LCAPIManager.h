@@ -56,6 +56,9 @@
 
 + (void)getCauseSearchResultsWithSearchKey:(NSString*)searchText withFastId:(NSString*)lastId success:(void (^)(id response))success
                                 andfailure:(void (^)(NSString *error))failure;
++ (void)getInterestsSearchResultsWithSearchKey:(NSString*)searchText withFastId:(NSString*)lastId success:(void (^)(id response))success
+                                andfailure:(void (^)(NSString *error))failure;
+
 
 #pragma mark- Friends and Requests
 

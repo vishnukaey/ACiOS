@@ -19,7 +19,7 @@
 - (void)setCausesArray:(NSArray*)causes
 {
   [self startFetchingResults];
-  BOOL hasMoreData = causes.count >= 1;
+  BOOL hasMoreData = causes.count >= 20;
   [self didFetchResults:causes haveMoreData:hasMoreData];
   [self.collectionView reloadData];
 }
@@ -28,8 +28,8 @@
 {
   [super startFetchingNextResults];
   
-  [LCAPIManager getCauseSearchResultsWithSearchKey:_searchKey withFastId:[(LCCause*)[self.results firstObject] causeID] success:^(id response) {
-    BOOL hasMoreData = [(NSArray*)response count] >= 1;
+  [LCAPIManager getCauseSearchResultsWithSearchKey:_searchKey withFastId:[(LCCause*)[self.results lastObject] causeID] success:^(id response) {
+    BOOL hasMoreData = [(NSArray*)response count] >= 20;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];
