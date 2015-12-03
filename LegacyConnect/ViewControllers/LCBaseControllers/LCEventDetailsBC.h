@@ -14,7 +14,9 @@
 }
 
 @property (nonatomic, retain) LCEvent *eventObject;
+@property (nonatomic, assign) BOOL needCommentRefresh;
 
 - (void)refreshEventDetails;
+- (void)dataPopulation;
 
 @end

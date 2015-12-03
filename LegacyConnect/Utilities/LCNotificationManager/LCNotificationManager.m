@@ -117,6 +117,12 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kRejectEventRequestNFK object:nil userInfo:userInfo];
 }
 
++ (void)postEventCommentedNotificationWithComment:(LCComment*)comment andEvent:(LCEvent*)event
+{
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:event,comment, nil] forKeys:[NSArray arrayWithObjects:kEntityTypeEvent,kPostCommentKey, nil]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kCommentEventNFK object:nil userInfo:userInfo];
+}
+
 #pragma mark - userUpdate notifications
 
 + (void)postProfileUpdatedNotification :(LCUserDetail *)userDetails
