@@ -112,6 +112,7 @@ static NSString *kTitle = @"MY FEED";
 -(void) addSideMenuVIewController
 {
   [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
+  [LCDataManager sharedDataManager].userFBID = [[NSUserDefaults standardUserDefaults] valueForKey:kFBUserIDKey];
   
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.

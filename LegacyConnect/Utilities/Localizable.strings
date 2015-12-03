@@ -104,4 +104,6 @@
 "email_changed" = "Email successfully changed";
 "password_changed" = "Password successfully changed";
 "signout_alert_message" = "Are you sure you want to sign out?";
+"fbuser_can't_change_email" = "Email cannot be changed as you have logged in via Facebook";
+"fbuser_can't_change_password" = "Password cannot be changed as you have logged in via Facebook";
 "signOut" = "Sign Out";
