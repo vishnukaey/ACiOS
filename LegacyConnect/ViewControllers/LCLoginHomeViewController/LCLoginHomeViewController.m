@@ -75,6 +75,12 @@
        if (!error)
        {
          [self saveUserDetailsToDataManagerFromResponse:result];
+         
+         //save fb user id to NSUserDefaults
+         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+         NSDictionary *response = result;
+         [defaults setValue:response[kIDKey] forKey:kFBUserIDKey];
+         
          NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
          
          [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
