@@ -198,9 +198,18 @@
   [self endRefreshing];
   [self hideNoResultsLoadingView];
   
+  
+  NSMutableArray * newIndexes = [NSMutableArray new];
+  for (NSInteger i = self.results.count; i < self.results.count + results.count; i++) {
+    [newIndexes addObject:[NSIndexPath indexPathForItem:i inSection:0]];
+  }
+
   [self.results addObjectsFromArray:results];
   self->_haveMoreData = haveMoreData;
-  [self.collectionView reloadData];
+  [self.collectionView performBatchUpdates:^{
+    [self.collectionView insertItemsAtIndexPaths:newIndexes];;
+  } completion:nil];
+
 }
 
 - (void)didFailedToFetchResults

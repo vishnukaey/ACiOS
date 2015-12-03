@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.noResultsView = [self getNOResultLabel];
+  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_results_found", nil) andViewWidth:CGRectGetWidth(self.collectionView.frame)];
 }
 
 - (void)didReceiveMemoryWarning {
