@@ -13,35 +13,24 @@
 #import "LCTabMenuView.h"
 #import "LCProfileViewBC.h"
 
-#import "LCMileStonesVC.h"
-#import "LCInterestsVC.h"
-#import "LCActionsVC.h"
-
 @interface LCProfileViewVC : LCProfileViewBC <MileStonesDelegate, InterestsDelegate, ActionsDelegate>
 {
   
-  IBOutlet UIView *profilePicBorderView;
-  IBOutlet UIView *tabMenuContainer, *viewToCollapse;
-  IBOutlet UIButton *backButton;
-  IBOutlet NSLayoutConstraint *collapseViewHeight;
+  __weak IBOutlet UIView *profilePicBorderView;
+  __weak IBOutlet UIView *tabMenuContainer, *viewToCollapse;
+  __weak IBOutlet UIButton *backButton;
+  __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   
+  __weak IBOutlet UIButton *mileStonesButton;
+  __weak IBOutlet UIButton *interestsButton;
+  __weak IBOutlet UIButton *actionsButton;
   
-  IBOutlet UIButton *mileStonesButton;
-  IBOutlet UIButton *interestsButton;
-  IBOutlet UIButton *actionsButton;
-  
-  IBOutlet UIView *milestonesContainer;
-  IBOutlet UIView *interestsContainer;
-  IBOutlet UIView *actionsContainer;
-  
-  LCMileStonesVC *mileStonesVC;
-  LCInterestsVC *interestsVC;
-  LCActionsVC *actionsVC;
-  
+  __weak IBOutlet UIView *milestonesContainer;
+  __weak IBOutlet UIView *interestsContainer;
+  __weak IBOutlet UIView *actionsContainer;
   
   NSArray *interestsArray;
   NSArray *actionsArray;
-  
   
   LCTabMenuView *tabmenu;
 }

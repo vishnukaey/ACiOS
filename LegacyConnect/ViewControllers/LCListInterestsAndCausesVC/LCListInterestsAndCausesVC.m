@@ -71,7 +71,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   causesSearchArray = [[NSMutableArray alloc] init];
   
   [self addTabMenu];
-  [self loadInterestsAndCauses];
+  [self loadInterestsAndCausesWithSearchKey:nil];
   
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   interestsTableView.tableFooterView = zeroRectView;
@@ -103,10 +103,12 @@ static NSString *kCheckedImageName = @"contact_tick";
   tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
 
-- (void)loadInterestsAndCauses
+- (void)loadInterestsAndCausesWithSearchKey :(NSString *)searchKey
 {
+  [interestsSearchArray removeAllObjects];
+  [causesSearchArray removeAllObjects];
   [MBProgressHUD showHUDAddedTo:interestsTableView.superview animated:YES];
-  [LCAPIManager getUserInterestsAndCausesWithSuccess:^(NSArray *responses) {
+  [LCAPIManager getUserInterestsAndCausesWithSearchKey:searchKey withSuccess:^(NSArray *responses) {
     interestsArray = responses;
     [interestsSearchArray addObjectsFromArray:responses];
     [interestsTableView reloadData];
@@ -166,59 +168,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  //interest search
-  [interestsSearchArray removeAllObjects];
-  if([searchText length] != 0) {
-    for (int i = 0; i<interestsArray.count ; i++)
-    {
-      LCInterest *interest = interestsArray[i];
-      NSString * tempStr = interest.name;
-      NSComparisonResult result = [tempStr compare:searchBar.text options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchBar.text length])];
-      if (result == NSOrderedSame)
-      {
-        [interestsSearchArray addObject:interest];
-      }
-    }
-  }
-  else
-  {
-    [interestsSearchArray addObjectsFromArray:interestsArray];
-  }
-  [interestsTableView reloadData];
-  
-  //cause search
-  [causesSearchArray removeAllObjects];
-  if([searchText length] != 0) {
-    for (int i = 0; i<causesArray.count ; i++)
-    {
-      LCInterest *interest = [causesArray[i] copy];
-      NSMutableArray *causes_ = [[NSMutableArray alloc] init];
-      for (LCCause *cause in interest.causes)
-      {
-        NSString * tempStr = cause.name;
-        if (tempStr.length>=[searchBar.text length]) {
-          NSComparisonResult result = [tempStr compare:searchBar.text options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [searchBar.text length])];
-          if (result == NSOrderedSame)
-          {
-            [causes_ addObject:cause];
-          }
-        }
-      }
-      if (causes_.count>0)
-      {
-        interest.causes = [causes_ copy];
-        [causesSearchArray addObject:interest];
-      }
-    }
-    NSArray *sortedCauses = [self sortedInterestCauses:[causesSearchArray copy]];
-    [causesSearchArray removeAllObjects];
-    [causesSearchArray addObjectsFromArray:sortedCauses];
-  }
-  else
-  {
-    [causesSearchArray addObjectsFromArray:[self sortedInterestCauses:causesArray]];
-  }
-  [causesCollectionView reloadData];
+  [self loadInterestsAndCausesWithSearchKey:searchText];
 }
 
 #pragma mark - TableView delegates

@@ -15,6 +15,12 @@ typedef enum {
   kRequestWaiting
 }FriendStatus;
 
+typedef enum {
+  kPivacyOnlyMe,
+  kPivacyFriendsOnly,
+  kPivacyPublic
+}PivacyStatus;
+
 @interface LCConstants : NSObject
 
 extern NSString *const kTWConsumerKey;
