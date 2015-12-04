@@ -188,6 +188,7 @@
 		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; settings = {ASSET_TAGS = (); }; };
 		CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */; settings = {ASSET_TAGS = (); }; };
+		CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */; settings = {ASSET_TAGS = (); }; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
 /* End PBXBuildFile section */
 
@@ -509,6 +510,8 @@
 		CEDD5F391BF208D900332A4E /* LCEditActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEditActions.h; path = LCEditActions/LCEditActions.h; sourceTree = "<group>"; };
 		CEDD5F3A1BF208D900332A4E /* LCEditActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEditActions.m; path = LCEditActions/LCEditActions.m; sourceTree = "<group>"; };
 		CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCFeedcellXIB.xib; path = CustomViews/LCFeedCellView/LCFeedcellXIB.xib; sourceTree = "<group>"; };
+		CEE2BDD81C104DA3000E56AB /* LCNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCNavigationBar.h; path = CustomViews/LCNavigationBar/LCNavigationBar.h; sourceTree = "<group>"; };
+		CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCNavigationBar.m; path = CustomViews/LCNavigationBar/LCNavigationBar.m; sourceTree = "<group>"; };
 		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
 		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1669,6 +1672,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				CEE2BDDB1C104DAD000E56AB /* LCNavigationBar */,
 				0B2A2CCF1BF5B30D00D20827 /* LCActionsHeader */,
 				0BA86F031BCE7BEE00B24454 /* LCThanksButtonImage */,
 				0B8AA05A1BC299C600C284DF /* LCFriendButton */,
@@ -1696,6 +1700,15 @@
 				0BB7B3701B57DEB100261658 /* LCGIButton */,
 			);
 			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		CEE2BDDB1C104DAD000E56AB /* LCNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				CEE2BDD81C104DA3000E56AB /* LCNavigationBar.h */,
+				CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */,
+			);
+			name = LCNavigationBar;
 			sourceTree = "<group>";
 		};
 		CEF275D41B78A2BA00709005 /* LCCommentCell */ = {
@@ -1931,6 +1944,7 @@
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
+				CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */,
 				0B775D911BE1F25B008B5B6F /* LCUpdateEmailViewController.m in Sources */,
 				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,
 				0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */,

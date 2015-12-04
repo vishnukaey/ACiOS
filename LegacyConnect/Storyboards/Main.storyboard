@@ -94,7 +94,7 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="9JT-jc-p6e"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5F3-Ck-Mhb">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5F3-Ck-Mhb" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY FEED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7z-nM-tf3">
@@ -135,6 +135,10 @@
                                         <exclude reference="XvQ-eH-owv"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="leftButton" destination="ohl-Ah-7Lb" id="fqu-mW-Ls1"/>
+                                    <outlet property="title" destination="i7z-nM-tf3" id="pau-0m-icv"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -332,7 +336,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="602-j7-Fca">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="602-j7-Fca" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMENTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="foe-JZ-2dc">
@@ -368,6 +372,10 @@
                                     <constraint firstAttribute="bottom" secondItem="Zxp-XQ-3NM" secondAttribute="bottom" id="ryD-h7-D2s"/>
                                     <constraint firstAttribute="centerX" secondItem="foe-JZ-2dc" secondAttribute="centerX" id="xJF-qf-ifF"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="Zxp-XQ-3NM" id="0pl-T4-Lzy"/>
+                                    <outlet property="title" destination="foe-JZ-2dc" id="PvS-No-AvU"/>
+                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HuG-7V-Jiv">
                                 <rect key="frame" x="0.0" y="64" width="320" height="459"/>
@@ -1083,10 +1091,10 @@
                                                         <constraint firstAttribute="height" constant="30" id="Lch-6x-KdD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="13"/>
-                                                    <state key="normal" title="Support">
+                                                    <state key="normal" title="Follow">
                                                         <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
-                                                    <state key="selected" title="Supporting"/>
+                                                    <state key="selected" title="Following"/>
                                                     <connections>
                                                         <action selector="supportButtonTapped:" destination="twQ-Rt-dFp" eventType="touchUpInside" id="OAS-hY-3Nn"/>
                                                     </connections>

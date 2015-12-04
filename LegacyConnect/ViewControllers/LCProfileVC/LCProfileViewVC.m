@@ -271,17 +271,23 @@
 
 - (IBAction)mileStonesClicked:(id)sender
 {
-  [mileStonesVC loadMileStones];
+  if (tabmenu.currentIndex != 0) {
+    [mileStonesVC loadMileStones];
+  }
 }
 
 - (IBAction)interestsClicked:(id)sender
 {
-  [interestsVC loadInterests];
+  if (tabmenu.currentIndex != 1) {
+    [interestsVC loadInterests];
+  }
 }
 
 - (IBAction)actionsClicked:(id)sender
 {
-  [actionsVC loadActions];
+  if (tabmenu.currentIndex != 2) {
+    [actionsVC loadActions];
+  }
 }
 
 

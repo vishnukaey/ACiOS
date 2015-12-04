@@ -56,17 +56,17 @@
 #pragma mark - button actions
 - (IBAction)supportClicked:(id)sender
 {
-  NSLog(@"support clicked");
+  NSLog(@"Follow clicked");
 }
 
 - (IBAction)supportersListClicked:(id)sender
 {
-    NSLog(@"supportersList clicked");
+    NSLog(@"FollowList clicked");
 }
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
-  NSLog(@"support clicked");
+  NSLog(@"Follow clicked");
 }
 
 #pragma mark - TableView delegates

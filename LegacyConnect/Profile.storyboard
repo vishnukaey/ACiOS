@@ -58,7 +58,7 @@
                                     <outlet property="delegate" destination="WAr-y6-GZf" id="xJy-wS-bau"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sf5-DC-4Ib">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sf5-DC-4Ib" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0iH-NS-2S5" userLabel="Back Button">
@@ -94,6 +94,10 @@
                                     <constraint firstAttribute="centerX" secondItem="ehS-K0-QVT" secondAttribute="centerX" constant="-1" id="w9p-r8-YRv"/>
                                     <constraint firstAttribute="centerY" secondItem="ehS-K0-QVT" secondAttribute="centerY" constant="-9" id="xSI-Bw-Veg"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="0iH-NS-2S5" id="R56-V3-o60"/>
+                                    <outlet property="title" destination="ehS-K0-QVT" id="nT9-4v-lIt"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
