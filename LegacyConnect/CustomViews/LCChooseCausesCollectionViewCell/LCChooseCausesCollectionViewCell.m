@@ -42,7 +42,9 @@
   UIGraphicsEndImageContext();
   [_causesImageView setBackgroundColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
   [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    [_causesImageView setBackgroundColor:[UIColor whiteColor]];
+    if (image) {
+      [_causesImageView setBackgroundColor:[UIColor whiteColor]];
+    }
   }];
 }
 
