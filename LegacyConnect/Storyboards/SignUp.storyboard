@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
-            <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
             <string>Gotham-Bold</string>
@@ -61,7 +59,6 @@
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
-            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -83,7 +80,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homeloginbg" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
                                         <rect key="frame" x="112" y="70" width="150" height="150"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="54t-CA-WbB"/>
@@ -172,34 +169,22 @@ id augue sagittis, mattis sapien.</string>
                                             <constraint firstItem="fwE-Wr-2y7" firstAttribute="top" secondItem="9pK-Ug-TD8" secondAttribute="top" id="tlG-LP-dvT"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEGACY CONNECT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fdu-sR-nPm">
-                                        <rect key="frame" x="0.0" y="242" width="375" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="fZR-rw-eJh"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="18"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="Fdu-sR-nPm" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" id="2aq-f9-74y"/>
                                     <constraint firstAttribute="trailing" secondItem="9pK-Ug-TD8" secondAttribute="trailing" constant="15" id="30j-bB-1gE"/>
-                                    <constraint firstItem="PT3-8f-KV0" firstAttribute="top" secondItem="Fdu-sR-nPm" secondAttribute="bottom" constant="25" id="3Kw-TT-SQv"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="3py-uM-zmt"/>
                                     <constraint firstAttribute="centerY" secondItem="PT3-8f-KV0" secondAttribute="centerY" constant="-22" id="7dr-mI-RMK"/>
-                                    <constraint firstAttribute="trailing" secondItem="Fdu-sR-nPm" secondAttribute="trailing" id="Dqs-kJ-GrX"/>
                                     <constraint firstAttribute="centerX" secondItem="RNu-5a-VSC" secondAttribute="centerX" id="EXy-w9-PPo"/>
                                     <constraint firstAttribute="bottom" secondItem="We9-Zy-2a3" secondAttribute="bottom" id="Eap-7K-qJb"/>
                                     <constraint firstAttribute="trailing" secondItem="We9-Zy-2a3" secondAttribute="trailing" id="Fsj-pp-P5j"/>
                                     <constraint firstItem="We9-Zy-2a3" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" id="I3a-c0-thP"/>
                                     <constraint firstAttribute="trailing" secondItem="PT3-8f-KV0" secondAttribute="trailing" id="JdX-jO-sdp"/>
-                                    <constraint firstItem="Fdu-sR-nPm" firstAttribute="top" secondItem="RNu-5a-VSC" secondAttribute="bottom" constant="22" id="NLY-Hu-eXg"/>
                                     <constraint firstAttribute="trailing" secondItem="tZ0-jb-f3n" secondAttribute="trailing" constant="15" id="PR0-Yw-4yq"/>
                                     <constraint firstItem="We9-Zy-2a3" firstAttribute="top" secondItem="1RK-dy-Ksn" secondAttribute="top" id="UnC-id-UNq"/>
                                     <constraint firstAttribute="bottom" secondItem="tZ0-jb-f3n" secondAttribute="bottom" constant="25" id="ccM-Kf-mfC"/>
                                     <constraint firstItem="9pK-Ug-TD8" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="dU8-Dc-4oQ"/>
+                                    <constraint firstItem="PT3-8f-KV0" firstAttribute="top" secondItem="RNu-5a-VSC" secondAttribute="bottom" constant="68" id="ixw-at-0JA"/>
                                     <constraint firstItem="PT3-8f-KV0" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" id="kQl-vT-ViX"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="top" secondItem="9pK-Ug-TD8" secondAttribute="bottom" constant="15" id="r1W-Eu-6eT"/>
                                 </constraints>
@@ -1195,7 +1180,7 @@ then select a few related causes.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F9M-tD-hzX" id="MhH-N4-n8D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="t8l-z9-6KE">
@@ -1384,12 +1369,12 @@ then select a few related causes.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4rt-vB-gIN" id="d7E-e3-tgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-MA-qAN">
                                                     <rect key="frame" x="15" y="15" width="63" height="63"/>
-                                                    <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                                    <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="63" id="0qD-CA-WXy"/>
                                                         <constraint firstAttribute="width" constant="63" id="trd-CT-vRl"/>
@@ -1552,20 +1537,10 @@ then select a few related causes.</string>
                                             <action selector="forgotPasswordButtonClicked:" destination="zgM-N2-seB" eventType="touchDown" id="49v-8x-DRB"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LEGACY CONNECT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJa-Ck-ySw">
-                                        <rect key="frame" x="107" y="198" width="161" height="21"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Fc8-3T-sqr">
+                                        <rect key="frame" x="119" y="65" width="144" height="140"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="nzq-Vf-9EF"/>
-                                            <constraint firstAttribute="width" constant="161" id="qco-Gt-4Of"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="16"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lc_logo_reg" translatesAutoresizingMaskIntoConstraints="NO" id="Fc8-3T-sqr">
-                                        <rect key="frame" x="129" y="65" width="116" height="116"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Fc8-3T-sqr" secondAttribute="height" multiplier="1:1" id="HZ7-QS-lpL"/>
+                                            <constraint firstAttribute="height" constant="140" id="cwr-aQ-WqP"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1573,15 +1548,12 @@ then select a few related causes.</string>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="c14-eH-YKS" secondAttribute="trailing" id="3Da-Kc-F0B"/>
                                     <constraint firstItem="c14-eH-YKS" firstAttribute="leading" secondItem="taT-CI-BxF" secondAttribute="leading" id="7Tt-DM-Dim"/>
-                                    <constraint firstItem="4tw-yg-nB1" firstAttribute="top" secondItem="jJa-Ck-ySw" secondAttribute="bottom" constant="141" id="Bl4-NS-K5O"/>
                                     <constraint firstAttribute="bottom" secondItem="c14-eH-YKS" secondAttribute="bottom" id="ONU-bT-sJV"/>
                                     <constraint firstItem="c14-eH-YKS" firstAttribute="top" secondItem="taT-CI-BxF" secondAttribute="top" id="Rbb-eM-oFA"/>
                                     <constraint firstItem="4tw-yg-nB1" firstAttribute="leading" secondItem="taT-CI-BxF" secondAttribute="leading" constant="8" id="Rvf-bK-mHX"/>
                                     <constraint firstAttribute="trailing" secondItem="4tw-yg-nB1" secondAttribute="trailing" constant="8" id="fGG-gh-JaH"/>
-                                    <constraint firstItem="jJa-Ck-ySw" firstAttribute="top" secondItem="Fc8-3T-sqr" secondAttribute="bottom" constant="17" id="kVf-Tx-zdv"/>
                                     <constraint firstItem="Fc8-3T-sqr" firstAttribute="top" secondItem="taT-CI-BxF" secondAttribute="top" constant="65" id="pgg-XS-bAt"/>
-                                    <constraint firstAttribute="centerX" secondItem="jJa-Ck-ySw" secondAttribute="centerX" id="scQ-G3-PtC"/>
-                                    <constraint firstAttribute="centerX" secondItem="Fc8-3T-sqr" secondAttribute="centerX" id="xCs-bD-Hdu"/>
+                                    <constraint firstAttribute="centerX" secondItem="Fc8-3T-sqr" secondAttribute="centerX" constant="-3" id="xCs-bD-Hdu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IdR-Zg-rIm">
@@ -1683,6 +1655,7 @@ then select a few related causes.</string>
                             <constraint firstItem="3Di-hV-voq" firstAttribute="top" secondItem="IdR-Zg-rIm" secondAttribute="bottom" constant="214" id="PWf-jL-fx0"/>
                             <constraint firstAttribute="trailing" secondItem="IdR-Zg-rIm" secondAttribute="trailing" id="Q3R-e9-Lpm"/>
                             <constraint firstItem="MsP-BH-WUp" firstAttribute="top" secondItem="taT-CI-BxF" secondAttribute="bottom" id="SR4-2n-DWJ"/>
+                            <constraint firstItem="4tw-yg-nB1" firstAttribute="top" secondItem="Alq-V2-uvY" secondAttribute="bottom" constant="8" id="a1N-dm-Yck"/>
                             <constraint firstItem="IdR-Zg-rIm" firstAttribute="top" secondItem="zrk-zR-Mdi" secondAttribute="top" id="idi-RI-nMQ"/>
                             <constraint firstItem="IdR-Zg-rIm" firstAttribute="leading" secondItem="zrk-zR-Mdi" secondAttribute="leading" id="ksR-of-QzH"/>
                             <constraint firstItem="taT-CI-BxF" firstAttribute="leading" secondItem="zrk-zR-Mdi" secondAttribute="leading" id="zRd-h3-wDj"/>
@@ -1898,7 +1871,7 @@ then select a few related causes.</string>
         <image name="FBLogoSmall" width="22" height="22"/>
         <image name="FacebookButtonSignUp" width="345" height="44"/>
         <image name="HorizontalDivider" width="1" height="1"/>
-        <image name="LC_logo" width="150" height="150"/>
+        <image name="LC_logo" width="144" height="179"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="TakeAPhotoBtnBG" width="287" height="287"/>
         <image name="backButton_image" width="12" height="21"/>
@@ -1907,7 +1880,6 @@ then select a few related causes.</string>
         <image name="contact_tick" width="37" height="37"/>
         <image name="default-placeholder.png" width="250" height="250"/>
         <image name="homeloginbg" width="375" height="667"/>
-        <image name="lc_logo_reg" width="116" height="116"/>
         <image name="login_bg_copy" width="375" height="667"/>
         <image name="login_textFieldbg" width="345" height="88"/>
         <image name="manplaceholder.jpg" width="100" height="100"/>
