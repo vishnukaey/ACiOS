@@ -28,6 +28,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  //hide until privacy check
+  tabBarView.hidden = YES;
+  impactsCountButton.userInteractionEnabled = NO;
+  friendsCountButton.userInteractionEnabled = NO;
+  
+  
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(profileUpdatedNotificationReceived:)
                                                name:kUpdateProfileNFK
@@ -135,6 +141,26 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   [self setCurrentProfileStatus:(FriendStatus)[self.userDetail.isFriend integerValue]];
 }
 
+- (void) checkPrivacySettings {
+  
+  if (currentProfileStatus != kMyProfile) {
+    
+    NSInteger privacy = [self.userDetail.privacy integerValue];
+    if (privacy == kPivacyPublic ||
+        (privacy == kPivacyFriendsOnly && [self.userDetail.isFriend integerValue] == kIsFriend)) {
+      [self showTabBarAndLoadMilestones];
+    }
+  }
+}
+
+- (void) showTabBarAndLoadMilestones {
+  
+  tabBarView.hidden = NO;
+  impactsCountButton.userInteractionEnabled = YES;
+  friendsCountButton.userInteractionEnabled = YES;
+  [mileStonesVC loadMileStones];
+}
+
 #pragma mark - Notification Receivers
 
 -(void)profileUpdatedNotificationReceived:(NSNotification *)notification {
@@ -149,21 +175,21 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   LCFriend *friend = notification.userInfo[@"friend"];
   if (currentProfileStatus == kMyProfile || _userDetail.userID == friend.friendId) {
   
+    if(_userDetail.userID == friend.friendId) {
+      
+      _userDetail.isFriend = friend.isFriend;
+    }
+    
     if (notification.name == kAcceptFriendRequestNFK) {
       
       NSInteger count = [_userDetail.friendCount integerValue] + 1;
       _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+      [self checkPrivacySettings];
     }
     else if(notification.name == kRemoveFriendNFK) {
       
       NSInteger count = [_userDetail.friendCount integerValue] - 1;
       _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
-    }
-    
-    
-    if(_userDetail.userID == friend.friendId) {
-
-      _userDetail.isFriend = friend.isFriend;
     }
     [self updateUserDetailUI];
   }
