@@ -10,34 +10,57 @@
 #import "LCInterestsCellView.h"
 #import "LCViewActions.h"
 
-@interface LCInterestsVC ()
-
-@end
-
 @implementation LCInterestsVC
 
-- (void)viewDidLoad {
+#pragma mark - API call and Pagination
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager getInterestsForUser:self.userID lastId:nil withSuccess:^(NSArray *responses) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    BOOL hasMoreData = responses.count >= 20;
+    [self didFetchResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCAPIManager getInterestsForUser:self.userID lastId:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *responses) {
+    BOOL hasMoreData = responses.count >= 20;
+    [self didFetchNextResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
+
+#pragma mark - view life cycle
+- (void)viewDidLoad
+{
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  
   [self initailSetup];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
   [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - private method implementation
-
-- (void) initailSetup {
-  
+- (void) initailSetup
+{
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.backgroundColor = [UIColor clearColor];
+  self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+  self.tableView.allowsSelection = YES;
   isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
-  
   if (!self.noResultsView) {
     NSString *message = NSLocalizedString(@"no_interests_available_others", nil);
     if (isSelfProfile) {
@@ -45,7 +68,7 @@
     }
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
   }
-
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
 
 - (void)loadInterests
@@ -53,41 +76,9 @@
   [self startFetchingResults];
 }
 
-#pragma mark - API call and Pagination
-
-- (void)startFetchingResults
+- (void)setNoResultViewHidden:(BOOL)hide
 {
-  [super startFetchingResults];
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCAPIManager getInterestsForUser:self.userID withSuccess:^(NSArray *responses) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = NO;
-    [self didFetchResults:responses haveMoreData:hasMoreData];
-    [self setNoResultViewHidden:[self.results count] != 0];
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    [self didFailedToFetchResults];
-    [self setNoResultViewHidden:[self.results count] != 0];
-  }];
-}
-
-- (void)startFetchingNextResults
-{
-  //Currently no pagination required for interests
-      //  [super startFetchingNextResults];
-      //  [LCAPIManager getInterestsForUser:self.userID withSuccess:^(NSArray *responses) {
-      //    [self stopRefreshingViews];
-      //    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
-      //    [self didFetchNextResults:response haveMoreData:hasMoreData];
-      //  } andFailure:^(NSString *error) {
-      //    [self stopRefreshingViews];
-      //    [self didFailedToFetchResults];
-      //  }];
-}
-
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
+  if (hide) {
     [self hideNoResultsView];
   }
   else
@@ -98,27 +89,24 @@
 
 #pragma mark - TableView delegates
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  [self setNoResultViewHidden:(self.results.count > 0)];
+  return [super tableView:tableView numberOfRowsInSection:section];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
   JTTABLEVIEW_cellForRowAtIndexPath
-  
   static NSString *MyIdentifier = @"LCInterestsCell";
   LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
     cell = [topLevelObjects objectAtIndex:0];
-    
   }
-  
   LCInterest *interstObj = [self.results objectAtIndex:indexPath.row];
   [cell setData:interstObj];
-  
-  tableView.backgroundColor = [UIColor clearColor];
-  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-  tableView.allowsSelection = YES;
-  
   return cell;
 }
 
