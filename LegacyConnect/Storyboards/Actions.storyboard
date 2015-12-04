@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -60,7 +60,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-61-Hiu">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoM-61-Hiu" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xh6-xH-zzh">
@@ -118,6 +118,11 @@
                                     <constraint firstItem="C8s-ol-1ee" firstAttribute="centerX" secondItem="QoM-61-Hiu" secondAttribute="centerX" id="cVz-wU-Prf"/>
                                     <constraint firstItem="6pD-hc-xci" firstAttribute="leading" secondItem="C8s-ol-1ee" secondAttribute="trailing" constant="25" id="jty-7A-Ldw"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="xh6-xH-zzh" id="Tcv-OW-31R"/>
+                                    <outlet property="rightButton" destination="6pD-hc-xci" id="mRx-Sj-xXt"/>
+                                    <outlet property="title" destination="C8s-ol-1ee" id="Sep-TL-Cwb"/>
+                                </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an Interest to take your action in:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-cf-Oxl">
                                 <rect key="frame" x="0.0" y="64" width="320" height="36"/>
@@ -183,7 +188,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnE-38-ZO1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WnE-38-ZO1" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INVITE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqK-8C-kpp">
@@ -234,6 +239,11 @@
                                     <constraint firstAttribute="trailing" secondItem="l9I-rp-Vpo" secondAttribute="trailing" constant="8" id="ize-Jc-ymj"/>
                                     <constraint firstAttribute="height" constant="64" id="uAC-jd-Qwr"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="lnD-QO-z6C" id="1t1-MP-1e1"/>
+                                    <outlet property="rightButton" destination="l9I-rp-Vpo" id="oyX-oJ-HX6"/>
+                                    <outlet property="title" destination="aqK-8C-kpp" id="srW-Jg-isq"/>
+                                </connections>
                             </view>
                             <searchBar contentMode="redraw" placeholder="Search friends to tag" translatesAutoresizingMaskIntoConstraints="NO" id="vb2-Cy-ApG">
                                 <rect key="frame" x="0.0" y="64" width="375" height="44"/>
@@ -267,7 +277,7 @@
                                         <rect key="frame" x="0.0" y="22" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WAD-tq-IKj" id="Wjj-Jm-0kY">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-4R-LMo">
@@ -719,7 +729,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouk-DQ-ciO">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ouk-DQ-ciO" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dl9-fg-364">
@@ -755,6 +765,10 @@
                                     <constraint firstAttribute="height" constant="64" id="yis-5E-eV8"/>
                                     <constraint firstItem="dl9-fg-364" firstAttribute="top" secondItem="ouk-DQ-ciO" secondAttribute="top" constant="17" id="z2H-xa-qf1"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="dl9-fg-364" id="uFx-Ba-nQS"/>
+                                    <outlet property="title" destination="5ph-Qm-rE8" id="QmX-B1-d64"/>
+                                </connections>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="KlI-iR-Jfs" customClass="LCMultipleSelectionTable">
                                 <rect key="frame" x="0.0" y="108" width="320" height="460"/>
@@ -764,7 +778,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pC5-7w-vnz" id="DcJ-iX-kvz">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69h-fE-bqm">
@@ -902,7 +916,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pL-0i-Vlu">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pL-0i-Vlu" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT DATE AND TIME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QA8-LD-vSu">
@@ -955,6 +969,11 @@
                                     <constraint firstItem="o3A-lC-YKb" firstAttribute="top" secondItem="2pL-0i-Vlu" secondAttribute="top" constant="22" id="hSr-fR-Rbl"/>
                                     <constraint firstAttribute="bottom" secondItem="o3A-lC-YKb" secondAttribute="bottom" id="zhd-JW-cEG"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="o3A-lC-YKb" id="2cX-GJ-ehh"/>
+                                    <outlet property="rightButton" destination="ISP-P1-25k" id="SUa-mc-njZ"/>
+                                    <outlet property="title" destination="QA8-LD-vSu" id="lzx-Sg-sgh"/>
+                                </connections>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="42h-nk-Psd">
                                 <rect key="frame" x="143" y="72" width="89" height="29"/>

@@ -40,7 +40,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNW-qp-ENC">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JNW-qp-ENC" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTIFICATIONS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3m-Mm-6un">
@@ -60,6 +60,9 @@
                                     <constraint firstAttribute="height" constant="64" id="hy0-sO-kIi"/>
                                     <constraint firstItem="S3m-Mm-6un" firstAttribute="leading" secondItem="JNW-qp-ENC" secondAttribute="leading" constant="15" id="tRd-Gq-EJB"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="title" destination="S3m-Mm-6un" id="A9r-oN-3CE"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4WG-1b-jf6">
                                 <rect key="frame" x="-4" y="108" width="383" height="1"/>

@@ -9,11 +9,8 @@
 #import "LCNavigationBar.h"
 
 
-#define TITLE_FONT [UIFont fontWithName:@"Gotham-Book" size:13]
-#define BUTTON_FONT [UIFont fontWithName:@"Gotham-Book" size:13]
-#define TITLE_COLOR [UIColor colorWithRed:35/255.0 green:31/255.0 blue:32/255.0 alpha:1]
-#define BUTTON_ACTIVECOLOR [UIColor colorWithRed:35/255.0 green:31/255.0 blue:32/255.0 alpha:1]
-#define BUTTON_INACTIVECOLOR [UIColor colorWithRed:35/255.0 green:31/255.0 blue:32/255.0 alpha:1]
+#define TITLE_FONT [UIFont fontWithName:@"Gotham-Bold" size:12]
+#define TITLE_COLOR [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
 
 @implementation LCNavigationBar
 
@@ -57,13 +54,8 @@
     }
     else
     {
-      if (self.leftButton.enabled) {
-        [self.leftButton setTitleColor:BUTTON_ACTIVECOLOR forState:UIControlStateNormal];
-      }
-      else
-      {
-        [self.leftButton setTitleColor:BUTTON_INACTIVECOLOR forState:UIControlStateNormal];
-      }
+      height = 44;
+      width = 74;
     }
     
     NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.leftButton attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
@@ -85,24 +77,17 @@
   if (self.rightButton) {
     
     float width , height;
-    height = 44;
-    width = 44;
     if ([self.rightButton imageForState:UIControlStateNormal]) {
       width = height = 44;
     }
     else
     {
-      if (self.rightButton.enabled) {
-        [self.rightButton setTitleColor:BUTTON_ACTIVECOLOR forState:UIControlStateNormal];
-      }
-      else
-      {
-        [self.rightButton setTitleColor:BUTTON_INACTIVECOLOR forState:UIControlStateNormal];
-      }
+      height = 44;
+      width = 64;
     }
     
-    NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.rightButton attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
-    [self addConstraint:lead];
+    NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.rightButton attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+    [self addConstraint:trail];
     
     NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.rightButton attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
     [self addConstraint:bottom];
@@ -118,8 +103,10 @@
 - (void)setTitleProperties
 {
   if (self.title) {
-    float bottomSpace = 0;
+    float bottomSpace = 10;
     float title_hight = 20;
+    [self.title setTextColor:TITLE_COLOR];
+    [self.title setFont:TITLE_FONT];
     
     NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.title attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
     [self addConstraint:lead];
