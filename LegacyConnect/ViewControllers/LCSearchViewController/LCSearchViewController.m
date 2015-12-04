@@ -134,12 +134,11 @@
   searchUsersVC.searchKey = _searchBar.text;
   [searchUsersVC.tableView reloadData];
   
-  searchInterestsVC.interestsArray = searchResultObject.interestsArray;
-  [searchInterestsVC.interestsCollectionView reloadData];
+  [searchInterestsVC setInterestsArray:searchResultObject.interestsArray];
+  searchInterestsVC.searchKey = _searchBar.text;
   
-  searchCausesVC.causesArray = searchResultObject.causesArray;
-  [searchCausesVC.causesCollectionView reloadData];
-  
+  [searchCausesVC setCausesArray:searchResultObject.causesArray];
+  searchCausesVC.searchKey = _searchBar.text;
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

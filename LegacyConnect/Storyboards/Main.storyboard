@@ -98,7 +98,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY FEED" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i7z-nM-tf3">
-                                        <rect key="frame" x="85" y="31.5" width="150" height="21"/>
+                                        <rect key="frame" x="85" y="32" width="150" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="150" id="fhX-Bg-NsJ"/>
                                             <constraint firstAttribute="height" constant="21" id="h5z-0t-M0f"/>
@@ -705,7 +705,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="causesCollectionView" destination="e3C-3l-Qx3" id="22u-r0-2GP"/>
+                        <outlet property="collectionView" destination="e3C-3l-Qx3" id="xdy-dy-ndO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3tb-RI-4uo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -806,7 +806,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="interestsCollectionView" destination="NSB-mx-iVI" id="tL5-VL-O9f"/>
+                        <outlet property="collectionView" destination="NSB-mx-iVI" id="DVW-LE-WeP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J8a-4t-6w6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1083,10 +1083,10 @@
                                                         <constraint firstAttribute="height" constant="30" id="Lch-6x-KdD"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="13"/>
-                                                    <state key="normal" title="Support">
+                                                    <state key="normal" title="Follow">
                                                         <color key="titleColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
-                                                    <state key="selected" title="Supporting"/>
+                                                    <state key="selected" title="Following"/>
                                                     <connections>
                                                         <action selector="supportButtonTapped:" destination="twQ-Rt-dFp" eventType="touchUpInside" id="OAS-hY-3Nn"/>
                                                     </connections>

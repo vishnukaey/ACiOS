@@ -29,7 +29,7 @@
   _cause = cause;
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:nil];
   _causeNameLabel.text = [NSString stringWithFormat:@"%@",cause.name];
-  _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",cause.supporters];
+  _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",cause.supporters];
   if(_cause.isSupporting)
   {
     [_causeSupportButton setSelected:YES];
@@ -46,7 +46,7 @@
   _causeSupportButton.userInteractionEnabled = NO;
   if(!_causeSupportButton.selected)
   {
-    _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Supporters",[_cause.supporters intValue]+1];
+    _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Followers",[_cause.supporters intValue]+1];
     [_causeSupportButton setSelected:YES];
     [LCAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
       _cause.isSupporting =YES;
@@ -54,13 +54,13 @@
       _causeSupportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       [_causeSupportButton setSelected:NO];
-      _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",_cause.supporters];
+      _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",_cause.supporters];
       _causeSupportButton.userInteractionEnabled = YES;
     }];
   }
   else
   {
-    _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Supporters",[_cause.supporters intValue]-1];
+    _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%d Followers",[_cause.supporters intValue]-1];
     [_causeSupportButton setSelected:NO];
     [LCAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
       _causeSupportButton.userInteractionEnabled = YES;
@@ -68,7 +68,7 @@
       _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]-1];
     } andFailure:^(NSString *error) {
       _causeSupportButton.userInteractionEnabled = YES;
-      _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Supporters",_cause.supporters];
+      _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",_cause.supporters];
       [_causeSupportButton setSelected:YES];
     }];
   }

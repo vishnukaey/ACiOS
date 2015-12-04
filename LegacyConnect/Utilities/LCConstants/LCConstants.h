@@ -43,6 +43,8 @@ extern NSString *const kIneterestsFollowURL;
 extern NSString *const kIneterestsUnfollowURL;
 extern NSString *const kGetInterestsAndCausesURL;
 
+extern NSString *const kGetInterestsSearchURL;
+extern NSString *const kGetCauseSearchURL;
 extern NSString *const kGetCauseURL;
 extern NSString *const kGetCausesURL;
 extern NSString *const kGetUserCausesURL;

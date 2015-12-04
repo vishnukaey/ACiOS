@@ -69,7 +69,7 @@
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
     self.eventObject.followerCount = modifiedEvent.followerCount;
-    [settingsButton setTitle:NSLocalizedString(@"attending", @"Attending button title") forState:UIControlStateNormal];
+    [settingsButton setTitle:NSLocalizedString(@"supporting", @"Attending button title") forState:UIControlStateNormal];
     [self showCommentsField];
     
     [self topViewOnlyRefresh];
@@ -83,7 +83,7 @@
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
     self.eventObject.followerCount = modifiedEvent.followerCount;
-    [settingsButton setTitle:NSLocalizedString(@"attend", @"attend button title") forState:UIControlStateNormal];
+    [settingsButton setTitle:NSLocalizedString(@"support", @"attend button title") forState:UIControlStateNormal];
     [self hideCommentsFields];
     
     [self topViewOnlyRefresh];

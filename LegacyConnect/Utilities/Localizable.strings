@@ -69,8 +69,10 @@
 "post_caps" = "POST";
 "comment_placeholder" = "Comment";
 "settings" = "Settings";
-"attend" = "Attend";
-"attending" = "Attending";
+"follow" = "Follow";
+"following" = "Following";
+"support" = "Support";
+"supporting" = "Supporting";
 "follow_event_message" = "Follow the event to view and post comments";
 "delete_action" = "Delete Action";
 "delete_action_message" = "Are you sure you want to permanently remove this action from LegacyConnect?";
@@ -104,4 +106,6 @@
 "email_changed" = "Email successfully changed";
 "password_changed" = "Password successfully changed";
 "signout_alert_message" = "Are you sure you want to sign out?";
+"fbuser_can't_change_email" = "Email cannot be changed as you have logged in via Facebook";
+"fbuser_can't_change_password" = "Password cannot be changed as you have logged in via Facebook";
 "signOut" = "Sign Out";

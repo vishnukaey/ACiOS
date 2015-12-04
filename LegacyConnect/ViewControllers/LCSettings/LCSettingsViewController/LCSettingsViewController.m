@@ -169,13 +169,24 @@ static CGFloat kNumberOfSection = 2;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == kIndexSectionAccount) {
+    NSString *fbUserId = [LCDataManager sharedDataManager].userFBID;
     switch (indexPath.row) {
       case 0:
-        [self showUpdateEmailScreen];
+        if (fbUserId) {
+          [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"fbuser_can't_change_email", nil)];
+        }
+        else {
+          [self showUpdateEmailScreen];
+        }
         break;
         
       case 1:
-        [self showChangePasswordScreen];
+        if (fbUserId) {
+          [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"fbuser_can't_change_password", nil)];
+        }
+        else {
+          [self showChangePasswordScreen];
+        }
         break;
         
       case 2:

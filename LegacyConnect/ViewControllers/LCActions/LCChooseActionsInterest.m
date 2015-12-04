@@ -24,19 +24,43 @@ static NSString *kCheckedImageName = @"contact_tick";
   IBOutlet UIButton *nextButton;
 }
 
+#pragma mark - API call and Pagination
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:nil withSuccess:^(NSArray *responses) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    BOOL hasMoreData = responses.count >= 20;
+    [self didFetchResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [self startFetchingNextResults];
+  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *responses) {
+    BOOL hasMoreData = responses.count >= 20;
+    [self didFetchNextResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   nextButton.enabled = NO;
-  
   if (!self.noResultsView) {
-    
     NSString *message = NSLocalizedString(@"no_interests_available_self", nil);
     self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
   }
+  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self startFetchingResults];
 }
 
@@ -58,29 +82,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   [appdel.menuButton setHidden:true];
 }
 
-#pragma mark - API call and Pagination
-
-- (void)startFetchingResults
-{
-  [super startFetchingResults];
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID withSuccess:^(NSArray *responses) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = NO;
-    [self didFetchResults:responses haveMoreData:hasMoreData];
-    [self setNoResultViewHidden:[self.results count] != 0];
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    [self didFailedToFetchResults];
-    [self setNoResultViewHidden:[self.results count] != 0];
-  }];
-}
-
-- (void)startFetchingNextResults
-{
-  //Currently no pagination required for interests
-}
-
+#pragma mark -Private method implementation
 - (void)setNoResultViewHidden:(BOOL)hidded
 {
   if (hidded) {
@@ -107,9 +109,14 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  [self setNoResultViewHidden:(self.results.count > 0)];
+  return [super tableView:tableView numberOfRowsInSection:section];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
