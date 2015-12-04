@@ -25,6 +25,7 @@
 @property (nonatomic, strong) NSString *isFriend;
 @property (nonatomic, strong) NSString *impactCount;
 @property (nonatomic, strong) NSString *friendCount;
+@property (nonatomic, strong) NSString *privacy;
 
 - (void)performNullCheck;
 @end

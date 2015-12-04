@@ -23,8 +23,8 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self initialUISetUp];
-  [mileStonesVC loadMileStones];
+  [self initialSetUp];
+  [self addTabMenu];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,32 +75,26 @@
 
 #pragma mark - private method implementation
 
-- (void)initialUISetUp
+- (void)initialSetUp
 {
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
-  
-  [self loadUserInfo];
-  [self addTabMenu];
-}
-
-- (void) loadUserInfo {
+  profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   
   userNameLabel.text = kEmptyStringValue;
   memeberSincelabel.text = kEmptyStringValue;
   locationLabel.text = kEmptyStringValue;
   
+  
   NSString *nativeUserId = [LCDataManager sharedDataManager].userID;
   if ([nativeUserId isEqualToString:self.userDetail.userID] || !self.userDetail.userID)
   {
     [self setCurrentProfileStatus:kMyProfile];
-    
   }
   else
   {
     [self setCurrentProfileStatus:kNonFriend];
   }
-  profilePic.image = [UIImage imageNamed:@"userProfilePic"];
   
   [self loaduserDetails];
 }
@@ -118,10 +112,18 @@
     self.userDetail = response;
     [self updateUserDetailUI];
     friendsButton.enabled = YES;
+
+    if (currentProfileStatus == kMyProfile) {
+      [self showTabBarAndLoadMilestones];
+    }
+    else {
+      [self checkPrivacySettings];
+    }
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
   }];
 }
+
 
 - (void)addTabMenu
 {
