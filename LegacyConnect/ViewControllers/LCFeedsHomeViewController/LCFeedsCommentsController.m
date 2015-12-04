@@ -106,15 +106,11 @@ static CGFloat kIndexForPostDetails = 0;
     [self resignAllResponders];
     [self enableCommentField:NO];
     [LCAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {
-//      [self.results insertObject:(LCComment*)response atIndex:0];
-//      self.feedObject.commentCount = [NSString stringWithFormat:@"%li",(unsigned long)[self.results count]];
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
-//      [self.tableView reloadData];
       [self enableCommentField:YES];
     } andFailure:^(NSString *error) {
-      LCDLog(@"----- Fail to add new comment");
       [self enableCommentField:YES];
     }];
   }
@@ -129,6 +125,13 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (!self.feedObject) {
+    /**
+     * This added because, In notification to FeedDetails flow, app need to fetch feed details and during this time
+     * the placeholders in this screen(especially the first cell for FeedDetaisl) is shown long time than expected.
+     */
+    return [super tableView:tableView numberOfRowsInSection:section];
+  }
   return [super tableView:tableView numberOfRowsInSection:section] + 1;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -183,7 +186,6 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 #pragma mark - feedCell delegates
