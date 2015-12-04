@@ -509,16 +509,16 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5iW-De-Ye3" userLabel="Description">
-                                                    <rect key="frame" x="80" y="27" width="280" height="16"/>
+                                                    <rect key="frame" x="80" y="27" width="280" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="16" id="qLR-1H-pae"/>
+                                                        <constraint firstAttribute="height" constant="18" id="qLR-1H-pae"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                                                     <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVw-jt-Wyi" userLabel="Details">
-                                                    <rect key="frame" x="80" y="43" width="280" height="36"/>
+                                                    <rect key="frame" x="80" y="45" width="280" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="21" id="1JR-8B-Eq4"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="wVY-6g-Dhl"/>

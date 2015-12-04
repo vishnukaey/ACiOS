@@ -13,5 +13,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *causeNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *causeSupportersCountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *causeSupportButton;
+@property (weak, nonatomic) IBOutlet UIView *imageContainer;
 @property (weak, nonatomic) LCCause *cause;
 @end

@@ -27,6 +27,10 @@
 -(void)setCause:(LCCause *)cause
 {
   _cause = cause;
+  [self.imageContainer setBackgroundColor:[UIColor clearColor]];
+  [self.imageContainer.layer setCornerRadius:5.0f];
+  [self.imageContainer.layer setBorderColor:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor];
+  [self.imageContainer.layer setBorderWidth:1];
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:nil];
   _causeNameLabel.text = [NSString stringWithFormat:@"%@",cause.name];
   _causeSupportersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",cause.supporters];
