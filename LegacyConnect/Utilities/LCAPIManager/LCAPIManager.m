@@ -700,10 +700,12 @@ static LCAPIManager *sharedManager = nil;
 
 
 
-+ (void)getUserInterestsAndCausesWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getUserInterestsAndCausesWithSearchKey: (NSString *)searchKey withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetInterestsAndCausesURL];
+  NSString *url = [NSString stringWithFormat:@"%@%@?searchKey=%@", kBaseURL, kGetInterestsAndCausesURL, searchKey];
+  url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
+  
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
