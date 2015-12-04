@@ -34,7 +34,12 @@
 -(void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
+  [_interestsImageView setBackgroundColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
+  [_interestsImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    if (image) {
+      [_interestsImageView setBackgroundColor:[UIColor clearColor]];
+    }
+  }];
   _interestNameLabel.text = interest.name;
 }
 

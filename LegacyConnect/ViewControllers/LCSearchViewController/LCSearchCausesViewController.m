@@ -39,6 +39,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_results_found", nil) andViewWidth:CGRectGetWidth(self.collectionView.frame)];
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  self.collectionViewCellSize  = CGSizeMake(size, size);
 }
 
 - (void)didReceiveMemoryWarning {
