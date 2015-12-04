@@ -32,6 +32,7 @@
 #import "LCGAManager.h"
 #import "LCRequest.h"
 #import "LCRecentNotification.h"
+#import "LCNavigationBar.h"
 
 #import "LCAPIManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
