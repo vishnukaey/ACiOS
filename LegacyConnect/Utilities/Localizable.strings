@@ -69,8 +69,10 @@
 "post_caps" = "POST";
 "comment_placeholder" = "Comment";
 "settings" = "Settings";
-"attend" = "Attend";
-"attending" = "Attending";
+"follow" = "Follow";
+"following" = "Following";
+"support" = "Support";
+"supporting" = "Supporting";
 "follow_event_message" = "Follow the event to view and post comments";
 "delete_action" = "Delete Action";
 "delete_action_message" = "Are you sure you want to permanently remove this action from LegacyConnect?";
