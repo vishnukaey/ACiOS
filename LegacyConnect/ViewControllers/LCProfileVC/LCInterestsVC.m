@@ -107,6 +107,8 @@
   }
   LCInterest *interstObj = [self.results objectAtIndex:indexPath.row];
   [cell setData:interstObj];
+  cell.checkButtonWidth.constant = 0;
+  cell.checkButtonTrailing.constant = 0;
   return cell;
 }
 
