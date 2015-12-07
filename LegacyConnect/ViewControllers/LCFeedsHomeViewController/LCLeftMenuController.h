@@ -17,7 +17,9 @@
 @end
 
 //------interface
-@interface LCLeftMenuController : UIViewController
+@interface LCLeftMenuController : UIViewController {
+  NSIndexPath *selectedIndexPath;
+}
 
 @property(nonatomic, retain)id delegate_;
 

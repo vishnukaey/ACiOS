@@ -67,7 +67,7 @@
 {
   if (self.emailTextField.text.length > 0) {
     [self.submitButton setEnabled:true];
-    [self.submitButton setBackgroundColor:[UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]];
+    [self.submitButton setBackgroundColor:[LCUtilityManager getThemeRedColor]];
   }
   else
   {

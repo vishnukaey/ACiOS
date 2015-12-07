@@ -11,7 +11,7 @@
 #import "NSDate+TimeAgo.h"
 
 #define kNormalPostTextColor [UIColor colorWithRed:35/255.0 green:31/255.0 blue:32/255.0 alpha:1]
-#define kTagsTextColor [UIColor colorWithRed:239/255.0 green:100/255.0 blue:77/255.0 alpha:1]
+#define kTagsTextColor [LCUtilityManager getThemeRedColor]
 #define kImageLoadingBackColor [UIColor colorWithRed:90.0f/255.0f green:90.0f/255.0f blue:90.0f/255.0f alpha:1.0]
 #define kFeedUserTextFont [UIFont fontWithName:@"Gotham-Medium" size:13]
 #define kPostInfoFont [UIFont fontWithName:@"Gotham-Book" size:13]
