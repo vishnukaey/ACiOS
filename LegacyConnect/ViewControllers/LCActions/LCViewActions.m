@@ -95,10 +95,12 @@ static CGFloat kActionSectionHeight = 30;
     }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self dataPopulation];
-    if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {
-      [self startFetchingResults];
-    }
+    [self.tableView setHidden:YES];
+    eventCreatedByLabel.hidden = YES;
+    eventdateInfoLable.hidden = YES;
+    eventNameLabel.hidden = YES;
+    eventPhoto.hidden = YES;
+    settingsButton.hidden = YES;
     LCDLog(@"%@",error);
   }];
 }
