@@ -21,4 +21,9 @@ static LCDataManager *sharedManager = nil;
   return sharedManager;
 }
 
++ (void)resetSharedManager
+{  
+  sharedManager = nil;
+}
+
 @end
