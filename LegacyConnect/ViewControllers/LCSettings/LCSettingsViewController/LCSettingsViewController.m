@@ -248,8 +248,6 @@ static CGFloat kNumberOfSection = 2;
 
 - (void) signOutLegacy {
   
-  
-  
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager signOutwithSuccess:^(id response) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -259,6 +257,7 @@ static CGFloat kNumberOfSection = 2;
     BOOL tutorialPresent = [[NSUserDefaults standardUserDefaults] boolForKey:kTutorialPresentKey];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     [[NSUserDefaults standardUserDefaults] setBool:tutorialPresent forKey:kTutorialPresentKey];//tutorial should persist
+    [LCDataManager resetSharedManager];
     if ([FBSDKAccessToken currentAccessToken])
     {
       [[FBSDKLoginManager new] logOut];

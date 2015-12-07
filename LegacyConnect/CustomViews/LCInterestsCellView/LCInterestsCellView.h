@@ -15,6 +15,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *interestFollowLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *interestsBG;
 @property (strong, nonatomic) IBOutlet UIButton *checkButton;//for select interest in create post flow
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *checkButtonWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *checkButtonTrailing;
 
 - (void)setData: (LCInterest *) interest;
 @end

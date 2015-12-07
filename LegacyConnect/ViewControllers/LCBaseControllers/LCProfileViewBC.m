@@ -133,10 +133,10 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   
   NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",self.userDetail.avatarURL];
   [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
-                placeholderImage:profilePic.image];
+                placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   
   [headerImageView sd_setImageWithURL:[NSURL URLWithString:self.userDetail.headerPhotoURL]
-                     placeholderImage:headerImageView.image];
+                     placeholderImage:nil];
   
   [self setCurrentProfileStatus:(FriendStatus)[self.userDetail.isFriend integerValue]];
 }
