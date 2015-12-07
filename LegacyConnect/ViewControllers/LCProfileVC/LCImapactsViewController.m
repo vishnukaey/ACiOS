@@ -124,9 +124,9 @@
   [actionSheet addAction:editPost];
   
   
-  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:@"Delete Post" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-                    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:@"Delete Post" message:@"Are you sure you want to permanently remove this post from LegacyConnect?" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:@"Delete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+                    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
                       [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
                         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
@@ -138,13 +138,13 @@
                     }];
                     [deleteAlert addAction:deletePostActionFinal];
                     
-                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+                    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
                     [deleteAlert addAction:cancelAction];
                     [self presentViewController:deleteAlert animated:YES completion:nil];
   }];
   [actionSheet addAction:deletePost];
   
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
