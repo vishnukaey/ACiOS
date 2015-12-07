@@ -16,7 +16,7 @@
 #define DEMO_SERVER 3
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -233,5 +233,7 @@ NSString *const kPrivacy = @"Privacy";
 NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";
+
+
 
 @end

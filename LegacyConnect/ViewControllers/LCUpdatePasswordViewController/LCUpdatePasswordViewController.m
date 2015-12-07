@@ -66,7 +66,7 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
 {
   if (self.passwordTextField.text.length > 0 && self.confirmPasswordTextField.text.length > 0) {
     [self.updateButton setEnabled:true];
-    [self.updateButton setBackgroundColor:[UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]];
+    [self.updateButton setBackgroundColor:[LCUtilityManager getThemeRedColor]];
   }
   else
   {

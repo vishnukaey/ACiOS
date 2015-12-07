@@ -11,7 +11,7 @@
 static NSString * kUnLikedStatus = @"0";
 static NSString * kLikedStatus = @"1";
 
-#define kLikedColour [UIColor colorWithRed:239.0f/255 green:100.0f/255 blue:77.0f/255 alpha:1]
+#define kLikedColour [LCUtilityManager getThemeRedColor]
 #define kUnLikedColor [UIColor colorWithRed:222.0f/255 green:223.0f/255 blue:224.0f/255 alpha:1]
 
 @interface LCThanksButtonImage : UIImageView

@@ -98,9 +98,6 @@ static NSString *kCheckedImageName = @"contact_tick";
   
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:interestsButton, causesButton, nil];
   tabmenu.views = [[NSArray alloc] initWithObjects:interestsTableView,  causesCollectionView, nil];
-  
-  tabmenu.highlightColor = [UIColor colorWithRed:239.0f/255.0 green:100.0f/255.0 blue:77.0f/255.0 alpha:1.0];
-  tabmenu.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 }
 
 - (void)loadInterestsAndCausesWithSearchKey :(NSString *)searchKey

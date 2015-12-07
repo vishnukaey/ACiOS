@@ -58,9 +58,6 @@ static NSString * const kRequestNotifications = @"requestNotifications";
   self.tabMenu.menuButtons = @[_recentButton,_requestsButton];
   self.tabMenu.views = @[_recentContainer, _requestsContainer];
   self.tabMenu.backgroundColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
-  self.tabMenu.highlightColor = [UIColor colorWithRed:240.0/255.0 green:100/255.0 blue:77/255.0 alpha:1.0];
-  self.tabMenu.normalColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
-  
 }
 
 - (void)requestTabTapped
