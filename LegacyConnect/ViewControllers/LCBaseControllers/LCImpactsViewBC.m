@@ -107,7 +107,7 @@
 {
   if ([self.navigationController.topViewController isEqual:self]) {
     CGPoint offset = self.tableView.contentOffset;
-    [self.tableView reloadData];
+    [self reloadImpactsTable];
     [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
@@ -129,6 +129,17 @@
   else{
     [self showNoResultsView];
   }
+}
+
+- (void)reloadImpactsTable
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.tableView reloadData];
+    [self.tableView layoutIfNeeded];
+    if (self.tableView.contentSize.height>self.tableView.frame.size.height - [LCUtilityManager getHeightOffsetForGIB]) {
+      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB]);
+    }
+  });
 }
 
 /*

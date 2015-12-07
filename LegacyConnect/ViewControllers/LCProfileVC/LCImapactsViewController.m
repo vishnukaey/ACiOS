@@ -26,6 +26,7 @@
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
+    [self reloadImpactsTable];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
@@ -101,7 +102,7 @@
     if (show) {
       [self showFeedCommentsWithFeed:viewController.feed];
     } else {
-      [self.tableView reloadData];
+      [self reloadImpactsTable];
     }
   }];
 }

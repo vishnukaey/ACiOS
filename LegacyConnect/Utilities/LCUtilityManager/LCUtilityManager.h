@@ -52,5 +52,6 @@
 + (void)checkAppVersion;
 
 + (UIColor *)getThemeRedColor;
++ (float)getHeightOffsetForGIB;
 
 @end
