@@ -31,7 +31,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self.tableView reloadData];
+  [self reloadMilestonesTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,6 +95,7 @@
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
+    [self reloadMilestonesTable];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
@@ -110,6 +111,7 @@
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
+    [self reloadMilestonesTable];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
@@ -207,7 +209,7 @@
     if (show) {
       [self showFeedCommentsWithFeed:viewController.feed];
     } else {
-      [self.tableView reloadData];
+      [self reloadMilestonesTable];
     }
   }];
 }
@@ -268,7 +270,6 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
   {
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
@@ -283,7 +284,9 @@
 #pragma mark - ScrollView delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
+  [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight)];
   [self.delegate scrollViewScrolled:scrollView];
+  [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight)];
 }
 
 @end

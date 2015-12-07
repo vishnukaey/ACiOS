@@ -154,7 +154,7 @@
 //  if ([self.navigationController.topViewController isEqual:self]) {
   
     CGPoint offset = self.tableView.contentOffset;
-    [self.tableView reloadData];
+    [self reloadMilestonesTable];
     [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
@@ -171,6 +171,18 @@
     [self showNoResultsView];
   }
 }
+
+- (void)reloadMilestonesTable
+{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self.tableView reloadData];
+    [self.tableView layoutIfNeeded];
+    self.tableContentHeight = self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB];
+      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight);
+    
+  });
+}
+
 
 - (void) viewWillAppear:(BOOL)animated
 {
