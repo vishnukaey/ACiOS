@@ -11,6 +11,7 @@
 
 #define TITLE_FONT [UIFont fontWithName:@"Gotham-Bold" size:12]
 #define TITLE_COLOR [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1]
+#define TOPBAR_COLOR [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0]
 
 @implementation LCNavigationBar
 
@@ -25,7 +26,7 @@
   [self.leftButton removeFromSuperview];
   [self.title removeFromSuperview];
   [self.rightButton removeFromSuperview];
-  
+  [self setBackgroundColor:TOPBAR_COLOR];
   
   [self.title removeConstraints:self.title.constraints];
   [self.leftButton removeConstraints:self.leftButton.constraints];
@@ -120,6 +121,20 @@
     NSLayoutConstraint *titleHeight = [NSLayoutConstraint constraintWithItem:self.title attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:title_hight];
     [self.title addConstraint:titleHeight];
   }
+}
+
++ (UIColor *)getTitleColor
+{
+  return TITLE_COLOR;
+}
++ (UIFont *)getTitleFont
+{
+  return TITLE_FONT;
+}
+
+ + (UIColor *)getNavigationBarColor
+{
+  return TOPBAR_COLOR;
 }
 /*
 // Only override drawRect: if you perform custom drawing.
