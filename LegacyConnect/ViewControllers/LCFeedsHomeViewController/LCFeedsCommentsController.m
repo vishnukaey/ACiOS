@@ -49,7 +49,7 @@ static CGFloat kIndexForPostDetails = 0;
     self.feedObject = response;
     [self startFetchingResults];
   } andFailure:^(NSString *error) {
-    
+    [self enableCommentField:NO];
   }];
 }
 
