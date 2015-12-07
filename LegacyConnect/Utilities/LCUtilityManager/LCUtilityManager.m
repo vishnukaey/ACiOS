@@ -534,4 +534,9 @@
   }];
 }
 
++ (UIColor *)getThemeRedColor
+{
+  return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
+}
+
 @end

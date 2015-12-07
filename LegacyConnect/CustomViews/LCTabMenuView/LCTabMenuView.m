@@ -21,6 +21,12 @@
 
 - (void)setMenuButtons:(NSArray *)menuButtons_
 {
+  
+  //setting highlight color
+  self.highlightColor = [LCUtilityManager getThemeRedColor];
+  self.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
+
+  
   menuButtons = menuButtons_;
   if (highlightColor)
   {

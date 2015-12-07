@@ -30,7 +30,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 #define kDeSelectionColor [UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:1]
 
 
-#define kIconSelectionColor [UIColor colorWithRed:239.0f/255 green:100.0f/255 blue:77.0f/255 alpha:1]
+#define kIconSelectionColor [LCUtilityManager getThemeRedColor]
 #define kIconDeSelectionColor [UIColor colorWithRed:247.0f/255 green:247.0f/255 blue:247.0f/255 alpha:1]
 
 @implementation LCLeftMenuController

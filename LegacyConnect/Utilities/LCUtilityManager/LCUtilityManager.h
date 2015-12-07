@@ -51,4 +51,6 @@
 + (NSString *)getAppVersion;
 + (void)checkAppVersion;
 
++ (UIColor *)getThemeRedColor;
+
 @end

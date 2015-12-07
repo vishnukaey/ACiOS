@@ -23,7 +23,7 @@
 
 //    badgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(frame.size.width * .52f, 3, 20, 20)];
 //    badgeLabel.backgroundColor = [UIColor whiteColor];
-//    badgeLabel.textColor = [UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:1];
+//    badgeLabel.textColor = [LCUtilityManager getThemeRedColor];
 //    badgeLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:11];
 //    [self addSubview:badgeLabel];
 //    badgeLabel.layer.cornerRadius = badgeLabel.frame.size.width/2;

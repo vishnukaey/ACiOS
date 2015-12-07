@@ -185,7 +185,7 @@ static CGFloat kActionSectionHeight = 30;
   NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
   [eventInfoAttribString addAttributes:@{
                                              NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                             NSForegroundColorAttributeName : [UIColor colorWithRed:239/255.0f green:100/255.0f blue:77/255.0f alpha:1]
+                                             NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]
                                              } range:tagRangeUserName];
   
   

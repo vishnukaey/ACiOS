@@ -12,7 +12,7 @@
 
 static CGFloat kCommentFieldHeight = 45.0f;
 #define kPostButtonDisabledColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
-#define kPostButtonEnabledColor [UIColor colorWithRed:239.0/255 green:100.0/255 blue:77.0/255 alpha:0.9]
+#define kPostButtonEnabledColor [LCUtilityManager getThemeRedColor]
 #define kPostButtonTextColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
 #define kPostBtnFont [UIFont fontWithName:@"Gotham-Book" size:12.0f]
 #define kCommentFieldBGColor [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1]
