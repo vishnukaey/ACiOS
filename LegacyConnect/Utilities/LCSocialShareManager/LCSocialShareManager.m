@@ -171,12 +171,13 @@ NSString * const kFBMessageKey = @"message";
     
   } errorBlock:^(NSError *error) {
     self.canShareTwitterBlock(NO);
-    NSLog(@"-- %@", [error localizedDescription]);
+    NSLog(@"verification error-- %@", [error localizedDescription]);
   }];
 }
 
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
+  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
   if (image) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"postImage.png"];
@@ -187,7 +188,7 @@ NSString * const kFBMessageKey = @"message";
     NSURL *url_ = [NSURL fileURLWithPath:filePath];
     [self.twitterAPI postStatusUpdate:status inReplyToStatusID:nil mediaURL:url_ placeID:nil latitude:nil longitude:nil uploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
     } successBlock:^(NSDictionary *status) {
-      
+      LCDLog(@"shared on twitter successfully");
     } errorBlock:^(NSError *error) {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
     }];

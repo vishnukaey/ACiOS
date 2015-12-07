@@ -15,5 +15,8 @@
 @property(nonatomic, weak)IBOutlet UIButton *leftButton;
 
 - (void)layoutComponents;
++ (UIColor *)getTitleColor;
++ (UIFont *)getTitleFont;
++ (UIColor *)getNavigationBarColor;
 
 @end

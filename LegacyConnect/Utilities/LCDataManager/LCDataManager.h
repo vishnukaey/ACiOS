@@ -10,7 +10,6 @@
 
 @interface LCDataManager : NSObject
 
-+ (LCDataManager *)sharedDataManager;
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *dob;
@@ -28,5 +27,8 @@
 
 @property (strong, nonatomic) NSString *notificationCount;
 @property (strong, nonatomic) NSString *requestCount;
+
++ (LCDataManager *)sharedDataManager;
++ (void)resetSharedManager;
 
 @end

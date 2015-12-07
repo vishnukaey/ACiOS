@@ -46,7 +46,6 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
@@ -426,10 +425,10 @@ id augue sagittis, mattis sapien.</string>
                                     <constraint firstAttribute="trailing" secondItem="KD4-fi-MKp" secondAttribute="trailing" id="uxl-dI-GFy"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLu-gJ-chA">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLu-gJ-chA" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUs-Ri-0RD">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUs-Ri-0RD">
                                         <rect key="frame" x="153" y="31" width="69" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="69" id="1JZ-am-XxH"/>
@@ -483,6 +482,11 @@ id augue sagittis, mattis sapien.</string>
                                     <constraint firstAttribute="bottom" secondItem="u4t-AC-zlZ" secondAttribute="bottom" constant="8" id="kyz-83-K6h"/>
                                     <constraint firstAttribute="bottom" secondItem="jUs-Ri-0RD" secondAttribute="bottom" constant="13" id="oWY-TE-KiG"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="AKD-Ls-hjZ" id="6jm-sk-q0V"/>
+                                    <outlet property="rightButton" destination="u4t-AC-zlZ" id="a5K-Fi-Dl3"/>
+                                    <outlet property="title" destination="jUs-Ri-0RD" id="fhn-Oe-bgf"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -544,10 +548,10 @@ id augue sagittis, mattis sapien.</string>
                                 <color key="textColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9X-JJ-RC2">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b9X-JJ-RC2" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qol-uE-0xQ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qol-uE-0xQ">
                                         <rect key="frame" x="309" y="29" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="2PJ-9w-gcn"/>
@@ -581,6 +585,10 @@ id augue sagittis, mattis sapien.</string>
                                     <constraint firstAttribute="centerX" secondItem="thn-PH-Ngb" secondAttribute="centerX" id="GWl-Y9-R9K"/>
                                     <constraint firstAttribute="centerY" secondItem="Qol-uE-0xQ" secondAttribute="centerY" constant="-11" id="gjL-YI-2vw"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="rightButton" destination="Qol-uE-0xQ" id="pbo-S9-Yhk"/>
+                                    <outlet property="title" destination="thn-PH-Ngb" id="Wpv-Sr-1WM"/>
+                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mal-bE-9d3">
                                 <rect key="frame" x="0.0" y="579" width="375" height="88"/>
@@ -893,7 +901,7 @@ then select a few related causes.</string>
                                     <constraint firstAttribute="bottom" secondItem="kiA-vT-V5i" secondAttribute="bottom" constant="20" id="xRo-BE-rEm"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqk-BZ-Sd0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jqk-BZ-Sd0" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FyJ-K7-mEk">
@@ -918,6 +926,9 @@ then select a few related causes.</string>
                                     <constraint firstAttribute="height" constant="65" id="kUj-9c-07W"/>
                                     <constraint firstAttribute="trailing" secondItem="FyJ-K7-mEk" secondAttribute="trailing" constant="15" id="m4k-W9-4ny"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="rightButton" destination="FyJ-K7-mEk" id="IYy-c6-pLp"/>
+                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="JuP-Gg-t3z">
                                 <rect key="frame" x="142" y="23" width="100" height="100"/>
@@ -1053,16 +1064,9 @@ then select a few related causes.</string>
                                     <constraint firstItem="BF6-Al-sbl" firstAttribute="leading" secondItem="v28-q3-dnp" secondAttribute="leading" constant="15" id="yrj-cB-Nfx"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mz0-Jt-69X" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backButton_image" translatesAutoresizingMaskIntoConstraints="NO" id="pW9-0z-lfK">
-                                        <rect key="frame" x="15" y="32" width="13" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="13" id="DQm-O7-usN"/>
-                                            <constraint firstAttribute="height" constant="21" id="TEZ-xL-0L8"/>
-                                        </constraints>
-                                    </imageView>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNM-Jd-cza">
                                         <rect key="frame" x="316" y="27" width="47" height="30"/>
                                         <constraints>
@@ -1078,14 +1082,13 @@ then select a few related causes.</string>
                                             <action selector="buttonActions:" destination="rX4-yN-9BJ" eventType="touchUpInside" id="dmJ-Ro-GGg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
-                                        <rect key="frame" x="15" y="27" width="46" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IAy-gU-RrU">
+                                        <rect key="frame" x="8" y="27" width="33" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="46" id="7Ue-jT-DQw"/>
+                                            <constraint firstAttribute="width" constant="33" id="7Ue-jT-DQw"/>
                                             <constraint firstAttribute="height" constant="30" id="MIs-4V-VhA"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal">
+                                        <state key="normal" image="backButton">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1097,13 +1100,15 @@ then select a few related causes.</string>
                                 <color key="backgroundColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="UNM-Jd-cza" secondAttribute="trailing" constant="12" id="G0z-vM-fzM"/>
-                                    <constraint firstItem="IAy-gU-RrU" firstAttribute="centerY" secondItem="pW9-0z-lfK" secondAttribute="centerY" id="SVD-MG-pps"/>
                                     <constraint firstAttribute="bottom" secondItem="IAy-gU-RrU" secondAttribute="bottom" constant="8" id="Wnj-Au-NIB"/>
                                     <constraint firstAttribute="bottom" secondItem="UNM-Jd-cza" secondAttribute="bottom" constant="8" id="dPm-zE-j39"/>
-                                    <constraint firstItem="pW9-0z-lfK" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="15" id="hAP-3t-Td5"/>
                                     <constraint firstAttribute="height" constant="65" id="jEv-TB-uLI"/>
-                                    <constraint firstItem="IAy-gU-RrU" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="15" id="wlC-As-kR6"/>
+                                    <constraint firstItem="IAy-gU-RrU" firstAttribute="leading" secondItem="Mz0-Jt-69X" secondAttribute="leading" constant="8" id="wlC-As-kR6"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="IAy-gU-RrU" id="OTA-uA-av8"/>
+                                    <outlet property="rightButton" destination="UNM-Jd-cza" id="o1V-xo-23t"/>
+                                </connections>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
                                 <rect key="frame" x="138" y="28" width="100" height="100"/>
@@ -1231,10 +1236,10 @@ then select a few related causes.</string>
                                     <outlet property="delegate" destination="ajw-VA-3ws" id="kVz-vZ-UVH"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKr-yI-QjX">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKr-yI-QjX" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZP-oh-taW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZP-oh-taW">
                                         <rect key="frame" x="309" y="29" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="WLK-9K-3FN"/>
@@ -1268,6 +1273,10 @@ then select a few related causes.</string>
                                     <constraint firstAttribute="centerY" secondItem="0gn-mA-3LI" secondAttribute="centerY" constant="-9" id="TjR-EJ-L5v"/>
                                     <constraint firstAttribute="trailing" secondItem="IZP-oh-taW" secondAttribute="trailing" constant="16" id="sPu-kj-EnM"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="rightButton" destination="IZP-oh-taW" id="Do4-al-FYk"/>
+                                    <outlet property="title" destination="0gn-mA-3LI" id="poh-Pc-0Jn"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1422,10 +1431,10 @@ then select a few related causes.</string>
                                     <outlet property="delegate" destination="H3O-50-gkk" id="yDS-2u-IbW"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owd-PY-Dzl">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owd-PY-Dzl" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-aI-EqX">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-aI-EqX">
                                         <rect key="frame" x="309" y="29" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="GE5-Q0-b4q"/>
@@ -1459,6 +1468,10 @@ then select a few related causes.</string>
                                     <constraint firstAttribute="trailing" secondItem="YYL-aI-EqX" secondAttribute="trailing" constant="16" id="cYs-OH-iPB"/>
                                     <constraint firstAttribute="height" constant="65" id="mtV-dn-WTB"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="rightButton" destination="YYL-aI-EqX" id="4sz-5J-tgh"/>
+                                    <outlet property="title" destination="6xP-ka-uyH" id="b6L-3R-raC"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1860,7 +1873,7 @@ then select a few related causes.</string>
         <image name="LC_logo" width="144" height="179"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="TakeAPhotoBtnBG" width="287" height="287"/>
-        <image name="backButton_image" width="12" height="21"/>
+        <image name="backButton" width="12" height="21"/>
         <image name="chooseCauses_topBG" width="375" height="297"/>
         <image name="contact_plus" width="37" height="37"/>
         <image name="contact_tick" width="37" height="37"/>

@@ -36,7 +36,7 @@ NSString *const kFBURLScheme = @"fb781451981972910";
 ///* Staging url */
 NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 NSString *const kFBAppID = @"535164313296078";
-NSString *const kFBAppDisplayName = @"LegacyConnect";
+NSString *const kFBAppDisplayName = @"ThatHelps";
 NSString *const kFBURLScheme = @"fb535164313296078";
 
 #elif CURRENT_SERVER == DEMO_SERVER

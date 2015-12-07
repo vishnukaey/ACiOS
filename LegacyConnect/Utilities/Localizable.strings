@@ -44,6 +44,9 @@
 "send" = "Send";
 "skip" = "Skip";
 
+//-----post----//
+"delete_post" = "Delete Post";
+"delete_post_message" = "Are you sure you want to permanently remove this post from ThatHelps?";
 //---friends---//
 "remove_friend" = "Remove Friend";
 "cancel_friend_request" = "Cancel Friend Request";
@@ -75,7 +78,7 @@
 "supporting" = "Supporting";
 "follow_event_message" = "Follow the event to view and post comments";
 "delete_action" = "Delete Action";
-"delete_action_message" = "Are you sure you want to permanently remove this action from LegacyConnect?";
+"delete_action_message" = "Are you sure you want to permanently remove this action from ThatHelps?";
 "action_date_comparison_alert_message" = "Start date should be before end date";
 "action_form_name" = "NAME";
 "action_form_action_type" = "TYPE OF ACTION";
@@ -95,7 +98,7 @@
 
 //-- version control --//
 "version_outdated_title" = "Version outdated";
-"version_outdated_message" = "You are using and outdated version of LegacyConnect. Please Update to the latest version.";
+"version_outdated_message" = "You are using and outdated version of ThatHelps. Please Update to the latest version.";
 "version_update_title" = "Update now";"follow_event_message" = "Follow the event to view and post comments";
 
 //----tutorial----//

@@ -102,11 +102,11 @@ static NSString *kTitle = @"MY FEED";
 
 - (void)initialUISetUp
 {
-  [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0]];
+  [self.navigationController.navigationBar setBarTintColor:[LCNavigationBar getNavigationBarColor]];
   [self.navigationController setNavigationBarHidden:NO];
   self.title = kTitle;
   [self.navigationController.navigationBar setTitleTextAttributes:
-   @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+   @{NSForegroundColorAttributeName:[LCNavigationBar getTitleColor], NSFontAttributeName:[LCNavigationBar getTitleFont]}];
 }
 
 -(void) addSideMenuVIewController
