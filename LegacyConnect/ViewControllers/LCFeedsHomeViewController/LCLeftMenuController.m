@@ -53,6 +53,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   //  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
   //  self.menuTable.backgroundView = nil;
   self.isFirstLaunch = YES;
+  selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
   NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
@@ -132,9 +133,8 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 }
 
 - (IBAction)profileButtonTapped:(id)sender {
-  
-  NSIndexPath *selectedIndexPath = [self.menuTable indexPathForSelectedRow];
   [self deselectCellAtIndexPath:selectedIndexPath];
+  selectedIndexPath = nil;
   [delegate_ leftMenuItemSelectedAtIndex:3];
 }
 
@@ -152,8 +152,8 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   }
   [cell setIndex:indexPath.row];
   [cell setBackgroundColor:kDeSelectionColor];
-  if (self.isFirstLaunch && indexPath.row == 0) {
-    //Set 'Feeds' selected by default.
+  
+  if ([indexPath isEqual:selectedIndexPath]) {
     [cell setBackgroundColor:kSelectionColor];
     [cell.itemIcon setTintColor:kIconSelectionColor];
   }
@@ -164,15 +164,13 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 #pragma mark - UITableViewDelegate implementation
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  if (self.isFirstLaunch)
-  {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    LCMenuItemCell * cell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
-    [cell setBackgroundColor:kDeSelectionColor];
-    [cell.itemIcon setTintColor:kIconDeSelectionColor];
-  }
   
-  self.isFirstLaunch = NO;
+  if (self.isFirstLaunch) {
+    [self deselectCellAtIndexPath:selectedIndexPath];
+    self.isFirstLaunch = NO;
+  }
+  selectedIndexPath = indexPath;
+  
   LCMenuItemCell * selectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
   [selectedCell setSelected:NO];
   [selectedCell setBackgroundColor:kSelectionColor];
