@@ -54,7 +54,7 @@
   AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
   if([LCUtilityManager isNetworkAvailable])
   {
-    [manager.requestSerializer setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    [manager.requestSerializer setCachePolicy:NSURLRequestReloadRevalidatingCacheData];
   }
   else
   {

@@ -63,7 +63,8 @@ static CGFloat kNumberOfSection = 2;
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:settingsTableView animated:YES];
     LCDLog(@"error - %@", error);
-    [settingsTableView setAllowsSelection:NO];
+    
+//    [settingsTableView setAllowsSelection:NO];
   }];
   
 }
@@ -134,10 +135,12 @@ static CGFloat kNumberOfSection = 2;
   return cell;
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   
   return 44;
 }
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   
@@ -262,6 +265,7 @@ static CGFloat kNumberOfSection = 2;
     {
       [[FBSDKLoginManager new] logOut];
     }
+        
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
     UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];

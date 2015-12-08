@@ -62,13 +62,16 @@ static NSString * const kRequestNotifications = @"requestNotifications";
 
 - (void)requestTabTapped
 {
-  if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0)
+  if(_tabMenu.currentIndex != 1)
   {
-    [[LCDataManager sharedDataManager] setRequestCount:@"0"];
-    [LCNotificationManager postNotificationCountUpdatedNotification];
+    if ([[[LCDataManager sharedDataManager] requestCount] integerValue] > 0)
+    {
+      [[LCDataManager sharedDataManager] setRequestCount:@"0"];
+      [LCNotificationManager postNotificationCountUpdatedNotification];
+    }
+    [self updateRequestButtonTitle];
+    [requestsView getRequests];
   }
-  [self updateRequestButtonTitle];
-  [requestsView getRequests];
 }
 
 - (void) viewWillDisappear:(BOOL)animated

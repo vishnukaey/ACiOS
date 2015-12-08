@@ -36,8 +36,8 @@
 
 -(void) getRequests
 {
-  [self startFetchingNextResults];
-}
+  [self startFetchingResults];
+} 
 
 -(void) startFetchingResults
 {
