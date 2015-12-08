@@ -50,8 +50,8 @@ NSString *const kFBURLScheme = @"fb781451981972910";
 
 NSString *const kLCiTunesLink = @"https://itunes.apple.com/in/app/instagram/id389801252?mt=8";
 
-NSString *const kTWConsumerKey = @"IiYfEw17iKn2jTcWjp4H2QfYo";
-NSString *const kTWConsumerSecretKey = @"pBPJNqVUXdfkeulFZuXf4Epd0SSXsLwOXYqgeNkCWC4QlUJmiv";
+NSString *const kTWConsumerKey = @"NOuT5mmDQ8Z3qjXwtnbFQstGS";
+NSString *const kTWConsumerSecretKey = @"NuCOzjrAlUyMHDuTgTPMmCLyMo24nG9qCVIHlJ8loqLVQhjVWy";
 
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";

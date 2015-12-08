@@ -134,6 +134,7 @@ NSString * const kFBMessageKey = @"message";
 //    else
 //    {
         [[UIApplication sharedApplication] openURL:url];
+       self.twitterButton.enabled = YES;
 //    }
   } authenticateInsteadOfAuthorize:NO
                   forceLogin:@(YES)

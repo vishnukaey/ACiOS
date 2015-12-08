@@ -16,6 +16,8 @@ typedef void (^CanShareToTwitter) (BOOL canShare);
 
 @interface LCSocialShareManager : NSObject <FBSDKSharingDelegate>
 
+@property(nonatomic, weak)UIButton *twitterButton;
+
 - (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler;
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
 

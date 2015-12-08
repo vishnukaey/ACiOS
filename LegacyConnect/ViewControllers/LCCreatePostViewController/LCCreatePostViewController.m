@@ -507,6 +507,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   else {
     _twitterButton.enabled = NO;
     self.TWsocialShare = [[LCSocialShareManager alloc] init];
+    self.TWsocialShare.twitterButton = _twitterButton;
     [self.TWsocialShare canShareToTwitter:^(BOOL canShare) {
       if (canShare) {
         _twitterButton.selected = YES;
