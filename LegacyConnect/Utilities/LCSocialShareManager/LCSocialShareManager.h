@@ -11,13 +11,14 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import "STTwitter.h"
+#import "LCTWWebViewVC.h"
 
 typedef void (^CanShareToTwitter) (BOOL canShare);
 
-@interface LCSocialShareManager : NSObject <FBSDKSharingDelegate>
+@interface LCSocialShareManager : NSObject <FBSDKSharingDelegate, TWItterWebViewDelegate>
 
-@property(nonatomic, weak)UIButton *twitterButton;
-
+@property(nonatomic, weak)UIViewController *presentingController;
+@property(nonatomic, weak)LCTWWebViewVC *webViewVC;
 - (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler;
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
 
