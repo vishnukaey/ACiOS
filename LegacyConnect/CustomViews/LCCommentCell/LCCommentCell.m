@@ -34,6 +34,7 @@
   timeAgo = [timeAgo stringByReplacingOccurrencesOfString:@"minutes" withString:@"mins"];
 
   [timeLabel setText:timeAgo];
+  commentLabel.contentInset = UIEdgeInsetsMake(-5, -5, -5, 0);
   [commentLabel setText:comment.commentText];
   NSString * userName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:comment.firstName],[LCUtilityManager performNullCheckAndSetValue:comment.lastName]] ;
   
