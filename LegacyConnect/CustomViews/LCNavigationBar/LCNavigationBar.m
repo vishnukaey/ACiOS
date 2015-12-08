@@ -104,7 +104,7 @@
 - (void)setTitleProperties
 {
   if (self.title) {
-    float bottomSpace = 10;
+    float bottomSpace = 15;
     float title_hight = 20;
     [self.title setTextColor:TITLE_COLOR];
     [self.title setFont:TITLE_FONT];
