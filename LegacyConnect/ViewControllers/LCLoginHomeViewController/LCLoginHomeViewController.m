@@ -31,6 +31,8 @@
   {
     self.textViewYPosition.constant = -45.0f;
   }
+  // Cache data is removed completely during a new user sign-in.
+  [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 -(void) viewWillAppear:(BOOL)animated
