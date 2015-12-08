@@ -57,6 +57,7 @@
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -645,11 +646,22 @@ id augue sagittis, mattis sapien.</string>
                                     <constraint firstAttribute="trailing" secondItem="0e7-WY-hOy" secondAttribute="trailing" id="ynJ-nd-U9F"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Take a Photo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTh-9f-f5r">
+                                <rect key="frame" x="131" y="353" width="113" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="SOG-yN-s5r"/>
+                                    <constraint firstAttribute="width" constant="113" id="qL4-Pj-dDy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                <color key="textColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90588235289999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="01p-4a-UlF" secondAttribute="trailing" id="ELg-MY-ZNz"/>
                             <constraint firstAttribute="centerX" secondItem="ors-E3-fiH" secondAttribute="centerX" id="FT3-vM-mpe"/>
+                            <constraint firstItem="CTh-9f-f5r" firstAttribute="centerY" secondItem="5GG-A7-8Oa" secondAttribute="centerY" constant="30" id="O8r-6q-1Ax"/>
                             <constraint firstItem="b9X-JJ-RC2" firstAttribute="top" secondItem="5GG-A7-8Oa" secondAttribute="top" id="OhX-fS-Yra"/>
                             <constraint firstItem="01p-4a-UlF" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="OlX-qJ-wfm"/>
                             <constraint firstAttribute="trailing" secondItem="JiO-TB-upp" secondAttribute="trailing" id="Peu-2S-B3t"/>
@@ -659,6 +671,7 @@ id augue sagittis, mattis sapien.</string>
                             <constraint firstItem="b9X-JJ-RC2" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="jGF-tG-fBC"/>
                             <constraint firstAttribute="trailing" secondItem="Mal-bE-9d3" secondAttribute="trailing" id="mTT-PJ-cL1"/>
                             <constraint firstItem="ors-E3-fiH" firstAttribute="top" secondItem="01p-4a-UlF" secondAttribute="bottom" constant="30" id="neY-Y0-gYu"/>
+                            <constraint firstItem="CTh-9f-f5r" firstAttribute="centerX" secondItem="5GG-A7-8Oa" secondAttribute="centerX" id="nhn-p7-DjG"/>
                             <constraint firstItem="Mal-bE-9d3" firstAttribute="leading" secondItem="5GG-A7-8Oa" secondAttribute="leading" id="ogI-cx-MDI"/>
                             <constraint firstAttribute="trailing" secondItem="b9X-JJ-RC2" secondAttribute="trailing" id="r67-VJ-iih"/>
                             <constraint firstItem="CMz-t7-7Xx" firstAttribute="top" secondItem="Mal-bE-9d3" secondAttribute="bottom" id="t3G-Q7-hyN"/>

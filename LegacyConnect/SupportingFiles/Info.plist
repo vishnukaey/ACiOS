@@ -103,7 +103,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Legacy connect would like to access your location.</string>
+	<string>ThatHelps would like to access your location.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Gotham-Bold.otf</string>
