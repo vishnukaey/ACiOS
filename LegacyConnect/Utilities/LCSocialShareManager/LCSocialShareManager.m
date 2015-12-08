@@ -111,20 +111,23 @@ NSString * const kFBMessageKey = @"message";
 
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
-  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
+//  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
   if (image) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"postImage.png"];
     
     // Save image.
-    [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+    [[LCUtilityManager performNormalisedImageCompression:image] writeToFile:filePath atomically:YES];
+
     
     NSURL *url_ = [NSURL fileURLWithPath:filePath];
     [self.twitterAPI postStatusUpdate:status inReplyToStatusID:nil mediaURL:url_ placeID:nil latitude:nil longitude:nil uploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {
+      LCDLog(@"progress tw -->>>>%li", (long)totalBytesWritten);
     } successBlock:^(NSDictionary *status) {
       LCDLog(@"shared on twitter successfully");
     } errorBlock:^(NSError *error) {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
+      LCDLog(@"twitter share failed--%@", error);
     }];
   }
   else
@@ -142,6 +145,7 @@ NSString * const kFBMessageKey = @"message";
 {
   self.canShareTwitterBlock(NO);
 }
+
 
 #pragma mark- Facebook
 
