@@ -115,12 +115,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (finalFriendsArray.count == 0)
+  {
+    return 1;
+  }
   return finalFriendsArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  
+  if (finalFriendsArray.count == 0)
+  {
+    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_facebook_friends_to_display", nil)];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelection = NO;
+    return cell;
+  }
+
   static NSString *MyIdentifier = @"LCFBContactsCell";
   LCFBContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)

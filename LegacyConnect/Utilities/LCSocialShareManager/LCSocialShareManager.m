@@ -45,107 +45,41 @@ NSString * const kFBMessageKey = @"message";
   [self loginOnTheWeb];
 }
 
-- (void)loginWithiOSAccount:(ACAccount *)account withError:(NSString *)error
-{
-  self.twitterAPI = nil;
-  self.twitterAPI = [STTwitterAPI twitterAPIOSWithAccount:account];
-  
-  [_twitterAPI verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
-    
-    self.canShareTwitterBlock(YES);
-    
-  } errorBlock:^(NSError *error) {
-    self.canShareTwitterBlock(NO);
-  }];
-}
-
-- (void)chooseAccount {
-  ACAccountStore *accountStore = [[ACAccountStore alloc] init];
-  ACAccountType *accountType = [accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
-  ACAccountStoreRequestAccessCompletionHandler accountStoreRequestCompletionHandler = ^(BOOL granted, NSError *error) {
-    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-      
-      if(granted == NO) {
-        [self loginWithiOSAccount:nil withError:@"Acccess not granted."];
-        return;
-      }
-      self.twitterAccounts = [accountStore accountsWithAccountType:accountType];
-      
-      if([self.twitterAccounts count] >0) {
-        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Select an account:" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-        actionSheet.view.tintColor = [UIColor blackColor];
-        
-        for(ACAccount *account in self.twitterAccounts) {
-          UIAlertAction *addAction = [UIAlertAction actionWithTitle:account.username style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-            
-            [self loginWithiOSAccount:account withError:nil];
-            
-          }];
-          [actionSheet addAction:addAction];
-        }
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-        [actionSheet addAction:cancelAction];
-        UIViewController *rootController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        [rootController presentViewController:actionSheet animated:YES completion:nil];
-      }
-      else
-      {
-        [self loginWithiOSAccount:nil withError:@"No twitter accounts"];
-      }
-    }];
-  };
-  
-#if TARGET_OS_IPHONE &&  (__IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_6_0)
-  if (floor(NSFoundationVersionNumber) < NSFoundationVersionNumber_iOS_6_0) {
-    [accountStore requestAccessToAccountsWithType:accountType
-                                 withCompletionHandler:accountStoreRequestCompletionHandler];
-  } else {
-    [accountStore requestAccessToAccountsWithType:accountType
-                                               options:NULL
-                                            completion:accountStoreRequestCompletionHandler];
-  }
-#else
-  [accountStore requestAccessToAccountsWithType:accountType
-                                             options:NULL
-                                          completion:accountStoreRequestCompletionHandler];
-#endif
-  
-}
 
 - (IBAction)loginOnTheWeb {
   
   self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey
                                                consumerSecret:kTWConsumerSecretKey];
-  [_twitterAPI postTokenRequest:^(NSURL *url, NSString *oauthToken) {
+  
+  [self.twitterAPI postTokenRequest:^(NSURL *url, NSString *oauthToken) {
     NSLog(@"-- url: %@", url);
     NSLog(@"-- oauthToken: %@", oauthToken);
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OauthVerification:) name:kTwitterCallbackNotification object:nil];
+
+       UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+       self.webViewVC  = [sb instantiateViewControllerWithIdentifier:@"WebViewVC"];
+    self.webViewVC.delegate = self;
+      [self.presentingController presentViewController:self.webViewVC animated:YES completion:^{
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        [self.webViewVC.webView loadRequest:request];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OauthVerification:) name:kTwitterCallbackNotification object:nil];
+      }];
     
-//    NSArray *splitedUrl = [[url absoluteString] componentsSeparatedByString:@"https://api.twitter.com/oauth/"];
-//    NSString *TWAppUrl;
-//    if(splitedUrl.count>1)
-//    {
-//      TWAppUrl = [NSString stringWithFormat:@"%@",splitedUrl[1]];
-//    }
-//    NSURL *urlApp = [NSURL URLWithString: [NSString stringWithFormat:@"twitter://%@",TWAppUrl]];
-//    if ([[UIApplication sharedApplication] canOpenURL:urlApp]){
-//     [[UIApplication sharedApplication] openURL:urlApp];
-//    }
-//    else
-//    {
-        [[UIApplication sharedApplication] openURL:url];
-//    }
   } authenticateInsteadOfAuthorize:NO
                   forceLogin:@(YES)
                   screenName:nil
-               oauthCallback:[NSString stringWithFormat:@"%@://twitter_access_tokens/", kTwitterUrlScheme]
+                      oauthCallback:
+                          [NSString stringWithFormat:@"%@://twitter_access_tokens/", kTwitterUrlScheme]
                   errorBlock:^(NSError *error) {
                     self.canShareTwitterBlock(NO);
-                    NSLog(@"-- error: %@", error);
+                    LCDLog(@"-- error: %@", error);
                   }];
+
 }
 
 - (void)OauthVerification :(NSNotification *)notification {
+  [self.webViewVC dismissViewControllerAnimated:YES completion:^{
+    //
+  }];
   NSDictionary *userInfo = notification.userInfo;
 //  NSString *token = userInfo[@"oauth_token"];
   NSString *verifier = userInfo[@"oauth_verifier"];
@@ -199,8 +133,14 @@ NSString * const kFBMessageKey = @"message";
       
     } errorBlock:^(NSError *error) {
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Twitter sharing failed."];
+      LCDLog(@"twitter share failed--%@", error);
     }];
   }
+}
+
+- (void)webViewCancelledTwitterAuth
+{
+  self.canShareTwitterBlock(NO);
 }
 
 #pragma mark- Facebook

@@ -33,6 +33,7 @@
   [self loadContacts];
   contactsTable.checkedImage = [UIImage imageNamed:@"contact_tick"];
   contactsTable.uncheckedImage = [UIImage imageNamed:@"contact_plus"];
+  contactsTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,12 +137,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (contactsArray.count == 0)
+  {
+    return 1;
+  }
   return contactsArray.count;
 }
 
 - (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (contactsArray.count == 0)
+  {
+    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_contacts_to_display", nil)];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelection = NO;
+    return cell;
+  }
+
   static NSString *MyIdentifier = @"contactsCell";
   LCInviteFromContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)
