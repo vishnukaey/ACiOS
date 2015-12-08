@@ -48,12 +48,8 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   //-- Name Label -- //
   [self refreshUserInfo];
   
-  self.menuTable.opaque = NO;
-  [self.menuTable setBackgroundColor:kDeSelectionColor];
   //  [self.menuTable.backgroundView setBackgroundColor:kDeSelectionColor];
   //  self.menuTable.backgroundView = nil;
-  self.isFirstLaunch = YES;
-  selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
   
   NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
   NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
@@ -99,6 +95,12 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  self.isFirstLaunch = YES;
+  selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+  self.menuTable.opaque = NO;
+  [self.menuTable setBackgroundColor:kDeSelectionColor];
+
   [self addRequiredNotificationObserver];
 }
 
@@ -166,9 +168,10 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 {
   
   if (self.isFirstLaunch) {
-    [self deselectCellAtIndexPath:selectedIndexPath];
     self.isFirstLaunch = NO;
   }
+  [self deselectCellAtIndexPath:selectedIndexPath];
+
   selectedIndexPath = indexPath;
   
   LCMenuItemCell * selectedCell = (LCMenuItemCell*)[tableView cellForRowAtIndexPath:indexPath];
@@ -178,10 +181,6 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   [delegate_ leftMenuItemSelectedAtIndex:indexPath.row];
 }
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  [self deselectCellAtIndexPath:indexPath];
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
