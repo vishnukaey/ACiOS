@@ -135,10 +135,10 @@
 {
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.tableView reloadData];
-    [self.tableView layoutIfNeeded];
-    if (self.tableView.contentSize.height>self.tableView.frame.size.height - [LCUtilityManager getHeightOffsetForGIB]) {
-      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB]);
-    }
+//    [self.tableView layoutIfNeeded];
+//    if (self.tableView.contentSize.height>self.tableView.frame.size.height - [LCUtilityManager getHeightOffsetForGIB]) {
+//      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB]);
+//    }
   });
 }
 

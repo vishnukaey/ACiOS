@@ -46,7 +46,8 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
-  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+//  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
   self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   
   if (!self.noResultsView) {
@@ -284,9 +285,7 @@
 #pragma mark - ScrollView delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-  [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight)];
   [self.delegate scrollViewScrolled:scrollView];
-  [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight)];
 }
 
 @end

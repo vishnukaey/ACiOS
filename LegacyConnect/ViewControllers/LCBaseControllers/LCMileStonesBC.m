@@ -175,10 +175,11 @@
 - (void)reloadMilestonesTable
 {
   dispatch_async(dispatch_get_main_queue(), ^{
+//    [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, 0)];
     [self.tableView reloadData];
-    [self.tableView layoutIfNeeded];
-    self.tableContentHeight = self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB];
-      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight);
+//    [self.tableView layoutIfNeeded];
+//    self.tableContentHeight = self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB];
+//      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight);
     
   });
 }
