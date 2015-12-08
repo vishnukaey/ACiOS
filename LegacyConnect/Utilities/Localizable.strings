@@ -33,6 +33,9 @@
 
 
 "no_results_found" = "No results found.";
+"no_contacts_to_display" = "No Contacts to display.";
+"no_facebook_friends_to_display" = "No Friends to display.";
+
 
 
 "ok" = "OK";
