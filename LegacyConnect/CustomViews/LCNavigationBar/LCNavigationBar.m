@@ -27,7 +27,6 @@
   [self.title removeFromSuperview];
   [self.rightButton removeFromSuperview];
   [self setBackgroundColor:TOPBAR_COLOR];
-  
   [self.title removeConstraints:self.title.constraints];
   [self.leftButton removeConstraints:self.leftButton.constraints];
   [self.rightButton removeConstraints:self.rightButton.constraints];
@@ -105,7 +104,7 @@
 {
   if (self.title) {
     float bottomSpace = 15;
-    float title_hight = 20;
+    float title_hight = 10;
     [self.title setTextColor:TITLE_COLOR];
     [self.title setFont:TITLE_FONT];
     

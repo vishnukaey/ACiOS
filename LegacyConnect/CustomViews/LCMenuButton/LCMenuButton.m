@@ -33,7 +33,7 @@
 //    badgeLabel.clipsToBounds = YES;
 //    badgeLabel.adjustsFontSizeToFitWidth = YES;
     
-    self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(5, self.frame.size.height/2 - 12, 30, 30)];
+    self.iconImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, self.frame.size.height/2 - 12, 25, 25)];
     self.iconImage.image = [UIImage imageNamed:@"MenuButton"];
     [self addSubview:self.iconImage];
   }

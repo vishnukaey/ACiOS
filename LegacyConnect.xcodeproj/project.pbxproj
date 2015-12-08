@@ -81,7 +81,6 @@
 		0BB33DDC1BA81401009E6D0C /* GIButton_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC01BA81400009E6D0C /* GIButton_dummy.png */; };
 		0BB33DDD1BA81401009E6D0C /* heart_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC11BA81400009E6D0C /* heart_dummy.png */; };
 		0BB33DDE1BA81401009E6D0C /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC21BA81400009E6D0C /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */; };
-		0BB33DDF1BA81401009E6D0C /* locationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC31BA81400009E6D0C /* locationIcon.png */; };
 		0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC41BA81400009E6D0C /* manplaceholder.jpg */; };
 		0BB33DE11BA81401009E6D0C /* menuButton_dummy.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC51BA81401009E6D0C /* menuButton_dummy.png */; };
 		0BB33DE21BA81401009E6D0C /* photo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC61BA81401009E6D0C /* photo.jpg */; };
@@ -324,7 +323,6 @@
 		0BB33DC01BA81400009E6D0C /* GIButton_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GIButton_dummy.png; sourceTree = "<group>"; };
 		0BB33DC11BA81400009E6D0C /* heart_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_dummy.png; sourceTree = "<group>"; };
 		0BB33DC21BA81400009E6D0C /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg"; sourceTree = "<group>"; };
-		0BB33DC31BA81400009E6D0C /* locationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationIcon.png; sourceTree = "<group>"; };
 		0BB33DC41BA81400009E6D0C /* manplaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manplaceholder.jpg; sourceTree = "<group>"; };
 		0BB33DC51BA81401009E6D0C /* menuButton_dummy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuButton_dummy.png; sourceTree = "<group>"; };
 		0BB33DC61BA81401009E6D0C /* photo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = photo.jpg; sourceTree = "<group>"; };
@@ -927,7 +925,6 @@
 				0BB33DC01BA81400009E6D0C /* GIButton_dummy.png */,
 				0BB33DC11BA81400009E6D0C /* heart_dummy.png */,
 				0BB33DC21BA81400009E6D0C /* landscape_valley_sunset_lone_tree_high_resolution_wallpapers-320x568.jpg */,
-				0BB33DC31BA81400009E6D0C /* locationIcon.png */,
 				0BB33DC41BA81400009E6D0C /* manplaceholder.jpg */,
 				0BB33DC51BA81401009E6D0C /* menuButton_dummy.png */,
 				0BB33DC61BA81401009E6D0C /* photo.jpg */,
@@ -1827,7 +1824,6 @@
 				0BB33DD81BA81401009E6D0C /* communityMemebrs.png in Resources */,
 				16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */,
 				0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */,
-				0BB33DDF1BA81401009E6D0C /* locationIcon.png in Resources */,
 				0BB33DE81BA81401009E6D0C /* rsz_lc-logo.png in Resources */,
 				0BB33DA41BA812A3009E6D0C /* Gotham-Medium.otf in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
