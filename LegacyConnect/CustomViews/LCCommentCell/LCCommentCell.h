@@ -15,7 +15,8 @@ typedef void (^CommentCellTagAction)(NSDictionary* tagDetails);
 {
   IBOutlet UIImageView *profilePic;
   IBOutlet LCTaggedLabel *userNameLabel;
-  IBOutlet UILabel*timeLabel, *commentLabel;
+  IBOutlet UILabel*timeLabel;
+  IBOutlet UITextView *commentLabel;
 }
 
 @property (nonatomic, strong) LCComment * comment;
