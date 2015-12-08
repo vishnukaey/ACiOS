@@ -151,6 +151,7 @@
 		B135998390F39591137C1EFD /* libPods-LegacyConnect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */; };
 		CE0374571B5647070031FFC7 /* LCFeedsCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */; };
 		CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1AFB621BF1DFA80039A47F /* LCCreateActions.m */; settings = {ASSET_TAGS = (); }; };
+		CE1B91551C16DB4D00DCAC53 /* LCTWWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */; settings = {ASSET_TAGS = (); }; };
 		CE1C957C1BFB3C2B00A3B9FB /* LCSearchUsersBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */; settings = {ASSET_TAGS = (); }; };
 		CE2E09C11C04304600722A22 /* LCHomeFeedBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C01C04304600722A22 /* LCHomeFeedBC.m */; settings = {ASSET_TAGS = (); }; };
 		CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C31C0432BA00722A22 /* LCFeedDetailBC.m */; settings = {ASSET_TAGS = (); }; };
@@ -438,6 +439,8 @@
 		CE0374561B5647070031FFC7 /* LCFeedsCommentsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFeedsCommentsController.m; path = ViewControllers/LCFeedsHomeViewController/LCFeedsCommentsController.m; sourceTree = "<group>"; };
 		CE1AFB611BF1DFA80039A47F /* LCCreateActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCreateActions.h; path = LCCreateActions/LCCreateActions.h; sourceTree = "<group>"; };
 		CE1AFB621BF1DFA80039A47F /* LCCreateActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreateActions.m; path = LCCreateActions/LCCreateActions.m; sourceTree = "<group>"; };
+		CE1B91531C16DB4D00DCAC53 /* LCTWWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTWWebViewVC.h; path = ViewControllers/LCCreatePostViewController/LCTWWebViewVC.h; sourceTree = "<group>"; };
+		CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTWWebViewVC.m; path = ViewControllers/LCCreatePostViewController/LCTWWebViewVC.m; sourceTree = "<group>"; };
 		CE1C957A1BFB3C2B00A3B9FB /* LCSearchUsersBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchUsersBC.h; path = ViewControllers/LCBaseControllers/LCSearchUsersBC.h; sourceTree = "<group>"; };
 		CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchUsersBC.m; path = ViewControllers/LCBaseControllers/LCSearchUsersBC.m; sourceTree = "<group>"; };
 		CE2E09BF1C04304600722A22 /* LCHomeFeedBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHomeFeedBC.h; path = ViewControllers/LCBaseControllers/LCHomeFeedBC.h; sourceTree = "<group>"; };
@@ -1443,6 +1446,8 @@
 		96B86A1F1B79CF77003EF7CA /* LCCreatePostViewController */ = {
 			isa = PBXGroup;
 			children = (
+				CE1B91531C16DB4D00DCAC53 /* LCTWWebViewVC.h */,
+				CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */,
 				96B86A1C1B79C456003EF7CA /* LCCreatePostViewController.h */,
 				96B86A1D1B79C456003EF7CA /* LCCreatePostViewController.m */,
 			);
@@ -1962,6 +1967,7 @@
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
 				CE2E09C11C04304600722A22 /* LCHomeFeedBC.m in Sources */,
+				CE1B91551C16DB4D00DCAC53 /* LCTWWebViewVC.m in Sources */,
 				0B775D901BE1F25B008B5B6F /* LCSettingsViewController.m in Sources */,
 				CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */,
 				0B775D8F1BE1F25B008B5B6F /* LCMyLegacyURLViewController.m in Sources */,

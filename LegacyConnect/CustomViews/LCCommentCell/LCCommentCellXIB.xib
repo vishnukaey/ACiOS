@@ -49,12 +49,6 @@
                         <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comment" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmC-iR-XFX">
-                        <rect key="frame" x="68" y="33" width="236" height="24"/>
-                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
-                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TJL-Yg-CTM">
                         <rect key="frame" x="68" y="66" width="252" height="1"/>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="0.75" colorSpace="calibratedRGB"/>
@@ -62,21 +56,28 @@
                             <constraint firstAttribute="height" constant="1" id="DD4-iU-z5E"/>
                         </constraints>
                     </imageView>
+                    <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pqD-ze-JfD">
+                        <rect key="frame" x="68" y="28" width="237" height="38"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="12" id="9hE-34-Qsw"/>
-                    <constraint firstAttribute="bottom" secondItem="MmC-iR-XFX" secondAttribute="bottom" constant="10" id="KhX-Lk-qf2"/>
+                    <constraint firstAttribute="trailing" secondItem="pqD-ze-JfD" secondAttribute="trailing" constant="15" id="EtQ-bQ-G58"/>
+                    <constraint firstItem="pqD-ze-JfD" firstAttribute="top" secondItem="MtL-zH-fbZ" secondAttribute="bottom" id="H2H-D2-L5s"/>
                     <constraint firstItem="SPp-c3-CKE" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="8" id="NK8-Hq-lw5"/>
-                    <constraint firstItem="MmC-iR-XFX" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="NWa-Y8-LwT"/>
                     <constraint firstAttribute="trailing" secondItem="MtL-zH-fbZ" secondAttribute="trailing" constant="15" id="OeN-1H-PnE"/>
                     <constraint firstItem="MtL-zH-fbZ" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="8" id="Opi-bR-ams"/>
-                    <constraint firstAttribute="trailing" secondItem="MmC-iR-XFX" secondAttribute="trailing" constant="16" id="cU7-Fn-TDz"/>
                     <constraint firstItem="SPp-c3-CKE" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="ciO-Mt-RPV"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="centerY" secondItem="04y-rd-ZMV" secondAttribute="centerY" id="hkF-ej-ucQ"/>
+                    <constraint firstItem="TJL-Yg-CTM" firstAttribute="top" secondItem="pqD-ze-JfD" secondAttribute="bottom" id="l5s-vG-vaL"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="leading" secondItem="04y-rd-ZMV" secondAttribute="leading" constant="15" id="loZ-ne-l1f"/>
-                    <constraint firstItem="MmC-iR-XFX" firstAttribute="top" secondItem="MtL-zH-fbZ" secondAttribute="bottom" constant="5" id="ogv-QA-suj"/>
                     <constraint firstAttribute="bottom" secondItem="TJL-Yg-CTM" secondAttribute="bottom" id="psn-rs-Ra6"/>
                     <constraint firstItem="TJL-Yg-CTM" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="qNb-a5-ExK"/>
+                    <constraint firstItem="pqD-ze-JfD" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="qel-yZ-sws"/>
                     <constraint firstAttribute="trailing" secondItem="TJL-Yg-CTM" secondAttribute="trailing" id="uFC-VW-7Sx"/>
                     <constraint firstItem="MtL-zH-fbZ" firstAttribute="leading" secondItem="SPp-c3-CKE" secondAttribute="trailing" constant="8" id="uPA-8O-8rs"/>
                 </constraints>
@@ -87,7 +88,7 @@
                 </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="commentLabel" destination="MmC-iR-XFX" id="FN3-ep-41j"/>
+                <outlet property="commentLabel" destination="pqD-ze-JfD" id="17u-1n-l4F"/>
                 <outlet property="profilePic" destination="7tr-BC-ppO" id="pyF-jO-Pvc"/>
                 <outlet property="seperator" destination="TJL-Yg-CTM" id="ZBD-MD-Gj9"/>
                 <outlet property="timeLabel" destination="MtL-zH-fbZ" id="Fhd-AT-eda"/>
