@@ -16,7 +16,6 @@
 static CGFloat kNumberOfSections = 1;
 static NSInteger kRowHeightFriendsCell= 88;
 static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
-static NSString *kTitle = @"FRIENDS";
 
 @implementation LCFriendsListViewController
 
@@ -80,22 +79,12 @@ static NSString *kTitle = @"FRIENDS";
 
 - (void)initialUISetUp
 {
-  [self.navigationController.navigationBar setBarTintColor:[LCNavigationBar getNavigationBarColor]];
-  [self.navigationController setNavigationBarHidden:NO];
-  self.title = kTitle;
-  [self.navigationController.navigationBar setTitleTextAttributes:
-   @{NSForegroundColorAttributeName:[LCNavigationBar getTitleColor], NSFontAttributeName:[LCNavigationBar getTitleFont]}];
-  UIButton * backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 21)];
-  [backButton setImage:[UIImage imageNamed:@"backButton"] forState:UIControlStateNormal];
-  [backButton addTarget:self action:@selector(backButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-  UIBarButtonItem * backBtnItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-  self.navigationItem.leftBarButtonItem = backBtnItem;
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
 
 #pragma mark - Button actions
-- (void)backButtonTapped:(id)sender
+- (IBAction)backButtonTapped:(id)sender
 {
   [self.navigationController popViewControllerAnimated:YES];
 }

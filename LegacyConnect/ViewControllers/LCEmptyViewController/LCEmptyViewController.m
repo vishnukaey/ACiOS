@@ -103,6 +103,7 @@ static NSString *kTitle = @"MY FEED";
 - (void)initialUISetUp
 {
   [self.navigationController.navigationBar setBarTintColor:[LCNavigationBar getNavigationBarColor]];
+  self.navigationController.navigationBar.translucent = NO;
   [self.navigationController setNavigationBarHidden:NO];
   self.title = kTitle;
   [self.navigationController.navigationBar setTitleTextAttributes:
