@@ -601,7 +601,7 @@
                                     <outlet property="delegate" destination="oRs-pM-3Ty" id="QUG-zZ-0P9"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Legacy Connect 0.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2Y-7Y-eib">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThatHelps 0.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2Y-7Y-eib">
                                 <rect key="frame" x="45" y="637" width="284" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="fXd-Xy-jGA"/>
