@@ -20,14 +20,14 @@
   // Do any additional setup after loading the view.
   
   //mine interst api call
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getInterestsWithSuccess:^(NSArray *response) {
     interestsMine = response;
     [self showMyInterests];
   } andFailure:^(NSString *error) {
   }];
   
   //all interests api call
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getInterestsWithSuccess:^(NSArray *response) {
     interestsAll = response;
   } andFailure:^(NSString *error) {
   }];

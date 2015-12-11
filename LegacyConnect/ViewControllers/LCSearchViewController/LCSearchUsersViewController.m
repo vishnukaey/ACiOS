@@ -37,7 +37,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager searchUserUsingsearchKey:_searchKey lastUserId:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(id response) {
+  [LCSearchAPIManager searchUserUsingsearchKey:_searchKey lastUserId:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(id response) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {

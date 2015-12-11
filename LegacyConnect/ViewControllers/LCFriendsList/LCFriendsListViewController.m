@@ -24,7 +24,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
+  [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
@@ -42,7 +42,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+  [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -181,7 +181,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
     //change button image
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
     friendBtn.userInteractionEnabled = NO;
-    [LCAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
+    [LCProfileAPIManager removeFriend:friendObj.friendId withSuccess:^(NSArray *response)
      {
        friendBtn.userInteractionEnabled = YES;
      } andFailure:^(NSString *error) {
@@ -207,7 +207,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
   UIAlertAction *cancelFreindRequest = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel_friend_request", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
     friendBtn.userInteractionEnabled = NO;
-    [LCAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
+    [LCProfileAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
       LCDLog(@"%@",response);
       friendBtn.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
@@ -229,7 +229,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
   LCfriendButton * friendBtn = btn;
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
   friendBtn.userInteractionEnabled = NO;
-  [LCAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSDictionary *response) {
+  [LCProfileAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSDictionary *response) {
     NSLog(@"%@",response);
     friendBtn.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {

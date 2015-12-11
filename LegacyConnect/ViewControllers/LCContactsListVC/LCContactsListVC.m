@@ -111,7 +111,7 @@
 {
   NSArray *selectedMailIDs = contactsTable.selectedIDs;
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager sendFriendRequestFromContacts:selectedMailIDs withSuccess:^(id response) {
+  [LCProfileAPIManager sendFriendRequestFromContacts:selectedMailIDs withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
   } andFailure:^(NSString *error) {

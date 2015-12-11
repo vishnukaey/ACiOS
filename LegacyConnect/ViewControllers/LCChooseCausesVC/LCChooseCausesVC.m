@@ -35,7 +35,7 @@
   self.customNavigationHeight.constant = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height;
   NSString *urlString = [NSString stringWithFormat:@"%@?type=normal",[LCDataManager sharedDataManager].avatarUrl];
   [_userImageView sd_setImageWithURL:[NSURL URLWithString:urlString] placeholderImage:[LCDataManager sharedDataManager].userAvatarImage];
-  [LCAPIManager getInterestsWithSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getInterestsWithSuccess:^(NSArray *response) {
     interests = response;
     [self.interestsCollectionView reloadData];
   } andFailure:^(NSString *error) {
@@ -181,7 +181,7 @@
       NSMutableArray *selectedCauses = [[NSMutableArray alloc] init];
       [selectedItems setObject:selectedCauses forKey:interest.interestID];
       [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      [LCAPIManager getCausesForInterestID:interest.interestID andLastCauseID:kEmptyStringValue withSuccess:^(NSArray *responses) {
+      [LCThemeAPIManager getCausesForInterestID:interest.interestID andLastCauseID:kEmptyStringValue withSuccess:^(NSArray *responses) {
         interest.causes = responses;
         [causes addObjectsFromArray:interest.causes];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -227,7 +227,7 @@
     [selectedCauseIDs addObjectsFromArray:causeIDS];
   }
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager saveCauses:selectedCauseIDs andInterests:selectedInterestIDs ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
+  [LCThemeAPIManager saveCauses:selectedCauseIDs andInterests:selectedInterestIDs ofUser:[LCDataManager sharedDataManager].userID   withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self performSegueWithIdentifier:@"connectFriends" sender:self];
   } andFailure:^(NSString *error) {

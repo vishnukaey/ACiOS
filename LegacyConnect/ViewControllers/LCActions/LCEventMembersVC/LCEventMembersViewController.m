@@ -10,6 +10,7 @@
 #import "LCUserTableViewCell.h"
 #import "LCProfileViewVC.h"
 #import "LCInviteToActions.h"
+#import "LCEventAPImanager.h"
 
 @interface LCEventMembersViewController ()
 @end
@@ -36,7 +37,7 @@
 -(void) startFetchingResults
 {
   [super startFetchingResults];
-  [LCAPIManager getMembersForEventID:_event.eventID andLastEventID:nil withSuccess:^(NSArray *responses) {
+  [LCEventAPImanager getMembersForEventID:_event.eventID andLastEventID:nil withSuccess:^(NSArray *responses) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
@@ -53,7 +54,7 @@
 {
   [super startFetchingNextResults];
   
-  [LCAPIManager getMembersForEventID:_event.eventID andLastEventID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
+  [LCEventAPImanager getMembersForEventID:_event.eventID andLastEventID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
     BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {

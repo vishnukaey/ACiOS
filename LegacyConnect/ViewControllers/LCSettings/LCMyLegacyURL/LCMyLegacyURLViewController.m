@@ -61,7 +61,7 @@
 - (IBAction)saveAction:(id)sender {
   
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager changeLegacyURL:legacyURLTextField.text withSuccess:^(id response) {
+  [LCSettingsAPIManager changeLegacyURL:legacyURLTextField.text withSuccess:^(id response) {
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     _settingsData.legacyUrl = legacyURLTextField.text;

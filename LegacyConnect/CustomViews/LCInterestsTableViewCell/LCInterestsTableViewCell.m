@@ -49,7 +49,7 @@
   {
     _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%d Followers",[_interest.followers intValue]+1];
     [_interestFollowButton setSelected:YES];
-    [LCAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
+    [LCThemeAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
       _interest.isFollowing =YES;
       _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]+1];
       _interestFollowButton.userInteractionEnabled = YES;
@@ -63,7 +63,7 @@
   {
     _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%d Followers",[_interest.followers intValue]-1];
     [_interestFollowButton setSelected:NO];
-    [LCAPIManager unfollowInterest:_interest.interestID withSuccess:^(id response) {
+    [LCThemeAPIManager unfollowInterest:_interest.interestID withSuccess:^(id response) {
       _interestFollowButton.userInteractionEnabled = YES;
       _interest.isFollowing = NO;
       _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]-1];
