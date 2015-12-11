@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LCChooseCausesVC : UIViewController
+@interface LCOnboardThemesVC : UIViewController
 @property (weak, nonatomic) IBOutlet UICollectionView *interestsCollectionView;
 @property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
