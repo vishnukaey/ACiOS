@@ -255,4 +255,97 @@
    }];
 }
 
++ (void)getCausesForSetOfInterests:(NSArray*)interests withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetCauseFromInterestsURL];
+  if (interests.count > 0) {
+    NSString * restOfInterestId = [interests componentsJoinedByString:@"&interestId[]="];
+    url = [NSString stringWithFormat:@"%@?interestId[]=%@",url,restOfInterestId];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *data= response[kResponseData];
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:data error:&error];
+     if(!error)
+     {
+       LCDLog(@"Getting Cause Followers successful! ");
+       success(responsesArray);
+     }
+     else
+     {
+       LCDLog(@"%@",error);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+
+}
+
++ (void)getInterestsForThemeId:(NSString*)themeId lastId:(NSString*)lastId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?themeId=%@", kBaseURL, kGetInterestsURL,themeId];
+  if (lastId) {
+    url = [NSString stringWithFormat:@"%@&lastId=%@",url,lastId];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSDictionary *dict= response[kResponseData];
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
+     if(!error)
+     {
+       LCDLog(@"Getting Interests successful! ");
+       success(responsesArray);
+     }
+     else
+     {
+       LCDLog(@"%@",error);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+
+}
+
++ (void)getThemesWithLastId:(NSString*)lastId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetThemesURL];
+  if (lastId) {
+    url = [NSString stringWithFormat:@"%@?lastId=%@",url,lastId];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSDictionary *dict= response[kResponseData];
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCTheme class] fromJSONArray:dict[kThemesKey] error:&error];
+     if(!error)
+     {
+       LCDLog(@"Getting Interests successful! ");
+       success(responsesArray);
+     }
+     else
+     {
+       LCDLog(@"%@",error);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+
+}
+
+
 @end

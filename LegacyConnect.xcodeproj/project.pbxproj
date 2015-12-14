@@ -49,6 +49,7 @@
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
 		0B6F8C671BD90AB000A0F33E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F8C661BD90AB000A0F33E /* Profile.storyboard */; };
+		0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7189D01C1EAE2F00554B98 /* LCTheme.m */; };
 		0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */; };
 		0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */; };
 		0B775D8F1BE1F25B008B5B6F /* LCMyLegacyURLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D841BE1F25B008B5B6F /* LCMyLegacyURLViewController.m */; };
@@ -293,6 +294,8 @@
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
 		0B6F8C661BD90AB000A0F33E /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		0B7189CF1C1EAE2F00554B98 /* LCTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCTheme.h; sourceTree = "<group>"; };
+		0B7189D01C1EAE2F00554B98 /* LCTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCTheme.m; sourceTree = "<group>"; };
 		0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Storyboards/Settings.storyboard; sourceTree = "<group>"; };
 		0B775D801BE1F25B008B5B6F /* LCChangePasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCChangePasswordViewController.h; sourceTree = "<group>"; };
 		0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCChangePasswordViewController.m; sourceTree = "<group>"; };
@@ -926,6 +929,16 @@
 			name = LCFriend;
 			sourceTree = "<group>";
 		};
+		0B7189CE1C1EAE2100554B98 /* LCTheme */ = {
+			isa = PBXGroup;
+			children = (
+				0B7189CF1C1EAE2F00554B98 /* LCTheme.h */,
+				0B7189D01C1EAE2F00554B98 /* LCTheme.m */,
+			);
+			name = LCTheme;
+			path = Models/LCTheme;
+			sourceTree = "<group>";
+		};
 		0B775D7E1BE1F25B008B5B6F /* LCSettings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1441,6 +1454,7 @@
 		0BF05A681B4E628700FF7B39 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0B7189CE1C1EAE2100554B98 /* LCTheme */,
 				1619550D1BFEFA91005D9944 /* LCRequest */,
 				0BB971481BFE057C000A33A9 /* LCRecentNotification */,
 				CEBEDD421BFDB30300AE9351 /* LCSettings */,
@@ -2050,6 +2064,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
+				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,
 				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
 				0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */,
 				CE2E09E21C04679300722A22 /* LCEventMembersListBC.m in Sources */,
