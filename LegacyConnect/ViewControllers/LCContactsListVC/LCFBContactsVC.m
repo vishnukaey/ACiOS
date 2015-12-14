@@ -185,7 +185,7 @@
 
 - (IBAction)doneButtonTapped:(id)sender
 {
-  [LCAPIManager sendFriendRequestToFBFriends:selectedContacts withSuccess:^(id response) {
+  [LCProfileAPIManager sendFriendRequestToFBFriends:selectedContacts withSuccess:^(id response) {
     [self.navigationController popToRootViewControllerAnimated:YES];
   } andFailure:^(NSString *error) {
     LCDLog(@"%@",error);

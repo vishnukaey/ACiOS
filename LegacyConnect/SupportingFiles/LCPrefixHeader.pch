@@ -27,6 +27,7 @@
 #import "LCSearchResult.h"
 #import "LCComment.h"
 #import "LCSettings.h"
+#import "LCTheme.h"
 #import "LCNotificationManager.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 #import "LCGAManager.h"

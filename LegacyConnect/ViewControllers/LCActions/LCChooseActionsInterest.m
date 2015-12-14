@@ -29,7 +29,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:nil withSuccess:^(NSArray *responses) {
+  [LCUserProfileAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:nil withSuccess:^(NSArray *responses) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = responses.count >= 20;
     [self didFetchResults:responses haveMoreData:hasMoreData];
@@ -42,7 +42,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 - (void)startFetchingNextResults
 {
   [self startFetchingNextResults];
-  [LCAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *responses) {
+  [LCUserProfileAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *responses) {
     BOOL hasMoreData = responses.count >= 20;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {

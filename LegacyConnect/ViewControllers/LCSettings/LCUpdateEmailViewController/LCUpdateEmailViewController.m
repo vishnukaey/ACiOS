@@ -70,7 +70,7 @@
   else {
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [LCAPIManager changeEmail:self.emailAddressField.text withSuccess:^(id response) {
+    [LCSettingsAPIManager changeEmail:self.emailAddressField.text withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"email_changed", nil)];
       _settingsData.email = self.emailAddressField.text;

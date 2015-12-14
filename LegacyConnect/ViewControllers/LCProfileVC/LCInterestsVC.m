@@ -17,7 +17,7 @@
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager getInterestsForUser:self.userID lastId:nil withSuccess:^(NSArray *responses) {
+  [LCUserProfileAPIManager getInterestsForUser:self.userID lastId:nil withSuccess:^(NSArray *responses) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = responses.count >= 20;
     [self didFetchResults:responses haveMoreData:hasMoreData];
@@ -30,7 +30,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getInterestsForUser:self.userID lastId:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *responses) {
+  [LCUserProfileAPIManager getInterestsForUser:self.userID lastId:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *responses) {
     BOOL hasMoreData = responses.count >= 20;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {

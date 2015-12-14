@@ -121,7 +121,7 @@
   [self.signupButton setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dobTimeStamp] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager registerNewUser:dict withSuccess:^(id response) {
+  [LCOnboardingAPIManager registerNewUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
     
     //GA Tracking

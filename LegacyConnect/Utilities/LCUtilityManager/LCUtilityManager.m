@@ -528,7 +528,7 @@
 
  + (void)checkAppVersion
 {
-  [LCAPIManager checkVersionWithSuccess:^(id response) {
+  [LCSettingsAPIManager checkVersionWithSuccess:^(id response) {
     LCDLog(@"version checked");
     } andFailure:^(NSString *error) {
   }];

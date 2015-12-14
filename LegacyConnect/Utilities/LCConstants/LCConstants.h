@@ -57,6 +57,8 @@ extern NSString *const kGetUserCausesURL;
 extern NSString *const kGetCauseFollowersURL;
 extern NSString *const kCauseSuppotURL;
 extern NSString *const kCauseUnsuppotURL;
+extern NSString *const kGetCauseFromInterestsURL;
+extern NSString *const kGetThemesURL;
 
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
@@ -125,6 +127,7 @@ extern NSString *const kUsersKey;
 extern NSString *const kInterestsKey;
 extern NSString *const kCauseIDKey;
 extern NSString *const kCausesKey;
+extern NSString *const kThemesKey;
 extern NSString *const kInterestIDKey;
 extern NSString *const kEventIDKey;
 extern NSString *const kLastCauseIDKey;

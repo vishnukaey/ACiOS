@@ -21,7 +21,7 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
+  [LCFeedAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
@@ -34,7 +34,7 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super startFetchingNextResults];
   
-  [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
+  [LCFeedAPIManager getCommentsForPost:feedObject.entityID lastCommentId:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
@@ -45,7 +45,7 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - feed details API
 - (void)fetchFeedDetails
 {
-  [LCAPIManager getPostDetailsOfPost:self.feedId WithSuccess:^(LCFeed *response) {
+  [LCFeedAPIManager getPostDetailsOfPost:self.feedId WithSuccess:^(LCFeed *response) {
     self.feedObject = response;
     [self startFetchingResults];
   } andFailure:^(NSString *error) {
@@ -105,7 +105,7 @@ static CGFloat kIndexForPostDetails = 0;
   if (commentString.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
-    [LCAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {
+    [LCFeedAPIManager commentPost:self.feedObject comment:commentTextField.text withSuccess:^(id response) {
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];

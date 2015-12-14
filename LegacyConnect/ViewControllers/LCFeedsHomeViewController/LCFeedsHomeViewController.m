@@ -27,7 +27,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [LCAPIManager getHomeFeedsWithLastFeedId:nil success:^(NSArray *response) {
+  [LCFeedAPIManager getHomeFeedsWithLastFeedId:nil success:^(NSArray *response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -44,7 +44,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getHomeFeedsWithLastFeedId:[(LCFeed*)[self.results lastObject] feedId] success:^(NSArray *response) {
+  [LCFeedAPIManager getHomeFeedsWithLastFeedId:[(LCFeed*)[self.results lastObject] feedId] success:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];

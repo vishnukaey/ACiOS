@@ -448,7 +448,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     if (self.isImageEdited) {
       imageToUpload = postImageView.image;
     }
-    [LCAPIManager updatePost:_postFeedObject withImage:imageToUpload withSuccess:^(id response) {
+    [LCPostAPIManager updatePost:_postFeedObject withImage:imageToUpload withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
@@ -460,7 +460,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   }
   else//new
   {
-    [LCAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
+    [LCPostAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
