@@ -52,8 +52,10 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
@@ -1626,7 +1628,7 @@ then select a few related causes.</string>
                                     <inset key="sectionInset" minX="15" minY="15" maxX="15" maxY="15"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="p5j-vw-04k">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCollectionViewCell" id="p5j-vw-04k">
                                         <rect key="frame" x="15" y="65" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1634,12 +1636,48 @@ then select a few related causes.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="CDn-6B-FLu">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerCell" id="MiX-Vs-zc4" customClass="LCCausesHeaderReusableView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gay-pv-lWd">
+                                            <rect key="frame" x="8" y="29" width="291" height="13"/>
+                                            <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="513-1k-xYg">
+                                            <rect key="frame" x="307" y="25" width="60" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="25" id="tBS-vp-M2Q"/>
+                                                <constraint firstAttribute="width" constant="60" id="ujB-ym-S5K"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
+                                            <state key="normal" title="Show All">
+                                                <color key="titleColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="gay-pv-lWd" firstAttribute="bottom" secondItem="MiX-Vs-zc4" secondAttribute="bottomMargin" id="AM8-Mi-E2Y"/>
+                                        <constraint firstItem="513-1k-xYg" firstAttribute="trailing" secondItem="MiX-Vs-zc4" secondAttribute="trailingMargin" id="D0f-FF-dLm"/>
+                                        <constraint firstItem="gay-pv-lWd" firstAttribute="leading" secondItem="MiX-Vs-zc4" secondAttribute="leadingMargin" id="DPF-e0-nOX"/>
+                                        <constraint firstItem="513-1k-xYg" firstAttribute="leading" secondItem="gay-pv-lWd" secondAttribute="trailing" constant="8" id="k4p-dX-xeV"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="513-1k-xYg" secondAttribute="bottom" constant="-8" id="l2m-wz-gnj"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="interestName" destination="gay-pv-lWd" id="mIc-gP-dP6"/>
+                                        <outlet property="showAllButton" destination="513-1k-xYg" id="t3O-0a-pgf"/>
+                                    </connections>
                                 </collectionReusableView>
+                                <connections>
+                                    <outlet property="dataSource" destination="Waq-9X-zJm" id="WGo-p0-gD0"/>
+                                    <outlet property="delegate" destination="Waq-9X-zJm" id="Jwa-8X-TLy"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
