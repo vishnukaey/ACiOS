@@ -101,7 +101,7 @@
 #pragma mark - private method implementation
 - (void)performPasswordResetRequestWithEmail:(NSString*)email {
   
-  [LCAPIManager forgotPasswordOfUserWithMailID:email withSuccess:^(id response) {
+  [LCOnboardingAPIManager forgotPasswordOfUserWithMailID:email withSuccess:^(id response) {
     [self.delegate forgotPasswordRequestSent:_emailTextField.text];
   } andFailure:^(NSString *error) {
     NSLog(@"response : %@",error);

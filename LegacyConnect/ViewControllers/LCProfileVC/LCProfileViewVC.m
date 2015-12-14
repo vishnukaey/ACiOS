@@ -102,7 +102,7 @@
 - (void)loaduserDetails
 {
   friendsButton.enabled = NO;
-  [LCAPIManager getUserDetailsOfUser:self.userDetail.userID WithSuccess:^(id response) {
+  [LCUserProfileAPIManager getUserDetailsOfUser:self.userDetail.userID WithSuccess:^(id response) {
     
     if(currentProfileStatus == kMyProfile) {
       [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
@@ -154,7 +154,7 @@
   
   [self setCurrentProfileStatus:kRequestWaiting];
   friendsButton.userInteractionEnabled = NO;
-  [LCAPIManager sendFriendRequest:self.userDetail.userID withSuccess:^(NSDictionary *response) {
+  [LCProfileAPIManager sendFriendRequest:self.userDetail.userID withSuccess:^(NSDictionary *response) {
     friendsButton.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -167,7 +167,7 @@
   
   [self setCurrentProfileStatus:kNonFriend];
   friendsButton.userInteractionEnabled = NO;
-  [LCAPIManager cancelFriendRequest:self.userDetail.userID withSuccess:^(NSArray *response) {
+  [LCProfileAPIManager cancelFriendRequest:self.userDetail.userID withSuccess:^(NSArray *response) {
     friendsButton.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
     NSLog(@"%@",error);
@@ -180,7 +180,7 @@
   
   [self setCurrentProfileStatus:kNonFriend];
   friendsButton.userInteractionEnabled = NO;
-  [LCAPIManager removeFriend:self.userDetail.userID withSuccess:^(NSArray *response)
+  [LCProfileAPIManager removeFriend:self.userDetail.userID withSuccess:^(NSArray *response)
    {
      friendsButton.userInteractionEnabled = YES;
    }

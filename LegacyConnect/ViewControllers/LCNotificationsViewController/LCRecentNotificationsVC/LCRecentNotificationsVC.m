@@ -19,7 +19,7 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [LCAPIManager getRecentNotificationsWithLastId:nil withSuccess:^(id response) {
+  [LCNotificationsAPIManager getRecentNotificationsWithLastId:nil withSuccess:^(id response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -34,7 +34,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getRecentNotificationsWithLastId:[(LCRecentNotification*)[self.results lastObject] notificationId] withSuccess:^(id response) {
+  [LCNotificationsAPIManager getRecentNotificationsWithLastId:[(LCRecentNotification*)[self.results lastObject] notificationId] withSuccess:^(id response) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
@@ -149,7 +149,7 @@
 - (void)markNotificationAsRead:(LCRecentNotification*)notification
 {
   if (!notification.isRead) {
-    [LCAPIManager markNotificationAsRead:notification.notificationId andStatus:^(BOOL status) {
+    [LCNotificationsAPIManager markNotificationAsRead:notification.notificationId andStatus:^(BOOL status) {
       notification.isRead = YES;
     }];
   }

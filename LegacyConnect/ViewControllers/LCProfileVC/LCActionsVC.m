@@ -19,7 +19,7 @@
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCAPIManager getUserEventsForUserId:self.userID andLastEventId:nil withSuccess:^(NSArray *response) {
+  [LCProfileAPIManager getUserEventsForUserId:self.userID andLastEventId:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -36,7 +36,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getUserEventsForUserId:self.userID andLastEventId:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
+  [LCProfileAPIManager getUserEventsForUserId:self.userID andLastEventId:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];

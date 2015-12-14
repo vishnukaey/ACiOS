@@ -85,7 +85,7 @@
          
          NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
          
-         [LCAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+         [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
            [self loginUser];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
            

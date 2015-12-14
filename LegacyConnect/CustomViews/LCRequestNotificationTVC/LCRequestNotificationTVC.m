@@ -7,6 +7,7 @@
 //
 
 #import "LCRequestNotificationTVC.h"
+#import "LCEventAPImanager.h"
 
 @implementation LCRequestNotificationTVC
 
@@ -65,7 +66,7 @@
   {
     LCEvent *event = [[LCEvent alloc] init];
     event.eventID = _request.eventID;
-    [LCAPIManager followEvent:event withSuccess:^(id response) {
+    [LCEventAPImanager followEvent:event withSuccess:^(id response) {
       [self setUserInteractionEnabled:YES];
       self.alpha = 1.0;
       _request.requestStatus = @"1";
@@ -78,7 +79,7 @@
   }
   else
   {
-    [LCAPIManager acceptFriendRequest:_request.friendID withSuccess:^(id response)
+    [LCProfileAPIManager acceptFriendRequest:_request.friendID withSuccess:^(id response)
      {
        [self setUserInteractionEnabled:YES];
        self.alpha = 1.0;
@@ -99,7 +100,7 @@
   self.alpha = 0.5;
   if([_request.type isEqualToString:@"event"])
   {
-    [LCAPIManager rejectEventRequest:_request.eventID withSuccess:^(id response) {
+    [LCNotificationsAPIManager rejectEventRequest:_request.eventID withSuccess:^(id response) {
       [self setUserInteractionEnabled:YES];
       self.alpha = 1.0;
       _request.requestStatus = @"2";
@@ -111,7 +112,7 @@
   }
   else
   {
-    [LCAPIManager rejectFriendRequest:_request.friendID withSuccess:^(id response)
+    [LCProfileAPIManager rejectFriendRequest:_request.friendID withSuccess:^(id response)
      {
        [self setUserInteractionEnabled:YES];
        self.alpha = 1.0;

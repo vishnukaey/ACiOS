@@ -79,7 +79,7 @@
   [loginBtn setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
+  [LCOnboardingAPIManager performLoginForUser:dict withSuccess:^(id response) {
     NSLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];

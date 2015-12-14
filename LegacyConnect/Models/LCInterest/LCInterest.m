@@ -23,7 +23,8 @@
            @"followers": @"followers",
            @"causes": @"causes",
            @"events": @"events",
-           @"isFollowing": @"isFollowing"
+           @"isFollowing": @"isFollowing",
+           @"themeID" : @"themeId"
            };
 }
 

@@ -28,7 +28,7 @@
 {
   [super startFetchingNextResults];
   
-  [LCAPIManager getCauseSearchResultsWithSearchKey:_searchKey withFastId:[(LCCause*)[self.results lastObject] causeID] success:^(id response) {
+  [LCSearchAPIManager getCauseSearchResultsWithSearchKey:_searchKey withFastId:[(LCCause*)[self.results lastObject] causeID] success:^(id response) {
     BOOL hasMoreData = [(NSArray*)response count] >= 20;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {

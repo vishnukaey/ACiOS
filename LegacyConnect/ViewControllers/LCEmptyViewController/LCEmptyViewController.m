@@ -83,7 +83,7 @@ static NSString *kTitle = @"MY FEED";
     if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
     {
       
-      [LCAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
+      [LCUserProfileAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
        {
          [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
          [self addSideMenuVIewController];
@@ -404,7 +404,7 @@ static NSString *kTitle = @"MY FEED";
 - (void)updateNotificationCount
 {
   LCDLog(@"Get Notification Count API call and Update");
-  [LCAPIManager getNotificationCountWithStatus:^(BOOL status) {
+  [LCNotificationsAPIManager getNotificationCountWithStatus:^(BOOL status) {
     [LCNotificationManager postNotificationCountUpdatedNotification];
   }];
 }

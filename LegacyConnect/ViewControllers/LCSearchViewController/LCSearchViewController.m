@@ -103,7 +103,7 @@
 
 -(void) searchRequest:(NSTimer*)sender
 {
-  [LCAPIManager searchForItem:sender.userInfo withSuccess:^(LCSearchResult *searchResult) {
+  [LCSearchAPIManager searchForItem:sender.userInfo withSuccess:^(LCSearchResult *searchResult) {
     searchResultObject = searchResult;
     [self reloadAllViews];
   } andFailure:^(NSString *error) {

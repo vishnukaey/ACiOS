@@ -75,6 +75,8 @@ NSString *const kGetUserCausesURL = @"api/user/causes";
 NSString *const kGetCauseFollowersURL = @"api/cause/users";
 NSString *const kCauseSuppotURL = @"api/cause/support";
 NSString *const kCauseUnsuppotURL = @"api/cause/unsupport";
+NSString *const kGetCauseFromInterestsURL = @"api/causesFromInterest";
+NSString *const kGetThemesURL = @"api/themes";
 
 NSString *const kGetFeedsURL = @"api/feed";
 NSString *const kGetMilestonesURL = @"api/user/milestone";
@@ -141,6 +143,7 @@ NSString *const kResponseData = @"data";
 NSString *const kUsersKey = @"users";
 NSString *const kInterestsKey = @"interests";
 NSString *const kCausesKey = @"causes";
+NSString *const kThemesKey = @"themes";
 NSString *const kInterestIDKey = @"interestId";
 NSString *const kCauseIDKey = @"causeId";
 NSString *const kEventIDKey = @"eventId";
