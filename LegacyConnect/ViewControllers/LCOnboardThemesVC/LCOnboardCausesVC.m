@@ -48,7 +48,7 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [LCAPIManager getCausesForInterestID:@"1" andLastCauseID:nil withSuccess:^(NSArray *responses) {
+  [LCThemeAPIManager getCausesForInterestID:@"1" andLastCauseID:nil withSuccess:^(NSArray *responses) {
     
     BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
@@ -61,7 +61,7 @@
 {
   [super startFetchingNextResults];
   
-  [LCAPIManager getCausesForInterestID:@"" andLastCauseID:[(LCCause*)[self.results lastObject] causeID] withSuccess:^(NSArray *responses) {
+  [LCThemeAPIManager getCausesForInterestID:@"" andLastCauseID:[(LCCause*)[self.results lastObject] causeID] withSuccess:^(NSArray *responses) {
     
     BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
