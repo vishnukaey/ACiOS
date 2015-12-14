@@ -62,8 +62,11 @@ static NSString *kTitle = @"MY FEED";
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self initialUISetUp];
+  
+  [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
   [LCDataManager sharedDataManager].userAvatarImage = [UIImage imageNamed:@"userProfilePic"];
+  
+  [self initialUISetUp];
   // Navigate to signup if user is NOT logged-in
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
@@ -315,13 +318,13 @@ static NSString *kTitle = @"MY FEED";
   }
   else if (index == 2)//settings
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
-    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-//    LCOnboardCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
+//    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCOnboardCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
     
     
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
