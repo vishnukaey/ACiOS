@@ -26,6 +26,7 @@
 #import "UIImage+LCImageFix.h"
 #import "LCFinalTutorialVC.h"
 #import "LCOnboardCausesVC.h"
+#import "LCOnboardFinalSelectionVC.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -318,8 +319,13 @@ static NSString *kTitle = @"MY FEED";
 //    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
     
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+//    LCOnboardCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
+//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+    
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-    LCOnboardCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
+    LCOnboardFinalSelectionVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardFinalSelectionVC"];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 3)//profile
