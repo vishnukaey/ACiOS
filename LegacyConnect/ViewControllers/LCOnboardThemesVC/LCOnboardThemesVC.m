@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Gist. All rights reserved.
 //
 
-#import "LCChooseCausesVC.h"
+#import "LCOnboardThemesVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCChooseInterestCVC.h"
 
 
-@interface LCChooseCausesVC ()
+@interface LCOnboardThemesVC ()
 {
   NSMutableDictionary *selectedItems;
   NSMutableArray *causes;
@@ -20,7 +20,7 @@
 }
 @end
 
-@implementation LCChooseCausesVC
+@implementation LCOnboardThemesVC
 
 - (void)viewDidLoad {
   [super viewDidLoad];
