@@ -7,6 +7,19 @@
 //
 
 #import "LCOnboardCausesVC.h"
+#import "LCChooseCausesCollectionViewCell.h"
+
+#pragma mark - LCInviteFromContactsCell class
+@interface LCOnboardCausesViewCell : UICollectionViewCell
+
+  @property (weak, nonatomic) IBOutlet UIImageView *causeImage;
+  @property (weak, nonatomic) IBOutlet UILabel *causeName;
+  @property (weak, nonatomic) IBOutlet UIButton *followCauseButton;
+
+@end
+
+@implementation LCOnboardCausesViewCell
+@end
 
 @interface LCOnboardCausesVC ()
 
@@ -22,8 +35,9 @@
 //  causesCollectionView.collectionViewCellSize = CGSizeMake(size, size + 20);
 //  causesCollectionView.collec
   
-  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+//  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
   self.collectionViewCellSize  = CGSizeMake(105, 135);
+  [self startFetchingResults];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,25 +45,56 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [LCThemeAPIManager getCausesForInterestID:@"1" andLastCauseID:nil withSuccess:^(NSArray *responses) {
+    
+    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
+    [self didFetchNextResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  
+  [LCThemeAPIManager getCausesForInterestID:@"" andLastCauseID:[(LCCause*)[self.results lastObject] causeID] withSuccess:^(NSArray *responses) {
+    
+    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
+    [self didFetchNextResults:responses haveMoreData:hasMoreData];
+  } andFailure:^(NSString *error) {
+    [self didFailedToFetchResults];
+  }];
+}
+
 
 
 #pragma CollectionView Delegates
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-  
-  return 8;
-  
-}
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//  
+//  return 8;
+//  
+//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
   
-  static NSString *identifier = @"causesCell";
-  
-  UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+//  static NSString *identifier = @"causesCell";
+//  
+//  LCOnboardCausesViewCell *cell = (LCOnboardCausesViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+//  
+//  cell.causeName.text = @"name";
+//  cell.causeImage.image = [UIImage imageNamed:@"userProfilePic"];
+//  [cell.followCauseButton setSelected:YES];
 
-//  
-//  UIImageView *collectionImageView = (UIImageView *)[cell viewWithTag:100];
-//  
-//  collectionImageView.image = [UIImage imageNamed:[collectionImages objectAtIndex:indexPath.row]];
+  LCCOLLECTIONVIEW_cellForItemAtIndexPath
+  
+  static NSString *identifier = @"causesCollectionViewCell";
+  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+  cell.cause = self.results[indexPath.item];
+  
   return cell;
   
 }
