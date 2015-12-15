@@ -66,6 +66,7 @@ NSString *const kGetInterestFollowersURL = @"api/interest/users";
 NSString *const kIneterestsFollowURL = @"api/interest/follow";
 NSString *const kIneterestsUnfollowURL = @"api/interest/unfollow";
 NSString *const kGetInterestsAndCausesURL = @"api/user/getUserInterestsWithCauses";
+NSString *const kGetCausesWithInterestURL = @"api/causesWithInterest";
 
 NSString *const kGetInterestsSearchURL = @"api/search/interest";
 NSString *const kGetCauseSearchURL = @"api/search/cause";

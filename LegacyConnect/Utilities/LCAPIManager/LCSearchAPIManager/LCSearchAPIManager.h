@@ -18,4 +18,6 @@
 + (void)getInterestsSearchResultsWithSearchKey:(NSString*)searchText withFastId:(NSString*)lastId success:(void (^)(id response))success
                                     andfailure:(void (^)(NSString *error))failure;
 
++ (void)searchCausesWithInterestForSearchText:(NSString*)searchkey lastId:(NSString*)lastId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
+
 @end
