@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -54,8 +54,11 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
@@ -743,7 +746,7 @@ id augue sagittis, mattis sapien.</string>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEARCH CAUSES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaL-13-WRD">
-                                        <rect key="frame" x="117" y="31" width="141.5" height="21"/>
+                                        <rect key="frame" x="117" y="31" width="142" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="CuX-I6-1PM"/>
                                         </constraints>
@@ -1362,7 +1365,7 @@ then select a few related causes.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F9M-tD-hzX" id="MhH-N4-n8D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="t8l-z9-6KE">
@@ -1555,7 +1558,7 @@ then select a few related causes.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4rt-vB-gIN" id="d7E-e3-tgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-MA-qAN">
@@ -1791,35 +1794,75 @@ then select a few related causes.</string>
                                 <rect key="frame" x="0.0" y="150" width="375" height="517"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="D9h-jO-1ox">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="105" height="140"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="15" minY="15" maxX="15" maxY="15"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCollectionViewCell" id="p5j-vw-04k">
-                                        <rect key="frame" x="15" y="65" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCell" id="J0E-Wh-y9M" customClass="LCChooseCausesCollectionViewCell">
+                                        <rect key="frame" x="15" y="65" width="105" height="140"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qq2-ZL-nl5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="105" id="2gy-ha-yIB"/>
+                                                        <constraint firstAttribute="width" constant="105" id="QeW-Js-8Mi"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cause" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ra4-cx-EX2">
+                                                    <rect key="frame" x="5" y="110" width="95" height="25"/>
+                                                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="12"/>
+                                                    <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oGf-xi-TjX">
+                                                    <rect key="frame" x="67" y="8" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="goj-3Z-1q9"/>
+                                                        <constraint firstAttribute="height" constant="30" id="uFP-HZ-fex"/>
+                                                    </constraints>
+                                                    <state key="normal" image="contact_plus"/>
+                                                    <state key="selected" image="contact_tick"/>
+                                                </button>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="oGf-xi-TjX" firstAttribute="trailing" secondItem="J0E-Wh-y9M" secondAttribute="trailingMargin" id="5Uv-VZ-oPS"/>
+                                            <constraint firstItem="Qq2-ZL-nl5" firstAttribute="leading" secondItem="J0E-Wh-y9M" secondAttribute="leading" id="COe-aQ-QDt"/>
+                                            <constraint firstItem="ra4-cx-EX2" firstAttribute="top" secondItem="Qq2-ZL-nl5" secondAttribute="bottom" constant="5" id="G6i-nR-uzA"/>
+                                            <constraint firstItem="Qq2-ZL-nl5" firstAttribute="top" secondItem="J0E-Wh-y9M" secondAttribute="top" id="KjV-Bb-UJU"/>
+                                            <constraint firstAttribute="bottom" secondItem="ra4-cx-EX2" secondAttribute="bottom" constant="5" id="PWZ-LN-LNA"/>
+                                            <constraint firstAttribute="trailing" secondItem="Qq2-ZL-nl5" secondAttribute="trailing" id="Ul7-d1-6O0"/>
+                                            <constraint firstAttribute="trailing" secondItem="ra4-cx-EX2" secondAttribute="trailing" constant="5" id="ZJq-nc-soq"/>
+                                            <constraint firstItem="ra4-cx-EX2" firstAttribute="leading" secondItem="J0E-Wh-y9M" secondAttribute="leading" constant="5" id="tAd-y3-swb"/>
+                                            <constraint firstItem="oGf-xi-TjX" firstAttribute="top" secondItem="J0E-Wh-y9M" secondAttribute="topMargin" id="yJ8-jV-jZm"/>
+                                        </constraints>
+                                        <size key="customSize" width="105" height="140"/>
+                                        <connections>
+                                            <outlet property="causeLabel" destination="ra4-cx-EX2" id="1Ge-KP-ofb"/>
+                                            <outlet property="causesImageView" destination="Qq2-ZL-nl5" id="E2l-wI-udt"/>
+                                            <outlet property="selectionButton" destination="oGf-xi-TjX" id="CpK-tt-Xno"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerCell" id="MiX-Vs-zc4" customClass="LCCausesHeaderReusableView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gay-pv-lWd">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interest" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gay-pv-lWd">
                                             <rect key="frame" x="8" y="29" width="291" height="13"/>
                                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="513-1k-xYg">
-                                            <rect key="frame" x="307" y="25" width="60" height="25"/>
+                                            <rect key="frame" x="307" y="23" width="60" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="25" id="tBS-vp-M2Q"/>
                                                 <constraint firstAttribute="width" constant="60" id="ujB-ym-S5K"/>
@@ -1828,15 +1871,19 @@ then select a few related causes.</string>
                                             <state key="normal" title="Show All">
                                                 <color key="titleColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="showAllAction:" destination="Waq-9X-zJm" eventType="touchUpInside" id="6Ba-Jc-zuI"/>
+                                            </connections>
                                         </button>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="gay-pv-lWd" firstAttribute="bottom" secondItem="MiX-Vs-zc4" secondAttribute="bottomMargin" id="AM8-Mi-E2Y"/>
                                         <constraint firstItem="513-1k-xYg" firstAttribute="trailing" secondItem="MiX-Vs-zc4" secondAttribute="trailingMargin" id="D0f-FF-dLm"/>
                                         <constraint firstItem="gay-pv-lWd" firstAttribute="leading" secondItem="MiX-Vs-zc4" secondAttribute="leadingMargin" id="DPF-e0-nOX"/>
+                                        <constraint firstItem="513-1k-xYg" firstAttribute="centerY" secondItem="gay-pv-lWd" secondAttribute="centerY" id="j6R-5n-Ngp"/>
                                         <constraint firstItem="513-1k-xYg" firstAttribute="leading" secondItem="gay-pv-lWd" secondAttribute="trailing" constant="8" id="k4p-dX-xeV"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="513-1k-xYg" secondAttribute="bottom" constant="-8" id="l2m-wz-gnj"/>
+                                        <constraint firstItem="513-1k-xYg" firstAttribute="baseline" secondItem="gay-pv-lWd" secondAttribute="baseline" id="klw-Hr-Voe"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="interestName" destination="gay-pv-lWd" id="mIc-gP-dP6"/>
@@ -1864,6 +1911,9 @@ then select a few related causes.</string>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="collectionView" destination="BZT-4W-nTJ" id="kYq-1J-enI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOz-jL-aFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1894,8 +1944,11 @@ then select a few related causes.</string>
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="icu-cv-ReE" eventType="touchUpInside" id="284-NW-69C"/>
+                                        </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WATER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNy-42-kfY">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECTED INTEREST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JNy-42-kfY">
                                         <rect key="frame" x="-372" y="31" width="1121" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="1120" id="E9g-U7-wUY"/>
@@ -1921,7 +1974,7 @@ then select a few related causes.</string>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Krq-jO-vos">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="A5H-m2-VZv">
                                     <size key="itemSize" width="105" height="139"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1929,28 +1982,27 @@ then select a few related causes.</string>
                                     <inset key="sectionInset" minX="15" minY="15" maxX="15" maxY="15"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCell" id="x8J-VR-z3e" customClass="LCOnboardCausesViewCell">
-                                        <rect key="frame" x="15" y="15" width="105" height="139"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCell" id="x8J-VR-z3e" customClass="LCChooseCausesCollectionViewCell">
+                                        <rect key="frame" x="15" y="15" width="105" height="140"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="139"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="105" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jkF-aA-Hzr">
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="105" id="L7g-ML-kDp"/>
                                                         <constraint firstAttribute="height" constant="105" id="phb-1f-bLe"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aA-Ad-tbN">
-                                                    <rect key="frame" x="5" y="110" width="95" height="24"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cause" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4aA-Ad-tbN">
+                                                    <rect key="frame" x="5" y="110" width="95" height="25"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="12"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bV1-wC-Trb">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bV1-wC-Trb">
                                                     <rect key="frame" x="67" y="8" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="c23-28-vyu"/>
@@ -1973,45 +2025,11 @@ then select a few related causes.</string>
                                             <constraint firstItem="jkF-aA-Hzr" firstAttribute="leading" secondItem="x8J-VR-z3e" secondAttribute="leading" id="nmU-z5-4dB"/>
                                             <constraint firstItem="jkF-aA-Hzr" firstAttribute="top" secondItem="x8J-VR-z3e" secondAttribute="top" id="wiq-C5-L3b"/>
                                         </constraints>
-                                        <size key="customSize" width="105" height="139"/>
+                                        <size key="customSize" width="105" height="140"/>
                                         <connections>
-                                            <outlet property="causeImage" destination="jkF-aA-Hzr" id="CUc-9G-rXQ"/>
-                                            <outlet property="causeName" destination="4aA-Ad-tbN" id="KPG-3F-3mV"/>
-                                            <outlet property="followCauseButton" destination="bV1-wC-Trb" id="xsC-Gt-huZ"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCollectionViewCell" id="nXN-Oz-L68" customClass="LCChooseCausesCollectionViewCell">
-                                        <rect key="frame" x="130" y="32" width="105" height="105"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NKd-it-Ll8">
-                                                    <rect key="frame" x="0.0" y="0.0" width="105" height="105"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default-placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="QaL-5p-WAk">
-                                                    <rect key="frame" x="2" y="2" width="101" height="101"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                </imageView>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="QaL-5p-WAk" firstAttribute="leading" secondItem="nXN-Oz-L68" secondAttribute="leading" constant="2" id="8LD-0Q-vHd"/>
-                                            <constraint firstItem="NKd-it-Ll8" firstAttribute="leading" secondItem="nXN-Oz-L68" secondAttribute="leading" id="DVn-62-WcX"/>
-                                            <constraint firstAttribute="trailing" secondItem="QaL-5p-WAk" secondAttribute="trailing" constant="2" id="Nhb-Sp-9CR"/>
-                                            <constraint firstItem="QaL-5p-WAk" firstAttribute="top" secondItem="nXN-Oz-L68" secondAttribute="top" constant="2" id="a7h-ay-ehE"/>
-                                            <constraint firstItem="NKd-it-Ll8" firstAttribute="top" secondItem="nXN-Oz-L68" secondAttribute="top" id="a8Q-Om-hPI"/>
-                                            <constraint firstAttribute="trailing" secondItem="NKd-it-Ll8" secondAttribute="trailing" id="atP-as-sNv"/>
-                                            <constraint firstAttribute="bottom" secondItem="QaL-5p-WAk" secondAttribute="bottom" constant="2" id="maV-Ha-xev"/>
-                                            <constraint firstAttribute="bottom" secondItem="NKd-it-Ll8" secondAttribute="bottom" id="s2z-I0-lB6"/>
-                                        </constraints>
-                                        <size key="customSize" width="105" height="105"/>
-                                        <connections>
-                                            <outlet property="causesImageView" destination="QaL-5p-WAk" id="Itm-pt-iwm"/>
-                                            <outlet property="outerBorder" destination="NKd-it-Ll8" id="Gk9-04-iWl"/>
+                                            <outlet property="causeLabel" destination="4aA-Ad-tbN" id="I05-4v-DGS"/>
+                                            <outlet property="causesImageView" destination="jkF-aA-Hzr" id="CaN-Xu-Niq"/>
+                                            <outlet property="selectionButton" destination="bV1-wC-Trb" id="mRd-qE-U0Z"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -2034,7 +2052,8 @@ then select a few related causes.</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="collectionView" destination="Krq-jO-vos" id="qex-BO-vxh"/>
+                        <outlet property="collectionView" destination="Krq-jO-vos" id="gVq-Su-Sqz"/>
+                        <outlet property="navBarTitle" destination="JNy-42-kfY" id="feQ-XG-zhQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BdQ-Uy-Yen" userLabel="First Responder" sceneMemberID="firstResponder"/>

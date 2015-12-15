@@ -10,7 +10,8 @@
 #import "LCCollectionViewController.h"
 
 @interface LCOnboardCausesVC : LCCollectionViewController
-{
-  
-}
+
+  @property (strong, nonatomic) LCInterest *interest;
+  @property (weak, nonatomic) IBOutlet UILabel *navBarTitle;
+
 @end
