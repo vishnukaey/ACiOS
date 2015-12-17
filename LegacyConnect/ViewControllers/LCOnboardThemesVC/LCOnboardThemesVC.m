@@ -16,7 +16,7 @@
 {
   IBOutlet UIButton *nextButton;
   NSMutableArray *themesArray;
-  NSMutableArray *selectedItems;
+
 }
 @end
 
@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   themesArray = [[NSMutableArray alloc] init];
-  selectedItems = [[NSMutableArray alloc] init];
   
    [LCThemeAPIManager getThemesWithLastId:nil withSuccess:^(id response) {
      themesArray = response;

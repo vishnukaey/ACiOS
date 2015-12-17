@@ -10,8 +10,12 @@
 
 @interface LCOnboardingHelper : NSObject
 
-+ (void)removeInterest :(LCInterest *)interest fromDictionary:(NSMutableDictionary *)dictionary;
-+ (void)removeCause :(LCCause *)cause fromDictionary:(NSMutableDictionary *)dictionary;
-+ (void)addCause :(LCCause *)cause andInterest:(LCInterest *)interest toDictionary:(NSMutableDictionary *)dictionary;//pass associated interest when adding causes. Pass nil for causes if adding interests
++ (void)removeInterest :(LCInterest *)interest;
++ (void)removeCause :(LCCause *)cause;
++ (void)addCause :(LCCause *)cause andInterest:(LCInterest *)interest;//pass associated interest when adding causes. Pass nil for causes if adding interests
++ (BOOL)isInterestSelected :(LCInterest *)interest;
 
+
+
++(NSMutableDictionary*) selectedItemsDictionary;
 @end

@@ -8,13 +8,25 @@
 
 #import "LCOnboardingHelper.h"
 
+static NSMutableDictionary *selectedItemsDictionary;
+
 @implementation LCOnboardingHelper
 
-+ (void)addCause :(LCCause *)cause andInterest:(LCInterest *)interest toDictionary:(NSMutableDictionary *)dictionary
++(NSMutableDictionary*) selectedItemsDictionary
 {
-  if (cause && [dictionary objectForKey:cause.interestID])//interest of the cause is already added
+  if (selectedItemsDictionary == nil)
   {
-    LCInterest *parentInterest = dictionary[cause.interestID];
+    selectedItemsDictionary = [[NSMutableDictionary alloc] init];
+  }
+  return selectedItemsDictionary;
+}
+
+
++ (void)addCause :(LCCause *)cause andInterest:(LCInterest *)interest
+{
+  if (cause && [[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is already added
+  {
+    LCInterest *parentInterest = [self selectedItemsDictionary][cause.interestID];
     for (int i = 0 ;i<parentInterest.causes.count ;i++) {
       LCCause *subcause = parentInterest.causes[i];
       if ([subcause.causeID isEqualToString:cause.causeID]) {
@@ -25,29 +37,29 @@
         NSMutableArray *newCauses = [[NSMutableArray alloc] initWithArray:parentInterest.causes];
         [newCauses addObject:cause];
         parentInterest.causes = [NSArray arrayWithArray:newCauses];
-        [dictionary setObject:parentInterest forKey:cause.interestID];
+        [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
       }
     }
   }
-  else if (cause && ![dictionary objectForKey:cause.interestID])//interest of the cause is not added yet
+  else if (cause && ![[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is not added yet
   {
     interest.causes = [NSArray arrayWithObjects:cause, nil];
-    [dictionary setObject:interest forKey:cause.interestID];
+    [[self selectedItemsDictionary] setObject:interest forKey:cause.interestID];
   }
   else if (!cause && interest)//add an interest
   {
-    if (![dictionary objectForKey:interest.interestID])
+    if (![[self selectedItemsDictionary] objectForKey:interest.interestID])
     {
       interest.causes = nil;
-      [dictionary setObject:interest forKey:interest.interestID];
+      [[self selectedItemsDictionary] setObject:interest forKey:interest.interestID];
     }
   }
   
 }
 
-+ (void)removeCause :(LCCause *)cause fromDictionary:(NSMutableDictionary *)dictionary
++ (void)removeCause :(LCCause *)cause
 {
-    LCInterest *parentInterest = dictionary[cause.interestID];
+    LCInterest *parentInterest = [self selectedItemsDictionary][cause.interestID];
     NSMutableArray *subcauses = [[NSMutableArray alloc] initWithArray:parentInterest.causes];
     for(LCCause *subcause_ in subcauses)
     {
@@ -57,12 +69,21 @@
       }
     }
     parentInterest.causes = [NSArray arrayWithArray:subcauses];
-    [dictionary setObject:parentInterest forKey:parentInterest.interestID];
+    [[self selectedItemsDictionary] setObject:parentInterest forKey:parentInterest.interestID];
 }
 
-+ (void)removeInterest :(LCInterest *)interest fromDictionary:(NSMutableDictionary *)dictionary
++ (void)removeInterest :(LCInterest *)interest
 {
-  [dictionary removeObjectForKey:interest.interestID];
+  [[self selectedItemsDictionary] removeObjectForKey:interest.interestID];
+}
+
++ (BOOL)isInterestSelected :(LCInterest *)interest
+{
+  if ([[self selectedItemsDictionary] objectForKey:interest.interestID])
+  {
+    return YES;
+  }
+  return NO;
 }
 
 @end
