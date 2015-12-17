@@ -12,8 +12,8 @@
 
 #pragma mark - LCCausesHeaderReusableView class
 @interface LCCausesHeaderTableViewCell : UITableViewCell
-  @property (weak, nonatomic) IBOutlet UILabel *interestName;
-  @property (weak, nonatomic) IBOutlet UIButton *showAllButton;
+@property (weak, nonatomic) IBOutlet UILabel *interestName;
+@property (weak, nonatomic) IBOutlet UIButton *showAllButton;
 @end
 
 @implementation LCCausesHeaderTableViewCell
@@ -23,13 +23,17 @@
 
 @end
 
+NSString *const kCellIdentifierSectionHeader = @"headerCell";
+NSString *const kCellIdentifierTableViewCell = @"mycell";
+NSInteger const kTableViewCellHeight = 170;
+NSInteger const kTableViewHeaderHeight = 44;
+NSInteger const kNumberOfRowsInSection = 1;
+
 @implementation LCOnboardFinalSelectionVC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-  
-  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
   [self getCauses];
 }
 
@@ -40,8 +44,8 @@
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 
@@ -60,7 +64,7 @@
 }
 
 - (IBAction)showAllAction:(UIButton*)sender {
-
+  
   NSInteger section = sender.tag;
   LCInterest *interest = self.interestArray[section];
   
@@ -79,18 +83,18 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 1;
+  return kNumberOfRowsInSection;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 170;
+  return kTableViewCellHeight;
   
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   
-  return 44;
+  return kTableViewHeaderHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -102,7 +106,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   
-  NSString *cellIdentifier = @"headerCell";
+  NSString *cellIdentifier = kCellIdentifierSectionHeader;
   LCCausesHeaderTableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   LCInterest *interest = self.interestArray[section];
   headerView.interestName.text = interest.name;
@@ -112,86 +116,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//  if(indexPath.section == SECTION_NAME){
-  
-    NSString *cellIdentifier = @"mycell";
-    LCCausesCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    LCInterest *interest = self.interestArray[indexPath.section];
-    cell.causesArray = interest.causes;
-    return cell;
-//  }
+  NSString *cellIdentifier = kCellIdentifierTableViewCell;
+  LCCausesCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  LCInterest *interest = self.interestArray[indexPath.section];
+  cell.causesArray = interest.causes;
+  return cell;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//#pragma CollectionView Delegates
-//
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-//{
-//  return self.interestArray.count;
-//}
-//
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//
-//  LCInterest *interest = self.interestArray[section];
-//  return interest.causes.count;
-//}
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-//  
-//  static NSString *identifier = @"causesCell";
-//  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-//  
-//  LCInterest *interest = self.interestArray[indexPath.section];
-//  cell.cause = interest.causes[indexPath.item];
-//  
-//  return cell;
-//  
-//}
-//
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//  [cell setCellSelected:YES];
-//}
-//- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//  [cell setCellSelected:NO];
-//}
-//
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  
-//  CGSize size = CGSizeMake(105, 140);
-//  return size;
-//}
-//
-//
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//  if (kind == UICollectionElementKindSectionHeader) {
-//    
-//    LCCausesHeaderReusableView *reusableview =(LCCausesHeaderReusableView*)[collectionView
-//                                                                            dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-//                                                                            withReuseIdentifier:@"headerCell"
-//                                                                            forIndexPath:indexPath];
-//    LCInterest *interest = self.interestArray[indexPath.section];
-//    reusableview.interestName.text = interest.name;
-//    reusableview.showAllButton.tag = indexPath.section;
-//    return reusableview;
-//  }
-//  return nil;
-//}
 
 @end

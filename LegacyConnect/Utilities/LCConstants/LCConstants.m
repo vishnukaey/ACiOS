@@ -197,6 +197,7 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
+NSString *const kCausesCellID = @"causesCell";
 
 NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
