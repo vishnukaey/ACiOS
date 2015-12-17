@@ -197,6 +197,7 @@
 		CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */; };
 		CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
+		CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */; settings = {ASSET_TAGS = (); }; };
 		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; settings = {ASSET_TAGS = (); }; };
 		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; settings = {ASSET_TAGS = (); }; };
 		CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40671C1AA598003D3C81 /* LCOnboardThemesVC.m */; settings = {ASSET_TAGS = (); }; };
@@ -206,6 +207,7 @@
 		CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */; settings = {ASSET_TAGS = (); }; };
 		CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */; settings = {ASSET_TAGS = (); }; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
+		CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF97CCF1C22B67600DFA272 /* LCOnboardingHelper.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -546,6 +548,8 @@
 		CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSettings.m; path = Models/LCSettings/LCSettings.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
+		CED5F4301C2002470027A31C /* LCHorizontalInterestsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHorizontalInterestsCell.h; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestsCell.h; sourceTree = "<group>"; };
+		CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHorizontalInterestsCell.m; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestsCell.m; sourceTree = "<group>"; };
 		CEDD5F361BF1F8C100332A4E /* LCActionsFormPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsFormPresenter.h; sourceTree = "<group>"; };
 		CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsFormPresenter.m; sourceTree = "<group>"; };
 		CEDD5F391BF208D900332A4E /* LCEditActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEditActions.h; path = LCEditActions/LCEditActions.h; sourceTree = "<group>"; };
@@ -563,6 +567,8 @@
 		CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCNavigationBar.m; path = CustomViews/LCNavigationBar/LCNavigationBar.m; sourceTree = "<group>"; };
 		CEF275D51B78A30800709005 /* LCCommentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommentCell.h; path = CustomViews/LCCommentCell/LCCommentCell.h; sourceTree = "<group>"; };
 		CEF275D61B78A30800709005 /* LCCommentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCommentCell.m; path = CustomViews/LCCommentCell/LCCommentCell.m; sourceTree = "<group>"; };
+		CEF97CCE1C22B67600DFA272 /* LCOnboardingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCOnboardingHelper.h; path = ViewControllers/LCOnboardThemesVC/LCOnboardingHelper.h; sourceTree = "<group>"; };
+		CEF97CCF1C22B67600DFA272 /* LCOnboardingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCOnboardingHelper.m; path = ViewControllers/LCOnboardThemesVC/LCOnboardingHelper.m; sourceTree = "<group>"; };
 		D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1218,6 +1224,8 @@
 		0BC755681B562982009CE7F3 /* LCOnboardThemesVC */ = {
 			isa = PBXGroup;
 			children = (
+				CEF97CCE1C22B67600DFA272 /* LCOnboardingHelper.h */,
+				CEF97CCF1C22B67600DFA272 /* LCOnboardingHelper.m */,
 				CEDE40661C1AA598003D3C81 /* LCOnboardThemesVC.h */,
 				CEDE40671C1AA598003D3C81 /* LCOnboardThemesVC.m */,
 				CEDE40691C1AA623003D3C81 /* LCOnboardCauseSearchVC.h */,
@@ -1230,6 +1238,8 @@
 				0BC656161C1AC46100DBB5BA /* LCOnboardCausesVC.m */,
 				0B9741821C217732000B89CA /* LCCausesCollectionTableViewCell.h */,
 				0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */,
+				CED5F4301C2002470027A31C /* LCHorizontalInterestsCell.h */,
+				CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */,
 			);
 			name = LCOnboardThemesVC;
 			sourceTree = "<group>";
@@ -2088,6 +2098,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */,
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
 				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,
 				CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */,
@@ -2172,6 +2183,7 @@
 				0B56B8DF1C1AD74B001F3AE5 /* LCFeedAPIManager.m in Sources */,
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */,
+				CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */,
 				CEDE406B1C1AA623003D3C81 /* LCOnboardCauseSearchVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
 				168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */,
