@@ -9,18 +9,6 @@
 #import "LCOnboardCausesVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
 
-#pragma mark - LCInviteFromContactsCell class
-@interface LCOnboardCausesViewCell : UICollectionViewCell
-
-  @property (weak, nonatomic) IBOutlet UIImageView *causeImage;
-  @property (weak, nonatomic) IBOutlet UILabel *causeName;
-  @property (weak, nonatomic) IBOutlet UIButton *followCauseButton;
-
-@end
-
-@implementation LCOnboardCausesViewCell
-@end
-
 @interface LCOnboardCausesVC ()
 
 @end
@@ -30,13 +18,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
-//  causesCollectionView.collectionViewCellSize  = CGSizeMake(size, size);
-//  causesCollectionView.collectionViewCellSize = CGSizeMake(size, size + 20);
-//  causesCollectionView.collec
   
-//  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
-  self.collectionViewCellSize  = CGSizeMake(105, 135);
+  self.navBarTitle.text = [self.interest.name uppercaseString];
+  self.collectionView.allowsMultipleSelection = YES;
+  
+  //self.collectionViewCellSize  = CGSizeMake(105, 135);
   [self startFetchingResults];
 }
 
@@ -48,11 +34,13 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [LCThemeAPIManager getCausesForInterestID:@"1" andLastCauseID:nil withSuccess:^(NSArray *responses) {
-    
+  [MBProgressHUD showHUDAddedTo:self.collectionView animated:YES];
+  [LCThemeAPIManager getCausesForInterestID:self.interest.interestID andLastCauseID:nil withSuccess:^(NSArray *responses) {
+    [MBProgressHUD hideAllHUDsForView:self.collectionView animated:YES];
     BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.collectionView animated:YES];
     [self didFailedToFetchResults];
   }];
 }
@@ -61,7 +49,7 @@
 {
   [super startFetchingNextResults];
   
-  [LCThemeAPIManager getCausesForInterestID:@"" andLastCauseID:[(LCCause*)[self.results lastObject] causeID] withSuccess:^(NSArray *responses) {
+  [LCThemeAPIManager getCausesForInterestID:self.interest.interestID andLastCauseID:[(LCCause*)[self.results lastObject] causeID] withSuccess:^(NSArray *responses) {
     
     BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
@@ -70,45 +58,41 @@
   }];
 }
 
+- (IBAction)backButtonAction:(id)sender {
+  
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 #pragma CollectionView Delegates
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//  
-//  return 8;
-//  
-//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
   
-//  static NSString *identifier = @"causesCell";
-//  
-//  LCOnboardCausesViewCell *cell = (LCOnboardCausesViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
-//  
-//  cell.causeName.text = @"name";
-//  cell.causeImage.image = [UIImage imageNamed:@"userProfilePic"];
-//  [cell.followCauseButton setSelected:YES];
-
   LCCOLLECTIONVIEW_cellForItemAtIndexPath
-  
-  static NSString *identifier = @"causesCollectionViewCell";
+  static NSString *identifier = @"causesCell";
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
   cell.cause = self.results[indexPath.item];
   
   return cell;
-  
 }
 
-//- (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
-//  return CGSizeMake(size, size);  // will be w120xh100 or w190x100
-//  // if the width is higher, only one image will be shown in a line
-//}
-//
-//- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//  return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
-//}
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+  [cell setCellSelected:YES];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+  [cell setCellSelected:NO];
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  
+  CGSize size = CGSizeMake(105, 140);
+  return size;
+}
 
 @end

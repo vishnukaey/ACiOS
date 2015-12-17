@@ -25,7 +25,6 @@
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
 #import "LCFinalTutorialVC.h"
-#import "LCOnboardCausesVC.h"
 #import "LCOnboardFinalSelectionVC.h"
 
 static NSString *kTitle = @"MY FEED";
@@ -321,10 +320,6 @@ static NSString *kTitle = @"MY FEED";
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
     LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-//    LCOnboardCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
-//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
     
     
 //    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];

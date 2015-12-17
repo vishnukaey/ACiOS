@@ -66,6 +66,7 @@
 		0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */; };
 		0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */; };
 		0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8AA05C1BC299EE00C284DF /* LCfriendButton.m */; };
+		0B9741841C217732000B89CA /* LCCausesCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */; };
 		0BB33D951BA81142009E6D0C /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D941BA81142009E6D0C /* camera-icon.png */; };
 		0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D961BA812A3009E6D0C /* Gotham-Bold.otf */; };
@@ -332,6 +333,8 @@
 		0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEvent.m; path = Models/LCEvent/LCEvent.m; sourceTree = "<group>"; };
 		0B8AA05B1BC299EE00C284DF /* LCfriendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCfriendButton.h; sourceTree = "<group>"; };
 		0B8AA05C1BC299EE00C284DF /* LCfriendButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCfriendButton.m; sourceTree = "<group>"; };
+		0B9741821C217732000B89CA /* LCCausesCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCausesCollectionTableViewCell.h; path = ViewControllers/LCOnboardThemesVC/LCCausesCollectionTableViewCell.h; sourceTree = "<group>"; };
+		0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCausesCollectionTableViewCell.m; path = ViewControllers/LCOnboardThemesVC/LCCausesCollectionTableViewCell.m; sourceTree = "<group>"; };
 		0BA86F041BCE7C1C00B24454 /* LCThanksButtonImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCThanksButtonImage.h; sourceTree = "<group>"; };
 		0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCThanksButtonImage.m; sourceTree = "<group>"; };
 		0BB33D941BA81142009E6D0C /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
@@ -1228,6 +1231,8 @@
 				CEDE40701C1AA683003D3C81 /* LCOnboardFinalSelectionVC.m */,
 				0BC656151C1AC46100DBB5BA /* LCOnboardCausesVC.h */,
 				0BC656161C1AC46100DBB5BA /* LCOnboardCausesVC.m */,
+				0B9741821C217732000B89CA /* LCCausesCollectionTableViewCell.h */,
+				0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */,
 				CED5F4301C2002470027A31C /* LCHorizontalInterestsCell.h */,
 				CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */,
 			);
@@ -2211,6 +2216,7 @@
 				CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */,
 				16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */,
 				0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */,
+				0B9741841C217732000B89CA /* LCCausesCollectionTableViewCell.m in Sources */,
 				0B56B8E81C1AEE45001F3AE5 /* LCOnboardingAPIManager.m in Sources */,
 				0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */,
 				0BB33DAB1BA8132A009E6D0C /* LCFeedCellView.m in Sources */,
