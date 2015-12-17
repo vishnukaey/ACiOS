@@ -100,26 +100,16 @@ static NSString *kCheckedImageName = @"contact_tick";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//  LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
-//  LCInterest *interest_copy = [interest_ copy];
-//  selectedCause = [interest_.causes objectAtIndex:indexPath.row];
-//  selectedInterest = nil;
-//  
-//  NSArray *sortedCauses = [causesSearchArray copy];
-//  [causesSearchArray removeAllObjects];
-//  [causesSearchArray addObjectsFromArray:[self sortedInterestCauses:sortedCauses]];
-//  [interestsTableView reloadData];
-//  
-//  [causesCollectionView performBatchUpdates:^{
-//    for (NSInteger i = 0; i < interest_.causes.count; i++) {
-//      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
-//      NSInteger j = [interest_copy.causes indexOfObject:interest_.causes[i]];
-//      NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:j inSection:indexPath.section];
-//      [causesCollectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-//    }
-//  } completion:^(BOOL finished) {
-//    [causesCollectionView reloadData];
-//  }];
+  LCHorizontalInterestCollectionCell *cell = (LCHorizontalInterestCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
+  if ([LCOnboardingHelper isInterestSelected:self.interestsArray[indexPath.row]]) {
+    [LCOnboardingHelper removeInterest:self.interestsArray[indexPath.row]];
+    [cell setInterestSelected:NO];
+  }
+  else
+  {
+    [LCOnboardingHelper addCause:nil andInterest:self.interestsArray[indexPath.row]];
+    [cell setInterestSelected:YES];
+  }
 }
 //adding section header
 
