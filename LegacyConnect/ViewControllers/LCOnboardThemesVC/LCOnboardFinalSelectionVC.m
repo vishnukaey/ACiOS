@@ -9,6 +9,7 @@
 #import "LCOnboardFinalSelectionVC.h"
 #import "LCCausesCollectionTableViewCell.h"
 #import "LCOnboardCausesVC.h"
+#import "LCOnboardingHelper.h"
 
 #pragma mark - LCCausesHeaderReusableView class
 @interface LCCausesHeaderTableViewCell : UITableViewCell
@@ -41,6 +42,7 @@ NSInteger const kNumberOfRowsInSection = 1;
   
   [super viewWillAppear:animated];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO ];
+  [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -118,8 +120,8 @@ NSInteger const kNumberOfRowsInSection = 1;
 {
   NSString *cellIdentifier = kCellIdentifierTableViewCell;
   LCCausesCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-  LCInterest *interest = self.interestArray[indexPath.section];
-  cell.causesArray = interest.causes;
+  cell.interest = (LCInterest*)self.interestArray[indexPath.section];
+  [cell reloadCollectionView];
   return cell;
 }
 

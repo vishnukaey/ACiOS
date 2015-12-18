@@ -8,6 +8,7 @@
 
 #import "LCOnboardCausesVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
+#import "LCOnboardingHelper.h"
 
 @interface LCOnboardCausesVC ()
 
@@ -73,18 +74,26 @@
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
   cell.cause = self.results[indexPath.item];
   
+  if ([LCOnboardingHelper isCauseSelected:self.results[indexPath.item]]) {
+    [cell setCellSelected:YES];
+  }
+  else {
+    [cell setCellSelected:NO];
+  }
   return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+  [LCOnboardingHelper addCause:self.results[indexPath.item] andInterest:self.interest];
   [cell setCellSelected:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+  [LCOnboardingHelper removeCause:self.results[indexPath.item]];
   [cell setCellSelected:NO];
 }
 
