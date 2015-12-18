@@ -65,6 +65,10 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [milestoneImage setHidden:![self.feedObject.isMilestone boolValue]];
 }
 
+/**
+ * Setting feed details as an attributed text. Need to set different font and color for 
+ * post details, tagged people & checked in locations.
+ */
 - (void)setFeedInfoDetails
 {
   NSString *typeString = kAddedAPhotoIn;
