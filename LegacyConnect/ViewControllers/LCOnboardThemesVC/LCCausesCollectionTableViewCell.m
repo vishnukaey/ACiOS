@@ -25,19 +25,15 @@
 
 - (void)reloadCollectionView
 {
-  self.causesArray = [LCOnboardingHelper sortCausesInInterest:self.interest];
-  [self.collectionView reloadData];
+  LCInterest *selectedInterest = [[LCOnboardingHelper selectedItemsDictionary] objectForKey:self.interest.interestID];
+  if (selectedInterest.causes.count > 0) {
+    self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:selectedInterest.causes];
+  }
+  else {
+    self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:self.interest.causes];
+  }
   
-//  [self.collectionView performBatchUpdates:^{
-//    for (NSInteger i = 0; i < self.causesArray.count; i++) {
-//      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:i inSection:0];
-//      NSInteger j = [self.causesArray indexOfObject:self.causesArray[i]];
-//      NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:j inSection:0];
-//      [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-//    }
-//  } completion:^(BOOL finished) {
-//    [self.collectionView reloadData];
-//  }];
+  [self.collectionView reloadData];
 }
 
 #pragma CollectionView Delegates
@@ -75,7 +71,19 @@
     [cell setCellSelected:YES];
   }
   
-  [self reloadCollectionView];
+  NSArray *causesArrayCopy = [self.causesArray copy];
+  
+  self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:self.causesArray];
+  [self.collectionView performBatchUpdates:^{
+      NSInteger i = [self.causesArray indexOfObject:cause];
+      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:i inSection:indexPath.section];
+      NSInteger j = [causesArrayCopy indexOfObject:cause];
+      NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:j inSection:indexPath.section];
+      [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+  } completion:^(BOOL finished) {
+    [self.collectionView reloadData];
+  }];
+  
 }
 
 
