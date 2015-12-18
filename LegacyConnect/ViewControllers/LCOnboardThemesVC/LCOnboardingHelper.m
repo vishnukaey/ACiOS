@@ -35,20 +35,6 @@ static NSMutableDictionary *selectedItemsDictionary;
       [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
     }
     
-//    LCInterest *parentInterest = [self selectedItemsDictionary][cause.interestID];
-//    for (int i = 0 ;i < parentInterest.causes.count ;i++) {
-//      LCCause *subcause = parentInterest.causes[i];
-//      if ([subcause.causeID isEqualToString:cause.causeID]) {
-//        break;
-//      }
-//      else if(i == parentInterest.causes.count-1)
-//      {
-//        NSMutableArray *newCauses = [[NSMutableArray alloc] initWithArray:parentInterest.causes];
-//        [newCauses addObject:cause];
-//        parentInterest.causes = [NSArray arrayWithArray:newCauses];
-//        [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
-//      }
-//    }
   }
   else if (cause && ![[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is not added yet
   {
@@ -109,23 +95,17 @@ static NSMutableDictionary *selectedItemsDictionary;
   return NO;
 }
 
-+ (NSArray *)sortCausesInInterest:(LCInterest*)interest
++ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes
 {
-  //NSArray *selectedCauses = [[NSArray alloc] init];//[[NSArray alloc] initWithObjects:nil];
-  LCInterest *selectedInterest = [[self selectedItemsDictionary] objectForKey:interest.interestID];
+  LCCause *cause = [causes firstObject];
+  LCInterest *selectedInterest = [[self selectedItemsDictionary] objectForKey:cause.interestID];
   NSArray *selectedCauses = selectedInterest.causes;
-  selectedCauses = [self sort:selectedCauses];
+  selectedCauses = [self sortCausesArrayWithName:selectedCauses];
   
-  NSMutableArray *allCauses = [[NSMutableArray alloc] initWithArray: interest.causes];
-  
-//  NSArray *selectedCauses = @[allCauses[2],allCauses[4]];
-//  selectedCauses = [self sort:selectedCauses];
-  
+  NSMutableArray *allCauses = [[NSMutableArray alloc] initWithArray: causes];
   [allCauses removeObjectsInArray:selectedCauses];
+  NSArray *remaingCauses = [self sortCausesArrayWithName:allCauses];
   
-  NSArray *remaingCauses = [self sort:allCauses];
-  
-//  NSArray *combinedArray = [selectedCauses arrayByAddingObjectsFromArray:remaingCauses];//@[selectedCauses,remaingCauses];
   NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedCauses];
   [combinedArray addObjectsFromArray:remaingCauses];
   
@@ -133,7 +113,7 @@ static NSMutableDictionary *selectedItemsDictionary;
 }
 
 
-+ (NSArray*)sort:(NSArray*)array {
++ (NSArray*)sortCausesArrayWithName:(NSArray*)array {
   
   NSSortDescriptor *sortDescriptor;
   sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
