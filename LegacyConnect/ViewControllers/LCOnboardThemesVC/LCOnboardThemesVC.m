@@ -10,6 +10,7 @@
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCChooseInterestCVC.h"
 #import "LCHorizontalInterestsCell.h"
+#import "LCOnboardInterestsVC.h"
 
 
 @interface LCOnboardThemesVC ()
@@ -39,13 +40,12 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+  [self.themesTable reloadData];
 }
-
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
-
 
 - (IBAction) nextButtonTapped:(id)sender
 {
@@ -54,7 +54,11 @@
 
 - (void)showAllClicked :(UIButton *)sender
 {
-  LCDLog(@"dsfs");
+  LCTheme *theme = [themesArray objectAtIndex:sender.tag];
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCOnboardInterestsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardInterestsVC"];
+  vc.theme = theme;
+  [self.navigationController pushViewController:vc animated:YES];;
 }
 
 #pragma mark - TableView delegates
@@ -78,6 +82,7 @@
     cell = [[LCHorizontalInterestsCell alloc] initWithStyle:UITableViewCellStyleDefault
                                            reuseIdentifier:identifier_];
   }
+  cell.showAllButton.tag = indexPath.row;
   [cell.showAllButton addTarget:self action:@selector(showAllClicked:) forControlEvents:UIControlEventTouchUpInside];
   LCTheme *theme = [themesArray objectAtIndex:indexPath.row];
   cell.interestsArray = theme.interests;
@@ -85,7 +90,6 @@
   
   return cell;
 }
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

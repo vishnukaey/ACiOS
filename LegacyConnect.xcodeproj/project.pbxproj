@@ -164,6 +164,7 @@
 		CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1AFB621BF1DFA80039A47F /* LCCreateActions.m */; };
 		CE1B91551C16DB4D00DCAC53 /* LCTWWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */; };
 		CE1C957C1BFB3C2B00A3B9FB /* LCSearchUsersBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */; };
+		CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */; settings = {ASSET_TAGS = (); }; };
 		CE2E09C11C04304600722A22 /* LCHomeFeedBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C01C04304600722A22 /* LCHomeFeedBC.m */; };
 		CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C31C0432BA00722A22 /* LCFeedDetailBC.m */; };
 		CE2E09C71C04330800722A22 /* LCProfileViewBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C61C04330800722A22 /* LCProfileViewBC.m */; };
@@ -483,6 +484,8 @@
 		CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTWWebViewVC.m; path = ViewControllers/LCCreatePostViewController/LCTWWebViewVC.m; sourceTree = "<group>"; };
 		CE1C957A1BFB3C2B00A3B9FB /* LCSearchUsersBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchUsersBC.h; path = ViewControllers/LCBaseControllers/LCSearchUsersBC.h; sourceTree = "<group>"; };
 		CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchUsersBC.m; path = ViewControllers/LCBaseControllers/LCSearchUsersBC.m; sourceTree = "<group>"; };
+		CE2C87901C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHorizontalInterestCollectionCell.h; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestCollectionCell.h; sourceTree = "<group>"; };
+		CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHorizontalInterestCollectionCell.m; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestCollectionCell.m; sourceTree = "<group>"; };
 		CE2E09BF1C04304600722A22 /* LCHomeFeedBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHomeFeedBC.h; path = ViewControllers/LCBaseControllers/LCHomeFeedBC.h; sourceTree = "<group>"; };
 		CE2E09C01C04304600722A22 /* LCHomeFeedBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHomeFeedBC.m; path = ViewControllers/LCBaseControllers/LCHomeFeedBC.m; sourceTree = "<group>"; };
 		CE2E09C21C0432BA00722A22 /* LCFeedDetailBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedDetailBC.h; path = ViewControllers/LCBaseControllers/LCFeedDetailBC.h; sourceTree = "<group>"; };
@@ -1240,6 +1243,8 @@
 				0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */,
 				CED5F4301C2002470027A31C /* LCHorizontalInterestsCell.h */,
 				CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */,
+				CE2C87901C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.h */,
+				CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */,
 			);
 			name = LCOnboardThemesVC;
 			sourceTree = "<group>";
@@ -2139,6 +2144,7 @@
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */,
+				CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */,
 				0B775D911BE1F25B008B5B6F /* LCUpdateEmailViewController.m in Sources */,
 				CEDE406E1C1AA63F003D3C81 /* LCOnboardInterestsVC.m in Sources */,
 				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,

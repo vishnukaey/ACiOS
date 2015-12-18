@@ -73,7 +73,7 @@ static NSMutableDictionary *selectedItemsDictionary;
 
 + (BOOL)isInterestSelected :(LCInterest *)interest
 {
-  if ([[self selectedItemsDictionary] objectForKey:interest.interestID])
+  if ([[LCOnboardingHelper selectedItemsDictionary] objectForKey:interest.interestID])
   {
     return YES;
   }
