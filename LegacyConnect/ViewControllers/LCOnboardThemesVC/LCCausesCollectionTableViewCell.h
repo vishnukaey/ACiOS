@@ -11,5 +11,8 @@
 @interface LCCausesCollectionTableViewCell : UITableViewCell
 
   @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-  @property (weak, nonatomic) NSArray *causesArray;
+  @property (strong, nonatomic) LCInterest *interest;
+  @property (strong, nonatomic) NSArray *causesArray;
+
+  - (void)reloadCollectionView;
 @end
