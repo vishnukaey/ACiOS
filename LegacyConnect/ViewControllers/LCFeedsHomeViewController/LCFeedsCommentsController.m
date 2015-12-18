@@ -161,27 +161,24 @@ static CGFloat kIndexForPostDetails = 0;
     };
     return feedCell;
   }
-  else //comment cell
+  JTTABLEVIEW_cellForRowAtIndexPath
+  LCCommentCell *commentCell;
+  static NSString *MyIdentifier = @"LCCommentCell";
+  commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (commentCell == nil)
   {
-    JTTABLEVIEW_cellForRowAtIndexPath
-    LCCommentCell *commentCell;
-    static NSString *MyIdentifier = @"LCCommentCell";
-    commentCell = (LCCommentCell *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (commentCell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-      commentCell = [topLevelObjects objectAtIndex:0];
-    }
-    NSInteger rowNo = indexPath.row - 1;
-    [commentCell setComment:[self.results objectAtIndex:rowNo]];
-    [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    __weak typeof(self) weakSelf = self;
-    commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
-      [weakSelf tagTapped:tagDetails];
-    };
-    [commentCell.seperator setHidden:self.results.count == indexPath.row];
-    return commentCell;
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
+    commentCell = [topLevelObjects objectAtIndex:0];
   }
+  NSInteger rowNo = indexPath.row - 1;
+  [commentCell setComment:[self.results objectAtIndex:rowNo]];
+  [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+  __weak typeof(self) weakSelf = self;
+  commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
+    [weakSelf tagTapped:tagDetails];
+  };
+  [commentCell.seperator setHidden:self.results.count == indexPath.row];
+  return commentCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -204,13 +201,13 @@ static CGFloat kIndexForPostDetails = 0;
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.feed = feed;
-  vc.commentAction = ^ (id sender, BOOL showComments) {
+  LCFullScreenImageVC *imageVC = [[LCFullScreenImageVC alloc] init];
+  imageVC.feed = feed;
+  imageVC.commentAction = ^ (id sender, BOOL showComments) {
     [sender dismissViewControllerAnimated:YES completion:nil];
   };
-  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-  [self presentViewController:vc animated:YES completion:nil];
+  imageVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:imageVC animated:YES completion:nil];
 }
 
 

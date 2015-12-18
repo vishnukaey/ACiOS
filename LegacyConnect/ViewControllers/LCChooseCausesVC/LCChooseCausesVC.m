@@ -58,10 +58,10 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  if([collectionView isEqual:_interestsCollectionView])
+  if([collectionView isEqual:_interestsCollectionView]) {
     return interests.count;
-  else
-    return causes.count;
+  }
+  return causes.count;
 }
 
 //- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -123,28 +123,25 @@
     }
     return cell;
   }
+  static NSString *cellIdentifier = @"causesCollectionViewCell";
+  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+  
+  if (cell == nil)
+  {
+    NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
+    cell=cells[0];
+  }
+  cell.cause = causes[indexPath.item];
+  NSArray *selectedCauseIDs = [selectedItems valueForKey:cell.cause.interestID];
+  if([selectedCauseIDs containsObject:cell.cause.causeID])
+  {
+    [cell setCellSelected:YES];
+  }
   else
   {
-    static NSString *cellIdentifier = @"causesCollectionViewCell";
-    LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-   
-    if (cell == nil)
-    {
-      NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
-      cell=cells[0];
-    }
-    cell.cause = causes[indexPath.item];
-    NSArray *selectedCauseIDs = [selectedItems valueForKey:cell.cause.interestID];
-    if([selectedCauseIDs containsObject:cell.cause.causeID])
-    {
-      [cell setCellSelected:YES];
-    }
-    else
-    {
-      [cell setCellSelected:NO];
-    }
-    return cell;
+    [cell setCellSelected:NO];
   }
+  return cell;
 }
 
 

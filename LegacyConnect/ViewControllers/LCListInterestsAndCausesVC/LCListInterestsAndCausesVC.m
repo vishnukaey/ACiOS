@@ -194,35 +194,32 @@ static NSString *kCheckedImageName = @"contact_tick";
     tableView.allowsSelection = NO;
     return cell;
   }
+  static NSString *MyIdentifier = @"LCInterestsCell";
+  LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  if (cell == nil)
+  {
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+    cell = [topLevelObjects objectAtIndex:0];
+  }
+  
+  LCInterest *interstObj = [interestsSearchArray objectAtIndex:indexPath.row];
+  [cell setData:interstObj];
+  tableView.backgroundColor = [tableView.superview backgroundColor];
+  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+  tableView.allowsSelection = YES;
+  
+  cell.checkButton.hidden = NO;
+  cell.checkButton.userInteractionEnabled = NO;
+  if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
+  {
+    [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+  }
   else
   {
-    static NSString *MyIdentifier = @"LCInterestsCell";
-    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    if (cell == nil)
-    {
-      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-      cell = [topLevelObjects objectAtIndex:0];
-    }
-    
-    LCInterest *interstObj = [interestsSearchArray objectAtIndex:indexPath.row];
-    [cell setData:interstObj];
-    tableView.backgroundColor = [tableView.superview backgroundColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    tableView.allowsSelection = YES;
-    
-    cell.checkButton.hidden = NO;
-    cell.checkButton.userInteractionEnabled = NO;
-    if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
-    {
-      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
-    }
-    else
-    {
-      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
-    }
-    
-    return cell;
+    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
   }
+  
+  return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -305,8 +302,8 @@ static NSString *kCheckedImageName = @"contact_tick";
   [causesCollectionView performBatchUpdates:^{
     for (NSInteger i = 0; i < interest_.causes.count; i++) {
       NSIndexPath *fromIndexPath = [NSIndexPath indexPathForRow:i inSection:indexPath.section];
-      NSInteger j = [interest_copy.causes indexOfObject:interest_.causes[i]];
-      NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:j inSection:indexPath.section];
+      NSInteger toIndex = [interest_copy.causes indexOfObject:interest_.causes[i]];
+      NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:toIndex inSection:indexPath.section];
       [causesCollectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
     }
   } completion:^(BOOL finished) {

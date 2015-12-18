@@ -89,17 +89,14 @@
   [imageCropVC.chooseButton setHidden:true];
   [imageCropVC.moveAndScaleLabel setHidden:true];
   
-  
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
   UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height)];
   [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
-  
   [topBar setUserInteractionEnabled:true];
   
   CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
   
   UIButton *cancelBtn = [self getCancelButtonForImageCropView:imageCropVC andButtonyPosition:btnY];
-  
   UIButton *doneBtn = [self getDoneButtonForImageCropView:imageCropVC buttonyPosition:btnY andTopBarFrame:topBar.frame];
   
   CGFloat screenWidth = CGRectGetWidth(topBar.frame);
@@ -109,7 +106,6 @@
   [titleLabel setText:@"MOVE AND SCALE"];
   [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
   [titleLabel setUserInteractionEnabled:NO];
-  
   
   [topBar addSubview:cancelBtn];
   [topBar addSubview:doneBtn];
