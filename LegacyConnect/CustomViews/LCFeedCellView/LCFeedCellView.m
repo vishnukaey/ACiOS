@@ -65,15 +65,8 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [milestoneImage setHidden:![self.feedObject.isMilestone boolValue]];
 }
 
-/*!
- * This method is supposed to be call after a successful call to startFetchingNextResults.
- */
 - (void)setFeedInfoDetails
 {
-  /*!
-   * This method is supposed to be call after a successful call to startFetchingNextResults.
-   */
-
   NSString *typeString = kAddedAPhotoIn;
   if ([self.feedObject.postType isEqualToString:kPostTypeTextOnly])
   {
@@ -88,26 +81,17 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
   
   
-  //never ever forget to add the font attribute to the tagged label
-  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
-
+  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];//never ever forget to add the font attribute to the tagged label
   NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
   NSString * postInfoString = postTypeAndCause;
-  
-  
-  /*!
-   * This method is supposed to be call after a successful call to startFetchingNextResults.
-   */
-
   NSString * atString = @" at ";
-  NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];
+  NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];//never ever forget to add the font attribute to the tagged label
 
   if (location.length > 0) {
     NSString * atLocation = [NSString stringWithFormat:@"%@%@",atString,location];
     postInfoString = [NSString stringWithFormat:@"%@%@",postTypeAndCause,atLocation];
   }
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:postInfoString];
-  
   // -- Add Font -- //
   [attributtedString addAttributes:@{
                                      NSFontAttributeName : kPostInfoFont,
@@ -116,34 +100,24 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   // -- Text color for typeString string -- //
   [attributtedString addAttribute:NSForegroundColorAttributeName
                             value:kNormalPostTextColor
-                            range:NSMakeRange(0, typeString.length)];
-  
+                            range:NSMakeRange(0, typeString.length)];//never ever forget to add the font attribute to the tagged label
   // -- Text color for cause tag -- //
   NSRange tagRangeCause = [postInfoString rangeOfString:cause];
   [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:tagRangeCause];
-  
-  
   if (location.length > 0) {
     // -- text color for 'at' string -- //
     NSRange atStringRange = [postInfoString rangeOfString:atString];
-    [attributtedString addAttribute:NSForegroundColorAttributeName value:kNormalPostTextColor range:atStringRange];
+    [attributtedString addAttribute:NSForegroundColorAttributeName value:kNormalPostTextColor range:atStringRange];//never ever forget to add the font attribute to the tagged label
     
     // -- text color for Location tag -- //
     NSRange locationTagRange = [postInfoString rangeOfString:location];
-    [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
+    [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];//never ever forget to add the font attribute to the tagged label
   }
-  
-  /*!
-   * This method is supposed to be call after a successful call to startFetchingNextResults.
-   */
-
-  
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  
   NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
   [createdAtLabelTagsWithRanges addObject:dict_createdAt];
   createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
-  [createdLabel setAttributedText:attributtedString];
+  [createdLabel setAttributedText:attributtedString];//never ever forget to add the font attribute to the tagged label
   __weak typeof(self) weakSelf = self;
   createdLabel.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(dict_createdAt);
