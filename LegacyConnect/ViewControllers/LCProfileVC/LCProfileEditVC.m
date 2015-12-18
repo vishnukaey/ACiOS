@@ -660,11 +660,10 @@ NSInteger const kHeightForHeader = 44;
   CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
   CGFloat viewHeight = CGRectGetHeight(controller.view.frame);
   
-  CGRect maskRect = CGRectMake((viewWidth - maskSize.width) * 0.5f,
+  return CGRectMake((viewWidth - maskSize.width) * 0.5f,
                                (viewHeight - maskSize.height) * 0.5f,
                                maskSize.width,
                                maskSize.height);
-  return maskRect;
 }
 
 // Returns a custom path for the mask.

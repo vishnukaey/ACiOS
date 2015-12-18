@@ -81,11 +81,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
   
   
-  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];//never ever forget to add the font attribute to the tagged label
+  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
   NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
   NSString * postInfoString = postTypeAndCause;
   NSString * atString = @" at ";
-  NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];//never ever forget to add the font attribute to the tagged label
+  NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];
 
   if (location.length > 0) {
     NSString * atLocation = [NSString stringWithFormat:@"%@%@",atString,location];
@@ -100,24 +100,24 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   // -- Text color for typeString string -- //
   [attributtedString addAttribute:NSForegroundColorAttributeName
                             value:kNormalPostTextColor
-                            range:NSMakeRange(0, typeString.length)];//never ever forget to add the font attribute to the tagged label
+                            range:NSMakeRange(0, typeString.length)];
   // -- Text color for cause tag -- //
   NSRange tagRangeCause = [postInfoString rangeOfString:cause];
   [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:tagRangeCause];
   if (location.length > 0) {
     // -- text color for 'at' string -- //
     NSRange atStringRange = [postInfoString rangeOfString:atString];
-    [attributtedString addAttribute:NSForegroundColorAttributeName value:kNormalPostTextColor range:atStringRange];//never ever forget to add the font attribute to the tagged label
+    [attributtedString addAttribute:NSForegroundColorAttributeName value:kNormalPostTextColor range:atStringRange];
     
     // -- text color for Location tag -- //
     NSRange locationTagRange = [postInfoString rangeOfString:location];
-    [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];//never ever forget to add the font attribute to the tagged label
+    [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
   NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
   [createdAtLabelTagsWithRanges addObject:dict_createdAt];
   createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
-  [createdLabel setAttributedText:attributtedString];//never ever forget to add the font attribute to the tagged label
+  [createdLabel setAttributedText:attributtedString];
   __weak typeof(self) weakSelf = self;
   createdLabel.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(dict_createdAt);

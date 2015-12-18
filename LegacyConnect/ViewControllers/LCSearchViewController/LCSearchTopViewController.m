@@ -51,10 +51,7 @@
   {
     return 3;
   }
-  else
-  {
-    return 1;
-  }//count of section
+  return 1;
 }
 
 
@@ -79,11 +76,7 @@
   {
     return self.searchResultObject.interestsArray.count>3 ? 3 : self.searchResultObject.interestsArray.count;
   }
-  else
-  {
-    return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
-  }
-  
+  return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -100,7 +93,7 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
   
-  NSString *sectionName;
+  NSString *sectionName = nil;
   switch (section)
   {
     case 0:
@@ -118,12 +111,7 @@
   {
     return sectionName;
   }
-  else
-  {
-    return nil;
-  }
   return sectionName;
-  
 }
 
 
@@ -159,15 +147,11 @@
     cell.interest = interest;
     return cell;
   }
-  else
-  {
-    LCCausesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCCausesTableViewCell"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCCause *cause = self.searchResultObject.causesArray[indexPath.row];
-    cell.cause= cause;
-    return cell;
-  }
-  
+  LCCausesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCCausesTableViewCell"];
+  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+  LCCause *cause = self.searchResultObject.causesArray[indexPath.row];
+  cell.cause= cause;
+  return cell;
 }
 
 
