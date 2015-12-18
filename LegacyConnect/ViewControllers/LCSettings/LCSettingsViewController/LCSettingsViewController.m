@@ -207,18 +207,23 @@ static CGFloat kNumberOfSection = 2;
     }
   }
   else {
-    //sign out
-    UIAlertController *signOutAlert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"signout_alert_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"signOut", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-      [self signOutLegacy];
-    }];
-    [signOutAlert addAction:okAction];
-    
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil)  style:UIAlertActionStyleCancel handler:nil];
-    [signOutAlert addAction:cancelAction];
-    [self presentViewController:signOutAlert animated:YES completion:nil];
+    [self signOut];
   }
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)signOut
+{
+  //sign out
+  UIAlertController *signOutAlert = [UIAlertController alertControllerWithTitle:nil message:NSLocalizedString(@"signout_alert_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"signOut", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self signOutLegacy];
+  }];
+  [signOutAlert addAction:okAction];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil)  style:UIAlertActionStyleCancel handler:nil];
+  [signOutAlert addAction:cancelAction];
+  [self presentViewController:signOutAlert animated:YES completion:nil];
 }
 
 - (void)showUpdateEmailScreen

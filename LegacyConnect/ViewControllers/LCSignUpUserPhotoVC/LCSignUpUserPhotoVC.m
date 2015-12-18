@@ -82,6 +82,7 @@
   [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
+#pragma mark - edit view UI customisation
 - (void)customizeCropViewUI:(RSKImageCropViewController*)imageCropVC {
   [imageCropVC.view setAlpha:1];
   [imageCropVC.cancelButton setHidden:true];
@@ -95,39 +96,11 @@
   
   [topBar setUserInteractionEnabled:true];
   
-  
-  
-  CGFloat btnWidth = 75;
-  
   CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
   
+  UIButton *cancelBtn = [self getCancelButtonForImageCropView:imageCropVC andButtonyPosition:btnY];
   
-  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
-  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
-  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
-  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
-  
-  for (id target in imageCropVC.cancelButton.allTargets) {
-    NSArray *actions = [imageCropVC.cancelButton actionsForTarget:target
-                                                  forControlEvent:UIControlEventTouchUpInside];
-    for (NSString *action in actions) {
-      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
-    }
-  }
-  
-  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
-  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
-  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
-  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
-  
-  
-  for (id target in imageCropVC.chooseButton.allTargets) {
-    NSArray *actions = [imageCropVC.chooseButton actionsForTarget:target
-                                                  forControlEvent:UIControlEventTouchUpInside];
-    for (NSString *action in actions) {
-      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
-    }
-  }
+  UIButton *doneBtn = [self getDoneButtonForImageCropView:imageCropVC buttonyPosition:btnY andTopBarFrame:topBar.frame];
   
   CGFloat screenWidth = CGRectGetWidth(topBar.frame);
   UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
@@ -143,6 +116,46 @@
   [topBar addSubview:titleLabel];
   [imageCropVC.view addSubview:topBar];
 }
+
+- (UIButton*)getCancelButtonForImageCropView:(RSKImageCropViewController*)cropView andButtonyPosition:(CGFloat)btnY
+{
+  CGFloat btnWidth = 75;
+
+  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
+  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  for (id target in cropView.cancelButton.allTargets) {
+    NSArray *actions = [cropView.cancelButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  return cancelBtn;
+}
+
+- (UIButton*)getDoneButtonForImageCropView:(RSKImageCropViewController*)cropView buttonyPosition:(CGFloat)btnY andTopBarFrame:(CGRect)topBarFrame
+{
+  CGFloat btnWidth = 75;
+
+  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBarFrame) - btnWidth, btnY, btnWidth, 30)];
+  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
+  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
+  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
+  
+  
+  for (id target in cropView.chooseButton.allTargets) {
+    NSArray *actions = [cropView.chooseButton actionsForTarget:target
+                                                  forControlEvent:UIControlEventTouchUpInside];
+    for (NSString *action in actions) {
+      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
+    }
+  }
+  return doneBtn;
+}
+
 
 #pragma mark - ImagePicker delegate methods
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info

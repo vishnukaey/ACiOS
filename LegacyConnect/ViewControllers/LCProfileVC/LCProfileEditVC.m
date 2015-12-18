@@ -634,8 +634,8 @@ NSInteger const kHeightForHeader = 44;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:^{
-    UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage *normalzedImage = [originalImage normalizedImage];
+    UIImage * originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *normalzedImage = (UIImage*)[originalImage normalizedImage];
     [self showImageCropViewWithImage:normalzedImage];
   }];
   [LCUtilityManager setLCStatusBarStyle];
@@ -748,6 +748,6 @@ NSInteger const kHeightForHeader = 44;
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-  return [genderTypes objectAtIndex:row];
+  return (NSString *)[genderTypes objectAtIndex:row];
 }
 @end
