@@ -65,15 +65,13 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [milestoneImage setHidden:![self.feedObject.isMilestone boolValue]];
 }
 
-/**
- * Setting feed details as an attributed text. Need to set different font and color for 
- * post details, tagged people & checked in locations.
+/*!
+ * This method is supposed to be call after a successful call to startFetchingNextResults.
  */
 - (void)setFeedInfoDetails
 {
-  /**
-   * Setting feed details as an attributed text. Need to set different font and color for
-   * post details, tagged people & checked in locations.
+  /*!
+   * This method is supposed to be call after a successful call to startFetchingNextResults.
    */
 
   NSString *typeString = kAddedAPhotoIn;
@@ -97,9 +95,8 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   NSString * postInfoString = postTypeAndCause;
   
   
-  /**
-   * Setting feed details as an attributed text. Need to set different font and color for
-   * post details, tagged people & checked in locations.
+  /*!
+   * This method is supposed to be call after a successful call to startFetchingNextResults.
    */
 
   NSString * atString = @" at ";
@@ -136,9 +133,8 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
   
-  /**
-   * Setting feed details as an attributed text. Need to set different font and color for
-   * post details, tagged people & checked in locations.
+  /*!
+   * This method is supposed to be call after a successful call to startFetchingNextResults.
    */
 
   
