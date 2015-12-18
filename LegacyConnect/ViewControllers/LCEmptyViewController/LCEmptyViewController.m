@@ -67,8 +67,8 @@ static NSString *kTitle = @"MY FEED";
   
   [self initialUISetUp];
   // Navigate to signup if user is NOT logged-in
-//  if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
-//  {
+  if([[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
+  {
       UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
       UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
@@ -78,30 +78,30 @@ static NSString *kTitle = @"MY FEED";
     {
       [self showPasswordResetScreen];
     }
-//  }
-//  else
-//  {
-//    //Fetch additional userdetails if user is logged-in
-//    if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
-//    {
-//      
-//      [LCUserProfileAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
-//       {
-//         [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
-//         [self addSideMenuVIewController];
-//       } andFailure:^(NSString *error) {
-//         [self addSideMenuVIewController];
-//       }];
-//    }
-//    else
-//    {
-//      [LCUtilityManager clearUserDefaultsForCurrentUser];
-//      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-//      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-//      [self.navigationController setNavigationBarHidden:YES];
-//      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
-//    }
-//  }
+  }
+  else
+  {
+    //Fetch additional userdetails if user is logged-in
+    if([[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey])
+    {
+      
+      [LCUserProfileAPIManager getUserDetailsOfUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUserIDKey] WithSuccess:^(LCUserDetail *responses)
+       {
+         [LCUtilityManager saveUserDetailsToDataManagerFromResponse:responses];
+         [self addSideMenuVIewController];
+       } andFailure:^(NSString *error) {
+         [self addSideMenuVIewController];
+       }];
+    }
+    else
+    {
+      [LCUtilityManager clearUserDefaultsForCurrentUser];
+      UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+      [self.navigationController setNavigationBarHidden:YES];
+      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+    }
+  }
 }
 
 - (void)initialUISetUp
@@ -317,14 +317,14 @@ static NSString *kTitle = @"MY FEED";
   }
   else if (index == 2)//settings
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
-    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
-    
-    
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-//    LCOnboardFinalSelectionVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardFinalSelectionVC"];
+//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
+//    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
 //    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    
+    
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCOnboardFinalSelectionVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardFinalSelectionVC"];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
   }
   else if (index == 3)//profile
   {

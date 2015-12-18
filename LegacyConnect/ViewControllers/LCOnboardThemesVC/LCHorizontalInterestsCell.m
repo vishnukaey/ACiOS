@@ -8,41 +8,7 @@
 
 #import "LCHorizontalInterestsCell.h"
 #import "LCOnboardingHelper.h"
-
-@interface LCHorizontalInterestCollectionCell : UICollectionViewCell
-@property(nonatomic, retain)IBOutlet UIImageView *checkMark;
-@property(nonatomic, retain)IBOutlet UIImageView *interestLogo;
-@property(nonatomic, retain)IBOutlet UILabel *interestName;
-@property(nonatomic, retain)LCInterest *interest;
-- (void)setInterestSelected :(BOOL)isSelected;
-
-@end
-
-@implementation LCHorizontalInterestCollectionCell
-static NSString *kUnCheckedImageName = @"acceptButtonBG";
-static NSString *kCheckedImageName = @"contact_tick";
-- (void)setInterestSelected :(BOOL)isSelected
-{
-  if (isSelected) {
-    [self.checkMark setImage:[UIImage imageNamed:kCheckedImageName]];
-  }
-  else
-  {
-    [self.checkMark setImage:[UIImage imageNamed:kUnCheckedImageName]];
-  }
-}
-
-- (void)setInterest:(LCInterest *)interest
-{
-  _interest = interest;
-  self.interestLogo.layer.cornerRadius = 8;
-  self.interestLogo.clipsToBounds = YES;
-  [self.interestLogo sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
-  self.interestName.text = interest.name;
-}
-
-@end
-
+#import "LCHorizontalInterestCollectionCell.h"
 
 #define GRAY_BACK [UIColor colorWithRed:111.0f/255.0 green:113.0f/255.0 blue:121.0f/255.0 alpha:1]
 @interface LCHorizontalInterestsCell ()
@@ -75,7 +41,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   
   LCHorizontalInterestCollectionCell *cell = (LCHorizontalInterestCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
   
-  LCInterest *interstObj = [self.interestsArray objectAtIndex:indexPath.section];
+  LCInterest *interstObj = [self.interestsArray objectAtIndex:indexPath.row];
   cell.interest = interstObj;
   [cell setInterestSelected:[LCOnboardingHelper isInterestSelected:interstObj]];
   return cell;

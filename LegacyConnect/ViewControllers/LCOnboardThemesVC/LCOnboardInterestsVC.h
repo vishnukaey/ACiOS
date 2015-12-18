@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCCollectionViewController.h"
 
-@interface LCOnboardInterestsVC : UIViewController
+@interface LCOnboardInterestsVC : LCCollectionViewController
+
+@property (strong, nonatomic) LCTheme *theme;
+@property (weak, nonatomic) IBOutlet UILabel *navBarTitle;
 
 @end

@@ -48,7 +48,6 @@
 		0B56B8F71C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56B8F61C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m */; };
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
-		0B6F8C671BD90AB000A0F33E /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B6F8C661BD90AB000A0F33E /* Profile.storyboard */; };
 		0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7189D01C1EAE2F00554B98 /* LCTheme.m */; };
 		0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */; };
 		0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */; };
@@ -151,6 +150,7 @@
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; };
 		169EE45C1C24779F00749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45B1C24779F00749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
+		169EE45E1C24790100749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45D1C24790100749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; };
 		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -165,6 +165,7 @@
 		CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1AFB621BF1DFA80039A47F /* LCCreateActions.m */; };
 		CE1B91551C16DB4D00DCAC53 /* LCTWWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */; };
 		CE1C957C1BFB3C2B00A3B9FB /* LCSearchUsersBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */; };
+		CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */; settings = {ASSET_TAGS = (); }; };
 		CE2E09C11C04304600722A22 /* LCHomeFeedBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C01C04304600722A22 /* LCHomeFeedBC.m */; };
 		CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C31C0432BA00722A22 /* LCFeedDetailBC.m */; };
 		CE2E09C71C04330800722A22 /* LCProfileViewBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C61C04330800722A22 /* LCProfileViewBC.m */; };
@@ -301,7 +302,6 @@
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
-		0B6F8C661BD90AB000A0F33E /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		0B7189CF1C1EAE2F00554B98 /* LCTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCTheme.h; sourceTree = "<group>"; };
 		0B7189D01C1EAE2F00554B98 /* LCTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCTheme.m; sourceTree = "<group>"; };
 		0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Storyboards/Settings.storyboard; sourceTree = "<group>"; };
@@ -463,6 +463,7 @@
 		169607E11BF06A1E0007A278 /* LCEventMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEventMembersViewController.h; path = LCEventMembersVC/LCEventMembersViewController.h; sourceTree = "<group>"; };
 		169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventMembersViewController.m; path = LCEventMembersVC/LCEventMembersViewController.m; sourceTree = "<group>"; };
 		169EE45B1C24779F00749D4F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = Storyboards/Profile.storyboard; sourceTree = "<group>"; };
+		169EE45D1C24790100749D4F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = Storyboards/Profile.storyboard; sourceTree = "<group>"; };
 		16D6AF491BF3481F00DBC025 /* LCGAManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGAManager.h; path = Utilities/LCGAManager/LCGAManager.h; sourceTree = "<group>"; };
 		16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGAManager.m; path = Utilities/LCGAManager/LCGAManager.m; sourceTree = "<group>"; };
 		16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SupportingFiles/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -485,6 +486,8 @@
 		CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTWWebViewVC.m; path = ViewControllers/LCCreatePostViewController/LCTWWebViewVC.m; sourceTree = "<group>"; };
 		CE1C957A1BFB3C2B00A3B9FB /* LCSearchUsersBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchUsersBC.h; path = ViewControllers/LCBaseControllers/LCSearchUsersBC.h; sourceTree = "<group>"; };
 		CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchUsersBC.m; path = ViewControllers/LCBaseControllers/LCSearchUsersBC.m; sourceTree = "<group>"; };
+		CE2C87901C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHorizontalInterestCollectionCell.h; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestCollectionCell.h; sourceTree = "<group>"; };
+		CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHorizontalInterestCollectionCell.m; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestCollectionCell.m; sourceTree = "<group>"; };
 		CE2E09BF1C04304600722A22 /* LCHomeFeedBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHomeFeedBC.h; path = ViewControllers/LCBaseControllers/LCHomeFeedBC.h; sourceTree = "<group>"; };
 		CE2E09C01C04304600722A22 /* LCHomeFeedBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHomeFeedBC.m; path = ViewControllers/LCBaseControllers/LCHomeFeedBC.m; sourceTree = "<group>"; };
 		CE2E09C21C0432BA00722A22 /* LCFeedDetailBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFeedDetailBC.h; path = ViewControllers/LCBaseControllers/LCFeedDetailBC.h; sourceTree = "<group>"; };
@@ -1242,6 +1245,8 @@
 				0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */,
 				CED5F4301C2002470027A31C /* LCHorizontalInterestsCell.h */,
 				CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */,
+				CE2C87901C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.h */,
+				CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */,
 			);
 			name = LCOnboardThemesVC;
 			sourceTree = "<group>";
@@ -1453,8 +1458,8 @@
 		0BF05A651B4E623D00FF7B39 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				169EE45D1C24790100749D4F /* Profile.storyboard */,
 				CE6515021BF1B44F00BD6B86 /* Actions.storyboard */,
-				0B6F8C661BD90AB000A0F33E /* Profile.storyboard */,
 				0BB33DB11BA81359009E6D0C /* Interests.storyboard */,
 				0BB33DB31BA81359009E6D0C /* SignUp.storyboard */,
 				0BF05A801B4E64A000FF7B39 /* Main.storyboard */,
@@ -2004,6 +2009,7 @@
 				0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */,
 				0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */,
 				0BB33DA11BA812A3009E6D0C /* Gotham-BookItalic.otf in Resources */,
+				169EE45E1C24790100749D4F /* Profile.storyboard in Resources */,
 				169EE45C1C24779F00749D4F /* Profile.storyboard in Resources */,
 				0BB33DA01BA812A3009E6D0C /* Gotham-Book.otf in Resources */,
 				0BB33DEC1BA81401009E6D0C /* star.png in Resources */,
@@ -2020,7 +2026,6 @@
 				0BB33DE81BA81401009E6D0C /* rsz_lc-logo.png in Resources */,
 				0BB33DA41BA812A3009E6D0C /* Gotham-Medium.otf in Resources */,
 				0BF05A7F1B4E649600FF7B39 /* LaunchScreen.xib in Resources */,
-				0B6F8C671BD90AB000A0F33E /* Profile.storyboard in Resources */,
 				0BB33DD91BA81401009E6D0C /* communityWebsite.png in Resources */,
 				0BB33DDC1BA81401009E6D0C /* GIButton_dummy.png in Resources */,
 				0BB33DA71BA81315009E6D0C /* LCCommentCellXIB.xib in Resources */,
@@ -2143,6 +2148,7 @@
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */,
+				CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */,
 				0B775D911BE1F25B008B5B6F /* LCUpdateEmailViewController.m in Sources */,
 				CEDE406E1C1AA63F003D3C81 /* LCOnboardInterestsVC.m in Sources */,
 				CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */,

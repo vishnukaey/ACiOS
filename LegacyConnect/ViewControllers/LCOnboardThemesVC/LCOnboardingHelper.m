@@ -24,37 +24,31 @@ static NSMutableDictionary *selectedItemsDictionary;
 
 + (void)addCause :(LCCause *)cause andInterest:(LCInterest *)interest
 {
+  LCInterest *interestToAdd = [interest copy];
   if (cause && [[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is already added
   {
-    LCInterest *parentInterest = [self selectedItemsDictionary][cause.interestID];
-    for (int i = 0 ;i<parentInterest.causes.count ;i++) {
-      LCCause *subcause = parentInterest.causes[i];
-      if ([subcause.causeID isEqualToString:cause.causeID]) {
-        break;
-      }
-      else if(i==parentInterest.causes.count-1)
-      {
-        NSMutableArray *newCauses = [[NSMutableArray alloc] initWithArray:parentInterest.causes];
-        [newCauses addObject:cause];
-        parentInterest.causes = [NSArray arrayWithArray:newCauses];
-        [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
-      }
+    if (![self isCauseSelected:cause]) {
+      LCInterest *parentInterest = [self selectedItemsDictionary][cause.interestID];
+      NSMutableArray *newCauses = [[NSMutableArray alloc] initWithArray:parentInterest.causes];
+      [newCauses addObject:cause];
+      parentInterest.causes = [NSArray arrayWithArray:newCauses];
+      [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
     }
+    
   }
   else if (cause && ![[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is not added yet
   {
-    interest.causes = [NSArray arrayWithObjects:cause, nil];
-    [[self selectedItemsDictionary] setObject:interest forKey:cause.interestID];
+    interestToAdd.causes = [NSArray arrayWithObjects:cause, nil];
+    [[self selectedItemsDictionary] setObject:interestToAdd forKey:cause.interestID];
   }
   else if (!cause && interest)//add an interest
   {
     if (![[self selectedItemsDictionary] objectForKey:interest.interestID])
     {
-      interest.causes = nil;
-      [[self selectedItemsDictionary] setObject:interest forKey:interest.interestID];
+      interestToAdd.causes = nil;
+      [[self selectedItemsDictionary] setObject:interestToAdd forKey:interestToAdd.interestID];
     }
   }
-  
 }
 
 + (void)removeCause :(LCCause *)cause
@@ -79,11 +73,56 @@ static NSMutableDictionary *selectedItemsDictionary;
 
 + (BOOL)isInterestSelected :(LCInterest *)interest
 {
-  if ([[self selectedItemsDictionary] objectForKey:interest.interestID])
+  if ([[LCOnboardingHelper selectedItemsDictionary] objectForKey:interest.interestID])
   {
     return YES;
   }
   return NO;
 }
+
++ (BOOL)isCauseSelected:(LCCause *)cause
+{
+  if ([[self selectedItemsDictionary] objectForKey:cause.interestID])
+  {
+    LCInterest *parentInterest = [self selectedItemsDictionary][cause.interestID];
+    for (int i = 0 ;i<parentInterest.causes.count ;i++) {
+      LCCause *subcause = parentInterest.causes[i];
+      if ([subcause.causeID isEqualToString:cause.causeID]) {
+        return YES;
+      }
+    }
+  }
+  return NO;
+}
+
++ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes
+{
+  LCCause *cause = [causes firstObject];
+  LCInterest *selectedInterest = [[self selectedItemsDictionary] objectForKey:cause.interestID];
+  NSArray *selectedCauses = selectedInterest.causes;
+  selectedCauses = [self sortCausesArrayWithName:selectedCauses];
+  
+  NSMutableArray *allCauses = [[NSMutableArray alloc] initWithArray: causes];
+  [allCauses removeObjectsInArray:selectedCauses];
+  NSArray *remaingCauses = [self sortCausesArrayWithName:allCauses];
+  
+  NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedCauses];
+  [combinedArray addObjectsFromArray:remaingCauses];
+  
+  return combinedArray;
+}
+
+
++ (NSArray*)sortCausesArrayWithName:(NSArray*)array {
+  
+  NSSortDescriptor *sortDescriptor;
+  sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+                                               ascending:YES];
+  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+  NSArray *sortedArray = [array sortedArrayUsingDescriptors:sortDescriptors];
+  return sortedArray;
+
+}
+
 
 @end

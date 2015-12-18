@@ -55,6 +55,14 @@
     cell=cells[0];
   }
   cell.cause = [(LCInterest*)causesArray[indexPath.section] causes][indexPath.row];
+  if([LCOnboardingHelper isCauseSelected:cell.cause])
+  {
+    cell.selectionButton.selected = YES;
+  }
+  else
+  {
+    cell.selectionButton.selected = NO;
+  }
   return cell;
 }
 
@@ -76,15 +84,15 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-  if(cell.selected)
+  if([LCOnboardingHelper isCauseSelected:cell.cause])
   {
-    [LCOnboardingHelper addCause:cell.cause andInterest:causesArray[indexPath.section]];
-//    [cell setSelected:NO];
+    [LCOnboardingHelper removeCause:cell.cause];
+    cell.selectionButton.selected = NO;
   }
   else
   {
+    cell.selectionButton.selected = YES;
     [LCOnboardingHelper addCause:cell.cause andInterest:causesArray[indexPath.section]];
-//    [cell setSelected:YES];
   }
 }
 
