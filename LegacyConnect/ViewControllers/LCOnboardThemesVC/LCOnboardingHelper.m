@@ -54,7 +54,6 @@ static NSMutableDictionary *selectedItemsDictionary;
       [[self selectedItemsDictionary] setObject:interest forKey:interest.interestID];
     }
   }
-  
 }
 
 + (void)removeCause :(LCCause *)cause
@@ -79,7 +78,7 @@ static NSMutableDictionary *selectedItemsDictionary;
 
 + (BOOL)isInterestSelected :(LCInterest *)interest
 {
-  if ([[self selectedItemsDictionary] objectForKey:interest.interestID])
+  if ([[LCOnboardingHelper selectedItemsDictionary] objectForKey:interest.interestID])
   {
     return YES;
   }
