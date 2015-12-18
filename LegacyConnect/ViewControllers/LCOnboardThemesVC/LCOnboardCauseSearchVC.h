@@ -10,7 +10,7 @@
 
 @interface LCOnboardCauseSearchVC : UIViewController
 
-@property(nonatomic, weak)NSMutableArray *selectedItems;//{causesArray, InterestsArray}
+@property(nonatomic, weak) NSMutableArray *selectedItems;//{causesArray, InterestsArray}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
 @end

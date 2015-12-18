@@ -11,7 +11,7 @@
 
 @interface LCOnboardCauseSearchVC ()
 {
-  NSArray *causesArray;
+  NSMutableArray *causesArray;
   NSTimer *searchTimer;
 }
 @end
@@ -20,13 +20,17 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+  [super viewDidLoad];
+  causesArray = [[NSMutableArray alloc] init];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - collection view delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -34,10 +38,11 @@
   return causesArray.count;
 }
 
+
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *cellIdentifier = @"LCOnboardingChooseInterestCVC";
-   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
   if (cell == nil)
   {
     NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
@@ -47,9 +52,33 @@
   return cell;
 }
 
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+  UICollectionReusableView *reusableview = nil;
+  
+  if (kind == UICollectionElementKindSectionHeader) {
+    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+//    NSString *title = [[NSString alloc]initWithFormat:@"%@",@"sample Text"];
+    reusableview = headerView;
+  }
+  return reusableview;
+}
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
+  if(cell.selected)
+  {
+    [_selectedItems removeObject:cell.cause];
+    cell.selected = NO;
+  }
+  else
+  {
+    [_selectedItems addObject:cell.cause];
+    cell.selected = YES;
+  }
   cell.selected = cell.selected ? NO : YES;
 }
 
@@ -63,7 +92,7 @@
   }
   if(searchBar.text.length == 0 || searchText == nil)
   {
-    // remove all objects from causes array.
+    [causesArray removeAllObjects];
   }
   else
   {
@@ -74,7 +103,11 @@
 
 -(void) searchRequest:(NSTimer*)sender
 {
-  // Call search API and reload
+  [LCSearchAPIManager searchCausesWithInterestForSearchText:_searchBar.text lastId:@"" withSuccess:^(id response) {
+    [causesArray removeAllObjects];
+    [causesArray addObjectsFromArray:response];
+  } andfailure:^(NSString *error) {
+  }];
 }
 
 
