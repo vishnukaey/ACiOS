@@ -424,12 +424,12 @@ NSInteger const kHeightForHeader = 44;
   
   txt_birthday.inputView = datePicker;
   [txt_birthday addCancelDoneOnKeyboardWithTarget:self
-                                     cancelAction:@selector(dismissDatePickerView:)
-                                       doneAction:@selector(setDateAndDismissDatePickerView:)];
+                                     cancelAction:@selector(dismissDatePickerView)
+                                       doneAction:@selector(setDateAndDismissDatePickerView)];
 }
 
 
-- (void) setDateAndDismissDatePickerView:(id)sender
+- (void) setDateAndDismissDatePickerView
 {
   [txt_birthday resignFirstResponder];
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
@@ -437,7 +437,7 @@ NSInteger const kHeightForHeader = 44;
   [self validateFields];
 }
 
-- (void)dismissDatePickerView:(id)sender
+- (void)dismissDatePickerView
 {
   [txt_birthday resignFirstResponder];
   
@@ -469,17 +469,17 @@ NSInteger const kHeightForHeader = 44;
     [genderPicker selectRow:selection inComponent:0 animated:NO];
   }
   txt_gender.inputView = genderPicker;
-  [txt_gender addCancelDoneOnKeyboardWithTarget:self cancelAction:@selector(genderSelectionCancelled:) doneAction:@selector(genderSelected:)];
+  [txt_gender addCancelDoneOnKeyboardWithTarget:self cancelAction:@selector(genderSelectionCancelled) doneAction:@selector(genderSelected)];
 }
 
-- (void) genderSelected:(id)sender
+- (void) genderSelected//CC
 {
   [txt_gender resignFirstResponder];
-  txt_gender.text = [genderTypes objectAtIndex:[genderPicker selectedRowInComponent:0]];
+  txt_gender.text = genderTypes[[genderPicker selectedRowInComponent:0]];
   [self validateFields];
 }
 
-- (void) genderSelectionCancelled:(id)sender {
+- (void) genderSelectionCancelled {
   [txt_gender resignFirstResponder];
   if([genderTypes containsObject:userDetail.gender]){
     NSInteger selection = [genderTypes indexOfObject:userDetail.gender];
@@ -545,76 +545,94 @@ NSInteger const kHeightForHeader = 44;
 {
   
   UITableViewCell *cell = nil;
-  
-  if(indexPath.section == SECTION_NAME){
-    
-    NSString *cellIdentifier = kCellIdentifierName;
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    
-    txt_firstName = (UITextField*)[cell viewWithTag:101];
-    txt_firstName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName];
-    [txt_firstName addTarget:self
-                      action:@selector(validateFields)
-            forControlEvents:UIControlEventEditingChanged];
-    
-    txt_lastName = (UITextField*)[cell viewWithTag:102];
-    txt_lastName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName];
-    [txt_lastName addTarget:self
-                     action:@selector(validateFields)
-           forControlEvents:UIControlEventEditingChanged];
+  if (indexPath.section == SECTION_NAME)
+  {
+    cell = [self getNameSectionCellForTableView:tableView];
+  }
+  else if (indexPath.section == SECTION_LOCATION)
+  {
+    cell = [self getLocationSectionCellForTableView:tableView];
+  }
+  else if (indexPath.section == SECTION_BIRTHDAY)
+  {
+    cell = [self getBirthdaySectionCellForTableView:tableView];
+  }
+  else if (indexPath.section == SECTION_GENDER)
+  {
+    cell = [self getGenderSectionCellForTableView:tableView];
+  }
+  return cell;
+}
+
+- (UITableViewCell*)getGenderSectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierBirthday;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
   }
   
-  else if(indexPath.section == SECTION_LOCATION){
-    
-    NSString *cellIdentifier = kCellIdentifierLocation;
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    
-    txt_location = (UITextField*)[cell viewWithTag:101];
-    txt_location.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.location];
-    [txt_location addTarget:self
-                     action:@selector(validateFields)
-           forControlEvents:UIControlEventEditingChanged];
-    
+  txt_gender = (UITextField*)[cell viewWithTag:101];
+  txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
+  [self setGenderPickerTextFieldWithInputView];
+  return cell;
+}
+
+- (UITableViewCell*)getNameSectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierName;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
   }
   
-  else if(indexPath.section == SECTION_BIRTHDAY){
-    
-    NSString *cellIdentifier = kCellIdentifierBirthday;
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    
-    txt_birthday = (UITextField*)[cell viewWithTag:101];
-    txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:kDOBFormat];
-    
-    [self setDobTextFieldWithInputView];
+  txt_firstName = (UITextField*)[cell viewWithTag:101];
+  txt_firstName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.firstName];
+  [txt_firstName addTarget:self
+                    action:@selector(validateFields)
+          forControlEvents:UIControlEventEditingChanged];
+  
+  txt_lastName = (UITextField*)[cell viewWithTag:102];
+  txt_lastName.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.lastName];
+  [txt_lastName addTarget:self
+                   action:@selector(validateFields)
+         forControlEvents:UIControlEventEditingChanged];
+  return cell;
+}
+
+- (UITableViewCell*)getLocationSectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierLocation;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
   }
   
-  else if(indexPath.section == SECTION_GENDER){
-    
-    NSString *cellIdentifier = kCellIdentifierBirthday;
-    cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    
-    txt_gender = (UITextField*)[cell viewWithTag:101];
-    txt_gender.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.gender];
-    
-    [self setGenderPickerTextFieldWithInputView];
+  txt_location = (UITextField*)[cell viewWithTag:101];
+  txt_location.text = [LCUtilityManager performNullCheckAndSetValue:userDetail.location];
+  [txt_location addTarget:self
+                   action:@selector(validateFields)
+         forControlEvents:UIControlEventEditingChanged];
+  return cell;
+
+}
+
+- (UITableViewCell*)getBirthdaySectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierBirthday;
+  UITableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
   }
   
+  txt_birthday = (UITextField*)[cell viewWithTag:101];
+  txt_birthday.text = [LCUtilityManager getDateFromTimeStamp:userDetail.dob WithFormat:kDOBFormat];
+  
+  [self setDobTextFieldWithInputView];
   return cell;
 }
 
@@ -634,8 +652,8 @@ NSInteger const kHeightForHeader = 44;
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:^{
-    UIImage * originalImage = (UIImage*)[info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage *normalzedImage = (UIImage*)[originalImage normalizedImage];
+    UIImage * originalImage = info[UIImagePickerControllerOriginalImage];//CC
+    UIImage *normalzedImage = [originalImage normalizedImage];
     [self showImageCropViewWithImage:normalzedImage];
   }];
   [LCUtilityManager setLCStatusBarStyle];
@@ -748,6 +766,6 @@ NSInteger const kHeightForHeader = 44;
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-  return (NSString *)[genderTypes objectAtIndex:row];
+  return genderTypes[row];//CC
 }
 @end
