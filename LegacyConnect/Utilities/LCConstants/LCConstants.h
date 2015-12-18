@@ -180,6 +180,7 @@ extern NSString *const kDefaultDateFormat;
 
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
+extern NSString *const kCausesCellID;
 
 extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;

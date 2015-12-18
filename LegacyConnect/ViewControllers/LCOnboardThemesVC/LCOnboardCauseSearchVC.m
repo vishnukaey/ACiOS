@@ -8,6 +8,7 @@
 
 #import "LCOnboardCauseSearchVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
+#import "LCOnboardingHelper.h"
 
 @interface LCOnboardCauseSearchVC ()
 {
@@ -35,20 +36,25 @@
 #pragma mark - collection view delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+  
+  return [(LCInterest*)causesArray[section] causes].count;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
   return causesArray.count;
 }
 
-
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *cellIdentifier = @"LCOnboardingChooseInterestCVC";
+  static NSString *cellIdentifier = @"LCChooseCausesCollectionViewCell";
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
   if (cell == nil)
   {
     NSArray *cells =[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([LCChooseCausesCollectionViewCell class]) owner:nil options:nil];
     cell=cells[0];
   }
-  cell.cause = [causesArray objectAtIndex:indexPath.row];
+  cell.cause = [(LCInterest*)causesArray[indexPath.section] causes][indexPath.row];
   return cell;
 }
 
@@ -57,8 +63,9 @@
 {
   UICollectionReusableView *reusableview = nil;
   
-  if (kind == UICollectionElementKindSectionHeader) {
-    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"header" forIndexPath:indexPath];
+  if (kind == UICollectionElementKindSectionHeader)
+  {
+    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView" forIndexPath:indexPath];
 //    NSString *title = [[NSString alloc]initWithFormat:@"%@",@"sample Text"];
     reusableview = headerView;
   }
@@ -71,15 +78,14 @@
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
   if(cell.selected)
   {
-    [_selectedItems removeObject:cell.cause];
-    cell.selected = NO;
+    [LCOnboardingHelper addCause:cell.cause andInterest:causesArray[indexPath.section]];
+//    [cell setSelected:NO];
   }
   else
   {
-    [_selectedItems addObject:cell.cause];
-    cell.selected = YES;
+    [LCOnboardingHelper addCause:cell.cause andInterest:causesArray[indexPath.section]];
+//    [cell setSelected:YES];
   }
-  cell.selected = cell.selected ? NO : YES;
 }
 
 
@@ -106,6 +112,7 @@
   [LCSearchAPIManager searchCausesWithInterestForSearchText:_searchBar.text lastId:@"" withSuccess:^(id response) {
     [causesArray removeAllObjects];
     [causesArray addObjectsFromArray:response];
+    [_causesCollectionView reloadData];
   } andfailure:^(NSString *error) {
   }];
 }
