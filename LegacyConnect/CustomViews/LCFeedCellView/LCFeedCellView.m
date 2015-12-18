@@ -71,6 +71,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
  */
 - (void)setFeedInfoDetails
 {
+  /**
+   * Setting feed details as an attributed text. Need to set different font and color for
+   * post details, tagged people & checked in locations.
+   */
+
   NSString *typeString = kAddedAPhotoIn;
   if ([self.feedObject.postType isEqualToString:kPostTypeTextOnly])
   {
@@ -92,6 +97,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   NSString * postInfoString = postTypeAndCause;
   
   
+  /**
+   * Setting feed details as an attributed text. Need to set different font and color for
+   * post details, tagged people & checked in locations.
+   */
+
   NSString * atString = @" at ";
   NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];
 
@@ -126,6 +136,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
   
+  /**
+   * Setting feed details as an attributed text. Need to set different font and color for
+   * post details, tagged people & checked in locations.
+   */
+
   
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
   
