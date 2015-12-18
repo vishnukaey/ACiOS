@@ -98,16 +98,18 @@ static CGFloat kNumberOfSection = 2;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  NSInteger count;
   switch (section)
   {
     case kIndexSectionAccount:
-      return self.accountDataSource.count;
+      count =  self.accountDataSource.count;
       break;
       
     default:
-      return 1;
+      count = 1;
       break;
   }
+  return count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
