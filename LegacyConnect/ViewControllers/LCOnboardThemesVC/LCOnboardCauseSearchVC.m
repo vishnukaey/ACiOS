@@ -24,6 +24,7 @@
 {
   [super viewDidLoad];
   causesArray = [[NSMutableArray alloc] init];
+  causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
 }
 
 
@@ -100,6 +101,7 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
   [causesArray removeAllObjects];
+  causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
   [_causesCollectionView reloadData];
 }
 
@@ -113,6 +115,7 @@
   if(searchBar.text.length == 0 || searchText == nil)
   {
     [causesArray removeAllObjects];
+    causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
     [_causesCollectionView reloadData];
   }
   else
@@ -137,5 +140,10 @@
   [self.navigationController popViewControllerAnimated:YES];
 }
 
+
+-(IBAction)doneButtonTapped:(id)sender
+{
+  [self performSegueWithIdentifier:@"connectFriends" sender:self];
+}
 
 @end
