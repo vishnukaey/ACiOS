@@ -17,5 +17,5 @@ typedef void (^tagTapped)(int index);
 @property(nonatomic, strong)NSTextStorage *textStorage;
 @property(nonatomic, strong)NSArray *tagsArray;
 @property(readwrite, copy) tagTapped nameTagTapped;
-
+@property(nonatomic, assign)UIEdgeInsets insets;
 @end
