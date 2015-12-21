@@ -9,6 +9,7 @@
 #import "LCOnboardCauseSearchVC.h"
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCOnboardingHelper.h"
+#import "LCCauseCollectionReusableView.h"
 
 @interface LCOnboardCauseSearchVC ()
 {
@@ -70,11 +71,11 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
   UICollectionReusableView *reusableview = nil;
-  
   if (kind == UICollectionElementKindSectionHeader)
   {
-    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView" forIndexPath:indexPath];
-//    NSString *title = [[NSString alloc]initWithFormat:@"%@",@"sample Text"];
+    LCCauseCollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView" forIndexPath:indexPath];
+    LCInterest *interest = causesArray[indexPath.section];
+    headerView.sectionHeader.text = interest.name;
     reusableview = headerView;
   }
   return reusableview;
@@ -131,6 +132,10 @@
   }];
 }
 
+-(IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 @end

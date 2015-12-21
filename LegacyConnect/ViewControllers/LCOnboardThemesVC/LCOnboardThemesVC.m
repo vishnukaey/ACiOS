@@ -49,7 +49,7 @@
 
 - (IBAction) nextButtonTapped:(id)sender
 {
-  
+  [self performSegueWithIdentifier:@"causeSummary" sender:self];
 }
 
 - (void)showAllClicked :(UIButton *)sender
@@ -96,5 +96,11 @@
   return 167;
 }
 
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+  [self performSegueWithIdentifier:@"searchCauses" sender:self];
+  return NO;
+}
 
 @end

@@ -261,7 +261,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygP-lN-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1714.5" y="-368.5"/>
+            <point key="canvasLocation" x="-2994.5" y="-408.5"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="ZvZ-mw-Vr2">
@@ -536,7 +536,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fuh-SE-SiQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1231.5" y="-368.5"/>
+            <point key="canvasLocation" x="-2511.5" y="-408.5"/>
         </scene>
         <!--Sign Up User PhotoVC-->
         <scene sceneID="nr8-Ui-0hS">
@@ -582,6 +582,9 @@ id augue sagittis, mattis sapien.</string>
                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <segue destination="NTc-Lv-43q" kind="push" id="zLA-AX-ius"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGN UP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="thn-PH-Ngb">
                                         <rect key="frame" x="150" y="31" width="76" height="21"/>
@@ -707,7 +710,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yHr-1V-8Kn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-747.5" y="-368.5"/>
+            <point key="canvasLocation" x="-2027.5" y="-408.5"/>
         </scene>
         <!--Onboard Cause SearchVC-->
         <scene sceneID="FZp-44-pDG">
@@ -731,7 +734,7 @@ id augue sagittis, mattis sapien.</string>
                                             <constraint firstAttribute="height" constant="30" id="NmX-zo-n0K"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Next">
+                                        <state key="normal" title="Done">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -746,6 +749,9 @@ id augue sagittis, mattis sapien.</string>
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="eud-A4-nhB" eventType="touchUpInside" id="4VO-Vl-S50"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SEARCH CAUSES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uaL-13-WRD">
                                         <rect key="frame" x="117" y="31" width="142" height="21"/>
@@ -771,7 +777,7 @@ id augue sagittis, mattis sapien.</string>
                                     <outlet property="rightButton" destination="PeI-dc-AKR" id="n0j-ya-gYh"/>
                                 </connections>
                             </view>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="lft-9b-tuN">
+                            <searchBar contentMode="redraw" placeholder="Search Nonprofits" translatesAutoresizingMaskIntoConstraints="NO" id="lft-9b-tuN">
                                 <rect key="frame" x="0.0" y="65" width="375" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="vdw-jt-wLf"/>
@@ -846,7 +852,7 @@ id augue sagittis, mattis sapien.</string>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerView" id="Gus-Zr-E39">
+                                <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="headerView" id="Gus-Zr-E39" customClass="LCCauseCollectionReusableView">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
@@ -864,6 +870,9 @@ id augue sagittis, mattis sapien.</string>
                                         <constraint firstItem="Wcy-2s-wU2" firstAttribute="top" secondItem="Gus-Zr-E39" secondAttribute="topMargin" constant="-1" id="Qzd-sg-FZY"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Wcy-2s-wU2" secondAttribute="bottom" constant="-1" id="Re5-X3-Dfz"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="sectionHeader" destination="Wcy-2s-wU2" id="wI8-S2-IbC"/>
+                                    </connections>
                                 </collectionReusableView>
                                 <connections>
                                     <outlet property="dataSource" destination="eud-A4-nhB" id="lRy-Tv-fyk"/>
@@ -885,15 +894,17 @@ id augue sagittis, mattis sapien.</string>
                             <constraint firstItem="lft-9b-tuN" firstAttribute="top" secondItem="q7Q-rE-H4x" secondAttribute="bottom" id="x6Q-GE-JZf"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="MrG-6m-LyW"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="causesCollectionView" destination="HC4-jj-8FZ" id="jBq-Kk-bh0"/>
                         <outlet property="searchBar" destination="lft-9b-tuN" id="fIZ-x2-hps"/>
+                        <segue destination="rX4-yN-9BJ" kind="push" id="L3b-8s-ru0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TEr-bs-0wK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-247.5" y="-1151.5"/>
+            <point key="canvasLocation" x="-1559.5" y="-1208.5"/>
         </scene>
         <!--Connect FriendsVC-->
         <scene sceneID="7sB-tv-ACv">
@@ -1060,7 +1071,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wg3-d4-bwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="310.5" y="-368.5"/>
+            <point key="canvasLocation" x="-313.5" y="-828.5"/>
         </scene>
         <!--Contacts ListVC-->
         <scene sceneID="6kj-6n-h6F">
@@ -1210,7 +1221,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="812.5" y="-368.5"/>
+            <point key="canvasLocation" x="236.5" y="-1372.5"/>
         </scene>
         <!--Final TutorialVC-->
         <scene sceneID="aDc-Ju-RoL">
@@ -1253,7 +1264,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="csL-GK-zeI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2271" y="-155"/>
+            <point key="canvasLocation" x="1407" y="-859"/>
         </scene>
         <!--Facebook Friends-->
         <scene sceneID="Mf4-7x-Z6K">
@@ -1403,7 +1414,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rYI-BI-rWp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="811.5" y="472.5"/>
+            <point key="canvasLocation" x="267.5" y="-499.5"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="dCQ-Az-kVE">
@@ -1413,7 +1424,7 @@ id augue sagittis, mattis sapien.</string>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1zS-Dn-wRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1808" y="-155"/>
+            <point key="canvasLocation" x="944" y="-859"/>
         </scene>
         <!--Onboard Final SelectionVC-->
         <scene sceneID="Yar-dB-otf">
@@ -1660,6 +1671,7 @@ id augue sagittis, mattis sapien.</string>
                             <constraint firstItem="b6E-cG-Cus" firstAttribute="top" secondItem="zy7-Zq-fAl" secondAttribute="top" id="upT-07-M1u"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="PwM-HG-8mc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="sU2-sD-xKu" id="MZS-OB-aXk"/>
@@ -1667,7 +1679,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOz-jL-aFh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1575.5" y="1432.5"/>
+            <point key="canvasLocation" x="-1022.5" y="-408.5"/>
         </scene>
         <!--Onboard CausesVC-->
         <scene sceneID="fCE-av-VDx">
@@ -1808,7 +1820,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BdQ-Uy-Yen" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1143.5" y="1432.5"/>
+            <point key="canvasLocation" x="-1030.5" y="445.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Pwo-rh-u61">
@@ -1976,7 +1988,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kv4-ew-bdb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1282.5" y="683.5"/>
+            <point key="canvasLocation" x="-3007.5" y="467.5"/>
         </scene>
         <!--FORGOT PASSWORD-->
         <scene sceneID="R3f-TQ-xlM">
@@ -2060,7 +2072,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBC-7I-Jgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-775.5" y="683.5"/>
+            <point key="canvasLocation" x="-3012.5" y="1275.5"/>
         </scene>
         <!--Update Password View Controller-->
         <scene sceneID="XP1-Jo-GIa">
@@ -2169,7 +2181,7 @@ id augue sagittis, mattis sapien.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTQ-sJ-fO4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-227.5" y="683.5"/>
+            <point key="canvasLocation" x="-2472.5" y="1283.5"/>
         </scene>
         <!--Onboard ThemesVC-->
         <scene sceneID="NtR-fn-pjl">
@@ -2193,10 +2205,13 @@ id augue sagittis, mattis sapien.</string>
                                             <constraint firstAttribute="height" constant="30" id="xYy-ly-wli"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Skip">
+                                        <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="nextButtonTapped:" destination="NTc-Lv-43q" eventType="touchUpInside" id="aye-Mr-3NT"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THATHELPS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdR-Md-oAW">
                                         <rect key="frame" x="142" y="25" width="91" height="15"/>
@@ -2241,6 +2256,9 @@ Now on to the next step.</string>
                                     <searchBar contentMode="redraw" placeholder="Search Nonprofits" translatesAutoresizingMaskIntoConstraints="NO" id="NIx-KC-GsH">
                                         <rect key="frame" x="0.0" y="92" width="375" height="54"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="NTc-Lv-43q" id="K5L-ER-SPn"/>
+                                        </connections>
                                     </searchBar>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-00-wsq">
                                         <rect key="frame" x="15" y="154" width="345" height="39"/>
@@ -2404,11 +2422,13 @@ Now on to the next step.</string>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="themesTable" destination="lB5-Fa-EER" id="Bwq-Qm-a7u"/>
+                        <segue destination="Waq-9X-zJm" kind="push" identifier="causeSummary" id="kxs-vz-56G"/>
+                        <segue destination="eud-A4-nhB" kind="push" identifier="searchCauses" id="gEY-p5-HQ0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLH-kx-CDf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-247.5" y="-368.5"/>
+            <point key="canvasLocation" x="-1559.5" y="-408.5"/>
         </scene>
         <!--Onboard InterestsVC-->
         <scene sceneID="YKJ-bf-jct">
@@ -2544,7 +2564,7 @@ Now on to the next step.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ODs-ng-hen" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1143.5" y="1432.5"/>
+            <point key="canvasLocation" x="-1559.5" y="445.5"/>
         </scene>
     </scenes>
     <resources>
