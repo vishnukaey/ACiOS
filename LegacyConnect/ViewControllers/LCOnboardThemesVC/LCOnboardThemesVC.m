@@ -18,7 +18,6 @@
 {
   IBOutlet UIButton *nextButton;
   NSMutableArray *themesArray;
-
 }
 @end
 
@@ -28,7 +27,7 @@
   [super viewDidLoad];
   themesArray = [[NSMutableArray alloc] init];
   self.themesTable.separatorColor = [UIColor clearColor];
-//  nextButton.enabled = NO;
+  nextButton.enabled = NO;
   
    [LCThemeAPIManager getThemesWithLastId:nil withSuccess:^(id response) {
      themesArray = response;
@@ -61,6 +60,7 @@
     theme.interests = [LCOnboardingHelper sortInterests:theme.interests forTheme:theme];
   }
   [self.themesTable reloadData];
+  [nextButton setEnabled:![LCOnboardingHelper noInterestSelected]];
 }
 
 - (void)showAllClicked :(UIButton *)sender
@@ -99,6 +99,7 @@
   cell.interestsArray = theme.interests;
   cell.themeLabel.text = theme.name;
   cell.theme = theme;
+  cell.nextButton = nextButton;
   
   cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
   

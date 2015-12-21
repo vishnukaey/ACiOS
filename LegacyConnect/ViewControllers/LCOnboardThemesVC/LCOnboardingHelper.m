@@ -142,5 +142,13 @@ static NSMutableDictionary *selectedItemsDictionary;
 
 }
 
++ (BOOL)noInterestSelected
+{
+  if ([[LCOnboardingHelper selectedItemsDictionary] allKeys].count) {
+    return NO;
+  }
+  return YES;
+}
+
 
 @end
