@@ -94,21 +94,21 @@
     [LCOnboardingHelper addCause:nil andInterest:currentInterest];
     [cell setInterestSelected:YES];
   }
- 
-    [self.nextButton setEnabled:![LCOnboardingHelper noInterestSelected]];
-  
-  NSArray *interstsCopy = [self.interestsArray copy];
-  self.interestsArray = [LCOnboardingHelper sortInterests:self.interestsArray forTheme:self.theme];
-  
-  [self.interestsCollection performBatchUpdates:^{
-    NSInteger newIndex = [self.interestsArray indexOfObject:currentInterest];
-    NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
-    NSInteger oldIndex = [interstsCopy indexOfObject:currentInterest];
-    NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
-    [self.interestsCollection moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
-  } completion:^(BOOL finished) {
-    [self.interestsCollection reloadData];
-  }];
+// 
+//    [self.nextButton setEnabled:![LCOnboardingHelper noInterestSelected]];
+//  
+//  NSArray *interstsCopy = [self.interestsArray copy];
+//  self.interestsArray = [LCOnboardingHelper sortInterests:self.interestsArray forTheme:self.theme];
+//  
+//  [self.interestsCollection performBatchUpdates:^{
+//    NSInteger newIndex = [self.interestsArray indexOfObject:currentInterest];
+//    NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
+//    NSInteger oldIndex = [interstsCopy indexOfObject:currentInterest];
+//    NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
+//    [self.interestsCollection moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+//  } completion:^(BOOL finished) {
+//    [self.interestsCollection reloadData];
+//  }];
 
 }
 

@@ -56,9 +56,9 @@
 
 - (void)reloadTable
 {
-  for (LCTheme *theme in themesArray) {
-    theme.interests = [LCOnboardingHelper sortInterests:theme.interests forTheme:theme];
-  }
+//  for (LCTheme *theme in themesArray) {
+//    theme.interests = [LCOnboardingHelper sortInterests:theme.interests forTheme:theme];
+//  }
   [self.themesTable reloadData];
   [nextButton setEnabled:![LCOnboardingHelper noInterestSelected]];
 }
