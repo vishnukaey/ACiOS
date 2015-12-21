@@ -8,6 +8,7 @@
 
 #import "LCCreateActions.h"
 #import "LCInviteToActions.h"
+#import "LCEventAPImanager.h"
 
 @interface LCCreateActions ()
 
@@ -36,7 +37,7 @@
   com.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
   com.type = actionForm.actionTypeField.text;
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-  [LCAPIManager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
+  [LCEventAPImanager createEvent:com havingHeaderPhoto:actionForm.headerPhotoImageView.image withSuccess:^(id response) {
     com.eventID = response[@"data"][@"eventId"];
     UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
     LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];

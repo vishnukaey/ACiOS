@@ -135,7 +135,7 @@
     [self.thanksButtonImage setLikeUnlikeStatusImage:kUnLikedStatus];
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
     [self.thanksCountLabel setText:[NSString stringWithFormat:@"%d",[likeCount intValue]-1]];
-    [LCAPIManager unlikePost:self.feed withSuccess:^(id response) {
+    [LCFeedAPIManager unlikePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kUnLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];
@@ -150,7 +150,7 @@
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
     [self.thanksCountLabel setText:[NSString stringWithFormat:@"%d",[likeCount intValue] + 1]];
     [self.thanksButtonImage setLikeUnlikeStatusImage:kLikedStatus];
-    [LCAPIManager likePost:self.feed withSuccess:^(id response) {
+    [LCFeedAPIManager likePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];

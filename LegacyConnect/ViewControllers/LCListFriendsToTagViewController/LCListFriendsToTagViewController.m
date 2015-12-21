@@ -71,7 +71,7 @@
 - (void) loadFriendsList
 {
   [MBProgressHUD showHUDAddedTo:friendsTableView.superview animated:YES];
-  [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
+  [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
     friendsArray = response;
     [searchResultsArray addObjectsFromArray:response];
     [friendsTableView reloadData];

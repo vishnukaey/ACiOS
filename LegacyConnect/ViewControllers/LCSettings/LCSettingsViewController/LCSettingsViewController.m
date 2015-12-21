@@ -56,7 +56,7 @@ static CGFloat kNumberOfSection = 2;
 - (void)getSettingsOfUser
 {
   [MBProgressHUD showHUDAddedTo:settingsTableView animated:YES];
-  [LCAPIManager getSettignsOfUserWithSuccess:^(LCSettings *responses) {
+  [LCSettingsAPIManager getSettignsOfUserWithSuccess:^(LCSettings *responses) {
     [MBProgressHUD hideAllHUDsForView:settingsTableView animated:YES];
     _settingsData = responses;
     [self prepareDataSource];
@@ -259,7 +259,7 @@ static CGFloat kNumberOfSection = 2;
 - (void) signOutLegacy {
   
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager signOutwithSuccess:^(id response) {
+  [LCSettingsAPIManager signOutwithSuccess:^(id response) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     
     //[LCUtilityManager clearUserDefaultsForCurrentUser];

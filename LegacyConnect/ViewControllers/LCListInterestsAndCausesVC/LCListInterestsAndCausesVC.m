@@ -105,7 +105,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   [interestsSearchArray removeAllObjects];
   [causesSearchArray removeAllObjects];
   [MBProgressHUD showHUDAddedTo:interestsTableView.superview animated:YES];
-  [LCAPIManager getUserInterestsAndCausesWithSearchKey:searchKey withSuccess:^(NSArray *responses) {
+  [LCSearchAPIManager getUserInterestsAndCausesWithSearchKey:searchKey withSuccess:^(NSArray *responses) {
     interestsArray = responses;
     [interestsSearchArray addObjectsFromArray:responses];
     [interestsTableView reloadData];

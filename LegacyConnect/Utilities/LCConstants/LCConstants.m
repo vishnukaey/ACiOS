@@ -16,7 +16,7 @@
 #define DEMO_SERVER 3
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -66,6 +66,7 @@ NSString *const kGetInterestFollowersURL = @"api/interest/users";
 NSString *const kIneterestsFollowURL = @"api/interest/follow";
 NSString *const kIneterestsUnfollowURL = @"api/interest/unfollow";
 NSString *const kGetInterestsAndCausesURL = @"api/user/getUserInterestsWithCauses";
+NSString *const kGetCausesWithInterestURL = @"api/causesWithInterest";
 
 NSString *const kGetInterestsSearchURL = @"api/search/interest";
 NSString *const kGetCauseSearchURL = @"api/search/cause";
@@ -75,6 +76,8 @@ NSString *const kGetUserCausesURL = @"api/user/causes";
 NSString *const kGetCauseFollowersURL = @"api/cause/users";
 NSString *const kCauseSuppotURL = @"api/cause/support";
 NSString *const kCauseUnsuppotURL = @"api/cause/unsupport";
+NSString *const kGetCauseFromInterestsURL = @"api/causesFromInterest";
+NSString *const kGetThemesURL = @"api/themes";
 
 NSString *const kGetFeedsURL = @"api/feed";
 NSString *const kGetMilestonesURL = @"api/user/milestone";
@@ -141,10 +144,11 @@ NSString *const kResponseData = @"data";
 NSString *const kUsersKey = @"users";
 NSString *const kInterestsKey = @"interests";
 NSString *const kCausesKey = @"causes";
+NSString *const kThemesKey = @"themes";
 NSString *const kInterestIDKey = @"interestId";
 NSString *const kCauseIDKey = @"causeId";
 NSString *const kEventIDKey = @"eventId";
-NSString *const kLastCauseIDKey = @"lastCauseId";
+NSString *const kLastCauseIDKey = @"lastId";
 NSString *const kFriendsKey = @"friends";
 NSString *const kFriendIDKey = @"friendId";
 NSString *const kPostIDKey = @"postId";
@@ -193,6 +197,7 @@ NSString *const kDefaultDateFormat = @"yyyy-mm-dd";
 
 NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
+NSString *const kCausesCellID = @"causesCell";
 
 NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";

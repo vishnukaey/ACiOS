@@ -221,7 +221,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
     NSInteger thanksCount = [likeCount integerValue] > 0 ? [likeCount integerValue] -1 : 0;
     [thanksLabel_ref setText:[NSString stringWithFormat:@"%d",(int)thanksCount]];
-    [LCAPIManager unlikePost:feedObject_ withSuccess:^(id response) {
+    [LCFeedAPIManager unlikePost:feedObject_ withSuccess:^(id response) {
       btn.userInteractionEnabled = YES;
       tankImageView_ref.alpha = 1.0;
     } andFailure:^(NSString *error) {
@@ -236,7 +236,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:feedObject_.likeCount];
     [thanksLabel_ref setText:[NSString stringWithFormat:@"%d",[likeCount intValue] + 1]];
     [tankImageView_ref setLikeUnlikeStatusImage:kLikedStatus];
-    [LCAPIManager likePost:feedObject_ withSuccess:^(id response) {
+    [LCFeedAPIManager likePost:feedObject_ withSuccess:^(id response) {
       btn.userInteractionEnabled = YES;
       tankImageView_ref.alpha = 1.0;
     } andFailure:^(NSString *error) {

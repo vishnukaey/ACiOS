@@ -9,6 +9,7 @@
 #import "LCInviteToActions.h"
 #import "LCViewActions.h"
 #import "LCActionsForm.h"
+#import "LCEventAPImanager.h"
 
 
 #pragma mark - LCInviteCommunityFriendCell class
@@ -111,7 +112,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCAPIManager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
+  [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
@@ -126,7 +127,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+  [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
@@ -152,7 +153,7 @@
   LCDLog(@"friendsTableView.selectedIDs-->>>%@", selectedIDs);
   if (selectedIDs.count > 0) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCAPIManager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
+    [LCEventAPImanager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
       LCDLog(@"%@",response);
       [MBProgressHUD hideHUDForView:self.tableView animated:YES];
       [self dismissInviteActionView];

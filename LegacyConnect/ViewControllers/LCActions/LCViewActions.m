@@ -16,6 +16,7 @@
 #import "LCEventMembersViewController.h"
 #import "LCActionsHeader.h"
 #import "NSURL+LCURLCategory.h"
+#import "LCEventAPImanager.h"
 
 static CGFloat kActionSectionHeight = 30;
 
@@ -64,7 +65,7 @@ static CGFloat kActionSectionHeight = 30;
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [super startFetchingResults];
-  [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:nil withSuccess:^(id response, BOOL isMore) {
+  [LCEventAPImanager getCommentsForEvent:self.eventObject.eventID lastCommentID:nil withSuccess:^(id response, BOOL isMore) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
@@ -76,7 +77,7 @@ static CGFloat kActionSectionHeight = 30;
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getCommentsForEvent:self.eventObject.eventID lastCommentID:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
+  [LCEventAPImanager getCommentsForEvent:self.eventObject.eventID lastCommentID:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
     [self didFetchNextResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];
@@ -86,7 +87,7 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - Event Details API call
 -(void)getEventDetails
 {
-  [LCAPIManager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(LCEvent *responses) {
+  [LCEventAPImanager getEventDetailsForEventWithID:self.eventObject.eventID withSuccess:^(LCEvent *responses) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.eventObject = responses;
     [self dataPopulation];
@@ -112,7 +113,7 @@ static CGFloat kActionSectionHeight = 30;
   if (commentString.length > 0) {
     [self resignAllResponders];
     [self enableCommentField:NO];
-    [LCAPIManager postCommentToEvent:self.eventObject comment:commentTextField.text withSuccess:^(id response) {
+    [LCEventAPImanager postCommentToEvent:self.eventObject comment:commentTextField.text withSuccess:^(id response) {
       [commentTextField setText:nil];
       [commentTextField_dup setText:nil];
       [self changeUpdateButtonState];
@@ -283,7 +284,7 @@ static CGFloat kActionSectionHeight = 30;
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   if (self.eventObject.isFollowing) {
     [settingsButton setTitle:NSLocalizedString(@"support", @"attend button title") forState:UIControlStateNormal];
-    [LCAPIManager unfollowEvent:self.eventObject withSuccess:^(id response) {
+    [LCEventAPImanager unfollowEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
       [MBProgressHUD hideHUDForView:self.view animated:YES];
     } andFailure:^(NSString *error) {
@@ -293,7 +294,7 @@ static CGFloat kActionSectionHeight = 30;
     }];
   } else {
     [settingsButton setTitle:NSLocalizedString(@"supporting", @"Attending button title") forState:UIControlStateNormal];
-    [LCAPIManager followEvent:self.eventObject withSuccess:^(id response) {
+    [LCEventAPImanager followEvent:self.eventObject withSuccess:^(id response) {
       [settingsButton setUserInteractionEnabled:YES];
       [MBProgressHUD hideHUDForView:self.view animated:YES];
       if ((self.eventObject.isFollowing || self.eventObject.isOwner)  && self.results.count ==0) {

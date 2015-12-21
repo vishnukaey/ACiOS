@@ -90,7 +90,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCAPIManager getMilestonesForUser:self.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+  [LCUserProfileAPIManager getMilestonesForUser:self.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -108,7 +108,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCAPIManager getMilestonesForUser:self.userID andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+  [LCUserProfileAPIManager getMilestonesForUser:self.userID andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -233,7 +233,7 @@
   
   UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
+    [LCPostAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     }
                                andFailure:^(NSString *error) {
@@ -247,7 +247,7 @@
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
     UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-      [LCAPIManager deletePost:feed withSuccess:^(NSArray *response) {
+      [LCPostAPIManager deletePost:feed withSuccess:^(NSArray *response) {
         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
       }
                     andFailure:^(NSString *error) {

@@ -233,7 +233,7 @@
 - (void)invokeUploadImageAPIWithImage:(UIImage*)croppedImage
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager uploadImage:croppedImage ofUser:[LCDataManager sharedDataManager].userID
+  [LCOnboardingAPIManager uploadImage:croppedImage ofUser:[LCDataManager sharedDataManager].userID
                 withSuccess:^(id response) {
                   [self saveUserDetailsToDataManagerFromResponse:response];
                   [LCDataManager sharedDataManager].userAvatarImage = croppedImage;

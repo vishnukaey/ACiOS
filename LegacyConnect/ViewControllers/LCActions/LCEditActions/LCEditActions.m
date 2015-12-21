@@ -7,6 +7,7 @@
 //
 
 #import "LCEditActions.h"
+#import "LCEventAPImanager.h"
 
 @implementation LCEditActions
 @synthesize actionForm, eventToEdit;
@@ -32,7 +33,7 @@
     UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
       
-      [LCAPIManager deleteEvent:eventToEdit withSuccess:^(id response) {
+      [LCEventAPImanager deleteEvent:eventToEdit withSuccess:^(id response) {
         [actionForm dismissViewControllerAnimated:YES completion:nil];
         [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
       } andFailure:^(NSString *error) {
@@ -64,7 +65,7 @@
   if (!headerImageEdited) {
     imagetoUpload = nil;
   }
-  [LCAPIManager updateEvent:eventToEdit havingHeaderPhoto:imagetoUpload andImageStatus:statusRemoved withSuccess:^(id response) {
+  [LCEventAPImanager updateEvent:eventToEdit havingHeaderPhoto:imagetoUpload andImageStatus:statusRemoved withSuccess:^(id response) {
     [actionForm dismissViewControllerAnimated:YES completion:nil];
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
   } andFailure:^(NSString *error) {

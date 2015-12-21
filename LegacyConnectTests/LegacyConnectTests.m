@@ -28,7 +28,7 @@
 - (void)testLoginAPI
 {
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[@"prabhal+545@qburst.com",@"burst"] forKeys:@[kEmailKey, kPasswordKey]];
-  [LCAPIManager performLoginForUser:dict withSuccess:^(id response) {
+  [LCOnboardingAPIManager performLoginForUser:dict withSuccess:^(id response) {
     NSLog(@"passed is passed")
     ;    XCTAssert(YES, @"login Pass");
   } andFailure:^(NSString *error) {

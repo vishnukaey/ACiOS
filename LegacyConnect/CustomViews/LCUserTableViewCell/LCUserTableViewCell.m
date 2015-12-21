@@ -73,7 +73,7 @@
   LCfriendButton * friendBtn = btn;
   btn.userInteractionEnabled = NO;
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
-  [LCAPIManager sendFriendRequest:friendObj.userID withSuccess:^(NSDictionary *response) {
+  [LCProfileAPIManager sendFriendRequest:friendObj.userID withSuccess:^(NSDictionary *response) {
     NSLog(@"%@",response);
     btn.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {

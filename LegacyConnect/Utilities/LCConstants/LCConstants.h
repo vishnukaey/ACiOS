@@ -48,6 +48,7 @@ extern NSString *const kGetInterestFollowersURL;
 extern NSString *const kIneterestsFollowURL;
 extern NSString *const kIneterestsUnfollowURL;
 extern NSString *const kGetInterestsAndCausesURL;
+extern NSString *const kGetCausesWithInterestURL;
 
 extern NSString *const kGetInterestsSearchURL;
 extern NSString *const kGetCauseSearchURL;
@@ -57,6 +58,8 @@ extern NSString *const kGetUserCausesURL;
 extern NSString *const kGetCauseFollowersURL;
 extern NSString *const kCauseSuppotURL;
 extern NSString *const kCauseUnsuppotURL;
+extern NSString *const kGetCauseFromInterestsURL;
+extern NSString *const kGetThemesURL;
 
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
@@ -125,6 +128,7 @@ extern NSString *const kUsersKey;
 extern NSString *const kInterestsKey;
 extern NSString *const kCauseIDKey;
 extern NSString *const kCausesKey;
+extern NSString *const kThemesKey;
 extern NSString *const kInterestIDKey;
 extern NSString *const kEventIDKey;
 extern NSString *const kLastCauseIDKey;
@@ -176,6 +180,7 @@ extern NSString *const kDefaultDateFormat;
 
 extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
+extern NSString *const kCausesCellID;
 
 extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;

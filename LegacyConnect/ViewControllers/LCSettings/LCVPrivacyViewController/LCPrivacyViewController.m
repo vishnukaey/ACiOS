@@ -62,7 +62,7 @@
   NSString *newPrivacy = [_settingsData.availablePrivacy objectAtIndex:_selectedIndex];
   
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCAPIManager changePrivacy:newPrivacy withSuccess:^(id response) {
+  [LCSettingsAPIManager changePrivacy:newPrivacy withSuccess:^(id response) {
     
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     _settingsData.privacy = newPrivacy;
