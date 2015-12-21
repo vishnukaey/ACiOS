@@ -149,7 +149,6 @@
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; };
-		169EE45C1C24779F00749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45B1C24779F00749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
 		169EE45E1C24790100749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45D1C24790100749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
 		16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */; settings = {ASSET_TAGS = (); }; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; };
@@ -463,7 +462,6 @@
 		168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRequestsNotificationsVC.m; path = ViewControllers/LCNotificationsViewController/LCRequestsNotificationsVC/LCRequestsNotificationsVC.m; sourceTree = "<group>"; };
 		169607E11BF06A1E0007A278 /* LCEventMembersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEventMembersViewController.h; path = LCEventMembersVC/LCEventMembersViewController.h; sourceTree = "<group>"; };
 		169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventMembersViewController.m; path = LCEventMembersVC/LCEventMembersViewController.m; sourceTree = "<group>"; };
-		169EE45B1C24779F00749D4F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = Storyboards/Profile.storyboard; sourceTree = "<group>"; };
 		169EE45D1C24790100749D4F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = Storyboards/Profile.storyboard; sourceTree = "<group>"; };
 		16BBD85C1C24830D0096F622 /* LCCauseCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCauseCollectionReusableView.h; path = CustomViews/LCCauseCollectionReusableView/LCCauseCollectionReusableView.h; sourceTree = "<group>"; };
 		16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCauseCollectionReusableView.m; path = CustomViews/LCCauseCollectionReusableView/LCCauseCollectionReusableView.m; sourceTree = "<group>"; };
@@ -1468,7 +1466,6 @@
 				0BF05A801B4E64A000FF7B39 /* Main.storyboard */,
 				0BF05A7E1B4E649600FF7B39 /* LaunchScreen.xib */,
 				0B56A7F91B6A31CF0065C231 /* Notification.storyboard */,
-				169EE45B1C24779F00749D4F /* Profile.storyboard */,
 				96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */,
 				0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */,
 			);
@@ -2023,7 +2020,6 @@
 				0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */,
 				0BB33DA11BA812A3009E6D0C /* Gotham-BookItalic.otf in Resources */,
 				169EE45E1C24790100749D4F /* Profile.storyboard in Resources */,
-				169EE45C1C24779F00749D4F /* Profile.storyboard in Resources */,
 				0BB33DA01BA812A3009E6D0C /* Gotham-Book.otf in Resources */,
 				0BB33DEC1BA81401009E6D0C /* star.png in Resources */,
 				0BB33DE31BA81401009E6D0C /* photoPost_dummy.png in Resources */,

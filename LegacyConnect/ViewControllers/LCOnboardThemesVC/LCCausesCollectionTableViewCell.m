@@ -75,10 +75,10 @@
   
   self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:self.causesArray];
   [self.collectionView performBatchUpdates:^{
-      NSInteger i = [self.causesArray indexOfObject:cause];
-      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:i inSection:indexPath.section];
-      NSInteger j = [causesArrayCopy indexOfObject:cause];
-      NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:j inSection:indexPath.section];
+      NSInteger newIndex = [self.causesArray indexOfObject:cause];
+      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
+      NSInteger oldIndex = [causesArrayCopy indexOfObject:cause];
+      NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
       [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
   } completion:^(BOOL finished) {
     [self.collectionView reloadData];

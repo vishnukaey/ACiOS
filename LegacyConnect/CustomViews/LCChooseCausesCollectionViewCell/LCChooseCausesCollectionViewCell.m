@@ -52,16 +52,16 @@
   }];
 }
 
-//- (void)setSelected:(BOOL)selected
-//{
-//  if (selected)
-//  {
-//    _selectionButton.selected = YES;
-//  }
-//  else
-//  {
-//    _selectionButton.selected = NO;
-//  }
-//}
+- (void)setCellSelected:(BOOL)selected
+{
+  if (selected)
+  {
+    _selectionButton.selected = YES;
+  }
+  else
+  {
+    _selectionButton.selected = NO;
+  }
+}
 
 @end
