@@ -151,6 +151,7 @@
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; };
 		169EE45C1C24779F00749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45B1C24779F00749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
 		169EE45E1C24790100749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45D1C24790100749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
+		16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */; settings = {ASSET_TAGS = (); }; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; };
 		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -464,6 +465,8 @@
 		169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventMembersViewController.m; path = LCEventMembersVC/LCEventMembersViewController.m; sourceTree = "<group>"; };
 		169EE45B1C24779F00749D4F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = Storyboards/Profile.storyboard; sourceTree = "<group>"; };
 		169EE45D1C24790100749D4F /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Profile.storyboard; path = Storyboards/Profile.storyboard; sourceTree = "<group>"; };
+		16BBD85C1C24830D0096F622 /* LCCauseCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCauseCollectionReusableView.h; path = CustomViews/LCCauseCollectionReusableView/LCCauseCollectionReusableView.h; sourceTree = "<group>"; };
+		16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCauseCollectionReusableView.m; path = CustomViews/LCCauseCollectionReusableView/LCCauseCollectionReusableView.m; sourceTree = "<group>"; };
 		16D6AF491BF3481F00DBC025 /* LCGAManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGAManager.h; path = Utilities/LCGAManager/LCGAManager.h; sourceTree = "<group>"; };
 		16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGAManager.m; path = Utilities/LCGAManager/LCGAManager.m; sourceTree = "<group>"; };
 		16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SupportingFiles/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1601,6 +1604,15 @@
 			name = LCEventMembers;
 			sourceTree = "<group>";
 		};
+		16BBD85F1C2483680096F622 /* LCCauseCollectionReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				16BBD85C1C24830D0096F622 /* LCCauseCollectionReusableView.h */,
+				16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */,
+			);
+			name = LCCauseCollectionReusableView;
+			sourceTree = "<group>";
+		};
 		16D6AF4C1BF3482300DBC025 /* LCGAManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1871,6 +1883,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				16BBD85F1C2483680096F622 /* LCCauseCollectionReusableView */,
 				CEE2BDDB1C104DAD000E56AB /* LCNavigationBar */,
 				0B2A2CCF1BF5B30D00D20827 /* LCActionsHeader */,
 				0BA86F031BCE7BEE00B24454 /* LCThanksButtonImage */,
@@ -2107,6 +2120,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */,
 				CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */,
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
 				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,

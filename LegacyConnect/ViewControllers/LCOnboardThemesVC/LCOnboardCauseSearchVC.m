@@ -96,6 +96,11 @@
   }
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+  [causesArray removeAllObjects];
+  [_causesCollectionView reloadData];
+}
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
@@ -107,6 +112,7 @@
   if(searchBar.text.length == 0 || searchText == nil)
   {
     [causesArray removeAllObjects];
+    [_causesCollectionView reloadData];
   }
   else
   {

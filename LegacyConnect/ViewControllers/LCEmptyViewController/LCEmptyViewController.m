@@ -67,7 +67,7 @@ static NSString *kTitle = @"MY FEED";
   
   [self initialUISetUp];
   // Navigate to signup if user is NOT logged-in
-  if([[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
+  if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
       UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
       UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
