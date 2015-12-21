@@ -34,7 +34,6 @@ static NSMutableDictionary *selectedItemsDictionary;
       parentInterest.causes = [NSArray arrayWithArray:newCauses];
       [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
     }
-    
   }
   else if (cause && ![[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is not added yet
   {
@@ -112,6 +111,25 @@ static NSMutableDictionary *selectedItemsDictionary;
   return combinedArray;
 }
 
++ (NSArray *)sortInterests:(NSArray*)interests forTheme:(LCTheme *)theme
+{
+  NSMutableArray *allSelectedInterests = [[NSMutableArray alloc]initWithArray:[selectedItemsDictionary allValues]];
+  
+  NSArray *selectedInterests = [NSArray arrayWithArray:[allSelectedInterests filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"themeID == '%@'",theme.themeID]]]];
+  selectedInterests = [self sortCausesArrayWithName:selectedInterests];
+  
+  NSMutableArray *allInterests = [[NSMutableArray alloc] initWithArray: interests];
+  for (int i = 0; i<selectedInterests.count; i++)
+  {
+    LCInterest *_interest = selectedInterests[i];
+    [allInterests removeObjectsInArray:[allInterests filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"interestID == '%@'",_interest.interestID]]]];
+  }
+  
+  NSArray *remaingInterests = [self sortCausesArrayWithName:allInterests];
+  NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedInterests];
+  [combinedArray addObjectsFromArray:remaingInterests];
+  return combinedArray;
+}
 
 + (NSArray*)sortCausesArrayWithName:(NSArray*)array {
   

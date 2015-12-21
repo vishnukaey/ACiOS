@@ -11,6 +11,7 @@
 #import "LCChooseInterestCVC.h"
 #import "LCHorizontalInterestsCell.h"
 #import "LCOnboardInterestsVC.h"
+#import "LCOnboardingHelper.h"
 
 
 @interface LCOnboardThemesVC ()
@@ -26,10 +27,12 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   themesArray = [[NSMutableArray alloc] init];
+  self.themesTable.separatorColor = [UIColor clearColor];
+//  nextButton.enabled = NO;
   
    [LCThemeAPIManager getThemesWithLastId:nil withSuccess:^(id response) {
      themesArray = response;
-     [self.themesTable reloadData];
+     [self reloadTable];
    } andFailure:^(NSString *error) {
      
    }];
@@ -40,7 +43,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  [self.themesTable reloadData];
+  [self reloadTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,6 +53,14 @@
 - (IBAction) nextButtonTapped:(id)sender
 {
   [self performSegueWithIdentifier:@"causeSummary" sender:self];
+}
+
+- (void)reloadTable
+{
+  for (LCTheme *theme in themesArray) {
+    theme.interests = [LCOnboardingHelper sortInterests:theme.interests forTheme:theme];
+  }
+  [self.themesTable reloadData];
 }
 
 - (void)showAllClicked :(UIButton *)sender
@@ -87,6 +98,9 @@
   LCTheme *theme = [themesArray objectAtIndex:indexPath.row];
   cell.interestsArray = theme.interests;
   cell.themeLabel.text = theme.name;
+  cell.theme = theme;
+  
+  cell.separatorInset = UIEdgeInsetsMake(0.f, cell.bounds.size.width, 0.f, 0.f);
   
   return cell;
 }

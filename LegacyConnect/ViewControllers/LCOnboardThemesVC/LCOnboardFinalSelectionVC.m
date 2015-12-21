@@ -125,4 +125,9 @@ NSInteger const kNumberOfRowsInSection = 1;
   return cell;
 }
 
+
+-(IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 @end

@@ -15,6 +15,7 @@
 + (void)addCause :(LCCause *)cause andInterest:(LCInterest *)interest;//pass associated interest when adding causes. Pass nil for causes if adding interests
 + (BOOL)isInterestSelected :(LCInterest *)interest;
 + (BOOL)isCauseSelected:(LCCause *)cause;
++ (NSArray *)sortInterests:(NSArray*)interests forTheme:(LCTheme *)theme;
 + (NSArray *)sortAndCombineCausesArray:(NSArray*)causes;
 
 +(NSMutableDictionary*) selectedItemsDictionary;
