@@ -25,6 +25,23 @@
   [self.interestsCollection reloadData];
 }
 
+//- (void)reloadCollectionForIndex :(NSIndexPath *)index
+//{
+//  self.interestsArray = [LCOnboardingHelper sortInterests:self.interestsArray forTheme:self.theme];
+//  
+//  [self.interestsCollection performBatchUpdates:^{
+//    NSInteger newIndex = [self.interestsArray indexOfObject:cause];
+//    NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
+//    NSInteger oldIndex = [causesArrayCopy indexOfObject:cause];
+//    NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
+//    [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+//  } completion:^(BOOL finished) {
+//    [self.collectionView reloadData];
+//  }];
+//
+//}
+
+
 #pragma mark - collectionview delegates
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -66,16 +83,31 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  LCInterest *currentInterest = self.interestsArray[indexPath.row];
   LCHorizontalInterestCollectionCell *cell = (LCHorizontalInterestCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
-  if ([LCOnboardingHelper isInterestSelected:self.interestsArray[indexPath.row]]) {
-    [LCOnboardingHelper removeInterest:self.interestsArray[indexPath.row]];
+  if ([LCOnboardingHelper isInterestSelected:currentInterest]) {
+    [LCOnboardingHelper removeInterest:currentInterest];
     [cell setInterestSelected:NO];
   }
   else
   {
-    [LCOnboardingHelper addCause:nil andInterest:self.interestsArray[indexPath.row]];
+    [LCOnboardingHelper addCause:nil andInterest:currentInterest];
     [cell setInterestSelected:YES];
   }
+  
+  NSArray *interstsCopy = [self.interestsArray copy];
+  self.interestsArray = [LCOnboardingHelper sortInterests:self.interestsArray forTheme:self.theme];
+  
+  [self.interestsCollection performBatchUpdates:^{
+    NSInteger newIndex = [self.interestsArray indexOfObject:currentInterest];
+    NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
+    NSInteger oldIndex = [interstsCopy indexOfObject:currentInterest];
+    NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
+    [self.interestsCollection moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+  } completion:^(BOOL finished) {
+    [self.interestsCollection reloadData];
+  }];
+
 }
 //adding section header
 

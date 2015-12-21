@@ -2174,9 +2174,12 @@ id augue sagittis, mattis sapien.</string>
                                             <constraint firstAttribute="height" constant="30" id="xYy-ly-wli"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Skip">
+                                        <state key="normal" title="Next">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96723970426986572" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THATHELPS!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdR-Md-oAW">
@@ -2249,7 +2252,7 @@ Now on to the next step.</string>
                                     <constraint firstAttribute="trailing" secondItem="SiV-mb-hz3" secondAttribute="trailing" constant="15" id="u2k-Yu-6Ie"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="167" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-Fa-EER">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="167" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-Fa-EER">
                                 <rect key="frame" x="15" y="266" width="345" height="393"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -2384,6 +2387,7 @@ Now on to the next step.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="nextButton" destination="yPQ-dm-GL1" id="kAS-30-1Ea"/>
                         <outlet property="themesTable" destination="lB5-Fa-EER" id="Bwq-Qm-a7u"/>
                     </connections>
                 </viewController>
