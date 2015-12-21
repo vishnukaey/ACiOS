@@ -109,7 +109,10 @@
     return;
   }
   LCFeed *newfeed = [notification.userInfo objectForKey:@"post"];
-  BOOL isNewMilestone = YES;
+  BOOL isNewMilestone = NO;
+  if ([newfeed.isMilestone isEqualToString:@"1"]) {
+    isNewMilestone = YES;
+  }
   for (int i = 0; i<self.results.count ; i++) {
     if ([self.results[i] isKindOfClass:[LCFeed class]]) {
       LCFeed *feed = self.results[i];
@@ -174,14 +177,14 @@
 
 - (void)reloadMilestonesTable
 {
-  dispatch_async(dispatch_get_main_queue(), ^{
+//  dispatch_async(dispatch_get_main_queue(), ^{
 //    [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, 0)];
     [self.tableView reloadData];
 //    [self.tableView layoutIfNeeded];
 //    self.tableContentHeight = self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB];
 //      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight);
     
-  });
+//  });
 }
 
 
