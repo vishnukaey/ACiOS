@@ -35,7 +35,7 @@
 + (NSString*) getStringValueOfBOOL:(BOOL)value
 {
   int boolInt = (int) value;
-  return [NSString stringWithFormat:@"%d",boolInt];;
+  return [NSString stringWithFormat:@"%d",boolInt];
 }
 
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message
@@ -87,23 +87,20 @@
   {
     return data;
   }
-  else
+  CGFloat compression = 1.0f;
+  CGFloat maxCompression = 0.1f;
+  int maxFileSize = MAX_IMAGE_SIZE*1024*1024;
+  
+  NSData *imageData = UIImageJPEGRepresentation(image, compression);
+  NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  while ([imageData length] > maxFileSize && compression > maxCompression)
   {
-    CGFloat compression = 1.0f;
-    CGFloat maxCompression = 0.1f;
-    int maxFileSize = MAX_IMAGE_SIZE*1024*1024;
-    
-    NSData *imageData = UIImageJPEGRepresentation(image, compression);
+    compression -= 0.1;
+    imageData = UIImageJPEGRepresentation(image, compression);
     NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
-    while ([imageData length] > maxFileSize && compression > maxCompression)
-    {
-      compression -= 0.1;
-      imageData = UIImageJPEGRepresentation(image, compression);
-      NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
-    }
-    NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
-    return imageData;
   }
+  NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  return imageData;
 }
 
 
@@ -176,10 +173,7 @@
   {
     return YES;
   }
-  else
-  {
-    return NO;
-  }
+  return NO;
 }
 
 + (BOOL)validatePassword:(NSString*)passwordString
@@ -192,10 +186,7 @@
   {
     return YES;
   }
-  else
-  {
-    return NO;
-  }
+  return NO;
 }
 
 + (NSString *)decodeFromBase64String:(NSString *)string
@@ -424,7 +415,7 @@
 #pragma mark- twitter url proccess
 + (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString {
   
-  NSMutableDictionary *md = [NSMutableDictionary dictionary];
+  NSMutableDictionary *parameterDict = [NSMutableDictionary dictionary];
   
   NSArray *queryComponents = [queryString componentsSeparatedByString:@"&"];
   
@@ -435,10 +426,10 @@
     NSString *key = pair[0];
     NSString *value = pair[1];
     
-    md[key] = value;
+    parameterDict[key] = value;
   }
   
-  return md;
+  return parameterDict;
 }
 
 + (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width

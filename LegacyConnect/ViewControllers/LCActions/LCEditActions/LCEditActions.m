@@ -181,115 +181,142 @@
   UITableViewCell *cell = nil;
   
   if(indexPath.section == SECTION_NAME){
-    
-    NSString *cellIdentifier = kCellIdentifierName;
-    cell = [tableview dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    if (!actionForm.actionNameField) {
-      actionForm.actionNameField = (UITextField*)[cell viewWithTag:100];
-      actionForm.actionNameField.text = eventToEdit.name;
-      [actionForm.actionNameField addTarget:actionForm
-                                     action:@selector(validateFields)
-                           forControlEvents:UIControlEventEditingChanged];
-    }
+    cell = [self getNameSectionCellForTableView:tableview];
   }
-  
   else if(indexPath.section == SECTION_ACTIONTYPE){
-    
-    NSString *cellIdentifier = kCellIdentifierType;
-    cell = [tableview dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    if (!actionForm.actionTypeField) {
-      actionForm.actionTypeField = (UITextField*)[cell viewWithTag:100];
-      actionForm.actionTypeField.text = eventToEdit.type;
-    }
+    cell = [self getActionTypeCellForTableView:tableview];
   }
-  
   else if(indexPath.section == SECTION_DATE){
-    
-    NSString *cellIdentifier = kCellIdentifierDate;
-    cell = [tableview dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    if (!actionForm.actionDateField) {
-      actionForm.actionDateField = (UITextField*)[cell viewWithTag:100];
-      actionForm.actionDateField.text = [actionForm getActionFormatedDateString:actionForm.startDate];
-    }
+    cell = [self getDateSectionCellForTableView:tableview];
   }
-  
   else if(indexPath.section == SECTION_WEBSITE){
-    
-    NSString *cellIdentifier = kCellIdentifierWebsite;
-    cell = [tableview dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    if (!actionForm.actionWebsiteField) {
-      actionForm.actionWebsiteField = (UITextField*)[cell viewWithTag:100];
-      actionForm.actionWebsiteField.text = eventToEdit.website;
-      [actionForm.actionWebsiteField addTarget:actionForm
-                                     action:@selector(validateFields)
-                           forControlEvents:UIControlEventEditingChanged];
-    }
+    cell = [self getWebSiteSectionCellForTableView:tableview];
   }
   else if(indexPath.section == SECTION_HEADER){
-    
-    NSString *cellIdentifier = kCellIdentifierHeaderBG;
-    cell = [tableview dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    if (!actionForm.headerImagePlaceholder) {
-      actionForm.headerImagePlaceholder = (UITextField*)[cell viewWithTag:100];
-      actionForm.headerPhotoImageView = (UIImageView*)[cell viewWithTag:101];
-      actionForm.imageLoadingIndicator = (UIActivityIndicatorView *)[cell viewWithTag:103];
-      [self loadCoverImage];
-    }
-    
-    if (actionForm.isImageLoading) {
-      [actionForm.imageLoadingIndicator startAnimating];
-    }
-    else
-    {
-      actionForm.imageLoadingIndicator.hidden = true;
-    }
+    cell = [self getHeaderImageSectionCellForTableView:tableview];
   }
   else if(indexPath.section == SECTION_ABOUT){
-    
-    NSString *cellIdentifier = kCellIdentifierAbout;
-    cell = [tableview dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                    reuseIdentifier:cellIdentifier];
-    }
-    if (!actionForm.aboutPlaceholder) {
-      actionForm.aboutPlaceholder = (UITextField*)[cell viewWithTag:100];
-    }
-    if (!actionForm.actionAboutField) {
-      actionForm.actionAboutField = (UITextView*)[cell viewWithTag:101];
-      actionForm.actionAboutField.delegate = actionForm;
-      actionForm.actionAboutField.text = eventToEdit.eventDescription;
-      if (eventToEdit.eventDescription.length) {
-        actionForm.aboutPlaceholder.hidden = true;
-      }
+    cell = [self getAboutSectionCellForTableView:tableview];
+  }
+  return cell;
+}
+
+- (UITableViewCell*)getAboutSectionCellForTableView:(UITableView*)tabelView
+{
+  NSString *cellIdentifier = kCellIdentifierAbout;
+  UITableViewCell * cell = [tabelView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
+  }
+  if (!actionForm.aboutPlaceholder) {
+    actionForm.aboutPlaceholder = (UITextField*)[cell viewWithTag:100];
+  }
+  if (!actionForm.actionAboutField) {
+    actionForm.actionAboutField = (UITextView*)[cell viewWithTag:101];
+    actionForm.actionAboutField.delegate = actionForm;
+    actionForm.actionAboutField.text = eventToEdit.eventDescription;
+    if (eventToEdit.eventDescription.length) {
+      actionForm.aboutPlaceholder.hidden = true;
     }
   }
   return cell;
 }
 
+- (UITableViewCell*)getHeaderImageSectionCellForTableView:(UITableView*)tabelView
+{
+  NSString *cellIdentifier = kCellIdentifierHeaderBG;
+  UITableViewCell * cell = [tabelView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
+  }
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  if (!actionForm.headerImagePlaceholder) {
+    actionForm.headerImagePlaceholder = (UITextField*)[cell viewWithTag:100];
+    actionForm.headerPhotoImageView = (UIImageView*)[cell viewWithTag:101];
+    actionForm.imageLoadingIndicator = (UIActivityIndicatorView *)[cell viewWithTag:103];
+    [self loadCoverImage];
+  }
+  
+  if (actionForm.isImageLoading) {
+    [actionForm.imageLoadingIndicator startAnimating];
+  }
+  else
+  {
+    actionForm.imageLoadingIndicator.hidden = true;
+  }
+  return cell;
+}
+
+- (UITableViewCell*)getDateSectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierDate;
+  UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
+  }
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  if (!actionForm.actionDateField) {
+    actionForm.actionDateField = (UITextField*)[cell viewWithTag:100];
+    actionForm.actionDateField.text = [actionForm getActionFormatedDateString:actionForm.startDate];
+  }
+  return cell;
+}
+
+- (UITableViewCell*)getNameSectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierName;
+  UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
+  }
+  if (!actionForm.actionNameField) {
+    actionForm.actionNameField = (UITextField*)[cell viewWithTag:100];
+    actionForm.actionNameField.text = eventToEdit.name;
+    [actionForm.actionNameField addTarget:actionForm
+                                   action:@selector(validateFields)
+                         forControlEvents:UIControlEventEditingChanged];
+  }
+  
+  return cell;
+}
+
+- (UITableViewCell*)getActionTypeCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierType;
+  UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
+  }
+  cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  if (!actionForm.actionTypeField) {
+    actionForm.actionTypeField = (UITextField*)[cell viewWithTag:100];
+    actionForm.actionTypeField.text = eventToEdit.type;
+  }
+  return cell;
+}
+
+- (UITableViewCell*)getWebSiteSectionCellForTableView:(UITableView*)tableView
+{
+  NSString *cellIdentifier = kCellIdentifierWebsite;
+  UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                  reuseIdentifier:cellIdentifier];
+  }
+  if (!actionForm.actionWebsiteField) {
+    actionForm.actionWebsiteField = (UITextField*)[cell viewWithTag:100];
+    actionForm.actionWebsiteField.text = eventToEdit.website;
+    [actionForm.actionWebsiteField addTarget:actionForm
+                                      action:@selector(validateFields)
+                            forControlEvents:UIControlEventEditingChanged];
+  }
+  return cell;
+}
 
 - (void)loadCoverImage
 {

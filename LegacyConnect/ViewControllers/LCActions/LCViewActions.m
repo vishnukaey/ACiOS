@@ -144,7 +144,7 @@ static CGFloat kActionSectionHeight = 30;
   }
 }
 
-- (void)dataPopulation
+- (void)updateEventTitleAndTopUI
 {
   [settingsButton setTitle:NSLocalizedString(@"settings", @"settings Button Titile") forState:UIControlStateNormal];
   if (!self.eventObject.isOwner) {
@@ -156,10 +156,14 @@ static CGFloat kActionSectionHeight = 30;
   } else {
     [self showCommentsField];
   }
-
+  
   [eventNameLabel setText:self.eventObject.name];
   [eventPhoto sd_setImageWithURL:[NSURL URLWithString:self.eventObject.headerPhoto] placeholderImage:nil];
-  
+
+}
+- (void)dataPopulation
+{
+  [self updateEventTitleAndTopUI];
   // -------- Created By 'Owner' in 'Interest' -------- //
   NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
@@ -220,6 +224,12 @@ static CGFloat kActionSectionHeight = 30;
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
   
+  [self setEventDateInfo];
+  [self.tableView reloadData];
+}
+
+- (void)setEventDateInfo
+{
   if (![LCUtilityManager isEmptyString:self.eventObject.startDate]) {
     NSString * eventDateInfo = [LCUtilityManager getDateFromTimeStamp:self.eventObject.startDate WithFormat:@"MMM dd yyyy"];
     if (![LCUtilityManager isEmptyString:self.eventObject.endDate]) {
@@ -227,8 +237,6 @@ static CGFloat kActionSectionHeight = 30;
     }
     [eventdateInfoLable setText:eventDateInfo];
   }
-  
-  [self.tableView reloadData];
 }
 
 - (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title

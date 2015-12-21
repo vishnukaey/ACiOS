@@ -29,11 +29,11 @@ NSString * const kFBMessageKey = @"message";
   //check if already granted permissions
   if ([[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey]) {
     self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey consumerSecret:kTWConsumerSecretKey oauthToken:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey] oauthTokenSecret:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenSecretKey]];
-//    [self.twitterAPI verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
-      completionHandler(YES);
-//    } errorBlock:^(NSError *error) {
-//      [self getTwitterPermissions];
-//    }];
+    //    [self.twitterAPI verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
+    completionHandler(YES);
+    //    } errorBlock:^(NSError *error) {
+    //      [self getTwitterPermissions];
+    //    }];
     return;
   }
   [self getTwitterPermissions];
@@ -49,31 +49,31 @@ NSString * const kFBMessageKey = @"message";
 - (IBAction)loginOnTheWeb {
   
   self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey
-                                               consumerSecret:kTWConsumerSecretKey];
+                                                  consumerSecret:kTWConsumerSecretKey];
   
   [self.twitterAPI postTokenRequest:^(NSURL *url, NSString *oauthToken) {
     NSLog(@"-- url: %@", url);
     NSLog(@"-- oauthToken: %@", oauthToken);
-
-       UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-       self.webViewVC  = [sb instantiateViewControllerWithIdentifier:@"WebViewVC"];
+    
+    UIStoryboard*  createPostSb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+    self.webViewVC  = [createPostSb instantiateViewControllerWithIdentifier:@"WebViewVC"];
     self.webViewVC.delegate = self;
-      [self.presentingController presentViewController:self.webViewVC animated:YES completion:^{
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        [self.webViewVC.webView loadRequest:request];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OauthVerification:) name:kTwitterCallbackNotification object:nil];
-      }];
+    [self.presentingController presentViewController:self.webViewVC animated:YES completion:^{
+      NSURLRequest *request = [NSURLRequest requestWithURL:url];
+      [self.webViewVC.webView loadRequest:request];
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(OauthVerification:) name:kTwitterCallbackNotification object:nil];
+    }];
     
   } authenticateInsteadOfAuthorize:NO
-                  forceLogin:@(YES)
-                  screenName:nil
+                         forceLogin:@(YES)
+                         screenName:nil
                       oauthCallback:
-                          [NSString stringWithFormat:@"%@://twitter_access_tokens/", kTwitterUrlScheme]
-                  errorBlock:^(NSError *error) {
-                    self.canShareTwitterBlock(NO);
-                    LCDLog(@"-- error: %@", error);
-                  }];
-
+   [NSString stringWithFormat:@"%@://twitter_access_tokens/", kTwitterUrlScheme]
+                         errorBlock:^(NSError *error) {
+                           self.canShareTwitterBlock(NO);
+                           LCDLog(@"-- error: %@", error);
+                         }];
+  
 }
 
 - (void)OauthVerification :(NSNotification *)notification {
@@ -81,7 +81,7 @@ NSString * const kFBMessageKey = @"message";
     //
   }];
   NSDictionary *userInfo = notification.userInfo;
-//  NSString *token = userInfo[@"oauth_token"];
+  //  NSString *token = userInfo[@"oauth_token"];
   NSString *verifier = userInfo[@"oauth_verifier"];
   [_twitterAPI postAccessTokenRequestWithPIN:verifier successBlock:^(NSString *oauthToken, NSString *oauthTokenSecret, NSString *userID, NSString *screenName) {
     NSLog(@"-- screenName: %@", screenName);
@@ -111,14 +111,14 @@ NSString * const kFBMessageKey = @"message";
 
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
-//  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
+  //  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
   if (image) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"postImage.png"];
     
     // Save image.
     [[LCUtilityManager performNormalisedImageCompression:image] writeToFile:filePath atomically:YES];
-
+    
     
     NSURL *url_ = [NSURL fileURLWithPath:filePath];
     [self.twitterAPI postStatusUpdate:status inReplyToStatusID:nil mediaURL:url_ placeID:nil latitude:nil longitude:nil uploadProgressBlock:^(NSInteger bytesWritten, NSInteger totalBytesWritten, NSInteger totalBytesExpectedToWrite) {

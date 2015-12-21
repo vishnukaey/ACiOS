@@ -75,10 +75,10 @@
   
   self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:self.causesArray];
   [self.collectionView performBatchUpdates:^{
-      NSInteger i = [self.causesArray indexOfObject:cause];
-      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:i inSection:indexPath.section];
-      NSInteger j = [causesArrayCopy indexOfObject:cause];
-      NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:j inSection:indexPath.section];
+      NSInteger fromIndex = [self.causesArray indexOfObject:cause];
+      NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:fromIndex inSection:indexPath.section];
+      NSInteger toIndex = [causesArrayCopy indexOfObject:cause];
+      NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:toIndex inSection:indexPath.section];
       [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
   } completion:^(BOOL finished) {
     [self.collectionView reloadData];
@@ -89,9 +89,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
-  CGSize size = CGSizeMake(105, 140);
-  return size;
+  return CGSizeMake(105, 140);
 }
 
 

@@ -254,6 +254,7 @@
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])
   {
     //go to cause page
+    LCDLog(@"cause selected");
   }
   else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
   {

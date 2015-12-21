@@ -79,12 +79,12 @@
 - (void)dateSelection
 {
   [self.formTableView endEditing:YES];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-  LCActionsDateSelection *vc = [sb instantiateViewControllerWithIdentifier:@"LCActionsDateSelection"];
-  vc.startDate = self.startDate;
-  vc.endDate = self.endDate;
-  vc.delegate = self;
-  [self presentViewController:vc animated:YES completion:nil];
+  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+  LCActionsDateSelection *dateSelectorVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCActionsDateSelection"];
+  dateSelectorVC.startDate = self.startDate;
+  dateSelectorVC.endDate = self.endDate;
+  dateSelectorVC.delegate = self;
+  [self presentViewController:dateSelectorVC animated:YES completion:nil];
 }
 
 - (void)headerPhotoSelection
