@@ -24,7 +24,10 @@
 {
   [super viewDidLoad];
   causesArray = [[NSMutableArray alloc] init];
+  [self addSelectedCausesToDataSourcce];
+  [self refreshList];
 }
+
 
 
 - (void)didReceiveMemoryWarning
@@ -37,7 +40,6 @@
 #pragma mark - collection view delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  
   return [(LCInterest*)causesArray[section] causes].count;
 }
 
@@ -100,7 +102,8 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
   [causesArray removeAllObjects];
-  [_causesCollectionView reloadData];
+  causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
+  [self refreshList];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -113,7 +116,8 @@
   if(searchBar.text.length == 0 || searchText == nil)
   {
     [causesArray removeAllObjects];
-    [_causesCollectionView reloadData];
+    [self addSelectedCausesToDataSourcce];
+    [self refreshList];
   }
   else
   {
@@ -127,7 +131,7 @@
   [LCSearchAPIManager searchCausesWithInterestForSearchText:_searchBar.text lastId:@"" withSuccess:^(id response) {
     [causesArray removeAllObjects];
     [causesArray addObjectsFromArray:response];
-    [_causesCollectionView reloadData];
+    [self refreshList];
   } andfailure:^(NSString *error) {
   }];
 }
@@ -135,6 +139,38 @@
 -(IBAction)backButtonTapped:(id)sender
 {
   [self.navigationController popViewControllerAnimated:YES];
+}
+
+
+-(IBAction)doneButtonTapped:(id)sender
+{
+  [self performSegueWithIdentifier:@"connectFriends" sender:self];
+}
+
+-(void)addSelectedCausesToDataSourcce
+{
+  causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
+  for(LCInterest *interest in causesArray)
+  {
+    if(!interest.causes.count)
+    {
+      [causesArray removeObject:interest];
+    }
+  }
+}
+
+
+-(void) refreshList
+{
+  if(causesArray.count == 0)
+  {
+    _noCausesLabel.hidden  = NO;
+  }
+  else
+  {
+    _noCausesLabel.hidden = YES;
+  }
+  [_causesCollectionView reloadData];
 }
 
 

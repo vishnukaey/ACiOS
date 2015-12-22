@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface LCOnboardCauseSearchVC : UIViewController
-
+@property (weak,  nonatomic) IBOutlet UILabel *noCausesLabel;
 @property(nonatomic, weak) NSMutableArray *selectedItems;//{causesArray, InterestsArray}
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (weak, nonatomic) IBOutlet UICollectionView *causesCollectionView;
