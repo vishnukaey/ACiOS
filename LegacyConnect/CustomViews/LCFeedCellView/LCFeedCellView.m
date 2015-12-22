@@ -65,7 +65,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [milestoneImage setHidden:![self.feedObject.isMilestone boolValue]];
 }
 
-- (void)setFeedInfoDetails
+- (void)adjustPhotoPostUI
 {
   NSString *typeString = kAddedAPhotoIn;
   if ([self.feedObject.postType isEqualToString:kPostTypeTextOnly])
@@ -79,8 +79,13 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     postPhotoHeight.constant = 200;
     [self retryLoadingFeedImage:nil];
   }
+}
+
+- (void)setFeedInfoDetails
+{
   
-  
+  [self adjustPhotoPostUI];
+  NSString *typeString = kAddedAPhotoIn;
   NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
   NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
   NSString * postInfoString = postTypeAndCause;

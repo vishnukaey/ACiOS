@@ -108,11 +108,9 @@
   self.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
   for (int i = 0; i<menuButtons_.count; i++)
   {
-    if (normalColor)
+    if (normalColor && i!=0)
     {
-      if (i!=0) {
-        [[menuButtons_ objectAtIndex:i] setTitleColor:normalColor forState:UIControlStateNormal];
-      }
+      [[menuButtons_ objectAtIndex:i] setTitleColor:normalColor forState:UIControlStateNormal];
     }
     UIButton *button = [menuButtons_ objectAtIndex:i];
     if (i==0)
