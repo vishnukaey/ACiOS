@@ -130,4 +130,9 @@ NSInteger const kNumberOfRowsInSection = 1;
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(IBAction)nextButtonTapped:(id)sender
+{
+  [self performSegueWithIdentifier:@"connectFriends" sender:self];
+}
 @end

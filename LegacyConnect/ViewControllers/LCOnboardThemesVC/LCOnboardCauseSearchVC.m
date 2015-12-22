@@ -24,8 +24,10 @@
 {
   [super viewDidLoad];
   causesArray = [[NSMutableArray alloc] init];
-  causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
+  [self addSelectedCausesToDataSourcce];
+  [self refreshList];
 }
+
 
 
 - (void)didReceiveMemoryWarning
@@ -38,7 +40,6 @@
 #pragma mark - collection view delegates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  
   return [(LCInterest*)causesArray[section] causes].count;
 }
 
@@ -102,7 +103,7 @@
 {
   [causesArray removeAllObjects];
   causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
-  [_causesCollectionView reloadData];
+  [self refreshList];
 }
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -115,8 +116,8 @@
   if(searchBar.text.length == 0 || searchText == nil)
   {
     [causesArray removeAllObjects];
-    causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
-    [_causesCollectionView reloadData];
+    [self addSelectedCausesToDataSourcce];
+    [self refreshList];
   }
   else
   {
@@ -130,7 +131,7 @@
   [LCSearchAPIManager searchCausesWithInterestForSearchText:_searchBar.text lastId:@"" withSuccess:^(id response) {
     [causesArray removeAllObjects];
     [causesArray addObjectsFromArray:response];
-    [_causesCollectionView reloadData];
+    [self refreshList];
   } andfailure:^(NSString *error) {
   }];
 }
@@ -145,5 +146,32 @@
 {
   [self performSegueWithIdentifier:@"connectFriends" sender:self];
 }
+
+-(void)addSelectedCausesToDataSourcce
+{
+  causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
+  for(LCInterest *interest in causesArray)
+  {
+    if(!interest.causes.count)
+    {
+      [causesArray removeObject:interest];
+    }
+  }
+}
+
+
+-(void) refreshList
+{
+  if(causesArray.count == 0)
+  {
+    _noCausesLabel.hidden  = NO;
+  }
+  else
+  {
+    _noCausesLabel.hidden = YES;
+  }
+  [_causesCollectionView reloadData];
+}
+
 
 @end
