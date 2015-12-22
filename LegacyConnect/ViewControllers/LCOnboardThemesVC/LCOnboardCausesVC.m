@@ -10,9 +10,8 @@
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCOnboardingHelper.h"
 
-@interface LCOnboardCausesVC ()
-
-@end
+static NSInteger kCausesCellWidth = 105;
+static NSInteger kCausesCellHeight = 140;
 
 @implementation LCOnboardCausesVC
 
@@ -23,7 +22,6 @@
   self.navBarTitle.text = [self.interest.name uppercaseString];
   self.collectionView.allowsMultipleSelection = YES;
   
-  //self.collectionViewCellSize  = CGSizeMake(105, 135);
   [self startFetchingResults];
 }
 
@@ -31,6 +29,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Private Methods
 
 - (void)startFetchingResults
 {
@@ -65,7 +65,7 @@
 }
 
 
-#pragma CollectionView Delegates
+#pragma mark - CollectionView Delegates
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
   
@@ -99,9 +99,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-  CGSize size = CGSizeMake(105, 140);
-  return size;
+  return CGSizeMake(kCausesCellWidth, kCausesCellHeight);;
 }
 
 @end

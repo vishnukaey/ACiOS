@@ -16,7 +16,7 @@
 + (BOOL)isInterestSelected :(LCInterest *)interest;
 + (BOOL)isCauseSelected:(LCCause *)cause;
 + (NSArray *)sortInterests:(NSArray*)interests forTheme:(LCTheme *)theme;
-+ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes;
+//+ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes;
 
 +(NSMutableDictionary*) selectedItemsDictionary;
 @end

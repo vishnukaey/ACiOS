@@ -10,6 +10,7 @@
 #import "LCCausesCollectionTableViewCell.h"
 #import "LCOnboardCausesVC.h"
 #import "LCOnboardingHelper.h"
+#import "LCContactsListVC.h"
 
 #pragma mark - LCCausesHeaderReusableView class
 @interface LCCausesHeaderTableViewCell : UITableViewCell
@@ -35,13 +36,15 @@ NSInteger const kNumberOfRowsInSection = 1;
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  [self getCauses];
+  
+//  self.tableView.estimatedRowHeight = 170.0;
+//  self.tableView.rowHeight = UITableViewAutomaticDimension;
+  [self getCausesSuggestions];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
   
   [super viewWillAppear:animated];
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO ];
   [self.tableView reloadData];
 }
 
@@ -50,13 +53,14 @@ NSInteger const kNumberOfRowsInSection = 1;
   // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Private Methods
 
-- (void) getCauses {
+- (void) getCausesSuggestions {
   
-  NSArray *interestArray = @[@"1", @"2", @"3"];
+  NSArray *selectedInterestArray = [[LCOnboardingHelper selectedItemsDictionary] allKeys];//@[@"1", @"2", @"3"];
   
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCThemeAPIManager getCausesForSetOfInterests:interestArray withSuccess:^(id response) {
+  [LCThemeAPIManager getCausesForSetOfInterests:selectedInterestArray withSuccess:^(id response) {
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     self.interestArray = response;
     [self.tableView reloadData];
@@ -64,6 +68,8 @@ NSInteger const kNumberOfRowsInSection = 1;
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
   }];
 }
+
+#pragma mark - Actoin Methods
 
 - (IBAction)showAllAction:(UIButton*)sender {
   
@@ -76,7 +82,39 @@ NSInteger const kNumberOfRowsInSection = 1;
   [self.navigationController pushViewController:vc animated:YES];;
 }
 
-#pragma mark - TableView delegates
+- (IBAction)nextButtonAction:(id)sender {
+  
+  NSDictionary *selectedItems = [LCOnboardingHelper selectedItemsDictionary];
+  NSArray *interestsToSave = [selectedItems allKeys];
+  NSArray *allInterests = [selectedItems allValues];
+  NSMutableArray *causesToSave = [[NSMutableArray alloc] init];
+  for(LCInterest *interest in allInterests) {
+    for (LCCause *cause in interest.causes) {
+      [causesToSave addObject:cause.causeID];
+    }
+  }
+  
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [LCThemeAPIManager saveCauses:causesToSave
+                   andInterests:interestsToSave
+                         ofUser:[LCDataManager sharedDataManager].userID
+                    withSuccess:^(id response) {
+                      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+                      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+                      LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"connectFriends"];
+                      [self.navigationController pushViewController:next animated:YES];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+  }];
+}
+
+
+-(IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - TableView Delegates
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -91,7 +129,6 @@ NSInteger const kNumberOfRowsInSection = 1;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   return kTableViewCellHeight;
-  
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -125,9 +162,4 @@ NSInteger const kNumberOfRowsInSection = 1;
   return cell;
 }
 
-
--(IBAction)backButtonTapped:(id)sender
-{
-  [self.navigationController popViewControllerAnimated:YES];
-}
 @end

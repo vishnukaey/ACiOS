@@ -94,22 +94,22 @@ static NSMutableDictionary *selectedItemsDictionary;
   return NO;
 }
 
-+ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes
-{
-  LCCause *cause = [causes firstObject];
-  LCInterest *selectedInterest = [[self selectedItemsDictionary] objectForKey:cause.interestID];
-  NSArray *selectedCauses = selectedInterest.causes;
-  selectedCauses = [self sortCausesArrayWithName:selectedCauses];
-  
-  NSMutableArray *allCauses = [[NSMutableArray alloc] initWithArray: causes];
-  [allCauses removeObjectsInArray:selectedCauses];
-  NSArray *remaingCauses = [self sortCausesArrayWithName:allCauses];
-  
-  NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedCauses];
-  [combinedArray addObjectsFromArray:remaingCauses];
-  
-  return combinedArray;
-}
+//+ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes
+//{
+//  LCCause *cause = [causes firstObject];
+//  LCInterest *selectedInterest = [[self selectedItemsDictionary] objectForKey:cause.interestID];
+//  NSArray *selectedCauses = selectedInterest.causes;
+//  selectedCauses = [self sortCausesArrayWithName:selectedCauses];
+//  
+//  NSMutableArray *allCauses = [[NSMutableArray alloc] initWithArray: causes];
+//  [allCauses removeObjectsInArray:selectedCauses];
+//  NSArray *remaingCauses = [self sortCausesArrayWithName:allCauses];
+//  
+//  NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedCauses];
+//  [combinedArray addObjectsFromArray:remaingCauses];
+//  
+//  return combinedArray;
+//}
 
 + (NSArray *)sortInterests:(NSArray*)interests forTheme:(LCTheme *)theme
 {
