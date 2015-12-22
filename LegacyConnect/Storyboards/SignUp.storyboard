@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -238,11 +238,12 @@ id augue sagittis, mattis sapien.</string>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="textViewYPosition" destination="7dr-mI-RMK" id="Wav-yH-N6j"/>
+                        <segue destination="P0n-lH-Sgz" kind="push" identifier="onBoarding" id="LLx-cd-7e7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygP-lN-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1714.5" y="-368.5"/>
+            <point key="canvasLocation" x="-1770.5" y="243.5"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="ZvZ-mw-Vr2">
@@ -1184,7 +1185,7 @@ then select a few related causes.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F9M-tD-hzX" id="MhH-N4-n8D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="t8l-z9-6KE">
@@ -1377,7 +1378,7 @@ then select a few related causes.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4rt-vB-gIN" id="d7E-e3-tgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-MA-qAN">
@@ -1898,7 +1899,7 @@ then select a few related causes.</string>
         <image name="rightChevron" width="8" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="krZ-hL-VvX"/>
+        <segue reference="LLx-cd-7e7"/>
         <segue reference="aNy-6t-e6c"/>
     </inferredMetricsTieBreakers>
 </document>

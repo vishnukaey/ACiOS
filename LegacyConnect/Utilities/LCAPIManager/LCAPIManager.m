@@ -1563,10 +1563,7 @@ static LCAPIManager *sharedManager = nil;
    {
      LCDLog(@"%@",response);
      NSDictionary *responseData = response[kResponseData];
-     [LCDataManager sharedDataManager].avatarUrl = responseData[kFBAvatarImageUrlKey];
-     [LCDataManager sharedDataManager].userID = responseData[kUserIDKey];
-     [LCDataManager sharedDataManager].userToken = responseData[kAccessTokenKey];
-     success(response);
+     success(responseData);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
      failure(error);
