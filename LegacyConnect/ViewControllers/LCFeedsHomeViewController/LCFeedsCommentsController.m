@@ -68,11 +68,10 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  if (self.feedId) {
-    [self fetchFeedDetails];
-  } else {
-    [self startFetchingResults];
+  if (!self.feedId) {
+    self.feedId = self.feedObject.entityID;
   }
+  [self fetchFeedDetails];
 }
 
 - (void) viewWillAppear:(BOOL)animated
