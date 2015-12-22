@@ -18,21 +18,20 @@
 
 - (void) awakeFromNib {
   [super awakeFromNib];
-  self.causesImageView.layer.cornerRadius = 6;
+  self.causesImageView.layer.cornerRadius = 5.0;
   self.causesImageView.clipsToBounds = YES;
-//  outerBorder.backgroundColor = [UIColor clearColor];
-//  outerBorder.layer.cornerRadius = 8;
-//  outerBorder.layer.borderWidth = 2;
-//  outerBorder.layer.borderColor = [UIColor colorWithRed:248.0f/255.0 green:195.0f/255.0 blue:62.0f/255.0 alpha:1.0]
-//  .CGColor;
+  
+  [self.containerView.layer setCornerRadius:5.0f];
+  [self.containerView setClipsToBounds:YES];
+  [self.containerView.layer setBorderColor:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor];
+  [self.containerView.layer setBorderWidth:1];
+
 }
 
 -(void)setCause:(LCCause *)cause
 {
   _cause = cause;
-  [self.layer setCornerRadius:5.0f];
-  [self.layer setBorderColor:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1.0].CGColor];
-  [self.layer setBorderWidth:1];
+  
   CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
   UIGraphicsBeginImageContext(rect.size);
   CGContextRef context = UIGraphicsGetCurrentContext();
@@ -40,6 +39,7 @@
   CGContextFillRect(context, rect);
   UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
+  
   if(_causeLabel)
   {
     _causeLabel.text = cause.name;
