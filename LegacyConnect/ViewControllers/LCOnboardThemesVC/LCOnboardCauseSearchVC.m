@@ -144,7 +144,27 @@
 
 -(IBAction)doneButtonTapped:(id)sender
 {
-  [self performSegueWithIdentifier:@"connectFriends" sender:self];
+  NSDictionary *selectedItems = [LCOnboardingHelper selectedItemsDictionary];
+  NSArray *interestsToSave = [selectedItems allKeys];
+  NSArray *allInterests = [selectedItems allValues];
+  NSMutableArray *causesToSave = [[NSMutableArray alloc] init];
+  for(LCInterest *interest in allInterests) {
+    for (LCCause *cause in interest.causes) {
+      [causesToSave addObject:cause.causeID];
+    }
+  }
+  
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCThemeAPIManager saveCauses:causesToSave
+                   andInterests:interestsToSave
+                         ofUser:[LCDataManager sharedDataManager].userID
+                    withSuccess:^(id response) {
+                      [[LCOnboardingHelper selectedItemsDictionary] removeAllObjects];
+                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                      [self performSegueWithIdentifier:@"connectFriends" sender:self];
+                    } andFailure:^(NSString *error) {
+                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                    }];
 }
 
 -(void)addSelectedCausesToDataSourcce
