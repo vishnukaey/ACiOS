@@ -25,7 +25,7 @@ static CGFloat kAvatarImageCornerRadius = 31.5f;
 {
   _friendObj = friendObj;
   [self.friendsNameLabel setText:[NSString stringWithFormat:@"%@ %@",friendObj.firstName,friendObj.lastName]];
-  [self.friendsLocationLabel setText:friendObj.location];
+  [self.friendsLocationLabel setText:friendObj.addressCity];
   [self.friendsImageView sd_setImageWithURL:[NSURL URLWithString:friendObj.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   [self.changeFriendStatusBtn setfriendStatusButtonImageForStatus:(FriendStatus)[self.friendObj.isFriend integerValue]];
 }

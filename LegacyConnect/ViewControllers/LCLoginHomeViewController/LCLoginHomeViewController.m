@@ -86,14 +86,8 @@
          NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
          
          [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-           [self loginUser];
+           [self loginUser:response];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
-           
-           /*
-            Temporarily added alert, remove after sprint 1.
-            */
-//           [LCUtilityManager showAlertViewWithTitle:@"Success" andMessage:@"Login success!"];
-
          } andFailure:^(NSString *error) {
            NSLog(@"");
            [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -125,12 +119,26 @@
 }
 
 
-- (void) loginUser
+- (void) loginUser:(id)response
 {
+  [self saveUserDetailsToDataManager:response];
   [LCUtilityManager saveUserDefaultsForNewUser];
-  [self.navigationController popToRootViewControllerAnimated:NO];
+  if([response[@"firstTimeLogin"] isEqualToString:@"1"])
+  {
+    [self performSegueWithIdentifier:@"onBoarding" sender:self];
+  }
+  else
+  {
+    [self.navigationController popToRootViewControllerAnimated:NO];
+  }
 }
 
+-(void)saveUserDetailsToDataManager:(id)userInfo
+{
+  [LCDataManager sharedDataManager].avatarUrl = userInfo[kFBAvatarImageUrlKey];
+  [LCDataManager sharedDataManager].userID = userInfo[kUserIDKey];
+  [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
+}
 
 - (void)goToUpdatePassword:(NSNotification*)notification {
   
@@ -161,15 +169,6 @@
 
 - (IBAction)signInButtonClicked:(id)sender
 {
-//#if DEBUG
-//  //testing community
-//  [LCDataManager sharedDataManager].userToken = @"d3cc6a2b6ac3ef5100b31dbac2ab13e18e19589114da0165e06948a00181b5a3d5eca53c30f2da96a680e5bf709d0e64";
-//  LCConnectFriendsVC *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"connectFriends"];
-//  [self.navigationController pushViewController:loginVC animated:YES];
-//  return;
-//#endif
- 
-  
   LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
   [self.navigationController pushViewController:loginVC animated:YES];
 }

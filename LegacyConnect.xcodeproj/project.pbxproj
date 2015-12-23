@@ -47,6 +47,8 @@
 		0B56B8F41C1AF756001F3AE5 /* LCSettingsAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56B8F31C1AF756001F3AE5 /* LCSettingsAPIManager.m */; };
 		0B56B8F71C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56B8F61C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m */; };
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; };
+		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; settings = {ASSET_TAGS = (); }; };
+		0B5AE56F1C2A96CA008DA57A /* NSString+RemoveEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */; settings = {ASSET_TAGS = (); }; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
 		0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7189D01C1EAE2F00554B98 /* LCTheme.m */; };
 		0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */; };
@@ -299,6 +301,8 @@
 		0B56B8F61C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserProfileAPIManager.m; sourceTree = "<group>"; };
 		0B58BCDF1BC267D6007F60E3 /* LCLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLoadingCell.h; sourceTree = "<group>"; };
 		0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCLoadingCell.m; sourceTree = "<group>"; };
+		0B5AE56D1C2A96CA008DA57A /* NSString+RemoveEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+RemoveEmoji.h"; path = "Utilities/LCCategories/LCStringRemoveEmoji/NSString+RemoveEmoji.h"; sourceTree = "<group>"; };
+		0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+RemoveEmoji.m"; path = "Utilities/LCCategories/LCStringRemoveEmoji/NSString+RemoveEmoji.m"; sourceTree = "<group>"; };
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
@@ -653,6 +657,7 @@
 		0B1859401BF34802006A4905 /* LCCategories */ = {
 			isa = PBXGroup;
 			children = (
+				0B5AE56C1C2A96AC008DA57A /* LCStringRemoveEmoji */,
 				0B2A2CD51BF5B9D100D20827 /* LCURLCategory */,
 				0B1859411BF34855006A4905 /* UIImage+LCImageFix.h */,
 				0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */,
@@ -936,6 +941,15 @@
 			);
 			name = LCLoadingCell;
 			path = CustomViews/LCLoadingCell;
+			sourceTree = "<group>";
+		};
+		0B5AE56C1C2A96AC008DA57A /* LCStringRemoveEmoji */ = {
+			isa = PBXGroup;
+			children = (
+				0B5AE56D1C2A96CA008DA57A /* NSString+RemoveEmoji.h */,
+				0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */,
+			);
+			name = LCStringRemoveEmoji;
 			sourceTree = "<group>";
 		};
 		0B5FA6E21B57BA6400DDC2B1 /* Contact */ = {
@@ -2178,6 +2192,7 @@
 				0B35941C1B4E6AD20098C484 /* LCFeedsHomeViewController.m in Sources */,
 				0B56A8051B6A46AD0065C231 /* LCNotificationsViewController.m in Sources */,
 				CE2E09C11C04304600722A22 /* LCHomeFeedBC.m in Sources */,
+				0B5AE56F1C2A96CA008DA57A /* NSString+RemoveEmoji.m in Sources */,
 				CE1B91551C16DB4D00DCAC53 /* LCTWWebViewVC.m in Sources */,
 				0B775D901BE1F25B008B5B6F /* LCSettingsViewController.m in Sources */,
 				CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */,
