@@ -46,6 +46,7 @@
     [locationsTable.selectedIDs addObject:alreadyTaggedLocation];
   }
   [searchTextField setReturnKeyType:UIReturnKeyDone];
+  searchTextField.locdelegate = self;
 }
 
 - (void)didReceiveMemoryWarning
