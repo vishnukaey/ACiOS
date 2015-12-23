@@ -121,6 +121,7 @@
 
 - (void) loginUser:(id)response
 {
+  [self saveUserDetailsToDataManager:response];
   [LCUtilityManager saveUserDefaultsForNewUser];
   if([response[@"firstTimeLogin"] isEqualToString:@"1"])
   {
