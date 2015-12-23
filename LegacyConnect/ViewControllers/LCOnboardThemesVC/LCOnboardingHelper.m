@@ -144,7 +144,7 @@ static NSMutableDictionary *selectedItemsDictionary;
 
 + (BOOL)noInterestSelected
 {
-  if ([[LCOnboardingHelper selectedItemsDictionary] allKeys].count) {
+  if ([[LCOnboardingHelper selectedItemsDictionary] allKeys].count > 0) {
     return NO;
   }
   return YES;

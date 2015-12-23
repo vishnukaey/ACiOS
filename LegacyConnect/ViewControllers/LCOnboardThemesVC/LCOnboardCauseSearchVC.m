@@ -150,11 +150,13 @@
 -(void)addSelectedCausesToDataSourcce
 {
   causesArray = [[[LCOnboardingHelper selectedItemsDictionary] allValues] mutableCopy];
-  for(LCInterest *interest in causesArray)
+  for(int i = 0 ; i<causesArray.count ; i++)
   {
+    LCInterest *interest = causesArray[i];
     if(!interest.causes.count)
     {
       [causesArray removeObject:interest];
+      i--;
     }
   }
 }
