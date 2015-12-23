@@ -20,12 +20,11 @@ static CGFloat kIndexForPostDetails = 0;
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }
@@ -33,7 +32,6 @@ static CGFloat kIndexForPostDetails = 0;
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  
   [LCAPIManager getCommentsForPost:feedObject.entityID lastCommentId:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -45,10 +43,17 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - feed details API
 - (void)fetchFeedDetails
 {
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCAPIManager getPostDetailsOfPost:self.feedId WithSuccess:^(LCFeed *response) {
-    self.feedObject = response;
+    if (self.feedObject) {
+      self.feedObject.likeCount = response.likeCount;
+      self.feedObject.commentCount = response.commentCount;
+    } else {
+      self.feedObject = response;
+    }
     [self startFetchingResults];
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self enableCommentField:NO];
   }];
 }
