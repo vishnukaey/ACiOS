@@ -18,6 +18,7 @@
   if (self)
   {
     self.userInteractionEnabled = YES;
+    [self setInsets:UIEdgeInsetsMake(4, 0, 4, 0)];
   }
   return self;
 }
@@ -28,6 +29,7 @@
   if (self)
   {
     self.userInteractionEnabled = YES;
+    [self setInsets:UIEdgeInsetsMake(4, 0, 4, 0)];
   }
   
   return self;
@@ -107,6 +109,35 @@
   }  
   return textOffset;
 }
+
+- (void) setInsets:(UIEdgeInsets)insets
+{
+  _insets = insets ;
+  [self invalidateIntrinsicContentSize] ;
+}
+
+- (void)drawTextInRect:(CGRect)rect
+{
+  return [super drawTextInRect:UIEdgeInsetsInsetRect(rect, self.insets)];
+}
+
+- (void)resizeHeightToFitText
+{
+  CGRect frame = [self bounds];
+  CGSize newSize = [self.text sizeWithAttributes:
+                 @{NSFontAttributeName: self.font}];
+  frame.size.height = newSize.height + self.insets.top + self.insets.bottom;
+  self.frame = frame;
+}
+
+- (CGSize) intrinsicContentSize
+{
+  CGSize superSize = [super intrinsicContentSize] ;
+  superSize.height += self.insets.top + self.insets.bottom ;
+  superSize.width += self.insets.left + self.insets.right ;
+  return superSize ;
+}
+
 
 /*
  // Only override drawRect: if you perform custom drawing.

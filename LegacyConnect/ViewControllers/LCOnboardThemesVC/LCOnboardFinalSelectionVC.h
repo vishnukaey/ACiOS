@@ -10,7 +10,6 @@
 
 @interface LCOnboardFinalSelectionVC : UIViewController
 
-@property(nonatomic, weak)NSMutableArray *selectedItems;//{causesArray, InterestsArray}
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *interestArray;
 

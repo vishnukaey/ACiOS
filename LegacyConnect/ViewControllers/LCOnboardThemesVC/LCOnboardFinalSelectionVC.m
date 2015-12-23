@@ -99,6 +99,7 @@ NSInteger const kNumberOfRowsInSection = 1;
                    andInterests:interestsToSave
                          ofUser:[LCDataManager sharedDataManager].userID
                     withSuccess:^(id response) {
+                      [[LCOnboardingHelper selectedItemsDictionary] removeAllObjects];
                       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
                       UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
                       LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"connectFriends"];

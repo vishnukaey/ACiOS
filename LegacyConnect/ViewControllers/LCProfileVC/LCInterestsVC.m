@@ -22,7 +22,7 @@
     BOOL hasMoreData = responses.count >= 20;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }

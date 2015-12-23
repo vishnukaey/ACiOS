@@ -112,19 +112,21 @@
       [locations_ addObject:item.name];
     }
     NSArray *returnArray = [locations_ copy];
-    [self.delegate recievedLocations:returnArray];
+    if (self.locdelegate && [self.locdelegate respondsToSelector:@selector(recievedLocations:)]) {
+      [self.locdelegate recievedLocations:returnArray];
+    }
     [activity stopAnimating];
   }];
 }
 
 
-
--(void) setDelegate:(id<locationsSearchFieldDelegate>) delegate {
-  [super setDelegate: delegate];
-}
-- (id) delegate {
-  return [super delegate];
-}
+//
+//-(void) setDelegate:(id<locationsSearchFieldDelegate>) delegate {
+//  [super setDelegate: delegate];
+//}
+//- (id) delegate {
+//  return [super delegate];
+//}
 
 /*
 // Only override drawRect: if you perform custom drawing.

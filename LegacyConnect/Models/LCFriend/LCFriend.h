@@ -19,7 +19,7 @@
 @property (nonatomic, strong) NSString *avatarURL;
 @property (nonatomic, strong) NSString *createdAt;
 @property (nonatomic, strong) NSString *isFriend;
-@property (nonatomic, strong) NSString *location;
+@property (nonatomic, strong) NSString *addressCity;
 @property (nonatomic, assign) BOOL isInvitedToEvent;
 
 @end
