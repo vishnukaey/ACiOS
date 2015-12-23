@@ -254,27 +254,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UdN-eh-kZW">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKM-28-5j4" userLabel="Lable View">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.LegacyConnect.com" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlA-Vu-eSL">
-                                                <rect key="frame" x="15" y="56" width="345" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="24" id="4YI-v0-96w"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                                                <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="vlA-Vu-eSL" secondAttribute="bottom" constant="8" id="5aF-7t-VcV"/>
-                                            <constraint firstAttribute="height" constant="88" id="PAT-WB-0d3"/>
-                                            <constraint firstItem="vlA-Vu-eSL" firstAttribute="leading" secondItem="GKM-28-5j4" secondAttribute="leading" constant="15" id="WdW-YC-oou"/>
-                                            <constraint firstAttribute="trailing" secondItem="vlA-Vu-eSL" secondAttribute="trailing" constant="15" id="fVk-K8-qE2"/>
-                                        </constraints>
-                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add or update your personal URL" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2KQ-sm-zet">
                                         <rect key="frame" x="15" y="15" width="345" height="24"/>
                                         <constraints>
@@ -301,7 +280,10 @@
                                                 </constraints>
                                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
+                                                <connections>
+                                                    <action selector="textFieldDidChange:" destination="5OU-4q-idy" eventType="editingChanged" id="zQg-Lo-Ehr"/>
+                                                </connections>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -318,6 +300,24 @@
                                         <color key="backgroundColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="fDR-yT-7eA"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKM-28-5j4" userLabel="Lable View">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="www.LegacyConnect.com/" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhu-C1-u75">
+                                                <rect key="frame" x="15" y="65" width="345" height="15"/>
+                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                                <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="88" id="PAT-WB-0d3"/>
+                                            <constraint firstItem="mhu-C1-u75" firstAttribute="leading" secondItem="GKM-28-5j4" secondAttribute="leading" constant="15" id="XIj-0E-2QG"/>
+                                            <constraint firstAttribute="bottom" secondItem="mhu-C1-u75" secondAttribute="bottom" constant="8" id="ebV-dM-ZYS"/>
+                                            <constraint firstAttribute="trailing" secondItem="mhu-C1-u75" secondAttribute="trailing" constant="15" id="wOZ-jb-tjJ"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -357,6 +357,7 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="legacyURLLabel" destination="mhu-C1-u75" id="wkx-gb-amX"/>
                         <outlet property="legacyURLTextField" destination="Ml5-Em-H0d" id="LDS-sZ-jU6"/>
                         <outlet property="saveButton" destination="Yh4-gG-yfW" id="Mih-U8-7Av"/>
                     </connections>
@@ -784,7 +785,7 @@ ThatHelps account</string>
                                                 </constraints>
                                                 <color key="textColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

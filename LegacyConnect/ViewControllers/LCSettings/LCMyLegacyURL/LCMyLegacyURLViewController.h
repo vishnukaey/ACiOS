@@ -15,6 +15,7 @@
 @interface LCMyLegacyURLViewController : UIViewController
 {
   __weak IBOutlet UITextField *legacyURLTextField;
+  __weak IBOutlet UILabel *legacyURLLabel;
   __weak IBOutlet UIButton *saveButton;
 }
 
