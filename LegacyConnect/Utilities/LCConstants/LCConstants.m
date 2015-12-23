@@ -53,6 +53,8 @@ NSString *const kLCiTunesLink = @"https://itunes.apple.com/in/app/instagram/id38
 NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
 NSString *const kTWConsumerSecretKey = @"dFA57jARhKy3vhD7cV0pPToCO7gKBN3W7Kly1kqEZUFooEbCbT";
 
+NSString *const kLegacyConnectUrl = @"www.LegacyConnect.com/";
+
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";

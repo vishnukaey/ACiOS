@@ -7,6 +7,7 @@
 //
 
 #import "LCMyLegacyURLViewController.h"
+#import "NSString+RemoveEmoji.h"
 
 @interface LCMyLegacyURLViewController ()
 
@@ -35,20 +36,11 @@
   
   [legacyURLTextField setText:_settingsData.legacyUrl];
   [legacyURLTextField becomeFirstResponder];
-  [legacyURLTextField addTarget:self
-                             action:@selector(validateFields)
-                   forControlEvents:UIControlEventEditingChanged];
+  
+  [legacyURLLabel setText:[NSString stringWithFormat:@"%@%@",
+                           kLegacyConnectUrl,
+                           legacyURLTextField.text]];
   [saveButton setEnabled:NO];
-}
-
-- (void)validateFields
-{
-  if ([LCUtilityManager isEmptyString:legacyURLTextField.text] || [legacyURLTextField.text isEqualToString:_settingsData.legacyUrl]) {
-    [saveButton setEnabled:NO];
-  }
-  else {
-    [saveButton setEnabled:YES];
-  }
 }
 
 #pragma mark - Action methods
@@ -71,6 +63,22 @@
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     NSLog(@"error - %@",error);
   }];
+}
+
+-(IBAction)textFieldDidChange :(UITextField *)textField {
+  
+  if ([textField.text isIncludingEmoji]) {
+    textField.text =[textField.text stringByRemovingEmoji];
+  }
+  
+  legacyURLLabel.text = [NSString stringWithFormat:@"%@%@",kLegacyConnectUrl, legacyURLTextField.text];
+  
+  if ([LCUtilityManager isEmptyString:legacyURLTextField.text] || [legacyURLTextField.text isEqualToString:_settingsData.legacyUrl]) {
+    [saveButton setEnabled:NO];
+  }
+  else {
+    [saveButton setEnabled:YES];
+  }
 }
 
 @end

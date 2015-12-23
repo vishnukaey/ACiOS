@@ -34,6 +34,8 @@ extern NSString *const kTWConsumerSecretKey;
 
 extern NSString *const kLCiTunesLink;
 
+extern NSString *const kLegacyConnectUrl;
+
 extern NSString *const kBaseURL;
 extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;

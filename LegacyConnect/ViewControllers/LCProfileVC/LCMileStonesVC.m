@@ -92,13 +92,13 @@
   [super startFetchingResults];
   [LCAPIManager getMilestonesForUser:self.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
     [self reloadMilestonesTable];
   } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
