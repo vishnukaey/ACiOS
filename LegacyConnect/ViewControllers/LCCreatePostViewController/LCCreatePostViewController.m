@@ -163,6 +163,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     placeHolderLabel.hidden = true;
     postTextView.text = _postFeedObject.message;
+    [postTextView layoutIfNeeded];
     CGRect frame = postTextView.frame;
     frame.size.height = postTextView.contentSize.height;
     postTextView.frame = frame;
