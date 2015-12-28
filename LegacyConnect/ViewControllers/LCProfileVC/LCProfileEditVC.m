@@ -7,8 +7,6 @@
 //
 
 #import "LCProfileEditVC.h"
-#import "RSKImageCropViewController.h"
-#import "UIImage+LCImageFix.h"
 
 @interface LCProfileEditVC ()
 
@@ -56,6 +54,10 @@ NSInteger const kHeightForHeader = 44;
 - (void)initialSetup {
   
   self.navigationController.navigationBarHidden = YES;
+  
+  imageEditor = [[LCProfileImageEditor alloc] init];
+  imageEditor.delegate = self;
+  
   profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
@@ -104,83 +106,6 @@ NSInteger const kHeightForHeader = 44;
   [navigationBar.layer insertSublayer:gradient atIndex:0];
 }
 
-- (void)customizeCropViewUI:(RSKImageCropViewController*)imageCropVC {
-  
-  [imageCropVC.view setAlpha:1];
-  [imageCropVC.cancelButton setHidden:true];
-  [imageCropVC.chooseButton setHidden:true];
-  [imageCropVC.moveAndScaleLabel setHidden:true];
-  
-  
-  CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.frame), statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height)];
-  [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
-  
-  [topBar setUserInteractionEnabled:true];
-  
-  
-  
-  CGFloat btnWidth = 75;
-  
-  CGFloat btnY = statusBarViewRect.size.height+self.navigationController.navigationBar.frame.size.height -38;
-  
-  
-  UIButton *cancelBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, btnY, btnWidth, 30)];
-  [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
-  [cancelBtn.titleLabel setTextColor:[UIColor whiteColor]];
-  [cancelBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
-  
-  for (id target in imageCropVC.cancelButton.allTargets) {
-    NSArray *actions = [imageCropVC.cancelButton actionsForTarget:target
-                                                  forControlEvent:UIControlEventTouchUpInside];
-    for (NSString *action in actions) {
-      [cancelBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
-    }
-  }
-  
-  UIButton *doneBtn = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetWidth(topBar.frame) - btnWidth, btnY, btnWidth, 30)];
-  [doneBtn setTitle:@"Done" forState:UIControlStateNormal];
-  [doneBtn.titleLabel setTextColor:[UIColor whiteColor]];
-  [doneBtn.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:17.0f]];
-  
-  
-  for (id target in imageCropVC.chooseButton.allTargets) {
-    NSArray *actions = [imageCropVC.chooseButton actionsForTarget:target
-                                                  forControlEvent:UIControlEventTouchUpInside];
-    for (NSString *action in actions) {
-      [doneBtn addTarget:target action:NSSelectorFromString(action) forControlEvents:UIControlEventTouchUpInside];
-    }
-  }
-  
-  CGFloat screenWidth = CGRectGetWidth(topBar.frame);
-  UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, btnY, screenWidth, 30)];
-  [titleLabel setTextAlignment:NSTextAlignmentCenter];
-  [titleLabel setTextColor:[UIColor whiteColor]];
-  [titleLabel setText:@"MOVE AND SCALE"];
-  [titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:12.0f]];
-  [titleLabel setUserInteractionEnabled:NO];
-  
-  
-  [topBar addSubview:cancelBtn];
-  [topBar addSubview:doneBtn];
-  [topBar addSubview:titleLabel];
-  [imageCropVC.view addSubview:topBar];
-}
-
-- (void) showImageCropViewWithImage:(UIImage *)image {
-  
-  RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:image];
-  imageCropVC.delegate = self;
-  
-  if (!isEditingProfilePic) {
-    
-    imageCropVC.cropMode = RSKImageCropModeCustom;
-    imageCropVC.dataSource = self;
-  }
-  
-  [self presentViewController:imageCropVC animated:YES completion:nil];
-  [self customizeCropViewUI:imageCropVC];
-}
 
 - (void)validateFields
 {
@@ -245,7 +170,6 @@ NSInteger const kHeightForHeader = 44;
 
 - (IBAction)editProfilePicAction:(id)sender {
   
-  isEditingProfilePic = YES;
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
@@ -270,38 +194,29 @@ NSInteger const kHeightForHeader = 44;
                            progress:nil
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                             if (image) {
-                              [self showImageCropViewWithImage:image];
+                              [imageEditor presentImageEditorOnController:self withImage:image isEditingProfilePic:YES];
                             }
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                           }];
     }
     else {
-      [self showImageCropViewWithImage:actualAvatarImage];
+      [imageEditor presentImageEditorOnController:self withImage:actualAvatarImage isEditingProfilePic:YES];
     }
   }];
   
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-      
-      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-      imagePicker.delegate = self;
-      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-      imagePicker.allowsEditing = NO;
-      
-      [self presentViewController:imagePicker animated:YES completion:nil];
-    }
+
+    imageEditor = [[LCProfileImageEditor alloc] init];
+    imageEditor.delegate = self;
+    [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypeCamera isEditingProfilePic:YES];
     
   }];
   
   UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.allowsEditing = NO;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    imageEditor = [[LCProfileImageEditor alloc] init];
+    imageEditor.delegate = self;
+    [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypePhotoLibrary isEditingProfilePic:YES];
     
   }];
   
@@ -329,7 +244,6 @@ NSInteger const kHeightForHeader = 44;
 
 - (IBAction)editHeaderBGAction:(id)sender {
   
-  isEditingProfilePic = NO;
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
@@ -345,13 +259,13 @@ NSInteger const kHeightForHeader = 44;
                            progress:nil
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                             if (image) {
-                              [self showImageCropViewWithImage:image];
+                              [imageEditor presentImageEditorOnController:self withImage:image isEditingProfilePic:NO];
                             }
                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                           }];
     }
     else{
-      [self showImageCropViewWithImage:actualHeaderImage];
+      [imageEditor presentImageEditorOnController:self withImage:actualHeaderImage isEditingProfilePic:NO];
     }
   }];
   
@@ -359,24 +273,18 @@ NSInteger const kHeightForHeader = 44;
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       
-      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-      imagePicker.delegate = self;
-      imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-      imagePicker.allowsEditing = NO;
-      
-      [self presentViewController:imagePicker animated:YES completion:nil];
+      imageEditor = [[LCProfileImageEditor alloc] init];
+      imageEditor.delegate = self;
+      [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypeCamera isEditingProfilePic:NO];
     }
     
   }];
   
   UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    imagePicker.allowsEditing = NO;
-    
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    imageEditor = [[LCProfileImageEditor alloc] init];
+    imageEditor.delegate = self;
+    [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypePhotoLibrary isEditingProfilePic:NO];
     
   }];
   
@@ -400,6 +308,23 @@ NSInteger const kHeightForHeader = 44;
   
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
+
+- (void)RSKFinishedPickingProfileImage:(UIImage *)image
+{
+  avatarPicState = IMAGE_EDITED;
+  actualAvatarImage = image;
+  profilePic.image = image;
+  [self validateFields];
+}
+
+- (void)RSKFinishedPickingHeaderImage:(UIImage *)image
+{
+  headerPicState = IMAGE_EDITED;
+  actualHeaderImage = image;
+  headerBGImage.image = image;
+  [self validateFields];
+}
+
 
 
 #pragma mark - DOB and Gender setup
@@ -637,113 +562,6 @@ NSInteger const kHeightForHeader = 44;
     [txt_gender becomeFirstResponder];
   }
 }
-
-
-#pragma mark - ImagePicker delegate methods
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-  [picker dismissViewControllerAnimated:YES completion:^{
-    UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-    UIImage *normalzedImage = [originalImage normalizedImage];
-    [self showImageCropViewWithImage:normalzedImage];
-  }];
-  [LCUtilityManager setLCStatusBarStyle];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-  [picker dismissViewControllerAnimated:YES completion:nil];
-  [LCUtilityManager setLCStatusBarStyle];
-}
-
-
-#pragma mark - RSKImageCropViewControllerDatasource
-
-// Returns a custom rect for the mask.
-- (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
-{
-  CGSize maskSize;
-  maskSize = CGSizeMake(self.view.frame.size.width, 165);
-  
-  
-  CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
-  CGFloat viewHeight = CGRectGetHeight(controller.view.frame);
-  
-  CGRect maskRect = CGRectMake((viewWidth - maskSize.width) * 0.5f,
-                               (viewHeight - maskSize.height) * 0.5f,
-                               maskSize.width,
-                               maskSize.height);
-  return maskRect;
-}
-
-// Returns a custom path for the mask.
-- (UIBezierPath *)imageCropViewControllerCustomMaskPath:(RSKImageCropViewController *)controller
-{
-  CGRect rect = controller.maskRect;
-  UIBezierPath *rectangle = [UIBezierPath bezierPathWithRect:rect];
-  
-  return rectangle;
-}
-
-// Returns a custom rect in which the image can be moved.
-- (CGRect)imageCropViewControllerCustomMovementRect:(RSKImageCropViewController *)controller
-{
-  // If the image is not rotated, then the movement rect coincides with the mask rect.
-  return controller.maskRect;
-}
-
-
-
-
-#pragma mark - RSKImageCropViewControllerDelegate
-// Crop image has been canceled.
-- (void)imageCropViewControllerDidCancelCrop:(RSKImageCropViewController *)controller
-{
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-// The original image has been cropped.
-- (void)imageCropViewController:(RSKImageCropViewController *)controller
-                   didCropImage:(UIImage *)croppedImage
-                  usingCropRect:(CGRect)cropRect
-{
-  [self dismissViewControllerAnimated:YES completion:^{
-    if (isEditingProfilePic) {
-      avatarPicState = IMAGE_EDITED;
-      actualAvatarImage = croppedImage;
-      profilePic.image = croppedImage;
-    }
-    else {
-      headerPicState = IMAGE_EDITED;
-      actualHeaderImage = croppedImage;
-      headerBGImage.image = croppedImage;
-    }
-    [self validateFields];
-  }];
-}
-
-// The original image has been cropped. Additionally provides a rotation angle used to produce image.
-- (void)imageCropViewController:(RSKImageCropViewController *)controller
-                   didCropImage:(UIImage *)croppedImage
-                  usingCropRect:(CGRect)cropRect
-                  rotationAngle:(CGFloat)rotationAngle
-{
-  [self dismissViewControllerAnimated:YES completion:^{
-    
-    if (isEditingProfilePic) {
-      avatarPicState = IMAGE_EDITED;
-      actualAvatarImage = croppedImage;
-      profilePic.image = croppedImage;
-    }
-    else {
-      headerPicState = IMAGE_EDITED;
-      actualHeaderImage = croppedImage;
-      headerBGImage.image = croppedImage;
-    }
-    [self validateFields];
-  }];
-}
-
 
 #pragma mark - Picker View Delegate
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
