@@ -231,12 +231,16 @@
 + (BOOL)isaValidWebsiteLink :(NSString *)link
 {
 //  NSURL *candidateURL = [NSURL URLWithString:link];
-//  if (candidateURL && candidateURL.host) {
+//  if (candidateURL && candidateURL.scheme && candidateURL.host) {
 //    return true;
 //  }
 //  return false;
-  NSString *urlRegEx =
-  @"((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+
+//  NSString *urlRegEx = @"((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+//  NSString *urlRegEx =@"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
+//  NSString *urlRegEx = @"((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
+  
+  NSString *urlRegEx =@"((http|https)://)?((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
   NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
   return [urlTest evaluateWithObject:link];
 }
