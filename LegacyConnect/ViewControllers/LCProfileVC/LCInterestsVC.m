@@ -9,6 +9,7 @@
 #import "LCInterestsVC.h"
 #import "LCInterestsCellView.h"
 #import "LCViewActions.h"
+#import "LCSingleInterestVC.h"
 
 @implementation LCInterestsVC
 
@@ -120,6 +121,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end

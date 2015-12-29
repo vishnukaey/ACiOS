@@ -8,16 +8,28 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
+#import "LCTabMenuView.h"
 
-@interface LCSingleInterestVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCSingleInterestVC : UIViewController
 {
-  IBOutlet UITableView *feedsTable;
-  IBOutlet UIScrollView *causesScrollView;
-  NSMutableArray *cellsViewArray;
+//  IBOutlet UITableView *feedsTable;
+//  IBOutlet UIScrollView *causesScrollView;
+//  NSMutableArray *cellsViewArray;
+  
+  __weak IBOutlet UIView *tabMenuContainer;
+  LCTabMenuView *tabmenu;
+  
+  __weak IBOutlet UIButton *postsButton;
+  __weak IBOutlet UIButton *causesButton;
+  __weak IBOutlet UIButton *actionsButton;
+  
+  __weak IBOutlet UIView *postsContainer;
+  __weak IBOutlet UIView *causesContainer;
+  __weak IBOutlet UIView *actionsContainer;
 }
 
-- (IBAction)toggleHelpsORCauses:(UIButton *)sender;
-- (IBAction)backAction:(id)sender;
-- (IBAction)followButtonAction:(id)sender;
+//- (IBAction)toggleHelpsORCauses:(UIButton *)sender;
+//- (IBAction)backAction:(id)sender;
+//- (IBAction)followButtonAction:(id)sender;
 
 @end
