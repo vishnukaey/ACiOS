@@ -121,9 +121,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-  LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-  [self.navigationController pushViewController:vc animated:YES];
+  LCInterest *interest = [self.results objectAtIndex:indexPath.row];
+  
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCSingleInterestVC *interestVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+  interestVC.interest = interest;
+  [self.navigationController pushViewController:interestVC animated:YES];
 }
 
 @end
