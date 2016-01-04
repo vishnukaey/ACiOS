@@ -8,6 +8,7 @@
 
 #import "LCSearchCausesViewController.h"
 #import "LCChooseCausesCollectionViewCell.h"
+#import "LCSingleCauseVC.h"
 
 @interface LCSearchCausesViewController ()
 
@@ -69,19 +70,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  /*
-   if([collectionView isEqual:_causesCollectionView])
-   {
-   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-   LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-   [self.navigationController pushViewController:vc animated:YES];  }
-   else
-   {
-   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-   LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-   [self.navigationController pushViewController:vc animated:YES];
-   }
-   */
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+  vc.cause = self.results[indexPath.item];
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
