@@ -26,7 +26,17 @@
   __weak IBOutlet UIView *postsContainer;
   __weak IBOutlet UIView *causesContainer;
   __weak IBOutlet UIView *actionsContainer;
+  
+  
+  __weak IBOutlet UILabel *interestName;
+  __weak IBOutlet UILabel *interestDescription;
+  __weak IBOutlet UIImageView *interestImage;
+  __weak IBOutlet UIImageView *interestBGImage;
+  __weak IBOutlet UIButton *interestFollowButton;
+  
 }
+
+@property(nonatomic, strong) LCInterest *interest;
 
 //- (IBAction)toggleHelpsORCauses:(UIButton *)sender;
 //- (IBAction)backAction:(id)sender;

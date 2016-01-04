@@ -19,8 +19,7 @@
   // Do any additional setup after loading the view.
 //  [self prepareCauses];
 //  [self prepareCells];
-  
-  [self addTabMenu];
+  [self initialSetup];
 }
 
 - (void)didReceiveMemoryWarning
@@ -33,6 +32,29 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+}
+
+
+- (void) initialSetup
+{
+  [self updateInterestDetails];
+  [self addTabMenu];
+}
+
+- (void) updateInterestDetails
+{
+  interestName.text = _interest.name;
+  interestDescription.text = _interest.descriptionText;
+  [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
+  [interestBGImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLLarge] placeholderImage:nil];
+  if (_interest.isFollowing)
+  {
+    [interestFollowButton setTitle:@"Unfollow" forState:UIControlStateNormal];
+  }
+  else
+  {
+    [interestFollowButton setTitle:@"Follow" forState:UIControlStateNormal];
+  }
 }
 
 - (void)addTabMenu
