@@ -15,8 +15,8 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  // Do any additional setup after loading the view.
-  [self prepareCells];
+  [self refreshViewWithCauseDetails];
+//  [self prepareCells];
 }
 
 - (void)didReceiveMemoryWarning
@@ -28,7 +28,28 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  self.navigationController.navigationBarHidden = false;
+  self.navigationController.navigationBarHidden = YES;
+}
+
+-(void)refreshViewWithCauseDetails
+{
+  causeNameLabel.text = _cause.name;
+  causeDescriptionLabel.text = _cause.tagLine;
+  [causeImageView sd_setImageWithURL:[NSURL URLWithString:_cause.logoURLSmall] placeholderImage:nil];
+  causeNameLabel.text = [NSString stringWithFormat:@"%@",[_cause.name uppercaseString]];
+  
+  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",_cause.supporters] forState:UIControlStateNormal];
+  
+  //  [causeURLLabel setText:@""];
+  
+  if(_cause.isSupporting)
+  {
+    [supportButton setSelected:YES];
+  }
+  else
+  {
+    [supportButton setSelected:NO];
+  }
 }
 
 #pragma mark - setup functions
@@ -66,7 +87,13 @@
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
+  NSLog(@"Website Link clicked");
+}
+
+
+- (IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - TableView delegates

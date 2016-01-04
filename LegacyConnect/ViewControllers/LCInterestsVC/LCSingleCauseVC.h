@@ -13,7 +13,15 @@
 {
   IBOutlet UITableView *feedsTable;
   NSMutableArray *cellsViewArray;
+  IBOutlet UILabel *causeNameLabel;
+  IBOutlet UILabel *causeDescriptionLabel;
+  IBOutlet UIButton *causeSupportersCountButton;
+  IBOutlet UIButton *causeURLButton;
+  IBOutlet UIImageView *causeImageView;
+  IBOutlet UIButton *supportButton;
 }
+
+@property (strong, nonatomic) LCCause *cause;
 
 - (IBAction)supportClicked:(id)sender;
 - (IBAction)supportersListClicked:(id)sender;

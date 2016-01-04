@@ -14,6 +14,8 @@
 #import "LCInterest.h"
 #import "LCCause.h"
 #import "LCProfileViewVC.h"
+#import "LCSingleInterestVC.h"
+#import "LCSingleCauseVC.h"
 
 @interface LCSearchTopViewController ()
 
@@ -182,27 +184,22 @@
       vc.userDetail = self.searchResultObject.usersArray[indexPath.row];
       [self.navigationController pushViewController:vc animated:YES];
     }
+    case 1:
+    {
+      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+      LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+      [self.navigationController pushViewController:vc animated:YES];
+    }
       break;
       
-      // Uncomment for Interests and causes
-      
-      /*
-       case 1:
-       {
-       UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-       LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-       [self.navigationController pushViewController:vc animated:YES];
-       }
-       break;
-       
-       case 2:
-       {
-       UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-       LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-       [self.navigationController pushViewController:vc animated:YES];
-       }
-       break;
-       */
+    case 2:
+    {
+      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+      LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+      vc.cause = self.searchResultObject.causesArray[indexPath.row];
+      [self.navigationController pushViewController:vc animated:YES];
+    }
+      break;
       
     default:
       break;
