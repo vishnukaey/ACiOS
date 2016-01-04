@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
 #import "LCTabMenuView.h"
+#import "LCInterestPosts.h"
+#import "LCInterestCauses.h"
+#import "LCInterestActions.h"
 
-@interface LCSingleInterestVC : UIViewController
+@interface LCSingleInterestVC : UIViewController <LCInterestPostsDelegate, LCInterestCausesDelegate>
 {
 //  IBOutlet UITableView *feedsTable;
 //  IBOutlet UIScrollView *causesScrollView;
@@ -18,6 +21,7 @@
   
   __weak IBOutlet UIView *tabMenuContainer;
   LCTabMenuView *tabmenu;
+  __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   
   __weak IBOutlet UIButton *postsButton;
   __weak IBOutlet UIButton *causesButton;
@@ -33,6 +37,10 @@
   __weak IBOutlet UIImageView *interestImage;
   __weak IBOutlet UIImageView *interestBGImage;
   __weak IBOutlet UIButton *interestFollowButton;
+  
+  LCInterestPosts *interestPostsView;
+  LCInterestCauses *interestCausesView;
+  LCInterestActions *interestActionsView;
   
 }
 

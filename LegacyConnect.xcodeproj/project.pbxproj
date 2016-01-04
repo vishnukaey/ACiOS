@@ -47,8 +47,7 @@
 		0B56B8F41C1AF756001F3AE5 /* LCSettingsAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56B8F31C1AF756001F3AE5 /* LCSettingsAPIManager.m */; };
 		0B56B8F71C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56B8F61C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m */; };
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; };
-		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; settings = {ASSET_TAGS = (); }; };
-		0B5AE56F1C2A96CA008DA57A /* NSString+RemoveEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */; settings = {ASSET_TAGS = (); }; };
+		0B5AE56F1C2A96CA008DA57A /* NSString+RemoveEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
 		0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7189D01C1EAE2F00554B98 /* LCTheme.m */; };
 		0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */; };
@@ -66,8 +65,11 @@
 		0B85BD061BEC8F4400217897 /* LCSearchInterestsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD051BEC8F4400217897 /* LCSearchInterestsViewController.m */; };
 		0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */; };
 		0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */; };
+		0B89BDCB1C3A4885006271EB /* LCInterestPosts.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89BDCA1C3A4885006271EB /* LCInterestPosts.m */; };
+		0B89BDCE1C3A490C006271EB /* LCInterestCauses.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89BDCD1C3A490C006271EB /* LCInterestCauses.m */; };
+		0B89BDD11C3A4926006271EB /* LCInterestActions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B89BDD01C3A4926006271EB /* LCInterestActions.m */; };
 		0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B8AA05C1BC299EE00C284DF /* LCfriendButton.m */; };
-		0B9741841C217732000B89CA /* LCCausesCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
+		0B9741841C217732000B89CA /* LCCausesCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */; };
 		0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */; };
 		0BB33D951BA81142009E6D0C /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D941BA81142009E6D0C /* camera-icon.png */; };
 		0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D961BA812A3009E6D0C /* Gotham-Bold.otf */; };
@@ -115,8 +117,8 @@
 		0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC06E1B70BF730004C4B6 /* LCInterest.m */; };
 		0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0711B70BF910004C4B6 /* LCCause.m */; };
 		0BBDC0771B70C4910004C4B6 /* LCUserDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0761B70C4910004C4B6 /* LCUserDetail.m */; };
-		0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */; settings = {ASSET_TAGS = (); }; };
-		0BC656171C1AC46100DBB5BA /* LCOnboardCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC656161C1AC46100DBB5BA /* LCOnboardCausesVC.m */; settings = {ASSET_TAGS = (); }; };
+		0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4C4691BD6738B00F9AA90 /* LCSocialShareManager.m */; };
+		0BC656171C1AC46100DBB5BA /* LCOnboardCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC656161C1AC46100DBB5BA /* LCOnboardCausesVC.m */; };
 		0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC755621B56291C009CE7F3 /* LCSignUpUserPhotoVC.m */; };
 		0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7556A1B5629D9009CE7F3 /* LCConnectFriendsVC.m */; };
 		0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7556E1B562A8A009CE7F3 /* LCContactsListVC.m */; };
@@ -151,8 +153,8 @@
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
 		169607E31BF06A1E0007A278 /* LCEventMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 169607E21BF06A1E0007A278 /* LCEventMembersViewController.m */; };
-		169EE45E1C24790100749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45D1C24790100749D4F /* Profile.storyboard */; settings = {ASSET_TAGS = (); }; };
-		16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */; settings = {ASSET_TAGS = (); }; };
+		169EE45E1C24790100749D4F /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 169EE45D1C24790100749D4F /* Profile.storyboard */; };
+		16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; };
 		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -167,7 +169,7 @@
 		CE1AFB631BF1DFA80039A47F /* LCCreateActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1AFB621BF1DFA80039A47F /* LCCreateActions.m */; };
 		CE1B91551C16DB4D00DCAC53 /* LCTWWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1B91541C16DB4D00DCAC53 /* LCTWWebViewVC.m */; };
 		CE1C957C1BFB3C2B00A3B9FB /* LCSearchUsersBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1C957B1BFB3C2B00A3B9FB /* LCSearchUsersBC.m */; };
-		CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */; settings = {ASSET_TAGS = (); }; };
+		CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2C87911C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m */; };
 		CE2E09C11C04304600722A22 /* LCHomeFeedBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C01C04304600722A22 /* LCHomeFeedBC.m */; };
 		CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C31C0432BA00722A22 /* LCFeedDetailBC.m */; };
 		CE2E09C71C04330800722A22 /* LCProfileViewBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09C61C04330800722A22 /* LCProfileViewBC.m */; };
@@ -201,17 +203,17 @@
 		CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */; };
 		CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
-		CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */; settings = {ASSET_TAGS = (); }; };
-		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; settings = {ASSET_TAGS = (); }; };
-		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; settings = {ASSET_TAGS = (); }; };
-		CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40671C1AA598003D3C81 /* LCOnboardThemesVC.m */; settings = {ASSET_TAGS = (); }; };
-		CEDE406B1C1AA623003D3C81 /* LCOnboardCauseSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE406A1C1AA623003D3C81 /* LCOnboardCauseSearchVC.m */; settings = {ASSET_TAGS = (); }; };
-		CEDE406E1C1AA63F003D3C81 /* LCOnboardInterestsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE406D1C1AA63F003D3C81 /* LCOnboardInterestsVC.m */; settings = {ASSET_TAGS = (); }; };
-		CEDE40711C1AA683003D3C81 /* LCOnboardFinalSelectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40701C1AA683003D3C81 /* LCOnboardFinalSelectionVC.m */; settings = {ASSET_TAGS = (); }; };
-		CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */; settings = {ASSET_TAGS = (); }; };
-		CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */; settings = {ASSET_TAGS = (); }; };
+		CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */; };
+		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; };
+		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; };
+		CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40671C1AA598003D3C81 /* LCOnboardThemesVC.m */; };
+		CEDE406B1C1AA623003D3C81 /* LCOnboardCauseSearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE406A1C1AA623003D3C81 /* LCOnboardCauseSearchVC.m */; };
+		CEDE406E1C1AA63F003D3C81 /* LCOnboardInterestsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE406D1C1AA63F003D3C81 /* LCOnboardInterestsVC.m */; };
+		CEDE40711C1AA683003D3C81 /* LCOnboardFinalSelectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40701C1AA683003D3C81 /* LCOnboardFinalSelectionVC.m */; };
+		CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE276E51BE39B0F00849593 /* LCFeedcellXIB.xib */; };
+		CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2BDD91C104DA3000E56AB /* LCNavigationBar.m */; };
 		CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF275D61B78A30800709005 /* LCCommentCell.m */; };
-		CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF97CCF1C22B67600DFA272 /* LCOnboardingHelper.m */; settings = {ASSET_TAGS = (); }; };
+		CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF97CCF1C22B67600DFA272 /* LCOnboardingHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -337,6 +339,12 @@
 		0B85BD081BEC8F5C00217897 /* LCSearchCausesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchCausesViewController.m; path = ViewControllers/LCSearchViewController/LCSearchCausesViewController.m; sourceTree = "<group>"; };
 		0B86A4EC1B86EE73005D4BD7 /* LCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEvent.h; path = Models/LCEvent/LCEvent.h; sourceTree = "<group>"; };
 		0B86A4ED1B86EE73005D4BD7 /* LCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEvent.m; path = Models/LCEvent/LCEvent.m; sourceTree = "<group>"; };
+		0B89BDC91C3A4885006271EB /* LCInterestPosts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestPosts.h; path = ViewControllers/LCInterestsVC/LCInterestPosts.h; sourceTree = "<group>"; };
+		0B89BDCA1C3A4885006271EB /* LCInterestPosts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestPosts.m; path = ViewControllers/LCInterestsVC/LCInterestPosts.m; sourceTree = "<group>"; };
+		0B89BDCC1C3A490C006271EB /* LCInterestCauses.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestCauses.h; path = ViewControllers/LCInterestsVC/LCInterestCauses.h; sourceTree = "<group>"; };
+		0B89BDCD1C3A490C006271EB /* LCInterestCauses.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestCauses.m; path = ViewControllers/LCInterestsVC/LCInterestCauses.m; sourceTree = "<group>"; };
+		0B89BDCF1C3A4926006271EB /* LCInterestActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestActions.h; path = ViewControllers/LCInterestsVC/LCInterestActions.h; sourceTree = "<group>"; };
+		0B89BDD01C3A4926006271EB /* LCInterestActions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestActions.m; path = ViewControllers/LCInterestsVC/LCInterestActions.m; sourceTree = "<group>"; };
 		0B8AA05B1BC299EE00C284DF /* LCfriendButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCfriendButton.h; sourceTree = "<group>"; };
 		0B8AA05C1BC299EE00C284DF /* LCfriendButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCfriendButton.m; sourceTree = "<group>"; };
 		0B9741821C217732000B89CA /* LCCausesCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCausesCollectionTableViewCell.h; path = ViewControllers/LCOnboardThemesVC/LCCausesCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -1869,6 +1877,12 @@
 				CEBCEC631B68996F00F0116E /* LCSingleInterestVC.m */,
 				CEBCEC651B6899B600F0116E /* LCSingleCauseVC.h */,
 				CEBCEC661B6899B600F0116E /* LCSingleCauseVC.m */,
+				0B89BDC91C3A4885006271EB /* LCInterestPosts.h */,
+				0B89BDCA1C3A4885006271EB /* LCInterestPosts.m */,
+				0B89BDCC1C3A490C006271EB /* LCInterestCauses.h */,
+				0B89BDCD1C3A490C006271EB /* LCInterestCauses.m */,
+				0B89BDCF1C3A4926006271EB /* LCInterestActions.h */,
+				0B89BDD01C3A4926006271EB /* LCInterestActions.m */,
 			);
 			name = LCInterestsVC;
 			sourceTree = "<group>";
@@ -2172,6 +2186,7 @@
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */,
+				0B89BDCB1C3A4885006271EB /* LCInterestPosts.m in Sources */,
 				CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */,
 				0B775D911BE1F25B008B5B6F /* LCUpdateEmailViewController.m in Sources */,
 				CEDE406E1C1AA63F003D3C81 /* LCOnboardInterestsVC.m in Sources */,
@@ -2221,6 +2236,7 @@
 				CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */,
 				CEDE406B1C1AA623003D3C81 /* LCOnboardCauseSearchVC.m in Sources */,
 				0B3594261B4E6D920098C484 /* LCSignupViewController.m in Sources */,
+				0B89BDD11C3A4926006271EB /* LCInterestActions.m in Sources */,
 				168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */,
 				0B56B8EB1C1AEFC6001F3AE5 /* LCPostAPIManager.m in Sources */,
 				0B2A2CD81BF5B9F800D20827 /* NSURL+LCURLCategory.m in Sources */,
@@ -2259,6 +2275,7 @@
 				0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */,
 				0B9741841C217732000B89CA /* LCCausesCollectionTableViewCell.m in Sources */,
 				0B56B8E81C1AEE45001F3AE5 /* LCOnboardingAPIManager.m in Sources */,
+				0B89BDCE1C3A490C006271EB /* LCInterestCauses.m in Sources */,
 				0B05D7521BEB1D4100FD5AE1 /* LCInviteToActions.m in Sources */,
 				0BB33DAB1BA8132A009E6D0C /* LCFeedCellView.m in Sources */,
 				0B56B8F41C1AF756001F3AE5 /* LCSettingsAPIManager.m in Sources */,

@@ -39,6 +39,8 @@
 {
   [self updateInterestDetails];
   [self addTabMenu];
+  
+  [interestPostsView loadPostsInCurrentInterest];
 }
 
 - (void) updateInterestDetails
@@ -87,6 +89,82 @@
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
+- (IBAction)followAction:(id)sender
+{
+}
+
+- (IBAction)postsButtonClicked:(id)sender
+{
+  [interestPostsView loadPostsInCurrentInterest];
+}
+
+- (IBAction)causesButtonClicked:(id)sender
+{
+  [interestCausesView loadCausesInCurrentInterest];
+}
+
+- (IBAction)actionsButtonClicked:(id)sender {
+}
+
+
+
+- (void) prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+{
+  
+  if ([segue.identifier isEqualToString:@"LCInterestPostsSegue"]) {
+    
+    interestPostsView = segue.destinationViewController;
+    interestPostsView.interest = self.interest;
+    interestPostsView.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"LCInterestCausesSegue"]) {
+    
+    interestCausesView = segue.destinationViewController;
+    interestCausesView.interest = self.interest;
+    interestCausesView.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"LCInterestActionsSegue"]) {
+    
+    interestActionsView = segue.destinationViewController;
+//    interestActionsView.userID = self.userDetail.userID;
+//    interestActionsView.delegate = self;
+  }
+}
+
+
+#pragma mark - ScrollView Custom Delelgate
+
+- (void)scrollViewScrolled:(UIScrollView *)scrollView {
+  
+  CGFloat viewHeight = 265.0;
+  
+  if (scrollView.contentOffset.y <= 0 && collapseViewHeight.constant >= viewHeight) //Added this line to KOAPullToRefresh to work correctly.
+  {
+    return;
+  }
+  
+  float collapseConstant = 0;;
+  if (collapseViewHeight.constant > 0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseViewHeight.constant < viewHeight && scrollView.contentOffset.y < 0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseConstant < 0)
+  {
+    collapseConstant = 0;
+  }
+  if (collapseConstant > viewHeight)
+  {
+    collapseConstant = viewHeight;
+  }
+  collapseViewHeight.constant = collapseConstant;
+}
+
 
 
 
