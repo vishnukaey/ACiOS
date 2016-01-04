@@ -351,7 +351,15 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"close_post", nil) message:NSLocalizedString(@"close_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"discard", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
+  [deleteAlert addAction:deletePostActionFinal];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [deleteAlert addAction:cancelAction];
+  [self presentViewController:deleteAlert animated:YES completion:nil];
 }
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
@@ -424,6 +432,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
     return;
   }
+  
+  if (postTextView.text.length<1 && !postImageView.image) {
+    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
+    return;
+  }
+  
   [postTextView resignFirstResponder];
   _postFeedObject.message = postTextView.text;
   _postFeedObject.location = taggedLocation;
@@ -453,7 +467,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
-      [self closeButtonClicked:nil];
+      [self dismissViewControllerAnimated:YES completion:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
@@ -465,7 +479,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
-      [self closeButtonClicked:nil];
+      [self dismissViewControllerAnimated:YES completion:nil];
       if(postImageView.image)
       {
         //GA Tracking
