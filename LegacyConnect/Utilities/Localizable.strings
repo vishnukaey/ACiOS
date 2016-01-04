@@ -46,10 +46,13 @@
 "done" = "Done";
 "send" = "Send";
 "skip" = "Skip";
+"discard" = "Discard";
 
 //-----post----//
 "delete_post" = "Delete Post";
 "delete_post_message" = "Are you sure you want to permanently remove this post from ThatHelps?";
+"close_post" = "Discard Post";
+"close_post_message" = "Are you sure you want to discard the post?";
 //---friends---//
 "remove_friend" = "Remove Friend";
 "cancel_friend_request" = "Cancel Friend Request";

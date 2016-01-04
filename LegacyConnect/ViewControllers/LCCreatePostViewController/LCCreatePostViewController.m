@@ -351,8 +351,8 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
-  UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"close_post", nil) message:NSLocalizedString(@"close_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"discard", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     [self dismissViewControllerAnimated:YES completion:nil];
   }];
   [deleteAlert addAction:deletePostActionFinal];
@@ -434,7 +434,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   }
   
   if (postTextView.text.length<1 && !postImageView.image) {
-    [LCUtilityManager showAlertViewWithTitle:@"Missing content" andMessage:@"Please add content for posting"];
+    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
     return;
   }
   
