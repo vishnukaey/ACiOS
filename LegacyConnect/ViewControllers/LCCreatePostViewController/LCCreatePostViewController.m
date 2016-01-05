@@ -433,14 +433,14 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
     return;
   }
-  
-  if (postTextView.text.length<1 && !postImageView.image) {
+  NSString *text_to_post = [LCUtilityManager getSpaceTrimmedStringFromString:postTextView.text];
+  if (text_to_post.length<1 && !postImageView.image) {
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
     return;
   }
   
   [postTextView resignFirstResponder];
-  _postFeedObject.message = postTextView.text;
+  _postFeedObject.message = text_to_post;
   _postFeedObject.location = taggedLocation;
   NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
   for (LCFriend *friend in taggedFriendsArray)
