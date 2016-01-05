@@ -512,11 +512,11 @@
                                             <constraint firstAttribute="height" constant="1" id="UIu-Vj-Bvp"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4N0-M0-Sgk" customClass="LCMultipleSelectionTable">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" allowsMultipleSelection="YES" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="4N0-M0-Sgk" customClass="LCMultipleSelectionTable">
                                         <rect key="frame" x="0.0" y="44" width="375" height="515"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCTagFriendsTableViewCell" rowHeight="76" id="VW2-9b-OsM" customClass="LCTagFriendsTableViewCell">
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LCTagFriendsTableViewCell" rowHeight="76" id="VW2-9b-OsM" customClass="LCTagFriendsTableViewCell">
                                                 <rect key="frame" x="0.0" y="22" width="375" height="76"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VW2-9b-OsM" id="4a4-98-JTu">
@@ -542,6 +542,8 @@
                                                                     <state key="normal" image="profileTick.png">
                                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                                     </state>
+                                                                    <state key="disabled" image="tagFirend_unselected"/>
+                                                                    <state key="selected" image="contact_tick"/>
                                                                 </button>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgl-SA-MYj">
                                                                     <rect key="frame" x="8" y="6" width="253" height="40"/>
@@ -623,7 +625,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="friendsTableView" destination="4N0-M0-Sgk" id="3Hp-6L-qbS"/>
+                        <outlet property="tableView" destination="4N0-M0-Sgk" id="je9-2M-mqQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nW3-ke-sz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1170,5 +1172,6 @@
         <image name="locationIcon.png" width="53" height="77"/>
         <image name="manplaceholder.jpg" width="100" height="100"/>
         <image name="profileTick.png" width="110" height="110"/>
+        <image name="tagFirend_unselected" width="30" height="30"/>
     </resources>
 </document>

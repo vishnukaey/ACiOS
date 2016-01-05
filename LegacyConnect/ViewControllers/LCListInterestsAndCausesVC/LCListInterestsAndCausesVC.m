@@ -20,6 +20,8 @@
   
   NSArray *interestsArray, *causesArray;
   NSMutableArray *interestsSearchArray, *causesSearchArray;
+  
+  NSTimer *searchTimer;
 }
 @end
 
@@ -71,7 +73,13 @@ static NSString *kCheckedImageName = @"contact_tick";
   causesSearchArray = [[NSMutableArray alloc] init];
   
   [self addTabMenu];
-  [self loadInterestsAndCausesWithSearchKey:nil];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
+  
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:nil repeats:NO];
   
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   interestsTableView.tableFooterView = zeroRectView;
@@ -100,12 +108,12 @@ static NSString *kCheckedImageName = @"contact_tick";
   tabmenu.views = [[NSArray alloc] initWithObjects:interestsTableView,  causesCollectionView, nil];
 }
 
-- (void)loadInterestsAndCausesWithSearchKey :(NSString *)searchKey
+- (void)loadInterestsAndCausesWithSearchKey:(NSTimer*)sender
 {
-  [interestsSearchArray removeAllObjects];
-  [causesSearchArray removeAllObjects];
   [MBProgressHUD showHUDAddedTo:interestsTableView.superview animated:YES];
-  [LCAPIManager getUserInterestsAndCausesWithSearchKey:searchKey withSuccess:^(NSArray *responses) {
+  [LCAPIManager getUserInterestsAndCausesWithSearchKey:sender.userInfo withSuccess:^(NSArray *responses) {
+    [interestsSearchArray removeAllObjects];
+    [causesSearchArray removeAllObjects];
     interestsArray = responses;
     [interestsSearchArray addObjectsFromArray:responses];
     [interestsTableView reloadData];
@@ -165,7 +173,14 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  [self loadInterestsAndCausesWithSearchKey:searchText];
+  searchText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
+  
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:searchText repeats:NO];
 }
 
 #pragma mark - TableView delegates
