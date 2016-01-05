@@ -940,9 +940,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhF-Nu-QEE">
                                 <rect key="frame" x="0.0" y="157" width="375" height="510"/>
                                 <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
+                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
+                                        </connections>
+                                    </tableView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zq1-Re-mZm">
                                         <rect key="frame" x="8" y="0.0" width="359" height="510"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gss-tP-hmW">
                                             <size key="itemSize" width="100" height="100"/>
                                             <size key="headerReferenceSize" width="50" height="31"/>
@@ -958,7 +966,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jwW-HD-dvn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                            <rect key="frame" x="8" y="8" width="84" height="84"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </imageView>
                                                         <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9R3-VC-qeI">
@@ -974,12 +982,12 @@
                                                 </view>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstItem="jwW-HD-dvn" firstAttribute="top" secondItem="Wqx-Wb-5fA" secondAttribute="top" id="5Nv-cK-2oN"/>
-                                                    <constraint firstAttribute="trailing" secondItem="jwW-HD-dvn" secondAttribute="trailing" id="5Wd-Ix-Kl6"/>
-                                                    <constraint firstAttribute="bottom" secondItem="jwW-HD-dvn" secondAttribute="bottom" id="EpO-2g-ctg"/>
+                                                    <constraint firstItem="jwW-HD-dvn" firstAttribute="top" secondItem="Wqx-Wb-5fA" secondAttribute="top" constant="8" id="5Nv-cK-2oN"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jwW-HD-dvn" secondAttribute="trailing" constant="8" id="5Wd-Ix-Kl6"/>
+                                                    <constraint firstAttribute="bottom" secondItem="jwW-HD-dvn" secondAttribute="bottom" constant="8" id="EpO-2g-ctg"/>
                                                     <constraint firstAttribute="trailing" secondItem="9R3-VC-qeI" secondAttribute="trailing" constant="8" id="Lba-Uu-rpE"/>
                                                     <constraint firstItem="9R3-VC-qeI" firstAttribute="top" secondItem="Wqx-Wb-5fA" secondAttribute="top" constant="8" id="fUB-IQ-CNc"/>
-                                                    <constraint firstItem="jwW-HD-dvn" firstAttribute="leading" secondItem="Wqx-Wb-5fA" secondAttribute="leading" id="g16-pJ-S7p"/>
+                                                    <constraint firstItem="jwW-HD-dvn" firstAttribute="leading" secondItem="Wqx-Wb-5fA" secondAttribute="leading" constant="8" id="g16-pJ-S7p"/>
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="causeImageView" destination="jwW-HD-dvn" id="oxv-NB-hnN"/>
@@ -1017,14 +1025,6 @@
                                             <outlet property="delegate" destination="C2E-jM-Jem" id="fSx-94-Zfq"/>
                                         </connections>
                                     </collectionView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
-                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
-                                        </connections>
-                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

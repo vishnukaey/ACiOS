@@ -47,7 +47,6 @@ static NSString *kCheckedImageName = @"contact_tick";
   CGContextFillRect(context, rect);
   UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
-  
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image];//no placeholder needed. background color is placeholder itself
 }
 @end
@@ -285,6 +284,9 @@ static NSString *kCheckedImageName = @"contact_tick";
   {
     [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
   }
+  cell.layer.cornerRadius = 6;
+  cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+  cell.layer.borderWidth = 1;
   return cell;
 }
 
