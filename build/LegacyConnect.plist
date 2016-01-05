@@ -17,13 +17,13 @@
 			<key>metadata</key>
 			<dict>
 				<key>bundle-identifier</key>
-				<string>com.gistdigital.legacyconnect</string>
+				<string>com.gistdigital.thathelps</string>
 				<key>bundle-version</key>
-				<string>0.3.0</string>
+				<string>0.5.4</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>title</key>
-				<string>LegacyConnect</string>
+				<string>ThatHelps</string>
 			</dict>
 		</dict>
 	</array>
