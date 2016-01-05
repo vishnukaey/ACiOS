@@ -8,6 +8,9 @@
 
 #import "LCInterestPosts.h"
 #import "LCFeedCellView.h"
+#import "LCFeedsCommentsController.h"
+#import "LCFullScreenImageVC.h"
+#import "LCProfileViewVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 @interface LCInterestPosts ()
@@ -34,8 +37,8 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
-  //  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+//  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
   
 //  self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
 //  
@@ -148,15 +151,15 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
-//  __weak typeof(self) weakSelf = self;
-//  cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
-//    [weakSelf feedCellActionWithType:actionType andFeed:feed];
-//  };
-//  cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
-//    [weakSelf tagTapped:tagDetails];
-//  };
-//  
-//  
+  __weak typeof(self) weakSelf = self;
+  cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+    [weakSelf feedCellActionWithType:actionType andFeed:feed];
+  };
+  cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+    [weakSelf tagTapped:tagDetails];
+  };
+  
+  
 //  if (self.isSelfProfile) {
 //    cell.moreButton.hidden = NO;
 //  }
@@ -169,59 +172,59 @@
 }
 
 #pragma mark - feedCell delegates
-//- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
-//{
-//  switch (type) {
+- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
+{
+  switch (type) {
 //    case kkFeedCellActionLoadMore:
 //      [self feedCellMoreAction :feed];
 //      break;
-//      
-//    case kkFeedCellActionViewImage:
-//      [self showFullScreenImage:feed];
-//      break;
-//      
-//    case kFeedCellActionComment:
-//      [self showFeedCommentsWithFeed:feed];
-//      
-//    default:
-//      break;
-//  }
-//}
-//
-//- (void)showFeedCommentsWithFeed:(LCFeed*)feed
-//{
-//  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-//                                                bundle:nil];
-//  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
-//  [next setFeedObject:feed];
-//  UIViewController *profileController = (UIViewController *)self.delegate;
-//  [profileController.navigationController pushViewController:next animated:YES];
-//}
-//
-//- (void)showFullScreenImage:(LCFeed*)feed
-//{
-//  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-//  vc.feed = feed;
-//  __weak typeof (self) weakSelf = self;
-//  vc.commentAction = ^ (id sender, BOOL showComments) {
-//    [weakSelf fullScreenAction:sender andShowComments:showComments];
-//  };
-//  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//  [self presentViewController:vc animated:YES completion:nil];
-//}
-//
-//- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
-//{
-//  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
-//  [viewController dismissViewControllerAnimated:!show completion:^{
-//    if (show) {
-//      [self showFeedCommentsWithFeed:viewController.feed];
-//    } else {
-//      [self reloadMilestonesTable];
-//    }
-//  }];
-//}
-//
+      
+    case kkFeedCellActionViewImage:
+      [self showFullScreenImage:feed];
+      break;
+      
+    case kFeedCellActionComment:
+      [self showFeedCommentsWithFeed:feed];
+      
+    default:
+      break;
+  }
+}
+
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+  UIViewController *profileController = (UIViewController *)self.delegate;
+  [profileController.navigationController pushViewController:next animated:YES];
+}
+
+- (void)showFullScreenImage:(LCFeed*)feed
+{
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.feed = feed;
+  __weak typeof (self) weakSelf = self;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [weakSelf fullScreenAction:sender andShowComments:showComments];
+  };
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
+{
+  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
+  [viewController dismissViewControllerAnimated:!show completion:^{
+    if (show) {
+      [self showFeedCommentsWithFeed:viewController.feed];
+    } else {
+      [self reloadPostsTable];
+    }
+  }];
+}
+
 //- (void)feedCellMoreAction :(LCFeed *)feed
 //{
 //  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
@@ -275,19 +278,19 @@
 //  [actionSheet addAction:cancelAction];
 //  [self presentViewController:actionSheet animated:YES completion:nil];
 //}
-//
-//- (void)tagTapped:(NSDictionary *)tagDetails
-//{
-//  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
-//  {
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-//    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-//    vc.userDetail = [[LCUserDetail alloc] init];
-//    vc.userDetail.userID = tagDetails[@"id"];
-//    UIViewController *profileController = (UIViewController *)self.delegate;
-//    [profileController.navigationController pushViewController:vc animated:YES];
-//  }
-//}
+
+- (void)tagTapped:(NSDictionary *)tagDetails
+{
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    UIViewController *profileController = (UIViewController *)self.delegate;
+    [profileController.navigationController pushViewController:vc animated:YES];
+  }
+}
 
 #pragma mark - ScrollView delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

@@ -179,22 +179,24 @@
   switch (indexPath.section) {
     case 0:
     {
-      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
       LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
       vc.userDetail = self.searchResultObject.usersArray[indexPath.row];
       [self.navigationController pushViewController:vc animated:YES];
     }
     case 1:
     {
-      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-      LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-      [self.navigationController pushViewController:vc animated:YES];
+      LCInterest *selectedInterest = self.searchResultObject.interestsArray[indexPath.row];
+      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+      LCSingleInterestVC *interestVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+      interestVC.interest = selectedInterest;
+      [self.navigationController pushViewController:interestVC animated:YES];
     }
       break;
       
     case 2:
     {
-      UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
       LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
       vc.cause = self.searchResultObject.causesArray[indexPath.row];
       [self.navigationController pushViewController:vc animated:YES];

@@ -8,10 +8,7 @@
 
 #import "LCInterestCauses.h"
 #import "LCChooseCausesCollectionViewCell.h"
-
-@interface LCInterestCauses ()
-
-@end
+#import "LCSingleCauseVC.h"
 
 //static NSInteger kCausesCellWidth = 105;
 //static NSInteger kCausesCellHeight = 140;
@@ -81,13 +78,14 @@
   return cell;
 }
 
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//  [LCOnboardingHelper addCause:self.results[indexPath.item] andInterest:self.interest];
-//  [cell setCellSelected:YES];
-//}
-//
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+  vc.cause = self.results[indexPath.item];
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
 //- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 //{
 //  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];

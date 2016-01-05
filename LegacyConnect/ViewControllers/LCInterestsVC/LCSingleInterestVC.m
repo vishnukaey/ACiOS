@@ -49,14 +49,7 @@
   interestDescription.text = _interest.descriptionText;
   [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
   [interestBGImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLLarge] placeholderImage:nil];
-  if (_interest.isFollowing)
-  {
-    [interestFollowButton setTitle:@"Unfollow" forState:UIControlStateNormal];
-  }
-  else
-  {
-    [interestFollowButton setTitle:@"Follow" forState:UIControlStateNormal];
-  }
+  [interestFollowButton setSelected:_interest.isFollowing];
 }
 
 - (void)addTabMenu
@@ -91,6 +84,31 @@
 }
 - (IBAction)followAction:(id)sender
 {
+  interestFollowButton.userInteractionEnabled = NO;
+  if(!interestFollowButton.selected)
+  {
+    [interestFollowButton setSelected:YES];
+    [LCThemeAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
+      _interest.isFollowing =YES;
+      _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]+1];
+      interestFollowButton.userInteractionEnabled = YES;
+    } andFailure:^(NSString *error) {
+      [interestFollowButton setSelected:NO];
+      interestFollowButton.userInteractionEnabled = YES;
+    }];
+  }
+  else
+  {
+    [interestFollowButton setSelected:NO];
+    [LCThemeAPIManager unfollowInterest:_interest.interestID withSuccess:^(id response) {
+      interestFollowButton.userInteractionEnabled = YES;
+      _interest.isFollowing = NO;
+      _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]-1];
+    } andFailure:^(NSString *error) {
+      interestFollowButton.userInteractionEnabled = YES;
+      [interestFollowButton setSelected:YES];
+    }];
+  }
 }
 
 - (IBAction)postsButtonClicked:(id)sender
@@ -103,7 +121,9 @@
   [interestCausesView loadCausesInCurrentInterest];
 }
 
-- (IBAction)actionsButtonClicked:(id)sender {
+- (IBAction)actionsButtonClicked:(id)sender
+{
+  [interestActionsView loadActionsInCurrentInterest];
 }
 
 
@@ -126,8 +146,8 @@
   else if ([segue.identifier isEqualToString:@"LCInterestActionsSegue"]) {
     
     interestActionsView = segue.destinationViewController;
-//    interestActionsView.userID = self.userDetail.userID;
-//    interestActionsView.delegate = self;
+    interestActionsView.interest = self.interest;
+    interestActionsView.delegate = self;
   }
 }
 

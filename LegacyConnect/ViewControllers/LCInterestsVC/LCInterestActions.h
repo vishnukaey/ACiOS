@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JTTableViewController.h"
 
-@interface LCInterestActions : UIViewController
+@protocol LCInterestActionsDelegate <NSObject>
+- (void)scrollViewScrolled:(UIScrollView *)scrollView;
+@end
+
+@interface LCInterestActions : JTTableViewController
+
+@property(nonatomic, retain) LCInterest *interest;
+@property (nonatomic, assign) id<LCInterestActionsDelegate> delegate;
+- (void) loadActionsInCurrentInterest;
 
 @end

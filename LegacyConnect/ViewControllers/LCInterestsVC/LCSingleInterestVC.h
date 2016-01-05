@@ -13,7 +13,7 @@
 #import "LCInterestCauses.h"
 #import "LCInterestActions.h"
 
-@interface LCSingleInterestVC : UIViewController <LCInterestPostsDelegate, LCInterestCausesDelegate>
+@interface LCSingleInterestVC : UIViewController <LCInterestPostsDelegate, LCInterestCausesDelegate, LCInterestActionsDelegate>
 {
 //  IBOutlet UITableView *feedsTable;
 //  IBOutlet UIScrollView *causesScrollView;

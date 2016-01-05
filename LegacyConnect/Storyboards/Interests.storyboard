@@ -22,6 +22,7 @@
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
+            <string>Gotham-Medium</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -112,149 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jRq-Vi-IF3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="149" y="-303"/>
-        </scene>
-        <!--Water-->
-        <scene sceneID="FrJ-9k-j82">
-            <objects>
-                <viewController storyboardIdentifier="LCSingle" title="Water" id="iHA-Ys-w0x" customClass="LCSingleInterestVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="EKN-pQ-gfY"/>
-                        <viewControllerLayoutGuide type="bottom" id="izB-Df-8NB"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0x4-de-l9S">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHz-3w-cbt">
-                                <rect key="frame" x="5" y="20" width="35" height="30"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="backAction:" destination="iHA-Ys-w0x" eventType="touchUpInside" id="g1q-Bk-CZC"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fPO-FZ-n47">
-                                <rect key="frame" x="128" y="48" width="65" height="65"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="awJ-EQ-ySI">
-                                <rect key="frame" x="16" y="59" width="96" height="43"/>
-                                <string key="text">15
-EVENTS</string>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mD9-o6-kyY">
-                                <rect key="frame" x="221" y="65" width="82" height="32"/>
-                                <string key="text">128
-FOLLOWERS</string>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJ1-c2-4aw">
-                                <rect key="frame" x="16" y="128" width="288" height="63"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="WATER">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin eu tellus ut ligula dapibus aliquam. Integer luctus mollis augue, sed finibus purus suscipit ac. </string>
-                                        <attributes>
-                                            <font key="NSFont" size="13" name="Times-Roman"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                    <fragment>
-                                        <string key="content" base64-UTF8="YES">
-Cg
-</string>
-                                        <attributes>
-                                            <font key="NSFont" size="12" name="Times-Roman"/>
-                                            <real key="NSKern" value="0.0"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" paragraphSpacing="12" defaultTabInterval="36">
-                                                <tabStops/>
-                                            </paragraphStyle>
-                                            <color key="NSStrokeColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fzf-1k-HVW">
-                                <rect key="frame" x="0.0" y="229" width="320" height="32"/>
-                                <subviews>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cxf-bM-7dP">
-                                        <rect key="frame" x="0.0" y="0.0" width="154" height="30"/>
-                                        <state key="normal" title="Helps">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleHelpsORCauses:" destination="iHA-Ys-w0x" eventType="touchUpInside" id="gWS-KY-1uw"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YbC-S8-Rvv">
-                                        <rect key="frame" x="162" y="1" width="158" height="30"/>
-                                        <state key="normal" title="Causes">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="toggleHelpsORCauses:" destination="iHA-Ys-w0x" eventType="touchUpInside" id="9Zh-wk-rQG"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xHc-W3-Xcp">
-                                <rect key="frame" x="0.0" y="263" width="320" height="305"/>
-                            </scrollView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bgC-xR-3jz">
-                                <rect key="frame" x="0.0" y="263" width="320" height="305"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="iHA-Ys-w0x" id="yla-78-cg4"/>
-                                    <outlet property="delegate" destination="iHA-Ys-w0x" id="1hL-R6-TAL"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6bx-w9-Ywk">
-                                <rect key="frame" x="106" y="199" width="109" height="30"/>
-                                <state key="normal" title="Follow">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="followButtonAction:" destination="iHA-Ys-w0x" eventType="touchUpInside" id="VQY-Aq-KVf"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="causesScrollView" destination="xHc-W3-Xcp" id="Zfn-Ut-xgi"/>
-                        <outlet property="feedsTable" destination="bgC-xR-3jz" id="4On-wo-zsy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VUg-7U-hNS" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="559" y="-303"/>
+            <point key="canvasLocation" x="202" y="-312"/>
         </scene>
         <!--Cause-->
         <scene sceneID="smZ-8L-ple">
@@ -561,7 +420,7 @@ Cg
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s1z-4o-A1N" userLabel="Interest Image Border View">
                                         <rect key="frame" x="133" y="48" width="109" height="109"/>
                                         <subviews>
-                                            <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ill-HR-0Dg">
+                                            <imageView autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ill-HR-0Dg">
                                                 <rect key="frame" x="2" y="2" width="105" height="105"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="105" id="BVd-NQ-GEQ"/>
@@ -590,26 +449,31 @@ Cg
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YXg-J6-uW6" userLabel="InterestDetailView">
                                         <rect key="frame" x="0.0" y="172" width="375" height="93"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="INTEREST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Md-TH-HgB">
-                                                <rect key="frame" x="15" y="0.0" width="345" height="17"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INTEREST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Md-TH-HgB">
+                                                <rect key="frame" x="15" y="0.0" width="345" height="15"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0U-9W-W8b">
-                                                <rect key="frame" x="15" y="21" width="345" height="16"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f0U-9W-W8b">
+                                                <rect key="frame" x="15" y="19" width="345" height="13"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asc-MU-zOR">
-                                                <rect key="frame" x="133" y="52" width="110" height="35"/>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asc-MU-zOR">
+                                                <rect key="frame" x="133" y="47" width="110" height="35"/>
                                                 <color key="backgroundColor" red="0.93725490196078431" green="0.39215686274509803" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="dQc-u1-hgN"/>
                                                     <constraint firstAttribute="width" constant="110" id="jXm-Q2-l2h"/>
                                                 </constraints>
+                                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <state key="normal" title="Follow">
+                                                    <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <state key="selected" title="Unfollow">
                                                     <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -676,8 +540,8 @@ Cg
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MvH-kb-bWH" userLabel="TabBarMenu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RT5-Yp-X44">
-                                                <rect key="frame" x="0.0" y="9" width="125" height="26"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RT5-Yp-X44">
+                                                <rect key="frame" x="0.0" y="10" width="125" height="24"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                                 <state key="normal" title="POSTS">
                                                     <color key="titleColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -687,8 +551,8 @@ Cg
                                                     <action selector="postsButtonClicked:" destination="a8T-4F-roh" eventType="touchUpInside" id="Kg4-r7-x2O"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMk-Lb-NhF">
-                                                <rect key="frame" x="125" y="9" width="125" height="26"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XMk-Lb-NhF">
+                                                <rect key="frame" x="125" y="10" width="125" height="24"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                                 <state key="normal" title="CAUSES">
                                                     <color key="titleColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -698,8 +562,8 @@ Cg
                                                     <action selector="causesButtonClicked:" destination="a8T-4F-roh" eventType="touchUpInside" id="FVf-Ei-y72"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-CC-zZD">
-                                                <rect key="frame" x="250" y="9" width="125" height="26"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJe-CC-zZD">
+                                                <rect key="frame" x="250" y="10" width="125" height="24"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="12"/>
                                                 <state key="normal" title="ACTIONS">
                                                     <color key="titleColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -875,7 +739,7 @@ Cg
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N1j-lj-9A3">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="357"/>
-                                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5lW-gv-U2U">
                                     <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -883,41 +747,28 @@ Cg
                                     <inset key="sectionInset" minX="15" minY="15" maxX="15" maxY="15"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCell" id="tMw-Wj-YNp" customClass="LCChooseCausesCollectionViewCell">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="causesCell" id="dKa-ag-8gQ" customClass="LCChooseCausesCollectionViewCell">
                                         <rect key="frame" x="15" y="15" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XY5-AX-iwP">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lqi-no-mQM">
                                                     <rect key="frame" x="5" y="5" width="90" height="90"/>
                                                     <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFD-PJ-wXY">
-                                                    <rect key="frame" x="67" y="8" width="15" height="15"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <state key="normal">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <state key="selected" backgroundImage="EDE832E0-A655-4FE2-BCDB-09DFDFEEC0F5"/>
-                                                </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="XY5-AX-iwP" firstAttribute="leading" secondItem="tMw-Wj-YNp" secondAttribute="leadingMargin" constant="-3" id="E9n-OU-UCD"/>
-                                            <constraint firstItem="XY5-AX-iwP" firstAttribute="centerY" secondItem="tMw-Wj-YNp" secondAttribute="centerY" id="Qu0-xL-v7E"/>
-                                            <constraint firstItem="ZFD-PJ-wXY" firstAttribute="top" secondItem="tMw-Wj-YNp" secondAttribute="topMargin" id="UOY-aS-7o6"/>
-                                            <constraint firstItem="ZFD-PJ-wXY" firstAttribute="leading" secondItem="tMw-Wj-YNp" secondAttribute="leadingMargin" constant="59" id="Y3B-I5-eIf"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="ZFD-PJ-wXY" secondAttribute="trailing" constant="10" id="c1I-6c-xfI"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="ZFD-PJ-wXY" secondAttribute="bottom" constant="69" id="dKJ-rr-BtS"/>
-                                            <constraint firstItem="XY5-AX-iwP" firstAttribute="top" secondItem="tMw-Wj-YNp" secondAttribute="topMargin" constant="-3" id="oQz-uW-pvE"/>
-                                            <constraint firstItem="XY5-AX-iwP" firstAttribute="centerX" secondItem="tMw-Wj-YNp" secondAttribute="centerX" id="rKx-wx-4xH"/>
+                                            <constraint firstItem="Lqi-no-mQM" firstAttribute="leading" secondItem="dKa-ag-8gQ" secondAttribute="leadingMargin" constant="-3" id="CTe-eW-V7m"/>
+                                            <constraint firstItem="Lqi-no-mQM" firstAttribute="top" secondItem="dKa-ag-8gQ" secondAttribute="topMargin" constant="-3" id="Cdr-Sy-zA2"/>
+                                            <constraint firstItem="Lqi-no-mQM" firstAttribute="centerY" secondItem="dKa-ag-8gQ" secondAttribute="centerY" id="H0f-2d-kHv"/>
+                                            <constraint firstItem="Lqi-no-mQM" firstAttribute="centerX" secondItem="dKa-ag-8gQ" secondAttribute="centerX" id="rhG-c0-KuE"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="causesImageView" destination="XY5-AX-iwP" id="2ji-qA-xBv"/>
-                                            <outlet property="selectionButton" destination="ZFD-PJ-wXY" id="8f0-QD-bFI"/>
+                                            <outlet property="causesImageView" destination="Lqi-no-mQM" id="KeQ-Li-XTW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -959,6 +810,10 @@ Cg
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="357"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="OeO-qC-ZqT" id="f07-FO-GPJ"/>
+                                    <outlet property="delegate" destination="OeO-qC-ZqT" id="b7P-FN-83e"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -969,6 +824,9 @@ Cg
                             <constraint firstItem="Tdt-kt-Spg" firstAttribute="leading" secondItem="dG0-Jd-DX5" secondAttribute="leading" id="Geo-Z8-h3Q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="Tdt-kt-Spg" id="Q26-eo-8PU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zRK-a3-R1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -980,7 +838,6 @@ Cg
         <image name="LinkIcon" width="17" height="17"/>
         <image name="MembersIcon" width="17" height="16"/>
         <image name="backButton" width="12" height="21"/>
-        <image name="photo.jpg" width="100" height="100"/>
         <image name="rightChevronGrey" width="8" height="12"/>
     </resources>
 </document>
