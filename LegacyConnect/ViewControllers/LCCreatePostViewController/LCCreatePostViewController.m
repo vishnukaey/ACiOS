@@ -101,6 +101,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [_postScrollView addSubview:interstIconImageView];
   interstIconImageView.backgroundColor = ICONBACK_COLOR;
   interstIconImageView.layer.cornerRadius = 4;
+  interstIconImageView.contentMode = UIViewContentModeScaleAspectFit;
   
   postTextView = [[UITextView alloc] initWithFrame:CGRectMake(interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8, topmargin, _postScrollView.frame.size.width - (interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8), 35)];
   postTextView.text = @"";
