@@ -25,13 +25,16 @@
 }
 @end
 
-static NSString *kUnCheckedImageName = @"tagFirend_unselected";
+static NSString *kUnCheckedImageName_cause = @"contact_plus";
 static NSString *kCheckedImageName = @"contact_tick";
+static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 
 #pragma mark - LCTagCauseCollectionCell class
 @interface LCTagCauseCollectionCell : UICollectionViewCell
 @property(nonatomic, strong)IBOutlet UIImageView *causeImageView;
 @property(nonatomic, strong)IBOutlet UIButton *checkButton;
+@property(nonatomic, strong)IBOutlet UILabel *causeLabel;
+@property(nonatomic, strong)IBOutlet UIView *imageContainer;
 @property(nonatomic, strong) LCCause *cause;
 @end
 
@@ -48,6 +51,11 @@ static NSString *kCheckedImageName = @"contact_tick";
   UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image];//no placeholder needed. background color is placeholder itself
+  [_causeLabel setText:cause.name];
+  
+  _imageContainer.layer.cornerRadius = 6;
+  _imageContainer.layer.borderColor = [UIColor lightGrayColor].CGColor;
+  _imageContainer.layer.borderWidth = 1;
 }
 @end
 
@@ -232,7 +240,7 @@ static NSString *kCheckedImageName = @"contact_tick";
     }
     else
     {
-      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName_interest] forState:UIControlStateNormal];
     }
     
     return cell;
@@ -282,18 +290,15 @@ static NSString *kCheckedImageName = @"contact_tick";
   }
   else
   {
-    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName_cause] forState:UIControlStateNormal];
   }
-  cell.layer.cornerRadius = 6;
-  cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
-  cell.layer.borderWidth = 1;
   return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
-  return CGSizeMake(size, size);  // will be w120xh100 or w190x100
+  return CGSizeMake(size, size + 40);  // will be w120xh100 or w190x100
   // if the width is higher, only one image will be shown in a line
 }
 
