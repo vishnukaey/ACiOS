@@ -2296,13 +2296,6 @@ Now on to the next step.</string>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <searchBar contentMode="redraw" placeholder="Search nonprofits" translatesAutoresizingMaskIntoConstraints="NO" id="NIx-KC-GsH">
-                                        <rect key="frame" x="0.0" y="92" width="375" height="54"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="NTc-Lv-43q" id="K5L-ER-SPn"/>
-                                        </connections>
-                                    </searchBar>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mhS-00-wsq">
                                         <rect key="frame" x="15" y="154" width="345" height="39"/>
                                         <string key="text">If you don't have one, that's okay! Choose a few Interests below and we'll fill your feed with news from related causes that you can follow later.</string>
@@ -2310,6 +2303,13 @@ Now on to the next step.</string>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <searchBar contentMode="redraw" text="" placeholder="Search Nonprofits" translatesAutoresizingMaskIntoConstraints="NO" id="NIx-KC-GsH">
+                                        <rect key="frame" x="0.0" y="95" width="375" height="51"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="NTc-Lv-43q" id="K5L-ER-SPn"/>
+                                        </connections>
+                                    </searchBar>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -2322,15 +2322,15 @@ Now on to the next step.</string>
                                     <constraint firstItem="SiV-mb-hz3" firstAttribute="leading" secondItem="JXL-xS-GDd" secondAttribute="leading" constant="15" id="FfI-XX-IWN"/>
                                     <constraint firstAttribute="trailing" secondItem="mhS-00-wsq" secondAttribute="trailing" constant="15" id="IoN-Id-3Rx"/>
                                     <constraint firstItem="mhS-00-wsq" firstAttribute="leading" secondItem="JXL-xS-GDd" secondAttribute="leading" constant="15" id="MZV-vy-3Td"/>
-                                    <constraint firstItem="NIx-KC-GsH" firstAttribute="top" secondItem="SiV-mb-hz3" secondAttribute="bottom" constant="5" id="Qii-bX-Js9"/>
+                                    <constraint firstItem="NIx-KC-GsH" firstAttribute="top" secondItem="SiV-mb-hz3" secondAttribute="bottom" constant="8" id="Qii-bX-Js9"/>
                                     <constraint firstItem="SiV-mb-hz3" firstAttribute="top" secondItem="v1l-Yb-haM" secondAttribute="bottom" constant="14" id="hcK-x2-9dj"/>
                                     <constraint firstItem="mhS-00-wsq" firstAttribute="top" secondItem="NIx-KC-GsH" secondAttribute="bottom" constant="8" id="ltM-vT-QK2"/>
-                                    <constraint firstAttribute="height" priority="999" constant="193" id="oDF-0n-LWR"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="999" constant="193" id="oDF-0n-LWR"/>
                                     <constraint firstAttribute="trailing" secondItem="SiV-mb-hz3" secondAttribute="trailing" constant="15" id="u2k-Yu-6Ie"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="167" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lB5-Fa-EER">
-                                <rect key="frame" x="15" y="266" width="345" height="393"/>
+                                <rect key="frame" x="15" y="273" width="345" height="386"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="horizontalInterestsCell" rowHeight="167" id="VFS-jZ-hzp" customClass="LCHorizontalInterestsCell">
@@ -2449,7 +2449,7 @@ Now on to the next step.</string>
                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ZmA-H1-gvx" secondAttribute="trailing" id="2Kp-tc-Aw1"/>
-                            <constraint firstItem="lB5-Fa-EER" firstAttribute="top" secondItem="JXL-xS-GDd" secondAttribute="bottom" constant="8" id="B7m-Lz-34u"/>
+                            <constraint firstItem="lB5-Fa-EER" firstAttribute="top" secondItem="JXL-xS-GDd" secondAttribute="bottom" constant="15" id="B7m-Lz-34u"/>
                             <constraint firstAttribute="trailing" secondItem="lB5-Fa-EER" secondAttribute="trailing" constant="15" id="PBm-OY-CQu"/>
                             <constraint firstItem="ZmA-H1-gvx" firstAttribute="leading" secondItem="hin-DH-cYf" secondAttribute="leading" id="RGe-xf-I94"/>
                             <constraint firstAttribute="trailing" secondItem="JXL-xS-GDd" secondAttribute="trailing" id="ZtP-EE-MK4"/>
@@ -2464,6 +2464,8 @@ Now on to the next step.</string>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="infoLabel1" destination="SiV-mb-hz3" id="M3I-NY-Ibb"/>
+                        <outlet property="inforLabel2" destination="mhS-00-wsq" id="jcd-Gp-bQ5"/>
                         <outlet property="nextButton" destination="yPQ-dm-GL1" id="kAS-30-1Ea"/>
                         <outlet property="themesTable" destination="lB5-Fa-EER" id="Bwq-Qm-a7u"/>
                         <segue destination="Waq-9X-zJm" kind="push" identifier="causeSummary" id="kxs-vz-56G"/>

@@ -17,6 +17,7 @@
 @interface LCOnboardThemesVC ()
 {
   IBOutlet UIButton *nextButton;
+  IBOutlet UILabel *infoLabel1, *inforLabel2;;
   NSMutableArray *themesArray;
 }
 @end
@@ -35,6 +36,21 @@
    } andFailure:^(NSString *error) {
      
    }];
+  
+  NSString *infoText_2 = @"If you don't have one, that's okay! Choose a few Interests below and we'll fill your feed with news from related causes that you can follow later.";
+  NSMutableAttributedString *attributedString_2 = [[NSMutableAttributedString alloc] initWithString:infoText_2];
+  NSMutableParagraphStyle *paragraphStyle_2 = [[NSMutableParagraphStyle alloc] init];
+  [paragraphStyle_2 setLineSpacing:5];
+  [attributedString_2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle_2 range:NSMakeRange(0, [infoText_2 length])];
+  inforLabel2.attributedText = attributedString_2 ;
+  
+  
+  NSString *infoText_1 = @"To get started, search for the name of a specific Cause if you have one in mind.";
+  NSMutableAttributedString *attributedString_1 = [[NSMutableAttributedString alloc] initWithString:infoText_1];
+  NSMutableParagraphStyle *paragraphStyle_1 = [[NSMutableParagraphStyle alloc] init];
+  [paragraphStyle_1 setLineSpacing:5];
+  [attributedString_1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle_1 range:NSMakeRange(0, [infoText_1 length])];
+  infoLabel1.attributedText = attributedString_1 ;
 }
 
 
