@@ -84,14 +84,14 @@
      NSError *error = nil;
      NSDictionary *dict = response[kResponseData];
      LCEvent *event = [MTLJSONAdapter modelOfClass:[LCEvent class] fromJSONDictionary:dict[@"event"] error:&error];
-     if(!error)
+     if(error)
      {
-       LCDLog(@"Getting Event details successful! ");
-       success(event);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
      }
      else
      {
-       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       LCDLog(@"Getting Event details successful! ");
+       success(event);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -146,15 +146,15 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:dict[@"eventMembers"] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Users successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Users successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -184,14 +184,14 @@
      NSError *error = nil;
      NSArray *data= response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:data error:&error];
-     if(!error)
-     {
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -211,14 +211,14 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[kEventsKey] error:&error];
-     if(!error)
+     if(error)
      {
-       LCDLog(@"Getting events success! ");
-       success(responsesArray);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
      }
      else
      {
-       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       LCDLog(@"Getting events success! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -279,15 +279,15 @@
      NSDictionary * comments = dict[kPostCommentsKey];
      BOOL isMorePresent = [[comments objectForKey:@"more"] boolValue];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:comments[kPostCommentsKey] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Comments successful! ");
-       success(responsesArray,isMorePresent);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Comments successful! ");
+       success(responsesArray,isMorePresent);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -308,15 +308,15 @@
      NSDictionary *dict= response[kResponseData];
      LCComment *comment = [MTLJSONAdapter modelOfClass:[LCComment class] fromJSONDictionary:dict error:&error];
      
-     if(!error)
-     {
-       [LCNotificationManager postEventCommentedNotificationWithComment:comment andEvent:event];
-       success(comment);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       [LCNotificationManager postEventCommentedNotificationWithComment:comment andEvent:event];
+       success(comment);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
