@@ -942,14 +942,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhF-Nu-QEE">
                                 <rect key="frame" x="0.0" y="157" width="375" height="510"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
-                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
-                                        </connections>
-                                    </tableView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zq1-Re-mZm">
                                         <rect key="frame" x="8" y="0.0" width="359" height="510"/>
                                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
@@ -1027,6 +1019,14 @@
                                             <outlet property="delegate" destination="C2E-jM-Jem" id="fSx-94-Zfq"/>
                                         </connections>
                                     </collectionView>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YhI-gu-R5y">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="C2E-jM-Jem" id="lFM-of-Fi8"/>
+                                            <outlet property="delegate" destination="C2E-jM-Jem" id="UUy-Gi-xjM"/>
+                                        </connections>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
