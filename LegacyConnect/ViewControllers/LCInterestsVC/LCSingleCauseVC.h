@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
+#import "JTTableViewController.h"
 
-@interface LCSingleCauseVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@interface LCSingleCauseVC : JTTableViewController
 {
-  IBOutlet UITableView *feedsTable;
   NSMutableArray *cellsViewArray;
   IBOutlet UILabel *causeNameLabel;
   IBOutlet UILabel *causeDescriptionLabel;

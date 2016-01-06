@@ -74,6 +74,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 }
 
 

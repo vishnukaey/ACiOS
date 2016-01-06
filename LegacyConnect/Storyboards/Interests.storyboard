@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="a8T-4F-roh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="a8T-4F-roh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -132,16 +132,20 @@
                                 <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="QUc-rX-R9p" id="ISQ-gK-pWo"/>
-                                    <outlet property="delegate" destination="QUc-rX-R9p" id="vOs-w0-M19"/>
+                                    <outlet property="dataSource" destination="QUc-rX-R9p" id="pD5-nb-bTb"/>
+                                    <outlet property="delegate" destination="QUc-rX-R9p" id="gVD-BP-T0L"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcW-yh-gPw">
                                 <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="EventHeaderImage" translatesAutoresizingMaskIntoConstraints="NO" id="CpQ-02-Fuw" userLabel="Event Overlay">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaB-93-o3L">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photoPost_dummy.png" translatesAutoresizingMaskIntoConstraints="NO" id="CpQ-02-Fuw" userLabel="Event Overlay">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hl1-p5-gYt">
                                         <rect key="frame" x="115" y="12" width="90" height="90"/>
@@ -252,7 +256,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIs-1V-U5b">
-                                                        <rect key="frame" x="35" y="10" width="266" height="30"/>
+                                                        <rect key="frame" x="41" y="10" width="260" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="WS6-K0-r9o"/>
                                                         </constraints>
@@ -266,7 +270,7 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="FIs-1V-U5b" firstAttribute="leading" secondItem="CpW-4Y-LSj" secondAttribute="trailing" constant="8" id="PLB-92-aw1"/>
+                                                    <constraint firstItem="FIs-1V-U5b" firstAttribute="leading" secondItem="CpW-4Y-LSj" secondAttribute="trailing" constant="14" id="PLB-92-aw1"/>
                                                     <constraint firstAttribute="height" constant="50" id="VFR-Wc-l1B"/>
                                                     <constraint firstItem="CpW-4Y-LSj" firstAttribute="top" secondItem="f86-sa-3iP" secondAttribute="top" constant="17" id="Y5n-Zr-2oM"/>
                                                     <constraint firstItem="CpW-4Y-LSj" firstAttribute="leading" secondItem="f86-sa-3iP" secondAttribute="leading" constant="10" id="ZMD-ue-Ge4"/>
@@ -296,8 +300,10 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="CpQ-02-Fuw" firstAttribute="top" secondItem="TcW-yh-gPw" secondAttribute="top" id="19A-pO-blr"/>
+                                    <constraint firstItem="ZaB-93-o3L" firstAttribute="leading" secondItem="TcW-yh-gPw" secondAttribute="leading" id="3x6-sm-xDl"/>
                                     <constraint firstItem="PWz-GD-nDP" firstAttribute="top" secondItem="CpQ-02-Fuw" secondAttribute="bottom" id="4FR-Ld-7pt"/>
                                     <constraint firstItem="PWz-GD-nDP" firstAttribute="leading" secondItem="TcW-yh-gPw" secondAttribute="leading" id="8Z2-ib-lx2"/>
+                                    <constraint firstItem="PWz-GD-nDP" firstAttribute="top" secondItem="ZaB-93-o3L" secondAttribute="bottom" id="CxI-hk-pwd"/>
                                     <constraint firstAttribute="height" constant="320" id="GXB-Sz-jCq"/>
                                     <constraint firstItem="CpQ-02-Fuw" firstAttribute="top" secondItem="TcW-yh-gPw" secondAttribute="top" id="Iok-fC-ZNF"/>
                                     <constraint firstItem="hl1-p5-gYt" firstAttribute="top" secondItem="TcW-yh-gPw" secondAttribute="top" constant="12" id="OTH-J1-G9q"/>
@@ -310,8 +316,10 @@
                                     <constraint firstItem="PWz-GD-nDP" firstAttribute="top" secondItem="CpQ-02-Fuw" secondAttribute="bottom" id="gg6-ls-yuO"/>
                                     <constraint firstItem="CpQ-02-Fuw" firstAttribute="leading" secondItem="TcW-yh-gPw" secondAttribute="leading" id="kxx-eP-lag"/>
                                     <constraint firstItem="ZtP-yW-yRb" firstAttribute="centerX" secondItem="TcW-yh-gPw" secondAttribute="centerX" id="lLX-U5-mPi"/>
+                                    <constraint firstAttribute="trailing" secondItem="ZaB-93-o3L" secondAttribute="trailing" id="pTf-wn-KBc"/>
                                     <constraint firstAttribute="bottom" secondItem="PWz-GD-nDP" secondAttribute="bottom" id="q3h-wz-zL5"/>
                                     <constraint firstItem="g4t-kl-MuJ" firstAttribute="top" secondItem="hl1-p5-gYt" secondAttribute="bottom" constant="4" id="uxQ-FV-R1E"/>
+                                    <constraint firstItem="ZaB-93-o3L" firstAttribute="top" secondItem="TcW-yh-gPw" secondAttribute="top" id="yrX-vz-oke"/>
                                     <constraint firstItem="hl1-p5-gYt" firstAttribute="centerX" secondItem="TcW-yh-gPw" secondAttribute="centerX" id="zYG-IB-IDr"/>
                                 </constraints>
                                 <variation key="default">
@@ -386,8 +394,8 @@
                         <outlet property="causeNameLabel" destination="g4t-kl-MuJ" id="S5o-O6-Yj9"/>
                         <outlet property="causeSupportersCountButton" destination="LCC-FG-Y4a" id="8p4-e1-quK"/>
                         <outlet property="causeURLButton" destination="FIs-1V-U5b" id="pMX-01-u09"/>
-                        <outlet property="feedsTable" destination="jC8-yh-5s2" id="eU7-rF-SbD"/>
                         <outlet property="supportButton" destination="ZtP-yW-yRb" id="1Ig-Uh-yqB"/>
+                        <outlet property="tableView" destination="jC8-yh-5s2" id="TfQ-iv-vBy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hnT-qn-WuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -834,10 +842,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="EventHeaderImage" width="375" height="165"/>
         <image name="LinkIcon" width="17" height="17"/>
         <image name="MembersIcon" width="17" height="16"/>
         <image name="backButton" width="12" height="21"/>
+        <image name="photoPost_dummy.png" width="690" height="390"/>
         <image name="rightChevronGrey" width="8" height="12"/>
     </resources>
 </document>
