@@ -112,7 +112,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   
   placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x+5, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.frame.size.height)];
   [placeHolderLabel setFont:POSTTEXT_FONT];
-  [placeHolderLabel setText:@"Share your legacy"];
+  [placeHolderLabel setText:@"Share your news"];
   [placeHolderLabel setTextColor:[UIColor lightGrayColor]];
   [_postScrollView addSubview:placeHolderLabel];
 
