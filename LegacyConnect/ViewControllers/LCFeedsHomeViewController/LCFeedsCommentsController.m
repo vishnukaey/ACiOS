@@ -20,7 +20,6 @@ static CGFloat kIndexForPostDetails = 0;
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCFeedAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
