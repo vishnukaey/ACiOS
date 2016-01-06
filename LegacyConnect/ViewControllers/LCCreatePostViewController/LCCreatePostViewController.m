@@ -101,6 +101,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [_postScrollView addSubview:interstIconImageView];
   interstIconImageView.backgroundColor = ICONBACK_COLOR;
   interstIconImageView.layer.cornerRadius = 4;
+  interstIconImageView.contentMode = UIViewContentModeScaleAspectFit;
   
   postTextView = [[UITextView alloc] initWithFrame:CGRectMake(interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8, topmargin, _postScrollView.frame.size.width - (interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8), 35)];
   postTextView.text = @"";
@@ -111,7 +112,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   
   placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x+5, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.frame.size.height)];
   [placeHolderLabel setFont:POSTTEXT_FONT];
-  [placeHolderLabel setText:@"Share your legacy"];
+  [placeHolderLabel setText:@"Share your news"];
   [placeHolderLabel setTextColor:[UIColor lightGrayColor]];
   [_postScrollView addSubview:placeHolderLabel];
 
@@ -163,6 +164,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     placeHolderLabel.hidden = true;
     postTextView.text = _postFeedObject.message;
+    [postTextView layoutIfNeeded];
     CGRect frame = postTextView.frame;
     frame.size.height = postTextView.contentSize.height;
     postTextView.frame = frame;
@@ -350,7 +352,15 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"close_post", nil) message:NSLocalizedString(@"close_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"discard", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
+  [deleteAlert addAction:deletePostActionFinal];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [deleteAlert addAction:cancelAction];
+  [self presentViewController:deleteAlert animated:YES completion:nil];
 }
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
@@ -423,8 +433,14 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
     return;
   }
+  NSString *text_to_post = [LCUtilityManager getSpaceTrimmedStringFromString:postTextView.text];
+  if (text_to_post.length<1 && !postImageView.image) {
+    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
+    return;
+  }
+  
   [postTextView resignFirstResponder];
-  _postFeedObject.message = postTextView.text;
+  _postFeedObject.message = text_to_post;
   _postFeedObject.location = taggedLocation;
   NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
   for (LCFriend *friend in taggedFriendsArray)
@@ -452,7 +468,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
-      [self closeButtonClicked:nil];
+      [self dismissViewControllerAnimated:YES completion:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
@@ -464,7 +480,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
       fadedActivityView.hidden = true;
       [self shareToSocialMedia];
-      [self closeButtonClicked:nil];
+      [self dismissViewControllerAnimated:YES completion:nil];
       if(postImageView.image)
       {
         //GA Tracking

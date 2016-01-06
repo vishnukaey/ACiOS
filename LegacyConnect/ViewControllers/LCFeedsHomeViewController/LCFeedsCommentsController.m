@@ -25,7 +25,7 @@ static CGFloat kIndexForPostDetails = 0;
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFailedToFetchResults];
   }];
 }
@@ -45,10 +45,17 @@ static CGFloat kIndexForPostDetails = 0;
 #pragma mark - feed details API
 - (void)fetchFeedDetails
 {
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCFeedAPIManager getPostDetailsOfPost:self.feedId WithSuccess:^(LCFeed *response) {
-    self.feedObject = response;
+    if (self.feedObject) {
+      self.feedObject.likeCount = response.likeCount;
+      self.feedObject.commentCount = response.commentCount;
+    } else {
+      self.feedObject = response;
+    }
     [self startFetchingResults];
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self enableCommentField:NO];
   }];
 }
@@ -68,11 +75,10 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super viewDidLoad];
   [self initialUISetUp];
-  if (self.feedId) {
-    [self fetchFeedDetails];
-  } else {
-    [self startFetchingResults];
+  if (!self.feedId) {
+    self.feedId = self.feedObject.entityID;
   }
+  [self fetchFeedDetails];
 }
 
 - (void) viewWillAppear:(BOOL)animated

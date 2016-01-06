@@ -124,7 +124,6 @@
 		0BC755801B563907009CE7F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BC7557F1B563907009CE7F3 /* Localizable.strings */; };
 		0BCC873C1C1025FF0088D35D /* LCCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */; };
 		0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */; };
-		0BDB92301BECD0E900D26D4C /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */; };
 		0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */; };
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
 		0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */; };
@@ -183,6 +182,7 @@
 		CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */; };
 		CE6515031BF1B44F00BD6B86 /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6515021BF1B44F00BD6B86 /* Actions.storyboard */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
+		CE71D1521C3D225C00AD6E07 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */; settings = {ASSET_TAGS = (); }; };
 		CE72CCEB1BFB18E300A288D2 /* LCSearchTopBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE72CCEA1BFB18E300A288D2 /* LCSearchTopBC.m */; };
 		CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F388B1BD4D45700574526 /* LCListInterestsAndCausesVC.m */; };
 		CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA30E2F1B7366C100DAA4BA /* LCCommunityInterestCell.m */; };
@@ -299,6 +299,8 @@
 		0B56B8F61C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCUserProfileAPIManager.m; sourceTree = "<group>"; };
 		0B58BCDF1BC267D6007F60E3 /* LCLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCLoadingCell.h; sourceTree = "<group>"; };
 		0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCLoadingCell.m; sourceTree = "<group>"; };
+		0B5AE56D1C2A96CA008DA57A /* NSString+RemoveEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+RemoveEmoji.h"; path = "Utilities/LCCategories/LCStringRemoveEmoji/NSString+RemoveEmoji.h"; sourceTree = "<group>"; };
+		0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+RemoveEmoji.m"; path = "Utilities/LCCategories/LCStringRemoveEmoji/NSString+RemoveEmoji.m"; sourceTree = "<group>"; };
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
@@ -415,7 +417,6 @@
 		0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCollectionViewController.m; sourceTree = "<group>"; };
 		0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFinalTutorialVC.h; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.h; sourceTree = "<group>"; };
 		0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFinalTutorialVC.m; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.m; sourceTree = "<group>"; };
-		0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
 		0BDB98D01B5E5AEB006F62FD /* LCWebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCWebServiceManager.h; path = Utilities/LCWebServiceManager/LCWebServiceManager.h; sourceTree = "<group>"; };
 		0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCWebServiceManager.m; path = Utilities/LCWebServiceManager/LCWebServiceManager.m; sourceTree = "<group>"; };
 		0BE2B9B61B58F7B80026E607 /* LCChooseCausesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseCausesCollectionViewCell.h; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.h; sourceTree = "<group>"; };
@@ -522,6 +523,7 @@
 		CE6515021BF1B44F00BD6B86 /* Actions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Actions.storyboard; path = Storyboards/Actions.storyboard; sourceTree = "<group>"; };
 		CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImapactsViewController.h; path = ViewControllers/LCProfileVC/LCImapactsViewController.h; sourceTree = "<group>"; };
 		CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImapactsViewController.m; path = ViewControllers/LCProfileVC/LCImapactsViewController.m; sourceTree = "<group>"; };
+		CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
 		CE72CCE91BFB18E300A288D2 /* LCSearchTopBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchTopBC.h; path = ViewControllers/LCBaseControllers/LCSearchTopBC.h; sourceTree = "<group>"; };
 		CE72CCEA1BFB18E300A288D2 /* LCSearchTopBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchTopBC.m; path = ViewControllers/LCBaseControllers/LCSearchTopBC.m; sourceTree = "<group>"; };
 		CE8F388A1BD4D45700574526 /* LCListInterestsAndCausesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListInterestsAndCausesVC.h; path = ViewControllers/LCListInterestsAndCausesVC/LCListInterestsAndCausesVC.h; sourceTree = "<group>"; };
@@ -653,6 +655,7 @@
 		0B1859401BF34802006A4905 /* LCCategories */ = {
 			isa = PBXGroup;
 			children = (
+				0B5AE56C1C2A96AC008DA57A /* LCStringRemoveEmoji */,
 				0B2A2CD51BF5B9D100D20827 /* LCURLCategory */,
 				0B1859411BF34855006A4905 /* UIImage+LCImageFix.h */,
 				0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */,
@@ -695,7 +698,7 @@
 			children = (
 				0B29027D1BB9370100E80684 /* LCInterestsCellView.h */,
 				0B29027E1BB9370100E80684 /* LCInterestsCellView.m */,
-				0BDB922F1BECD0E900D26D4C /* LCInterestsCellView.xib */,
+				CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */,
 			);
 			name = LCInterestsCellView;
 			sourceTree = "<group>";
@@ -936,6 +939,15 @@
 			);
 			name = LCLoadingCell;
 			path = CustomViews/LCLoadingCell;
+			sourceTree = "<group>";
+		};
+		0B5AE56C1C2A96AC008DA57A /* LCStringRemoveEmoji */ = {
+			isa = PBXGroup;
+			children = (
+				0B5AE56D1C2A96CA008DA57A /* NSString+RemoveEmoji.h */,
+				0B5AE56E1C2A96CA008DA57A /* NSString+RemoveEmoji.m */,
+			);
+			name = LCStringRemoveEmoji;
 			sourceTree = "<group>";
 		};
 		0B5FA6E21B57BA6400DDC2B1 /* Contact */ = {
@@ -2013,7 +2025,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0BDB92301BECD0E900D26D4C /* LCInterestsCellView.xib in Resources */,
 				0BB33DDB1BA81401009E6D0C /* fbButton.png in Resources */,
 				0BB33DE11BA81401009E6D0C /* menuButton_dummy.png in Resources */,
 				0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */,
@@ -2055,6 +2066,7 @@
 				CEE276E61BE39B0F00849593 /* LCFeedcellXIB.xib in Resources */,
 				0BB33D9F1BA812A3009E6D0C /* Gotham-BoldItalic.otf in Resources */,
 				0BB33DEF1BA81401009E6D0C /* warning@3x.png in Resources */,
+				CE71D1521C3D225C00AD6E07 /* LCInterestsCellView.xib in Resources */,
 				0BB33DB71BA81359009E6D0C /* SignUp.storyboard in Resources */,
 				0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */,
 				0BF05A811B4E64A000FF7B39 /* Main.storyboard in Resources */,
@@ -2382,7 +2394,7 @@
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.legacyconnect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2401,7 +2413,7 @@
 				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.legacyconnect;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

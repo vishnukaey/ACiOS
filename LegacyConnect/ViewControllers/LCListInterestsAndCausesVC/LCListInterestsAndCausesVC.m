@@ -20,6 +20,8 @@
   
   NSArray *interestsArray, *causesArray;
   NSMutableArray *interestsSearchArray, *causesSearchArray;
+  
+  NSTimer *searchTimer;
 }
 @end
 
@@ -45,7 +47,6 @@ static NSString *kCheckedImageName = @"contact_tick";
   CGContextFillRect(context, rect);
   UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
-  
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image];//no placeholder needed. background color is placeholder itself
 }
 @end
@@ -71,7 +72,13 @@ static NSString *kCheckedImageName = @"contact_tick";
   causesSearchArray = [[NSMutableArray alloc] init];
   
   [self addTabMenu];
-  [self loadInterestsAndCausesWithSearchKey:nil];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
+  
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:nil repeats:NO];
   
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   interestsTableView.tableFooterView = zeroRectView;
@@ -100,12 +107,12 @@ static NSString *kCheckedImageName = @"contact_tick";
   tabmenu.views = [[NSArray alloc] initWithObjects:interestsTableView,  causesCollectionView, nil];
 }
 
-- (void)loadInterestsAndCausesWithSearchKey :(NSString *)searchKey
+- (void)loadInterestsAndCausesWithSearchKey:(NSTimer*)sender
 {
-  [interestsSearchArray removeAllObjects];
-  [causesSearchArray removeAllObjects];
   [MBProgressHUD showHUDAddedTo:interestsTableView.superview animated:YES];
-  [LCSearchAPIManager getUserInterestsAndCausesWithSearchKey:searchKey withSuccess:^(NSArray *responses) {
+  [LCSearchAPIManager getUserInterestsAndCausesWithSearchKey:sender.userInfo withSuccess:^(NSArray *responses) {
+    [interestsSearchArray removeAllObjects];
+    [causesSearchArray removeAllObjects];
     interestsArray = responses;
     [interestsSearchArray addObjectsFromArray:responses];
     [interestsTableView reloadData];
@@ -165,7 +172,14 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  [self loadInterestsAndCausesWithSearchKey:searchText];
+  searchText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
+  
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:searchText repeats:NO];
 }
 
 #pragma mark - TableView delegates
@@ -270,6 +284,9 @@ static NSString *kCheckedImageName = @"contact_tick";
   {
     [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
   }
+  cell.layer.cornerRadius = 6;
+  cell.layer.borderColor = [UIColor lightGrayColor].CGColor;
+  cell.layer.borderWidth = 1;
   return cell;
 }
 
