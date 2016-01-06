@@ -22,7 +22,7 @@ static CGFloat kIndexForPostDetails = 0;
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCFeedAPIManager getCommentsForPost:feedObject.entityID lastCommentId:nil withSuccess:^(id response, BOOL isMore) {
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self didFetchResults:response haveMoreData:isMore];
   } andfailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -33,7 +33,6 @@ static CGFloat kIndexForPostDetails = 0;
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  
   [LCFeedAPIManager getCommentsForPost:feedObject.entityID lastCommentId:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];

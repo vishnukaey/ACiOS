@@ -26,7 +26,7 @@
 @end
 
 NSString *const kCellIdentifierSectionHeader = @"headerCell";
-NSString *const kCellIdentifierTableViewCell = @"mycell";
+NSString *const kCellIdentifierTableViewCell = @"causesTableViewCell";
 NSInteger const kTableViewCellHeight = 170;
 NSInteger const kTableViewHeaderHeight = 44;
 NSInteger const kNumberOfRowsInSection = 1;
@@ -57,7 +57,7 @@ NSInteger const kNumberOfRowsInSection = 1;
 
 - (void) getCausesSuggestions {
   
-  NSArray *selectedInterestArray = [[LCOnboardingHelper selectedItemsDictionary] allKeys];//@[@"1", @"2", @"3"];
+  NSArray *selectedInterestArray = [[LCOnboardingHelper selectedItemsDictionary] allKeys];
   
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCThemeAPIManager getCausesForSetOfInterests:selectedInterestArray withSuccess:^(id response) {
@@ -99,6 +99,7 @@ NSInteger const kNumberOfRowsInSection = 1;
                    andInterests:interestsToSave
                          ofUser:[LCDataManager sharedDataManager].userID
                     withSuccess:^(id response) {
+                      [[LCOnboardingHelper selectedItemsDictionary] removeAllObjects];
                       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
                       UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
                       LCContactsListVC *next = [sb instantiateViewControllerWithIdentifier:@"connectFriends"];

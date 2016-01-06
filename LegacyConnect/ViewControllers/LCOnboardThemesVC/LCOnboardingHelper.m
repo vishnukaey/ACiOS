@@ -94,6 +94,15 @@ static NSMutableDictionary *selectedItemsDictionary;
   return NO;
 }
 
++ (BOOL)noInterestSelected
+{
+  if ([[LCOnboardingHelper selectedItemsDictionary] allKeys].count > 0) {
+    return NO;
+  }
+  return YES;
+}
+
+
 //+ (NSArray *)sortAndCombineCausesArray:(NSArray*)causes
 //{
 //  LCCause *cause = [causes firstObject];
@@ -111,44 +120,35 @@ static NSMutableDictionary *selectedItemsDictionary;
 //  return combinedArray;
 //}
 
-+ (NSArray *)sortInterests:(NSArray*)interests forTheme:(LCTheme *)theme
-{
-  NSMutableArray *allSelectedInterests = [[NSMutableArray alloc]initWithArray:[selectedItemsDictionary allValues]];
-  
-  NSArray *selectedInterests = [NSArray arrayWithArray:[allSelectedInterests filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"themeID == '%@'",theme.themeID]]]];
-  selectedInterests = [self sortCausesArrayWithName:selectedInterests];
-  
-  NSMutableArray *allInterests = [[NSMutableArray alloc] initWithArray: interests];
-  for (int i = 0; i<selectedInterests.count; i++)
-  {
-    LCInterest *_interest = selectedInterests[i];
-    [allInterests removeObjectsInArray:[allInterests filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"interestID == '%@'",_interest.interestID]]]];
-  }
-  
-  NSArray *remaingInterests = [self sortCausesArrayWithName:allInterests];
-  NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedInterests];
-  [combinedArray addObjectsFromArray:remaingInterests];
-  return combinedArray;
-}
+//+ (NSArray *)sortInterests:(NSArray*)interests forTheme:(LCTheme *)theme
+//{
+//  NSMutableArray *allSelectedInterests = [[NSMutableArray alloc]initWithArray:[selectedItemsDictionary allValues]];
+//  
+//  NSArray *selectedInterests = [NSArray arrayWithArray:[allSelectedInterests filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"themeID == '%@'",theme.themeID]]]];
+//  selectedInterests = [self sortCausesArrayWithName:selectedInterests];
+//  
+//  NSMutableArray *allInterests = [[NSMutableArray alloc] initWithArray: interests];
+//  for (int i = 0; i<selectedInterests.count; i++)
+//  {
+//    LCInterest *_interest = selectedInterests[i];
+//    [allInterests removeObjectsInArray:[allInterests filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"interestID == '%@'",_interest.interestID]]]];
+//  }
+//  
+//  NSArray *remaingInterests = [self sortCausesArrayWithName:allInterests];
+//  NSMutableArray *combinedArray = [[NSMutableArray alloc] initWithArray:selectedInterests];
+//  [combinedArray addObjectsFromArray:remaingInterests];
+//  return combinedArray;
+//}
 
-+ (NSArray*)sortCausesArrayWithName:(NSArray*)array {
-  
-  NSSortDescriptor *sortDescriptor;
-  sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
-                                               ascending:YES];
-  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-  NSArray *sortedArray = [array sortedArrayUsingDescriptors:sortDescriptors];
-  return sortedArray;
-
-}
-
-+ (BOOL)noInterestSelected
-{
-  if ([[LCOnboardingHelper selectedItemsDictionary] allKeys].count > 0) {
-    return NO;
-  }
-  return YES;
-}
-
+//+ (NSArray*)sortCausesArrayWithName:(NSArray*)array {
+//  
+//  NSSortDescriptor *sortDescriptor;
+//  sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
+//                                               ascending:YES];
+//  NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+//  NSArray *sortedArray = [array sortedArrayUsingDescriptors:sortDescriptors];
+//  return sortedArray;
+//
+//}
 
 @end
