@@ -40,15 +40,15 @@
   [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict_mut andImagesArray:images withSuccess:^(id response) {
     LCDLog(@"---%@",response[kResponseMessage]);
     NSError *error = nil;
-    if(!error)
+    if(error)
+    {
+      failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+    }
+    else
     {
       LCDLog(@"Successfully created new post");
       [LCNotificationManager postCreateNewPostNotificationfromResponse:response];
       success(response);
-    }
-    else
-    {
-      failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
     }
   } andFailure:^(NSString *error) {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
@@ -86,7 +86,11 @@
   [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict_mut andImagesArray:images withSuccess:^(id response) {
     LCDLog(@"%@",response[kResponseMessage]);
     NSError *error = nil;
-    if(!error)
+    if(error)
+    {
+      failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+    }
+    else
     {
       NSError *error_1 = nil;
       LCDLog(@"Successfully updated post");
@@ -95,10 +99,6 @@
       LCFeed *updated_post = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:data_post error:&error_1];
       [LCNotificationManager postPostEditedNotificationForPost:updated_post];
       success(response);
-    }
-    else
-    {
-      failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
     }
   } andFailure:^(NSString *error) {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
