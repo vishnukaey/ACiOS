@@ -100,7 +100,7 @@
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
-  return CGSizeMake(size, size+20);
+  return CGSizeMake(size, 140);
 }
 
 @end
