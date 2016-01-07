@@ -1061,7 +1061,7 @@ id augue sagittis, mattis sapien.</string>
                                     <outlet property="rightButton" destination="UNM-Jd-cza" id="o1V-xo-23t"/>
                                 </connections>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="Kig-Hh-ZLO">
                                 <rect key="frame" x="138" y="28" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="2Ab-2S-8G8"/>
@@ -1835,6 +1835,7 @@ id augue sagittis, mattis sapien.</string>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cause" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHt-uf-erY">
                                                     <rect key="frame" x="5" y="110" width="95" height="25"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="750" constant="25" id="5aV-Uq-xoH"/>
                                                     </constraints>
@@ -1845,7 +1846,7 @@ id augue sagittis, mattis sapien.</string>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="UHt-uf-erY" firstAttribute="leading" secondItem="2Sw-MB-Lhd" secondAttribute="leading" constant="5" id="N1u-Ow-Cnd"/>
                                             <constraint firstItem="oVV-79-g7A" firstAttribute="top" secondItem="2Sw-MB-Lhd" secondAttribute="topMargin" constant="-8" id="PPw-gX-Aaw"/>
@@ -2508,6 +2509,8 @@ Now on to the next step.</string>
                         <outlet property="infoLabel1" destination="SiV-mb-hz3" id="M3I-NY-Ibb"/>
                         <outlet property="inforLabel2" destination="mhS-00-wsq" id="jcd-Gp-bQ5"/>
                         <outlet property="nextButton" destination="yPQ-dm-GL1" id="kAS-30-1Ea"/>
+                        <outlet property="nextStepLabel" destination="v1l-Yb-haM" id="IgF-dY-39r"/>
+                        <outlet property="photoLabelHeight" destination="tv6-6x-WPq" id="DxV-yh-KYp"/>
                         <outlet property="themesTable" destination="lB5-Fa-EER" id="Bwq-Qm-a7u"/>
                         <segue destination="Waq-9X-zJm" kind="push" identifier="causeSummary" id="kxs-vz-56G"/>
                         <segue destination="eud-A4-nhB" kind="push" identifier="searchCauses" id="gEY-p5-HQ0"/>
@@ -2671,7 +2674,7 @@ Now on to the next step.</string>
         <image name="rightChevron" width="8" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="L3b-8s-ru0"/>
         <segue reference="yiJ-HE-CXd"/>
-        <segue reference="zp7-Wy-z2U"/>
     </inferredMetricsTieBreakers>
 </document>

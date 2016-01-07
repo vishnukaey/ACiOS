@@ -11,6 +11,7 @@
 #import "LCLoginHomeViewController.h"
 #import "LCWebServiceManager.h"
 #import "LCConstants.h"
+#import "LCOnboardThemesVC.h"
 
 #import "LCConnectFriendsVC.h"
 
@@ -173,4 +174,12 @@
   [self.navigationController pushViewController:loginVC animated:YES];
 }
 
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+  
+  if ([segue.identifier isEqualToString:@"onBoarding"]) {
+    
+    LCOnboardThemesVC *recentView = segue.destinationViewController;
+    recentView.fromFacebook = YES;
+  }
+}
 @end
