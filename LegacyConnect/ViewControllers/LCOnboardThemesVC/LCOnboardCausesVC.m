@@ -10,8 +10,6 @@
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCOnboardingHelper.h"
 
-static NSInteger kCausesCellWidth = 105;
-static NSInteger kCausesCellHeight = 140;
 
 @implementation LCOnboardCausesVC
 
@@ -97,9 +95,12 @@ static NSInteger kCausesCellHeight = 140;
   [cell setCellSelected:NO];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  return CGSizeMake(kCausesCellWidth, kCausesCellHeight);;
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  return CGSizeMake(size, size+20);
 }
 
 @end
