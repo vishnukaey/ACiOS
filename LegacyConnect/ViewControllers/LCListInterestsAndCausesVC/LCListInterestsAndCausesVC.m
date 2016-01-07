@@ -319,7 +319,7 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     UILabel * textLbl = [[UILabel alloc] initWithFrame:cell.frame];
     [textLbl setTextAlignment:NSTextAlignmentCenter];
     [textLbl setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
-    [textLbl setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:0.7]];
+    [textLbl setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:0.6]];
     textLbl.numberOfLines = 2;
 
     textLbl.text = @"Search and add causes from the menu.";
@@ -406,6 +406,10 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     if (causesSearchArray.count) {
       LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
       headerView.headerLabel.text = interest_.name;
+    }
+    else
+    {
+      headerView.headerLabel.text = @"";
     }
     
     reusableview = headerView;
