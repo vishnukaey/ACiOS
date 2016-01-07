@@ -29,12 +29,13 @@
   themesArray = [[NSMutableArray alloc] init];
   self.themesTable.separatorColor = [UIColor clearColor];
   nextButton.enabled = NO;
-  
+  [MBProgressHUD showHUDAddedTo:self.themesTable animated:YES];
    [LCThemeAPIManager getThemesWithLastId:nil withSuccess:^(id response) {
+     [MBProgressHUD hideAllHUDsForView:self.themesTable animated:YES];
      themesArray = response;
      [self reloadTable];
    } andFailure:^(NSString *error) {
-     
+     [MBProgressHUD hideAllHUDsForView:self.themesTable animated:YES];
    }];
   
   NSString *infoText_2 = @"If you don't have one, that's okay! Choose a few Interests below and we'll fill your feed with news from related causes that you can follow later.";

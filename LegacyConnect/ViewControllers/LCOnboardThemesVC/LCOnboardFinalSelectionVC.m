@@ -26,6 +26,7 @@
 @end
 
 NSString *const kCellIdentifierSectionHeader = @"headerCell";
+NSString *const kCellIdentifierSectionFooter = @"footerCell";
 NSString *const kCellIdentifierTableViewCell = @"causesTableViewCell";
 NSInteger const kTableViewCellHeight = 170;
 NSInteger const kTableViewHeaderHeight = 44;
@@ -135,12 +136,6 @@ NSInteger const kNumberOfRowsInSection = 1;
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   
   return kTableViewHeaderHeight;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-  
-  // remove bottom extra 20px space.
-  return CGFLOAT_MIN;
 }
 
 
