@@ -403,7 +403,7 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
   
   if (kind == UICollectionElementKindSectionHeader) {
     LCTagCauseCollectionSectionHeader *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LCTagCauseCollectionSectionHeader" forIndexPath:indexPath];
-    if (causesSearchArray.count) {
+    if (causesSearchArray.count>0) {
       LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
       headerView.headerLabel.text = interest_.name;
     }
@@ -419,9 +419,9 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     
     reusableview = footerview;
   }
-  if (causesSearchArray.count) {
-    [reusableview setFrame:CGRectMake(0, 0, 0, 0)];
-  }
+//  if (causesSearchArray.count>0) {
+//    [reusableview setFrame:CGRectMake(0, 0, 0, 0)];
+//  }
   return reusableview;
 }
 
