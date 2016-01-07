@@ -409,12 +409,16 @@ NSInteger const kHeightForHeader = 44;
   
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
-  [datePicker setMaximumDate:[NSDate date]];
-  NSString *str = kDOBFormat;
-  NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-  [formatter setDateFormat:kDefaultDateFormat];
-  NSDate *date = [formatter dateFromString:str];
-  [datePicker setMinimumDate:date];
+  
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDate *currentDate = [NSDate date];
+  NSDateComponents *comps = [[NSDateComponents alloc] init];
+  [comps setYear:-150];
+  NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+  [comps setYear:-13];
+  NSDate *maxDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+  datePicker.minimumDate = minDate;
+  datePicker.maximumDate = maxDate;
   
   NSDate *defualtDate;
   if(dobTimeStamp) {
