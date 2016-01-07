@@ -955,14 +955,14 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LCTagCauseCollectionCell" id="Wqx-Wb-5fA" customClass="LCTagCauseCollectionCell">
-                                                <rect key="frame" x="0.0" y="31" width="100" height="135"/>
+                                                <rect key="frame" x="0.0" y="31" width="100" height="130"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="135"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="130"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bio-xD-0hC">
-                                                            <rect key="frame" x="8" y="100" width="84" height="35"/>
+                                                            <rect key="frame" x="8" y="100" width="84" height="30"/>
                                                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="12"/>
                                                             <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -999,7 +999,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="trailing" secondItem="bio-xD-0hC" secondAttribute="trailing" constant="8" id="GBZ-pV-9ss"/>
                                                     <constraint firstItem="bio-xD-0hC" firstAttribute="leading" secondItem="Wqx-Wb-5fA" secondAttribute="leading" constant="8" id="Lvc-nj-Dhl"/>
@@ -1009,7 +1009,7 @@
                                                     <constraint firstItem="Re7-t9-bEk" firstAttribute="leading" secondItem="Wqx-Wb-5fA" secondAttribute="leading" id="cF1-kz-S9k"/>
                                                     <constraint firstItem="bio-xD-0hC" firstAttribute="top" secondItem="Re7-t9-bEk" secondAttribute="bottom" id="cfC-XF-J1S"/>
                                                 </constraints>
-                                                <size key="customSize" width="100" height="135"/>
+                                                <size key="customSize" width="100" height="130"/>
                                                 <connections>
                                                     <outlet property="causeImageView" destination="jwW-HD-dvn" id="oxv-NB-hnN"/>
                                                     <outlet property="causeLabel" destination="bio-xD-0hC" id="0uh-Ao-ycn"/>
@@ -1040,7 +1040,7 @@
                                             </connections>
                                         </collectionReusableView>
                                         <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FooterView" id="gQg-mT-9my">
-                                            <rect key="frame" x="0.0" y="166" width="359" height="18"/>
+                                            <rect key="frame" x="0.0" y="161" width="359" height="18"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </collectionReusableView>
                                         <connections>
