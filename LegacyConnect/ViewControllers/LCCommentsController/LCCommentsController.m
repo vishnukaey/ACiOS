@@ -212,17 +212,17 @@ static CGFloat kCommentFieldHeight = 45.0f;
 {
   if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIStoryboard*  interestsSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *causeVC = [interestsSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:causeVC animated:YES];
   }
   else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:profileVC animated:YES];
   }
 }
 

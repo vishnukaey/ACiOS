@@ -118,12 +118,12 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
   [searchResultsArray removeAllObjects];
-  if([searchText length] != 0) {
-    [self searchTableList:searchBar.text];
+  if([searchText length] == 0) {
+    [searchResultsArray addObjectsFromArray:friendsArray];
   }
   else
   {
-    [searchResultsArray addObjectsFromArray:friendsArray];
+    [self searchTableList:searchBar.text];
   }
   [friendsTableView reloadData];
 }

@@ -99,15 +99,10 @@ static CGFloat kNumberOfSection = 2;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   NSInteger count;
-  switch (section)
-  {
-    case kIndexSectionAccount:
-      count =  self.accountDataSource.count;
-      break;
-      
-    default:
-      count = 1;
-      break;
+  if (section == kIndexSectionAccount) {
+    count =  self.accountDataSource.count;
+  } else  {
+    count = 1;
   }
   return count;
 }
@@ -154,17 +149,11 @@ static CGFloat kNumberOfSection = 2;
   }
   
   UILabel *sectionLabel = (UILabel *)[headerView viewWithTag:100];
-  switch (section)
-  {
-    case kIndexSectionAccount:
-      sectionLabel.text = kAccountTitle;
-      break;
-      
-    default:
-      sectionLabel.text = kEmptyStringValue;
-      break;
+  if (section == kIndexSectionAccount) {
+    sectionLabel.text = kAccountTitle;
+  } else {
+    sectionLabel.text = kEmptyStringValue;
   }
-  
   return  headerView ;
 }
 

@@ -55,10 +55,10 @@
 - (void)showAllClicked :(UIButton *)sender
 {
   LCTheme *theme = [themesArray objectAtIndex:sender.tag];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-  LCOnboardInterestsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardInterestsVC"];
-  vc.theme = theme;
-  [self.navigationController pushViewController:vc animated:YES];;
+  UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCOnboardInterestsVC *interestVC = [signupSB instantiateViewControllerWithIdentifier:@"LCOnboardInterestsVC"];
+  interestVC.theme = theme;
+  [self.navigationController pushViewController:interestVC animated:YES];;
 }
 
 #pragma mark - TableView delegates

@@ -70,10 +70,10 @@ NSInteger const kNumberOfRowsInSection = 1;
   NSInteger section = sender.tag;
   LCInterest *interest = self.interestArray[section];
   
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-  LCOnboardCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
-  vc.interest = interest;
-  [self.navigationController pushViewController:vc animated:YES];;
+  UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCOnboardCausesVC *causeVC = [signupSB instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
+  causeVC.interest = interest;
+  [self.navigationController pushViewController:causeVC animated:YES];;
 }
 
 #pragma mark - TableView delegates

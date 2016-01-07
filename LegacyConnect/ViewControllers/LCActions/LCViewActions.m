@@ -333,10 +333,10 @@ static CGFloat kActionSectionHeight = 30;
 
 - (void)gotoMembersScreen
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-  LCEventMembersViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCEventMembersViewController"];
-  vc.event = self.eventObject;
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+  LCEventMembersViewController *membersVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCEventMembersViewController"];
+  membersVC.event = self.eventObject;
+  [self.navigationController pushViewController:membersVC animated:YES];
 }
 
 
@@ -394,16 +394,12 @@ static CGFloat kActionSectionHeight = 30;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+  
   NSString * headerText;
-  switch (section)
-  {
-    case 0:
-      headerText = NSLocalizedString(@"details_caps", nil);
-      break;
-      
-    default:
-      headerText = NSLocalizedString(@"comments_caps", nil);
-      break;
+  if (section == 0) {
+    headerText = NSLocalizedString(@"details_caps", nil);
+  } else {
+    headerText = NSLocalizedString(@"comments_caps", nil);
   }
   return [self getHeaderViewWithHeaderTitle:headerText];
 }
@@ -412,19 +408,12 @@ static CGFloat kActionSectionHeight = 30;
 {
   if (indexPath.section == 0)
   {
-    switch (indexPath.row)
-    {
-      case 0:
-        return [self getActionsDetailsCell];
-        break;
-        
-      case 1:
-        return [self getActionsMembersCountCell];
-        break;
-        
-      default:
-        return [self getActionsWebsiteCell];
-        break;
+    if (indexPath.row == 0) {
+      return [self getActionsDetailsCell];
+    } else if (indexPath.row == 1) {
+      return [self getActionsMembersCountCell];
+    } else {
+      return [self getActionsWebsiteCell];
     }
   }
   
@@ -502,18 +491,11 @@ static CGFloat kActionSectionHeight = 30;
 {
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
   if (indexPath.section == 0) {
-    switch (indexPath.row) {
-        
-      case 1:
-        [self gotoMembersScreen];
-        break;
-
-      case 2:
-        [self websiteLinkAction];
-        break;
-        
-      default:
-        break;
+    
+    if (indexPath.row == 1) {
+      [self gotoMembersScreen];
+    } else if (indexPath.row == 2) {
+      [self websiteLinkAction];
     }
   }
 }

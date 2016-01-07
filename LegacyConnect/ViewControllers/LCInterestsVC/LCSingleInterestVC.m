@@ -95,9 +95,9 @@
 - (void)causesClicked :(UIButton *)sender
 {
   NSLog(@"cause clicked0-->>>");
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+  LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+  [self.navigationController pushViewController:causeVC animated:YES];
 }
 
 #pragma mark - TableView delegates
