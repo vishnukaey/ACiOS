@@ -16,7 +16,7 @@
 #define DEMO_SERVER 3
 
 /* Set server to be used */
-#define CURRENT_SERVER DEV_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */

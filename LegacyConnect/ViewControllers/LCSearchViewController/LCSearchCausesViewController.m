@@ -68,9 +68,10 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   LCCOLLECTIONVIEW_cellForItemAtIndexPath
-  static NSString *identifier = @"causesCollectionViewCell";
+  static NSString *identifier = @"causesCell";
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
   cell.cause = self.results[indexPath.item];
+  cell.selectionButton.hidden = true;
   return cell;
 }
 
@@ -89,6 +90,14 @@
    [self.navigationController pushViewController:vc animated:YES];
    }
    */
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  return CGSizeMake(size, 140);
 }
 
 @end

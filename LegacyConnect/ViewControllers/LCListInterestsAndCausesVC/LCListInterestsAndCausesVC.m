@@ -79,6 +79,9 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
   interestsSearchArray = [[NSMutableArray alloc] init];
   causesSearchArray = [[NSMutableArray alloc] init];
   
+  [causesCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"causeCellId"];
+
+  
   [self addTabMenu];
   if (searchTimer)
   {
@@ -267,16 +270,39 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 #pragma mark - collectionview delegates
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+  if ([causesSearchArray count] == 0) {
+    return 1;
+  }
   return [causesSearchArray count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+  if ([causesSearchArray count] == 0) {
+    return 1;
+  }
+
   LCInterest *interest_ = [causesSearchArray objectAtIndex:section];
   return [interest_.causes count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+  
+  if ([causesSearchArray count] == 0) {
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"causeCellId" forIndexPath:indexPath];
+    UILabel * textLbl = [[UILabel alloc] initWithFrame:cell.frame];
+    [textLbl setTextAlignment:NSTextAlignmentCenter];
+    [textLbl setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
+    [textLbl setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:0.7]];
+    textLbl.numberOfLines = 2;
+
+    textLbl.text = @"Search and add causes from the menu.";
+    [cell addSubview:textLbl];
+    return cell;
+  }
+
+  
+  
   static NSString *identifier = @"LCTagCauseCollectionCell";
   
   LCTagCauseCollectionCell *cell = (LCTagCauseCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
@@ -297,6 +323,10 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  if ([causesSearchArray count] == 0) {
+    return CGSizeMake(collectionView.frame.size.width, 20);
+  }
+  
   float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
   return CGSizeMake(size, size + 30);  // will be w120xh100 or w190x100
   // if the width is higher, only one image will be shown in a line
@@ -338,18 +368,29 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 //adding section header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
+//  if (causesSearchArray.count == 0) {
+//    UIView *emptyHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+//    return emptyHead;
+//  }
+  
   UICollectionReusableView *reusableview = nil;
   
   if (kind == UICollectionElementKindSectionHeader) {
     LCTagCauseCollectionSectionHeader *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LCTagCauseCollectionSectionHeader" forIndexPath:indexPath];
-    LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
-    headerView.headerLabel.text = interest_.name;
+    if (causesSearchArray.count) {
+      LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
+      headerView.headerLabel.text = interest_.name;
+    }
+    
     reusableview = headerView;
   }
   if (kind == UICollectionElementKindSectionFooter) {
     UICollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"FooterView" forIndexPath:indexPath];
     
     reusableview = footerview;
+  }
+  if (causesSearchArray.count) {
+    [reusableview setFrame:CGRectMake(0, 0, 0, 0)];
   }
   return reusableview;
 }
