@@ -17,7 +17,8 @@
 @interface LCOnboardThemesVC ()
 {
   IBOutlet UIButton *nextButton;
-  IBOutlet UILabel *infoLabel1, *inforLabel2;;
+  IBOutlet UILabel *infoLabel1, *inforLabel2, *nextStepLabel;
+  IBOutlet NSLayoutConstraint *photoLabelHeight;
   NSMutableArray *themesArray;
 }
 @end
@@ -51,6 +52,12 @@
   [paragraphStyle_1 setLineSpacing:5];
   [attributedString_1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle_1 range:NSMakeRange(0, [infoText_1 length])];
   infoLabel1.attributedText = attributedString_1 ;
+  
+  BOOL fromFacebook = YES;
+  if (fromFacebook) {
+    nextStepLabel.text = @"Now on to the next step.";
+    photoLabelHeight.constant = 20;
+  }
 }
 
 

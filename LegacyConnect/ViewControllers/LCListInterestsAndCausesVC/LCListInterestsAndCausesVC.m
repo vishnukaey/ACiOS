@@ -13,6 +13,7 @@
 @interface LCListInterestsAndCausesVC ()
 {
   IBOutlet UIView *tabMenuContainer;
+  IBOutlet UISearchBar *searchBar;
   IBOutlet UICollectionView *causesCollectionView;
   IBOutlet UITableView *interestsTableView;
   
@@ -83,6 +84,7 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 
   
   [self addTabMenu];
+  [self setSearchBarProperties];
   if (searchTimer)
   {
     if ([searchTimer isValid]) { [searchTimer invalidate]; }
@@ -105,6 +107,24 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 }
 
 #pragma mark - setup functions
+- (void)setSearchBarProperties
+{
+  for (UIView *subview in searchBar.subviews)
+  {
+    for (UIView *subSubview in subview.subviews)
+    {
+      if ([subSubview conformsToProtocol:@protocol(UITextInputTraits)])
+      {
+        UITextField *textField = (UITextField *)subSubview;
+        [textField setEnablesReturnKeyAutomatically:NO];
+        //        [textField setKeyboardAppearance: UIKeyboardAppearanceAlert];
+        textField.returnKeyType = UIReturnKeyDone;
+        break;
+      }
+    }
+  }
+}
+
 - (void)addTabMenu
 {
   
@@ -191,6 +211,12 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
   }
   
     searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:searchText repeats:NO];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchbar
+{
+  [searchbar resignFirstResponder];
+  // Do the search...
 }
 
 #pragma mark - TableView delegates

@@ -2495,6 +2495,8 @@ Now on to the next step.</string>
                         <outlet property="infoLabel1" destination="SiV-mb-hz3" id="M3I-NY-Ibb"/>
                         <outlet property="inforLabel2" destination="mhS-00-wsq" id="jcd-Gp-bQ5"/>
                         <outlet property="nextButton" destination="yPQ-dm-GL1" id="kAS-30-1Ea"/>
+                        <outlet property="nextStepLabel" destination="v1l-Yb-haM" id="IgF-dY-39r"/>
+                        <outlet property="photoLabelHeight" destination="tv6-6x-WPq" id="DxV-yh-KYp"/>
                         <outlet property="themesTable" destination="lB5-Fa-EER" id="Bwq-Qm-a7u"/>
                         <segue destination="Waq-9X-zJm" kind="push" identifier="causeSummary" id="kxs-vz-56G"/>
                         <segue destination="eud-A4-nhB" kind="push" identifier="searchCauses" id="gEY-p5-HQ0"/>

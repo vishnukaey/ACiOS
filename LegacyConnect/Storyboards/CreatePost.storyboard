@@ -830,13 +830,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" text="" placeholder="Search Interests or Causes" translatesAutoresizingMaskIntoConstraints="NO" id="Dw9-RO-alz">
-                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="C2E-jM-Jem" id="CyN-hu-gil"/>
-                                </connections>
-                            </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nif-MQ-ztM" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                 <subviews>
@@ -1069,6 +1062,13 @@
                                     <constraint firstItem="zq1-Re-mZm" firstAttribute="leading" secondItem="RhF-Nu-QEE" secondAttribute="leading" constant="8" id="wjZ-CW-ruf"/>
                                 </constraints>
                             </view>
+                            <searchBar contentMode="redraw" text="" placeholder="Search Interests or Causes" translatesAutoresizingMaskIntoConstraints="NO" id="Dw9-RO-alz">
+                                <rect key="frame" x="0.0" y="64" width="375" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="C2E-jM-Jem" id="CyN-hu-gil"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1096,6 +1096,7 @@
                         <outlet property="causesCollectionView" destination="zq1-Re-mZm" id="wOR-aI-SGP"/>
                         <outlet property="interestsButton" destination="X2n-eM-uQx" id="Ck2-ui-SWc"/>
                         <outlet property="interestsTableView" destination="YhI-gu-R5y" id="6ah-DZ-YXU"/>
+                        <outlet property="searchBar" destination="Dw9-RO-alz" id="thu-oE-hQg"/>
                         <outlet property="tabMenuContainer" destination="xTA-63-BqU" id="7gO-af-i2c"/>
                     </connections>
                 </viewController>
