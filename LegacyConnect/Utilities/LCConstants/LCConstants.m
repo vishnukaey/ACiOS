@@ -16,7 +16,8 @@
 #define DEMO_SERVER 3
 
 /* Set server to be used */
-#define CURRENT_SERVER QA_SERVER
+#define CURRENT_SERVER DEMO_SERVER
+
 
 #if CURRENT_SERVER == QA_SERVER
 /* QA url */
@@ -50,8 +51,10 @@ NSString *const kFBURLScheme = @"fb781451981972910";
 
 NSString *const kLCiTunesLink = @"https://itunes.apple.com/in/app/instagram/id389801252?mt=8";
 
-NSString *const kTWConsumerKey = @"NOuT5mmDQ8Z3qjXwtnbFQstGS";
-NSString *const kTWConsumerSecretKey = @"NuCOzjrAlUyMHDuTgTPMmCLyMo24nG9qCVIHlJ8loqLVQhjVWy";
+NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
+NSString *const kTWConsumerSecretKey = @"dFA57jARhKy3vhD7cV0pPToCO7gKBN3W7Kly1kqEZUFooEbCbT";
+
+NSString *const kLegacyConnectUrl = @"www.LegacyConnect.com/";
 
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";

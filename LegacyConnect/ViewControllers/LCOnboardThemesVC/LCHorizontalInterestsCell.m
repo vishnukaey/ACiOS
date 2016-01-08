@@ -25,6 +25,23 @@
   [self.interestsCollection reloadData];
 }
 
+//- (void)reloadCollectionForIndex :(NSIndexPath *)index
+//{
+//  self.interestsArray = [LCOnboardingHelper sortInterests:self.interestsArray forTheme:self.theme];
+//  
+//  [self.interestsCollection performBatchUpdates:^{
+//    NSInteger newIndex = [self.interestsArray indexOfObject:cause];
+//    NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
+//    NSInteger oldIndex = [causesArrayCopy indexOfObject:cause];
+//    NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
+//    [self.collectionView moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+//  } completion:^(BOOL finished) {
+//    [self.collectionView reloadData];
+//  }];
+//
+//}
+
+
 #pragma mark - collectionview delegates
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -49,15 +66,15 @@
 
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
   return CGSizeMake(size, size);  // will be w120xh100 or w190x100
   // if the width is higher, only one image will be shown in a line
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-  return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
-}
+//- (UIEdgeInsets)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//  return UIEdgeInsetsMake(0, 0, 0, 0); // top, left, bottom, right
+//}
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -66,72 +83,34 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  LCInterest *currentInterest = self.interestsArray[indexPath.row];
   LCHorizontalInterestCollectionCell *cell = (LCHorizontalInterestCollectionCell *)[collectionView cellForItemAtIndexPath:indexPath];
-  if ([LCOnboardingHelper isInterestSelected:self.interestsArray[indexPath.row]]) {
-    [LCOnboardingHelper removeInterest:self.interestsArray[indexPath.row]];
+  if ([LCOnboardingHelper isInterestSelected:currentInterest]) {
+    [LCOnboardingHelper removeInterest:currentInterest];
     [cell setInterestSelected:NO];
   }
   else
   {
-    [LCOnboardingHelper addCause:nil andInterest:self.interestsArray[indexPath.row]];
+    [LCOnboardingHelper addCause:nil andInterest:currentInterest];
     [cell setInterestSelected:YES];
   }
+    [self.nextButton setEnabled:![LCOnboardingHelper noInterestSelected]];
+//
+//  NSArray *interstsCopy = [self.interestsArray copy];
+//  self.interestsArray = [LCOnboardingHelper sortInterests:self.interestsArray forTheme:self.theme];
+//  
+//  [self.interestsCollection performBatchUpdates:^{
+//    NSInteger newIndex = [self.interestsArray indexOfObject:currentInterest];
+//    NSIndexPath *fromIndexPath = [NSIndexPath indexPathForItem:newIndex inSection:indexPath.section];
+//    NSInteger oldIndex = [interstsCopy indexOfObject:currentInterest];
+//    NSIndexPath *toIndexPath = [NSIndexPath indexPathForItem:oldIndex inSection:indexPath.section];
+//    [self.interestsCollection moveItemAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
+//  } completion:^(BOOL finished) {
+//    [self.interestsCollection reloadData];
+//  }];
+
 }
-//adding section header
 
 
-
-
-
-
-//- (void)loadInterestTable
-//{
-//  for (UIView *sub in self.horizontalTable.subviews) {
-//    [sub removeFromSuperview];
-//  }
-//  CGFloat spacing = 8;
-//  float iconSize  = (self.horizontalTable.frame.size.height - 2*spacing);
-////  self.horizontalTable.layer.borderColor = [UIColor redColor].CGColor;
-////  self.horizontalTable.layer.borderWidth = 3;
-//
-//  for (int i = 0; i<self.interestsArray.count; i++) {
-//    LCInterest *interest = self.interestsArray[i];
-//    UIImageView *interestCell = [[UIImageView alloc] init];
-//    [interestCell setBackgroundColor:GRAY_BACK];
-//    interestCell.clipsToBounds = YES;
-//    interestCell.layer.cornerRadius = 5;
-//    [interestCell sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
-//    interestCell.frame = CGRectMake((i+1)*spacing + i*iconSize, spacing, iconSize, iconSize);
-//    [self.horizontalTable addSubview:interestCell];
-//
-//    LCInterestSelectionButton *selectionButton = [[LCInterestSelectionButton alloc] initWithFrame:CGRectMake(0, 0, interestCell.frame.size.width, interestCell.frame.size.height)];
-//    [interestCell addSubview:selectionButton];
-//    float checkMarkSize = 25, checkMarkBoarder = 8;
-//    UIImageView *checkMark = [[UIImageView alloc] initWithFrame:CGRectMake(interestCell.frame.size.width - checkMarkSize- checkMarkBoarder, checkMarkBoarder, checkMarkSize, checkMarkSize)];
-//    [interestCell addSubview:checkMark];
-//    selectionButton.checkMark = checkMark;
-//    checkMark
-//
-//    UILabel *interestName = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, interestCell.frame.size.width, interestCell.frame.size.height)];
-//    [interestCell addSubview:interestName];
-//    interestName.text = interest.name;
-//    interestName.numberOfLines = 0;
-//    interestName.textAlignment = NSTextAlignmentCenter;
-//    [interestName setTextColor:[UIColor colorWithRed:247.0f/255.0 green:247.0f/255.0 blue:247.0f/255.0 alpha:1]];
-//    [interestName setFont:[UIFont fontWithName:@"Gotham-Medium" size:14]];
-//  }
-//}
-
-//- (BOOL)interestisSelected :(LCInterest *)interest
-//{
-//  BOOL isSelected = NO;
-//  for (LCInterest *intrst in [self.selectedItems objectAtIndex:1]) {
-//    if ([interest.interestID isEqualToString:intrst.interestID]) {
-//      isSelected = YES;
-//      break;
-//    }
-//  }
-//  return isSelected;
-//}
 
 @end

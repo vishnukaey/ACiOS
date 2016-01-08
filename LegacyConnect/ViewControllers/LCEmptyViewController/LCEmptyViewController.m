@@ -317,14 +317,10 @@ static NSString *kTitle = @"MY FEED";
   }
   else if (index == 2)//settings
   {
-//    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
-//    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
-//    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    UIStoryboard*  settingsSB = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
+    LCSettingsViewController *settingsVC = [settingsSB instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:settingsVC]];
     
-    
-    UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-    LCOnboardFinalSelectionVC *finalVC = [signupSB instantiateViewControllerWithIdentifier:@"LCOnboardFinalSelectionVC"];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:finalVC]];
   }
   else if (index == 3)//profile
   {

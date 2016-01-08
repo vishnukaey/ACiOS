@@ -46,6 +46,7 @@
     [locationsTable.selectedIDs addObject:alreadyTaggedLocation];
   }
   [searchTextField setReturnKeyType:UIReturnKeyDone];
+  searchTextField.locdelegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,12 +126,26 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+  if (locationsArray.count == 0)
+  {
+    return 1;
+  }
   return locationsArray.count;
 }
 
 - (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  if (locationsArray.count == 0)
+  {
+    NSString * message = NSLocalizedString(@"no_results_found", nil);
+    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
+    tableView.backgroundColor = [UIColor whiteColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.allowsSelection = NO;
+    return cell;
+  }
+  
   static NSString *MyIdentifier = @"LCLocationCell";
   LCLocationCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)

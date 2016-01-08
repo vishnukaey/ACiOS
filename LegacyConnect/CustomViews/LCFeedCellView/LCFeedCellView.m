@@ -178,6 +178,15 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [postDescriptionString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:13],
                                          } range:NSMakeRange(0, postDescriptionString.length)];
+  
+  NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+  [style setLineSpacing:3];
+  [postDescriptionString addAttribute:NSParagraphStyleAttributeName
+                     value:style
+                     range:NSMakeRange(0, postDescriptionString.length)];
+  [postDescription sizeToFit];
+  
+  
   postDescription.tagsArray  = postDescriptionTagsWithRanges;
   [postDescription setAttributedText:postDescriptionString];
   __weak typeof(self) weakSelf = self;

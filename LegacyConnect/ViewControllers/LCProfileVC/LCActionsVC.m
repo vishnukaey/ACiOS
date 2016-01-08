@@ -21,13 +21,13 @@
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [LCProfileAPIManager getUserEventsForUserId:self.userID andLastEventId:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
-    [MBProgressHUD hideHUDForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
   }];

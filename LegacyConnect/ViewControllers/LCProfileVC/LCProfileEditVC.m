@@ -252,8 +252,17 @@ NSInteger const kHeightForHeader = 44;
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     if (avatarPicState == IMAGE_UNTOUCHED) {
-    
-      NSString *avatarUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
+      
+      NSURL *avatarUrl = [NSURL URLWithString:userDetail.avatarURL];
+      
+      NSString *avatarUrlString;
+      if ([avatarUrl.host containsString:@"facebook"]) {
+        avatarUrlString = [NSString stringWithFormat:@"%@?width=800",userDetail.avatarURL];
+      }
+      else {
+        avatarUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
+      }
+      
       SDWebImageManager *manager = [SDWebImageManager sharedManager];
       [MBProgressHUD showHUDAddedTo:self.view animated:YES];
       [manager downloadImageWithURL:[NSURL URLWithString:avatarUrlString]
@@ -400,12 +409,16 @@ NSInteger const kHeightForHeader = 44;
   
   datePicker = [[UIDatePicker alloc] init];
   datePicker.datePickerMode = UIDatePickerModeDate;
-  [datePicker setMaximumDate:[NSDate date]];
-  NSString *str = kDOBFormat;
-  NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-  [formatter setDateFormat:kDefaultDateFormat];
-  NSDate *date = [formatter dateFromString:str];
-  [datePicker setMinimumDate:date];
+  
+  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+  NSDate *currentDate = [NSDate date];
+  NSDateComponents *comps = [[NSDateComponents alloc] init];
+  [comps setYear:-150];
+  NSDate *minDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+  [comps setYear:-13];
+  NSDate *maxDate = [gregorian dateByAddingComponents:comps toDate:currentDate  options:0];
+  datePicker.minimumDate = minDate;
+  datePicker.maximumDate = maxDate;
   
   NSDate *defualtDate;
   if(dobTimeStamp) {

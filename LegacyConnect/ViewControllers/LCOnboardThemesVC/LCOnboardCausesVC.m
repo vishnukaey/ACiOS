@@ -10,9 +10,6 @@
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCOnboardingHelper.h"
 
-@interface LCOnboardCausesVC ()
-
-@end
 
 @implementation LCOnboardCausesVC
 
@@ -23,7 +20,6 @@
   self.navBarTitle.text = [self.interest.name uppercaseString];
   self.collectionView.allowsMultipleSelection = YES;
   
-  //self.collectionViewCellSize  = CGSizeMake(105, 135);
   [self startFetchingResults];
 }
 
@@ -31,6 +27,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Private Methods
 
 - (void)startFetchingResults
 {
@@ -65,7 +63,7 @@
 }
 
 
-#pragma CollectionView Delegates
+#pragma mark - CollectionView Delegates
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
   
@@ -97,9 +95,12 @@
   [cell setCellSelected:NO];
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  return CGSizeMake(105, 140);
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  return CGSizeMake(size, 140);
 }
 
 @end

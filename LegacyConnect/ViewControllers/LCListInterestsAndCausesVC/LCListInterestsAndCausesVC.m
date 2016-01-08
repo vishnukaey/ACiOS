@@ -13,6 +13,7 @@
 @interface LCListInterestsAndCausesVC ()
 {
   IBOutlet UIView *tabMenuContainer;
+  IBOutlet UISearchBar *searchBar;
   IBOutlet UICollectionView *causesCollectionView;
   IBOutlet UITableView *interestsTableView;
   
@@ -20,16 +21,21 @@
   
   NSArray *interestsArray, *causesArray;
   NSMutableArray *interestsSearchArray, *causesSearchArray;
+  
+  NSTimer *searchTimer;
 }
 @end
 
-static NSString *kUnCheckedImageName = @"tagFirend_unselected";
+static NSString *kUnCheckedImageName_cause = @"contact_plus";
 static NSString *kCheckedImageName = @"contact_tick";
+static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 
 #pragma mark - LCTagCauseCollectionCell class
 @interface LCTagCauseCollectionCell : UICollectionViewCell
 @property(nonatomic, strong)IBOutlet UIImageView *causeImageView;
 @property(nonatomic, strong)IBOutlet UIButton *checkButton;
+@property(nonatomic, strong)IBOutlet UILabel *causeLabel;
+@property(nonatomic, strong)IBOutlet UIView *imageContainer;
 @property(nonatomic, strong) LCCause *cause;
 @end
 
@@ -45,8 +51,12 @@ static NSString *kCheckedImageName = @"contact_tick";
   CGContextFillRect(context, rect);
   UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
-  
   [_causeImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image];//no placeholder needed. background color is placeholder itself
+  [_causeLabel setText:cause.name];
+  
+  _imageContainer.layer.cornerRadius = 6;
+  _imageContainer.layer.borderColor = [UIColor lightGrayColor].CGColor;
+  _imageContainer.layer.borderWidth = 1;
 }
 @end
 
@@ -70,8 +80,18 @@ static NSString *kCheckedImageName = @"contact_tick";
   interestsSearchArray = [[NSMutableArray alloc] init];
   causesSearchArray = [[NSMutableArray alloc] init];
   
+  [causesCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"causeCellId"];
+
+  
   [self addTabMenu];
-  [self loadInterestsAndCausesWithSearchKey:nil];
+  [self setSearchBarProperties];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
+  
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:nil repeats:NO];
   
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   interestsTableView.tableFooterView = zeroRectView;
@@ -87,6 +107,24 @@ static NSString *kCheckedImageName = @"contact_tick";
 }
 
 #pragma mark - setup functions
+- (void)setSearchBarProperties
+{
+  for (UIView *subview in searchBar.subviews)
+  {
+    for (UIView *subSubview in subview.subviews)
+    {
+      if ([subSubview conformsToProtocol:@protocol(UITextInputTraits)])
+      {
+        UITextField *textField = (UITextField *)subSubview;
+        [textField setEnablesReturnKeyAutomatically:NO];
+        //        [textField setKeyboardAppearance: UIKeyboardAppearanceAlert];
+        textField.returnKeyType = UIReturnKeyDone;
+        break;
+      }
+    }
+  }
+}
+
 - (void)addTabMenu
 {
   
@@ -100,12 +138,12 @@ static NSString *kCheckedImageName = @"contact_tick";
   tabmenu.views = [[NSArray alloc] initWithObjects:interestsTableView,  causesCollectionView, nil];
 }
 
-- (void)loadInterestsAndCausesWithSearchKey :(NSString *)searchKey
+- (void)loadInterestsAndCausesWithSearchKey:(NSTimer*)sender
 {
-  [interestsSearchArray removeAllObjects];
-  [causesSearchArray removeAllObjects];
   [MBProgressHUD showHUDAddedTo:interestsTableView.superview animated:YES];
-  [LCSearchAPIManager getUserInterestsAndCausesWithSearchKey:searchKey withSuccess:^(NSArray *responses) {
+  [LCSearchAPIManager getUserInterestsAndCausesWithSearchKey:sender.userInfo withSuccess:^(NSArray *responses) {
+    [interestsSearchArray removeAllObjects];
+    [causesSearchArray removeAllObjects];
     interestsArray = responses;
     [interestsSearchArray addObjectsFromArray:responses];
     [interestsTableView reloadData];
@@ -165,7 +203,20 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  [self loadInterestsAndCausesWithSearchKey:searchText];
+  searchText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
+  if (searchTimer)
+  {
+    if ([searchTimer isValid]) { [searchTimer invalidate]; }
+    searchTimer = nil;
+  }
+  
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:searchText repeats:NO];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchbar
+{
+  [searchbar resignFirstResponder];
+  // Do the search...
 }
 
 #pragma mark - TableView delegates
@@ -194,32 +245,32 @@ static NSString *kCheckedImageName = @"contact_tick";
     tableView.allowsSelection = NO;
     return cell;
   }
-  static NSString *MyIdentifier = @"LCInterestsCell";
-  LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
-  {
-    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
-  }
-  
-  LCInterest *interstObj = [interestsSearchArray objectAtIndex:indexPath.row];
-  [cell setData:interstObj];
-  tableView.backgroundColor = [tableView.superview backgroundColor];
-  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-  tableView.allowsSelection = YES;
-  
-  cell.checkButton.hidden = NO;
-  cell.checkButton.userInteractionEnabled = NO;
-  if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
-  {
-    [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
-  }
-  else
-  {
-    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
-  }
-  
-  return cell;
+    static NSString *MyIdentifier = @"LCInterestsCell";
+    LCInterestsCellView *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
+      cell = [topLevelObjects objectAtIndex:0];
+    }
+    
+    LCInterest *interstObj = [interestsSearchArray objectAtIndex:indexPath.row];
+    [cell setData:interstObj];
+    tableView.backgroundColor = [tableView.superview backgroundColor];
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tableView.allowsSelection = YES;
+    
+    cell.checkButton.hidden = NO;
+    cell.checkButton.userInteractionEnabled = NO;
+    if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
+    {
+      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+    }
+    else
+    {
+      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName_interest] forState:UIControlStateNormal];
+    }
+    
+    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -242,16 +293,39 @@ static NSString *kCheckedImageName = @"contact_tick";
 #pragma mark - collectionview delegates
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+  if ([causesSearchArray count] == 0) {
+    return 1;
+  }
   return [causesSearchArray count];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+  if ([causesSearchArray count] == 0) {
+    return 1;
+  }
+
   LCInterest *interest_ = [causesSearchArray objectAtIndex:section];
   return [interest_.causes count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+  
+  if ([causesSearchArray count] == 0) {
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"causeCellId" forIndexPath:indexPath];
+    UILabel * textLbl = [[UILabel alloc] initWithFrame:cell.frame];
+    [textLbl setTextAlignment:NSTextAlignmentCenter];
+    [textLbl setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
+    [textLbl setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:0.6]];
+    textLbl.numberOfLines = 2;
+
+    textLbl.text = @"Search and add causes from the menu.";
+    [cell addSubview:textLbl];
+    return cell;
+  }
+
+  
+  
   static NSString *identifier = @"LCTagCauseCollectionCell";
   
   LCTagCauseCollectionCell *cell = (LCTagCauseCollectionCell *)[collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
@@ -265,15 +339,19 @@ static NSString *kCheckedImageName = @"contact_tick";
   }
   else
   {
-    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName] forState:UIControlStateNormal];
+    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName_cause] forState:UIControlStateNormal];
   }
   return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  if ([causesSearchArray count] == 0) {
+    return CGSizeMake(collectionView.frame.size.width, 20);
+  }
+  
   float size = ([[UIScreen mainScreen] bounds].size.width - 8*4)/3;
-  return CGSizeMake(size, size);  // will be w120xh100 or w190x100
+  return CGSizeMake(size, size + 30);  // will be w120xh100 or w190x100
   // if the width is higher, only one image will be shown in a line
 }
 
@@ -313,12 +391,24 @@ static NSString *kCheckedImageName = @"contact_tick";
 //adding section header
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
+//  if (causesSearchArray.count == 0) {
+//    UIView *emptyHead = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+//    return emptyHead;
+//  }
+  
   UICollectionReusableView *reusableview = nil;
   
   if (kind == UICollectionElementKindSectionHeader) {
     LCTagCauseCollectionSectionHeader *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"LCTagCauseCollectionSectionHeader" forIndexPath:indexPath];
-    LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
-    headerView.headerLabel.text = interest_.name;
+    if (causesSearchArray.count>0) {
+      LCInterest *interest_ = [causesSearchArray objectAtIndex:indexPath.section];
+      headerView.headerLabel.text = interest_.name;
+    }
+    else
+    {
+      headerView.headerLabel.text = @"";
+    }
+    
     reusableview = headerView;
   }
   if (kind == UICollectionElementKindSectionFooter) {
@@ -326,6 +416,9 @@ static NSString *kCheckedImageName = @"contact_tick";
     
     reusableview = footerview;
   }
+//  if (causesSearchArray.count>0) {
+//    [reusableview setFrame:CGRectMake(0, 0, 0, 0)];
+//  }
   return reusableview;
 }
 
