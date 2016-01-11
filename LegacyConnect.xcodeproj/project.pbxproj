@@ -17,7 +17,8 @@
 		0B05D7571BEB70D900FD5AE1 /* LCCommentsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B05D7561BEB70D900FD5AE1 /* LCCommentsController.m */; };
 		0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
-		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; };
+		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; settings = {ASSET_TAGS = (); }; };
+		0B26D1EC1C310BFD000B8E9A /* LCProfileImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B26D1EB1C310BFD000B8E9A /* LCProfileImageEditor.m */; settings = {ASSET_TAGS = (); }; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
 		0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2902761BB90F8800E80684 /* LCActionsCellView.m */; };
 		0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B2902781BB90FDF00E80684 /* LCActionsCellView.xib */; };
@@ -246,6 +247,8 @@
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B223C391BCFA6220022B8F6 /* LCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComment.h; sourceTree = "<group>"; };
 		0B223C3A1BCFA6220022B8F6 /* LCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCComment.m; sourceTree = "<group>"; };
+		0B26D1EA1C310BFD000B8E9A /* LCProfileImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileImageEditor.h; path = ViewControllers/LCProfileVC/LCProfileImageEditor.h; sourceTree = "<group>"; };
+		0B26D1EB1C310BFD000B8E9A /* LCProfileImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileImageEditor.m; path = ViewControllers/LCProfileVC/LCProfileImageEditor.m; sourceTree = "<group>"; };
 		0B288C711BA92660001A8E9D /* LCProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileEditVC.h; path = ViewControllers/LCProfileVC/LCProfileEditVC.h; sourceTree = "<group>"; };
 		0B288C721BA92660001A8E9D /* LCProfileEditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileEditVC.m; path = ViewControllers/LCProfileVC/LCProfileEditVC.m; sourceTree = "<group>"; };
 		0B2902751BB90F8800E80684 /* LCActionsCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCActionsCellView.h; path = CustomViews/LCActionsCellView/LCActionsCellView.h; sourceTree = "<group>"; };
@@ -1828,6 +1831,8 @@
 				0BEA5C8F1BEA1B0F00669C57 /* LCInterestsVC.m */,
 				0BEA5C911BEA1B3B00669C57 /* LCActionsVC.h */,
 				0BEA5C921BEA1B3B00669C57 /* LCActionsVC.m */,
+				0B26D1EA1C310BFD000B8E9A /* LCProfileImageEditor.h */,
+				0B26D1EB1C310BFD000B8E9A /* LCProfileImageEditor.m */,
 			);
 			name = LCProfileVC;
 			sourceTree = "<group>";
@@ -2170,6 +2175,7 @@
 				CE2E09CD1C0433DA00722A22 /* LCImpactsViewBC.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
+				0B26D1EC1C310BFD000B8E9A /* LCProfileImageEditor.m in Sources */,
 				966287221B565F2900C91196 /* (null) in Sources */,
 				CEE2BDDA1C104DA3000E56AB /* LCNavigationBar.m in Sources */,
 				CE2C87921C23CC6500EF45AE /* LCHorizontalInterestCollectionCell.m in Sources */,
