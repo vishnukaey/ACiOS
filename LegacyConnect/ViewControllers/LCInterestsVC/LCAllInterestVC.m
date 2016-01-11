@@ -110,8 +110,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-  LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+  UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+  LCSingleInterestVC *vc = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
   [self.navigationController pushViewController:vc animated:YES];
 }
 /*

@@ -21,14 +21,14 @@
      LCDLog(@"%@",response[kResponseMessage]);
      NSError *error = nil;
      LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
-     if(!error)
+     if(error)
      {
-       LCDLog(@"Successfully registered new user");
-       success(user);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
      }
      else
      {
-       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       LCDLog(@"Successfully registered new user");
+       success(user);
      }
    } andFailure:^(NSString *error){
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
@@ -86,14 +86,14 @@
    {
      NSError *error = nil;
      LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
-     if(!error)
+     if(error)
      {
-       LCDLog(@"Login success ! ");
-       success(user);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
      }
      else
      {
-       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       LCDLog(@"Login success ! ");
+       success(user);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

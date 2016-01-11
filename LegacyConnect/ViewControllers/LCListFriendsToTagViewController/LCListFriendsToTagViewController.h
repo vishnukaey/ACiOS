@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCMultipleSelectionTable.h"
+#import "JTTableViewController.h"
 
 @protocol LCListFriendsToTagViewControllerDelegate <NSObject>
 
@@ -15,17 +15,16 @@
 
 @end
 
-@interface LCListFriendsToTagViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
+@interface LCListFriendsToTagViewController : JTTableViewController<UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate>
 {
-  IBOutlet LCMultipleSelectionTable *friendsTableView;
-  NSArray *friendsArray;
-  NSMutableArray *searchResultsArray;
+  NSTimer *searchTimer;
 }
 
 @property(nonatomic, retain) id delegate;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *cancelButton;
 @property(nonatomic,retain) IBOutlet UIBarButtonItem *doneButton;
 @property(nonatomic,retain) IBOutlet UINavigationBar *navigationBar;
-@property(nonatomic,retain) IBOutlet UITableView *tableView;
 @property(nonatomic, retain) NSArray *alreadySelectedFriends;
+@property (nonatomic,retain) NSString *searchKey;
+@property (nonatomic,retain) NSMutableArray *selectedIDs;
 @end

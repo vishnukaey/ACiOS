@@ -19,14 +19,86 @@
 @implementation LCTabMenuView
 @synthesize menuButtons, views, highlightColor, normalColor;
 
+- (void)addConstraintForFirstButton:(UIButton*)button withIndex:(int)index menuButtons:(NSArray*)buttonsArray
+{
+  NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+  [self addConstraint:lead];
+  
+  UIButton *button_ = [buttonsArray objectAtIndex:index+1];
+  NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+  [self addConstraint:trail];
+  
+  NSLayoutConstraint *width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+  [self addConstraint:width];
+  
+  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+  [self addConstraint:top];
+  
+  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+  [self addConstraint:bottom];
+  //add the bottom bar under first button
+  bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
+  bottomBar.backgroundColor = highlightColor;
+  bottomBar.translatesAutoresizingMaskIntoConstraints = NO;
+  [self addSubview:bottomBar];
+  NSLayoutConstraint *botbar_bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:bottomBar attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+  [self addConstraint:botbar_bottom];
+  
+  botbarWidthConstraint =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:[self getTitleLengthForButton:button]];
+  [self addConstraint:botbarWidthConstraint];
+  
+  NSLayoutConstraint *botbar_height =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:3];
+  [self addConstraint:botbar_height];
+  
+  botbarXcenterConstraint = [NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+  [self addConstraint:botbarXcenterConstraint];
+}
+
+- (void)addConstraintsForLastbutton:(UIButton*)button withIndex:(int)index buttonsArray:(NSArray*)buttonsArray
+{
+  NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTrailingMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+  [self addConstraint:trail];
+  
+  UIButton *button_ = [buttonsArray objectAtIndex:index-1];
+  NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+  [self addConstraint:lead];
+  
+  NSLayoutConstraint *width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+  [self addConstraint:width];
+  
+  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+  [self addConstraint:top];
+  
+  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+  [self addConstraint:bottom];
+
+}
+
+- (void)addConstraintsForMiddleButton:(UIButton*)button withIndex:(int)index andMenuButtons:(NSArray*)buttonsArray
+{
+  UIButton *button_ = [buttonsArray objectAtIndex:index-1];
+  UIButton *_button = [buttonsArray objectAtIndex:index+1];
+  NSLayoutConstraint *_width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_button attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
+  [self addConstraint:_width];
+  
+  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+  [self addConstraint:top];
+  
+  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+  [self addConstraint:bottom];
+  NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
+  [self addConstraint:lead];
+  
+  NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_button attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
+  [self addConstraint:trail];
+
+}
 - (void)setMenuButtons:(NSArray *)menuButtons_
 {
-  
   //setting highlight color
   self.highlightColor = [LCUtilityManager getThemeRedColor];
   self.normalColor = [UIColor colorWithRed:40.0f/255.0 green:40.0f/255.0 blue:40.0f/255.0 alpha:1.0];
 
-  
   menuButtons = menuButtons_;
   if (highlightColor)
   {
@@ -36,83 +108,23 @@
   self.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
   for (int i = 0; i<menuButtons_.count; i++)
   {
-    if (normalColor)
+    if (normalColor && i!=0)
     {
-      if (i!=0) {
-        [[menuButtons_ objectAtIndex:i] setTitleColor:normalColor forState:UIControlStateNormal];
-      }
+      [[menuButtons_ objectAtIndex:i] setTitleColor:normalColor forState:UIControlStateNormal];
     }
     UIButton *button = [menuButtons_ objectAtIndex:i];
     if (i==0)
     {
-      NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-      [self addConstraint:lead];
-      
-      UIButton *button_ = [menuButtons_ objectAtIndex:i+1];
-       NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
-      [self addConstraint:trail];
-      
-      NSLayoutConstraint *width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
-      [self addConstraint:width];
-      
-      NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-      [self addConstraint:top];
-      
-      NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-      [self addConstraint:bottom];
-      //add the bottom bar under first button
-      bottomBar = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 0)];
-      bottomBar.backgroundColor = highlightColor;
-      bottomBar.translatesAutoresizingMaskIntoConstraints = NO;
-      [self addSubview:bottomBar];
-      NSLayoutConstraint *botbar_bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:bottomBar attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-      [self addConstraint:botbar_bottom];
-      
-      botbarWidthConstraint =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeWidth multiplier:1.0 constant:[self getTitleLengthForButton:button]];
-      [self addConstraint:botbarWidthConstraint];
-      
-      NSLayoutConstraint *botbar_height =[NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:3];
-      [self addConstraint:botbar_height];
-      
-      botbarXcenterConstraint = [NSLayoutConstraint constraintWithItem:bottomBar attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
-      [self addConstraint:botbarXcenterConstraint];
+      [self addConstraintForFirstButton:button withIndex:i menuButtons:menuButtons_];
     }
     else if (i==menuButtons.count-1)
     {
-      NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTrailingMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
-      [self addConstraint:trail];
-      
-      UIButton *button_ = [menuButtons_ objectAtIndex:i-1];
-      NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
-      [self addConstraint:lead];
-      
-      NSLayoutConstraint *width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
-      [self addConstraint:width];
-      
-      NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-      [self addConstraint:top];
-      
-      NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-      [self addConstraint:bottom];
+      [self addConstraintsForLastbutton:button withIndex:i buttonsArray:menuButtons_];
       break;
     }
     else
     {
-      UIButton *button_ = [menuButtons_ objectAtIndex:i-1];
-      UIButton *_button = [menuButtons_ objectAtIndex:i+1];
-      NSLayoutConstraint *_width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_button attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
-      [self addConstraint:_width];
-      
-      NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-      [self addConstraint:top];
-      
-      NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-      [self addConstraint:bottom];
-      NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
-      [self addConstraint:lead];
-      
-      NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:_button attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
-      [self addConstraint:trail];
+      [self addConstraintsForMiddleButton:button withIndex:i andMenuButtons:menuButtons_];
     }
   }
 }
@@ -167,8 +179,8 @@
       {
         continue;
       }
-      UIView *v_ = views[i];
-      v_.center = CGPointMake(v_.superview.frame.size.width*3/2, v_.center.y);
+      UIView *currentView = views[i];
+      currentView.center = CGPointMake(currentView.superview.frame.size.width*3/2, currentView.center.y);
     }
   [self animateToIndex:sender.tag];
 }

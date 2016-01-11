@@ -50,6 +50,7 @@
       } else if (result.isCancelled)
       {
         // Handle cancellations
+        LCDLog(@"cancelled FB login-->>");
       } else
       {
         // If you ask for multiple permissions at once, you
@@ -75,7 +76,12 @@
   FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]initWithGraphPath:@"/me/friends" parameters:params1 HTTPMethod:@"GET"];
   [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error)
   {
-    if (!error)
+    if (error)
+    {
+      LCDLog(@"error-->>>%@", error);
+      [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
+    }
+    else
     {
       LCDLog(@"fetched user:%@", result);
       finalFriendsArray = [[NSMutableArray alloc] init];
@@ -87,15 +93,9 @@
         con.P_id = [[friendsArray objectAtIndex:i] valueForKey:@"id"];
         con.P_imageURL = [[[[friendsArray objectAtIndex:i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
         [finalFriendsArray addObject:con];
-         [self.friendsTable reloadData];
+        [self.friendsTable reloadData];
       }
       [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
-    }
-    else
-    {
-      LCDLog(@"error-->>>%@", error);
-      [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
-      // Handle the result
     }
   }];
 

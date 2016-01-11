@@ -34,15 +34,15 @@
      NSDictionary *dict= response[kResponseData];
      NSDictionary *friendsDict= dict[kFriendsKey];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFriend class] fromJSONArray:friendsDict[@"users"] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Friends successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Friends successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -195,14 +195,14 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCEvent class] fromJSONArray:dict[@"events"] error:&error];
-     if(!error)
+     if(error)
      {
-       LCDLog(@"Getting Events successful! ");
-       success(responsesArray);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
      }
      else
      {
-       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       LCDLog(@"Getting Events successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

@@ -22,15 +22,15 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      LCSearchResult *searchresult = [MTLJSONAdapter modelOfClass:[LCSearchResult class] fromJSONDictionary:dict error:&error];
-     if(!error)
-     {
-       LCDLog(@"Search success! ");
-       success(searchresult);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Search success! ");
+       success(searchresult);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -57,15 +57,15 @@
    {
      NSError *error = nil;
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:response[kResponseData] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Friends successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Friends successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -85,15 +85,15 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:dict[kInterestsKey] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Interests successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Interests successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -113,15 +113,15 @@
    {
      NSError *error = nil;
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCCause class] fromJSONArray:response[kResponseData] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Causes successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Causes successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -141,15 +141,15 @@
    {
      NSError *error = nil;
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:response[kResponseData] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Interests successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Interests successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -172,15 +172,15 @@
      NSError *error = nil;
      NSDictionary * data = response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCInterest class] fromJSONArray:data[kInterestsKey] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Interests successful! ");
-       success(responsesArray);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Interests successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

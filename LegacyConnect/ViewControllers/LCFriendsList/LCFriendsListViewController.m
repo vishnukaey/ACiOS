@@ -137,12 +137,12 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCProfileViewVC *vc = [sb instantiateInitialViewController];
-  vc.userDetail = [[LCUserDetail alloc] init];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  LCProfileViewVC *profileVC = [profileSB instantiateInitialViewController];
+  profileVC.userDetail = [[LCUserDetail alloc] init];
   LCFriend *friend = [self.results objectAtIndex:indexPath.row];
-  vc.userDetail.userID = friend.friendId;
-  [self.navigationController pushViewController:vc animated:YES];
+  profileVC.userDetail.userID = friend.friendId;
+  [self.navigationController pushViewController:profileVC animated:YES];
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

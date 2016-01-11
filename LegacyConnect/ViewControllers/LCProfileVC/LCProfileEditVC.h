@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RSKImageCropper/RSKImageCropper.h>
+#import "LCProfileImageEditor.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 
 typedef enum profileSectionTypes
@@ -25,7 +25,7 @@ typedef enum imageEditStates
   IMAGE_UNTOUCHED
 } imageEditState;
 
-@interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate>
+@interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
   
   IBOutlet UIImageView *profilePic;
@@ -46,12 +46,13 @@ typedef enum imageEditStates
   
   UIPickerView *genderPicker;
   NSArray *genderTypes;
-  
-  BOOL isEditingProfilePic;
+
   imageEditState avatarPicState, headerPicState;
   UIImage *actualHeaderImage, *actualAvatarImage;
   
   UIImage *profilePicPlaceholder;
+  
+  LCProfileImageEditor *imageEditor;
 }
 
 

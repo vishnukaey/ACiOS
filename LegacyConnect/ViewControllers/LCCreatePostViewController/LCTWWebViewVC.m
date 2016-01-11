@@ -18,7 +18,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        //
+      LCDLog(@"LCTWWebViewVC : Custom initialization");
     }
     return self;
 }

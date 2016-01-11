@@ -23,14 +23,14 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kFeedsKey] error:&error];
-     if(!error)
+     if(error)
      {
-       LCDLog(@"Fetching Home Feeds successful! ");
-       success(responsesArray);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
      }
      else
      {
-       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+       LCDLog(@"Fetching Home Feeds successful! ");
+       success(responsesArray);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -47,15 +47,15 @@
    {
      NSError *error = nil;
      LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:response[kResponseData] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Post details Fetch success! ");
-       success(feed);
-     }
-     else
+     if(error)
      {
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Post details Fetch success! ");
+       success(feed);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -111,15 +111,15 @@
      NSDictionary *dict= response[kResponseData];
      LCComment *comment = [MTLJSONAdapter modelOfClass:[LCComment class] fromJSONDictionary:dict[@"comment"] error:&error];
      
-     if(!error)
-     {
-       [LCNotificationManager postCommentedNotificationforPost:post andComment:comment];
-       success(comment);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       [LCNotificationManager postCommentedNotificationforPost:post andComment:comment];
+       success(comment);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -165,15 +165,15 @@
      NSDictionary * comments = dict[kPostCommentsKey];
      BOOL isMorePresent = [[comments objectForKey:@"more"] boolValue];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:comments[kPostCommentsKey] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Getting Comments successful! ");
-       success(responsesArray,isMorePresent);
-     }
-     else
+     if(error)
      {
        LCDLog(@"%@",error);
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Comments successful! ");
+       success(responsesArray,isMorePresent);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

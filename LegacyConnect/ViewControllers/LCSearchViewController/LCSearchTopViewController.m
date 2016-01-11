@@ -21,6 +21,8 @@
 
 @end
 
+#warning headers are present even on no result condition.
+
 @implementation LCSearchTopViewController
 
 - (void)viewDidLoad {
@@ -53,10 +55,7 @@
   {
     return 3;
   }
-  else
-  {
-    return 1;
-  }//count of section
+  return 1;
 }
 
 
@@ -81,11 +80,7 @@
   {
     return self.searchResultObject.interestsArray.count>3 ? 3 : self.searchResultObject.interestsArray.count;
   }
-  else
-  {
-    return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
-  }
-  
+  return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -102,30 +97,21 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
   
-  NSString *sectionName;
-  switch (section)
-  {
-    case 0:
-      sectionName = @"Users";
-      break;
-    case 1:
-      sectionName = @"Interests";
-      break;
-      // ...
-    default:
-      sectionName = @"Causes";
-      break;
+  NSString *sectionName = nil;
+  
+  if (section == 0) {
+    sectionName = @"Users";
+  } else  if (section == 1) {
+    sectionName = @"Interests";
+  } else {
+    sectionName = @"Causes";
   }
+  
   if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] > 0)
   {
     return sectionName;
   }
-  else
-  {
-    return nil;
-  }
   return sectionName;
-  
 }
 
 
@@ -161,15 +147,11 @@
     cell.interest = interest;
     return cell;
   }
-  else
-  {
-    LCCausesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCCausesTableViewCell"];
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    LCCause *cause = self.searchResultObject.causesArray[indexPath.row];
-    cell.cause= cause;
-    return cell;
-  }
-  
+  LCCausesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"LCCausesTableViewCell"];
+  [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+  LCCause *cause = self.searchResultObject.causesArray[indexPath.row];
+  cell.cause= cause;
+  return cell;
 }
 
 
@@ -206,6 +188,25 @@
     default:
       break;
   }
+  
+  /*
+   case 1:
+   {
+   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+   LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+   [self.navigationController pushViewController:vc animated:YES];
+   }
+   break;
+   
+   case 2:
+   {
+   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+   LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+   [self.navigationController pushViewController:vc animated:YES];
+   }
+   break;
+   */
+
 }
 
 @end

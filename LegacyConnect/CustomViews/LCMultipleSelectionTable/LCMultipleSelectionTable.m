@@ -16,11 +16,9 @@
 - (id)initWithFrame:(CGRect)frame
 {
   self = [super initWithFrame:frame];
-  if (self)
+  if (self && !selectedIDs)
   {
-    if (!selectedIDs) {
-      selectedIDs = [[NSMutableArray alloc]init];
-    }
+    selectedIDs = [[NSMutableArray alloc]init];
   }
   return self;
 }
@@ -28,11 +26,9 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
   self = [super initWithCoder:aDecoder];
-  if (self)
+  if (self && !selectedIDs)
   {
-    if (!selectedIDs) {
-      selectedIDs = [[NSMutableArray alloc]init];
-    }
+    selectedIDs = [[NSMutableArray alloc]init];
   }
   
   return self;

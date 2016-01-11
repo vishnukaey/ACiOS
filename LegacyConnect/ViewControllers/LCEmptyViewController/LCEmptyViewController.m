@@ -146,8 +146,8 @@ static NSString *kTitle = @"MY FEED";
   if (![userdefaults boolForKey:kTutorialPresentKey]) {
     [userdefaults setBool:YES forKey:kTutorialPresentKey];
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-    tutorialVC = [sb instantiateViewControllerWithIdentifier:@"Tutorial"];
+    UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    tutorialVC = [signupSB instantiateViewControllerWithIdentifier:@"Tutorial"];
     tutorialVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [appdel.window addSubview:tutorialVC.view];
   }
@@ -183,7 +183,7 @@ static NSString *kTitle = @"MY FEED";
   [giButton addTarget:self action:@selector(GIButtonClicked) forControlEvents:UIControlEventTouchUpInside];
 }
 
-- (void)addMenuButton:(UIViewController*)vc
+- (void)addMenuButton:(UIViewController*)controller
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   //menu poper button
@@ -192,7 +192,7 @@ static NSString *kTitle = @"MY FEED";
   menuButton = [[LCMenuButton alloc] initWithFrame:CGRectMake(appdel.window.frame.size.width - 50, statusBarViewRect.size.height, 50, self.navigationController.navigationBar.frame.size.height)];
 
   menuButton.backgroundColor = [UIColor clearColor];
-  [vc.view addSubview:menuButton];
+  [controller.view addSubview:menuButton];
   [menuButton addTarget:self action:@selector(menuButtonAction) forControlEvents:UIControlEventTouchUpInside];
   appdel.menuButton = menuButton;
   [menuButton bringSubviewToFront:menuButton.badgeLabel];
@@ -230,9 +230,9 @@ static NSString *kTitle = @"MY FEED";
   if (sender.tag == 0)//create event
   {
     [appdel.menuButton setHidden:YES];
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-    LCChooseActionsInterest *vc = [sb instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
-    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCChooseActionsInterest *chooseInterestVC = [actionsSB instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:chooseInterestVC];
     [navigationRoot presentViewController:navC animated:YES completion:nil];
  
   }
@@ -243,8 +243,8 @@ static NSString *kTitle = @"MY FEED";
   }
   else if(sender.tag == 2)//text post
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-    createPostVC = [sb instantiateInitialViewController];
+    UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    createPostVC = [createPostSB instantiateInitialViewController];
     
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
@@ -283,8 +283,8 @@ static NSString *kTitle = @"MY FEED";
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   UIImage *normalzedImage = [chosenImage normalizedImage];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-  createPostVC = [sb instantiateInitialViewController];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  createPostVC = [createPostSB instantiateInitialViewController];
   
   createPostVC.photoPostPhoto = normalzedImage;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
@@ -304,29 +304,30 @@ static NSString *kTitle = @"MY FEED";
   [mainContainer setMenuState:MFSideMenuStateClosed];
   if (index == 0)//home
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    LCFeedsHomeViewController *vc = [sb instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    LCFeedsHomeViewController *feedsVC = [mainSB instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:feedsVC]];
   }
   else if (index == 1)//notifications
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
-    LCNotificationsViewController *vc = [sb instantiateInitialViewController];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    UIStoryboard*  notificationSB = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
+    LCNotificationsViewController *notificationVC = [notificationSB instantiateInitialViewController];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:notificationVC]];
   }
   else if (index == 2)//settings
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
-    LCSettingsViewController *vc = [sb instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    UIStoryboard*  settingsSB = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
+    LCSettingsViewController *settingsVC = [settingsSB instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:settingsVC]];
+    
   }
   else if (index == 3)//profile
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateInitialViewController];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = [LCDataManager sharedDataManager].userID;
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:vc]];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *profileVC = [profileSB instantiateInitialViewController];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = [LCDataManager sharedDataManager].userID;
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:profileVC]];
   }
   
   //added to bring menu button to top on menu item selection.

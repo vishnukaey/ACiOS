@@ -34,10 +34,10 @@
 
 - (void)performNullCheck
 {
-  unsigned int outCount, i;
+  unsigned int outCount, index;
   objc_property_t *properties = class_copyPropertyList([self class], &outCount);
-  for (i = 0; i < outCount; i++) {
-    objc_property_t property = properties[i];
+  for (index = 0; index < outCount; index++) {
+    objc_property_t property = properties[index];
     NSString *propertyName = [NSString stringWithFormat:@"%s", property_getName(property)];
     const char * type = property_getAttributes(property);
     NSString * typeString = [NSString stringWithUTF8String:type];

@@ -203,10 +203,10 @@
 - (IBAction)impactsButtonClicked
 {
   NSLog(@"impacts clicked----->");
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCImapactsViewController *vc = [sb instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
-  vc.self.userDetail = self.userDetail;
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  LCImapactsViewController *impactsVC = [profileSB instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
+  impactsVC.self.userDetail = self.userDetail;
+  [self.navigationController pushViewController:impactsVC animated:YES];
 }
 
 - (IBAction)backAction:(id)sender
@@ -219,10 +219,10 @@
   
   if (currentProfileStatus == kMyProfile)
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileEditVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
-    vc.self.userDetail = self.self.userDetail;
-    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:vc];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileEditVC *editProfileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
+    editProfileVC.self.userDetail = self.self.userDetail;
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:editProfileVC];
     [self presentViewController:navC animated:YES completion:nil];
   }
   else if (currentProfileStatus == kIsFriend)

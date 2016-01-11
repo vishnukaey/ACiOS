@@ -116,11 +116,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-  LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-  vc.userDetail = [[LCUserDetail alloc] init];
-  vc.userDetail = self.results[indexPath.row];
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+  profileVC.userDetail = [[LCUserDetail alloc] init];
+  profileVC.userDetail = self.results[indexPath.row];
+  [self.navigationController pushViewController:profileVC animated:YES];
   
 }
 

@@ -39,14 +39,14 @@
     NSError *error = nil;
     NSArray *data= response[kResponseData];
     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCRecentNotification class] fromJSONArray:data error:&error];
-    if(!error)
-    {
-      success(responsesArray);
-    }
-    else
+    if(error)
     {
       LCDLog(@"%@",error);
       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+    }
+    else
+    {
+      success(responsesArray);
     }
   } andFailure:^(NSString *error) {
     LCDLog(@"%@",error);
@@ -84,15 +84,15 @@
      NSError *error = nil;
      NSDictionary * dict = response[kResponseData];
      NSArray *requests = [MTLJSONAdapter modelsOfClass:[LCRequest class] fromJSONArray:dict[@"invites"] error:&error];
-     if(!error)
-     {
-       LCDLog(@"Post details Fetch success!");
-       success(requests);
-     }
-     else
+     if(error)
      {
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Post details Fetch success!");
+       success(requests);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
