@@ -52,7 +52,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
                                              } range:NSMakeRange(0, userNameAttributtedString.length)];
   
   NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.userID, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.userID, @"id", @"cause", @"text", kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], @"range", nil];
   [userNameLabelTagsWithRanges addObject:dic_user];
   usernameLabel.tagsArray  = userNameLabelTagsWithRanges;
   [usernameLabel setAttributedText:userNameAttributtedString];
@@ -86,15 +86,15 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   
   [self adjustPhotoPostUI];
   NSString *typeString = kAddedAPhotoIn;
-  NSString *cause = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
-  NSString *postTypeAndCause = [NSString stringWithFormat:@"%@%@", typeString, cause];
-  NSString * postInfoString = postTypeAndCause;
+  NSString *postToName = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.postToName];
+  NSString *postTypeAndName = [NSString stringWithFormat:@"%@%@", typeString, postToName];
+  NSString * postInfoString = postTypeAndName;
   NSString * atString = @" at ";
   NSString *location = [LCUtilityManager performNullCheckAndSetValue:self.feedObject.location];
 
   if (location.length > 0) {
     NSString * atLocation = [NSString stringWithFormat:@"%@%@",atString,location];
-    postInfoString = [NSString stringWithFormat:@"%@%@",postTypeAndCause,atLocation];
+    postInfoString = [NSString stringWithFormat:@"%@%@",postTypeAndName,atLocation];
   }
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:postInfoString];
   // -- Add Font -- //
@@ -107,7 +107,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
                             value:kNormalPostTextColor
                             range:NSMakeRange(0, typeString.length)];
   // -- Text color for cause tag -- //
-  NSRange tagRangeCause = [postInfoString rangeOfString:cause];
+  NSRange tagRangeCause = [postInfoString rangeOfString:postToName];
   [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:tagRangeCause];
   if (location.length > 0) {
     // -- text color for 'at' string -- //
@@ -119,7 +119,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
   NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, kFeedTagTypeCause, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
+  NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, self.feedObject.postToType, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
   [createdAtLabelTagsWithRanges addObject:dict_createdAt];
   createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
   [createdLabel setAttributedText:attributtedString];
@@ -171,7 +171,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   {
     LCTag * tag = self.feedObject.postTags[i];
     NSRange tagRangePost = [completeFeedMessage rangeOfString:[tag text]];
-    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:tag.tagID, @"id", tag.text, @"text", tag.type, @"type", [NSValue valueWithRange:tagRangePost], @"range", nil];
+    NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:tag.tagID, @"id", tag.text, @"text", tag.type, kTagobjType, [NSValue valueWithRange:tagRangePost], @"range", nil];
     [postDescriptionTagsWithRanges addObject:dic_post];
     
   }

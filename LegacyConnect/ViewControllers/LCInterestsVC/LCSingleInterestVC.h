@@ -37,6 +37,9 @@
   __weak IBOutlet UIImageView *interestImage;
   __weak IBOutlet UIImageView *interestBGImage;
   __weak IBOutlet UIButton *interestFollowButton;
+  __weak IBOutlet UILabel *actionsCount;
+  __weak IBOutlet UILabel *followersCount;
+  
   
   LCInterestPosts *interestPostsView;
   LCInterestCauses *interestCausesView;

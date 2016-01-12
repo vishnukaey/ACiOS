@@ -20,14 +20,14 @@
 @implementation LCInterestPosts
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
   [self initialSetUp];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - private method implementation
@@ -37,18 +37,18 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-//  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  //  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
   
-//  self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
-//  
-//  if (!self.noResultsView) {
-//    NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
-//    if (self.isSelfProfile) {
-//      message = NSLocalizedString(@"no_milestones_available_self", nil);
-//    }
-//    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
-//  }
+  //  self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  //
+  //  if (!self.noResultsView) {
+  //    NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
+  //    if (self.isSelfProfile) {
+  //      message = NSLocalizedString(@"no_milestones_available_self", nil);
+  //    }
+  //    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  //  }
   
   [self addPullToRefreshForPostsTable];
 }
@@ -160,9 +160,9 @@
   };
   
   
-//  if (self.isSelfProfile) {
-//    cell.moreButton.hidden = NO;
-//  }
+  //  if (self.isSelfProfile) {
+  //    cell.moreButton.hidden = NO;
+  //  }
   
   tableView.backgroundColor = [UIColor clearColor];
   tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -175,9 +175,9 @@
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
   switch (type) {
-//    case kkFeedCellActionLoadMore:
-//      [self feedCellMoreAction :feed];
-//      break;
+      //    case kkFeedCellActionLoadMore:
+      //      [self feedCellMoreAction :feed];
+      //      break;
       
     case kkFeedCellActionViewImage:
       [self showFullScreenImage:feed];
@@ -229,7 +229,7 @@
 //{
 //  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
 //  actionSheet.view.tintColor = [UIColor blackColor];
-//  
+//
 //  UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 //    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
 //    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
@@ -238,9 +238,9 @@
 //    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
 //    [self presentViewController:createPostVC animated:YES completion:nil];
 //  }];
-//  
+//
 //  [actionSheet addAction:editPost];
-//  
+//
 //  UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
 //    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
 //    [LCPostAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
@@ -252,7 +252,7 @@
 //                                   }];
 //  }];
 //  [actionSheet addAction:removeMilestone];
-//  
+//
 //  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
 //    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
 //    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
@@ -266,14 +266,14 @@
 //                        }];
 //    }];
 //    [deleteAlert addAction:deletePostActionFinal];
-//    
+//
 //    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
 //    [deleteAlert addAction:cancelAction];
 //    [self presentViewController:deleteAlert animated:YES completion:nil];
-//    
+//
 //  }];
 //  [actionSheet addAction:deletePost];
-//  
+//
 //  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
 //  [actionSheet addAction:cancelAction];
 //  [self presentViewController:actionSheet animated:YES completion:nil];

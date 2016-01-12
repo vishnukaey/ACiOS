@@ -17,8 +17,6 @@
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-//  [self prepareCauses];
-//  [self prepareCells];
   [self initialSetup];
 }
 
@@ -32,6 +30,7 @@
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
 }
 
 
@@ -48,7 +47,18 @@
   interestName.text = _interest.name;
   interestDescription.text = _interest.descriptionText;
   [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
-  [interestBGImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLLarge] placeholderImage:nil];
+  [interestBGImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLLarge] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    
+//    UIColor *topColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5];
+//    UIColor *bottomColor = [UIColor colorWithRed:80.0/255.0 green:80.0/255.0 blue:80.0/255.0 alpha:0.6];
+//    
+//    CAGradientLayer *gradientMask = [CAGradientLayer layer];
+//    gradientMask.frame = interestBGImage.bounds;
+//    gradientMask.colors = @[(id)topColor.CGColor,
+//                            (id)bottomColor.CGColor];
+//    interestBGImage.layer.mask = gradientMask;
+  }];
+  followersCount.text = _interest.followers;
   [interestFollowButton setSelected:_interest.isFollowing];
 }
 
@@ -113,17 +123,23 @@
 
 - (IBAction)postsButtonClicked:(id)sender
 {
-  [interestPostsView loadPostsInCurrentInterest];
+  if (tabmenu.currentIndex != 0) {
+    [interestPostsView loadPostsInCurrentInterest];
+  }
 }
 
 - (IBAction)causesButtonClicked:(id)sender
 {
-  [interestCausesView loadCausesInCurrentInterest];
+  if (tabmenu.currentIndex != 1) {
+    [interestCausesView loadCausesInCurrentInterest];
+  }
 }
 
 - (IBAction)actionsButtonClicked:(id)sender
 {
-  [interestActionsView loadActionsInCurrentInterest];
+  if (tabmenu.currentIndex != 2) {
+    [interestActionsView loadActionsInCurrentInterest];
+  }
 }
 
 
@@ -184,135 +200,5 @@
   }
   collapseViewHeight.constant = collapseConstant;
 }
-
-
-
-
-//#pragma mark - setup functions
-//- (void)prepareCauses
-//{
-//  UIButton *aCause = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-//  [aCause setTitle:@"A Cause" forState:UIControlStateNormal];
-//  [causesScrollView addSubview:aCause];
-//  aCause.backgroundColor = [UIColor orangeColor];
-//  aCause.center = CGPointMake(causesScrollView.frame.size.width/2, causesScrollView.frame.size.height/2);
-//  [aCause addTarget:self action:@selector(causesClicked:) forControlEvents:UIControlEventTouchUpInside];
-//}
-//
-//-(void)prepareCells
-//{
-//  NSArray *feedsArray = [LCDummyValues dummyFeedArray];
-//  
-//  cellsViewArray = [[NSMutableArray alloc]init];
-//  for (int i=0; i<feedsArray.count; i++)
-//  {
-//    LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-////    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
-//    __weak typeof(self) weakSelf = self;
-//    celViewFinal.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
-//      [weakSelf feedCellActionWithType:actionType andFeed:feed];
-//    };
-//    celViewFinal.feedCellTagAction = ^ (NSDictionary * tagDetails) {
-//      [weakSelf tagTapped:tagDetails];
-//    };
-//
-//    [cellsViewArray addObject:celViewFinal];
-//  }
-//}
-//
-//#pragma mark - button actions
-//- (IBAction)followButtonAction:(id)sender
-//{
-//  NSLog(@"follow button clicked-->>");
-//}
-//
-//- (IBAction)toggleHelpsORCauses:(UIButton *)sender
-//{
-//  if (sender.tag == 1)//helps
-//  {
-//    feedsTable.hidden = false;
-//    causesScrollView.hidden = true;
-//  }
-//  else//causes--tag is 2
-//  {
-//    feedsTable.hidden = true;
-//    causesScrollView.hidden = false;
-//  }
-//}
-//
-//- (IBAction)backAction:(id)sender
-//{
-//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  [appdel.GIButton setHidden:NO];
-//  [self.navigationController popViewControllerAnimated:YES];
-//}
-//
-//- (void)causesClicked :(UIButton *)sender
-//{
-//  NSLog(@"cause clicked0-->>>");
-//  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-//  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-//  [self.navigationController pushViewController:vc animated:YES];
-//}
-//
-//#pragma mark - TableView delegates
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-//{
-//  return 1;    //count of section
-//}
-//
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//  
-//  return cellsViewArray.count;
-//}
-//
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  static NSString *MyIdentifier = @"MyIdentifier";
-//  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-//  if (cell == nil)
-//  {
-//    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-//  }
-//  [[cell viewWithTag:10] removeFromSuperview];
-//  
-//  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-//  [cell addSubview:cellView];
-//  cellView.tag = 10;
-//  
-//  return cell;
-//}
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-//  
-//  return cellView.frame.size.height;
-//}
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  NSLog(@"selected row-->>>%d", (int)indexPath.row);
-//}
-//
-//#pragma mark - feedCell delegates
-//- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
-//{
-//  NSLog(@"actionType--->>>%u", type);
-//}
-//
-//- (void)tagTapped:(NSDictionary *)tagDetails
-//{
-//  NSLog(@"tag details-->>%@", tagDetails);
-//}
-///*
-//#pragma mark - Navigation
-//
-//// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    // Get the new view controller using [segue destinationViewController].
-//    // Pass the selected object to the new view controller.
-//}
-//*/
 
 @end
