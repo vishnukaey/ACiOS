@@ -7,6 +7,12 @@
 //
 
 #import "LCSingleCauseVC.h"
+#import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCFeedCellView.h"
+#import "LCFeedsCommentsController.h"
+#import "LCFullScreenImageVC.h"
+#import "LCProfileViewVC.h"
+#import "LCCauseSupportersVC.h"
 
 
 @implementation LCSingleCauseVC
@@ -28,11 +34,17 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   self.navigationController.navigationBarHidden = YES;
 }
 
 -(void)refreshViewWithCauseDetails
 {
+  causeImageView.layer.cornerRadius = 5.0;
+  supportButton.layer.cornerRadius = 5.0;
+  causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
   causeNameLabel.text = _cause.name;
   causeDescriptionLabel.text = _cause.tagLine;
   [causeImageView sd_setImageWithURL:[NSURL URLWithString:_cause.logoURLSmall] placeholderImage:nil];
@@ -52,10 +64,15 @@
   }
 }
 
-#pragma mark - setup functions
--(void)prepareCells
+////////
+
+
+#pragma mark - private method implementation
+
+- (void)initialSetUp
 {
-  NSArray *feedsArray = [LCDummyValues dummyFeedArray];
+  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   cellsViewArray = [[NSMutableArray alloc]init];
   for (int i=0; i<feedsArray.count; i++)
@@ -74,77 +91,178 @@
   }
 }
 
-#pragma mark - button actions
-- (IBAction)supportClicked:(id)sender
+
+- (void)stopRefreshingViews
 {
-  NSLog(@"Follow clicked");
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
 }
 
-- (IBAction)supportersListClicked:(id)sender
+
+- (void)addPullToRefreshForPostsTable
 {
   NSLog(@"FollowList clicked");
 }
 
-- (IBAction)websiteLinkClicked:(id)sender
+- (void) loadPostsInCurrentInterest {
+  [self startFetchingResults];
+}
+
+#pragma mark - API and Pagination
+- (void)startFetchingResults
 {
-  NSLog(@"Website Link clicked");
+  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [super startFetchingResults];
+  [LCUserProfileAPIManager getMilestonesForUser:@"5598" andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+    [self stopRefreshingViews];
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchResults:response haveMoreData:hasMoreData];
+    [self setNoResultViewHidden:[(NSArray*)response count] != 0];
+    [self reloadPostsTable];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+    [self setNoResultViewHidden:[self.results count] != 0];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+  [LCUserProfileAPIManager getMilestonesForUser:@"5598" andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+    [self stopRefreshingViews];
+    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    [self didFetchNextResults:response haveMoreData:hasMoreData];
+    [self reloadPostsTable];
+  } andFailure:^(NSString *error) {
+    [self stopRefreshingViews];
+    [self didFailedToFetchResults];
+  }];
+}
+
+- (void)setNoResultViewHidden:(BOOL)hidded
+{
+  if (hidded) {
+    [self hideNoResultsView];
+  }
+  else
+  {
+    [self showNoResultsView];
+  }
+}
+
+- (void)reloadPostsTable
+{
+  [self.tableView reloadData];
 }
 
 
-- (IBAction)backButtonTapped:(id)sender
-{
-  [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - TableView delegates
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;    //count of section
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   
-  return cellsViewArray.count;
+  return self.results.count;
+  
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+  
+  JTTABLEVIEW_cellForRowAtIndexPath
+  LCFeedCellView *cell = [tableView dequeueReusableCellWithIdentifier:[LCFeedCellView getFeedCellIdentifier]];
   if (cell == nil)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
+    // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
+    cell = [topLevelObjects objectAtIndex:0];
   }
-  [[cell viewWithTag:10] removeFromSuperview];
+  [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
+  __weak typeof(self) weakSelf = self;
+  cell.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
+    [weakSelf feedCellActionWithType:actionType andFeed:feed];
+  };
+  cell.feedCellTagAction = ^ (NSDictionary * tagDetails) {
+    [weakSelf tagTapped:tagDetails];
+  };
   
-  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-  [cell addSubview:cellView];
-  cellView.tag = 10;
+  
+  tableView.backgroundColor = [UIColor clearColor];
+  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+  tableView.allowsSelection = YES;
   
   return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-  
-  return cellView.frame.size.height;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
 }
 
 #pragma mark - feedCell delegates
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  NSLog(@"actionType--->>>%u", type);
+  switch (type) {
+      //    case kkFeedCellActionLoadMore:
+      //      [self feedCellMoreAction :feed];
+      //      break;
+      
+    case kkFeedCellActionViewImage:
+      [self showFullScreenImage:feed];
+      break;
+      
+    case kFeedCellActionComment:
+      [self showFeedCommentsWithFeed:feed];
+      
+    default:
+      break;
+  }
 }
+
+- (void)showFeedCommentsWithFeed:(LCFeed*)feed
+{
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+                                                bundle:nil];
+  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  [next setFeedObject:feed];
+//  UIViewController *profileController = (UIViewController *)self.delegate;
+  [self.navigationController pushViewController:next animated:YES];
+}
+
+- (void)showFullScreenImage:(LCFeed*)feed
+{
+  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
+  vc.feed = feed;
+  __weak typeof (self) weakSelf = self;
+  vc.commentAction = ^ (id sender, BOOL showComments) {
+    [weakSelf fullScreenAction:sender andShowComments:showComments];
+  };
+  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
+{
+  LCFullScreenImageVC * viewController = (LCFullScreenImageVC*)sender;
+  [viewController dismissViewControllerAnimated:!show completion:^{
+    if (show) {
+      [self showFeedCommentsWithFeed:viewController.feed];
+    } else {
+      [self reloadPostsTable];
+    }
+  }];
+}
+
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  NSLog(@"tag details-->>%@", tagDetails);
+  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    vc.userDetail = [[LCUserDetail alloc] init];
+    vc.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:vc animated:YES];
+  }
 }
 /*
  #pragma mark - Navigation
