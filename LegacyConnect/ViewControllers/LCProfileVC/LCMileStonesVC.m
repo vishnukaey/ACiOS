@@ -12,6 +12,8 @@
 #import "LCFeedCellView.h"
 #import "LCFeedsCommentsController.h"
 #import "LCFullScreenImageVC.h"
+#import "LCSingleCauseVC.h"
+#import "LCSingleInterestVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 @interface LCMileStonesVC ()
@@ -272,14 +274,25 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:causeVC animated:YES];
+  }
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
+  {
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
-    UIViewController *profileController = (UIViewController *)self.delegate;
-    [profileController.navigationController pushViewController:profileVC animated:YES];
+    [self.navigationController pushViewController:profileVC animated:YES];
+  }
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to cause page
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleInterestVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    [self.navigationController pushViewController:causeVC animated:YES];
   }
 }
 

@@ -13,6 +13,7 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import "LCSingleCauseVC.h"
+#import "LCSingleInterestVC.h"
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
@@ -159,7 +160,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to cause page
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    LCSingleInterestVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
 }
