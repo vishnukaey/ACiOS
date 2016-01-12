@@ -13,6 +13,7 @@
 
 @interface LCSingleCauseVC : JTTableViewController
 {
+  __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSMutableArray *cellsViewArray;
   IBOutlet UILabel *causeNameLabel;
   IBOutlet UILabel *causeDescriptionLabel;

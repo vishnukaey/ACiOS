@@ -135,10 +135,10 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="QUc-rX-R9p" id="pD5-nb-bTb"/>
-                                    <outlet property="delegate" destination="QUc-rX-R9p" id="gVD-BP-T0L"/>
+                                    <outlet property="delegate" destination="QUc-rX-R9p" id="a23-C8-970"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcW-yh-gPw">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcW-yh-gPw">
                                 <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaB-93-o3L">
@@ -194,7 +194,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWz-GD-nDP">
                                         <rect key="frame" x="0.0" y="220" width="320" height="100"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-cO-MZo">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-cO-MZo">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MembersIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Fpc-ea-0a9">
@@ -247,7 +247,7 @@
                                                     <constraint firstItem="LLC-FS-SLd" firstAttribute="leading" secondItem="LCC-FG-Y4a" secondAttribute="trailing" constant="8" id="uHI-7y-hzo"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f86-sa-3iP">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f86-sa-3iP">
                                                 <rect key="frame" x="0.0" y="50" width="320" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LinkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CpW-4Y-LSj">
@@ -396,6 +396,7 @@
                         <outlet property="causeNameLabel" destination="g4t-kl-MuJ" id="S5o-O6-Yj9"/>
                         <outlet property="causeSupportersCountButton" destination="LCC-FG-Y4a" id="8p4-e1-quK"/>
                         <outlet property="causeURLButton" destination="FIs-1V-U5b" id="pMX-01-u09"/>
+                        <outlet property="collapseViewHeight" destination="GXB-Sz-jCq" id="18n-06-POC"/>
                         <outlet property="supportButton" destination="ZtP-yW-yRb" id="1Ig-Uh-yqB"/>
                         <outlet property="tableView" destination="jC8-yh-5s2" id="TfQ-iv-vBy"/>
                     </connections>
