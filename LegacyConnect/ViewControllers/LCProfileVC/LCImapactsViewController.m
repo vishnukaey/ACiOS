@@ -13,6 +13,8 @@
 #import "LCFeedsCommentsController.h"
 #import "LCCreatePostViewController.h"
 #import "LCProfileViewVC.h"
+#import "LCSingleCauseVC.h"
+#import "LCSingleInterestVC.h"
 
 @implementation LCImapactsViewController
 @synthesize customNavigationHeight, userDetail;
@@ -251,18 +253,25 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])
+  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    //go to cause page
-    LCDLog(@"cause selected");
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:causeVC animated:YES];
   }
-  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:profileVC animated:YES];
+  }
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to cause page
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleInterestVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    [self.navigationController pushViewController:causeVC animated:YES];
   }
 }
 
