@@ -62,18 +62,15 @@
 }
 
 #pragma mark - private method implementation
+
 - (void) initailSetup {
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  //  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
-  //  if (!self.noResultsView) {
-  //    NSString *message = NSLocalizedString(@"no_actions_available_others", nil);
-  //    if (isSelfProfile) {
-  //      message = NSLocalizedString(@"no_actions_available_self", nil);
-  //    }
-  //    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
-  //  }
+  
+  NSString *message = NSLocalizedString(@"no_causes_to_display", nil);
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self addPullToRefreshForActionsTable];
 }
