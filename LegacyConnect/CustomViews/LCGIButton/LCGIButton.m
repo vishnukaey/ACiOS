@@ -123,13 +123,13 @@
 
 -(void)toggle
 {
-  if (!menuOpen)
+  if (menuOpen)
   {
-    [self showMenu];
+    [self hideMenu];
   }
   else
   {
-    [self hideMenu];
+    [self showMenu];
   }
 }
 

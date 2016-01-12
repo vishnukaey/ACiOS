@@ -101,6 +101,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [_postScrollView addSubview:interstIconImageView];
   interstIconImageView.backgroundColor = ICONBACK_COLOR;
   interstIconImageView.layer.cornerRadius = 4;
+  interstIconImageView.contentMode = UIViewContentModeScaleAspectFit;
   
   postTextView = [[UITextView alloc] initWithFrame:CGRectMake(interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8, topmargin, _postScrollView.frame.size.width - (interstIconImageView.frame.origin.x + interstIconImageView.frame.size.width + 8), 35)];
   postTextView.text = @"";
@@ -111,7 +112,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   
   placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(postTextView.frame.origin.x+5, postTextView.frame.origin.y, postTextView.frame.size.width, postTextView.frame.size.height)];
   [placeHolderLabel setFont:POSTTEXT_FONT];
-  [placeHolderLabel setText:@"Share your legacy"];
+  [placeHolderLabel setText:@"Share your news"];
   [placeHolderLabel setTextColor:[UIColor lightGrayColor]];
   [_postScrollView addSubview:placeHolderLabel];
 
@@ -129,23 +130,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [postImageView setImage:_photoPostPhoto];
     [self arrangePostImageView];
     _photoPostPhoto = nil;
-  if (_postFeedObject.postToID)
-  {
-    if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeCause])
-    {
-      _selectedCause = [[LCCause alloc] init];
-      _selectedCause.causeID = _postFeedObject.postToID;
-      _selectedCause.name = _postFeedObject.postToName;
-      _selectedCause.logoURLSmall = _postFeedObject.postToImageURL;
-    }
-    else if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeInterest])
-    {
-      _selectedInterest = [[LCInterest alloc] init];
-      _selectedInterest.interestID = _postFeedObject.postToID;
-      _selectedInterest.name = _postFeedObject.postToName;
-      _selectedInterest.logoURLSmall = _postFeedObject.postToImageURL;
-    }
-  }
+  [self setCurrentCauseAndInterestObj];
   [self didfinishPickingInterest:_selectedInterest andCause:_selectedCause];
   
   if (_postFeedObject.image.length)
@@ -169,6 +154,46 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     postTextView.frame = frame;
   }
   
+  [self prepareTaggedFriendsArray];
+  
+  if (_postFeedObject.location.length)
+  {
+    taggedLocation = _postFeedObject.location;
+  }
+  
+  if ([_postFeedObject.isMilestone integerValue])
+  {
+    milestoneIcon.tag = 1;
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+  }
+  
+  [self arrangeTaggedLabel];
+  [self arrangePostImageView];
+}
+
+- (void)setCurrentCauseAndInterestObj
+{
+  if (_postFeedObject.postToID)
+  {
+    if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeCause])
+    {
+      _selectedCause = [[LCCause alloc] init];
+      _selectedCause.causeID = _postFeedObject.postToID;
+      _selectedCause.name = _postFeedObject.postToName;
+      _selectedCause.logoURLSmall = _postFeedObject.postToImageURL;
+    }
+    else if ([_postFeedObject.postToType isEqualToString:kFeedTagTypeInterest])
+    {
+      _selectedInterest = [[LCInterest alloc] init];
+      _selectedInterest.interestID = _postFeedObject.postToID;
+      _selectedInterest.name = _postFeedObject.postToName;
+      _selectedInterest.logoURLSmall = _postFeedObject.postToImageURL;
+    }
+  }
+}
+
+- (void)prepareTaggedFriendsArray
+{
   if (_postFeedObject.postTags.count)
   {
     NSMutableArray *freinds_tageed = [[NSMutableArray alloc] init];
@@ -184,20 +209,6 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     taggedFriendsArray = [freinds_tageed copy];
     
   }
-  
-  if (_postFeedObject.location.length)
-  {
-    taggedLocation = _postFeedObject.location;
-  }
-  
-  if ([_postFeedObject.isMilestone integerValue])
-  {
-    milestoneIcon.tag = 1;
-    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
-  }
-  
-  [self arrangeTaggedLabel];
-  [self arrangePostImageView];
 }
 
 #pragma mark - keyboard functions
@@ -298,23 +309,19 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [_postScrollView setContentSize:CGSizeMake(_postScrollView.contentSize.width, postImageView.frame.origin.y + postImageView.frame.size.height)];
   
   UIImage *tagfirends_im = [UIImage imageNamed:ktagFriendIconImageName];
-  tagfirends_im = [tagfirends_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  tagFriendsIcon.image = tagfirends_im;
+  tagFriendsIcon.image = [tagfirends_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [tagFriendsIcon setTintColor:[UIColor grayColor]];
   
   UIImage *cam_im = [UIImage imageNamed:kcameraIconImageName];
-  cam_im = [cam_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  cameraIcon.image = cam_im;
+  cameraIcon.image = [cam_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [cameraIcon setTintColor:[UIColor grayColor]];
   
   UIImage *tagloc_im = [UIImage imageNamed:ktagLocationIconImageName];
-  tagloc_im = [tagloc_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  tagLocationIcon.image = tagloc_im;
+  tagLocationIcon.image = [tagloc_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [tagLocationIcon setTintColor:[UIColor grayColor]];
   
   UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImageName];
-  miles_im = [miles_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  milestoneIcon.image = miles_im;
+  milestoneIcon.image = [miles_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [milestoneIcon setTintColor:[UIColor grayColor]];
 
   if (taggedFriendsArray.count > 0) {
@@ -351,13 +358,21 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"close_post", nil) message:NSLocalizedString(@"close_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"discard", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }];
+  [deleteAlert addAction:deletePostActionFinal];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [deleteAlert addAction:cancelAction];
+  [self presentViewController:deleteAlert animated:YES completion:nil];
 }
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListFriendsToTagViewController *contactListVC = [sb instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListFriendsToTagViewController *contactListVC = [createPostSB instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
   contactListVC.alreadySelectedFriends = taggedFriendsArray;
   contactListVC.delegate = self;
   [self presentViewController:contactListVC animated:YES completion:nil];
@@ -366,11 +381,11 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 
 - (IBAction)addLocationToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListLocationsToTagVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
-  vc.alreadyTaggedLocation = taggedLocation;
-  vc.delegate = self;
-  [self presentViewController:vc animated:YES completion:nil];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListLocationsToTagVC *locationsVC = [createPostSB instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
+  locationsVC.alreadyTaggedLocation = taggedLocation;
+  locationsVC.delegate = self;
+  [self presentViewController:locationsVC animated:YES completion:nil];
 }
 
 - (IBAction)postPhotoButtonClicked
@@ -399,12 +414,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 
 - (IBAction)intersestDownArrowClicked
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListInterestsAndCausesVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCListInterestsAndCausesVC"];
-  vc.delegate = self;
-  vc.selectedCause = _selectedCause;
-  vc.selectedInterest = _selectedInterest;
-  [self presentViewController:vc animated:YES completion:nil];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
+  LCListInterestsAndCausesVC *interestCauseVC = [createPostSB instantiateViewControllerWithIdentifier:@"LCListInterestsAndCausesVC"];
+  interestCauseVC.delegate = self;
+  interestCauseVC.selectedCause = _selectedCause;
+  interestCauseVC.selectedInterest = _selectedInterest;
+  [self presentViewController:interestCauseVC animated:YES completion:nil];
 }
 
 - (IBAction)postButtonAction
@@ -424,8 +439,14 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
     return;
   }
+  NSString *text_to_post = [LCUtilityManager getSpaceTrimmedStringFromString:postTextView.text];
+  if (text_to_post.length<1 && !postImageView.image) {
+    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
+    return;
+  }
+  
   [postTextView resignFirstResponder];
-  _postFeedObject.message = postTextView.text;
+  _postFeedObject.message = text_to_post;
   _postFeedObject.location = taggedLocation;
   NSMutableArray *posttags_ = [[NSMutableArray alloc] init];
   for (LCFriend *friend in taggedFriendsArray)
@@ -445,42 +466,52 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   fadedActivityView.hidden = false;
   if (_isEditing)
   {
-    UIImage *imageToUpload = nil;
-    if (self.isImageEdited) {
-      imageToUpload = postImageView.image;
-    }
-    [LCPostAPIManager updatePost:_postFeedObject withImage:imageToUpload withSuccess:^(id response) {
-      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-      fadedActivityView.hidden = true;
-      [self shareToSocialMedia];
-      [self closeButtonClicked:nil];
-    } andFailure:^(NSString *error) {
-      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-      fadedActivityView.hidden = true;
-    }];
+    [self invokeUpdatePostAPI];
   }
   else//new
   {
-    [LCPostAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
-      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-      fadedActivityView.hidden = true;
-      [self shareToSocialMedia];
-      [self closeButtonClicked:nil];
-      if(postImageView.image)
-      {
-        //GA Tracking
-        [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created without media"];
-      }
-      else
-      {
-        //GA Tracking
-        [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created with media content"];
-      }
-    } andFailure:^(NSString *error) {
-      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-      fadedActivityView.hidden = true;
-    }];
+    [self invokeCreateNewPostAPI];
   }
+}
+
+- (void)invokeUpdatePostAPI
+{
+  UIImage *imageToUpload = nil;
+  if (self.isImageEdited) {
+    imageToUpload = postImageView.image;
+  }
+  [LCPostAPIManager updatePost:_postFeedObject withImage:imageToUpload withSuccess:^(id response) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    fadedActivityView.hidden = true;
+    [self shareToSocialMedia];
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    fadedActivityView.hidden = true;
+  }];
+}
+
+- (void)invokeCreateNewPostAPI
+{
+  [LCPostAPIManager createNewPost:_postFeedObject withImage:postImageView.image withSuccess:^(id response) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    fadedActivityView.hidden = true;
+    [self shareToSocialMedia];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    if(postImageView.image)
+    {
+      //GA Tracking
+      [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created without media"];
+    }
+    else
+    {
+      //GA Tracking
+      [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Post Created" andLabel:@"Post created with media content"];
+    }
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    fadedActivityView.hidden = true;
+  }];
 }
 
 - (IBAction)facebookButtonAction:(id)sender {

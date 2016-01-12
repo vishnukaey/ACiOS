@@ -175,6 +175,7 @@
       
     case kFeedCellActionComment:
       [self showFeedCommentsWithFeed:feed];
+      break;
       
     default:
       break;
@@ -183,9 +184,9 @@
 
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+  UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:@"Main"
                                                 bundle:nil];
-  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  LCFeedsCommentsController *next = [mainSB instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
   UIViewController *profileController = (UIViewController *)self.delegate;
   [profileController.navigationController pushViewController:next animated:YES];
@@ -193,14 +194,14 @@
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.feed = feed;
+  LCFullScreenImageVC *imageVC = [[LCFullScreenImageVC alloc] init];
+  imageVC.feed = feed;
   __weak typeof (self) weakSelf = self;
-  vc.commentAction = ^ (id sender, BOOL showComments) {
+  imageVC.commentAction = ^ (id sender, BOOL showComments) {
     [weakSelf fullScreenAction:sender andShowComments:showComments];
   };
-  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-  [self presentViewController:vc animated:YES completion:nil];
+  imageVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:imageVC animated:YES completion:nil];
 }
 
 - (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
@@ -273,12 +274,12 @@
 {
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = tagDetails[@"id"];
     UIViewController *profileController = (UIViewController *)self.delegate;
-    [profileController.navigationController pushViewController:vc animated:YES];
+    [profileController.navigationController pushViewController:profileVC animated:YES];
   }
 }
 

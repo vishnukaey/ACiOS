@@ -124,21 +124,21 @@
 {
   LCRecentNotification * notification = self.results[indexPath.row];
   if ([notification.entityType isEqualToString:kEntityTypePost]) {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:@"Main"
                                                   bundle:nil];
-    LCFeedsCommentsController *commentsVC = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+    LCFeedsCommentsController *commentsVC = [mainSB instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
     commentsVC.feedId = notification.entityId;
     [self.navigationController pushViewController:commentsVC animated:YES];
   } else if ([notification.entityType isEqualToString:kEntityTypeEvent]) {
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-    LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    UIStoryboard * actionsSB = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions *actions = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
     LCEvent * event = [[LCEvent alloc] init];
     event.eventID = notification.entityId;
     actions.eventObject = event;
     [self.navigationController pushViewController:actions animated:YES];
   } else if ([notification.entityType isEqualToString:kEntityTypeUserProfile]) {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *vc = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = notification.entityId;
     [self.navigationController pushViewController:vc animated:YES];

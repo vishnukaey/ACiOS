@@ -140,15 +140,15 @@
   {
     LCEvent *event = [[LCEvent alloc] init];
     event.eventID =request.eventID;
-    UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-    LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    UIStoryboard * actionsSB = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+    LCViewActions *actions = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
     actions.eventObject = event;
     [self.navigationController pushViewController:actions animated:YES];
   }
   else
   {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateInitialViewController];
+    UIStoryboard *profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *vc = [profileSB instantiateInitialViewController];
     vc.userDetail = [[LCUserDetail alloc] init];
     LCRequest *request = [self.results objectAtIndex:indexPath.row];
     vc.userDetail.userID = request.friendID;
@@ -165,18 +165,18 @@
 
 -(void) deleteCellForRequest:(LCRequest*)request
 {
-  NSIndexPath *index;
-  int i = 0;
+  NSIndexPath *indexpath;
+  int index = 0;
   for(LCRequest *req in self.results)
   {
     if([req.requestID isEqualToString:request.requestID])
     {
-      index = [NSIndexPath indexPathForRow:i inSection:0];
+      indexpath = [NSIndexPath indexPathForRow:index inSection:0];
     }
-    i++;
+    index++;
   }
   [self.tableView beginUpdates];
-  [self.tableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+  [self.tableView deleteRowsAtIndexPaths:@[indexpath] withRowAnimation:UITableViewRowAnimationLeft];
   [self.results removeObject:request];
   [self.tableView endUpdates];
 }

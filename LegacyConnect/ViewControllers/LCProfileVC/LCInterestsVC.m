@@ -19,7 +19,7 @@
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCUserProfileAPIManager getInterestsForUser:self.userID lastId:nil withSuccess:^(NSArray *responses) {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     BOOL hasMoreData = responses.count >= 20;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {

@@ -33,12 +33,9 @@
     for (int i = 0; i<self.results.count ; i++) {
       if ([self.results[i] isKindOfClass:[LCRequest class]]) {
         LCRequest *request__ = self.results[i];
-        if (![request__.type isEqualToString:@"event"]) {
-          if([request__.friendID isEqualToString:updated_friend.friendId])
-          {
+        if (![request__.type isEqualToString:@"event"] && [request__.friendID isEqualToString:updated_friend.friendId]) {
             [self.results removeObjectAtIndex:i];
             break;
-          }
         }
       }
     }
@@ -55,13 +52,10 @@
   for (int i = 0; i<self.results.count ; i++) {
     if ([self.results[i] isKindOfClass:[LCRequest class]]) {
       LCRequest *request__ = self.results[i];
-      if ([request__.type isEqualToString:@"event"])
+      if ([request__.type isEqualToString:@"event"] && [request__.eventID isEqualToString:updated_event.eventID])
       {
-        if([request__.eventID isEqualToString:updated_event.eventID])
-        {
           [self.results removeObjectAtIndex:i];
           break;
-        }
       }
     }
   }

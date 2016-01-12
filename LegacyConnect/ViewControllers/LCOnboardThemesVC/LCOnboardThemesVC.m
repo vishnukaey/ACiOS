@@ -17,6 +17,8 @@
 @interface LCOnboardThemesVC ()
 {
   IBOutlet UIButton *nextButton;
+  IBOutlet UILabel *infoLabel1, *inforLabel2, *nextStepLabel;
+  IBOutlet NSLayoutConstraint *photoLabelHeight;
   NSMutableArray *themesArray;
 }
 @end
@@ -28,13 +30,34 @@
   themesArray = [[NSMutableArray alloc] init];
   self.themesTable.separatorColor = [UIColor clearColor];
   nextButton.enabled = NO;
-  
+  [MBProgressHUD showHUDAddedTo:self.themesTable animated:YES];
    [LCThemeAPIManager getThemesWithLastId:nil withSuccess:^(id response) {
+     [MBProgressHUD hideAllHUDsForView:self.themesTable animated:YES];
      themesArray = response;
      [self reloadTable];
    } andFailure:^(NSString *error) {
-     
+     [MBProgressHUD hideAllHUDsForView:self.themesTable animated:YES];
    }];
+  
+  NSString *infoText_2 = @"If you don't have one, that's okay! Choose a few Interests below and we'll fill your feed with news from related causes that you can follow later.";
+  NSMutableAttributedString *attributedString_2 = [[NSMutableAttributedString alloc] initWithString:infoText_2];
+  NSMutableParagraphStyle *paragraphStyle_2 = [[NSMutableParagraphStyle alloc] init];
+  [paragraphStyle_2 setLineSpacing:5];
+  [attributedString_2 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle_2 range:NSMakeRange(0, [infoText_2 length])];
+  inforLabel2.attributedText = attributedString_2 ;
+  
+  
+  NSString *infoText_1 = @"To get started, search for the name of a specific Cause if you have one in mind.";
+  NSMutableAttributedString *attributedString_1 = [[NSMutableAttributedString alloc] initWithString:infoText_1];
+  NSMutableParagraphStyle *paragraphStyle_1 = [[NSMutableParagraphStyle alloc] init];
+  [paragraphStyle_1 setLineSpacing:5];
+  [attributedString_1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle_1 range:NSMakeRange(0, [infoText_1 length])];
+  infoLabel1.attributedText = attributedString_1 ;
+  
+  if (_fromFacebook) {
+    nextStepLabel.text = @"Now on to the next step.";
+    photoLabelHeight.constant = 20;
+  }
 }
 
 
@@ -66,10 +89,10 @@
 - (void)showAllClicked :(UIButton *)sender
 {
   LCTheme *theme = [themesArray objectAtIndex:sender.tag];
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-  LCOnboardInterestsVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCOnboardInterestsVC"];
-  vc.theme = theme;
-  [self.navigationController pushViewController:vc animated:YES];;
+  UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCOnboardInterestsVC *interestVC = [signupSB instantiateViewControllerWithIdentifier:@"LCOnboardInterestsVC"];
+  interestVC.theme = theme;
+  [self.navigationController pushViewController:interestVC animated:YES];;
 }
 
 #pragma mark - TableView delegates

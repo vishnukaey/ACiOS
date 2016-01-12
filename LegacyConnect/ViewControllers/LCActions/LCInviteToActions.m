@@ -175,12 +175,12 @@
 - (void) dismissInviteActionView{
   
   if (isCreatingAction) {
-    UIStoryboard *sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-    LCViewActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
-    vc.eventObject = self.eventToInvite;
+    UIStoryboard *actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    LCViewActions *actionsVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
+    actionsVC.eventObject = self.eventToInvite;
     UINavigationController *nav = [[[self presentingViewController] childViewControllers] objectAtIndex:0];
     [self dismissViewControllerAnimated:NO completion:^{
-      [nav pushViewController:vc animated:YES];
+      [nav pushViewController:actionsVC animated:YES];
     }];
   }
   else {

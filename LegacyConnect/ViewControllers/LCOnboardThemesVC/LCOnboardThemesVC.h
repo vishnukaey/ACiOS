@@ -11,4 +11,5 @@
 @interface LCOnboardThemesVC : UIViewController
 @property (weak, nonatomic) IBOutlet UITableView *themesTable;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (assign, nonatomic) BOOL fromFacebook;
 @end

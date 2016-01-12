@@ -140,10 +140,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-  LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-  vc.userDetail = [self.results objectAtIndex:indexPath.row];
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+  LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+  profileVC.userDetail = [self.results objectAtIndex:indexPath.row];
+  [self.navigationController pushViewController:profileVC animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -156,10 +156,10 @@
 
 -(IBAction)inviteFriends:(id)sender
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
-  LCInviteToActions *vc = [sb instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
-  vc.eventToInvite = self.event;
-  [self presentViewController:vc animated:YES completion:nil];
+  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+  LCInviteToActions *actionsVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
+  actionsVC.eventToInvite = self.event;
+  [self presentViewController:actionsVC animated:YES completion:nil];
 }
 
 

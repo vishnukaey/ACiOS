@@ -111,23 +111,23 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+  UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:@"Main"
                                                 bundle:nil];
-  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  LCFeedsCommentsController *next = [mainSB instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
   [self.navigationController pushViewController:next animated:YES];
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.feed = feed;
+  LCFullScreenImageVC *imageVC = [[LCFullScreenImageVC alloc] init];
+  imageVC.feed = feed;
   __weak typeof (self) weakSelf = self;
-  vc.commentAction = ^ (id sender, BOOL showComments) {
+  imageVC.commentAction = ^ (id sender, BOOL showComments) {
     [weakSelf fullScreenAction:sender andShowComments:showComments];
   };
-  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-  [self presentViewController:vc animated:YES completion:nil];
+  imageVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:imageVC animated:YES completion:nil];
 }
 
 - (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
@@ -136,8 +136,6 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [viewController dismissViewControllerAnimated:!show completion:^{
     if (show) {
       [self showFeedCommentsWithFeed:viewController.feed];
-    } else {
-//      [self.tableView reloadData];
     }
   }];
 }
@@ -146,17 +144,17 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    [self.navigationController pushViewController:causeVC animated:YES];
   }
   else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:profileVC animated:YES];
   }
 }
 

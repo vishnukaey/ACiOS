@@ -103,8 +103,6 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       btnImageName = kImageNameProfileWaiting;
       break;
       
-    default:
-      break;
   }
   if(btnImageName)
   {

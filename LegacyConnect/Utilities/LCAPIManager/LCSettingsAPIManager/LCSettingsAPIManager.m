@@ -98,15 +98,15 @@
    {
      NSError *error = nil;
      LCSettings *settings = [MTLJSONAdapter modelOfClass:[LCSettings class] fromJSONDictionary:response[kResponseData][@"settings"] error:&error];
-     if(!error)
-     {
-       LCDLog(@"user settigns Fetch success!");
-       success(settings);
-     }
-     else
+     if(error)
      {
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"user settigns Fetch success!");
+       success(settings);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

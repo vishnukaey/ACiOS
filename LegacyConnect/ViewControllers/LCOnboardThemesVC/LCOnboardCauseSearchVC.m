@@ -26,9 +26,27 @@
   causesArray = [[NSMutableArray alloc] init];
   [self addSelectedCausesToDataSourcce];
   [self refreshList];
+  [self setSearchBarProperties];
+  [self.searchBar becomeFirstResponder];
 }
 
-
+- (void)setSearchBarProperties
+{
+  for (UIView *subview in self.searchBar.subviews)
+  {
+    for (UIView *subSubview in subview.subviews)
+    {
+      if ([subSubview conformsToProtocol:@protocol(UITextInputTraits)])
+      {
+        UITextField *textField = (UITextField *)subSubview;
+        [textField setEnablesReturnKeyAutomatically:NO];
+//        [textField setKeyboardAppearance: UIKeyboardAppearanceAlert];
+        textField.returnKeyType = UIReturnKeyDone;
+        break;
+      }
+    }
+  }
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -50,7 +68,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  static NSString *cellIdentifier = @"LCChooseCausesCollectionViewCell";
+  static NSString *cellIdentifier = @"causesCell";
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
   if (cell == nil)
   {
@@ -84,6 +102,16 @@
 }
 
 
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  return CGSizeMake(size, 140);
+}
+
+
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
@@ -106,8 +134,15 @@
   [self refreshList];
 }
 
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+  [searchBar resignFirstResponder];
+  // Do the search...
+}
+
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+  
   if (searchTimer)
   {
     if ([searchTimer isValid]) { [searchTimer invalidate]; }

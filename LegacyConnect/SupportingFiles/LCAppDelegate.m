@@ -86,14 +86,11 @@
     }
     return boolValue;
   }
-  else
-  {
-    boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
-                                                               openURL:url
-                                                     sourceApplication:sourceApplication
-                                                            annotation:annotation];
-    return boolValue;
-  }
+  boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                             openURL:url
+                                                   sourceApplication:sourceApplication
+                                                          annotation:annotation];
+  return boolValue;
 }
 
 + (LCAppDelegate *)appDelegate
