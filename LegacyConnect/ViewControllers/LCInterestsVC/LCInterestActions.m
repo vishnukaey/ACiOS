@@ -51,7 +51,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:[(LCInterest*)[self.results lastObject] interestID] withSuccess:^(NSArray *response) {
+  [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];

@@ -1134,8 +1134,8 @@
         <image name="LinkIcon" width="17" height="17"/>
         <image name="MembersIcon" width="17" height="16"/>
         <image name="backButton" width="12" height="21"/>
-        <image name="contact_plus" width="37" height="37"/>
-        <image name="contact_tick" width="37" height="37"/>
+        <image name="backButton_image" width="12" height="21"/>
+        <image name="photoPost_dummy.png" width="690" height="390"/>
         <image name="rightChevronGrey" width="8" height="12"/>
     </resources>
 </document>

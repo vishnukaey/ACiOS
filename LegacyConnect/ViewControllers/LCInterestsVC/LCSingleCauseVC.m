@@ -74,21 +74,9 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
-  cellsViewArray = [[NSMutableArray alloc]init];
-  for (int i=0; i<feedsArray.count; i++)
-  {
-    LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-    //    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
-    __weak typeof(self) weakSelf = self;
-    celViewFinal.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
-      [weakSelf feedCellActionWithType:actionType andFeed:feed];
-    };
-    celViewFinal.feedCellTagAction = ^ (NSDictionary * tagDetails) {
-      [weakSelf tagTapped:tagDetails];
-    };
-    
-    [cellsViewArray addObject:celViewFinal];
-  }
+  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+  
+  [self addPullToRefreshForPostsTable];
 }
 
 
@@ -100,10 +88,18 @@
   }
 }
 
-
 - (void)addPullToRefreshForPostsTable
 {
-  NSLog(@"FollowList clicked");
+  [self.tableView.pullToRefreshView setFontAwesomeIcon:@"icon-refresh"];
+  __weak typeof (self) weakSelf = self;
+  [self.tableView addPullToRefreshWithActionHandler:^{
+    [weakSelf setNoResultViewHidden:YES];
+    double delayInSeconds = 2.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [weakSelf startFetchingResults];
+    });
+  }withBackgroundColor:[UIColor lightGrayColor]];
 }
 
 - (void) loadPostsInCurrentInterest {
@@ -273,5 +269,63 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+
+- (IBAction)supportClicked:(id)sender
+{
+  NSLog(@"Follow clicked");
+  
+  supportButton.userInteractionEnabled = NO;
+  if(!supportButton.selected)
+  {
+    [supportButton setSelected:YES];
+    [LCThemeAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
+      _cause.isSupporting =YES;
+      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]+1];
+      supportButton.userInteractionEnabled = YES;
+    } andFailure:^(NSString *error) {
+      [supportButton setSelected:NO];
+      supportButton.userInteractionEnabled = YES;
+    }];
+  }
+  else
+  {
+    [supportButton setSelected:NO];
+    [LCThemeAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
+      supportButton.userInteractionEnabled = YES;
+      _cause.isSupporting = NO;
+      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]-1];
+    } andFailure:^(NSString *error) {
+      supportButton.userInteractionEnabled = YES;
+      [supportButton setSelected:YES];
+    }];
+  }
+}
+
+- (IBAction)supportersListClicked:(id)sender
+{
+  NSLog(@"FollowList clicked");
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
+  vc.cause = _cause;
+  [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)websiteLinkClicked:(id)sender
+{
+  NSLog(@"Follow clicked");
+//  if (_cause.url) {
+//    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
+//    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
+//      [[UIApplication sharedApplication] openURL:websiteURL];
+//    }
+//  }
+}
+
+
+- (IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 @end
