@@ -10,19 +10,16 @@
 #import "LCChooseCausesCollectionViewCell.h"
 #import "LCSingleCauseVC.h"
 
-//static NSInteger kCausesCellWidth = 105;
-//static NSInteger kCausesCellHeight = 140;
-
 @implementation LCInterestCauses
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Methods
@@ -39,7 +36,7 @@
   [LCThemeAPIManager getCausesForInterestID:self.interest.interestID andLastCauseID:nil withSuccess:^(NSArray *responses) {
     [MBProgressHUD hideAllHUDsForView:self.collectionView animated:YES];
     BOOL hasMoreData = [(NSArray*)responses count] >= 10;
-    [self didFetchNextResults:responses haveMoreData:hasMoreData];
+    [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.collectionView animated:YES];
     [self didFailedToFetchResults];
@@ -68,13 +65,8 @@
   LCCOLLECTIONVIEW_cellForItemAtIndexPath
   LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:kCausesCellID forIndexPath:indexPath];
   cell.cause = self.results[indexPath.item];
+  cell.selectionButton.hidden = YES;
   
-//  if ([LCOnboardingHelper isCauseSelected:self.results[indexPath.item]]) {
-//    [cell setCellSelected:YES];
-//  }
-//  else {
-//    [cell setCellSelected:NO];
-//  }
   return cell;
 }
 
@@ -86,17 +78,12 @@
   [self.navigationController pushViewController:vc animated:YES];
 }
 
-//- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  LCChooseCausesCollectionViewCell *cell = (LCChooseCausesCollectionViewCell*)[collectionView cellForItemAtIndexPath:indexPath];
-//  [LCOnboardingHelper removeCause:self.results[indexPath.item]];
-//  [cell setCellSelected:NO];
-//}
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  return CGSizeMake(size, 140);
+}
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//  return CGSizeMake(kCausesCellWidth, kCausesCellHeight);;
-//}
 
 #pragma mark - ScrollView delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView

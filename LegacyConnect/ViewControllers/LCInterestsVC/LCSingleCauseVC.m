@@ -16,7 +16,7 @@
 {
   [super viewDidLoad];
   [self refreshViewWithCauseDetails];
-//  [self prepareCells];
+  //  [self prepareCells];
 }
 
 - (void)didReceiveMemoryWarning
@@ -61,7 +61,7 @@
   for (int i=0; i<feedsArray.count; i++)
   {
     LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-//    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
+    //    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
     __weak typeof(self) weakSelf = self;
     celViewFinal.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
       [weakSelf feedCellActionWithType:actionType andFeed:feed];
@@ -69,7 +69,7 @@
     celViewFinal.feedCellTagAction = ^ (NSDictionary * tagDetails) {
       [weakSelf tagTapped:tagDetails];
     };
-
+    
     [cellsViewArray addObject:celViewFinal];
   }
 }
@@ -82,7 +82,7 @@
 
 - (IBAction)supportersListClicked:(id)sender
 {
-    NSLog(@"FollowList clicked");
+  NSLog(@"FollowList clicked");
 }
 
 - (IBAction)websiteLinkClicked:(id)sender
@@ -147,13 +147,13 @@
   NSLog(@"tag details-->>%@", tagDetails);
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
