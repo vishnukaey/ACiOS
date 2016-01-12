@@ -12,6 +12,7 @@
 #import "LCFeedsCommentsController.h"
 #import "LCFullScreenImageVC.h"
 #import "LCProfileViewVC.h"
+#import "LCCauseSupportersVC.h"
 
 
 @implementation LCSingleCauseVC
@@ -259,7 +260,6 @@
     LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     vc.userDetail = [[LCUserDetail alloc] init];
     vc.userDetail.userID = tagDetails[@"id"];
-//    UIViewController *profileController = (UIViewController *)self.delegate;
     [self.navigationController pushViewController:vc animated:YES];
   }
 }
@@ -268,17 +268,54 @@
 - (IBAction)supportClicked:(id)sender
 {
   NSLog(@"Follow clicked");
+  
+  supportButton.userInteractionEnabled = NO;
+  if(!supportButton.selected)
+  {
+    [supportButton setSelected:YES];
+    [LCThemeAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
+      _cause.isSupporting =YES;
+      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]+1];
+      supportButton.userInteractionEnabled = YES;
+    } andFailure:^(NSString *error) {
+      [supportButton setSelected:NO];
+      supportButton.userInteractionEnabled = YES;
+    }];
+  }
+  else
+  {
+    [supportButton setSelected:NO];
+    [LCThemeAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
+      supportButton.userInteractionEnabled = YES;
+      _cause.isSupporting = NO;
+      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]-1];
+    } andFailure:^(NSString *error) {
+      supportButton.userInteractionEnabled = YES;
+      [supportButton setSelected:YES];
+    }];
+  }
 }
 
 - (IBAction)supportersListClicked:(id)sender
 {
   NSLog(@"FollowList clicked");
+  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
+  vc.cause = _cause;
+  [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
   NSLog(@"Follow clicked");
+//  if (_cause.url) {
+//    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
+//    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
+//      [[UIApplication sharedApplication] openURL:websiteURL];
+//    }
+//  }
 }
+
 
 - (IBAction)backButtonTapped:(id)sender
 {
