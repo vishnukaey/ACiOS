@@ -21,8 +21,6 @@
 
 @end
 
-#warning headers are present even on no result condition.
-
 @implementation LCSearchTopViewController
 
 - (void)viewDidLoad {
@@ -80,7 +78,10 @@
   {
     return self.searchResultObject.interestsArray.count>3 ? 3 : self.searchResultObject.interestsArray.count;
   }
-  return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
+  else
+  {
+    return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
+  }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -96,20 +97,27 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  
-  NSString *sectionName = nil;
-  
-  if (section == 0) {
-    sectionName = @"Users";
-  } else  if (section == 1) {
-    sectionName = @"Interests";
-  } else {
-    sectionName = @"Causes";
+  NSString *sectionName;
+  switch (section)
+  {
+    case 0:
+      sectionName = @"Users";
+      break;
+    case 1:
+      sectionName = @"Interests";
+      break;
+      // ...
+    default:
+      sectionName = @"Causes";
+      break;
   }
-  
   if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] > 0)
   {
     return sectionName;
+  }
+  else
+  {
+    return nil;
   }
   return sectionName;
 }
