@@ -200,10 +200,13 @@
    }];
 }
 
-+ (void)getListOfEventsForInterestID:(NSString*)InterestID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getListOfEventsForInterestID:(NSString*)InterestID lastID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *params = [NSString stringWithFormat:@"?%@=%@",kInterestIDKey,InterestID];
+  NSMutableString *params = [NSMutableString stringWithFormat:@"?%@=%@",kInterestIDKey,InterestID];
+  if (lastID) {
+    [params appendString:[NSString stringWithFormat:@"&%@=%@", kLastIdKey, lastID]];
+  }
   NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kEventsURL,params];
   
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)

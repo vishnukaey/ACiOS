@@ -34,7 +34,7 @@
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCProfileAPIManager getUserEventsForUserId:@"7347" andLastEventId:nil withSuccess:^(NSArray *response) {
+  [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -51,7 +51,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCProfileAPIManager getUserEventsForUserId:@"7347" andLastEventId:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
+  [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -66,14 +66,14 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-//  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
-//  if (!self.noResultsView) {
-//    NSString *message = NSLocalizedString(@"no_actions_available_others", nil);
-//    if (isSelfProfile) {
-//      message = NSLocalizedString(@"no_actions_available_self", nil);
-//    }
-//    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
-//  }
+  //  isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
+  //  if (!self.noResultsView) {
+  //    NSString *message = NSLocalizedString(@"no_actions_available_others", nil);
+  //    if (isSelfProfile) {
+  //      message = NSLocalizedString(@"no_actions_available_self", nil);
+  //    }
+  //    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  //  }
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self addPullToRefreshForActionsTable];
 }
