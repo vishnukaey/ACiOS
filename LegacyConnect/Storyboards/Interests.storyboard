@@ -1158,6 +1158,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
+                                            <action selector="backAction:" destination="hfz-b5-dSQ" eventType="touchUpInside" id="fJe-HF-VdV"/>
                                             <action selector="backButtonTapped:" destination="Dfv-2o-Ygq" eventType="touchUpInside" id="NNx-GF-5Ms"/>
                                         </connections>
                                     </button>
@@ -1187,14 +1188,14 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3v1-Xe-C9x">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92156862745098034" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="dataSource" destination="hfz-b5-dSQ" id="Zlf-md-Nef"/>
                                     <outlet property="delegate" destination="hfz-b5-dSQ" id="owl-Jg-Zgo"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Aar-zh-k01" secondAttribute="trailing" id="67B-n3-VTd"/>
                             <constraint firstItem="Aar-zh-k01" firstAttribute="top" secondItem="NM0-Ez-WCh" secondAttribute="top" id="Dfk-cj-fUO"/>

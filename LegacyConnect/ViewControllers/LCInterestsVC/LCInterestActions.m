@@ -33,16 +33,16 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
-    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
   }];
@@ -68,7 +68,7 @@
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
-  NSString *message = NSLocalizedString(@"no_causes_to_display", nil);
+  NSString *message = NSLocalizedString(@"no_actions_to_display", nil);
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
 
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
@@ -113,6 +113,10 @@
   [self startFetchingResults];
 }
 
+- (IBAction)backAction:(id)sender {
+  [self.navigationController popViewControllerAnimated:YES];
+}
+
 #pragma mark - TableView delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -131,9 +135,6 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   [cell setEvent:[self.results objectAtIndex:indexPath.row]];
-  tableView.backgroundColor = [UIColor clearColor];
-  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-  tableView.allowsSelection = YES;
   return cell;
 }
 
@@ -142,8 +143,8 @@
   UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
   LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
   actions.eventObject = self.results[indexPath.row];
-  UIViewController *profileController = (UIViewController *)self.delegate;
-  [profileController.navigationController pushViewController:actions animated:YES];
+  //UIViewController *profileController = (UIViewController *)self.delegate;
+  [self.navigationController pushViewController:actions animated:YES];
 }
 
 #pragma mark - ScrollView delegates
