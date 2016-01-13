@@ -127,25 +127,25 @@
 
 - (void)addTabMenu
 {
-  tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [tabMenuContainer addSubview:tabmenu];
-  //[tabmenu setBackgroundColor:[UIColor whiteColor]];
-  tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
-  tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+//  tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+//  [tabMenuContainer addSubview:tabmenu];
+//  //[tabmenu setBackgroundColor:[UIColor whiteColor]];
+//  tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
+//  tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+//  
+//  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+//  [tabMenuContainer addConstraint:top];
+//  
+//  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+//  [tabMenuContainer addConstraint:bottom];
+//  
+//  NSLayoutConstraint *left =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+//  [tabMenuContainer addConstraint:left];
+//  
+//  NSLayoutConstraint *right =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+//  [tabMenuContainer addConstraint:right];
+//  tabmenu.layer.borderWidth = 3;
   
-  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:top];
-  
-  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:bottom];
-  
-  NSLayoutConstraint *left =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:left];
-  
-  NSLayoutConstraint *right =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:right];
-  
-  //  tabmenu.layer.borderWidth = 3;
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, actionsButton, nil];
   tabmenu.views = [[NSArray alloc] initWithObjects:milestonesContainer, interestsContainer, actionsContainer, nil];
 }

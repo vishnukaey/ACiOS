@@ -15,6 +15,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
+  [self initailSetup];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -23,6 +24,11 @@
 }
 
 #pragma mark - Private Methods
+
+- (void) initailSetup {
+
+  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_causes_to_display", nil) andViewWidth:CGRectGetWidth(self.collectionView.frame)];
+}
 
 - (void) loadCausesInCurrentInterest
 {
@@ -37,6 +43,11 @@
     [MBProgressHUD hideAllHUDsForView:self.collectionView animated:YES];
     BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchResults:responses haveMoreData:hasMoreData];
+    if (self.results.count > 0) {
+      [self hideNoResultsView];
+    } else {
+      [self showNoResultsView];
+    }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.collectionView animated:YES];
     [self didFailedToFetchResults];
