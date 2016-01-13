@@ -11,10 +11,13 @@
 
 @implementation LCThemeAPIManager
 
-+ (void)getInterestsWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getAllInterestsWithLastId:(NSString*)lastId success:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetInterestsURL];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetAllInterestsURL];
+  if (lastId) {
+    url = [NSString stringWithFormat:@"%@?lastId=%@",url,lastId];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
@@ -134,15 +137,16 @@
    }];
 }
 
-+ (void)followInterest:(NSString *)interestId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)followInterest:(LCInterest *)interest withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kIneterestsFollowURL];
-  NSDictionary *dict = @{kInterestIDKey: interestId};
+  NSDictionary *dict = @{kInterestIDKey: interest.interestID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Interest followed successfully");
+     [LCNotificationManager postInterestFollowedNotificationWithInterest:interest];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -178,15 +182,17 @@
 }
 
 
-+ (void)unfollowInterest:(NSString *)interestId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)unfollowInterest:(LCInterest *)interest withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kIneterestsUnfollowURL];
-  NSDictionary *dict = @{kInterestIDKey: interestId};
+  NSDictionary *dict = @{kInterestIDKey: interest.interestID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Interest unfollowed successfully");
+     [LCNotificationManager postInterestUnFollowedNotificationWithInterest:interest];
+
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

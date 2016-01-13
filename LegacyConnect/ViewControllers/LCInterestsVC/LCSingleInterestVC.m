@@ -79,7 +79,7 @@
   if(!interestFollowButton.selected)
   {
     [interestFollowButton setSelected:YES];
-    [LCThemeAPIManager followInterest:_interest.interestID withSuccess:^(id response) {
+    [LCThemeAPIManager followInterest:_interest withSuccess:^(id response) {
       _interest.isFollowing =YES;
       _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]+1];
       interestFollowButton.userInteractionEnabled = YES;
@@ -91,7 +91,7 @@
   else
   {
     [interestFollowButton setSelected:NO];
-    [LCThemeAPIManager unfollowInterest:_interest.interestID withSuccess:^(id response) {
+    [LCThemeAPIManager unfollowInterest:_interest withSuccess:^(id response) {
       interestFollowButton.userInteractionEnabled = YES;
       _interest.isFollowing = NO;
       _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]-1];
