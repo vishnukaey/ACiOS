@@ -131,9 +131,9 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   [cell setEvent:[self.results objectAtIndex:indexPath.row]];
-  tableView.backgroundColor = [UIColor clearColor];
-  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-  tableView.allowsSelection = YES;
+//  tableView.backgroundColor = [UIColor clearColor];
+//  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//  tableView.allowsSelection = YES;
   return cell;
 }
 

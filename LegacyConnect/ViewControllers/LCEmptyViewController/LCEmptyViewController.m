@@ -15,7 +15,7 @@
 #import "LCMenuButton.h"
 #import "LCChooseActionsInterest.h"
 #import "LCProfileViewVC.h"
-#import "LCAllInterestVC.h"
+#import "LCMyAndAllInterestVC.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCLoginViewController.h"
@@ -308,20 +308,26 @@ static NSString *kTitle = @"MY FEED";
     LCFeedsHomeViewController *feedsVC = [mainSB instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:feedsVC]];
   }
-  else if (index == 1)//notifications
+  else if (index == 1)//Interest
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    LCMyAndAllInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:kAllAndMyInterestStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:interestVC]];
+  }
+  else if (index == 2)//notifications
   {
     UIStoryboard*  notificationSB = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
     LCNotificationsViewController *notificationVC = [notificationSB instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:notificationVC]];
   }
-  else if (index == 2)//settings
+  else if (index == 3)//settings
   {
     UIStoryboard*  settingsSB = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
     LCSettingsViewController *settingsVC = [settingsSB instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:settingsVC]];
     
   }
-  else if (index == 3)//profile
+  else if (index == 4)//profile
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateInitialViewController];
@@ -360,12 +366,12 @@ static NSString *kTitle = @"MY FEED";
     updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
     [self.navigationController pushViewController:updatePasswordVC animated:YES];
   }
-  else
-  {
-    //Logout
-    [self leftMenuItemSelectedAtIndex:4];
-    [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
-  }
+//  else
+//  {
+//    //Logout
+//    [self leftMenuItemSelectedAtIndex:4];
+//    [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
+//  }
 }
 
 

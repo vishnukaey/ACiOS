@@ -180,4 +180,19 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCountUpdated object:nil userInfo:nil];
 }
 
++ (void)postInterestFollowedNotificationWithInterest:(LCInterest*)interest
+{
+  interest.isFollowing = YES;
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:interest, kInterestObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFollowInterestNFK object:nil userInfo:userInfo];
+}
+
++ (void)postInterestUnFollowedNotificationWithInterest:(LCInterest*)interest
+{
+  interest.isFollowing = NO;
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:interest, kInterestObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUnfollowInterestNFK object:nil userInfo:userInfo];
+}
+
+
 @end

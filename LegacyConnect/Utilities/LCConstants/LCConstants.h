@@ -46,9 +46,11 @@ extern NSString *const kGetUserDetailsURL;
 extern NSString *const kGetInterestURL;
 extern NSString *const kGetInterestsURL;
 extern NSString *const kGetUserInterestsURL;
+extern NSString *const kGetAllInterestsURL;
 extern NSString *const kGetInterestFollowersURL;
 extern NSString *const kIneterestsFollowURL;
 extern NSString *const kIneterestsUnfollowURL;
+extern NSString *const kGetInterestFeedsURL;
 extern NSString *const kGetInterestsAndCausesURL;
 extern NSString *const kGetCausesWithInterestURL;
 
@@ -111,6 +113,9 @@ extern NSString *const kNotificationStoryBoardIdentifier;
 extern NSString *const kCreatePostStoryBoardIdentifier;
 extern NSString *const kSettingsStoryBoardIdentifier;
 
+extern NSString *const kInterestObj;
+extern NSString *const kCauseObj;
+
 extern NSString *const kTutorialPresentKey;
 
 extern NSString *const kHomeFeedsStoryBoardID;
@@ -119,6 +124,7 @@ extern NSString *const kUpdatePasswordStoryBoardID;
 extern NSString *const kLoginStoryBoardID;
 extern NSString *const kForgotPasswordStoryBoardID;
 extern NSString *const kSettingsStoryBoardID;
+extern NSString *const kAllAndMyInterestStoryBoardID;
 
 extern NSString *const kStatusCodeKey;
 extern NSString *const kLCVersionKey;

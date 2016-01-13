@@ -16,7 +16,7 @@
 #define DEMO_SERVER 3
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -65,9 +65,11 @@ NSString *const kUploadUserImageURL = @"api/user/profileImage";
 NSString *const kGetInterestURL = @"api/interest";
 NSString *const kGetInterestsURL = @"api/interests";
 NSString *const kGetUserInterestsURL = @"api/user/interests";
+NSString *const kGetAllInterestsURL = @"api/interest/all";
 NSString *const kGetInterestFollowersURL = @"api/interest/users";
 NSString *const kIneterestsFollowURL = @"api/interest/follow";
 NSString *const kIneterestsUnfollowURL = @"api/interest/unfollow";
+NSString *const kGetInterestFeedsURL = @"api/interest/feed";
 NSString *const kGetInterestsAndCausesURL = @"api/user/getUserInterestsWithCauses";
 NSString *const kGetCausesWithInterestURL = @"api/causesWithInterest";
 
@@ -129,6 +131,9 @@ NSString *const kNotificationStoryBoardIdentifier = @"Notification";
 NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
 NSString *const kSettingsStoryBoardIdentifier = @"Settings";
 
+NSString *const kInterestObj = @"Interest";
+NSString *const kCauseObj = @"cause";
+
 NSString *const kTutorialPresentKey = @"tutorialPresented";
 
 NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
@@ -137,6 +142,7 @@ NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
 NSString *const kLoginStoryBoardID = @"LCLoginViewController";
 NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
 NSString *const kSettingsStoryBoardID = @"LCSettingsViewController";
+NSString *const kAllAndMyInterestStoryBoardID = @"LCMyAndAllInterestVC";
 
 NSString *const kStatusCodeKey = @"statusCode";
 NSString *const kLCVersionKey = @"lcversion";
