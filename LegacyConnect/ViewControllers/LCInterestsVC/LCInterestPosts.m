@@ -38,27 +38,11 @@
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  //  self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
-  
-  //  self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
-  //
-  //  if (!self.noResultsView) {
-  //    NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
-  //    if (self.isSelfProfile) {
-  //      message = NSLocalizedString(@"no_milestones_available_self", nil);
-  //    }
-  //    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
-  //  }
-  
-  [self addPullToRefreshForPostsTable];
-}
 
-- (void)stopRefreshingViews
-{
-  //-- Stop Refreshing Views -- //
-  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
-    [self.tableView.pullToRefreshView stopAnimating];
-  }
+  NSString *message = NSLocalizedString(@"no_posts_to_display", nil);
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+
+  [self addPullToRefreshForPostsTable];
 }
 
 - (void)addPullToRefreshForPostsTable
@@ -75,6 +59,14 @@
   }withBackgroundColor:[UIColor lightGrayColor]];
 }
 
+- (void)stopRefreshingViews
+{
+  //-- Stop Refreshing Views -- //
+  if (self.tableView.pullToRefreshView.state == KoaPullToRefreshStateLoading) {
+    [self.tableView.pullToRefreshView stopAnimating];
+  }
+}
+
 - (void) loadPostsInCurrentInterest {
   [self startFetchingResults];
 }
@@ -84,9 +76,9 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCUserProfileAPIManager getMilestonesForUser:@"7347" andLastMilestoneID:nil withSuccess:^(NSArray *response) {
-    [self stopRefreshingViews];
+  [LCThemeAPIManager getPostsInInterest:self.interest.interestID andLastPostID:nil withSuccess:^(NSArray *response) {
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
@@ -102,7 +94,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCUserProfileAPIManager getMilestonesForUser:@"7347" andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getPostsInInterest:self.interest.interestID andLastPostID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -159,11 +151,6 @@
     [weakSelf tagTapped:tagDetails];
   };
   
-  
-  //  if (self.isSelfProfile) {
-  //    cell.moreButton.hidden = NO;
-  //  }
-  
   tableView.backgroundColor = [UIColor clearColor];
   tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
   tableView.allowsSelection = YES;
@@ -175,9 +162,6 @@
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
   switch (type) {
-      //    case kkFeedCellActionLoadMore:
-      //      [self feedCellMoreAction :feed];
-      //      break;
       
     case kkFeedCellActionViewImage:
       [self showFullScreenImage:feed];
@@ -225,70 +209,16 @@
   }];
 }
 
-//- (void)feedCellMoreAction :(LCFeed *)feed
-//{
-//  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//  actionSheet.view.tintColor = [UIColor blackColor];
-//
-//  UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-//    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
-//    createPostVC.isEditing = YES;
-//    createPostVC.postFeedObject = feed;
-//    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-//    [self presentViewController:createPostVC animated:YES completion:nil];
-//  }];
-//
-//  [actionSheet addAction:editPost];
-//
-//  UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-//    [LCPostAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
-//      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-//    }
-//                                   andFailure:^(NSString *error) {
-//                                     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-//                                     NSLog(@"%@",error);
-//                                   }];
-//  }];
-//  [actionSheet addAction:removeMilestone];
-//
-//  UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-//    UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-//    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-//      [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-//      [LCPostAPIManager deletePost:feed withSuccess:^(NSArray *response) {
-//        [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-//      }
-//                        andFailure:^(NSString *error) {
-//                          [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-//                          NSLog(@"%@",error);
-//                        }];
-//    }];
-//    [deleteAlert addAction:deletePostActionFinal];
-//
-//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
-//    [deleteAlert addAction:cancelAction];
-//    [self presentViewController:deleteAlert animated:YES completion:nil];
-//
-//  }];
-//  [actionSheet addAction:deletePost];
-//
-//  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
-//  [actionSheet addAction:cancelAction];
-//  [self presentViewController:actionSheet animated:YES completion:nil];
-//}
-
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
   if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
+    UIStoryboard*  storyboard = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *profileVC = [storyboard instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = tagDetails[@"id"];
     UIViewController *profileController = (UIViewController *)self.delegate;
-    [profileController.navigationController pushViewController:vc animated:YES];
+    [profileController.navigationController pushViewController:profileVC animated:YES];
   }
 }
 

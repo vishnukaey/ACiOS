@@ -15,12 +15,7 @@
 
 @interface LCSingleInterestVC : UIViewController <LCInterestPostsDelegate, LCInterestCausesDelegate, LCInterestActionsDelegate>
 {
-//  IBOutlet UITableView *feedsTable;
-//  IBOutlet UIScrollView *causesScrollView;
-//  NSMutableArray *cellsViewArray;
-  
-  __weak IBOutlet UIView *tabMenuContainer;
-  LCTabMenuView *tabmenu;
+  __weak IBOutlet LCTabMenuView *tabmenu;
   __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   
   __weak IBOutlet UIButton *postsButton;
@@ -48,9 +43,4 @@
 }
 
 @property(nonatomic, strong) LCInterest *interest;
-
-//- (IBAction)toggleHelpsORCauses:(UIButton *)sender;
-//- (IBAction)backAction:(id)sender;
-//- (IBAction)followButtonAction:(id)sender;
-
 @end
