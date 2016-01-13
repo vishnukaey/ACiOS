@@ -32,7 +32,7 @@
   NSArray *interestsArray;
   NSArray *actionsArray;
   
-  LCTabMenuView *tabmenu;
+  IBOutlet LCTabMenuView *tabmenu;
 }
 
 - (IBAction)backAction:(id)sender;
