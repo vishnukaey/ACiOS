@@ -23,7 +23,7 @@
 static NSString *kProfilePicPlaceholder = @"userProfilePic";
 static CGFloat kProfilePicBorderWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
-static CGFloat kNumberOfCells = 3.0;
+static CGFloat kNumberOfCells = 4.0;
 static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 #define kSelectionColor [UIColor colorWithRed:0.0f/255 green:0.0f/255 blue:0.0f/255 alpha:1]
@@ -137,7 +137,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (IBAction)profileButtonTapped:(id)sender {
   [self deselectCellAtIndexPath:selectedIndexPath];
   selectedIndexPath = nil;
-  [delegate_ leftMenuItemSelectedAtIndex:3];
+  [delegate_ leftMenuItemSelectedAtIndex:4];
 }
 
 #pragma mark - UITableViewDataSource

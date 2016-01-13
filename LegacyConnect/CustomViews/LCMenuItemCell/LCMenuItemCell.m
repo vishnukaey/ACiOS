@@ -35,18 +35,18 @@ static NSString *kSettingsIcon = @"SettingsIcon";
       cellIconImag = [UIImage imageNamed:kFeedIcon];
       break;
       
-//    case 1:
-//      cellText = NSLocalizedString(@"Interests", nil) ;
-//      cellIconImag = [UIImage imageNamed:kInterestsIncon];
-//      break;
-      
     case 1:
+      cellText = NSLocalizedString(@"Interests", nil) ;
+      cellIconImag = [UIImage imageNamed:kInterestsIncon];
+      break;
+      
+    case 2:
       cellText = NSLocalizedString(@"Notifications", nil) ;
       cellIconImag = [UIImage imageNamed:kNotificationsIcon];
       [self updateNotificationCount];
       break;
       
-    case 2:
+    case 3:
       cellText = NSLocalizedString(@"Settings", nil) ;
       cellIconImag = [UIImage imageNamed:kSettingsIcon];
       break;

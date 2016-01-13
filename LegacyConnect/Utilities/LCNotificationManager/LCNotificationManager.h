@@ -40,5 +40,9 @@
 //Notification
 + (void)postNotificationCountUpdatedNotification;
 
+//Interest
++ (void)postInterestFollowedNotificationWithInterest:(LCInterest*)interest;
++ (void)postInterestUnFollowedNotificationWithInterest:(LCInterest*)interest;
+
 
 @end
