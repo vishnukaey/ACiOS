@@ -147,6 +147,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    causeVC.cause.interestID = tagDetails[kTagobjId];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
@@ -157,11 +158,13 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     profileVC.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:profileVC animated:YES];
   }
-  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to cause page
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-    LCSingleInterestVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-    [self.navigationController pushViewController:causeVC animated:YES];
+    LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    interestVC.interest = [[LCInterest alloc] init];
+    interestVC.interest.interestID = tagDetails[kTagobjId];
+    [self.navigationController pushViewController:interestVC animated:YES];
   }
 }
 
