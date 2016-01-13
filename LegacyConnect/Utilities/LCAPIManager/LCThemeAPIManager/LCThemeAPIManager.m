@@ -84,14 +84,14 @@
    }];
 }
 
-+ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCFeed* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCInterest* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kGetInterestURL,interestId];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
-     LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCInterest class] fromJSONDictionary:response[kResponseData] error:&error];
+     LCInterest *interest = [MTLJSONAdapter modelOfClass:[LCInterest class] fromJSONDictionary:response[kResponseData] error:&error];
      if(error)
      {
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
@@ -100,7 +100,7 @@
      else
      {
        LCDLog(@"Interest details Fetch success! ");
-       success(feed);
+       success(interest);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -345,6 +345,33 @@
      failure(error);
    }];
 
+}
+
++ (void)getPostsInInterest:(NSString *)interestID andLastPostID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFeedsURL, kInterestIDKey, interestID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:response[kResponseData] error:&error];
+     if(error)
+     {
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Milestones fetch success! ");
+       success(responsesArray);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
 }
 
 

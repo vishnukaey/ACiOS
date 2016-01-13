@@ -12,7 +12,7 @@
 
 @implementation LCSingleInterestVC
 
-#pragma mark - controller life cycle
+#pragma mark - Controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
@@ -33,13 +33,29 @@
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
 }
 
-
+#pragma mark - Private Methods
 - (void) initialSetup
 {
-  [self updateInterestDetails];
-  [self addTabMenu];
+  tabmenu.menuButtons = [[NSArray alloc] initWithObjects:postsButton, causesButton, actionsButton, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:postsContainer, causesContainer, actionsContainer, nil];
   
-  [interestPostsView loadPostsInCurrentInterest];
+  [self updateInterestDetails];
+//  if (self.interest.name == nil) {
+  [self getInterestDetails];
+//  }
+}
+
+- (void) getInterestDetails
+{
+//  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCThemeAPIManager getInterestDetailsOfInterest:self.interest.interestID WithSuccess:^(LCInterest *response) {
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    self.interest = response;
+    [self updateInterestDetails];
+    [interestPostsView loadPostsInCurrentInterest];
+  } andFailure:^(NSString *error) {
+//    [MBProgressHUD hideHUDForView:self.view animated:YES];    
+  }];
 }
 
 - (void) updateInterestDetails
@@ -47,47 +63,12 @@
   interestName.text = _interest.name;
   interestDescription.text = _interest.descriptionText;
   [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
-  [interestBGImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLLarge] placeholderImage:nil completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    
-//    UIColor *topColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.5];
-//    UIColor *bottomColor = [UIColor colorWithRed:80.0/255.0 green:80.0/255.0 blue:80.0/255.0 alpha:0.6];
-//    
-//    CAGradientLayer *gradientMask = [CAGradientLayer layer];
-//    gradientMask.frame = interestBGImage.bounds;
-//    gradientMask.colors = @[(id)topColor.CGColor,
-//                            (id)bottomColor.CGColor];
-//    interestBGImage.layer.mask = gradientMask;
-  }];
   followersCount.text = _interest.followers;
+  actionsCount.text = _interest.events;
   [interestFollowButton setSelected:_interest.isFollowing];
 }
 
-- (void)addTabMenu
-{
-  tabmenu = [[LCTabMenuView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-  [tabMenuContainer addSubview:tabmenu];
-  //[tabmenu setBackgroundColor:[UIColor whiteColor]];
-  tabmenu.translatesAutoresizingMaskIntoConstraints = NO;
-  tabMenuContainer.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
-  
-  NSLayoutConstraint *top =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeTopMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:top];
-  
-  NSLayoutConstraint *bottom =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeBottomMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:bottom];
-  
-  NSLayoutConstraint *left =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:left];
-  
-  NSLayoutConstraint *right =[NSLayoutConstraint constraintWithItem:tabMenuContainer attribute:NSLayoutAttributeRightMargin relatedBy:NSLayoutRelationEqual toItem:tabmenu attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
-  [tabMenuContainer addConstraint:right];
-  
-  //  tabmenu.layer.borderWidth = 3;
-  tabmenu.menuButtons = [[NSArray alloc] initWithObjects:postsButton, causesButton, actionsButton, nil];
-  tabmenu.views = [[NSArray alloc] initWithObjects:postsContainer, causesContainer, actionsContainer, nil];
-}
-
-
+#pragma mark - Action Mehtods
 - (IBAction)backAction:(id)sender
 {
   [self.navigationController popViewControllerAnimated:YES];
@@ -120,6 +101,17 @@
     }];
   }
 }
+
+- (IBAction)showActions:(id)sender {
+  
+  
+}
+
+- (IBAction)showFollowers:(id)sender {
+  
+  
+}
+
 
 - (IBAction)postsButtonClicked:(id)sender
 {
@@ -164,6 +156,12 @@
     interestActionsView = segue.destinationViewController;
     interestActionsView.interest = self.interest;
     interestActionsView.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"showActionsList"]) {
+    
+    interestActionsView = segue.destinationViewController;
+    interestActionsView.interest = self.interest;
+    [interestActionsView loadActionsInCurrentInterest];
   }
 }
 

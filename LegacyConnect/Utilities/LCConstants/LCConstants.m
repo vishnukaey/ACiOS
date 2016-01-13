@@ -16,7 +16,7 @@
 #define DEMO_SERVER 3
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -68,6 +68,7 @@ NSString *const kGetUserInterestsURL = @"api/user/interests";
 NSString *const kGetInterestFollowersURL = @"api/interest/users";
 NSString *const kIneterestsFollowURL = @"api/interest/follow";
 NSString *const kIneterestsUnfollowURL = @"api/interest/unfollow";
+NSString *const kGetInterestFeedsURL = @"api/interest/feed";
 NSString *const kGetInterestsAndCausesURL = @"api/user/getUserInterestsWithCauses";
 NSString *const kGetCausesWithInterestURL = @"api/causesWithInterest";
 
