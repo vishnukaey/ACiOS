@@ -236,7 +236,7 @@
    }];
 }
 
-+ (void)getCauseFollowersOfCause:(NSString*)causeId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getCauseFollowersOfCause:(NSString*)causeId andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId];
@@ -371,7 +371,6 @@
      }
      else
      {
-       LCDLog(@"Milestones fetch success! ");
        success(responsesArray);
      }
    } andFailure:^(NSString *error) {

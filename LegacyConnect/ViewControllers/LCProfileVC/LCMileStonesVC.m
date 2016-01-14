@@ -57,7 +57,7 @@
     if (self.isSelfProfile) {
       message = NSLocalizedString(@"no_milestones_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
   }
 }
 
@@ -276,14 +276,14 @@
 {
   if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
     causeVC.cause.interestID = tagDetails[kTagobjId];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
@@ -291,7 +291,7 @@
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
     LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
     interestVC.interest = [[LCInterest alloc] init];
     interestVC.interest.interestID = tagDetails[kTagobjId];

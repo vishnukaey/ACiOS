@@ -12,8 +12,9 @@
 #import "LCInterestPosts.h"
 #import "LCInterestCauses.h"
 #import "LCInterestActions.h"
+#import "LCSingleInterestBC.h"
 
-@interface LCSingleInterestVC : UIViewController <LCInterestPostsDelegate, LCInterestCausesDelegate, LCInterestActionsDelegate>
+@interface LCSingleInterestVC : LCSingleInterestBC <LCInterestPostsDelegate, LCInterestCausesDelegate, LCInterestActionsDelegate>
 {
   __weak IBOutlet LCTabMenuView *tabmenu;
   __weak IBOutlet NSLayoutConstraint *collapseViewHeight;

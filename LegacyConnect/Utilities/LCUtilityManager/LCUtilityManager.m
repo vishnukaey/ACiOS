@@ -436,7 +436,7 @@
   return parameterDict;
 }
 
-+ (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width
++ (UIView*)getNoResultViewWithText:(NSString*)text
 {
   UIView * noResultView = [[UIView alloc] init];
   UILabel * noResultLabel = [[UILabel alloc] init];
@@ -464,7 +464,7 @@
   return noResultView;
 }
 
-+ (UIView*)getSearchNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width
++ (UIView*)getSearchNoResultViewWithText:(NSString*)text
 {
   UIView * noResultView = [[UIView alloc] init];
   UILabel * noResultLabel = [[UILabel alloc] init];

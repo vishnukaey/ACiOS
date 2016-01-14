@@ -7,15 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JTTableViewController.h"
+#import "LCInterestPostsBC.h"
 
 @protocol LCInterestPostsDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCInterestPosts : JTTableViewController
+@interface LCInterestPosts : LCInterestPostsBC
 
-  @property(nonatomic, retain) LCInterest *interest;
   @property (nonatomic, assign) id<LCInterestPostsDelegate> delegate;
   - (void) loadPostsInCurrentInterest;
 

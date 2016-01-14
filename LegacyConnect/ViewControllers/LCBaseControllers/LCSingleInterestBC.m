@@ -17,11 +17,40 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDeletedNotificationReceived:) name:kDeleteEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kCreateEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestFollowedNotificationReceived:) name:kFollowInterestNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestUnfollowedNotificationReceived:) name:kUnfollowInterestNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)eventDeletedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+}
+
+- (void)eventCreatedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+}
+
+- (void)interestFollowedNotificationReceived :(NSNotification *)notification
+{
+  LCInterest *interest = [notification.userInfo objectForKey:kInterestObj];
+}
+
+- (void)interestUnfollowedNotificationReceived :(NSNotification *)notification
+{
+  LCInterest *interest = [notification.userInfo objectForKey:kInterestObj];
 }
 
 /*

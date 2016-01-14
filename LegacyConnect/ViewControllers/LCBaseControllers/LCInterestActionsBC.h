@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JTTableViewController.h"
 
-@interface LCInterestActionsBC : UIViewController
+@interface LCInterestActionsBC : JTTableViewController
 
+@property(nonatomic, retain)LCInterest *interest;
 @end
