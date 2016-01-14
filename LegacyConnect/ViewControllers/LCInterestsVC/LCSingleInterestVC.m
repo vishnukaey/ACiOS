@@ -8,6 +8,7 @@
 
 #import "LCSingleInterestVC.h"
 #import "LCSingleCauseVC.h"
+#import "LCInterestFollowersVC.h"
 #import "UIImage+LCImageBlur.h"
 
 
@@ -64,7 +65,7 @@
 {
   interestName.text = _interest.name;
   interestDescription.text = _interest.descriptionText;
-  [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
+  [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:interestImage.image];
   
   SDWebImageManager *manager = [SDWebImageManager sharedManager];
   [manager downloadImageWithURL:[NSURL URLWithString:_interest.logoURLSmall]
@@ -122,11 +123,6 @@
   }
 }
 
-- (IBAction)showFollowers:(id)sender {
-  
-  
-}
-
 
 - (IBAction)postsButtonClicked:(id)sender
 {
@@ -177,6 +173,11 @@
     interestActionsView = segue.destinationViewController;
     interestActionsView.interest = self.interest;
     [interestActionsView loadActionsInCurrentInterest];
+  }
+  else if ([segue.identifier isEqualToString:@"showInterestFollowers"]) {
+  
+    LCInterestFollowersVC *followersVC = segue.destinationViewController;
+    followersVC.interest = self.interest;
   }
 }
 
