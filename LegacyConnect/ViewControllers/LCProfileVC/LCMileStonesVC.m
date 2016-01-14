@@ -57,7 +57,7 @@
     if (self.isSelfProfile) {
       message = NSLocalizedString(@"no_milestones_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
   }
 }
 

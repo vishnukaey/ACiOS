@@ -79,7 +79,7 @@
 {
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_requests_pending", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_requests_pending", nil)];
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   
   // Pull to Refresh Interface to Feeds TableView.
