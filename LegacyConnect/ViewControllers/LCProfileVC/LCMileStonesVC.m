@@ -293,6 +293,7 @@
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
     LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    interestVC.interest = [[LCInterest alloc] init];
     interestVC.interest.interestID = tagDetails[kTagobjId];
     [self.navigationController pushViewController:interestVC animated:YES];
   }

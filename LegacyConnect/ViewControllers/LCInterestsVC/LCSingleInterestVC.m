@@ -8,6 +8,7 @@
 
 #import "LCSingleInterestVC.h"
 #import "LCSingleCauseVC.h"
+#import "UIImage+LCImageBlur.h"
 
 
 @implementation LCSingleInterestVC
@@ -63,6 +64,17 @@
   interestName.text = _interest.name;
   interestDescription.text = _interest.descriptionText;
   [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
+
+  SDWebImageManager *manager = [SDWebImageManager sharedManager];
+  [manager downloadImageWithURL:[NSURL URLWithString:_interest.logoURLSmall]
+                        options:0
+                       progress:nil
+                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                        if (image) {
+                            interestBGImage.image = [image bluredImage];
+                        }
+                      }];
+  
   followersCount.text = _interest.followers;
   actionsCount.text = _interest.events;
   [interestFollowButton setSelected:_interest.isFollowing];
@@ -100,11 +112,6 @@
       [interestFollowButton setSelected:YES];
     }];
   }
-}
-
-- (IBAction)showActions:(id)sender {
-  
-  
 }
 
 - (IBAction)showFollowers:(id)sender {

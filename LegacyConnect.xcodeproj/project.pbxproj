@@ -49,6 +49,7 @@
 		0B56B8F71C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B56B8F61C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m */; };
 		0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B58BCE01BC267D6007F60E3 /* LCLoadingCell.m */; };
 		0B5FA6E91B57BB4A00DDC2B1 /* LCContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */; };
+		0B6E4E151C46701800BF0D74 /* UIImage+LCImageBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E4E141C46701800BF0D74 /* UIImage+LCImageBlur.m */; };
 		0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B7189D01C1EAE2F00554B98 /* LCTheme.m */; };
 		0B775D7D1BE1F22F008B5B6F /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */; };
 		0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B775D811BE1F25B008B5B6F /* LCChangePasswordViewController.m */; };
@@ -189,9 +190,9 @@
 		CE44ACD91BE78CCE00D22EE8 /* LCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44ACD81BE78CCE00D22EE8 /* LCNotificationManager.m */; };
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
 		CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5954D51B6F608B00D839DD /* LCMultipleSelectionTable.m */; };
-		CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1A1C4626E700ED4E5E /* LCSingleInterestBC.m */; settings = {ASSET_TAGS = (); }; };
-		CE5BEA1E1C46270200ED4E5E /* LCInterestPostsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1D1C46270200ED4E5E /* LCInterestPostsBC.m */; settings = {ASSET_TAGS = (); }; };
-		CE5BEA211C46271F00ED4E5E /* LCInterestActionsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */; settings = {ASSET_TAGS = (); }; };
+		CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1A1C4626E700ED4E5E /* LCSingleInterestBC.m */; };
+		CE5BEA1E1C46270200ED4E5E /* LCInterestPostsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1D1C46270200ED4E5E /* LCInterestPostsBC.m */; };
+		CE5BEA211C46271F00ED4E5E /* LCInterestActionsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */; };
 		CE6515031BF1B44F00BD6B86 /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6515021BF1B44F00BD6B86 /* Actions.storyboard */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
 		CE71D1521C3D225C00AD6E07 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */; };
@@ -315,6 +316,8 @@
 		0B5FA6E71B57BB4A00DDC2B1 /* LCContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCContact.h; path = Models/contact/LCContact.h; sourceTree = "<group>"; };
 		0B5FA6E81B57BB4A00DDC2B1 /* LCContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCContact.m; path = Models/contact/LCContact.m; sourceTree = "<group>"; };
 		0B5FA6ED1B57BDE200DDC2B1 /* LCPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LCPrefixHeader.pch; path = SupportingFiles/LCPrefixHeader.pch; sourceTree = "<group>"; };
+		0B6E4E131C46701800BF0D74 /* UIImage+LCImageBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+LCImageBlur.h"; path = "Utilities/LCCategories/LCImageBlur/UIImage+LCImageBlur.h"; sourceTree = "<group>"; };
+		0B6E4E141C46701800BF0D74 /* UIImage+LCImageBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+LCImageBlur.m"; path = "Utilities/LCCategories/LCImageBlur/UIImage+LCImageBlur.m"; sourceTree = "<group>"; };
 		0B7189CF1C1EAE2F00554B98 /* LCTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCTheme.h; sourceTree = "<group>"; };
 		0B7189D01C1EAE2F00554B98 /* LCTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCTheme.m; sourceTree = "<group>"; };
 		0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Storyboards/Settings.storyboard; sourceTree = "<group>"; };
@@ -686,6 +689,7 @@
 		0B1859401BF34802006A4905 /* LCCategories */ = {
 			isa = PBXGroup;
 			children = (
+				0B6E4E121C466FC300BF0D74 /* LCImageBlur */,
 				0B5AE56C1C2A96AC008DA57A /* LCStringRemoveEmoji */,
 				0B2A2CD51BF5B9D100D20827 /* LCURLCategory */,
 				0B1859411BF34855006A4905 /* UIImage+LCImageFix.h */,
@@ -997,6 +1001,15 @@
 				0BFBC7B81B81BC5100E75179 /* LCFriend.m */,
 			);
 			name = LCFriend;
+			sourceTree = "<group>";
+		};
+		0B6E4E121C466FC300BF0D74 /* LCImageBlur */ = {
+			isa = PBXGroup;
+			children = (
+				0B6E4E131C46701800BF0D74 /* UIImage+LCImageBlur.h */,
+				0B6E4E141C46701800BF0D74 /* UIImage+LCImageBlur.m */,
+			);
+			name = LCImageBlur;
 			sourceTree = "<group>";
 		};
 		0B7189CE1C1EAE2100554B98 /* LCTheme */ = {
@@ -2287,6 +2300,7 @@
 				0B89BDD11C3A4926006271EB /* LCInterestActions.m in Sources */,
 				168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */,
 				0B56B8EB1C1AEFC6001F3AE5 /* LCPostAPIManager.m in Sources */,
+				0B6E4E151C46701800BF0D74 /* UIImage+LCImageBlur.m in Sources */,
 				0B2A2CD81BF5B9F800D20827 /* NSURL+LCURLCategory.m in Sources */,
 				0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */,
 				0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */,
