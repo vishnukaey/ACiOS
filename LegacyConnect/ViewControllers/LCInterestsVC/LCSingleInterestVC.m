@@ -40,22 +40,23 @@
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:postsButton, causesButton, actionsButton, nil];
   tabmenu.views = [[NSArray alloc] initWithObjects:postsContainer, causesContainer, actionsContainer, nil];
   
-  [self updateInterestDetails];
-//  if (self.interest.name == nil) {
+  interestName.text = kEmptyStringValue;
+  interestDescription.text = kEmptyStringValue;
+  
+  //[self updateInterestDetails];
   [self getInterestDetails];
-//  }
 }
 
 - (void) getInterestDetails
 {
-//  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCThemeAPIManager getInterestDetailsOfInterest:self.interest.interestID WithSuccess:^(LCInterest *response) {
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.interest = response;
     [self updateInterestDetails];
     [interestPostsView loadPostsInCurrentInterest];
   } andFailure:^(NSString *error) {
-//    [MBProgressHUD hideHUDForView:self.view animated:YES];    
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
 }
 
@@ -64,14 +65,21 @@
   interestName.text = _interest.name;
   interestDescription.text = _interest.descriptionText;
   [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:nil];
-
+  
   SDWebImageManager *manager = [SDWebImageManager sharedManager];
   [manager downloadImageWithURL:[NSURL URLWithString:_interest.logoURLSmall]
                         options:0
                        progress:nil
                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
                         if (image) {
-                            interestBGImage.image = [image bluredImage];
+                          
+                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            
+                            UIImage *bluredImage = [image bluredImage];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                              interestBGImage.image = bluredImage;
+                            });
+                          });
                         }
                       }];
   
