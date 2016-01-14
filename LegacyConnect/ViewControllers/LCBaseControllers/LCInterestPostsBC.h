@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JTTableViewController.h"
 
-@interface LCInterestPostsBC : UIViewController
+@interface LCInterestPostsBC : JTTableViewController
 
+  @property(nonatomic, retain) LCInterest *interest;
+- (void)setNoResultViewHidden:(BOOL)hidded;
+- (void)reloadPostsTable;
 @end

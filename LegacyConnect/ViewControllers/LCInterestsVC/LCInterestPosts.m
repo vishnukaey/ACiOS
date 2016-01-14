@@ -107,24 +107,6 @@
   }];
 }
 
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else
-  {
-    [self showNoResultsView];
-  }
-}
-
-- (void)reloadPostsTable
-{
-  [self.tableView reloadData];
-}
-
-
-
 #pragma mark - TableView delegates
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
