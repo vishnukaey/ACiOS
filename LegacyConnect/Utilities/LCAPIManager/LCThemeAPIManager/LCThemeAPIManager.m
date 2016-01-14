@@ -370,7 +370,6 @@
      }
      else
      {
-       LCDLog(@"Milestones fetch success! ");
        success(responsesArray);
      }
    } andFailure:^(NSString *error) {

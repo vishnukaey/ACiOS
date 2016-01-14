@@ -15,14 +15,73 @@
 @implementation LCInterestActionsBC
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  [super viewDidLoad];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUpdatedNotificationReceived:) name:kUpdateEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDeletedNotificationReceived:) name:kDeleteEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kCreateEventNFK object:nil];
+}
+
+- (void)dealloc {
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+  [self refreshEventListing];
+}
+
+- (void)refreshEventListing
+{
+  [self.tableView reloadData];
+}
+
+- (void)refreshTopViewOnly
+{
+  if (self.view.window) {
+    [self refreshEventListing];
+  }
+}
+
+- (void)eventUpdatedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *modifiedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  for (int i = 0; i<self.results.count ; i++) {
+    LCEvent *event = self.results[i];
+    if ([event.eventID isEqualToString:modifiedEvent.eventID])
+    {
+      [self.results replaceObjectAtIndex:i withObject:modifiedEvent];
+      [self refreshTopViewOnly];
+      break;
+    }
+  }
+}
+
+- (void)eventDeletedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  for (int i = 0; i<self.results.count ; i++) {
+    LCEvent *event = self.results[i];
+    if ([event.eventID isEqualToString:deletedEvent.eventID])
+    {
+      [self.results removeObjectAtIndex:i];
+      [self refreshTopViewOnly];
+      break;
+    }
+  }
+}
+
+- (void)eventCreatedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  if ([createdEvent.interestID isEqualToString:self.interest.interestID]) {
+    [self.results insertObject:createdEvent atIndex:0];
+    [self refreshTopViewOnly];
+  }
+}
+
 
 /*
 #pragma mark - Navigation

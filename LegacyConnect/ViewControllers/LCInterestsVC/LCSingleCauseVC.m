@@ -13,7 +13,7 @@
 #import "LCFullScreenImageVC.h"
 #import "LCProfileViewVC.h"
 #import "LCCauseSupportersVC.h"
-
+#import "LCSingleInterestVC.h"
 
 @implementation LCSingleCauseVC
 
@@ -251,13 +251,29 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+//  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
+//  {
+//    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+//    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+//    causeVC.cause.interestID = tagDetails[kTagobjId];
+//    [self.navigationController pushViewController:causeVC animated:YES];
+//  }
+//  else
+  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = tagDetails[@"id"];
-    [self.navigationController pushViewController:vc animated:YES];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = tagDetails[@"id"];
+    [self.navigationController pushViewController:profileVC animated:YES];
+  }
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    interestVC.interest = [[LCInterest alloc] init];
+    interestVC.interest.interestID = tagDetails[kTagobjId];
+    [self.navigationController pushViewController:interestVC animated:YES];
   }
 }
 /*
