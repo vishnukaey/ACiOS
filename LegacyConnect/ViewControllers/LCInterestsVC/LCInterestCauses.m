@@ -27,7 +27,7 @@
 
 - (void) initailSetup {
 
-  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_causes_to_display", nil) andViewWidth:CGRectGetWidth(self.collectionView.frame)];
+  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_causes_to_display", nil)];
 }
 
 - (void) loadCausesInCurrentInterest

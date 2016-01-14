@@ -69,7 +69,7 @@
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
   NSString *message = NSLocalizedString(@"no_actions_to_display", nil);
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
 
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self addPullToRefreshForActionsTable];

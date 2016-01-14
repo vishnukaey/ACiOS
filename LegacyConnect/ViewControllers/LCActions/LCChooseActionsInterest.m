@@ -58,7 +58,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   nextButton.enabled = NO;
   if (!self.noResultsView) {
     NSString *message = NSLocalizedString(@"no_interests_available_self", nil);
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
   }
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self startFetchingResults];

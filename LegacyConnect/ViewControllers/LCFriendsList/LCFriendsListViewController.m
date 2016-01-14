@@ -79,7 +79,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 
 - (void)initialUISetUp
 {
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil)];
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
 

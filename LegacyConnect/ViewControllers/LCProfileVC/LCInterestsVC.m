@@ -67,7 +67,7 @@
     if (isSelfProfile) {
       message = NSLocalizedString(@"no_interests_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
   }
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
