@@ -118,7 +118,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCUserProfileAPIManager getMilestonesForUser:@"5598" andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getPostsInCause:_cause.causeID andLastPostID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -137,7 +137,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCUserProfileAPIManager getMilestonesForUser:@"5598" andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getPostsInCause:_cause.causeID andLastPostID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
