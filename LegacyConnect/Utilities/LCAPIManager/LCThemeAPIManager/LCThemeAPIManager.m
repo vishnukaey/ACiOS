@@ -239,7 +239,7 @@
 + (void)getCauseFollowersOfCause:(NSString*)causeId andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@&%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId,kLastIdKey,lastID];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
