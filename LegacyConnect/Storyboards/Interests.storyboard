@@ -57,10 +57,10 @@
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="QUc-rX-R9p" id="pD5-nb-bTb"/>
-                                    <outlet property="delegate" destination="QUc-rX-R9p" id="gVD-BP-T0L"/>
+                                    <outlet property="delegate" destination="QUc-rX-R9p" id="a23-C8-970"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcW-yh-gPw">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TcW-yh-gPw">
                                 <rect key="frame" x="0.0" y="64" width="320" height="320"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZaB-93-o3L">
@@ -89,13 +89,13 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9v-Eb-0VT" userLabel="Description Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W9v-Eb-0VT" userLabel="Description Label">
                                         <rect key="frame" x="15" y="129" width="290" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="290" id="abN-bG-RjC"/>
                                             <constraint firstAttribute="height" constant="30" id="ySG-Gd-Swi"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="21"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -113,10 +113,10 @@
                                             <action selector="supportClicked:" destination="QUc-rX-R9p" eventType="touchUpInside" id="gEs-b6-P70"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWz-GD-nDP">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWz-GD-nDP">
                                         <rect key="frame" x="0.0" y="220" width="320" height="100"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-cO-MZo">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYL-cO-MZo">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MembersIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Fpc-ea-0a9">
@@ -140,7 +140,7 @@
                                                             <constraint firstAttribute="height" constant="1" id="HDS-ke-e3E"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCC-FG-Y4a">
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCC-FG-Y4a">
                                                         <rect key="frame" x="41" y="10" width="251" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="2zk-4G-qYm"/>
@@ -169,7 +169,7 @@
                                                     <constraint firstItem="LLC-FS-SLd" firstAttribute="leading" secondItem="LCC-FG-Y4a" secondAttribute="trailing" constant="8" id="uHI-7y-hzo"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f86-sa-3iP">
+                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f86-sa-3iP">
                                                 <rect key="frame" x="0.0" y="50" width="320" height="50"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LinkIcon" translatesAutoresizingMaskIntoConstraints="NO" id="CpW-4Y-LSj">
@@ -179,7 +179,7 @@
                                                             <constraint firstAttribute="height" constant="17" id="y1w-iz-Ovb"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIs-1V-U5b">
+                                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIs-1V-U5b">
                                                         <rect key="frame" x="41" y="10" width="260" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="WS6-K0-r9o"/>
@@ -207,6 +207,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="f86-sa-3iP" secondAttribute="trailing" id="0md-aC-Lz4"/>
                                             <constraint firstItem="f86-sa-3iP" firstAttribute="top" secondItem="JYL-cO-MZo" secondAttribute="bottom" id="0tG-bN-zmM"/>
+                                            <constraint firstItem="f86-sa-3iP" firstAttribute="top" secondItem="JYL-cO-MZo" secondAttribute="bottom" id="6WL-pa-ZMC"/>
                                             <constraint firstAttribute="height" constant="100" id="PMH-JF-LN2"/>
                                             <constraint firstAttribute="trailing" secondItem="JYL-cO-MZo" secondAttribute="trailing" id="TRM-Ma-xJz"/>
                                             <constraint firstItem="JYL-cO-MZo" firstAttribute="leading" secondItem="PWz-GD-nDP" secondAttribute="leading" id="Y0d-XB-yy1"/>
@@ -318,6 +319,8 @@
                         <outlet property="causeNameLabel" destination="g4t-kl-MuJ" id="S5o-O6-Yj9"/>
                         <outlet property="causeSupportersCountButton" destination="LCC-FG-Y4a" id="8p4-e1-quK"/>
                         <outlet property="causeURLButton" destination="FIs-1V-U5b" id="pMX-01-u09"/>
+                        <outlet property="collapseViewHeight" destination="GXB-Sz-jCq" id="18n-06-POC"/>
+                        <outlet property="navigationBar" destination="LXN-cz-AYe" id="pQy-O4-gwu"/>
                         <outlet property="supportButton" destination="ZtP-yW-yRb" id="1Ig-Uh-yqB"/>
                         <outlet property="tableView" destination="jC8-yh-5s2" id="TfQ-iv-vBy"/>
                     </connections>
@@ -933,7 +936,7 @@
                                             <action selector="backButtonTapped:" destination="Dfv-2o-Ygq" eventType="touchUpInside" id="h9v-Kx-GTb"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWING" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lI9-5U-TUS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FOLLOWERS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lI9-5U-TUS">
                                         <rect key="frame" x="86" y="29" width="149" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="149" id="5dJ-cR-Q32"/>
@@ -965,7 +968,7 @@
                                         <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="leW-Nb-Jl7" id="m73-0d-dBM">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkA-OY-E0l">

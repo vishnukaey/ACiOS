@@ -21,9 +21,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  [self initialSetUp];
   [self refreshViewWithCauseDetails];
-  //  [self prepareCells];
+  [self fetchCauseDetails];
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -38,19 +40,24 @@
   self.navigationController.navigationBarHidden = YES;
 }
 
+-(void)fetchCauseDetails
+{
+  [LCThemeAPIManager getCauseDetailsOfCause:_cause.causeID WithSuccess:^(LCCause *response) {
+    _cause = response;
+    [self refreshViewWithCauseDetails];
+  } andFailure:^(NSString *error) {
+  }];
+}
+
+
 -(void)refreshViewWithCauseDetails
 {
-  causeImageView.layer.cornerRadius = 5.0;
-  supportButton.layer.cornerRadius = 5.0;
-  causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-  causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-
   causeNameLabel.text = _cause.name;
   causeDescriptionLabel.text = _cause.tagLine;
+  navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: _cause.name] uppercaseString];
   [causeImageView sd_setImageWithURL:[NSURL URLWithString:_cause.logoURLSmall] placeholderImage:nil];
   causeNameLabel.text = [NSString stringWithFormat:@"%@",[_cause.name uppercaseString]];
-  
-  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",_cause.supporters] forState:UIControlStateNormal];
+  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:_cause.supporters]] forState:UIControlStateNormal];
   
   //  [causeURLLabel setText:@""];
   
@@ -64,18 +71,18 @@
   }
 }
 
-////////
-
 
 #pragma mark - private method implementation
 
 - (void)initialSetUp
 {
+  causeImageView.layer.cornerRadius = 5.0;
+  supportButton.layer.cornerRadius = 5.0;
+  causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  
   [self addPullToRefreshForPostsTable];
 }
 
@@ -125,6 +132,7 @@
     [self setNoResultViewHidden:[self.results count] != 0];
   }];
 }
+
 
 - (void)startFetchingNextResults
 {
@@ -343,5 +351,39 @@
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
+
+#pragma mark - ScrollView Custom Delelgate
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+  CGFloat viewHeight = 320.0;
+  
+  if (scrollView.contentOffset.y <= 0 && collapseViewHeight.constant >= viewHeight) //Added this line to KOAPullToRefresh to work correctly.
+  {
+    return;
+  }
+  
+  float collapseConstant = 0;;
+  if (collapseViewHeight.constant > 0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseViewHeight.constant < viewHeight && scrollView.contentOffset.y < 0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseConstant < 0)
+  {
+    collapseConstant = 0;
+  }
+  if (collapseConstant > viewHeight)
+  {
+    collapseConstant = viewHeight;
+  }
+  collapseViewHeight.constant = collapseConstant;
+}
+
 
 @end

@@ -13,6 +13,7 @@
 
 @interface LCSingleCauseVC : JTTableViewController
 {
+  __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSMutableArray *cellsViewArray;
   IBOutlet UILabel *causeNameLabel;
   IBOutlet UILabel *causeDescriptionLabel;
@@ -20,6 +21,7 @@
   IBOutlet UIButton *causeURLButton;
   IBOutlet UIImageView *causeImageView;
   IBOutlet UIButton *supportButton;
+  IBOutlet LCNavigationBar *navigationBar;
 }
 
 @property (strong, nonatomic) LCCause *cause;

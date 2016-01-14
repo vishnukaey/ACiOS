@@ -36,10 +36,8 @@
 -(void) startFetchingResults
 {
   [super startFetchingResults];
-
-#warning Change api for Cause supporters
   
-  [LCEventAPImanager getMembersForEventID:@"" andLastEventID:nil withSuccess:^(NSArray *responses) {
+  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID withSuccess:^(NSArray *responses) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
@@ -55,10 +53,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-#warning Change api for Cause supporters
-
-  [LCEventAPImanager getMembersForEventID:@"" andLastEventID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
-    BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
+  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID withSuccess:^(NSArray *responses) {    BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self didFailedToFetchResults];
