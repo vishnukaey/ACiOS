@@ -91,6 +91,7 @@
 - (void)loadMyInterests
 {
   [self startFetchingResults];
+  [self setNoResultViewHidden:(self.results.count > 0)];
 }
 
 #pragma mark - TableView delegates
