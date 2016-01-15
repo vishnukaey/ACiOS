@@ -24,6 +24,7 @@
   [self initialSetUp];
   [self refreshViewWithCauseDetails];
   [self fetchCauseDetails];
+  [self startFetchingResults];
 }
 
 
@@ -76,6 +77,7 @@
 
 - (void)initialSetUp
 {
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
   causeImageView.layer.cornerRadius = 5.0;
   supportButton.layer.cornerRadius = 5.0;
   causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
