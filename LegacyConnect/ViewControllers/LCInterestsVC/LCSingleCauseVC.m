@@ -38,6 +38,7 @@
 {
   [super viewWillAppear:animated];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+  [self addGradientOverLay];
   self.navigationController.navigationBarHidden = YES;
 }
 
@@ -50,14 +51,14 @@
   }];
 }
 
--(void) viewDidAppear:(BOOL)animated
+-(void) addGradientOverLay
 {
-  [super viewDidAppear:animated];
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = self.causeOverlayImageView.bounds;
   gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
   [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
 }
+
 
 #pragma mark - private method implementation
 
