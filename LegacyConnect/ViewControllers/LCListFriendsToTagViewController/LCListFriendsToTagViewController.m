@@ -132,7 +132,6 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSLog(@"done button clicked-->>>");
   NSMutableArray *arrayToPass = [[NSMutableArray alloc] init];
   for (NSString *userId in self.selectedIDs)
   {

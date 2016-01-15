@@ -78,7 +78,7 @@
       [self dismissViewControllerAnimated:YES completion:nil];
     } andFailure:^(NSString *error) {
       [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-      NSLog(@"error - %@",error);
+      LCDLog(@"error - %@",error);
     }];
   }
 }

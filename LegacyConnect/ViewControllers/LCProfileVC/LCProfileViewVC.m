@@ -108,7 +108,6 @@
       [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     }
     
-    NSLog(@"user details - %@",response);
     self.userDetail = response;
     [self updateUserDetailUI];
     friendsButton.enabled = YES;
@@ -120,7 +119,7 @@
       [self checkPrivacySettings];
     }
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
   }];
 }
 
@@ -157,7 +156,6 @@
   [LCProfileAPIManager sendFriendRequest:self.userDetail.userID withSuccess:^(NSDictionary *response) {
     friendsButton.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
     [self setCurrentProfileStatus:kNonFriend];
     friendsButton.userInteractionEnabled = YES;
   }];
@@ -170,7 +168,6 @@
   [LCProfileAPIManager cancelFriendRequest:self.userDetail.userID withSuccess:^(NSArray *response) {
     friendsButton.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
     [self setCurrentProfileStatus:kRequestWaiting];
     friendsButton.userInteractionEnabled = YES;
   }];
@@ -186,7 +183,6 @@
    }
    andFailure:^(NSString *error)
    {
-     NSLog(@"%@",error);
      [self setCurrentProfileStatus:kIsFriend];
      friendsButton.userInteractionEnabled = YES;
    }];
@@ -202,7 +198,6 @@
 
 - (IBAction)impactsButtonClicked
 {
-  NSLog(@"impacts clicked----->");
   UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
   LCImapactsViewController *impactsVC = [profileSB instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
   impactsVC.self.userDetail = self.userDetail;

@@ -188,7 +188,6 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
        //Set previous button state
        [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
        friendBtn.userInteractionEnabled = YES;
-       NSLog(@"%@",error);
      }];
   }];
   [actionSheet addAction:removeFriend];
@@ -208,13 +207,11 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
     [friendBtn setfriendStatusButtonImageForStatus:kNonFriend];
     friendBtn.userInteractionEnabled = NO;
     [LCProfileAPIManager cancelFriendRequest:friendObj.friendId withSuccess:^(NSArray *response) {
-      LCDLog(@"%@",response);
       friendBtn.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       //Set previous button state
       [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
       friendBtn.userInteractionEnabled = YES;
-      NSLog(@"%@",error);
     }];
   }];
   [actionSheet addAction:cancelFreindRequest];
@@ -230,10 +227,8 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
   friendBtn.userInteractionEnabled = NO;
   [LCProfileAPIManager sendFriendRequest:friendObj.friendId withSuccess:^(NSDictionary *response) {
-    NSLog(@"%@",response);
     friendBtn.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
-    LCDLog(@"%@",error);
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
     friendBtn.userInteractionEnabled = YES;
   }];

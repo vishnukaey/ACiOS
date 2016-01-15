@@ -100,7 +100,7 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
     [LCOnboardingAPIManager resetPasswordWithPasswordResetCode:self.token andNewPassword:_confirmPasswordTextField.text withSuccess:^(id response) {
       [_delegate updatePasswordSuccessful];
     } andFailure:^(NSString *error) {
-      NSLog(@"error");
+      LCDLog(@"error - %@",error);
     }];
   }
 

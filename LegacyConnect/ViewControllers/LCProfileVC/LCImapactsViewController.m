@@ -135,7 +135,7 @@
                       }
                                     andFailure:^(NSString *error) {
                                       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-                                      NSLog(@"%@",error);
+                                      LCDLog(@"%@",error);
                                     }];
                     }];
                     [deleteAlert addAction:deletePostActionFinal];

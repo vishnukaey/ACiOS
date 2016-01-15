@@ -263,8 +263,6 @@
 
 - (IBAction)supportClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
-  
   self.supportButton.userInteractionEnabled = NO;
   if(!self.supportButton.selected)
   {
@@ -290,7 +288,6 @@
 
 - (IBAction)supportersListClicked:(id)sender
 {
-  NSLog(@"FollowList clicked");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
   LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
   vc.cause = self.cause;
@@ -299,7 +296,7 @@
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
+  LCDLog(@"Follow clicked");
 //  if (_cause.url) {
 //    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
 //    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
