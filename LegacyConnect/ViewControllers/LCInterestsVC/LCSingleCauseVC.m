@@ -50,15 +50,24 @@
   }];
 }
 
+-(void) viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = self.causeOverlayImageView.bounds;
+  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
+  [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
+}
+
 #pragma mark - private method implementation
 
 - (void)initialSetUp
 {
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
-  causeImageView.layer.cornerRadius = 5.0;
-  supportButton.layer.cornerRadius = 5.0;
-  causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-  causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  self.causeImageView.layer.cornerRadius = 5.0;
+  self.supportButton.layer.cornerRadius = 5.0;
+  self.causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  self.causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];

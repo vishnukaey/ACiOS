@@ -16,6 +16,7 @@
 @property (strong, nonatomic)IBOutlet UILabel *causeNameLabel;
 @property (strong, nonatomic)IBOutlet UILabel *causeDescriptionLabel;
 @property (strong, nonatomic)IBOutlet UIImageView *causeImageView;
+@property (strong, nonatomic)IBOutlet UIImageView *causeOverlayImageView;
 @property (strong, nonatomic)IBOutlet UIButton *supportButton;
 @property (strong, nonatomic)IBOutlet LCNavigationBar *navigationBar;
 
