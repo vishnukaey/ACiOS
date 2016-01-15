@@ -11,7 +11,6 @@
 #import "LCInterestFollowersVC.h"
 #import "UIImage+LCImageBlur.h"
 
-
 @implementation LCSingleInterestVC
 
 #pragma mark - Controller life cycle
@@ -55,20 +54,19 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.interest = response;
     [self updateInterestDetails];
+    [self updateInterestImages];
     [interestPostsView loadPostsInCurrentInterest];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
 }
 
-- (void) updateInterestDetails
+- (void) updateInterestImages
 {
-  interestName.text = _interest.name;
-  interestDescription.text = _interest.descriptionText;
-  [interestImage sd_setImageWithURL:[NSURL URLWithString:_interest.logoURLSmall] placeholderImage:interestImage.image];
+  [interestImage sd_setImageWithURL:[NSURL URLWithString:self.interest.logoURLSmall] placeholderImage:interestImage.image];
   
   SDWebImageManager *manager = [SDWebImageManager sharedManager];
-  [manager downloadImageWithURL:[NSURL URLWithString:_interest.logoURLSmall]
+  [manager downloadImageWithURL:[NSURL URLWithString:self.interest.logoURLSmall]
                         options:0
                        progress:nil
                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
@@ -83,10 +81,6 @@
                           });
                         }
                       }];
-  
-  followersCount.text = _interest.followers;
-  actionsCount.text = _interest.events;
-  [interestFollowButton setSelected:_interest.isFollowing];
 }
 
 #pragma mark - Action Mehtods
@@ -100,9 +94,7 @@
   if(!interestFollowButton.selected)
   {
     [interestFollowButton setSelected:YES];
-    [LCThemeAPIManager followInterest:_interest withSuccess:^(id response) {
-      _interest.isFollowing =YES;
-      _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]+1];
+    [LCThemeAPIManager followInterest:self.interest withSuccess:^(id response) {
       interestFollowButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       [interestFollowButton setSelected:NO];
@@ -112,10 +104,8 @@
   else
   {
     [interestFollowButton setSelected:NO];
-    [LCThemeAPIManager unfollowInterest:_interest withSuccess:^(id response) {
+    [LCThemeAPIManager unfollowInterest:self.interest withSuccess:^(id response) {
       interestFollowButton.userInteractionEnabled = YES;
-      _interest.isFollowing = NO;
-      _interest.followers = [NSString stringWithFormat:@"%d",[_interest.followers intValue]-1];
     } andFailure:^(NSString *error) {
       interestFollowButton.userInteractionEnabled = YES;
       [interestFollowButton setSelected:YES];
