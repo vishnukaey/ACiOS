@@ -47,7 +47,7 @@
   
   if([request.type isEqualToString:@"event"])
   {
-    [_detailLabel setText:@"Invited you to an Event"];
+    [_detailLabel setText:@"Has invited you to participate in an action"];
     [_typeDetailLabel setText:[NSString stringWithFormat:@"%@",request.eventName]];
     [_thumbImage sd_setImageWithURL:[NSURL URLWithString:request.eventImage] placeholderImage:nil];
   }
