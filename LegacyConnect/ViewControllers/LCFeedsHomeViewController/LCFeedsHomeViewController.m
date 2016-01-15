@@ -147,7 +147,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-    causeVC.cause.interestID = tagDetails[kTagobjId];
+    causeVC.cause = [[LCCause alloc] init];
+    causeVC.cause.causeID = tagDetails[kTagobjId];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page

@@ -242,7 +242,7 @@
 + (void)getCauseFollowersOfCause:(NSString*)causeId andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@&%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId,kLastIdKey,lastID];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
@@ -361,6 +361,33 @@
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFeedsURL, kInterestIDKey, interestID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:response[kResponseData] error:&error];
+     if(error)
+     {
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       success(responsesArray);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
++ (void)getPostsInCause:(NSString *)causeID andLastPostID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFeedsURL, kCauseIDKey, causeID];
   if (lastID) {
     url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
   }
