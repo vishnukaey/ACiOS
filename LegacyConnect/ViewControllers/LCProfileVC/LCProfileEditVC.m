@@ -153,12 +153,11 @@ NSInteger const kHeightForHeader = 44;
   
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCUserProfileAPIManager updateProfile:userDetail havingHeaderPhoto:headerToPass removedState:isHeaderRemoved andAvtarImage:avatarToPass removedState:isAvatarRemoved withSuccess:^(NSArray *response) {
-    NSLog(@"ress-->>>%@",response);
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
   }];
 }
 

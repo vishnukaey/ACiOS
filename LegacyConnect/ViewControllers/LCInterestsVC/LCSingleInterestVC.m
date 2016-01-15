@@ -160,9 +160,9 @@
   }
   else if ([segue.identifier isEqualToString:@"showActionsList"]) {
     
-    interestActionsView = segue.destinationViewController;
-    interestActionsView.interest = self.interest;
-    [interestActionsView loadActionsInCurrentInterest];
+    LCInterestActions *interestActionsVC = segue.destinationViewController;
+    interestActionsVC.interest = self.interest;
+    [interestActionsVC loadActionsInCurrentInterest];
   }
   else if ([segue.identifier isEqualToString:@"showInterestFollowers"]) {
   

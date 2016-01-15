@@ -32,6 +32,9 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kRemoveMileStoneNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeNotificationReceived:) name:kSupportCauseNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeNotificationReceived:) name:kUnsupportCauseNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +96,13 @@
   [self refreshViews];
 }
 
+- (void)causeNotificationReceived :(NSNotification *)notification
+{
+  LCCause *cause = notification.userInfo[kCauseObj];
+  self.cause = cause;
+  [self refreshViews];
+}
+
 - (void)refreshViews
 {
   CGPoint offset = self.tableView.contentOffset;
@@ -100,6 +110,7 @@
   [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
   [self.tableView setContentOffset:offset];
   [self setNoResultViewHidden:[self.results count] != 0];
+  [self refreshViewWithCauseDetails];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -128,6 +139,27 @@
     //      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB]);
     //    }
   });
+}
+
+-(void)refreshViewWithCauseDetails
+{
+  self.causeNameLabel.text = self.cause.name;
+  self.causeDescriptionLabel.text = self.cause.tagLine;
+  self.navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: self.cause.name] uppercaseString];
+  [self.causeImageView sd_setImageWithURL:[NSURL URLWithString:self.cause.logoURLSmall] placeholderImage:nil];
+  self.causeNameLabel.text = [NSString stringWithFormat:@"%@",[self.cause.name uppercaseString]];
+  [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:self.cause.supporters]] forState:UIControlStateNormal];
+  
+  //  [causeURLLabel setText:@""];
+  
+  if(self.cause.isSupporting)
+  {
+    [self.supportButton setSelected:YES];
+  }
+  else
+  {
+    [self.supportButton setSelected:NO];
+  }
 }
 
 /*

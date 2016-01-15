@@ -92,14 +92,14 @@
   int maxFileSize = MAX_IMAGE_SIZE*1024*1024;
   
   NSData *imageData = UIImageJPEGRepresentation(image, compression);
-  NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
   while ([imageData length] > maxFileSize && compression > maxCompression)
   {
     compression -= 0.1;
     imageData = UIImageJPEGRepresentation(image, compression);
-    NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+    LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
   }
-  NSLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
   return imageData;
 }
 
@@ -270,7 +270,7 @@
     NSMutableArray* items = [NSMutableArray arrayWithCapacity:nPeople];
     
     if (!allPeople || !nPeople) {
-        NSLog(@"people nil");
+        LCDLog(@"people nil");
     }
     
     

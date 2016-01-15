@@ -198,5 +198,21 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kUnfollowInterestNFK object:nil userInfo:userInfo];
 }
 
++ (void)postCauseFollowedNotificationWithCause:(LCCause *)cause
+{
+  cause.isSupporting = YES;
+  cause.supporters = [NSString stringWithFormat:@"%d",[cause.supporters intValue]+1];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:cause, kCauseObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kSupportCauseNFK object:nil userInfo:userInfo];
+}
+
++ (void)postCauseUnFollowedNotificationWithCause:(LCCause *)cause
+{
+  cause.isSupporting = NO;
+  cause.supporters = [NSString stringWithFormat:@"%d",[cause.supporters intValue]-1];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:cause, kCauseObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUnsupportCauseNFK object:nil userInfo:userInfo];
+}
+
 
 @end

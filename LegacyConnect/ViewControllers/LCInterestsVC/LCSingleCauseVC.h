@@ -15,13 +15,6 @@
 {
   __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSMutableArray *cellsViewArray;
-  IBOutlet UILabel *causeNameLabel;
-  IBOutlet UILabel *causeDescriptionLabel;
-  IBOutlet UIButton *causeSupportersCountButton;
-  IBOutlet UIButton *causeURLButton;
-  IBOutlet UIImageView *causeImageView;
-  IBOutlet UIButton *supportButton;
-  IBOutlet LCNavigationBar *navigationBar;
 }
 
 

@@ -104,7 +104,7 @@
   [LCOnboardingAPIManager forgotPasswordOfUserWithMailID:email withSuccess:^(id response) {
     [self.delegate forgotPasswordRequestSent:_emailTextField.text];
   } andFailure:^(NSString *error) {
-    NSLog(@"response : %@",error);
+    LCDLog(@"response : %@",error);
   }];
 }
 

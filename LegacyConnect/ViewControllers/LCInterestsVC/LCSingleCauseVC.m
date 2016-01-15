@@ -50,29 +50,6 @@
   }];
 }
 
-
--(void)refreshViewWithCauseDetails
-{
-  causeNameLabel.text = self.cause.name;
-  causeDescriptionLabel.text = self.cause.tagLine;
-  navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: self.cause.name] uppercaseString];
-  [causeImageView sd_setImageWithURL:[NSURL URLWithString:self.cause.logoURLSmall] placeholderImage:nil];
-  causeNameLabel.text = [NSString stringWithFormat:@"%@",[self.cause.name uppercaseString]];
-  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:self.cause.supporters]] forState:UIControlStateNormal];
-  
-  //  [causeURLLabel setText:@""];
-  
-  if(self.cause.isSupporting)
-  {
-    [supportButton setSelected:YES];
-  }
-  else
-  {
-    [supportButton setSelected:NO];
-  }
-}
-
-
 #pragma mark - private method implementation
 
 - (void)initialSetUp
@@ -288,38 +265,31 @@
 
 - (IBAction)supportClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
-  
-  supportButton.userInteractionEnabled = NO;
-  if(!supportButton.selected)
+  self.supportButton.userInteractionEnabled = NO;
+  if(!self.supportButton.selected)
   {
-    [supportButton setSelected:YES];
-    [LCThemeAPIManager supportCause:self.cause.causeID withSuccess:^(id response) {
-      self.cause.isSupporting =YES;
-      self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]+1];
-      supportButton.userInteractionEnabled = YES;
+    [self.supportButton setSelected:YES];
+    [LCThemeAPIManager supportCause:self.cause withSuccess:^(id response) {
+      self.supportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
-      [supportButton setSelected:NO];
-      supportButton.userInteractionEnabled = YES;
+      [self.supportButton setSelected:NO];
+      self.supportButton.userInteractionEnabled = YES;
     }];
   }
   else
   {
-    [supportButton setSelected:NO];
-    [LCThemeAPIManager unsupportCause:self.cause.causeID withSuccess:^(id response) {
-      supportButton.userInteractionEnabled = YES;
-      self.cause.isSupporting = NO;
-      self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]-1];
+    [self.supportButton setSelected:NO];
+    [LCThemeAPIManager unsupportCause:self.cause withSuccess:^(id response) {
+      self.supportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
-      supportButton.userInteractionEnabled = YES;
-      [supportButton setSelected:YES];
+      self.supportButton.userInteractionEnabled = YES;
+      [self.supportButton setSelected:YES];
     }];
   }
 }
 
 - (IBAction)supportersListClicked:(id)sender
 {
-  NSLog(@"FollowList clicked");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
   LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
   vc.cause = self.cause;
@@ -328,7 +298,7 @@
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
+  LCDLog(@"Follow clicked");
 //  if (_cause.url) {
 //    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
 //    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
