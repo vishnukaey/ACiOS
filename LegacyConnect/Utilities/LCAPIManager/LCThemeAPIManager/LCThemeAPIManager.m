@@ -205,15 +205,16 @@
    }];
 }
 
-+ (void)supportCause:(NSString *)causeId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)supportCause:(LCCause *)cause withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kCauseSuppotURL];
-  NSDictionary *dict = @{kCauseIDKey: causeId};
+  NSDictionary *dict = @{kCauseIDKey: cause.causeID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Cause Supported successfully");
+     [LCNotificationManager postCauseFollowedNotificationWithCause:cause];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -222,15 +223,16 @@
    }];
 }
 
-+ (void)unsupportCause:(NSString *)causeId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)unsupportCause:(LCCause *)cause withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kCauseUnsuppotURL];
-  NSDictionary *dict = @{kCauseIDKey: causeId};
+  NSDictionary *dict = @{kCauseIDKey: cause.causeID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Cause Unsupported successfully");
+     [LCNotificationManager postCauseUnFollowedNotificationWithCause:cause];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

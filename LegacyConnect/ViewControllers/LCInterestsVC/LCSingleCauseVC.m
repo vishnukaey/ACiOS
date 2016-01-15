@@ -49,37 +49,14 @@
   }];
 }
 
-
--(void)refreshViewWithCauseDetails
-{
-  causeNameLabel.text = self.cause.name;
-  causeDescriptionLabel.text = self.cause.tagLine;
-  navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: self.cause.name] uppercaseString];
-  [causeImageView sd_setImageWithURL:[NSURL URLWithString:self.cause.logoURLSmall] placeholderImage:nil];
-  causeNameLabel.text = [NSString stringWithFormat:@"%@",[self.cause.name uppercaseString]];
-  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:self.cause.supporters]] forState:UIControlStateNormal];
-  
-  //  [causeURLLabel setText:@""];
-  
-  if(self.cause.isSupporting)
-  {
-    [supportButton setSelected:YES];
-  }
-  else
-  {
-    [supportButton setSelected:NO];
-  }
-}
-
-
 #pragma mark - private method implementation
 
 - (void)initialSetUp
 {
-  causeImageView.layer.cornerRadius = 5.0;
-  supportButton.layer.cornerRadius = 5.0;
-  causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-  causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  self.causeImageView.layer.cornerRadius = 5.0;
+  self.supportButton.layer.cornerRadius = 5.0;
+  self.causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  self.causeURLButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -288,29 +265,25 @@
 {
   NSLog(@"Follow clicked");
   
-  supportButton.userInteractionEnabled = NO;
-  if(!supportButton.selected)
+  self.supportButton.userInteractionEnabled = NO;
+  if(!self.supportButton.selected)
   {
-    [supportButton setSelected:YES];
-    [LCThemeAPIManager supportCause:self.cause.causeID withSuccess:^(id response) {
-      self.cause.isSupporting =YES;
-      self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]+1];
-      supportButton.userInteractionEnabled = YES;
+    [self.supportButton setSelected:YES];
+    [LCThemeAPIManager supportCause:self.cause withSuccess:^(id response) {
+      self.supportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
-      [supportButton setSelected:NO];
-      supportButton.userInteractionEnabled = YES;
+      [self.supportButton setSelected:NO];
+      self.supportButton.userInteractionEnabled = YES;
     }];
   }
   else
   {
-    [supportButton setSelected:NO];
-    [LCThemeAPIManager unsupportCause:self.cause.causeID withSuccess:^(id response) {
-      supportButton.userInteractionEnabled = YES;
-      self.cause.isSupporting = NO;
-      self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]-1];
+    [self.supportButton setSelected:NO];
+    [LCThemeAPIManager unsupportCause:self.cause withSuccess:^(id response) {
+      self.supportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
-      supportButton.userInteractionEnabled = YES;
-      [supportButton setSelected:YES];
+      self.supportButton.userInteractionEnabled = YES;
+      [self.supportButton setSelected:YES];
     }];
   }
 }
