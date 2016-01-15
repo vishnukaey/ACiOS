@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
-#import "JTTableViewController.h"
+#import "LCSingleCauseBC.h"
 
 
-@interface LCSingleCauseVC : JTTableViewController
+@interface LCSingleCauseVC : LCSingleCauseBC
 {
   __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSMutableArray *cellsViewArray;
@@ -24,7 +24,6 @@
   IBOutlet LCNavigationBar *navigationBar;
 }
 
-@property (strong, nonatomic) LCCause *cause;
 
 - (IBAction)supportClicked:(id)sender;
 - (IBAction)supportersListClicked:(id)sender;

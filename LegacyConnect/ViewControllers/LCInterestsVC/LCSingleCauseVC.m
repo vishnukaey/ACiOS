@@ -42,8 +42,8 @@
 
 -(void)fetchCauseDetails
 {
-  [LCThemeAPIManager getCauseDetailsOfCause:_cause.causeID WithSuccess:^(LCCause *response) {
-    _cause = response;
+  [LCThemeAPIManager getCauseDetailsOfCause:self.cause.causeID WithSuccess:^(LCCause *response) {
+    self.cause = response;
     [self refreshViewWithCauseDetails];
   } andFailure:^(NSString *error) {
   }];
@@ -52,16 +52,16 @@
 
 -(void)refreshViewWithCauseDetails
 {
-  causeNameLabel.text = _cause.name;
-  causeDescriptionLabel.text = _cause.tagLine;
-  navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: _cause.name] uppercaseString];
-  [causeImageView sd_setImageWithURL:[NSURL URLWithString:_cause.logoURLSmall] placeholderImage:nil];
-  causeNameLabel.text = [NSString stringWithFormat:@"%@",[_cause.name uppercaseString]];
-  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:_cause.supporters]] forState:UIControlStateNormal];
+  causeNameLabel.text = self.cause.name;
+  causeDescriptionLabel.text = self.cause.tagLine;
+  navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: self.cause.name] uppercaseString];
+  [causeImageView sd_setImageWithURL:[NSURL URLWithString:self.cause.logoURLSmall] placeholderImage:nil];
+  causeNameLabel.text = [NSString stringWithFormat:@"%@",[self.cause.name uppercaseString]];
+  [causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:self.cause.supporters]] forState:UIControlStateNormal];
   
   //  [causeURLLabel setText:@""];
   
-  if(_cause.isSupporting)
+  if(self.cause.isSupporting)
   {
     [supportButton setSelected:YES];
   }
@@ -118,7 +118,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCThemeAPIManager getPostsInCause:_cause.causeID andLastPostID:nil withSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getPostsInCause:self.cause.causeID andLastPostID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
@@ -137,7 +137,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCThemeAPIManager getPostsInCause:_cause.causeID andLastPostID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getPostsInCause:self.cause.causeID andLastPostID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -146,17 +146,6 @@
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
   }];
-}
-
-- (void)setNoResultViewHidden:(BOOL)hidded
-{
-  if (hidded) {
-    [self hideNoResultsView];
-  }
-  else
-  {
-    [self showNoResultsView];
-  }
 }
 
 - (void)reloadPostsTable
@@ -303,9 +292,9 @@
   if(!supportButton.selected)
   {
     [supportButton setSelected:YES];
-    [LCThemeAPIManager supportCause:_cause.causeID withSuccess:^(id response) {
-      _cause.isSupporting =YES;
-      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]+1];
+    [LCThemeAPIManager supportCause:self.cause.causeID withSuccess:^(id response) {
+      self.cause.isSupporting =YES;
+      self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]+1];
       supportButton.userInteractionEnabled = YES;
     } andFailure:^(NSString *error) {
       [supportButton setSelected:NO];
@@ -315,10 +304,10 @@
   else
   {
     [supportButton setSelected:NO];
-    [LCThemeAPIManager unsupportCause:_cause.causeID withSuccess:^(id response) {
+    [LCThemeAPIManager unsupportCause:self.cause.causeID withSuccess:^(id response) {
       supportButton.userInteractionEnabled = YES;
-      _cause.isSupporting = NO;
-      _cause.supporters = [NSString stringWithFormat:@"%d",[_cause.supporters intValue]-1];
+      self.cause.isSupporting = NO;
+      self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]-1];
     } andFailure:^(NSString *error) {
       supportButton.userInteractionEnabled = YES;
       [supportButton setSelected:YES];
@@ -331,7 +320,7 @@
   NSLog(@"FollowList clicked");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
   LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
-  vc.cause = _cause;
+  vc.cause = self.cause;
   [self.navigationController pushViewController:vc animated:YES];
 }
 

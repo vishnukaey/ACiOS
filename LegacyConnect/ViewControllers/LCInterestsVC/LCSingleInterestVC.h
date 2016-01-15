@@ -28,20 +28,10 @@
   __weak IBOutlet UIView *actionsContainer;
   
   
-  __weak IBOutlet UILabel *interestName;
-  __weak IBOutlet UILabel *interestDescription;
-  __weak IBOutlet UIImageView *interestImage;
-  __weak IBOutlet UIImageView *interestBGImage;
-  __weak IBOutlet UIButton *interestFollowButton;
-  __weak IBOutlet UILabel *actionsCount;
-  __weak IBOutlet UILabel *followersCount;
-  
-  
   LCInterestPosts *interestPostsView;
   LCInterestCauses *interestCausesView;
   LCInterestActions *interestActionsView;
   
 }
 
-@property(nonatomic, strong) LCInterest *interest;
 @end

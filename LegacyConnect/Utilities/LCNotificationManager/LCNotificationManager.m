@@ -183,6 +183,8 @@
 + (void)postInterestFollowedNotificationWithInterest:(LCInterest*)interest
 {
   interest.isFollowing = YES;
+  NSInteger followers = [interest.followers integerValue] + 1 ;
+  interest.followers = [NSString stringWithFormat:@"%d", followers];
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:interest, kInterestObj, nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kFollowInterestNFK object:nil userInfo:userInfo];
 }
@@ -190,6 +192,8 @@
 + (void)postInterestUnFollowedNotificationWithInterest:(LCInterest*)interest
 {
   interest.isFollowing = NO;
+  NSInteger followers = [interest.followers integerValue] - 1 ;
+  interest.followers = [NSString stringWithFormat:@"%d", followers];
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:interest, kInterestObj, nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kUnfollowInterestNFK object:nil userInfo:userInfo];
 }

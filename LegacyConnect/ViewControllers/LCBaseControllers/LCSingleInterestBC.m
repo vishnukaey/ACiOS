@@ -33,24 +33,57 @@
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+#pragma mark - Private Methods
+
+- (void) updateInterestDetails
+{
+  interestName.text = self.interest.name;
+  interestDescription.text = self.interest.descriptionText;
+  followersCount.text = self.interest.followers;
+  actionsCount.text = self.interest.events;
+  [interestFollowButton setSelected:self.interest.isFollowing];
+}
+
+
+#pragma mark Notification Receiveres
+
 - (void)eventDeletedNotificationReceived :(NSNotification *)notification
 {
   LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  if ([self.interest.interestID isEqualToString:deletedEvent.interestID]) {
+    NSInteger actions = [self.interest.events integerValue] - 1 ;
+    self.interest.events = [NSString stringWithFormat:@"%d", actions];
+    [self updateInterestDetails];
+  }
 }
 
 - (void)eventCreatedNotificationReceived :(NSNotification *)notification
 {
   LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  if ([self.interest.interestID isEqualToString:createdEvent.interestID]) {
+    NSInteger actions = [self.interest.events integerValue] + 1 ;
+    self.interest.events = [NSString stringWithFormat:@"%d", actions];
+    [self updateInterestDetails];
+  }
 }
 
 - (void)interestFollowedNotificationReceived :(NSNotification *)notification
 {
-  LCInterest *interest = [notification.userInfo objectForKey:kInterestObj];
+  LCInterest *updatedInterest = [notification.userInfo objectForKey:kInterestObj];
+  if ([self.interest.interestID isEqualToString:updatedInterest.interestID]) {
+    self.interest = updatedInterest;
+    [self updateInterestDetails];
+  }
 }
 
 - (void)interestUnfollowedNotificationReceived :(NSNotification *)notification
 {
-  LCInterest *interest = [notification.userInfo objectForKey:kInterestObj];
+  LCInterest *updatedInterest = [notification.userInfo objectForKey:kInterestObj];
+  if ([self.interest.interestID isEqualToString:updatedInterest.interestID]) {
+    self.interest = updatedInterest;
+    [self updateInterestDetails];
+  }
 }
 
 /*
