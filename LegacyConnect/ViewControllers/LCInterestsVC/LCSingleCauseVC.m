@@ -24,6 +24,7 @@
   [self initialSetUp];
   [self refreshViewWithCauseDetails];
   [self fetchCauseDetails];
+  [self startFetchingResults];
 }
 
 
@@ -37,6 +38,7 @@
 {
   [super viewWillAppear:animated];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+  [self addGradientOverLay];
   self.navigationController.navigationBarHidden = YES;
 }
 
@@ -49,10 +51,20 @@
   }];
 }
 
+-(void) addGradientOverLay
+{
+  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient.frame = self.causeOverlayImageView.bounds;
+  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
+  [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
+}
+
+
 #pragma mark - private method implementation
 
 - (void)initialSetUp
 {
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
   self.causeImageView.layer.cornerRadius = 5.0;
   self.supportButton.layer.cornerRadius = 5.0;
   self.causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -263,8 +275,6 @@
 
 - (IBAction)supportClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
-  
   self.supportButton.userInteractionEnabled = NO;
   if(!self.supportButton.selected)
   {
@@ -290,7 +300,6 @@
 
 - (IBAction)supportersListClicked:(id)sender
 {
-  NSLog(@"FollowList clicked");
   UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
   LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
   vc.cause = self.cause;
@@ -299,7 +308,7 @@
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
-  NSLog(@"Follow clicked");
+  LCDLog(@"Follow clicked");
 //  if (_cause.url) {
 //    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
 //    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {

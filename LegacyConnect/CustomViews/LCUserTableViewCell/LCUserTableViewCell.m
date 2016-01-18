@@ -74,10 +74,8 @@
   btn.userInteractionEnabled = NO;
   [friendBtn setfriendStatusButtonImageForStatus:kRequestWaiting];
   [LCProfileAPIManager sendFriendRequest:friendObj.userID withSuccess:^(NSDictionary *response) {
-    NSLog(@"%@",response);
     btn.userInteractionEnabled = YES;
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
     btn.userInteractionEnabled = YES;
     [friendBtn setfriendStatusButtonImageForStatus:(FriendStatus)[friendObj.isFriend integerValue]];
   }];

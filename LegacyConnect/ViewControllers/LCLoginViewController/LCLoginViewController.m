@@ -80,7 +80,7 @@
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.emailTextField.text,self.passwordTextField.text] forKeys:@[kEmailKey, kPasswordKey]];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCOnboardingAPIManager performLoginForUser:dict withSuccess:^(id response) {
-    NSLog(@"%@",response);
+    LCDLog(@"%@",response);
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [loginBtn setEnabled:true];
@@ -91,7 +91,7 @@
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self.navigationController popToRootViewControllerAnimated:NO];
   } andFailure:^(NSString *error) {
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
     [loginBtn setEnabled:true];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
