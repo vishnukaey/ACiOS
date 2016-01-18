@@ -38,10 +38,10 @@
 
 - (void) updateInterestDetails
 {
-  interestName.text = self.interest.name;
-  interestDescription.text = self.interest.descriptionText;
-  followersCount.text = self.interest.followers;
-  actionsCount.text = self.interest.events;
+  interestName.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.name];
+  interestDescription.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.descriptionText];
+  followersCount.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.followers];
+  actionsCount.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.events];
   [interestFollowButton setSelected:self.interest.isFollowing];
 }
 
