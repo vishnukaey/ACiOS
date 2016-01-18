@@ -38,7 +38,6 @@
 {
   [super viewWillAppear:animated];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self addGradientOverLay];
   self.navigationController.navigationBarHidden = YES;
 }
 
@@ -47,6 +46,7 @@
   [LCThemeAPIManager getCauseDetailsOfCause:self.cause.causeID WithSuccess:^(LCCause *response) {
     self.cause = response;
     [self refreshViewWithCauseDetails];
+    [self addGradientOverLay];
   } andFailure:^(NSString *error) {
   }];
 }
@@ -54,13 +54,19 @@
 
 -(void) addGradientOverLay
 {
-  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient = [CAGradientLayer layer];
   gradient.frame = self.causeOverlayImageView.bounds;
   gradient.colors = [NSArray arrayWithObjects:(id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor], (id)[LCUtilityManager colorWithHexString:@"282828"], nil];
   [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
 }
 
 
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+  gradient.frame = self.causeOverlayImageView.bounds;
+
+}
 
 #pragma mark - private method implementation
 
