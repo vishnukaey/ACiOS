@@ -53,5 +53,6 @@
 
 + (UIColor *)getThemeRedColor;
 + (float)getHeightOffsetForGIB;
++(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

@@ -51,13 +51,15 @@
   }];
 }
 
+
 -(void) addGradientOverLay
 {
   CAGradientLayer *gradient = [CAGradientLayer layer];
   gradient.frame = self.causeOverlayImageView.bounds;
-  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
+  gradient.colors = [NSArray arrayWithObjects:(id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor], (id)[LCUtilityManager colorWithHexString:@"282828"], nil];
   [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
 }
+
 
 
 #pragma mark - private method implementation
