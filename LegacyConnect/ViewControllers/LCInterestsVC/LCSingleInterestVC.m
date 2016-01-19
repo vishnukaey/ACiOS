@@ -30,8 +30,15 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [self setPostEntityWithInterest:self.interest];
   self.navigationController.navigationBarHidden = true;
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [self removePostEntity];
 }
 
 #pragma mark - Private Methods
@@ -53,12 +60,28 @@
   [LCThemeAPIManager getInterestDetailsOfInterest:self.interest.interestID WithSuccess:^(LCInterest *response) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     self.interest = response;
+    [self setPostEntityWithInterest:self.interest];
     [self updateInterestDetails];
     [self updateInterestImages];
     [interestPostsView loadPostsInCurrentInterest];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
   }];
+}
+
+- (void)setPostEntityWithInterest :(LCInterest *)interest
+{
+  if (interest.interestID && interest.name) {
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appdel.currentPostEntity = [interest copy];
+  }
+  
+}
+
+- (void)removePostEntity
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  appdel.currentPostEntity = nil;
 }
 
 - (void) updateInterestImages

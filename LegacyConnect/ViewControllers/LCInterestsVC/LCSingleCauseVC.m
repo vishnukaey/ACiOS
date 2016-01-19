@@ -39,12 +39,14 @@
   [super viewWillAppear:animated];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   self.navigationController.navigationBarHidden = YES;
+  [self setPostEntityWithCause:self.cause];
 }
 
 -(void)fetchCauseDetails
 {
   [LCThemeAPIManager getCauseDetailsOfCause:self.cause.causeID WithSuccess:^(LCCause *response) {
     self.cause = response;
+    [self setPostEntityWithCause:self.cause];
     [self refreshViewWithCauseDetails];
     [self addGradientOverLay];
   } andFailure:^(NSString *error) {
@@ -66,6 +68,12 @@
   [super viewDidLayoutSubviews];
   gradient.frame = self.causeOverlayImageView.bounds;
 
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [self removePostEntity];
 }
 
 #pragma mark - private method implementation
@@ -108,6 +116,21 @@
 
 - (void) loadPostsInCurrentInterest {
   [self startFetchingResults];
+}
+
+- (void)setPostEntityWithCause :(LCCause *)cause
+{
+  if (cause.causeID && cause.name) {
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appdel.currentPostEntity = [cause copy];
+  }
+  
+}
+
+- (void)removePostEntity
+{
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  appdel.currentPostEntity = nil;
 }
 
 #pragma mark - API and Pagination
