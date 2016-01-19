@@ -245,6 +245,15 @@ static NSString *kTitle = @"MY FEED";
   {
     UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
     createPostVC = [createPostSB instantiateInitialViewController];
+    if (appdel.currentPostEntity) {
+      if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
+        createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+      }
+      else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+      {
+        createPostVC.selectedCause = [appdel.currentPostEntity copy];
+      }
+    }
     
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
@@ -280,6 +289,7 @@ static NSString *kTitle = @"MY FEED";
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   UIImage *normalzedImage = [chosenImage normalizedImage];
@@ -287,6 +297,15 @@ static NSString *kTitle = @"MY FEED";
   createPostVC = [createPostSB instantiateInitialViewController];
   
   createPostVC.photoPostPhoto = normalzedImage;
+  if (appdel.currentPostEntity) {
+    if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
+      createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+    }
+    else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+    {
+      createPostVC.selectedCause = [appdel.currentPostEntity copy];
+    }
+  }
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
   [LCUtilityManager setLCStatusBarStyle];
