@@ -23,6 +23,17 @@
   [self initailSetup];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  
+  UIViewController * parentController = self.parentViewController;
+  if (parentController != nil && [parentController isKindOfClass:[UINavigationController class]])
+  {
+    [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+  }
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
