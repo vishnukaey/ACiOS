@@ -53,7 +53,7 @@
   LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
   if ([self.interest.interestID isEqualToString:deletedEvent.interestID]) {
     NSInteger actions = [self.interest.events integerValue] - 1 ;
-    self.interest.events = [NSString stringWithFormat:@"%d", actions];
+    self.interest.events = [NSString stringWithFormat:@"%ld", (long)actions];
     [self updateInterestDetails];
   }
 }
@@ -63,7 +63,7 @@
   LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
   if ([self.interest.interestID isEqualToString:createdEvent.interestID]) {
     NSInteger actions = [self.interest.events integerValue] + 1 ;
-    self.interest.events = [NSString stringWithFormat:@"%d", actions];
+    self.interest.events = [NSString stringWithFormat:@"%ld", (long)actions];
     [self updateInterestDetails];
   }
 }
