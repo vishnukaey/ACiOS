@@ -73,11 +73,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)addRequiredNotificationObserver
 {
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserDataUpdatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages) name:kUserDataUpdatedNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCountUpdated) name:kNotificationCountUpdated object:nil];
 }
 
-- (void)refreshUserImages:(NSNotification*)notification
+- (void)refreshUserImages
 {
   [self refreshUserInfo];
 }
@@ -126,10 +126,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)deselectCellAtIndexPath:(NSIndexPath*)indexpath
 {
-  if (!indexpath) {
-    indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
+  NSIndexPath *deselectionPath = [NSIndexPath indexPathForRow:0 inSection:0];
+  if (indexpath) {
+    deselectionPath = indexpath;
   }
-  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[self.menuTable cellForRowAtIndexPath:indexpath];
+  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[self.menuTable cellForRowAtIndexPath:deselectionPath];
   [deSelectedCell setBackgroundColor:kDeSelectionColor];
   [deSelectedCell.itemIcon setTintColor:kIconDeSelectionColor];
 }

@@ -22,7 +22,7 @@
   [self.navigationController setNavigationBarHidden:false];
   UIButton * backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 21)];
   [backButton setImage:[UIImage imageNamed:@"backButton_image"] forState:UIControlStateNormal];
-  [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
   UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   [self.navigationItem setLeftBarButtonItem:backButtonItem];
   [self.emailTextField becomeFirstResponder];
@@ -77,7 +77,7 @@
     
 }
 
-- (void)backButtonPressed:(id)sender
+- (void)backButtonPressed
 {
   [self.navigationController popViewControllerAnimated:YES];
 }

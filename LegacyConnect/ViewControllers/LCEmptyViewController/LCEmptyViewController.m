@@ -136,7 +136,7 @@ static NSString *kTitle = @"MY FEED";
   [self addGIButton];
   [self addMenuButton:navigationRoot];
   mainContainer.panMode = MFSideMenuPanModeNone;
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
   [self presentTutorial];
 }
 
@@ -153,7 +153,7 @@ static NSString *kTitle = @"MY FEED";
   }
 }
 
-- (void)menuEventNotification:(NSNotification*)notification
+- (void)menuEventNotification
 {
   //added to bring menu button to top on menu item selection.
   [navigationRoot.view bringSubviewToFront:menuButton];

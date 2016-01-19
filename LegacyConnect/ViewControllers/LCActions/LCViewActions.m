@@ -412,9 +412,8 @@ static CGFloat kActionSectionHeight = 30;
       return [self getActionsDetailsCell];
     } else if (indexPath.row == 1) {
       return [self getActionsMembersCountCell];
-    } else {
-      return [self getActionsWebsiteCell];
     }
+    return [self getActionsWebsiteCell];
   }
   
   if (!self.eventObject.isFollowing) {
