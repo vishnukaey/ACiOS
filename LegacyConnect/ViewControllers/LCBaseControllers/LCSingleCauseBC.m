@@ -35,6 +35,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeNotificationReceived:) name:kSupportCauseNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeNotificationReceived:) name:kUnsupportCauseNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestUnfollowNotificationReceived:) name:kUnfollowInterestNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,6 +45,16 @@
 
 - (void)dealloc {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)interestUnfollowNotificationReceived: (NSNotification *)notification
+{
+  LCInterest *updatedInterest = [notification.userInfo objectForKey:kInterestObj];
+  if ([self.cause.interestID isEqualToString:updatedInterest.interestID] && self.cause.isSupporting) {
+    self.cause.isSupporting = NO;
+    self.cause.supporters = [NSString stringWithFormat:@"%d",[self.cause.supporters intValue]-1];
+    [self refreshViews];
+  }
 }
 
 - (void)newPostCreatedNotificationReceived :(NSNotification *)notification
