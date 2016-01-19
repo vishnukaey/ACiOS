@@ -143,14 +143,13 @@
 
 -(void)refreshViewWithCauseDetails
 {
-  self.causeNameLabel.text = self.cause.name;
-  self.causeDescriptionLabel.text = self.cause.tagLine;
+  self.causeDescriptionLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.cause.tagLine];
   self.navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: self.cause.name] uppercaseString];
   [self.causeImageView sd_setImageWithURL:[NSURL URLWithString:self.cause.logoURLSmall] placeholderImage:nil];
-  self.causeNameLabel.text = [NSString stringWithFormat:@"%@",[self.cause.name uppercaseString]];
+  self.causeNameLabel.text = [[LCUtilityManager performNullCheckAndSetValue:self.cause.name] uppercaseString];
   [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:self.cause.supporters]] forState:UIControlStateNormal];
   
-  //  [causeURLLabel setText:@""];
+  [self.causeURLButton setTitle:[LCUtilityManager performNullCheckAndSetValue:self.cause.causeUrl] forState:UIControlStateNormal];
   
   if(self.cause.isSupporting)
   {
@@ -162,14 +161,5 @@
   }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
