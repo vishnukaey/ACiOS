@@ -164,7 +164,6 @@ static CGFloat kActionSectionHeight = 30;
 - (void)dataPopulation
 {
   [self updateEventTitleAndTopUI];
-  // -------- Created By 'Owner' in 'Interest' -------- //
   NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
   NSString * inText = NSLocalizedString(@"in_", nil);
