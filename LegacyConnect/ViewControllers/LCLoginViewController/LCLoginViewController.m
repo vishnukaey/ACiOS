@@ -81,7 +81,9 @@
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCOnboardingAPIManager performLoginForUser:dict withSuccess:^(id response) {
     LCDLog(@"%@",response);
-    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
+    NSError *error = nil;
+    LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
+    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:user];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [loginBtn setEnabled:true];
 
@@ -89,7 +91,14 @@
     [LCGAManager ga_trackEventWithCategory:@"SignIn" action:@"Success" andLabel:@"User Sign-in successful"];
 
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    if([response[@"data"][@"firstTimeLogin"] isEqualToString:@"1"])
+    {
+      [self performSegueWithIdentifier:@"loginOnboarding" sender:self];
+    }
+    else
+    {
+      [self.navigationController popToRootViewControllerAnimated:NO];
+    }
   } andFailure:^(NSString *error) {
     LCDLog(@"%@",error);
     [loginBtn setEnabled:true];
