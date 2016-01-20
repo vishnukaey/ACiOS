@@ -176,7 +176,7 @@
 {
   NSDateFormatter *format = [[NSDateFormatter alloc] init];
   [format setDateFormat:@"EEEE, MMM dd, yyyy    hh:mm aa"];
-  NSString *dateString = [format stringFromDate:self.startDate];
+  NSString *dateString = [format stringFromDate:date];
   return dateString;
 }
 
@@ -209,32 +209,11 @@
   return 44;
 }
 
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-  
-  NSString *cellIdentifier = kCellIdentifierSection;
-  UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-  if (headerView == nil) {
-    headerView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    
-  }
-  UIView *topLine = [headerView viewWithTag:111];
-  UIView *botLine = [headerView viewWithTag:112];
-  [topLine removeFromSuperview];
-  [botLine removeFromSuperview];
-  
-  topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 1)];
-  [topLine setBackgroundColor:[UIColor colorWithRed:128.0f/255 green:128.0f/255 blue:128.0f/255 alpha:0.5]];
-  [headerView addSubview:topLine];
-  topLine.tag = 111;
-  
-  botLine = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height - 1, tableView.frame.size.width, 1)];
-  [botLine setBackgroundColor:[UIColor colorWithRed:128.0f/255 green:128.0f/255 blue:128.0f/255 alpha:0.5]];
-  [headerView addSubview:botLine];
-  botLine.tag = 111;
-  
+- (void)setTableViewSectionLabelsInHeaderView :(UIView *)headerView forSection:(NSInteger)section
+{
   UILabel *sectionLabel = (UILabel *)[headerView viewWithTag:100];
   UILabel *optionalLabel = (UILabel *)[headerView viewWithTag:101];
+  UIView *topLine = [headerView viewWithTag:111];
   switch (section) {
     case SECTION_NAME:
       sectionLabel.text = NSLocalizedString(@"action_form_name", nil);
@@ -261,10 +240,32 @@
       sectionLabel.text = NSLocalizedString(@"action_form_about", nil);
       optionalLabel.text = @"";
       break;
-      
-    default:
-      break;
   }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+  
+  NSString *cellIdentifier = kCellIdentifierSection;
+  UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+  if (headerView == nil) {
+    headerView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    
+  }
+  UIView *topLine = [headerView viewWithTag:111];
+  UIView *botLine = [headerView viewWithTag:112];
+  [topLine removeFromSuperview];
+  [botLine removeFromSuperview];
+  
+  topLine = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 1)];
+  [topLine setBackgroundColor:[UIColor colorWithRed:128.0f/255 green:128.0f/255 blue:128.0f/255 alpha:0.5]];
+  [headerView addSubview:topLine];
+  topLine.tag = 111;
+  
+  botLine = [[UIView alloc] initWithFrame:CGRectMake(0, headerView.frame.size.height - 1, tableView.frame.size.width, 1)];
+  [botLine setBackgroundColor:[UIColor colorWithRed:128.0f/255 green:128.0f/255 blue:128.0f/255 alpha:0.5]];
+  [headerView addSubview:botLine];
+  botLine.tag = 111;
+  [self setTableViewSectionLabelsInHeaderView:headerView forSection:section];
   return  headerView ;
 }
 

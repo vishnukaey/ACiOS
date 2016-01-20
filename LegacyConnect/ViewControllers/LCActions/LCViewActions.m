@@ -168,11 +168,9 @@ static CGFloat kActionSectionHeight = 30;
   NSString  *eventOwnerName;
   NSString * inText = NSLocalizedString(@"in_", nil);
   NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
-  if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
-    eventOwnerName = NSLocalizedString(@"you_", nil);
-  }
-  else
-  {
+  
+  eventOwnerName = NSLocalizedString(@"you_", nil);
+  if (![self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
     eventOwnerName = [NSString stringWithFormat:@"%@ %@ ",
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerFirstName],
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerLastName]];

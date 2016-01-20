@@ -280,7 +280,7 @@
      NSError *error = nil;
      NSDictionary *dict= response[kResponseData];
      NSDictionary * comments = dict[kPostCommentsKey];
-     BOOL isMorePresent = [[comments objectForKey:@"more"] boolValue];
+     BOOL isMorePresent = [comments[@"more"] boolValue];
      NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCComment class] fromJSONArray:comments[kPostCommentsKey] error:&error];
      if(error)
      {

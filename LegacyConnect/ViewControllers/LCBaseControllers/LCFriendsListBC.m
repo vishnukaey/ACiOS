@@ -24,10 +24,10 @@
                                            selector:@selector(friendRemovedNotificationReceived:)
                                                name:kRemoveFriendNFK
                                              object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(friendAcceptedNotificationReceived:)
-                                               name:kAcceptFriendRequestNFK
-                                             object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self
+//                                           selector:@selector(friendAcceptedNotificationReceived:)
+//                                               name:kAcceptFriendRequestNFK
+//                                             object:nil];
 }
 
 - (void)dealloc
@@ -73,12 +73,12 @@
 }
 
 
-- (void)friendAcceptedNotificationReceived :(NSNotification *)notification
-{
+//- (void)friendAcceptedNotificationReceived :(NSNotification *)notification
+//{
 //  LCFriend *newFriend = notification.userInfo[@"friend"];
 //  [self.results addObject:newFriend];
 //  [self refreshViews];
-}
+//}
 
 - (void)refreshViews
 {

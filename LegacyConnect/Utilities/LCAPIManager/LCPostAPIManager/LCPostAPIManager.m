@@ -25,7 +25,7 @@
   NSArray *tags = [dict_mut objectForKey:@"postTags"];
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:tags options:NSJSONWritingPrettyPrinted error:&error];
   NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-  [dict_mut setObject:jsonString forKey:@"postTags"];
+  dict_mut[@"postTags"] = jsonString;
   
   NSMutableArray *images = [[NSMutableArray alloc] init];
   LCImage *postImage;

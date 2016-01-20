@@ -152,7 +152,7 @@ NSString * const kFBMessageKey = @"message";
 + (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler
 {
   FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
-  if (accessToken && [accessToken hasGranted:kFBPublishActionsPermissionKey]) {
+  if ([accessToken hasGranted:kFBPublishActionsPermissionKey]) {
     
     LCDLog(@"have facebook access token.");
     completionHandler(YES);

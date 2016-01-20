@@ -151,8 +151,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard * sb = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
-  LCViewActions *actions = [sb instantiateViewControllerWithIdentifier:@"LCViewActions"];
+  UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Actions" bundle:nil];
+  LCViewActions *actions = [storyboard instantiateViewControllerWithIdentifier:@"LCViewActions"];
   actions.eventObject = self.results[indexPath.row];
   //UIViewController *profileController = (UIViewController *)self.delegate;
   [self.navigationController pushViewController:actions animated:YES];
