@@ -148,11 +148,11 @@
   else
   {
     UIStoryboard *profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-    LCProfileViewVC *vc = [profileSB instantiateInitialViewController];
-    vc.userDetail = [[LCUserDetail alloc] init];
+    LCProfileViewVC *viewC = [profileSB instantiateInitialViewController];
+    viewC.userDetail = [[LCUserDetail alloc] init];
     LCRequest *request = [self.results objectAtIndex:indexPath.row];
-    vc.userDetail.userID = request.friendID;
-    [self.navigationController pushViewController:vc animated:YES];
+    viewC.userDetail.userID = request.friendID;
+    [self.navigationController pushViewController:viewC animated:YES];
   }
 }
 

@@ -95,18 +95,17 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
   NSString *sectionName;
-  switch (section)
+  if(section == 0)
   {
-    case 0:
-      sectionName = @"Users";
-      break;
-    case 1:
-      sectionName = @"Interests";
-      break;
-      // ...
-    default:
-      sectionName = @"Causes";
-      break;
+    sectionName = @"Users";
+  }
+  else if(section == 1)
+  {
+    sectionName = @"Interests";
+  }
+  else
+  {
+    sectionName = @"Causes";
   }
   if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] > 0)
   {
