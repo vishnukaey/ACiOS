@@ -15,6 +15,8 @@
 #import "LCCauseSupportersVC.h"
 #import "LCSingleInterestVC.h"
 
+static NSString* const kGradientDefaultColor = @"282828";
+
 @implementation LCSingleCauseVC
 
 #pragma mark - controller life cycle
@@ -58,17 +60,14 @@
 {
   gradient = [CAGradientLayer layer];
   gradient.frame = self.causeOverlayImageView.bounds;
-  gradient.colors = [NSArray arrayWithObjects:(id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor], (id)[LCUtilityManager colorWithHexString:@"282828"], nil];
-  [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
+  gradient.colors = [NSArray arrayWithObjects:(id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor], [(id)[LCUtilityManager colorWithHexString:kGradientDefaultColor] CGColor], nil];
+  UIGraphicsBeginImageContext(self.causeOverlayImageView.bounds.size);
+  [gradient renderInContext:UIGraphicsGetCurrentContext()];
+  UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  [self.causeOverlayImageView setImage:image];
 }
 
-
-- (void)viewDidLayoutSubviews
-{
-  [super viewDidLayoutSubviews];
-  gradient.frame = self.causeOverlayImageView.bounds;
-
-}
 
 - (void)viewDidDisappear:(BOOL)animated
 {
