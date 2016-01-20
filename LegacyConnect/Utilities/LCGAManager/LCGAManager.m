@@ -26,7 +26,7 @@
   [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category     // Event category (required)
                                                         action:action  // Event action (required)
                                                          label:label          // Event label
-                                                         value:[NSNumber numberWithInt:1]] build]];
+                                                         value:@1] build]];
 }
 
 @end

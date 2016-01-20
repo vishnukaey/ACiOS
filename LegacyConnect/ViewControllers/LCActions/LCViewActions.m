@@ -477,7 +477,7 @@ static CGFloat kActionSectionHeight = 30;
     }
     cell.communityMemebersCountLabel.text = [NSString stringWithFormat:@"%@ %@",self.eventObject.followerCount, membersText];
   }
-  [cell.seperator setHidden:self.eventObject.website ? NO : YES];
+  [cell.seperator setHidden:!self.eventObject.website];
   return cell;
 }
 
