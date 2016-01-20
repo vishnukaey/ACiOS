@@ -85,7 +85,6 @@
   [webService performPostOperationWithUrl:url  andAccessToken:kEmptyStringValue withParameters:params withSuccess:^(id response)
    {
      NSError *error = nil;
-     LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
      if(error)
      {
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
