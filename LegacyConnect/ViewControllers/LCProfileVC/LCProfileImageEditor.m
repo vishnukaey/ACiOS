@@ -160,6 +160,7 @@
                                (viewHeight - maskSize.height) * 0.5f,
                                maskSize.width,
                                maskSize.height);
+  
   return maskRect;
 }
 
