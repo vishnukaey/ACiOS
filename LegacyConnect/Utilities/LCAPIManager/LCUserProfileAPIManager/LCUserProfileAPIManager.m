@@ -109,25 +109,7 @@
     LCDLog(@"%@",[error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
   }
   
-  NSMutableArray *images = [[NSMutableArray alloc] init];
-  LCImage *headPhotoImage;
-  if(headerPhoto)
-  {
-    headPhotoImage = [[LCImage alloc] init];
-    headPhotoImage.image = headerPhoto;
-    headPhotoImage.imageKey= @"headphoto";
-    [images addObject:headPhotoImage];
-  }
-  
-  LCImage *avtarPhotoImage;
-  if(avtarImage)
-  {
-    avtarPhotoImage = [[LCImage alloc] init];
-    avtarPhotoImage.image = avtarImage;
-    avtarPhotoImage.imageKey= @"avatarUrl";
-    [images addObject:avtarPhotoImage];
-  }
-  
+  NSMutableArray *images = [self getUserImagesArrayWithHeaderPhoto:headerPhoto andAvatarImage:avtarImage];
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url accessToken:[LCDataManager sharedDataManager].userToken parameters:dict andImagesArray:images withSuccess:^(id response) {
     LCDLog(@"Success!");
@@ -150,6 +132,29 @@
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
     failure(error);
   }];
+}
+
++ (NSMutableArray*)getUserImagesArrayWithHeaderPhoto:(UIImage*)headerPhoto andAvatarImage:(UIImage*)avtarImage
+{
+  NSMutableArray *images = [[NSMutableArray alloc] init];
+  LCImage *headPhotoImage;
+  if(headerPhoto)
+  {
+    headPhotoImage = [[LCImage alloc] init];
+    headPhotoImage.image = headerPhoto;
+    headPhotoImage.imageKey= @"headphoto";
+    [images addObject:headPhotoImage];
+  }
+  
+  LCImage *avtarPhotoImage;
+  if(avtarImage)
+  {
+    avtarPhotoImage = [[LCImage alloc] init];
+    avtarPhotoImage.image = avtarImage;
+    avtarPhotoImage.imageKey= @"avatarUrl";
+    [images addObject:avtarPhotoImage];
+  }
+  return images;
 }
 
 + (void)getInterestsForUser:(NSString*)userID lastId:(NSString*)lastId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
