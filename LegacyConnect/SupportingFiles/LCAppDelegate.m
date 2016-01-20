@@ -54,6 +54,7 @@
   
   //GA Tracking
   [LCGAManager ga_trackEventWithCategory:@"Launch" action:@"Success" andLabel:@"Application Launched Successfully"];
+  [GAI sharedInstance].trackUncaughtExceptions = YES;
   
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
