@@ -179,37 +179,37 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   NSString * eventinfoString = [NSString stringWithFormat:@"%@%@ %@%@",eventCreatedBy,eventOwnerName,inText,interest];
-  NSMutableAttributedString * eventInfoAttribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
+  NSMutableAttributedString * eventInfoAtribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
   
   NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
   [paragraphStyle setAlignment:NSTextAlignmentCenter];
   
-  [eventInfoAttribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [eventInfoAttribString length])];
+  [eventInfoAtribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [eventInfoAtribString length])];
 
   
   
   NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
-  [eventInfoAttribString addAttributes:@{
+  [eventInfoAtribString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
                                          NSForegroundColorAttributeName : [UIColor whiteColor]
                                          } range:tagRangeCreatedBy];
   
   NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
-  [eventInfoAttribString addAttributes:@{
+  [eventInfoAtribString addAttributes:@{
                                              NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
                                              NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]
                                              } range:tagRangeUserName];
   
   
   NSRange tagRangeinText = [eventinfoString rangeOfString:inText];
-  [eventInfoAttribString addAttributes:@{
+  [eventInfoAtribString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
                                          NSForegroundColorAttributeName : [UIColor whiteColor]
                                          } range:tagRangeinText];
 
 
   NSRange tagRangeinterest = [eventinfoString rangeOfString:interest];
-  [eventInfoAttribString addAttributes:@{
+  [eventInfoAtribString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
                                          NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
                                          } range:tagRangeinterest];
@@ -218,7 +218,7 @@ static CGFloat kActionSectionHeight = 30;
   NSMutableArray * tagsWithRanges = [self getTaggedArrayWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName];
   
   eventCreatedByLabel.tagsArray  = tagsWithRanges;
-  [eventCreatedByLabel setAttributedText:eventInfoAttribString];
+  [eventCreatedByLabel setAttributedText:eventInfoAtribString];
   __weak typeof(self) weakSelf = self;
   eventCreatedByLabel.nameTagTapped = ^(int index) {
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];

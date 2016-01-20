@@ -70,9 +70,9 @@ static NSString *kTitle = @"MY FEED";
   if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey])
   {
       UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+      UIViewController* initialVC = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
-      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+      [self.navigationController pushViewController:initialVC animated:NO];
     
     if ([LCAppLaunchHelper needsToShowPasswordResetScreen])
     {
@@ -97,9 +97,9 @@ static NSString *kTitle = @"MY FEED";
     {
       [LCUtilityManager clearUserDefaultsForCurrentUser];
       UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-      UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+      UIViewController* initialVC = [storyboard instantiateInitialViewController];
       [self.navigationController setNavigationBarHidden:YES];
-      [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+      [self.navigationController pushViewController:initialVC animated:NO];
     }
   }
 }
@@ -395,9 +395,9 @@ static NSString *kTitle = @"MY FEED";
 - (void)showPasswordResetScreen {
   // Set sign up story board
   UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+  UIViewController* initialVC = [storyboard instantiateInitialViewController];
   [self.navigationController setNavigationBarHidden:YES];
-  [self.navigationController pushViewController:myStoryBoardInitialViewController animated:NO];
+  [self.navigationController pushViewController:initialVC animated:NO];
   
   NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
   LCLoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:kLoginStoryBoardID];

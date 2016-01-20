@@ -14,8 +14,8 @@
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
 
 static CGFloat kNumberOfSections = 1;
-static NSInteger kRowHeightFriendsCell= 88;
-static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
+static NSInteger kFriendsCellHeight= 88;
+static NSString *kFriendsCellID = @"LCFriendsCell";
 
 @implementation LCFriendsListViewController
 
@@ -120,9 +120,9 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 {
   JTTABLEVIEW_cellForRowAtIndexPath
 
-  LCFriendsCell * friendsCell = (LCFriendsCell*)[tableView dequeueReusableCellWithIdentifier:kFriendsCellIdentifier forIndexPath:indexPath];
+  LCFriendsCell * friendsCell = (LCFriendsCell*)[tableView dequeueReusableCellWithIdentifier:kFriendsCellID forIndexPath:indexPath];
   if (friendsCell == nil) {
-    friendsCell = [[LCFriendsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kFriendsCellIdentifier];
+    friendsCell = [[LCFriendsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kFriendsCellID];
   }
   friendsCell.friendObj = [self.results objectAtIndex:indexPath.row];
   [friendsCell.changeFriendStatusBtn setTag:indexPath.row];
@@ -132,7 +132,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return kRowHeightFriendsCell;
+  return kFriendsCellHeight;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

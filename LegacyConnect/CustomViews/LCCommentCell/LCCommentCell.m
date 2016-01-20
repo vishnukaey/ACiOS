@@ -39,17 +39,17 @@
   NSString * userName = [NSString stringWithFormat:@"%@ %@",[LCUtilityManager performNullCheckAndSetValue:comment.firstName],[LCUtilityManager performNullCheckAndSetValue:comment.lastName]] ;
   
   
-  NSMutableAttributedString * userNameAttributtedString = [[NSMutableAttributedString alloc] initWithString:userName];
+  NSMutableAttributedString * userNameAttribString = [[NSMutableAttributedString alloc] initWithString:userName];
   NSRange tagRangeUserName = NSMakeRange(0, userName.length);
-  [userNameAttributtedString addAttributes:@{
+  [userNameAttribString addAttributes:@{
                                              NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
-                                             } range:NSMakeRange(0, userNameAttributtedString.length)];
+                                             } range:NSMakeRange(0, userNameAttribString.length)];
   
-  NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
+  NSMutableArray *userNameTagsRanges = [[NSMutableArray alloc] init];
   NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:comment.userId, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
-  [userNameLabelTagsWithRanges addObject:dic_user];
-  userNameLabel.tagsArray  = userNameLabelTagsWithRanges;
-  [userNameLabel setAttributedText:userNameAttributtedString];
+  [userNameTagsRanges addObject:dic_user];
+  userNameLabel.tagsArray  = userNameTagsRanges;
+  [userNameLabel setAttributedText:userNameAttribString];
   __weak typeof(self) weakSelf = self;
   userNameLabel.nameTagTapped = ^(int index) {
     if (weakSelf.commentCellTagAction) {

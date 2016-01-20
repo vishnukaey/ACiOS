@@ -88,9 +88,9 @@
 
 - (CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
   
-  CGSize nextPageLoaderCellSize = self.nextPageLoaderCell.frame.size;
-  if(indexPath.row == [self.results count] && !CGSizeEqualToSize(nextPageLoaderCellSize, CGSizeZero)){
-    return nextPageLoaderCellSize;
+  CGSize nxtPgeLdrCellSize = self.nextPageLoaderCell.frame.size;
+  if(indexPath.row == [self.results count] && !CGSizeEqualToSize(nxtPgeLdrCellSize, CGSizeZero)){
+    return nxtPgeLdrCellSize;
   }
   
   return self->_collectionViewCellSize;

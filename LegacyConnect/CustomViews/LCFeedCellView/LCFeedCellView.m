@@ -117,10 +117,10 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     NSRange locationTagRange = [postInfoString rangeOfString:location];
     [attributtedString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
-  NSMutableArray *createdAtLabelTagsWithRanges = [[NSMutableArray alloc] init];
+  NSMutableArray *createdAtTagsRange = [[NSMutableArray alloc] init];
   NSDictionary *dict_createdAt = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.postToID, kTagobjId, self.feedObject.postToName, kTagobjText, self.feedObject.postToType, kTagobjType, [NSValue valueWithRange:tagRangeCause], @"range", nil];
-  [createdAtLabelTagsWithRanges addObject:dict_createdAt];
-  createdLabel.tagsArray  = createdAtLabelTagsWithRanges;
+  [createdAtTagsRange addObject:dict_createdAt];
+  createdLabel.tagsArray  = createdAtTagsRange;
   [createdLabel setAttributedText:attributtedString];
   __weak typeof(self) weakSelf = self;
   createdLabel.nameTagTapped = ^(int index) {
@@ -158,11 +158,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   
   //never ever forget to add the font attribute to the tagged label
   NSMutableString * completeFeedMessage = [[NSMutableString alloc] initWithString:[NSString stringWithFormat:@"%@ %@",self.feedObject.message,friendsTotag]];
-  NSMutableAttributedString * postDescriptionString = [[NSMutableAttributedString alloc] initWithString:completeFeedMessage];
+  NSMutableAttributedString * postDescString = [[NSMutableAttributedString alloc] initWithString:completeFeedMessage];
   
   if (friendsTotag.length > 0) {
     NSRange locationTagRange = [completeFeedMessage rangeOfString:friendsTotag];
-    [postDescriptionString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
+    [postDescString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
   
   NSMutableArray *postDescriptionTagsWithRanges = [[NSMutableArray alloc] init];
@@ -174,20 +174,20 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [postDescriptionTagsWithRanges addObject:dic_post];
     
   }
-  [postDescriptionString addAttributes:@{
+  [postDescString addAttributes:@{
                                          NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:13],
-                                         } range:NSMakeRange(0, postDescriptionString.length)];
+                                         } range:NSMakeRange(0, postDescString.length)];
   
   NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
   [style setLineSpacing:3];
-  [postDescriptionString addAttribute:NSParagraphStyleAttributeName
+  [postDescString addAttribute:NSParagraphStyleAttributeName
                      value:style
-                     range:NSMakeRange(0, postDescriptionString.length)];
+                     range:NSMakeRange(0, postDescString.length)];
   [postDescription sizeToFit];
   
   
   postDescription.tagsArray  = postDescriptionTagsWithRanges;
-  [postDescription setAttributedText:postDescriptionString];
+  [postDescription setAttributedText:postDescString];
   __weak typeof(self) weakSelf = self;
   postDescription.nameTagTapped = ^(int index) {
     if (weakSelf.feedCellTagAction) {

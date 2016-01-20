@@ -20,8 +20,8 @@
 @property (nonatomic, assign) BOOL isFirstLaunch;
 @end
 
-static NSString *kProfilePicPlaceholder = @"userProfilePic";
-static CGFloat kProfilePicBorderWidth = 3.0f;
+static NSString *kProfilePicPH = @"userProfilePic";
+static CGFloat kProfilePicBdrWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
 static CGFloat kNumberOfCells = 4.0;
 static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
@@ -42,9 +42,9 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   //-- Profile Photo -- //
   self.profilePicture.layer.cornerRadius = CGRectGetWidth(self.profilePicture.frame) / 2;
   self.profilePicture.layer.borderColor = [UIColor whiteColor].CGColor;
-  self.profilePicture.layer.borderWidth = kProfilePicBorderWidth;
+  self.profilePicture.layer.borderWidth = kProfilePicBdrWidth;
   self.profilePicture.clipsToBounds = YES;
-  self.profilePicture.image = [UIImage imageNamed:kProfilePicPlaceholder];
+  self.profilePicture.image = [UIImage imageNamed:kProfilePicPH];
   //-- Name Label -- //
   [self refreshUserInfo];
   
@@ -85,9 +85,9 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (void)notificationCountUpdated
 {
   LCAppDelegate * appdel = [[UIApplication sharedApplication] delegate];
-  NSInteger totalNotificationCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
-  [[(LCMenuButton*)appdel.menuButton badgeLabel] setText:[NSString stringWithFormat:@"%li",(long)totalNotificationCount]];
-  [[(LCMenuButton*)appdel.menuButton badgeLabel] setHidden:(totalNotificationCount == 0)];
+  NSInteger totalNotificCount = [[[LCDataManager sharedDataManager] notificationCount] integerValue] + [[[LCDataManager sharedDataManager] requestCount] integerValue];
+  [[(LCMenuButton*)appdel.menuButton badgeLabel] setText:[NSString stringWithFormat:@"%li",(long)totalNotificCount]];
+  [[(LCMenuButton*)appdel.menuButton badgeLabel] setHidden:(totalNotificCount == 0)];
   [self.menuTable reloadData];
 }
 
