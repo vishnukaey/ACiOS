@@ -23,7 +23,7 @@
 static NSString *kProfilePicPlaceholder = @"userProfilePic";
 static CGFloat kProfilePicBorderWidth = 3.0f;
 static CGFloat kCellHeight = 44.0f;
-static CGFloat kNumberOfCells = 3.0;
+static CGFloat kNumberOfCells = 4.0;
 static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 #define kSelectionColor [UIColor colorWithRed:0.0f/255 green:0.0f/255 blue:0.0f/255 alpha:1]
@@ -73,11 +73,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)addRequiredNotificationObserver
 {
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages:) name:kUserDataUpdatedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages) name:kUserDataUpdatedNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCountUpdated) name:kNotificationCountUpdated object:nil];
 }
 
-- (void)refreshUserImages:(NSNotification*)notification
+- (void)refreshUserImages
 {
   [self refreshUserInfo];
 }
@@ -126,10 +126,11 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 
 - (void)deselectCellAtIndexPath:(NSIndexPath*)indexpath
 {
-  if (!indexpath) {
-    indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
+  NSIndexPath *deselectionPath = [NSIndexPath indexPathForRow:0 inSection:0];
+  if (indexpath) {
+    deselectionPath = indexpath;
   }
-  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[self.menuTable cellForRowAtIndexPath:indexpath];
+  LCMenuItemCell * deSelectedCell = (LCMenuItemCell*)[self.menuTable cellForRowAtIndexPath:deselectionPath];
   [deSelectedCell setBackgroundColor:kDeSelectionColor];
   [deSelectedCell.itemIcon setTintColor:kIconDeSelectionColor];
 }
@@ -137,7 +138,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 - (IBAction)profileButtonTapped:(id)sender {
   [self deselectCellAtIndexPath:selectedIndexPath];
   selectedIndexPath = nil;
-  [delegate_ leftMenuItemSelectedAtIndex:3];
+  [delegate_ leftMenuItemSelectedAtIndex:4];
 }
 
 #pragma mark - UITableViewDataSource

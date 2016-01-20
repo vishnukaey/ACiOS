@@ -13,6 +13,7 @@
 #import <Social/Social.h>
 #import <Accounts/Accounts.h>
 #import "LCSingleCauseVC.h"
+#import "LCSingleInterestVC.h"
 #import "LCProfileViewVC.h"
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
@@ -71,7 +72,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   
   // Pull to Refresh Interface to Feeds TableView.
@@ -142,19 +143,29 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])//go to cause page
+  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    causeVC.cause = [[LCCause alloc] init];
+    causeVC.cause.causeID = tagDetails[kTagobjId];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
-  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:profileVC animated:YES];
+  }
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    interestVC.interest = [[LCInterest alloc] init];
+    interestVC.interest.interestID = tagDetails[kTagobjId];
+    [self.navigationController pushViewController:interestVC animated:YES];
   }
 }
 

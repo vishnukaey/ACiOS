@@ -40,8 +40,8 @@
 
 + (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString;
 
-+ (UIView*)getNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width;
-+ (UIView*)getSearchNoResultViewWithText:(NSString*)text andViewWidth:(CGFloat)width;
++ (UIView*)getNoResultViewWithText:(NSString*)text;
++ (UIView*)getSearchNoResultViewWithText:(NSString*)text;
 + (UITableViewCell*)getNextPageLoaderCell;
 + (BOOL)isaValidWebsiteLink :(NSString *)link;
 + (NSString *)getSpaceTrimmedStringFromString :(NSString *)string;
@@ -53,5 +53,6 @@
 
 + (UIColor *)getThemeRedColor;
 + (float)getHeightOffsetForGIB;
++(UIColor*)colorWithHexString:(NSString*)hex;
 
 @end

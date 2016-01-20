@@ -8,16 +8,30 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
+#import "LCTabMenuView.h"
+#import "LCInterestPosts.h"
+#import "LCInterestCauses.h"
+#import "LCInterestActions.h"
+#import "LCSingleInterestBC.h"
 
-@interface LCSingleInterestVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface LCSingleInterestVC : LCSingleInterestBC <LCInterestPostsDelegate, LCInterestCausesDelegate, LCInterestActionsDelegate>
 {
-  IBOutlet UITableView *feedsTable;
-  IBOutlet UIScrollView *causesScrollView;
-  NSMutableArray *cellsViewArray;
+  __weak IBOutlet LCTabMenuView *tabmenu;
+  __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
+  
+  __weak IBOutlet UIButton *postsButton;
+  __weak IBOutlet UIButton *causesButton;
+  __weak IBOutlet UIButton *actionsButton;
+  
+  __weak IBOutlet UIView *postsContainer;
+  __weak IBOutlet UIView *causesContainer;
+  __weak IBOutlet UIView *actionsContainer;
+  
+  
+  LCInterestPosts *interestPostsView;
+  LCInterestCauses *interestCausesView;
+  LCInterestActions *interestActionsView;
+  
 }
-
-- (IBAction)toggleHelpsORCauses:(UIButton *)sender;
-- (IBAction)backAction:(id)sender;
-- (IBAction)followButtonAction:(id)sender;
 
 @end

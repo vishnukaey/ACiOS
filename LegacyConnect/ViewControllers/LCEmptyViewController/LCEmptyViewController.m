@@ -15,7 +15,7 @@
 #import "LCMenuButton.h"
 #import "LCChooseActionsInterest.h"
 #import "LCProfileViewVC.h"
-#import "LCAllInterestVC.h"
+#import "LCMyAndAllInterestVC.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCLoginViewController.h"
@@ -25,7 +25,6 @@
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
 #import "LCFinalTutorialVC.h"
-#import "LCOnboardFinalSelectionVC.h"
 
 static NSString *kTitle = @"MY FEED";
 
@@ -137,7 +136,7 @@ static NSString *kTitle = @"MY FEED";
   [self addGIButton];
   [self addMenuButton:navigationRoot];
   mainContainer.panMode = MFSideMenuPanModeNone;
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
   [self presentTutorial];
 }
 
@@ -154,7 +153,7 @@ static NSString *kTitle = @"MY FEED";
   }
 }
 
-- (void)menuEventNotification:(NSNotification*)notification
+- (void)menuEventNotification
 {
   //added to bring menu button to top on menu item selection.
   [navigationRoot.view bringSubviewToFront:menuButton];
@@ -246,6 +245,15 @@ static NSString *kTitle = @"MY FEED";
   {
     UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
     createPostVC = [createPostSB instantiateInitialViewController];
+    if (appdel.currentPostEntity) {
+      if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
+        createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+      }
+      else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+      {
+        createPostVC.selectedCause = [appdel.currentPostEntity copy];
+      }
+    }
     
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
@@ -281,6 +289,7 @@ static NSString *kTitle = @"MY FEED";
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   UIImage *normalzedImage = [chosenImage normalizedImage];
@@ -288,6 +297,15 @@ static NSString *kTitle = @"MY FEED";
   createPostVC = [createPostSB instantiateInitialViewController];
   
   createPostVC.photoPostPhoto = normalzedImage;
+  if (appdel.currentPostEntity) {
+    if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
+      createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+    }
+    else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+    {
+      createPostVC.selectedCause = [appdel.currentPostEntity copy];
+    }
+  }
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
   [LCUtilityManager setLCStatusBarStyle];
@@ -309,20 +327,26 @@ static NSString *kTitle = @"MY FEED";
     LCFeedsHomeViewController *feedsVC = [mainSB instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:feedsVC]];
   }
-  else if (index == 1)//notifications
+  else if (index == 1)//Interest
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    LCMyAndAllInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:kAllAndMyInterestStoryBoardID];
+    [navigationRoot setViewControllers:[NSArray arrayWithObject:interestVC]];
+  }
+  else if (index == 2)//notifications
   {
     UIStoryboard*  notificationSB = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
     LCNotificationsViewController *notificationVC = [notificationSB instantiateInitialViewController];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:notificationVC]];
   }
-  else if (index == 2)//settings
+  else if (index == 3)//settings
   {
     UIStoryboard*  settingsSB = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
     LCSettingsViewController *settingsVC = [settingsSB instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
     [navigationRoot setViewControllers:[NSArray arrayWithObject:settingsVC]];
     
   }
-  else if (index == 3)//profile
+  else if (index == 4)//profile
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateInitialViewController];
@@ -361,12 +385,12 @@ static NSString *kTitle = @"MY FEED";
     updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
     [self.navigationController pushViewController:updatePasswordVC animated:YES];
   }
-  else
-  {
-    //Logout
-    [self leftMenuItemSelectedAtIndex:4];
-    [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
-  }
+//  else
+//  {
+//    //Logout
+//    [self leftMenuItemSelectedAtIndex:4];
+//    [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
+//  }
 }
 
 

@@ -11,10 +11,13 @@
 
 @implementation LCThemeAPIManager
 
-+ (void)getInterestsWithSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getAllInterestsWithLastId:(NSString*)lastId success:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetInterestsURL];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetAllInterestsURL];
+  if (lastId) {
+    url = [NSString stringWithFormat:@"%@?lastId=%@",url,lastId];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
@@ -84,14 +87,14 @@
    }];
 }
 
-+ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCFeed* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getInterestDetailsOfInterest:(NSString*)interestId WithSuccess:(void (^)(LCInterest* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kGetInterestURL,interestId];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
-     LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCInterest class] fromJSONDictionary:response[kResponseData] error:&error];
+     LCInterest *interest = [MTLJSONAdapter modelOfClass:[LCInterest class] fromJSONDictionary:response[kResponseData] error:&error];
      if(error)
      {
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
@@ -100,7 +103,7 @@
      else
      {
        LCDLog(@"Interest details Fetch success! ");
-       success(feed);
+       success(interest);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -109,14 +112,14 @@
    }];
 }
 
-+ (void)getCauseDetailsOfCause:(NSString*)causeId WithSuccess:(void (^)(LCFeed* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getCauseDetailsOfCause:(NSString*)causeId WithSuccess:(void (^)(LCCause* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kGetCauseURL,causeId];
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
-     LCFeed *feed = [MTLJSONAdapter modelOfClass:[LCCause class] fromJSONDictionary:response[kResponseData] error:&error];
+     LCCause *cause = [MTLJSONAdapter modelOfClass:[LCCause class] fromJSONDictionary:response[kResponseData] error:&error];
      if(error)
      {
        [LCUtilityManager showAlertViewWithTitle:nil andMessage:error.localizedDescription];
@@ -125,7 +128,7 @@
      else
      {
        LCDLog(@"Cause details Fetch success! ");
-       success(feed);
+       success(cause);
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -134,15 +137,17 @@
    }];
 }
 
-+ (void)followInterest:(NSString *)interestId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+
++ (void)followInterest:(LCInterest *)interest withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kIneterestsFollowURL];
-  NSDictionary *dict = @{kInterestIDKey: interestId};
+  NSDictionary *dict = @{kInterestIDKey: interest.interestID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Interest followed successfully");
+     [LCNotificationManager postInterestFollowedNotificationWithInterest:interest];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -151,10 +156,13 @@
    }];
 }
 
-+ (void)getInterestFolowersOfInterest:(NSString*)interestId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getInterestFolowersOfInterest:(NSString*)interestId lastUserId:(NSString*)lastId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFollowersURL, kInterestIDKey, interestId];
+  if (lastId) {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastId];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
@@ -178,15 +186,17 @@
 }
 
 
-+ (void)unfollowInterest:(NSString *)interestId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)unfollowInterest:(LCInterest *)interest withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kIneterestsUnfollowURL];
-  NSDictionary *dict = @{kInterestIDKey: interestId};
+  NSDictionary *dict = @{kInterestIDKey: interest.interestID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Interest unfollowed successfully");
+     [LCNotificationManager postInterestUnFollowedNotificationWithInterest:interest];
+
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -195,15 +205,16 @@
    }];
 }
 
-+ (void)supportCause:(NSString *)causeId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)supportCause:(LCCause *)cause withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kCauseSuppotURL];
-  NSDictionary *dict = @{kCauseIDKey: causeId};
+  NSDictionary *dict = @{kCauseIDKey: cause.causeID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Cause Supported successfully");
+     [LCNotificationManager postCauseFollowedNotificationWithCause:cause];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -212,15 +223,16 @@
    }];
 }
 
-+ (void)unsupportCause:(NSString *)causeId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)unsupportCause:(LCCause *)cause withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kCauseUnsuppotURL];
-  NSDictionary *dict = @{kCauseIDKey: causeId};
+  NSDictionary *dict = @{kCauseIDKey: cause.causeID};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Cause Unsupported successfully");
+     [LCNotificationManager postCauseUnFollowedNotificationWithCause:cause];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -229,10 +241,14 @@
    }];
 }
 
-+ (void)getCauseFolowersOfCause:(NSString*)causeId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getCauseFollowersOfCause:(NSString*)causeId andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId];
+  if (lastID)
+  {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastCauseIDKey,lastID];
+  }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;
@@ -345,6 +361,59 @@
      failure(error);
    }];
 
+}
+
++ (void)getPostsInInterest:(NSString *)interestID andLastPostID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFeedsURL, kInterestIDKey, interestID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:response[kResponseData] error:&error];
+     if(error)
+     {
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       success(responsesArray);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
++ (void)getPostsInCause:(NSString *)causeID andLastPostID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFeedsURL, kCauseIDKey, causeID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:response[kResponseData] error:&error];
+     if(error)
+     {
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       success(responsesArray);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
 }
 
 

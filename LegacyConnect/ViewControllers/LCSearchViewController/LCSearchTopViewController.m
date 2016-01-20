@@ -14,6 +14,8 @@
 #import "LCInterest.h"
 #import "LCCause.h"
 #import "LCProfileViewVC.h"
+#import "LCSingleInterestVC.h"
+#import "LCSingleCauseVC.h"
 
 @interface LCSearchTopViewController ()
 
@@ -76,7 +78,10 @@
   {
     return self.searchResultObject.interestsArray.count>3 ? 3 : self.searchResultObject.interestsArray.count;
   }
-  return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
+  else
+  {
+    return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
+  }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -92,20 +97,27 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-  
-  NSString *sectionName = nil;
-  
-  if (section == 0) {
-    sectionName = @"Users";
-  } else  if (section == 1) {
-    sectionName = @"Interests";
-  } else {
-    sectionName = @"Causes";
+  NSString *sectionName;
+  switch (section)
+  {
+    case 0:
+      sectionName = @"Users";
+      break;
+    case 1:
+      sectionName = @"Interests";
+      break;
+      // ...
+    default:
+      sectionName = @"Causes";
+      break;
   }
-  
   if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] > 0)
   {
     return sectionName;
+  }
+  else
+  {
+    return nil;
   }
   return sectionName;
 }
@@ -154,11 +166,35 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
-  if (indexPath.section == 0) {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    profileVC.userDetail = self.searchResultObject.usersArray[indexPath.row];
-    [self.navigationController pushViewController:profileVC animated:YES];
+  switch (indexPath.section) {
+    case 0:
+    {
+      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+      LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+      vc.userDetail = self.searchResultObject.usersArray[indexPath.row];
+      [self.navigationController pushViewController:vc animated:YES];
+    }
+    case 1:
+    {
+      LCInterest *selectedInterest = self.searchResultObject.interestsArray[indexPath.row];
+      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+      LCSingleInterestVC *interestVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+      interestVC.interest = selectedInterest;
+      [self.navigationController pushViewController:interestVC animated:YES];
+    }
+      break;
+      
+    case 2:
+    {
+      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+      LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+      vc.cause = self.searchResultObject.causesArray[indexPath.row];
+      [self.navigationController pushViewController:vc animated:YES];
+    }
+      break;
+      
+    default:
+      break;
   }
   
   /*

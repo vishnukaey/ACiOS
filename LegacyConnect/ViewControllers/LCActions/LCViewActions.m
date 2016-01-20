@@ -164,16 +164,13 @@ static CGFloat kActionSectionHeight = 30;
 - (void)dataPopulation
 {
   [self updateEventTitleAndTopUI];
-  // -------- Created By 'Owner' in 'Interest' -------- //
   NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
   NSString * inText = NSLocalizedString(@"in_", nil);
   NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
-  if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
-    eventOwnerName = NSLocalizedString(@"you_", nil);
-  }
-  else
-  {
+  
+  eventOwnerName = NSLocalizedString(@"you_", nil);
+  if (![self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
     eventOwnerName = [NSString stringWithFormat:@"%@ %@ ",
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerFirstName],
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerLastName]];
@@ -412,9 +409,8 @@ static CGFloat kActionSectionHeight = 30;
       return [self getActionsDetailsCell];
     } else if (indexPath.row == 1) {
       return [self getActionsMembersCountCell];
-    } else {
-      return [self getActionsWebsiteCell];
     }
+    return [self getActionsWebsiteCell];
   }
   
   if (!self.eventObject.isFollowing) {

@@ -161,7 +161,7 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     [MBProgressHUD hideAllHUDsForView:interestsTableView.superview animated:YES];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:interestsTableView.superview animated:YES];
-    NSLog(@"%@",error);
+    LCDLog(@"%@",error);
   }];
 }
 

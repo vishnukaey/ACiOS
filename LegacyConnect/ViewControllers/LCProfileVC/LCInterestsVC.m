@@ -9,6 +9,7 @@
 #import "LCInterestsVC.h"
 #import "LCInterestsCellView.h"
 #import "LCViewActions.h"
+#import "LCSingleInterestVC.h"
 
 @implementation LCInterestsVC
 
@@ -66,7 +67,7 @@
     if (isSelfProfile) {
       message = NSLocalizedString(@"no_interests_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
   }
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
 }
@@ -120,6 +121,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  LCInterest *interest = [self.results objectAtIndex:indexPath.row];
+  
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCSingleInterestVC *interestVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+  interestVC.interest = interest;
+  [self.navigationController pushViewController:interestVC animated:YES];
 }
 
 @end

@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "LCFeedCellView.h"
+#import "LCSingleCauseBC.h"
 
-@interface LCSingleCauseVC : UIViewController<UITableViewDataSource, UITableViewDelegate>
+
+@interface LCSingleCauseVC : LCSingleCauseBC
 {
-  IBOutlet UITableView *feedsTable;
+  __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSMutableArray *cellsViewArray;
+  CAGradientLayer *gradient;
 }
+
 
 - (IBAction)supportClicked:(id)sender;
 - (IBAction)supportersListClicked:(id)sender;

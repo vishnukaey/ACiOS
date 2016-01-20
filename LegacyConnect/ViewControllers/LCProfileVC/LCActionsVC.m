@@ -69,7 +69,7 @@
     if (isSelfProfile) {
       message = NSLocalizedString(@"no_actions_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message andViewWidth:CGRectGetWidth(self.tableView.frame)];
+    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
   }
   self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
   [self addPullToRefreshForActionsTable];
@@ -131,9 +131,9 @@
     cell = [topLevelObjects objectAtIndex:0];
   }
   [cell setEvent:[self.results objectAtIndex:indexPath.row]];
-  tableView.backgroundColor = [UIColor clearColor];
-  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-  tableView.allowsSelection = YES;
+//  tableView.backgroundColor = [UIColor clearColor];
+//  tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+//  tableView.allowsSelection = YES;
   return cell;
 }
 

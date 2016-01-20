@@ -180,4 +180,39 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationCountUpdated object:nil userInfo:nil];
 }
 
++ (void)postInterestFollowedNotificationWithInterest:(LCInterest*)interest
+{
+  interest.isFollowing = YES;
+  NSInteger followers = [interest.followers integerValue] + 1 ;
+  interest.followers = [NSString stringWithFormat:@"%ld", (long)followers];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:interest, kInterestObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kFollowInterestNFK object:nil userInfo:userInfo];
+}
+
++ (void)postInterestUnFollowedNotificationWithInterest:(LCInterest*)interest
+{
+  interest.isFollowing = NO;
+  NSInteger followers = [interest.followers integerValue] - 1 ;
+  interest.followers = [NSString stringWithFormat:@"%ld", (long)followers];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:interest, kInterestObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUnfollowInterestNFK object:nil userInfo:userInfo];
+}
+
++ (void)postCauseFollowedNotificationWithCause:(LCCause *)cause
+{
+  cause.isSupporting = YES;
+  cause.supporters = [NSString stringWithFormat:@"%d",[cause.supporters intValue]+1];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:cause, kCauseObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kSupportCauseNFK object:nil userInfo:userInfo];
+}
+
++ (void)postCauseUnFollowedNotificationWithCause:(LCCause *)cause
+{
+  cause.isSupporting = NO;
+  cause.supporters = [NSString stringWithFormat:@"%d",[cause.supporters intValue]-1];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:cause, kCauseObj, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kUnsupportCauseNFK object:nil userInfo:userInfo];
+}
+
+
 @end

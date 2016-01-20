@@ -8,17 +8,17 @@
 
 #import "LCSingleInterestVC.h"
 #import "LCSingleCauseVC.h"
-
+#import "LCInterestFollowersVC.h"
+#import "UIImage+LCImageBlur.h"
 
 @implementation LCSingleInterestVC
 
-#pragma mark - controller life cycle
+#pragma mark - Controller life cycle
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  [self prepareCauses];
-  [self prepareCells];
+  [self initialSetup];
 }
 
 - (void)didReceiveMemoryWarning
@@ -30,134 +30,202 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [self setPostEntityWithInterest:self.interest];
   self.navigationController.navigationBarHidden = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
 }
 
-#pragma mark - setup functions
-- (void)prepareCauses
+- (void)viewDidDisappear:(BOOL)animated
 {
-  UIButton *aCause = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 200, 100)];
-  [aCause setTitle:@"A Cause" forState:UIControlStateNormal];
-  [causesScrollView addSubview:aCause];
-  aCause.backgroundColor = [UIColor orangeColor];
-  aCause.center = CGPointMake(causesScrollView.frame.size.width/2, causesScrollView.frame.size.height/2);
-  [aCause addTarget:self action:@selector(causesClicked:) forControlEvents:UIControlEventTouchUpInside];
+  [super viewDidDisappear:animated];
+  [self removePostEntity];
 }
 
--(void)prepareCells
+#pragma mark - Private Methods
+- (void) initialSetup
 {
-  NSArray *feedsArray = [LCDummyValues dummyFeedArray];
+  tabmenu.menuButtons = [[NSArray alloc] initWithObjects:postsButton, causesButton, actionsButton, nil];
+  tabmenu.views = [[NSArray alloc] initWithObjects:postsContainer, causesContainer, actionsContainer, nil];
   
-  cellsViewArray = [[NSMutableArray alloc]init];
-  for (int i=0; i<feedsArray.count; i++)
-  {
-    LCFeedCellView *celViewFinal = [[LCFeedCellView alloc]init];
-//    [celViewFinal arrangeSelfForData:[feedsArray objectAtIndex:i] forWidth:feedsTable.frame.size.width forPage:kHomefeedCellID];
-    __weak typeof(self) weakSelf = self;
-    celViewFinal.feedCellAction = ^ (kkFeedCellActionType actionType, LCFeed * feed) {
-      [weakSelf feedCellActionWithType:actionType andFeed:feed];
-    };
-    celViewFinal.feedCellTagAction = ^ (NSDictionary * tagDetails) {
-      [weakSelf tagTapped:tagDetails];
-    };
-
-    [cellsViewArray addObject:celViewFinal];
-  }
+  interestName.text = kEmptyStringValue;
+  interestDescription.text = kEmptyStringValue;
+  
+  //[self updateInterestDetails];
+  [self getInterestDetails];
 }
 
-#pragma mark - button actions
-- (IBAction)followButtonAction:(id)sender
+- (void) getInterestDetails
 {
-  NSLog(@"follow button clicked-->>");
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCThemeAPIManager getInterestDetailsOfInterest:self.interest.interestID WithSuccess:^(LCInterest *response) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    self.interest = response;
+    [self setPostEntityWithInterest:self.interest];
+    [self updateInterestDetails];
+    [self updateInterestImages];
+    [interestPostsView loadPostsInCurrentInterest];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+  }];
 }
 
-- (IBAction)toggleHelpsORCauses:(UIButton *)sender
+- (void)setPostEntityWithInterest :(LCInterest *)interest
 {
-  if (sender.tag == 1)//helps
-  {
-    feedsTable.hidden = false;
-    causesScrollView.hidden = true;
+  if (interest.interestID && interest.name) {
+    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appdel.currentPostEntity = [interest copy];
   }
-  else//causes--tag is 2
-  {
-    feedsTable.hidden = true;
-    causesScrollView.hidden = false;
-  }
+  
 }
 
-- (IBAction)backAction:(id)sender
+- (void)removePostEntity
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:NO];
+  appdel.currentPostEntity = nil;
+}
+
+- (void) updateInterestImages
+{
+  [interestImage sd_setImageWithURL:[NSURL URLWithString:self.interest.logoURLSmall] placeholderImage:interestImage.image];
+  
+  SDWebImageManager *manager = [SDWebImageManager sharedManager];
+  [manager downloadImageWithURL:[NSURL URLWithString:self.interest.logoURLSmall]
+                        options:0
+                       progress:nil
+                      completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                        if (image) {
+                          
+                          dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            
+                            UIImage *bluredImage = [image bluredImage];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                              interestBGImage.image = bluredImage;
+                            });
+                          });
+                        }
+                      }];
+}
+
+#pragma mark - Action Mehtods
+- (IBAction)backAction:(id)sender
+{
   [self.navigationController popViewControllerAnimated:YES];
 }
-
-- (void)causesClicked :(UIButton *)sender
+- (IBAction)followAction:(id)sender
 {
-  NSLog(@"cause clicked0-->>>");
-  UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-  LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-  [self.navigationController pushViewController:causeVC animated:YES];
-}
-
-#pragma mark - TableView delegates
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;    //count of section
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  
-  return cellsViewArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  static NSString *MyIdentifier = @"MyIdentifier";
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
+  interestFollowButton.userInteractionEnabled = NO;
+  if(!interestFollowButton.selected)
   {
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
+    [interestFollowButton setSelected:YES];
+    [LCThemeAPIManager followInterest:self.interest withSuccess:^(id response) {
+      interestFollowButton.userInteractionEnabled = YES;
+    } andFailure:^(NSString *error) {
+      [interestFollowButton setSelected:NO];
+      interestFollowButton.userInteractionEnabled = YES;
+    }];
   }
-  [[cell viewWithTag:10] removeFromSuperview];
+  else
+  {
+    [interestFollowButton setSelected:NO];
+    [LCThemeAPIManager unfollowInterest:self.interest withSuccess:^(id response) {
+      interestFollowButton.userInteractionEnabled = YES;
+    } andFailure:^(NSString *error) {
+      interestFollowButton.userInteractionEnabled = YES;
+      [interestFollowButton setSelected:YES];
+    }];
+  }
+}
+
+
+- (IBAction)postsButtonClicked:(id)sender
+{
+  if (tabmenu.currentIndex != 0) {
+    [interestPostsView loadPostsInCurrentInterest];
+  }
+}
+
+- (IBAction)causesButtonClicked:(id)sender
+{
+  if (tabmenu.currentIndex != 1) {
+    [interestCausesView loadCausesInCurrentInterest];
+  }
+}
+
+- (IBAction)actionsButtonClicked:(id)sender
+{
+  if (tabmenu.currentIndex != 2) {
+    [interestActionsView loadActionsInCurrentInterest];
+  }
+}
+
+
+
+- (void) prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender
+{
   
-  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
-  [cell addSubview:cellView];
-  cellView.tag = 10;
+  if ([segue.identifier isEqualToString:@"LCInterestPostsSegue"]) {
+    
+    interestPostsView = segue.destinationViewController;
+    interestPostsView.interest = self.interest;
+    interestPostsView.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"LCInterestCausesSegue"]) {
+    
+    interestCausesView = segue.destinationViewController;
+    interestCausesView.interest = self.interest;
+    interestCausesView.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"LCInterestActionsSegue"]) {
+    
+    interestActionsView = segue.destinationViewController;
+    interestActionsView.interest = self.interest;
+    interestActionsView.delegate = self;
+  }
+  else if ([segue.identifier isEqualToString:@"showActionsList"]) {
+    
+    LCInterestActions *interestActionsVC = segue.destinationViewController;
+    interestActionsVC.interest = self.interest;
+    [interestActionsVC loadActionsInCurrentInterest];
+  }
+  else if ([segue.identifier isEqualToString:@"showInterestFollowers"]) {
   
-  return cell;
+    LCInterestFollowersVC *followersVC = segue.destinationViewController;
+    followersVC.interest = self.interest;
+  }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  UIView *cellView = (UIView *)[cellsViewArray objectAtIndex:indexPath.row];
+
+#pragma mark - ScrollView Custom Delelgate
+
+- (void)scrollViewScrolled:(UIScrollView *)scrollView {
   
-  return cellView.frame.size.height;
+  CGFloat viewHeight = 265.0;
+  
+  if (scrollView.contentOffset.y <= 0 && collapseViewHeight.constant >= viewHeight) //Added this line to KOAPullToRefresh to work correctly.
+  {
+    return;
+  }
+  
+  float collapseConstant = 0;;
+  if (collapseViewHeight.constant > 0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseViewHeight.constant < viewHeight && scrollView.contentOffset.y < 0)
+  {
+    collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+  }
+  if (collapseConstant < 0)
+  {
+    collapseConstant = 0;
+  }
+  if (collapseConstant > viewHeight)
+  {
+    collapseConstant = viewHeight;
+  }
+  collapseViewHeight.constant = collapseConstant;
 }
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  NSLog(@"selected row-->>>%d", (int)indexPath.row);
-}
-
-#pragma mark - feedCell delegates
-- (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
-{
-  NSLog(@"actionType--->>>%u", type);
-}
-
-- (void)tagTapped:(NSDictionary *)tagDetails
-{
-  NSLog(@"tag details-->>%@", tagDetails);
-}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

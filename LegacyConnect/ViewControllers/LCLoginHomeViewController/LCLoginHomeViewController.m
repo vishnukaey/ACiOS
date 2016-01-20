@@ -49,11 +49,11 @@
   [login logInWithReadPermissions:@[kEmailKey,@"public_profile",@"user_friends"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
     {
-      NSLog(@"error %@",error);
+      LCDLog(@"error %@",error);
     }
     else if (result.isCancelled)
     {
-      NSLog(@"Cancelled");
+      LCDLog(@"Cancelled");
     }
     else
     {
@@ -90,7 +90,6 @@
            [self loginUser:response[@"data"]];
            [MBProgressHUD hideHUDForView:self.view animated:YES];
          } andFailure:^(NSString *error) {
-           NSLog(@"");
            [MBProgressHUD hideHUDForView:self.view animated:YES];
          }];
          

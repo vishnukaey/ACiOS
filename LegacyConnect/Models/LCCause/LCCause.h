@@ -18,8 +18,10 @@
 @property (nonatomic, strong) NSString *logoURLLarge;
 @property (nonatomic, strong) NSString *logoURLSmall;
 @property (nonatomic, strong) NSString *supporters;
+@property (nonatomic, strong) NSString *userID;
+@property (nonatomic, strong) NSString *themeColor;
+@property (nonatomic, strong) NSString *themeBackgroundColor;
+@property (nonatomic, strong) NSString *causeUrl;
 @property (nonatomic, assign) BOOL isDeleted;
 @property (nonatomic, assign) BOOL isSupporting;
-@property (nonatomic, strong) NSString *userID;
-
 @end

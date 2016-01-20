@@ -85,7 +85,6 @@
   [webService performPostOperationWithUrl:url  andAccessToken:kEmptyStringValue withParameters:params withSuccess:^(id response)
    {
      NSError *error = nil;
-     LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
      if(error)
      {
        failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
@@ -93,7 +92,7 @@
      else
      {
        LCDLog(@"Login success ! ");
-       success(user);
+       success(response);//passing response directly to get the firsttimelogin user parameter
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

@@ -71,7 +71,7 @@
     [self.selectedIDs addObject:friend.friendId];
   }
   NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage];
   
   [self startFetchingResults];
 }
@@ -132,7 +132,6 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSLog(@"done button clicked-->>>");
   NSMutableArray *arrayToPass = [[NSMutableArray alloc] init];
   for (NSString *userId in self.selectedIDs)
   {

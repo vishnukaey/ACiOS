@@ -8,6 +8,7 @@
 
 #import "LCSearchInterestsViewController.h"
 #import "LCChooseInterestCVC.h"
+#import "LCSingleInterestVC.h"
 
 @interface LCSearchInterestsViewController ()
 
@@ -36,7 +37,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_results_found", nil) andViewWidth:CGRectGetWidth(self.collectionView.frame)];
+  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_results_found", nil)];
   float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
   self.collectionViewCellSize = CGSizeMake(size, size + 20);
   
@@ -78,19 +79,11 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  /*
-   if([collectionView isEqual:_causesCollectionView])
-   {
-   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-   LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-   [self.navigationController pushViewController:vc animated:YES];  }
-   else
-   {
-   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-   LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-   [self.navigationController pushViewController:vc animated:YES];
-   }
-   */
+  LCInterest *selectedInterest = self.results[indexPath.item];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCSingleInterestVC *interestVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+  interestVC.interest = selectedInterest;
+  [self.navigationController pushViewController:interestVC animated:YES];
 }
 
 @end

@@ -26,7 +26,7 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
   self.title = kResetPasswordTitle;
   UIButton * backButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 13, 21)];
   [backButton setImage:[UIImage imageNamed:@"backButton_image"] forState:UIControlStateNormal];
-  [backButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+  [backButton addTarget:self action:@selector(backButtonPressed) forControlEvents:UIControlEventTouchUpInside];
   UIBarButtonItem * backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
   [self.navigationItem setLeftBarButtonItem:backButtonItem];
   [self.updateButton.layer setCornerRadius:5];
@@ -75,7 +75,7 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
   }
 }
 
-- (void)backButtonPressed:(id)sender
+- (void)backButtonPressed
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
@@ -100,7 +100,7 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
     [LCOnboardingAPIManager resetPasswordWithPasswordResetCode:self.token andNewPassword:_confirmPasswordTextField.text withSuccess:^(id response) {
       [_delegate updatePasswordSuccessful];
     } andFailure:^(NSString *error) {
-      NSLog(@"error");
+      LCDLog(@"error - %@",error);
     }];
   }
 

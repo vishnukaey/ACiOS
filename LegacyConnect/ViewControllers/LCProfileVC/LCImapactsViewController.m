@@ -13,6 +13,8 @@
 #import "LCFeedsCommentsController.h"
 #import "LCCreatePostViewController.h"
 #import "LCProfileViewVC.h"
+#import "LCSingleCauseVC.h"
+#import "LCSingleInterestVC.h"
 
 @implementation LCImapactsViewController
 @synthesize customNavigationHeight, userDetail;
@@ -133,7 +135,7 @@
                       }
                                     andFailure:^(NSString *error) {
                                       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-                                      NSLog(@"%@",error);
+                                      LCDLog(@"%@",error);
                                     }];
                     }];
                     [deleteAlert addAction:deletePostActionFinal];
@@ -159,7 +161,7 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil) andViewWidth:CGRectGetWidth(self.tableView.frame)];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
   
   [self addPullToRefresh];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
@@ -251,18 +253,29 @@
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeCause])
+  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    //go to cause page
-    LCDLog(@"cause selected");
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+    causeVC.cause = [[LCCause alloc] init];
+    causeVC.cause.causeID = tagDetails[kTagobjId];
+    [self.navigationController pushViewController:causeVC animated:YES];
   }
-  else if ([tagDetails[@"type"] isEqualToString:kFeedTagTypeUser])//go to user page
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:profileVC animated:YES];
+  }
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
+    LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    interestVC.interest = [[LCInterest alloc] init];
+    interestVC.interest.interestID = tagDetails[kTagobjId];
+    [self.navigationController pushViewController:interestVC animated:YES];
   }
 }
 

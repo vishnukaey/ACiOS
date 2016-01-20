@@ -36,6 +36,11 @@
 "no_contacts_to_display" = "No Contacts to display.";
 "no_facebook_friends_to_display" = "No Friends to display.";
 
+//------Interest Page------//
+"no_posts_to_display" = "No Posts to display.";
+"no_causes_to_display" = "No Causes to display.";
+"no_actions_to_display" = "No Actions to display.";
+
 
 
 "ok" = "OK";
@@ -79,7 +84,7 @@
 "comment_placeholder" = "Comment";
 "settings" = "Settings";
 "follow" = "Follow";
-"following" = "Following";
+"following" = "Unfollow";
 "support" = "Support";
 "supporting" = "Supporting";
 "follow_event_message" = "Follow the event to view and post comments";
