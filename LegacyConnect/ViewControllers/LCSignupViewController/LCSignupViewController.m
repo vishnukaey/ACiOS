@@ -27,22 +27,22 @@
   [super viewWillAppear:animated];
   _signupButton.enabled = NO;
   [_firstNameTextField addTarget:self
-                      action:@selector(textFieldDidChange:)
+                      action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
   [_lastNameTextField addTarget:self
-                         action:@selector(textFieldDidChange:)
+                         action:@selector(textFieldDidChange)
                forControlEvents:UIControlEventEditingChanged];
   [_emailTextField addTarget:self
-                      action:@selector(textFieldDidChange:)
+                      action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
   [_passwordTextField addTarget:self
-                         action:@selector(textFieldDidChange:)
+                         action:@selector(textFieldDidChange)
                forControlEvents:UIControlEventEditingChanged];
   [_confirmPasswordTextField addTarget:self
-                      action:@selector(textFieldDidChange:)
+                      action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
   [_dobTextField addTarget:self
-                         action:@selector(textFieldDidChange:)
+                         action:@selector(textFieldDidChange)
                forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
   
@@ -99,12 +99,12 @@
 {
   [_dobTextField resignFirstResponder];
   [self updateTextFieldWithDate];
-  [self textFieldDidChange:nil];
+  [self textFieldDidChange];
 }
 
 - (void)dismissDatePickerView
 {
-  [self textFieldDidChange:nil];
+  [self textFieldDidChange];
   [_dobTextField resignFirstResponder];
 }
 
@@ -145,7 +145,7 @@
   [LCDataManager sharedDataManager].userToken = userInfo[kAccessTokenKey];
 }
 
-- (void)textFieldDidChange:(id)sender
+- (void)textFieldDidChange
 {
   if(_firstNameTextField.text.length!=0 && _lastNameTextField.text.length!=0 && _emailTextField.text.length!=0 && _passwordTextField.text.length!=0 && _confirmPasswordTextField.text.length!=0 && _dobTextField.text.length!=0 )
   {
