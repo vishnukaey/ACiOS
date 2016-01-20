@@ -195,12 +195,7 @@
                   usingCropRect:(CGRect)cropRect
 {
   [controller dismissViewControllerAnimated:YES completion:^{
-    if (isProfilePic) {
-      [self.delegate RSKFinishedPickingProfileImage:croppedImage];
-    }
-    else{
-      [self.delegate RSKFinishedPickingHeaderImage:croppedImage];
-    }
+    [self.delegate RSKFinishedPickingImage:croppedImage isProfilePic:isProfilePic];
   }];
 }
 
@@ -211,12 +206,7 @@
                   rotationAngle:(CGFloat)rotationAngle
 {
   [controller dismissViewControllerAnimated:YES completion:^{
-    if (isProfilePic) {
-      [self.delegate RSKFinishedPickingProfileImage:croppedImage];
-    }
-    else{
-      [self.delegate RSKFinishedPickingHeaderImage:croppedImage];
-    }
+    [self.delegate RSKFinishedPickingImage:croppedImage isProfilePic:isProfilePic];
   }];
 }
 

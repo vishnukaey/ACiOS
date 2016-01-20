@@ -150,7 +150,7 @@
   {
     [self showFullScreenImage:feed];
   }
-  else if (kFeedCellActionComment)
+  else if (type == kFeedCellActionComment)
   {
     [self showFeedCommentsWithFeed:feed];
   }
