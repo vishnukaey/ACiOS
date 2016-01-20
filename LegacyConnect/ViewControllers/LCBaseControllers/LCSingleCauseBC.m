@@ -29,7 +29,7 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:kCreateNewPostNFK object:nil];
   
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kRemoveMileStoneNFK object:nil];
   
@@ -84,12 +84,12 @@
   [self refreshViews];
 }
 
-- (void)updateProfileNotificationReceived :(NSNotification *)notification
-{
+//- (void)updateProfileNotificationReceived :(NSNotification *)notification
+//{
   //  firstName;
   //  lastName;
   //  avatarURL;
-}
+//}
 
 - (void)feedUpdatedNotificationReceived :(NSNotification *)notification
 {
