@@ -83,10 +83,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-  LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-  vc.cause = self.results[indexPath.item];
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCSingleCauseVC *singleCauseVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+  singleCauseVC.cause = self.results[indexPath.item];
+  [self.navigationController pushViewController:singleCauseVC animated:YES];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

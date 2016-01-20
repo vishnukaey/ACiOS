@@ -145,25 +145,22 @@
 #pragma mark - feedCell delegates
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  switch (type) {
-      
-    case kkFeedCellActionViewImage:
-      [self showFullScreenImage:feed];
-      break;
-      
-    case kFeedCellActionComment:
-      [self showFeedCommentsWithFeed:feed];
-      
-    default:
-      break;
+  
+  if (type == kkFeedCellActionViewImage)
+  {
+    [self showFullScreenImage:feed];
+  }
+  else if (kFeedCellActionComment)
+  {
+    [self showFeedCommentsWithFeed:feed];
   }
 }
 
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
+  UIStoryboard *storyboard = [UIStoryboard  storyboardWithName:kMainStoryBoardIdentifier
                                                 bundle:nil];
-  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  LCFeedsCommentsController *next = [storyboard instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
   UIViewController *profileController = (UIViewController *)self.delegate;
   [profileController.navigationController pushViewController:next animated:YES];
@@ -171,14 +168,14 @@
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.feed = feed;
+  LCFullScreenImageVC *fullScreenImageView = [[LCFullScreenImageVC alloc] init];
+  fullScreenImageView.feed = feed;
   __weak typeof (self) weakSelf = self;
-  vc.commentAction = ^ (id sender, BOOL showComments) {
+  fullScreenImageView.commentAction = ^ (id sender, BOOL showComments) {
     [weakSelf fullScreenAction:sender andShowComments:showComments];
   };
-  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-  [self presentViewController:vc animated:YES completion:nil];
+  fullScreenImageView.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:fullScreenImageView animated:YES completion:nil];
 }
 
 - (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
@@ -197,14 +194,14 @@
 {
   if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    UIStoryboard *  interestSB = [UIStoryboard  storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
     causeVC.cause.interestID = tagDetails[kTagobjId];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard *  profileSB = [UIStoryboard  storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
