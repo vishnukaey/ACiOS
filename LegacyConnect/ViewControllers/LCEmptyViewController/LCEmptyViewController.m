@@ -36,6 +36,7 @@ static NSString *kTitle = @"MY FEED";
   MFSideMenuContainerViewController *mainContainer;
   UINavigationController *navigationRoot;
   LCFinalTutorialVC *tutorialVC;
+  id postEntityCopy;//to persist the value because it gets removed in the viewdiddissapear method of the interest/cause detail page when image picker is presented
 }
 @end
 
@@ -240,6 +241,7 @@ static NSString *kTitle = @"MY FEED";
   {
     UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
     [sheet showInView:navigationRoot.view];
+    postEntityCopy = appdel.currentPostEntity;
   }
   else if(sender.tag == 2)//text post
   {
@@ -284,7 +286,6 @@ static NSString *kTitle = @"MY FEED";
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   UIImage *normalzedImage = [chosenImage normalizedImage];
@@ -292,14 +293,15 @@ static NSString *kTitle = @"MY FEED";
   createPostVC = [createPostSB instantiateInitialViewController];
   
   createPostVC.photoPostPhoto = normalzedImage;
-  if (appdel.currentPostEntity) {
-    if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
-      createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+  if (postEntityCopy) {
+    if ([postEntityCopy isKindOfClass:[LCInterest class]]) {
+      createPostVC.selectedInterest = [postEntityCopy copy];
     }
-    else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+    else if ([postEntityCopy isKindOfClass:[LCCause class]])
     {
-      createPostVC.selectedCause = [appdel.currentPostEntity copy];
+      createPostVC.selectedCause = [postEntityCopy copy];
     }
+    postEntityCopy = nil;
   }
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
@@ -309,6 +311,7 @@ static NSString *kTitle = @"MY FEED";
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
   [picker dismissViewControllerAnimated:YES completion:nil];
+  postEntityCopy = nil;
   [LCUtilityManager setLCStatusBarStyle];
 }
 
