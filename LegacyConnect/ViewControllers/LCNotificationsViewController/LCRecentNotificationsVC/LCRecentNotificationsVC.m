@@ -22,7 +22,7 @@
   [LCNotificationsAPIManager getRecentNotificationsWithLastId:nil withSuccess:^(id response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
@@ -35,7 +35,7 @@
 {
   [super startFetchingNextResults];
   [LCNotificationsAPIManager getRecentNotificationsWithLastId:[(LCRecentNotification*)[self.results lastObject] notificationId] withSuccess:^(id response) {
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self didFailedToFetchResults];

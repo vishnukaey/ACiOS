@@ -24,7 +24,7 @@
   NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeLeftMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
   [self addConstraint:lead];
   
-  UIButton *button_ = [buttonsArray objectAtIndex:index+1];
+  UIButton *button_ = buttonsArray[index+1];
   NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeLeading multiplier:1.0 constant:0];
   [self addConstraint:trail];
   
@@ -59,7 +59,7 @@
   NSLayoutConstraint *trail =[NSLayoutConstraint constraintWithItem:self attribute:NSLayoutAttributeTrailingMargin relatedBy:NSLayoutRelationEqual toItem:button attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
   [self addConstraint:trail];
   
-  UIButton *button_ = [buttonsArray objectAtIndex:index-1];
+  UIButton *button_ = buttonsArray[index-1];
   NSLayoutConstraint *lead =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:button_ attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:0];
   [self addConstraint:lead];
   
@@ -76,8 +76,8 @@
 
 - (void)addConstraintsForMiddleButton:(UIButton*)button withIndex:(int)index andMenuButtons:(NSArray*)buttonsArray
 {
-  UIButton *button_ = [buttonsArray objectAtIndex:index-1];
-  UIButton *_button = [buttonsArray objectAtIndex:index+1];
+  UIButton *button_ = buttonsArray[index-1];
+  UIButton *_button = buttonsArray[index+1];
   NSLayoutConstraint *_width =[NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_button attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0];
   [self addConstraint:_width];
   
@@ -102,7 +102,7 @@
   menuButtons = menuButtons_;
   if (highlightColor)
   {
-    [[menuButtons objectAtIndex:0] setTitleColor:highlightColor forState:UIControlStateNormal];
+    [menuButtons[0] setTitleColor:highlightColor forState:UIControlStateNormal];
   }
   [self addButtons];
   self.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -110,9 +110,9 @@
   {
     if (normalColor && i!=0)
     {
-      [[menuButtons_ objectAtIndex:i] setTitleColor:normalColor forState:UIControlStateNormal];
+      [menuButtons_[i] setTitleColor:normalColor forState:UIControlStateNormal];
     }
-    UIButton *button = [menuButtons_ objectAtIndex:i];
+    UIButton *button = menuButtons_[i];
     if (i==0)
     {
       [self addConstraintForFirstButton:button withIndex:i menuButtons:menuButtons_];
@@ -134,7 +134,7 @@
   highlightColor = highlightColor_;
   if (menuButtons)
   {
-    [[menuButtons objectAtIndex:0] setTitleColor:highlightColor_ forState:UIControlStateNormal];
+    [menuButtons[0] setTitleColor:highlightColor_ forState:UIControlStateNormal];
   }
   bottomBar.backgroundColor = highlightColor_;
 }
@@ -145,7 +145,7 @@
   if (menuButtons)
   {
     for (int i = 1; i<menuButtons.count; i++) {
-      [[menuButtons objectAtIndex:i] setTitleColor:normalColor_ forState:UIControlStateNormal];
+      [menuButtons[i] setTitleColor:normalColor_ forState:UIControlStateNormal];
     }
   }
 }
@@ -163,7 +163,7 @@
 - (void)addButtons
 {
   for (int i = 0 ; i<menuButtons.count ; i++) {
-    UIButton *button = [menuButtons objectAtIndex:i];
+    UIButton *button = menuButtons[i];
     button.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:button];
     button.tag = i;
@@ -188,7 +188,7 @@
 - (void)animateToIndex :(NSInteger)index
 {  
   UIView *currentView = [views objectAtIndex:(int)_currentIndex];
-  UIView *nextView = [views objectAtIndex:index];
+  UIView *nextView = views[index];
   CGPoint currentViewPointTo;
   if (index>(int)_currentIndex)
   {
@@ -211,8 +211,8 @@
      currentView.center = currentViewPointTo;
      nextView.center = CGPointMake(nextView.superview.frame.size.width/2, nextView.center.y);
      [[menuButtons objectAtIndex:(int)_currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
-     [[menuButtons objectAtIndex:index] setTitleColor:highlightColor forState:UIControlStateNormal];
-     UIButton *nextBut = [menuButtons objectAtIndex:index];
+     [menuButtons[index] setTitleColor:highlightColor forState:UIControlStateNormal];
+     UIButton *nextBut = menuButtons[index];
      botbarXcenterConstraint.constant = nextBut.frame.origin.x;
      botbarWidthConstraint.constant = [self getTitleLengthForButton:nextBut];
    }

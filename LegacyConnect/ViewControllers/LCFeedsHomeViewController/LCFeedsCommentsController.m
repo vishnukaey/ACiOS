@@ -33,7 +33,7 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super startFetchingNextResults];
   [LCFeedAPIManager getCommentsForPost:feedObject.entityID lastCommentId:[(LCComment*)[self.results lastObject] commentId] withSuccess:^(id response, BOOL isMore) {
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];

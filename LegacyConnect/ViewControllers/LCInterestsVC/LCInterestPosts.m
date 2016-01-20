@@ -81,7 +81,7 @@
   [LCThemeAPIManager getPostsInInterest:self.interest.interestID andLastPostID:nil withSuccess:^(NSArray *response) {
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
     [self reloadPostsTable];
@@ -98,7 +98,7 @@
   [super startFetchingNextResults];
   [LCThemeAPIManager getPostsInInterest:self.interest.interestID andLastPostID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
     [self reloadPostsTable];
   } andFailure:^(NSString *error) {

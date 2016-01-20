@@ -48,7 +48,7 @@
 
 + (void)postPostDeletedNotificationforPost: (LCFeed *)post
 {
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kDeletePostNFK  object:nil userInfo:userInfo];
 }
 
@@ -61,7 +61,7 @@
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post
 {
   post.isMilestone = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:[NSArray arrayWithObjects:@[kEntityTypePost], nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveMileStoneNFK object:nil userInfo:userInfo];
 }
 
@@ -90,7 +90,7 @@
   NSError *error = nil;
   LCEvent *event = [MTLJSONAdapter modelOfClass:[LCEvent class] fromJSONDictionary:response[kResponseData] error:&error];
 
-  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kCreateEventNFK object:nil userInfo:userInfo];
 }
 
@@ -105,7 +105,7 @@
 
 + (void)postEventDeletedNotification:(LCEvent*)event
 {
-  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kDeleteEventNFK object:nil userInfo:userInfo];
 }
 
@@ -113,7 +113,7 @@
 {
   LCEvent *event = [[LCEvent alloc] init];
   event.eventID = eventID;
-  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, @"event", nil];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kRejectEventRequestNFK object:nil userInfo:userInfo];
 }
 

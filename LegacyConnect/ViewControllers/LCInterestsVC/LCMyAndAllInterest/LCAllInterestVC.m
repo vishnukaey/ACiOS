@@ -21,7 +21,7 @@
   [LCThemeAPIManager getAllInterestsWithLastId:nil success:^(NSArray *response) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -35,7 +35,7 @@
   [super startFetchingNextResults];
   [LCThemeAPIManager getAllInterestsWithLastId:[(LCInterest*)[self.results lastObject] interestID] success:^(NSArray *response) {
     [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];

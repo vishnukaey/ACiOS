@@ -40,7 +40,7 @@
   [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID andLastID:nil withSuccess:^(NSArray *responses) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
@@ -53,7 +53,8 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID andLastID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {    BOOL hasMoreData = ([(NSArray*)responses count] < 10) ? NO : YES;
+  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID andLastID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
+    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self didFailedToFetchResults];
@@ -71,7 +72,7 @@
 - (void) setUsersArray:(NSArray*) usersArray
 {
   [super startFetchingResults];
-  BOOL hasMoreData = ([(NSArray*)usersArray count] < 10) ? NO : YES;
+  BOOL hasMoreData = [(NSArray*)usersArray count] >= 10;
   [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 

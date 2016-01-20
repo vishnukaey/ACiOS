@@ -96,7 +96,7 @@
   [super startFetchingResults];
   [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:_searchKey lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andfailure:^(NSString *error) {
@@ -110,7 +110,7 @@
 {
   [super startFetchingNextResults];
   [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:_searchKey lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];

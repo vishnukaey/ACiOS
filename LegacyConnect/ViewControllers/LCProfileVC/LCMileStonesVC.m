@@ -95,7 +95,7 @@
   [LCUserProfileAPIManager getMilestonesForUser:self.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
     [self reloadMilestonesTable];
@@ -112,7 +112,7 @@
   [super startFetchingNextResults];
   [LCUserProfileAPIManager getMilestonesForUser:self.userID andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
     [self reloadMilestonesTable];
   } andFailure:^(NSString *error) {

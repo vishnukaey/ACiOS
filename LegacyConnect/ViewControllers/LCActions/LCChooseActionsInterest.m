@@ -31,7 +31,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCUserProfileAPIManager getInterestsForUser:[LCDataManager sharedDataManager].userID lastId:nil withSuccess:^(NSArray *responses) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    BOOL hasMoreData = responses.count >= 20;
+    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];

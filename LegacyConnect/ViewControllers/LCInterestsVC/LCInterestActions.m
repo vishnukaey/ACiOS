@@ -48,7 +48,7 @@
   [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
@@ -64,7 +64,7 @@
   [super startFetchingNextResults];
   [LCEventAPImanager getListOfEventsForInterestID:self.interest.interestID lastID:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];

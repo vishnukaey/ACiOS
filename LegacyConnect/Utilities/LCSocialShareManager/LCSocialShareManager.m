@@ -114,7 +114,7 @@ NSString * const kFBMessageKey = @"message";
   //  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
   if (image) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filePath = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"postImage.png"];
+    NSString *filePath = [paths[0] stringByAppendingPathComponent:@"postImage.png"];
     
     // Save image.
     [[LCUtilityManager performNormalisedImageCompression:image] writeToFile:filePath atomically:YES];

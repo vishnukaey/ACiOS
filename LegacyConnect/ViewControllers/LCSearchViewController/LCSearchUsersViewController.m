@@ -38,7 +38,7 @@
 {
   [super startFetchingNextResults];
   [LCSearchAPIManager searchUserUsingsearchKey:_searchKey lastUserId:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(id response) {
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
@@ -49,7 +49,7 @@
 - (void) setUsersArray:(NSArray*) usersArray {
   
   [super startFetchingResults];
-  BOOL hasMoreData = ([(NSArray*)usersArray count] < 10) ? NO : YES;
+  BOOL hasMoreData = [(NSArray*)usersArray count] >= 10;
   [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 

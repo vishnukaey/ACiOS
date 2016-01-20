@@ -26,7 +26,7 @@
   [LCUserProfileAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:nil with:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self reloadImpactsTable];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
@@ -44,7 +44,7 @@
   [LCUserProfileAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:[(LCFeed*)[self.results lastObject] entityID] with:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];

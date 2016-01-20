@@ -28,7 +28,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andfailure:^(NSString *error) {
@@ -45,7 +45,7 @@ static NSString *kFriendsCellIdentifier = @"LCFriendsCell";
   [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = ([(NSArray*)response count] < 10) ? NO : YES;
+    BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];

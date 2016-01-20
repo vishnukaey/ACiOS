@@ -347,7 +347,7 @@
   if (ABMultiValueGetCount(addressRef) > 0) {
     NSDictionary *addressDict = (__bridge NSDictionary *)ABMultiValueCopyValueAtIndex(addressRef, 0);
     
-    address = [NSString stringWithFormat:@"%@",[addressDict objectForKey:(NSString *)kABPersonAddressCityKey]];
+    address = [NSString stringWithFormat:@"%@",addressDict[(NSString *)kABPersonAddressCityKey]];
     
   }
   CFRelease(addressRef);
@@ -358,13 +358,10 @@
     CFErrorRef *error = nil;
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
     ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
-    CFArrayRef allPeople = (ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName));
+    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
     //CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
     CFIndex nPeople = CFArrayGetCount(allPeople); // bugfix who synced contacts with facebook
     NSMutableArray* items = [NSMutableArray arrayWithCapacity:nPeople];
-//    if (!allPeople || !nPeople) {
-//        NSLog(@"people nil");
-//    }
     for (int i = 0; i < nPeople; i++) {
         @autoreleasepool {
             //data model
