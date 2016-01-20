@@ -426,7 +426,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [self presentViewController:interestCauseVC animated:YES completion:nil];
 }
 
-- (IBAction)postButtonAction
+- (BOOL)validatPostFieldsWithPostText :(NSString *)post_Text
 {
   if (_selectedInterest)
   {
@@ -441,11 +441,19 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   else
   {
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
-    return;
+    return false;
   }
-  NSString *text_to_post = [LCUtilityManager getSpaceTrimmedStringFromString:postTextView.text];
-  if (text_to_post.length<1 && !postImageView.image) {
+  if (post_Text.length<1 && !postImageView.image) {
     [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
+    return false;
+  }
+  return true;
+}
+
+- (IBAction)postButtonAction
+{
+  NSString *text_to_post = [LCUtilityManager getSpaceTrimmedStringFromString:postTextView.text];
+  if ([self validatPostFieldsWithPostText:text_to_post] == false) {
     return;
   }
   
@@ -596,17 +604,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   {
     UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
     UIImagePickerControllerSourceType type;
-    switch (buttonIndex)
+    if (buttonIndex == 0) {
+      type = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    else if (buttonIndex == 1)
     {
-      case 0:
-        type = UIImagePickerControllerSourceTypePhotoLibrary;
-        break;
-      case 1:
-        type = UIImagePickerControllerSourceTypeCamera;
-        break;
-        
-      default:
-        break;
+      type = UIImagePickerControllerSourceTypeCamera;
     }
     imagePicker.sourceType = type;
     imagePicker.delegate = self;

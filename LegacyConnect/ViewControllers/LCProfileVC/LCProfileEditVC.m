@@ -308,23 +308,22 @@ NSInteger const kHeightForHeader = 44;
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
-- (void)RSKFinishedPickingProfileImage:(UIImage *)image
+- (void)RSKFinishedPickingImage:(UIImage *)image isProfilePic:(BOOL)isProfilePic
 {
-  avatarPicState = IMAGE_EDITED;
-  actualAvatarImage = image;
-  profilePic.image = image;
+  if (isProfilePic)
+  {
+    avatarPicState = IMAGE_EDITED;
+    actualAvatarImage = image;
+    profilePic.image = image;
+  }
+  else
+  {
+    headerPicState = IMAGE_EDITED;
+    actualHeaderImage = image;
+    headerBGImage.image = image;
+  }
   [self validateFields];
 }
-
-- (void)RSKFinishedPickingHeaderImage:(UIImage *)image
-{
-  headerPicState = IMAGE_EDITED;
-  actualHeaderImage = image;
-  headerBGImage.image = image;
-  [self validateFields];
-}
-
-
 
 #pragma mark - DOB and Gender setup
 

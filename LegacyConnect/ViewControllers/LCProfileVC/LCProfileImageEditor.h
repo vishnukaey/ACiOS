@@ -10,8 +10,7 @@
 
 @protocol LCActionsImageEditerDelegate <NSObject>
 
-- (void)RSKFinishedPickingProfileImage :(UIImage *)image;
-- (void)RSKFinishedPickingHeaderImage :(UIImage *)image;
+- (void)RSKFinishedPickingImage:(UIImage *)image isProfilePic:(BOOL)isProfilePic;
 
 @end
 

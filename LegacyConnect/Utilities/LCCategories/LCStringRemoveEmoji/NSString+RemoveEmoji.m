@@ -21,9 +21,9 @@
     return (0x1D000 <= codepoint && codepoint <= 0x1F9FF);
     
     // Not surrogate pair (U+2100-27BF)
-  } else {
-    return (0x2100 <= high && high <= 0x27BF);
   }
+  
+  return (0x2100 <= high && high <= 0x27BF);
 }
 
 - (BOOL)isIncludingEmoji {

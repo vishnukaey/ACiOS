@@ -115,11 +115,7 @@
   {
     return sectionName;
   }
-  else
-  {
-    return nil;
-  }
-  return sectionName;
+  return nil;
 }
 
 
@@ -169,11 +165,13 @@
   switch (indexPath.section) {
     case 0:
     {
-      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
-      LCProfileViewVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-      vc.userDetail = self.searchResultObject.usersArray[indexPath.row];
-      [self.navigationController pushViewController:vc animated:YES];
+      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+      LCProfileViewVC *profileViewVC = [storyboard instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+      profileViewVC.userDetail = self.searchResultObject.usersArray[indexPath.row];
+      [self.navigationController pushViewController:profileViewVC animated:YES];
     }
+      break;
+      
     case 1:
     {
       LCInterest *selectedInterest = self.searchResultObject.interestsArray[indexPath.row];
@@ -186,10 +184,10 @@
       
     case 2:
     {
-      UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-      LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-      vc.cause = self.searchResultObject.causesArray[indexPath.row];
-      [self.navigationController pushViewController:vc animated:YES];
+      UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+      LCSingleCauseVC *singleCauseVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
+      singleCauseVC.cause = self.searchResultObject.causesArray[indexPath.row];
+      [self.navigationController pushViewController:singleCauseVC animated:YES];
     }
       break;
       
