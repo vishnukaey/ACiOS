@@ -240,9 +240,6 @@
       sectionLabel.text = NSLocalizedString(@"action_form_about", nil);
       optionalLabel.text = @"";
       break;
-      
-    default:
-      break;
   }
 }
 
