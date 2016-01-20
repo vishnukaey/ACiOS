@@ -15,34 +15,34 @@
 {
   NSError *error = nil;
   NSDictionary *dict= response[kResponseData];
-  LCFeed *newPost = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:dict[@"post"] error:&error];
+  LCFeed *newPost = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:dict[kEntityTypePost] error:&error];
   if(!error)
   {
-    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[newPost] forKeys:@[@"post"]];
+    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[newPost] forKeys:@[kEntityTypePost]];
     [[NSNotificationCenter defaultCenter] postNotificationName:kCreateNewPostNFK object:nil userInfo:userInfo];
   }
 }
 
 + (void)postUnLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post
 {
-  post.likeCount = [(NSDictionary*)[response objectForKey:@"data"]objectForKey:@"likeCount"];
+  post.likeCount = response[kResponseData][@"likeCount"];
   post.didLike = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[@"post"]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kUnlikedPostNFK object:nil userInfo:userInfo];
 }
 
 + (void)postLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post
 {
-  post.likeCount = [(NSDictionary*)[response objectForKey:@"data"]objectForKey:@"likeCount"];
+  post.likeCount = response[kResponseData][@"likeCount"];
   post.didLike = @"1";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kLikedPostNFK object:nil userInfo:userInfo];
 }
 
 + (void)postCommentedNotificationforPost:(LCFeed *)post andComment:(LCComment *)comment
 {
   post.commentCount = [NSString stringWithFormat:@"%d", [post.commentCount intValue]+1];
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post,comment, nil] forKeys:[NSArray arrayWithObjects:kEntityTypePost,kPostCommentKey, nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post,comment] forKeys:@[kEntityTypePost,kPostCommentKey]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kCommentPostNFK object:nil userInfo:userInfo];
 }
 
@@ -54,14 +54,14 @@
 
 + (void)postPostEditedNotificationForPost :(LCFeed *)post
 {
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:kEntityTypePost, nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kUpdatePostNFK object:nil userInfo:userInfo];
 }
 
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post
 {
   post.isMilestone = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:[NSArray arrayWithObjects:@[kEntityTypePost], nil]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveMileStoneNFK object:nil userInfo:userInfo];
 }
 
@@ -119,7 +119,7 @@
 
 + (void)postEventCommentedNotificationWithComment:(LCComment*)comment andEvent:(LCEvent*)event
 {
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:event,comment, nil] forKeys:[NSArray arrayWithObjects:kEntityTypeEvent,kPostCommentKey, nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[event,comment] forKeys:@[kEntityTypeEvent,kPostCommentKey]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kCommentEventNFK object:nil userInfo:userInfo];
 }
 
