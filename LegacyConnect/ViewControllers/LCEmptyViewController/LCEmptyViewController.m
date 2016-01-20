@@ -268,17 +268,12 @@ static NSString *kTitle = @"MY FEED";
   {
     UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
     UIImagePickerControllerSourceType type;
-    switch (buttonIndex)
+    if (buttonIndex == 0) {
+      type = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    else if (buttonIndex == 1)
     {
-      case 0:
-        type = UIImagePickerControllerSourceTypePhotoLibrary;
-        break;
-      case 1:
-        type = UIImagePickerControllerSourceTypeCamera;
-        break;
-        
-      default:
-        break;
+      type = UIImagePickerControllerSourceTypeCamera;
     }
     imagePicker.sourceType = type;
     imagePicker.delegate = self;

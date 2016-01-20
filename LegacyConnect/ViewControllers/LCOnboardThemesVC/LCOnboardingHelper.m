@@ -40,13 +40,10 @@ static NSMutableDictionary *selectedItemsDictionary;
     interestToAdd.causes = [NSArray arrayWithObjects:cause, nil];
     [[self selectedItemsDictionary] setObject:interestToAdd forKey:cause.interestID];
   }
-  else if (!cause && interest)//add an interest
+  else if (!cause && interest && ![[self selectedItemsDictionary] objectForKey:interest.interestID])//add an interest
   {
-    if (![[self selectedItemsDictionary] objectForKey:interest.interestID])
-    {
       interestToAdd.causes = nil;
       [[self selectedItemsDictionary] setObject:interestToAdd forKey:interestToAdd.interestID];
-    }
   }
 }
 

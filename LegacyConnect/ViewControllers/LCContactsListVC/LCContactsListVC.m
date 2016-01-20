@@ -60,6 +60,7 @@
       }
       else
       {
+        LCDLog(@"User denied acces earlier--");
         // User denied access
         // Display an alert telling user the contact could not be added
       }
