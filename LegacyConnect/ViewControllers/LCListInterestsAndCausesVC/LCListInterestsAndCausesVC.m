@@ -203,14 +203,14 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
 #pragma mark - searchfield delegates
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  searchText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
+  NSString * trimmedText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
   if (searchTimer)
   {
     if ([searchTimer isValid]) { [searchTimer invalidate]; }
     searchTimer = nil;
   }
   
-    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:searchText repeats:NO];
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadInterestsAndCausesWithSearchKey:) userInfo:trimmedText repeats:NO];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchbar

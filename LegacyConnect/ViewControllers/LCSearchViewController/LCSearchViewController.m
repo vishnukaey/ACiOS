@@ -85,20 +85,20 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  searchText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
+  NSString * trimmedText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
   if (searchTimer)
   {
     if ([searchTimer isValid]) { [searchTimer invalidate]; }
     searchTimer = nil;
   }
-  if(searchBar.text.length == 0 || searchText == nil || searchText.length == 0)
+  if(searchBar.text.length == 0 || trimmedText == nil || trimmedText.length == 0)
   {
     searchResultObject = nil;
     [self reloadAllViews];
   }
   else
   {
-    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:searchText repeats:NO];
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:trimmedText repeats:NO];
   }
 }
 
