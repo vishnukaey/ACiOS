@@ -22,7 +22,10 @@
            @"isDeleted": @"isDeleted",
            @"isSupporting": @"isSupporting",
            @"supporters": @"supporters",
-           @"userID": @"userId"
+           @"userID": @"userId",
+           @"themeColor": @"themeColor",
+           @"themeBackgroundColor": @"themeBackgroundColor",
+           @"causeUrl":@"causeUrl"
            };
 }
 

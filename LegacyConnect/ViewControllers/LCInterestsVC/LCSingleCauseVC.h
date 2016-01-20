@@ -15,6 +15,7 @@
 {
   __weak IBOutlet NSLayoutConstraint *collapseViewHeight;
   NSMutableArray *cellsViewArray;
+  CAGradientLayer *gradient;
 }
 
 

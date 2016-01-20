@@ -15,6 +15,8 @@
 #import "LCCauseSupportersVC.h"
 #import "LCSingleInterestVC.h"
 
+static NSString* const kGradientDefaultColor = @"282828";
+
 @implementation LCSingleCauseVC
 
 #pragma mark - controller life cycle
@@ -38,7 +40,6 @@
 {
   [super viewWillAppear:animated];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
-  [self addGradientOverLay];
   self.navigationController.navigationBarHidden = YES;
 }
 
@@ -47,16 +48,22 @@
   [LCThemeAPIManager getCauseDetailsOfCause:self.cause.causeID WithSuccess:^(LCCause *response) {
     self.cause = response;
     [self refreshViewWithCauseDetails];
+    [self addGradientOverLay];
   } andFailure:^(NSString *error) {
   }];
 }
 
+
 -(void) addGradientOverLay
 {
-  CAGradientLayer *gradient = [CAGradientLayer layer];
+  gradient = [CAGradientLayer layer];
   gradient.frame = self.causeOverlayImageView.bounds;
-  gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor redColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
-  [self.causeOverlayImageView.layer insertSublayer:gradient atIndex:0];
+  gradient.colors = [NSArray arrayWithObjects:(id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor], [(id)[LCUtilityManager colorWithHexString:kGradientDefaultColor] CGColor], nil];
+  UIGraphicsBeginImageContext(self.causeOverlayImageView.bounds.size);
+  [gradient renderInContext:UIGraphicsGetCurrentContext()];
+  UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  [self.causeOverlayImageView setImage:image];
 }
 
 
