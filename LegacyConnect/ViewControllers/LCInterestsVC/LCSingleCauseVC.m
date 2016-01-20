@@ -213,44 +213,39 @@ static NSString* const kGradientDefaultColor = @"282828";
 #pragma mark - feedCell delegates
 - (void)feedCellActionWithType:(kkFeedCellActionType)type andFeed:(LCFeed *)feed
 {
-  switch (type) {
-      //    case kkFeedCellActionLoadMore:
-      //      [self feedCellMoreAction :feed];
-      //      break;
-      
-    case kkFeedCellActionViewImage:
-      [self showFullScreenImage:feed];
-      break;
-      
-    case kFeedCellActionComment:
-      [self showFeedCommentsWithFeed:feed];
-      
-    default:
-      break;
+  if(type == kkFeedCellActionViewImage)
+  {
+    [self showFullScreenImage:feed];
+  }
+  else if (type == kFeedCellActionComment)
+  {
+    [self showFeedCommentsWithFeed:feed];
   }
 }
 
+
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Main"
-                                                bundle:nil];
-  LCFeedsCommentsController *next = [sb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
+  UIStoryboard *storyb = [UIStoryboard storyboardWithName:@"Main"
+                                                   bundle:nil];
+  LCFeedsCommentsController *next = [storyb instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
-//  UIViewController *profileController = (UIViewController *)self.delegate;
+  //  UIViewController *profileController = (UIViewController *)self.delegate;
   [self.navigationController pushViewController:next animated:YES];
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
 {
-  LCFullScreenImageVC *vc = [[LCFullScreenImageVC alloc] init];
-  vc.feed = feed;
+  LCFullScreenImageVC *viewC = [[LCFullScreenImageVC alloc] init];
+  viewC.feed = feed;
   __weak typeof (self) weakSelf = self;
-  vc.commentAction = ^ (id sender, BOOL showComments) {
+  viewC.commentAction = ^ (id sender, BOOL showComments) {
     [weakSelf fullScreenAction:sender andShowComments:showComments];
   };
-  vc.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-  [self presentViewController:vc animated:YES completion:nil];
+  viewC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:viewC animated:YES completion:nil];
 }
+
 
 - (void)fullScreenAction:(id)sender andShowComments:(BOOL)show
 {
@@ -267,14 +262,7 @@ static NSString* const kGradientDefaultColor = @"282828";
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-//  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
-//  {
-//    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-//    LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-//    causeVC.cause.interestID = tagDetails[kTagobjId];
-//    [self.navigationController pushViewController:causeVC animated:YES];
-//  }
-//  else
+  
   if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
@@ -292,15 +280,6 @@ static NSString* const kGradientDefaultColor = @"282828";
     [self.navigationController pushViewController:interestVC animated:YES];
   }
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 
 - (IBAction)supportClicked:(id)sender
@@ -328,23 +307,19 @@ static NSString* const kGradientDefaultColor = @"282828";
   }
 }
 
+
 - (IBAction)supportersListClicked:(id)sender
 {
-  UIStoryboard*  sb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
-  LCCauseSupportersVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
-  vc.cause = self.cause;
-  [self.navigationController pushViewController:vc animated:YES];
+  UIStoryboard *storyb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  LCCauseSupportersVC *viewC = [storyb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
+  viewC.cause = self.cause;
+  [self.navigationController pushViewController:viewC animated:YES];
 }
+
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
   LCDLog(@"Follow clicked");
-//  if (_cause.url) {
-//    NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
-//    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
-//      [[UIApplication sharedApplication] openURL:websiteURL];
-//    }
-//  }
 }
 
 

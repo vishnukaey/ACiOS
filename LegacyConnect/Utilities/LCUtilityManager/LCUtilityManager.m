@@ -565,14 +565,14 @@
   NSString *bString = [colorString substringWithRange:range];
   
   // Scan values
-  unsigned int r, g, b;
-  [[NSScanner scannerWithString:rString] scanHexInt:&r];
-  [[NSScanner scannerWithString:gString] scanHexInt:&g];
-  [[NSScanner scannerWithString:bString] scanHexInt:&b];
+  unsigned int red, green, blue;
+  [[NSScanner scannerWithString:rString] scanHexInt:&red];
+  [[NSScanner scannerWithString:gString] scanHexInt:&green];
+  [[NSScanner scannerWithString:bString] scanHexInt:&blue];
   
-  return [UIColor colorWithRed:((float) r / 255.0f)
-                         green:((float) g / 255.0f)
-                          blue:((float) b / 255.0f)
+  return [UIColor colorWithRed:((float) red / 255.0f)
+                         green:((float) green / 255.0f)
+                          blue:((float) blue / 255.0f)
                          alpha:1.0f];
 }
 

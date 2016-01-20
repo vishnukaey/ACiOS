@@ -43,30 +43,18 @@
 -(IBAction)addButtonTapped:(id)sender
 {
   FriendStatus status = (FriendStatus)[_user.isFriend integerValue];
-  
-  switch (status) {
-//    case kIsFriend:
-      
-//      [self removeUserFriend:_user andFriendButton:_userAddButton];
-//      break;
-//      
-//    case kRequestWaiting:
-//      [self cancelFriendRequest:_user andFriendButton:_userAddButton];
-//      break;
-      
-    case kNonFriend:
-      [self addFriend:_user andFriendButton:_userAddButton];
-      break;
-      
-    default:
-      break;
+  if(status == kNonFriend)
+  {
+    [self addFriend:_user andFriendButton:_userAddButton];
   }
 }
+
 
 -(void) updateAddButtonImage
 {
   [_userAddButton setfriendStatusButtonImageForStatus:(FriendStatus)[_user.isFriend integerValue]];
 }
+
 
 - (void)addFriend:(LCUserDetail*)friendObj andFriendButton:(LCfriendButton*)btn
 {
