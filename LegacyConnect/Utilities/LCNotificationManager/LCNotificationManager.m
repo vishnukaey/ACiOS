@@ -18,7 +18,7 @@
   LCFeed *newPost = [MTLJSONAdapter modelOfClass:[LCFeed class] fromJSONDictionary:dict[@"post"] error:&error];
   if(!error)
   {
-    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:newPost, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+    NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[newPost] forKeys:@[@"post"]];
     [[NSNotificationCenter defaultCenter] postNotificationName:kCreateNewPostNFK object:nil userInfo:userInfo];
   }
 }
@@ -27,7 +27,7 @@
 {
   post.likeCount = [(NSDictionary*)[response objectForKey:@"data"]objectForKey:@"likeCount"];
   post.didLike = @"0";
-  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:[NSArray arrayWithObjects:post, nil] forKeys:[NSArray arrayWithObjects:@"post", nil]];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[@"post"]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kUnlikedPostNFK object:nil userInfo:userInfo];
 }
 
