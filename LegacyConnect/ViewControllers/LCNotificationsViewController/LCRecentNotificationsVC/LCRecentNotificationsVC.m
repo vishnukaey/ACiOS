@@ -138,10 +138,10 @@
     [self.navigationController pushViewController:actions animated:YES];
   } else if ([notification.entityType isEqualToString:kEntityTypeUserProfile]) {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-    LCProfileViewVC *vc = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
-    vc.userDetail = [[LCUserDetail alloc] init];
-    vc.userDetail.userID = notification.entityId;
-    [self.navigationController pushViewController:vc animated:YES];
+    LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
+    profileVC.userDetail = [[LCUserDetail alloc] init];
+    profileVC.userDetail.userID = notification.entityId;
+    [self.navigationController pushViewController:profileVC animated:YES];
   }
   [self markNotificationAsRead:notification];
 }

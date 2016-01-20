@@ -164,7 +164,6 @@ static CGFloat kActionSectionHeight = 30;
 - (void)dataPopulation
 {
   [self updateEventTitleAndTopUI];
-  // -------- Created By 'Owner' in 'Interest' -------- //
   NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
   NSString * inText = NSLocalizedString(@"in_", nil);
@@ -412,9 +411,8 @@ static CGFloat kActionSectionHeight = 30;
       return [self getActionsDetailsCell];
     } else if (indexPath.row == 1) {
       return [self getActionsMembersCountCell];
-    } else {
-      return [self getActionsWebsiteCell];
     }
+    return [self getActionsWebsiteCell];
   }
   
   if (!self.eventObject.isFollowing) {

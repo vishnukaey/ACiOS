@@ -26,8 +26,8 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUnLikeEventReceived:) name:kUnlikedPostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCommentEventReceived:) name:kCommentPostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdateEventReceived:) name:kUpdatePostNFK object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdateEventReceived:) name:kUpdateProfileNFK object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeletedEventReceived:) name:kDeletePostNFK object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdateEventReceived:) name:kUpdateProfileNFK object:nil];
+//  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeletedEventReceived:) name:kDeletePostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(milestoneRemovedEventReceived:) name:kRemoveMileStoneNFK object:nil];
 }
 
@@ -104,10 +104,15 @@
   }
 }
 
-- (void)profileUpdateEventReceived:(NSNotification*)notification
-{
-  
-}
+//- (void)profileUpdateEventReceived:(NSNotification*)notification
+//{
+//  
+//}
+//
+//- (void)postDeletedEventReceived:(NSNotification*)notification
+//{
+//  
+//}
 
 - (void)milestoneRemovedEventReceived:(NSNotification*)notification
 {
@@ -119,9 +124,6 @@
   }
 }
 
-- (void)postDeletedEventReceived:(NSNotification*)notification
-{
-}
 
 
 @end

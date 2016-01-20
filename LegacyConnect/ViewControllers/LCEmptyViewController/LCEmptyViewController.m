@@ -136,7 +136,7 @@ static NSString *kTitle = @"MY FEED";
   [self addGIButton];
   [self addMenuButton:navigationRoot];
   mainContainer.panMode = MFSideMenuPanModeNone;
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification:) name:MFSideMenuStateNotificationEvent object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
   [self presentTutorial];
 }
 
@@ -153,7 +153,7 @@ static NSString *kTitle = @"MY FEED";
   }
 }
 
-- (void)menuEventNotification:(NSNotification*)notification
+- (void)menuEventNotification
 {
   //added to bring menu button to top on menu item selection.
   [navigationRoot.view bringSubviewToFront:menuButton];
@@ -245,6 +245,15 @@ static NSString *kTitle = @"MY FEED";
   {
     UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
     createPostVC = [createPostSB instantiateInitialViewController];
+    if (appdel.currentPostEntity) {
+      if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
+        createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+      }
+      else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+      {
+        createPostVC.selectedCause = [appdel.currentPostEntity copy];
+      }
+    }
     
     createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
     [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
@@ -280,6 +289,7 @@ static NSString *kTitle = @"MY FEED";
 #pragma mark - UIImagePickerController delegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [picker dismissViewControllerAnimated:YES completion:NULL];
   UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
   UIImage *normalzedImage = [chosenImage normalizedImage];
@@ -287,6 +297,15 @@ static NSString *kTitle = @"MY FEED";
   createPostVC = [createPostSB instantiateInitialViewController];
   
   createPostVC.photoPostPhoto = normalzedImage;
+  if (appdel.currentPostEntity) {
+    if ([appdel.currentPostEntity isKindOfClass:[LCInterest class]]) {
+      createPostVC.selectedInterest = [appdel.currentPostEntity copy];
+    }
+    else if ([appdel.currentPostEntity isKindOfClass:[LCCause class]])
+    {
+      createPostVC.selectedCause = [appdel.currentPostEntity copy];
+    }
+  }
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [navigationRoot presentViewController:createPostVC animated:YES completion:nil];
   [LCUtilityManager setLCStatusBarStyle];

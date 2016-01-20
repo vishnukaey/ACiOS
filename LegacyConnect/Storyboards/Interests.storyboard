@@ -100,15 +100,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtP-yW-yRb">
-                                        <rect key="frame" x="70" y="165" width="180" height="44"/>
+                                        <rect key="frame" x="103" y="165" width="115" height="35"/>
                                         <color key="backgroundColor" red="0.98039215690000003" green="0.27450980390000002" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="9m4-pO-drj"/>
-                                            <constraint firstAttribute="width" constant="180" id="goU-ZB-Ofo"/>
+                                            <constraint firstAttribute="height" constant="35" id="9m4-pO-drj"/>
+                                            <constraint firstAttribute="width" constant="115" id="goU-ZB-Ofo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
                                         <state key="normal" title="Follow"/>
-                                        <state key="selected" title="Following"/>
+                                        <state key="selected" title="Unfollow"/>
                                         <connections>
                                             <action selector="supportClicked:" destination="QUc-rX-R9p" eventType="touchUpInside" id="gEs-b6-P70"/>
                                         </connections>
@@ -487,11 +487,11 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asc-MU-zOR">
-                                                <rect key="frame" x="133" y="49" width="110" height="35"/>
+                                                <rect key="frame" x="130" y="49" width="115" height="35"/>
                                                 <color key="backgroundColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="dQc-u1-hgN"/>
-                                                    <constraint firstAttribute="width" constant="110" id="jXm-Q2-l2h"/>
+                                                    <constraint firstAttribute="width" constant="115" id="jXm-Q2-l2h"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

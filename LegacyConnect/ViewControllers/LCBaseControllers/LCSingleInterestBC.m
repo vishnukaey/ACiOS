@@ -21,6 +21,8 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kCreateEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestFollowedNotificationReceived:) name:kFollowInterestNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestUnfollowedNotificationReceived:) name:kUnfollowInterestNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeFollowedNotificationReceived:) name:kSupportCauseNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,6 +84,18 @@
   LCInterest *updatedInterest = [notification.userInfo objectForKey:kInterestObj];
   if ([self.interest.interestID isEqualToString:updatedInterest.interestID]) {
     self.interest = updatedInterest;
+    [self updateInterestDetails];
+  }
+}
+
+- (void)causeFollowedNotificationReceived :(NSNotification *)notification
+{
+  LCCause *updatedCause = [notification.userInfo objectForKey:kCauseObj];
+  if ([self.interest.interestID isEqualToString:updatedCause.interestID] && !self.interest.isFollowing) {
+    
+    self.interest.isFollowing = YES;
+    NSInteger followers = [self.interest.followers integerValue] + 1 ;
+    self.interest.followers = [NSString stringWithFormat:@"%ld", (long)followers];
     [self updateInterestDetails];
   }
 }

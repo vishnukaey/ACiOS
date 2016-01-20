@@ -84,7 +84,7 @@
 "comment_placeholder" = "Comment";
 "settings" = "Settings";
 "follow" = "Follow";
-"following" = "Following";
+"following" = "Unfollow";
 "support" = "Support";
 "supporting" = "Supporting";
 "follow_event_message" = "Follow the event to view and post comments";

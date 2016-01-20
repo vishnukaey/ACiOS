@@ -69,6 +69,10 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   [appdel.GIButton setHidden: true];
   [appdel.menuButton setHidden: true];
   appdel.isCreatePostOpen = true;
+  
+  if (self.selectedCause || self.selectedInterest) {
+      [self didfinishPickingInterest:_selectedInterest andCause:_selectedCause];
+  }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -93,7 +93,7 @@
      else
      {
        LCDLog(@"Login success ! ");
-       success(user);
+       success(response);//passing response directly to get the firsttimelogin user parameter
      }
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

@@ -198,11 +198,11 @@
     searchTimer = nil;
   }
   
-  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:nil repeats:NO];
+  searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(startSearching) userInfo:nil repeats:NO];
 }
 
 
--(void) searchRequest:(NSTimer*)sender
+-(void) startSearching
 {
   [self startFetchingResults];
 }
