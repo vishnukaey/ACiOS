@@ -40,7 +40,7 @@
       {
         UITextField *textField = (UITextField *)subSubview;
         [textField setEnablesReturnKeyAutomatically:NO];
-//        [textField setKeyboardAppearance: UIKeyboardAppearanceAlert];
+        //        [textField setKeyboardAppearance: UIKeyboardAppearanceAlert];
         textField.returnKeyType = UIReturnKeyDone;
         break;
       }
@@ -156,12 +156,12 @@
   }
   else
   {
-    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest:) userInfo:searchText repeats:NO];
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest) userInfo:searchText repeats:NO];
   }
 }
 
 
--(void) searchRequest:(NSTimer*)sender
+-(void)searchRequest
 {
   [LCSearchAPIManager searchCausesWithInterestForSearchText:_searchBar.text lastId:@"" withSuccess:^(id response) {
     [causesArray removeAllObjects];
@@ -170,6 +170,7 @@
   } andfailure:^(NSString *error) {
   }];
 }
+
 
 -(IBAction)backButtonTapped:(id)sender
 {

@@ -86,30 +86,30 @@
   UIToolbar *accessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
   accessoryView.barStyle = UIBarStyleDefault;
   UIBarButtonItem *flexSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView:)];
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(setDateAndDismissDatePickerView)];
   [doneButton setTintColor:[UIColor blackColor]];
-  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView:)];
+  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView)];
   [cancelButton setTintColor:[UIColor blackColor]];
   [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
   [self.dobTextField setInputAccessoryView:accessoryView];
 }
 
 
-- (void) setDateAndDismissDatePickerView:(id)sender
+- (void)setDateAndDismissDatePickerView
 {
   [_dobTextField resignFirstResponder];
-  [self updateTextFieldWithDate:self];
+  [self updateTextFieldWithDate];
   [self textFieldDidChange:nil];
 }
 
-- (void)dismissDatePickerView:(id)sender
+- (void)dismissDatePickerView
 {
   [self textFieldDidChange:nil];
   [_dobTextField resignFirstResponder];
 }
 
 
--(void) updateTextFieldWithDate:(id) picker
+-(void)updateTextFieldWithDate
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
   _dobTextField.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"MM/dd/yyyy"];

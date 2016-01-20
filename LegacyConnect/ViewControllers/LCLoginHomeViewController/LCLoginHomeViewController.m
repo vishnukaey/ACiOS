@@ -84,7 +84,7 @@
          NSDictionary *response = result;
          [defaults setValue:response[kIDKey] forKey:kFBUserIDKey];
          
-         NSArray *userDetailsArray = [self getFBUserDetailsArray:result];
+         NSArray *userDetailsArray = [self getFBUserDetailsArray];
          
          [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
            [self loginUser:response[@"data"]];
@@ -112,7 +112,7 @@
 }
 
 
--(NSArray*) getFBUserDetailsArray:(id)response
+-(NSArray*) getFBUserDetailsArray
 {
   NSArray *userDetails = @[[LCDataManager sharedDataManager].userEmail,[LCDataManager sharedDataManager].firstName, [LCDataManager sharedDataManager].lastName, [LCDataManager sharedDataManager].dob, [LCDataManager sharedDataManager].userFBID, [FBSDKAccessToken currentAccessToken].tokenString, [LCDataManager sharedDataManager].avatarUrl];
   return userDetails;
