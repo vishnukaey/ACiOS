@@ -37,13 +37,13 @@ static NSMutableDictionary *selectedItemsDictionary;
   }
   else if (cause && ![[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is not added yet
   {
-    interestToAdd.causes = [NSArray arrayWithObjects:cause, nil];
-    [[self selectedItemsDictionary] setObject:interestToAdd forKey:cause.interestID];
+    interestToAdd.causes = @[cause];
+    [self selectedItemsDictionary][cause.interestID] = interestToAdd;
   }
   else if (!cause && interest && ![[self selectedItemsDictionary] objectForKey:interest.interestID])//add an interest
   {
-      interestToAdd.causes = nil;
-      [[self selectedItemsDictionary] setObject:interestToAdd forKey:interestToAdd.interestID];
+    interestToAdd.causes = nil;
+    [self selectedItemsDictionary][interestToAdd.interestID] = interestToAdd;
   }
 }
 
