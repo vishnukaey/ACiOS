@@ -224,12 +224,7 @@
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
-    createPostVC.isEditing = YES;
-    createPostVC.postFeedObject = feed;
-    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:createPostVC animated:YES completion:nil];
+    [self loadPostViewControllerWithField:feed];
   }];
   
   [actionSheet addAction:editPost];
@@ -270,6 +265,16 @@
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void) loadPostViewControllerWithField:(LCFeed*)feed
+{
+  UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
+  createPostVC.isEditing = YES;
+  createPostVC.postFeedObject = feed;
+  createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:createPostVC animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails
