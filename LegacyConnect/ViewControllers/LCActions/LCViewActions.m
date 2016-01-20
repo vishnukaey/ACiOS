@@ -214,15 +214,8 @@ static CGFloat kActionSectionHeight = 30;
                                          NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
                                          } range:tagRangeinterest];
   
-  NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   
-  // -- Interest Info Tag -- //
-  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
-  [tagsWithRanges addObject:dic_interest];
-
-  // -- User Info Tag -- //
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
-  [tagsWithRanges addObject:dic_user];
+  NSMutableArray * tagsWithRanges = [self getTaggedArrayWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName];
   
   eventCreatedByLabel.tagsArray  = tagsWithRanges;
   [eventCreatedByLabel setAttributedText:eventInfoAttribString];
@@ -231,9 +224,22 @@ static CGFloat kActionSectionHeight = 30;
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
   
-//  [eventCreatedByLabel sizeToFit];
   [self setEventDateInfo];
   [self.tableView reloadData];
+}
+
+- (NSMutableArray*)getTaggedArrayWithTagRangeUsername:(NSRange)tagRangeUserName andTagRangeinterest:(NSRange)tagRangeinterest eventOwnerName:(NSString*)eventOwnerName
+{
+  NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
+  
+  // -- Interest Info Tag -- //
+  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
+  [tagsWithRanges addObject:dic_interest];
+  
+  // -- User Info Tag -- //
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
+  [tagsWithRanges addObject:dic_user];
+  return tagsWithRanges;
 }
 
 - (void)setEventDateInfo
@@ -437,7 +443,7 @@ static CGFloat kActionSectionHeight = 30;
   if (commentCell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-    commentCell = [topLevelObjects objectAtIndex:0];
+    commentCell = topLevelObjects[0];
   }
   [commentCell setComment:[self.results objectAtIndex:indexPath.row]];
   [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];

@@ -209,7 +209,7 @@
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
     // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   __weak typeof(self) weakSelf = self;

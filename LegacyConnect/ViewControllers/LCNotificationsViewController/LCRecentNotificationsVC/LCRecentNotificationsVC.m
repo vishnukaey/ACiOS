@@ -113,7 +113,7 @@
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCRecentNotificationTVC" owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   [cell setNotification:self.results[indexPath.row]];

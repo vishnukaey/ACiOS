@@ -323,25 +323,25 @@ static NSString *kTitle = @"MY FEED";
   {
     UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
     LCFeedsHomeViewController *feedsVC = [mainSB instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:feedsVC]];
+    [navigationRoot setViewControllers:@[feedsVC]];
   }
   else if (index == 1)//Interest
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
     LCMyAndAllInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:kAllAndMyInterestStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:interestVC]];
+    [navigationRoot setViewControllers:@[interestVC]];
   }
   else if (index == 2)//notifications
   {
     UIStoryboard*  notificationSB = [UIStoryboard storyboardWithName:kNotificationStoryBoardIdentifier bundle:nil];
     LCNotificationsViewController *notificationVC = [notificationSB instantiateInitialViewController];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:notificationVC]];
+    [navigationRoot setViewControllers:@[notificationVC]];
   }
   else if (index == 3)//settings
   {
     UIStoryboard*  settingsSB = [UIStoryboard storyboardWithName:kSettingsStoryBoardIdentifier bundle:nil];
     LCSettingsViewController *settingsVC = [settingsSB instantiateViewControllerWithIdentifier:kSettingsStoryBoardID];
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:settingsVC]];
+    [navigationRoot setViewControllers:@[settingsVC]];
     
   }
   else if (index == 4)//profile
@@ -350,7 +350,7 @@ static NSString *kTitle = @"MY FEED";
     LCProfileViewVC *profileVC = [profileSB instantiateInitialViewController];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = [LCDataManager sharedDataManager].userID;
-    [navigationRoot setViewControllers:[NSArray arrayWithObject:profileVC]];
+    [navigationRoot setViewControllers:@[profileVC]];
   }
   
   //added to bring menu button to top on menu item selection.
@@ -380,7 +380,7 @@ static NSString *kTitle = @"MY FEED";
     LCLoginViewController * loginViewController = (LCLoginViewController*)self.navigationController.topViewController;
     LCUpdatePasswordViewController *updatePasswordVC = [loginViewController.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
     updatePasswordVC.delegate = loginViewController;
-    updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
+    updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
     [self.navigationController pushViewController:updatePasswordVC animated:YES];
   }
 //  else

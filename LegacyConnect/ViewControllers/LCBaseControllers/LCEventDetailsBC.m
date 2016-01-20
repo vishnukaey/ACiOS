@@ -65,7 +65,7 @@
 - (void)eventFollowNotificationReceived:(NSNotification*)notification
 {
   NSDictionary * userInfo = notification.userInfo;
-  LCEvent *modifiedEvent = [userInfo objectForKey:kEntityTypeEvent];
+  LCEvent *modifiedEvent = userInfo[kEntityTypeEvent];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
     self.eventObject.followerCount = modifiedEvent.followerCount;
@@ -79,7 +79,7 @@
 - (void)eventUnFollowNotificationReceived:(NSNotification*)notification
 {
   NSDictionary * userInfo = notification.userInfo;
-  LCEvent *modifiedEvent = [userInfo objectForKey:kEntityTypeEvent];
+  LCEvent *modifiedEvent = userInfo[kEntityTypeEvent];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
     self.eventObject.followerCount = modifiedEvent.followerCount;
@@ -94,7 +94,7 @@
 - (void)eventDetailsUpdatedNotificationReceived:(NSNotification*)notification
 {
   NSDictionary * userInfo = notification.userInfo;
-  LCEvent *modifiedEvent = [userInfo objectForKey:kEntityTypeEvent];
+  LCEvent *modifiedEvent = userInfo[kEntityTypeEvent];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject = modifiedEvent;
     [self topViewOnlyRefresh];

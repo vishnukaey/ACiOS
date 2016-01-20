@@ -212,7 +212,7 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:kFeedCellXibName owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   __weak typeof(self) weakSelf = self;
