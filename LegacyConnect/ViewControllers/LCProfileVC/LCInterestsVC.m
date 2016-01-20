@@ -104,7 +104,7 @@
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   LCInterest *interstObj = [self.results objectAtIndex:indexPath.row];
   [cell setData:interstObj];

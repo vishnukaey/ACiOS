@@ -118,8 +118,8 @@ static CGFloat kNumberOfSection = 2;
     if (cell == nil) {
       cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsCellIdentifier];
     }
-    [cell.textLabel setText:[(NSDictionary*)[_accountDataSource objectAtIndex:indexPath.row] objectForKey:kTextLeft]];
-    [cell.detailTextLabel setText:[(NSDictionary*)[_accountDataSource objectAtIndex:indexPath.row] objectForKey:kTextRight]];
+    [cell.textLabel setText:[(NSDictionary*)_accountDataSource[indexPath.row] objectForKey:kTextLeft]];
+    [cell.detailTextLabel setText:[(NSDictionary*)_accountDataSource[indexPath.row] objectForKey:kTextRight]];
   }
   else if (indexPath.section == kIndexSectionSignOut) {
     

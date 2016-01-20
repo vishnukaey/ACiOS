@@ -128,7 +128,7 @@
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCActionsCellView" owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   [cell setEvent:[self.results objectAtIndex:indexPath.row]];
 //  tableView.backgroundColor = [UIColor clearColor];

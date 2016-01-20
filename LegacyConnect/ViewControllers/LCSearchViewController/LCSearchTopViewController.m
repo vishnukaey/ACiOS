@@ -78,10 +78,7 @@
   {
     return self.searchResultObject.interestsArray.count>3 ? 3 : self.searchResultObject.interestsArray.count;
   }
-  else
-  {
     return self.searchResultObject.causesArray.count>3 ? 3 : self.searchResultObject.causesArray.count;
-  }
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section

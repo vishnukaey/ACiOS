@@ -128,7 +128,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:^{
-    UIImage * originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage * originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *normalzedImage = [originalImage normalizedImage];
     [self showImageCropViewWithImage:normalzedImage];
   }];
@@ -156,12 +156,10 @@
   CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
   CGFloat viewHeight = CGRectGetHeight(controller.view.frame);
   
-  CGRect maskRect = CGRectMake((viewWidth - maskSize.width) * 0.5f,
-                               (viewHeight - maskSize.height) * 0.5f,
-                               maskSize.width,
-                               maskSize.height);
-  
-  return maskRect;
+  return CGRectMake((viewWidth - maskSize.width) * 0.5f,
+                    (viewHeight - maskSize.height) * 0.5f,
+                    maskSize.width,
+                    maskSize.height);
 }
 
 // Returns a custom path for the mask.
