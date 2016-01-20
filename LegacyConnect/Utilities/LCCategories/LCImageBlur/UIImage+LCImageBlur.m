@@ -16,7 +16,7 @@
   CIImage *inputImage = [[CIImage alloc] initWithImage:self];
   CIFilter *filter = [CIFilter filterWithName:@"CIGaussianBlur"];
   [filter setValue:inputImage forKey:kCIInputImageKey];
-  [filter setValue:[NSNumber numberWithFloat:10.0f] forKey:@"inputRadius"];
+  [filter setValue:@10.0f forKey:kCIInputRadiusKey];
   CIImage *result = [filter valueForKey:kCIOutputImageKey];
   CGImageRef cgImage = [context createCGImage:result fromRect:[inputImage extent]];
   UIImage* blurredImage = [[UIImage alloc] initWithCGImage:cgImage];
