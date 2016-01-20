@@ -36,7 +36,7 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H45-oW-g99">
-                        <rect key="frame" x="15" y="23" width="454" height="60"/>
+                        <rect key="frame" x="15" y="23" width="454" height="64"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="userProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="5bn-gW-4lj">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -46,29 +46,29 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcg-BE-PLJ" customClass="LCTaggedLabel">
-                                <rect key="frame" x="65" y="2" width="366" height="13"/>
+                                <rect key="frame" x="65" y="2" width="366" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="13" id="Gy4-8C-ICZ"/>
+                                    <constraint firstAttribute="height" constant="17" id="Gy4-8C-ICZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
                                 <color key="textColor" red="0.13725490196078433" green="0.12156862745098039" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Created Post in" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sok-jq-UiD" customClass="LCTaggedLabel">
-                                <rect key="frame" x="65" y="19" width="374" height="12"/>
+                                <rect key="frame" x="65" y="23" width="374" height="12"/>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="12"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ClockIcon" translatesAutoresizingMaskIntoConstraints="NO" id="YdG-Pp-IrC">
-                                <rect key="frame" x="65" y="33" width="13" height="20"/>
+                                <rect key="frame" x="65" y="37" width="13" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="13" id="GeS-6o-bJp"/>
                                     <constraint firstAttribute="height" constant="20" id="i4l-IV-8cd"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aKp-8U-1B4">
-                                <rect key="frame" x="86" y="35" width="353" height="17"/>
+                                <rect key="frame" x="86" y="39" width="353" height="17"/>
                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="11"/>
                                 <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -112,7 +112,7 @@
                         </variation>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNa-Mb-cau" customClass="LCTaggedLabel">
-                        <rect key="frame" x="15" y="89" width="454" height="37"/>
+                        <rect key="frame" x="15" y="93" width="454" height="33"/>
                         <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                         <color key="textColor" red="0.13725490196078433" green="0.12156862745098039" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
