@@ -9,6 +9,7 @@
 #import "LCCommentsController.h"
 #import "LCSingleCauseVC.h"
 #import "LCProfileViewVC.h"
+#import "LCSingleInterestVC.h"
 
 static CGFloat kCommentFieldHeight = 45.0f;
 #define kPostButtonDisabledColor [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1]
@@ -223,7 +224,15 @@ static CGFloat kCommentFieldHeight = 45.0f;
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:profileVC animated:YES];
+  } else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeInterest])
+  {
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
+    interestVC.interest = [[LCInterest alloc] init];
+    interestVC.interest.interestID = tagDetails[kTagobjId];
+    [self.navigationController pushViewController:interestVC animated:YES];
   }
+
 }
 
 @end

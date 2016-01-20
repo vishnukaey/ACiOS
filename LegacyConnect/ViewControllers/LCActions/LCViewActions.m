@@ -170,14 +170,22 @@ static CGFloat kActionSectionHeight = 30;
   NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
   
   eventOwnerName = NSLocalizedString(@"you_", nil);
+
+
   if (![self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
     eventOwnerName = [NSString stringWithFormat:@"%@ %@ ",
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerFirstName],
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerLastName]];
   }
   
-  NSString * eventinfoString = [NSString stringWithFormat:@"%@%@%@%@",eventCreatedBy,eventOwnerName,inText,interest];
+  NSString * eventinfoString = [NSString stringWithFormat:@"%@%@ %@%@",eventCreatedBy,eventOwnerName,inText,interest];
   NSMutableAttributedString * eventInfoAttribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
+  
+  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
+  [paragraphStyle setAlignment:NSTextAlignmentCenter];
+  
+  [eventInfoAttribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [eventInfoAttribString length])];
+
   
   
   NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
@@ -207,12 +215,14 @@ static CGFloat kActionSectionHeight = 30;
                                          } range:tagRangeinterest];
   
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
-  // -- User Info Tag -- //
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, nil];
-  [tagsWithRanges addObject:dic_user];
+  
   // -- Interest Info Tag -- //
-  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kIDKey, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
+  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
   [tagsWithRanges addObject:dic_interest];
+
+  // -- User Info Tag -- //
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
+  [tagsWithRanges addObject:dic_user];
   
   eventCreatedByLabel.tagsArray  = tagsWithRanges;
   [eventCreatedByLabel setAttributedText:eventInfoAttribString];
@@ -221,6 +231,7 @@ static CGFloat kActionSectionHeight = 30;
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
   
+//  [eventCreatedByLabel sizeToFit];
   [self setEventDateInfo];
   [self.tableView reloadData];
 }
