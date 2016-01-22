@@ -7,6 +7,7 @@
 //
 
 #import "LCProfileEditVC.h"
+#import "LCProfileImageEditor.h"
 
 @interface LCProfileEditVC ()
 
@@ -55,41 +56,39 @@ NSInteger const kHeightForHeader = 44;
   
   self.navigationController.navigationBarHidden = YES;
   
-  imageEditor = [[LCProfileImageEditor alloc] init];
-  imageEditor.delegate = self;
-  
-  profilePic.layer.cornerRadius = profilePic.frame.size.width / 2;
+  _profilePic.layer.cornerRadius = _profilePic.frame.size.width / 2;
   profilePicBorderView.layer.cornerRadius = profilePicBorderView.frame.size.width/2;
   
   profilePicPlaceholder = [UIImage imageNamed:@"userProfilePic"];
-  profilePic.image = profilePicPlaceholder;
-  avatarPicState = IMAGE_UNTOUCHED;
-  headerPicState = IMAGE_UNTOUCHED;
+  _profilePic.image = profilePicPlaceholder;
+  _avatarPicState = IMAGE_UNTOUCHED;
+  _headerPicState = IMAGE_UNTOUCHED;
   
   NSString *profileUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
-  [profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
-                placeholderImage:profilePicPlaceholder
-                       completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                         if (headerPicState == IMAGE_UNTOUCHED) {
-                           actualAvatarImage = image;
-                         }
-                         else {
-                           //image already edited by user
-                           profilePic.image = actualAvatarImage;
-                         }
-                       }];
+  [_profilePic sd_setImageWithURL:[NSURL URLWithString:profileUrlString]
+                 placeholderImage:profilePicPlaceholder
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                          if (_headerPicState == IMAGE_UNTOUCHED) {
+                            
+                            _actualAvatarImage = image;
+                          }
+                          else {
+                            //image already edited by user
+                            _profilePic.image = _actualAvatarImage;
+                          }
+                        }];
   
-  [headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
-                   placeholderImage:nil
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                            if (headerPicState == IMAGE_UNTOUCHED) {
-                              actualHeaderImage = image;
-                            }
-                            else {
-                              //image already edited by user
-                              headerBGImage.image = actualHeaderImage;
-                            }
-                          }];
+  [_headerBGImage sd_setImageWithURL:[NSURL URLWithString:userDetail.headerPhotoURL]
+                    placeholderImage:nil
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                             if (_headerPicState == IMAGE_UNTOUCHED) {
+                               _actualHeaderImage = image;
+                             }
+                             else {
+                               //image already edited by user
+                               _headerBGImage.image = _actualHeaderImage;
+                             }
+                           }];
   
   dobTimeStamp = userDetail.dob;
   genderTypes = @[kMaleString, kFemaleString];
@@ -133,22 +132,22 @@ NSInteger const kHeightForHeader = 44;
   UIImage *avatarToPass = nil, *headerToPass = nil;
   BOOL isAvatarRemoved = NO, isHeaderRemoved = NO;
   
-  if (avatarPicState == IMAGE_REMOVED)
+  if (_avatarPicState == IMAGE_REMOVED)
   {
     isAvatarRemoved = YES;
   }
-  else if (avatarPicState == IMAGE_EDITED)
+  else if (_avatarPicState == IMAGE_EDITED)
   {
-    avatarToPass = actualAvatarImage;
+    avatarToPass = _actualAvatarImage;
   }
   
-  if (headerPicState == IMAGE_REMOVED)
+  if (_headerPicState == IMAGE_REMOVED)
   {
     isHeaderRemoved = YES;
   }
-  else if (headerPicState == IMAGE_EDITED)
+  else if (_headerPicState == IMAGE_EDITED)
   {
-    headerToPass = actualHeaderImage;
+    headerToPass = _actualHeaderImage;
   }
   
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -169,160 +168,16 @@ NSInteger const kHeightForHeader = 44;
 
 - (IBAction)editProfilePicAction:(id)sender {
   
-  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-  actionSheet.view.tintColor = [UIColor blackColor];
-  
-  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    if (avatarPicState == IMAGE_UNTOUCHED) {
-      
-      NSURL *avatarUrl = [NSURL URLWithString:userDetail.avatarURL];
-      
-      NSString *avatarUrlString;
-      if ([avatarUrl.host containsString:@"facebook"]) {
-        avatarUrlString = [NSString stringWithFormat:@"%@?width=800",userDetail.avatarURL];
-      }
-      else {
-        avatarUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.avatarURL];
-      }
-      
-      SDWebImageManager *manager = [SDWebImageManager sharedManager];
-      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      [manager downloadImageWithURL:[NSURL URLWithString:avatarUrlString]
-                            options:0
-                           progress:nil
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                            if (image) {
-                              [imageEditor presentImageEditorOnController:self withImage:image isEditingProfilePic:YES];
-                            }
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                          }];
-    }
-    else {
-      [imageEditor presentImageEditorOnController:self withImage:actualAvatarImage isEditingProfilePic:YES];
-    }
-  }];
-  
-  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-
-    imageEditor = [[LCProfileImageEditor alloc] init];
-    imageEditor.delegate = self;
-    [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypeCamera isEditingProfilePic:YES];
-    
-  }];
-  
-  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    imageEditor = [[LCProfileImageEditor alloc] init];
-    imageEditor.delegate = self;
-    [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypePhotoLibrary isEditingProfilePic:YES];
-    
-  }];
-  
-  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Profile Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    avatarPicState = IMAGE_REMOVED;
-    actualAvatarImage = nil;
-    profilePic.image = profilePicPlaceholder;
-    [self validateFields];
-  }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-  
-  
-  if (actualAvatarImage){
-    [actionSheet addAction:editAction];
-  }
-  [actionSheet addAction:takeAction];
-  [actionSheet addAction:chooseAction];
-  if (actualAvatarImage) {
-    [actionSheet addAction:removeAction];
-  }
-  [actionSheet addAction:cancelAction];
-  
-  [self presentViewController:actionSheet animated:YES completion:nil];
+  LCProfileImageEditor *imageEditor = [[LCProfileImageEditor alloc] init];
+  imageEditor.parentController = self;
+  [imageEditor editProfilePicture];
 }
 
 - (IBAction)editHeaderBGAction:(id)sender {
   
-  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-  actionSheet.view.tintColor = [UIColor blackColor];
-  
-  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    if (headerPicState == IMAGE_UNTOUCHED) {
-      
-      NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",userDetail.headerPhotoURL];
-      SDWebImageManager *manager = [SDWebImageManager sharedManager];
-      [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-      [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
-                            options:0
-                           progress:nil
-                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                            if (image) {
-                              [imageEditor presentImageEditorOnController:self withImage:image isEditingProfilePic:NO];
-                            }
-                            [MBProgressHUD hideHUDForView:self.view animated:YES];
-                          }];
-    }
-    else{
-      [imageEditor presentImageEditorOnController:self withImage:actualHeaderImage isEditingProfilePic:NO];
-    }
-  }];
-  
-  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-      
-      imageEditor = [[LCProfileImageEditor alloc] init];
-      imageEditor.delegate = self;
-      [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypeCamera isEditingProfilePic:NO];
-    }
-    
-  }];
-  
-  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    
-    imageEditor = [[LCProfileImageEditor alloc] init];
-    imageEditor.delegate = self;
-    [imageEditor showImagePickerOnController:self withSource:UIImagePickerControllerSourceTypePhotoLibrary isEditingProfilePic:NO];
-    
-  }];
-  
-  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    headerPicState = IMAGE_REMOVED;
-    actualHeaderImage = nil;
-    headerBGImage.image = nil;
-    [self validateFields];
-  }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-  
-  if (actualHeaderImage){
-    [actionSheet addAction:editAction];
-  }
-  [actionSheet addAction:takeAction];
-  [actionSheet addAction:chooseAction];
-  if (actualHeaderImage) {
-    [actionSheet addAction:removeAction];
-  }
-  [actionSheet addAction:cancelAction];
-  
-  [self presentViewController:actionSheet animated:YES completion:nil];
-}
-
-- (void)RSKFinishedPickingImage:(UIImage *)image isProfilePic:(BOOL)isProfilePic
-{
-  if (isProfilePic)
-  {
-    avatarPicState = IMAGE_EDITED;
-    actualAvatarImage = image;
-    profilePic.image = image;
-  }
-  else
-  {
-    headerPicState = IMAGE_EDITED;
-    actualHeaderImage = image;
-    headerBGImage.image = image;
-  }
-  [self validateFields];
+  LCProfileImageEditor *imageEditor = [[LCProfileImageEditor alloc] init];
+  imageEditor.parentController = self;
+  [imageEditor editHeaderBackground];
 }
 
 #pragma mark - DOB and Gender setup
@@ -553,7 +408,7 @@ NSInteger const kHeightForHeader = 44;
                    action:@selector(validateFields)
          forControlEvents:UIControlEventEditingChanged];
   return cell;
-
+  
 }
 
 - (UITableViewCell*)getBirthdaySectionCellForTableView:(UITableView*)tableView
