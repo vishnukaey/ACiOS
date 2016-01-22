@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ynU-pE-0Wh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ynU-pE-0Wh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -772,21 +772,21 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="interestsCollectionViewCell" id="gOB-ug-dye" customClass="LCChooseInterestCVC">
-                                        <rect key="frame" x="15" y="15" width="100" height="120"/>
+                                        <rect key="frame" x="15" y="15" width="100" height="140"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTP-bQ-KNj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="120"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="140"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GFx-BD-tU4">
-                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="85"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="105"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATU-Ae-b9j">
-                                                            <rect key="frame" x="1" y="92" width="95" height="15"/>
+                                                            <rect key="frame" x="1" y="112" width="95" height="15"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="15" id="1vr-8P-19e"/>
                                                             </constraints>
@@ -820,7 +820,7 @@
                                             <constraint firstItem="mTP-bQ-KNj" firstAttribute="top" secondItem="gOB-ug-dye" secondAttribute="top" id="vGF-6r-5Ti"/>
                                             <constraint firstAttribute="trailing" secondItem="mTP-bQ-KNj" secondAttribute="trailing" id="wy5-Gu-zvA"/>
                                         </constraints>
-                                        <size key="customSize" width="100" height="120"/>
+                                        <size key="customSize" width="100" height="140"/>
                                         <connections>
                                             <outlet property="imageSuperView" destination="mTP-bQ-KNj" id="gcz-ez-c68"/>
                                             <outlet property="interestNameLabel" destination="ATU-Ae-b9j" id="phT-R0-JUK"/>

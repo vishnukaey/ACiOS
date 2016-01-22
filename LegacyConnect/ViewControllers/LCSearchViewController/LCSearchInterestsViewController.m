@@ -86,4 +86,12 @@
   [self.navigationController pushViewController:interestVC animated:YES];
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
+  return CGSizeMake(size, 140);
+}
+
 @end

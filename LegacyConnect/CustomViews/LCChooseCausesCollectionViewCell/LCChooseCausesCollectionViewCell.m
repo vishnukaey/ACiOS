@@ -32,20 +32,20 @@
 {
   _cause = cause;
   
-  CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
-  UIGraphicsBeginImageContext(rect.size);
-  CGContextRef context = UIGraphicsGetCurrentContext();
-  CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0] CGColor]);
-  CGContextFillRect(context, rect);
-  UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
+//  CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+//  UIGraphicsBeginImageContext(rect.size);
+//  CGContextRef context = UIGraphicsGetCurrentContext();
+//  CGContextSetFillColorWithColor(context, [[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0] CGColor]);
+//  CGContextFillRect(context, rect);
+//  UIImage *placeHolder_image = UIGraphicsGetImageFromCurrentImageContext();
+//  UIGraphicsEndImageContext();
   
   if(_causeLabel)
   {
     _causeLabel.text = cause.name;
   }
   [_causesImageView setBackgroundColor:[UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]];
-  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:placeHolder_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+  [_causesImageView sd_setImageWithURL:[NSURL URLWithString:cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"cause_placeholder"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
     if (image) {
       [_causesImageView setBackgroundColor:[UIColor whiteColor]];
     }

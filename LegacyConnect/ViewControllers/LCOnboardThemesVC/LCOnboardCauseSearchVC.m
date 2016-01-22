@@ -142,13 +142,13 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-  
+  NSString * trimmedText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
   if (searchTimer)
   {
     if ([searchTimer isValid]) { [searchTimer invalidate]; }
     searchTimer = nil;
   }
-  if(searchBar.text.length == 0 || searchText == nil)
+  if(searchBar.text.length == 0 || searchText == nil || trimmedText == nil || trimmedText.length == 0)
   {
     [causesArray removeAllObjects];
     [self addSelectedCausesToDataSourcce];
@@ -156,14 +156,14 @@
   }
   else
   {
-    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest) userInfo:searchText repeats:NO];
+    searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(searchRequest) userInfo:trimmedText repeats:NO];
   }
 }
 
 
 -(void)searchRequest
 {
-  [LCSearchAPIManager searchCausesWithInterestForSearchText:_searchBar.text lastId:@"" withSuccess:^(id response) {
+  [LCSearchAPIManager searchCausesWithInterestForSearchText:[LCUtilityManager getSpaceTrimmedStringFromString:_searchBar.text] lastId:@"" withSuccess:^(id response) {
     [causesArray removeAllObjects];
     [causesArray addObjectsFromArray:response];
     [self refreshList];
