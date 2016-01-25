@@ -54,6 +54,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
   NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
   [_versionLabel setText:[NSString stringWithFormat:@"ThatHelps! %@",version]];
+  [_versionLabel setHidden:YES];
 }
 
 - (void)refreshUserInfo
