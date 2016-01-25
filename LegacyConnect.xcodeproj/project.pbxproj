@@ -169,7 +169,7 @@
 		CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1A1C4626E700ED4E5E /* LCSingleInterestBC.m */; };
 		CE5BEA1E1C46270200ED4E5E /* LCInterestPostsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1D1C46270200ED4E5E /* LCInterestPostsBC.m */; };
 		CE5BEA211C46271F00ED4E5E /* LCInterestActionsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */; };
-		CE5CBF6D1C55FC610001F82C /* LCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5CBF6C1C55FC610001F82C /* LCImagePickerController.m */; settings = {ASSET_TAGS = (); }; };
+		CE5CBF6D1C55FC610001F82C /* LCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5CBF6C1C55FC610001F82C /* LCImagePickerController.m */; };
 		CE6515031BF1B44F00BD6B86 /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6515021BF1B44F00BD6B86 /* Actions.storyboard */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
 		CE71D1521C3D225C00AD6E07 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */; };
@@ -189,7 +189,7 @@
 		CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
 		CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */; };
-		CED6411D1C48C45600943693 /* LCSingleCauseBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6411C1C48C45600943693 /* LCSingleCauseBC.m */; settings = {ASSET_TAGS = (); }; };
+		CED6411D1C48C45600943693 /* LCSingleCauseBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6411C1C48C45600943693 /* LCSingleCauseBC.m */; };
 		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; };
 		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; };
 		CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40671C1AA598003D3C81 /* LCOnboardThemesVC.m */; };
