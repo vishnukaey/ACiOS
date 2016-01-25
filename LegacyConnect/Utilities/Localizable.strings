@@ -68,7 +68,7 @@
 "choose_from_library" = "Choose From Library";
 "edit_photo" = "Edit Photo";
 "remove_header_photo" = "Remove Header Photo";
-"access_denied_error_message_photo_library" = "Please give ThatHelps! permission to access your photo library in your settings app!";
+"access_denied_error_message_camera" = "Please give ThatHelps! permission to access device camera in your settings app!";
 "attention" = "Attention";
 "close" = "Close";
 //-- Menu Item --//
