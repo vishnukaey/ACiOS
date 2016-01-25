@@ -21,7 +21,7 @@
   ALAuthorizationStatus status = [ALAssetsLibrary authorizationStatus];
   
   if (status != ALAuthorizationStatusAuthorized) {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Attention" message:@"Please give this app permission to access your photo library in your settings app!" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"attention", nil) message:NSLocalizedString(@"access_denied_error_message_photo_library", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"close", nil) otherButtonTitles:nil, nil];
     [alert show];
   }
 }
