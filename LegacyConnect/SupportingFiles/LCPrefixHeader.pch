@@ -36,4 +36,6 @@
 
 #import "LCAPIManager.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "LCImagePickerController.h"
+
 #endif

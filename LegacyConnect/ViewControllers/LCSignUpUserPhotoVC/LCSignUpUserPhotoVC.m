@@ -63,7 +63,7 @@
 
 - (IBAction)takeAPhoto:(id)sender
 {
-  UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+  LCImagePickerController *imagePicker = [[LCImagePickerController alloc]init];
   imagePicker.delegate = self;
   imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
   imagePicker.allowsEditing = false;
@@ -73,7 +73,7 @@
 
 - (IBAction)chooseAPhotoFromLibrary:(id)sender
 {
-  UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+  LCImagePickerController *imagePicker = [[LCImagePickerController alloc]init];
   imagePicker.delegate = self;
   imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
   imagePicker.allowsEditing = false;

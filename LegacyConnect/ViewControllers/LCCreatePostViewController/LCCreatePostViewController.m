@@ -602,7 +602,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   if (buttonIndex < 2)
   {
-    UIImagePickerController * imagePicker = [[UIImagePickerController alloc] init];
+    LCImagePickerController * imagePicker = [[LCImagePickerController alloc] init];
     UIImagePickerControllerSourceType type;
     if (buttonIndex == 0) {
       type = UIImagePickerControllerSourceTypePhotoLibrary;
