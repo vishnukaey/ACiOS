@@ -109,7 +109,7 @@
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       
-      UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+      LCImagePickerController *imagePicker = [[LCImagePickerController alloc]init];
       imagePicker.delegate = self;
       imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
       imagePicker.allowsEditing = NO;
@@ -120,7 +120,7 @@
   
   UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"choose_from_library", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    LCImagePickerController *imagePicker = [[LCImagePickerController alloc]init];
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.allowsEditing = NO;

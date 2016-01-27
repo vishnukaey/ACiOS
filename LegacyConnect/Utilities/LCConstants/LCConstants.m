@@ -57,7 +57,7 @@ NSString *const kFBURLScheme = @"fb781451981972910";
 
 #endif
 
-NSString *const kLCiTunesLink = @"https://itunes.apple.com/in/app/instagram/id389801252?mt=8";
+NSString *const kLCiTunesLink = @"https://itunes.apple.com/us/app/thathelps!/id1064878350?ls=1&mt=8";
 
 NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
 NSString *const kTWConsumerSecretKey = @"dFA57jARhKy3vhD7cV0pPToCO7gKBN3W7Kly1kqEZUFooEbCbT";

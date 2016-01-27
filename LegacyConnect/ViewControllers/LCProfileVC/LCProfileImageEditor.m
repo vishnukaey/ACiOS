@@ -167,7 +167,7 @@
 {
   if ([UIImagePickerController isSourceTypeAvailable:imageSource]) {
     
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    LCImagePickerController *imagePicker = [[LCImagePickerController alloc]init];
     imagePicker.delegate = self;
     imagePicker.sourceType = imageSource;
     imagePicker.allowsEditing = NO;

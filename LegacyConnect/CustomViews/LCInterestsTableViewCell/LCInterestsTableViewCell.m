@@ -28,7 +28,7 @@
 {
   _interest = interest;
   [_interestImageView.layer setCornerRadius:5.0f];
-  [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:nil];
+  [_interestImageView sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:[UIImage imageNamed:@"InterestPlaceholder"]];
   _interestNameLabel.text = [NSString stringWithFormat:@"%@ ",interest.name];
   _interestFollowersCountLabel.text = [NSString stringWithFormat:@"%@ Followers",interest.followers];
   if(_interest.isFollowing)

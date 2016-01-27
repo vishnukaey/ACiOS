@@ -26,8 +26,8 @@
   
   _interestFollowLabel.text = [NSString stringWithFormat:@"Followed by %ld people",
                                    (long)[interest.followers integerValue]];
-  [_interestsBG sd_setImageWithURL:[NSURL URLWithString:interest.logoURLLarge]
-                      placeholderImage:nil];
+  [_interestsBG sd_setImageWithURL:[NSURL URLWithString:interest.logoURLLarge] placeholderImage:[UIImage imageNamed:@"InterestCellPlaceholder"]];
+
 }
 
 @end
