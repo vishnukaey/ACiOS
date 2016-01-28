@@ -45,17 +45,17 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
                          [LCUtilityManager performNullCheckAndSetValue:self.feedObject.firstName],
                          [LCUtilityManager performNullCheckAndSetValue:self.feedObject.lastName]];
   
-  NSMutableAttributedString * userNameAttributtedString = [[NSMutableAttributedString alloc] initWithString:userName];
+  NSMutableAttributedString * userNameAttrString = [[NSMutableAttributedString alloc] initWithString:userName];
   NSRange tagRangeUserName = NSMakeRange(0, userName.length);
-  [userNameAttributtedString addAttributes:@{
+  [userNameAttrString addAttributes:@{
                                              NSFontAttributeName : kFeedUserTextFont,
-                                             } range:NSMakeRange(0, userNameAttributtedString.length)];
+                                             } range:NSMakeRange(0, userNameAttrString.length)];
   
-  NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
+  NSMutableArray *userNameLblTagRange = [[NSMutableArray alloc] init];
   NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.userID, @"id", @"cause", @"text", kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], @"range", nil];
-  [userNameLabelTagsWithRanges addObject:dic_user];
-  usernameLabel.tagsArray  = userNameLabelTagsWithRanges;
-  [usernameLabel setAttributedText:userNameAttributtedString];
+  [userNameLblTagRange addObject:dic_user];
+  usernameLabel.tagsArray  = userNameLblTagRange;
+  [usernameLabel setAttributedText:userNameAttrString];
   __weak typeof(self) weakSelf = self;
   usernameLabel.nameTagTapped = ^(int index) {
     weakSelf.feedCellTagAction(dic_user);
@@ -165,13 +165,13 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
     [postDescString addAttribute:NSForegroundColorAttributeName value:kTagsTextColor range:locationTagRange];
   }
   
-  NSMutableArray *postDescriptionTagsWithRanges = [[NSMutableArray alloc] init];
+  NSMutableArray *postDescTagRange = [[NSMutableArray alloc] init];
   for (int i = 0; i<self.feedObject.postTags.count; i++)
   {
     LCTag * tag = self.feedObject.postTags[i];
     NSRange tagRangePost = [completeFeedMessage rangeOfString:[tag text]];
     NSDictionary *dic_post = [[NSDictionary alloc] initWithObjectsAndKeys:tag.tagID, @"id", tag.text, @"text", tag.type, kTagobjType, [NSValue valueWithRange:tagRangePost], @"range", nil];
-    [postDescriptionTagsWithRanges addObject:dic_post];
+    [postDescTagRange addObject:dic_post];
     
   }
   [postDescString addAttributes:@{
@@ -186,12 +186,12 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [postDescription sizeToFit];
   
   
-  postDescription.tagsArray  = postDescriptionTagsWithRanges;
+  postDescription.tagsArray  = postDescTagRange;
   [postDescription setAttributedText:postDescString];
   __weak typeof(self) weakSelf = self;
   postDescription.nameTagTapped = ^(int index) {
     if (weakSelf.feedCellTagAction) {
-      weakSelf.feedCellTagAction(postDescriptionTagsWithRanges[index]);
+      weakSelf.feedCellTagAction(postDescTagRange[index]);
     }
   };
 }

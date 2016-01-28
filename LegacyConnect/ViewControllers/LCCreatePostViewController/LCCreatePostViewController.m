@@ -34,10 +34,10 @@
 }
 @end
 
-static NSString *ktagFriendIconImageName = @"createPost_tagFriends";
-static NSString *ktagLocationIconImageName = @"createPost_location";
-static NSString *kcameraIconImageName = @"createPost_cameraGrey";
-static NSString *kmilestoneIconImageName = @"MilestoneIcon";
+static NSString *ktagFriendIconImg = @"createPost_tagFriends";
+static NSString *ktagLocationIconImg = @"createPost_location";
+static NSString *kcameraIconImg = @"createPost_cameraGrey";
+static NSString *kmilestoneIconImg = @"MilestoneIcon";
 
 @implementation LCCreatePostViewController
 #pragma mark - lifecycle methods
@@ -168,7 +168,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   if ([_postFeedObject.isMilestone integerValue])
   {
     milestoneIcon.tag = 1;
-    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImg]];
   }
   
   [self arrangeTaggedLabel];
@@ -268,13 +268,13 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
     NSAttributedString *atString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" %C at ",0x2014] attributes:@{
                                                                                                                                        NSFontAttributeName : POSTTEXT_FONT,
                                                                                                                                        NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],}];
-    NSAttributedString *attributtedLocationString = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"%@", taggedLocation]
+    NSAttributedString *attributtedLocStrng = [[NSAttributedString alloc] initWithString : [NSString stringWithFormat:@"%@", taggedLocation]
                                                                                     attributes : @{
                                                                                                    NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:13],
                                                                                                    NSForegroundColorAttributeName : [UIColor colorWithRed:40/255.0 green:40/255.0 blue:40/255.0 alpha:1],
                                                                                                    }];
     [attributtedString appendAttributedString:atString];
-    [attributtedString appendAttributedString:attributtedLocationString];
+    [attributtedString appendAttributedString:attributtedLocStrng];
   }
   [tagsLabel setAttributedText:attributtedString];
 
@@ -312,19 +312,19 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   
   [_postScrollView setContentSize:CGSizeMake(_postScrollView.contentSize.width, postImageView.frame.origin.y + postImageView.frame.size.height)];
   
-  UIImage *tagfirends_im = [UIImage imageNamed:ktagFriendIconImageName];
+  UIImage *tagfirends_im = [UIImage imageNamed:ktagFriendIconImg];
   tagFriendsIcon.image = [tagfirends_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [tagFriendsIcon setTintColor:[UIColor grayColor]];
   
-  UIImage *cam_im = [UIImage imageNamed:kcameraIconImageName];
+  UIImage *cam_im = [UIImage imageNamed:kcameraIconImg];
   cameraIcon.image = [cam_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [cameraIcon setTintColor:[UIColor grayColor]];
   
-  UIImage *tagloc_im = [UIImage imageNamed:ktagLocationIconImageName];
+  UIImage *tagloc_im = [UIImage imageNamed:ktagLocationIconImg];
   tagLocationIcon.image = [tagloc_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [tagLocationIcon setTintColor:[UIColor grayColor]];
   
-  UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImageName];
+  UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImg];
   milestoneIcon.image = [miles_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [milestoneIcon setTintColor:[UIColor grayColor]];
 
@@ -343,7 +343,7 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   }
   
   if (milestoneIcon.tag) {
-    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImg]];
   }
 }
 
@@ -351,9 +351,9 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 {
   if (textView.selectedTextRange) {
     CGPoint cursorPosition = [textView caretRectForPosition:textView.selectedTextRange.start].origin;
-    float bottommarginAdjustment = textView.font.pointSize*2;
-    if (cursorPosition.y + postTextView.frame.origin.y >= _postScrollView.frame.size.height - bottommarginAdjustment + _postScrollView.contentOffset.y) {
-      CGPoint pointToScroll = CGPointMake(_postScrollView.contentOffset.x, postTextView.frame.origin.y + cursorPosition.y - _postScrollView.frame.size.height + bottommarginAdjustment);
+    float btmMarginAdjust = textView.font.pointSize*2;
+    if (cursorPosition.y + postTextView.frame.origin.y >= _postScrollView.frame.size.height - btmMarginAdjust + _postScrollView.contentOffset.y) {
+      CGPoint pointToScroll = CGPointMake(_postScrollView.contentOffset.x, postTextView.frame.origin.y + cursorPosition.y - _postScrollView.frame.size.height + btmMarginAdjust);
       [_postScrollView setContentOffset:pointToScroll];
     }
   }
@@ -363,10 +363,10 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
 - (IBAction)closeButtonClicked:(id)sender
 {
   UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"close_post", nil) message:NSLocalizedString(@"close_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"discard", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+  UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"discard", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     [self dismissViewControllerAnimated:YES completion:nil];
   }];
-  [deleteAlert addAction:deletePostActionFinal];
+  [deleteAlert addAction:deletePostAction];
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [deleteAlert addAction:cancelAction];
@@ -404,12 +404,12 @@ static NSString *kmilestoneIconImageName = @"MilestoneIcon";
   if (milestoneIcon.tag == 0)
   {
     milestoneIcon.tag = 1;
-    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImageName]];
+    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImg]];
   }
   else
   {
     milestoneIcon.tag = 0;
-    UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImageName];
+    UIImage *miles_im = [UIImage imageNamed:kmilestoneIconImg];
     miles_im = [miles_im imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     milestoneIcon.image = miles_im;
     [milestoneIcon setTintColor:[UIColor grayColor]];

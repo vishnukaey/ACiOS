@@ -26,9 +26,9 @@
 }
 @end
 
-static NSString *kUnCheckedImageName_cause = @"contact_plus";
-static NSString *kCheckedImageName = @"contact_tick";
-static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
+static NSString *kUnCheckedImg_cause = @"contact_plus";
+static NSString *kCheckedImg = @"contact_tick";
+static NSString *kUnChkdImg_interest = @"tagFirend_unselected";
 
 #pragma mark - LCTagCauseCollectionCell class
 @interface LCTagCauseCollectionCell : UICollectionViewCell
@@ -147,15 +147,15 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     interestsArray = responses;
     [interestsSearchArray addObjectsFromArray:responses];
     [interestsTableView reloadData];
-    NSMutableArray *nonZeroCausedInterests = [[NSMutableArray alloc] init];
+    NSMutableArray *interestsWithCause = [[NSMutableArray alloc] init];
     for (LCInterest *interest in responses)
     {
       if (interest.causes.count>0)
       {
-        [nonZeroCausedInterests addObject:interest];
+        [interestsWithCause addObject:interest];
       }
     }
-    causesArray = [self sortedInterestCauses:[nonZeroCausedInterests copy]];
+    causesArray = [self sortedInterestCauses:[interestsWithCause copy]];
     [causesSearchArray addObjectsFromArray:causesArray];
     [causesCollectionView reloadData];
     [MBProgressHUD hideAllHUDsForView:interestsTableView.superview animated:YES];
@@ -263,11 +263,11 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     cell.checkButton.userInteractionEnabled = NO;
     if ([interstObj.interestID isEqualToString:selectedInterest.interestID])
     {
-      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+      [cell.checkButton setImage:[UIImage imageNamed:kCheckedImg] forState:UIControlStateNormal];
     }
     else
     {
-      [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName_interest] forState:UIControlStateNormal];
+      [cell.checkButton setImage:[UIImage imageNamed:kUnChkdImg_interest] forState:UIControlStateNormal];
     }
     
     return cell;
@@ -335,11 +335,11 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
   [cell setCause:causeObj];
   if ([causeObj.causeID isEqualToString:selectedCause.causeID])
   {
-    [cell.checkButton setImage:[UIImage imageNamed:kCheckedImageName] forState:UIControlStateNormal];
+    [cell.checkButton setImage:[UIImage imageNamed:kCheckedImg] forState:UIControlStateNormal];
   }
   else
   {
-    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImageName_cause] forState:UIControlStateNormal];
+    [cell.checkButton setImage:[UIImage imageNamed:kUnCheckedImg_cause] forState:UIControlStateNormal];
   }
   return cell;
 }

@@ -243,7 +243,7 @@
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
       [LCPostAPIManager deletePost:feed withSuccess:^(NSArray *response) {
         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
@@ -253,7 +253,7 @@
                       LCDLog(@"%@",error);
                     }];
     }];
-    [deleteAlert addAction:deletePostActionFinal];
+    [deleteAlert addAction:deletePostAction];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
     [deleteAlert addAction:cancelAction];

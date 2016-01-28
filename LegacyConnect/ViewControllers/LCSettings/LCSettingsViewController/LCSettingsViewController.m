@@ -264,8 +264,8 @@ static CGFloat kNumberOfSection = 2;
         
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    appdel.window.rootViewController = myStoryBoardInitialViewController;
+    UIViewController* initialVC = [storyboard instantiateInitialViewController];
+    appdel.window.rootViewController = initialVC;
     [appdel.window makeKeyAndVisible];
     
   } andFailure:^(NSString *error) {

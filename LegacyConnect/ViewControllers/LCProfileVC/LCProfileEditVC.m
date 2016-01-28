@@ -13,11 +13,11 @@
 
 @end
 
-NSString * const kCellIdentifierName = @"LCProfileNameCell";
-NSString * const kCellIdentifierLocation = @"LCProfileLocationCell";
-NSString * const kCellIdentifierHeaderBG = @"LCProfileHeaderBGCell";
-NSString * const kCellIdentifierBirthday = @"LCProfileBirthdayCell";
-NSString * const kCellIdentifierSection = @"LCProfileSectionHeader";
+NSString * const kCellIdName = @"LCProfileNameCell";
+NSString * const kCellIdLocation = @"LCProfileLocationCell";
+NSString * const kCellIdHeaderBG = @"LCProfileHeaderBGCell";
+NSString * const kCellIdBirthday = @"LCProfileBirthdayCell";
+NSString * const kCellIdSection = @"LCProfileSectionHeader";
 
 NSString * const kDOBFormat = @"MMMM dd, yyyy";
 NSString * const kMaleString = @"Male";
@@ -298,7 +298,7 @@ NSInteger const kHeightForHeader = 44;
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   
-  NSString *cellIdentifier = kCellIdentifierSection;
+  NSString *cellIdentifier = kCellIdSection;
   UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (headerView == nil) {
     headerView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -357,7 +357,7 @@ NSInteger const kHeightForHeader = 44;
 
 - (UITableViewCell*)getGenderSectionCellForTableView:(UITableView*)tableView
 {
-  NSString *cellIdentifier = kCellIdentifierBirthday;
+  NSString *cellIdentifier = kCellIdBirthday;
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -372,7 +372,7 @@ NSInteger const kHeightForHeader = 44;
 
 - (UITableViewCell*)getNameSectionCellForTableView:(UITableView*)tableView
 {
-  NSString *cellIdentifier = kCellIdentifierName;
+  NSString *cellIdentifier = kCellIdName;
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -395,7 +395,7 @@ NSInteger const kHeightForHeader = 44;
 
 - (UITableViewCell*)getLocationSectionCellForTableView:(UITableView*)tableView
 {
-  NSString *cellIdentifier = kCellIdentifierLocation;
+  NSString *cellIdentifier = kCellIdLocation;
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -413,7 +413,7 @@ NSInteger const kHeightForHeader = 44;
 
 - (UITableViewCell*)getBirthdaySectionCellForTableView:(UITableView*)tableView
 {
-  NSString *cellIdentifier = kCellIdentifierBirthday;
+  NSString *cellIdentifier = kCellIdBirthday;
   UITableViewCell*cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault

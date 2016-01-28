@@ -504,10 +504,10 @@
 + (void)showVersionOutdatedAlert
 {
   UIAlertController *versionAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"version_outdated_title", @"title") message:NSLocalizedString(@"version_outdated_message", @"message") preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"version_update_title", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"version_update_title", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:kLCiTunesLink]];
   }];
-  [versionAlert addAction:deletePostActionFinal];
+  [versionAlert addAction:deletePostAction];
   
   [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:versionAlert animated:YES completion:nil];
 }

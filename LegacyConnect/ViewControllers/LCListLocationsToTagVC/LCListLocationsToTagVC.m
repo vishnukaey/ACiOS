@@ -102,9 +102,9 @@
   [locationsArray addObjectsFromArray:locationsTable.selectedIDs];
   [locationsArray addObjectsFromArray:locations];
   NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:locationsArray];
-  NSArray *arrayWithoutDuplicates = [orderedSet array];
+  NSArray *locWithoutDuplicates = [orderedSet array];
   [locationsArray removeAllObjects];
-  [locationsArray addObjectsFromArray:arrayWithoutDuplicates];
+  [locationsArray addObjectsFromArray:locWithoutDuplicates];
   [locationsTable reloadData];
 }
 

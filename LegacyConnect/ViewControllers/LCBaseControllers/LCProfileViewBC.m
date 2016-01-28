@@ -18,10 +18,10 @@
 #import "LCProfileViewBC.h"
 
 
-static NSString * const kImageNameProfileSettings = @"profileSettings";
-static NSString * const kImageNameProfileAdd = @"profileAdd";
-static NSString * const kImageNameProfileFriend = @"profileFriend";
-static NSString * const kImageNameProfileWaiting = @"profileWaiting";
+static NSString * const kImgProfileSettings = @"profileSettings";
+static NSString * const kImgProfileAdd = @"profileAdd";
+static NSString * const kImgProfileFriend = @"profileFriend";
+static NSString * const kImgProfileWaiting = @"profileWaiting";
 
 @implementation LCProfileViewBC
 
@@ -88,19 +88,19 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
   switch (currentProfileStatus) {
       
     case kMyProfile:
-      btnImageName = kImageNameProfileSettings;
+      btnImageName = kImgProfileSettings;
       break;
       
     case kIsFriend:
-      btnImageName = kImageNameProfileFriend;
+      btnImageName = kImgProfileFriend;
       break;
       
     case kNonFriend:
-      btnImageName = kImageNameProfileAdd;
+      btnImageName = kImgProfileAdd;
       break;
       
     case kRequestWaiting:
-      btnImageName = kImageNameProfileWaiting;
+      btnImageName = kImgProfileWaiting;
       break;
       
   }

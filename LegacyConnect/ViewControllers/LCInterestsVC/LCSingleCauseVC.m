@@ -15,7 +15,7 @@
 #import "LCCauseSupportersVC.h"
 #import "LCSingleInterestVC.h"
 
-static NSString* const kGradientDefaultColor = @"282828";
+static NSString* const kGradientDefaultClr = @"282828";
 
 @implementation LCSingleCauseVC
 
@@ -62,7 +62,7 @@ static NSString* const kGradientDefaultColor = @"282828";
   gradient.frame = self.causeOverlayImageView.bounds;
   gradient.colors = @[
                       (id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor],
-                      (id)[[LCUtilityManager colorWithHexString:kGradientDefaultColor] CGColor]
+                      (id)[[LCUtilityManager colorWithHexString:kGradientDefaultClr] CGColor]
                       ];
   UIGraphicsBeginImageContext(self.causeOverlayImageView.bounds.size);
   [gradient renderInContext:UIGraphicsGetCurrentContext()];
