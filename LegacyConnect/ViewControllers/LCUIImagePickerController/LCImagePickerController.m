@@ -23,7 +23,7 @@
     
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     if(authStatus == AVAuthorizationStatusAuthorized) {
-      // do your logic
+      LCDLog(@"Media access Authorized");
     }
     else if(authStatus == AVAuthorizationStatusDenied){
       // denied
