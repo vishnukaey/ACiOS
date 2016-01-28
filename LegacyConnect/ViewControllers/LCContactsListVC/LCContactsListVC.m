@@ -83,7 +83,7 @@
 #pragma mark - buttonActions
 - (void)checkbuttonAction :(UIButton *)sender
 {
-  LCContact *con = [contactsArray objectAtIndex:sender.tag];
+  LCContact *con = contactsArray[sender.tag];
   contactsTable.selectedButton = sender;
     if (con.P_emails.count==1)
     {
@@ -125,7 +125,7 @@
 {
   if (buttonIndex>0)
   {
-    LCContact *con = [contactsArray objectAtIndex:actionSheet.tag];
+    LCContact *con = contactsArray[actionSheet.tag];
     [contactsTable AddOrRemoveID:con.P_emails[buttonIndex -1]];
   }
 }
@@ -167,7 +167,7 @@
 
   
 
-  LCContact *con = [contactsArray objectAtIndex:indexPath.row];
+  LCContact *con = contactsArray[indexPath.row];
   cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
   cell.conatctPhotoView.clipsToBounds = YES;
   cell.conatctPhotoView.image = con.P_image;

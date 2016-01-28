@@ -155,7 +155,7 @@
   views = views_;
   if(views_.count)
   {
-    UIView *v__ = [views_ objectAtIndex:0];
+    UIView *v__ = views_[0];
     [v__ superview].clipsToBounds = YES;
   }
 }
@@ -187,7 +187,7 @@
 
 - (void)animateToIndex :(NSInteger)index
 {  
-  UIView *currentView = [views objectAtIndex:(int)_currentIndex];
+  UIView *currentView = views[(int)_currentIndex];
   UIView *nextView = views[index];
   CGPoint currentViewPointTo;
   if (index>(int)_currentIndex)
@@ -210,7 +210,7 @@
    {
      currentView.center = currentViewPointTo;
      nextView.center = CGPointMake(nextView.superview.frame.size.width/2, nextView.center.y);
-     [[menuButtons objectAtIndex:(int)_currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
+     [menuButtons[(int)_currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
      [menuButtons[index] setTitleColor:highlightColor forState:UIControlStateNormal];
      UIButton *nextBut = menuButtons[index];
      botbarXcenterConstraint.constant = nextBut.frame.origin.x;

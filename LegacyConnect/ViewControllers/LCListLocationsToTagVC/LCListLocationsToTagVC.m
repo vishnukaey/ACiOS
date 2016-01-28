@@ -156,7 +156,7 @@
   cell.locationLabel.text = [locationsArray objectAtIndex:indexPath.row];
   [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   cell.checkButton.tag = indexPath.row;
-  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:[locationsArray objectAtIndex:indexPath.row], nil]];
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:@[locationsArray[indexPath.row]]];
   return cell;
 }
 

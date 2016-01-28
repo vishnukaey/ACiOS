@@ -52,7 +52,7 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
   //  self.menuTable.backgroundView = nil;
   
   NSDictionary* infoDict = [[NSBundle mainBundle] infoDictionary];
-  NSString* version = [infoDict objectForKey:@"CFBundleShortVersionString"];
+  NSString* version = infoDict[@"CFBundleShortVersionString"];
   [_versionLabel setText:[NSString stringWithFormat:@"ThatHelps! %@",version]];
   [_versionLabel setHidden:YES];
 }

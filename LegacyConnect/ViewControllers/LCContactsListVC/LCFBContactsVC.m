@@ -89,9 +89,9 @@
       for (int i = 0; i<friendsArray.count; i++)
       {
         LCContact * con = [[LCContact alloc] init];
-        con.P_name = [[friendsArray objectAtIndex:i] valueForKey:@"name"];
-        con.P_id = [[friendsArray objectAtIndex:i] valueForKey:@"id"];
-        con.P_imageURL = [[[[friendsArray objectAtIndex:i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
+        con.P_name = [friendsArray[i] valueForKey:@"name"];
+        con.P_id = [friendsArray[i] valueForKey:@"id"];
+        con.P_imageURL = [[[friendsArray[i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
         [finalFriendsArray addObject:con];
         [self.friendsTable reloadData];
       }

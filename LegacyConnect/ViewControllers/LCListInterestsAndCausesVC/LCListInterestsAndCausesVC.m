@@ -172,7 +172,7 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     NSSortDescriptor *sortDescriptor;
     sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name"
                                                  ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortDescriptors = @[sortDescriptor];
     NSArray *sortedArray = [interest.causes sortedArrayUsingDescriptors:sortDescriptors];
     for (LCCause *cause_ in sortedArray)
     {
@@ -250,7 +250,7 @@ static NSString *kUnCheckedImageName_interest = @"tagFirend_unselected";
     if (cell == nil)
     {
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-      cell = [topLevelObjects objectAtIndex:0];
+      cell = topLevelObjects[0];
     }
     
     LCInterest *interstObj = [interestsSearchArray objectAtIndex:indexPath.row];

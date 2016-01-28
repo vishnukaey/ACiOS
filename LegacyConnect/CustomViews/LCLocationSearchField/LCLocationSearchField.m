@@ -26,14 +26,7 @@
   self = [super initWithFrame:frame];
   if (self)
   {
-    locManager = [[CLLocationManager alloc] init];
-    [locManager setDelegate:self];
-    [locManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-    {
-      [locManager requestWhenInUseAuthorization];
-    }
-    [locManager startUpdatingLocation];
+    [self setupLocationManager];
 
     activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activity.hidesWhenStopped = YES;
@@ -48,14 +41,7 @@
   self = [super initWithCoder:aDecoder];
   if (self)
   {
-    locManager = [[CLLocationManager alloc] init];
-    [locManager setDelegate:self];
-    [locManager setDesiredAccuracy:kCLLocationAccuracyBest];
-    if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
-    {
-      [locManager requestWhenInUseAuthorization];
-    }
-    [locManager startUpdatingLocation];
+    [self setupLocationManager];
     
     activity = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activity.hidesWhenStopped = YES;
@@ -64,6 +50,18 @@
   }
   
   return self;
+}
+
+-(void) setupLocationManager
+{
+  locManager = [[CLLocationManager alloc] init];
+  [locManager setDelegate:self];
+  [locManager setDesiredAccuracy:kCLLocationAccuracyBest];
+  if ([locManager respondsToSelector:@selector(requestWhenInUseAuthorization)])
+  {
+    [locManager requestWhenInUseAuthorization];
+  }
+  [locManager startUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations

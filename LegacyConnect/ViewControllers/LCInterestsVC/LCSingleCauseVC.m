@@ -60,14 +60,16 @@ static NSString* const kGradientDefaultColor = @"282828";
 {
   gradient = [CAGradientLayer layer];
   gradient.frame = self.causeOverlayImageView.bounds;
-  gradient.colors = [NSArray arrayWithObjects:(id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor], [(id)[LCUtilityManager colorWithHexString:kGradientDefaultColor] CGColor], nil];
+  gradient.colors = @[
+                      (id)[[LCUtilityManager colorWithHexString:self.cause.themeBackgroundColor] CGColor],
+                      (id)[[LCUtilityManager colorWithHexString:kGradientDefaultColor] CGColor]
+                      ];
   UIGraphicsBeginImageContext(self.causeOverlayImageView.bounds.size);
   [gradient renderInContext:UIGraphicsGetCurrentContext()];
   UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
   UIGraphicsEndImageContext();
   [self.causeOverlayImageView setImage:image];
 }
-
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
@@ -190,7 +192,7 @@ static NSString* const kGradientDefaultColor = @"282828";
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
     // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   __weak typeof(self) weakSelf = self;

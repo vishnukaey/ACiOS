@@ -90,7 +90,7 @@
   [doneButton setTintColor:[UIColor blackColor]];
   UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(dismissDatePickerView)];
   [cancelButton setTintColor:[UIColor blackColor]];
-  [accessoryView setItems:[NSArray arrayWithObjects:cancelButton,flexSpace, doneButton, nil] animated:NO];
+  [accessoryView setItems:@[cancelButton,flexSpace, doneButton] animated:NO];
   [self.dobTextField setInputAccessoryView:accessoryView];
 }
 
