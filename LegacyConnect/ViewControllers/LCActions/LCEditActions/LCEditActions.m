@@ -30,7 +30,7 @@
 - (void)deleteActionEvent
 {
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_action", nil) message:NSLocalizedString(@"delete_action_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
       
       [LCEventAPImanager deleteEvent:eventToEdit withSuccess:^(id response) {
@@ -41,7 +41,7 @@
       }];
 
     }];
-    [deleteAlert addAction:deletePostActionFinal];
+    [deleteAlert addAction:deletePostAction];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
     [deleteAlert addAction:cancelAction];
     [actionForm presentViewController:deleteAlert animated:YES completion:nil];  

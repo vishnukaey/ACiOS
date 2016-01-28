@@ -14,7 +14,7 @@
 #import "LCRequestsNotificationsVC.h"
 
 static NSString * const kRecentNotifications = @"recentNotifications";
-static NSString * const kRequestNotifications = @"requestNotifications";
+static NSString * const kReqstNotifications = @"requestNotifications";
 
 @interface LCNotificationsViewController ()
 {

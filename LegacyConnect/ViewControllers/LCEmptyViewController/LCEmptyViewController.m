@@ -123,13 +123,13 @@ static NSString *kTitle = @"MY FEED";
   LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
   navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
   
-  LCLeftMenuController *leftSideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
-  leftSideMenuViewController.delegate_ = self;
+  LCLeftMenuController *leftSideMenuVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
+  leftSideMenuVC.delegate_ = self;
   
   mainContainer = [MFSideMenuContainerViewController
                    containerWithCenterViewController:navigationRoot
                    leftMenuViewController:nil
-                   rightMenuViewController:leftSideMenuViewController];
+                   rightMenuViewController:leftSideMenuVC];
   mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
   appdel.window.rootViewController = mainContainer;
   [appdel.window makeKeyAndVisible];

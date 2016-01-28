@@ -8,17 +8,17 @@
 
 #import "LCOnboardingHelper.h"
 
-static NSMutableDictionary *selectedItemsDictionary;
+static NSMutableDictionary *selectedItemsDict;
 
 @implementation LCOnboardingHelper
 
 +(NSMutableDictionary*) selectedItemsDictionary
 {
-  if (selectedItemsDictionary == nil)
+  if (selectedItemsDict == nil)
   {
-    selectedItemsDictionary = [[NSMutableDictionary alloc] init];
+    selectedItemsDict = [[NSMutableDictionary alloc] init];
   }
-  return selectedItemsDictionary;
+  return selectedItemsDict;
 }
 
 
