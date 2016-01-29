@@ -72,10 +72,12 @@
 
 - (IBAction)reportButtonTapped:(id)sender
 {
-  [LCPostAPIManager ReportPostWithPostId:self.postToReport withSuccess:^(id response) {
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCPostAPIManager reportPostWithPostId:self.postToReport withSuccess:^(id response) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
   } andFailure:^(NSString *error) {
-    
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];    
   }];
 }
 

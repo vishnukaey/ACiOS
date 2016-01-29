@@ -66,6 +66,10 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                                            selector:@selector(updateImpactsCount:)
                                                name:kDeletePostNFK
                                              object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updateImpactsCount:)
+                                               name:kReportedPostNFK
+                                             object:nil];
 }
 
 - (void)dealloc {
@@ -208,7 +212,15 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
       NSInteger count = [_userDetail.impactCount integerValue] - 1;
       _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
     }
-    [self updateUserDetailUI];
   }
+  else
+  {
+    if (notification.name == kReportedPostNFK) {
+      
+      NSInteger count = [_userDetail.impactCount integerValue] - 1;
+      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    }
+  }
+  [self updateUserDetailUI];
 }
 @end

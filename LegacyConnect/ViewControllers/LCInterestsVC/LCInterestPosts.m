@@ -204,6 +204,7 @@
     UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
                                                       bundle:nil];
     LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
+    report.postToReport = feed;
     [self presentViewController:report animated:YES completion:nil];
   }];
   [actionSheet addAction:reportPost];

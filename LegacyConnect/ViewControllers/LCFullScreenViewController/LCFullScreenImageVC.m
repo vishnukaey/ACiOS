@@ -170,7 +170,7 @@
     self.commentAction(weakSelf, YES);
   }
 }
-- (IBAction)reportPost:(id)sender {
+- (IBAction)reportFeed:(id)sender {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
@@ -178,6 +178,7 @@
     UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
                                                       bundle:nil];
     LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
+    report.postToReport = self.feed;
     [self presentViewController:report animated:YES completion:nil];
   }];
   [actionSheet addAction:reportPost];
