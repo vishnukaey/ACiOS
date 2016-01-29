@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ynU-pE-0Wh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ynU-pE-0Wh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -23,8 +23,10 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
+            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
@@ -325,6 +327,92 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RXH-Hl-g47" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1245" y="215"/>
+        </scene>
+        <!--Report Post View Controller-->
+        <scene sceneID="zKb-SR-rYF">
+            <objects>
+                <viewController storyboardIdentifier="LCReportPostViewController" id="rx3-0k-zhm" customClass="LCReportPostViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1DO-70-bsH"/>
+                        <viewControllerLayoutGuide type="bottom" id="Uzt-lD-59h"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xdr-yW-1Cy">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NhM-hO-SJd" customClass="LCNavigationBar">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="REPORT POST" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZYZ-jd-8J6">
+                                        <rect key="frame" x="88" y="22" width="145" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEF-r0-bfR">
+                                        <rect key="frame" x="8" y="17" width="59" height="30"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
+                                        <state key="normal" title="Cencel">
+                                            <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelButtonTapped:" destination="rx3-0k-zhm" eventType="touchUpInside" id="qsM-La-0zW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="65" id="oAL-ow-jMJ"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="leftButton" destination="DEF-r0-bfR" id="5ka-rM-Qu3"/>
+                                    <outlet property="title" destination="ZYZ-jd-8J6" id="KdU-5r-k37"/>
+                                </connections>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XhV-kn-XXo">
+                                <rect key="frame" x="10" y="75" width="300" height="379"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <attributedString key="attributedText"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ik7-AM-3U9">
+                                <rect key="frame" x="15" y="474" width="290" height="44"/>
+                                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="kPx-rN-aPF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                <state key="normal" title="Report and Hide Post">
+                                    <color key="titleColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="reportButtonTapped:" destination="rx3-0k-zhm" eventType="touchUpInside" id="Mer-MT-um1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Ik7-AM-3U9" secondAttribute="trailing" constant="15" id="3Ej-Eg-DNQ"/>
+                            <constraint firstItem="Uzt-lD-59h" firstAttribute="top" secondItem="Ik7-AM-3U9" secondAttribute="bottom" constant="50" id="3hm-hY-5Er"/>
+                            <constraint firstItem="Ik7-AM-3U9" firstAttribute="top" secondItem="XhV-kn-XXo" secondAttribute="bottom" constant="20" id="Hr3-MQ-93j"/>
+                            <constraint firstItem="XhV-kn-XXo" firstAttribute="leading" secondItem="Xdr-yW-1Cy" secondAttribute="leading" constant="10" id="Luc-rK-VDH"/>
+                            <constraint firstItem="XhV-kn-XXo" firstAttribute="top" secondItem="NhM-hO-SJd" secondAttribute="bottom" constant="10" id="YK0-Ir-ZiJ"/>
+                            <constraint firstAttribute="trailing" secondItem="XhV-kn-XXo" secondAttribute="trailing" constant="10" id="ed3-QS-Z1c"/>
+                            <constraint firstItem="NhM-hO-SJd" firstAttribute="top" secondItem="Xdr-yW-1Cy" secondAttribute="top" id="f1m-Ny-fUD"/>
+                            <constraint firstItem="Ik7-AM-3U9" firstAttribute="leading" secondItem="Xdr-yW-1Cy" secondAttribute="leading" constant="15" id="ivD-MH-RPY"/>
+                            <constraint firstItem="NhM-hO-SJd" firstAttribute="leading" secondItem="Xdr-yW-1Cy" secondAttribute="leading" id="oae-lh-n1x"/>
+                            <constraint firstAttribute="trailing" secondItem="NhM-hO-SJd" secondAttribute="trailing" id="qch-ir-IBA"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="infoTextView" destination="XhV-kn-XXo" id="IXr-RQ-s63"/>
+                        <outlet property="reportButton" destination="Ik7-AM-3U9" id="Jvx-5b-CaY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xes-fp-dVf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="815" y="-458"/>
         </scene>
         <!--Feeds Comments Controller-->
         <scene sceneID="cfW-uW-X9I">
