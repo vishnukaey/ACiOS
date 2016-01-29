@@ -32,6 +32,12 @@
   [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+}
+
 #pragma mark - private method implementation
 - (void)initialUISetUp
 {
