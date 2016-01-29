@@ -61,7 +61,7 @@
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
-  [self.navigationController popViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)reportButtonTapped:(id)sender

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -159,6 +159,16 @@
                                 <action selector="commentButtonClicked:" destination="-1" eventType="touchUpInside" id="wWN-zg-E8n"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="31k-JJ-l9Q">
+                            <rect key="frame" x="331" y="0.0" width="44" height="45"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="00V-P3-cC6"/>
+                            </constraints>
+                            <state key="normal" image="ReportIcon"/>
+                            <connections>
+                                <action selector="reportPost:" destination="-1" eventType="touchUpInside" id="NIX-Bd-qBg"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -169,14 +179,17 @@
                         <constraint firstItem="zX7-FN-DZD" firstAttribute="leading" secondItem="CXl-rR-yaS" secondAttribute="leading" constant="10" id="LPg-jc-xVB"/>
                         <constraint firstItem="EGc-4Z-gkg" firstAttribute="top" secondItem="CXl-rR-yaS" secondAttribute="top" id="Noa-Ky-qlA"/>
                         <constraint firstItem="Igg-YJ-ChP" firstAttribute="centerY" secondItem="CXl-rR-yaS" secondAttribute="centerY" id="SLX-wl-zS1"/>
+                        <constraint firstAttribute="bottom" secondItem="31k-JJ-l9Q" secondAttribute="bottom" id="XF8-ta-zU0"/>
                         <constraint firstAttribute="bottom" secondItem="EGc-4Z-gkg" secondAttribute="bottom" id="fBc-6n-rnW"/>
                         <constraint firstItem="WXU-WS-uDJ" firstAttribute="centerY" secondItem="CXl-rR-yaS" secondAttribute="centerY" id="ggu-eV-1M2"/>
+                        <constraint firstItem="31k-JJ-l9Q" firstAttribute="top" secondItem="CXl-rR-yaS" secondAttribute="top" id="ieW-IF-OOt"/>
                         <constraint firstItem="ro2-O4-6UZ" firstAttribute="leading" secondItem="Igg-YJ-ChP" secondAttribute="trailing" constant="10" id="kVe-Va-EBC"/>
                         <constraint firstAttribute="bottom" secondItem="2eE-Lt-b0X" secondAttribute="bottom" id="lCV-kF-FoI"/>
                         <constraint firstItem="2eE-Lt-b0X" firstAttribute="top" secondItem="CXl-rR-yaS" secondAttribute="top" id="osI-Bv-RYb"/>
                         <constraint firstAttribute="height" constant="45" id="r9G-Oh-oJH"/>
                         <constraint firstItem="zX7-FN-DZD" firstAttribute="centerY" secondItem="CXl-rR-yaS" secondAttribute="centerY" id="sNw-nK-4ON"/>
                         <constraint firstItem="Igg-YJ-ChP" firstAttribute="leading" secondItem="WXU-WS-uDJ" secondAttribute="trailing" constant="8" id="weq-Vs-J1n"/>
+                        <constraint firstAttribute="trailing" secondItem="31k-JJ-l9Q" secondAttribute="trailing" id="zsO-03-EGE"/>
                     </constraints>
                 </view>
             </subviews>
@@ -198,5 +211,6 @@
     </objects>
     <resources>
         <image name="CommentIcon" width="19" height="18"/>
+        <image name="ReportIcon" width="12" height="15"/>
     </resources>
 </document>

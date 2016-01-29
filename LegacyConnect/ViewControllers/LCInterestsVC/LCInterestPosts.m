@@ -14,6 +14,7 @@
 #import "LCSingleInterestVC.h"
 #import "LCSingleCauseVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCReportPostViewController.h"
 
 @interface LCInterestPosts ()
 
@@ -196,7 +197,20 @@
 
 - (void)reportFeed:(LCFeed*)feed
 {
-  LCDLog(@"Report Post");
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                      bundle:nil];
+    LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
+    [self presentViewController:report animated:YES completion:nil];
+  }];
+  [actionSheet addAction:reportPost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

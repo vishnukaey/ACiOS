@@ -18,6 +18,7 @@
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
 #import "LCSocialShareManager.h"
+#import "LCReportPostViewController.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static NSString *kFeedCellXibName = @"LCFeedcellXIB";
@@ -151,7 +152,10 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                      bundle:nil];
+    LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
+    [self presentViewController:report animated:YES completion:nil];
   }];
   [actionSheet addAction:reportPost];
   
