@@ -12,7 +12,7 @@
 #import "LCWebServiceManager.h"
 #import "LCConstants.h"
 #import "LCOnboardThemesVC.h"
-
+#import "LCAcceptTermsViewController.h"
 #import "LCConnectFriendsVC.h"
 
 @interface LCLoginHomeViewController ()
@@ -75,26 +75,38 @@
     [parameters setValue:@"id, email, name" forKey:kFieldsKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-       if (!error)
-       {
-         [self saveUserDetailsToDataManagerFromResponse:result];
-         
-         //save fb user id to NSUserDefaults
-         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-         NSDictionary *response = result;
-         [defaults setValue:response[kIDKey] forKey:kFBUserIDKey];
-         
-         NSArray *userDetailsArray = [self getFBUserDetailsArray];
-         
-         [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-           [self loginUser:response[@"data"]];
-           [MBProgressHUD hideHUDForView:self.view animated:YES];
-         } andFailure:^(NSString *error) {
-           [MBProgressHUD hideHUDForView:self.view animated:YES];
-         }];
-         
-       }
-     }];
+      if (!error)
+      {
+        [self saveUserDetailsToDataManagerFromResponse:result];
+        
+        //save fb user id to NSUserDefaults
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *response = result;
+        [defaults setValue:response[kIDKey] forKey:kFBUserIDKey];
+        
+        NSArray *userDetailsArray = [self getFBUserDetailsArray];
+        
+        [LCOnboardingAPIManager checkIfNewUser:[LCDataManager sharedDataManager].userEmail withSuccess:^(id response) {
+          if([response[@"exists"] isEqualToString:@"0"])
+          {
+            UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+            LCAcceptTermsViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCAcceptTermsViewController"];
+            [self.navigationController pushViewController:termsVC animated:YES];
+          }
+          else
+          {
+            [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+              [self loginUser:response[@"data"]];
+              [MBProgressHUD hideHUDForView:self.view animated:YES];
+            } andFailure:^(NSString *error) {
+              [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }];
+          }
+        } andFailure:^(NSString *error){
+          [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+      }
+    }];
   }
 }
 
@@ -123,14 +135,7 @@
 {
   [self saveUserDetailsToDataManager:response];
   [LCUtilityManager saveUserDefaultsForNewUser];
-  if([response[@"firstTimeLogin"] isEqualToString:@"1"])
-  {
-    [self performSegueWithIdentifier:@"onBoarding" sender:self];
-  }
-  else
-  {
-    [self.navigationController popToRootViewControllerAnimated:NO];
-  }
+  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 -(void)saveUserDetailsToDataManager:(id)userInfo

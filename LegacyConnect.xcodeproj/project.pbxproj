@@ -131,6 +131,8 @@
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; };
 		1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619550B1BFEFA8C005D9944 /* LCRequest.m */; };
+		16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */; settings = {ASSET_TAGS = (); }; };
+		16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */; settings = {ASSET_TAGS = (); }; };
 		165DC9311C44FE3600E55484 /* LCCauseSupportersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */; };
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
@@ -442,6 +444,10 @@
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
 		1619550A1BFEFA8C005D9944 /* LCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRequest.h; path = Models/LCRequest/LCRequest.h; sourceTree = "<group>"; };
 		1619550B1BFEFA8C005D9944 /* LCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRequest.m; path = Models/LCRequest/LCRequest.m; sourceTree = "<group>"; };
+		16278B6F1C5B4ACC00F743F6 /* LCTermsOfServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTermsOfServiceViewController.h; path = ViewControllers/LCTermsOfServiceViewController/LCTermsOfServiceViewController.h; sourceTree = "<group>"; };
+		16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTermsOfServiceViewController.m; path = ViewControllers/LCTermsOfServiceViewController/LCTermsOfServiceViewController.m; sourceTree = "<group>"; };
+		16278B721C5B4B2D00F743F6 /* LCAcceptTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAcceptTermsViewController.h; path = ViewControllers/LCAcceptTermsViewController/LCAcceptTermsViewController.h; sourceTree = "<group>"; };
+		16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAcceptTermsViewController.m; path = ViewControllers/LCAcceptTermsViewController/LCAcceptTermsViewController.m; sourceTree = "<group>"; };
 		165DC92F1C44FE3600E55484 /* LCCauseSupportersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCauseSupportersVC.h; path = ViewControllers/LCCauseSupportersVC/LCCauseSupportersVC.h; sourceTree = "<group>"; };
 		165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCauseSupportersVC.m; path = ViewControllers/LCCauseSupportersVC/LCCauseSupportersVC.m; sourceTree = "<group>"; };
 		1687680D1BFDDA96001213D8 /* LCRecentNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRecentNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.h; sourceTree = "<group>"; };
@@ -1282,6 +1288,8 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				16278B751C5B4B3700F743F6 /* LCAcceptTermsViewController */,
+				16278B6E1C5B4A7800F743F6 /* LCTermsOfServiceViewController */,
 				0BD5936F1B57786200658E99 /* LCFinalTutorialVC */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
@@ -1599,6 +1607,24 @@
 				1619550B1BFEFA8C005D9944 /* LCRequest.m */,
 			);
 			name = LCRequest;
+			sourceTree = "<group>";
+		};
+		16278B6E1C5B4A7800F743F6 /* LCTermsOfServiceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16278B6F1C5B4ACC00F743F6 /* LCTermsOfServiceViewController.h */,
+				16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */,
+			);
+			name = LCTermsOfServiceViewController;
+			sourceTree = "<group>";
+		};
+		16278B751C5B4B3700F743F6 /* LCAcceptTermsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16278B721C5B4B2D00F743F6 /* LCAcceptTermsViewController.h */,
+				16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */,
+			);
+			name = LCAcceptTermsViewController;
 			sourceTree = "<group>";
 		};
 		169607E41BF06A240007A278 /* LCEventMembers */ = {
@@ -2141,6 +2167,7 @@
 				CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */,
 				CE2E09E21C04679300722A22 /* LCEventMembersListBC.m in Sources */,
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
+				16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */,
 				CE2E09E71C0468D900722A22 /* LCEventDetailsBC.m in Sources */,
 				0BB33DAF1BA8133F009E6D0C /* LCGIButton.m in Sources */,
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
@@ -2250,6 +2277,7 @@
 				0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */,
 				0BF5DD2F1BD4BD53004C5627 /* LCPost.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
+				16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */,
 				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,
 				CE1C957C1BFB3C2B00A3B9FB /* LCSearchUsersBC.m in Sources */,
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,

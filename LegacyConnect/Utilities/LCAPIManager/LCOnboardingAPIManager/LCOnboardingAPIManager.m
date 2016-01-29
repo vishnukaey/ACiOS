@@ -134,4 +134,21 @@
 }
 
 
++ (void)checkIfNewUser:(NSString*)emailID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, @"api/user/exists"];
+  NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:emailID,@"email", nil];
+  [webService performPostOperationWithUrl:url andAccessToken:kEmptyStringValue withParameters:dict withSuccess:^(id response)
+   {
+     LCDLog(@"%@",response[kResponseMessage]);
+     success(response[kResponseData]);
+    } andFailure:^(NSString *error){
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
+
+
 @end
