@@ -32,6 +32,12 @@
   [super didReceiveMemoryWarning];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+}
+
 #pragma mark - private method implementation
 - (void)initialUISetUp
 {
@@ -66,7 +72,11 @@
 
 - (IBAction)reportButtonTapped:(id)sender
 {
-  
+  [LCPostAPIManager ReportPostWithPostId:self.postToReport withSuccess:^(id response) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  } andFailure:^(NSString *error) {
+    
+  }];
 }
 
 @end

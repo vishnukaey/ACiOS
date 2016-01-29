@@ -121,6 +121,7 @@ NSString *const kPostMilestoneURL = @"api/post/milestone";
 NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
 NSString *const kGetRecentNotificationsURL = @"api/user/notification";
 NSString *const kMarkNotificationAsReadURL = @"api/user/notification/read";
+NSString *const kGetReportPostURL = @"api/post/report";
 
 NSString *const kGetSettignsURL = @"api/user/settings";
 NSString *const kChangeEmailURL = @"api/user/changeEmail";
