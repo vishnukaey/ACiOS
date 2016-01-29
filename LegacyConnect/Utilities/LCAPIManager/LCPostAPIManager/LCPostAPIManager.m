@@ -162,11 +162,11 @@
   
 }
 
-+ (void)ReportPostWithPostId:(NSString*)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)ReportPostWithPostId:(LCFeed*)feedObj withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetReportPostURL];
-  NSDictionary *dict = @{kPostIDKey: postId};
+  NSDictionary *dict = @{kPostIDKey: feedObj.feedId};
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {

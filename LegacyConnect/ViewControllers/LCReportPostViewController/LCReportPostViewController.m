@@ -72,7 +72,7 @@
 
 - (IBAction)reportButtonTapped:(id)sender
 {
-  [LCPostAPIManager ReportPostWithPostId:self.postToReport.feedId withSuccess:^(id response) {
+  [LCPostAPIManager ReportPostWithPostId:self.postToReport withSuccess:^(id response) {
     [self dismissViewControllerAnimated:YES completion:nil];
   } andFailure:^(NSString *error) {
     
