@@ -352,7 +352,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DEF-r0-bfR">
                                         <rect key="frame" x="8" y="17" width="59" height="30"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Cencel">
+                                        <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>

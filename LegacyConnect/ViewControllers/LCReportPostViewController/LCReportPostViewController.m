@@ -42,7 +42,7 @@
 - (void)initialUISetUp
 {
   
-  NSString * infoText = @"1. You are reporting this postdue to offensive content, objectionable content.\n\n2. This will be reporte to the ThatHelps admin for review.\n\n3. The admin shall approve or remove this post including but no limited to removing the user posting the flagged content from the Thathelps platform\n\nThe ThatHelps Admins have the final say on all content posted on the ThatHelps network";
+  NSString * infoText = @"1. You are reporting this post due to offensive content, objectionable content.\n\n2. This will be reported to the ThatHelps admin for review.\n\n3. The admin shall approve or remove this post including but no limited to removing the user posting the flagged content from the ThatHelps platform\n\nThe ThatHelps Admins have the final say on all content posted on the ThatHelps network";
   NSMutableAttributedString * info = [[NSMutableAttributedString alloc] initWithString:infoText];
   
   NSRange fullTxtRng = [infoText rangeOfString:infoText];
@@ -62,7 +62,7 @@
 
   [self.infoTextView setAttributedText:info];
   
-  [self.reportButton.layer setCornerRadius:10.0f];
+  [self.reportButton.layer setCornerRadius:5.0f];
 }
 
 - (IBAction)cancelButtonTapped:(id)sender
