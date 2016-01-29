@@ -218,7 +218,6 @@ NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 NSString *const kCausesCellID = @"causesCell";
 
-NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";

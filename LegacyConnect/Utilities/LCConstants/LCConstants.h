@@ -192,7 +192,6 @@ extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
 extern NSString *const kCausesCellID;
 
-extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;

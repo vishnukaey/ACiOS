@@ -46,7 +46,7 @@
                                              } range:NSMakeRange(0, userNameAttributtedString.length)];
   
   NSMutableArray *userNameLabelTagsWithRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:comment.userId, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:comment.userId, @"id", @"cause", @"text", kFeedTagTypeUser,kTagobjType, [NSValue valueWithRange:tagRangeUserName], @"range", nil];
   [userNameLabelTagsWithRanges addObject:dic_user];
   userNameLabel.tagsArray  = userNameLabelTagsWithRanges;
   [userNameLabel setAttributedText:userNameAttributtedString];

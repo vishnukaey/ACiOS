@@ -217,11 +217,11 @@ static CGFloat kActionSectionHeight = 30;
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   
   // -- Interest Info Tag -- //
-  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
+  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kTagobjType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
   [tagsWithRanges addObject:dic_interest];
 
   // -- User Info Tag -- //
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
   [tagsWithRanges addObject:dic_user];
   
   eventCreatedByLabel.tagsArray  = tagsWithRanges;

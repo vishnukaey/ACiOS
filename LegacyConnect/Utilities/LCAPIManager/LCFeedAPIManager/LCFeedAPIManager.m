@@ -77,6 +77,7 @@
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
   
@@ -95,6 +96,7 @@
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
 }
