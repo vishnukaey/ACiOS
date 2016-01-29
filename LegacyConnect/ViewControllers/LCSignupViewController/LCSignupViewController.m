@@ -15,12 +15,17 @@
 }
 @end
 
+#define kInfoBoldFont [UIFont fontWithName:@"Gotham-Bold" size:13.0f]
+#define kInfoFont [UIFont fontWithName:@"Gotham-Book" size:13.0f]
+#define kInfoColor [UIColor colorWithRed:35/255.0 green:31/255.0  blue:32/255.0  alpha:1]
+
 @implementation LCSignupViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   [self setDobTextFieldWithInputView];
+  [self initialUISetUp];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -51,6 +56,35 @@
   [LCGAManager ga_trackViewWithName:@"Registration"];
 }
 
+- (void)initialUISetUp
+{
+  NSString *infoText = @"By signing up you agree to these Terms of Service";
+  NSMutableAttributedString *info = [[NSMutableAttributedString alloc] initWithString:infoText];
+  
+  NSRange fullTxtRng = [infoText rangeOfString:infoText];
+  [info addAttribute:NSFontAttributeName value:kInfoFont range:fullTxtRng];
+  [info addAttribute:NSForegroundColorAttributeName value:kInfoColor range:fullTxtRng];
+  
+  NSRange boldTxtRag1 = [infoText rangeOfString:@"Terms of Service"];
+  [info addAttribute:NSFontAttributeName value:kInfoBoldFont range:boldTxtRag1];
+  
+  NSMutableArray *tagsArray = [[NSMutableArray alloc] init];
+  NSDictionary *tagsDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSValue valueWithRange:boldTxtRag1],@"range", nil];
+  [tagsArray addObject:tagsDict];
+  _termsLabel.tagsArray = tagsArray;
+  _termsLabel.nameTagTapped = ^(int index)
+  {
+    [self readTermsofService];
+  };
+  [self.termsLabel setAttributedText:info];
+}
+
+-(void)readTermsofService
+{
+  UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCTermsOfServiceViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCTermsOfServiceViewController"];
+  [self.navigationController pushViewController:termsVC animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
@@ -121,6 +155,21 @@
 {
   [self.signupButton setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dobTimeStamp] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCOnboardingAPIManager registerNewUser:dict withSuccess:^(id response) {
+    
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful"];
+    
+    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
+    [LCUtilityManager saveUserDefaultsForNewUser];
+    [self.signupButton setEnabled:true];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+  } andFailure:^(NSString *error) {
+    [self.signupButton setEnabled:true];
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
+  }];
 }
 
 

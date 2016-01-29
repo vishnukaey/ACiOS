@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCTaggedLabel.h"
 
 @interface LCAcceptTermsViewController : UIViewController
 @property (nonatomic, strong) NSDictionary *userDict;
 @property (nonatomic, weak) IBOutlet UIButton *readTermsButton;
 @property (nonatomic, weak) IBOutlet UIButton *acceptTermsButton;
+@property (nonatomic, weak) IBOutlet LCTaggedLabel *termsLabel;
 @end

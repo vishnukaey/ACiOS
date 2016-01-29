@@ -12,7 +12,7 @@
 #import "LCWebServiceManager.h"
 #import "LCConstants.h"
 #import "LCOnboardThemesVC.h"
-
+#import "LCAcceptTermsViewController.h"
 #import "LCConnectFriendsVC.h"
 
 @interface LCLoginHomeViewController ()
@@ -86,21 +86,25 @@
         
         NSArray *userDetailsArray = [self getFBUserDetailsArray];
         
-        /*
-         Check if user is new
-         */
-        
-        //Navigate to Terms and Conditions
-        
-        // else
-        
-        [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-          [self loginUser:response[@"data"]];
-          [MBProgressHUD hideHUDForView:self.view animated:YES];
-        } andFailure:^(NSString *error) {
+        [LCOnboardingAPIManager checkIfNewUser:[LCDataManager sharedDataManager].userEmail withSuccess:^(id response) {
+          if([response[@"exists"] isEqualToString:@"0"])
+          {
+            UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+            LCAcceptTermsViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCAcceptTermsViewController"];
+            [self.navigationController pushViewController:termsVC animated:YES];
+          }
+          else
+          {
+            [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+              [self loginUser:response[@"data"]];
+              [MBProgressHUD hideHUDForView:self.view animated:YES];
+            } andFailure:^(NSString *error) {
+              [MBProgressHUD hideHUDForView:self.view animated:YES];
+            }];
+          }
+        } andFailure:^(NSString *error){
           [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
-        
       }
     }];
   }
