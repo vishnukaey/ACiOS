@@ -105,6 +105,10 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       [self showFullScreenImage:feed];
       break;
       
+    case kkFeedCellActionReport:
+      [self reportFeed:feed];
+      break;
+      
     default:
       break;
   }
@@ -140,6 +144,22 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     }
   }];
 }
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    
+  }];
+  [actionSheet addAction:reportPost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {

@@ -220,6 +220,10 @@ static NSString* const kGradientDefaultColor = @"282828";
   {
     [self showFeedCommentsWithFeed:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 
@@ -256,6 +260,11 @@ static NSString* const kGradientDefaultColor = @"282828";
       [self reloadPostsTable];
     }
   }];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  LCDLog(@"Report Post");
 }
 
 
