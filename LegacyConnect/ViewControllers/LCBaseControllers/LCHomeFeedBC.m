@@ -41,6 +41,8 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:kCreateNewPostNFK object:nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedReportedNotificationReceived:) name:kReportedPostNFK object:nil];
+  
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
 }
 
@@ -99,6 +101,24 @@
    }
   [self refreshViews];
 }
+
+
+- (void)feedReportedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = notification.userInfo[kEntityTypePost];
+  for (int i = 0; i<self.results.count ; i++) {
+    if ([self.results[i] isKindOfClass:[LCFeed class]]) {
+      LCFeed *feed = self.results[i];
+      if ([feed.entityID isEqualToString:newfeed.entityID])
+      {
+        [self.results removeObjectAtIndex:i];
+        break;
+      }
+    }
+  }
+  [self refreshViews];
+}
+
 
 - (void)refreshViews
 {

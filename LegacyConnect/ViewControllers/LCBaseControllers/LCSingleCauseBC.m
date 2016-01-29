@@ -29,6 +29,8 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newPostCreatedNotificationReceived:) name:kCreateNewPostNFK object:nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedReportedNotificationReceived:) name:kReportedPostNFK object:nil];
+  
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProfileNotificationReceived:) name:kUpdateProfileNFK object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kRemoveMileStoneNFK object:nil];
@@ -36,6 +38,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeNotificationReceived:) name:kSupportCauseNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(causeNotificationReceived:) name:kUnsupportCauseNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestUnfollowNotificationReceived:) name:kUnfollowInterestNFK object:nil];
+  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -111,6 +114,22 @@
 {
   LCCause *cause = notification.userInfo[kCauseObj];
   self.cause = cause;
+  [self refreshViews];
+}
+
+- (void)feedReportedNotificationReceived :(NSNotification *)notification
+{
+  LCFeed *newfeed = notification.userInfo[kEntityTypePost];
+  for (int i = 0; i<self.results.count ; i++) {
+    if ([self.results[i] isKindOfClass:[LCFeed class]]) {
+      LCFeed *feed = self.results[i];
+      if ([feed.entityID isEqualToString:newfeed.entityID])
+      {
+        [self.results removeObjectAtIndex:i];
+        break;
+      }
+    }
+  }
   [self refreshViews];
 }
 

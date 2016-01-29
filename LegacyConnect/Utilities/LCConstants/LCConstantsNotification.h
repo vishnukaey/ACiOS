@@ -18,6 +18,7 @@ extern NSString *const kUpdateProfileNFK;
 extern NSString *const kCreateNewPostNFK;
 extern NSString *const kUpdatePostNFK;
 extern NSString *const kDeletePostNFK;
+extern NSString *const kReportedPostNFK;
 extern NSString *const kLikedPostNFK;
 extern NSString *const kUnlikedPostNFK;
 extern NSString *const kCommentPostNFK;

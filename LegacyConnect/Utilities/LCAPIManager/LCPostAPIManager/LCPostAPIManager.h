@@ -16,4 +16,6 @@
 + (void)makePostAsMilestone:(NSString *)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)removeMilestoneFromPost:(LCFeed *)post withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
++ (void)reportPostWithPostId:(LCFeed*)feedObj withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
+
 @end

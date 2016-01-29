@@ -14,6 +14,7 @@
 #import "LCProfileViewVC.h"
 #import "LCCauseSupportersVC.h"
 #import "LCSingleInterestVC.h"
+#import "LCReportPostViewController.h"
 
 static NSString* const kGradientDefaultColor = @"282828";
 
@@ -220,6 +221,10 @@ static NSString* const kGradientDefaultColor = @"282828";
   {
     [self showFeedCommentsWithFeed:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 
@@ -256,6 +261,25 @@ static NSString* const kGradientDefaultColor = @"282828";
       [self reloadPostsTable];
     }
   }];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                      bundle:nil];
+    LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
+    report.postToReport = feed;
+    [self presentViewController:report animated:YES completion:nil];
+  }];
+  [actionSheet addAction:reportPost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 

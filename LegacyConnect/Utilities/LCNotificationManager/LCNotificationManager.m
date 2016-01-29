@@ -65,6 +65,12 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveMileStoneNFK object:nil userInfo:userInfo];
 }
 
++ (void)postPostReportedNotificationforPost: (LCFeed *)post
+{
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kReportedPostNFK  object:nil userInfo:userInfo];
+}
+
 #pragma mark - event notifications
 + (void)postEventFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
 {

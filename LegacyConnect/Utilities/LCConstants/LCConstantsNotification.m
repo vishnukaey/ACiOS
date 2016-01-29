@@ -18,6 +18,7 @@ NSString *const kUpdateProfileNFK = @"profile_updated";
 NSString *const kCreateNewPostNFK = @"new_post_created";
 NSString *const kUpdatePostNFK = @"post_updated";
 NSString *const kDeletePostNFK = @"post_deleted";
+NSString *const kReportedPostNFK = @"post_reported";
 NSString *const kLikedPostNFK = @"post_liked";
 NSString *const kUnlikedPostNFK = @"post_unliked";
 NSString *const kCommentPostNFK = @"post_commented";
