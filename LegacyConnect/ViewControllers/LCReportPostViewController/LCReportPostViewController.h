@@ -10,4 +10,6 @@
 
 @interface LCReportPostViewController : UIViewController
 
+@property (nonatomic, strong) LCFeed * postToReport;
+
 @end

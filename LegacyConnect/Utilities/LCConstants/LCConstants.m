@@ -17,7 +17,7 @@
 #define PRODUCTION_SERVER 4
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -121,6 +121,7 @@ NSString *const kPostMilestoneURL = @"api/post/milestone";
 NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
 NSString *const kGetRecentNotificationsURL = @"api/user/notification";
 NSString *const kMarkNotificationAsReadURL = @"api/user/notification/read";
+NSString *const kGetReportPostURL = @"api/post/report";
 
 NSString *const kGetSettignsURL = @"api/user/settings";
 NSString *const kChangeEmailURL = @"api/user/changeEmail";

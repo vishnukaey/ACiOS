@@ -162,5 +162,21 @@
   
 }
 
++ (void)ReportPostWithPostId:(NSString*)postId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kGetReportPostURL];
+  NSDictionary *dict = @{kPostIDKey: postId};
+  
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+   {
+     LCDLog(@"Reported post successfully.");
+     success(response);
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
 
 @end
