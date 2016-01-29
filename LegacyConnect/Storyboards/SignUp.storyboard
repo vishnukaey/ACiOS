@@ -516,10 +516,7 @@ id augue sagittis, mattis sapien.</string>
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoa-9j-YA0" customClass="LCTaggedLabel">
-                                <rect key="frame" x="16" y="330" width="343" height="34"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="aNT-Rx-FBZ"/>
-                                </constraints>
+                                <rect key="frame" x="16" y="330" width="343" height="17.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="By signing up you agree to these Terms of Service">
                                         <attributes>
