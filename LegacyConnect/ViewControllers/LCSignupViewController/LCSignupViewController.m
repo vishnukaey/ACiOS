@@ -7,6 +7,7 @@
 //
 
 #import "LCSignupViewController.h"
+#import "LCTermsOfServiceViewController.h"
 
 @interface LCSignupViewController ()
 {
@@ -120,21 +121,6 @@
 {
   [self.signupButton setEnabled:false];
   NSDictionary *dict = [[NSDictionary alloc] initWithObjects:@[self.firstNameTextField.text,self.lastNameTextField.text,self.emailTextField.text,self.passwordTextField.text,dobTimeStamp] forKeys:@[kFirstNameKey, kLastNameKey, kEmailKey, kPasswordKey, kDobKey]];
-  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCOnboardingAPIManager registerNewUser:dict withSuccess:^(id response) {
-    
-    //GA Tracking
-    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful"];
-    
-    [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
-    [LCUtilityManager saveUserDefaultsForNewUser];
-    [self.signupButton setEnabled:true];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [self performSegueWithIdentifier:@"selectPhoto" sender:self];
-  } andFailure:^(NSString *error) {
-    [self.signupButton setEnabled:true];
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-  }];
 }
 
 
@@ -162,6 +148,13 @@
 - (IBAction)cancelButtonTapped:(id)sender
 {
   [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+-(IBAction)readTermsofService:(id)sender
+{
+  UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCTermsOfServiceViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCTermsOfServiceViewController"];
+  [self.navigationController pushViewController:termsVC animated:YES];
 }
 
 

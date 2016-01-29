@@ -75,26 +75,34 @@
     [parameters setValue:@"id, email, name" forKey:kFieldsKey];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-       if (!error)
-       {
-         [self saveUserDetailsToDataManagerFromResponse:result];
-         
-         //save fb user id to NSUserDefaults
-         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-         NSDictionary *response = result;
-         [defaults setValue:response[kIDKey] forKey:kFBUserIDKey];
-         
-         NSArray *userDetailsArray = [self getFBUserDetailsArray];
-         
-         [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-           [self loginUser:response[@"data"]];
-           [MBProgressHUD hideHUDForView:self.view animated:YES];
-         } andFailure:^(NSString *error) {
-           [MBProgressHUD hideHUDForView:self.view animated:YES];
-         }];
-         
-       }
-     }];
+      if (!error)
+      {
+        [self saveUserDetailsToDataManagerFromResponse:result];
+        
+        //save fb user id to NSUserDefaults
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *response = result;
+        [defaults setValue:response[kIDKey] forKey:kFBUserIDKey];
+        
+        NSArray *userDetailsArray = [self getFBUserDetailsArray];
+        
+        /*
+         Check if user is new
+         */
+        
+        //Navigate to Terms and Conditions
+        
+        // else
+        
+        [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+          [self loginUser:response[@"data"]];
+          [MBProgressHUD hideHUDForView:self.view animated:YES];
+        } andFailure:^(NSString *error) {
+          [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+        
+      }
+    }];
   }
 }
 
@@ -123,14 +131,7 @@
 {
   [self saveUserDetailsToDataManager:response];
   [LCUtilityManager saveUserDefaultsForNewUser];
-  if([response[@"firstTimeLogin"] isEqualToString:@"1"])
-  {
-    [self performSegueWithIdentifier:@"onBoarding" sender:self];
-  }
-  else
-  {
-    [self.navigationController popToRootViewControllerAnimated:NO];
-  }
+  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 -(void)saveUserDetailsToDataManager:(id)userInfo
