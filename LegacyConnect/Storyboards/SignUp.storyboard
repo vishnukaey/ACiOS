@@ -61,7 +61,6 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
@@ -2843,14 +2842,21 @@ Now on to the next step.</string>
                                     <action selector="acceptTermsofService:" destination="8yh-8j-WAc" eventType="touchUpInside" id="xFJ-Lh-PiP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By signing up you agree to these Terms of Service " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnc-wi-n1f">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnc-wi-n1f" customClass="LCTaggedLabel">
                                 <rect key="frame" x="16" y="198" width="343" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="343" id="EwW-Ia-X3P"/>
                                     <constraint firstAttribute="height" constant="30" id="QGO-Dr-Aau"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="By signing up you agree to these Terms of Service ">
+                                        <attributes>
+                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <font key="NSFont" size="13" name="HelveticaNeue"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -2876,6 +2882,7 @@ Now on to the next step.</string>
                     <connections>
                         <outlet property="acceptTermsButton" destination="ZDn-D9-K24" id="lQc-Zk-TL9"/>
                         <outlet property="readTermsButton" destination="4zK-c7-xO3" id="Enb-F3-W1l"/>
+                        <outlet property="termsLabel" destination="vnc-wi-n1f" id="8zb-kw-lqE"/>
                         <segue destination="NTc-Lv-43q" kind="push" identifier="onBoarding" id="aFc-Qf-A3e"/>
                     </connections>
                 </viewController>
