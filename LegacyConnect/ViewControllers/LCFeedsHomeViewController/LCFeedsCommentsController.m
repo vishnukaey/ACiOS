@@ -201,6 +201,10 @@ static CGFloat kIndexForPostDetails = 0;
   {
     [self showFullScreenImage:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
@@ -212,6 +216,11 @@ static CGFloat kIndexForPostDetails = 0;
   };
   imageVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:imageVC animated:YES completion:nil];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  LCDLog(@"Report Post");
 }
 
 

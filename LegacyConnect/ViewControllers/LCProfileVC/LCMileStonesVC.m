@@ -154,6 +154,7 @@
   
   if (self.isSelfProfile) {
     cell.moreButton.hidden = NO;
+    cell.reportButton.hidden = YES;
   }
   
   tableView.backgroundColor = [UIColor clearColor];

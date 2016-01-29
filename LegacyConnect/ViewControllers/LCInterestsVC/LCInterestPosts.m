@@ -154,6 +154,10 @@
   {
     [self showFeedCommentsWithFeed:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
@@ -188,6 +192,11 @@
       [self reloadPostsTable];
     }
   }];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  LCDLog(@"Report Post");
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

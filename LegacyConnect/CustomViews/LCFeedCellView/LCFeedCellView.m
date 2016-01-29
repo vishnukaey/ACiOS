@@ -217,6 +217,16 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [thanksLabel setText:thanks_];
   [commentsLabel setText:comments_];
   [self setPostDescription];
+  
+  //hide report button for my posts
+  if ([feed.userID isEqualToString:[LCDataManager sharedDataManager].userID])
+  {
+    self.reportButton.hidden = YES;
+  }
+  else
+  {
+    self.reportButton.hidden = NO;
+  }
 }
 
 - (IBAction)likeAction:(id)sender
@@ -282,6 +292,14 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   if (self.feedCellAction)
   {
     self.feedCellAction(kkFeedCellActionLoadMore,feedObject);
+  }
+}
+
+- (IBAction)reportButtonAction
+{
+  if (self.feedCellAction)
+  {
+    self.feedCellAction(kkFeedCellActionReport,feedObject);
   }
 }
 

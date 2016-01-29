@@ -223,6 +223,7 @@
   if ([[LCDataManager sharedDataManager].userID isEqualToString:userDetail.userID]) {
     
     cell.moreButton.hidden = NO;
+    cell.reportButton.hidden = YES;
   }
 
   return cell;
@@ -247,6 +248,9 @@
       
     case kkFeedCellActionViewImage:
       [self showFullScreenImage:feed];
+      break;
+      
+    default:
       break;
   }
 }
