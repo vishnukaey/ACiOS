@@ -462,6 +462,10 @@ static CGFloat kActionSectionHeight = 30;
   commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
   };
+  commentCell.commentCellMoreAction =^(){
+    [LCReportHelper showCommentReportActionSheetFromView:self
+                                             withComment:self.results[indexPath.row]];
+  };
   [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;
 }

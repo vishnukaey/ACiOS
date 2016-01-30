@@ -45,6 +45,29 @@
   [presentingView presentViewController:actionSheet animated:YES completion:nil];
 }
 
++ (void)showCommentReportActionSheetFromView:(UIViewController*)presentingView withComment:(LCComment*)comment
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                      bundle:nil];
+    LCBlockUserViewController *blockUserVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockUserViewController"];
+    LCUserDetail *userDetail = [[LCUserDetail alloc] init];
+    userDetail.userID = comment.userId;
+    userDetail.firstName = comment.firstName;
+    userDetail.lastName = comment.lastName;
+    blockUserVC.userToBlock = userDetail;
+    [presentingView presentViewController:blockUserVC animated:YES completion:nil];
+  }];
+  [actionSheet addAction:blockUser];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [presentingView presentViewController:actionSheet animated:YES completion:nil];
+}
+
 + (void)showActionReportActionSheetFromView:(UIViewController*)presentingView withAction:(LCEvent*)event
 {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];

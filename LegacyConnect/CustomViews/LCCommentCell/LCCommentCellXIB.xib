@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -20,7 +20,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L64-DK-fa1" id="04y-rd-ZMV">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="67.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="67"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7tr-BC-ppO">
@@ -57,27 +57,40 @@
                         </constraints>
                     </imageView>
                     <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pqD-ze-JfD">
-                        <rect key="frame" x="68" y="28" width="237" height="38"/>
+                        <rect key="frame" x="68" y="28" width="207" height="38"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fWE-A6-VMV">
+                        <rect key="frame" x="275" y="36" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="ONP-ug-HEt"/>
+                            <constraint firstAttribute="width" constant="30" id="zAb-Dr-5un"/>
+                        </constraints>
+                        <state key="normal" image="more_icon"/>
+                        <connections>
+                            <action selector="moreAction:" destination="L64-DK-fa1" eventType="touchUpInside" id="8Ke-Ug-OsL"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="TJL-Yg-CTM" firstAttribute="top" secondItem="fWE-A6-VMV" secondAttribute="bottom" id="7tn-FQ-TaV"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="12" id="9hE-34-Qsw"/>
-                    <constraint firstAttribute="trailing" secondItem="pqD-ze-JfD" secondAttribute="trailing" constant="15" id="EtQ-bQ-G58"/>
                     <constraint firstItem="pqD-ze-JfD" firstAttribute="top" secondItem="MtL-zH-fbZ" secondAttribute="bottom" id="H2H-D2-L5s"/>
                     <constraint firstItem="SPp-c3-CKE" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="8" id="NK8-Hq-lw5"/>
                     <constraint firstAttribute="trailing" secondItem="MtL-zH-fbZ" secondAttribute="trailing" constant="15" id="OeN-1H-PnE"/>
                     <constraint firstItem="MtL-zH-fbZ" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="8" id="Opi-bR-ams"/>
                     <constraint firstItem="SPp-c3-CKE" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="ciO-Mt-RPV"/>
+                    <constraint firstAttribute="trailing" secondItem="fWE-A6-VMV" secondAttribute="trailing" constant="15" id="gF8-8S-epU"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="centerY" secondItem="04y-rd-ZMV" secondAttribute="centerY" id="hkF-ej-ucQ"/>
                     <constraint firstItem="TJL-Yg-CTM" firstAttribute="top" secondItem="pqD-ze-JfD" secondAttribute="bottom" id="l5s-vG-vaL"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="leading" secondItem="04y-rd-ZMV" secondAttribute="leading" constant="15" id="loZ-ne-l1f"/>
                     <constraint firstAttribute="bottom" secondItem="TJL-Yg-CTM" secondAttribute="bottom" id="psn-rs-Ra6"/>
                     <constraint firstItem="TJL-Yg-CTM" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="qNb-a5-ExK"/>
                     <constraint firstItem="pqD-ze-JfD" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="qel-yZ-sws"/>
+                    <constraint firstItem="fWE-A6-VMV" firstAttribute="leading" secondItem="pqD-ze-JfD" secondAttribute="trailing" id="seY-xc-R3K"/>
                     <constraint firstAttribute="trailing" secondItem="TJL-Yg-CTM" secondAttribute="trailing" id="uFC-VW-7Sx"/>
                     <constraint firstItem="MtL-zH-fbZ" firstAttribute="leading" secondItem="SPp-c3-CKE" secondAttribute="trailing" constant="8" id="uPA-8O-8rs"/>
                 </constraints>
@@ -89,6 +102,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="commentLabel" destination="pqD-ze-JfD" id="17u-1n-l4F"/>
+                <outlet property="moreButton" destination="fWE-A6-VMV" id="b09-xJ-Eee"/>
                 <outlet property="profilePic" destination="7tr-BC-ppO" id="pyF-jO-Pvc"/>
                 <outlet property="seperator" destination="TJL-Yg-CTM" id="ZBD-MD-Gj9"/>
                 <outlet property="timeLabel" destination="MtL-zH-fbZ" id="Fhd-AT-eda"/>
@@ -97,4 +111,7 @@
             <point key="canvasLocation" x="403" y="187"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="more_icon" width="22" height="5"/>
+    </resources>
 </document>
