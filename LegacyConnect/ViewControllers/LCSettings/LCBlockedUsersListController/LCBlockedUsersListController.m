@@ -15,14 +15,18 @@
 
 @implementation LCBlockedUsersListController
 
+#pragma mark - view life cycle
 - (void)viewDidLoad {
   [super viewDidLoad];
+  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_blocked_users", nil)];
+  [self startFetchingResults];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
 
+#pragma maek - Button Actions
 - (IBAction)cancelButtonTapped:(id)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
@@ -41,6 +45,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  JTTABLEVIEW_cellForRowAtIndexPath
   LCBlockedUsersCell * friendsCell = (LCBlockedUsersCell*)[tableView dequeueReusableCellWithIdentifier:@"LCBlockedUsersCell" forIndexPath:indexPath];
   if (friendsCell == nil) {
     friendsCell = [[LCBlockedUsersCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LCBlockedUsersCell"];
@@ -49,7 +54,41 @@
   return friendsCell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 88.0f;
+}
 
+
+#pragma maek - private method implementation
+- (void)startFetchingResults
+{
+  [super startFetchingResults];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCSettingsAPIManager getBlockedUsersWithSuccess:^(id response) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self didFetchResults:response haveMoreData:NO];
+    [self noresultViewUpdate];
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    [self didFailedToFetchResults];
+    [self noresultViewUpdate];
+  }];
+}
+
+- (void)startFetchingNextResults
+{
+  [super startFetchingNextResults];
+}
+
+- (void)noresultViewUpdate
+{
+  if (self.results.count > 0) {
+    [self hideNoResultsView];
+  } else {
+    [self showNoResultsView];
+  }
+}
 
 
 

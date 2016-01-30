@@ -9,6 +9,8 @@
 #import "LCSettingsViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "LCBlockedUsersListController.h"
+
 
 #define kIndexSectionAccount 0
 #define kIndexSectionBlock 1
@@ -263,8 +265,8 @@ static CGFloat kNumberOfSection = 3;
 
 - (void)showBlockedUsersList
 {
-//  LCPrivacyViewController * privacyVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCPrivacyVC"];
-//  [self presentViewController:privacyVC animated:YES completion:nil];
+  LCBlockedUsersListController * blockedList = [self.storyboard instantiateViewControllerWithIdentifier:@"LCBlockedUsersListController"];
+  [self presentViewController:blockedList animated:YES completion:nil];
 }
 
 - (void) signOutLegacy {

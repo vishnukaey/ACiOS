@@ -129,3 +129,5 @@
 "fbuser_can't_change_email" = "Email cannot be changed as you have logged in via Facebook";
 "fbuser_can't_change_password" = "Password cannot be changed as you have logged in via Facebook";
 "signOut" = "Sign Out";
+
+"no_blocked_users" = "No Blocked Users";
