@@ -134,6 +134,7 @@ NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
 NSString *const kSignOutURL = @"api/signout";
 
 NSString *const kVersionCheckURL = @"api/version";
+NSString *const kBlockedUsersURL = @"api/user/blockedList";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";

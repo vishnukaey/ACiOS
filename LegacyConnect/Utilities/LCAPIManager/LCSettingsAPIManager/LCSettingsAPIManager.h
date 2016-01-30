@@ -18,5 +18,6 @@
 + (void)getSettignsOfUserWithSuccess:(void (^)(LCSettings * responses))success andFailure:(void (^)(NSString *error))failure;
 
 + (void)checkVersionWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)getBlockedUsersWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 @end
