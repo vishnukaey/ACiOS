@@ -182,6 +182,10 @@ static CGFloat kIndexForPostDetails = 0;
   commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
   };
+  commentCell.commentCellMoreAction =^(){
+    [LCReportHelper showCommentReportActionSheetFromView:self
+                                             withComment:self.results[rowNo]];
+  };
   [commentCell.seperator setHidden:self.results.count == indexPath.row];
   return commentCell;
 }

@@ -56,6 +56,23 @@
       weakSelf.commentCellTagAction(dic_user);
     }
   };
+  
+  //hide more button for my comments
+  if ([comment.userId isEqualToString:[LCDataManager sharedDataManager].userID])
+  {
+    moreButton.hidden = YES;
+  }
+  else
+  {
+    moreButton.hidden = NO;
+  }
 }
+- (IBAction)moreAction:(id)sender {
+  if (self.commentCellMoreAction) {
+    self.commentCellMoreAction();
+  }
+}
+
+
 
 @end

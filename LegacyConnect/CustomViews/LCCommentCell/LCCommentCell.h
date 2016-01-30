@@ -10,6 +10,7 @@
 #import "LCTaggedLabel.h"
 
 typedef void (^CommentCellTagAction)(NSDictionary* tagDetails);
+typedef void (^CommentCellMoreAction)();
 
 @interface LCCommentCell : UITableViewCell
 {
@@ -17,10 +18,13 @@ typedef void (^CommentCellTagAction)(NSDictionary* tagDetails);
   IBOutlet LCTaggedLabel *userNameLabel;
   IBOutlet UILabel*timeLabel;
   IBOutlet UITextView *commentLabel;
+  __weak IBOutlet UIButton *moreButton;
+  
 }
 
 @property (nonatomic, strong) LCComment * comment;
 @property (readwrite, copy) CommentCellTagAction commentCellTagAction;
+@property (readwrite, copy) CommentCellMoreAction commentCellMoreAction;
 @property (weak, nonatomic) IBOutlet UIImageView *seperator;
 
 - (void)setComment:(LCComment *)comment;

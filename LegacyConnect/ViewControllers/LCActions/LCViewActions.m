@@ -17,6 +17,7 @@
 #import "LCActionsHeader.h"
 #import "NSURL+LCURLCategory.h"
 #import "LCEventAPImanager.h"
+#import "LCReportHelper.h"
 
 static CGFloat kActionSectionHeight = 30;
 
@@ -459,6 +460,10 @@ static CGFloat kActionSectionHeight = 30;
   __weak typeof(self) weakSelf = self;
   commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
+  };
+  commentCell.commentCellMoreAction =^(){
+    [LCReportHelper showCommentReportActionSheetFromView:self
+                                             withComment:self.results[indexPath.row]];
   };
   [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;
