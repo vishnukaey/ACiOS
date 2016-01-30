@@ -361,6 +361,7 @@ static CGFloat kActionSectionHeight = 30;
 }
 
 - (IBAction)blockActionBtnTapped:(id)sender {
+  [LCReportHelper showActionReportActionSheetFromView:self withAction:self.eventObject];
 }
 
 

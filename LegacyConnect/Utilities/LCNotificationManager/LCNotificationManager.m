@@ -221,4 +221,11 @@
 }
 
 
++ (void)postEventBlockedNotificationForEvent:(LCEvent*)event
+{
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kReportedEventNFK object:nil userInfo:userInfo];
+}
+
+
 @end

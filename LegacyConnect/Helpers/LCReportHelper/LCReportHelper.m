@@ -9,6 +9,7 @@
 #import "LCReportHelper.h"
 #import "LCBlockUserViewController.h"
 #import "LCReportPostViewController.h"
+#import "LCBlockActionViewController.h"
 
 @implementation LCReportHelper
 

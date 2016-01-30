@@ -10,6 +10,6 @@
 
 @interface LCBlockUserViewController : UIViewController
 
-@property (nonatomic, strong) LCUserDetail * userToBlock;
+@property (nonatomic, strong) LCUserDetail *userToBlock;
 
 @end

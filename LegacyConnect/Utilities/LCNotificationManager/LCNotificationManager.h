@@ -49,4 +49,6 @@
 + (void)postCauseFollowedNotificationWithCause:(LCCause *)cause;
 + (void)postCauseUnFollowedNotificationWithCause:(LCCause *)cause;
 
++ (void)postEventBlockedNotificationForEvent:(LCEvent*)event;
+
 @end

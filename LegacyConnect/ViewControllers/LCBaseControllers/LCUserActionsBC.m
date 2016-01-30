@@ -28,6 +28,8 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kCreateEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventFollowedNotificationReceived:) name:kFollowEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUnFollowedNotificationReceived:) name:kUnfollowEventNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventReportedNotificationReceived:) name:kReportedEventNFK object:nil];
+  
 }
 
 - (void)dealloc {
@@ -81,6 +83,21 @@
     }
   }
 }
+
+- (void)eventReportedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  for (int i = 0; i<self.results.count ; i++) {
+    LCEvent *event = self.results[i];
+    if ([event.eventID isEqualToString:deletedEvent.eventID])
+    {
+      [self.results removeObjectAtIndex:i];
+      [self refreshTopViewOnly];
+      break;
+    }
+  }
+}
+
 
 - (void)eventCreatedNotificationReceived :(NSNotification *)notification
 {

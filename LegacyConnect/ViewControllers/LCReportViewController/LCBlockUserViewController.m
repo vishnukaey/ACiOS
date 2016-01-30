@@ -50,7 +50,7 @@
   [self.infoTextView setAttributedText:info];
   
   [self.reportButton.layer setCornerRadius:5.0f];
-  [self.reportButton setTitle:[NSString stringWithFormat:@"Block %@",[LCUtilityManager performNullCheckAndSetValue:_userToBlock.firstName]] forState:UIControlStateNormal];
+  [self.reportButton setTitle:[NSString stringWithFormat:@"Block %@ %@",[LCUtilityManager performNullCheckAndSetValue:_userToBlock.firstName],[LCUtilityManager performNullCheckAndSetValue:_userToBlock.lastName]] forState:UIControlStateNormal];
 }
 
 - (IBAction)cancelButtonTapped:(id)sender

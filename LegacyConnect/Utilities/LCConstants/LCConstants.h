@@ -12,7 +12,8 @@ typedef enum {
   kMyProfile,
   kIsFriend,
   kNonFriend,
-  kRequestWaiting
+  kRequestWaiting,
+  kBlocked
 }FriendStatus;
 
 typedef enum {

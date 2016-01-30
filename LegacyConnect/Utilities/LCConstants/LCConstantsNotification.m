@@ -36,6 +36,7 @@ NSString *const kRejectFriendRequestNFK = @"friend_request_rejected";
 NSString *const kCreateEventNFK = @"event_created";
 NSString *const kCommentEventNFK = @"event_commented";
 NSString *const kDeleteEventNFK = @"event_deleted";
+NSString *const kReportedEventNFK = @"event_reported";
 NSString *const kUpdateEventNFK = @"event_updated";
 NSString *const kFollowEventNFK = @"event_followed";
 NSString *const kUnfollowEventNFK = @"event_unfollowed";
