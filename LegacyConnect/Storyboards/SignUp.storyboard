@@ -2729,25 +2729,26 @@ Now on to the next step.</string>
                                     <outlet property="title" destination="tAD-Oo-nGr" id="JjF-Du-Itr"/>
                                 </connections>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3OX-kH-113">
-                                <rect key="frame" x="16" y="72" width="343" height="575"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaU-pY-zPv">
+                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="DgC-dc-YJr" firstAttribute="top" secondItem="3OX-kH-113" secondAttribute="bottom" constant="20" id="2WP-zT-lqQ"/>
-                            <constraint firstItem="3OX-kH-113" firstAttribute="top" secondItem="9WS-jb-0oI" secondAttribute="bottom" constant="8" id="S2s-UV-qGF"/>
-                            <constraint firstItem="3OX-kH-113" firstAttribute="trailing" secondItem="gCv-08-O6c" secondAttribute="trailingMargin" id="dJQ-vT-9WN"/>
+                            <constraint firstItem="PaU-pY-zPv" firstAttribute="top" secondItem="9WS-jb-0oI" secondAttribute="bottom" id="CvP-3L-eK4"/>
+                            <constraint firstItem="PaU-pY-zPv" firstAttribute="leading" secondItem="gCv-08-O6c" secondAttribute="leadingMargin" constant="-20" id="ZNm-sC-BKP"/>
                             <constraint firstAttribute="trailing" secondItem="9WS-jb-0oI" secondAttribute="trailing" id="ek2-mr-0s8"/>
+                            <constraint firstItem="DgC-dc-YJr" firstAttribute="top" secondItem="PaU-pY-zPv" secondAttribute="bottom" id="gGx-xn-QXR"/>
                             <constraint firstItem="9WS-jb-0oI" firstAttribute="leading" secondItem="gCv-08-O6c" secondAttribute="leading" id="kDu-Rx-BeP"/>
                             <constraint firstItem="9WS-jb-0oI" firstAttribute="top" secondItem="gCv-08-O6c" secondAttribute="top" id="oE6-jg-E8e"/>
-                            <constraint firstItem="3OX-kH-113" firstAttribute="leading" secondItem="gCv-08-O6c" secondAttribute="leadingMargin" id="yW0-TZ-lr0"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="PaU-pY-zPv" secondAttribute="trailing" constant="-20" id="vjL-bv-kFf"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="webview" destination="PaU-pY-zPv" id="gNg-3M-ZnB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YTc-kH-C9R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

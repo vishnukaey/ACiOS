@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LCTermsOfServiceViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIWebView *webview;
 @end

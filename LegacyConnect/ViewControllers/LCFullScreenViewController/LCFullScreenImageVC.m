@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingActivity;
 @property (weak, nonatomic) IBOutlet UIButton *retryButton;
-
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 @end
 
 @implementation LCFullScreenImageVC
@@ -92,6 +92,16 @@
   menuButton_preState = [appdel.menuButton isHidden];
   [appdel.GIButton setHidden: true];
   [appdel.menuButton setHidden: true];
+  
+  if ([_feed.userID isEqualToString:[LCDataManager sharedDataManager].userID])
+  {
+    self.reportButton.hidden = YES;
+  }
+  else
+  {
+    self.reportButton.hidden = NO;
+  }
+
 }
 
 - (void)didReceiveMemoryWarning
