@@ -60,9 +60,9 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
@@ -480,43 +480,22 @@ id augue sagittis, mattis sapien.</string>
                                             <action selector="cancelButtonTapped:" destination="sEZ-MI-sW3" eventType="touchUpInside" id="67P-SX-G8n"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u4t-AC-zlZ">
-                                        <rect key="frame" x="314" y="27" width="44" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="7xe-ne-kXO"/>
-                                            <constraint firstAttribute="width" constant="44" id="fen-cz-T02"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="17"/>
-                                        <state key="normal" title="Next">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="disabled">
-                                            <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="nextButtonTapped:" destination="sEZ-MI-sW3" eventType="touchUpInside" id="LuN-nh-H8j"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="AKD-Ls-hjZ" firstAttribute="leading" secondItem="cLu-gJ-chA" secondAttribute="leading" constant="15" id="93I-VJ-hdw"/>
                                     <constraint firstAttribute="bottom" secondItem="AKD-Ls-hjZ" secondAttribute="bottom" constant="8" id="LBa-sj-KE7"/>
                                     <constraint firstAttribute="centerX" secondItem="jUs-Ri-0RD" secondAttribute="centerX" id="ORW-Qg-7Uk"/>
-                                    <constraint firstAttribute="trailing" secondItem="u4t-AC-zlZ" secondAttribute="trailing" constant="17" id="ZZM-ik-xsp"/>
                                     <constraint firstAttribute="height" constant="65" id="dEZ-yk-eUH"/>
-                                    <constraint firstAttribute="bottom" secondItem="u4t-AC-zlZ" secondAttribute="bottom" constant="8" id="kyz-83-K6h"/>
                                     <constraint firstAttribute="bottom" secondItem="jUs-Ri-0RD" secondAttribute="bottom" constant="13" id="oWY-TE-KiG"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="leftButton" destination="AKD-Ls-hjZ" id="6jm-sk-q0V"/>
-                                    <outlet property="rightButton" destination="u4t-AC-zlZ" id="a5K-Fi-Dl3"/>
                                     <outlet property="title" destination="jUs-Ri-0RD" id="fhn-Oe-bgf"/>
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uoa-9j-YA0" customClass="LCTaggedLabel">
-                                <rect key="frame" x="16" y="330" width="343" height="17.5"/>
+                                <rect key="frame" x="16" y="378" width="343" height="17.5"/>
                                 <attributedString key="attributedText">
                                     <fragment content="By signing up you agree to these Terms of Service">
                                         <attributes>
@@ -528,6 +507,20 @@ id augue sagittis, mattis sapien.</string>
                                 </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nq6-YA-3vK">
+                                <rect key="frame" x="16" y="326" width="347" height="44"/>
+                                <color key="backgroundColor" red="0.98039215690000003" green="0.27450980390000002" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="T1Q-6E-EaI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
+                                <state key="normal" title="Join">
+                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="nextButtonTapped:" destination="sEZ-MI-sW3" eventType="touchUpInside" id="hL3-WF-iWu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -535,12 +528,15 @@ id augue sagittis, mattis sapien.</string>
                             <constraint firstItem="uoa-9j-YA0" firstAttribute="leading" secondItem="Jqb-rW-4tT" secondAttribute="leadingMargin" id="B8S-TN-uYs"/>
                             <constraint firstItem="uoa-9j-YA0" firstAttribute="centerX" secondItem="Jqb-rW-4tT" secondAttribute="centerX" id="FFt-Mq-2Of"/>
                             <constraint firstItem="uoa-9j-YA0" firstAttribute="trailing" secondItem="Jqb-rW-4tT" secondAttribute="trailingMargin" id="Gsh-Zd-lK8"/>
+                            <constraint firstItem="nq6-YA-3vK" firstAttribute="leading" secondItem="Jqb-rW-4tT" secondAttribute="leadingMargin" id="N2c-fK-Ju2"/>
                             <constraint firstItem="5hW-pJ-Amq" firstAttribute="top" secondItem="cLu-gJ-chA" secondAttribute="bottom" constant="25" id="Ote-0Q-BYA"/>
                             <constraint firstItem="cLu-gJ-chA" firstAttribute="top" secondItem="Jqb-rW-4tT" secondAttribute="top" id="Uc1-ow-QoY"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="nq6-YA-3vK" secondAttribute="trailing" constant="-4" id="VRC-dQ-VVc"/>
                             <constraint firstAttribute="trailing" secondItem="cLu-gJ-chA" secondAttribute="trailing" id="XYj-LR-BHL"/>
+                            <constraint firstItem="nq6-YA-3vK" firstAttribute="top" secondItem="5hW-pJ-Amq" secondAttribute="bottom" constant="16" id="aXK-7b-cEJ"/>
                             <constraint firstItem="5hW-pJ-Amq" firstAttribute="leading" secondItem="Jqb-rW-4tT" secondAttribute="leading" id="fxV-YH-UbX"/>
                             <constraint firstAttribute="trailing" secondItem="5hW-pJ-Amq" secondAttribute="trailing" id="mUn-Ga-UT0"/>
-                            <constraint firstItem="uoa-9j-YA0" firstAttribute="top" secondItem="5hW-pJ-Amq" secondAttribute="bottom" constant="20" id="nZt-Kh-tc3"/>
+                            <constraint firstItem="uoa-9j-YA0" firstAttribute="top" secondItem="nq6-YA-3vK" secondAttribute="bottom" constant="8" id="z1u-jT-LpT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Pyj-5v-ei4"/>
@@ -553,7 +549,7 @@ id augue sagittis, mattis sapien.</string>
                         <outlet property="firstNameTextField" destination="CMX-Xf-4HM" id="WwS-pE-2aG"/>
                         <outlet property="lastNameTextField" destination="15P-BC-G5o" id="MNE-Wg-p5F"/>
                         <outlet property="passwordTextField" destination="pNq-0g-rs9" id="6vy-8C-O4Z"/>
-                        <outlet property="signupButton" destination="u4t-AC-zlZ" id="yO2-d1-Upa"/>
+                        <outlet property="signupButton" destination="nq6-YA-3vK" id="hZp-09-irg"/>
                         <outlet property="termsLabel" destination="uoa-9j-YA0" id="Mhy-vg-bUC"/>
                         <outlet property="warningLabel" destination="jn1-9h-gDM" id="pCG-sV-cjf"/>
                         <segue destination="neY-up-Txe" kind="push" identifier="selectPhoto" id="epE-Zn-RNL"/>
@@ -2905,7 +2901,7 @@ Now on to the next step.</string>
         <image name="rightChevron" width="8" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zLA-AX-ius"/>
         <segue reference="L3b-8s-ru0"/>
-        <segue reference="aFc-Qf-A3e"/>
     </inferredMetricsTieBreakers>
 </document>
