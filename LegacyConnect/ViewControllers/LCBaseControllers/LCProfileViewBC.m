@@ -106,7 +106,9 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     case kRequestWaiting:
       btnImageName = kImageNameProfileWaiting;
       break;
-      
+    case kBlocked:
+      btnImageName = kImageNameProfileAdd;
+      break;
   }
   if(btnImageName)
   {
