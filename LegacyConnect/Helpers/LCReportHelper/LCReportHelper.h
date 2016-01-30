@@ -12,5 +12,6 @@
 
 + (void)showPostReportActionSheetFromView:(UIViewController*)presentingView withPost:(LCFeed*)feed;
 + (void)showCommentReportActionSheetFromView:(UIViewController*)presentingView withComment:(LCComment*)comment;
++ (void)showActionReportActionSheetFromView:(UIViewController*)presentingView withAction:(LCEvent*)action;
 
 @end
