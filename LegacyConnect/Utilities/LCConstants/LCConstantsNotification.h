@@ -35,6 +35,7 @@ extern NSString *const kRejectFriendRequestNFK;
 extern NSString *const kCreateEventNFK;
 extern NSString *const kCommentEventNFK;
 extern NSString *const kDeleteEventNFK;
+extern NSString *const kReportedEventNFK;
 extern NSString *const kUpdateEventNFK;
 extern NSString *const kFollowEventNFK;
 extern NSString *const kUnfollowEventNFK;
