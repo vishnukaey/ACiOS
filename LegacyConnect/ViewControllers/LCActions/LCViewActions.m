@@ -233,7 +233,19 @@ static CGFloat kActionSectionHeight = 30;
   
 //  [eventCreatedByLabel sizeToFit];
   [self setEventDateInfo];
+  [self blockEventUI];
   [self.tableView reloadData];
+}
+
+- (void)blockEventUI
+{
+  if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+    [blockActionBtn setHidden:YES];
+    [blockActionBtnImg setHidden:YES];
+  } else {
+    [blockActionBtn setHidden:NO];
+    [blockActionBtnImg setHidden:NO];
+  }
 }
 
 - (void)setEventDateInfo
@@ -345,6 +357,9 @@ static CGFloat kActionSectionHeight = 30;
   LCEventMembersViewController *membersVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCEventMembersViewController"];
   membersVC.event = self.eventObject;
   [self.navigationController pushViewController:membersVC animated:YES];
+}
+
+- (IBAction)blockActionBtnTapped:(id)sender {
 }
 
 
