@@ -229,6 +229,7 @@ extern NSString *const kEmailAddress;
 extern NSString *const kChangePassword;
 extern NSString *const kMyLegacyURL;
 extern NSString *const kPrivacy;
+extern NSString *const kManageBlkdUsers;
 extern NSString *const kSignOut;
 
 
