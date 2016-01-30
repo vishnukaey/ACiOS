@@ -18,6 +18,7 @@
 #define kInfoBoldFont [UIFont fontWithName:@"Gotham-Bold" size:13.0f]
 #define kInfoFont [UIFont fontWithName:@"Gotham-Book" size:13.0f]
 #define kInfoColor [UIColor colorWithRed:35/255.0 green:31/255.0  blue:32/255.0  alpha:1]
+#define kBGColor [UIColor colorWithRed:250/255.0 green:70/255.0  blue:22/255.0  alpha:1]
 
 @implementation LCSignupViewController
 
@@ -32,8 +33,11 @@
 {
   [super viewWillAppear:animated];
   _signupButton.enabled = NO;
-  [_firstNameTextField addTarget:self
-                      action:@selector(textFieldDidChange)
+  [_signupButton setBackgroundColor:[UIColor lightGrayColor]];
+  _signupButton.layer.cornerRadius = 5.0;
+  [_signupButton clipsToBounds];
+  
+  [_firstNameTextField addTarget:self action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
   [_lastNameTextField addTarget:self
                          action:@selector(textFieldDidChange)
@@ -86,10 +90,12 @@
   [self.navigationController pushViewController:termsVC animated:YES];
 }
 
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - private method implementation
 - (void) setDobTextFieldWithInputView
@@ -185,10 +191,13 @@
   if(_firstNameTextField.text.length!=0 && _lastNameTextField.text.length!=0 && _emailTextField.text.length!=0 && _passwordTextField.text.length!=0 && _confirmPasswordTextField.text.length!=0 && _dobTextField.text.length!=0 )
   {
     _signupButton.enabled = YES;
+    [_signupButton setBackgroundColor:kBGColor];
+    
   }
   else
   {
     _signupButton.enabled = NO;
+    [_signupButton setBackgroundColor:[UIColor lightGrayColor]];
   }
 }
 

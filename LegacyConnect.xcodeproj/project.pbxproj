@@ -34,6 +34,7 @@
 		0B422B531C47A4940094B341 /* LCInterestFollowersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B422B521C47A4940094B341 /* LCInterestFollowersVC.m */; };
 		0B44DC491C5C948F0080D7B4 /* LCReportPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */; };
 		0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */; };
+		0B44DC531C5CA92A0080D7B4 /* LCReportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */; };
 		0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */; };
 		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
@@ -269,6 +270,8 @@
 		0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCReportPostViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCReportPostViewController.m; sourceTree = SOURCE_ROOT; };
 		0B44DC4D1C5C95950080D7B4 /* LCBlockUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBlockUserViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockUserViewController.h; sourceTree = SOURCE_ROOT; };
 		0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBlockUserViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockUserViewController.m; sourceTree = SOURCE_ROOT; };
+		0B44DC511C5CA92A0080D7B4 /* LCReportHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCReportHelper.h; path = Helpers/LCReportHelper/LCReportHelper.h; sourceTree = "<group>"; };
+		0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCReportHelper.m; path = Helpers/LCReportHelper/LCReportHelper.m; sourceTree = "<group>"; };
 		0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadingCell.xib; sourceTree = "<group>"; };
 		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
 		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
@@ -797,6 +800,15 @@
 				0BF5DD2E1BD4BD53004C5627 /* LCPost.m */,
 			);
 			name = LCPost;
+			sourceTree = "<group>";
+		};
+		0B44DC501C5CA8F10080D7B4 /* LCReportHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0B44DC511C5CA92A0080D7B4 /* LCReportHelper.h */,
+				0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */,
+			);
+			name = LCReportHelper;
 			sourceTree = "<group>";
 		};
 		0B5571431B8D9F1B00445958 /* LCSearchViewController */ = {
@@ -1386,6 +1398,7 @@
 		0BEC736B1BA0301400D97BCA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0B44DC501C5CA8F10080D7B4 /* LCReportHelper */,
 				0BEC736C1BA0304D00D97BCA /* LCAppLaunchHelper */,
 			);
 			name = Helpers;
@@ -2320,6 +2333,7 @@
 				CE2E09D31C0449E700722A22 /* LCUserInterestsBC.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
 				0B422B531C47A4940094B341 /* LCInterestFollowersVC.m in Sources */,
+				0B44DC531C5CA92A0080D7B4 /* LCReportHelper.m in Sources */,
 				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
 				0B56B8F71C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m in Sources */,
 				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,
