@@ -32,6 +32,10 @@ static NSString * kWaitingFriend = @"profileWaiting";
       btnImageName = kWaitingFriend;
       break;
       
+    case kBlocked:
+      btnImageName = kAddFriend;
+      break;
+      
     default:
       break;
   }
