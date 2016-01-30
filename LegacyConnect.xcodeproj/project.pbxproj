@@ -36,6 +36,8 @@
 		0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */; };
 		0B44DC531C5CA92A0080D7B4 /* LCReportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */; };
 		0B477E141C5CB1BE00510568 /* LCBlockActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B477E131C5CB1BE00510568 /* LCBlockActionViewController.m */; };
+		0B477E181C5CF10100510568 /* LCBlockedUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B477E171C5CF10100510568 /* LCBlockedUsersListController.m */; };
+		0B477E1C1C5CFB0600510568 /* LCBlockedUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B477E1B1C5CFB0600510568 /* LCBlockedUsersCell.m */; };
 		0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */; };
 		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
@@ -275,6 +277,10 @@
 		0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCReportHelper.m; path = Helpers/LCReportHelper/LCReportHelper.m; sourceTree = "<group>"; };
 		0B477E121C5CB1BE00510568 /* LCBlockActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBlockActionViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockActionViewController.h; sourceTree = SOURCE_ROOT; };
 		0B477E131C5CB1BE00510568 /* LCBlockActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBlockActionViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockActionViewController.m; sourceTree = SOURCE_ROOT; };
+		0B477E161C5CF10100510568 /* LCBlockedUsersListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCBlockedUsersListController.h; sourceTree = "<group>"; };
+		0B477E171C5CF10100510568 /* LCBlockedUsersListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCBlockedUsersListController.m; sourceTree = "<group>"; };
+		0B477E1A1C5CFB0600510568 /* LCBlockedUsersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCBlockedUsersCell.h; sourceTree = "<group>"; };
+		0B477E1B1C5CFB0600510568 /* LCBlockedUsersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCBlockedUsersCell.m; sourceTree = "<group>"; };
 		0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadingCell.xib; sourceTree = "<group>"; };
 		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
 		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
@@ -816,6 +822,25 @@
 			name = LCReportHelper;
 			sourceTree = "<group>";
 		};
+		0B477E151C5CF0E500510568 /* LCBlockedUsersListController */ = {
+			isa = PBXGroup;
+			children = (
+				0B477E161C5CF10100510568 /* LCBlockedUsersListController.h */,
+				0B477E171C5CF10100510568 /* LCBlockedUsersListController.m */,
+			);
+			path = LCBlockedUsersListController;
+			sourceTree = "<group>";
+		};
+		0B477E191C5CFAEF00510568 /* LCBlockedUsersCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B477E1A1C5CFB0600510568 /* LCBlockedUsersCell.h */,
+				0B477E1B1C5CFB0600510568 /* LCBlockedUsersCell.m */,
+			);
+			name = LCBlockedUsersCell;
+			path = CustomViews/LCBlockedUsersCell;
+			sourceTree = "<group>";
+		};
 		0B5571431B8D9F1B00445958 /* LCSearchViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1024,6 +1049,7 @@
 		0B775D7E1BE1F25B008B5B6F /* LCSettings */ = {
 			isa = PBXGroup;
 			children = (
+				0B477E151C5CF0E500510568 /* LCBlockedUsersListController */,
 				0B775D7F1BE1F25B008B5B6F /* LCChangePassword */,
 				0B775D821BE1F25B008B5B6F /* LCMyLegacyURL */,
 				0B775D851BE1F25B008B5B6F /* LCSettingsViewController */,
@@ -1966,6 +1992,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0B477E191C5CFAEF00510568 /* LCBlockedUsersCell */,
 				16BBD85F1C2483680096F622 /* LCCauseCollectionReusableView */,
 				CEE2BDDB1C104DAD000E56AB /* LCNavigationBar */,
 				0B2A2CCF1BF5B30D00D20827 /* LCActionsHeader */,
@@ -2184,6 +2211,7 @@
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
 				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,
 				CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */,
+				0B477E1C1C5CFB0600510568 /* LCBlockedUsersCell.m in Sources */,
 				0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */,
 				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
 				0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */,
@@ -2273,6 +2301,7 @@
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,
 				CE2E09C71C04330800722A22 /* LCProfileViewBC.m in Sources */,
 				0B56B8DF1C1AD74B001F3AE5 /* LCFeedAPIManager.m in Sources */,
+				0B477E181C5CF10100510568 /* LCBlockedUsersListController.m in Sources */,
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */,
 				CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */,
