@@ -121,7 +121,7 @@
         LCEvent *event = self.results[i];
         if ([event.eventID isEqualToString:followedEvent.eventID])
         {
-          event.followerCount = [NSString stringWithFormat:@"%d", [event.followerCount integerValue]+1];
+          event.followerCount = [NSString stringWithFormat:@"%ld", [event.followerCount integerValue]+1];
           break;
         }
       }
@@ -143,7 +143,7 @@
         }
         else
         {
-          event.followerCount = [NSString stringWithFormat:@"%d", [event.followerCount integerValue]-1];
+          event.followerCount = [NSString stringWithFormat:@"%ld", [event.followerCount integerValue]-1];
         }
         [self refreshTopViewOnly];
         break;
