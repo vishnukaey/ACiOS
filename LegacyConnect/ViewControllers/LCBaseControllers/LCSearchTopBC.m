@@ -36,6 +36,12 @@
                                              object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kBlockUserNFK
+                                             object:nil];
+
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(interestFollowedNotificationReceived:)
                                                name:kFollowInterestNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self

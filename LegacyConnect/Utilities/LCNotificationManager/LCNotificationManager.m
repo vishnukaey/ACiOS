@@ -227,5 +227,14 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kReportedEventNFK object:nil userInfo:userInfo];
 }
 
++ (void)postBlockedUserNotification :(NSString *)friendID forFriendStatus :(int)status
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  friend.isFriend = [NSString stringWithFormat:@"%d", status];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kBlockUserNFK object:nil userInfo:userInfo];
+}
+
 
 @end

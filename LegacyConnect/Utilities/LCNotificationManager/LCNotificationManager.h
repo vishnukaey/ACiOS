@@ -51,4 +51,5 @@
 
 + (void)postEventBlockedNotificationForEvent:(LCEvent*)event;
 
++ (void)postBlockedUserNotification :(NSString *)friendID forFriendStatus :(int)status;
 @end

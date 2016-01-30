@@ -42,6 +42,8 @@ extern NSString *const kUnfollowEventNFK;
 extern NSString *const kRejectEventRequestNFK;
 extern NSString *const kAcceptEventRequestNFK;
 
+extern NSString *const kBlockUserNFK ;
+
 extern NSString *const kUserProfileUpdateNotification;
 extern NSString *const kfeedUpdatedotification;
 extern NSString *const kNotificationCountUpdated;

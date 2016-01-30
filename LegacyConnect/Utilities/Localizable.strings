@@ -16,8 +16,8 @@
 "no_interests_selected" = "Causes will appear here based on the interests you choose";
 "no_causes_available" = "No causes to display.";
 "no_friends_available" = "No friends to display.";
-"no_impacts_available_self" = "Create Impacts by selecting the Global Impact button from the bottom right.";
-"no_impacts_available_others" = "No Impacts to display.";
+"no_impacts_available_self" = "Create Helps by selecting the Global Impact button from the bottom right.";
+"no_impacts_available_others" = "No Helps to display.";
 "no_feeds_available" = "No Feeds to display.";
 "no_comments_available" = "No Comments to display.";
 

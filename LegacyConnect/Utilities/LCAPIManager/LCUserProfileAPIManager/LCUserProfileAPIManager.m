@@ -223,6 +223,7 @@
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
     LCDLog(@"Success!");
+    [LCNotificationManager postBlockedUserNotification:userID forFriendStatus:kNonFriend];
     success(response[kResponseData]);
   } andFailure:^(NSString *error) {
     LCDLog(@"Failure");
