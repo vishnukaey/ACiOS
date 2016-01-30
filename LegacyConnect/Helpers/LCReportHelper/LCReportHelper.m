@@ -25,6 +25,7 @@
     userDetail.userID = feed.userID;
     userDetail.firstName = feed.firstName;
     userDetail.lastName = feed.lastName;
+    blockUserVC.userToBlock = userDetail;
     [presentingView presentViewController:blockUserVC animated:YES completion:nil];
   }];
   [actionSheet addAction:blockUser];
