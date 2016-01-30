@@ -59,6 +59,7 @@
 "close_post" = "Discard Post";
 "close_post_message" = "Are you sure you want to discard the post?";
 "report_post" = "Report Post";
+"block_user" = "Block User";
 //---friends---//
 "remove_friend" = "Remove Friend";
 "cancel_friend_request" = "Cancel Friend Request";

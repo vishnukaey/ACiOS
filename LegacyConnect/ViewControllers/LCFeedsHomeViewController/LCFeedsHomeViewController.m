@@ -19,6 +19,7 @@
 #import "LCLoadingCell.h"
 #import "LCSocialShareManager.h"
 #import "LCReportPostViewController.h"
+#import "LCBlockUserViewController.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static NSString *kFeedCellXibName = @"LCFeedcellXIB";
@@ -150,6 +151,18 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
 {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                      bundle:nil];
+    LCBlockUserViewController *blockUserVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockUserViewController"];
+    LCUserDetail *userDetail = [[LCUserDetail alloc] init];
+    userDetail.userID = feed.userID;
+    userDetail.firstName = feed.firstName;
+    userDetail.lastName = feed.lastName;
+    [self presentViewController:blockUserVC animated:YES completion:nil];
+  }];
+  [actionSheet addAction:blockUser];
   
   UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
