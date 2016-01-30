@@ -59,7 +59,7 @@
 }
 
 
-- (IBAction)reportButtonTapped:(id)sender
+- (IBAction)blockButtonTapped:(id)sender
 {
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCUserProfileAPIManager blockUserWithUserID:_userToBlock.userID withSuccess:^(id response) {
