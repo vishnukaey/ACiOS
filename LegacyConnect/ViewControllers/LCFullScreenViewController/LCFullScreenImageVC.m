@@ -87,12 +87,6 @@
   [self tryImageLoading:nil];
   [self dataPopulation];
   
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  GIButton_preState = [appdel.GIButton isHidden];
-  menuButton_preState = [appdel.menuButton isHidden];
-  [appdel.GIButton setHidden: true];
-  [appdel.menuButton setHidden: true];
-  
   if ([_feed.userID isEqualToString:[LCDataManager sharedDataManager].userID])
   {
     self.reportButton.hidden = YES;
@@ -110,12 +104,18 @@
   // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden: GIButton_preState];
-  [appdel.menuButton setHidden: menuButton_preState];
+//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+//  [appdel.GIButton setHidden: GIButton_preState];
+//  [appdel.menuButton setHidden: menuButton_preState];
 }
 
 #pragma mark - button actions
