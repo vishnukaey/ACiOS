@@ -9,6 +9,7 @@
 #import "LCReportHelper.h"
 #import "LCBlockUserViewController.h"
 #import "LCReportPostViewController.h"
+#import "LCBlockActionViewController.h"
 
 @implementation LCReportHelper
 
@@ -37,6 +38,25 @@
     [presentingView presentViewController:report animated:YES completion:nil];
   }];
   [actionSheet addAction:reportPost];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [presentingView presentViewController:actionSheet animated:YES completion:nil];
+}
+
++ (void)showActionReportActionSheetFromView:(UIViewController*)presentingView withAction:(LCEvent*)event
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *blockAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_action", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                      bundle:nil];
+    LCBlockActionViewController *blockActionVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockActionViewController"];
+    blockActionVC.eventToBlock = event;
+    [presentingView presentViewController:blockActionVC animated:YES completion:nil];
+  }];
+  [actionSheet addAction:blockAction];
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];

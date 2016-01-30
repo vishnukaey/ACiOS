@@ -17,6 +17,7 @@
 #import "LCActionsHeader.h"
 #import "NSURL+LCURLCategory.h"
 #import "LCEventAPImanager.h"
+#import "LCReportHelper.h"
 
 static CGFloat kActionSectionHeight = 30;
 
@@ -360,6 +361,7 @@ static CGFloat kActionSectionHeight = 30;
 }
 
 - (IBAction)blockActionBtnTapped:(id)sender {
+  [LCReportHelper showActionReportActionSheetFromView:self withAction:self.eventObject];
 }
 
 

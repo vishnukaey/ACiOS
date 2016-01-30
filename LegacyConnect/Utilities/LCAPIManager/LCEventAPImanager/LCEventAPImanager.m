@@ -329,14 +329,14 @@
 }
 
 
-+ (void)blockEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)blockEventWithEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kBlockEventURL];
   NSDictionary *dict;
   
-  if(eventID)
+  if(event.eventID)
   {
-    dict = @{kEventIDKey:eventID};
+    dict = @{kEventIDKey:event.eventID};
   }
   
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];

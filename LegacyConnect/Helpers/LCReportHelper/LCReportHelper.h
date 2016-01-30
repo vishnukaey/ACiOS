@@ -11,5 +11,6 @@
 @interface LCReportHelper : NSObject
 
 + (void)showPostReportActionSheetFromView:(UIViewController*)presentingView withPost:(LCFeed*)feed;
++ (void)showActionReportActionSheetFromView:(UIViewController*)presentingView withAction:(LCEvent*)action;
 
 @end
