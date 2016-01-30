@@ -22,4 +22,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
 @property (nonatomic, weak) IBOutlet LCTaggedLabel *termsLabel;
+
 @end

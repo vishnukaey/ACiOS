@@ -42,19 +42,12 @@
 - (void)initialUISetUp
 {
   
-  NSString * infoText = @"1. You are reporting this post due to offensive content, objectionable content.\n\n2. This will be reported to the ThatHelps admin for review.\n\n3. The admin shall approve or remove this post including but no limited to removing the user posting the flagged content from the ThatHelps platform\n\nThe ThatHelps Admins have the final say on all content posted on the ThatHelps network";
+  NSString * infoText = @"You are reporting this post because this content is offensive or objectionable.\n\nThis content will be reported to the ThatHelps admin for review. The ThatHelps admin will either approve or remove this post.\n\nThe user posting the content could be removed from ThatHelps if the content is deemed to be offensive or objectionable.\n\nThe ThatHelps Admins have the final say on all content posted on the ThatHelps network";
   NSMutableAttributedString * info = [[NSMutableAttributedString alloc] initWithString:infoText];
   
   NSRange fullTxtRng = [infoText rangeOfString:infoText];
   [info addAttribute:NSFontAttributeName value:kInfoFont range:fullTxtRng];
   [info addAttribute:NSForegroundColorAttributeName value:kInfoColor range:fullTxtRng];
-
-  NSRange boldTxtRag1 = [infoText rangeOfString:@"1."];
-  [info addAttribute:NSFontAttributeName value:kInfoBoldFont range:boldTxtRag1];
-  NSRange boldTxtRag2 = [infoText rangeOfString:@"2."];
-  [info addAttribute:NSFontAttributeName value:kInfoBoldFont range:boldTxtRag2];
-  NSRange boldTxtRag3 = [infoText rangeOfString:@"3."];
-  [info addAttribute:NSFontAttributeName value:kInfoBoldFont range:boldTxtRag3];
   
   NSRange italixTxtRng = [infoText rangeOfString:@"The ThatHelps Admins have the final say on all content posted on the ThatHelps network"];
   [info addAttribute:NSFontAttributeName value:kInfoItalixFont range:italixTxtRng];
