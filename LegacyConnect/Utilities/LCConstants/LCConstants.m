@@ -17,7 +17,7 @@
 #define PRODUCTION_SERVER 4
 
 /* Set server to be used */
-#define CURRENT_SERVER QA_SERVER
+#define CURRENT_SERVER DEMO_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -57,6 +57,7 @@ NSString *const kFBURLScheme = @"fb781451981972910";
 
 #endif
 
+NSString *const kToSURL = @"terms_of_use.html";
 NSString *const kLCiTunesLink = @"https://itunes.apple.com/us/app/thathelps!/id1064878350?ls=1&mt=8";
 
 NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
