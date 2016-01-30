@@ -2730,19 +2730,22 @@ Now on to the next step.</string>
                                 </connections>
                             </view>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaU-pY-zPv">
-                                <rect key="frame" x="-4" y="64" width="383" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="dKv-Xe-u8x" id="9Rz-X4-mTo"/>
+                                </connections>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.92941176469999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="PaU-pY-zPv" firstAttribute="top" secondItem="9WS-jb-0oI" secondAttribute="bottom" id="CvP-3L-eK4"/>
-                            <constraint firstItem="PaU-pY-zPv" firstAttribute="leading" secondItem="gCv-08-O6c" secondAttribute="leadingMargin" constant="-20" id="ZNm-sC-BKP"/>
+                            <constraint firstItem="DgC-dc-YJr" firstAttribute="top" secondItem="PaU-pY-zPv" secondAttribute="bottom" id="ME0-rV-M35"/>
+                            <constraint firstAttribute="trailing" secondItem="PaU-pY-zPv" secondAttribute="trailing" id="PN3-OH-Euh"/>
+                            <constraint firstItem="PaU-pY-zPv" firstAttribute="top" secondItem="9WS-jb-0oI" secondAttribute="bottom" id="Qjn-HX-mbi"/>
                             <constraint firstAttribute="trailing" secondItem="9WS-jb-0oI" secondAttribute="trailing" id="ek2-mr-0s8"/>
-                            <constraint firstItem="DgC-dc-YJr" firstAttribute="top" secondItem="PaU-pY-zPv" secondAttribute="bottom" id="gGx-xn-QXR"/>
                             <constraint firstItem="9WS-jb-0oI" firstAttribute="leading" secondItem="gCv-08-O6c" secondAttribute="leading" id="kDu-Rx-BeP"/>
                             <constraint firstItem="9WS-jb-0oI" firstAttribute="top" secondItem="gCv-08-O6c" secondAttribute="top" id="oE6-jg-E8e"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="PaU-pY-zPv" secondAttribute="trailing" constant="-20" id="vjL-bv-kFf"/>
+                            <constraint firstItem="PaU-pY-zPv" firstAttribute="leading" secondItem="gCv-08-O6c" secondAttribute="leading" id="tQv-Q1-Wxp"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
