@@ -18,7 +18,6 @@
 		0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B1859421BF34855006A4905 /* UIImage+LCImageFix.m */; };
 		0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */; };
 		0B223C3B1BCFA6220022B8F6 /* LCComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B223C3A1BCFA6220022B8F6 /* LCComment.m */; };
-		0B22B5DA1C5B471100397630 /* LCReportPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B22B5D91C5B471100397630 /* LCReportPostViewController.m */; };
 		0B26D1EC1C310BFD000B8E9A /* LCProfileImageEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B26D1EB1C310BFD000B8E9A /* LCProfileImageEditor.m */; };
 		0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B288C721BA92660001A8E9D /* LCProfileEditVC.m */; };
 		0B2902771BB90F8800E80684 /* LCActionsCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B2902761BB90F8800E80684 /* LCActionsCellView.m */; };
@@ -131,8 +130,8 @@
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; };
 		1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619550B1BFEFA8C005D9944 /* LCRequest.m */; };
-		16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */; settings = {ASSET_TAGS = (); }; };
-		16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */; };
+		16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */; };
 		165DC9311C44FE3600E55484 /* LCCauseSupportersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */; };
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
@@ -238,8 +237,6 @@
 		0B212EE61BBACA5F00B4237E /* LCMenuItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCMenuItemCell.m; sourceTree = "<group>"; };
 		0B223C391BCFA6220022B8F6 /* LCComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCComment.h; sourceTree = "<group>"; };
 		0B223C3A1BCFA6220022B8F6 /* LCComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCComment.m; sourceTree = "<group>"; };
-		0B22B5D81C5B471100397630 /* LCReportPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCReportPostViewController.h; sourceTree = "<group>"; };
-		0B22B5D91C5B471100397630 /* LCReportPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCReportPostViewController.m; sourceTree = "<group>"; };
 		0B26D1EA1C310BFD000B8E9A /* LCProfileImageEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileImageEditor.h; path = ViewControllers/LCProfileVC/LCProfileImageEditor.h; sourceTree = "<group>"; };
 		0B26D1EB1C310BFD000B8E9A /* LCProfileImageEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCProfileImageEditor.m; path = ViewControllers/LCProfileVC/LCProfileImageEditor.m; sourceTree = "<group>"; };
 		0B288C711BA92660001A8E9D /* LCProfileEditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCProfileEditVC.h; path = ViewControllers/LCProfileVC/LCProfileEditVC.h; sourceTree = "<group>"; };
@@ -685,13 +682,11 @@
 			path = Models/LCComment;
 			sourceTree = "<group>";
 		};
-		0B22B5D71C5B46F500397630 /* LCReportPostViewController */ = {
+		0B22B5D71C5B46F500397630 /* LCReportViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0B22B5D81C5B471100397630 /* LCReportPostViewController.h */,
-				0B22B5D91C5B471100397630 /* LCReportPostViewController.m */,
 			);
-			name = LCReportPostViewController;
+			name = LCReportViewController;
 			path = ViewControllers/LCReportPostViewController;
 			sourceTree = "<group>";
 		};
@@ -1490,7 +1485,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0B22B5D71C5B46F500397630 /* LCReportPostViewController */,
+				0B22B5D71C5B46F500397630 /* LCReportViewController */,
 				CE5CBF6E1C55FC6B0001F82C /* LCUIImagePickerController */,
 				0BCC87391C1025E00088D35D /* LCCollectionViewController */,
 				CE72CCEC1BFB18F300A288D2 /* LCBaseControllers */,
@@ -2160,7 +2155,6 @@
 				CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */,
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
 				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,
-				0B22B5DA1C5B471100397630 /* LCReportPostViewController.m in Sources */,
 				CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */,
 				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
 				0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */,

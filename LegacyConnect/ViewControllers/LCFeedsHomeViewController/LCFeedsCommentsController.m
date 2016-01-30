@@ -224,6 +224,15 @@ static CGFloat kIndexForPostDetails = 0;
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   
+  UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+//                                                      bundle:nil];
+//    LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
+//    report.postToReport = feed;
+//    [self presentViewController:report animated:YES completion:nil];
+  }];
+  [actionSheet addAction:blockUser];
+  
   UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
                                                       bundle:nil];
