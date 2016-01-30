@@ -215,7 +215,11 @@
 + (void)blockUserWithUserID:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kBlockUserURL];
-  NSDictionary *dict = @{kUserIDKey:userID};
+  NSDictionary *dict;
+  if(userID)
+  {
+    dict = @{kUserIDKey:userID};
+  }
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
     LCDLog(@"Success!");

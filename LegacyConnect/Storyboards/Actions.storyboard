@@ -429,7 +429,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5a-5l-JsE">
-                                                <rect key="frame" x="15" y="97" width="290" height="21"/>
+                                                <rect key="frame" x="42" y="97" width="236" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="MnO-dQ-YFG"/>
                                                 </constraints>
@@ -437,6 +437,23 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4v-SI-f8R">
+                                                <rect key="frame" x="0.0" y="90" width="40" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="40" id="D6I-1N-TjC"/>
+                                                    <constraint firstAttribute="height" constant="40" id="hPw-o3-pNX"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="blockActionBtnTapped:" destination="k8j-y9-80a" eventType="touchUpInside" id="aJz-tR-9HX"/>
+                                                </connections>
+                                            </button>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReportIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ikh-Gn-nUi">
+                                                <rect key="frame" x="14" y="102" width="13" height="15"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="15" id="IYl-M8-qtx"/>
+                                                    <constraint firstAttribute="width" constant="13" id="PfF-px-AXn"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -444,10 +461,14 @@
                                             <constraint firstItem="0vW-y2-WNf" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" constant="15" id="FUE-J2-20w"/>
                                             <constraint firstAttribute="trailing" secondItem="0vW-y2-WNf" secondAttribute="trailing" constant="15" id="FpC-En-OZm"/>
                                             <constraint firstItem="0vW-y2-WNf" firstAttribute="top" secondItem="rH2-7I-xXb" secondAttribute="top" id="Jc7-yr-Jro"/>
-                                            <constraint firstAttribute="trailing" secondItem="a5a-5l-JsE" secondAttribute="trailing" constant="15" id="SGK-ze-9NR"/>
+                                            <constraint firstItem="a4v-SI-f8R" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" id="LSS-G9-cag"/>
+                                            <constraint firstItem="Ikh-Gn-nUi" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" constant="14" id="RIL-Hn-bz6"/>
+                                            <constraint firstAttribute="trailing" secondItem="a5a-5l-JsE" secondAttribute="trailing" constant="42" id="SGK-ze-9NR"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ikh-Gn-nUi" secondAttribute="bottom" constant="13" id="g65-5f-WQb"/>
                                             <constraint firstItem="0vW-y2-WNf" firstAttribute="centerY" secondItem="rH2-7I-xXb" secondAttribute="centerY" constant="-35" id="l4L-cF-s1b"/>
-                                            <constraint firstItem="a5a-5l-JsE" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" constant="15" id="lne-gE-LJ3"/>
+                                            <constraint firstItem="a5a-5l-JsE" firstAttribute="leading" secondItem="rH2-7I-xXb" secondAttribute="leading" constant="42" id="lne-gE-LJ3"/>
                                             <constraint firstAttribute="trailing" secondItem="SbM-8k-bBk" secondAttribute="trailing" id="m2w-Ui-8bd"/>
+                                            <constraint firstAttribute="bottom" secondItem="a4v-SI-f8R" secondAttribute="bottom" id="nVg-gU-OGT"/>
                                             <constraint firstAttribute="bottom" secondItem="SbM-8k-bBk" secondAttribute="bottom" id="v4o-u7-n1X"/>
                                             <constraint firstItem="a5a-5l-JsE" firstAttribute="top" secondItem="SbM-8k-bBk" secondAttribute="bottom" constant="2" id="x2M-cS-hvo"/>
                                             <constraint firstItem="SbM-8k-bBk" firstAttribute="centerY" secondItem="rH2-7I-xXb" secondAttribute="centerY" constant="-5" id="yGE-mT-YAw"/>
@@ -703,6 +724,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="blockActionBtn" destination="a4v-SI-f8R" id="Twh-WW-InK"/>
+                        <outlet property="blockActionBtnImg" destination="Ikh-Gn-nUi" id="7qJ-dP-Gcs"/>
                         <outlet property="collapseViewHeight" destination="MQR-bB-VKa" id="KJi-Pq-ycR"/>
                         <outlet property="eventCreatedByLabel" destination="SbM-8k-bBk" id="u5t-3c-4M1"/>
                         <outlet property="eventNameLabel" destination="0vW-y2-WNf" id="Z9M-8f-ZZc"/>
@@ -1388,6 +1411,7 @@
         <image name="EventHeaderImage" width="375" height="165"/>
         <image name="LinkIcon" width="17" height="17"/>
         <image name="MembersIcon" width="17" height="16"/>
+        <image name="ReportIcon" width="12" height="15"/>
         <image name="backButton" width="12" height="21"/>
         <image name="backButton_image" width="12" height="21"/>
         <image name="contact_tick" width="37" height="37"/>
