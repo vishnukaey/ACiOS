@@ -32,6 +32,8 @@
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
 		0B422B531C47A4940094B341 /* LCInterestFollowersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B422B521C47A4940094B341 /* LCInterestFollowersVC.m */; };
+		0B44DC491C5C948F0080D7B4 /* LCReportPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */; };
+		0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */; };
 		0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */; };
 		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
@@ -263,6 +265,10 @@
 		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
 		0B422B511C47A4940094B341 /* LCInterestFollowersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestFollowersVC.h; path = ViewControllers/LCInterestsVC/LCInterestFollowersVC.h; sourceTree = "<group>"; };
 		0B422B521C47A4940094B341 /* LCInterestFollowersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestFollowersVC.m; path = ViewControllers/LCInterestsVC/LCInterestFollowersVC.m; sourceTree = "<group>"; };
+		0B44DC471C5C948F0080D7B4 /* LCReportPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCReportPostViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCReportPostViewController.h; sourceTree = SOURCE_ROOT; };
+		0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCReportPostViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCReportPostViewController.m; sourceTree = SOURCE_ROOT; };
+		0B44DC4D1C5C95950080D7B4 /* LCBlockUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBlockUserViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockUserViewController.h; sourceTree = SOURCE_ROOT; };
+		0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBlockUserViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockUserViewController.m; sourceTree = SOURCE_ROOT; };
 		0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadingCell.xib; sourceTree = "<group>"; };
 		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
 		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
@@ -685,6 +691,10 @@
 		0B22B5D71C5B46F500397630 /* LCReportViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0B44DC471C5C948F0080D7B4 /* LCReportPostViewController.h */,
+				0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */,
+				0B44DC4D1C5C95950080D7B4 /* LCBlockUserViewController.h */,
+				0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */,
 			);
 			name = LCReportViewController;
 			path = ViewControllers/LCReportPostViewController;
@@ -2156,6 +2166,7 @@
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
 				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,
 				CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */,
+				0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */,
 				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
 				0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */,
 				CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */,
@@ -2299,6 +2310,7 @@
 				0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
+				0B44DC491C5C948F0080D7B4 /* LCReportPostViewController.m in Sources */,
 				0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CE2E09D91C045B6B00722A22 /* LCFriendsListBC.m in Sources */,
