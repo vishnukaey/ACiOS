@@ -57,6 +57,12 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                                                name:kAcceptFriendRequestNFK
                                              object:nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kBlockUserNFK
+                                             object:nil];
+
+  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(updateImpactsCount:)
@@ -70,6 +76,7 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
                                            selector:@selector(updateImpactsCount:)
                                                name:kReportedPostNFK
                                              object:nil];
+  
 }
 
 - (void)dealloc {
@@ -192,6 +199,10 @@ static NSString * const kImageNameProfileWaiting = @"profileWaiting";
     }
     else if(notification.name == kRemoveFriendNFK) {
       
+      NSInteger count = [_userDetail.friendCount integerValue] - 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    }
+    else if (notification.name == kBlockUserNFK) {
       NSInteger count = [_userDetail.friendCount integerValue] - 1;
       _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
     }
