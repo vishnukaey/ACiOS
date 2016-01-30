@@ -197,10 +197,12 @@
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
 
-  if ([self.selectedIDs containsObject:friend.friendId]) {
+  if ([self.selectedIDs containsObject:friend.friendId])
+  {
     [cell.checkButton setSelected:YES];
   }
-  else {
+  else
+  {
     [cell.checkButton setSelected:NO];
   }
   
@@ -214,29 +216,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
   LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   LCFriend *friend = self.results[indexPath.row];
-  [self.selectedIDs addObject:friend.friendId];
-  [cell.checkButton setSelected:YES];
-}
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  LCFriend *friend = self.results[indexPath.row];
-  [self.selectedIDs removeObject:friend.friendId];
-  [cell.checkButton setSelected:NO];
-}
+  if(cell.checkButton.selected)
+  {
+    [self.selectedIDs removeObject:friend.friendId];
+    [cell.checkButton setSelected:NO];
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+  }
+  else
+  {
+    [self.selectedIDs addObject:friend.friendId];
+    [cell.checkButton setSelected:YES];
+  }
+}
 
 @end

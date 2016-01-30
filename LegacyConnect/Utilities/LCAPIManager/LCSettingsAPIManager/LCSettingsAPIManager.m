@@ -130,5 +130,31 @@
    }];
 }
 
++ (void)getBlockedUsersWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kBlockedUsersURL];
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *users= response[kResponseData];
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCUserDetail class] fromJSONArray:users error:&error];
+     if(error)
+     {
+       LCDLog(@"%@",error);
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Getting Blocked Users uccessful! ");
+       success(responsesArray);
+     }
+
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     failure(error);
+   }];
+}
+
 
 @end

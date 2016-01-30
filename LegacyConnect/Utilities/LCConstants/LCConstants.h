@@ -99,7 +99,7 @@ extern NSString *const kGetNotificationCountURL;
 extern NSString *const kGetRecentNotificationsURL;
 extern NSString *const kMarkNotificationAsReadURL;
 extern NSString *const kGetReportPostURL;
-
+extern NSString *const kBlockedUsersURL;
 extern NSString *const kGetSettignsURL;
 extern NSString *const kChangeEmailURL;
 extern NSString *const kChangePasswordURL;
@@ -229,6 +229,7 @@ extern NSString *const kEmailAddress;
 extern NSString *const kChangePassword;
 extern NSString *const kMyLegacyURL;
 extern NSString *const kPrivacy;
+extern NSString *const kManageBlkdUsers;
 extern NSString *const kSignOut;
 
 

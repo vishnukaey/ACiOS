@@ -134,6 +134,7 @@ NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
 NSString *const kSignOutURL = @"api/signout";
 
 NSString *const kVersionCheckURL = @"api/version";
+NSString *const kBlockedUsersURL = @"api/user/blockedList";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -256,6 +257,7 @@ NSString *const kEmailAddress = @"Email Address";
 NSString *const kChangePassword = @"Change Password";
 NSString *const kMyLegacyURL = @"My Legacy URL";
 NSString *const kPrivacy = @"Privacy";
+NSString *const kManageBlkdUsers = @"Manage Blocked Users";
 NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";
