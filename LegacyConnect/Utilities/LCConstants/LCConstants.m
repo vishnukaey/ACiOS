@@ -17,7 +17,7 @@
 #define PRODUCTION_SERVER 4
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER PRODUCTION_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -44,16 +44,16 @@ NSString *const kFBURLScheme = @"fb535164313296078";
 #elif CURRENT_SERVER == DEMO_SERVER
 ///* Demo url */
 NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
-NSString *const kFBAppID = @"781451981972910";
-NSString *const kFBAppDisplayName = @"LegacyConnectDev";
-NSString *const kFBURLScheme = @"fb781451981972910";
+NSString *const kFBAppID = @"535164313296078";
+NSString *const kFBAppDisplayName = @"ThatHelps";
+NSString *const kFBURLScheme = @"fb535164313296078";
 
 #elif CURRENT_SERVER == PRODUCTION_SERVER
 ///* Demo url */
 NSString *const kBaseURL = @"https://www.legacyconnect.com/";
-NSString *const kFBAppID = @"781451981972910";
-NSString *const kFBAppDisplayName = @"LegacyConnectDev";
-NSString *const kFBURLScheme = @"fb781451981972910";
+NSString *const kFBAppID = @"535164313296078";
+NSString *const kFBAppDisplayName = @"ThatHelps";
+NSString *const kFBURLScheme = @"fb535164313296078";
 
 #endif
 
