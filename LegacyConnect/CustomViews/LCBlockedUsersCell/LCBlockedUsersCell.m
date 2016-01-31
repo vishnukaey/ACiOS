@@ -8,9 +8,12 @@
 
 #import "LCBlockedUsersCell.h"
 
+static CGFloat kAvatarImageCornerRadius = 31.5f;
 @implementation LCBlockedUsersCell
 
 - (void)awakeFromNib {
+  self.friendsImageView.layer.cornerRadius = kAvatarImageCornerRadius;
+  self.friendsImageView.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
