@@ -16,4 +16,5 @@ typedef void (^ FullScreenFinishAction)(id sender, BOOL showComments);
 @property (nonatomic, strong) LCFeed * feed;
 @property (readwrite, copy) FullScreenFinishAction commentAction;
 
+
 @end

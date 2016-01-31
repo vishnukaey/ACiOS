@@ -18,6 +18,9 @@
 #pragma mark - view life cycle
 - (void)viewDidLoad {
   [super viewDidLoad];
+  UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
+  footerView.backgroundColor = self.tableView.separatorColor;
+  self.tableView.tableFooterView = footerView;
   self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_blocked_users", nil)];
   [self startFetchingResults];
 }

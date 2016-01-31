@@ -59,7 +59,9 @@
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES completion:^{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"block_details_screen_dismissed" object:nil];
+  }];
 }
 
 - (IBAction)reportButtonTapped:(id)sender

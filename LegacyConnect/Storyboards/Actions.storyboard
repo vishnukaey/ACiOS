@@ -447,7 +447,7 @@
                                                     <action selector="blockActionBtnTapped:" destination="k8j-y9-80a" eventType="touchUpInside" id="aJz-tR-9HX"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ReportIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ikh-Gn-nUi">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BlockActionIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Ikh-Gn-nUi">
                                                 <rect key="frame" x="14" y="102" width="13" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="IYl-M8-qtx"/>
@@ -1408,10 +1408,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BlockActionIcon" width="12" height="15"/>
         <image name="EventHeaderImage" width="375" height="165"/>
         <image name="LinkIcon" width="17" height="17"/>
         <image name="MembersIcon" width="17" height="16"/>
-        <image name="ReportIcon" width="12" height="15"/>
         <image name="backButton" width="12" height="21"/>
         <image name="backButton_image" width="12" height="21"/>
         <image name="contact_tick" width="37" height="37"/>
