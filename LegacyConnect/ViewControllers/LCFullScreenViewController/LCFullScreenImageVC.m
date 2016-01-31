@@ -107,13 +107,23 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+//  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  GIButton_preState = [appdel.GIButton isHidden];
+  menuButton_preState = [appdel.menuButton isHidden];
+  [appdel.GIButton setHidden: true];
+  [appdel.menuButton setHidden: true];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
-  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+//  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.GIButton setHidden: GIButton_preState];
+  [appdel.menuButton setHidden: menuButton_preState];
+
 }
 
 #pragma mark - button actions
@@ -128,13 +138,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
   }
 }
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  [appdel.GIButton setHidden:NO];
-//  [appdel.menuButton setHidden:NO];
-//  [super viewWillDisappear:animated];
-//}
 
 - (IBAction)likeButtonClicked:(id)sender
 {
