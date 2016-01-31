@@ -113,9 +113,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
-//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  [appdel.GIButton setHidden: GIButton_preState];
-//  [appdel.menuButton setHidden: menuButton_preState];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
 }
 
 #pragma mark - button actions
@@ -181,8 +179,20 @@
   }
 }
 - (IBAction)reportFeed:(id)sender {
-  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GIAndMenuButtonUpdateOnDismissal) name:@"block_details_screen_dismissed" object:nil];
   [LCReportHelper showPostReportActionSheetFromView:self withPost:self.feed];
+}
+
+- (void)GIAndMenuButtonUpdateOnDismissal
+{
+  if (self.isViewLoaded && self.view.window) {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"block_details_screen_dismissed" object:nil];
+    [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+  }
+}
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"block_details_screen_dismissed" object:nil];
 }
 
 @end

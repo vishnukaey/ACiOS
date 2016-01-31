@@ -135,6 +135,8 @@ static CGFloat kActionSectionHeight = 30;
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
   [settingsButton.layer setCornerRadius:5.0f];
+  [blockActionBtn setHidden:YES];
+  [blockActionBtnImg setHidden:YES];
 }
 
 - (void)refreshEventDetails
@@ -240,12 +242,14 @@ static CGFloat kActionSectionHeight = 30;
 
 - (void)blockEventUI
 {
-  if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
-    [blockActionBtn setHidden:YES];
-    [blockActionBtnImg setHidden:YES];
-  } else {
-    [blockActionBtn setHidden:NO];
-    [blockActionBtnImg setHidden:NO];
+  if (self.eventObject.userID) {
+    if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+      [blockActionBtn setHidden:YES];
+      [blockActionBtnImg setHidden:YES];
+    } else {
+      [blockActionBtn setHidden:NO];
+      [blockActionBtnImg setHidden:NO];
+    }
   }
 }
 

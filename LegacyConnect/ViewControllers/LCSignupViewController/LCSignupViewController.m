@@ -32,10 +32,9 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  _signupButton.enabled = NO;
-  [_signupButton setBackgroundColor:[UIColor lightGrayColor]];
   _signupButton.layer.cornerRadius = 5.0;
   [_signupButton clipsToBounds];
+  [self textFieldDidChange];
   
   [_firstNameTextField addTarget:self action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
