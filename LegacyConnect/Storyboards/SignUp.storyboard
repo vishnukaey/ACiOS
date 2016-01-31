@@ -2842,7 +2842,6 @@ Now on to the next step.</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnc-wi-n1f" customClass="LCTaggedLabel">
                                 <rect key="frame" x="16" y="198" width="343" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="343" id="EwW-Ia-X3P"/>
                                     <constraint firstAttribute="height" constant="30" id="QGO-Dr-Aau"/>
                                 </constraints>
                                 <attributedString key="attributedText">
@@ -2865,12 +2864,13 @@ Now on to the next step.</string>
                             <constraint firstItem="ZDn-D9-K24" firstAttribute="centerX" secondItem="4QN-Un-X8k" secondAttribute="centerX" id="Hgs-LJ-TPQ"/>
                             <constraint firstItem="4zK-c7-xO3" firstAttribute="leading" secondItem="4QN-Un-X8k" secondAttribute="leadingMargin" id="LVq-Q4-sDo"/>
                             <constraint firstItem="4zK-c7-xO3" firstAttribute="top" secondItem="hUx-CD-xCl" secondAttribute="bottom" constant="33" id="Lgb-Wm-nku"/>
-                            <constraint firstItem="vnc-wi-n1f" firstAttribute="centerX" secondItem="4QN-Un-X8k" secondAttribute="centerX" id="Z8Q-PT-nNx"/>
                             <constraint firstItem="hUx-CD-xCl" firstAttribute="top" secondItem="4QN-Un-X8k" secondAttribute="top" id="ci3-sn-PCf"/>
+                            <constraint firstItem="vnc-wi-n1f" firstAttribute="leading" secondItem="4QN-Un-X8k" secondAttribute="leading" constant="16" id="cyQ-V9-dkZ"/>
                             <constraint firstItem="4zK-c7-xO3" firstAttribute="trailing" secondItem="4QN-Un-X8k" secondAttribute="trailingMargin" id="hTO-du-YSk"/>
                             <constraint firstItem="ZDn-D9-K24" firstAttribute="top" secondItem="4zK-c7-xO3" secondAttribute="bottom" constant="13" id="jfO-nJ-aZ6"/>
                             <constraint firstItem="ZDn-D9-K24" firstAttribute="trailing" secondItem="4QN-Un-X8k" secondAttribute="trailingMargin" id="l8u-jR-M2m"/>
                             <constraint firstItem="hUx-CD-xCl" firstAttribute="leading" secondItem="4QN-Un-X8k" secondAttribute="leading" id="mVk-uP-fKe"/>
+                            <constraint firstAttribute="trailing" secondItem="vnc-wi-n1f" secondAttribute="trailing" constant="16" id="otJ-5k-eLi"/>
                             <constraint firstItem="4zK-c7-xO3" firstAttribute="centerX" secondItem="4QN-Un-X8k" secondAttribute="centerX" id="uBo-RD-Drv"/>
                         </constraints>
                     </view>
@@ -2905,7 +2905,7 @@ Now on to the next step.</string>
         <image name="rightChevron" width="8" height="12"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zLA-AX-ius"/>
+        <segue reference="aFc-Qf-A3e"/>
         <segue reference="L3b-8s-ru0"/>
     </inferredMetricsTieBreakers>
 </document>
