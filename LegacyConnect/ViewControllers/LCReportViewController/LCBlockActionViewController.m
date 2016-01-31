@@ -43,7 +43,7 @@
 #pragma mark - privete method implementation
 - (void)initialUISetUp
 {
-  NSString * infoText = @"You are reporting this event because it may contain content that is offensive or objectionable.\n\nThe event could be removed from ThatHelps if the content is deemed to be offensive or objectionable.\n\nThe Admins have the final say on all content and posts on the ThatHelps network";
+  NSString * infoText = @"You are reporting this action because it may contain content that is offensive or objectionable.\n\nThe action could be removed from ThatHelps if the content is deemed to be offensive or objectionable.\n\nThe Admins have the final say on all content and posts on the ThatHelps network";
   
   NSMutableAttributedString * info = [[NSMutableAttributedString alloc] initWithString:infoText];
   
