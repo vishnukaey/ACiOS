@@ -65,6 +65,12 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kRemoveMileStoneNFK object:nil userInfo:userInfo];
 }
 
++ (void)postPostReportedNotificationforPost: (LCFeed *)post
+{
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kReportedPostNFK  object:nil userInfo:userInfo];
+}
+
 #pragma mark - event notifications
 + (void)postEventFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response
 {
@@ -212,6 +218,22 @@
   cause.supporters = [NSString stringWithFormat:@"%d",[cause.supporters intValue]-1];
   NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:cause, kCauseObj, nil];
   [[NSNotificationCenter defaultCenter] postNotificationName:kUnsupportCauseNFK object:nil userInfo:userInfo];
+}
+
+
++ (void)postEventBlockedNotificationForEvent:(LCEvent*)event
+{
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:event, kEntityTypeEvent, nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kReportedEventNFK object:nil userInfo:userInfo];
+}
+
++ (void)postBlockedUserNotification :(NSString *)friendID forFriendStatus :(int)status
+{
+  LCFriend *friend = [[LCFriend alloc] init];
+  friend.friendId = friendID;
+  friend.isFriend = [NSString stringWithFormat:@"%d", status];
+  NSDictionary * userInfo = [[NSDictionary alloc] initWithObjectsAndKeys:friend, @"friend", nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kBlockUserNFK object:nil userInfo:userInfo];
 }
 
 

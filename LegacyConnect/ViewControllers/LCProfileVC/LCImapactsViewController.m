@@ -15,6 +15,7 @@
 #import "LCProfileViewVC.h"
 #import "LCSingleCauseVC.h"
 #import "LCSingleInterestVC.h"
+#import "LCReportHelper.h"
 
 @implementation LCImapactsViewController
 @synthesize customNavigationHeight, userDetail;
@@ -151,6 +152,11 @@
   [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
+- (void)reportFeed:(LCFeed*)feed
+{
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:feed];
+}
+
 #pragma mark - controller life cycle
 - (void)viewDidLoad
 {
@@ -223,6 +229,7 @@
   if ([[LCDataManager sharedDataManager].userID isEqualToString:userDetail.userID]) {
     
     cell.moreButton.hidden = NO;
+    cell.reportButton.hidden = YES;
   }
 
   return cell;
@@ -247,6 +254,13 @@
       
     case kkFeedCellActionViewImage:
       [self showFullScreenImage:feed];
+      break;
+      
+    case kkFeedCellActionReport:
+      [self reportFeed:feed];
+      break;
+      
+    default:
       break;
   }
 }

@@ -19,6 +19,9 @@
   __weak IBOutlet UILabel *eventdateInfoLable;
   __weak IBOutlet LCTaggedLabel *eventCreatedByLabel;
   __weak IBOutlet UIImageView *eventPhoto;
+  __weak IBOutlet UIImageView *blockActionBtnImg;
+  __weak IBOutlet UIButton *blockActionBtn;
+  
 }
 
 - (IBAction)backAction:(id)sender;

@@ -14,7 +14,8 @@ typedef enum {
   kFeedCellActionLike,
   kFeedCellActionComment,
   kkFeedCellActionViewImage,
-  kkFeedCellActionLoadMore
+  kkFeedCellActionLoadMore,
+  kkFeedCellActionReport
 } kkFeedCellActionType;
 
 typedef enum
@@ -44,6 +45,7 @@ typedef void (^FeedCellTagAction)(NSDictionary* tagDetails);
 @property(nonatomic, retain)id delegate;
 @property(nonatomic, weak)LCFeed *feedObject;
 @property(nonatomic, weak)IBOutlet UIButton *moreButton;
+@property(nonatomic, weak)IBOutlet UIButton *reportButton;
 @property (readwrite, copy) FeedCellAction feedCellAction;
 @property (readwrite, copy) FeedCellTagAction feedCellTagAction;
 

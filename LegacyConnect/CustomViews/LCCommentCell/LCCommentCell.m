@@ -46,7 +46,7 @@
                                              } range:NSMakeRange(0, userNameAttribString.length)];
   
   NSMutableArray *userNameTagsRanges = [[NSMutableArray alloc] init];
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:comment.userId, @"id", @"cause", @"text", kFeedTagTypeUser, @"type", [NSValue valueWithRange:tagRangeUserName], @"range", nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:comment.userId, @"id", @"cause", @"text", kFeedTagTypeUser,kTagobjType, [NSValue valueWithRange:tagRangeUserName], @"range", nil];
   [userNameTagsRanges addObject:dic_user];
   userNameLabel.tagsArray  = userNameTagsRanges;
   [userNameLabel setAttributedText:userNameAttribString];
@@ -56,6 +56,23 @@
       weakSelf.commentCellTagAction(dic_user);
     }
   };
+  
+  //hide more button for my comments
+  if ([comment.userId isEqualToString:[LCDataManager sharedDataManager].userID])
+  {
+    moreButton.hidden = YES;
+  }
+  else
+  {
+    moreButton.hidden = NO;
+  }
 }
+- (IBAction)moreAction:(id)sender {
+  if (self.commentCellMoreAction) {
+    self.commentCellMoreAction();
+  }
+}
+
+
 
 @end

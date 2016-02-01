@@ -14,6 +14,7 @@
 #import "LCProfileViewVC.h"
 #import "LCCauseSupportersVC.h"
 #import "LCSingleInterestVC.h"
+#import "LCReportHelper.h"
 
 static NSString* const kGradientDefaultClr = @"282828";
 
@@ -222,6 +223,10 @@ static NSString* const kGradientDefaultClr = @"282828";
   {
     [self showFeedCommentsWithFeed:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 
@@ -258,6 +263,11 @@ static NSString* const kGradientDefaultClr = @"282828";
       [self reloadPostsTable];
     }
   }];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:feed];
 }
 
 

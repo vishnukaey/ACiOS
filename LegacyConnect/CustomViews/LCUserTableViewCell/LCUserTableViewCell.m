@@ -28,7 +28,8 @@
   [_userImageView sd_setImageWithURL:[NSURL URLWithString:user.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
   _userNameLabel.text = [NSString stringWithFormat:@"%@ %@",user.firstName, user.lastName];
   _userLocationLabel.text = [LCUtilityManager performNullCheckAndSetValue:user.location];
-  if([user.userID isEqualToString:[LCDataManager sharedDataManager].userID])
+  FriendStatus status = (FriendStatus)[_user.isFriend integerValue];
+  if([user.userID isEqualToString:[LCDataManager sharedDataManager].userID] || status == kBlocked)
   {
     _userAddButton.hidden = YES;
   }

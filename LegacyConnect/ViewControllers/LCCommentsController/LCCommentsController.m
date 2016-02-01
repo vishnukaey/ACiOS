@@ -211,20 +211,20 @@ static CGFloat kCommentFieldHeight = 45.0f;
 #pragma mark - other private methods
 - (void)tagTapped:(NSDictionary *)tagDetails
 {
-  if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeCause])//go to cause page
+  if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
     UIStoryboard*  interestsSB = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
     LCSingleCauseVC *causeVC = [interestsSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
     [self.navigationController pushViewController:causeVC animated:YES];
   }
-  else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeUser])//go to user page
+  else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
     [self.navigationController pushViewController:profileVC animated:YES];
-  } else if ([tagDetails[kWordType] isEqualToString:kFeedTagTypeInterest])
+  } else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])
   {
     UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
     LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];

@@ -328,4 +328,27 @@
    }];
 }
 
+
++ (void)blockEventWithEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kBlockEventURL];
+  NSDictionary *dict;
+  
+  if(event.eventID)
+  {
+    dict = @{kEventIDKey:event.eventID};
+  }
+  
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
+    LCDLog(@"Success!");
+    [LCNotificationManager postEventBlockedNotificationForEvent:event];
+    success(response[kResponseData]);
+  } andFailure:^(NSString *error) {
+    LCDLog(@"Failure");
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
+}
+
 @end

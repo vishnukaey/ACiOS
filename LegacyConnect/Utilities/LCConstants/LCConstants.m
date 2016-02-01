@@ -44,19 +44,20 @@ NSString *const kFBURLScheme = @"fb535164313296078";
 #elif CURRENT_SERVER == DEMO_SERVER
 ///* Demo url */
 NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
-NSString *const kFBAppID = @"781451981972910";
-NSString *const kFBAppDisplayName = @"LegacyConnectDev";
-NSString *const kFBURLScheme = @"fb781451981972910";
+NSString *const kFBAppID = @"535164313296078";
+NSString *const kFBAppDisplayName = @"ThatHelps";
+NSString *const kFBURLScheme = @"fb535164313296078";
 
 #elif CURRENT_SERVER == PRODUCTION_SERVER
 ///* Demo url */
 NSString *const kBaseURL = @"https://www.legacyconnect.com/";
-NSString *const kFBAppID = @"781451981972910";
-NSString *const kFBAppDisplayName = @"LegacyConnectDev";
-NSString *const kFBURLScheme = @"fb781451981972910";
+NSString *const kFBAppID = @"535164313296078";
+NSString *const kFBAppDisplayName = @"ThatHelps";
+NSString *const kFBURLScheme = @"fb535164313296078";
 
 #endif
 
+NSString *const kToSURL = @"terms_of_use.html";
 NSString *const kLCiTunesLink = @"https://itunes.apple.com/us/app/thathelps!/id1064878350?ls=1&mt=8";
 
 NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
@@ -67,6 +68,8 @@ NSString *const kLegacyConnectUrl = @"www.LegacyConnect.com/";
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";
+NSString *const kBlockUserURL = @"api/user/block";
+NSString *const kBlockEventURL = @"api/event/block";
 NSString *const kFBLoginURL = @"api/user/fbLogin";
 NSString *const kUploadUserImageURL = @"api/user/profileImage";
 
@@ -121,6 +124,7 @@ NSString *const kPostMilestoneURL = @"api/post/milestone";
 NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
 NSString *const kGetRecentNotificationsURL = @"api/user/notification";
 NSString *const kMarkNotificationAsReadURL = @"api/user/notification/read";
+NSString *const kGetReportPostURL = @"api/post/report";
 
 NSString *const kGetSettignsURL = @"api/user/settings";
 NSString *const kChangeEmailURL = @"api/user/changeEmail";
@@ -130,6 +134,7 @@ NSString *const kChangePrivacyURL = @"api/user/changePrivacy";
 NSString *const kSignOutURL = @"api/signout";
 
 NSString *const kVersionCheckURL = @"api/version";
+NSString *const kBlockedUsersURL = @"api/user/blockedList";
 
 NSString *const kMainStoryBoardIdentifier = @"Main";
 NSString *const kSignupStoryBoardIdentifier = @"SignUp";
@@ -217,7 +222,6 @@ NSString *const kHomefeedCellID = @"homefeedCell";
 NSString *const kCommentsfeedCellID = @"commentfeedCell";
 NSString *const kCausesCellID = @"causesCell";
 
-NSString *const kWordType = @"type";
 NSString *const kFeedTagTypeCause = @"cause";
 NSString *const kFeedTagTypeInterest = @"interest";
 NSString *const kFeedTagTypeUser = @"user";
@@ -253,6 +257,7 @@ NSString *const kEmailAddress = @"Email Address";
 NSString *const kChangePassword = @"Change Password";
 NSString *const kMyLegacyURL = @"My Legacy URL";
 NSString *const kPrivacy = @"Privacy";
+NSString *const kManageBlkdUsers = @"Blocked Users";
 NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";

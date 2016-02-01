@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -191,10 +191,23 @@
                                     <action selector="moreButtonAction" destination="Eee-dM-J0u" eventType="touchUpInside" id="UQe-8Y-8eR"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eqW-Fl-woV">
+                                <rect key="frame" x="432" y="0.0" width="22" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="22" id="K6N-hE-iAc"/>
+                                </constraints>
+                                <state key="normal" image="ReportIcon">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reportButtonAction" destination="Eee-dM-J0u" eventType="touchUpInside" id="SwV-Vo-Gtl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="BQi-BN-dl2" firstAttribute="leading" secondItem="s4Y-bI-bWO" secondAttribute="trailing" constant="1" id="00f-YB-Hns"/>
                             <constraint firstAttribute="bottom" secondItem="drK-gf-Qhn" secondAttribute="bottom" id="2SA-So-Gfq"/>
+                            <constraint firstAttribute="bottom" secondItem="eqW-Fl-woV" secondAttribute="bottom" id="5MZ-UP-cVI"/>
                             <constraint firstItem="xaI-a7-PHn" firstAttribute="leading" secondItem="BQi-BN-dl2" secondAttribute="trailing" id="6tj-xS-xpQ"/>
                             <constraint firstItem="xaI-a7-PHn" firstAttribute="top" secondItem="9wn-L9-Byh" secondAttribute="top" id="9kE-AQ-bCb"/>
                             <constraint firstItem="xaI-a7-PHn" firstAttribute="centerY" secondItem="cTw-CL-UeO" secondAttribute="centerY" id="BEI-as-aLT"/>
@@ -206,6 +219,8 @@
                             <constraint firstItem="drK-gf-Qhn" firstAttribute="top" secondItem="9wn-L9-Byh" secondAttribute="top" id="Np2-Xi-uD7"/>
                             <constraint firstItem="xaI-a7-PHn" firstAttribute="centerX" secondItem="cTw-CL-UeO" secondAttribute="centerX" id="UsN-Vo-3P4"/>
                             <constraint firstAttribute="centerY" secondItem="BQi-BN-dl2" secondAttribute="centerY" id="YB9-SI-D0a"/>
+                            <constraint firstItem="eqW-Fl-woV" firstAttribute="top" secondItem="9wn-L9-Byh" secondAttribute="top" id="kWt-fo-MYL"/>
+                            <constraint firstAttribute="trailing" secondItem="eqW-Fl-woV" secondAttribute="trailing" id="n3i-de-hxr"/>
                             <constraint firstAttribute="bottom" secondItem="s4Y-bI-bWO" secondAttribute="bottom" id="p17-6t-Ylo"/>
                             <constraint firstAttribute="centerY" secondItem="ALI-21-bQD" secondAttribute="centerY" id="r4B-FR-VGM"/>
                             <constraint firstItem="ALI-21-bQD" firstAttribute="leading" secondItem="xaI-a7-PHn" secondAttribute="trailing" id="uRo-GZ-ocX"/>
@@ -300,6 +315,7 @@
                 <outlet property="postPhoto" destination="b8n-aD-8hK" id="aMT-uo-QFi"/>
                 <outlet property="postPhotoHeight" destination="nNO-f9-GMw" id="IMk-M3-Hya"/>
                 <outlet property="profilePic" destination="5bn-gW-4lj" id="MhW-Ui-yBI"/>
+                <outlet property="reportButton" destination="eqW-Fl-woV" id="7xZ-KE-Xh3"/>
                 <outlet property="retryButton" destination="KUW-U5-pxy" id="Dd0-je-iZq"/>
                 <outlet property="thanksBtnImage" destination="WHf-Ix-jfR" id="HwT-RQ-Izm"/>
                 <outlet property="thanksLabel" destination="BQi-BN-dl2" id="JlV-Ou-xpd"/>
@@ -314,6 +330,7 @@
         <image name="ClockIcon" width="12" height="12"/>
         <image name="CommentIcon" width="19" height="18"/>
         <image name="MilestoneIcon" width="13" height="12"/>
+        <image name="ReportIcon" width="12" height="15"/>
         <image name="ThanksIcon_enabled" width="17" height="15"/>
         <image name="more_icon" width="22" height="5"/>
         <image name="userProfilePic" width="100" height="100"/>

@@ -73,6 +73,20 @@
   }
 }
 
+- (void)eventReportedNotificationReceived :(NSNotification *)notification
+{
+  LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
+  for (int i = 0; i<self.results.count ; i++) {
+    LCEvent *event = self.results[i];
+    if ([event.eventID isEqualToString:deletedEvent.eventID])
+    {
+      [self.results removeObjectAtIndex:i];
+      [self refreshTopViewOnly];
+      break;
+    }
+  }
+}
+
 - (void)eventCreatedNotificationReceived :(NSNotification *)notification
 {
   LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];

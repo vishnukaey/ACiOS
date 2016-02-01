@@ -14,6 +14,7 @@
 #import "LCSingleInterestVC.h"
 #import "LCSingleCauseVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCReportHelper.h"
 
 @interface LCInterestPosts ()
 
@@ -154,6 +155,10 @@
   {
     [self showFeedCommentsWithFeed:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
@@ -188,6 +193,11 @@
       [self reloadPostsTable];
     }
   }];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:feed];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

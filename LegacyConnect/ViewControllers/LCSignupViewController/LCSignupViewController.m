@@ -7,6 +7,7 @@
 //
 
 #import "LCSignupViewController.h"
+#import "LCTermsOfServiceViewController.h"
 
 @interface LCSignupViewController ()
 {
@@ -14,20 +15,28 @@
 }
 @end
 
+#define kInfoBoldFont [UIFont fontWithName:@"Gotham-Bold" size:13.0f]
+#define kInfoFont [UIFont fontWithName:@"Gotham-Book" size:13.0f]
+#define kInfoColor [UIColor colorWithRed:35/255.0 green:31/255.0  blue:32/255.0  alpha:1]
+#define kBGColor [UIColor colorWithRed:250/255.0 green:70/255.0  blue:22/255.0  alpha:1]
+
 @implementation LCSignupViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   [self setDobTextFieldWithInputView];
+  [self initialUISetUp];
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  _signupButton.enabled = NO;
-  [_firstNameTextField addTarget:self
-                      action:@selector(textFieldDidChange)
+  _signupButton.layer.cornerRadius = 5.0;
+  [_signupButton clipsToBounds];
+  [self textFieldDidChange];
+  
+  [_firstNameTextField addTarget:self action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
   [_lastNameTextField addTarget:self
                          action:@selector(textFieldDidChange)
@@ -50,11 +59,42 @@
   [LCGAManager ga_trackViewWithName:@"Registration"];
 }
 
+- (void)initialUISetUp
+{
+  NSString *infoText = @"By signing up you agree to these Terms of Service";
+  NSMutableAttributedString *info = [[NSMutableAttributedString alloc] initWithString:infoText];
+  
+  NSRange fullTxtRng = [infoText rangeOfString:infoText];
+  [info addAttribute:NSFontAttributeName value:kInfoFont range:fullTxtRng];
+  [info addAttribute:NSForegroundColorAttributeName value:kInfoColor range:fullTxtRng];
+  
+  NSRange boldTxtRag1 = [infoText rangeOfString:@"Terms of Service"];
+  [info addAttribute:NSFontAttributeName value:kInfoBoldFont range:boldTxtRag1];
+  
+  NSMutableArray *tagsArray = [[NSMutableArray alloc] init];
+  NSDictionary *tagsDict = [[NSDictionary alloc] initWithObjectsAndKeys:[NSValue valueWithRange:boldTxtRag1],@"range", nil];
+  [tagsArray addObject:tagsDict];
+  _termsLabel.tagsArray = tagsArray;
+  _termsLabel.nameTagTapped = ^(int index)
+  {
+    [self readTermsofService];
+  };
+  [self.termsLabel setAttributedText:info];
+}
+
+-(void)readTermsofService
+{
+  UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCTermsOfServiceViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCTermsOfServiceViewController"];
+  [self.navigationController pushViewController:termsVC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
 }
+
 
 #pragma mark - private method implementation
 - (void) setDobTextFieldWithInputView
@@ -150,10 +190,13 @@
   if(_firstNameTextField.text.length!=0 && _lastNameTextField.text.length!=0 && _emailTextField.text.length!=0 && _passwordTextField.text.length!=0 && _confirmPasswordTextField.text.length!=0 && _dobTextField.text.length!=0 )
   {
     _signupButton.enabled = YES;
+    [_signupButton setBackgroundColor:kBGColor];
+    
   }
   else
   {
     _signupButton.enabled = NO;
+    [_signupButton setBackgroundColor:[UIColor lightGrayColor]];
   }
 }
 
@@ -162,6 +205,13 @@
 - (IBAction)cancelButtonTapped:(id)sender
 {
   [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+-(IBAction)readTermsofService:(id)sender
+{
+  UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCTermsOfServiceViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCTermsOfServiceViewController"];
+  [self.navigationController pushViewController:termsVC animated:YES];
 }
 
 

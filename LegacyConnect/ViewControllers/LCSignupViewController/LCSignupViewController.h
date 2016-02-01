@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LCTaggedLabel.h"
 
 @interface LCSignupViewController : UIViewController
 {
@@ -20,4 +21,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *dobTextField;
 @property (weak, nonatomic) IBOutlet UIButton *signupButton;
 @property (weak, nonatomic) IBOutlet UILabel *warningLabel;
+@property (nonatomic, weak) IBOutlet LCTaggedLabel *termsLabel;
+
 @end

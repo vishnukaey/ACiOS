@@ -17,6 +17,7 @@
 #import "LCActionsHeader.h"
 #import "NSURL+LCURLCategory.h"
 #import "LCEventAPImanager.h"
+#import "LCReportHelper.h"
 
 static CGFloat kActionSectionHeight = 30;
 
@@ -134,6 +135,8 @@ static CGFloat kActionSectionHeight = 30;
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
   [settingsButton.layer setCornerRadius:5.0f];
+  [blockActionBtn setHidden:YES];
+  [blockActionBtnImg setHidden:YES];
 }
 
 - (void)refreshEventDetails
@@ -225,6 +228,7 @@ static CGFloat kActionSectionHeight = 30;
   };
   
   [self setEventDateInfo];
+  [self blockEventUI];
   [self.tableView reloadData];
 }
 
@@ -233,13 +237,26 @@ static CGFloat kActionSectionHeight = 30;
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   
   // -- Interest Info Tag -- //
-  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kWordType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
+  NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kTagobjType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
   [tagsWithRanges addObject:dic_interest];
   
   // -- User Info Tag -- //
-  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kWordType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
   [tagsWithRanges addObject:dic_user];
   return tagsWithRanges;
+}
+
+- (void)blockEventUI
+{
+  if (self.eventObject.userID) {
+    if ([self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
+      [blockActionBtn setHidden:YES];
+      [blockActionBtnImg setHidden:YES];
+    } else {
+      [blockActionBtn setHidden:NO];
+      [blockActionBtnImg setHidden:NO];
+    }
+  }
 }
 
 - (void)setEventDateInfo
@@ -353,6 +370,10 @@ static CGFloat kActionSectionHeight = 30;
   [self.navigationController pushViewController:membersVC animated:YES];
 }
 
+- (IBAction)blockActionBtnTapped:(id)sender {
+  [LCReportHelper showActionReportActionSheetFromView:self withAction:self.eventObject];
+}
+
 
 #pragma mark - scrollview delegates
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -450,6 +471,10 @@ static CGFloat kActionSectionHeight = 30;
   __weak typeof(self) weakSelf = self;
   commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
+  };
+  commentCell.commentCellMoreAction =^(){
+    [LCReportHelper showCommentReportActionSheetFromView:self
+                                             withComment:self.results[indexPath.row]];
   };
   [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;

@@ -32,6 +32,12 @@
 		0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B3594291B4E6DBE0098C484 /* LCLoginViewController.m */; };
 		0B35942E1B4E731C0098C484 /* LCEmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */; };
 		0B422B531C47A4940094B341 /* LCInterestFollowersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B422B521C47A4940094B341 /* LCInterestFollowersVC.m */; };
+		0B44DC491C5C948F0080D7B4 /* LCReportPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */; };
+		0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */; };
+		0B44DC531C5CA92A0080D7B4 /* LCReportHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */; };
+		0B477E141C5CB1BE00510568 /* LCBlockActionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B477E131C5CB1BE00510568 /* LCBlockActionViewController.m */; };
+		0B477E181C5CF10100510568 /* LCBlockedUsersListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B477E171C5CF10100510568 /* LCBlockedUsersListController.m */; };
+		0B477E1C1C5CFB0600510568 /* LCBlockedUsersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B477E1B1C5CFB0600510568 /* LCBlockedUsersCell.m */; };
 		0B4D0A761BCCD3330081E856 /* LCLoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */; };
 		0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B5571451B8D9F5D00445958 /* LCSearchViewController.m */; };
 		0B56A7FA1B6A31CF0065C231 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B56A7F91B6A31CF0065C231 /* Notification.storyboard */; };
@@ -130,6 +136,8 @@
 		0BFDF94F1BDDFB83001E1067 /* LCFullScreenImageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BFDF94E1BDDFB83001E1067 /* LCFullScreenImageVC.xib */; };
 		1618309D1BDF45D4002D3539 /* LCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1618309C1BDF45D4002D3539 /* LCImage.m */; };
 		1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619550B1BFEFA8C005D9944 /* LCRequest.m */; };
+		16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */; };
+		16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */; };
 		165DC9311C44FE3600E55484 /* LCCauseSupportersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */; };
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
@@ -261,6 +269,18 @@
 		0B35942D1B4E731C0098C484 /* LCEmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEmptyViewController.m; path = ViewControllers/LCEmptyViewController/LCEmptyViewController.m; sourceTree = "<group>"; };
 		0B422B511C47A4940094B341 /* LCInterestFollowersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestFollowersVC.h; path = ViewControllers/LCInterestsVC/LCInterestFollowersVC.h; sourceTree = "<group>"; };
 		0B422B521C47A4940094B341 /* LCInterestFollowersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestFollowersVC.m; path = ViewControllers/LCInterestsVC/LCInterestFollowersVC.m; sourceTree = "<group>"; };
+		0B44DC471C5C948F0080D7B4 /* LCReportPostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCReportPostViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCReportPostViewController.h; sourceTree = SOURCE_ROOT; };
+		0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCReportPostViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCReportPostViewController.m; sourceTree = SOURCE_ROOT; };
+		0B44DC4D1C5C95950080D7B4 /* LCBlockUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBlockUserViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockUserViewController.h; sourceTree = SOURCE_ROOT; };
+		0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBlockUserViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockUserViewController.m; sourceTree = SOURCE_ROOT; };
+		0B44DC511C5CA92A0080D7B4 /* LCReportHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCReportHelper.h; path = Helpers/LCReportHelper/LCReportHelper.h; sourceTree = "<group>"; };
+		0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCReportHelper.m; path = Helpers/LCReportHelper/LCReportHelper.m; sourceTree = "<group>"; };
+		0B477E121C5CB1BE00510568 /* LCBlockActionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCBlockActionViewController.h; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockActionViewController.h; sourceTree = SOURCE_ROOT; };
+		0B477E131C5CB1BE00510568 /* LCBlockActionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCBlockActionViewController.m; path = LegacyConnect/ViewControllers/LCReportViewController/LCBlockActionViewController.m; sourceTree = SOURCE_ROOT; };
+		0B477E161C5CF10100510568 /* LCBlockedUsersListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCBlockedUsersListController.h; sourceTree = "<group>"; };
+		0B477E171C5CF10100510568 /* LCBlockedUsersListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCBlockedUsersListController.m; sourceTree = "<group>"; };
+		0B477E1A1C5CFB0600510568 /* LCBlockedUsersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCBlockedUsersCell.h; sourceTree = "<group>"; };
+		0B477E1B1C5CFB0600510568 /* LCBlockedUsersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCBlockedUsersCell.m; sourceTree = "<group>"; };
 		0B4D0A751BCCD3330081E856 /* LCLoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LCLoadingCell.xib; sourceTree = "<group>"; };
 		0B5571441B8D9F5D00445958 /* LCSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchViewController.h; path = ViewControllers/LCSearchViewController/LCSearchViewController.h; sourceTree = "<group>"; };
 		0B5571451B8D9F5D00445958 /* LCSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchViewController.m; path = ViewControllers/LCSearchViewController/LCSearchViewController.m; sourceTree = "<group>"; };
@@ -439,6 +459,10 @@
 		1618309C1BDF45D4002D3539 /* LCImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImage.m; path = Models/LCImage/LCImage.m; sourceTree = "<group>"; };
 		1619550A1BFEFA8C005D9944 /* LCRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRequest.h; path = Models/LCRequest/LCRequest.h; sourceTree = "<group>"; };
 		1619550B1BFEFA8C005D9944 /* LCRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCRequest.m; path = Models/LCRequest/LCRequest.m; sourceTree = "<group>"; };
+		16278B6F1C5B4ACC00F743F6 /* LCTermsOfServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTermsOfServiceViewController.h; path = ViewControllers/LCTermsOfServiceViewController/LCTermsOfServiceViewController.h; sourceTree = "<group>"; };
+		16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTermsOfServiceViewController.m; path = ViewControllers/LCTermsOfServiceViewController/LCTermsOfServiceViewController.m; sourceTree = "<group>"; };
+		16278B721C5B4B2D00F743F6 /* LCAcceptTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAcceptTermsViewController.h; path = ViewControllers/LCAcceptTermsViewController/LCAcceptTermsViewController.h; sourceTree = "<group>"; };
+		16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAcceptTermsViewController.m; path = ViewControllers/LCAcceptTermsViewController/LCAcceptTermsViewController.m; sourceTree = "<group>"; };
 		165DC92F1C44FE3600E55484 /* LCCauseSupportersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCauseSupportersVC.h; path = ViewControllers/LCCauseSupportersVC/LCCauseSupportersVC.h; sourceTree = "<group>"; };
 		165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCauseSupportersVC.m; path = ViewControllers/LCCauseSupportersVC/LCCauseSupportersVC.m; sourceTree = "<group>"; };
 		1687680D1BFDDA96001213D8 /* LCRecentNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRecentNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.h; sourceTree = "<group>"; };
@@ -676,6 +700,20 @@
 			path = Models/LCComment;
 			sourceTree = "<group>";
 		};
+		0B22B5D71C5B46F500397630 /* LCReportViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B44DC471C5C948F0080D7B4 /* LCReportPostViewController.h */,
+				0B44DC481C5C948F0080D7B4 /* LCReportPostViewController.m */,
+				0B44DC4D1C5C95950080D7B4 /* LCBlockUserViewController.h */,
+				0B44DC4E1C5C95950080D7B4 /* LCBlockUserViewController.m */,
+				0B477E121C5CB1BE00510568 /* LCBlockActionViewController.h */,
+				0B477E131C5CB1BE00510568 /* LCBlockActionViewController.m */,
+			);
+			name = LCReportViewController;
+			path = ViewControllers/LCReportPostViewController;
+			sourceTree = "<group>";
+		};
 		0B2902741BB90F1500E80684 /* LCActionsCellView */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,6 +811,34 @@
 				0BF5DD2E1BD4BD53004C5627 /* LCPost.m */,
 			);
 			name = LCPost;
+			sourceTree = "<group>";
+		};
+		0B44DC501C5CA8F10080D7B4 /* LCReportHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0B44DC511C5CA92A0080D7B4 /* LCReportHelper.h */,
+				0B44DC521C5CA92A0080D7B4 /* LCReportHelper.m */,
+			);
+			name = LCReportHelper;
+			sourceTree = "<group>";
+		};
+		0B477E151C5CF0E500510568 /* LCBlockedUsersListController */ = {
+			isa = PBXGroup;
+			children = (
+				0B477E161C5CF10100510568 /* LCBlockedUsersListController.h */,
+				0B477E171C5CF10100510568 /* LCBlockedUsersListController.m */,
+			);
+			path = LCBlockedUsersListController;
+			sourceTree = "<group>";
+		};
+		0B477E191C5CFAEF00510568 /* LCBlockedUsersCell */ = {
+			isa = PBXGroup;
+			children = (
+				0B477E1A1C5CFB0600510568 /* LCBlockedUsersCell.h */,
+				0B477E1B1C5CFB0600510568 /* LCBlockedUsersCell.m */,
+			);
+			name = LCBlockedUsersCell;
+			path = CustomViews/LCBlockedUsersCell;
 			sourceTree = "<group>";
 		};
 		0B5571431B8D9F1B00445958 /* LCSearchViewController */ = {
@@ -983,6 +1049,7 @@
 		0B775D7E1BE1F25B008B5B6F /* LCSettings */ = {
 			isa = PBXGroup;
 			children = (
+				0B477E151C5CF0E500510568 /* LCBlockedUsersListController */,
 				0B775D7F1BE1F25B008B5B6F /* LCChangePassword */,
 				0B775D821BE1F25B008B5B6F /* LCMyLegacyURL */,
 				0B775D851BE1F25B008B5B6F /* LCSettingsViewController */,
@@ -1269,6 +1336,8 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				16278B751C5B4B3700F743F6 /* LCAcceptTermsViewController */,
+				16278B6E1C5B4A7800F743F6 /* LCTermsOfServiceViewController */,
 				0BD5936F1B57786200658E99 /* LCFinalTutorialVC */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
@@ -1360,6 +1429,7 @@
 		0BEC736B1BA0301400D97BCA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0B44DC501C5CA8F10080D7B4 /* LCReportHelper */,
 				0BEC736C1BA0304D00D97BCA /* LCAppLaunchHelper */,
 			);
 			name = Helpers;
@@ -1469,6 +1539,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0B22B5D71C5B46F500397630 /* LCReportViewController */,
 				CE5CBF6E1C55FC6B0001F82C /* LCUIImagePickerController */,
 				0BCC87391C1025E00088D35D /* LCCollectionViewController */,
 				CE72CCEC1BFB18F300A288D2 /* LCBaseControllers */,
@@ -1585,6 +1656,24 @@
 				1619550B1BFEFA8C005D9944 /* LCRequest.m */,
 			);
 			name = LCRequest;
+			sourceTree = "<group>";
+		};
+		16278B6E1C5B4A7800F743F6 /* LCTermsOfServiceViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16278B6F1C5B4ACC00F743F6 /* LCTermsOfServiceViewController.h */,
+				16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */,
+			);
+			name = LCTermsOfServiceViewController;
+			sourceTree = "<group>";
+		};
+		16278B751C5B4B3700F743F6 /* LCAcceptTermsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16278B721C5B4B2D00F743F6 /* LCAcceptTermsViewController.h */,
+				16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */,
+			);
+			name = LCAcceptTermsViewController;
 			sourceTree = "<group>";
 		};
 		169607E41BF06A240007A278 /* LCEventMembers */ = {
@@ -1903,6 +1992,7 @@
 		CECBC8CC1B5678FE0012B287 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				0B477E191C5CFAEF00510568 /* LCBlockedUsersCell */,
 				16BBD85F1C2483680096F622 /* LCCauseCollectionReusableView */,
 				CEE2BDDB1C104DAD000E56AB /* LCNavigationBar */,
 				0B2A2CCF1BF5B30D00D20827 /* LCActionsHeader */,
@@ -2121,11 +2211,14 @@
 				CE2E09DC1C045C0500722A22 /* LCUsersListBC.m in Sources */,
 				0B7189D11C1EAE2F00554B98 /* LCTheme.m in Sources */,
 				CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */,
+				0B477E1C1C5CFB0600510568 /* LCBlockedUsersCell.m in Sources */,
+				0B44DC4F1C5C95950080D7B4 /* LCBlockUserViewController.m in Sources */,
 				0BEC736F1BA0306C00D97BCA /* LCAppLaunchHelper.m in Sources */,
 				0BEA5C931BEA1B3B00669C57 /* LCActionsVC.m in Sources */,
 				CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */,
 				CE2E09E21C04679300722A22 /* LCEventMembersListBC.m in Sources */,
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
+				16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */,
 				CE2E09E71C0468D900722A22 /* LCEventDetailsBC.m in Sources */,
 				0BB33DAF1BA8133F009E6D0C /* LCGIButton.m in Sources */,
 				CEBB4FFA1B8C75BD00C1552E /* LCListLocationsToTagVC.m in Sources */,
@@ -2208,6 +2301,7 @@
 				0BC7556F1B562A8A009CE7F3 /* LCContactsListVC.m in Sources */,
 				CE2E09C71C04330800722A22 /* LCProfileViewBC.m in Sources */,
 				0B56B8DF1C1AD74B001F3AE5 /* LCFeedAPIManager.m in Sources */,
+				0B477E181C5CF10100510568 /* LCBlockedUsersListController.m in Sources */,
 				CEBCEC641B68996F00F0116E /* LCSingleInterestVC.m in Sources */,
 				1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */,
 				CEF97CD01C22B67600DFA272 /* LCOnboardingHelper.m in Sources */,
@@ -2235,6 +2329,7 @@
 				0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */,
 				0BF5DD2F1BD4BD53004C5627 /* LCPost.m in Sources */,
 				0BC755751B56315F009CE7F3 /* LCConstants.m in Sources */,
+				16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */,
 				96B86A251B7A232C003EF7CA /* LCListFriendsToTagViewController.m in Sources */,
 				CE1C957C1BFB3C2B00A3B9FB /* LCSearchUsersBC.m in Sources */,
 				CEBCE1A81B6A252100730FD5 /* LCMenuButton.m in Sources */,
@@ -2262,6 +2357,7 @@
 				0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
 				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
+				0B44DC491C5C948F0080D7B4 /* LCReportPostViewController.m in Sources */,
 				0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,
 				CE2E09D91C045B6B00722A22 /* LCFriendsListBC.m in Sources */,
@@ -2270,7 +2366,9 @@
 				CEDE40711C1AA683003D3C81 /* LCOnboardFinalSelectionVC.m in Sources */,
 				CE2E09D31C0449E700722A22 /* LCUserInterestsBC.m in Sources */,
 				0B001B171B7C9E6800E8E569 /* LCFeed.m in Sources */,
+				0B477E141C5CB1BE00510568 /* LCBlockActionViewController.m in Sources */,
 				0B422B531C47A4940094B341 /* LCInterestFollowersVC.m in Sources */,
+				0B44DC531C5CA92A0080D7B4 /* LCReportHelper.m in Sources */,
 				0B2902801BB9370100E80684 /* LCInterestsCellView.m in Sources */,
 				0B56B8F71C1AF8E2001F3AE5 /* LCUserProfileAPIManager.m in Sources */,
 				0B8575021B9D644D00FD8766 /* LCInterestsTableViewCell.m in Sources */,

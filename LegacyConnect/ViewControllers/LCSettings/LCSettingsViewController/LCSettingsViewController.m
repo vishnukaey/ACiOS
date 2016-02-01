@@ -9,9 +9,12 @@
 #import "LCSettingsViewController.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
+#import "LCBlockedUsersListController.h"
+
 
 #define kIndexSectionAccount 0
-#define kIndexSectionSignOut 1
+#define kIndexSectionBlock 1
+#define kIndexSectionSignOut 2
 #define kStoryVoardId @"LCSettingsVC"
 #define kSettingsCellIdentifier @"LCSettingsCell"
 #define kSettingsSignOutCellIdentifier @"LCSettingsSignOutCell"
@@ -20,7 +23,7 @@
 #define kTextLeft @"left_text"
 #define kTextRight @"right_text"
 
-static CGFloat kNumberOfSection = 2;
+static CGFloat kNumberOfSection = 3;
 
 @interface LCSettingsViewController ()
 
@@ -101,7 +104,11 @@ static CGFloat kNumberOfSection = 2;
   NSInteger count;
   if (section == kIndexSectionAccount) {
     count =  self.accountDataSource.count;
-  } else  {
+  }
+  else if (section == kIndexSectionBlock) {
+    count = 1;
+  }
+  else if (section == kIndexSectionSignOut) {
     count = 1;
   }
   return count;
@@ -120,6 +127,15 @@ static CGFloat kNumberOfSection = 2;
     }
     [cell.textLabel setText:[(NSDictionary*)_accountDataSource[indexPath.row] objectForKey:kTextLeft]];
     [cell.detailTextLabel setText:[(NSDictionary*)_accountDataSource[indexPath.row] objectForKey:kTextRight]];
+  }
+  else if (indexPath.section == kIndexSectionBlock) {
+    
+    cell = [tableView dequeueReusableCellWithIdentifier:kSettingsCellIdentifier forIndexPath:indexPath];
+    if (cell == nil) {
+      cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kSettingsCellIdentifier];
+    }
+    [cell.textLabel setText:kManageBlkdUsers];
+    [cell.detailTextLabel setText:kEmptyStringValue];
   }
   else if (indexPath.section == kIndexSectionSignOut) {
     
@@ -145,7 +161,6 @@ static CGFloat kNumberOfSection = 2;
   UITableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   if (headerView == nil) {
     headerView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    
   }
   
   UILabel *sectionLabel = (UILabel *)[headerView viewWithTag:100];
@@ -195,7 +210,10 @@ static CGFloat kNumberOfSection = 2;
         break;
     }
   }
-  else {
+  else if (indexPath.section == kIndexSectionBlock) {
+    [self showBlockedUsersList];
+  }
+  else if (indexPath.section == kIndexSectionSignOut) {
     [self signOut];
   }
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -243,6 +261,12 @@ static CGFloat kNumberOfSection = 2;
   privacyVC.settingsData = _settingsData;
   privacyVC.delegate = self;
   [self presentViewController:privacyVC animated:YES completion:nil];
+}
+
+- (void)showBlockedUsersList
+{
+  LCBlockedUsersListController * blockedList = [self.storyboard instantiateViewControllerWithIdentifier:@"LCBlockedUsersListController"];
+  [self presentViewController:blockedList animated:YES completion:nil];
 }
 
 - (void) signOutLegacy {

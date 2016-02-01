@@ -57,6 +57,12 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
                                                name:kAcceptFriendRequestNFK
                                              object:nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kBlockUserNFK
+                                             object:nil];
+
+  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(updateImpactsCount:)
@@ -66,6 +72,11 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
                                            selector:@selector(updateImpactsCount:)
                                                name:kDeletePostNFK
                                              object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(updateImpactsCount:)
+                                               name:kReportedPostNFK
+                                             object:nil];
+  
 }
 
 - (void)dealloc {
@@ -102,7 +113,9 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
     case kRequestWaiting:
       btnImageName = kImgProfileWaiting;
       break;
-      
+    case kBlocked:
+      btnImageName = kImgProfileAdd;
+      break;
   }
   if(btnImageName)
   {
@@ -189,6 +202,10 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
       NSInteger count = [_userDetail.friendCount integerValue] - 1;
       _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
     }
+    else if (notification.name == kBlockUserNFK) {
+      NSInteger count = [_userDetail.friendCount integerValue] - 1;
+      _userDetail.friendCount = [NSString stringWithFormat: @"%ld", (long)count];
+    }
     [self updateUserDetailUI];
   }
 }
@@ -208,7 +225,15 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
       NSInteger count = [_userDetail.impactCount integerValue] - 1;
       _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
     }
-    [self updateUserDetailUI];
   }
+  else
+  {
+    if (notification.name == kReportedPostNFK) {
+      
+      NSInteger count = [_userDetail.impactCount integerValue] - 1;
+      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+    }
+  }
+  [self updateUserDetailUI];
 }
 @end

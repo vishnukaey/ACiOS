@@ -16,8 +16,8 @@
 "no_interests_selected" = "Causes will appear here based on the interests you choose";
 "no_causes_available" = "No causes to display.";
 "no_friends_available" = "No friends to display.";
-"no_impacts_available_self" = "Create Impacts by selecting the Global Impact button from the bottom right.";
-"no_impacts_available_others" = "No Impacts to display.";
+"no_impacts_available_self" = "Create Helps by selecting the Global Impact button from the bottom right.";
+"no_impacts_available_others" = "No Helps to display.";
 "no_feeds_available" = "No Feeds to display.";
 "no_comments_available" = "No Comments to display.";
 
@@ -58,6 +58,8 @@
 "delete_post_message" = "Are you sure you want to permanently remove this post from ThatHelps?";
 "close_post" = "Discard Post";
 "close_post_message" = "Are you sure you want to discard the post?";
+"report_post" = "Report Post";
+"block_user" = "Block User";
 //---friends---//
 "remove_friend" = "Remove Friend";
 "cancel_friend_request" = "Cancel Friend Request";
@@ -108,6 +110,8 @@
 "in_" = "in ";
 "you_" = "You";
 "members_count" = "Members";
+"block_action" = "Block Action";
+
 
 //-- version control --//
 "version_outdated_title" = "Version outdated";
@@ -125,3 +129,5 @@
 "fbuser_can't_change_email" = "Email cannot be changed as you have logged in via Facebook";
 "fbuser_can't_change_password" = "Password cannot be changed as you have logged in via Facebook";
 "signOut" = "Sign Out";
+
+"no_blocked_users" = "No Blocked Users";

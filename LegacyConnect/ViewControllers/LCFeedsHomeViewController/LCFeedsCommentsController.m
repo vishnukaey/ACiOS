@@ -10,6 +10,7 @@
 #import "LCCommentCell.h"
 #import "LCLoadingCell.h"
 #import "LCFullScreenImageVC.h"
+#import "LCReportHelper.h"
 
 static CGFloat kIndexForPostDetails = 0;
 
@@ -181,6 +182,10 @@ static CGFloat kIndexForPostDetails = 0;
   commentCell.commentCellTagAction = ^ (NSDictionary * tagDetails) {
     [weakSelf tagTapped:tagDetails];
   };
+  commentCell.commentCellMoreAction =^(){
+    [LCReportHelper showCommentReportActionSheetFromView:self
+                                             withComment:self.results[rowNo]];
+  };
   [commentCell.seperator setHidden:self.results.count == indexPath.row];
   return commentCell;
 }
@@ -201,6 +206,10 @@ static CGFloat kIndexForPostDetails = 0;
   {
     [self showFullScreenImage:feed];
   }
+  else if (type == kkFeedCellActionReport)
+  {
+    [self reportFeed:feed];
+  }
 }
 
 - (void)showFullScreenImage:(LCFeed*)feed
@@ -212,6 +221,11 @@ static CGFloat kIndexForPostDetails = 0;
   };
   imageVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:imageVC animated:YES completion:nil];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:feed];
 }
 
 

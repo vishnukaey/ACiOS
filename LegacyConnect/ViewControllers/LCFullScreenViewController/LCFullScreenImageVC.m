@@ -8,6 +8,7 @@
 
 #import "LCFullScreenImageVC.h"
 #import "LCThanksButtonImage.h"
+#import "LCReportHelper.h"
 
 @interface LCFullScreenImageVC ()
 {
@@ -22,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *commentCountLabel;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingActivity;
 @property (weak, nonatomic) IBOutlet UIButton *retryButton;
-
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 @end
 
 @implementation LCFullScreenImageVC
@@ -86,11 +87,15 @@
   [self tryImageLoading:nil];
   [self dataPopulation];
   
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  GIButton_preState = [appdel.GIButton isHidden];
-  menuButton_preState = [appdel.menuButton isHidden];
-  [appdel.GIButton setHidden: true];
-  [appdel.menuButton setHidden: true];
+  if ([_feed.userID isEqualToString:[LCDataManager sharedDataManager].userID])
+  {
+    self.reportButton.hidden = YES;
+  }
+  else
+  {
+    self.reportButton.hidden = NO;
+  }
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,12 +104,26 @@
   // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+//  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  GIButton_preState = [appdel.GIButton isHidden];
+  menuButton_preState = [appdel.menuButton isHidden];
+  [appdel.GIButton setHidden: true];
+  [appdel.menuButton setHidden: true];
+
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
+//  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.GIButton setHidden: GIButton_preState];
   [appdel.menuButton setHidden: menuButton_preState];
+
 }
 
 #pragma mark - button actions
@@ -119,13 +138,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
   }
 }
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  [appdel.GIButton setHidden:NO];
-//  [appdel.menuButton setHidden:NO];
-//  [super viewWillDisappear:animated];
-//}
 
 - (IBAction)likeButtonClicked:(id)sender
 {
@@ -168,6 +180,22 @@
   if (self.commentAction) {
     self.commentAction(weakSelf, YES);
   }
+}
+- (IBAction)reportFeed:(id)sender {
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(GIAndMenuButtonUpdateOnDismissal) name:@"block_details_screen_dismissed" object:nil];
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:self.feed];
+}
+
+- (void)GIAndMenuButtonUpdateOnDismissal
+{
+  if (self.isViewLoaded && self.view.window) {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"block_details_screen_dismissed" object:nil];
+    [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+  }
+}
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self name:@"block_details_screen_dismissed" object:nil];
 }
 
 @end

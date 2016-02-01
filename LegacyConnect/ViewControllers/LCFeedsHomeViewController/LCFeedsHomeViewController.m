@@ -18,6 +18,7 @@
 #import "LCSearchViewController.h"
 #import "LCLoadingCell.h"
 #import "LCSocialShareManager.h"
+#import "LCReportHelper.h"
 
 static CGFloat kFeedCellRowHeight = 44.0f;
 static NSString *kFeedCellXibName = @"LCFeedcellXIB";
@@ -105,6 +106,10 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
       [self showFullScreenImage:feed];
       break;
       
+    case kkFeedCellActionReport:
+      [self reportFeed:feed];
+      break;
+      
     default:
       break;
   }
@@ -140,6 +145,12 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
     }
   }];
 }
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:feed];
+}
+
 
 - (void)tagTapped:(NSDictionary *)tagDetails
 {

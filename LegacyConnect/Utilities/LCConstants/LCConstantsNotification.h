@@ -18,6 +18,7 @@ extern NSString *const kUpdateProfileNFK;
 extern NSString *const kCreateNewPostNFK;
 extern NSString *const kUpdatePostNFK;
 extern NSString *const kDeletePostNFK;
+extern NSString *const kReportedPostNFK;
 extern NSString *const kLikedPostNFK;
 extern NSString *const kUnlikedPostNFK;
 extern NSString *const kCommentPostNFK;
@@ -34,11 +35,14 @@ extern NSString *const kRejectFriendRequestNFK;
 extern NSString *const kCreateEventNFK;
 extern NSString *const kCommentEventNFK;
 extern NSString *const kDeleteEventNFK;
+extern NSString *const kReportedEventNFK;
 extern NSString *const kUpdateEventNFK;
 extern NSString *const kFollowEventNFK;
 extern NSString *const kUnfollowEventNFK;
 extern NSString *const kRejectEventRequestNFK;
 extern NSString *const kAcceptEventRequestNFK;
+
+extern NSString *const kBlockUserNFK ;
 
 extern NSString *const kUserProfileUpdateNotification;
 extern NSString *const kfeedUpdatedotification;

@@ -17,6 +17,7 @@
 + (void)postPostDeletedNotificationforPost: (LCFeed *)post;
 + (void)postPostEditedNotificationForPost :(LCFeed *)post;
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post;
++ (void)postPostReportedNotificationforPost: (LCFeed *)post;
 
 // ------- Event ------//
 + (void)postEventFollowedNotificationWithEvent:(LCEvent*)event andResponse:(NSDictionary*)response;
@@ -48,4 +49,7 @@
 + (void)postCauseFollowedNotificationWithCause:(LCCause *)cause;
 + (void)postCauseUnFollowedNotificationWithCause:(LCCause *)cause;
 
++ (void)postEventBlockedNotificationForEvent:(LCEvent*)event;
+
++ (void)postBlockedUserNotification :(NSString *)friendID forFriendStatus :(int)status;
 @end

@@ -36,6 +36,12 @@
                                              object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(friendStatusUpdatedNotificationReceived:)
+                                               name:kBlockUserNFK
+                                             object:nil];
+
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(interestFollowedNotificationReceived:)
                                                name:kFollowInterestNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self
@@ -116,7 +122,7 @@
   for (int i = 0; i<self.searchResultObject.causesArray.count ; i++) {
     if ([self.searchResultObject.causesArray[i] isKindOfClass:[LCCause class]]) {
       LCCause *cause = self.searchResultObject.causesArray[i];
-      if ([cause.interestID isEqualToString:updatedCause.interestID])
+      if ([cause.causeID isEqualToString:updatedCause.causeID])
       {
         cause.isSupporting = updatedCause.isSupporting;
         cause.supporters = updatedCause.supporters;

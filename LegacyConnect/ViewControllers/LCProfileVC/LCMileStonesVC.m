@@ -15,6 +15,7 @@
 #import "LCSingleCauseVC.h"
 #import "LCSingleInterestVC.h"
 #import <KoaPullToRefresh/KoaPullToRefresh.h>
+#import "LCReportHelper.h"
 
 @interface LCMileStonesVC ()
 
@@ -154,6 +155,7 @@
   
   if (self.isSelfProfile) {
     cell.moreButton.hidden = NO;
+    cell.reportButton.hidden = YES;
   }
   
   tableView.backgroundColor = [UIColor clearColor];
@@ -177,6 +179,10 @@
       
     case kFeedCellActionComment:
       [self showFeedCommentsWithFeed:feed];
+      break;
+      
+    case kkFeedCellActionReport:
+      [self reportFeed:feed];
       break;
       
     default:
@@ -275,6 +281,11 @@
   createPostVC.postFeedObject = feed;
   createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   [self presentViewController:createPostVC animated:YES completion:nil];
+}
+
+- (void)reportFeed:(LCFeed*)feed
+{
+  [LCReportHelper showPostReportActionSheetFromView:self withPost:feed];
 }
 
 - (void)tagTapped:(NSDictionary *)tagDetails

@@ -12,7 +12,8 @@ typedef enum {
   kMyProfile,
   kIsFriend,
   kNonFriend,
-  kRequestWaiting
+  kRequestWaiting,
+  kBlocked
 }FriendStatus;
 
 typedef enum {
@@ -41,7 +42,7 @@ extern NSString *const kLoginURL;
 extern NSString *const kRegisterURL;
 extern NSString *const kEditProfileURL;
 extern NSString *const kFBLoginURL;
-
+extern NSString *const kToSURL;
 extern NSString *const kGetUserDetailsURL;
 extern NSString *const kGetInterestURL;
 extern NSString *const kGetInterestsURL;
@@ -66,6 +67,8 @@ extern NSString *const kCauseUnsuppotURL;
 extern NSString *const kGetCauseFromInterestsURL;
 extern NSString *const kGetThemesURL;
 
+extern NSString *const kBlockUserURL;
+extern NSString *const kBlockEventURL;
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
 extern NSString *const kForgotPasswordURL;
@@ -95,7 +98,8 @@ extern NSString *const kPostMilestoneURL;
 extern NSString *const kGetNotificationCountURL;
 extern NSString *const kGetRecentNotificationsURL;
 extern NSString *const kMarkNotificationAsReadURL;
-
+extern NSString *const kGetReportPostURL;
+extern NSString *const kBlockedUsersURL;
 extern NSString *const kGetSettignsURL;
 extern NSString *const kChangeEmailURL;
 extern NSString *const kChangePasswordURL;
@@ -191,7 +195,6 @@ extern NSString *const kHomefeedCellID;
 extern NSString *const kCommentsfeedCellID;
 extern NSString *const kCausesCellID;
 
-extern NSString *const kWordType;
 extern NSString *const kFeedTagTypeCause;
 extern NSString *const kFeedTagTypeInterest;
 extern NSString *const kFeedTagTypeUser;
@@ -226,6 +229,7 @@ extern NSString *const kEmailAddress;
 extern NSString *const kChangePassword;
 extern NSString *const kMyLegacyURL;
 extern NSString *const kPrivacy;
+extern NSString *const kManageBlkdUsers;
 extern NSString *const kSignOut;
 
 
