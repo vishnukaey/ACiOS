@@ -8,14 +8,41 @@
 
 #import "LCUtilityManager.h"
 #import <AFNetworking/AFNetworkReachabilityManager.h>
-#import <AddressBook/AddressBook.h>
 #import <Reachability/Reachability.h>
-#import "LCContact.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #define MAX_IMAGE_SIZE 1.2
 
 @implementation LCUtilityManager
+
+#pragma mark - genearal method implementation
++ (NSData*)performNormalisedImageCompression:(UIImage*)image
+{
+  NSData *data = UIImageJPEGRepresentation(image, 1.0);
+  if([data length] < MAX_IMAGE_SIZE*1024*1024)
+  {
+    return data;
+  }
+  CGFloat compression = 1.0f;
+  CGFloat maxCompression = 0.1f;
+  int maxFileSize = MAX_IMAGE_SIZE*1024*1024;
+  
+  NSData *imageData = UIImageJPEGRepresentation(image, compression);
+  LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  while ([imageData length] > maxFileSize && compression > maxCompression)
+  {
+    compression -= 0.1;
+    imageData = UIImageJPEGRepresentation(image, compression);
+    LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  }
+  LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
+  return imageData;
+}
+
++ (void)setLCStatusBarStyle {
+  
+  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+}
 
 + (BOOL)isNetworkAvailable
 {
@@ -23,27 +50,14 @@
   return reach.isReachable;
 }
 
-+ (NSString *)performNullCheckAndSetValue:(NSString *)value
-{
-  if (value && ![value isKindOfClass:[NSNull class]])
-  {
-    return value;
-  }
-  return kEmptyStringValue;
-}
-
-+ (NSString*) getStringValueOfBOOL:(BOOL)value
-{
-  int boolInt = (int) value;
-  return [NSString stringWithFormat:@"%d",boolInt];
-}
-
+#pragma mark - Alert
 + (void)showAlertViewWithTitle:(NSString *)title andMessage:(NSString *)message
 {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
   [alert show];
 }
 
+#pragma maek - User defaults saving/Retriving.
 + (void)saveUserDefaultsForNewUser
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -79,31 +93,6 @@
 
 }
 
-
-+ (NSData*)performNormalisedImageCompression:(UIImage*)image
-{
-  NSData *data = UIImageJPEGRepresentation(image, 1.0);
-  if([data length] < MAX_IMAGE_SIZE*1024*1024)
-  {
-    return data;
-  }
-  CGFloat compression = 1.0f;
-  CGFloat maxCompression = 0.1f;
-  int maxFileSize = MAX_IMAGE_SIZE*1024*1024;
-  
-  NSData *imageData = UIImageJPEGRepresentation(image, compression);
-  LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
-  while ([imageData length] > maxFileSize && compression > maxCompression)
-  {
-    compression -= 0.1;
-    imageData = UIImageJPEGRepresentation(image, compression);
-    LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
-  }
-  LCDLog(@"File size is : %.2f MB",(float)imageData.length/1024.0f/1024.0f);
-  return imageData;
-}
-
-
 + (void)clearUserDefaultsForCurrentUser
 {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -116,7 +105,7 @@
   [defaults setValue:nil forKey:kUserIDKey];
 }
 
-
+#pragma mark - Data and Time method implemenatation
 + (NSString *)getDateFromTimeStamp:(NSString *)timeStamp WithFormat:(NSString *)format
 {
   NSString *date = kEmptyStringValue;
@@ -128,7 +117,6 @@
   }
   return date;
 }
-
 
 + (NSString *)getTimeStampStringFromDate:(NSDate *)date
 {
@@ -157,6 +145,7 @@
   return age;
 }
 
+#pragma mark -Encode and Decode methods
 + (NSString *)encodeToBase64String:(NSString *)string
 {
   NSData *encodedData = [string dataUsingEncoding: NSUTF8StringEncoding];
@@ -164,6 +153,14 @@
   return base64String;
 }
 
++ (NSString *)decodeFromBase64String:(NSString *)string
+{
+  NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:string options:0];
+  NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
+  return decodedString;
+}
+
+#pragma mark - Validation methods
 + (BOOL)validateEmail:(NSString*)emailString
 {
   NSString *emailRegex = @"[A-Z0-9a-z._%+]+@[A-Za-z0-9.]+\\.[A-Za-z]{2,4}";
@@ -189,48 +186,29 @@
   return NO;
 }
 
-+ (NSString *)decodeFromBase64String:(NSString *)string
-{
-  NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:string options:0];
-  NSString *decodedString = [[NSString alloc] initWithData:decodedData encoding:NSUTF8StringEncoding];
-  return decodedString;
-}
-
 + (NSString *) generateUserTokenForUserID:(NSString*)userEmail andPassword:(NSString *)password
 {
   NSString *appendedString = [NSString stringWithFormat:@"%@:%@",userEmail,password];
   return [LCUtilityManager encodeToBase64String:appendedString];
 }
 
-+ (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text
++ (NSString *)performNullCheckAndSetValue:(NSString *)value
 {
-  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-  cell.textLabel.text = text;
-  [cell.textLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
-  [cell.textLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
-  cell.textLabel.textAlignment =NSTextAlignmentCenter;
-  cell.textLabel.numberOfLines = 2;
-  return cell;
+  if (value && ![value isKindOfClass:[NSNull class]])
+  {
+    return value;
+  }
+  return kEmptyStringValue;
 }
 
-+ (void)setLCStatusBarStyle {
-  
-  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
++ (NSString*) getStringValueOfBOOL:(BOOL)value
+{
+  int boolInt = (int) value;
+  return [NSString stringWithFormat:@"%d",boolInt];
 }
-
 
 + (BOOL)isaValidWebsiteLink :(NSString *)link
 {
-//  NSURL *candidateURL = [NSURL URLWithString:link];
-//  if (candidateURL && candidateURL.scheme && candidateURL.host) {
-//    return true;
-//  }
-//  return false;
-
-//  NSString *urlRegEx = @"((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-//  NSString *urlRegEx =@"(http|https)://((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
-//  NSString *urlRegEx = @"((?:http|https)://)?(?:www\\.)?[\\w\\d\\-_]+\\.\\w{2,3}(\\.\\w{2})?(/(?<=/)(?:[\\w\\d\\-./_]+)?)?";
-  
   NSString *urlRegEx =@"((http|https)://)?((\\w)*|([0-9]*)|([-|_])*)+([\\.|/]((\\w)*|([0-9]*)|([-|_])*))+";
   NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
   return [urlTest evaluateWithObject:link];
@@ -248,169 +226,6 @@
     return NO;
   }
   return YES;
-}
-
-//+(NSNumber*) getNSNumberFromString:(NSString*)string
-//{
-//  NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
-//  format.numberStyle = NSNumberFormatterDecimalStyle;
-//  NSNumber *myNumber = [format numberFromString:string];
-//  return myNumber;
-//}
-
-#pragma mark- Get Contacts
-+ (NSString *)getFirstnameOfContactForPerson :(ABRecordRef)person
-{
-  CFStringRef firstName = (CFStringRef)ABRecordCopyValue(person,kABPersonFirstNameProperty);
-  NSString *firstName_ = [(__bridge NSString*)firstName copy];
-  if (firstName != NULL) {
-    CFRelease(firstName);
-  }
-  if (!firstName_) {
-    firstName_ = @"";
-  }
-  return firstName_;
-}
-
-+ (NSString *)getLastnameOfContactForPerson :(ABRecordRef)person
-{
-  CFStringRef lastName = (CFStringRef)ABRecordCopyValue(person,kABPersonLastNameProperty);
-  NSString *lastName_ = [(__bridge NSString*)lastName copy];
-  
-  if (lastName != NULL) {
-    CFRelease(lastName);
-  }
-  if (!lastName_) {
-    lastName_ = @"";
-  }
-  return lastName_;
-}
-
-+ (UIImage *)getImageOfContactForPerson :(ABRecordRef)person
-{
-  CFDataRef imgData = ABPersonCopyImageData(person);
-  NSData *imageData = (__bridge NSData *)imgData;
-  UIImage *dpImage = [UIImage imageWithData:imageData];
-  if (imgData != NULL) {
-    CFRelease(imgData);
-  }
-  if (!dpImage) {
-    dpImage = [UIImage imageNamed:@"userProfilePic"];
-  }
-  return dpImage;
-}
-
-+ (NSArray *)getPhoneNumbersOfContactForPerson :(ABRecordRef)person
-{
-  NSMutableArray *phoneNumbers = [[NSMutableArray alloc] init];
-  ABMultiValueRef multiPhones = ABRecordCopyValue(person, kABPersonPhoneProperty);
-  
-  for(CFIndex i=0; i<ABMultiValueGetCount(multiPhones); i++) {
-    @autoreleasepool {
-      CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(multiPhones, i);
-      NSString *phoneNumber = CFBridgingRelease(phoneNumberRef);
-      if (phoneNumber != nil)[phoneNumbers addObject:phoneNumber];
-      //NSLog(@"All numbers %@", phoneNumbers);
-    }
-  }
-  
-  if (multiPhones != NULL) {
-    CFRelease(multiPhones);
-  }
-  return phoneNumbers;
-}
-
-+ (NSArray *)getEmailsOfContactForPerson :(ABRecordRef)person
-{
-  NSMutableArray *contactEmails = [NSMutableArray new];
-  ABMultiValueRef multiEmails = ABRecordCopyValue(person, kABPersonEmailProperty);
-
-  for (CFIndex i=0; i<ABMultiValueGetCount(multiEmails); i++) {
-    @autoreleasepool {
-      CFStringRef contactEmailRef = ABMultiValueCopyValueAtIndex(multiEmails, i);
-      NSString *contactEmail = CFBridgingRelease(contactEmailRef);
-      if (contactEmail != nil)[contactEmails addObject:contactEmail];
-      // NSLog(@"All emails are:%@", contactEmails);
-    }
-  }
-
-  if (multiEmails != NULL) {
-    CFRelease(multiEmails);
-  }
-  return contactEmails;
-}
-
-+ (NSString *)getLocationOfContactForPerson :(ABRecordRef)person
-{
-  NSString *address = @"";
-  ABMultiValueRef addressRef = ABRecordCopyValue(person, kABPersonAddressProperty);
-  if (ABMultiValueGetCount(addressRef) > 0) {
-    NSDictionary *addressDict = (__bridge NSDictionary *)ABMultiValueCopyValueAtIndex(addressRef, 0);
-    
-    address = [NSString stringWithFormat:@"%@",addressDict[(NSString *)kABPersonAddressCityKey]];
-    
-  }
-  CFRelease(addressRef);
-  return address;
-}
-
-+ (NSArray *)getPhoneContacts {
-    CFErrorRef *error = nil;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, error);
-    ABRecordRef source = ABAddressBookCopyDefaultSource(addressBook);
-    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeopleInSourceWithSortOrdering(addressBook, source, kABPersonSortByFirstName);
-    //CFIndex nPeople = ABAddressBookGetPersonCount(addressBook);
-    CFIndex nPeople = CFArrayGetCount(allPeople); // bugfix who synced contacts with facebook
-    NSMutableArray* items = [NSMutableArray arrayWithCapacity:nPeople];
-    for (int i = 0; i < nPeople; i++) {
-        @autoreleasepool {
-            //data model
-            LCContact *contact_ = [[LCContact alloc] init];
-            ABRecordRef person = CFArrayGetValueAtIndex(allPeople, i);
-            //get First Name
-            NSString *firstName_ = [LCUtilityManager getFirstnameOfContactForPerson:person];
-            //get Last Name
-            NSString *lastName_ = [LCUtilityManager getLastnameOfContactForPerson:person];
-            //            contacts.contactId = ABRecordGetRecordID(person);
-            //append first name and last name
-            contact_.P_name = [NSString stringWithFormat:@"%@ %@", firstName_, lastName_];
-            if ([contact_.P_name isEqualToString:@" "]) {
-                continue;
-            }
-            // get contacts picture, if pic doesn't exists, show standart one
-            contact_.P_image = [LCUtilityManager getImageOfContactForPerson:person];
-          
-            //get Phone Numbers
-            contact_.P_numbers = [LCUtilityManager getPhoneNumbersOfContactForPerson:person];
-            
-//            if (contact_.P_numbers.count == 0) {
-//                continue;
-//            }
-          
-            //get Contact email
-            contact_.P_emails = [LCUtilityManager getEmailsOfContactForPerson:person];
-            if (contact_.P_emails.count == 0) {
-                continue;
-            }
-          //get location
-            contact_.P_address = [LCUtilityManager getLocationOfContactForPerson:person];
-            [items addObject:contact_];
-        }
-    } //autoreleasepool
-    CFRelease(allPeople);
-    CFRelease(addressBook);
-    CFRelease(source);
-    return items;
-}
-
-#pragma mark- GIButton visibility
-+ (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden
-{
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  if (!appdel.isCreatePostOpen) {
-    [appdel.GIButton setHidden:GIisHidden];
-    [appdel.menuButton setHidden:menuisHidden];
-  }
 }
 
 #pragma mark- twitter url proccess
@@ -433,6 +248,7 @@
   return parameterDict;
 }
 
+#pragma mark - Pagination helper
 + (UIView*)getNoResultViewWithText:(NSString*)text
 {
   UIView * noResultView = [[UIView alloc] init];
@@ -500,6 +316,18 @@
   return loaderCell;
 }
 
++ (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text
+{
+  UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
+  cell.textLabel.text = text;
+  [cell.textLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
+  [cell.textLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
+  cell.textLabel.textAlignment =NSTextAlignmentCenter;
+  cell.textLabel.numberOfLines = 2;
+  return cell;
+}
+
+
 #pragma mark- version control
 + (void)showVersionOutdatedAlert
 {
@@ -511,7 +339,6 @@
   
   [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:versionAlert animated:YES completion:nil];
 }
-
 + (NSString *)getAppVersion
 {
   NSString *appVersion = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -526,9 +353,14 @@
   }];
 }
 
-+ (UIColor *)getThemeRedColor
+#pragma mark - GI Button method implementation
++ (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden
 {
-  return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  if (!appdel.isCreatePostOpen) {
+    [appdel.GIButton setHidden:GIisHidden];
+    [appdel.menuButton setHidden:menuisHidden];
+  }
 }
 
 + (float)getHeightOffsetForGIB
@@ -536,6 +368,7 @@
   return 80;
 }
 
+#pragma mark - LC Colour - implementation.
 +(UIColor*)colorWithHexString:(NSString*)hexString
 {
   NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
@@ -573,5 +406,9 @@
                          alpha:1.0f];
 }
 
++ (UIColor *)getThemeRedColor
+{
+  return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
+}
 
 @end

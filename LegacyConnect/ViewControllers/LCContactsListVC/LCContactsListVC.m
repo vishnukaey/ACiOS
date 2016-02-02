@@ -10,6 +10,7 @@
 #import <AddressBook/AddressBook.h>
 #import "LCContact.h"
 #import "LCFeedsHomeViewController.h"
+#import "LCPhoneContactsHelper.h"
 
 #pragma mark - LCInviteFromContactsCell class
 @interface LCInviteFromContactsCell : UITableViewCell
@@ -53,7 +54,7 @@
       if (granted)
       {
         // First time access has been granted, add the contact
-        contactsArray = [LCUtilityManager getPhoneContacts];
+        contactsArray = [LCPhoneContactsHelper getPhoneContacts];
         dispatch_async(dispatch_get_main_queue(), ^{
           [contactsTable reloadData];
         });
@@ -69,7 +70,7 @@
   else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
   {
     // The user has previously given access, add the contact
-    contactsArray = [LCUtilityManager getPhoneContacts];
+    contactsArray = [LCPhoneContactsHelper getPhoneContacts];
     [contactsTable reloadData];
   }
   else

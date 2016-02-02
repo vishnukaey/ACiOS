@@ -334,11 +334,6 @@ static CGFloat kActionSectionHeight = 30;
   }
 }
 
-- (void)membersAction
-{
-  LCDLog(@"members clicked-->>");
-}
-
 - (void)websiteLinkAction
 {
   if (self.eventObject.website) {
