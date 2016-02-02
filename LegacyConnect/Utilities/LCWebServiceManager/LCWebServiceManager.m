@@ -211,32 +211,38 @@
   }
   else
   {
-    // Oridinary Post in case of no images
-    
-    [manager POST:urlString parameters:params
-          success:^(AFHTTPRequestOperation *operation, id responseObject)
-     {
-       NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
-       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-       if([statusCode isEqualToString:kStatusCodeSuccess])
-       {
-         success(responseObject);
-       }
-       else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
-       {
-         [LCUtilityManager showVersionOutdatedAlert];
-       }
-       else//101
-       {
-         failure(responseObject[kResponseMessage]);
-       }
-     }
-          failure:^(AFHTTPRequestOperation *operation, NSError *error)
-     {
-       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-       failure([error localizedDescription]);
-     }];
+    [LCWebServiceManager ordinaryPostOperationWithManager:manager Url:urlString parameters:params withSuccess:success andFailure:failure];
   }
+}
+
++ (void)ordinaryPostOperationWithManager:(AFHTTPRequestOperationManager*)manager Url:(NSString *)urlString parameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  // Oridinary Post in case of no images
+  
+  [manager POST:urlString parameters:params
+        success:^(AFHTTPRequestOperation *operation, id responseObject)
+   {
+     NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
+     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+     if([statusCode isEqualToString:kStatusCodeSuccess])
+     {
+       success(responseObject);
+     }
+     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     {
+       [LCUtilityManager showVersionOutdatedAlert];
+     }
+     else//101
+     {
+       failure(responseObject[kResponseMessage]);
+     }
+   }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+   {
+     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+     failure([error localizedDescription]);
+   }];
+
 }
 
 @end

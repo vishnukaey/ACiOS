@@ -131,7 +131,7 @@ static CGFloat kActionSectionHeight = 30;
 {
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
   [settingsButton.layer setCornerRadius:5.0f];
@@ -192,52 +192,29 @@ static CGFloat kActionSectionHeight = 30;
   NSString * eventinfoString = [NSString stringWithFormat:@"%@%@ %@%@",eventCreatedBy,eventOwnerName,inText,interest];
   NSMutableAttributedString * eventInfoAtribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
   
-  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
+  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
   [paragraphStyle setAlignment:NSTextAlignmentCenter];
   
   [eventInfoAtribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [eventInfoAtribString length])];
   
-  
-  
   NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
-  [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                        NSForegroundColorAttributeName : [UIColor whiteColor]
-                                        } range:tagRangeCreatedBy];
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14], NSForegroundColorAttributeName : [UIColor whiteColor]} range:tagRangeCreatedBy];
   
   NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
-  [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                        NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]
-                                        } range:tagRangeUserName];
-  
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14], NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]} range:tagRangeUserName];
   
   NSRange tagRangeinText = [eventinfoString rangeOfString:inText];
-  [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                        NSForegroundColorAttributeName : [UIColor whiteColor]
-                                        } range:tagRangeinText];
-  
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14], NSForegroundColorAttributeName : [UIColor whiteColor]} range:tagRangeinText];
   
   NSRange tagRangeinterest = [eventinfoString rangeOfString:interest];
-  [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                        NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
-                                        } range:tagRangeinterest];
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14], NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]} range:tagRangeinterest];
   
+  [self setTaggedLabelWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName andInfoString:eventInfoAtribString];
   
-  NSMutableArray * tagsWithRanges = [self getTaggedArrayWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName];
-  
-  eventCreatedByLabel.tagsArray  = tagsWithRanges;
-  [eventCreatedByLabel setAttributedText:eventInfoAtribString];
-  __weak typeof(self) weakSelf = self;
-  eventCreatedByLabel.nameTagTapped = ^(int index) {
-    [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
-  };
-
 }
 
-- (NSMutableArray*)getTaggedArrayWithTagRangeUsername:(NSRange)tagRangeUserName andTagRangeinterest:(NSRange)tagRangeinterest eventOwnerName:(NSString*)eventOwnerName
+- (void)setTaggedLabelWithTagRangeUsername:(NSRange)tagRangeUserName andTagRangeinterest:(NSRange)tagRangeinterest
+                            eventOwnerName:(NSString*)eventOwnerName andInfoString:(NSMutableAttributedString*)infoString
 {
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   
@@ -248,7 +225,14 @@ static CGFloat kActionSectionHeight = 30;
   // -- User Info Tag -- //
   NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
   [tagsWithRanges addObject:dic_user];
-  return tagsWithRanges;
+  
+  
+  eventCreatedByLabel.tagsArray  = tagsWithRanges;
+  [eventCreatedByLabel setAttributedText:infoString];
+  __weak typeof(self) weakSelf = self;
+  eventCreatedByLabel.nameTagTapped = ^(int index) {
+    [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
+  };
 }
 
 - (void)blockEventUI
@@ -428,7 +412,7 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   if (!self.eventObject.isFollowing) {
-    UITableViewCell * followEventCell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
+    UITableViewCell * followEventCell = [LCPaginationHelper getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
     [followEventCell setBackgroundColor:[UIColor clearColor]];
     return followEventCell;
   }

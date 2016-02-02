@@ -73,8 +73,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
   self.tableView.estimatedRowHeight = kFeedCellRowHeight;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;

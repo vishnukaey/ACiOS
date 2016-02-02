@@ -151,7 +151,7 @@
 {
   if (contactsArray.count == 0)
   {
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_contacts_to_display", nil)];
+    UITableViewCell *cell = [LCPaginationHelper getEmptyIndicationCellWithText:NSLocalizedString(@"no_contacts_to_display", nil)];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.allowsSelection = NO;

@@ -84,6 +84,7 @@
 		0B9741841C217732000B89CA /* LCCausesCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9741831C217732000B89CA /* LCCausesCollectionTableViewCell.m */; };
 		0B9C30F71C607475006B9582 /* LCActionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9C30F61C607475006B9582 /* LCActionHelper.m */; };
 		0B9C30FB1C6093A9006B9582 /* LCPhoneContactsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9C30FA1C6093A9006B9582 /* LCPhoneContactsHelper.m */; };
+		0B9C30FF1C609F7F006B9582 /* LCPaginationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0B9C30FE1C609F7F006B9582 /* LCPaginationHelper.m */; };
 		0BA86F061BCE7C1C00B24454 /* LCThanksButtonImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */; };
 		0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D961BA812A3009E6D0C /* Gotham-Bold.otf */; };
 		0BB33D9F1BA812A3009E6D0C /* Gotham-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33D971BA812A3009E6D0C /* Gotham-BoldItalic.otf */; };
@@ -374,6 +375,8 @@
 		0B9C30F61C607475006B9582 /* LCActionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionHelper.m; sourceTree = "<group>"; };
 		0B9C30F91C6093A9006B9582 /* LCPhoneContactsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCPhoneContactsHelper.h; sourceTree = "<group>"; };
 		0B9C30FA1C6093A9006B9582 /* LCPhoneContactsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCPhoneContactsHelper.m; sourceTree = "<group>"; };
+		0B9C30FD1C609F7F006B9582 /* LCPaginationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCPaginationHelper.h; sourceTree = "<group>"; };
+		0B9C30FE1C609F7F006B9582 /* LCPaginationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCPaginationHelper.m; sourceTree = "<group>"; };
 		0BA86F041BCE7C1C00B24454 /* LCThanksButtonImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCThanksButtonImage.h; sourceTree = "<group>"; };
 		0BA86F051BCE7C1C00B24454 /* LCThanksButtonImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCThanksButtonImage.m; sourceTree = "<group>"; };
 		0BB33D961BA812A3009E6D0C /* Gotham-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham-Bold.otf"; path = "Fonts/Gotham-Bold.otf"; sourceTree = "<group>"; };
@@ -1194,6 +1197,16 @@
 			path = Helpers/LCPhoneContactsHelper;
 			sourceTree = "<group>";
 		};
+		0B9C30FC1C609F6F006B9582 /* LCPaginationHelper */ = {
+			isa = PBXGroup;
+			children = (
+				0B9C30FD1C609F7F006B9582 /* LCPaginationHelper.h */,
+				0B9C30FE1C609F7F006B9582 /* LCPaginationHelper.m */,
+			);
+			name = LCPaginationHelper;
+			path = Helpers/LCPaginationHelper;
+			sourceTree = "<group>";
+		};
 		0BA86F031BCE7BEE00B24454 /* LCThanksButtonImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1458,6 +1471,7 @@
 		0BEC736B1BA0301400D97BCA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				0B9C30FC1C609F6F006B9582 /* LCPaginationHelper */,
 				0B9C30F81C60939D006B9582 /* LCPhoneContactsHelper */,
 				0B9C30F41C607465006B9582 /* LCActionHelper */,
 				0B44DC501C5CA8F10080D7B4 /* LCReportHelper */,
@@ -2282,6 +2296,7 @@
 				0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */,
 				96B86A1E1B79C456003EF7CA /* LCCreatePostViewController.m in Sources */,
 				CE2E09CD1C0433DA00722A22 /* LCImpactsViewBC.m in Sources */,
+				0B9C30FF1C609F7F006B9582 /* LCPaginationHelper.m in Sources */,
 				9662871E1B56448E00C91196 /* (null) in Sources */,
 				0B05D7501BEB1D4100FD5AE1 /* LCChooseActionsInterest.m in Sources */,
 				0B26D1EC1C310BFD000B8E9A /* LCProfileImageEditor.m in Sources */,

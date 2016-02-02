@@ -67,9 +67,9 @@
     if (isSelfProfile) {
       message = NSLocalizedString(@"no_interests_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
+    self.noResultsView = [LCPaginationHelper getNoResultViewWithText:message];
   }
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
 }
 
 - (void)loadInterests

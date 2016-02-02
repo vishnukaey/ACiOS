@@ -81,7 +81,7 @@ static NSString* const kGradientDefaultClr = @"282828";
 
 - (void)initialSetUp
 {
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_feeds_available", nil)];
   self.causeImageView.layer.cornerRadius = 5.0;
   self.supportButton.layer.cornerRadius = 5.0;
   self.causeSupportersCountButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;

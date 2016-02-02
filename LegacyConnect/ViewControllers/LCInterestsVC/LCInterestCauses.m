@@ -27,7 +27,7 @@
 
 - (void) initailSetup {
 
-  self.noResultsView = [LCUtilityManager getSearchNoResultViewWithText:NSLocalizedString(@"no_causes_to_display", nil)];
+  self.noResultsView = [LCPaginationHelper getSearchNoResultViewWithText:NSLocalizedString(@"no_causes_to_display", nil)];
 }
 
 - (void) loadCausesInCurrentInterest
