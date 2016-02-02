@@ -239,7 +239,7 @@ static NSString *kUnChkdImg_interest = @"tagFirend_unselected";
   if (interestsArray.count == 0)
   {
     NSString * message = @"Search and add interests from the menu.";
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
+    UITableViewCell *cell = [LCPaginationHelper getEmptyIndicationCellWithText:message];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.allowsSelection = NO;

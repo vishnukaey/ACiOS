@@ -131,7 +131,7 @@ static CGFloat kActionSectionHeight = 30;
 {
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
   [settingsButton.layer setCornerRadius:5.0f];
@@ -425,7 +425,7 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   if (!self.eventObject.isFollowing) {
-    UITableViewCell * followEventCell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
+    UITableViewCell * followEventCell = [LCPaginationHelper getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
     [followEventCell setBackgroundColor:[UIColor clearColor]];
     return followEventCell;
   }

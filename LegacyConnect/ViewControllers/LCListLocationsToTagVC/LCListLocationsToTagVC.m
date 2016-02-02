@@ -139,7 +139,7 @@
   if (locationsArray.count == 0)
   {
     NSString * message = NSLocalizedString(@"no_results_found", nil);
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
+    UITableViewCell *cell = [LCPaginationHelper getEmptyIndicationCellWithText:message];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.allowsSelection = NO;

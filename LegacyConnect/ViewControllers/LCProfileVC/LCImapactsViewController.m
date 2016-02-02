@@ -167,7 +167,7 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
   
   [self addPullToRefresh];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];

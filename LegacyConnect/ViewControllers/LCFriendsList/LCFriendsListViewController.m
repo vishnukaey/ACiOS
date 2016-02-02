@@ -79,8 +79,8 @@ static NSString *kFriendsCellID = @"LCFriendsCell";
 
 - (void)initialUISetUp
 {
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil)];
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_friends_available", nil)];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
 }
 
 #pragma mark - Button actions
