@@ -16,7 +16,7 @@ pod 'KoaPullToRefresh', '~> 1.0'
 pod 'RSKImageCropper', '~> 1.3'
 pod 'IQKeyboardManager', '~> 3.3'
 pod 'NSDate+TimeAgo', '~> 1.0.3'
-pod 'STTwitter', '~> 0.2.2'
+pod 'STTwitter', '0.2.2'
 pod 'Google/Analytics', '~> 1.0.0'
 pod 'JTTableViewController', '1.0.5'
 end
