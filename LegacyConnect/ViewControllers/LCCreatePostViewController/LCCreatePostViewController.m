@@ -12,21 +12,8 @@
 #define ICONBACK_COLOR [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]
 @interface LCCreatePostViewController ()
 {
-
-  
-
-  
   int keyBoardHeight;
- 
-  
-
- IBOutlet UIView *fadedActivityView;
-
-  
-
-
-  
-
+  IBOutlet UIView *fadedActivityView;
 }
 @end
 
@@ -96,7 +83,6 @@
      [self.view layoutIfNeeded];
    }];
 }
-
 
 #pragma mark - button actions
 - (IBAction)closeButtonClicked:(id)sender

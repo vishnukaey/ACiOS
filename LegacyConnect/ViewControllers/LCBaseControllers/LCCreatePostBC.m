@@ -96,8 +96,8 @@
   
   if ([_postFeedObject.isMilestone integerValue])
   {
-//    milestoneIcon.tag = 1;
-//    [milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImg]];
+    self.milestoneIcon.tag = 1;
+    [self.milestoneIcon setImage:[UIImage imageNamed:kmilestoneIconImg]];
   }
   
   [self arrangeTaggedLabel];
