@@ -14,10 +14,10 @@
 #import "LCActionsForm.h"
 #import "LCActionsFormPresenter.h"
 #import "LCEventMembersViewController.h"
-#import "LCActionsHeader.h"
 #import "NSURL+LCURLCategory.h"
 #import "LCEventAPImanager.h"
 #import "LCReportHelper.h"
+#import "LCActionHelper.h"
 
 static CGFloat kActionSectionHeight = 30;
 
@@ -168,7 +168,7 @@ static CGFloat kActionSectionHeight = 30;
 {
   [self updateEventTitleAndTopUI];
   [self setEventDetailsInfo];
-  [self setEventDateInfo];
+  [eventdateInfoLable setText:[LCActionHelper getEventDateInfo:self.eventObject]];
   [self blockEventUI];
   [self.tableView reloadData];
 }
@@ -262,24 +262,6 @@ static CGFloat kActionSectionHeight = 30;
       [blockActionBtnImg setHidden:NO];
     }
   }
-}
-
-- (void)setEventDateInfo
-{
-  if (![LCUtilityManager isEmptyString:self.eventObject.startDate]) {
-    NSString * eventDateInfo = [LCUtilityManager getDateFromTimeStamp:self.eventObject.startDate WithFormat:@"MMM dd yyyy"];
-    if (![LCUtilityManager isEmptyString:self.eventObject.endDate]) {
-      eventDateInfo = [NSString stringWithFormat:@"%@ to %@",eventDateInfo,[LCUtilityManager getDateFromTimeStamp:self.eventObject.endDate WithFormat:@"MMM dd yyyy"]];
-    }
-    [eventdateInfoLable setText:eventDateInfo];
-  }
-}
-
-- (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
-{
-  LCActionsHeader * headerView = [[[NSBundle mainBundle] loadNibNamed:@"LCActionsHeader" owner:self options:nil] firstObject];
-  [headerView.headerTextLabel setText:title];
-  return headerView;
 }
 
 #pragma mark - controller life cycle
@@ -434,14 +416,8 @@ static CGFloat kActionSectionHeight = 30;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+  return [LCActionHelper getActionsHeaderForSection:section];
   
-  NSString * headerText;
-  if (section == 0) {
-    headerText = NSLocalizedString(@"details_caps", nil);
-  } else {
-    headerText = NSLocalizedString(@"comments_caps", nil);
-  }
-  return [self getHeaderViewWithHeaderTitle:headerText];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
