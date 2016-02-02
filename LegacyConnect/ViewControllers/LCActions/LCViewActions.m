@@ -201,43 +201,33 @@ static CGFloat kActionSectionHeight = 30;
   
   NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
   [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                        NSForegroundColorAttributeName : [UIColor whiteColor]
+                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14], NSForegroundColorAttributeName : [UIColor whiteColor]
                                         } range:tagRangeCreatedBy];
   
   NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
   [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                        NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]
+                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14], NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]
                                         } range:tagRangeUserName];
   
   
   NSRange tagRangeinText = [eventinfoString rangeOfString:inText];
   [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                        NSForegroundColorAttributeName : [UIColor whiteColor]
+                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14], NSForegroundColorAttributeName : [UIColor whiteColor]
                                         } range:tagRangeinText];
   
   
   NSRange tagRangeinterest = [eventinfoString rangeOfString:interest];
   [eventInfoAtribString addAttributes:@{
-                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                        NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
+                                        NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14], NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
                                         } range:tagRangeinterest];
   
   
-  NSMutableArray * tagsWithRanges = [self getTaggedArrayWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName];
+  [self setTaggedLabelWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName andInfoString:eventInfoAtribString];
   
-  eventCreatedByLabel.tagsArray  = tagsWithRanges;
-  [eventCreatedByLabel setAttributedText:eventInfoAtribString];
-  __weak typeof(self) weakSelf = self;
-  eventCreatedByLabel.nameTagTapped = ^(int index) {
-    [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
-  };
-
 }
 
-- (NSMutableArray*)getTaggedArrayWithTagRangeUsername:(NSRange)tagRangeUserName andTagRangeinterest:(NSRange)tagRangeinterest eventOwnerName:(NSString*)eventOwnerName
+- (void)setTaggedLabelWithTagRangeUsername:(NSRange)tagRangeUserName andTagRangeinterest:(NSRange)tagRangeinterest
+                            eventOwnerName:(NSString*)eventOwnerName andInfoString:(NSMutableAttributedString*)infoString
 {
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   
@@ -248,7 +238,14 @@ static CGFloat kActionSectionHeight = 30;
   // -- User Info Tag -- //
   NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
   [tagsWithRanges addObject:dic_user];
-  return tagsWithRanges;
+  
+  
+  eventCreatedByLabel.tagsArray  = tagsWithRanges;
+  [eventCreatedByLabel setAttributedText:infoString];
+  __weak typeof(self) weakSelf = self;
+  eventCreatedByLabel.nameTagTapped = ^(int index) {
+    [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
+  };
 }
 
 - (void)blockEventUI
