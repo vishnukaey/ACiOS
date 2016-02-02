@@ -8,11 +8,11 @@
 
 #import "LCBlockedUsersCell.h"
 
-static CGFloat kAvatarImageCornerRadius = 31.5f;
+static CGFloat kAvatarCornerRadius = 31.5f;
 @implementation LCBlockedUsersCell
 
 - (void)awakeFromNib {
-  self.friendsImageView.layer.cornerRadius = kAvatarImageCornerRadius;
+  self.friendsImageView.layer.cornerRadius = kAvatarCornerRadius;
   self.friendsImageView.layer.masksToBounds = YES;
 }
 
