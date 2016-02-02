@@ -11,21 +11,16 @@
 #import "LCListLocationsToTagVC.h"
 #import "LCListInterestsAndCausesVC.h"
 #import "LCSocialShareManager.h"
+#import "LCCreatePostBC.h"
 
-@interface LCCreatePostViewController : UIViewController <UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LCListFriendsToTagViewControllerDelegate, LCListLocationsToTagVCDelegate, LCListInterestsAndCausesVCDelegate>
-
-
-@property(nonatomic,retain) IBOutlet UIView *popUpView;
-@property(nonatomic,retain) IBOutlet UIScrollView *postScrollView;
-@property(nonatomic,retain) IBOutlet NSLayoutConstraint *popUpViewHeightConstraint;
-@property (weak, nonatomic) IBOutlet UIButton *facebookButton;
-@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
+@interface LCCreatePostViewController : LCCreatePostBC <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, LCListFriendsToTagViewControllerDelegate, LCListLocationsToTagVCDelegate, LCListInterestsAndCausesVCDelegate>
 
 
-@property(nonatomic, retain) LCFeed *postFeedObject;
-@property(nonatomic, retain) UIImage *photoPostPhoto;
-@property(nonatomic, retain) LCInterest *selectedInterest;
-@property(nonatomic, retain) LCCause *selectedCause;
+
+
+
+
+
 @property(nonatomic, assign) BOOL isEditing, isImageEdited;
 
 @property(nonatomic, retain)LCSocialShareManager *TWsocialShare;

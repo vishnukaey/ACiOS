@@ -199,6 +199,7 @@
 		CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */; };
 		CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */; };
 		CEC6D9991B81D1D800157F89 /* LCTaggedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */; };
+		CED349581C609B2200AEBAF4 /* LCCreatePostBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED349571C609B2200AEBAF4 /* LCCreatePostBC.m */; settings = {ASSET_TAGS = (); }; };
 		CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */; };
 		CED6411D1C48C45600943693 /* LCSingleCauseBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6411C1C48C45600943693 /* LCSingleCauseBC.m */; };
 		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; };
@@ -579,6 +580,8 @@
 		CEBEDD401BFDB2FF00AE9351 /* LCSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSettings.m; path = Models/LCSettings/LCSettings.m; sourceTree = "<group>"; };
 		CEC6D9971B81D1D800157F89 /* LCTaggedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTaggedLabel.h; path = CustomViews/LCTaggedLabel/LCTaggedLabel.h; sourceTree = "<group>"; };
 		CEC6D9981B81D1D800157F89 /* LCTaggedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTaggedLabel.m; path = CustomViews/LCTaggedLabel/LCTaggedLabel.m; sourceTree = "<group>"; };
+		CED349561C609B2200AEBAF4 /* LCCreatePostBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCreatePostBC.h; path = ViewControllers/LCBaseControllers/LCCreatePostBC.h; sourceTree = "<group>"; };
+		CED349571C609B2200AEBAF4 /* LCCreatePostBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreatePostBC.m; path = ViewControllers/LCBaseControllers/LCCreatePostBC.m; sourceTree = "<group>"; };
 		CED5F4301C2002470027A31C /* LCHorizontalInterestsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHorizontalInterestsCell.h; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestsCell.h; sourceTree = "<group>"; };
 		CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHorizontalInterestsCell.m; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestsCell.m; sourceTree = "<group>"; };
 		CED6411B1C48C45600943693 /* LCSingleCauseBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSingleCauseBC.h; path = ViewControllers/LCBaseControllers/LCSingleCauseBC.h; sourceTree = "<group>"; };
@@ -1897,6 +1900,8 @@
 				CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */,
 				CED6411B1C48C45600943693 /* LCSingleCauseBC.h */,
 				CED6411C1C48C45600943693 /* LCSingleCauseBC.m */,
+				CED349561C609B2200AEBAF4 /* LCCreatePostBC.h */,
+				CED349571C609B2200AEBAF4 /* LCCreatePostBC.m */,
 			);
 			name = LCBaseControllers;
 			sourceTree = "<group>";
@@ -2310,6 +2315,7 @@
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */,
+				CED349581C609B2200AEBAF4 /* LCCreatePostBC.m in Sources */,
 				0BB9714B1BFE058E000A33A9 /* LCRecentNotification.m in Sources */,
 				CE5954D61B6F608B00D839DD /* LCMultipleSelectionTable.m in Sources */,
 				CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */,
