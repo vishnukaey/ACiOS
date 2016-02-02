@@ -27,18 +27,29 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
   //hide until privacy check
   tabBarView.hidden = YES;
   impactsCountButton.userInteractionEnabled = NO;
   friendsCountButton.userInteractionEnabled = NO;
+  [self addNotifications];
+}
+
+- (void)dealloc {
   
-  
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
+}
+
+- (void)addNotifications
+{
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(profileUpdatedNotificationReceived:)
                                                name:kUpdateProfileNFK
                                              object:nil];
-  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(friendStatusUpdatedNotificationReceived:)
@@ -61,8 +72,6 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
                                            selector:@selector(friendStatusUpdatedNotificationReceived:)
                                                name:kBlockUserNFK
                                              object:nil];
-
-  
   
   [[NSNotificationCenter defaultCenter] addObserver:self
                                            selector:@selector(updateImpactsCount:)
@@ -76,18 +85,6 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
                                            selector:@selector(updateImpactsCount:)
                                                name:kReportedPostNFK
                                              object:nil];
-  
-}
-
-- (void)dealloc {
-  
-   [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Private Methods
@@ -175,8 +172,8 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
 #pragma mark - Notification Receivers
 
 -(void)profileUpdatedNotificationReceived:(NSNotification *)notification {
-
-   _userDetail = notification.userInfo[@"userDetail"];
+  
+  _userDetail = notification.userInfo[@"userDetail"];
   [self updateUserDetailUI];
   [LCUtilityManager saveUserDetailsToDataManagerFromResponse:_userDetail];
 }
@@ -185,7 +182,7 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
   
   LCFriend *friend = notification.userInfo[@"friend"];
   if (currentProfileStatus == kMyProfile || _userDetail.userID == friend.friendId) {
-  
+    
     if(_userDetail.userID == friend.friendId) {
       
       _userDetail.isFriend = friend.isFriend;

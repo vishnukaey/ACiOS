@@ -248,10 +248,6 @@
       [self showFeedCommentsWithFeed:feed];
       break;
       
-    case kFeedCellActionLike:
-      //    [self postMessage];
-      break;
-      
     case kkFeedCellActionViewImage:
       [self showFullScreenImage:feed];
       break;
