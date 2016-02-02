@@ -133,10 +133,8 @@
 + (void)deleteCommentWithId:(NSString *)commentId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostCommentURL];
-  NSDictionary *dict = @{kPostCommentIdKey: commentId};
-  
-  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+  NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kCommentURL,commentId];
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      LCDLog(@"comment deleted.");
      success(response);

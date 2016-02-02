@@ -468,7 +468,8 @@ static CGFloat kActionSectionHeight = 30;
   };
   commentCell.commentCellMoreAction =^(){
     [LCReportHelper showCommentReportActionSheetFromView:self
-                                             withComment:self.results[indexPath.row]];
+                                             withComment:self.results[indexPath.row]
+                                        isMyPostOrAction:self.eventObject.isOwner];
   };
   [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;
