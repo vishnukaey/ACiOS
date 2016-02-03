@@ -467,9 +467,7 @@ static CGFloat kActionSectionHeight = 30;
     [weakSelf tagTapped:tagDetails];
   };
   commentCell.commentCellMoreAction =^(){
-    [LCReportHelper showCommentReportActionSheetFromView:self
-                                             withComment:self.results[indexPath.row]
-                                        isMyPostOrAction:self.eventObject.isOwner];
+    [LCReportHelper showCommentReportActionSheetFromView:self forAction:self.eventObject withComment:self.results[indexPath.row] isMyAction:self.eventObject.isOwner];
   };
   [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;

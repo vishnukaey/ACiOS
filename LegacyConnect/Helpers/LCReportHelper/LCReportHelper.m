@@ -45,7 +45,7 @@
   [presentingView presentViewController:actionSheet animated:YES completion:nil];
 }
 
-+ (void)showCommentReportActionSheetFromView:(UIViewController*)presentingView withComment:(LCComment*)comment isMyPostOrAction:(BOOL)isMyPostOrAction
++ (void)showCommentReportActionSheetFromView:(UIViewController*)presentingView forPost:(LCFeed *)post withComment:(LCComment*)comment isMyPost:(BOOL)isMyPost
 {
   UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
@@ -68,13 +68,56 @@
     [actionSheet addAction:blockUser];
   }
   
-  if(isMyPostOrAction || (!isMyPostOrAction && isMyComment) )
+  if(isMyPost || (!isMyPost && isMyComment) )
   {
     //delete comment action
     UIAlertAction *deleteComment = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_comment", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
       
       [MBProgressHUD showHUDAddedTo:presentingView.view animated:YES];
-      [LCFeedAPIManager deleteCommentWithId:comment.commentId withSuccess:^(id response) {
+      [LCFeedAPIManager deleteCommentFromPost:post withComment:comment withSuccess:^(id response) {
+        [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+      } andFailure:^(NSString *error) {
+        [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+      }];
+    }];
+    [actionSheet addAction:deleteComment];
+  }
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:cancelAction];
+  [presentingView presentViewController:actionSheet animated:YES completion:nil];
+}
+
++ (void)showCommentReportActionSheetFromView:(UIViewController*)presentingView forAction:(LCEvent *)event withComment:(LCComment*)comment isMyAction:(BOOL)isMyAction
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  BOOL isMyComment = [comment.userId isEqualToString:[[LCDataManager sharedDataManager] userID]];
+  if (!isMyComment)
+  {
+    //block user action
+    UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+      UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+                                                        bundle:nil];
+      LCBlockUserViewController *blockUserVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockUserViewController"];
+      LCUserDetail *userDetail = [[LCUserDetail alloc] init];
+      userDetail.userID = comment.userId;
+      userDetail.firstName = comment.firstName;
+      userDetail.lastName = comment.lastName;
+      blockUserVC.userToBlock = userDetail;
+      [presentingView presentViewController:blockUserVC animated:YES completion:nil];
+    }];
+    [actionSheet addAction:blockUser];
+  }
+  
+  if(isMyAction || (!isMyAction && isMyComment) )
+  {
+    //delete comment action
+    UIAlertAction *deleteComment = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_comment", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+      
+      [MBProgressHUD showHUDAddedTo:presentingView.view animated:YES];
+      [LCEventAPImanager deleteCommentFromAction:event withComment:comment withSuccess:^(id response) {
         [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
       } andFailure:^(NSString *error) {
         [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];

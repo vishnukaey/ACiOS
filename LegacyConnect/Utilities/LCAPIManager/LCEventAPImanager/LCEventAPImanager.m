@@ -328,6 +328,21 @@
    }];
 }
 
++ (void)deleteCommentFromAction:(LCEvent *)action withComment:(LCComment *)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kCommentURL,comment.commentId];
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     LCDLog(@"comment deleted.");
+     [LCNotificationManager postEventCommenteDeletedNotificationWithComment:comment andEvent:action];
+     success(response);
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
 
 + (void)blockEventWithEvent:(LCEvent*)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {

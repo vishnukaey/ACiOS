@@ -46,6 +46,13 @@
   [[NSNotificationCenter defaultCenter] postNotificationName:kCommentPostNFK object:nil userInfo:userInfo];
 }
 
++ (void)postCommentDeletededNotificationforPost:(LCFeed *)post andComment:(LCComment *)comment
+{
+  post.commentCount = [NSString stringWithFormat:@"%d", [post.commentCount intValue]-1];
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post,comment] forKeys:@[kEntityTypePost,kPostCommentKey]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kCommentDeletedPostNFK object:nil userInfo:userInfo];
+}
+
 + (void)postPostDeletedNotificationforPost: (LCFeed *)post
 {
   NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[post] forKeys:@[kEntityTypePost]];
@@ -127,6 +134,12 @@
 {
   NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[event,comment] forKeys:@[kEntityTypeEvent,kPostCommentKey]];
   [[NSNotificationCenter defaultCenter] postNotificationName:kCommentEventNFK object:nil userInfo:userInfo];
+}
+
++ (void)postEventCommenteDeletedNotificationWithComment:(LCComment*)comment andEvent:(LCEvent*)event
+{
+  NSDictionary *userInfo = [[NSDictionary alloc] initWithObjects:@[event,comment] forKeys:@[kEntityTypeEvent,kPostCommentKey]];
+  [[NSNotificationCenter defaultCenter] postNotificationName:kCommentDeletedEventNFK object:nil userInfo:userInfo];
 }
 
 #pragma mark - userUpdate notifications
