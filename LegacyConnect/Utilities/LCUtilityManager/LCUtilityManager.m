@@ -574,4 +574,16 @@
 }
 
 
++(void)logoutUserClearingDefaults
+{
+  [LCUtilityManager clearUserDefaultsForCurrentUser];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+  appdel.window.rootViewController = myStoryBoardInitialViewController;
+  [appdel.window makeKeyAndVisible];
+  LCDLog(@"401");
+}
+
+
 @end
