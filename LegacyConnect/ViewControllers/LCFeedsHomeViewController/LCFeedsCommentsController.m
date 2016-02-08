@@ -183,8 +183,8 @@ static CGFloat kIndexForPostDetails = 0;
     [weakSelf tagTapped:tagDetails];
   };
   commentCell.commentCellMoreAction =^(){
-    [LCReportHelper showCommentReportActionSheetFromView:self
-                                             withComment:self.results[rowNo]];
+    BOOL isMyPost = [feedObject.userID isEqualToString:[[LCDataManager sharedDataManager] userID]];
+    [LCReportHelper showCommentReportActionSheetFromView:self forPost:self.feedObject withComment:self.results[rowNo] isMyPost:isMyPost];
   };
   [commentCell.seperator setHidden:self.results.count == indexPath.row];
   return commentCell;

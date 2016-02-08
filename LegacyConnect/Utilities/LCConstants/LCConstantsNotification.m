@@ -22,6 +22,7 @@ NSString *const kReportedPostNFK = @"post_reported";
 NSString *const kLikedPostNFK = @"post_liked";
 NSString *const kUnlikedPostNFK = @"post_unliked";
 NSString *const kCommentPostNFK = @"post_commented";
+NSString *const kCommentDeletedPostNFK = @"post_comment_deleteded";
 NSString *const kRemoveMileStoneNFK = @"milestone_removed";
 NSString *const kFollowInterestNFK = @"interest_followed";
 NSString *const kUnfollowInterestNFK = @"interest_unfollowed";
@@ -38,6 +39,7 @@ NSString *const kBlockUserNFK = @"user_blocked";
 
 NSString *const kCreateEventNFK = @"event_created";
 NSString *const kCommentEventNFK = @"event_commented";
+NSString *const kCommentDeletedEventNFK = @"event_comment_deleted";
 NSString *const kDeleteEventNFK = @"event_deleted";
 NSString *const kReportedEventNFK = @"event_reported";
 NSString *const kUpdateEventNFK = @"event_updated";

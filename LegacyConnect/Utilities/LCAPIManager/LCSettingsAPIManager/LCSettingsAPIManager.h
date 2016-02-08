@@ -19,5 +19,6 @@
 
 + (void)checkVersionWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getBlockedUsersWithSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)unBlockUserWithUserID:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 @end

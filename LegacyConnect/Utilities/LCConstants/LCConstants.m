@@ -17,7 +17,7 @@
 #define PRODUCTION_SERVER 4
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER QA_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -69,6 +69,7 @@ NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";
 NSString *const kBlockUserURL = @"api/user/block";
+NSString *const kUnBlockUserURL = @"api/user/unblock";
 NSString *const kBlockEventURL = @"api/event/block";
 NSString *const kFBLoginURL = @"api/user/fbLogin";
 NSString *const kUploadUserImageURL = @"api/user/profileImage";
@@ -121,6 +122,7 @@ NSString *const kPostUnlikeURL = @"api/post/unlike";
 NSString *const kPostCommentURL = @"api/post/comment";
 NSString *const kPostCommentsURL = @"api/post/comments";
 NSString *const kPostMilestoneURL = @"api/post/milestone";
+NSString *const kCommentURL = @"api/comment";
 NSString *const kGetNotificationCountURL = @"api/user/notificationCount";
 NSString *const kGetRecentNotificationsURL = @"api/user/notification";
 NSString *const kMarkNotificationAsReadURL = @"api/user/notification/read";

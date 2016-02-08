@@ -26,6 +26,9 @@ static CGFloat kAvatarCornerRadius = 31.5f;
   [self.friendsNameLabel setText:[NSString stringWithFormat:@"%@ %@",self.userDetails.firstName,self.userDetails.lastName]];
   [self.friendsLocationLabel setText:self.userDetails.location];
   [self.friendsImageView sd_setImageWithURL:[NSURL URLWithString:self.userDetails.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+  self.unblockButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+  self.unblockButton.layer.borderWidth = 1;
+  self.unblockButton.layer.cornerRadius = 4;
 }
 
 @end

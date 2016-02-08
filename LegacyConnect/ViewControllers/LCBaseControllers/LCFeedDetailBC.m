@@ -25,6 +25,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postLikeEventReceived:) name:kLikedPostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUnLikeEventReceived:) name:kUnlikedPostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postCommentEventReceived:) name:kCommentPostNFK object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(commentDeletedEventReceived:) name:kCommentDeletedPostNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postUpdateEventReceived:) name:kUpdatePostNFK object:nil];
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdateEventReceived:) name:kUpdateProfileNFK object:nil];
 //  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(postDeletedEventReceived:) name:kDeletePostNFK object:nil];
@@ -90,6 +91,18 @@
     [self.results insertObject:newComment atIndex:0];
     self.feedObject.commentCount = feed.commentCount;
 
+    [self topViewOnlyRefresh];
+  }
+}
+
+- (void)commentDeletedEventReceived:(NSNotification*)notification
+{
+  LCFeed * feed = [notification.userInfo objectForKey:kEntityTypePost];
+  LCComment *deletedComment = [notification.userInfo objectForKey:kPostCommentKey];
+  if ([self.feedObject.entityID isEqualToString:feed.entityID]) {
+    [self.results removeObject:deletedComment];
+    self.feedObject.commentCount = feed.commentCount;
+    
     [self topViewOnlyRefresh];
   }
 }

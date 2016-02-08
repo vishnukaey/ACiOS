@@ -331,4 +331,16 @@
   return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
 }
 
++(void)logoutUserClearingDefaults
+{
+  [LCUtilityManager clearUserDefaultsForCurrentUser];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+  UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
+  appdel.window.rootViewController = myStoryBoardInitialViewController;
+  [appdel.window makeKeyAndVisible];
+  LCDLog(@"401");
+}
+
+
 @end

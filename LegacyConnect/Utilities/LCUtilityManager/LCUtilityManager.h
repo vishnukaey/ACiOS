@@ -41,5 +41,6 @@
 + (UIColor *)getThemeRedColor;
 + (float)getHeightOffsetForGIB;
 +(UIColor*)colorWithHexString:(NSString*)hex;
++(void)logoutUserClearingDefaults;
 
 @end
