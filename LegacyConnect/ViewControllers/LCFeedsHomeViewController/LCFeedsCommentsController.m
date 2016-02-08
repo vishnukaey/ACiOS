@@ -154,7 +154,7 @@ static CGFloat kIndexForPostDetails = 0;
     if (feedCell == nil)
     {
       NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
-      feedCell = [topLevelObjects objectAtIndex:0];
+      feedCell = topLevelObjects[0];
     }
     [feedCell setData:feedObject forPage:kCommentsfeedCellID];
     __weak typeof(self) weakSelf = self;
@@ -173,7 +173,7 @@ static CGFloat kIndexForPostDetails = 0;
   if (commentCell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-    commentCell = [topLevelObjects objectAtIndex:0];
+    commentCell = topLevelObjects[0];
   }
   NSInteger rowNo = indexPath.row - 1;
   [commentCell setComment:[self.results objectAtIndex:rowNo]];
@@ -183,8 +183,8 @@ static CGFloat kIndexForPostDetails = 0;
     [weakSelf tagTapped:tagDetails];
   };
   commentCell.commentCellMoreAction =^(){
-    [LCReportHelper showCommentReportActionSheetFromView:self
-                                             withComment:self.results[rowNo]];
+    BOOL isMyPost = [feedObject.userID isEqualToString:[[LCDataManager sharedDataManager] userID]];
+    [LCReportHelper showCommentReportActionSheetFromView:self forPost:self.feedObject withComment:self.results[rowNo] isMyPost:isMyPost];
   };
   [commentCell.seperator setHidden:self.results.count == indexPath.row];
   return commentCell;

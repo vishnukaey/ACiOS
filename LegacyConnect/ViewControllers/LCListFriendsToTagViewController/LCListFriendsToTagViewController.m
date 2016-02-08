@@ -71,23 +71,10 @@
     [self.selectedIDs addObject:friend.friendId];
   }
   NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
   
   [self startFetchingResults];
 }
-//- (void) loadFriendsList
-//{
-//  [MBProgressHUD showHUDAddedTo:friendsTableView.superview animated:YES];
-//  [LCAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:nil lastUserId:nil withSuccess:^(id response) {
-//    friendsArray = response;
-//    [searchResultsArray addObjectsFromArray:response];
-//    [friendsTableView reloadData];
-//    [MBProgressHUD hideAllHUDsForView:friendsTableView.superview animated:YES];
-//  } andfailure:^(NSString *error) {
-//    NSLog(@"%@",error);
-//    [MBProgressHUD hideAllHUDsForView:friendsTableView.superview animated:YES];
-//  }];
-//}
 
 #pragma mark - API and Pagination
 - (void)startFetchingResults

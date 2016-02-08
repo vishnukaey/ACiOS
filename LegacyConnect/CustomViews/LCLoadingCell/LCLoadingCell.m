@@ -8,14 +8,14 @@
 
 #import "LCLoadingCell.h"
 
-static NSString *kLoadingCellIdentifier = @"LoadingCell";
+static NSString *kLoadingCellId = @"LoadingCell";
 
 
 @implementation LCLoadingCell
 
 + (NSString*)getFeedCellidentifier
 {
-  return kLoadingCellIdentifier;
+  return kLoadingCellId;
 }
 
 - (void)awakeFromNib {

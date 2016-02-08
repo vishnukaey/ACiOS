@@ -178,10 +178,9 @@ static CGFloat kNumberOfSection = 3;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   if (indexPath.section == kIndexSectionAccount) {
-    NSString *fbUserId = [LCDataManager sharedDataManager].userFBID;
     switch (indexPath.row) {
       case 0:
-        if (fbUserId) {
+        if ([LCDataManager sharedDataManager].userFBID) {
           [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"fbuser_can't_change_email", nil)];
         }
         else {
@@ -190,7 +189,7 @@ static CGFloat kNumberOfSection = 3;
         break;
         
       case 1:
-        if (fbUserId) {
+        if ([LCDataManager sharedDataManager].userFBID) {
           [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"fbuser_can't_change_password", nil)];
         }
         else {
@@ -288,8 +287,8 @@ static CGFloat kNumberOfSection = 3;
         
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
-    appdel.window.rootViewController = myStoryBoardInitialViewController;
+    UIViewController* initialVC = [storyboard instantiateInitialViewController];
+    appdel.window.rootViewController = initialVC;
     [appdel.window makeKeyAndVisible];
     
   } andFailure:^(NSString *error) {

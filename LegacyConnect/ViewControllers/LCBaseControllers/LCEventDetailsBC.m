@@ -24,6 +24,8 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventUnFollowNotificationReceived:) name:kUnfollowEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDetailsUpdatedNotificationReceived:) name:kUpdateEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCommentedNotificationReceived:) name:kCommentEventNFK object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCommentDeletedNotificationReceived:) name:kCommentDeletedEventNFK object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,7 +67,7 @@
 - (void)eventFollowNotificationReceived:(NSNotification*)notification
 {
   NSDictionary * userInfo = notification.userInfo;
-  LCEvent *modifiedEvent = [userInfo objectForKey:kEntityTypeEvent];
+  LCEvent *modifiedEvent = userInfo[kEntityTypeEvent];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
     self.eventObject.followerCount = modifiedEvent.followerCount;
@@ -79,7 +81,7 @@
 - (void)eventUnFollowNotificationReceived:(NSNotification*)notification
 {
   NSDictionary * userInfo = notification.userInfo;
-  LCEvent *modifiedEvent = [userInfo objectForKey:kEntityTypeEvent];
+  LCEvent *modifiedEvent = userInfo[kEntityTypeEvent];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject.isFollowing = modifiedEvent.isFollowing;
     self.eventObject.followerCount = modifiedEvent.followerCount;
@@ -94,7 +96,7 @@
 - (void)eventDetailsUpdatedNotificationReceived:(NSNotification*)notification
 {
   NSDictionary * userInfo = notification.userInfo;
-  LCEvent *modifiedEvent = [userInfo objectForKey:kEntityTypeEvent];
+  LCEvent *modifiedEvent = userInfo[kEntityTypeEvent];
   if ([self.eventObject.eventID isEqualToString:modifiedEvent.eventID]) {
     self.eventObject = modifiedEvent;
     [self topViewOnlyRefresh];
@@ -112,6 +114,19 @@
     [self topViewOnlyRefresh];
   }
 
+}
+
+- (void)eventCommentDeletedNotificationReceived:(NSNotification*)notification
+{
+  NSDictionary * userInfo = notification.userInfo;
+  LCEvent * event = userInfo[kEntityTypeEvent];
+  LCComment *Comment = userInfo[kPostCommentKey];
+  if ([self.eventObject.eventID isEqualToString:event.eventID]) {
+    [self.results removeObject:Comment];
+    
+    [self topViewOnlyRefresh];
+  }
+  
 }
 
 @end

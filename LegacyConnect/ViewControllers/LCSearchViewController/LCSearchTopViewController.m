@@ -190,25 +190,6 @@
     default:
       break;
   }
-  
-  /*
-   case 1:
-   {
-   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-   LCSingleInterestVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
-   [self.navigationController pushViewController:vc animated:YES];
-   }
-   break;
-   
-   case 2:
-   {
-   UIStoryboard*  sb = [UIStoryboard storyboardWithName:@"Interests" bundle:nil];
-   LCSingleCauseVC *vc = [sb instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
-   [self.navigationController pushViewController:vc animated:YES];
-   }
-   break;
-   */
-
 }
 
 @end

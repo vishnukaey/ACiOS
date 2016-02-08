@@ -8,17 +8,17 @@
 
 #import "LCOnboardingHelper.h"
 
-static NSMutableDictionary *selectedItemsDictionary;
+static NSMutableDictionary *selectedItemsDict;
 
 @implementation LCOnboardingHelper
 
 +(NSMutableDictionary*) selectedItemsDictionary
 {
-  if (selectedItemsDictionary == nil)
+  if (selectedItemsDict == nil)
   {
-    selectedItemsDictionary = [[NSMutableDictionary alloc] init];
+    selectedItemsDict = [[NSMutableDictionary alloc] init];
   }
-  return selectedItemsDictionary;
+  return selectedItemsDict;
 }
 
 
@@ -32,7 +32,7 @@ static NSMutableDictionary *selectedItemsDictionary;
       NSMutableArray *newCauses = [[NSMutableArray alloc] initWithArray:parentInterest.causes];
       [newCauses addObject:cause];
       parentInterest.causes = [NSArray arrayWithArray:newCauses];
-      [[self selectedItemsDictionary] setObject:parentInterest forKey:cause.interestID];
+      [self selectedItemsDictionary][cause.interestID] = parentInterest;
     }
   }
   else if (cause && ![[self selectedItemsDictionary] objectForKey:cause.interestID])//interest of the cause is not added yet
@@ -59,7 +59,7 @@ static NSMutableDictionary *selectedItemsDictionary;
       }
     }
     parentInterest.causes = [NSArray arrayWithArray:subcauses];
-    [[self selectedItemsDictionary] setObject:parentInterest forKey:parentInterest.interestID];
+    [self selectedItemsDictionary][parentInterest.interestID] = parentInterest;
 }
 
 + (void)removeInterest :(LCInterest *)interest

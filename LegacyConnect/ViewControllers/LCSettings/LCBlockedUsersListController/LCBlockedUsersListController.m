@@ -21,12 +21,31 @@
   UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1)];
   footerView.backgroundColor = self.tableView.separatorColor;
   self.tableView.tableFooterView = footerView;
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_blocked_users", nil)];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_blocked_users", nil)];
   [self startFetchingResults];
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+}
+
+- (IBAction)UnblockUserAtIndex :(NSIndexPath *)index
+{
+  LCUserDetail *user_unblock = [self.results objectAtIndex:index.row];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+  [LCSettingsAPIManager unBlockUserWithUserID:user_unblock.userID withSuccess:^(id response) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.tableView beginUpdates];
+      [self.tableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationLeft];
+      [self.results removeObjectAtIndex:index.row];
+      [self.tableView endUpdates];
+      [self.tableView reloadData];
+      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    });
+    
+  } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+  }];
 }
 
 #pragma maek - Button Actions
@@ -35,8 +54,19 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)saveButtonTapped:(id)sender
+- (IBAction)unblockAction:(UIButton *)sender
 {
+  LCUserDetail *user_unblock = [self.results objectAtIndex:sender.tag];
+  UIAlertController *unblockAlert = [UIAlertController alertControllerWithTitle:@"Unblock User" message:[NSString stringWithFormat:@"Do you want to Unblock %@ %@?", user_unblock.firstName, user_unblock.lastName] preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *unblockActionFinal = [UIAlertAction actionWithTitle:@"Unblock" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    NSIndexPath *index = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    [self UnblockUserAtIndex:index];
+  }];
+  [unblockAlert addAction:unblockActionFinal];
+  
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+  [unblockAlert addAction:cancelAction];
+  [self presentViewController:unblockAlert animated:YES completion:nil];
 }
 
 #pragma mark - Table view data source
@@ -54,6 +84,8 @@
     friendsCell = [[LCBlockedUsersCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"LCBlockedUsersCell"];
   }
   friendsCell.userDetails = [self.results objectAtIndex:indexPath.row];
+  friendsCell.unblockButton.tag = indexPath.row;
+  [friendsCell.unblockButton addTarget:self action:@selector(unblockAction:) forControlEvents:UIControlEventTouchUpInside];
   return friendsCell;
 }
 

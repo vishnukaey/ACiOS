@@ -214,15 +214,15 @@
   UILabel *sectionLabel = (UILabel *)[headerView viewWithTag:100];
   UILabel *optionalLabel = (UILabel *)[headerView viewWithTag:101];
   UIView *topLine = [headerView viewWithTag:111];
+  
+  optionalLabel.text = @"";
   switch (section) {
     case SECTION_NAME:
       sectionLabel.text = NSLocalizedString(@"action_form_name", nil);
-      optionalLabel.text = @"";
       [topLine removeFromSuperview];
       break;
     case SECTION_ACTIONTYPE:
       sectionLabel.text = NSLocalizedString(@"action_form_action_type", nil);
-      optionalLabel.text = @"";
       break;
     case SECTION_DATE:
       sectionLabel.text = NSLocalizedString(@"action_form_date_time", nil);
@@ -238,7 +238,8 @@
       break;
     case SECTION_ABOUT:
       sectionLabel.text = NSLocalizedString(@"action_form_about", nil);
-      optionalLabel.text = @"";
+      break;
+    default:
       break;
   }
 }

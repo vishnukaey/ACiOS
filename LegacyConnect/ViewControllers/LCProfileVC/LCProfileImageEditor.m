@@ -8,18 +8,163 @@
 
 #import "LCProfileImageEditor.h"
 #import "UIImage+LCImageFix.h"
-
-@interface LCProfileImageEditor ()
-
-@end
+#import "LCProfileEditVC.h"
 
 @implementation LCProfileImageEditor
 
-- (void)showImagePickerOnController:(UIViewController*)controller withSource:(UIImagePickerControllerSourceType) imageSource isEditingProfilePic:(BOOL) isEditingProfilePic
+- (void) editProfilePicture
 {
-  presentingController = controller;
-  isProfilePic = isEditingProfilePic;
+  isProfilePic = YES;
   
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self loadAndEditProfilePic];
+  }];
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self showImagePickerWithSource:UIImagePickerControllerSourceTypeCamera];
+  }];
+  
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
+    
+  }];
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Profile Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    [self removeProfilePic];
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  
+  if (self.parentController.actualAvatarImage){
+    [actionSheet addAction:editAction];
+  }
+  [actionSheet addAction:takeAction];
+  [actionSheet addAction:chooseAction];
+  if (self.parentController.actualAvatarImage) {
+    [actionSheet addAction:removeAction];
+  }
+  [actionSheet addAction:cancelAction];
+  
+  [self.parentController presentViewController:actionSheet animated:YES completion:nil];
+  
+}
+
+- (void) editHeaderBackground
+{
+  isProfilePic = NO;
+  
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self loadAndEditHeaderBG];
+  }];
+  
+  UIAlertAction *takeAction = [UIAlertAction actionWithTitle:@"Take Photo" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    [self showImagePickerWithSource:UIImagePickerControllerSourceTypeCamera];
+  }];
+  
+  UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:@"Choose From Library" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    
+    [self showImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary];
+  }];
+  
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove Header Photo" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    [self removeHeaderBG];
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  
+  if (self.parentController.actualHeaderImage){
+    [actionSheet addAction:editAction];
+  }
+  [actionSheet addAction:takeAction];
+  [actionSheet addAction:chooseAction];
+  if (self.parentController.actualHeaderImage) {
+    [actionSheet addAction:removeAction];
+  }
+  [actionSheet addAction:cancelAction];
+  
+  [self.parentController presentViewController:actionSheet animated:YES completion:nil];
+  
+}
+
+#pragma mark -
+- (void)loadAndEditProfilePic
+{
+  if (self.parentController.avatarPicState == IMAGE_UNTOUCHED) {
+    
+    NSURL *avatarUrl = [NSURL URLWithString:self.parentController.userDetail.avatarURL];
+    
+    NSString *avatarUrlString;
+    if ([avatarUrl.host containsString:@"facebook"]) {
+      avatarUrlString = [NSString stringWithFormat:@"%@?width=800",self.parentController.userDetail.avatarURL];
+    }
+    else {
+      avatarUrlString = [NSString stringWithFormat:@"%@?type=large",self.parentController.userDetail.avatarURL];
+    }
+    
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [MBProgressHUD showHUDAddedTo:self.parentController.view animated:YES];
+    [manager downloadImageWithURL:[NSURL URLWithString:avatarUrlString]
+                          options:0
+                         progress:nil
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                          if (image) {
+                            [self showImageCropViewWithImage:image];
+                          }
+                          [MBProgressHUD hideHUDForView:self.parentController.view animated:YES];
+                        }];
+  }
+  else {
+    [self showImageCropViewWithImage:self.parentController.actualAvatarImage];
+  }}
+
+
+- (void)loadAndEditHeaderBG
+{
+  if (self.parentController.headerPicState == IMAGE_UNTOUCHED) {
+    
+    NSString *headerUrlString = [NSString stringWithFormat:@"%@?type=large",self.parentController.userDetail.headerPhotoURL];
+    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+    [MBProgressHUD showHUDAddedTo:self.parentController.view animated:YES];
+    [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                          options:0
+                         progress:nil
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                          if (image) {
+                            [self showImageCropViewWithImage:image];
+                          }
+                          [MBProgressHUD hideHUDForView:self.parentController.view animated:YES];
+                        }];
+  }
+  else{
+    [self showImageCropViewWithImage:self.parentController.actualHeaderImage];
+  }
+}
+
+- (void)removeProfilePic
+{
+  self.parentController.avatarPicState = IMAGE_REMOVED;
+  self.parentController.actualAvatarImage = nil;
+  self.parentController.profilePic.image = [UIImage imageNamed:@"userProfilePic"];
+  [self.parentController validateFields];
+}
+
+- (void)removeHeaderBG
+{
+  self.parentController.headerPicState = IMAGE_REMOVED;
+  self.parentController.actualHeaderImage = nil;
+  self.parentController.headerBGImage.image = nil;
+  [self.parentController validateFields];
+}
+
+#pragma mark -
+
+- (void)showImagePickerWithSource:(UIImagePickerControllerSourceType)imageSource
+{
   if ([UIImagePickerController isSourceTypeAvailable:imageSource]) {
     
     LCImagePickerController *imagePicker = [[LCImagePickerController alloc]init];
@@ -27,16 +172,8 @@
     imagePicker.sourceType = imageSource;
     imagePicker.allowsEditing = NO;
     
-    [controller presentViewController:imagePicker animated:YES completion:nil];
+    [self.parentController presentViewController:imagePicker animated:YES completion:nil];
   }
-}
-
-
-- (void)presentImageEditorOnController :(UIViewController *)controller withImage:(UIImage *)image isEditingProfilePic:(BOOL) isEditingProfilePic
-{
-  presentingController = controller;
-  isProfilePic = isEditingProfilePic;
-  [self showImageCropViewWithImage:image];
 }
 
 - (void) showImageCropViewWithImage:(UIImage *)image
@@ -51,7 +188,7 @@
     imageCropVC.dataSource = self;
   }
   
-  [presentingController presentViewController:imageCropVC animated:YES completion:nil];
+  [self.parentController presentViewController:imageCropVC animated:YES completion:nil];
   [self customizeCropViewUI:imageCropVC];
 }
 
@@ -64,11 +201,11 @@
   [imageCropVC.moveAndScaleLabel setHidden:true];
   
   CGRect statusBarViewRect = [[UIApplication sharedApplication] statusBarFrame];
-  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(presentingController.view.frame), statusBarViewRect.size.height+presentingController.navigationController.navigationBar.frame.size.height)];
+  UIView * topBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.parentController.view.frame), statusBarViewRect.size.height+self.parentController.navigationController.navigationBar.frame.size.height)];
   [topBar setBackgroundColor:[UIColor colorWithRed:40.0f/255 green:40.0f/255 blue:40.0f/255 alpha:.9]];
   
   [topBar setUserInteractionEnabled:true];
-  CGFloat btnY = statusBarViewRect.size.height+presentingController.navigationController.navigationBar.frame.size.height -38;
+  CGFloat btnY = statusBarViewRect.size.height+self.parentController.navigationController.navigationBar.frame.size.height -38;
   
   UIButton * cancelBtn = [self getCancelButtonForImageCropView:imageCropVC andButtonyPosition:btnY];
   UIButton *doneBtn = [self getDoneButtonForImageCropView:imageCropVC buttonyPosition:btnY andTopBarFrame:topBar.frame];
@@ -150,7 +287,7 @@
 - (CGRect)imageCropViewControllerCustomMaskRect:(RSKImageCropViewController *)controller
 {
   CGSize maskSize;
-  maskSize = CGSizeMake(presentingController.view.frame.size.width, 165);
+  maskSize = CGSizeMake(self.parentController.view.frame.size.width, 165);
   
   
   CGFloat viewWidth = CGRectGetWidth(controller.view.frame);
@@ -194,7 +331,20 @@
                   usingCropRect:(CGRect)cropRect
 {
   [controller dismissViewControllerAnimated:YES completion:^{
-    [self.delegate RSKFinishedPickingImage:croppedImage isProfilePic:isProfilePic];
+    
+    if (isProfilePic)
+    {
+      self.parentController.avatarPicState = IMAGE_EDITED;
+      self.parentController.actualAvatarImage = croppedImage;
+      self.parentController.profilePic.image = croppedImage;
+    }
+    else
+    {
+      self.parentController.headerPicState = IMAGE_EDITED;
+      self.parentController.actualHeaderImage = croppedImage;
+      self.parentController.headerBGImage.image = croppedImage;
+    }
+    [self.parentController validateFields];
   }];
 }
 
@@ -205,7 +355,19 @@
                   rotationAngle:(CGFloat)rotationAngle
 {
   [controller dismissViewControllerAnimated:YES completion:^{
-    [self.delegate RSKFinishedPickingImage:croppedImage isProfilePic:isProfilePic];
+    if (isProfilePic)
+    {
+      self.parentController.avatarPicState = IMAGE_EDITED;
+      self.parentController.actualAvatarImage = croppedImage;
+      self.parentController.profilePic.image = croppedImage;
+    }
+    else
+    {
+      self.parentController.headerPicState = IMAGE_EDITED;
+      self.parentController.actualHeaderImage = croppedImage;
+      self.parentController.headerBGImage.image = croppedImage;
+    }
+    [self.parentController validateFields];
   }];
 }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qhF-9Z-rbX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="qhF-9Z-rbX">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
@@ -136,13 +136,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iLw-QU-E1u">
-                                                <rect key="frame" x="85" y="17" width="66" height="13"/>
+                                                <rect key="frame" x="85" y="17" width="67" height="13"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
                                                 <color key="textColor" red="0.97254901960784312" green="0.78823529411764703" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="createPost_downArrow" translatesAutoresizingMaskIntoConstraints="NO" id="Cty-th-wKk">
-                                                <rect key="frame" x="159" y="0.0" width="10" height="46"/>
+                                                <rect key="frame" x="160" y="0.0" width="10" height="46"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="10" id="lGK-Fx-9RF"/>
                                                 </constraints>
@@ -230,10 +230,10 @@
                                                     <constraint firstItem="QwH-Vc-iZG" firstAttribute="centerX" secondItem="0Oo-BH-Vtb" secondAttribute="centerX" id="epj-2E-TEs"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hvd-V3-kTc">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvd-V3-kTc">
                                                 <rect key="frame" x="86" y="0.0" width="87" height="45"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fv-Ox-MFV">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Fv-Ox-MFV">
                                                         <rect key="frame" x="0.0" y="0.0" width="87" height="45"/>
                                                         <state key="normal">
                                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -398,16 +398,16 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="cameraIcon" destination="zKe-SD-78p" id="LyA-Wh-OxH"/>
+                        <outlet property="cameraIcon" destination="zKe-SD-78p" id="9MD-Pr-3i7"/>
                         <outlet property="facebookButton" destination="Sum-tm-Kmg" id="yHz-rs-sKw"/>
                         <outlet property="fadedActivityView" destination="wd3-Bo-ppF" id="9Hi-Jz-XyW"/>
-                        <outlet property="milestoneIcon" destination="A4V-sD-tkZ" id="Wgl-PC-6g8"/>
+                        <outlet property="milestoneIcon" destination="A4V-sD-tkZ" id="Mb7-mF-RCe"/>
                         <outlet property="popUpView" destination="4FT-hR-M8g" id="hTU-ti-7v8"/>
                         <outlet property="popUpViewHeightConstraint" destination="mry-6p-Q0w" id="3xx-il-bI7"/>
                         <outlet property="postScrollView" destination="tz6-cW-1uT" id="H49-Ns-pI8"/>
                         <outlet property="postingToLabel" destination="iLw-QU-E1u" id="PW9-43-l1b"/>
-                        <outlet property="tagFriendsIcon" destination="QwH-Vc-iZG" id="dG9-aR-0Kd"/>
-                        <outlet property="tagLocationIcon" destination="mN1-6M-jil" id="yEe-cH-mpm"/>
+                        <outlet property="tagFriendsIcon" destination="QwH-Vc-iZG" id="cbb-1c-vSD"/>
+                        <outlet property="tagLocationIcon" destination="mN1-6M-jil" id="Y3a-5o-hU2"/>
                         <outlet property="twitterButton" destination="Vo5-vY-Une" id="ToL-1g-Dth"/>
                         <outlet property="view" destination="1If-JH-g0B" id="a4a-U0-yyw"/>
                     </connections>
@@ -522,7 +522,7 @@
                                                 <rect key="frame" x="0.0" y="22" width="375" height="76"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VW2-9b-OsM" id="4a4-98-JTu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ddG-VW-XbD">
@@ -723,7 +723,7 @@
                                         <rect key="frame" x="0.0" y="22" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pPV-bG-OVM" id="YdN-yr-KWJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="39"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationIcon.png" translatesAutoresizingMaskIntoConstraints="NO" id="XSd-Yt-cnW">

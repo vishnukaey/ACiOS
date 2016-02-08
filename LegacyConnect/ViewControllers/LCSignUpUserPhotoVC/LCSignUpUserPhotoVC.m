@@ -157,7 +157,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
   [picker dismissViewControllerAnimated:YES completion:^{
-    UIImage *originalImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *normalzedImage = [originalImage normalizedImage];
     RSKImageCropViewController *imageCropVC = [[RSKImageCropViewController alloc] initWithImage:normalzedImage];
     imageCropVC.delegate = self;

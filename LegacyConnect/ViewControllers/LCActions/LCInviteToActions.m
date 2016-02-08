@@ -71,7 +71,7 @@
     selectedIDs = [[NSMutableArray alloc] init];
   }
   NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:noResultsMessage];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
   
   if (self.navigationController) {
     isCreatingAction = YES;

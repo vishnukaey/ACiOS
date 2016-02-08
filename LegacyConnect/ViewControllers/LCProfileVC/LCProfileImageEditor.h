@@ -7,24 +7,17 @@
 //
 
 #import "RSKImageCropViewController.h"
-
-@protocol LCActionsImageEditerDelegate <NSObject>
-
-- (void)RSKFinishedPickingImage:(UIImage *)image isProfilePic:(BOOL)isProfilePic;
-
-@end
-
+#import "LCProfileEditVC.h"
 
 @interface LCProfileImageEditor : NSObject <UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDataSource, RSKImageCropViewControllerDelegate>
 {
-  UIViewController *presentingController;
   BOOL isProfilePic;
 }
 
-@property(nonatomic, weak)id delegate;
+@property(nonatomic, strong)LCProfileEditVC *parentController;
 
-- (void)showImagePickerOnController:(UIViewController*)controller withSource:(UIImagePickerControllerSourceType) imageSource isEditingProfilePic:(BOOL) isEditingProfilePic;
-- (void)presentImageEditorOnController :(UIViewController *)controller withImage:(UIImage *)image isEditingProfilePic:(BOOL) isEditingProfilePic;
+- (void) editProfilePicture;
+- (void) editHeaderBackground;
 
 @end
 

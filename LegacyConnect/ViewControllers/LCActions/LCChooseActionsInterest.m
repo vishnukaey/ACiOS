@@ -58,9 +58,9 @@ static NSString *kCheckedImageName = @"contact_tick";
   nextButton.enabled = NO;
   if (!self.noResultsView) {
     NSString *message = NSLocalizedString(@"no_interests_available_self", nil);
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
+    self.noResultsView = [LCPaginationHelper getNoResultViewWithText:message];
   }
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   [self startFetchingResults];
 }
 
@@ -126,7 +126,7 @@ static NSString *kCheckedImageName = @"contact_tick";
   if (cell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCInterestsCellView" owner:self options:nil];
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   
   LCInterest *interstObj = [self.results objectAtIndex:indexPath.row];

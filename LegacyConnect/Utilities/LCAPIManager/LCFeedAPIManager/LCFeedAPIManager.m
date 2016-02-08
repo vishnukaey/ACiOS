@@ -130,15 +130,14 @@
    }];
 }
 
-+ (void)deleteCommentWithId:(NSString *)commentId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)deleteCommentFromPost:(LCFeed *)post withComment:(LCComment *)comment withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostCommentURL];
-  NSDictionary *dict = @{kPostCommentIdKey: commentId};
-  
-  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
+  NSString *url = [NSString stringWithFormat:@"%@%@/%@", kBaseURL, kCommentURL,comment.commentId];
+  [webService performDeleteOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      LCDLog(@"comment deleted.");
+     [LCNotificationManager postCommentDeletededNotificationforPost:post andComment:comment];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

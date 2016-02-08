@@ -10,6 +10,7 @@
 #import <AddressBook/AddressBook.h>
 #import "LCContact.h"
 #import "LCFeedsHomeViewController.h"
+#import "LCPhoneContactsHelper.h"
 
 #pragma mark - LCInviteFromContactsCell class
 @interface LCInviteFromContactsCell : UITableViewCell
@@ -53,7 +54,7 @@
       if (granted)
       {
         // First time access has been granted, add the contact
-        contactsArray = [LCUtilityManager getPhoneContacts];
+        contactsArray = [LCPhoneContactsHelper getPhoneContacts];
         dispatch_async(dispatch_get_main_queue(), ^{
           [contactsTable reloadData];
         });
@@ -69,7 +70,7 @@
   else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
   {
     // The user has previously given access, add the contact
-    contactsArray = [LCUtilityManager getPhoneContacts];
+    contactsArray = [LCPhoneContactsHelper getPhoneContacts];
     [contactsTable reloadData];
   }
   else
@@ -83,7 +84,7 @@
 #pragma mark - buttonActions
 - (void)checkbuttonAction :(UIButton *)sender
 {
-  LCContact *con = [contactsArray objectAtIndex:sender.tag];
+  LCContact *con = contactsArray[sender.tag];
   contactsTable.selectedButton = sender;
     if (con.P_emails.count==1)
     {
@@ -125,7 +126,7 @@
 {
   if (buttonIndex>0)
   {
-    LCContact *con = [contactsArray objectAtIndex:actionSheet.tag];
+    LCContact *con = contactsArray[actionSheet.tag];
     [contactsTable AddOrRemoveID:con.P_emails[buttonIndex -1]];
   }
 }
@@ -150,7 +151,7 @@
 {
   if (contactsArray.count == 0)
   {
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"no_contacts_to_display", nil)];
+    UITableViewCell *cell = [LCPaginationHelper getEmptyIndicationCellWithText:NSLocalizedString(@"no_contacts_to_display", nil)];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.allowsSelection = NO;
@@ -167,7 +168,7 @@
 
   
 
-  LCContact *con = [contactsArray objectAtIndex:indexPath.row];
+  LCContact *con = contactsArray[indexPath.row];
   cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
   cell.conatctPhotoView.clipsToBounds = YES;
   cell.conatctPhotoView.image = con.P_image;

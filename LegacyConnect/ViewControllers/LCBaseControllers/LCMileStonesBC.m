@@ -33,6 +33,8 @@
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kCommentPostNFK object:nil];
   
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedUpdatedNotificationReceived:) name:kCommentDeletedPostNFK object:nil];
+  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedEditedNotificationReceived:) name:kUpdatePostNFK object:nil];
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(feedDeletedNotificationReceived:) name:kDeletePostNFK object:nil];

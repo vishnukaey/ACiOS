@@ -14,10 +14,10 @@
 #import "LCActionsForm.h"
 #import "LCActionsFormPresenter.h"
 #import "LCEventMembersViewController.h"
-#import "LCActionsHeader.h"
 #import "NSURL+LCURLCategory.h"
 #import "LCEventAPImanager.h"
 #import "LCReportHelper.h"
+#import "LCActionHelper.h"
 
 static CGFloat kActionSectionHeight = 30;
 
@@ -131,7 +131,7 @@ static CGFloat kActionSectionHeight = 30;
 {
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
   self.tableView.tableFooterView = zeroRectView;
   [settingsButton.layer setCornerRadius:5.0f];
@@ -167,14 +167,22 @@ static CGFloat kActionSectionHeight = 30;
 - (void)dataPopulation
 {
   [self updateEventTitleAndTopUI];
+  [self setEventDetailsInfo];
+  [eventdateInfoLable setText:[LCActionHelper getEventDateInfo:self.eventObject]];
+  [self blockEventUI];
+  [self.tableView reloadData];
+}
+
+- (void)setEventDetailsInfo
+{
   NSString * eventCreatedBy = NSLocalizedString(@"event_created_by", nil);
   NSString  *eventOwnerName;
   NSString * inText = NSLocalizedString(@"in_", nil);
   NSString * interest = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.interestName];
   
   eventOwnerName = NSLocalizedString(@"you_", nil);
-
-
+  
+  
   if (![self.eventObject.userID isEqualToString:[LCDataManager sharedDataManager].userID]) {
     eventOwnerName = [NSString stringWithFormat:@"%@ %@ ",
                       [LCUtilityManager performNullCheckAndSetValue:self.eventObject.ownerFirstName],
@@ -182,62 +190,49 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   NSString * eventinfoString = [NSString stringWithFormat:@"%@%@ %@%@",eventCreatedBy,eventOwnerName,inText,interest];
-  NSMutableAttributedString * eventInfoAttribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
+  NSMutableAttributedString * eventInfoAtribString = [[NSMutableAttributedString alloc] initWithString:eventinfoString];
   
-  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init] ;
+  NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
   [paragraphStyle setAlignment:NSTextAlignmentCenter];
   
-  [eventInfoAttribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [eventInfoAttribString length])];
-
-  
+  [eventInfoAtribString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [eventInfoAtribString length])];
   
   NSRange tagRangeCreatedBy = [eventinfoString rangeOfString:eventCreatedBy];
-  [eventInfoAttribString addAttributes:@{
-                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                         NSForegroundColorAttributeName : [UIColor whiteColor]
-                                         } range:tagRangeCreatedBy];
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14], NSForegroundColorAttributeName : [UIColor whiteColor]} range:tagRangeCreatedBy];
   
   NSRange tagRangeUserName = [eventinfoString rangeOfString:eventOwnerName];
-  [eventInfoAttribString addAttributes:@{
-                                             NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                             NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]
-                                             } range:tagRangeUserName];
-  
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14], NSForegroundColorAttributeName : [LCUtilityManager getThemeRedColor]} range:tagRangeUserName];
   
   NSRange tagRangeinText = [eventinfoString rangeOfString:inText];
-  [eventInfoAttribString addAttributes:@{
-                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14],
-                                         NSForegroundColorAttributeName : [UIColor whiteColor]
-                                         } range:tagRangeinText];
-
-
-  NSRange tagRangeinterest = [eventinfoString rangeOfString:interest];
-  [eventInfoAttribString addAttributes:@{
-                                         NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14],
-                                         NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]
-                                         } range:tagRangeinterest];
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Book" size:14], NSForegroundColorAttributeName : [UIColor whiteColor]} range:tagRangeinText];
   
+  NSRange tagRangeinterest = [eventinfoString rangeOfString:interest];
+  [eventInfoAtribString addAttributes:@{NSFontAttributeName : [UIFont fontWithName:@"Gotham-Medium" size:14], NSForegroundColorAttributeName : [UIColor colorWithRed:107/255.0f green:215/255.0f blue:243/255.0f alpha:1]} range:tagRangeinterest];
+  
+  [self setTaggedLabelWithTagRangeUsername:tagRangeUserName andTagRangeinterest:tagRangeinterest eventOwnerName:eventOwnerName andInfoString:eventInfoAtribString];
+  
+}
+
+- (void)setTaggedLabelWithTagRangeUsername:(NSRange)tagRangeUserName andTagRangeinterest:(NSRange)tagRangeinterest
+                            eventOwnerName:(NSString*)eventOwnerName andInfoString:(NSMutableAttributedString*)infoString
+{
   NSMutableArray *tagsWithRanges = [[NSMutableArray alloc] init];
   
   // -- Interest Info Tag -- //
   NSDictionary *dic_interest = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.interestID, kTagobjId, kFeedTagTypeInterest, kTagobjType, [NSValue valueWithRange:tagRangeinterest], kRange, nil];
   [tagsWithRanges addObject:dic_interest];
-
+  
   // -- User Info Tag -- //
   NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.eventObject.userID, kIDKey,kFeedTagTypeUser, kTagobjType, [NSValue valueWithRange:tagRangeUserName], kRange, eventOwnerName, kTagobjText, nil];
   [tagsWithRanges addObject:dic_user];
   
+  
   eventCreatedByLabel.tagsArray  = tagsWithRanges;
-  [eventCreatedByLabel setAttributedText:eventInfoAttribString];
+  [eventCreatedByLabel setAttributedText:infoString];
   __weak typeof(self) weakSelf = self;
   eventCreatedByLabel.nameTagTapped = ^(int index) {
     [weakSelf tagTapped:eventCreatedByLabel.tagsArray[index]];
   };
-  
-//  [eventCreatedByLabel sizeToFit];
-  [self setEventDateInfo];
-  [self blockEventUI];
-  [self.tableView reloadData];
 }
 
 - (void)blockEventUI
@@ -251,24 +246,6 @@ static CGFloat kActionSectionHeight = 30;
       [blockActionBtnImg setHidden:NO];
     }
   }
-}
-
-- (void)setEventDateInfo
-{
-  if (![LCUtilityManager isEmptyString:self.eventObject.startDate]) {
-    NSString * eventDateInfo = [LCUtilityManager getDateFromTimeStamp:self.eventObject.startDate WithFormat:@"MMM dd yyyy"];
-    if (![LCUtilityManager isEmptyString:self.eventObject.endDate]) {
-      eventDateInfo = [NSString stringWithFormat:@"%@ to %@",eventDateInfo,[LCUtilityManager getDateFromTimeStamp:self.eventObject.endDate WithFormat:@"MMM dd yyyy"]];
-    }
-    [eventdateInfoLable setText:eventDateInfo];
-  }
-}
-
-- (UIView*)getHeaderViewWithHeaderTitle:(NSString*)title
-{
-  LCActionsHeader * headerView = [[[NSBundle mainBundle] loadNibNamed:@"LCActionsHeader" owner:self options:nil] firstObject];
-  [headerView.headerTextLabel setText:title];
-  return headerView;
 }
 
 #pragma mark - controller life cycle
@@ -339,11 +316,6 @@ static CGFloat kActionSectionHeight = 30;
       [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
   }
-}
-
-- (void)membersAction
-{
-  LCDLog(@"members clicked-->>");
 }
 
 - (void)websiteLinkAction
@@ -423,14 +395,8 @@ static CGFloat kActionSectionHeight = 30;
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+  return [LCActionHelper getActionsHeaderForSection:section];
   
-  NSString * headerText;
-  if (section == 0) {
-    headerText = NSLocalizedString(@"details_caps", nil);
-  } else {
-    headerText = NSLocalizedString(@"comments_caps", nil);
-  }
-  return [self getHeaderViewWithHeaderTitle:headerText];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -446,7 +412,7 @@ static CGFloat kActionSectionHeight = 30;
   }
   
   if (!self.eventObject.isFollowing) {
-    UITableViewCell * followEventCell = [LCUtilityManager getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
+    UITableViewCell * followEventCell = [LCPaginationHelper getEmptyIndicationCellWithText:NSLocalizedString(@"follow_event_message", @"Follow the event to view and post comments")];
     [followEventCell setBackgroundColor:[UIColor clearColor]];
     return followEventCell;
   }
@@ -458,7 +424,7 @@ static CGFloat kActionSectionHeight = 30;
   if (commentCell == nil)
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCCommentCellXIB" owner:self options:nil];
-    commentCell = [topLevelObjects objectAtIndex:0];
+    commentCell = topLevelObjects[0];
   }
   [commentCell setComment:[self.results objectAtIndex:indexPath.row]];
   [commentCell setSelectionStyle:UITableViewCellSelectionStyleNone];
@@ -467,8 +433,7 @@ static CGFloat kActionSectionHeight = 30;
     [weakSelf tagTapped:tagDetails];
   };
   commentCell.commentCellMoreAction =^(){
-    [LCReportHelper showCommentReportActionSheetFromView:self
-                                             withComment:self.results[indexPath.row]];
+    [LCReportHelper showCommentReportActionSheetFromView:self forAction:self.eventObject withComment:self.results[indexPath.row] isMyAction:self.eventObject.isOwner];
   };
   [commentCell.seperator setHidden:self.results.count -1 == indexPath.row];
   return commentCell;

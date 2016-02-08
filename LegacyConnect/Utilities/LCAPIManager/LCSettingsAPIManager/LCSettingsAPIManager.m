@@ -156,5 +156,25 @@
    }];
 }
 
++ (void)unBlockUserWithUserID:(NSString*)userID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
+{
+  NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kUnBlockUserURL];
+  NSDictionary *dict;
+  if(userID)
+  {
+    dict = @{kUserIDKey:userID};
+  }
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response) {
+    LCDLog(@"Success!");
+    [LCNotificationManager postBlockedUserNotification:userID forFriendStatus:kNonFriend];
+    success(response[kResponseData]);
+  } andFailure:^(NSString *error) {
+    LCDLog(@"Failure");
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+    failure(error);
+  }];
+}
+
 
 @end

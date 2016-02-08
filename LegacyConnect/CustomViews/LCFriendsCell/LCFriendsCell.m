@@ -8,12 +8,12 @@
 
 
 #import "LCFriendsCell.h"
-static CGFloat kAvatarImageCornerRadius = 31.5f;
+static CGFloat kAvatarImgCnrRadius = 31.5f;
 
 @implementation LCFriendsCell
 
 - (void)awakeFromNib {
-  self.friendsImageView.layer.cornerRadius = kAvatarImageCornerRadius;
+  self.friendsImageView.layer.cornerRadius = kAvatarImgCnrRadius;
   self.friendsImageView.layer.masksToBounds = YES;
 }
 

@@ -79,8 +79,8 @@
 {
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_requests_pending", nil)];
-  self.nextPageLoaderCell = [LCUtilityManager getNextPageLoaderCell];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_requests_pending", nil)];
+  self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   
   // Pull to Refresh Interface to Feeds TableView.
   __weak typeof(self) weakSelf = self;

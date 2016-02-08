@@ -14,6 +14,7 @@
 + (void)postLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post;
 + (void)postUnLikedNotificationfromResponse :(NSDictionary *)response forPost:(LCFeed *)post;
 + (void)postCommentedNotificationforPost:(LCFeed *)post andComment:(LCComment*)comment;
++ (void)postCommentDeletededNotificationforPost:(LCFeed *)post andComment:(LCComment *)comment;
 + (void)postPostDeletedNotificationforPost: (LCFeed *)post;
 + (void)postPostEditedNotificationForPost :(LCFeed *)post;
 + (void)postRemoveMilestoneNotificationForPost :(LCFeed *)post;
@@ -28,6 +29,7 @@
 + (void)postEventDeletedNotification:(LCEvent*)event;
 + (void)postEventRejectedNotification: (NSString *)eventID;
 + (void)postEventCommentedNotificationWithComment:(LCComment*)comment andEvent:(LCEvent*)event;
++ (void)postEventCommenteDeletedNotificationWithComment:(LCComment*)comment andEvent:(LCEvent*)event;
 
 //profile updated
 + (void)postProfileUpdatedNotification :(LCUserDetail *)userDetails;

@@ -154,7 +154,7 @@
   [viewArray addObject:loginVC];
   LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
   updatePasswordVC.delegate = loginVC;
-  updatePasswordVC.token = [userInfo objectForKey:kResetPasswordTokenKey];
+  updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
   [viewArray addObject:updatePasswordVC];
   self.navigationController.viewControllers = viewArray;
 }

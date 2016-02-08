@@ -30,7 +30,7 @@
 - (void)deleteActionEvent
 {
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_action", nil) message:NSLocalizedString(@"delete_action_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
       
       [LCEventAPImanager deleteEvent:eventToEdit withSuccess:^(id response) {
@@ -41,7 +41,7 @@
       }];
 
     }];
-    [deleteAlert addAction:deletePostActionFinal];
+    [deleteAlert addAction:deletePostAction];
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
     [deleteAlert addAction:cancelAction];
     [actionForm presentViewController:deleteAlert animated:YES completion:nil];  
@@ -79,32 +79,34 @@
   [actionForm dismissViewControllerAnimated:YES completion:nil];
 }
 
--  (void)selectHeaderPhoto
+- (UIAlertAction*)getEditAlertAction
 {
-  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-  actionSheet.view.tintColor = [UIColor blackColor];
-  
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"edit_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     if (headerImageEdited) {
-        [self startImageEditing:actionForm.headerPhotoImageView.image];
+      [self startImageEditing:actionForm.headerPhotoImageView.image];
     }
     else
     {
-        NSString *headerUrlString = eventToEdit.headerPhoto;
-        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
-        [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
-                              options:0
-                             progress:nil
-                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
-                              if (image) {
-                                [self startImageEditing:image];
-                              }
-                              [MBProgressHUD hideHUDForView:actionForm.view animated:YES];
-         }];
+      NSString *headerUrlString = eventToEdit.headerPhoto;
+      SDWebImageManager *manager = [SDWebImageManager sharedManager];
+      [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
+      [manager downloadImageWithURL:[NSURL URLWithString:headerUrlString]
+                            options:0
+                           progress:nil
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+                            if (image) {
+                              [self startImageEditing:image];
+                            }
+                            [MBProgressHUD hideHUDForView:actionForm.view animated:YES];
+                          }];
     }
   }];
-  
+  return editAction;
+
+}
+
+- (UIAlertAction*)getTakeAlertAction
+{
   UIAlertAction *takeAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"take_photo", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
@@ -117,6 +119,16 @@
     }
     
   }];
+  return takeAction;
+}
+
+-  (void)selectHeaderPhoto
+{
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  
+  UIAlertAction *editAction = [self getEditAlertAction];
+  UIAlertAction *takeAction = [self getTakeAlertAction];
   
   UIAlertAction *chooseAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"choose_from_library", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
     

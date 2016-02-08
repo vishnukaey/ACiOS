@@ -10,7 +10,7 @@
 #import "NSDate+TimeAgo.h"
 
 static NSString *kActionsDateFormat = @"MMM dd yyyy hh:mm a";
-static NSString *kEventPlaceholderImage = @"event_placeholder";
+static NSString *kEventPlaceholderImg = @"event_placeholder";
 static NSString *kSupportedByPeople = @"Supported by %@ People";
 static NSString *kSupportedByPerson = @"Supported by %@ Person";
 
@@ -44,7 +44,7 @@ static NSString *kSupportedByPerson = @"Supported by %@ Person";
       [self.supportersCountLabel setText:[NSString stringWithFormat:kSupportedByPeople,event.followerCount]];
     }
   }
-  [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:kEventPlaceholderImage]];
+  [self.headerPhotoImageView sd_setImageWithURL:[NSURL URLWithString:_event.headerPhoto] placeholderImage:[UIImage imageNamed:kEventPlaceholderImg]];
 }
 
 @end

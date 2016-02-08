@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LCUserDetail.h"
 #import <UIKit/UIKit.h>
+#import "LCPaginationHelper.h"
 
 @interface LCUtilityManager : NSObject
 
@@ -28,31 +29,18 @@
 + (NSString *) generateUserTokenForUserID:(NSString*)userID andPassword:(NSString *)password;
 + (void)clearUserDefaultsForCurrentUser;
 + (void)saveUserDefaultsForNewUser;
-
-+ (UITableViewCell*)getEmptyIndicationCellWithText:(NSString*)text;
 + (void)setLCStatusBarStyle;
-
-//+(NSNumber*) getNSNumberFromString:(NSString*)string;
-
-
-+ (NSArray *)getPhoneContacts;
 + (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden;
-
 + (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString;
-
-+ (UIView*)getNoResultViewWithText:(NSString*)text;
-+ (UIView*)getSearchNoResultViewWithText:(NSString*)text;
-+ (UITableViewCell*)getNextPageLoaderCell;
 + (BOOL)isaValidWebsiteLink :(NSString *)link;
 + (NSString *)getSpaceTrimmedStringFromString :(NSString *)string;
 + (BOOL)isEmptyString :(NSString *)string;
-
 + (void)showVersionOutdatedAlert;
 + (NSString *)getAppVersion;
 + (void)checkAppVersion;
-
 + (UIColor *)getThemeRedColor;
 + (float)getHeightOffsetForGIB;
 +(UIColor*)colorWithHexString:(NSString*)hex;
++(void)logoutUserClearingDefaults;
 
 @end

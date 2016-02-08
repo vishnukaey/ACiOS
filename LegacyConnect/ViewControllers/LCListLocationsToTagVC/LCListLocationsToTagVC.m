@@ -102,9 +102,9 @@
   [locationsArray addObjectsFromArray:locationsTable.selectedIDs];
   [locationsArray addObjectsFromArray:locations];
   NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:locationsArray];
-  NSArray *arrayWithoutDuplicates = [orderedSet array];
+  NSArray *locWithoutDuplicates = [orderedSet array];
   [locationsArray removeAllObjects];
-  [locationsArray addObjectsFromArray:arrayWithoutDuplicates];
+  [locationsArray addObjectsFromArray:locWithoutDuplicates];
   [locationsTable reloadData];
 }
 
@@ -139,7 +139,7 @@
   if (locationsArray.count == 0)
   {
     NSString * message = NSLocalizedString(@"no_results_found", nil);
-    UITableViewCell *cell = [LCUtilityManager getEmptyIndicationCellWithText:message];
+    UITableViewCell *cell = [LCPaginationHelper getEmptyIndicationCellWithText:message];
     tableView.backgroundColor = [UIColor whiteColor];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.allowsSelection = NO;
@@ -156,7 +156,7 @@
   cell.locationLabel.text = [locationsArray objectAtIndex:indexPath.row];
   [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   cell.checkButton.tag = indexPath.row;
-  [tableView setStatusForButton:cell.checkButton byCheckingIDs:[NSArray arrayWithObjects:[locationsArray objectAtIndex:indexPath.row], nil]];
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:@[locationsArray[indexPath.row]]];
   return cell;
 }
 

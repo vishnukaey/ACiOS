@@ -129,7 +129,7 @@
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
                     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
                       [LCPostAPIManager deletePost:feed withSuccess:^(NSArray *response) {
                         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
@@ -139,7 +139,7 @@
                                       LCDLog(@"%@",error);
                                     }];
                     }];
-                    [deleteAlert addAction:deletePostActionFinal];
+                    [deleteAlert addAction:deletePostAction];
                     
                     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
                     [deleteAlert addAction:cancelAction];
@@ -167,7 +167,7 @@
   self.tableView.estimatedRowHeight = 44.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, [LCUtilityManager getHeightOffsetForGIB])];
-  self.noResultsView = [LCUtilityManager getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
+  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:NSLocalizedString(@"no_impacts_available_others", nil)];
   
   [self addPullToRefresh];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
@@ -215,7 +215,7 @@
   {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"LCFeedcellXIB" owner:self options:nil];
     // Grab a pointer to the first object (presumably the custom cell, as that's all the XIB should contain).
-    cell = [topLevelObjects objectAtIndex:0];
+    cell = topLevelObjects[0];
   }
   [cell setData:[self.results objectAtIndex:indexPath.row] forPage:kHomefeedCellID];
   __weak typeof(self) weakSelf = self;
@@ -246,10 +246,6 @@
       
     case kFeedCellActionComment:
       [self showFeedCommentsWithFeed:feed];
-      break;
-      
-    case kFeedCellActionLike:
-      //    [self postMessage];
       break;
       
     case kkFeedCellActionViewImage:

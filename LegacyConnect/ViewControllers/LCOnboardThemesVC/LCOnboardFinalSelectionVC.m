@@ -25,12 +25,12 @@
 
 @end
 
-NSString *const kCellIdentifierSectionHeader = @"headerCell";
-NSString *const kCellIdentifierSectionFooter = @"footerCell";
-NSString *const kCellIdentifierTableViewCell = @"causesTableViewCell";
-NSInteger const kTableViewCellHeight = 170;
-NSInteger const kTableViewHeaderHeight = 44;
-NSInteger const kNumberOfRowsInSection = 1;
+NSString *const kCellIdSectionHeader = @"headerCell";
+NSString *const kCellIdSectionFooter = @"footerCell";
+NSString *const kCellIdTableViewCell = @"causesTableViewCell";
+NSInteger const kTableCellHeight = 170;
+NSInteger const kTableHeaderHeight = 44;
+NSInteger const kNoOfRowsInSection = 1;
 
 @implementation LCOnboardFinalSelectionVC
 
@@ -58,10 +58,10 @@ NSInteger const kNumberOfRowsInSection = 1;
 
 - (void) getCausesSuggestions {
   
-  NSArray *selectedInterestArray = [[LCOnboardingHelper selectedItemsDictionary] allKeys];
+  NSArray *selectedInterests = [[LCOnboardingHelper selectedItemsDictionary] allKeys];
   
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCThemeAPIManager getCausesForSetOfInterests:selectedInterestArray withSuccess:^(id response) {
+  [LCThemeAPIManager getCausesForSetOfInterests:selectedInterests withSuccess:^(id response) {
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     self.interestArray = response;
     [self.tableView reloadData];
@@ -125,23 +125,23 @@ NSInteger const kNumberOfRowsInSection = 1;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return kNumberOfRowsInSection;
+  return kNoOfRowsInSection;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return kTableViewCellHeight;
+  return kTableCellHeight;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
   
-  return kTableViewHeaderHeight;
+  return kTableHeaderHeight;
 }
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   
-  NSString *cellIdentifier = kCellIdentifierSectionHeader;
+  NSString *cellIdentifier = kCellIdSectionHeader;
   LCCausesHeaderTableViewCell *headerView = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   LCInterest *interest = self.interestArray[section];
   headerView.interestName.text = interest.name;
@@ -151,7 +151,7 @@ NSInteger const kNumberOfRowsInSection = 1;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  NSString *cellIdentifier = kCellIdentifierTableViewCell;
+  NSString *cellIdentifier = kCellIdTableViewCell;
   LCCausesCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   cell.interest = (LCInterest*)self.interestArray[indexPath.section];
   [cell reloadCollectionView];

@@ -58,7 +58,7 @@
     if (self.isSelfProfile) {
       message = NSLocalizedString(@"no_milestones_available_self", nil);
     }
-    self.noResultsView = [LCUtilityManager getNoResultViewWithText:message];
+    self.noResultsView = [LCPaginationHelper getNoResultViewWithText:message];
   }
 }
 
@@ -230,12 +230,7 @@
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
-    LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
-    createPostVC.isEditing = YES;
-    createPostVC.postFeedObject = feed;
-    createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [self presentViewController:createPostVC animated:YES completion:nil];
+    [self loadPostViewControllerWithField:feed];
   }];
   
   [actionSheet addAction:editPost];
@@ -254,7 +249,7 @@
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *deletePostActionFinal = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
       [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
       [LCPostAPIManager deletePost:feed withSuccess:^(NSArray *response) {
         [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
@@ -264,7 +259,7 @@
                       LCDLog(@"%@",error);
                     }];
     }];
-    [deleteAlert addAction:deletePostActionFinal];
+    [deleteAlert addAction:deletePostAction];
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
     [deleteAlert addAction:cancelAction];
@@ -276,6 +271,16 @@
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
+- (void) loadPostViewControllerWithField:(LCFeed*)feed
+{
+  UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
+  createPostVC.isEditing = YES;
+  createPostVC.postFeedObject = feed;
+  createPostVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+  [self presentViewController:createPostVC animated:YES completion:nil];
 }
 
 - (void)reportFeed:(LCFeed*)feed

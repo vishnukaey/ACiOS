@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCProfileImageEditor.h"
 #import "IQUIView+IQKeyboardToolbar.h"
 
 typedef enum profileSectionTypes
@@ -28,10 +27,10 @@ typedef enum imageEditStates
 @interface LCProfileEditVC : UIViewController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 {
   
-  IBOutlet UIImageView *profilePic;
+  
   IBOutlet UIView *profilePicBorderView;
   IBOutlet UIButton *buttonSave;
-  IBOutlet UIImageView *headerBGImage;
+  
   IBOutlet UIView *navigationBar;
   
   UITextField *txt_firstName;
@@ -46,14 +45,16 @@ typedef enum imageEditStates
   
   UIPickerView *genderPicker;
   NSArray *genderTypes;
-
-  imageEditState avatarPicState, headerPicState;
-  UIImage *actualHeaderImage, *actualAvatarImage;
   
   UIImage *profilePicPlaceholder;
-  
-  LCProfileImageEditor *imageEditor;
 }
+
+@property(weak, nonatomic) IBOutlet UIImageView *profilePic;
+@property(weak, nonatomic) IBOutlet UIImageView *headerBGImage;
+@property(nonatomic) imageEditState avatarPicState;
+@property(nonatomic) imageEditState headerPicState;
+@property(strong, nonatomic) UIImage *actualHeaderImage;
+@property(strong, nonatomic) UIImage *actualAvatarImage;
 
 
 @property(nonatomic, retain)LCUserDetail *userDetail;
@@ -62,5 +63,6 @@ typedef enum imageEditStates
 - (IBAction)saveAction:(id)sender;
 - (IBAction)editProfilePicAction:(id)sender;
 - (IBAction)editHeaderBGAction:(id)sender;
+- (void)validateFields;
 
 @end

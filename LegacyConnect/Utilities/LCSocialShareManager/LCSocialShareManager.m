@@ -16,7 +16,7 @@
 @property (nonatomic, strong) CanShareToTwitter canShareTwitterBlock;
 @end
 
-NSString * const kFBPublishActionsPermissionKey = @"publish_actions";
+NSString * const kFBPublishKey = @"publish_actions";
 NSString * const kFBMessageKey = @"message";
 
 @implementation LCSocialShareManager
@@ -152,7 +152,7 @@ NSString * const kFBMessageKey = @"message";
 + (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler
 {
   FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
-  if ([accessToken hasGranted:kFBPublishActionsPermissionKey]) {
+  if ([accessToken hasGranted:kFBPublishKey]) {
     
     LCDLog(@"have facebook access token.");
     completionHandler(YES);
@@ -178,7 +178,7 @@ NSString * const kFBMessageKey = @"message";
   FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
   [login logOut];
   LCAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-  [login logInWithPublishPermissions:@[kFBPublishActionsPermissionKey] fromViewController:appDelegate.window.rootViewController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+  [login logInWithPublishPermissions:@[kFBPublishKey] fromViewController:appDelegate.window.rootViewController handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
     if (error)
     {
       LCDLog(@"error %@",error);
@@ -192,7 +192,7 @@ NSString * const kFBMessageKey = @"message";
     }
     else
     {
-      if ([result.grantedPermissions containsObject:kFBPublishActionsPermissionKey])
+      if ([result.grantedPermissions containsObject:kFBPublishKey])
       {
         success(result);
       }
