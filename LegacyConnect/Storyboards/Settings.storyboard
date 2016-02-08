@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -41,6 +41,7 @@
             <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
+            <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
             <string>Gotham-Medium</string>
         </mutableArray>
@@ -955,21 +956,22 @@ ThatHelps account</string>
                                                         <constraint firstAttribute="width" constant="63" id="NMA-rf-Cdl"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxh-aZ-3Mg" customClass="LCfriendButton">
-                                                    <rect key="frame" x="322" y="25" width="38" height="38"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxh-aZ-3Mg" customClass="LCfriendButton">
+                                                    <rect key="frame" x="285" y="26" width="75" height="35"/>
                                                     <color key="backgroundColor" red="0.15686274510000001" green="0.15686274510000001" blue="0.15686274510000001" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="38" id="RRZ-wq-cnv"/>
-                                                        <constraint firstAttribute="width" constant="38" id="XrW-YX-HPS"/>
+                                                        <constraint firstAttribute="height" constant="35" id="RRZ-wq-cnv"/>
+                                                        <constraint firstAttribute="width" constant="75" id="XrW-YX-HPS"/>
                                                     </constraints>
+                                                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
                                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                    <state key="normal">
-                                                        <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <state key="normal" title="Unblock">
+                                                        <color key="titleColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nid-zk-oFb">
-                                                    <rect key="frame" x="93" y="23" width="214" height="21"/>
+                                                    <rect key="frame" x="93" y="23" width="192" height="21"/>
                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="2S4-Fd-a7k"/>
@@ -979,7 +981,7 @@ ThatHelps account</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j2l-jG-kAk">
-                                                    <rect key="frame" x="93" y="48" width="214" height="21"/>
+                                                    <rect key="frame" x="93" y="48" width="192" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="Yuv-Ub-o1h"/>
                                                     </constraints>
@@ -999,7 +1001,7 @@ ThatHelps account</string>
                                                 <constraint firstItem="e3n-li-TZH" firstAttribute="leading" secondItem="yEB-ph-Zho" secondAttribute="leading" constant="15" id="1Po-qQ-6gf"/>
                                                 <constraint firstAttribute="centerY" secondItem="Qxh-aZ-3Mg" secondAttribute="centerY" id="I2p-RW-QuQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="Qxh-aZ-3Mg" secondAttribute="trailing" constant="15" id="Wft-KG-KEi"/>
-                                                <constraint firstItem="Qxh-aZ-3Mg" firstAttribute="leading" secondItem="j2l-jG-kAk" secondAttribute="trailing" constant="15" id="aKc-y5-iz9"/>
+                                                <constraint firstItem="Qxh-aZ-3Mg" firstAttribute="leading" secondItem="j2l-jG-kAk" secondAttribute="trailing" id="aKc-y5-iz9"/>
                                                 <constraint firstAttribute="centerY" secondItem="j2l-jG-kAk" secondAttribute="centerY" constant="-15" id="aSr-76-YGz"/>
                                                 <constraint firstItem="j2l-jG-kAk" firstAttribute="leading" secondItem="e3n-li-TZH" secondAttribute="trailing" constant="15" id="b0j-w8-gsM"/>
                                                 <constraint firstAttribute="trailing" secondItem="6s9-EP-yyk" secondAttribute="trailing" id="bvn-fk-2QD"/>
@@ -1008,7 +1010,7 @@ ThatHelps account</string>
                                                 <constraint firstItem="nid-zk-oFb" firstAttribute="leading" secondItem="e3n-li-TZH" secondAttribute="trailing" constant="15" id="hWa-D7-WsJ"/>
                                                 <constraint firstItem="j2l-jG-kAk" firstAttribute="top" secondItem="6s9-EP-yyk" secondAttribute="bottom" id="hqe-SR-Bfo"/>
                                                 <constraint firstAttribute="centerY" secondItem="nid-zk-oFb" secondAttribute="centerY" constant="10" id="o8P-qY-ar8"/>
-                                                <constraint firstItem="Qxh-aZ-3Mg" firstAttribute="leading" secondItem="nid-zk-oFb" secondAttribute="trailing" constant="15" id="obu-Yv-QeU"/>
+                                                <constraint firstItem="Qxh-aZ-3Mg" firstAttribute="leading" secondItem="nid-zk-oFb" secondAttribute="trailing" id="obu-Yv-QeU"/>
                                                 <constraint firstItem="6s9-EP-yyk" firstAttribute="leading" secondItem="yEB-ph-Zho" secondAttribute="leading" constant="15" id="p7H-CA-a5C"/>
                                             </constraints>
                                             <variation key="default">
@@ -1021,6 +1023,7 @@ ThatHelps account</string>
                                             <outlet property="friendsImageView" destination="e3n-li-TZH" id="xVb-jl-dmV"/>
                                             <outlet property="friendsLocationLabel" destination="j2l-jG-kAk" id="eAI-Ij-maT"/>
                                             <outlet property="friendsNameLabel" destination="nid-zk-oFb" id="glF-Bu-ucw"/>
+                                            <outlet property="unblockButton" destination="Qxh-aZ-3Mg" id="7Ye-ng-ERP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

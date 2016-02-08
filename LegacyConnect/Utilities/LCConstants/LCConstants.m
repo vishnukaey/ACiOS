@@ -69,6 +69,7 @@ NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
 NSString *const kEditProfileURL = @"api/user/edit";
 NSString *const kBlockUserURL = @"api/user/block";
+NSString *const kUnBlockUserURL = @"api/user/unblock";
 NSString *const kBlockEventURL = @"api/event/block";
 NSString *const kFBLoginURL = @"api/user/fbLogin";
 NSString *const kUploadUserImageURL = @"api/user/profileImage";

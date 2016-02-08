@@ -68,6 +68,7 @@ extern NSString *const kGetCauseFromInterestsURL;
 extern NSString *const kGetThemesURL;
 
 extern NSString *const kBlockUserURL;
+extern NSString *const kUnBlockUserURL;
 extern NSString *const kBlockEventURL;
 extern NSString *const kUploadUserImageURL;
 extern NSString *const kUpdatePasswordURL;
