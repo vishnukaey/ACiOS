@@ -55,7 +55,7 @@
        (!errorMsg||[errorMsg isKindOfClass:[NSNull class]] ? failure([error localizedDescription]) : failure(errorMsg));
        LCDLog(@"error is %@", [error localizedDescription]);
      }
-
+     
      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
      failure([error localizedDescription]);
    }];
@@ -103,7 +103,7 @@
      NSString *errorMsg = operation.responseObject[kResponseMessage];
      
      NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)operation.response;
-
+     
      if(httpResponse.statusCode == 401)
      {
        [LCUtilityManager logoutUserClearingDefaults];
@@ -282,24 +282,31 @@
      }
      else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
      {
-       NSString *errorMsg = operation.responseObject[kResponseMessage];
-       
-       NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)operation.response;
-       
-       if(httpResponse.statusCode == 401)
-       {
-         [LCUtilityManager logoutUserClearingDefaults];
-       }
-       else
-       {
-         (!errorMsg||[errorMsg isKindOfClass:[NSNull class]] ? failure([error localizedDescription]) : failure(errorMsg));
-         LCDLog(@"error is %@", [error localizedDescription]);
-       }
-       [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-       failure([error localizedDescription]);
-       
-     }];
-  }
+       [LCUtilityManager showVersionOutdatedAlert];
+     }
+     else//101
+     {
+       failure(responseObject[kResponseMessage]);
+     }
+   }
+        failure:^(AFHTTPRequestOperation *operation, NSError *error)
+   {       NSString *errorMsg = operation.responseObject[kResponseMessage];
+     
+     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)operation.response;
+     
+     if(httpResponse.statusCode == 401)
+     {
+       [LCUtilityManager logoutUserClearingDefaults];
+     }
+     else
+     {
+       (!errorMsg||[errorMsg isKindOfClass:[NSNull class]] ? failure([error localizedDescription]) : failure(errorMsg));
+       LCDLog(@"error is %@", [error localizedDescription]);
+     }
+     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+     failure([error localizedDescription]);
+     
+   }];
 }
 
 @end
