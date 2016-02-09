@@ -229,6 +229,12 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   }
 }
 
+- (IBAction)profileImageClickedAction
+{
+  NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:self.feedObject.userID, @"id", @"cause", @"text", kFeedTagTypeUser, kTagobjType, nil];
+  self.feedCellTagAction(dic_user) ;
+}
+
 - (IBAction)likeAction:(id)sender
 {
   __weak typeof(self.feedObject) feedObject_ = self.feedObject;

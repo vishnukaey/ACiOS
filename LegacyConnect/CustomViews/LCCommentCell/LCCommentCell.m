@@ -23,6 +23,7 @@
 
 - (void)setComment:(LCComment *)comment
 {
+  _comment = comment;
   profilePic.layer.cornerRadius = profilePic.frame.size.width/2;
   profilePic.clipsToBounds = YES;
   [profilePic sd_setImageWithURL:[NSURL URLWithString:comment.avatarUrl] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
@@ -61,6 +62,11 @@
   if (self.commentCellMoreAction) {
     self.commentCellMoreAction();
   }
+}
+
+- (IBAction)profileImageClickedAction {
+    NSDictionary *dic_user = [[NSDictionary alloc] initWithObjectsAndKeys:_comment.userId, @"id", @"cause", @"text", kFeedTagTypeUser,kTagobjType, nil];
+  self.commentCellTagAction(dic_user);
 }
 
 

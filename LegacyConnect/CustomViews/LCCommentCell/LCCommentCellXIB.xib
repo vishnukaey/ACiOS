@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -74,25 +74,35 @@
                             <action selector="moreAction:" destination="L64-DK-fa1" eventType="touchUpInside" id="8Ke-Ug-OsL"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cyn-j4-c6O">
+                        <rect key="frame" x="15" y="12" width="38" height="38"/>
+                        <connections>
+                            <action selector="profileImageClickedAction" destination="L64-DK-fa1" eventType="touchUpInside" id="wK2-n7-uC8"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="TJL-Yg-CTM" firstAttribute="top" secondItem="fWE-A6-VMV" secondAttribute="bottom" id="7tn-FQ-TaV"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="12" id="9hE-34-Qsw"/>
                     <constraint firstItem="pqD-ze-JfD" firstAttribute="top" secondItem="MtL-zH-fbZ" secondAttribute="bottom" id="H2H-D2-L5s"/>
+                    <constraint firstItem="cyn-j4-c6O" firstAttribute="height" secondItem="7tr-BC-ppO" secondAttribute="height" id="N9a-zX-m5L"/>
                     <constraint firstItem="SPp-c3-CKE" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="8" id="NK8-Hq-lw5"/>
                     <constraint firstAttribute="trailing" secondItem="MtL-zH-fbZ" secondAttribute="trailing" constant="15" id="OeN-1H-PnE"/>
                     <constraint firstItem="MtL-zH-fbZ" firstAttribute="top" secondItem="04y-rd-ZMV" secondAttribute="top" constant="8" id="Opi-bR-ams"/>
+                    <constraint firstItem="cyn-j4-c6O" firstAttribute="width" secondItem="7tr-BC-ppO" secondAttribute="width" id="c05-T7-KMn"/>
                     <constraint firstItem="SPp-c3-CKE" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="ciO-Mt-RPV"/>
                     <constraint firstAttribute="trailing" secondItem="fWE-A6-VMV" secondAttribute="trailing" constant="15" id="gF8-8S-epU"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="centerY" secondItem="04y-rd-ZMV" secondAttribute="centerY" id="hkF-ej-ucQ"/>
                     <constraint firstItem="TJL-Yg-CTM" firstAttribute="top" secondItem="pqD-ze-JfD" secondAttribute="bottom" id="l5s-vG-vaL"/>
                     <constraint firstItem="7tr-BC-ppO" firstAttribute="leading" secondItem="04y-rd-ZMV" secondAttribute="leading" constant="15" id="loZ-ne-l1f"/>
+                    <constraint firstItem="cyn-j4-c6O" firstAttribute="centerY" secondItem="7tr-BC-ppO" secondAttribute="centerY" id="ns7-gW-vlx"/>
                     <constraint firstAttribute="bottom" secondItem="TJL-Yg-CTM" secondAttribute="bottom" id="psn-rs-Ra6"/>
                     <constraint firstItem="TJL-Yg-CTM" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="qNb-a5-ExK"/>
                     <constraint firstItem="pqD-ze-JfD" firstAttribute="leading" secondItem="7tr-BC-ppO" secondAttribute="trailing" constant="15" id="qel-yZ-sws"/>
                     <constraint firstItem="fWE-A6-VMV" firstAttribute="leading" secondItem="pqD-ze-JfD" secondAttribute="trailing" id="seY-xc-R3K"/>
                     <constraint firstAttribute="trailing" secondItem="TJL-Yg-CTM" secondAttribute="trailing" id="uFC-VW-7Sx"/>
                     <constraint firstItem="MtL-zH-fbZ" firstAttribute="leading" secondItem="SPp-c3-CKE" secondAttribute="trailing" constant="8" id="uPA-8O-8rs"/>
+                    <constraint firstItem="cyn-j4-c6O" firstAttribute="centerX" secondItem="7tr-BC-ppO" secondAttribute="centerX" id="yxs-9D-ix6"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">

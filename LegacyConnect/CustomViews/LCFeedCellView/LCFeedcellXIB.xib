@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -80,6 +80,12 @@
                                     <constraint firstAttribute="width" constant="13" id="mEo-sa-Lou"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lz8-Li-jDr">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <connections>
+                                    <action selector="profileImageClickedAction" destination="Eee-dM-J0u" eventType="touchUpInside" id="0tl-DQ-tBJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="YdG-Pp-IrC" secondAttribute="bottom" constant="7" id="45z-fs-9nq"/>
@@ -89,7 +95,10 @@
                             <constraint firstAttribute="trailing" secondItem="Sok-jq-UiD" secondAttribute="trailing" constant="15" id="BeO-0H-daU"/>
                             <constraint firstItem="aKp-8U-1B4" firstAttribute="leading" secondItem="YdG-Pp-IrC" secondAttribute="trailing" constant="8" id="ItR-G5-VlA"/>
                             <constraint firstItem="5bn-gW-4lj" firstAttribute="leading" secondItem="H45-oW-g99" secondAttribute="leading" id="KOD-cs-Jgs"/>
+                            <constraint firstItem="lz8-Li-jDr" firstAttribute="height" secondItem="5bn-gW-4lj" secondAttribute="height" id="MSO-i1-ZHM"/>
+                            <constraint firstItem="lz8-Li-jDr" firstAttribute="centerX" secondItem="5bn-gW-4lj" secondAttribute="centerX" id="U6Z-8Y-PDi"/>
                             <constraint firstItem="Sok-jq-UiD" firstAttribute="leading" secondItem="5bn-gW-4lj" secondAttribute="trailing" constant="15" id="UWg-yt-pwQ"/>
+                            <constraint firstItem="lz8-Li-jDr" firstAttribute="width" secondItem="5bn-gW-4lj" secondAttribute="width" id="XMh-AU-2ci"/>
                             <constraint firstAttribute="bottom" secondItem="aKp-8U-1B4" secondAttribute="bottom" constant="8" id="Zbt-Og-Ebt"/>
                             <constraint firstItem="YdG-Pp-IrC" firstAttribute="top" secondItem="Sok-jq-UiD" secondAttribute="bottom" constant="2" id="Zt2-TI-RET"/>
                             <constraint firstAttribute="trailing" secondItem="aKp-8U-1B4" secondAttribute="trailing" constant="15" id="bqP-Ue-jed"/>
@@ -102,6 +111,7 @@
                             <constraint firstItem="Sok-jq-UiD" firstAttribute="top" secondItem="xcg-BE-PLJ" secondAttribute="bottom" constant="4" id="rlt-fo-0vu"/>
                             <constraint firstItem="aKp-8U-1B4" firstAttribute="top" secondItem="Sok-jq-UiD" secondAttribute="bottom" constant="4" id="ve5-2s-swu"/>
                             <constraint firstAttribute="trailing" secondItem="Bdg-zj-WBm" secondAttribute="trailing" id="xRb-tZ-Bel"/>
+                            <constraint firstItem="lz8-Li-jDr" firstAttribute="centerY" secondItem="5bn-gW-4lj" secondAttribute="centerY" id="zKH-Sy-vxc"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
