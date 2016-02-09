@@ -107,7 +107,7 @@
 "action_type_event" = "Event";
 "action_type_challenge" = "Challenge";
 "action_type_poll" = "Poll";
-"event_created_by" = "Event Created by ";
+"event_created_by" = "Action Created by ";
 "in_" = "in ";
 "you_" = "You";
 "members_count" = "Members";
