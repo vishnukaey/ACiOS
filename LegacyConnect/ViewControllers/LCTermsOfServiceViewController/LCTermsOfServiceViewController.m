@@ -44,6 +44,8 @@
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
 {
   [MBProgressHUD hideAllHUDsForView:self.webview animated:YES];
+  NSString *htmlString = @"<html><head></head><body align='center'><br><br><p> <b>Page Loading Failed</b></p></body></html>";
+  [webView loadHTMLString:htmlString baseURL:nil];
 }
 
 

@@ -264,7 +264,7 @@ NSString *const kEmailAddress = @"Email Address";
 NSString *const kChangePassword = @"Change Password";
 NSString *const kMyLegacyURL = @"My Legacy URL";
 NSString *const kPrivacy = @"Privacy";
-NSString *const kManageBlkdUsers = @"Blocked Users";
+NSString *const kManageBlkdUsers = @"Manage Blocked Users";
 NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";
