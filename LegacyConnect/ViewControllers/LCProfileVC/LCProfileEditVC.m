@@ -10,6 +10,9 @@
 #import "LCProfileImageEditor.h"
 
 @interface LCProfileEditVC ()
+{
+  LCProfileImageEditor *imageEditor;
+}
 
 @end
 
@@ -168,14 +171,14 @@ NSInteger const kHeightForHeader = 44;
 
 - (IBAction)editProfilePicAction:(id)sender {
   
-  LCProfileImageEditor *imageEditor = [[LCProfileImageEditor alloc] init];
+  imageEditor = [[LCProfileImageEditor alloc] init];
   imageEditor.parentController = self;
   [imageEditor editProfilePicture];
 }
 
 - (IBAction)editHeaderBGAction:(id)sender {
   
-  LCProfileImageEditor *imageEditor = [[LCProfileImageEditor alloc] init];
+  imageEditor = [[LCProfileImageEditor alloc] init];
   imageEditor.parentController = self;
   [imageEditor editHeaderBackground];
 }
