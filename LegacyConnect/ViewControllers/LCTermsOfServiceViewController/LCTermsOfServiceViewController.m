@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  NSString *urlString = kToSURL;
+  NSString *urlString = [NSString stringWithFormat:@"%@%@",kBaseURL,kToSURL];;
   [self.webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:urlString]]];
   
 }

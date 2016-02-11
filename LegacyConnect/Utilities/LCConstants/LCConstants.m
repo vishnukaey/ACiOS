@@ -17,7 +17,7 @@
 #define PRODUCTION_SERVER 4
 
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+#define CURRENT_SERVER STAGING_SERVER
 
 
 #if CURRENT_SERVER == QA_SERVER
@@ -26,7 +26,6 @@ NSString *const kBaseURL = @"http://10.3.0.55:8000/";
 NSString *const kFBAppID = @"785925134858928";
 NSString *const kFBAppDisplayName = @"LegacyConnectGreeshmaLocal";
 NSString *const kFBURLScheme = @"fb785925134858928";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #elif CURRENT_SERVER == DEV_SERVER
 ///* Development url */
@@ -34,7 +33,6 @@ NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
 NSString *const kFBAppID = @"781451981972910";
 NSString *const kFBAppDisplayName = @"LegacyConnectDev";
 NSString *const kFBURLScheme = @"fb781451981972910";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #elif CURRENT_SERVER == STAGING_SERVER
 ///* Staging url */
@@ -42,7 +40,6 @@ NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 NSString *const kFBAppID = @"535164313296078";
 NSString *const kFBAppDisplayName = @"ThatHelps";
 NSString *const kFBURLScheme = @"fb535164313296078";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #elif CURRENT_SERVER == DEMO_SERVER
 ///* Demo url */
@@ -50,7 +47,6 @@ NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
 NSString *const kFBAppID = @"535164313296078";
 NSString *const kFBAppDisplayName = @"ThatHelps";
 NSString *const kFBURLScheme = @"fb535164313296078";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #elif CURRENT_SERVER == PRODUCTION_SERVER
 ///* Demo url */
@@ -58,7 +54,6 @@ NSString *const kBaseURL = @"https://www.legacyconnect.com/";
 NSString *const kFBAppID = @"535164313296078";
 NSString *const kFBAppDisplayName = @"ThatHelps";
 NSString *const kFBURLScheme = @"fb535164313296078";
-NSString *const kToSURL = @"https://www.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #endif
 
@@ -69,6 +64,7 @@ NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
 NSString *const kTWConsumerSecretKey = @"dFA57jARhKy3vhD7cV0pPToCO7gKBN3W7Kly1kqEZUFooEbCbT";
 
 NSString *const kLegacyConnectUrl = @"www.LegacyConnect.com/";
+NSString *const kToSURL = @"cdn/cms/publish/tos/terms_of_use.html";
 
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";
