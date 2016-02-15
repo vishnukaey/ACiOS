@@ -75,6 +75,7 @@ NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
 NSString *const kTWConsumerSecretKey = @"dFA57jARhKy3vhD7cV0pPToCO7gKBN3W7Kly1kqEZUFooEbCbT";
 
 NSString *const kLegacyConnectUrl = @"www.LegacyConnect.com/";
+NSString *const kToSURL = @"cdn/cms/publish/tos/terms_of_use.html";
 
 NSString *const kLoginURL = @"api/login";
 NSString *const kRegisterURL = @"api/user";

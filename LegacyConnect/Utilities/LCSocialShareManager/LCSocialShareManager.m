@@ -112,6 +112,7 @@ NSString * const kFBMessageKey = @"message";
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
   //  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
+  status = [NSString stringWithFormat:@"%@ %@", status, kLCiTunesLink];
   if (image) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [paths[0] stringByAppendingPathComponent:@"postImage.png"];
