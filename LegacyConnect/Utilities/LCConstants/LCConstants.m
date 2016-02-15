@@ -25,26 +25,22 @@
 /* Demo url */
 
 NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 
 #elif STAGING
 /* Staging url */
 
 NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #elif PRODUCTION
 ///* Production url */
 
 NSString *const kBaseURL = @"https://www.legacyconnect.com/";
-NSString *const kToSURL = @"https://www.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 
 #elif DEMO
 ///* Demo url */
 NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #endif
 
