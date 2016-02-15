@@ -156,6 +156,8 @@
   {
     [cell.checkButton setSelected:NO];
   }
+  cell.checkButton.tag = indexPath.row;
+  [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   return cell;
 }
 
@@ -165,23 +167,42 @@
   return 93;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)checkbuttonAction :(UIButton *)sender
 {
-  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
-  
-  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
-  LCFBContactsCell *cell = (LCFBContactsCell*)[_friendsTable cellForRowAtIndexPath:indexPath];
+  LCContact *con = finalFriendsArray[sender.tag];
   if([selectedContacts containsObject:con.P_id])
   {
-    [cell.checkButton setSelected:NO];
+    [sender setSelected:NO];
     [selectedContacts removeObject:con.P_id];
   }
   else
   {
-    [cell.checkButton setSelected:YES];
+    [sender setSelected:YES];
     [selectedContacts addObject:con.P_id];
   }
 }
+
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+//{
+//  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
+//  
+//  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
+//  LCFBContactsCell *cell = (LCFBContactsCell*)[_friendsTable cellForRowAtIndexPath:indexPath];
+//  if([selectedContacts containsObject:con.P_id])
+//  {
+//    [cell.checkButton setSelected:NO];
+//    [selectedContacts removeObject:con.P_id];
+//  }
+//  else
+//  {
+//    [cell.checkButton setSelected:YES];
+//    [selectedContacts addObject:con.P_id];
+//  }
+//}
+//
+//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+//  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
+//}
 
 - (IBAction)doneButtonTapped:(id)sender
 {

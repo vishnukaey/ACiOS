@@ -96,7 +96,8 @@
           else
           {
             [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-              [self loginUser:response[@"data"]];
+       
+              [self loginUser:response];
               [MBProgressHUD hideHUDForView:self.view animated:YES];
             } andFailure:^(NSString *error) {
               [MBProgressHUD hideHUDForView:self.view animated:YES];
@@ -135,7 +136,16 @@
 {
   [self saveUserDetailsToDataManager:response];
   [LCUtilityManager saveUserDefaultsForNewUser];
-  [self.navigationController popToRootViewControllerAnimated:NO];
+  if([response[@"firstTimeLogin" ] isEqualToString:@"1"])
+  {
+    UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCOnboardThemesVC *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCChooseCausesVC"];
+    [self.navigationController pushViewController:termsVC animated:YES];
+  }
+  else
+  {
+    [self.navigationController popToRootViewControllerAnimated:NO];
+  }
 }
 
 -(void)saveUserDetailsToDataManager:(id)userInfo
