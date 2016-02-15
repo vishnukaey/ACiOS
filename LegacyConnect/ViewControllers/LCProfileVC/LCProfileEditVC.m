@@ -321,7 +321,7 @@ NSInteger const kHeightForHeader = 44;
       optionalLabel.hidden = NO;
       break;
     case SECTION_BIRTHDAY:
-      sectionLabel.text = @"BIRHTDAY";
+      sectionLabel.text = @"BIRTHDAY";
       break;
     case SECTION_GENDER:
       sectionLabel.text = @"GENDER";

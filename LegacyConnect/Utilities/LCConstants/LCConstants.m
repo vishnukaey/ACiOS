@@ -10,55 +10,61 @@
 
 @implementation LCConstants
 
-#define QA_SERVER 0
-#define DEV_SERVER 1
-#define STAGING_SERVER 2
-#define DEMO_SERVER 3
-#define PRODUCTION_SERVER 4
-
+//#define QA_SERVER 0
+//#define DEV_SERVER 1
+//#define STAGING_SERVER 2
+//#define DEMO_SERVER 3
+//#define PRODUCTION_SERVER 4
+//
 /* Set server to be used */
-#define CURRENT_SERVER DEMO_SERVER
+//#define CURRENT_SERVER DEMO_SERVER
 
 
-#if CURRENT_SERVER == QA_SERVER
-/* QA url */
-NSString *const kBaseURL = @"http://10.3.0.55:8000/";
-NSString *const kFBAppID = @"785925134858928";
-NSString *const kFBAppDisplayName = @"LegacyConnectGreeshmaLocal";
-NSString *const kFBURLScheme = @"fb785925134858928";
+#ifdef RELEASE
+/* Demo url */
+
+NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
 NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
-#elif CURRENT_SERVER == DEV_SERVER
-///* Development url */
-NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
-NSString *const kFBAppID = @"781451981972910";
-NSString *const kFBAppDisplayName = @"LegacyConnectDev";
-NSString *const kFBURLScheme = @"fb781451981972910";
-NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
-#elif CURRENT_SERVER == STAGING_SERVER
-///* Staging url */
+#elif STAGING
+/* Staging url */
+
 NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
-NSString *const kFBAppID = @"535164313296078";
-NSString *const kFBAppDisplayName = @"ThatHelps";
-NSString *const kFBURLScheme = @"fb535164313296078";
 NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
-#elif CURRENT_SERVER == DEMO_SERVER
+//NSString *const kBaseURL = @"http://10.3.0.55:8000/";
+//NSString *const kFBAppID = @"785925134858928";
+//NSString *const kFBAppDisplayName = @"LegacyConnectGreeshmaLocal";
+//NSString *const kFBURLScheme = @"fb785925134858928";
+//NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
+
+#elif PRODUCTION
+///* Production url */
+
+NSString *const kBaseURL = @"https://www.legacyconnect.com/";
+NSString *const kToSURL = @"https://www.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
+
+
+//NSString *const kBaseURL = @"http://dev.legacyconnect.com/";
+//NSString *const kFBAppID = @"781451981972910";
+//NSString *const kFBAppDisplayName = @"LegacyConnectDev";
+//NSString *const kFBURLScheme = @"fb781451981972910";
+//NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
+
+#elif DEMO
 ///* Demo url */
 NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
-NSString *const kFBAppID = @"535164313296078";
-NSString *const kFBAppDisplayName = @"ThatHelps";
-NSString *const kFBURLScheme = @"fb535164313296078";
 NSString *const kToSURL = @"https://demo.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
-#elif CURRENT_SERVER == PRODUCTION_SERVER
-///* Demo url */
-NSString *const kBaseURL = @"https://www.legacyconnect.com/";
-NSString *const kFBAppID = @"535164313296078";
-NSString *const kFBAppDisplayName = @"ThatHelps";
-NSString *const kFBURLScheme = @"fb535164313296078";
-NSString *const kToSURL = @"https://www.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
+
+//#elif CURRENT_SERVER == DEMO_SERVER
+/////* Demo url */
+//
+//#elif CURRENT_SERVER == PRODUCTION_SERVER
+/////* Demo url */
+//NSString *const kBaseURL = @"https://www.legacyconnect.com/";
+//NSString *const kToSURL = @"https://www.legacyconnect.com/cdn/cms/publish/tos/terms_of_use.html";
 
 #endif
 
