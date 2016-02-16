@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb535164313296078</string>
+				<string>$(FB_URL_SCHEME)</string>
 			</array>
 		</dict>
 		<dict>
@@ -44,11 +44,11 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.7</string>
+	<string>1.8</string>
 	<key>FacebookAppID</key>
-	<string>535164313296078</string>
+	<string>$(FB_ID)</string>
 	<key>FacebookDisplayName</key>
-	<string>ThatHelps</string>
+	<string>$(FB_DISPLAY_NAME)</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSApplicationQueriesSchemes</key>

@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>TRACKING_ID</key>
-	<string>UA-48434124-6</string>
+	<string>$(GA_TRACKING_CODE)</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
