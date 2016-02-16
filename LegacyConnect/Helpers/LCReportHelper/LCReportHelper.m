@@ -73,12 +73,22 @@
     //delete comment action
     UIAlertAction *deleteComment = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_comment", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
       
-      [MBProgressHUD showHUDAddedTo:presentingView.view animated:YES];
-      [LCFeedAPIManager deleteCommentFromPost:post withComment:comment withSuccess:^(id response) {
-        [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
-      } andFailure:^(NSString *error) {
-        [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+      
+      
+      UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_comment", nil) message:NSLocalizedString(@"delete_comment_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [MBProgressHUD showHUDAddedTo:presentingView.view animated:YES];
+        [LCFeedAPIManager deleteCommentFromPost:post withComment:comment withSuccess:^(id response) {
+          [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+        } andFailure:^(NSString *error) {
+          [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+        }];
       }];
+      [deleteAlert addAction:deletePostAction];
+      
+      UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+      [deleteAlert addAction:cancelAction];
+      [presentingView presentViewController:deleteAlert animated:YES completion:nil];
     }];
     [actionSheet addAction:deleteComment];
   }
@@ -116,12 +126,21 @@
     //delete comment action
     UIAlertAction *deleteComment = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_comment", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
       
-      [MBProgressHUD showHUDAddedTo:presentingView.view animated:YES];
-      [LCEventAPImanager deleteCommentFromAction:event withComment:comment withSuccess:^(id response) {
-        [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
-      } andFailure:^(NSString *error) {
-        [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+      UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_comment", nil) message:NSLocalizedString(@"delete_comment_message", nil) preferredStyle:UIAlertControllerStyleAlert];
+      UIAlertAction *deletePostAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete", nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [MBProgressHUD showHUDAddedTo:presentingView.view animated:YES];
+        [LCEventAPImanager deleteCommentFromAction:event withComment:comment withSuccess:^(id response) {
+          [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+        } andFailure:^(NSString *error) {
+          [MBProgressHUD hideAllHUDsForView:presentingView.view animated:YES];
+        }];
       }];
+      [deleteAlert addAction:deletePostAction];
+      
+      UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"cancel", nil) style:UIAlertActionStyleCancel handler:nil];
+      [deleteAlert addAction:cancelAction];
+      [presentingView presentViewController:deleteAlert animated:YES completion:nil];
+      
     }];
     [actionSheet addAction:deleteComment];
   }
