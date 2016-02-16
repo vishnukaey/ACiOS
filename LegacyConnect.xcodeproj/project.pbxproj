@@ -2637,6 +2637,106 @@
 			};
 			name = Release;
 		};
+		1699A62C1C734DDF00AB2D7D /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = NO;
+				ENABLE_TESTABILITY = YES;
+				FB_DISPLAY_NAME = "";
+				FB_ID = 535164313296078;
+				FB_URL_SCHEME = "";
+				GA_TRACKING_CODE = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEV=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos;
+			};
+			name = Development;
+		};
+		1699A62D1C734DDF00AB2D7D /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
+				FB_DISPLAY_NAME = ThatHelps;
+				FB_ID = 535164313296078;
+				FB_URL_SCHEME = fb535164313296078;
+				GA_TRACKING_CODE = "UA-48434124-6";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
+				INFOPLIST_FILE = LegacyConnect/SupportingFiles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Development;
+		};
+		1699A62E1C734DDF00AB2D7D /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = LegacyConnect/SupportingFiles/LCPrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LegacyConnectTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "LC.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LegacyConnect.app/LegacyConnect";
+			};
+			name = Development;
+		};
 		16C0E2EC1C6B131C00F7B018 /* Staging */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
@@ -2946,6 +3046,7 @@
 				0BF05A5D1B4E622200FF7B39 /* Debug */,
 				16C0E2EC1C6B131C00F7B018 /* Staging */,
 				16C0E2EF1C6B133000F7B018 /* Demo */,
+				1699A62C1C734DDF00AB2D7D /* Development */,
 				16C0E2F21C6B4C3500F7B018 /* Production */,
 				0BF05A5E1B4E622200FF7B39 /* Release */,
 			);
@@ -2958,6 +3059,7 @@
 				0BF05A601B4E622200FF7B39 /* Debug */,
 				16C0E2ED1C6B131C00F7B018 /* Staging */,
 				16C0E2F01C6B133000F7B018 /* Demo */,
+				1699A62D1C734DDF00AB2D7D /* Development */,
 				16C0E2F31C6B4C3500F7B018 /* Production */,
 				0BF05A611B4E622200FF7B39 /* Release */,
 			);
@@ -2970,6 +3072,7 @@
 				0BF05A631B4E622200FF7B39 /* Debug */,
 				16C0E2EE1C6B131C00F7B018 /* Staging */,
 				16C0E2F11C6B133000F7B018 /* Demo */,
+				1699A62E1C734DDF00AB2D7D /* Development */,
 				16C0E2F41C6B4C3500F7B018 /* Production */,
 				0BF05A641B4E622200FF7B39 /* Release */,
 			);

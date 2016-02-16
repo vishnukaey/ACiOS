@@ -25,14 +25,6 @@
 
 - (void)reloadCollectionView
 {
-//  LCInterest *selectedInterest = [[LCOnboardingHelper selectedItemsDictionary] objectForKey:self.interest.interestID];
-//  if (selectedInterest.causes.count > 0) {
-//    self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:selectedInterest.causes];
-//  }
-//  else {
-//    self.causesArray = [LCOnboardingHelper sortAndCombineCausesArray:self.interest.causes];
-//  }
-  
   self.causesArray = self.interest.causes;
   [self.collectionView reloadData];
 }

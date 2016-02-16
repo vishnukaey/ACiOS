@@ -37,6 +37,11 @@ NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 
 NSString *const kBaseURL = @"https://www.legacyconnect.com/";
 
+#elif DEV
+///* Production url */
+
+NSString *const kBaseURL = @"https://dev.legacyconnect.com/";
+
 
 #elif DEMO
 ///* Demo url */

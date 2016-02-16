@@ -26,7 +26,7 @@ static NSString *kCheckedImageName = @"contact_tick";
 - (void)setInterest:(LCInterest *)interest
 {
   _interest = interest;
-  self.interestLogo.layer.cornerRadius = 8;
+  self.interestLogo.layer.cornerRadius = 8.0f;
   self.interestLogo.clipsToBounds = YES;
   [self.interestLogo sd_setImageWithURL:[NSURL URLWithString:interest.logoURLSmall] placeholderImage:[UIImage imageNamed:@"InterestPlaceholder"]];
   self.interestName.text = interest.name;

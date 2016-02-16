@@ -91,7 +91,7 @@
     [LCGAManager ga_trackEventWithCategory:@"SignIn" action:@"Success" andLabel:@"User Sign-in successful"];
 
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    if([response[@"data"][@"firstTimeLogin"] isEqualToString:@"1"])
+    if(![response[@"data"][@"firstTimeLogin"] isEqualToString:@"1"])
     {
       [self performSegueWithIdentifier:@"loginOnboarding" sender:self];
     }

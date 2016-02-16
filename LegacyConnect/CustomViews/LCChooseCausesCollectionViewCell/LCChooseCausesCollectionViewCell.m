@@ -18,7 +18,7 @@
 
 - (void) awakeFromNib {
   [super awakeFromNib];
-  self.causesImageView.layer.cornerRadius = 5.0;
+  self.causesImageView.layer.cornerRadius = 5.0f;
   self.causesImageView.clipsToBounds = YES;
   
   [self.containerView.layer setCornerRadius:5.0f];
