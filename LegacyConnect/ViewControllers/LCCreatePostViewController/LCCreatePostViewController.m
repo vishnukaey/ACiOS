@@ -10,6 +10,9 @@
 #import "UIImage+LCImageFix.h"
 
 #define ICONBACK_COLOR [UIColor colorWithRed:90.0/255.0 green:90.0/255.0 blue:90.0/255.0 alpha:1.0]
+#define kListFriendSBID @"LCListFriendsToTagViewController"
+#define kListLocationSBID @"LCListLocationsToTagVC"
+#define kListInterestsAndCauseSBID @"LCListInterestsAndCausesVC"
 @interface LCCreatePostViewController ()
 {
   int keyBoardHeight;
@@ -100,8 +103,8 @@
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListFriendsToTagViewController *contactListVC = [createPostSB instantiateViewControllerWithIdentifier:@"LCListFriendsToTagViewController"];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  LCListFriendsToTagViewController *contactListVC = [createPostSB instantiateViewControllerWithIdentifier:kListFriendSBID];
   contactListVC.alreadySelectedFriends = self.taggedFriendsArray;
   contactListVC.delegate = self;
   [self presentViewController:contactListVC animated:YES completion:nil];
@@ -110,8 +113,8 @@
 
 - (IBAction)addLocationToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListLocationsToTagVC *locationsVC = [createPostSB instantiateViewControllerWithIdentifier:@"LCListLocationsToTagVC"];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  LCListLocationsToTagVC *locationsVC = [createPostSB instantiateViewControllerWithIdentifier:kListLocationSBID];
   locationsVC.alreadyTaggedLocation = self.taggedLocation;
   locationsVC.delegate = self;
   [self presentViewController:locationsVC animated:YES completion:nil];
@@ -120,7 +123,7 @@
 - (IBAction)postPhotoButtonClicked
 {
   [self.postTextView resignFirstResponder];
-  UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select Photo" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"From Library", @"From Camera", nil];
+  UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"select_photo", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"from_library", nil), NSLocalizedString(@"from_camera", nil), nil];
   [sheet showInView:self.view];
 }
 
@@ -143,8 +146,8 @@
 
 - (IBAction)intersestDownArrowClicked
 {
-  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:@"CreatePost" bundle:nil];
-  LCListInterestsAndCausesVC *interestCauseVC = [createPostSB instantiateViewControllerWithIdentifier:@"LCListInterestsAndCausesVC"];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  LCListInterestsAndCausesVC *interestCauseVC = [createPostSB instantiateViewControllerWithIdentifier:kListInterestsAndCauseSBID];
   interestCauseVC.delegate = self;
   interestCauseVC.selectedCause = self.selectedCause;
   interestCauseVC.selectedInterest = self.selectedInterest;
@@ -165,11 +168,11 @@
   }
   else
   {
-    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please select an Interest or a Cause for posting"];
+    [LCUtilityManager showAlertViewWithTitle:NSLocalizedString(@"missing_fields", nil) andMessage:NSLocalizedString(@"interest_tag_missing_message", nil)];
     return false;
   }
   if (post_Text.length<1 && !self.postImageView.image) {
-    [LCUtilityManager showAlertViewWithTitle:@"Missing fields" andMessage:@"Please add a text or an image to post"];
+    [LCUtilityManager showAlertViewWithTitle:NSLocalizedString(@"missing_fields", nil) andMessage:NSLocalizedString(@"text_missing_message", nil)];
     return false;
   }
   return true;

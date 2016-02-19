@@ -122,7 +122,7 @@
   
   self.placeHolderLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.postTextView.frame.origin.x+5, self.postTextView.frame.origin.y, self.postTextView.frame.size.width, self.postTextView.frame.size.height)];
   [self.placeHolderLabel setFont:POSTTEXT_FONT];
-  [self.placeHolderLabel setText:@"Share your news"];
+  [self.placeHolderLabel setText:NSLocalizedString(@"share_news_placeholder_text", nil)];
   [self.placeHolderLabel setTextColor:[UIColor lightGrayColor]];
   [_postScrollView addSubview:self.placeHolderLabel];
   
