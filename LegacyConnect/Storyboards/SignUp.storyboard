@@ -1945,7 +1945,7 @@ id augue sagittis, mattis sapien.</string>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Fc8-3T-sqr">
-                                        <rect key="frame" x="119" y="65" width="144" height="140"/>
+                                        <rect key="frame" x="72" y="65" width="238" height="140"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="140" id="cwr-aQ-WqP"/>
                                         </constraints>
@@ -2889,7 +2889,7 @@ Now on to the next step.</string>
         <image name="FBLogoSmall" width="22" height="22"/>
         <image name="FacebookButtonSignUp" width="345" height="44"/>
         <image name="HorizontalDivider" width="1" height="1"/>
-        <image name="LC_logo" width="144" height="179"/>
+        <image name="LC_logo" width="238" height="76"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="TakeAPhotoBtnBG" width="287" height="287"/>
         <image name="backButton" width="12" height="21"/>
