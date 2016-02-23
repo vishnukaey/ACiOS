@@ -20,4 +20,6 @@ typedef NS_ENUM(NSInteger, constraintType) {
 @property(nonatomic, strong)NSArray *views;
 @property(nonatomic, strong)UIColor *highlightColor, *normalColor;
 @property (nonatomic, assign) NSInteger currentIndex;
+
+- (void)animateToIndex :(NSInteger)index;
 @end

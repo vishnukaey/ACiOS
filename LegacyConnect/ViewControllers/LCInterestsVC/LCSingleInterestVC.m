@@ -35,6 +35,12 @@
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  self.navigationBarLC.backgroundColor = [UIColor clearColor];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
@@ -217,15 +223,20 @@
     collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
   }
-  if (collapseConstant < 0)
+  if (collapseConstant < self.navigationBarLC.frame.size.height)
   {
-    collapseConstant = 0;
+    collapseConstant = self.navigationBarLC.frame.size.height;
   }
   if (collapseConstant > viewHeight)
   {
     collapseConstant = viewHeight;
   }
   collapseViewHeight.constant = collapseConstant;
+  
+  CGFloat opacity = (viewHeight - collapseConstant)/(viewHeight - self.navigationBarLC.frame.size.height);
+//  opacity = 
+  
+  self.navigationBarLC.backgroundColor =  [[LCNavigationBar getNavigationBarColor] colorWithAlphaComponent:opacity] ;
 }
 
 @end

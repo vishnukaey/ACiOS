@@ -21,6 +21,7 @@
 }
 
 @property(nonatomic, strong) LCInterest *interest;
+@property(nonatomic, strong) IBOutlet LCNavigationBar *navigationBarLC;
 
 - (void) updateInterestDetails;
 

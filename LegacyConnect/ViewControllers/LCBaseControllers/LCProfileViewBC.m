@@ -166,7 +166,7 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
   tabBarView.hidden = NO;
   impactsCountButton.userInteractionEnabled = YES;
   friendsCountButton.userInteractionEnabled = YES;
-  [mileStonesVC loadMileStones];
+  [interestsVC loadInterests];
 }
 
 #pragma mark - Notification Receivers

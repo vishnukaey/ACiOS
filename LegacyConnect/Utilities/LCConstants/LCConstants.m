@@ -229,6 +229,7 @@ NSString *const kEntityTypeUserProfile = @"user";
 NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
 NSString *const kLCUrlScheme = @"legacyconnect";
 NSString *const kResetPasswordTokenKey = @"password_reset_token";
+NSString *const kResetPasswordHostKey = @"test";
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
 NSString *const kfeedDeletedEventKey = @"deleted_feed";

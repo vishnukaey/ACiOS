@@ -208,6 +208,7 @@ extern NSString *const kEntityTypeUserProfile;
 extern NSString *const kTwitterUrlScheme;
 extern NSString *const kLCUrlScheme;
 extern NSString *const kResetPasswordTokenKey;
+extern NSString *const kResetPasswordHostKey;
 
 extern NSString *const kfeedUpdateEventKey;
 extern NSString *const kfeedDeletedEventKey;

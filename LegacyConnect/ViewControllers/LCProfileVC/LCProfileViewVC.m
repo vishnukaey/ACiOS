@@ -128,6 +128,7 @@
 {
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, actionsButton, nil];
   tabmenu.views = [[NSArray alloc] initWithObjects:milestonesContainer, interestsContainer, actionsContainer, nil];
+  [tabmenu animateToIndex:1];
 }
 
 - (void) sendFriendRequest {

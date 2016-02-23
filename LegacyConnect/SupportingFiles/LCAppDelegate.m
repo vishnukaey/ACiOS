@@ -78,13 +78,16 @@
   if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
   {
     boolValue = true;
-    NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
-    if (tokenString) {
-      NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
-      [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
-                                                          object:nil
-                                                        userInfo:userInfo];
+    if ([url.host isEqualToString:kResetPasswordHostKey]) {
+      NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
+      if (tokenString) {
+        NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
+        [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
+                                                            object:nil
+                                                          userInfo:userInfo];
+      }
     }
+    
     return boolValue;
   }
   boolValue = [[FBSDKApplicationDelegate sharedInstance] application:application
