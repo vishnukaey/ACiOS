@@ -54,7 +54,6 @@
                          action:@selector(textFieldDidChange)
                forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
-  
   //GATracking
   [LCGAManager ga_trackViewWithName:@"Registration"];
 }

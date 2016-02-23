@@ -59,7 +59,6 @@
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
-            <string>Gotham-Book</string>
         </mutableArray>
         <mutableArray key="Gotham-Medium.otf">
             <string>Gotham-Medium</string>
@@ -101,29 +100,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1RK-dy-Ksn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homeloginbg" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_BG" translatesAutoresizingMaskIntoConstraints="NO" id="We9-Zy-2a3">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="622"/>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
-                                        <rect key="frame" x="112" y="70" width="150" height="150"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="150" id="54t-CA-WbB"/>
-                                            <constraint firstAttribute="height" constant="150" id="HKc-y1-MJB"/>
-                                        </constraints>
-                                    </imageView>
-                                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PT3-8f-KV0">
-                                        <rect key="frame" x="0.0" y="288" width="375" height="90"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="90" id="B0X-Yu-YPZ"/>
-                                        </constraints>
-                                        <string key="text">Lorem ipsum dolor sit amet,
-consectetur adipiscing elit. Duis
-id augue sagittis, mattis sapien.</string>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tZ0-jb-f3n">
                                         <rect key="frame" x="15" y="552" width="345" height="45"/>
                                         <constraints>
@@ -193,23 +172,27 @@ id augue sagittis, mattis sapien.</string>
                                             <constraint firstItem="fwE-Wr-2y7" firstAttribute="top" secondItem="9pK-Ug-TD8" secondAttribute="top" id="tlG-LP-dvT"/>
                                         </constraints>
                                     </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
+                                        <rect key="frame" x="48" y="230" width="278" height="76"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="278" id="54t-CA-WbB"/>
+                                            <constraint firstAttribute="height" constant="76" id="HKc-y1-MJB"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="9pK-Ug-TD8" secondAttribute="trailing" constant="15" id="30j-bB-1gE"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="3py-uM-zmt"/>
-                                    <constraint firstAttribute="centerY" secondItem="PT3-8f-KV0" secondAttribute="centerY" constant="-22" id="7dr-mI-RMK"/>
                                     <constraint firstAttribute="centerX" secondItem="RNu-5a-VSC" secondAttribute="centerX" id="EXy-w9-PPo"/>
                                     <constraint firstAttribute="bottom" secondItem="We9-Zy-2a3" secondAttribute="bottom" id="Eap-7K-qJb"/>
                                     <constraint firstAttribute="trailing" secondItem="We9-Zy-2a3" secondAttribute="trailing" id="Fsj-pp-P5j"/>
                                     <constraint firstItem="We9-Zy-2a3" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" id="I3a-c0-thP"/>
-                                    <constraint firstAttribute="trailing" secondItem="PT3-8f-KV0" secondAttribute="trailing" id="JdX-jO-sdp"/>
                                     <constraint firstAttribute="trailing" secondItem="tZ0-jb-f3n" secondAttribute="trailing" constant="15" id="PR0-Yw-4yq"/>
                                     <constraint firstItem="We9-Zy-2a3" firstAttribute="top" secondItem="1RK-dy-Ksn" secondAttribute="top" id="UnC-id-UNq"/>
                                     <constraint firstAttribute="bottom" secondItem="tZ0-jb-f3n" secondAttribute="bottom" constant="25" id="ccM-Kf-mfC"/>
                                     <constraint firstItem="9pK-Ug-TD8" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="dU8-Dc-4oQ"/>
-                                    <constraint firstItem="PT3-8f-KV0" firstAttribute="top" secondItem="RNu-5a-VSC" secondAttribute="bottom" constant="68" id="ixw-at-0JA"/>
-                                    <constraint firstItem="PT3-8f-KV0" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" id="kQl-vT-ViX"/>
+                                    <constraint firstItem="RNu-5a-VSC" firstAttribute="centerY" secondItem="1RK-dy-Ksn" secondAttribute="centerY" constant="-43" id="pqy-q2-Pxw"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="top" secondItem="9pK-Ug-TD8" secondAttribute="bottom" constant="15" id="r1W-Eu-6eT"/>
                                 </constraints>
                             </view>
@@ -217,13 +200,13 @@ id augue sagittis, mattis sapien.</string>
                                 <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMB-i2-u7g">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="45"/>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" red="0.1137254902" green="0.1137254902" blue="0.1137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMH-cl-TWs">
-                                        <rect key="frame" x="188" y="0.0" width="187" height="45"/>
+                                        <rect key="frame" x="187" y="0.0" width="187.5" height="45"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                         <state key="normal" title=" Sign in Here">
                                             <color key="titleColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
@@ -234,7 +217,7 @@ id augue sagittis, mattis sapien.</string>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="882-IR-jK8"/>
                                     <constraint firstItem="dMB-i2-u7g" firstAttribute="leading" secondItem="VaL-nQ-tbV" secondAttribute="leading" id="G42-eQ-HAT"/>
@@ -262,7 +245,6 @@ id augue sagittis, mattis sapien.</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="textViewYPosition" destination="7dr-mI-RMK" id="Wav-yH-N6j"/>
                         <segue destination="8yh-8j-WAc" kind="push" identifier="acceptTerms" id="omK-xl-C9e"/>
                     </connections>
                 </viewController>
@@ -297,7 +279,7 @@ id augue sagittis, mattis sapien.</string>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="15P-BC-G5o">
                                                 <rect key="frame" x="8" y="8" width="171" height="28"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="sEZ-MI-sW3" id="hhU-FI-ERL"/>
                                                 </connections>
@@ -318,7 +300,7 @@ id augue sagittis, mattis sapien.</string>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CMX-Xf-4HM">
                                                 <rect key="frame" x="20" y="8" width="159" height="26"/>
                                                 <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="sEZ-MI-sW3" id="IGQ-l8-cCx"/>
                                                 </connections>
@@ -1927,7 +1909,7 @@ id augue sagittis, mattis sapien.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taT-CI-BxF">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg_copy" translatesAutoresizingMaskIntoConstraints="NO" id="c14-eH-YKS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_BG" translatesAutoresizingMaskIntoConstraints="NO" id="c14-eH-YKS">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4tw-yg-nB1">
@@ -1937,7 +1919,7 @@ id augue sagittis, mattis sapien.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="13"/>
                                         <state key="normal" title="Forgot Password?">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.98039215690000003" green="0.27450980390000002" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1974,11 +1956,11 @@ id augue sagittis, mattis sapien.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
                                         <state key="normal" title="Sign In">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <state key="disabled">
-                                            <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="loginButtonClicked:" destination="zgM-N2-seB" eventType="touchDown" id="M2a-Mc-EVw"/>
@@ -1992,8 +1974,11 @@ id augue sagittis, mattis sapien.</string>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="16"/>
                                         <state key="normal" title="Cancel">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="zgM-N2-seB" eventType="touchDown" id="IqI-bu-RYI"/>
@@ -2013,7 +1998,7 @@ id augue sagittis, mattis sapien.</string>
                                 <rect key="frame" x="0.0" y="264" width="375" height="88"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_textFieldbg" translatesAutoresizingMaskIntoConstraints="NO" id="Alq-V2-uvY">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="88"/>
+                                        <rect key="frame" x="28" y="0.0" width="333" height="88"/>
                                     </imageView>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ndh-Ag-J36">
                                         <rect key="frame" x="37" y="10" width="300" height="30"/>
@@ -2044,13 +2029,13 @@ id augue sagittis, mattis sapien.</string>
                                     <constraint firstItem="jgD-tA-Qks" firstAttribute="leading" secondItem="3Di-hV-voq" secondAttribute="leading" constant="37" id="2cP-uO-Szp"/>
                                     <constraint firstAttribute="bottom" secondItem="Alq-V2-uvY" secondAttribute="bottom" id="8fs-1e-TOF"/>
                                     <constraint firstAttribute="bottom" secondItem="jgD-tA-Qks" secondAttribute="bottom" constant="10" id="CMk-PD-i6z"/>
-                                    <constraint firstItem="Alq-V2-uvY" firstAttribute="leading" secondItem="3Di-hV-voq" secondAttribute="leading" constant="15" id="MZc-a6-1cS"/>
+                                    <constraint firstItem="Alq-V2-uvY" firstAttribute="leading" secondItem="3Di-hV-voq" secondAttribute="leading" constant="28" id="MZc-a6-1cS"/>
                                     <constraint firstAttribute="trailing" secondItem="jgD-tA-Qks" secondAttribute="trailing" constant="38" id="akp-Rq-kqV"/>
                                     <constraint firstItem="Alq-V2-uvY" firstAttribute="top" secondItem="3Di-hV-voq" secondAttribute="top" id="eTd-ys-tXG"/>
                                     <constraint firstItem="ndh-Ag-J36" firstAttribute="top" secondItem="3Di-hV-voq" secondAttribute="top" constant="10" id="iVT-pe-2YF"/>
                                     <constraint firstAttribute="trailing" secondItem="ndh-Ag-J36" secondAttribute="trailing" constant="38" id="kPG-BR-ArI"/>
                                     <constraint firstItem="ndh-Ag-J36" firstAttribute="leading" secondItem="3Di-hV-voq" secondAttribute="leading" constant="37" id="lvK-rV-6UH"/>
-                                    <constraint firstAttribute="trailing" secondItem="Alq-V2-uvY" secondAttribute="trailing" constant="15" id="txa-Yr-xWp"/>
+                                    <constraint firstAttribute="trailing" secondItem="Alq-V2-uvY" secondAttribute="trailing" constant="14" id="txa-Yr-xWp"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2895,14 +2880,13 @@ Now on to the next step.</string>
         <image name="backButton" width="12" height="21"/>
         <image name="contact_plus" width="37" height="37"/>
         <image name="contact_tick" width="37" height="37"/>
-        <image name="homeloginbg" width="375" height="667"/>
-        <image name="login_bg_copy" width="375" height="667"/>
         <image name="login_textFieldbg" width="345" height="88"/>
         <image name="manplaceholder.jpg" width="100" height="100"/>
         <image name="rightChevron" width="8" height="12"/>
+        <image name="splash_BG" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aFc-Qf-A3e"/>
-        <segue reference="zp7-Wy-z2U"/>
+        <segue reference="L3b-8s-ru0"/>
+        <segue reference="yQh-ez-zHg"/>
     </inferredMetricsTieBreakers>
 </document>

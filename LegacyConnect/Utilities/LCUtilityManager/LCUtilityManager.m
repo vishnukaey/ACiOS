@@ -10,6 +10,7 @@
 #import <AFNetworking/AFNetworkReachabilityManager.h>
 #import <Reachability/Reachability.h>
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "MFSideMenuContainerViewController.h"
 
 #define MAX_IMAGE_SIZE 1.2
 
@@ -280,6 +281,14 @@
   if (!appdel.isCreatePostOpen) {
     [appdel.GIButton setHidden:GIisHidden];
     [appdel.menuButton setHidden:menuisHidden];
+  }
+  if(menuisHidden)
+  {
+    appdel.mainContainer.panMode = MFSideMenuPanModeNone;
+  }
+  else
+  {
+    appdel.mainContainer.panMode = MFSideMenuPanModeCenterViewController | MFSideMenuPanModeSideMenu;
   }
 }
 
