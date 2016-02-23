@@ -330,7 +330,17 @@ static NSString* const kGradientDefaultClr = @"282828";
 
 - (IBAction)websiteLinkClicked:(id)sender
 {
-  LCDLog(@"Follow clicked");
+  if (self.cause.causeUrl) {
+    NSURL *websiteURL = [NSURL URLWithString:self.cause.causeUrl];
+    if ([[UIApplication sharedApplication] canOpenURL:websiteURL])
+    {
+      [[UIApplication sharedApplication] openURL:websiteURL];
+    }
+    else
+    {
+      [LCUtilityManager showAlertViewWithTitle:@"URL error" andMessage:@"This URL is invalid"];
+    }
+  }
 }
 
 

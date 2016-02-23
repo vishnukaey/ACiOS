@@ -114,6 +114,8 @@ static NSString *kTitle = @"MY FEED";
    @{NSForegroundColorAttributeName:[LCNavigationBar getTitleColor], NSFontAttributeName:[LCNavigationBar getTitleFont]}];
 }
 
+
+
 -(void) addSideMenuVIewController
 {
   [LCDataManager sharedDataManager].userToken = [[NSUserDefaults standardUserDefaults] valueForKey:kUserTokenKey];
@@ -122,7 +124,7 @@ static NSString *kTitle = @"MY FEED";
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   LCFeedsHomeViewController *centerViewController = [self.storyboard instantiateViewControllerWithIdentifier:kHomeFeedsStoryBoardID];  //I have instantiated using storyboard id.
   navigationRoot = [[UINavigationController alloc] initWithRootViewController:centerViewController];
-  
+  [navigationRoot.interactivePopGestureRecognizer setDelegate:nil];
   LCLeftMenuController *leftSideMenuVC = [self.storyboard instantiateViewControllerWithIdentifier:@"LCLeftMenuVC"];
   leftSideMenuVC.delegate_ = self;
   
@@ -132,11 +134,10 @@ static NSString *kTitle = @"MY FEED";
                    rightMenuViewController:leftSideMenuVC];
   mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
   appdel.window.rootViewController = mainContainer;
-  [appdel.window makeKeyAndVisible];
-  
+  appdel.mainContainer = mainContainer;
+  [appdel.window makeKeyAndVisible]; 
   [self addGIButton];
   [self addMenuButton:navigationRoot];
-  mainContainer.panMode = MFSideMenuPanModeNone;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
   [self presentTutorial];
 }
@@ -234,6 +235,7 @@ static NSString *kTitle = @"MY FEED";
     UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
     LCChooseActionsInterest *chooseInterestVC = [actionsSB instantiateViewControllerWithIdentifier:kChooseCommunityStoryBoardID];
     UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:chooseInterestVC];
+    [navigationRoot.interactivePopGestureRecognizer setDelegate:nil];
     [navigationRoot presentViewController:navC animated:YES completion:nil];
  
   }

@@ -200,6 +200,7 @@
     LCProfileEditVC *editProfileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
     editProfileVC.self.userDetail = self.self.userDetail;
     UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:editProfileVC];
+    [navC.interactivePopGestureRecognizer setDelegate:nil];
     [self presentViewController:navC animated:YES completion:nil];
   }
   else if (currentProfileStatus == kIsFriend)
