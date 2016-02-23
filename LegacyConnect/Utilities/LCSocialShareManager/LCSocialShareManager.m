@@ -112,7 +112,7 @@ NSString * const kFBMessageKey = @"message";
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image
 {
   //  image = [UIImage imageWithData:[LCUtilityManager performNormalisedImageCompression:image]];
-  status = @"http://10.3.0.55:8000/app.html?password_reset_token=24c7105e03cdf1b96a1625e50312581573bb7b9b";// [NSString stringWithFormat:@"%@ %@app.html", status, kBaseURL];
+  status =  [NSString stringWithFormat:@"%@ %@app.html", status, kBaseURL];
   if (image) {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filePath = [paths[0] stringByAppendingPathComponent:@"postImage.png"];
