@@ -135,7 +135,8 @@ static NSString *kTitle = @"MY FEED";
   mainContainer.rightMenuWidth = appdel.window.frame.size.width*3/4;
   appdel.window.rootViewController = mainContainer;
   appdel.mainContainer = mainContainer;
-  [appdel.window makeKeyAndVisible]; 
+  
+  [appdel.window makeKeyAndVisible];
   [self addGIButton];
   [self addMenuButton:navigationRoot];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
