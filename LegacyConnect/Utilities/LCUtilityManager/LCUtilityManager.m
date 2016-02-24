@@ -278,6 +278,8 @@
 + (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+//  [appdel.window removeGestureRecognizer:[appdel.mainContainer panGestureRecognizer]];
+  
   if (!appdel.isCreatePostOpen) {
     [appdel.GIButton setHidden:GIisHidden];
     [appdel.menuButton setHidden:menuisHidden];
@@ -285,10 +287,21 @@
   if(menuisHidden)
   {
     appdel.mainContainer.panMode = MFSideMenuPanModeNone;
+    [appdel.mainContainer panGestureRecognizer].enabled = NO;
+    for(id vb in appdel.window.gestureRecognizers)
+    {
+      if([vb isKindOfClass:[UIPanGestureRecognizer class]])
+      {
+        [appdel.window removeGestureRecognizer:vb];
+      }
+    }
   }
   else
   {
-    appdel.mainContainer.panMode = MFSideMenuPanModeCenterViewController | MFSideMenuPanModeSideMenu;
+//    appdel.mainContainer.panMode =  MFSideMenuPanModeSideMenu;
+    [appdel.window addGestureRecognizer:[appdel.mainContainer panGestureRecognizer]];
+//    [appdel.mainContainer panGestureRecognizer].enabled = YES;
+
   }
 }
 
