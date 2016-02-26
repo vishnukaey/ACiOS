@@ -43,6 +43,11 @@
   }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+}
+
 - (void) viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
@@ -128,7 +133,7 @@
 {
   tabmenu.menuButtons = [[NSArray alloc] initWithObjects:mileStonesButton, interestsButton, actionsButton, nil];
   tabmenu.views = [[NSArray alloc] initWithObjects:milestonesContainer, interestsContainer, actionsContainer, nil];
-  [tabmenu animateToIndex:1];
+  [tabmenu goToIndex:1];
 }
 
 - (void) sendFriendRequest {

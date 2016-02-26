@@ -213,7 +213,7 @@
   }
   
   float collapseConstant = 0;;
-  if (collapseViewHeight.constant > 0)
+  if (collapseViewHeight.constant > self.navigationBarLC.frame.size.height)
   {
     collapseConstant = collapseViewHeight.constant - scrollView.contentOffset.y;
     [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
