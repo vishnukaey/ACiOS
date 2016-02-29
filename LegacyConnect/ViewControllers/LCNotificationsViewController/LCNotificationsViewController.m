@@ -46,9 +46,7 @@ static NSString * const kReqstNotifications = @"requestNotifications";
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:YES];
-  [appdel.menuButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:NO];
 }
 
 -(void) addTabMenuForNotifications
