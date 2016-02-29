@@ -84,9 +84,7 @@ static CGFloat kIndexForPostDetails = 0;
 {
   [super viewWillAppear:animated];
   self.navigationController.navigationBarHidden = true;
-  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden:true];
-  [appdel.menuButton setHidden:NO];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:true MenuHiddenStatus:NO];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
