@@ -79,7 +79,7 @@
   [manager.requestSerializer setTimeoutInterval:30];
   [manager.requestSerializer setValue:accessToken forHTTPHeaderField:kAuthorizationKey];
   [manager.requestSerializer setValue:[LCUtilityManager getAppVersion] forHTTPHeaderField:kLCVersionKey];
-  [manager GET:urlString parameters:params
+  self.postOperation = [manager GET:urlString parameters:params
        success:^(AFHTTPRequestOperation *operation, id responseObject)
    {
      NSString *statusCode = [NSString stringWithFormat:@"%@",responseObject[kStatusCodeKey]];
@@ -107,6 +107,10 @@
      if(httpResponse.statusCode == 401)
      {
        [LCUtilityManager logoutUserClearingDefaults];
+     }
+     else if([error code] == NSURLErrorCancelled)//do nothing if request cancelled(for search APIs)
+     {
+       
      }
      else
      {

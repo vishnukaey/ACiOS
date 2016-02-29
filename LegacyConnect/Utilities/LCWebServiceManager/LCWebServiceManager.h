@@ -11,6 +11,8 @@
 
 @interface LCWebServiceManager : NSObject
 
+@property(nonatomic, strong)AFHTTPRequestOperation *postOperation;
+
 - (void)performPostOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
 - (void)performGetOperationWithUrl:(NSString *)urlString andAccessToken:(NSString*)accessToken withParameters:(NSDictionary *)params withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

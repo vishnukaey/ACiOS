@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LCWebServiceManager.h"
 
 @interface LCSearchAPIManager : NSObject
+{
+  LCWebServiceManager *webService;
+}
 
-+ (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure;
+- (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure;
 + (void)searchUserUsingsearchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
 + (void)getUserInterestsAndCausesWithSearchKey: (NSString *)searchKey withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
 + (void)getCauseSearchResultsWithSearchKey:(NSString*)searchText withFastId:(NSString*)lastId success:(void (^)(id response))success
@@ -20,4 +24,5 @@
 
 + (void)searchCausesWithInterestForSearchText:(NSString*)searchkey lastId:(NSString*)lastId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
 
+- (void)cancelPreviousSearch;
 @end
