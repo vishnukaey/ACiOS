@@ -126,11 +126,23 @@
 {
   if ([self.navigationController.topViewController isEqual:self]) {
     CGPoint offset = self.tableView.contentOffset;
-    [self.tableView reloadData];
-    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+    [self reloadFeedsTable];
+//    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
   }
+}
+
+- (void)reloadFeedsTable
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+//      [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, 0)];
+  [self.tableView reloadData];
+  //    [self.tableView layoutIfNeeded];
+  //    self.tableContentHeight = self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB];
+  //      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight);
+  
+    });
 }
 
 - (void) viewWillAppear:(BOOL)animated
