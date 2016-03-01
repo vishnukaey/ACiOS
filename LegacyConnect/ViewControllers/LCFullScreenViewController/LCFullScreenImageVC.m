@@ -95,7 +95,10 @@
   {
     self.reportButton.hidden = NO;
   }
-
+  
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  appdel.isCreatePostOpen = true;//it is to prevent blinking the create post button during the dismissal of report post or block user controller
+  
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,23 +110,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-//  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   GIButton_preState = [appdel.GIButton isHidden];
   menuButton_preState = [appdel.menuButton isHidden];
-  [appdel.GIButton setHidden: true];
-  [appdel.menuButton setHidden: true];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
-//  [LCUtilityManager setGIAndMenuButtonHiddenStatus:NO MenuHiddenStatus:NO];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden: GIButton_preState];
-  [appdel.menuButton setHidden: menuButton_preState];
-
+  appdel.isCreatePostOpen = false;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:GIButton_preState MenuHiddenStatus:menuButton_preState];
 }
 
 #pragma mark - button actions
