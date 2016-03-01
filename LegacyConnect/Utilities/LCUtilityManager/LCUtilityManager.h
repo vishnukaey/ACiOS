@@ -40,7 +40,8 @@
 + (void)checkAppVersion;
 + (UIColor *)getThemeRedColor;
 + (float)getHeightOffsetForGIB;
-+(UIColor*)colorWithHexString:(NSString*)hex;
-+(void)logoutUserClearingDefaults;
++ (UIColor*)colorWithHexString:(NSString*)hex;
++ (void)logoutUserClearingDefaults;
++ (void)clearWebCache;
 
 @end

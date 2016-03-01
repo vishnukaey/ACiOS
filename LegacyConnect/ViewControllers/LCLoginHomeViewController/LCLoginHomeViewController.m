@@ -77,8 +77,8 @@
     [[[FBSDKGraphRequest alloc] initWithGraphPath:kMeKey parameters:parameters] startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
       if (!error)
       {
+        [LCUtilityManager clearWebCache];
         [self saveUserDetailsToDataManagerFromResponse:result];
-        
         //save fb user id to NSUserDefaults
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSDictionary *response = result;

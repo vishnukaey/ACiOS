@@ -199,14 +199,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VaL-nQ-tbV">
                                 <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMB-i2-u7g">
-                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="45"/>
-                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iMH-cl-TWs">
-                                        <rect key="frame" x="187" y="0.0" width="187.5" height="45"/>
+                                        <rect key="frame" x="214.5" y="0.0" width="154.5" height="45"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="14"/>
                                         <state key="normal" title=" Sign in Here">
                                             <color key="titleColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
@@ -216,19 +210,25 @@
                                             <action selector="signInButtonClicked:" destination="Xok-Ye-tmO" eventType="touchDown" id="v65-3B-dlE"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have an account? " textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMB-i2-u7g">
+                                        <rect key="frame" x="8" y="0.0" width="204.5" height="45"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="882-IR-jK8"/>
-                                    <constraint firstItem="dMB-i2-u7g" firstAttribute="leading" secondItem="VaL-nQ-tbV" secondAttribute="leading" id="G42-eQ-HAT"/>
-                                    <constraint firstItem="iMH-cl-TWs" firstAttribute="leading" secondItem="dMB-i2-u7g" secondAttribute="trailing" id="HrT-AI-d8X"/>
+                                    <constraint firstItem="dMB-i2-u7g" firstAttribute="leading" secondItem="VaL-nQ-tbV" secondAttribute="leading" constant="8" id="G42-eQ-HAT"/>
+                                    <constraint firstItem="iMH-cl-TWs" firstAttribute="leading" secondItem="dMB-i2-u7g" secondAttribute="trailing" constant="2" id="HrT-AI-d8X"/>
                                     <constraint firstAttribute="bottom" secondItem="iMH-cl-TWs" secondAttribute="bottom" id="JTb-oj-xrV"/>
-                                    <constraint firstItem="iMH-cl-TWs" firstAttribute="leading" secondItem="dMB-i2-u7g" secondAttribute="trailing" id="Nrc-GV-6PB"/>
+                                    <constraint firstItem="iMH-cl-TWs" firstAttribute="leading" secondItem="dMB-i2-u7g" secondAttribute="trailing" constant="2" id="Nrc-GV-6PB"/>
                                     <constraint firstItem="dMB-i2-u7g" firstAttribute="top" secondItem="VaL-nQ-tbV" secondAttribute="top" id="O1E-Vm-ABv"/>
-                                    <constraint firstItem="iMH-cl-TWs" firstAttribute="width" secondItem="dMB-i2-u7g" secondAttribute="width" id="U0k-U9-PkK"/>
                                     <constraint firstItem="iMH-cl-TWs" firstAttribute="top" secondItem="VaL-nQ-tbV" secondAttribute="top" id="fSu-Mi-I7O"/>
                                     <constraint firstAttribute="bottom" secondItem="dMB-i2-u7g" secondAttribute="bottom" id="jFh-G3-hcn"/>
-                                    <constraint firstAttribute="trailing" secondItem="iMH-cl-TWs" secondAttribute="trailing" id="jxu-Sa-lZ3"/>
+                                    <constraint firstAttribute="trailing" secondItem="iMH-cl-TWs" secondAttribute="trailing" constant="6" id="jxu-Sa-lZ3"/>
+                                    <constraint firstItem="iMH-cl-TWs" firstAttribute="centerX" secondItem="VaL-nQ-tbV" secondAttribute="centerX" constant="104.25" id="nee-ku-jtS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -2886,7 +2886,7 @@ Now on to the next step.</string>
         <image name="splash_BG" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zLA-AX-ius"/>
         <segue reference="L3b-8s-ru0"/>
-        <segue reference="yQh-ez-zHg"/>
     </inferredMetricsTieBreakers>
 </document>

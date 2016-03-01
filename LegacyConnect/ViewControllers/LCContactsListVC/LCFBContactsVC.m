@@ -130,7 +130,6 @@
   {
     UITableViewCell *cell = [LCPaginationHelper getEmptyIndicationCellWithText:NSLocalizedString(@"no_facebook_friends_to_display", nil)];
     tableView.backgroundColor = [UIColor whiteColor];
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.allowsSelection = NO;
     return cell;
   }
@@ -164,7 +163,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  return 93;
+  return 94;
 }
 
 - (void)checkbuttonAction :(UIButton *)sender

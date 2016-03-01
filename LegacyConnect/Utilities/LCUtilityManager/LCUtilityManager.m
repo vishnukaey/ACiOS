@@ -311,7 +311,7 @@
 }
 
 #pragma mark - LC Colour - implementation.
-+(UIColor*)colorWithHexString:(NSString*)hexString
++ (UIColor*)colorWithHexString:(NSString*)hexString
 {
   NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
   NSString *colorString = [[cString stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
@@ -353,7 +353,7 @@
   return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
 }
 
-+(void)logoutUserClearingDefaults
++ (void)logoutUserClearingDefaults
 {
   [LCUtilityManager clearUserDefaultsForCurrentUser];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -364,5 +364,12 @@
   LCDLog(@"401");
 }
 
+
++ (void)clearWebCache
+{
+  SDImageCache *imageCache = [SDImageCache sharedImageCache];
+  [imageCache clearMemory];
+  [imageCache clearDisk];
+}
 
 @end

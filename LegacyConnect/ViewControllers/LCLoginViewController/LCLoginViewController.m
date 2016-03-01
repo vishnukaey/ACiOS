@@ -82,6 +82,7 @@
   [LCOnboardingAPIManager performLoginForUser:dict withSuccess:^(id response) {
     LCDLog(@"%@",response);
     NSError *error = nil;
+    [LCUtilityManager clearWebCache];
     LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:user];
     [LCUtilityManager saveUserDefaultsForNewUser];
