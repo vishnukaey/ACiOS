@@ -275,14 +275,30 @@
 }
 
 #pragma mark - GI Button method implementation
+
+
 + (void)setGIAndMenuButtonHiddenStatus:(BOOL)GIisHidden MenuHiddenStatus:(BOOL)menuisHidden
 {
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-//  [appdel.window removeGestureRecognizer:[appdel.mainContainer panGestureRecognizer]];
   
   if (!appdel.isCreatePostOpen) {
     [appdel.GIButton setHidden:GIisHidden];
     [appdel.menuButton setHidden:menuisHidden];
+  }
+  else
+  {
+    [appdel.GIButton setHidden:true];
+    [appdel.menuButton setHidden:true];
+    appdel.mainContainer.panMode = MFSideMenuPanModeNone;
+    [appdel.mainContainer panGestureRecognizer].enabled = NO;
+    for(id vb in appdel.window.rootViewController.view.gestureRecognizers)
+    {
+      if([vb isKindOfClass:[UIPanGestureRecognizer class]])
+      {
+        [appdel.window.rootViewController.view removeGestureRecognizer:vb];
+      }
+    }
+    return;
   }
   if(menuisHidden)
   {
@@ -298,10 +314,7 @@
   }
   else
   {
-//    appdel.mainContainer.panMode =  MFSideMenuPanModeSideMenu;
     [appdel.window.rootViewController.view addGestureRecognizer:[appdel.mainContainer panGestureRecognizer]];
-//    [appdel.mainContainer panGestureRecognizer].enabled = YES;
-
   }
 }
 
