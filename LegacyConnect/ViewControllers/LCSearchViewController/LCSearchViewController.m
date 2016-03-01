@@ -31,6 +31,7 @@
   LCSearchUsersViewController *searchUsersVC;
   LCSearchInterestsViewController *searchInterestsVC;
   LCSearchCausesViewController *searchCausesVC;
+  LCSearchAPIManager *searchAPIManager;
 }
 @end
 
@@ -85,6 +86,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
+  [searchAPIManager cancelPreviousSearch];
   NSString * trimmedText = [LCUtilityManager getSpaceTrimmedStringFromString:searchText];
   if (searchTimer)
   {
@@ -93,6 +95,7 @@
   }
   if(searchBar.text.length == 0 || trimmedText == nil || trimmedText.length == 0)
   {
+    
     searchResultObject = nil;
     [self reloadAllViews];
   }
@@ -105,7 +108,12 @@
 
 -(void) searchRequest:(NSTimer*)sender
 {
-  [LCSearchAPIManager searchForItem:sender.userInfo withSuccess:^(LCSearchResult *searchResult) {
+  if (!searchAPIManager) {
+    searchAPIManager = [[LCSearchAPIManager alloc] init];
+  }
+  [searchAPIManager cancelPreviousSearch];
+  
+  [searchAPIManager searchForItem:sender.userInfo withSuccess:^(LCSearchResult *searchResult) {
     searchResultObject = searchResult;
     [self reloadAllViews];
   } andFailure:^(NSString *error) {

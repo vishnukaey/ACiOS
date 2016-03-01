@@ -7,13 +7,17 @@
 //
 
 #import "LCSearchAPIManager.h"
-#import "LCWebServiceManager.h"
+
 
 @implementation LCSearchAPIManager
 
-+ (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure
+- (void)searchForItem:(NSString*)searchItem withSuccess:(void (^)(LCSearchResult* searchResult))success andFailure:(void (^)(NSString *error))failure
 {
-  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  if (!webService) {
+    webService = [[LCWebServiceManager alloc] init];
+  }
+  
+  
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL,@"api/search",@"searchKey",searchItem];
   url = [url stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
   
@@ -187,5 +191,10 @@
      [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
      failure(error);
    }];
+}
+
+- (void)cancelPreviousSearch
+{
+  [webService.postOperation cancel];
 }
 @end

@@ -22,4 +22,5 @@ typedef NS_ENUM(NSInteger, constraintType) {
 @property (nonatomic, assign) NSInteger currentIndex;
 
 - (void)animateToIndex :(NSInteger)index;
+- (void)goToIndex :(NSInteger)index;
 @end

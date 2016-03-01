@@ -186,7 +186,7 @@
 }
 
 - (void)animateToIndex :(NSInteger)index
-{  
+{
   UIView *currentView = views[(int)_currentIndex];
   UIView *nextView = views[index];
   CGPoint currentViewPointTo;
@@ -239,6 +239,49 @@
   float width_ = textSize.width;
   width_ = width_+ 20;
   return width_;
+}
+
+- (void)goToIndex :(NSInteger)index//set initial index without animation
+{
+  [self layoutIfNeeded];
+  
+  UIView *currentView = views[(int)_currentIndex];
+  UIView *nextView = views[index];
+  CGPoint currentViewPointTo;
+  if (index>(int)_currentIndex)
+  {
+    nextView.center = CGPointMake(nextView.superview.frame.size.width*3/2, nextView.center.y);
+    currentViewPointTo = CGPointMake(-nextView.superview.frame.size.width/2, nextView.center.y);
+  }
+  else if (index<(int)_currentIndex)
+  {
+    nextView.center = CGPointMake(-nextView.superview.frame.size.width/2, nextView.center.y);
+    currentViewPointTo = CGPointMake(nextView.superview.frame.size.width*3/2, nextView.center.y);
+  }
+  else
+  {
+    return;
+  }
+  
+  nextView.hidden = false;
+
+     currentView.center = currentViewPointTo;
+     nextView.center = CGPointMake(nextView.superview.frame.size.width/2, nextView.center.y);
+     [menuButtons[(int)_currentIndex] setTitleColor:normalColor forState:UIControlStateNormal];
+     [menuButtons[index] setTitleColor:highlightColor forState:UIControlStateNormal];
+     UIButton *nextBut = menuButtons[index];
+     botbarXcenterConstraint.constant = nextBut.frame.origin.x;
+     botbarWidthConstraint.constant = [self getTitleLengthForButton:nextBut];
+
+    for (UIView *v in views) {
+       if (v!=nextView) {
+         v.hidden = true;
+       }
+     }
+     nextView.hidden = false;
+  _currentIndex = index;
+  
+  
 }
 
 /*

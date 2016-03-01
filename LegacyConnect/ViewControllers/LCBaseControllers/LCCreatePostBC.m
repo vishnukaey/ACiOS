@@ -28,9 +28,8 @@
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   GIButton_preState = [appdel.GIButton isHidden];
   menuButton_preState = [appdel.menuButton isHidden];
-  [appdel.GIButton setHidden: true];
-  [appdel.menuButton setHidden: true];
   appdel.isCreatePostOpen = true;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:true MenuHiddenStatus:true];
     // Do any additional setup after loading the view.
 }
 
@@ -51,9 +50,9 @@
 {
   [super viewDidDisappear:animated];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  [appdel.GIButton setHidden: GIButton_preState];
-  [appdel.menuButton setHidden: menuButton_preState];
   appdel.isCreatePostOpen = false;
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:GIButton_preState MenuHiddenStatus:menuButton_preState];
+  [appdel.menuButton setHidden: menuButton_preState];
 }
 
 
