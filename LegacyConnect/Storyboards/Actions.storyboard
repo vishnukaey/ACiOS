@@ -96,8 +96,8 @@
                                             <action selector="nextAction" destination="9uJ-2n-Xif" eventType="touchUpInside" id="B2T-Za-7xX"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE ACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8s-ol-1ee">
-                                        <rect key="frame" x="92" y="20" width="137" height="44"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE OPPORTUNITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C8s-ol-1ee">
+                                        <rect key="frame" x="81" y="20" width="158" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="liv-mA-6Rq"/>
                                         </constraints>
@@ -110,13 +110,13 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="4cJ-D6-UEn"/>
                                     <constraint firstItem="xh6-xH-zzh" firstAttribute="leading" secondItem="QoM-61-Hiu" secondAttribute="leading" constant="8" id="7I0-Hy-BLK"/>
-                                    <constraint firstItem="C8s-ol-1ee" firstAttribute="leading" secondItem="xh6-xH-zzh" secondAttribute="trailing" constant="26" id="Ocx-7N-uAO"/>
+                                    <constraint firstItem="C8s-ol-1ee" firstAttribute="leading" secondItem="xh6-xH-zzh" secondAttribute="trailing" constant="15" id="Ocx-7N-uAO"/>
                                     <constraint firstItem="6pD-hc-xci" firstAttribute="top" secondItem="QoM-61-Hiu" secondAttribute="top" constant="20" id="PCE-bw-gWH"/>
                                     <constraint firstItem="xh6-xH-zzh" firstAttribute="top" secondItem="QoM-61-Hiu" secondAttribute="top" constant="20" id="T2Q-dq-cFG"/>
                                     <constraint firstItem="C8s-ol-1ee" firstAttribute="top" secondItem="QoM-61-Hiu" secondAttribute="top" constant="20" id="Ysn-3t-M6L"/>
                                     <constraint firstAttribute="trailing" secondItem="6pD-hc-xci" secondAttribute="trailing" constant="8" id="aqX-ib-725"/>
                                     <constraint firstItem="C8s-ol-1ee" firstAttribute="centerX" secondItem="QoM-61-Hiu" secondAttribute="centerX" id="cVz-wU-Prf"/>
-                                    <constraint firstItem="6pD-hc-xci" firstAttribute="leading" secondItem="C8s-ol-1ee" secondAttribute="trailing" constant="25" id="jty-7A-Ldw"/>
+                                    <constraint firstItem="6pD-hc-xci" firstAttribute="leading" secondItem="C8s-ol-1ee" secondAttribute="trailing" constant="15" id="jty-7A-Ldw"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="leftButton" destination="xh6-xH-zzh" id="Tcv-OW-31R"/>
@@ -124,7 +124,7 @@
                                     <outlet property="title" destination="C8s-ol-1ee" id="Sep-TL-Cwb"/>
                                 </connections>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an Interest to take your action in:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-cf-Oxl">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose an Interest to create your opportunity in:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcf-cf-Oxl">
                                 <rect key="frame" x="0.0" y="64" width="320" height="36"/>
                                 <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -252,7 +252,7 @@
                                     <outlet property="delegate" destination="d1r-qX-Qev" id="a2A-Ew-b66"/>
                                 </connections>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Select friends to invite to the action" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jf-go-LEo">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Select friends to invite to the opportunity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Jf-go-LEo">
                                 <rect key="frame" x="0.0" y="108" width="375" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1090,7 +1090,7 @@
                                             <action selector="cancelAction" destination="tE9-7p-HzV" eventType="touchUpInside" id="Kkh-Ap-D3C"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAKE ACTION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we0-T8-VxF">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CREATE OPPORTUNITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="we0-T8-VxF">
                                         <rect key="frame" x="-371" y="31" width="1120" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="eff-Dg-750"/>
@@ -1187,7 +1187,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a name for your Action" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Tu-3a-65k">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter a name for your Opportunity" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Tu-3a-65k">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="44"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
@@ -1360,7 +1360,7 @@
                                         <rect key="frame" x="15" y="8" width="345" height="44"/>
                                         <color key="backgroundColor" red="0.98039215686274506" green="0.27450980392156865" blue="0.086274509803921567" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
-                                        <state key="normal" title="Delete Action">
+                                        <state key="normal" title="Delete Opportunity">
                                             <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
@@ -1400,6 +1400,7 @@
                         <outlet property="deleteActionConstraint" destination="jZ1-FS-kDB" id="I3C-ge-0b6"/>
                         <outlet property="formTableView" destination="he7-0Z-I9P" id="9dR-ut-u5g"/>
                         <outlet property="nextButton" destination="59O-1i-0So" id="Xb1-la-ePT"/>
+                        <outlet property="titleLabel" destination="we0-T8-VxF" id="cdv-8S-gW3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MaM-mR-jrS" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -23,6 +23,8 @@
   if ([eventToEdit.endDate integerValue] != 0) {
     actionForm.endDate = [NSDate dateWithTimeIntervalSince1970:eventToEdit.endDate.longLongValue/1000];
   }
+  
+  actionForm.titleLabel.text = @"EDIT OPPORTUNITY";
     // Do any additional setup after loading the view.
   
 }

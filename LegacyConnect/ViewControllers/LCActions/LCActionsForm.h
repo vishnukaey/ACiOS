@@ -51,6 +51,7 @@ static NSString *  kCellIdentifierSection = @"LCActionSectionHeader";
 @property(nonatomic, retain)  UITextField *aboutPlaceholder;
 @property(nonatomic, retain)  UIImageView *headerPhotoImageView;
 @property(nonatomic, retain) IBOutlet UITableView *formTableView;
+@property(nonatomic, retain) IBOutlet UILabel *titleLabel;
 @property(nonatomic, retain) IBOutlet UIButton *nextButton, *cancelButton, *backButton, *deleteActionBut;
 @property(nonatomic, retain)
 UIActivityIndicatorView *imageLoadingIndicator;
