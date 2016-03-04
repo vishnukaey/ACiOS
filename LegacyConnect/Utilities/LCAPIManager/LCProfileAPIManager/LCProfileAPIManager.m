@@ -11,8 +11,7 @@
 
 @implementation LCProfileAPIManager
 
-+ (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success
-               andfailure:(void (^)(NSString *error))failure
++ (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId andPageNumber:(NSString*)pageNumber withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
 {
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
@@ -25,6 +24,9 @@
   }
   if (lastUserId) {
     [url appendString:[NSString stringWithFormat:@"&lastUserId=%@",lastUserId]];
+  }
+  if (pageNumber) {
+    [url appendString:[NSString stringWithFormat:@"&page=%@",pageNumber]];
   }
   url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
   
