@@ -2144,7 +2144,7 @@
 						DevelopmentTeam = L75K25G57P;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -2800,8 +2800,8 @@
 			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gist Digital Inc. (L75K25G57P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gist Digital Inc. (L75K25G57P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FB_DISPLAY_NAME = ThatHelps;
 				FB_ID = 535164313296078;
