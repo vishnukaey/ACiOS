@@ -112,9 +112,10 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:nil withSuccess:^(id response) {
+  int page = (int)self.results.count/kPaginationFactor+1;
+  [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text  pageNumber:[NSString stringWithFormat:@"%d",page] lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
-    BOOL hasMoreData = [(NSArray*)response count] >= 10;
+    BOOL hasMoreData = [(NSArray*)response count] >= kPaginationFactor;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andfailure:^(NSString *error) {
@@ -127,8 +128,17 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
-    BOOL hasMoreData = [(NSArray*)response count] >= 10;
+  int page;
+  if(self.results.count%kPaginationFactor == 0)
+  {
+    page = (int)self.results.count/kPaginationFactor+1;
+  }
+  else
+  {
+    page= (int)self.results.count/kPaginationFactor+2;
+  }
+  [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text pageNumber:[NSString stringWithFormat:@"%d",page] lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+    BOOL hasMoreData = [(NSArray*)response count] >= kPaginationFactor;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andfailure:^(NSString *error) {
     [self didFailedToFetchResults];

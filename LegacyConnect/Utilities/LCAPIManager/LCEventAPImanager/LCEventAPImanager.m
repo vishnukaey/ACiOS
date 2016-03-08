@@ -135,11 +135,11 @@
    }];
 }
 
-+ (void)getMembersForEventID:(NSString*)eventID andLastEventID:(NSString*)lastEventID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getMembersForEventID:(NSString*)eventID pageNumber:(NSString*)page andLastEventID:(NSString*)lastEventID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *params = [NSString stringWithFormat:@"?%@=%@&%@=%@",kEventIDKey,eventID,@"lastId",lastEventID];
-  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, @"api/event/users",params];
+  NSString *params = [NSString stringWithFormat:@"?%@=%@&%@=%@&%@=%@",kEventIDKey,eventID,@"lastId",lastEventID,kPageNumber,page];
+  NSString *url = [NSString stringWithFormat:@"%@%@%@", kBaseURL, kAddUsersToEventURL,params];
   
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
@@ -163,7 +163,7 @@
    }];
 }
 
-+ (void)getMemberFriendsForEventID:(NSString*)eventID searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
++ (void)getMemberFriendsForEventID:(NSString*)eventID searchKey:(NSString*)searchKey pageNumber:(NSString*)page lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure
 {
   NSString * userToken = [LCDataManager sharedDataManager].userToken;
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
@@ -171,11 +171,14 @@
   if (eventID) {
     [url appendString:[NSString stringWithFormat:@"eventId=%@",eventID]];
   }
-  if (searchKey) {
-    [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
-  }
   if (lastUserId) {
     [url appendString:[NSString stringWithFormat:@"&%@=%@",kLastIdKey, lastUserId]];
+  }
+  if (page) {
+    [url appendString:[NSString stringWithFormat:@"&%@=%@",kPageNumber, page]];
+  }
+  if (searchKey) {
+    [url appendString:[NSString stringWithFormat:@"&searchKey=%@",searchKey]];
   }
   url = [[url stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding] mutableCopy];
   
@@ -199,6 +202,7 @@
      failure(error);
    }];
 }
+
 
 + (void)getListOfEventsForInterestID:(NSString*)InterestID lastID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {

@@ -21,8 +21,8 @@
 
 + (void)supportCause:(LCCause *)cause withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)unsupportCause:(LCCause *)cause withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
-+ (void)getInterestFolowersOfInterest:(NSString*)interestId lastUserId:(NSString*)lastId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
-+ (void)getCauseFollowersOfCause:(NSString*)causeId andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getInterestFollowersOfInterest:(NSString*)interestId lastUserId:(NSString*)lastId andPageNumber:(NSString*) page withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
++ (void)getCauseFollowersOfCause:(NSString*)causeId pageNumber:(NSString*)page andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
 
 + (void)getCausesForSetOfInterests:(NSArray*)interests withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getThemesWithLastId:(NSString*)lastId withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

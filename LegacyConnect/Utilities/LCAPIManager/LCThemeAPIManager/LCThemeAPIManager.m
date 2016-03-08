@@ -156,10 +156,10 @@
    }];
 }
 
-+ (void)getInterestFolowersOfInterest:(NSString*)interestId lastUserId:(NSString*)lastId withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getInterestFollowersOfInterest:(NSString*)interestId lastUserId:(NSString*)lastId andPageNumber:(NSString*) page withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFollowersURL, kInterestIDKey, interestId];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@&%@=%@", kBaseURL, kGetInterestFollowersURL, kInterestIDKey, interestId,kPageNumber,page];
   if (lastId) {
     url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastId];
   }
@@ -241,13 +241,17 @@
    }];
 }
 
-+ (void)getCauseFollowersOfCause:(NSString*)causeId andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
++ (void)getCauseFollowersOfCause:(NSString*)causeId pageNumber:(NSString*)page andLastID:(NSString*)lastID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetCauseFollowersURL, kCauseIDKey, causeId];
   if (lastID)
   {
     url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastCauseIDKey,lastID];
+  }
+  if (page)
+  {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kPageNumber,page];
   }
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {

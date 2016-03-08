@@ -37,10 +37,11 @@
 -(void) startFetchingResults
 {
   [super startFetchingResults];
-  [LCEventAPImanager getMembersForEventID:_event.eventID andLastEventID:nil withSuccess:^(NSArray *responses) {
+  int page = (int)self.results.count/kPaginationFactor+1;
+  [LCEventAPImanager getMembersForEventID:_event.eventID pageNumber:[NSString stringWithFormat:@"%d",page] andLastEventID:nil withSuccess:^(NSArray *responses) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
+    BOOL hasMoreData = [(NSArray*)responses count] >= kPaginationFactor;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
@@ -53,9 +54,17 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  
-  [LCEventAPImanager getMembersForEventID:_event.eventID andLastEventID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
-    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
+  int page;
+  if(self.results.count%kPaginationFactor == 0)
+  {
+    page = (int)self.results.count/kPaginationFactor+1;
+  }
+  else
+  {
+    page= (int)self.results.count/kPaginationFactor+2;
+  }
+  [LCEventAPImanager getMembersForEventID:_event.eventID pageNumber:[NSString stringWithFormat:@"%d",page] andLastEventID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
+    BOOL hasMoreData = [(NSArray*)responses count] >= kPaginationFactor;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self didFailedToFetchResults];
@@ -73,7 +82,7 @@
 - (void) setUsersArray:(NSArray*) usersArray
 {
   [super startFetchingResults];
-  BOOL hasMoreData = [(NSArray*)usersArray count] >= 10;
+  BOOL hasMoreData = [(NSArray*)usersArray count] >= kPaginationFactor;
   [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 
