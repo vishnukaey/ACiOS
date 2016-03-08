@@ -10,8 +10,9 @@
 
 @interface LCProfileAPIManager : NSObject
 
-+ (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
-+ (void)sendFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)getFriendsForUser:(NSString*)userId searchKey:(NSString*)searchKey lastUserId:(NSString*)lastUserId andPageNumber:(NSString*)pageNumber withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
++ (void)sendFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))
+success andFailure:(void (^)(NSString *error))failure;
 + (void)cancelFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)removeFriend:(NSString *)FriendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)acceptFriendRequest:(NSString *)friendID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;

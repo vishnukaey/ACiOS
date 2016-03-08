@@ -24,7 +24,10 @@ static NSString *kFriendsCellID = @"LCFriendsCell";
 {
   [super startFetchingResults];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-  [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil withSuccess:^(id response) {
+  
+  //lll
+  int pageNumber = (int)self.results.count/10;
+  [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:nil andPageNumber:[NSString stringWithFormat:@"%d",pageNumber] withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
@@ -42,7 +45,10 @@ static NSString *kFriendsCellID = @"LCFriendsCell";
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] withSuccess:^(id response) {
+  
+  //lll
+  int pageNumber = (int)self.results.count/10;
+  [LCProfileAPIManager getFriendsForUser:self.userId searchKey:nil lastUserId:[(LCFriend*)[self.results lastObject] friendId] andPageNumber:[NSString stringWithFormat:@"%d",pageNumber] withSuccess:^(id response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
