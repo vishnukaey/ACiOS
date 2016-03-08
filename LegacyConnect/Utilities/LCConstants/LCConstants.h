@@ -189,6 +189,8 @@ extern NSString *const kFBAvatarImageUrlKey;
 extern NSString *const kFBAccessTokenKey;
 extern NSString *const kUserImageData;
 extern NSString *const kUserimageExtension;
+extern NSString *const kPageNumber;
+
 
 extern NSString *const kEmptyStringValue;
 extern NSString *const kDefaultDateFormat;
@@ -235,6 +237,7 @@ extern NSString *const kPrivacy;
 extern NSString *const kManageBlkdUsers;
 extern NSString *const kSignOut;
 
+extern int const kPaginationFactor;
 
 
 #define IS_IPHONE_4 (fabs((double)[[UIScreen mainScreen]bounds].size.height - (double)480) < DBL_EPSILON)

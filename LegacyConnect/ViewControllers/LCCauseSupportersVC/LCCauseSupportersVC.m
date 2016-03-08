@@ -36,11 +36,13 @@
 -(void) startFetchingResults
 {
   [super startFetchingResults];
-  
-  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID andLastID:nil withSuccess:^(NSArray *responses) {
+  int page = (int)self.results.count/kPaginationFactor+1;
+
+  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID pageNumber:[NSString stringWithFormat:@"%d",page] andLastID:nil withSuccess:^(NSArray *responses) {
+    
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
+    BOOL hasMoreData = [(NSArray*)responses count] >= kPaginationFactor;
     [self didFetchResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
@@ -53,8 +55,17 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID andLastID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
-    BOOL hasMoreData = [(NSArray*)responses count] >= 10;
+  int page;
+  if(self.results.count%kPaginationFactor == 0)
+  {
+    page = (int)self.results.count/kPaginationFactor+1;
+  }
+  else
+  {
+    page= (int)self.results.count/kPaginationFactor+2;
+  }
+  [LCThemeAPIManager getCauseFollowersOfCause:_cause.causeID pageNumber:[NSString stringWithFormat:@"%d",page] andLastID:[(LCUserDetail*)[self.results lastObject] userID] withSuccess:^(NSArray *responses) {
+    BOOL hasMoreData = [(NSArray*)responses count] >= kPaginationFactor;
     [self didFetchNextResults:responses haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self didFailedToFetchResults];
@@ -72,7 +83,7 @@
 - (void) setUsersArray:(NSArray*) usersArray
 {
   [super startFetchingResults];
-  BOOL hasMoreData = [(NSArray*)usersArray count] >= 10;
+  BOOL hasMoreData = [(NSArray*)usersArray count] >= kPaginationFactor;
   [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 
