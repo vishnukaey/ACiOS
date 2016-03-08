@@ -286,8 +286,9 @@ static CGFloat kNumberOfSection = 3;
     }
         
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appdel.mainContainer = nil;
     UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
-    UIViewController* initialVC = [storyboard instantiateInitialViewController];
+    UINavigationController* initialVC = [storyboard instantiateInitialViewController];
     appdel.window.rootViewController = initialVC;
     [appdel.window makeKeyAndVisible];
     
