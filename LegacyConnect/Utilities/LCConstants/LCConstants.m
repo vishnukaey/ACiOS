@@ -30,11 +30,11 @@ NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
 #elif STAGING
 /* Staging url */
 //
-//NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
+NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 //NSString *const kBaseURL = @"https://dev.legacyconnect.com/";
 //
 
-NSString *const kBaseURL = @"http://10.3.0.55:8000/";
+//NSString *const kBaseURL = @"http://10.3.0.55:8000/";
 
 #elif PRODUCTION
 ///* Production url */
@@ -171,6 +171,7 @@ NSString *const kInterestIDKey = @"interestId";
 NSString *const kCauseIDKey = @"causeId";
 NSString *const kEventIDKey = @"eventId";
 NSString *const kLastCauseIDKey = @"lastId";
+NSString *const kPageNumber = @"page";
 NSString *const kFriendsKey = @"friends";
 NSString *const kFriendIDKey = @"friendId";
 NSString *const kPostIDKey = @"postId";
@@ -261,6 +262,7 @@ NSString *const kManageBlkdUsers = @"Manage Blocked Users";
 NSString *const kSignOut = @"Sign Out";
 
 NSString *const kBulletUnicode = @"\u2022";
+int const kPaginationFactor = 10;
 
 
 
