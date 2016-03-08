@@ -25,6 +25,8 @@
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
 #import "LCFinalTutorialVC.h"
+#import "LCLoginHomeViewController.h"
+
 
 static NSString *kTitle = @"MY FEED";
 
@@ -379,19 +381,29 @@ static NSString *kTitle = @"MY FEED";
 - (void)showResetPasswordScreen:(NSNotification*)notification
 {
   NSDictionary *userInfo = notification.userInfo;
-  if ([self.navigationController.topViewController isKindOfClass:[LCLoginViewController class]]) {
-    LCLoginViewController * loginViewController = (LCLoginViewController*)self.navigationController.topViewController;
-    LCUpdatePasswordViewController *updatePasswordVC = [loginViewController.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
-    updatePasswordVC.delegate = loginViewController;
+  if(![[NSUserDefaults standardUserDefaults] boolForKey:kLoginStatusKey] && self.navigationController)
+  {
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    NSMutableArray *navigationArray = [[NSMutableArray alloc] init];
+    NSArray *currentControllers = self.navigationController.viewControllers;
+    [navigationArray addObject:currentControllers[0]];//adding current emptyviewController
+    LCLoginHomeViewController *homeController = [storyboard instantiateViewControllerWithIdentifier:@"LoginHomeVC"];
+    [navigationArray addObject:homeController];
+    
+    LCLoginViewController *loginController = [storyboard instantiateViewControllerWithIdentifier:@"LCLoginViewController"];
+    [navigationArray addObject:loginController];
+    
+    LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
     updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
-    [self.navigationController pushViewController:updatePasswordVC animated:YES];
+    //      UIViewController* initialVC = [storyboard instantiateInitialViewController];
+    //
+    //
+    //    LCLoginViewController * loginViewController = (LCLoginViewController*)self.navigationController.topViewController;
+    
+    [navigationArray addObject:updatePasswordVC];
+    
+    self.navigationController.viewControllers = navigationArray;
   }
-//  else
-//  {
-//    //Logout
-//    [self leftMenuItemSelectedAtIndex:4];
-//    [LCAppLaunchHelper setNeedsToShowPasswordResetScreenWithToken:[userInfo objectForKey:kResetPasswordTokenKey]];
-//  }
 }
 
 
