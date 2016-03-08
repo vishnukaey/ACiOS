@@ -112,6 +112,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
+  [self.results removeAllObjects];
   int page = (int)self.results.count/kPaginationFactor+1;
   [LCEventAPImanager getMemberFriendsForEventID:self.eventToInvite.eventID searchKey:searchBar.text  pageNumber:[NSString stringWithFormat:@"%d",page] lastUserId:nil withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
