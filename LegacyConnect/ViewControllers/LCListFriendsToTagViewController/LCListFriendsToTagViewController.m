@@ -63,12 +63,12 @@
   
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
   
-  if (!self.selectedIDs) {
-    self.selectedIDs = [[NSMutableArray alloc] init];
+  if (!self.selectedFriends) {
+    self.selectedFriends = [[NSMutableArray alloc] init];
   }
   for (LCFriend *friend in alreadySelectedFriends)
   {
-    [self.selectedIDs addObject:friend.friendId];
+    [self.selectedFriends addObject:friend];
   }
   NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
   self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
@@ -125,19 +125,7 @@
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
-  NSMutableArray *arrayToPass = [[NSMutableArray alloc] init];
-  for (NSString *userId in self.selectedIDs)
-  {
-    for (LCFriend *friend in self.results)
-    {
-      if ([friend.friendId isEqualToString:userId])
-      {
-        [arrayToPass addObject:friend];
-        break;
-      }
-    }
-  }
-  [delegate didFinishPickingFriends:arrayToPass];
+  [delegate didFinishPickingFriends:self.selectedFriends];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -191,7 +179,7 @@
   cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
   [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
 
-  if ([self.selectedIDs containsObject:friend.friendId])
+  if ([self.selectedFriends containsObject:friend])
   {
     [cell.checkButton setSelected:YES];
   }
@@ -215,13 +203,13 @@
 
   if(cell.checkButton.selected)
   {
-    [self.selectedIDs removeObject:friend.friendId];
+    [self.selectedFriends removeObject:friend];
     [cell.checkButton setSelected:NO];
 
   }
   else
   {
-    [self.selectedIDs addObject:friend.friendId];
+    [self.selectedFriends addObject:friend];
     [cell.checkButton setSelected:YES];
   }
 }

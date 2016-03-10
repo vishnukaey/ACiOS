@@ -26,7 +26,7 @@
 "no_interests_available_self" = "Search and add interests from the menu.";
 "no_interests_available_others" = "No interests available.";
 "no_actions_available_self" = "Create opportunity by selecting the Global Impact button from the bottom right.";
-"no_actions_available_others" = "No actions available.";
+"no_actions_available_others" = "No opportunities available.";
 "no_recent_notifications_available" = "No Recent Notifications available.";
 "no_requests_pending" = "No pending requests";
 "members_empty" = "No members yet!";
@@ -100,7 +100,7 @@
 "following" = "Unfollow";
 "support" = "Support";
 "supporting" = "Supporting";
-"follow_event_message" = "Follow the Opportunity to view and post comments";
+"follow_event_message" = "Support the Opportunity to view and post comments";
 "delete_action" = "Delete Opportunity";
 "delete_action_message" = "Are you sure you want to permanently remove this opportunity from ThatHelps?";
 "action_date_comparison_alert_message" = "Start date should be before end date";
@@ -125,7 +125,7 @@
 //-- version control --//
 "version_outdated_title" = "Version outdated";
 "version_outdated_message" = "You are using and outdated version of ThatHelps. Please Update to the latest version.";
-"version_update_title" = "Update now";"follow_event_message" = "Follow the opportunity to view and post comments";
+"version_update_title" = "Update now";"follow_event_message" = "Support the opportunity to view and post comments";
 
 //----tutorial----//
 "menu_tutorial" = "Explore ThatHelps through the menu";

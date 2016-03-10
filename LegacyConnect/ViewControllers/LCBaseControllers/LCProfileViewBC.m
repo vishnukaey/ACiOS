@@ -210,27 +210,29 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
 
 -(void)updateImpactsCount:(NSNotification *)notification {
   
-  if (currentProfileStatus == kMyProfile) {
-    
-    if (notification.name == kCreateNewPostNFK) {
-      
-      NSInteger count = [_userDetail.impactCount integerValue] + 1;
-      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-    }
-    else if (notification.name == kDeletePostNFK) {
-      
-      NSInteger count = [_userDetail.impactCount integerValue] - 1;
-      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-    }
-  }
-  else
-  {
-    if (notification.name == kReportedPostNFK) {
-      
-      NSInteger count = [_userDetail.impactCount integerValue] - 1;
-      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
-    }
-  }
-  [self updateUserDetailUI];
+  //now it is changed to thanks count
+  
+//  if (currentProfileStatus == kMyProfile) {
+//    
+//    if (notification.name == kCreateNewPostNFK) {
+//      
+//      NSInteger count = [_userDetail.impactCount integerValue] + 1;
+//      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+//    }
+//    else if (notification.name == kDeletePostNFK) {
+//      
+//      NSInteger count = [_userDetail.impactCount integerValue] - 1;
+//      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+//    }
+//  }
+//  else
+//  {
+//    if (notification.name == kReportedPostNFK) {
+//      
+//      NSInteger count = [_userDetail.impactCount integerValue] - 1;
+//      _userDetail.impactCount = [NSString stringWithFormat: @"%ld", (long)count];
+//    }
+//  }
+//  [self updateUserDetailUI];
 }
 @end

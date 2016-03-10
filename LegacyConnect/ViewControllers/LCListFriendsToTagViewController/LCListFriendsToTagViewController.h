@@ -26,5 +26,5 @@
 @property(nonatomic,retain) IBOutlet UINavigationBar *navigationBar;
 @property(nonatomic, retain) NSArray *alreadySelectedFriends;
 @property (nonatomic,retain) NSString *searchKey;
-@property (nonatomic,retain) NSMutableArray *selectedIDs;
+@property (nonatomic,retain) NSMutableArray *selectedFriends;
 @end
