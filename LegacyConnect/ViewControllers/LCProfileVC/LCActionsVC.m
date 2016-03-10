@@ -22,7 +22,7 @@
   [LCProfileAPIManager getUserEventsForUserId:self.userID andLastEventId:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-    BOOL hasMoreData = [(NSArray*)response count] >= 10;
+    BOOL hasMoreData = [(NSArray*)response count] >= kPaginationFactor;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
   } andFailure:^(NSString *error) {
@@ -36,9 +36,9 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCProfileAPIManager getUserEventsForUserId:self.userID andLastEventId:[(LCEvent*)[self.results lastObject] eventID] withSuccess:^(NSArray *response) {
+  [LCProfileAPIManager getUserEventsForUserId:self.userID andLastEventId:[(LCEvent*)[self.results lastObject] uniqueID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
-    BOOL hasMoreData = [(NSArray*)response count] >= 10;
+    BOOL hasMoreData = [(NSArray*)response count] >= kPaginationFactor;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];

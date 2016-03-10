@@ -30,7 +30,8 @@
            @"isOwner": @"isOwner",
            @"isFollowing": @"isFollowing",
            @"comments": @"comments",
-           @"createdAt" : @"createdAt"
+           @"createdAt" : @"createdAt",
+           @"uniqueID" : @"id"
            };
 }
 

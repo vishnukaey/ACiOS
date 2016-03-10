@@ -81,9 +81,7 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  
-  //lll
-  int pageNumber = (int)self.results.count/10;
+    int pageNumber = (int)self.results.count/10+1;
 
   [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:_searchKey lastUserId:nil andPageNumber:[NSString stringWithFormat:@"%d",pageNumber] withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
@@ -101,8 +99,7 @@
 {
   [super startFetchingNextResults];
   
-  //lll
-  int pageNumber = (int)self.results.count/10;
+  int pageNumber = (int)self.results.count/kPaginationFactor+1;
 
   [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:_searchKey lastUserId:[(LCFriend*)[self.results lastObject] friendId] andPageNumber:[NSString stringWithFormat:@"%d",pageNumber] withSuccess:^(id response) {
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
@@ -111,6 +108,7 @@
     [self didFailedToFetchResults];
   }];
 }
+
 
 - (void)setNoResultViewHidden:(BOOL)hidded
 {
@@ -180,6 +178,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  JTTABLEVIEW_cellForRowAtIndexPath
   static NSString *MyIdentifier = @"LCTagFriendsTableViewCell";
   LCTagFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
   if (cell == nil)

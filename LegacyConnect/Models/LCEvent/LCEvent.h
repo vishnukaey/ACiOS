@@ -28,4 +28,5 @@
 @property (assign) BOOL isFollowing;
 @property (nonatomic, strong) NSArray *comments;
 @property (nonatomic, strong) NSString *createdAt;
+@property (nonatomic, strong) NSString *uniqueID;
 @end
