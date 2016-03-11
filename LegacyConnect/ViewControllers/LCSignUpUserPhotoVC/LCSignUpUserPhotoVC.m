@@ -42,7 +42,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  _firstNameLabel.text = [NSString stringWithFormat:@"Welcome, %@!",[LCDataManager sharedDataManager].firstName];
+  _firstNameLabel.text = [NSString stringWithFormat:@"Welcome %@",[LCDataManager sharedDataManager].firstName];
   [self initialUISetUp];
 }
 
