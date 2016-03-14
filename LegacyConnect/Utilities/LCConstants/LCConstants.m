@@ -59,7 +59,7 @@ NSString *const kLCiTunesLink = @"https://itunes.apple.com/us/app/thathelps!/id1
 NSString *const kTWConsumerKey = @"JFYQnutilTD8nKw9D0Q7iwutI";
 NSString *const kTWConsumerSecretKey = @"dFA57jARhKy3vhD7cV0pPToCO7gKBN3W7Kly1kqEZUFooEbCbT";
 
-NSString *const kLegacyConnectUrl = @"www.LegacyConnect.com/";
+NSString *const kLegacyConnectUrl = @"www.ThatHelps.com/";
 NSString *const kToSURL = @"cdn/cms/publish/tos/terms_of_use.html";
 
 NSString *const kLoginURL = @"api/login";
@@ -256,7 +256,7 @@ NSString *const kEmailUpdateScreenTitle = @"EMAIL ADDRESS";
 NSString *const kAccountTitle = @"ACCOUNT";
 NSString *const kEmailAddress = @"Email Address";
 NSString *const kChangePassword = @"Change Password";
-NSString *const kMyLegacyURL = @"My Legacy URL";
+NSString *const kMyLegacyURL = @"My ThatHelps URL";
 NSString *const kPrivacy = @"Privacy";
 NSString *const kManageBlkdUsers = @"Manage Blocked Users";
 NSString *const kSignOut = @"Sign Out";
