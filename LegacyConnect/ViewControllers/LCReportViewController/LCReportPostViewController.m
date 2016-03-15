@@ -41,7 +41,7 @@
 - (void)initialUISetUp
 {
   
-  NSString * infoText = @"You are reporting this post because this content is offensive or objectionable.\n\nThis content will be reported to the ThatHelps admin for review. The ThatHelps admin will either approve or remove this post.\n\nThe user posting the content could be removed from ThatHelps if the content is deemed to be offensive or objectionable.\n\nThe ThatHelps Admins have the final say on all content posted on the ThatHelps network";
+  NSString * infoText = @"You are reporting this content because you find it offensive or objectionable.\n\nThis content will be reported to the ThatHelps admin for review. The ThatHelps admin will either approve or remove this post.\n\nThe user posting the content could be removed from ThatHelps if the content is deemed to be offensive or objectionable.\n\nThe ThatHelps Admins have the final say on all content posted on the ThatHelps network";
   NSMutableAttributedString * info = [[NSMutableAttributedString alloc] initWithString:infoText];
   
   NSRange fullTxtRng = [infoText rangeOfString:infoText];
