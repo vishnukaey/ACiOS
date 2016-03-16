@@ -117,7 +117,6 @@
 		0BC7557D1B563356009CE7F3 /* LCUtilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BC7557C1B563356009CE7F3 /* LCUtilityManager.m */; };
 		0BC755801B563907009CE7F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0BC7557F1B563907009CE7F3 /* Localizable.strings */; };
 		0BCC873C1C1025FF0088D35D /* LCCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */; };
-		0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */; };
 		0BDB98D21B5E5AEB006F62FD /* LCWebServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */; };
 		0BE2B9B81B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BE2B9B71B58F7B80026E607 /* LCChooseCausesCollectionViewCell.m */; };
 		0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA5C8C1BEA1ACB00669C57 /* LCMileStonesVC.m */; };
@@ -185,6 +184,8 @@
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
 		CE71D1521C3D225C00AD6E07 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */; };
 		CE72CCEB1BFB18E300A288D2 /* LCSearchTopBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE72CCEA1BFB18E300A288D2 /* LCSearchTopBC.m */; };
+		CE7ED3961C9805F90095D70A /* Tutorials.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7ED3951C9805F90095D70A /* Tutorials.xib */; };
+		CE7ED39A1C9810150095D70A /* LCTutorialView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7ED3991C9810150095D70A /* LCTutorialView.m */; };
 		CE8F388C1BD4D45700574526 /* LCListInterestsAndCausesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE8F388B1BD4D45700574526 /* LCListInterestsAndCausesVC.m */; };
 		CEA30E301B7366C100DAA4BA /* LCCommunityInterestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA30E2F1B7366C100DAA4BA /* LCCommunityInterestCell.m */; };
 		CEA3922A1C07253F0048FCC6 /* LCRequestsNotificationsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA392291C07253F0048FCC6 /* LCRequestsNotificationsBC.m */; };
@@ -202,6 +203,8 @@
 		CED349581C609B2200AEBAF4 /* LCCreatePostBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED349571C609B2200AEBAF4 /* LCCreatePostBC.m */; };
 		CED5F4321C2002470027A31C /* LCHorizontalInterestsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */; };
 		CED6411D1C48C45600943693 /* LCSingleCauseBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED6411C1C48C45600943693 /* LCSingleCauseBC.m */; };
+		CED75FEB1C9937BC00B0230D /* LCHomeFeedTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = CED75FEA1C9937BC00B0230D /* LCHomeFeedTutorial.m */; };
+		CED75FEE1C993A0B00B0230D /* LCTutorialManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CED75FED1C993A0B00B0230D /* LCTutorialManager.m */; };
 		CEDD5F381BF1F8C100332A4E /* LCActionsFormPresenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */; };
 		CEDD5F3B1BF208D900332A4E /* LCEditActions.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDD5F3A1BF208D900332A4E /* LCEditActions.m */; };
 		CEDE40681C1AA598003D3C81 /* LCOnboardThemesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDE40671C1AA598003D3C81 /* LCOnboardThemesVC.m */; };
@@ -427,8 +430,6 @@
 		0BC7557F1B563907009CE7F3 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Utilities/Localizable.strings; sourceTree = "<group>"; };
 		0BCC873A1C1025FF0088D35D /* LCCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCCollectionViewController.h; sourceTree = "<group>"; };
 		0BCC873B1C1025FF0088D35D /* LCCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCCollectionViewController.m; sourceTree = "<group>"; };
-		0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCFinalTutorialVC.h; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.h; sourceTree = "<group>"; };
-		0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCFinalTutorialVC.m; path = ViewControllers/LCFinalTutorialVC/LCFinalTutorialVC.m; sourceTree = "<group>"; };
 		0BDB98D01B5E5AEB006F62FD /* LCWebServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCWebServiceManager.h; path = Utilities/LCWebServiceManager/LCWebServiceManager.h; sourceTree = "<group>"; };
 		0BDB98D11B5E5AEB006F62FD /* LCWebServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCWebServiceManager.m; path = Utilities/LCWebServiceManager/LCWebServiceManager.m; sourceTree = "<group>"; };
 		0BE2B9B61B58F7B80026E607 /* LCChooseCausesCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCChooseCausesCollectionViewCell.h; path = CustomViews/LCChooseCausesCollectionViewCell/LCChooseCausesCollectionViewCell.h; sourceTree = "<group>"; };
@@ -552,6 +553,9 @@
 		CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
 		CE72CCE91BFB18E300A288D2 /* LCSearchTopBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchTopBC.h; path = ViewControllers/LCBaseControllers/LCSearchTopBC.h; sourceTree = "<group>"; };
 		CE72CCEA1BFB18E300A288D2 /* LCSearchTopBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchTopBC.m; path = ViewControllers/LCBaseControllers/LCSearchTopBC.m; sourceTree = "<group>"; };
+		CE7ED3951C9805F90095D70A /* Tutorials.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Tutorials.xib; path = Storyboards/Tutorials.xib; sourceTree = "<group>"; };
+		CE7ED3981C9810150095D70A /* LCTutorialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialView.h; path = ViewControllers/LCTutorials/LCTutorialView.h; sourceTree = "<group>"; };
+		CE7ED3991C9810150095D70A /* LCTutorialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialView.m; path = ViewControllers/LCTutorials/LCTutorialView.m; sourceTree = "<group>"; };
 		CE8F388A1BD4D45700574526 /* LCListInterestsAndCausesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCListInterestsAndCausesVC.h; path = ViewControllers/LCListInterestsAndCausesVC/LCListInterestsAndCausesVC.h; sourceTree = "<group>"; };
 		CE8F388B1BD4D45700574526 /* LCListInterestsAndCausesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCListInterestsAndCausesVC.m; path = ViewControllers/LCListInterestsAndCausesVC/LCListInterestsAndCausesVC.m; sourceTree = "<group>"; };
 		CEA30E2E1B7366C100DAA4BA /* LCCommunityInterestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCommunityInterestCell.h; path = CustomViews/LCCommunityInterestCell/LCCommunityInterestCell.h; sourceTree = "<group>"; };
@@ -586,6 +590,10 @@
 		CED5F4311C2002470027A31C /* LCHorizontalInterestsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHorizontalInterestsCell.m; path = ViewControllers/LCOnboardThemesVC/LCHorizontalInterestsCell.m; sourceTree = "<group>"; };
 		CED6411B1C48C45600943693 /* LCSingleCauseBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSingleCauseBC.h; path = ViewControllers/LCBaseControllers/LCSingleCauseBC.h; sourceTree = "<group>"; };
 		CED6411C1C48C45600943693 /* LCSingleCauseBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSingleCauseBC.m; path = ViewControllers/LCBaseControllers/LCSingleCauseBC.m; sourceTree = "<group>"; };
+		CED75FE91C9937BC00B0230D /* LCHomeFeedTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCHomeFeedTutorial.h; path = ViewControllers/LCTutorials/LCHomeFeedTutorial.h; sourceTree = "<group>"; };
+		CED75FEA1C9937BC00B0230D /* LCHomeFeedTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCHomeFeedTutorial.m; path = ViewControllers/LCTutorials/LCHomeFeedTutorial.m; sourceTree = "<group>"; };
+		CED75FEC1C993A0B00B0230D /* LCTutorialManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCTutorialManager.h; path = ViewControllers/LCTutorials/LCTutorialManager.h; sourceTree = "<group>"; };
+		CED75FED1C993A0B00B0230D /* LCTutorialManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTutorialManager.m; path = ViewControllers/LCTutorials/LCTutorialManager.m; sourceTree = "<group>"; };
 		CEDD5F361BF1F8C100332A4E /* LCActionsFormPresenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCActionsFormPresenter.h; sourceTree = "<group>"; };
 		CEDD5F371BF1F8C100332A4E /* LCActionsFormPresenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCActionsFormPresenter.m; sourceTree = "<group>"; };
 		CEDD5F391BF208D900332A4E /* LCEditActions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCEditActions.h; path = LCEditActions/LCEditActions.h; sourceTree = "<group>"; };
@@ -1380,7 +1388,6 @@
 			children = (
 				16278B751C5B4B3700F743F6 /* LCAcceptTermsViewController */,
 				16278B6E1C5B4A7800F743F6 /* LCTermsOfServiceViewController */,
-				0BD5936F1B57786200658E99 /* LCFinalTutorialVC */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
 				9662871B1B56445500C91196 /* LCForgotPasswordViewController */,
 				0B35942B1B4E6DC20098C484 /* LCLoginViewController */,
@@ -1439,15 +1446,6 @@
 			);
 			name = LCCollectionViewController;
 			path = ViewControllers/LCCollectionViewController;
-			sourceTree = "<group>";
-		};
-		0BD5936F1B57786200658E99 /* LCFinalTutorialVC */ = {
-			isa = PBXGroup;
-			children = (
-				0BD5936C1B57785E00658E99 /* LCFinalTutorialVC.h */,
-				0BD5936D1B57785E00658E99 /* LCFinalTutorialVC.m */,
-			);
-			name = LCFinalTutorialVC;
 			sourceTree = "<group>";
 		};
 		0BDB98D31B5E5AF2006F62FD /* LCWebServiceManager */ = {
@@ -1577,6 +1575,7 @@
 				0B56A7F91B6A31CF0065C231 /* Notification.storyboard */,
 				96B86A1A1B79C344003EF7CA /* CreatePost.storyboard */,
 				0B775D7C1BE1F22F008B5B6F /* Settings.storyboard */,
+				CE7ED3951C9805F90095D70A /* Tutorials.xib */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -1584,6 +1583,7 @@
 		0BF05A661B4E626E00FF7B39 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE7ED3971C9806AD0095D70A /* LCTutorials */,
 				0B22B5D71C5B46F500397630 /* LCReportViewController */,
 				CE5CBF6E1C55FC6B0001F82C /* LCUIImagePickerController */,
 				0BCC87391C1025E00088D35D /* LCCollectionViewController */,
@@ -1906,6 +1906,19 @@
 			name = LCBaseControllers;
 			sourceTree = "<group>";
 		};
+		CE7ED3971C9806AD0095D70A /* LCTutorials */ = {
+			isa = PBXGroup;
+			children = (
+				CE7ED3981C9810150095D70A /* LCTutorialView.h */,
+				CE7ED3991C9810150095D70A /* LCTutorialView.m */,
+				CED75FE91C9937BC00B0230D /* LCHomeFeedTutorial.h */,
+				CED75FEA1C9937BC00B0230D /* LCHomeFeedTutorial.m */,
+				CED75FEC1C993A0B00B0230D /* LCTutorialManager.h */,
+				CED75FED1C993A0B00B0230D /* LCTutorialManager.m */,
+			);
+			name = LCTutorials;
+			sourceTree = "<group>";
+		};
 		CE8F388D1BD4D5A700574526 /* LCListInterestsAndCausesVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2191,6 +2204,7 @@
 				0BB33D9E1BA812A3009E6D0C /* Gotham-Bold.otf in Resources */,
 				0BB33DA41BA812A3009E6D0C /* Gotham-Medium.otf in Resources */,
 				0BB33DA71BA81315009E6D0C /* LCCommentCellXIB.xib in Resources */,
+				CE7ED3961C9805F90095D70A /* Tutorials.xib in Resources */,
 				0BB33DB51BA81359009E6D0C /* Interests.storyboard in Resources */,
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */,
@@ -2326,6 +2340,7 @@
 				CE2E09C41C0432BA00722A22 /* LCFeedDetailBC.m in Sources */,
 				0B85BD031BEC8F1D00217897 /* LCSearchUsersViewController.m in Sources */,
 				0BCC873C1C1025FF0088D35D /* LCCollectionViewController.m in Sources */,
+				CED75FEB1C9937BC00B0230D /* LCHomeFeedTutorial.m in Sources */,
 				0BC656171C1AC46100DBB5BA /* LCOnboardCausesVC.m in Sources */,
 				0B001B1B1B7CA70400E8E569 /* LCTag.m in Sources */,
 				0B56A8011B6A461D0065C231 /* LCRequestNotificationTVC.m in Sources */,
@@ -2348,6 +2363,7 @@
 				0BED515E1B74D3F600DA125B /* LCChooseInterestCVC.m in Sources */,
 				0B05D74E1BEB1D4100FD5AE1 /* LCActionsDateSelection.m in Sources */,
 				CEBED69B1B5F89560012FEBB /* LCFBContactsVC.m in Sources */,
+				CED75FEE1C993A0B00B0230D /* LCTutorialManager.m in Sources */,
 				CED6411D1C48C45600943693 /* LCSingleCauseBC.m in Sources */,
 				966287251B567C0F00C91196 /* LCUpdatePasswordViewController.m in Sources */,
 				0B837F751C45241F0014553D /* LCMyInterestVC.m in Sources */,
@@ -2368,6 +2384,7 @@
 				0B6E4E151C46701800BF0D74 /* UIImage+LCImageBlur.m in Sources */,
 				0B2A2CD81BF5B9F800D20827 /* NSURL+LCURLCategory.m in Sources */,
 				0BF8C81C1BB0028000C29746 /* LCFriendsCell.m in Sources */,
+				CE7ED39A1C9810150095D70A /* LCTutorialView.m in Sources */,
 				0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */,
 				0B56B8EE1C1AF197001F3AE5 /* LCProfileAPIManager.m in Sources */,
 				0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */,
@@ -2411,7 +2428,6 @@
 				0BC755631B56291C009CE7F3 /* LCSignUpUserPhotoVC.m in Sources */,
 				0B288C731BA92660001A8E9D /* LCProfileEditVC.m in Sources */,
 				CEBCEC671B6899B600F0116E /* LCSingleCauseVC.m in Sources */,
-				0BD5936E1B57785E00658E99 /* LCFinalTutorialVC.m in Sources */,
 				0B44DC491C5C948F0080D7B4 /* LCReportPostViewController.m in Sources */,
 				0B775D8E1BE1F25B008B5B6F /* LCChangePasswordViewController.m in Sources */,
 				0BF8C8181BAFFCB000C29746 /* LCFriendsListViewController.m in Sources */,

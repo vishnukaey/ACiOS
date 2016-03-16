@@ -276,9 +276,7 @@ static CGFloat kNumberOfSection = 3;
     
     //[LCUtilityManager clearUserDefaultsForCurrentUser];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    BOOL tutorialPresent = [[NSUserDefaults standardUserDefaults] boolForKey:kTutorialPresentKey];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    [[NSUserDefaults standardUserDefaults] setBool:tutorialPresent forKey:kTutorialPresentKey];//tutorial should persist
     [LCDataManager resetSharedManager];
     if ([FBSDKAccessToken currentAccessToken])
     {

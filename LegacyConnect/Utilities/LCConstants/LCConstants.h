@@ -123,7 +123,6 @@ extern NSString *const kSettingsStoryBoardIdentifier;
 extern NSString *const kInterestObj;
 extern NSString *const kCauseObj;
 
-extern NSString *const kTutorialPresentKey;
 
 extern NSString *const kHomeFeedsStoryBoardID;
 extern NSString *const kChooseCommunityStoryBoardID;
