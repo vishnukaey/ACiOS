@@ -182,7 +182,7 @@
                                         </constraints>
                                     </imageView>
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgA-rb-eFX">
-                                        <rect key="frame" x="15" y="164" width="345" height="320"/>
+                                        <rect key="frame" x="15" y="146" width="345" height="338"/>
                                         <connections>
                                             <segue destination="6av-5x-wHA" kind="embed" id="ROz-De-Kmn"/>
                                         </connections>
@@ -193,7 +193,7 @@
                                     <constraint firstItem="rgA-rb-eFX" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="1vJ-PZ-4k3"/>
                                     <constraint firstAttribute="trailing" secondItem="9pK-Ug-TD8" secondAttribute="trailing" constant="15" id="30j-bB-1gE"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="3py-uM-zmt"/>
-                                    <constraint firstItem="rgA-rb-eFX" firstAttribute="top" secondItem="RNu-5a-VSC" secondAttribute="bottom" constant="33" id="9Am-eX-eXl"/>
+                                    <constraint firstItem="rgA-rb-eFX" firstAttribute="top" secondItem="RNu-5a-VSC" secondAttribute="bottom" constant="15" id="9Am-eX-eXl"/>
                                     <constraint firstItem="RNu-5a-VSC" firstAttribute="top" secondItem="1RK-dy-Ksn" secondAttribute="top" constant="55" id="A22-aF-KQH"/>
                                     <constraint firstItem="9pK-Ug-TD8" firstAttribute="top" secondItem="rgA-rb-eFX" secondAttribute="bottom" constant="8" id="DZu-te-crd"/>
                                     <constraint firstAttribute="centerX" secondItem="RNu-5a-VSC" secondAttribute="centerX" id="EXy-w9-PPo"/>
@@ -284,7 +284,7 @@
                         <viewControllerLayoutGuide type="bottom" id="g31-pq-Zn7"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Bir-un-5nr">
-                        <rect key="frame" x="0.0" y="0.0" width="345" height="320"/>
+                        <rect key="frame" x="0.0" y="0.0" width="345" height="338"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -306,23 +306,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lu3-AO-wu4">
-                                <rect key="frame" x="16" y="0.0" width="313" height="320"/>
+                                <rect key="frame" x="22" y="0.0" width="301" height="285.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXo-pA-iPH">
-                                <rect key="frame" x="20" y="297.5" width="305" height="14.5"/>
-                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="11" y="306.5" width="320" height="13"/>
+                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                                <color key="textColor" red="0.13725490196078433" green="0.12156862745098039" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="lu3-AO-wu4" secondAttribute="trailing" constant="16" id="46a-xw-2eO"/>
-                            <constraint firstItem="lu3-AO-wu4" firstAttribute="leading" secondItem="YBc-90-SB5" secondAttribute="leading" constant="16" id="GZy-uP-gkF"/>
-                            <constraint firstItem="JXo-pA-iPH" firstAttribute="leading" secondItem="YBc-90-SB5" secondAttribute="leading" constant="20" id="N4z-Lp-ThM"/>
+                            <constraint firstAttribute="trailing" secondItem="lu3-AO-wu4" secondAttribute="trailing" constant="22" id="46a-xw-2eO"/>
+                            <constraint firstItem="lu3-AO-wu4" firstAttribute="leading" secondItem="YBc-90-SB5" secondAttribute="leading" constant="22" id="GZy-uP-gkF"/>
+                            <constraint firstItem="JXo-pA-iPH" firstAttribute="leading" secondItem="YBc-90-SB5" secondAttribute="leading" constant="11" id="N4z-Lp-ThM"/>
                             <constraint firstItem="lu3-AO-wu4" firstAttribute="top" secondItem="YBc-90-SB5" secondAttribute="top" id="ZXn-nv-NA9"/>
-                            <constraint firstAttribute="trailing" secondItem="JXo-pA-iPH" secondAttribute="trailing" constant="20" id="bhe-La-IW6"/>
-                            <constraint firstItem="sIW-PU-lYo" firstAttribute="top" secondItem="JXo-pA-iPH" secondAttribute="bottom" constant="8" id="dRG-k0-2vA"/>
-                            <constraint firstItem="sIW-PU-lYo" firstAttribute="top" secondItem="lu3-AO-wu4" secondAttribute="bottom" id="jqO-80-0di"/>
+                            <constraint firstAttribute="trailing" secondItem="JXo-pA-iPH" secondAttribute="trailing" constant="14" id="bhe-La-IW6"/>
+                            <constraint firstItem="sIW-PU-lYo" firstAttribute="top" secondItem="JXo-pA-iPH" secondAttribute="bottom" constant="0.5" id="dRG-k0-2vA"/>
+                            <constraint firstItem="sIW-PU-lYo" firstAttribute="top" secondItem="lu3-AO-wu4" secondAttribute="bottom" constant="34.5" id="jqO-80-0di"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
