@@ -1,21 +1,22 @@
 //
-//  LCNotificationsTutorial.m
+//  LCInterestListTutorial.m
 //  LegacyConnect
 //
 //  Created by Jijo on 3/17/16.
 //  Copyright © 2016 Gist. All rights reserved.
 //
 
-#import "LCNotificationsTutorial.h"
+#import "LCInterestListTutorial.h"
 
-@interface LCNotificationsTutorial ()
+@interface LCInterestListTutorial ()
 {
   IBOutlet UILabel *label1;
   IBOutlet UIView *view1;
 }
 @end
 
-@implementation LCNotificationsTutorial
+@implementation LCInterestListTutorial
+
 
 - (void) awakeFromNib {
   [super awakeFromNib];
@@ -25,9 +26,9 @@
 
 - (void)setLabels
 {
-  NSString *labelString = @"See RECENT updates and activity for your\nCauses, Interests, Friends and Helps\n \nSee recent changes in friend REQUEST status";
+  NSString *labelString = @"This is your INTEREST menu. You\ncan use it to browse your favourite\ninterests or discover new ones.";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:labelString];
-  NSArray * colorWords = @[@"RECENT", @"REQUEST"];
+  NSArray * colorWords = @[@"INTEREST"];
   // -- Add Font -- //
   [attributtedString addAttributes:@{
                                      NSFontAttributeName : self.font,
@@ -54,4 +55,14 @@
   view1.backgroundColor = self.colorTransparentBlack;
 }
 
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
+
 @end
+

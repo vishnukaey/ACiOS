@@ -1,21 +1,21 @@
 //
-//  LCNotificationsTutorial.m
+//  LCProfileTutorial.m
 //  LegacyConnect
 //
 //  Created by Jijo on 3/17/16.
 //  Copyright © 2016 Gist. All rights reserved.
 //
 
-#import "LCNotificationsTutorial.h"
+#import "LCProfileTutorial.h"
 
-@interface LCNotificationsTutorial ()
+@interface LCProfileTutorial ()
 {
   IBOutlet UILabel *label1;
   IBOutlet UIView *view1;
 }
 @end
 
-@implementation LCNotificationsTutorial
+@implementation LCProfileTutorial
 
 - (void) awakeFromNib {
   [super awakeFromNib];
@@ -25,9 +25,9 @@
 
 - (void)setLabels
 {
-  NSString *labelString = @"See RECENT updates and activity for your\nCauses, Interests, Friends and Helps\n \nSee recent changes in friend REQUEST status";
+  NSString *labelString = @"This is your ThatHelps PROFILE.\n\nWhen someone THANKS you it tells\nyou they think it made a difference\n\nHELPS are posts you make to share\nhow you've helped\n\nINTERESTS are the subjects you're\npassionate about\n\nOPPORTUNITIES are ways to help\nthat you've created";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:labelString];
-  NSArray * colorWords = @[@"RECENT", @"REQUEST"];
+  NSArray * colorWords = @[@"PROFILE", @"THANKS", @"HELPS", @"INTERESTS", @"OPPORTUNITIES"];
   // -- Add Font -- //
   [attributtedString addAttributes:@{
                                      NSFontAttributeName : self.font,
@@ -55,3 +55,4 @@
 }
 
 @end
+

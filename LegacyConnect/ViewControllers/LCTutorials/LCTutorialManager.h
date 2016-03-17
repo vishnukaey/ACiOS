@@ -11,6 +11,10 @@
 @interface LCTutorialManager : NSObject
 
 + (void)showHomeFeedTutorial;
-+(id)getViewFromXIBForClass :(Class)classType;
++ (void)showNotificationsTutorial;
++ (void)showProfileTutorial;
++ (void)showInterestListTutorial;
++ (void)showInterestTutorial;
++ (void)showCauseTutorial;
 
 @end

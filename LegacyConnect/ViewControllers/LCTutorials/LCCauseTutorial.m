@@ -1,21 +1,23 @@
 //
-//  LCNotificationsTutorial.m
+//  LCCauseTutorial.m
 //  LegacyConnect
 //
 //  Created by Jijo on 3/17/16.
 //  Copyright © 2016 Gist. All rights reserved.
 //
 
-#import "LCNotificationsTutorial.h"
+#import "LCCauseTutorial.h"
 
-@interface LCNotificationsTutorial ()
+
+@interface LCCauseTutorial ()
 {
   IBOutlet UILabel *label1;
   IBOutlet UIView *view1;
 }
 @end
 
-@implementation LCNotificationsTutorial
+@implementation LCCauseTutorial
+
 
 - (void) awakeFromNib {
   [super awakeFromNib];
@@ -25,9 +27,9 @@
 
 - (void)setLabels
 {
-  NSString *labelString = @"See RECENT updates and activity for your\nCauses, Interests, Friends and Helps\n \nSee recent changes in friend REQUEST status";
+  NSString *labelString = @"This is a CAUSE page. Use it to find\n other people who support this\nCAUSE, to learn how they HELPED\nthis Cause and to discover\nOPPORTUNITIES for you to help,\ntoo. Support CAUSES to see their\nactivity in your FEED.";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:labelString];
-  NSArray * colorWords = @[@"RECENT", @"REQUEST"];
+  NSArray * colorWords = @[@"CAUSE", @"HELPED", @"OPPORTUNITIES", @"CAUSES", @"FEED"];
   // -- Add Font -- //
   [attributtedString addAttributes:@{
                                      NSFontAttributeName : self.font,
@@ -38,9 +40,17 @@
   
   for(NSString *word in colorWords)
   {
-    [attributtedString addAttribute:NSForegroundColorAttributeName
-                              value:self.colorFontRed
-                              range:[labelString rangeOfString:word]];
+    NSRange range = NSMakeRange(0, labelString.length);
+    while(range.location != NSNotFound)
+    {
+      range = [labelString rangeOfString: word options:0 range:range];
+      if(range.location != NSNotFound)
+      {
+        [attributtedString addAttribute:NSForegroundColorAttributeName
+                                  value:self.colorFontRed
+                                  range:range];
+      }
+    }
   }
   
   NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -54,4 +64,14 @@
   view1.backgroundColor = self.colorTransparentBlack;
 }
 
+
+/*
+ // Only override drawRect: if you perform custom drawing.
+ // An empty implementation adversely affects performance during animation.
+ - (void)drawRect:(CGRect)rect {
+ // Drawing code
+ }
+ */
+
 @end
+

@@ -9,6 +9,10 @@
 #import "LCTutorialManager.h"
 #import "LCHomeFeedTutorial.h"
 #import "LCNotificationsTutorial.h"
+#import "LCProfileTutorial.h"
+#import "LCInterestListTutorial.h"
+#import "LCInterestTutorial.h"
+#import "LCCauseTutorial.h"
 
 @implementation LCTutorialManager
 
@@ -23,6 +27,38 @@
 + (void)showNotificationsTutorial
 {
   LCNotificationsTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCNotificationsTutorial class]];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.window addSubview:rootView];
+  [rootView setFrame:appdel.window.frame];
+}
+
++ (void)showProfileTutorial
+{
+  LCProfileTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCProfileTutorial class]];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.window addSubview:rootView];
+  [rootView setFrame:appdel.window.frame];
+}
+
++ (void)showInterestListTutorial
+{
+  LCInterestListTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCInterestListTutorial class]];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.window addSubview:rootView];
+  [rootView setFrame:appdel.window.frame];
+}
+
++ (void)showInterestTutorial
+{
+  LCInterestTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCInterestTutorial class]];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.window addSubview:rootView];
+  [rootView setFrame:appdel.window.frame];
+}
+
++ (void)showCauseTutorial
+{
+  LCCauseTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCCauseTutorial class]];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.window addSubview:rootView];
   [rootView setFrame:appdel.window.frame];
