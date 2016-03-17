@@ -17,9 +17,14 @@
 
 @implementation LCTutorialView
 
-- (UIColor *)colorBackground
+- (void) awakeFromNib {
+  [super awakeFromNib];
+  _tapToDismissLabel.font = [UIFont fontWithName:@"Gotham-Medium" size:13.0f];
+}
+
+- (UIColor *)colorTransparentBlack
 {
-  return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
+  return [UIColor colorWithRed:0.0f/255 green:0.0f/255 blue:0.0f/255 alpha:0.9];
 }
 
 - (UIColor *)colorFontGrey
@@ -35,6 +40,11 @@
 - (UIFont *)font
 {
   return [UIFont fontWithName:@"Gotham-Bold" size:13.0f];
+}
+
+- (float)lineSpacing
+{
+  return 10;
 }
 
 

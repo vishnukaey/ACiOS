@@ -25,7 +25,6 @@
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
 #import "LCLoginHomeViewController.h"
-#import "LCTutorialManager.h"
 
 
 static NSString *kTitle = @"MY FEED";
@@ -141,8 +140,6 @@ static NSString *kTitle = @"MY FEED";
   [self addGIButton];
   [self addMenuButton:navigationRoot];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
-  
-  [LCTutorialManager showHomeFeedTutorial];
   
 }
 
@@ -383,6 +380,7 @@ static NSString *kTitle = @"MY FEED";
     
     LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
     updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
+    updatePasswordVC.delegate = loginController;
     //      UIViewController* initialVC = [storyboard instantiateInitialViewController];
     //
     //

@@ -8,12 +8,21 @@
 
 #import "LCTutorialManager.h"
 #import "LCHomeFeedTutorial.h"
+#import "LCNotificationsTutorial.h"
 
 @implementation LCTutorialManager
 
 + (void)showHomeFeedTutorial
 {
   LCHomeFeedTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCHomeFeedTutorial class]];
+  LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
+  [appdel.window addSubview:rootView];
+  [rootView setFrame:appdel.window.frame];
+}
+
++ (void)showNotificationsTutorial
+{
+  LCNotificationsTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCNotificationsTutorial class]];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.window addSubview:rootView];
   [rootView setFrame:appdel.window.frame];

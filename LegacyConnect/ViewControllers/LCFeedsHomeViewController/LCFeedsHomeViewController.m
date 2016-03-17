@@ -187,6 +187,8 @@ static NSString *kFeedCellXibName = @"LCFeedcellXIB";
   [self initialUISetUp];
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [self startFetchingResults];
+  
+  [LCTutorialManager showHomeFeedTutorial];
 }
 
 - (void) viewWillAppear:(BOOL)animated

@@ -1,22 +1,14 @@
 //
-//  LCHomeFeedTutorial.m
+//  LCNotificationsTutorial.m
 //  LegacyConnect
 //
-//  Created by Jijo on 3/16/16.
+//  Created by Jijo on 3/17/16.
 //  Copyright © 2016 Gist. All rights reserved.
 //
 
-#import "LCHomeFeedTutorial.h"
+#import "LCNotificationsTutorial.h"
 
-@interface LCHomeFeedTutorial ()
-{
-  IBOutlet UILabel *label1;
-  IBOutlet UIView *view1;
-}
-@end
-
-@implementation LCHomeFeedTutorial
-
+@implementation LCNotificationsTutorial
 
 - (void) awakeFromNib {
   [super awakeFromNib];
@@ -47,21 +39,12 @@
   NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
   [style setLineSpacing:self.lineSpacing];
   [attributtedString addAttribute:NSParagraphStyleAttributeName
-                    value:style
-                    range:NSMakeRange(0, labelString.length)];
+                            value:style
+                            range:NSMakeRange(0, labelString.length)];
   
-  [label1 setAttributedText:attributtedString];
-  
-  view1.backgroundColor = self.colorTransparentBlack;
+//  [label1 setAttributedText:attributtedString];
+//  
+//  view1.backgroundColor = self.colorTransparentBlack;
 }
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

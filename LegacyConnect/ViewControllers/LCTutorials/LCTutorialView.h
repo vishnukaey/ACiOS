@@ -13,10 +13,11 @@
 
 @property(nonatomic, retain) IBOutlet UILabel *tapToDismissLabel;
 
-- (UIColor *)colorBackground;
+- (UIColor *)colorTransparentBlack;
 - (UIColor *)colorFontGrey;
 - (UIColor *)colorFontRed;
 - (UIFont *)font;
+- (float)lineSpacing;
 
 
 @end
