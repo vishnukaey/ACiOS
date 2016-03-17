@@ -395,6 +395,8 @@ static NSString *kTitle = @"MY FEED";
     
     LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
     updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
+    updatePasswordVC.delegate = loginController;
+
     //      UIViewController* initialVC = [storyboard instantiateInitialViewController];
     //
     //

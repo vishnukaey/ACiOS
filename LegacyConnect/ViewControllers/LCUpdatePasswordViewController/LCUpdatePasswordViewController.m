@@ -97,9 +97,12 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
   }
   else
   {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [LCOnboardingAPIManager resetPasswordWithPasswordResetCode:self.token andNewPassword:_confirmPasswordTextField.text withSuccess:^(id response) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
       [_delegate updatePasswordSuccessful];
     } andFailure:^(NSString *error) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
       LCDLog(@"error - %@",error);
     }];
   }
