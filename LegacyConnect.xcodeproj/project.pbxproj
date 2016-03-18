@@ -140,6 +140,7 @@
 		1619550C1BFEFA8C005D9944 /* LCRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1619550B1BFEFA8C005D9944 /* LCRequest.m */; };
 		16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */; };
 		16278B741C5B4B2D00F743F6 /* LCAcceptTermsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */; };
+		163506E51C9C1BED00F2AFA1 /* LCInviteEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 163506E41C9C1BED00F2AFA1 /* LCInviteEmailVC.m */; settings = {ASSET_TAGS = (); }; };
 		165DC9311C44FE3600E55484 /* LCCauseSupportersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */; };
 		1687680F1BFDDA96001213D8 /* LCRecentNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1687680E1BFDDA96001213D8 /* LCRecentNotificationsVC.m */; };
 		168768121BFDDAC3001213D8 /* LCRequestsNotificationsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 168768111BFDDAC3001213D8 /* LCRequestsNotificationsVC.m */; };
@@ -474,6 +475,8 @@
 		16278B701C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCTermsOfServiceViewController.m; path = ViewControllers/LCTermsOfServiceViewController/LCTermsOfServiceViewController.m; sourceTree = "<group>"; };
 		16278B721C5B4B2D00F743F6 /* LCAcceptTermsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAcceptTermsViewController.h; path = ViewControllers/LCAcceptTermsViewController/LCAcceptTermsViewController.h; sourceTree = "<group>"; };
 		16278B731C5B4B2D00F743F6 /* LCAcceptTermsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAcceptTermsViewController.m; path = ViewControllers/LCAcceptTermsViewController/LCAcceptTermsViewController.m; sourceTree = "<group>"; };
+		163506E31C9C1BED00F2AFA1 /* LCInviteEmailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInviteEmailVC.h; path = ViewControllers/LCInviteEmailVC/LCInviteEmailVC.h; sourceTree = "<group>"; };
+		163506E41C9C1BED00F2AFA1 /* LCInviteEmailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInviteEmailVC.m; path = ViewControllers/LCInviteEmailVC/LCInviteEmailVC.m; sourceTree = "<group>"; };
 		165DC92F1C44FE3600E55484 /* LCCauseSupportersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCauseSupportersVC.h; path = ViewControllers/LCCauseSupportersVC/LCCauseSupportersVC.h; sourceTree = "<group>"; };
 		165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCauseSupportersVC.m; path = ViewControllers/LCCauseSupportersVC/LCCauseSupportersVC.m; sourceTree = "<group>"; };
 		1687680D1BFDDA96001213D8 /* LCRecentNotificationsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCRecentNotificationsVC.h; path = ViewControllers/LCNotificationsViewController/LCRecentNotificationsVC/LCRecentNotificationsVC.h; sourceTree = "<group>"; };
@@ -1377,6 +1380,8 @@
 				0BC7556E1B562A8A009CE7F3 /* LCContactsListVC.m */,
 				CEBED6991B5F89560012FEBB /* LCFBContactsVC.h */,
 				CEBED69A1B5F89560012FEBB /* LCFBContactsVC.m */,
+				163506E31C9C1BED00F2AFA1 /* LCInviteEmailVC.h */,
+				163506E41C9C1BED00F2AFA1 /* LCInviteEmailVC.m */,
 			);
 			name = LCContactsListVC;
 			sourceTree = "<group>";
@@ -2311,6 +2316,7 @@
 				0BC7556B1B5629D9009CE7F3 /* LCConnectFriendsVC.m in Sources */,
 				0BC4C46A1BD6738B00F9AA90 /* LCSocialShareManager.m in Sources */,
 				0B05D7531BEB1D4100FD5AE1 /* LCViewActions.m in Sources */,
+				163506E51C9C1BED00F2AFA1 /* LCInviteEmailVC.m in Sources */,
 				0B56B8E21C1ADAF1001F3AE5 /* LCThemeAPIManager.m in Sources */,
 				CEF275D71B78A30800709005 /* LCCommentCell.m in Sources */,
 				0B2A2CD41BF5B46800D20827 /* LCActionsHeader.m in Sources */,

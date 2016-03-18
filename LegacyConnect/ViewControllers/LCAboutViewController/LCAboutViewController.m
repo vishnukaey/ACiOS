@@ -13,6 +13,7 @@
 {
   int currentIndex;
   UIPageControl *pageControl;
+  NSTimer *timer;
 }
 @end
 
@@ -27,12 +28,6 @@
   
   _pageTitles = @[@"aboutPage1_Text", @"aboutPage2_Text", @"aboutPage3_Text", @"aboutPage4_Text"];
   _pageImages = @[@"AboutPage1", @"AboutPage2", @"AboutPage3", @"AboutPage4"];
-  
-  [NSTimer scheduledTimerWithTimeInterval:3.0
-                                   target:self
-                                 selector:@selector(loadNextController)
-                                 userInfo:nil
-                                  repeats:YES];
 
   // Create page view controller
   self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
@@ -54,7 +49,22 @@
   
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  timer = [NSTimer scheduledTimerWithTimeInterval:3.0
+                                           target:self
+                                         selector:@selector(loadNextController)
+                                         userInfo:nil
+                                          repeats:YES];
+}
 
+-(void)viewDidDisappear:(BOOL)animated
+{
+  [super viewDidDisappear:animated];
+  [timer invalidate];
+  timer= nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
