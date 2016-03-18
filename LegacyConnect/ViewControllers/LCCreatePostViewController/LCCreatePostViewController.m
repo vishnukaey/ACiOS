@@ -50,6 +50,8 @@
   if (self.selectedCause || self.selectedInterest) {
       [self didfinishPickingInterest:self.selectedInterest andCause:self.selectedCause];
   }
+  
+  [LCTutorialManager showCreatePostTutorial];
 }
 
 - (void)didReceiveMemoryWarning {

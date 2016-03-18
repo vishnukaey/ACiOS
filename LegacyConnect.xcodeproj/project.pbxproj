@@ -147,8 +147,8 @@
 		16A015441C771F9F007DEA55 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A015431C771F9F007DEA55 /* LaunchScreen.xib */; };
 		16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; };
-		16DB9C051C96968E005AC835 /* LCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB9C041C96968E005AC835 /* LCAboutViewController.m */; settings = {ASSET_TAGS = (); }; };
-		16DB9C081C96C137005AC835 /* LCAboutPageContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB9C071C96C137005AC835 /* LCAboutPageContentVC.m */; settings = {ASSET_TAGS = (); }; };
+		16DB9C051C96968E005AC835 /* LCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB9C041C96968E005AC835 /* LCAboutViewController.m */; };
+		16DB9C081C96C137005AC835 /* LCAboutPageContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB9C071C96C137005AC835 /* LCAboutPageContentVC.m */; };
 		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -175,6 +175,8 @@
 		CE2E09E21C04679300722A22 /* LCEventMembersListBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09E11C04679300722A22 /* LCEventMembersListBC.m */; };
 		CE2E09E71C0468D900722A22 /* LCEventDetailsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09E41C0468D900722A22 /* LCEventDetailsBC.m */; };
 		CE2E09E81C0468D900722A22 /* LCUserActionsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2E09E61C0468D900722A22 /* LCUserActionsBC.m */; };
+		CE3D54B91C9C19CA00AC0FEE /* LCGIButtonTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D54B81C9C19CA00AC0FEE /* LCGIButtonTutorial.m */; };
+		CE3D54BC1C9C22A000AC0FEE /* LCCreatePostTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3D54BB1C9C22A000AC0FEE /* LCCreatePostTutorial.m */; };
 		CE44ACD91BE78CCE00D22EE8 /* LCNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44ACD81BE78CCE00D22EE8 /* LCNotificationManager.m */; };
 		CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4EB6761B5E28D900B8A725 /* LCLeftMenuController.m */; };
 		CE4F6CD21C9AA7EF00B8F267 /* LCProfileTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4F6CD11C9AA7EF00B8F267 /* LCProfileTutorial.m */; };
@@ -187,6 +189,7 @@
 		CE5BEA211C46271F00ED4E5E /* LCInterestActionsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */; };
 		CE5CBF6D1C55FC610001F82C /* LCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5CBF6C1C55FC610001F82C /* LCImagePickerController.m */; };
 		CE6515031BF1B44F00BD6B86 /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6515021BF1B44F00BD6B86 /* Actions.storyboard */; };
+		CE6554371C9C0514003DE3D3 /* LCLeftMenuTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6554361C9C0514003DE3D3 /* LCLeftMenuTutorial.m */; };
 		CE706D6E1B8F14F3001BB8DD /* LCImapactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */; };
 		CE71D1521C3D225C00AD6E07 /* LCInterestsCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */; };
 		CE72CCEB1BFB18E300A288D2 /* LCSearchTopBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE72CCEA1BFB18E300A288D2 /* LCSearchTopBC.m */; };
@@ -544,6 +547,10 @@
 		CE2E09E41C0468D900722A22 /* LCEventDetailsBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCEventDetailsBC.m; path = ViewControllers/LCBaseControllers/LCEventDetailsBC.m; sourceTree = "<group>"; };
 		CE2E09E51C0468D900722A22 /* LCUserActionsBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCUserActionsBC.h; path = ViewControllers/LCBaseControllers/LCUserActionsBC.h; sourceTree = "<group>"; };
 		CE2E09E61C0468D900722A22 /* LCUserActionsBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCUserActionsBC.m; path = ViewControllers/LCBaseControllers/LCUserActionsBC.m; sourceTree = "<group>"; };
+		CE3D54B71C9C19CA00AC0FEE /* LCGIButtonTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGIButtonTutorial.h; path = ViewControllers/LCTutorials/LCGIButtonTutorial.h; sourceTree = "<group>"; };
+		CE3D54B81C9C19CA00AC0FEE /* LCGIButtonTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGIButtonTutorial.m; path = ViewControllers/LCTutorials/LCGIButtonTutorial.m; sourceTree = "<group>"; };
+		CE3D54BA1C9C22A000AC0FEE /* LCCreatePostTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCCreatePostTutorial.h; path = ViewControllers/LCTutorials/LCCreatePostTutorial.h; sourceTree = "<group>"; };
+		CE3D54BB1C9C22A000AC0FEE /* LCCreatePostTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCreatePostTutorial.m; path = ViewControllers/LCTutorials/LCCreatePostTutorial.m; sourceTree = "<group>"; };
 		CE44ACD71BE78CCE00D22EE8 /* LCNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCNotificationManager.h; path = Utilities/LCNotificationManager/LCNotificationManager.h; sourceTree = "<group>"; };
 		CE44ACD81BE78CCE00D22EE8 /* LCNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCNotificationManager.m; path = Utilities/LCNotificationManager/LCNotificationManager.m; sourceTree = "<group>"; };
 		CE4EB6751B5E28D900B8A725 /* LCLeftMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLeftMenuController.h; path = ViewControllers/LCFeedsHomeViewController/LCLeftMenuController.h; sourceTree = "<group>"; };
@@ -567,6 +574,8 @@
 		CE5CBF6B1C55FC610001F82C /* LCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImagePickerController.h; path = ViewControllers/LCUIImagePickerController/LCImagePickerController.h; sourceTree = "<group>"; };
 		CE5CBF6C1C55FC610001F82C /* LCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImagePickerController.m; path = ViewControllers/LCUIImagePickerController/LCImagePickerController.m; sourceTree = "<group>"; };
 		CE6515021BF1B44F00BD6B86 /* Actions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Actions.storyboard; path = Storyboards/Actions.storyboard; sourceTree = "<group>"; };
+		CE6554351C9C0514003DE3D3 /* LCLeftMenuTutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCLeftMenuTutorial.h; path = ViewControllers/LCTutorials/LCLeftMenuTutorial.h; sourceTree = "<group>"; };
+		CE6554361C9C0514003DE3D3 /* LCLeftMenuTutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCLeftMenuTutorial.m; path = ViewControllers/LCTutorials/LCLeftMenuTutorial.m; sourceTree = "<group>"; };
 		CE706D6C1B8F14F3001BB8DD /* LCImapactsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImapactsViewController.h; path = ViewControllers/LCProfileVC/LCImapactsViewController.h; sourceTree = "<group>"; };
 		CE706D6D1B8F14F3001BB8DD /* LCImapactsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImapactsViewController.m; path = ViewControllers/LCProfileVC/LCImapactsViewController.m; sourceTree = "<group>"; };
 		CE71D1511C3D225C00AD6E07 /* LCInterestsCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LCInterestsCellView.xib; path = CustomViews/LCInterestsCellView/LCInterestsCellView.xib; sourceTree = "<group>"; };
@@ -1966,6 +1975,12 @@
 				CE4F6CD71C9AB28E00B8F267 /* LCInterestTutorial.m */,
 				CE4F6CD91C9AC7BC00B8F267 /* LCCauseTutorial.h */,
 				CE4F6CDA1C9AC7BC00B8F267 /* LCCauseTutorial.m */,
+				CE6554351C9C0514003DE3D3 /* LCLeftMenuTutorial.h */,
+				CE6554361C9C0514003DE3D3 /* LCLeftMenuTutorial.m */,
+				CE3D54B71C9C19CA00AC0FEE /* LCGIButtonTutorial.h */,
+				CE3D54B81C9C19CA00AC0FEE /* LCGIButtonTutorial.m */,
+				CE3D54BA1C9C22A000AC0FEE /* LCCreatePostTutorial.h */,
+				CE3D54BB1C9C22A000AC0FEE /* LCCreatePostTutorial.m */,
 			);
 			name = LCTutorials;
 			sourceTree = "<group>";
@@ -2411,6 +2426,7 @@
 				0B8575061B9D64BD00FD8766 /* LCCausesTableViewCell.m in Sources */,
 				CE2E09E81C0468D900722A22 /* LCUserActionsBC.m in Sources */,
 				0BEA5C8D1BEA1ACB00669C57 /* LCMileStonesVC.m in Sources */,
+				CE3D54B91C9C19CA00AC0FEE /* LCGIButtonTutorial.m in Sources */,
 				CE2E09CA1C04337B00722A22 /* LCMileStonesBC.m in Sources */,
 				CEBBBFAF1B6B377B001C91E1 /* LCLocationSearchField.m in Sources */,
 				CEBEDD411BFDB2FF00AE9351 /* LCSettings.m in Sources */,
@@ -2443,6 +2459,7 @@
 				CE7ED39A1C9810150095D70A /* LCTutorialView.m in Sources */,
 				0B85BD001BEC8EF600217897 /* LCSearchTopViewController.m in Sources */,
 				0B56B8EE1C1AF197001F3AE5 /* LCProfileAPIManager.m in Sources */,
+				CE3D54BC1C9C22A000AC0FEE /* LCCreatePostTutorial.m in Sources */,
 				0BBDC06F1B70BF730004C4B6 /* LCInterest.m in Sources */,
 				0B837F721C45240E0014553D /* LCAllInterestVC.m in Sources */,
 				0B56B8F11C1AF614001F3AE5 /* LCSearchAPIManager.m in Sources */,
@@ -2452,6 +2469,7 @@
 				CE5BEA211C46271F00ED4E5E /* LCInterestActionsBC.m in Sources */,
 				CE4EB6771B5E28D900B8A725 /* LCLeftMenuController.m in Sources */,
 				0B5571461B8D9F5D00445958 /* LCSearchViewController.m in Sources */,
+				CE6554371C9C0514003DE3D3 /* LCLeftMenuTutorial.m in Sources */,
 				0B58BCE11BC267D6007F60E3 /* LCLoadingCell.m in Sources */,
 				0B56B8DC1C1AB587001F3AE5 /* LCEventAPImanager.m in Sources */,
 				0B8AA05D1BC299EE00C284DF /* LCfriendButton.m in Sources */,

@@ -16,5 +16,8 @@
 + (void)showInterestListTutorial;
 + (void)showInterestTutorial;
 + (void)showCauseTutorial;
++ (void)showLeftMenuTutorial;
++ (void)showGIButtonTutorial;
++ (void)showCreatePostTutorial;
 
 @end

@@ -191,6 +191,7 @@ static NSString *kTitle = @"MY FEED";
 #pragma mark - button actions
 - (void)GIButtonClicked
 {
+  [LCTutorialManager showGIButtonTutorial];
   [mainContainer setMenuState:MFSideMenuStateClosed];
 }
 
