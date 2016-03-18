@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -23,6 +23,7 @@
             <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
@@ -174,26 +175,36 @@
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LC_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RNu-5a-VSC">
-                                        <rect key="frame" x="48" y="230" width="278" height="76"/>
+                                        <rect key="frame" x="48" y="55" width="278" height="76"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="278" id="54t-CA-WbB"/>
                                             <constraint firstAttribute="height" constant="76" id="HKc-y1-MJB"/>
                                         </constraints>
                                     </imageView>
+                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rgA-rb-eFX">
+                                        <rect key="frame" x="15" y="146" width="345" height="338"/>
+                                        <connections>
+                                            <segue destination="6av-5x-wHA" kind="embed" id="ROz-De-Kmn"/>
+                                        </connections>
+                                    </containerView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="rgA-rb-eFX" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="1vJ-PZ-4k3"/>
                                     <constraint firstAttribute="trailing" secondItem="9pK-Ug-TD8" secondAttribute="trailing" constant="15" id="30j-bB-1gE"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="3py-uM-zmt"/>
+                                    <constraint firstItem="rgA-rb-eFX" firstAttribute="top" secondItem="RNu-5a-VSC" secondAttribute="bottom" constant="15" id="9Am-eX-eXl"/>
+                                    <constraint firstItem="RNu-5a-VSC" firstAttribute="top" secondItem="1RK-dy-Ksn" secondAttribute="top" constant="55" id="A22-aF-KQH"/>
+                                    <constraint firstItem="9pK-Ug-TD8" firstAttribute="top" secondItem="rgA-rb-eFX" secondAttribute="bottom" constant="8" id="DZu-te-crd"/>
                                     <constraint firstAttribute="centerX" secondItem="RNu-5a-VSC" secondAttribute="centerX" id="EXy-w9-PPo"/>
                                     <constraint firstAttribute="bottom" secondItem="We9-Zy-2a3" secondAttribute="bottom" id="Eap-7K-qJb"/>
                                     <constraint firstAttribute="trailing" secondItem="We9-Zy-2a3" secondAttribute="trailing" id="Fsj-pp-P5j"/>
                                     <constraint firstItem="We9-Zy-2a3" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" id="I3a-c0-thP"/>
+                                    <constraint firstAttribute="trailing" secondItem="rgA-rb-eFX" secondAttribute="trailing" constant="15" id="OU6-zR-mlL"/>
                                     <constraint firstAttribute="trailing" secondItem="tZ0-jb-f3n" secondAttribute="trailing" constant="15" id="PR0-Yw-4yq"/>
                                     <constraint firstItem="We9-Zy-2a3" firstAttribute="top" secondItem="1RK-dy-Ksn" secondAttribute="top" id="UnC-id-UNq"/>
                                     <constraint firstAttribute="bottom" secondItem="tZ0-jb-f3n" secondAttribute="bottom" constant="25" id="ccM-Kf-mfC"/>
                                     <constraint firstItem="9pK-Ug-TD8" firstAttribute="leading" secondItem="1RK-dy-Ksn" secondAttribute="leading" constant="15" id="dU8-Dc-4oQ"/>
-                                    <constraint firstItem="RNu-5a-VSC" firstAttribute="centerY" secondItem="1RK-dy-Ksn" secondAttribute="centerY" constant="-43" id="pqy-q2-Pxw"/>
                                     <constraint firstItem="tZ0-jb-f3n" firstAttribute="top" secondItem="9pK-Ug-TD8" secondAttribute="bottom" constant="15" id="r1W-Eu-6eT"/>
                                 </constraints>
                             </view>
@@ -254,7 +265,76 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ygP-lN-6nT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2903.5" y="-435.5"/>
+            <point key="canvasLocation" x="-2995.5" y="-779.5"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="dzt-ow-YiM">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="32a-HQ-33J" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KaG-iD-fCe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2621" y="-1815"/>
+        </scene>
+        <!--About View Controller-->
+        <scene sceneID="X4f-u2-WfD">
+            <objects>
+                <viewController id="6av-5x-wHA" customClass="LCAboutViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SDD-Rz-Vvz"/>
+                        <viewControllerLayoutGuide type="bottom" id="g31-pq-Zn7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bir-un-5nr">
+                        <rect key="frame" x="0.0" y="0.0" width="345" height="338"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwH-yf-0kH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3022.5" y="-1831"/>
+        </scene>
+        <!--PageContentViewController-->
+        <scene sceneID="Z1Z-KV-nNt">
+            <objects>
+                <viewController storyboardIdentifier="PageContentViewController" title="PageContentViewController" id="ld8-0T-PHL" customClass="LCAboutPageContentVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yOF-Fh-7PW"/>
+                        <viewControllerLayoutGuide type="bottom" id="sIW-PU-lYo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YBc-90-SB5">
+                        <rect key="frame" x="0.0" y="0.0" width="345" height="320"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lu3-AO-wu4">
+                                <rect key="frame" x="22" y="0.0" width="301" height="285.5"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXo-pA-iPH">
+                                <rect key="frame" x="11" y="306.5" width="320" height="13"/>
+                                <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                                <color key="textColor" red="0.13725490196078433" green="0.12156862745098039" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="lu3-AO-wu4" secondAttribute="trailing" constant="22" id="46a-xw-2eO"/>
+                            <constraint firstItem="lu3-AO-wu4" firstAttribute="leading" secondItem="YBc-90-SB5" secondAttribute="leading" constant="22" id="GZy-uP-gkF"/>
+                            <constraint firstItem="JXo-pA-iPH" firstAttribute="leading" secondItem="YBc-90-SB5" secondAttribute="leading" constant="11" id="N4z-Lp-ThM"/>
+                            <constraint firstItem="lu3-AO-wu4" firstAttribute="top" secondItem="YBc-90-SB5" secondAttribute="top" id="ZXn-nv-NA9"/>
+                            <constraint firstAttribute="trailing" secondItem="JXo-pA-iPH" secondAttribute="trailing" constant="14" id="bhe-La-IW6"/>
+                            <constraint firstItem="sIW-PU-lYo" firstAttribute="top" secondItem="JXo-pA-iPH" secondAttribute="bottom" constant="0.5" id="dRG-k0-2vA"/>
+                            <constraint firstItem="sIW-PU-lYo" firstAttribute="top" secondItem="lu3-AO-wu4" secondAttribute="bottom" constant="34.5" id="jqO-80-0di"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="345" height="320"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="lu3-AO-wu4" id="f7D-DD-oac"/>
+                        <outlet property="titleLabel" destination="JXo-pA-iPH" id="ryy-ax-rBX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="otx-XL-5mw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2248.5" y="-1721"/>
         </scene>
         <!--Signup View Controller-->
         <scene sceneID="ZvZ-mw-Vr2">
@@ -1129,7 +1209,7 @@ First, add a picture.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F9M-tD-hzX" id="MhH-N4-n8D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="t8l-z9-6KE">
@@ -1322,7 +1402,7 @@ First, add a picture.</string>
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4rt-vB-gIN" id="d7E-e3-tgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-MA-qAN">
@@ -1565,7 +1645,7 @@ First, add a picture.</string>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" id="QYs-Qe-GaW" customClass="LCCausesHeaderTableViewCell">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QYs-Qe-GaW" id="Tq7-uQ-Ypx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1607,7 +1687,7 @@ First, add a picture.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="causesTableViewCell" rowHeight="180" id="OJv-vW-t1e" customClass="LCCausesCollectionTableViewCell">
-                                        <rect key="frame" x="0.0" y="94" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OJv-vW-t1e" id="vaS-aZ-L8u">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
@@ -2378,7 +2458,7 @@ First, add a picture.</string>
                                         <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VFS-jZ-hzp" id="8Nu-nO-wRu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEF-eq-oGn">

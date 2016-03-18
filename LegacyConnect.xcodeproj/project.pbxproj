@@ -147,6 +147,8 @@
 		16A015441C771F9F007DEA55 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16A015431C771F9F007DEA55 /* LaunchScreen.xib */; };
 		16BBD85E1C24830D0096F622 /* LCCauseCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */; };
 		16D6AF4B1BF3481F00DBC025 /* LCGAManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */; };
+		16DB9C051C96968E005AC835 /* LCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB9C041C96968E005AC835 /* LCAboutViewController.m */; settings = {ASSET_TAGS = (); }; };
+		16DB9C081C96C137005AC835 /* LCAboutPageContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 16DB9C071C96C137005AC835 /* LCAboutPageContentVC.m */; settings = {ASSET_TAGS = (); }; };
 		16F3C2111BE21151003F9DDB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */; };
 		9662871E1B56448E00C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		966287221B565F2900C91196 /* (null) in Sources */ = {isa = PBXBuildFile; };
@@ -492,6 +494,10 @@
 		16BBD85D1C24830D0096F622 /* LCCauseCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCCauseCollectionReusableView.m; path = CustomViews/LCCauseCollectionReusableView/LCCauseCollectionReusableView.m; sourceTree = "<group>"; };
 		16D6AF491BF3481F00DBC025 /* LCGAManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCGAManager.h; path = Utilities/LCGAManager/LCGAManager.h; sourceTree = "<group>"; };
 		16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCGAManager.m; path = Utilities/LCGAManager/LCGAManager.m; sourceTree = "<group>"; };
+		16DB9C031C96968E005AC835 /* LCAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAboutViewController.h; path = ViewControllers/LCAboutViewController/LCAboutViewController.h; sourceTree = "<group>"; };
+		16DB9C041C96968E005AC835 /* LCAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAboutViewController.m; path = ViewControllers/LCAboutViewController/LCAboutViewController.m; sourceTree = "<group>"; };
+		16DB9C061C96C137005AC835 /* LCAboutPageContentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCAboutPageContentVC.h; path = ViewControllers/LCAboutPageContentVC/LCAboutPageContentVC.h; sourceTree = "<group>"; };
+		16DB9C071C96C137005AC835 /* LCAboutPageContentVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCAboutPageContentVC.m; path = ViewControllers/LCAboutPageContentVC/LCAboutPageContentVC.m; sourceTree = "<group>"; };
 		16F3C2101BE21151003F9DDB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SupportingFiles/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		4995F9CFCBFED57A2EAB62BF /* libPods-LegacyConnect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LegacyConnect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		61111286AB4CDBB5E60F8963 /* Pods-LegacyConnect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LegacyConnect.release.xcconfig"; path = "Pods/Target Support Files/Pods-LegacyConnect/Pods-LegacyConnect.release.xcconfig"; sourceTree = "<group>"; };
@@ -1401,6 +1407,7 @@
 		0BC755711B562AAD009CE7F3 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				16DB9C021C969652005AC835 /* LCAboutViewController */,
 				16278B751C5B4B3700F743F6 /* LCAcceptTermsViewController */,
 				16278B6E1C5B4A7800F743F6 /* LCTermsOfServiceViewController */,
 				9662871F1B565EFB00C91196 /* LCUpdatePasswordViewController */,
@@ -1761,6 +1768,25 @@
 				16D6AF4A1BF3481F00DBC025 /* LCGAManager.m */,
 			);
 			name = LCGAManager;
+			sourceTree = "<group>";
+		};
+		16DB9C021C969652005AC835 /* LCAboutViewController */ = {
+			isa = PBXGroup;
+			children = (
+				16DB9C031C96968E005AC835 /* LCAboutViewController.h */,
+				16DB9C041C96968E005AC835 /* LCAboutViewController.m */,
+				16DB9C091C96C13E005AC835 /* LCAboutPageContentVC */,
+			);
+			name = LCAboutViewController;
+			sourceTree = "<group>";
+		};
+		16DB9C091C96C13E005AC835 /* LCAboutPageContentVC */ = {
+			isa = PBXGroup;
+			children = (
+				16DB9C061C96C137005AC835 /* LCAboutPageContentVC.h */,
+				16DB9C071C96C137005AC835 /* LCAboutPageContentVC.m */,
+			);
+			name = LCAboutPageContentVC;
 			sourceTree = "<group>";
 		};
 		8F70C2AF88FA9740E76A5CA2 /* Frameworks */ = {
@@ -2358,6 +2384,7 @@
 				0B86A4EE1B86EE73005D4BD7 /* LCEvent.m in Sources */,
 				966287281B567C2600C91196 /* LCForgotPasswordViewController.m in Sources */,
 				CE5BEA1E1C46270200ED4E5E /* LCInterestPostsBC.m in Sources */,
+				16DB9C081C96C137005AC835 /* LCAboutPageContentVC.m in Sources */,
 				0B35942A1B4E6DBE0098C484 /* LCLoginViewController.m in Sources */,
 				0B212EE71BBACA5F00B4237E /* LCMenuItemCell.m in Sources */,
 				0B1859431BF34855006A4905 /* UIImage+LCImageFix.m in Sources */,
@@ -2476,6 +2503,7 @@
 				0BC755791B5631AF009CE7F3 /* LCDataManager.m in Sources */,
 				0B85BD091BEC8F5C00217897 /* LCSearchCausesViewController.m in Sources */,
 				0B9C30FB1C6093A9006B9582 /* LCPhoneContactsHelper.m in Sources */,
+				16DB9C051C96968E005AC835 /* LCAboutViewController.m in Sources */,
 				0B837F6F1C4523F90014553D /* LCMyAndAllInterestVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

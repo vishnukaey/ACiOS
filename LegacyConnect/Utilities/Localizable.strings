@@ -140,3 +140,8 @@
 "signOut" = "Sign Out";
 
 "no_blocked_users" = "No Blocked Users";
+
+"aboutPage1_Text" = "Discover the interest and \ncauses you care about.";
+"aboutPage2_Text" = "Connect with others who share your \npassion for helping.";
+"aboutPage3_Text" = "Create helping opportunities \nand invite others to participate.";
+"aboutPage4_Text" = "Share how you’ve helped. Inspire others. \nExperience what it feels like to make a difference.";
