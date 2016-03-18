@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Gotham-Bold.otf">
@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="484" height="385"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Eee-dM-J0u" id="sgZ-Vr-4nk">
-                <rect key="frame" x="0.0" y="0.0" width="484" height="384.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="484" height="384"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wYr-kF-FUk">
@@ -144,7 +144,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaI-a7-PHn">
-                                <rect key="frame" x="62" y="0.0" width="40" height="44"/>
+                                <rect key="frame" x="121" y="0.0" width="40" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="M8z-5u-hNZ"/>
                                 </constraints>
@@ -162,28 +162,28 @@
                                     <constraint firstAttribute="height" constant="18" id="vLJ-2p-ChN"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQi-BN-dl2">
-                                <rect key="frame" x="41" y="12" width="21" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Thanks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BQi-BN-dl2">
+                                <rect key="frame" x="41" y="12" width="80" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="TR5-Kt-aSL"/>
-                                    <constraint firstAttribute="width" constant="21" id="oiI-U0-Nu6"/>
+                                    <constraint firstAttribute="width" constant="80" id="oiI-U0-Nu6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CommentIcon" translatesAutoresizingMaskIntoConstraints="NO" id="cTw-CL-UeO">
-                                <rect key="frame" x="73" y="13" width="19" height="18"/>
+                                <rect key="frame" x="132" y="13" width="19" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="19" id="3sg-IO-141"/>
                                     <constraint firstAttribute="height" constant="18" id="Z5m-an-5Lf"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALI-21-bQD">
-                                <rect key="frame" x="102" y="11" width="21" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALI-21-bQD">
+                                <rect key="frame" x="161" y="11" width="80" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="IYh-2x-4u2"/>
-                                    <constraint firstAttribute="width" constant="21" id="eLr-Qk-rFX"/>
+                                    <constraint firstAttribute="width" constant="80" id="eLr-Qk-rFX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>

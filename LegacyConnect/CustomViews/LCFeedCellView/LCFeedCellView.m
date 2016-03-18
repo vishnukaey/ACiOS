@@ -209,13 +209,41 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   [self setFeedTimeLabel];
   
   // -- Thanks & Comments count label -- //
-  NSString *thanks_ = [LCUtilityManager performNullCheckAndSetValue:feed.likeCount];
-  NSString *comments_ = [LCUtilityManager performNullCheckAndSetValue:feed.commentCount];
+  NSString *thanks_ = @"Thank";
+  if ([feed.likeCount integerValue] >0) {
+    thanks_ = [[LCUtilityManager performNullCheckAndSetValue:feed.likeCount] stringByAppendingString:@" Thanks"];
+  }
+  NSMutableAttributedString * thanksAtrributted_string = [[NSMutableAttributedString alloc] initWithString:thanks_];
+  [thanksAtrributted_string addAttribute:NSForegroundColorAttributeName
+                            value:[UIColor lightGrayColor]
+                            range:[thanks_ rangeOfString:@"Thank"]];
+  [thanksAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor lightGrayColor]
+                                   range:[thanks_ rangeOfString:@"Thanks"]];
+  [thanksAtrributted_string addAttributes:@{
+                                     NSFontAttributeName : [UIFont fontWithName:@"Gotham-Bold" size:12.0f],
+                                     } range:NSMakeRange(0, thanks_.length)];
+  
+  NSString *comments_ = @"Comment";
+  if ([feed.commentCount integerValue] >0) {
+    comments_ = [[LCUtilityManager performNullCheckAndSetValue:feed.commentCount] stringByAppendingString:@" Comments"];
+  }
+  NSMutableAttributedString * commentsAtrributted_string = [[NSMutableAttributedString alloc] initWithString:comments_];
+  [commentsAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor lightGrayColor]
+                                   range:[comments_ rangeOfString:@"Comment"]];
+  [commentsAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor lightGrayColor]
+                                   range:[comments_ rangeOfString:@"Comments"]];
+  [commentsAtrributted_string addAttributes:@{
+                                            NSFontAttributeName : [UIFont fontWithName:@"Gotham-Bold" size:12.0f],
+                                            } range:NSMakeRange(0, comments_.length)];
+  
   UIImage * iconImage = [[UIImage imageNamed:@"ThanksIcon_enabled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [thanksBtnImage setImage:iconImage];
   [thanksBtnImage setLikeUnlikeStatusImage:self.feedObject.didLike];
-  [thanksLabel setText:thanks_];
-  [commentsLabel setText:comments_];
+  [thanksLabel setAttributedText:thanksAtrributted_string];
+  [commentsLabel setAttributedText:commentsAtrributted_string];
   [self setPostDescription];
   
   //hide report button for my posts

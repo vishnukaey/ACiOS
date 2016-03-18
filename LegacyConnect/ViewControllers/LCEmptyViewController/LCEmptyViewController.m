@@ -24,7 +24,6 @@
 #import "LCSocialShareManager.h"
 #import "LCSettingsViewController.h"
 #import "UIImage+LCImageFix.h"
-#import "LCFinalTutorialVC.h"
 #import "LCLoginHomeViewController.h"
 
 
@@ -37,7 +36,6 @@ static NSString *kTitle = @"MY FEED";
   LCMenuButton *menuButton;
   MFSideMenuContainerViewController *mainContainer;
   UINavigationController *navigationRoot;
-  LCFinalTutorialVC *tutorialVC;
   id postEntityCopy;//to persist the value because it gets removed in the viewdiddissapear method of the interest/cause detail page when image picker is presented
 }
 @end
@@ -142,20 +140,7 @@ static NSString *kTitle = @"MY FEED";
   [self addGIButton];
   [self addMenuButton:navigationRoot];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuEventNotification) name:MFSideMenuStateNotificationEvent object:nil];
-  [self presentTutorial];
-}
-
-- (void)presentTutorial
-{
-  NSUserDefaults *userdefaults = [NSUserDefaults standardUserDefaults];
-  if (![userdefaults boolForKey:kTutorialPresentKey]) {
-    [userdefaults setBool:YES forKey:kTutorialPresentKey];
-    LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-    UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
-    tutorialVC = [signupSB instantiateViewControllerWithIdentifier:@"Tutorial"];
-    tutorialVC.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    [appdel.window addSubview:tutorialVC.view];
-  }
+  
 }
 
 - (void)menuEventNotification
@@ -206,6 +191,7 @@ static NSString *kTitle = @"MY FEED";
 #pragma mark - button actions
 - (void)GIButtonClicked
 {
+  [LCTutorialManager showGIButtonTutorial];
   [mainContainer setMenuState:MFSideMenuStateClosed];
 }
 
@@ -395,6 +381,7 @@ static NSString *kTitle = @"MY FEED";
     
     LCUpdatePasswordViewController *updatePasswordVC = [storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
     updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
+    updatePasswordVC.delegate = loginController;
     //      UIViewController* initialVC = [storyboard instantiateInitialViewController];
     //
     //

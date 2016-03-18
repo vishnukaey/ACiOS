@@ -34,6 +34,8 @@
   [super viewDidLoad];
   [self addTabMenu];
   [myInterestVC loadMyInterests];
+  
+  [LCTutorialManager showInterestListTutorial];
 }
 
 - (void)viewWillAppear:(BOOL)animated

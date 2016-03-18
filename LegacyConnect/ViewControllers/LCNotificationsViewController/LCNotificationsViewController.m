@@ -36,6 +36,8 @@ static NSString * const kReqstNotifications = @"requestNotifications";
     [[LCDataManager sharedDataManager] setNotificationCount:@"0"];
     [LCNotificationManager postNotificationCountUpdatedNotification];
   }
+  
+  [LCTutorialManager showNotificationsTutorial];
 }
 
 - (void)didReceiveMemoryWarning {

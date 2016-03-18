@@ -49,7 +49,8 @@
     float width , height;
     height = 44;
     width = 44;
-    if ([self.leftButton imageForState:UIControlStateNormal]) {
+    if ([self.leftButton imageForState:UIControlStateNormal])//different height for image and title buttons
+    {
       width = height = 44;
     }
     else
