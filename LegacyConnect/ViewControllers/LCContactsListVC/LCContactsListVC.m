@@ -40,6 +40,7 @@
   
   contactsTable.checkedImage = [UIImage imageNamed:@"inviteBGSelected"];
   contactsTable.uncheckedImage = [UIImage imageNamed:@"inviteBG"];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
 }
 
 
@@ -129,6 +130,7 @@
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [LCProfileAPIManager sendFriendRequestFromContacts:selectedContactsArray withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Invitations Sent"];
     [self addSelectedMembersToInvitedList];
     [selectedContactsArray removeAllObjects];
     [selectedEmailsArray removeAllObjects];

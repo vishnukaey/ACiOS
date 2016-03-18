@@ -256,6 +256,8 @@ NSString *const kAccountTitle = @"ACCOUNT";
 NSString *const kEmailAddress = @"Email Address";
 NSString *const kChangePassword = @"Change Password";
 NSString *const kMyLegacyURL = @"My ThatHelps URL";
+NSString *const kSettingsInvite = @"Invite friends from contacts";
+
 NSString *const kPrivacy = @"Privacy";
 NSString *const kManageBlkdUsers = @"Manage Blocked Users";
 NSString *const kSignOut = @"Sign Out";
