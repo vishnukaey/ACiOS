@@ -44,7 +44,6 @@ NSString *const kPlaceholderText = @"Type email addresses here separated by comm
 
 -(void) textViewDidChange:(UITextView *)textView
 {
-  
   if(_emailTextView.text.length == 0)
   {
     _emailTextView.textColor = [UIColor lightGrayColor];
@@ -61,10 +60,38 @@ NSString *const kPlaceholderText = @"Type email addresses here separated by comm
 -(IBAction)doneButtonTapped:(id)sender
 {
   NSArray *emails = [_emailTextView.text componentsSeparatedByString:@","];
-  [_emailsArray removeAllObjects];
-  [_emailsArray addObjectsFromArray:emails];
-  NSLog(@"count %ld",_emailsArray.count);
-  [self.navigationController popViewControllerAnimated:YES];
+  if([self validateEmails:emails])
+  {
+    [_emailsArray removeAllObjects];
+    [_emailsArray addObjectsFromArray:emails];
+    NSLog(@"count %ld",_emailsArray.count);
+    [self.navigationController popViewControllerAnimated:YES];
+  }
+}
+
+
+-(BOOL)validateEmails:(NSArray*)emailsArray
+{
+  for (NSString *mailID in emailsArray)
+  {
+    if (![self isValidEmail:mailID])
+    {
+      [LCUtilityManager showAlertViewWithTitle:@"Invalid Email ID" andMessage:[NSString stringWithFormat:@"%@ is invalid",mailID]];
+      return NO;
+    }
+  }
+  return YES;
+}
+
+
+-(BOOL)isValidEmail:(NSString *)checkString
+{
+  BOOL stricterFilter = NO;
+  NSString *stricterFilterString = @"^[A-Z0-9a-z\\._%+-]+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2,4}$";
+  NSString *laxString = @"^.+@([A-Za-z0-9-]+\\.)+[A-Za-z]{2}[A-Za-z]*$";
+  NSString *emailRegex = stricterFilter ? stricterFilterString : laxString;
+  NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+  return [emailTest evaluateWithObject:checkString];
 }
 
 

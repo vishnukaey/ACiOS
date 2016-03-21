@@ -21,6 +21,9 @@
 @end
 
 @implementation LCInviteFromContactsCell
+{
+  NSArray *animalSectionTitles;
+}
 @end
 
 
@@ -41,6 +44,7 @@
   contactsTable.checkedImage = [UIImage imageNamed:@"inviteBGSelected"];
   contactsTable.uncheckedImage = [UIImage imageNamed:@"inviteBG"];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
+
 }
 
 
@@ -235,6 +239,8 @@
   LCInviteFromContactsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   [self checkbuttonAction:cell.checkButton];
 }
+
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

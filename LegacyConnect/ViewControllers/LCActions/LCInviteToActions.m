@@ -258,7 +258,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     [cell.checkButton setSelected:NO];
   }
-  
   return cell;
 }
 
@@ -281,6 +280,7 @@
   [self validate];
 }
 
+
 -(IBAction)inviteFriendsFromContacts:(id)sender
 {
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
@@ -288,8 +288,6 @@
   contacts.invitingToActions = YES;
   contacts.eventID = eventToInvite.eventID;
   [self.navigationController pushViewController:contacts animated:YES];
-  
 }
-
 
 @end
