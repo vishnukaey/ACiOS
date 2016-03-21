@@ -128,19 +128,43 @@
   selectedContactsArray = contactsTable.selectedIDs;
   [selectedContactsArray addObjectsFromArray:selectedEmailsArray];
   [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-  [LCProfileAPIManager sendFriendRequestFromContacts:selectedContactsArray withSuccess:^(id response) {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-    [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Invitations Sent"];
-    [self addSelectedMembersToInvitedList];
-    [selectedContactsArray removeAllObjects];
-    [selectedEmailsArray removeAllObjects];
-    [contactsTable.selectedIDs removeAllObjects];
-    [contactsTable reloadData];
-    [self updateCustomAddedEmailsCount];
+  [self sendInvitations];
+}
+
+
+-(void)sendInvitations
+{
+  if(_invitingToActions)
+  {
+    [LCEventAPImanager addUsersWithUserIDs:nil forEventWithEventID:_eventID andEmailIDs:selectedContactsArray withSuccess:^(id response) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+      [self updateDataSource];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
     
-  } andFailure:^(NSString *error) {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
-  }];
+  }
+  else
+  {
+    [LCProfileAPIManager sendFriendRequestFromContacts:selectedContactsArray withSuccess:^(id response) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Invitations Sent"];
+      [self updateDataSource];
+    } andFailure:^(NSString *error) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
+    }];
+  }
+}
+
+-(void) updateDataSource
+{
+  [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Invitations Sent"];
+  [self addSelectedMembersToInvitedList];
+  [selectedContactsArray removeAllObjects];
+  [selectedEmailsArray removeAllObjects];
+  [contactsTable.selectedIDs removeAllObjects];
+  [contactsTable reloadData];
+  [self updateCustomAddedEmailsCount];
 }
 
 //#pragma mark - UIActionSheet delegate

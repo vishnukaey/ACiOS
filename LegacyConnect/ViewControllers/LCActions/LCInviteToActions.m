@@ -158,13 +158,14 @@
 }
 
 
+
 #pragma mark - button actions
 -(IBAction)doneButtonAction
 {
   LCDLog(@"friendsTableView.selectedIDs-->>>%@", selectedIDs);
   if (selectedIDs.count > 0) {
     [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCEventAPImanager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID withSuccess:^(id response){
+    [LCEventAPImanager addUsersWithUserIDs:selectedIDs forEventWithEventID:self.eventToInvite.eventID andEmailIDs:nil withSuccess:^(id response){
       LCDLog(@"%@",response);
       [MBProgressHUD hideHUDForView:self.tableView animated:YES];
       [self dismissInviteActionView];
@@ -284,6 +285,8 @@
 {
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
   LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+  contacts.invitingToActions = YES;
+  contacts.eventID = eventToInvite.eventID;
   [self.navigationController pushViewController:contacts animated:YES];
   
 }

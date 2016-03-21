@@ -15,7 +15,7 @@
 + (void)getEventDetailsForEventWithID:(NSString*)eventID withSuccess:(void (^)(LCEvent* responses))success andFailure:(void (^)(NSString *error))failure;
 + (void)deleteEvent:(LCEvent *)event withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 
-+ (void)addUsersWithUserIDs:(NSArray*)userIDs forEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
++ (void)addUsersWithUserIDs:(NSArray*)userIDs forEventWithEventID:(NSString*)eventID andEmailIDs:(NSArray*)emailIDs withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure;
 + (void)getMembersForEventID:(NSString*)eventID pageNumber:(NSString*)page andLastEventID:(NSString*)lastEventID withSuccess:(void (^)(NSArray* responses))success andFailure:(void (^)(NSString *error))failure;
 + (void)getMemberFriendsForEventID:(NSString*)eventID searchKey:(NSString*)searchKey pageNumber:(NSString*)page lastUserId:(NSString*)lastUserId withSuccess:(void (^)(id response))success andfailure:(void (^)(NSString *error))failure;
 + (void)getListOfEventsForInterestID:(NSString*)InterestID lastID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure;

@@ -20,5 +20,6 @@
   NSMutableArray *invitedEmails;
   IBOutlet UILabel *additionalEmailsLabel;
 }
-
+@property(assign) BOOL invitingToActions;
+@property(strong, nonatomic) NSString *eventID;
 @end
