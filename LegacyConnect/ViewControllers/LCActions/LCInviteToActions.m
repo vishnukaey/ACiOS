@@ -10,7 +10,7 @@
 #import "LCViewActions.h"
 #import "LCActionsForm.h"
 #import "LCEventAPImanager.h"
-
+#import "LCContactsListVC.h"
 
 #pragma mark - LCInviteCommunityFriendCell class
 @interface LCInviteCommunityFriendCell : UITableViewCell
@@ -279,4 +279,14 @@
   [cell.checkButton setSelected:NO];
   [self validate];
 }
+
+-(IBAction)inviteFriendsFromContacts:(id)sender
+{
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+  [self.navigationController pushViewController:contacts animated:YES];
+  
+}
+
+
 @end

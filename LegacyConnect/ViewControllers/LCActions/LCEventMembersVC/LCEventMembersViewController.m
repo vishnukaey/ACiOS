@@ -168,7 +168,8 @@
   UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
   LCInviteToActions *actionsVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
   actionsVC.eventToInvite = self.event;
-  [self presentViewController:actionsVC animated:YES completion:nil];
+  UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:actionsVC];
+  [self presentViewController:nav animated:YES completion:nil];
 }
 
 

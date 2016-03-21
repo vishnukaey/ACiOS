@@ -7,6 +7,7 @@
 //
 
 #import "LCListFriendsToTagViewController.h"
+#import "LCContactsListVC.h"
 
 
 
@@ -212,6 +213,14 @@
     [self.selectedFriends addObject:friend];
     [cell.checkButton setSelected:YES];
   }
+}
+
+-(IBAction)inviteFriendsFromContacts:(id)sender
+{
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+  [self.navigationController pushViewController:contacts animated:YES];
+
 }
 
 @end
