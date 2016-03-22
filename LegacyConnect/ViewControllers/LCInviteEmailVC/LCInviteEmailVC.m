@@ -52,13 +52,17 @@ NSString *const kPlaceholderText = @"Type email addresses here separated by comm
   }
 }
 
+
+
 -(IBAction)backButtonTapped:(id)sender
 {
   [self.navigationController popViewControllerAnimated:YES];
 }
 
+
 -(IBAction)doneButtonTapped:(id)sender
 {
+  [_emailTextView resignFirstResponder];
   NSArray *emails = [_emailTextView.text componentsSeparatedByString:@","];
   if([self validateEmails:emails])
   {

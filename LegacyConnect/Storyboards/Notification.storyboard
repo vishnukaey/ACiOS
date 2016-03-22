@@ -255,7 +255,7 @@
                                                         <constraint firstAttribute="height" constant="38" id="srZ-in-rs5"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                    <state key="normal" backgroundImage="acceptButtonBG">
+                                                    <state key="normal" backgroundImage="contact_plus">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -381,7 +381,7 @@
                                                         <constraint firstAttribute="height" constant="38" id="oOD-Fe-nDg"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                                    <state key="normal" backgroundImage="acceptButtonBG">
+                                                    <state key="normal" backgroundImage="contact_plus">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
@@ -592,7 +592,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="acceptButtonBG" width="37" height="37"/>
+        <image name="contact_plus" width="37" height="37"/>
         <image name="rejectButtonBG" width="37" height="37"/>
     </resources>
 </document>

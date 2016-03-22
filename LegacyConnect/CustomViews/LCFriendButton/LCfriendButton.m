@@ -8,8 +8,8 @@
 
 #import "LCfriendButton.h"
 
-static NSString * kAddFriend = @"AddFriendButton";
-static NSString * kAlreadyFriend = @"profileFriend";
+static NSString * kAddFriend = @"addFriends";
+static NSString * kAlreadyFriend = @"friends";
 static NSString * kWaitingFriend = @"profileWaiting";
 
 @implementation LCfriendButton
