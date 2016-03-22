@@ -2670,7 +2670,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db5fd0-8148-47c6-9e1e-83131326ae4e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2694,7 +2694,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db5fd0-8148-47c6-9e1e-83131326ae4e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -2813,7 +2813,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db5fd0-8148-47c6-9e1e-83131326ae4e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Development;
 		};
@@ -2913,7 +2913,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db5fd0-8148-47c6-9e1e-83131326ae4e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Staging;
 		};
@@ -3013,7 +3013,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db5fd0-8148-47c6-9e1e-83131326ae4e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Demo;
 		};
@@ -3113,7 +3113,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "26db5fd0-8148-47c6-9e1e-83131326ae4e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Production;
 		};
