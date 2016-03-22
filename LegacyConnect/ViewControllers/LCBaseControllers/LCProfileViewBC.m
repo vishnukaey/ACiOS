@@ -19,8 +19,8 @@
 
 
 static NSString * const kImgProfileSettings = @"profileSettings";
-static NSString * const kImgProfileAdd = @"profileAdd";
-static NSString * const kImgProfileFriend = @"profileFriend";
+static NSString * const kImgProfileAdd = @"contact_plus";
+static NSString * const kImgProfileFriend = @"contact_tick";
 static NSString * const kImgProfileWaiting = @"profileWaiting";
 
 @implementation LCProfileViewBC
@@ -127,7 +127,7 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
                          [LCUtilityManager performNullCheckAndSetValue:self.userDetail.lastName]] uppercaseString];
   memeberSincelabel.text = [NSString stringWithFormat:@"%@ %@",
                             NSLocalizedString(@"member_since", nil),
-                            [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"YYYY MMM"]];
+                            [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"dd-MM-YYYY"]];
   
   locationLabel.text = [[NSString stringWithFormat:@"%@ %@ %@ %@ %@",
                          [LCUtilityManager performNullCheckAndSetValue:self.userDetail.gender],

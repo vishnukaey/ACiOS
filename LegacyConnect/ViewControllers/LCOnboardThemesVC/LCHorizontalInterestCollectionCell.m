@@ -10,8 +10,9 @@
 
 @implementation LCHorizontalInterestCollectionCell
 
-static NSString *kUnCheckedImageName = @"acceptButtonBG";
+static NSString *kUnCheckedImageName = @"contact_plus";
 static NSString *kCheckedImageName = @"contact_tick";
+
 - (void)setInterestSelected :(BOOL)isSelected
 {
   if (isSelected) {

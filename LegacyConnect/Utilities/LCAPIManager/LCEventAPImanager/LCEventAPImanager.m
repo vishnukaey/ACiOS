@@ -119,10 +119,18 @@
    }];
 }
 
-+ (void)addUsersWithUserIDs:(NSArray*)userIDs forEventWithEventID:(NSString*)eventID withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
++ (void)addUsersWithUserIDs:(NSArray*)userIDs forEventWithEventID:(NSString*)eventID andEmailIDs:(NSArray*)emailIDs withSuccess:(void (^)(id response))success andFailure:(void (^)(NSString *error))failure
 {
+  if(!emailIDs)
+  {
+    emailIDs = [[NSArray alloc] init];    
+  }
+  if(!userIDs)
+  {
+    userIDs = [[NSArray alloc] init];
+  }
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kAddUsersToEventURL];
-  NSDictionary *dict = @{@"users":userIDs, kEventIDKey: eventID};
+  NSDictionary *dict = @{@"users":userIDs, kEventIDKey: eventID,@"emailIds": emailIDs};
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
