@@ -50,6 +50,8 @@
   if (self.selectedCause || self.selectedInterest) {
       [self didfinishPickingInterest:self.selectedInterest andCause:self.selectedCause];
   }
+  
+  [LCTutorialManager showCreatePostTutorial];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,7 +109,8 @@
   LCListFriendsToTagViewController *contactListVC = [createPostSB instantiateViewControllerWithIdentifier:kListFriendSBID];
   contactListVC.alreadySelectedFriends = self.taggedFriendsArray;
   contactListVC.delegate = self;
-  [self presentViewController:contactListVC animated:YES completion:nil];
+  UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:contactListVC];
+  [self presentViewController:nav animated:YES completion:nil];
   
 }
 

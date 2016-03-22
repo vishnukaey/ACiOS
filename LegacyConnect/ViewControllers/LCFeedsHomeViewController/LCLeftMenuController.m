@@ -76,6 +76,14 @@ static NSString * kMenuCellIdentifier = @"LCMenuItemCell";
 {
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshUserImages) name:kUserDataUpdatedNotification object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationCountUpdated) name:kNotificationCountUpdated object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuOpened:) name:MFSideMenuStateNotificationEvent object:nil];
+}
+
+- (void)menuOpened:(NSNotification *)notification
+{
+  if ([notification.userInfo[@"eventType"] integerValue]== 1) {
+    [LCTutorialManager showLeftMenuTutorial];
+  }
 }
 
 - (void)refreshUserImages

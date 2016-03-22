@@ -58,7 +58,7 @@
 "delete_post_message" = "Are you sure you want to permanently remove this post from ThatHelps?";
 "close_post" = "Discard Post";
 "close_post_message" = "Are you sure you want to discard the post?";
-"report_post" = "Report Post";
+"report_post" = "Report Content";
 "block_user" = "Block User";
 "delete_comment" = "Delete Comment";
 "delete_comment_message" = "Are you sure you want to delete this comment?";
@@ -110,7 +110,7 @@
 "action_form_optional" = " (Optional)";
 "action_form_website" = "WEBSITE";
 "action_form_header_photo" = "HEADER PHOTO";
-"action_form_about" = "ABOUT";
+"action_form_about" = "DESCRIPTION";
 "website_validation_error_message" = "Please enter a valid website URL";
 "action_type_event" = "Event";
 "action_type_challenge" = "Challenge";
@@ -140,3 +140,8 @@
 "signOut" = "Sign Out";
 
 "no_blocked_users" = "No Blocked Users";
+
+"aboutPage1_Text" = "Discover the interest and \ncauses you care about.";
+"aboutPage2_Text" = "Connect with others who share your \npassion for helping.";
+"aboutPage3_Text" = "Create helping opportunities \nand invite others to participate.";
+"aboutPage4_Text" = "Share how you’ve helped. Inspire others. \nExperience what it feels like to make a difference.";

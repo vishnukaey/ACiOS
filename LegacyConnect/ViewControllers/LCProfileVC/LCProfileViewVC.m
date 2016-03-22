@@ -25,6 +25,8 @@
   [super viewDidLoad];
   [self initialSetUp];
   [self addTabMenu];
+  
+  [LCTutorialManager showProfileTutorial];
 }
 
 - (void)didReceiveMemoryWarning {

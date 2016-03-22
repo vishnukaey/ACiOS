@@ -28,6 +28,8 @@ static NSString* const kGradientDefaultClr = @"282828";
   [self refreshViewWithCauseDetails];
   [self fetchCauseDetails];
   [self startFetchingResults];
+  
+  [LCTutorialManager showCauseTutorial];
 }
 
 

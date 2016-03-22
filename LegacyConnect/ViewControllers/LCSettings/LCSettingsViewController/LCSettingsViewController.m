@@ -10,7 +10,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import "LCBlockedUsersListController.h"
-
+#import "LCContactsListVC.h"
 
 #define kIndexSectionAccount 0
 #define kIndexSectionBlock 1
@@ -81,7 +81,9 @@ static CGFloat kNumberOfSection = 3;
                               @{kTextLeft : kMyLegacyURL,
                                 kTextRight : [LCUtilityManager performNullCheckAndSetValue:_settingsData.legacyUrl]},
                               @{kTextLeft : kPrivacy,
-                                kTextRight : [LCUtilityManager performNullCheckAndSetValue:_settingsData.privacy]}
+                                kTextRight : [LCUtilityManager performNullCheckAndSetValue:_settingsData.privacy]},
+                              @{kTextLeft : kSettingsInvite,
+                                kTextRight : kEmptyStringValue}
                               ];
   
   self.signOutDataSource = @[ @{kTextLeft : kSignOut, kTextRight : kEmptyStringValue} ];
@@ -204,6 +206,9 @@ static CGFloat kNumberOfSection = 3;
       case 3:
         [self showPrivacyScreen];
         break;
+      case 4:
+        [self inviteContacts];
+        break;
         
       default:
         break;
@@ -276,9 +281,7 @@ static CGFloat kNumberOfSection = 3;
     
     //[LCUtilityManager clearUserDefaultsForCurrentUser];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    BOOL tutorialPresent = [[NSUserDefaults standardUserDefaults] boolForKey:kTutorialPresentKey];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    [[NSUserDefaults standardUserDefaults] setBool:tutorialPresent forKey:kTutorialPresentKey];//tutorial should persist
     [LCDataManager resetSharedManager];
     if ([FBSDKAccessToken currentAccessToken])
     {
@@ -297,5 +300,13 @@ static CGFloat kNumberOfSection = 3;
   }];
 }
 
+
+-(void)inviteContacts
+{
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+  [self.navigationController pushViewController:contacts animated:YES];
+  
+}
 
 @end

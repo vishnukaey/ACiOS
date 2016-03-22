@@ -39,11 +39,15 @@
   if ([selectedIDs containsObject:ID_])
   {
     [selectedIDs removeObject:ID_];
-    [selectedButton setImage:uncheckedImage forState:UIControlStateNormal];
+    [selectedButton setBackgroundImage:uncheckedImage forState:UIControlStateNormal];
+    [selectedButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
   }else
   {
     [selectedIDs addObject:ID_];
-    [selectedButton setImage:checkedImage forState:UIControlStateNormal];
+    [selectedButton setBackgroundImage:checkedImage forState:UIControlStateNormal];
+    [selectedButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
   }
 }
 
@@ -53,11 +57,13 @@
   {
     if ([selectedIDs containsObject:ID_])
     {
-      [button setImage:checkedImage forState:UIControlStateNormal];
+      [button setBackgroundImage:checkedImage forState:UIControlStateNormal];
+      [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
       return;
     }
   }
-  [button setImage:uncheckedImage forState:UIControlStateNormal];
+  [button setBackgroundImage:uncheckedImage forState:UIControlStateNormal];
+  [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 }
 
 /*
