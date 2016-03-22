@@ -235,17 +235,6 @@
   
   [actionSheet addAction:editPost];
   
-  UIAlertAction *removeMilestone = [UIAlertAction actionWithTitle:@"Remove Milestone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
-    [LCPostAPIManager removeMilestoneFromPost:feed withSuccess:^(NSArray *response) {
-      [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-    }
-                               andFailure:^(NSString *error) {
-                                 [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-                                 LCDLog(@"%@",error);
-                               }];
-  }];
-  [actionSheet addAction:removeMilestone];
   
   UIAlertAction *deletePost = [UIAlertAction actionWithTitle:NSLocalizedString(@"delete_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
     UIAlertController *deleteAlert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"delete_post", nil) message:NSLocalizedString(@"delete_post_message", nil) preferredStyle:UIAlertControllerStyleAlert];
