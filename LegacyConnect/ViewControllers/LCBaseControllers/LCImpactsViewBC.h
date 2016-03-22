@@ -11,7 +11,7 @@
 @interface LCImpactsViewBC : JTTableViewController
 
 @property(nonatomic, retain)LCUserDetail *userDetail;
-
+@property (nonatomic, assign) BOOL isSelfProfile;
 - (void)setNoResultViewHidden:(BOOL)hidded;
 - (void)reloadImpactsTable;
 

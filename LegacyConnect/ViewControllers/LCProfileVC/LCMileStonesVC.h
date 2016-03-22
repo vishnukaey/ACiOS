@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LCMileStonesBC.h"
+#import "LCImpactsViewBC.h"
 
 @protocol MileStonesDelegate <NSObject>
 - (void)scrollViewScrolled:(UIScrollView *)scrollView;
 @end
 
-@interface LCMileStonesVC : LCMileStonesBC
+@interface LCMileStonesVC : LCImpactsViewBC
 {
   
 }

@@ -67,13 +67,45 @@
    }];
 }
 
-+ (void)getImpactsForUser:(NSString *)userID andLastImpactsID:(NSString*)lastID with:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
++ (void)getImpactsForUserThanksSorted:(NSString *)userID andLastImpactsID:(NSString*)lastID andPageNumber:(NSString*)pageNumber withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetImpactsURL, kUserIDKey,userID];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetImpactsThankSortedURL, kUserIDKey,userID];
   if (lastID) {
     url = [NSString stringWithFormat:@"%@&lastId=%@",url,lastID];
   }
+  if (pageNumber) {
+    url = [NSString stringWithFormat:@"%@&page=%@",url,pageNumber];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSDictionary *dict= response[kResponseData];
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:dict[kImpactsKey] error:&error];
+     if(error)
+     {
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       LCDLog(@"Impacts fetch success! ");
+       success(responsesArray);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
++ (void)getImpactsForUserRecentSorted:(NSString *)userID andLastImpactsID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetImpactsRecentSortedURL, kUserIDKey,userID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&lastId=%@",url,lastID];
+  }
+
   [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
    {
      NSError *error = nil;

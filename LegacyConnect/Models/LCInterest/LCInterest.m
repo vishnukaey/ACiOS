@@ -24,7 +24,8 @@
            @"causes": @"causes",
            @"events": @"events",
            @"isFollowing": @"isFollowing",
-           @"themeID" : @"themeId"
+           @"themeID" : @"themeId",
+           @"thankCount" : @"thankCount"
            };
 }
 

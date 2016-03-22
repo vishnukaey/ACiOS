@@ -46,7 +46,7 @@
   inforLabel2.attributedText = attributedString_2 ;
   
   
-  NSString *infoText_1 = @"To get started, search for the name of a specific Cause if you have one in mind.";
+  NSString *infoText_1 = @"Search for the name of a specific cause if you have one in mind.";
   NSMutableAttributedString *attributedString_1 = [[NSMutableAttributedString alloc] initWithString:infoText_1];
   NSMutableParagraphStyle *paragraphStyle_1 = [[NSMutableParagraphStyle alloc] init];
   [paragraphStyle_1 setLineSpacing:5];

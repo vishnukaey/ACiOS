@@ -189,11 +189,11 @@
     interestActionsView.interest = self.interest;
     interestActionsView.delegate = self;
   }
-  else if ([segue.identifier isEqualToString:@"showActionsList"]) {
+  else if ([segue.identifier isEqualToString:@"LCInterestPosts"]) {
     
-    LCInterestActions *interestActionsVC = segue.destinationViewController;
-    interestActionsVC.interest = self.interest;
-    [interestActionsVC loadActionsInCurrentInterest];
+    LCInterestPosts *interestPostVC = segue.destinationViewController;
+    interestPostVC.interest = self.interest;
+    [interestPostVC loadPostsInCurrentInterest];
   }
   else if ([segue.identifier isEqualToString:@"showInterestFollowers"]) {
   

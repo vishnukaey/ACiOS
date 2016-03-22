@@ -393,6 +393,35 @@
    }];
 }
 
++ (void)getPostsInInterestByThankedOrder:(NSString *)interestID andLastPostID:(NSString*)lastID andPageNumber:(NSString*)pageNumber withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
+{
+  LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFeedByLikeCount, kInterestIDKey, interestID];
+  if (lastID) {
+    url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
+  }
+  if (pageNumber) {
+    url = [NSString stringWithFormat:@"%@&page=%@",url,pageNumber];
+  }
+  [webService performGetOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:nil withSuccess:^(id response)
+   {
+     NSError *error = nil;
+     NSArray *responsesArray = [MTLJSONAdapter modelsOfClass:[LCFeed class] fromJSONArray:response[kResponseData] error:&error];
+     if(error)
+     {
+       failure([error.userInfo valueForKey:NSLocalizedFailureReasonErrorKey]);
+     }
+     else
+     {
+       success(responsesArray);
+     }
+   } andFailure:^(NSString *error) {
+     LCDLog(@"%@",error);
+     [LCUtilityManager showAlertViewWithTitle:nil andMessage:error];
+     failure(error);
+   }];
+}
+
 
 + (void)getPostsInCause:(NSString *)causeID andLastPostID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
