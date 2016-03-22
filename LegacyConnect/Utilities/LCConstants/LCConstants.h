@@ -55,6 +55,7 @@ extern NSString *const kGetInterestFeedsURL;
 extern NSString *const kGetCauseFeedsURL;
 extern NSString *const kGetInterestsAndCausesURL;
 extern NSString *const kGetCausesWithInterestURL;
+extern NSString *const kGetInterestFeedByLikeCount;
 
 extern NSString *const kGetInterestsSearchURL;
 extern NSString *const kGetCauseSearchURL;

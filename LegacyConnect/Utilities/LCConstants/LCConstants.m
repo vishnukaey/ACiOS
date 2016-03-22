@@ -82,6 +82,7 @@ NSString *const kGetInterestFeedsURL = @"api/interest/feed";
 NSString *const kGetCauseFeedsURL = @"api/cause/feed";
 NSString *const kGetInterestsAndCausesURL = @"api/user/getUserInterestsWithCauses";
 NSString *const kGetCausesWithInterestURL = @"api/causesWithInterest";
+NSString *const kGetInterestFeedByLikeCount = @"api/interest/feedByCount";
 
 NSString *const kGetInterestsSearchURL = @"api/search/interest";
 NSString *const kGetCauseSearchURL = @"api/search/cause";

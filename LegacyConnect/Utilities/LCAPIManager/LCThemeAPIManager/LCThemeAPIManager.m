@@ -370,7 +370,7 @@
 + (void)getPostsInInterest:(NSString *)interestID andLastPostID:(NSString*)lastID withSuccess:(void (^)(NSArray* response))success andFailure:(void (^)(NSString *error))failure
 {
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
-  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFeedsURL, kInterestIDKey, interestID];
+  NSString *url = [NSString stringWithFormat:@"%@%@?%@=%@", kBaseURL, kGetInterestFeedByLikeCount, kInterestIDKey, interestID];
   if (lastID) {
     url = [NSString stringWithFormat:@"%@&%@=%@",url,kLastIdKey,lastID];
   }

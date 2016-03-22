@@ -187,6 +187,7 @@
 		CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1A1C4626E700ED4E5E /* LCSingleInterestBC.m */; };
 		CE5BEA1E1C46270200ED4E5E /* LCInterestPostsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA1D1C46270200ED4E5E /* LCInterestPostsBC.m */; };
 		CE5BEA211C46271F00ED4E5E /* LCInterestActionsBC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */; };
+		CE5C8E691CA1483E00EB98A1 /* LCInterestPostsThanked.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C8E681CA1483E00EB98A1 /* LCInterestPostsThanked.m */; };
 		CE5CBF6D1C55FC610001F82C /* LCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5CBF6C1C55FC610001F82C /* LCImagePickerController.m */; };
 		CE6515031BF1B44F00BD6B86 /* Actions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE6515021BF1B44F00BD6B86 /* Actions.storyboard */; };
 		CE6554371C9C0514003DE3D3 /* LCLeftMenuTutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6554361C9C0514003DE3D3 /* LCLeftMenuTutorial.m */; };
@@ -571,6 +572,8 @@
 		CE5BEA1D1C46270200ED4E5E /* LCInterestPostsBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestPostsBC.m; path = ViewControllers/LCBaseControllers/LCInterestPostsBC.m; sourceTree = "<group>"; };
 		CE5BEA1F1C46271F00ED4E5E /* LCInterestActionsBC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestActionsBC.h; path = ViewControllers/LCBaseControllers/LCInterestActionsBC.h; sourceTree = "<group>"; };
 		CE5BEA201C46271F00ED4E5E /* LCInterestActionsBC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestActionsBC.m; path = ViewControllers/LCBaseControllers/LCInterestActionsBC.m; sourceTree = "<group>"; };
+		CE5C8E671CA1483E00EB98A1 /* LCInterestPostsThanked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCInterestPostsThanked.h; path = ViewControllers/LCInterestsVC/LCInterestPostsThanked.h; sourceTree = "<group>"; };
+		CE5C8E681CA1483E00EB98A1 /* LCInterestPostsThanked.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCInterestPostsThanked.m; path = ViewControllers/LCInterestsVC/LCInterestPostsThanked.m; sourceTree = "<group>"; };
 		CE5CBF6B1C55FC610001F82C /* LCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCImagePickerController.h; path = ViewControllers/LCUIImagePickerController/LCImagePickerController.h; sourceTree = "<group>"; };
 		CE5CBF6C1C55FC610001F82C /* LCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCImagePickerController.m; path = ViewControllers/LCUIImagePickerController/LCImagePickerController.m; sourceTree = "<group>"; };
 		CE6515021BF1B44F00BD6B86 /* Actions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Actions.storyboard; path = Storyboards/Actions.storyboard; sourceTree = "<group>"; };
@@ -2093,6 +2096,8 @@
 				165DC9301C44FE3600E55484 /* LCCauseSupportersVC.m */,
 				0B422B511C47A4940094B341 /* LCInterestFollowersVC.h */,
 				0B422B521C47A4940094B341 /* LCInterestFollowersVC.m */,
+				CE5C8E671CA1483E00EB98A1 /* LCInterestPostsThanked.h */,
+				CE5C8E681CA1483E00EB98A1 /* LCInterestPostsThanked.m */,
 			);
 			name = LCInterestsVC;
 			sourceTree = "<group>";
@@ -2352,6 +2357,7 @@
 				CE5BEA1B1C4626E700ED4E5E /* LCSingleInterestBC.m in Sources */,
 				CE2E09E21C04679300722A22 /* LCEventMembersListBC.m in Sources */,
 				CEDA9C821C9A852100386A59 /* LCNotificationsTutorial.m in Sources */,
+				CE5C8E691CA1483E00EB98A1 /* LCInterestPostsThanked.m in Sources */,
 				0BBDC0721B70BF910004C4B6 /* LCCause.m in Sources */,
 				16278B711C5B4ACC00F743F6 /* LCTermsOfServiceViewController.m in Sources */,
 				CE2E09E71C0468D900722A22 /* LCEventDetailsBC.m in Sources */,

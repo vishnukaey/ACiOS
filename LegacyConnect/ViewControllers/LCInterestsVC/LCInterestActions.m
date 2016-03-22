@@ -23,16 +23,7 @@
   [self initailSetup];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  
-  UIViewController * parentController = self.parentViewController;
-  if (parentController != nil && [parentController isKindOfClass:[UINavigationController class]])
-  {
-    [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
-  }
-}
+
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
@@ -124,9 +115,7 @@
   [self startFetchingResults];
 }
 
-- (IBAction)backAction:(id)sender {
-  [self.navigationController popViewControllerAnimated:YES];
-}
+
 
 #pragma mark - TableView delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
