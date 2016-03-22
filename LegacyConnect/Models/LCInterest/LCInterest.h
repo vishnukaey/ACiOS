@@ -22,4 +22,5 @@
 @property (nonatomic, assign) BOOL isDeleted;
 @property (nonatomic, assign) BOOL isFollowing;
 @property (nonatomic, strong) NSString *themeID;
+@property (nonatomic, strong) NSString *thankCount;
 @end

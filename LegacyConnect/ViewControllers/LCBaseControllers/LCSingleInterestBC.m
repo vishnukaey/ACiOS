@@ -17,8 +17,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventDeletedNotificationReceived:) name:kDeleteEventNFK object:nil];
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(eventCreatedNotificationReceived:) name:kCreateEventNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestFollowedNotificationReceived:) name:kFollowInterestNFK object:nil];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interestUnfollowedNotificationReceived:) name:kUnfollowInterestNFK object:nil];
   
@@ -43,32 +41,13 @@
   interestName.text = [[LCUtilityManager performNullCheckAndSetValue:self.interest.name] uppercaseString];
   interestDescription.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.descriptionText];
   followersCount.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.followers];
-  actionsCount.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.events];
+  actionsCount.text = [LCUtilityManager performNullCheckAndSetValue:self.interest.thankCount];
   [interestFollowButton setSelected:self.interest.isFollowing];
 }
 
 
 #pragma mark Notification Receiveres
 
-- (void)eventDeletedNotificationReceived :(NSNotification *)notification
-{
-  LCEvent *deletedEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
-  if ([self.interest.interestID isEqualToString:deletedEvent.interestID]) {
-    NSInteger actions = [self.interest.events integerValue] - 1 ;
-    self.interest.events = [NSString stringWithFormat:@"%ld", (long)actions];
-    [self updateInterestDetails];
-  }
-}
-
-- (void)eventCreatedNotificationReceived :(NSNotification *)notification
-{
-  LCEvent *createdEvent = [notification.userInfo objectForKey:kEntityTypeEvent];
-  if ([self.interest.interestID isEqualToString:createdEvent.interestID]) {
-    NSInteger actions = [self.interest.events integerValue] + 1 ;
-    self.interest.events = [NSString stringWithFormat:@"%ld", (long)actions];
-    [self updateInterestDetails];
-  }
-}
 
 - (void)interestFollowedNotificationReceived :(NSNotification *)notification
 {
