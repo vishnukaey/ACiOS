@@ -102,6 +102,7 @@ static NSString * kResetPasswordTitle = @"UPDATE PASSWORD";
       [MBProgressHUD hideHUDForView:self.view animated:YES];
       [_delegate updatePasswordSuccessful];
     } andFailure:^(NSString *error) {
+      [MBProgressHUD hideHUDForView:self.view animated:YES];
       LCDLog(@"error - %@",error);
       [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
