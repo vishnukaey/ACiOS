@@ -24,7 +24,7 @@
 - (void)startFetchingResults
 {
   [super startFetchingResults];
-  [LCUserProfileAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:nil with:^(NSArray *response) {
+  [LCUserProfileAPIManager getImpactsForUserThanksSorted:userDetail.userID andLastImpactsID:nil andPageNumber:[NSString stringWithFormat:@"%lu", (unsigned long)self.results.count/10+1] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
@@ -42,7 +42,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCUserProfileAPIManager getImpactsForUser:userDetail.userID andLastImpactsID:[(LCFeed*)[self.results lastObject] entityID] with:^(NSArray *response) {
+  [LCUserProfileAPIManager getImpactsForUserThanksSorted:userDetail.userID andLastImpactsID:[(LCFeed*)[self.results lastObject] entityID] andPageNumber:[NSString stringWithFormat:@"%lu", (unsigned long)self.results.count/10+1] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;

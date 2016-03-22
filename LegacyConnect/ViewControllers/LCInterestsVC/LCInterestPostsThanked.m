@@ -108,7 +108,7 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCThemeAPIManager getPostsInInterestByThankedOrder:self.interest.interestID andLastPostID:nil andPageNumber:[NSString stringWithFormat:@"%lu", self.results.count/10 + 1] withSuccess:^(NSArray *response) {
+  [LCThemeAPIManager getPostsInInterestByThankedOrder:self.interest.interestID andLastPostID:[(LCFeed*)[self.results lastObject] entityID] andPageNumber:[NSString stringWithFormat:@"%lu", self.results.count/10 + 1] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];

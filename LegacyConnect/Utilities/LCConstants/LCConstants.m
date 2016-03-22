@@ -97,7 +97,8 @@ NSString *const kGetThemesURL = @"api/themes";
 
 NSString *const kGetFeedsURL = @"api/feed";
 NSString *const kGetMilestonesURL = @"api/user/milestone";
-NSString *const kGetImpactsURL = @"api/user/impact";
+NSString *const kGetImpactsThankSortedURL = @"api/user/impactByThanks";
+NSString *const kGetImpactsRecentSortedURL = @"api/user/impactByRecent";
 NSString *const kGetUserEventsURL = @"api/user/events";
 NSString *const kFriendsURL = @"api/user/friend";
 NSString *const kEventsURL = @"api/event";

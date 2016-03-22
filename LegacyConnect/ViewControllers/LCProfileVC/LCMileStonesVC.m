@@ -34,7 +34,7 @@
 - (void) viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  [self reloadMilestonesTable];
+  [self reloadImpactsTable];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,13 +93,13 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-  [LCUserProfileAPIManager getMilestonesForUser:self.userID andLastMilestoneID:nil withSuccess:^(NSArray *response) {
+  [LCUserProfileAPIManager getImpactsForUserRecentSorted:self.userID andLastImpactsID:nil withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
-    [self reloadMilestonesTable];
+    [self reloadImpactsTable];
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
     [self stopRefreshingViews];
@@ -111,11 +111,11 @@
 - (void)startFetchingNextResults
 {
   [super startFetchingNextResults];
-  [LCUserProfileAPIManager getMilestonesForUser:self.userID andLastMilestoneID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
+  [LCUserProfileAPIManager getImpactsForUserRecentSorted:self.userID andLastImpactsID:[(LCFeed*)[self.results lastObject] entityID] withSuccess:^(NSArray *response) {
     [self stopRefreshingViews];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
-    [self reloadMilestonesTable];
+    [self reloadImpactsTable];
   } andFailure:^(NSString *error) {
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
@@ -219,7 +219,7 @@
     if (show) {
       [self showFeedCommentsWithFeed:viewController.feed];
     } else {
-      [self reloadMilestonesTable];
+      [self reloadImpactsTable];
     }
   }];
 }
