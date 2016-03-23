@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="ajw-VA-3ws">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Xok-Ye-tmO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -24,6 +24,7 @@
             <string>Gotham-Bold</string>
         </mutableArray>
         <mutableArray key="Gotham-Book.otf">
+            <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
             <string>Gotham-Book</string>
@@ -1211,14 +1212,14 @@ First, add a picture.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wwW-fm-I2n" customClass="LCMultipleSelectionTable">
-                                <rect key="frame" x="0.0" y="108" width="375" height="515"/>
+                                <rect key="frame" x="0.0" y="89" width="375" height="534"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactsCell" rowHeight="93" id="F9M-tD-hzX" customClass="LCInviteFromContactsCell">
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F9M-tD-hzX" id="MhH-N4-n8D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="t8l-z9-6KE">
@@ -1303,7 +1304,7 @@ First, add a picture.</string>
                                             <constraint firstAttribute="width" constant="223" id="fo2-Xx-QoP"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightChevronGrey" translatesAutoresizingMaskIntoConstraints="NO" id="04E-E5-0LQ">
@@ -1344,7 +1345,7 @@ First, add a picture.</string>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select friends from your contacts with email addresses to tell them about ThatHelps" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IrH-hL-bAm">
                                         <rect key="frame" x="10" y="4" width="357" height="36"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1420,7 +1421,7 @@ First, add a picture.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="wwW-fm-I2n" firstAttribute="top" secondItem="rKr-yI-QjX" secondAttribute="bottom" constant="43" id="92k-qi-OQm"/>
+                            <constraint firstItem="wwW-fm-I2n" firstAttribute="top" secondItem="rKr-yI-QjX" secondAttribute="bottom" constant="24" id="92k-qi-OQm"/>
                             <constraint firstAttribute="trailing" secondItem="wpv-gH-HqS" secondAttribute="trailing" id="DhW-ig-YTV"/>
                             <constraint firstAttribute="bottom" secondItem="M3V-tZ-xj8" secondAttribute="bottom" id="FpB-8I-v91"/>
                             <constraint firstItem="M3V-tZ-xj8" firstAttribute="top" secondItem="wwW-fm-I2n" secondAttribute="bottom" id="HrB-kx-TZD"/>
@@ -1608,14 +1609,14 @@ First, add a picture.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="k10-0f-gjj" customClass="LCMultipleSelectionTable">
-                                <rect key="frame" x="0.0" y="45" width="375" height="622"/>
+                                <rect key="frame" x="0.0" y="103" width="375" height="564"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LCFBContactsCell" rowHeight="93" id="4rt-vB-gIN" customClass="LCFBContactsCell">
                                         <rect key="frame" x="0.0" y="22" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4rt-vB-gIN" id="d7E-e3-tgZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-MA-qAN">
@@ -1627,12 +1628,12 @@ First, add a picture.</string>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-Za-2DS">
-                                                    <rect key="frame" x="322" y="27" width="38" height="38"/>
+                                                    <rect key="frame" x="314" y="27" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="PW4-dC-sO4"/>
                                                         <constraint firstAttribute="width" constant="38" id="ZfE-xe-Zs1"/>
                                                     </constraints>
-                                                    <state key="normal" backgroundImage="contact_plus">
+                                                    <state key="normal" backgroundImage="addFriends">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <state key="selected" backgroundImage="contact_tick"/>
@@ -1658,15 +1659,15 @@ First, add a picture.</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="AQc-MA-qAN" firstAttribute="leading" secondItem="d7E-e3-tgZ" secondAttribute="leading" constant="15" id="3jn-2I-zgh"/>
-                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="jOk-Ji-gHM" secondAttribute="trailing" constant="8" id="7MW-z4-ptL"/>
+                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="jOk-Ji-gHM" secondAttribute="trailing" id="7MW-z4-ptL"/>
                                                 <constraint firstItem="jOk-Ji-gHM" firstAttribute="leading" secondItem="AQc-MA-qAN" secondAttribute="trailing" constant="8" id="BMp-UZ-Z2I"/>
                                                 <constraint firstAttribute="centerY" secondItem="AQc-MA-qAN" secondAttribute="centerY" id="BRv-mj-my8"/>
                                                 <constraint firstItem="AQc-MA-qAN" firstAttribute="centerY" secondItem="jOk-Ji-gHM" secondAttribute="centerY" constant="-15.5" id="GDq-Ap-Exb"/>
                                                 <constraint firstAttribute="centerY" secondItem="6vd-Za-2DS" secondAttribute="centerY" id="IEY-CL-VH4"/>
                                                 <constraint firstItem="CaZ-s5-8D4" firstAttribute="leading" secondItem="AQc-MA-qAN" secondAttribute="trailing" constant="8" id="XZL-Q7-CjM"/>
                                                 <constraint firstItem="CaZ-s5-8D4" firstAttribute="centerY" secondItem="AQc-MA-qAN" secondAttribute="centerY" constant="-4.5" id="dPa-jH-Be5"/>
-                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="CaZ-s5-8D4" secondAttribute="trailing" constant="8" id="otU-0r-49f"/>
-                                                <constraint firstAttribute="trailing" secondItem="6vd-Za-2DS" secondAttribute="trailing" constant="15" id="toG-5x-6Uu"/>
+                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="CaZ-s5-8D4" secondAttribute="trailing" id="otU-0r-49f"/>
+                                                <constraint firstAttribute="trailing" secondItem="6vd-Za-2DS" secondAttribute="trailing" constant="23" id="toG-5x-6Uu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1682,6 +1683,25 @@ First, add a picture.</string>
                                     <outlet property="delegate" destination="H3O-50-gkk" id="uE1-ue-LO5"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Je9-0J-Vr4">
+                                <rect key="frame" x="0.0" y="65" width="375" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" friends using ThatHelps" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2t1-vT-mz6">
+                                        <rect key="frame" x="9" y="7" width="357" height="36"/>
+                                        <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="2t1-vT-mz6" secondAttribute="bottom" constant="7" id="2q2-xl-F2K"/>
+                                    <constraint firstItem="2t1-vT-mz6" firstAttribute="leading" secondItem="Je9-0J-Vr4" secondAttribute="leading" constant="9" id="AhW-E1-XSC"/>
+                                    <constraint firstItem="2t1-vT-mz6" firstAttribute="top" secondItem="Je9-0J-Vr4" secondAttribute="top" constant="7" id="IZa-i6-lJb"/>
+                                    <constraint firstAttribute="height" constant="50" id="UHN-eN-T0V"/>
+                                    <constraint firstAttribute="trailing" secondItem="2t1-vT-mz6" secondAttribute="trailing" constant="9" id="brW-DQ-sY0"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owd-PY-Dzl" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
@@ -1700,6 +1720,20 @@ First, add a picture.</string>
                                             <action selector="doneButtonTapped:" destination="H3O-50-gkk" eventType="touchUpInside" id="ZsA-Qy-rza"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JDI-bc-DvL" userLabel="Back Button">
+                                        <rect key="frame" x="8" y="19" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Cnq-Id-ukd"/>
+                                            <constraint firstAttribute="width" constant="44" id="rgc-HP-IpF"/>
+                                        </constraints>
+                                        <state key="normal" image="backButton">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="backButtonTapped:" destination="H3O-50-gkk" eventType="touchUpInside" id="Kxx-yh-b19"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FACEBOOK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xP-ka-uyH">
                                         <rect key="frame" x="133" y="31" width="108" height="21"/>
                                         <constraints>
@@ -1715,8 +1749,10 @@ First, add a picture.</string>
                                 <constraints>
                                     <constraint firstAttribute="centerX" secondItem="6xP-ka-uyH" secondAttribute="centerX" id="AWu-tZ-urS"/>
                                     <constraint firstAttribute="bottom" secondItem="6xP-ka-uyH" secondAttribute="bottom" constant="13" id="Eec-ro-W61"/>
+                                    <constraint firstAttribute="bottom" secondItem="JDI-bc-DvL" secondAttribute="bottom" constant="2" id="Vu2-i5-1Mb"/>
                                     <constraint firstAttribute="bottom" secondItem="YYL-aI-EqX" secondAttribute="bottom" constant="6" id="b2V-Fe-daU"/>
                                     <constraint firstAttribute="trailing" secondItem="YYL-aI-EqX" secondAttribute="trailing" constant="16" id="cYs-OH-iPB"/>
+                                    <constraint firstItem="JDI-bc-DvL" firstAttribute="leading" secondItem="owd-PY-Dzl" secondAttribute="leading" constant="8" id="gKT-wq-A2p"/>
                                     <constraint firstAttribute="height" constant="65" id="mtV-dn-WTB"/>
                                 </constraints>
                                 <connections>
@@ -1728,16 +1764,20 @@ First, add a picture.</string>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="owd-PY-Dzl" firstAttribute="leading" secondItem="vEI-wu-ZXT" secondAttribute="leading" id="37J-tJ-3xu"/>
+                            <constraint firstItem="Je9-0J-Vr4" firstAttribute="top" secondItem="owd-PY-Dzl" secondAttribute="bottom" id="RlV-3y-X9B"/>
                             <constraint firstItem="k10-0f-gjj" firstAttribute="leading" secondItem="vEI-wu-ZXT" secondAttribute="leading" id="bb8-8m-0gg"/>
                             <constraint firstAttribute="trailing" secondItem="k10-0f-gjj" secondAttribute="trailing" id="jYL-e4-M2d"/>
+                            <constraint firstAttribute="trailing" secondItem="Je9-0J-Vr4" secondAttribute="trailing" id="juu-tS-oDw"/>
                             <constraint firstAttribute="trailing" secondItem="owd-PY-Dzl" secondAttribute="trailing" id="nHV-28-w92"/>
+                            <constraint firstItem="Je9-0J-Vr4" firstAttribute="leading" secondItem="vEI-wu-ZXT" secondAttribute="leading" id="tFb-A5-6GV"/>
                             <constraint firstItem="1Cp-Lu-beR" firstAttribute="top" secondItem="k10-0f-gjj" secondAttribute="bottom" id="ud6-L5-bof"/>
+                            <constraint firstItem="k10-0f-gjj" firstAttribute="top" secondItem="Je9-0J-Vr4" secondAttribute="bottom" constant="-12" id="uti-m5-hlU"/>
                             <constraint firstItem="owd-PY-Dzl" firstAttribute="top" secondItem="vEI-wu-ZXT" secondAttribute="top" id="yBu-O0-swX"/>
-                            <constraint firstItem="k10-0f-gjj" firstAttribute="top" secondItem="owd-PY-Dzl" secondAttribute="bottom" constant="-20" id="yRM-ee-RrJ"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="fbFriendsCount" destination="2t1-vT-mz6" id="vBa-Uh-drq"/>
                         <outlet property="friendsTable" destination="k10-0f-gjj" id="vuS-IO-ITA"/>
                     </connections>
                 </viewController>
@@ -1858,7 +1898,7 @@ First, add a picture.</string>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="headerCell" id="QYs-Qe-GaW" customClass="LCCausesHeaderTableViewCell">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QYs-Qe-GaW" id="Tq7-uQ-Ypx">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1900,7 +1940,7 @@ First, add a picture.</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="causesTableViewCell" rowHeight="180" id="OJv-vW-t1e" customClass="LCCausesCollectionTableViewCell">
-                                        <rect key="frame" x="0.0" y="94" width="375" height="180"/>
+                                        <rect key="frame" x="0.0" y="93.5" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OJv-vW-t1e" id="vaS-aZ-L8u">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
@@ -2668,7 +2708,7 @@ First, add a picture.</string>
                                         <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VFS-jZ-hzp" id="8Nu-nO-wRu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEF-eq-oGn">
@@ -3170,6 +3210,7 @@ First, add a picture.</string>
         <image name="LC_logo" width="238" height="76"/>
         <image name="SinUpWithEmailBG" width="345" height="44"/>
         <image name="TakeAPhotoBtnBG" width="287" height="287"/>
+        <image name="addFriends" width="37" height="37"/>
         <image name="backButton" width="12" height="21"/>
         <image name="contact_plus" width="37" height="37"/>
         <image name="contact_tick" width="37" height="37"/>

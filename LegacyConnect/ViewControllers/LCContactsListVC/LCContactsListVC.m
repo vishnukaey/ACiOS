@@ -48,9 +48,6 @@
   contactsTable.uncheckedImage = [UIImage imageNamed:@"inviteBG"];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   contactsTable.sectionIndexColor = [UIColor blackColor];
-  
-  
-//  contactsDictionary = [[NSMutableDictionary alloc] init];
 }
 
 
@@ -199,7 +196,7 @@
                                            reuseIdentifier:MyIdentifier];
   }
   
-  LCContact *con = contactsArray[indexPath.row];
+  LCContact *con = [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
   cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
   cell.conatctPhotoView.clipsToBounds = YES;
   cell.conatctPhotoView.image = con.P_image;
@@ -316,10 +313,15 @@
   return [sectionTitles objectAtIndex:section];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 0.0;
+}
+
+
 -(void)refreshTable
 {
-  NSMutableDictionary *contactsDictionary2 = [self createDictionaryForSectionIndex:contactsArray];
-  contactsDictionary = [contactsDictionary2 mutableCopy];
+  contactsDictionary = [self createDictionaryForSectionIndex:contactsArray];
   sectionTitles = [contactsDictionary allKeys];
   [contactsTable reloadData];
 }
