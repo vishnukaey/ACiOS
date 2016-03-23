@@ -65,7 +65,7 @@
 "missing_fields" = "Missing fields";
 "interest_tag_missing_message" = "Please select an Interest or a Cause for posting";
 "text_missing_message" = "Please add a text or an image to post";
-"share_news_placeholder_text" = "Share your news";
+"share_news_placeholder_text" = "Hey, what'd you do to help today?";
 //---friends---//
 "remove_friend" = "Remove Friend";
 "cancel_friend_request" = "Cancel Friend Request";
