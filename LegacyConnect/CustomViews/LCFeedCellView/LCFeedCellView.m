@@ -339,7 +339,6 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 
 - (IBAction)retryLoadingFeedImage: (id)sender
 {
- 
   imageLoadingActivity.hidden = false;
   [imageLoadingActivity startAnimating];
   [postPhoto setBackgroundColor:kImageLoadingBackColor];

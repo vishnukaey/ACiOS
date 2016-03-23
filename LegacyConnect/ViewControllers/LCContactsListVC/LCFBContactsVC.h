@@ -14,4 +14,5 @@
   NSMutableArray *finalFriendsArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *friendsTable;
+@property (weak, nonatomic) IBOutlet UILabel *fbFriendsCount;
 @end

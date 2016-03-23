@@ -26,6 +26,8 @@
 @implementation LCFBContactsVC
 {
   NSMutableArray *selectedContacts;
+    NSArray *sectionTitles;
+    NSMutableDictionary *contactsDictionary;
 }
 
 - (void)viewDidLoad
@@ -34,6 +36,9 @@
   selectedContacts = [[NSMutableArray alloc] init];
   [_friendsTable setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
   [self.navigationController setNavigationBarHidden:YES];
+  _friendsTable.sectionIndexColor = [UIColor blackColor];
+
+
   //request permission for accessing the friends list of the user. No need to ask permission everytime. Should store the status once the permission is granted and avoid this step from next access
   if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"user_friends"])
   {
@@ -66,6 +71,7 @@
   }
 }
 
+
 -(void)getFacebookFriendsList
 {
   [MBProgressHUD showHUDAddedTo:_friendsTable animated:YES];
@@ -93,7 +99,8 @@
         con.P_id = [friendsArray[i] valueForKey:@"id"];
         con.P_imageURL = [[[friendsArray[i] objectForKey:@"picture"] objectForKey:@"data"] objectForKey:@"url"];
         [finalFriendsArray addObject:con];
-        [self.friendsTable reloadData];
+        [self.fbFriendsCount setText:[NSString stringWithFormat:@"%lu friends using ThatHelps",(unsigned long)finalFriendsArray.count]];
+        [self refreshTable];
       }
       [MBProgressHUD hideHUDForView:_friendsTable animated:YES];
     }
@@ -110,8 +117,9 @@
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return [sectionTitles count];    //count of section
 }
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -119,11 +127,12 @@
   {
     return 1;
   }
-  return finalFriendsArray.count;
+  return [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:section]] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   
   if (finalFriendsArray.count == 0)
@@ -141,7 +150,7 @@
     cell = [[LCFBContactsCell alloc] initWithStyle:UITableViewCellStyleDefault
                                            reuseIdentifier:MyIdentifier];
   }
-  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
+  LCContact *con = [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
   cell.conatctPhotoView.layer.cornerRadius = cell.conatctPhotoView.frame.size.width/2;
   cell.conatctPhotoView.clipsToBounds = YES;
   [cell.conatctPhotoView sd_setImageWithURL:[NSURL URLWithString:con.P_imageURL] placeholderImage:nil];
@@ -166,6 +175,7 @@
   return 94;
 }
 
+
 - (void)checkbuttonAction :(UIButton *)sender
 {
   LCContact *con = finalFriendsArray[sender.tag];
@@ -181,27 +191,11 @@
   }
 }
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-//{
-//  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
-//  
-//  LCContact *con = [finalFriendsArray objectAtIndex:indexPath.row];
-//  LCFBContactsCell *cell = (LCFBContactsCell*)[_friendsTable cellForRowAtIndexPath:indexPath];
-//  if([selectedContacts containsObject:con.P_id])
-//  {
-//    [cell.checkButton setSelected:NO];
-//    [selectedContacts removeObject:con.P_id];
-//  }
-//  else
-//  {
-//    [cell.checkButton setSelected:YES];
-//    [selectedContacts addObject:con.P_id];
-//  }
-//}
-//
-//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
-//  LCDLog(@"selected row-->>>%d", (int)indexPath.row);
-//}
+
+- (IBAction)backButtonTapped:(id)sender
+{
+  [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (IBAction)doneButtonTapped:(id)sender
 {
@@ -211,5 +205,51 @@
     LCDLog(@"%@",error);
   }];
 }
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+  
+  return [sectionTitles objectAtIndex:section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+  return 0.0;
+}
+
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+  return sectionTitles;
+}
+
+
+-(void)refreshTable
+{
+  contactsDictionary = [self createDictionaryForSectionIndex:finalFriendsArray];
+  sectionTitles = [[contactsDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+  [_friendsTable reloadData];
+}
+
+
+
+-(NSMutableDictionary*)createDictionaryForSectionIndex:(NSArray*)array
+{
+  NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+  for (char firstChar = 'a'; firstChar <= 'z'; firstChar++)
+  {
+    NSString *firstCharacter = [NSString stringWithFormat:@"%c", firstChar];
+    NSArray *content = [finalFriendsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.P_name beginswith[cd] %@", firstCharacter]];
+    NSMutableArray *mutableContent = [[NSMutableArray alloc]initWithArray:content];
+    
+    if ([mutableContent count] > 0)
+    {
+      NSString *key = [firstCharacter uppercaseString];
+      [dict setObject:[mutableContent mutableCopy] forKey:key];
+    }
+  }
+  return dict;
+}
+
 
 @end
