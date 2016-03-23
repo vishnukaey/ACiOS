@@ -21,14 +21,17 @@
 @end
 
 @implementation LCInviteFromContactsCell
-{
-  NSArray *animalSectionTitles;
-}
+
 @end
 
 
 #pragma mark - LCContactsListVC class
 @implementation LCContactsListVC
+{
+  NSArray *sectionTitles;
+  NSMutableDictionary *contactsDictionary;
+}
+
 
 #pragma mark - controller life cycle
 - (void)viewDidLoad
@@ -44,7 +47,10 @@
   contactsTable.checkedImage = [UIImage imageNamed:@"inviteBGSelected"];
   contactsTable.uncheckedImage = [UIImage imageNamed:@"inviteBG"];
   [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
-
+  contactsTable.sectionIndexColor = [UIColor blackColor];
+  
+  
+//  contactsDictionary = [[NSMutableDictionary alloc] init];
 }
 
 
@@ -66,29 +72,28 @@
   ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
   if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined)
   {
-    ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error)
-                                             {
-                                               if (granted)
-                                               {
-                                                 // First time access has been granted, add the contact
-                                                 contactsArray = [LCPhoneContactsHelper getPhoneContacts];
-                                                 dispatch_async(dispatch_get_main_queue(), ^{
-                                                   [contactsTable reloadData];
-                                                 });
-                                               }
-                                               else
-                                               {
-                                                 LCDLog(@"User denied acces earlier--");
-                                                 // User denied access
-                                                 // Display an alert telling user the contact could not be added
-                                               }
-                                             });
+    ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error){
+      if (granted)
+      {
+        // First time access has been granted, add the contact
+        contactsArray = [LCPhoneContactsHelper getPhoneContacts];
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self refreshTable];
+        });
+      }
+      else
+      {
+        LCDLog(@"User denied acces earlier--");
+        // User denied access
+        // Display an alert telling user the contact could not be added
+      }
+    });
   }
   else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized)
   {
     // The user has previously given access, add the contact
     contactsArray = [LCPhoneContactsHelper getPhoneContacts];
-    [contactsTable reloadData];
+    [self refreshTable];
   }
   else
   {
@@ -103,27 +108,7 @@
 {
   LCContact *con = contactsArray[sender.tag];
   contactsTable.selectedButton = sender;
-  //    if (con.P_emails.count==1)
-  //    {
   [contactsTable AddOrRemoveID:con.P_emails[0]];
-  //    }
-  //    else//only if there are multiple selections for a single cell
-  //    {
-  //      for (int i = 0; i<con.P_emails.count; i++)
-  //      {
-  //        if ([contactsTable.selectedIDs containsObject:con.P_emails[i]]) {
-  //          [contactsTable AddOrRemoveID:con.P_emails[i]];
-  //          return;
-  //        }
-  //      }
-  //      UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Select email-ID" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
-  //      for (NSString *title in con.P_emails)
-  //      {
-  //        [sheet addButtonWithTitle:title];
-  //      }
-  //      sheet.tag = sender.tag;
-  //      [sheet showInView:self.view];
-  //    }
 }
 
 
@@ -167,24 +152,15 @@
   [selectedContactsArray removeAllObjects];
   [selectedEmailsArray removeAllObjects];
   [contactsTable.selectedIDs removeAllObjects];
-  [contactsTable reloadData];
+  [self refreshTable];
   [self updateCustomAddedEmailsCount];
 }
 
-//#pragma mark - UIActionSheet delegate
-//- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//  if (buttonIndex>0)
-//  {
-//    LCContact *con = contactsArray[actionSheet.tag];
-//    [contactsTable AddOrRemoveID:con.P_emails[buttonIndex-1]];
-//  }
-//}
 
 #pragma mark - TableView delegates
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-  return 1;    //count of section
+  return sectionTitles.count;    //count of section
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -193,8 +169,15 @@
   {
     return 1;
   }
-  return contactsArray.count;
+  NSArray *contacts = [contactsDictionary valueForKey:sectionTitles[section]];
+  return [contacts count];
 }
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+  return sectionTitles;
+}
+
 
 - (UITableViewCell *)tableView:(LCMultipleSelectionTable *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -222,7 +205,7 @@
   cell.conatctPhotoView.image = con.P_image;
   cell.contactNameLabel.text = con.P_name;
   cell.contactLocationLabel.text = con.P_emails[0];
-
+  
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   UIButton *checkbutton = cell.checkButton;
   checkbutton.tag = indexPath.row;
@@ -239,7 +222,6 @@
   LCInviteFromContactsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
   [self checkbuttonAction:cell.checkButton];
 }
-
 
 
 
@@ -291,6 +273,7 @@
 }
 
 
+
 -(void)addSelectedMembersToInvitedList
 {
   for(NSString *email in selectedContactsArray)
@@ -324,6 +307,41 @@
   {
     [additionalEmailsLabel setHidden:YES];
   }
+}
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+  
+  return [sectionTitles objectAtIndex:section];
+}
+
+-(void)refreshTable
+{
+  NSMutableDictionary *contactsDictionary2 = [self createDictionaryForSectionIndex:contactsArray];
+  contactsDictionary = [contactsDictionary2 mutableCopy];
+  sectionTitles = [contactsDictionary allKeys];
+  [contactsTable reloadData];
+}
+
+
+
+-(NSMutableDictionary*)createDictionaryForSectionIndex:(NSArray*)array
+{
+  NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+  for (char firstChar = 'a'; firstChar <= 'z'; firstChar++)
+  {
+    NSString *firstCharacter = [NSString stringWithFormat:@"%c", firstChar];
+    NSArray *content = [contactsArray filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.P_name beginswith[cd] %@", firstCharacter]];
+    NSMutableArray *mutableContent = [[NSMutableArray alloc]initWithArray:content];
+    
+    if ([mutableContent count] > 0)
+    {
+      NSString *key = [firstCharacter uppercaseString];
+      [dict setObject:[mutableContent mutableCopy] forKey:key];
+    }
+  }
+  return dict;
 }
 
 
