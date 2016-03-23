@@ -164,9 +164,26 @@
   {
     [cell.checkButton setSelected:NO];
   }
-  cell.checkButton.tag = indexPath.row;
+  cell.checkButton.tag = indexPath.section*10+indexPath.row;
   [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+  LCFBContactsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+  LCContact *con = [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+  if([selectedContacts containsObject:con.P_id])
+  {
+    [cell.checkButton setSelected:NO];
+    [selectedContacts removeObject:con.P_id];
+  }
+  else
+  {
+    [cell.checkButton setSelected:YES];
+    [selectedContacts addObject:con.P_id];
+  }
+  [self updateRightBarButton];
 }
 
 
@@ -176,19 +193,8 @@
 }
 
 
-- (void)checkbuttonAction :(UIButton *)sender
+- (void)checkbuttonAction:(UIButton *)sender
 {
-  LCContact *con = finalFriendsArray[sender.tag];
-  if([selectedContacts containsObject:con.P_id])
-  {
-    [sender setSelected:NO];
-    [selectedContacts removeObject:con.P_id];
-  }
-  else
-  {
-    [sender setSelected:YES];
-    [selectedContacts addObject:con.P_id];
-  }
 }
 
 
@@ -221,6 +227,18 @@
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
 {
   return sectionTitles;
+}
+
+-(void)updateRightBarButton
+{
+  if(selectedContacts.count)
+  {
+    _doneButton.enabled = YES;
+  }
+  else
+  {
+    _doneButton.enabled = NO;
+  }
 }
 
 

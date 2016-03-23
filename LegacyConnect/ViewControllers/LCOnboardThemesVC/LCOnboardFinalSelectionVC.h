@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *interestArray;
+@property (weak, nonatomic) IBOutlet UIButton *doneBUtton;
 
 @end

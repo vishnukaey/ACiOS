@@ -28,6 +28,7 @@
   [self refreshList];
   [self setSearchBarProperties];
   [self.searchBar becomeFirstResponder];
+  [self updateDoneButton];
 }
 
 - (void)setSearchBarProperties
@@ -125,6 +126,7 @@
     cell.selectionButton.selected = YES;
     [LCOnboardingHelper addCause:cell.cause andInterest:causesArray[indexPath.section]];
   }
+  [self updateDoneButton];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -229,6 +231,11 @@
     _noCausesLabel.hidden = YES;
   }
   [_causesCollectionView reloadData];
+}
+
+- (void)updateDoneButton
+{
+  [_doneButton setEnabled:![LCOnboardingHelper noInterestSelected]];
 }
 
 

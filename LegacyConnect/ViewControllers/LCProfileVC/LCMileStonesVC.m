@@ -54,9 +54,9 @@
   self.isSelfProfile = [self.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   
   if (!self.noResultsView) {
-    NSString *message = NSLocalizedString(@"no_milestones_available_others", nil);
+    NSString *message = NSLocalizedString(@"no_impacts_available_others", nil);
     if (self.isSelfProfile) {
-      message = NSLocalizedString(@"no_milestones_available_self", nil);
+      message = NSLocalizedString(@"no_impacts_available_self", nil);
     }
     self.noResultsView = [LCPaginationHelper getNoResultViewWithText:message];
   }

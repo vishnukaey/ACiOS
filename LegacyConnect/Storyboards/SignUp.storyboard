@@ -850,7 +850,7 @@ First, add a picture.</string>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-2S-wys">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8vS-2S-wys">
                                         <rect key="frame" x="310" y="28" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="Y5Z-TL-xwE"/>
@@ -860,6 +860,9 @@ First, add a picture.</string>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="doneButtonTapped:" destination="eud-A4-nhB" eventType="touchUpInside" id="Bgc-cT-gTf"/>
@@ -1023,6 +1026,7 @@ First, add a picture.</string>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="causesCollectionView" destination="HC4-jj-8FZ" id="jBq-Kk-bh0"/>
+                        <outlet property="doneButton" destination="8vS-2S-wys" id="XQJ-DV-ZII"/>
                         <outlet property="noCausesLabel" destination="BaP-zC-7mE" id="izR-oc-dWG"/>
                         <outlet property="searchBar" destination="lft-9b-tuN" id="fIZ-x2-hps"/>
                         <segue destination="rX4-yN-9BJ" kind="push" identifier="connectFriends" id="L3b-8s-ru0"/>
@@ -1224,12 +1228,13 @@ First, add a picture.</string>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="t8l-z9-6KE">
                                                     <rect key="frame" x="15" y="15" width="63" height="63"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="63" id="RTT-ZN-8hA"/>
                                                         <constraint firstAttribute="width" constant="63" id="acC-kD-ac3"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrD-yK-ynJ">
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrD-yK-ynJ">
                                                     <rect key="frame" x="287" y="31" width="75" height="35"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="FIi-ca-82k"/>
@@ -1361,7 +1366,7 @@ First, add a picture.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKr-yI-QjX" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZP-oh-taW">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZP-oh-taW">
                                         <rect key="frame" x="309" y="29" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="WLK-9K-3FN"/>
@@ -1371,6 +1376,9 @@ First, add a picture.</string>
                                         <state key="normal" title="Send">
                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="doneButtonAction" destination="ajw-VA-3ws" eventType="touchUpInside" id="axB-oC-LfI"/>
@@ -1444,6 +1452,7 @@ First, add a picture.</string>
                     <connections>
                         <outlet property="additionalEmailsLabel" destination="mYO-H6-mpV" id="D0S-lV-6ik"/>
                         <outlet property="contactsTable" destination="wwW-fm-I2n" id="wgz-lt-XHh"/>
+                        <outlet property="sendButton" destination="IZP-oh-taW" id="DfG-40-sHt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cUn-nN-zRG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1621,14 +1630,14 @@ First, add a picture.</string>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="manplaceholder.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AQc-MA-qAN">
                                                     <rect key="frame" x="15" y="15" width="63" height="63"/>
-                                                    <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="63" id="0qD-CA-WXy"/>
                                                         <constraint firstAttribute="width" constant="63" id="trd-CT-vRl"/>
                                                     </constraints>
                                                 </imageView>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-Za-2DS">
-                                                    <rect key="frame" x="314" y="27" width="38" height="38"/>
+                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vd-Za-2DS">
+                                                    <rect key="frame" x="321" y="27" width="38" height="38"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="38" id="PW4-dC-sO4"/>
                                                         <constraint firstAttribute="width" constant="38" id="ZfE-xe-Zs1"/>
@@ -1659,15 +1668,15 @@ First, add a picture.</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="AQc-MA-qAN" firstAttribute="leading" secondItem="d7E-e3-tgZ" secondAttribute="leading" constant="15" id="3jn-2I-zgh"/>
-                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="jOk-Ji-gHM" secondAttribute="trailing" id="7MW-z4-ptL"/>
+                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="jOk-Ji-gHM" secondAttribute="trailing" constant="7" id="7MW-z4-ptL"/>
                                                 <constraint firstItem="jOk-Ji-gHM" firstAttribute="leading" secondItem="AQc-MA-qAN" secondAttribute="trailing" constant="8" id="BMp-UZ-Z2I"/>
                                                 <constraint firstAttribute="centerY" secondItem="AQc-MA-qAN" secondAttribute="centerY" id="BRv-mj-my8"/>
                                                 <constraint firstItem="AQc-MA-qAN" firstAttribute="centerY" secondItem="jOk-Ji-gHM" secondAttribute="centerY" constant="-15.5" id="GDq-Ap-Exb"/>
                                                 <constraint firstAttribute="centerY" secondItem="6vd-Za-2DS" secondAttribute="centerY" id="IEY-CL-VH4"/>
                                                 <constraint firstItem="CaZ-s5-8D4" firstAttribute="leading" secondItem="AQc-MA-qAN" secondAttribute="trailing" constant="8" id="XZL-Q7-CjM"/>
                                                 <constraint firstItem="CaZ-s5-8D4" firstAttribute="centerY" secondItem="AQc-MA-qAN" secondAttribute="centerY" constant="-4.5" id="dPa-jH-Be5"/>
-                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="CaZ-s5-8D4" secondAttribute="trailing" id="otU-0r-49f"/>
-                                                <constraint firstAttribute="trailing" secondItem="6vd-Za-2DS" secondAttribute="trailing" constant="23" id="toG-5x-6Uu"/>
+                                                <constraint firstItem="6vd-Za-2DS" firstAttribute="leading" secondItem="CaZ-s5-8D4" secondAttribute="trailing" constant="7" id="otU-0r-49f"/>
+                                                <constraint firstAttribute="trailing" secondItem="6vd-Za-2DS" secondAttribute="trailing" constant="16" id="toG-5x-6Uu"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -1705,7 +1714,7 @@ First, add a picture.</string>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="owd-PY-Dzl" customClass="LCNavigationBar">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-aI-EqX">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYL-aI-EqX">
                                         <rect key="frame" x="309" y="29" width="50" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="GE5-Q0-b4q"/>
@@ -1715,6 +1724,9 @@ First, add a picture.</string>
                                         <state key="normal" title="Done">
                                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="doneButtonTapped:" destination="H3O-50-gkk" eventType="touchUpInside" id="ZsA-Qy-rza"/>
@@ -1777,6 +1789,7 @@ First, add a picture.</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="doneButton" destination="YYL-aI-EqX" id="Noa-fZ-Zdw"/>
                         <outlet property="fbFriendsCount" destination="2t1-vT-mz6" id="vBa-Uh-drq"/>
                         <outlet property="friendsTable" destination="k10-0f-gjj" id="vuS-IO-ITA"/>
                     </connections>
@@ -1968,6 +1981,7 @@ First, add a picture.</string>
                                                                         <subviews>
                                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1t3-yn-PoO">
                                                                                 <rect key="frame" x="1" y="1" width="103" height="103"/>
+                                                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="103" id="6mr-PI-dB2"/>
                                                                                     <constraint firstAttribute="height" constant="103" id="QYV-nK-omq"/>
@@ -2067,6 +2081,7 @@ First, add a picture.</string>
                     <navigationItem key="navigationItem" id="PwM-HG-8mc"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="doneBUtton" destination="E5T-RC-QUG" id="bHW-Dl-puu"/>
                         <outlet property="tableView" destination="sU2-sD-xKu" id="MZS-OB-aXk"/>
                         <segue destination="rX4-yN-9BJ" kind="push" identifier="loadConnectFriends" id="zp7-Wy-z2U"/>
                         <segue destination="icu-cv-ReE" kind="push" identifier="showAllCauses" id="0bh-8L-lXC"/>
@@ -3221,7 +3236,7 @@ First, add a picture.</string>
         <image name="splash_BG" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L3b-8s-ru0"/>
         <segue reference="zLA-AX-ius"/>
+        <segue reference="zp7-Wy-z2U"/>
     </inferredMetricsTieBreakers>
 </document>

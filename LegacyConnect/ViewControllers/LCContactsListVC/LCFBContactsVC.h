@@ -15,4 +15,5 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *friendsTable;
 @property (weak, nonatomic) IBOutlet UILabel *fbFriendsCount;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @end

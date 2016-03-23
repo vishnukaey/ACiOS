@@ -21,8 +21,6 @@
 "no_feeds_available" = "No Feeds to display.";
 "no_comments_available" = "No Comments to display.";
 
-"no_milestones_available_self" = "Tap \"...\" in any of your posts to add as a milestone.";
-"no_milestones_available_others" = "No milestones available.";
 "no_interests_available_self" = "Search and add interests from the menu.";
 "no_interests_available_others" = "No interests available.";
 "no_actions_available_self" = "Create opportunity by selecting the Global Impact button from the bottom right.";
@@ -37,7 +35,7 @@
 "no_facebook_friends_to_display" = "No Friends to display.";
 
 //------Interest Page------//
-"no_posts_to_display" = "No Posts to display.";
+"no_posts_to_display" = "No Helps to display.";
 "no_causes_to_display" = "No Causes to display.";
 "no_actions_to_display" = "No Opportunities to display.";
 

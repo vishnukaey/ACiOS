@@ -19,6 +19,7 @@
   NSMutableArray *selectedEmailsArray;
   NSMutableArray *invitedEmails;
   IBOutlet UILabel *additionalEmailsLabel;
+  IBOutlet UIButton *sendButton;
 }
 @property(assign) BOOL invitingToActions;
 @property(strong, nonatomic) NSString *eventID;

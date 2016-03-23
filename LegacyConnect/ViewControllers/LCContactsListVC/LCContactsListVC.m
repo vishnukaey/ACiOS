@@ -103,9 +103,7 @@
 #pragma mark - buttonActions
 - (void)checkbuttonAction :(UIButton *)sender
 {
-  LCContact *con = contactsArray[sender.tag];
-  contactsTable.selectedButton = sender;
-  [contactsTable AddOrRemoveID:con.P_emails[0]];
+  
 }
 
 
@@ -123,6 +121,7 @@
   if(_invitingToActions)
   {
     [LCEventAPImanager addUsersWithUserIDs:nil forEventWithEventID:_eventID andEmailIDs:selectedContactsArray withSuccess:^(id response) {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Invitations Sent"];
       [MBProgressHUD hideHUDForView:self.view animated:YES];
       [self updateDataSource];
     } andFailure:^(NSString *error) {
@@ -144,7 +143,6 @@
 
 -(void) updateDataSource
 {
-  [LCUtilityManager showAlertViewWithTitle:nil andMessage:@"Invitations Sent"];
   [self addSelectedMembersToInvitedList];
   [selectedContactsArray removeAllObjects];
   [selectedEmailsArray removeAllObjects];
@@ -205,8 +203,8 @@
   
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   UIButton *checkbutton = cell.checkButton;
-  checkbutton.tag = indexPath.row;
-  [checkbutton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
+//  checkbutton.tag = indexPath.section*10+indexPath.row;
+//  [checkbutton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   [tableView setStatusForButton:checkbutton byCheckingIDs:con.P_emails];
   [self setButtonTitleAndColourForCheckButton:checkbutton byCheckingID:con.P_emails[0]];
   
@@ -214,13 +212,36 @@
 }
 
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+-(void)tableView:(LCMultipleSelectionTable *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-  LCInviteFromContactsCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  [self checkbuttonAction:cell.checkButton];
+  LCInviteFromContactsCell *cell = (LCInviteFromContactsCell*)[tableView cellForRowAtIndexPath:indexPath];
+  LCContact *con = [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+  [tableView AddOrRemoveID:con.P_emails[0]];
+
+  if([selectedContactsArray containsObject:con.P_emails[0]])
+  {
+    [selectedContactsArray removeObject:con.P_emails[0]];
+  }
+  else
+  {
+    [selectedContactsArray addObject:con.P_emails[0]];
+  }
+  [tableView setStatusForButton:cell.checkButton byCheckingIDs:con.P_emails];
+  [self updateRightBarButton];
 }
 
 
+-(void)updateRightBarButton
+{
+  if(contactsTable.selectedIDs.count)
+  {
+    sendButton.enabled = YES;
+  }
+  else
+  {
+    sendButton.enabled = NO;
+  }
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {

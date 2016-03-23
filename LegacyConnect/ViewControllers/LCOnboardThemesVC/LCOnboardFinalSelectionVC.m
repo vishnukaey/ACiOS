@@ -37,10 +37,9 @@ NSInteger const kNoOfRowsInSection = 1;
 - (void)viewDidLoad {
   [super viewDidLoad];
   // Do any additional setup after loading the view.
-  
-//  self.tableView.estimatedRowHeight = 170.0;
-//  self.tableView.rowHeight = UITableViewAutomaticDimension;
+
   [self getCausesSuggestions];
+  [self updateDoneButton];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -149,13 +148,21 @@ NSInteger const kNoOfRowsInSection = 1;
   return  headerView ;
 }
 
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   NSString *cellIdentifier = kCellIdTableViewCell;
   LCCausesCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
   cell.interest = (LCInterest*)self.interestArray[indexPath.section];
   [cell reloadCollectionView];
+  [self updateDoneButton];
   return cell;
 }
+
+- (void)updateDoneButton
+{
+  [_doneBUtton setEnabled:![LCOnboardingHelper noInterestSelected]];
+}
+
 
 @end
