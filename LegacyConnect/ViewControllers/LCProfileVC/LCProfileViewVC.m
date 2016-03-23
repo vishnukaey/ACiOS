@@ -64,6 +64,7 @@
     
     mileStonesVC = segue.destinationViewController;
     mileStonesVC.userID = self.userDetail.userID;
+    mileStonesVC.userDetail = self.userDetail;
     mileStonesVC.delegate = self;
   }
   else if ([segue.identifier isEqualToString:@"LCInterestsSegue"]) {

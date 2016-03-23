@@ -126,13 +126,13 @@
 
 - (void)refreshViews
 {
-  if ([self.navigationController.topViewController isEqual:self]) {
+//  if ([self.navigationController.topViewController isEqual:self]) {
     CGPoint offset = self.tableView.contentOffset;
     [self reloadImpactsTable];
     [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
-  }
+//  }
 }
 
 - (void) viewWillAppear:(BOOL)animated
