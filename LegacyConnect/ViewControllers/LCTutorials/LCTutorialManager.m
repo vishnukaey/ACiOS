@@ -120,15 +120,16 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
   [rootView setFrame:appdel.window.frame];
 }
 
-+ (void)showCreatePostTutorial
++ (BOOL)showCreatePostTutorial
 {
   if ([LCTutorialManager tutorialShownForKey:kCreatePostTutorial]) {
-    return;
+    return false;
   }
   LCGIButtonTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCCreatePostTutorial class]];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.window addSubview:rootView];
   [rootView setFrame:appdel.window.frame];
+  return true;
 }
 
 

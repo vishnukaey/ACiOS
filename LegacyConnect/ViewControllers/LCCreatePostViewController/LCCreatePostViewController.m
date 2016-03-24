@@ -51,7 +51,9 @@
       [self didfinishPickingInterest:self.selectedInterest andCause:self.selectedCause];
   }
   
-  [LCTutorialManager showCreatePostTutorial];
+  if (![LCTutorialManager showCreatePostTutorial]) {
+    [self.postTextView becomeFirstResponder];
+  }
 }
 
 - (void)didReceiveMemoryWarning {
