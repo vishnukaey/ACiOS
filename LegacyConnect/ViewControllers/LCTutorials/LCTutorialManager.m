@@ -159,4 +159,37 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
   return NO;
 }
 
++ (void)setTutorialPersistance
+{
+  if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAfterInstallationFirstTime"] != nil) {
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kHomeFeedTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kNotificationsTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kProfileTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestListTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCauseTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kLeftMenuTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kGIButtonTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCreatePostTutorial];
+  }
+  else
+  {
+    
+  }
+  
+}
+
++ (void)resetTutorialPersistance
+{
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kHomeFeedTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kNotificationsTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kProfileTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kInterestListTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kInterestTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kCauseTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kLeftMenuTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kGIButtonTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kCreatePostTutorial];
+}
+
 @end

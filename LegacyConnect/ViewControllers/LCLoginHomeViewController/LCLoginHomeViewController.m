@@ -92,11 +92,12 @@
             UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
             LCAcceptTermsViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCAcceptTermsViewController"];
             [self.navigationController pushViewController:termsVC animated:YES];
+            [LCTutorialManager resetTutorialPersistance];
           }
           else
           {
             [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
-       
+              [LCTutorialManager setTutorialPersistance];
               [self loginUser:response];
               [MBProgressHUD hideHUDForView:self.view animated:YES];
             } andFailure:^(NSString *error) {

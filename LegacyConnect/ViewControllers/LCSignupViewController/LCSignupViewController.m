@@ -170,6 +170,7 @@
     [self.signupButton setEnabled:true];
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     [self performSegueWithIdentifier:@"selectPhoto" sender:self];
+    [LCTutorialManager resetTutorialPersistance];
   } andFailure:^(NSString *error) {
     [self.signupButton setEnabled:true];
     [MBProgressHUD hideHUDForView:self.view animated:YES];

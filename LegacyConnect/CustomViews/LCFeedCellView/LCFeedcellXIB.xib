@@ -144,7 +144,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xaI-a7-PHn">
-                                <rect key="frame" x="121" y="0.0" width="120" height="44"/>
+                                <rect key="frame" x="121" y="0.0" width="130" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="M8z-5u-hNZ"/>
                                 </constraints>
@@ -185,10 +185,10 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ALI-21-bQD">
-                                <rect key="frame" x="161" y="11" width="80" height="21"/>
+                                <rect key="frame" x="161" y="11" width="90" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="IYh-2x-4u2"/>
-                                    <constraint firstAttribute="width" constant="80" id="eLr-Qk-rFX"/>
+                                    <constraint firstAttribute="width" constant="90" id="eLr-Qk-rFX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
                                 <color key="textColor" red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>

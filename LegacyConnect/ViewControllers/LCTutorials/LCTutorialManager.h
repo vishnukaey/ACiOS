@@ -19,5 +19,7 @@
 + (void)showLeftMenuTutorial;
 + (void)showGIButtonTutorial;
 + (BOOL)showCreatePostTutorial;
++ (void)setTutorialPersistance;
++ (void)resetTutorialPersistance;
 
 @end

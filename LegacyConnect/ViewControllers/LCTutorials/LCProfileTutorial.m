@@ -25,7 +25,7 @@
 
 - (void)setLabels
 {
-  NSString *labelString = @"This is your ThatHelps PROFILE.\n\nWhen someone THANKS you it tells\nyou they think it made a difference\n\nHELPS are posts you make to share\nhow you've helped\n\nINTERESTS are the subjects you're\npassionate about\n\nOPPORTUNITIES are ways to help\nthat you've created";
+  NSString *labelString = @"This is your ThatHelps PROFILE.\n\nWhen someone THANKS you it tells\nyou they think it made a difference\n\nHELPS are posts you make to tell\npeople how you've helped\n\nINTERESTS are the subjects you're\npassionate about\n\nOPPORTUNITIES are ways to help\nthat you've created";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:labelString];
   NSArray * colorWords = @[@"PROFILE", @"THANKS", @"HELPS", @"INTERESTS", @"OPPORTUNITIES"];
   // -- Add Font -- //

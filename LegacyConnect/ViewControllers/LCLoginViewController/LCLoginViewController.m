@@ -95,10 +95,12 @@
     if([response[@"data"][@"firstTimeLogin"] isEqualToString:@"1"])
     {
       [self performSegueWithIdentifier:@"loginOnboarding" sender:self];
+      [LCTutorialManager resetTutorialPersistance];
     }
     else
     {
       [self.navigationController popToRootViewControllerAnimated:NO];
+      [LCTutorialManager setTutorialPersistance];
     }
   } andFailure:^(NSString *error) {
     LCDLog(@"%@",error);
