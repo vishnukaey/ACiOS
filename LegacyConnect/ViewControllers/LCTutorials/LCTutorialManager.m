@@ -120,15 +120,16 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
   [rootView setFrame:appdel.window.frame];
 }
 
-+ (void)showCreatePostTutorial
++ (BOOL)showCreatePostTutorial
 {
   if ([LCTutorialManager tutorialShownForKey:kCreatePostTutorial]) {
-    return;
+    return false;
   }
   LCGIButtonTutorial *rootView = [LCTutorialManager getViewFromXIBForClass:[LCCreatePostTutorial class]];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
   [appdel.window addSubview:rootView];
   [rootView setFrame:appdel.window.frame];
+  return true;
 }
 
 
@@ -156,6 +157,39 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:key];
   }
   return NO;
+}
+
++ (void)setTutorialPersistance
+{
+  if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAfterInstallationFirstTime"] != nil) {
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kHomeFeedTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kNotificationsTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kProfileTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestListTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCauseTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kLeftMenuTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kGIButtonTutorial];
+    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCreatePostTutorial];
+  }
+  else
+  {
+    
+  }
+  
+}
+
++ (void)resetTutorialPersistance
+{
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kHomeFeedTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kNotificationsTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kProfileTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kInterestListTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kInterestTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kCauseTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kLeftMenuTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kGIButtonTutorial];
+  [[NSUserDefaults standardUserDefaults]removeObjectForKey:kCreatePostTutorial];
 }
 
 @end

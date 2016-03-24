@@ -43,7 +43,7 @@
   [super viewDidAppear:animated];
   [self initialiseScrollSubviewsForPosting];
   [self setCurrentContexts];
-  [self.postTextView becomeFirstResponder];
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -124,6 +124,7 @@
   [self.placeHolderLabel setText:NSLocalizedString(@"share_news_placeholder_text", nil)];
   [self.placeHolderLabel setTextColor:[UIColor lightGrayColor]];
   [_postScrollView addSubview:self.placeHolderLabel];
+  self.placeHolderLabel.numberOfLines = 2;
   
   tagsLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.postTextView.frame.origin.x, self.postTextView.frame.origin.y + self.postTextView.frame.size.height, self.postTextView.frame.size.width, 0)];
   tagsLabel.numberOfLines = 0;

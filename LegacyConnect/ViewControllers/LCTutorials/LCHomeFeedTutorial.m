@@ -26,9 +26,9 @@
 
 - (void)setLabels
 {
-  NSString *labelString = @"This is your FEED. On it you’ll see all\nof the activity for your INTERESTS,\nCAUSES and FRIENDS. Use your\nFEED to learn how others are\nhelping, to THANKS them for helping\nand to find OPPORTUNITIES to help";
+  NSString *labelString = @"This is your FEED. On it you’ll see all\nof the activity for your INTERESTS,\nCAUSES and FRIENDS. Use your\nFEED to learn how others are\nhelping, to THANK them for helping\nand to find OPPORTUNITIES to help";
   NSMutableAttributedString * attributtedString = [[NSMutableAttributedString alloc] initWithString:labelString];
-  NSArray * colorWords = @[@"FEED", @"INTERESTS", @"CAUSES", @"FRIENDS", @"FEED", @"THANKS", @"OPPORTUNITIES"];
+  NSArray * colorWords = @[@"FEED", @"INTERESTS", @"CAUSES", @"FRIENDS", @"FEED", @"THANK", @"OPPORTUNITIES"];
   // -- Add Font -- //
   [attributtedString addAttributes:@{
                                      NSFontAttributeName : self.font,

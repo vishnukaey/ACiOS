@@ -89,10 +89,10 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Xz-ah-peZ">
-                            <rect key="frame" x="30" y="31" width="260" height="120"/>
+                            <rect key="frame" x="15" y="31" width="290" height="120"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" id="ddl-JJ-lHn"/>
-                                <constraint firstAttribute="width" constant="260" id="p0d-ka-Mf5"/>
+                                <constraint firstAttribute="width" constant="290" id="p0d-ka-Mf5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -655,7 +655,7 @@
         </view>
     </objects>
     <resources>
-        <image name="createPostTutorial" width="1125" height="2001"/>
+        <image name="createPostTutorial" width="750" height="1334"/>
         <image name="gi_create_event_button" width="57" height="57"/>
         <image name="gi_photo_post_button" width="57" height="57"/>
         <image name="gi_text_post_button" width="57" height="57"/>

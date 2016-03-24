@@ -18,6 +18,8 @@
 + (void)showCauseTutorial;
 + (void)showLeftMenuTutorial;
 + (void)showGIButtonTutorial;
-+ (void)showCreatePostTutorial;
++ (BOOL)showCreatePostTutorial;
++ (void)setTutorialPersistance;
++ (void)resetTutorialPersistance;
 
 @end
