@@ -51,7 +51,7 @@
 {
   if (sender.tag == 1)//phone contacts
   {
-    UIStoryboard*  signupSB = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
+    UIStoryboard *signupSB = [UIStoryboard storyboardWithName:@"SignUp" bundle:nil];
     LCContactsListVC *next = [signupSB instantiateViewControllerWithIdentifier:@"ContactList"];
     [self.navigationController pushViewController:next animated:YES];
   }

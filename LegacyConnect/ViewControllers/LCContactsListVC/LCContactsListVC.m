@@ -149,6 +149,7 @@
   [contactsTable.selectedIDs removeAllObjects];
   [self refreshTable];
   [self updateCustomAddedEmailsCount];
+  [self updateRightBarButton];
 }
 
 

@@ -82,8 +82,9 @@ NSInteger const kNoOfRowsInSection = 1;
   [self.navigationController pushViewController:causeVC animated:YES];;
 }
 
-- (IBAction)nextButtonAction:(id)sender {
-  
+- (IBAction)nextButtonAction:(id)sender
+{
+  [_doneBUtton setUserInteractionEnabled:NO];
   NSDictionary *selectedItems = [LCOnboardingHelper selectedItemsDictionary];
   NSArray *interestsToSave = [selectedItems allKeys];
   NSArray *allInterests = [selectedItems allValues];
@@ -103,9 +104,12 @@ NSInteger const kNoOfRowsInSection = 1;
                       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
                       UIStoryboard *storyboard = [UIStoryboard  storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
                       LCContactsListVC *next = [storyboard instantiateViewControllerWithIdentifier:@"connectFriends"];
+                      [_doneBUtton setUserInteractionEnabled:YES];
                       [self.navigationController pushViewController:next animated:YES];
-  } andFailure:^(NSString *error) {
+  } andFailure:^(NSString *error)
+  {
     [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    [_doneBUtton setUserInteractionEnabled:YES];
   }];
 }
 
