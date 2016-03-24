@@ -210,8 +210,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   
   // -- Thanks & Comments count label -- //
   NSString *thanks_ = @"Thank";
-  if ([feed.likeCount integerValue] >0) {
+  if ([feed.likeCount integerValue] >1) {
     thanks_ = [[LCUtilityManager performNullCheckAndSetValue:feed.likeCount] stringByAppendingString:@" Thanks"];
+  }
+  else if ([feed.likeCount integerValue] == 1) {
+    thanks_ = [[LCUtilityManager performNullCheckAndSetValue:feed.likeCount] stringByAppendingString:@" Thank"];
   }
   NSMutableAttributedString * thanksAtrributted_string = [[NSMutableAttributedString alloc] initWithString:thanks_];
   [thanksAtrributted_string addAttribute:NSForegroundColorAttributeName
@@ -225,8 +228,11 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
                                      } range:NSMakeRange(0, thanks_.length)];
   
   NSString *comments_ = @"Comment";
-  if ([feed.commentCount integerValue] >0) {
+  if ([feed.commentCount integerValue] >1) {
     comments_ = [[LCUtilityManager performNullCheckAndSetValue:feed.commentCount] stringByAppendingString:@" Comments"];
+  }
+  else if ([feed.commentCount integerValue] == 1) {
+    comments_ = [[LCUtilityManager performNullCheckAndSetValue:feed.commentCount] stringByAppendingString:@" Comment"];
   }
   NSMutableAttributedString * commentsAtrributted_string = [[NSMutableAttributedString alloc] initWithString:comments_];
   [commentsAtrributted_string addAttribute:NSForegroundColorAttributeName

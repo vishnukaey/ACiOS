@@ -161,7 +161,6 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
 
 + (void)setTutorialPersistance
 {
-  if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isAfterInstallationFirstTime"] != nil) {
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kHomeFeedTutorial];
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kNotificationsTutorial];
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kProfileTutorial];
@@ -171,12 +170,6 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kLeftMenuTutorial];
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kGIButtonTutorial];
     [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCreatePostTutorial];
-  }
-  else
-  {
-    
-  }
-  
 }
 
 + (void)resetTutorialPersistance
