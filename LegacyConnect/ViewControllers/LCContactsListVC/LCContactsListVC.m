@@ -344,7 +344,7 @@
 -(void)refreshTable
 {
   contactsDictionary = [self createDictionaryForSectionIndex:contactsArray];
-  sectionTitles = [contactsDictionary allKeys];
+  sectionTitles = [[contactsDictionary allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
   [contactsTable reloadData];
 }
 

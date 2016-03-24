@@ -157,6 +157,8 @@
   [cell.checkButton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   cell.checkButton.tag = indexPath.row;
   [tableView setStatusForButton:cell.checkButton byCheckingIDs:@[locationsArray[indexPath.row]]];
+  tableView.allowsSelection = YES;
+  cell.selectionStyle = UITableViewCellSelectionStyleNone;
   return cell;
 }
 
