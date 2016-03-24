@@ -302,13 +302,15 @@
   }
   if(menuisHidden)
   {
-    appdel.mainContainer.panMode = MFSideMenuPanModeNone;
-    [appdel.mainContainer panGestureRecognizer].enabled = NO;
-    for(id vb in appdel.window.rootViewController.view.gestureRecognizers)
-    {
-      if([vb isKindOfClass:[UIPanGestureRecognizer class]])
+    if (appdel.mainContainer) {
+      appdel.mainContainer.panMode = MFSideMenuPanModeNone;
+      [appdel.mainContainer panGestureRecognizer].enabled = NO;
+      for(id vb in appdel.window.rootViewController.view.gestureRecognizers)
       {
-        [appdel.window.rootViewController.view removeGestureRecognizer:vb];
+        if([vb isKindOfClass:[UIPanGestureRecognizer class]])
+        {
+          [appdel.window.rootViewController.view removeGestureRecognizer:vb];
+        }
       }
     }
   }
