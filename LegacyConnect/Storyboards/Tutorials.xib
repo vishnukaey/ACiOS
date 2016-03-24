@@ -151,7 +151,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-eP-Qf8">
-                            <rect key="frame" x="30" y="31" width="260" height="182"/>
+                            <rect key="frame" x="30" y="31" width="260" height="197"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="260" id="AEn-h1-78N"/>
                                 <constraint firstAttribute="height" constant="120" id="J8c-hL-M9r"/>
@@ -177,7 +177,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="VxG-c3-RQ6" firstAttribute="top" secondItem="CkO-eP-Qf8" secondAttribute="bottom" constant="15" id="3Vq-id-mf4"/>
+                        <constraint firstItem="VxG-c3-RQ6" firstAttribute="top" secondItem="CkO-eP-Qf8" secondAttribute="bottom" id="3Vq-id-mf4"/>
                         <constraint firstItem="PM4-kd-7fR" firstAttribute="top" secondItem="Lcw-mG-ovR" secondAttribute="top" constant="8" id="BCU-Qb-Cco"/>
                         <constraint firstItem="PM4-kd-7fR" firstAttribute="centerX" secondItem="Lcw-mG-ovR" secondAttribute="centerX" id="Mhy-Is-7yg"/>
                         <constraint firstItem="CkO-eP-Qf8" firstAttribute="top" secondItem="PM4-kd-7fR" secondAttribute="bottom" constant="8" id="U8b-x7-M3I"/>
