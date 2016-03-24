@@ -56,6 +56,25 @@
   [LCGAManager ga_trackEventWithCategory:@"Launch" action:@"Success" andLabel:@"Application Launched Successfully"];
   [GAI sharedInstance].trackUncaughtExceptions = YES;
   
+  NSURL * url = [launchOptions objectForKey:UIApplicationLaunchOptionsURLKey];
+  if(url)
+  {
+    if([[url scheme] caseInsensitiveCompare:kLCUrlScheme] == NSOrderedSame)
+    {
+      if ([url.host isEqualToString:kResetPasswordHostKey]) {
+        NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
+        if (tokenString) {
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
+            [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
+                                                                object:nil
+                                                              userInfo:userInfo];
+          });
+        }
+      }
+    }
+  }
+  
   return [[FBSDKApplicationDelegate sharedInstance] application:application
                                   didFinishLaunchingWithOptions:launchOptions];
 }
@@ -65,6 +84,7 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
   BOOL boolValue = false;
+
   
   if ([[url scheme] caseInsensitiveCompare:kTwitterUrlScheme] == NSOrderedSame)
   {
