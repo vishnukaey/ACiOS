@@ -14,7 +14,8 @@
 
 +(void)ga_trackViewWithName:(NSString*)screenName
 {
-  id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+  NSString *trackCode = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GA_TRACK_CODE"];
+  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:trackCode];
   [tracker set:kGAIScreenName value:screenName];
   [tracker send:[[GAIDictionaryBuilder createScreenView] build]];
 }
@@ -22,7 +23,8 @@
 
 +(void)ga_trackEventWithCategory:(NSString*)category action:(NSString*)action andLabel:(NSString*)label
 {
-  id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+  NSString *trackCode = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"GA_TRACK_CODE"];
+  id<GAITracker> tracker = [[GAI sharedInstance] trackerWithTrackingId:trackCode];
   [tracker send:[[GAIDictionaryBuilder createEventWithCategory:category     // Event category (required)
                                                         action:action  // Event action (required)
                                                          label:label          // Event label

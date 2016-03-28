@@ -8,9 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LCGAManager : NSObject
 
+@interface LCGAManager : NSObject
 +(void)ga_trackViewWithName:(NSString*)screenName;
 +(void)ga_trackEventWithCategory:(NSString*)category action:(NSString*)action andLabel:(NSString*)label;
-
 @end

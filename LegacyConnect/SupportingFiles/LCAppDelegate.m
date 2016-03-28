@@ -53,7 +53,9 @@
   NSAssert(!configureError, @"Error configuring Google services: %@", configureError);
   
   //GA Tracking
+  
   [LCGAManager ga_trackEventWithCategory:@"Launch" action:@"Success" andLabel:@"Application Launched Successfully"];
+  
   [GAI sharedInstance].trackUncaughtExceptions = YES;
   
   return [[FBSDKApplicationDelegate sharedInstance] application:application
@@ -130,5 +132,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
 
 @end

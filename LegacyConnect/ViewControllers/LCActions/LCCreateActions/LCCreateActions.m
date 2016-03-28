@@ -45,7 +45,7 @@
     [actionForm.navigationController pushViewController:inviteVC animated:YES];
     
     //GA Tracking
-    [LCGAManager ga_trackEventWithCategory:@"Impacts" action:@"Take Action" andLabel:@"Take Action"];
+    [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"Create Opportunity" andLabel:@"Create Opportunity"];
 
     
     [MBProgressHUD hideAllHUDsForView:actionForm.view animated:YES];
