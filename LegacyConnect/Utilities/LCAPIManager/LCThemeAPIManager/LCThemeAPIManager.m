@@ -76,7 +76,7 @@
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      //GA Tracking
-     [LCGAManager ga_trackEventWithCategory:@"Interests" action:@"Added" andLabel:@"User added interests"];
+     [LCGAManager ga_trackEventWithCategory:@"Interests" action:@"Followed" andLabel:@"User followed interests"];
      
      LCDLog(@"Save Causes Success! \n %@",response);
      success(response);
