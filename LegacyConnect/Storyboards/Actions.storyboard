@@ -339,91 +339,86 @@
                                             <outlet property="friendPhotoView" destination="y7D-4R-LMo" id="1a8-AH-3kT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LCInviteCommunityFriendCell" rowHeight="90" id="vi0-2D-1qP" customClass="LCInviteContactsCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LCInviteContactsCell" rowHeight="90" id="vi0-2D-1qP" customClass="LCInviteContactsCell">
                                         <rect key="frame" x="0.0" y="66" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vi0-2D-1qP" id="C8k-pB-svk">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Can’t find a friend? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOO-Hm-Y3j">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="44" id="7xM-7a-bhA"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="mZR-h8-4sk"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                    <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sAX-fK-gxJ">
-                                                    <rect key="frame" x="0.0" y="43" width="375" height="1"/>
-                                                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="Ggw-Mw-xWz"/>
-                                                    </constraints>
-                                                </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gB-Hj-qSp">
-                                                    <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S12-EY-XN0">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your contacts to ThatHelps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXf-EC-sqp">
-                                                            <rect key="frame" x="15" y="11" width="258" height="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   Can’t find a friend? " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOO-Hm-Y3j">
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="258" id="iyk-h1-uPL"/>
+                                                                <constraint firstAttribute="height" constant="44" id="sAh-n0-1lA"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightChevronGrey" translatesAutoresizingMaskIntoConstraints="NO" id="B6T-2f-GnP">
-                                                            <rect key="frame" x="352" y="15" width="15" height="15"/>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7gB-Hj-qSp">
+                                                            <rect key="frame" x="0.0" y="45" width="375" height="44"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite your contacts to ThatHelps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NXf-EC-sqp">
+                                                                    <rect key="frame" x="15" y="11" width="258" height="21"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="258" id="aBb-tF-oaN"/>
+                                                                        <constraint firstAttribute="height" constant="21" id="qS6-CQ-oT7"/>
+                                                                    </constraints>
+                                                                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightChevronGrey" translatesAutoresizingMaskIntoConstraints="NO" id="B6T-2f-GnP">
+                                                                    <rect key="frame" x="352" y="15" width="15" height="15"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="15" id="LQD-k1-2kg"/>
+                                                                        <constraint firstAttribute="height" constant="15" id="ahQ-Nc-u2t"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMo-hT-28W">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="44" id="hJV-MZ-rPh"/>
+                                                                    </constraints>
+                                                                    <connections>
+                                                                        <action selector="inviteFriendsFromContacts:" destination="d1r-qX-Qev" eventType="touchUpInside" id="vND-kC-gA0"/>
+                                                                    </connections>
+                                                                </button>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="15" id="Rf8-jx-XgI"/>
-                                                                <constraint firstAttribute="height" constant="15" id="mgg-pg-I3P"/>
+                                                                <constraint firstAttribute="bottom" secondItem="jMo-hT-28W" secondAttribute="bottom" id="0q6-cS-8Yp"/>
+                                                                <constraint firstAttribute="bottom" secondItem="NXf-EC-sqp" secondAttribute="bottom" constant="12" id="Lp0-ve-n0u"/>
+                                                                <constraint firstAttribute="bottom" secondItem="B6T-2f-GnP" secondAttribute="bottom" constant="14" id="PsK-ci-LLJ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="B6T-2f-GnP" secondAttribute="trailing" constant="8" id="SZF-k9-YKx"/>
+                                                                <constraint firstItem="jMo-hT-28W" firstAttribute="leading" secondItem="7gB-Hj-qSp" secondAttribute="leading" id="Wcn-nn-kvk"/>
+                                                                <constraint firstItem="NXf-EC-sqp" firstAttribute="leading" secondItem="7gB-Hj-qSp" secondAttribute="leading" constant="15" id="fF5-Wn-3io"/>
+                                                                <constraint firstAttribute="trailing" secondItem="jMo-hT-28W" secondAttribute="trailing" id="fgz-AW-hZl"/>
+                                                                <constraint firstAttribute="height" constant="44" id="qDk-h8-mVG"/>
                                                             </constraints>
-                                                        </imageView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jMo-hT-28W">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                                            <connections>
-                                                                <action selector="inviteFriendsFromContacts:" destination="d1r-qX-Qev" eventType="touchUpInside" id="vND-kC-gA0"/>
-                                                            </connections>
-                                                        </button>
+                                                        </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.96470588239999999" green="0.96470588239999999" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
-                                                        <constraint firstItem="NXf-EC-sqp" firstAttribute="leading" secondItem="7gB-Hj-qSp" secondAttribute="leading" constant="15" id="1He-ie-Kyy"/>
-                                                        <constraint firstItem="B6T-2f-GnP" firstAttribute="top" secondItem="7gB-Hj-qSp" secondAttribute="top" constant="15" id="3u5-oS-2cw"/>
-                                                        <constraint firstItem="jMo-hT-28W" firstAttribute="top" secondItem="7gB-Hj-qSp" secondAttribute="top" id="H3K-9q-oyP"/>
-                                                        <constraint firstAttribute="height" constant="44" id="MCq-GT-HHc"/>
-                                                        <constraint firstAttribute="trailing" secondItem="B6T-2f-GnP" secondAttribute="trailing" constant="8" id="NSC-Fa-pSa"/>
-                                                        <constraint firstItem="jMo-hT-28W" firstAttribute="leading" secondItem="7gB-Hj-qSp" secondAttribute="leading" id="S4W-RF-WgG"/>
-                                                        <constraint firstItem="NXf-EC-sqp" firstAttribute="top" secondItem="7gB-Hj-qSp" secondAttribute="top" constant="11" id="Wtp-WB-Mpj"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="fn0-di-bIx"/>
-                                                        <constraint firstAttribute="bottom" secondItem="jMo-hT-28W" secondAttribute="bottom" id="hRS-HC-4YK"/>
-                                                        <constraint firstAttribute="trailing" secondItem="jMo-hT-28W" secondAttribute="trailing" id="mCd-vj-yVa"/>
-                                                        <constraint firstAttribute="bottom" secondItem="NXf-EC-sqp" secondAttribute="bottom" constant="12" id="ped-eu-xE4"/>
+                                                        <constraint firstItem="7gB-Hj-qSp" firstAttribute="leading" secondItem="S12-EY-XN0" secondAttribute="leading" id="F2Q-YM-XYC"/>
+                                                        <constraint firstItem="7gB-Hj-qSp" firstAttribute="top" secondItem="fOO-Hm-Y3j" secondAttribute="bottom" constant="1" id="J0w-7f-W5z"/>
+                                                        <constraint firstAttribute="bottom" secondItem="7gB-Hj-qSp" secondAttribute="bottom" constant="1" id="Qm8-yM-HSN"/>
+                                                        <constraint firstAttribute="trailing" secondItem="7gB-Hj-qSp" secondAttribute="trailing" id="U1x-sW-1ai"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fOO-Hm-Y3j" secondAttribute="trailing" id="YCR-Hf-Zro"/>
+                                                        <constraint firstItem="fOO-Hm-Y3j" firstAttribute="top" secondItem="S12-EY-XN0" secondAttribute="top" id="guM-RX-Hxp"/>
+                                                        <constraint firstItem="fOO-Hm-Y3j" firstAttribute="leading" secondItem="S12-EY-XN0" secondAttribute="leading" id="shK-o1-zd1"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="7gB-Hj-qSp" firstAttribute="leading" secondItem="C8k-pB-svk" secondAttribute="leadingMargin" constant="-8" id="6g0-MV-BnZ"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="7gB-Hj-qSp" secondAttribute="trailing" constant="-8" id="78h-M5-4at"/>
-                                                <constraint firstItem="7gB-Hj-qSp" firstAttribute="top" secondItem="sAX-fK-gxJ" secondAttribute="bottom" id="BZd-fn-hyZ"/>
-                                                <constraint firstItem="sAX-fK-gxJ" firstAttribute="leading" secondItem="fOO-Hm-Y3j" secondAttribute="leading" id="CLp-k6-cNp"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="fOO-Hm-Y3j" secondAttribute="trailing" constant="-8" id="J3D-8n-khs"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="7gB-Hj-qSp" secondAttribute="bottom" constant="-6.5" id="QB6-BR-svO"/>
-                                                <constraint firstItem="sAX-fK-gxJ" firstAttribute="trailing" secondItem="fOO-Hm-Y3j" secondAttribute="trailing" id="ZCR-gP-S2e"/>
-                                                <constraint firstItem="fOO-Hm-Y3j" firstAttribute="leading" secondItem="C8k-pB-svk" secondAttribute="leadingMargin" constant="-8" id="mO6-tj-aY5"/>
-                                                <constraint firstItem="fOO-Hm-Y3j" firstAttribute="top" secondItem="C8k-pB-svk" secondAttribute="topMargin" constant="-8" id="nYH-EE-aeK"/>
-                                                <constraint firstItem="sAX-fK-gxJ" firstAttribute="bottom" secondItem="fOO-Hm-Y3j" secondAttribute="bottom" id="pTh-K1-puI"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="7gB-Hj-qSp" secondAttribute="bottom" constant="20.5" id="rTX-7g-Ncl"/>
+                                                <constraint firstItem="S12-EY-XN0" firstAttribute="leading" secondItem="C8k-pB-svk" secondAttribute="leading" id="5OK-ci-0gw"/>
+                                                <constraint firstItem="S12-EY-XN0" firstAttribute="top" secondItem="C8k-pB-svk" secondAttribute="top" id="aS7-GI-LoG"/>
+                                                <constraint firstAttribute="trailing" secondItem="S12-EY-XN0" secondAttribute="trailing" id="toY-CH-bMb"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="rTX-7g-Ncl"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -463,7 +458,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pnm-O1-FjH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="551.5" y="194.5"/>
+            <point key="canvasLocation" x="551.5" y="195.5"/>
         </scene>
         <!--View Community-->
         <scene sceneID="BDI-0l-X5X">

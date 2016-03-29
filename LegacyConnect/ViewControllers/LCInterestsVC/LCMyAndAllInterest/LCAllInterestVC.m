@@ -129,6 +129,14 @@
   [self.navigationController pushViewController:interestVC animated:YES];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+  if (indexPath.section == 1)
+  {
+    return 90;
+  }
+  return 44;
+}
 
 
 @end

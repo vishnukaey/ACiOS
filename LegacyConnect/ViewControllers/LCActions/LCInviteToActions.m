@@ -12,6 +12,18 @@
 #import "LCEventAPImanager.h"
 #import "LCContactsListVC.h"
 
+
+
+#pragma mark - LCIviteContacts class
+@interface LCInviteContactsCell : UITableViewCell
+@property(nonatomic, strong) IBOutlet UIButton *inviteButton;
+@end
+
+@implementation LCInviteContactsCell
+@end
+
+
+
 #pragma mark - LCInviteCommunityFriendCell class
 @interface LCInviteCommunityFriendCell : UITableViewCell
 @property(nonatomic, strong)IBOutlet UILabel *friendNameLabel;
@@ -66,13 +78,13 @@
 - (void) initialSerup {
   
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-  
+  self.tableView.rowHeight = UITableViewAutomaticDimension;
   if (!selectedIDs) {
     selectedIDs = [[NSMutableArray alloc] init];
   }
-  NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
-  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
-  
+//  NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
+//  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
+//  
   if (self.navigationController) {
     isCreatingAction = YES;
     [backButton setHidden:YES];
@@ -80,7 +92,7 @@
   else{
     isCreatingAction = NO;
   }
-
+  
   [self startFetchingResults];
   [self validate];
 }
@@ -181,7 +193,7 @@
 
 - (IBAction)backButtonAction
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) dismissInviteActionView{
@@ -221,63 +233,126 @@
 
 #pragma mark - TableView delegates
 
-//- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-//{
-//  return self.results.count;
-//}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+  if(section == 0)
+  {
+    return self.results.count;
+  }
+  else
+  {
+    return 1;
+  }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 2;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if(indexPath.section == 0)
+  {
+    return 44.0;
+  }
+  else
+  {
+    return 90;
+  }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  JTTABLEVIEW_cellForRowAtIndexPath
-  
-  static NSString *MyIdentifier = @"LCInviteCommunityFriendCell";
-  LCInviteCommunityFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
+  if(indexPath.section == 0)
   {
-    cell = [[LCInviteCommunityFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                              reuseIdentifier:MyIdentifier];
+    
+    JTTABLEVIEW_cellForRowAtIndexPath
+    
+    static NSString *MyIdentifier = @"LCInviteCommunityFriendCell";
+    LCInviteCommunityFriendCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      cell = [[LCInviteCommunityFriendCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                reuseIdentifier:MyIdentifier];
+    }
+    
+    LCFriend *friend = self.results[indexPath.row];
+    cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
+    [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+    
+    //check already invited
+    if (friend.isInvitedToEvent) {
+      [cell.checkButton setEnabled:NO];
+      [cell setUserInteractionEnabled:NO];
+    }
+    
+    //check already selected
+    if ([selectedIDs containsObject:friend.friendId]) {
+      [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+      [cell.checkButton setSelected:YES];
+    }
+    else {
+      [tableView deselectRowAtIndexPath:indexPath animated:NO];
+      [cell.checkButton setSelected:NO];
+    }
+    return cell;
+    
   }
-  
-  LCFriend *friend = self.results[indexPath.row];
-  cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
-  cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
-  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-  
-  //check already invited
-  if (friend.isInvitedToEvent) {
-    [cell.checkButton setEnabled:NO];
-    [cell setUserInteractionEnabled:NO];
+  else
+  {
+    static NSString *cellIdentifier = @"LCInviteContactsCell";
+    LCInviteContactsCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+      cell = [[LCInviteContactsCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                         reuseIdentifier:cellIdentifier];
+    }
+    return cell;
   }
-  
-  //check already selected
-  if ([selectedIDs containsObject:friend.friendId]) {
-    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-    [cell.checkButton setSelected:YES];
-  }
-  else {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [cell.checkButton setSelected:NO];
-  }
-  return cell;
 }
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
-  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  LCFriend *friend = self.results[indexPath.row];
-  [selectedIDs addObject:friend.friendId];
-  [cell.checkButton setSelected:YES];
-  [self validate];
+  if(indexPath.section==0)
+  {
+    LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    LCFriend *friend = self.results[indexPath.row];
+    [selectedIDs addObject:friend.friendId];
+    [cell.checkButton setSelected:YES];
+    [self validate];
+  }
+  else
+  {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+    contacts.invitingToActions = YES;
+    contacts.eventID = eventToInvite.eventID;
+    [self.navigationController pushViewController:contacts animated:YES];
+  }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  LCFriend *friend = self.results[indexPath.row];
-  [selectedIDs removeObject:friend.friendId];
-  [cell.checkButton setSelected:NO];
-  [self validate];
+  if(indexPath.section == 0)
+  {
+    LCInviteCommunityFriendCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    LCFriend *friend = self.results[indexPath.row];
+    [selectedIDs removeObject:friend.friendId];
+    [cell.checkButton setSelected:NO];
+    [self validate];
+  }
+  else
+  {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+    contacts.invitingToActions = YES;
+    contacts.eventID = eventToInvite.eventID;
+    [self.navigationController pushViewController:contacts animated:YES];
+  }
 }
 
 
