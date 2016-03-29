@@ -134,7 +134,7 @@ static CGFloat kActionSectionHeight = 30;
 #pragma mark - Private method implementation
 - (void)initialUISetUp
 {
-  self.tableView.estimatedRowHeight = 44.0;
+  self.tableView.estimatedRowHeight = 120.0;
   self.tableView.rowHeight = UITableViewAutomaticDimension;
   self.nextPageLoaderCell = [LCPaginationHelper getNextPageLoaderCell];
   UIView *zeroRectView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -455,6 +455,10 @@ static CGFloat kActionSectionHeight = 30;
     cell = [[LCActionsDetailsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
   }
   cell.communityDetailsLabel.text = [LCUtilityManager performNullCheckAndSetValue:self.eventObject.eventDescription];
+  
+  [cell.communityDetailsLabel setNumberOfLines:0];
+  [cell.communityDetailsLabel sizeToFit];
+
   return cell;
 }
 
@@ -490,6 +494,11 @@ static CGFloat kActionSectionHeight = 30;
 }
 
 #pragma mark - UITableViewDelegate implementation
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return self.tableView.rowHeight;
+  }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   [tableView deselectRowAtIndexPath:indexPath animated:NO];
