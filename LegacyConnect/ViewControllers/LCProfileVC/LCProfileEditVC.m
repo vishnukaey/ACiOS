@@ -22,7 +22,7 @@ NSString * const kCellIdHeaderBG = @"LCProfileHeaderBGCell";
 NSString * const kCellIdBirthday = @"LCProfileBirthdayCell";
 NSString * const kCellIdSection = @"LCProfileSectionHeader";
 
-NSString * const kDOBFormat = @"MMMM dd, yyyy";
+NSString * const kDOBFormat = @"dd-MMM-YYYY";
 NSString * const kMaleString = @"Male";
 NSString * const kFemaleString = @"Female";
 
