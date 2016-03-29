@@ -81,12 +81,7 @@
   [self refreshViews];
 }
 
-//- (void)updateProfileNotificationReceived :(NSNotification *)notification
-//{
-//  firstName;
-//  lastName;
-//  avatarURL;
-//}
+
 
 - (void)feedUpdatedNotificationReceived :(NSNotification *)notification
 {
@@ -126,8 +121,10 @@
 {
   if ([self.navigationController.topViewController isEqual:self]) {
     CGPoint offset = self.tableView.contentOffset;
+//    [self.tableView reloadData];
+
     [self reloadFeedsTable];
-    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+//    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
   }
@@ -136,6 +133,7 @@
 - (void)reloadFeedsTable
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+      
 //      [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, 0)];
   [self.tableView reloadData];
   //    [self.tableView layoutIfNeeded];
