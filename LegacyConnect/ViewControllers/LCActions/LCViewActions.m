@@ -31,6 +31,11 @@ static CGFloat kActionSectionHeight = 30;
 @end
 
 @implementation LCActionsDetailsCell
+- (void)awakeFromNib
+{
+  self.communityDetailsLabel.numberOfLines = 0;
+}
+
 @end
 
 #pragma mark - LCCommunityMemebersCountCell class
