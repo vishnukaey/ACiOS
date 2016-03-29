@@ -127,7 +127,7 @@ static NSString * const kImgProfileWaiting = @"profileWaiting";
                          [LCUtilityManager performNullCheckAndSetValue:self.userDetail.lastName]] uppercaseString];
   memeberSincelabel.text = [NSString stringWithFormat:@"%@ %@",
                             NSLocalizedString(@"member_since", nil),
-                            [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"dd-MM-YYYY"]];
+                            [LCUtilityManager getDateFromTimeStamp:self.userDetail.activationDate WithFormat:@"dd-MMM-YYYY"]];
   
   locationLabel.text = [[NSString stringWithFormat:@"%@ %@ %@ %@ %@",
                          [LCUtilityManager performNullCheckAndSetValue:self.userDetail.gender],

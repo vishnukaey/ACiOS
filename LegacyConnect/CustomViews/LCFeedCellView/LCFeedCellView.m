@@ -216,7 +216,7 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
   else if ([feed.likeCount integerValue] == 1) {
     thanks_ = [[LCUtilityManager performNullCheckAndSetValue:feed.likeCount] stringByAppendingString:@" Thank"];
   }
-  NSMutableAttributedString * thanksAtrributted_string = [[NSMutableAttributedString alloc] initWithString:thanks_];
+  NSMutableAttributedString *thanksAtrributted_string = [[NSMutableAttributedString alloc] initWithString:thanks_];
   [thanksAtrributted_string addAttribute:NSForegroundColorAttributeName
                             value:[UIColor lightGrayColor]
                             range:[thanks_ rangeOfString:@"Thank"]];

@@ -37,13 +37,14 @@
   [self.titleLabel setText:[user uppercaseString]];
   
   //-- Like --//
-  UIImage * iconImage = [[UIImage imageNamed:@"ThanksIcon_enabled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  UIImage *iconImage = [[UIImage imageNamed:@"ThanksIcon_enabled"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   [self.thanksButtonImage setImage:iconImage];
   [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
-  [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+  [self setLikeCount:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
   
   //-- Comment --//
-  [self.commentCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.commentCount]];
+  [self.commentCountLabel setText:[NSString stringWithFormat:@"%@ Comments",[LCUtilityManager performNullCheckAndSetValue:self.feed.commentCount]]];
+  [self setCommentCount:[LCUtilityManager performNullCheckAndSetValue:self.feed.commentCount]];
 }
 
 - (IBAction)tryImageLoading:(id)sender
@@ -144,22 +145,22 @@
   [btn setEnabled:NO];
   if ([self.feed.didLike boolValue]) {
     [self.thanksButtonImage setLikeUnlikeStatusImage:kUnLikedStatus];
-    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
-    [self.thanksCountLabel setText:[NSString stringWithFormat:@"%d",[likeCount intValue]-1]];
+    NSString *likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
+    [self setLikeCount:[NSString stringWithFormat:@"%d Thanks",[likeCount intValue]-1]];
     [LCFeedAPIManager unlikePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kUnLikedStatus;
       self.feed.likeCount = [(NSDictionary*)[response objectForKey:@"data"] objectForKey:@"likeCount"];
       [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
-      [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+      [self setLikeCount:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
       [btn setEnabled:YES];
     }];
   }
   else
   {
-    NSString * likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
-    [self.thanksCountLabel setText:[NSString stringWithFormat:@"%d",[likeCount intValue] + 1]];
+    NSString *likeCount = [LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount];
+    [self setLikeCount:[NSString stringWithFormat:@"%d Thanks",[likeCount intValue]+1]];
     [self.thanksButtonImage setLikeUnlikeStatusImage:kLikedStatus];
     [LCFeedAPIManager likePost:self.feed withSuccess:^(id response) {
       self.feed.didLike = kLikedStatus;
@@ -167,7 +168,7 @@
       [btn setEnabled:YES];
     } andFailure:^(NSString *error) {
       [self.thanksButtonImage setLikeUnlikeStatusImage:self.feed.didLike];
-      [self.thanksCountLabel setText:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
+      [self setLikeCount:[LCUtilityManager performNullCheckAndSetValue:self.feed.likeCount]];
       [btn setEnabled:YES];
     }];
   }
@@ -196,5 +197,54 @@
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"block_details_screen_dismissed" object:nil];
 }
+
+
+-(void)setLikeCount:(NSString*)count
+{
+  
+  NSString *thanks_ = @"Thank";
+  if ([count integerValue] >1) {
+    thanks_ = [[LCUtilityManager performNullCheckAndSetValue:count] stringByAppendingString:@" Thanks"];
+  }
+  else if ([count integerValue] == 1) {
+    thanks_ = [[LCUtilityManager performNullCheckAndSetValue:count] stringByAppendingString:@" Thank"];
+  }
+  NSMutableAttributedString *thanksAtrributted_string = [[NSMutableAttributedString alloc] initWithString:thanks_];
+  [thanksAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor lightGrayColor]
+                                   range:[thanks_ rangeOfString:@"Thank"]];
+  [thanksAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                   value:[UIColor lightGrayColor]
+                                   range:[thanks_ rangeOfString:@"Thanks"]];
+  [thanksAtrributted_string addAttributes:@{
+                                            NSFontAttributeName : [UIFont fontWithName:@"Gotham-Bold" size:12.0f],
+                                            } range:NSMakeRange(0, thanks_.length)];
+  [self.thanksCountLabel setAttributedText:thanksAtrributted_string];
+}
+
+
+
+-(void)setCommentCount:(NSString*)count
+{
+  NSString *comments_ = @"Comment";
+  if ([count integerValue] >1) {
+    comments_ = [[LCUtilityManager performNullCheckAndSetValue:count] stringByAppendingString:@" Comments"];
+  }
+  else if ([count integerValue] == 1) {
+    comments_ = [[LCUtilityManager performNullCheckAndSetValue:count] stringByAppendingString:@" Comment"];
+  }
+  NSMutableAttributedString * commentsAtrributted_string = [[NSMutableAttributedString alloc] initWithString:comments_];
+  [commentsAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                     value:[UIColor lightGrayColor]
+                                     range:[comments_ rangeOfString:@"Comment"]];
+  [commentsAtrributted_string addAttribute:NSForegroundColorAttributeName
+                                     value:[UIColor lightGrayColor]
+                                     range:[comments_ rangeOfString:@"Comments"]];
+  [commentsAtrributted_string addAttributes:@{
+                                              NSFontAttributeName : [UIFont fontWithName:@"Gotham-Bold" size:12.0f],
+                                              } range:NSMakeRange(0, comments_.length)];
+  [self.commentCountLabel setAttributedText:commentsAtrributted_string];
+}
+
 
 @end

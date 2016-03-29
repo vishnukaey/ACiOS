@@ -115,10 +115,10 @@
                                 <constraint firstAttribute="width" constant="20" id="pxW-Yy-xhA"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXU-WS-uDJ">
-                            <rect key="frame" x="40" y="12" width="21" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Thanks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WXU-WS-uDJ">
+                            <rect key="frame" x="40" y="12" width="55" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="21" id="6gM-lp-XpV"/>
+                                <constraint firstAttribute="width" constant="55" id="6gM-lp-XpV"/>
                                 <constraint firstAttribute="height" constant="21" id="7L8-mW-Jgy"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
@@ -126,16 +126,16 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CommentIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Igg-YJ-ChP">
-                            <rect key="frame" x="69" y="14" width="19" height="18"/>
+                            <rect key="frame" x="103" y="14" width="19" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="19" id="vTA-bj-Hpc"/>
                                 <constraint firstAttribute="height" constant="18" id="w0T-xr-KLy"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-O4-6UZ">
-                            <rect key="frame" x="98" y="12" width="21" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ro2-O4-6UZ">
+                            <rect key="frame" x="133" y="12" width="100" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="21" id="fp6-Lt-MhP"/>
+                                <constraint firstAttribute="width" constant="100" id="fp6-Lt-MhP"/>
                                 <constraint firstAttribute="height" constant="21" id="gbi-gb-MST"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="11"/>
@@ -143,18 +143,18 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGc-4Z-gkg">
-                            <rect key="frame" x="0.0" y="0.0" width="46" height="45"/>
+                            <rect key="frame" x="0.0" y="0.0" width="90" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="46" id="ynm-K0-nFx"/>
+                                <constraint firstAttribute="width" constant="90" id="ynm-K0-nFx"/>
                             </constraints>
                             <connections>
                                 <action selector="likeButtonClicked:" destination="-1" eventType="touchUpInside" id="goe-D0-tKE"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eE-Lt-b0X">
-                            <rect key="frame" x="64" y="0.0" width="46" height="45"/>
+                            <rect key="frame" x="101" y="0.0" width="105" height="45"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="46" id="wF6-Jg-kqk"/>
+                                <constraint firstAttribute="width" constant="105" id="wF6-Jg-kqk"/>
                             </constraints>
                             <connections>
                                 <action selector="commentButtonClicked:" destination="-1" eventType="touchUpInside" id="wWN-zg-E8n"/>
@@ -175,7 +175,7 @@
                     <constraints>
                         <constraint firstItem="WXU-WS-uDJ" firstAttribute="leading" secondItem="zX7-FN-DZD" secondAttribute="trailing" constant="10" id="2ew-8d-VvQ"/>
                         <constraint firstItem="EGc-4Z-gkg" firstAttribute="leading" secondItem="CXl-rR-yaS" secondAttribute="leading" id="5BA-Ry-Aum"/>
-                        <constraint firstItem="2eE-Lt-b0X" firstAttribute="leading" secondItem="Igg-YJ-ChP" secondAttribute="leading" constant="-5" id="Dna-L4-qtM"/>
+                        <constraint firstItem="2eE-Lt-b0X" firstAttribute="leading" secondItem="Igg-YJ-ChP" secondAttribute="leading" constant="-2" id="Dna-L4-qtM"/>
                         <constraint firstItem="ro2-O4-6UZ" firstAttribute="centerY" secondItem="CXl-rR-yaS" secondAttribute="centerY" id="KUl-bV-hOd"/>
                         <constraint firstItem="zX7-FN-DZD" firstAttribute="leading" secondItem="CXl-rR-yaS" secondAttribute="leading" constant="10" id="LPg-jc-xVB"/>
                         <constraint firstItem="EGc-4Z-gkg" firstAttribute="top" secondItem="CXl-rR-yaS" secondAttribute="top" id="Noa-Ky-qlA"/>
@@ -184,7 +184,7 @@
                         <constraint firstAttribute="bottom" secondItem="EGc-4Z-gkg" secondAttribute="bottom" id="fBc-6n-rnW"/>
                         <constraint firstItem="WXU-WS-uDJ" firstAttribute="centerY" secondItem="CXl-rR-yaS" secondAttribute="centerY" id="ggu-eV-1M2"/>
                         <constraint firstItem="31k-JJ-l9Q" firstAttribute="top" secondItem="CXl-rR-yaS" secondAttribute="top" id="ieW-IF-OOt"/>
-                        <constraint firstItem="ro2-O4-6UZ" firstAttribute="leading" secondItem="Igg-YJ-ChP" secondAttribute="trailing" constant="10" id="kVe-Va-EBC"/>
+                        <constraint firstItem="ro2-O4-6UZ" firstAttribute="leading" secondItem="Igg-YJ-ChP" secondAttribute="trailing" constant="11" id="kVe-Va-EBC"/>
                         <constraint firstAttribute="bottom" secondItem="2eE-Lt-b0X" secondAttribute="bottom" id="lCV-kF-FoI"/>
                         <constraint firstItem="2eE-Lt-b0X" firstAttribute="top" secondItem="CXl-rR-yaS" secondAttribute="top" id="osI-Bv-RYb"/>
                         <constraint firstAttribute="height" constant="45" id="r9G-Oh-oJH"/>

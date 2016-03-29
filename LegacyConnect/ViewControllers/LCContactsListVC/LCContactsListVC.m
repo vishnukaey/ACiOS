@@ -54,7 +54,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [LCUtilityManager setGIAndMenuButtonHiddenStatus:YES MenuHiddenStatus:YES];
   [self updateCustomAddedEmailsCount];
+  [self updateRightBarButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -234,7 +236,7 @@
 
 -(void)updateRightBarButton
 {
-  if(contactsTable.selectedIDs.count)
+  if(contactsTable.selectedIDs.count || selectedEmailsArray.count)
   {
     sendButton.enabled = YES;
   }

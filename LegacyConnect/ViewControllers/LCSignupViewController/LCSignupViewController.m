@@ -151,7 +151,7 @@
 -(void)updateTextFieldWithDate
 {
   dobTimeStamp = [LCUtilityManager getTimeStampStringFromDate:[datePicker date]];
-  _dobTextField.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"MM/dd/yyyy"];
+  _dobTextField.text = [LCUtilityManager getDateFromTimeStamp:dobTimeStamp WithFormat:@"dd-MMM-YYYY"];
 }
 
 
