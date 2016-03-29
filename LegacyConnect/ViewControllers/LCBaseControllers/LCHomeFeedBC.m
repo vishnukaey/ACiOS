@@ -127,7 +127,7 @@
   if ([self.navigationController.topViewController isEqual:self]) {
     CGPoint offset = self.tableView.contentOffset;
     [self reloadFeedsTable];
-//    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
+    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
     [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
   }
