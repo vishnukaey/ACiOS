@@ -206,10 +206,9 @@
   
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   UIButton *checkbutton = cell.checkButton;
-//  checkbutton.tag = indexPath.section*10+indexPath.row;
-//  [checkbutton addTarget:self action:@selector(checkbuttonAction:) forControlEvents:UIControlEventTouchUpInside];
   [tableView setStatusForButton:checkbutton byCheckingIDs:con.P_emails];
-  [self setButtonTitleAndColourForCheckButton:checkbutton byCheckingID:con.P_emails[0]];
+  [self setButtonTitleAndColourForCheckButton:checkbutton byCheckingID:con.P_emails[0] forCell:cell
+   ];
   
   return cell;
 }
@@ -218,19 +217,10 @@
 -(void)tableView:(LCMultipleSelectionTable *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
   LCInviteFromContactsCell *cell = (LCInviteFromContactsCell*)[tableView cellForRowAtIndexPath:indexPath];
-  LCContact *con = [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
-  [tableView AddOrRemoveID:con.P_emails[0]];
-
-  if([selectedContactsArray containsObject:con.P_emails[0]])
-  {
-    [selectedContactsArray removeObject:con.P_emails[0]];
-  }
-  else
-  {
-    [selectedContactsArray addObject:con.P_emails[0]];
-  }
-  [tableView setStatusForButton:cell.checkButton byCheckingIDs:con.P_emails];
-  [self updateRightBarButton];
+    LCContact *con = [[contactsDictionary valueForKey:[sectionTitles objectAtIndex:indexPath.section]] objectAtIndex:indexPath.row];
+    [tableView AddOrRemoveID:con.P_emails[0]];
+    [tableView setStatusForButton:cell.checkButton byCheckingIDs:con.P_emails];
+    [self updateRightBarButton];
 }
 
 
@@ -266,7 +256,7 @@
 }
 
 
--(void)setButtonTitleAndColourForCheckButton:(UIButton*)checkButton byCheckingID:(NSString*)email
+-(void)setButtonTitleAndColourForCheckButton:(UIButton*)checkButton byCheckingID:(NSString*)email forCell:(LCInviteFromContactsCell*)cell
 {
   BOOL invited = NO;
   for( NSString *E_id in invitedEmails)
@@ -285,11 +275,14 @@
     [checkButton setBackgroundImage:nil forState:UIControlStateNormal];
     [checkButton.titleLabel setFont:[UIFont fontWithName:@"Gotham-Bold" size:14.0f]];
     checkButton.userInteractionEnabled = NO;
+    cell.userInteractionEnabled = NO;
   }
   else
   {
     [checkButton setTitle:@"Invite" forState:UIControlStateNormal];
     [checkButton.titleLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14.0f]];
+    cell.userInteractionEnabled = YES;
+
   }
 }
 

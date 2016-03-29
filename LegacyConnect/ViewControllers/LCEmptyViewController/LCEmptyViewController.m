@@ -211,7 +211,7 @@ static NSString *kTitle = @"MY FEED";
 - (void)GIBComponentsAction :(UIButton *)sender
 {
   //GA Tracking
-  [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"GI Button Tapped" andLabel:@"User initiated a Help"];
+  [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"GI Button Tapped" andLabel:@"User initiated an Impact"];
   
   LCDLog(@"tag-->>%d", (int)sender.tag);
   [mainContainer setMenuState:MFSideMenuStateClosed];

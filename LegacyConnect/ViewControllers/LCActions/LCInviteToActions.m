@@ -16,7 +16,6 @@
 
 #pragma mark - LCIviteContacts class
 @interface LCInviteContactsCell : UITableViewCell
-@property(nonatomic, strong) IBOutlet UIButton *inviteButton;
 @end
 
 @implementation LCInviteContactsCell

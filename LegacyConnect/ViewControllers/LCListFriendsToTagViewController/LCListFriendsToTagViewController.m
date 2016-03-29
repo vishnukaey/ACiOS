@@ -9,7 +9,12 @@
 #import "LCListFriendsToTagViewController.h"
 #import "LCContactsListVC.h"
 
+#pragma mark - LCIviteContacts class
+@interface LCInviteContactsCell2 : UITableViewCell
+@end
 
+@implementation LCInviteContactsCell2
+@end
 
 #pragma mark - LCInviteCommunityFriendCell class
 @interface LCTagFriendsTableViewCell : UITableViewCell
@@ -30,7 +35,7 @@
 {
   [super viewDidLoad];
   self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    // Do any additional setup after loading the view.
+  // Do any additional setup after loading the view.
   [self initialSerup];
   
 }
@@ -71,8 +76,8 @@
   {
     [self.selectedFriends addObject:friend];
   }
-  NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
-  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
+//  NSString *noResultsMessage = NSLocalizedString(@"no_results_found", nil);
+//  self.noResultsView = [LCPaginationHelper getNoResultViewWithText:noResultsMessage];
   
   [self startFetchingResults];
 }
@@ -82,8 +87,8 @@
 {
   [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
   [super startFetchingResults];
-    int pageNumber = (int)self.results.count/10+1;
-
+  int pageNumber = (int)self.results.count/10+1;
+  
   [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:_searchKey lastUserId:nil andPageNumber:[NSString stringWithFormat:@"%d",pageNumber] withSuccess:^(id response) {
     [MBProgressHUD hideHUDForView:self.tableView animated:YES];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
@@ -101,7 +106,7 @@
   [super startFetchingNextResults];
   
   int pageNumber = (int)self.results.count/kPaginationFactor+1;
-
+  
   [LCProfileAPIManager getFriendsForUser:[LCDataManager sharedDataManager].userID searchKey:_searchKey lastUserId:[(LCFriend*)[self.results lastObject] friendId] andPageNumber:[NSString stringWithFormat:@"%d",pageNumber] withSuccess:^(id response) {
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchNextResults:response haveMoreData:hasMoreData];
@@ -154,73 +159,144 @@
 }
 
 #pragma mark - TableView delegates
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  return 1;    //count of section
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return self.results.count;
+  if(section == 0)
+  {
+    return self.results.count;
+  }
+  else
+  {
+    return 1;
+  }
 }
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+  return 2;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if(indexPath.section == 0)
+  {
+    return 76.0;
+  }
+  else
+  {
+    return 90;
+  }
+}
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  JTTABLEVIEW_cellForRowAtIndexPath
-  static NSString *MyIdentifier = @"LCTagFriendsTableViewCell";
-  LCTagFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-  if (cell == nil)
+  if(indexPath.section == 0)
   {
-    cell = [[LCTagFriendsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+    JTTABLEVIEW_cellForRowAtIndexPath
+    static NSString *MyIdentifier = @"LCTagFriendsTableViewCell";
+    LCTagFriendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil)
+    {
+      cell = [[LCTagFriendsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                               reuseIdentifier:MyIdentifier];
-  }
-  LCFriend *friend = self.results[indexPath.row];
-  cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
-  cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
-  [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
-
-  if ([self.selectedFriends containsObject:friend])
-  {
-    [cell.checkButton setSelected:YES];
+    }
+    LCFriend *friend = self.results[indexPath.row];
+    cell.friendNameLabel.text = [NSString stringWithFormat:@"%@ %@", friend.firstName, friend.lastName];
+    cell.friendPhotoView.layer.cornerRadius = cell.friendPhotoView.frame.size.width/2;
+    [cell.friendPhotoView  sd_setImageWithURL:[NSURL URLWithString:friend.avatarURL] placeholderImage:[UIImage imageNamed:@"userProfilePic"]];
+    
+    if ([self.selectedFriends containsObject:friend])
+    {
+      [cell.checkButton setSelected:YES];
+    }
+    else
+    {
+      [cell.checkButton setSelected:NO];
+    }
+    
+    return cell;
   }
   else
   {
-    [cell.checkButton setSelected:NO];
+    static NSString *cellIdentifier = @"LCInviteContactsCell";
+    LCInviteContactsCell2 *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+      cell = [[LCInviteContactsCell2 alloc] initWithStyle:UITableViewCellStyleDefault
+                                         reuseIdentifier:cellIdentifier];
+    }
+    return cell;
   }
-  
-  return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  return 76;
-}
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-  LCFriend *friend = self.results[indexPath.row];
-
-  if(cell.checkButton.selected)
+  if(indexPath.section == 0)
   {
-    [self.selectedFriends removeObject:friend];
-    [cell.checkButton setSelected:NO];
-
+    LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    LCFriend *friend = self.results[indexPath.row];
+    
+    if(cell.checkButton.selected)
+    {
+      [self.selectedFriends removeObject:friend];
+      [cell.checkButton setSelected:NO];
+      
+    }
+    else
+    {
+      [self.selectedFriends addObject:friend];
+      [cell.checkButton setSelected:YES];
+    }
   }
   else
   {
-    [self.selectedFriends addObject:friend];
-    [cell.checkButton setSelected:YES];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+    [self.navigationController pushViewController:contacts animated:YES];
   }
 }
+
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+  if(indexPath.section == 0)
+  {
+    LCTagFriendsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    LCFriend *friend = self.results[indexPath.row];
+    
+    if(cell.checkButton.selected)
+    {
+      [self.selectedFriends removeObject:friend];
+      [cell.checkButton setSelected:NO];
+      
+    }
+    else
+    {
+      [self.selectedFriends addObject:friend];
+      [cell.checkButton setSelected:YES];
+    }
+  }
+  else
+  {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
+    [self.navigationController pushViewController:contacts animated:YES];
+  }
+}
+
 
 -(IBAction)inviteFriendsFromContacts:(id)sender
 {
   UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
   LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
   [self.navigationController pushViewController:contacts animated:YES];
-
+  
 }
 
 @end
