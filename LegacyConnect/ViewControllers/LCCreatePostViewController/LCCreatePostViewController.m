@@ -50,10 +50,6 @@
   if (self.selectedCause || self.selectedInterest) {
       [self didfinishPickingInterest:self.selectedInterest andCause:self.selectedCause];
   }
-  
-  if (![LCTutorialManager showCreatePostTutorial]) {
-    [self.postTextView becomeFirstResponder];
-  }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -113,6 +113,11 @@
   self.interstIconImageView.contentMode = UIViewContentModeScaleAspectFit;
   
   self.postTextView = [[UITextView alloc] initWithFrame:CGRectMake(self.interstIconImageView.frame.origin.x + self.interstIconImageView.frame.size.width + 8, topmargin, _postScrollView.frame.size.width - (self.interstIconImageView.frame.origin.x + self.interstIconImageView.frame.size.width + 8), 35)];
+  //show tutorial...
+  if (![LCTutorialManager showCreatePostTutorial]) {
+    [self.postTextView becomeFirstResponder];
+  }
+  
   self.postTextView.text = @"";
   [self.postTextView setFrame:CGRectMake(self.postTextView.frame.origin.x, self.postTextView.frame.origin.y, self.postTextView.frame.size.width, self.postTextView.contentSize.height)];
   [self.postTextView setFont:POSTTEXT_FONT];
