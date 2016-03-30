@@ -14,6 +14,8 @@
 
 #define MAX_IMAGE_SIZE 1.2
 
+static NSString *const kWhiteSpace = @" ";
+
 @implementation LCUtilityManager
 
 #pragma mark - genearal method implementation
@@ -176,11 +178,7 @@
 
 + (BOOL)validatePassword:(NSString*)passwordString
 {
-  BOOL isValid = NO;
-  if (passwordString.length>7) {
-    isValid = YES;
-  }
-  if(isValid)
+  if (passwordString.length>7)
   {
     return YES;
   }
@@ -223,11 +221,18 @@
 
 + (BOOL)isEmptyString :(NSString *)string
 {
-  if ([string stringByReplacingOccurrencesOfString:@" " withString:@""].length) {
+  if ([string stringByReplacingOccurrencesOfString:kWhiteSpace withString:kEmptyStringValue].length) {
     return NO;
   }
   return YES;
 }
+
+
++ (long)trueStringLength:(NSString *)string
+{
+  return [string stringByReplacingOccurrencesOfString:kWhiteSpace withString:kEmptyStringValue].length;
+}
+
 
 #pragma mark- twitter url proccess
 + (NSDictionary *)parametersDictionaryFromQueryString:(NSString *)queryString {
@@ -329,7 +334,7 @@
 + (UIColor*)colorWithHexString:(NSString*)hexString
 {
   NSString *cString = [[hexString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
-  NSString *colorString = [[cString stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
+  NSString *colorString = [[cString stringByReplacingOccurrencesOfString: @"#" withString: kEmptyStringValue] uppercaseString];
   
   // String should be 6 or 8 characters
   if ([colorString length] < 6) return [UIColor grayColor];

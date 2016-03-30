@@ -43,5 +43,6 @@
 + (UIColor*)colorWithHexString:(NSString*)hex;
 + (void)logoutUserClearingDefaults;
 + (void)clearWebCache;
++ (long)trueStringLength:(NSString *)string;
 
 @end

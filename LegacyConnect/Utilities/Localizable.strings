@@ -12,6 +12,7 @@
 "invalid_mail_address" = "Please enter a valid mail address";
 "no_network_alert_msg" = "The network connection was lost.";
 "invalid_password" = "Password should be minimum of 8 characters.";
+"invalid_white_space" = "Password should not contain white spaces.";
 "password_mismatch" = "Passwords doesn't match.";
 "no_interests_selected" = "Causes will appear here based on the interests you choose";
 "no_causes_available" = "No causes to display.";

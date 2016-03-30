@@ -221,6 +221,10 @@
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_mail_address", @"")];
   }
+  else if([LCUtilityManager trueStringLength:self.passwordTextField.text] != self.passwordTextField.text.length )
+  {
+    [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_white_space", @"")];
+  }
   else if(![LCUtilityManager validatePassword:self.passwordTextField.text])
   {
     [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"invalid_password", @"")];
