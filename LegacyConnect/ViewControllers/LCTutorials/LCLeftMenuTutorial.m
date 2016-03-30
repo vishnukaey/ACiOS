@@ -32,7 +32,7 @@
   NSArray * colorWords1 = @[@"INTERESTS", @"FEED"];
   // -- Add Font -- //
   [attributtedString1 addAttributes:@{
-                                     NSFontAttributeName : self.font,
+                                     NSFontAttributeName : self.lightFont,
                                      } range:NSMakeRange(0, attributtedString1.length)];
   [attributtedString1 addAttribute:NSForegroundColorAttributeName
                             value:self.colorFontGrey
@@ -43,6 +43,9 @@
     [attributtedString1 addAttribute:NSForegroundColorAttributeName
                               value:self.colorFontRed
                               range:[labelString1 rangeOfString:word]];
+    [attributtedString1 addAttributes:@{
+                                       NSFontAttributeName : self.boldFont,
+                                       } range:[labelString1 rangeOfString:word]];
   }
   
   NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
@@ -59,7 +62,7 @@
   NSArray * colorWords2 = @[@"NOTIFICATIONS", @"SETTINGS"];
   // -- Add Font -- //
   [attributtedString2 addAttributes:@{
-                                      NSFontAttributeName : self.font,
+                                      NSFontAttributeName : self.lightFont,
                                       } range:NSMakeRange(0, attributtedString2.length)];
   [attributtedString2 addAttribute:NSForegroundColorAttributeName
                              value:self.colorFontGrey
@@ -70,6 +73,9 @@
     [attributtedString2 addAttribute:NSForegroundColorAttributeName
                                value:self.colorFontRed
                                range:[labelString2 rangeOfString:word]];
+    [attributtedString2 addAttributes:@{
+                                       NSFontAttributeName : self.boldFont,
+                                       } range:[labelString2 rangeOfString:word]];
   }
   
   NSMutableParagraphStyle *style2 = [[NSMutableParagraphStyle alloc] init];

@@ -52,17 +52,22 @@
 
 - (UIColor *)colorFontGrey
 {
-  return [UIColor grayColor];
+  return [UIColor colorWithRed:247.0f/255 green:247.0f/255 blue:247.0f/255 alpha:1.0];
 }
 
 - (UIColor *)colorFontRed
 {
-  return [UIColor colorWithRed:250.0f/255 green:70.0f/255 blue:22.0f/255 alpha:1];
+  return [LCUtilityManager getThemeRedColor];
 }
 
-- (UIFont *)font
+- (UIFont *)lightFont
 {
-  return [UIFont fontWithName:@"Gotham-medium" size:13.0f];
+  return [UIFont fontWithName:@"Gotham-book" size:13.0f];
+}
+
+- (UIFont *)boldFont
+{
+  return [UIFont fontWithName:@"Gotham-bold" size:13.0f];
 }
 
 - (float)lineSpacing

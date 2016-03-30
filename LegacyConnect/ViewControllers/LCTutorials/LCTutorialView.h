@@ -16,7 +16,8 @@
 - (UIColor *)colorTransparentBlack;
 - (UIColor *)colorFontGrey;
 - (UIColor *)colorFontRed;
-- (UIFont *)font;
+- (UIFont *)lightFont;
+- (UIFont *)boldFont;
 - (float)lineSpacing;
 
 

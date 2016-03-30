@@ -30,7 +30,7 @@
   NSArray * colorWords = @[@"PROFILE", @"THANKS", @"HELPS", @"INTERESTS", @"OPPORTUNITIES"];
   // -- Add Font -- //
   [attributtedString addAttributes:@{
-                                     NSFontAttributeName : self.font,
+                                     NSFontAttributeName : self.lightFont,
                                      } range:NSMakeRange(0, attributtedString.length)];
   [attributtedString addAttribute:NSForegroundColorAttributeName
                             value:self.colorFontGrey
@@ -41,6 +41,9 @@
     [attributtedString addAttribute:NSForegroundColorAttributeName
                               value:self.colorFontRed
                               range:[labelString rangeOfString:word]];
+    [attributtedString addAttributes:@{
+                                       NSFontAttributeName : self.boldFont,
+                                       } range:[labelString rangeOfString:word]];
   }
   
   NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
