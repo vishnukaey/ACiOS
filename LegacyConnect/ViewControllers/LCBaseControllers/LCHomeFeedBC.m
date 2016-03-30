@@ -120,7 +120,7 @@
 - (void)refreshViews
 {
   if ([self.navigationController.topViewController isEqual:self]) {
-//    CGPoint offset = self.tableView.contentOffset;
+    CGPoint offset = self.tableView.contentOffset;
 //    [self.tableView reloadData];
 
     [self reloadFeedsTable];
@@ -133,9 +133,10 @@
 - (void)reloadFeedsTable
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-      
+//      CGPoint offset = self.tableView.contentOffset;
 //      [self.tableView setContentSize:CGSizeMake(self.tableView.contentSize.width, 0)];
   [self.tableView reloadData];
+//      [self.tableView setContentOffset:offset];
   //    [self.tableView layoutIfNeeded];
   //    self.tableContentHeight = self.tableView.contentSize.height+[LCUtilityManager getHeightOffsetForGIB];
   //      self.tableView.contentSize = CGSizeMake(self.tableView.contentSize.width, self.tableContentHeight);

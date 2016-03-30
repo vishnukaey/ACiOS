@@ -88,17 +88,17 @@
 #pragma mark - API and Pagination
 - (void)startFetchingResults
 {
-  [MBProgressHUD showHUDAddedTo:self.tableView animated:YES];
+  [MBProgressHUD showHUDAddedTo:self.view animated:YES];
   [super startFetchingResults];
-  [LCThemeAPIManager getPostsInInterestByThankedOrder:self.interest.interestID andLastPostID:nil andPageNumber:[NSString stringWithFormat:@"%lu", self.results.count/10 + 1] withSuccess:^(NSArray *response) {
-    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+  [LCThemeAPIManager getPostsInInterestByThankedOrder:self.interest.interestID andLastPostID:nil andPageNumber:[NSString stringWithFormat:@"%d", 1] withSuccess:^(NSArray *response) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self stopRefreshingViews];
     BOOL hasMoreData = [(NSArray*)response count] >= 10;
     [self didFetchResults:response haveMoreData:hasMoreData];
     [self setNoResultViewHidden:[(NSArray*)response count] != 0];
     [self reloadPostsTable];
   } andFailure:^(NSString *error) {
-    [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     [self stopRefreshingViews];
     [self didFailedToFetchResults];
     [self setNoResultViewHidden:[self.results count] != 0];
