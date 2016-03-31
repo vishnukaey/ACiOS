@@ -703,12 +703,12 @@
                                     <outlet property="delegate" destination="oRs-pM-3Ty" id="QUG-zZ-0P9"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThatHelps 0.0.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2Y-7Y-eib">
-                                <rect key="frame" x="45" y="637" width="284" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ThatHelps 0.0.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c2Y-7Y-eib">
+                                <rect key="frame" x="28" y="631" width="284" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="fXd-Xy-jGA"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -718,13 +718,13 @@
                             <constraint firstItem="Z7H-Se-eIu" firstAttribute="top" secondItem="Xg2-fU-H8Q" secondAttribute="bottom" constant="38" id="8cs-0K-m9m"/>
                             <constraint firstItem="Xg2-fU-H8Q" firstAttribute="top" secondItem="SaK-0r-E77" secondAttribute="bottom" id="EK0-0S-0P1"/>
                             <constraint firstAttribute="trailing" secondItem="SaK-0r-E77" secondAttribute="trailing" id="RrQ-mb-aww"/>
-                            <constraint firstAttribute="trailing" secondItem="c2Y-7Y-eib" secondAttribute="trailing" constant="46" id="W86-Dd-8Rv"/>
+                            <constraint firstAttribute="trailing" secondItem="c2Y-7Y-eib" secondAttribute="trailing" constant="63" id="W86-Dd-8Rv"/>
                             <constraint firstAttribute="trailing" secondItem="Xg2-fU-H8Q" secondAttribute="trailing" id="b2N-el-3be"/>
                             <constraint firstItem="SaK-0r-E77" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" id="g5Z-Wp-5LP"/>
                             <constraint firstItem="SaK-0r-E77" firstAttribute="top" secondItem="lV2-yE-fgJ" secondAttribute="top" id="gVO-fH-vkx"/>
-                            <constraint firstItem="c2Y-7Y-eib" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" constant="45" id="rsI-DY-QDe"/>
+                            <constraint firstItem="c2Y-7Y-eib" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" constant="28" id="rsI-DY-QDe"/>
                             <constraint firstItem="Xg2-fU-H8Q" firstAttribute="leading" secondItem="lV2-yE-fgJ" secondAttribute="leading" id="ufE-mb-2jX"/>
-                            <constraint firstItem="Z7H-Se-eIu" firstAttribute="top" secondItem="c2Y-7Y-eib" secondAttribute="bottom" constant="9" id="yDG-qx-826"/>
+                            <constraint firstItem="Z7H-Se-eIu" firstAttribute="top" secondItem="c2Y-7Y-eib" secondAttribute="bottom" constant="15" id="yDG-qx-826"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
