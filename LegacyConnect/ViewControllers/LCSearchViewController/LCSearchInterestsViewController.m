@@ -37,15 +37,15 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.noResultsView = [LCPaginationHelper getSearchNoResultViewWithText:NSLocalizedString(@"no_results_found", nil)];
+//  self.noResultsView = [LCPaginationHelper getSearchNoResultViewWithText:NSLocalizedString(@"no_results_found", nil)];
   float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
   self.collectionViewCellSize = CGSizeMake(size, size + 20);
   
-  if (self.results.count > 0) {
-    [self hideNoResultsView];
-  } else {
-    [self showNoResultsView];
-  }
+//  if (self.results.count > 0) {
+//    [self hideNoResultsView];
+//  } else {
+//    [self showNoResultsView];
+//  }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +59,7 @@
   [noResultLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
   noResultLabel.textAlignment = NSTextAlignmentCenter;
   noResultLabel.numberOfLines = 2;
-  [noResultLabel setText:@"No Results Found"];
+  [noResultLabel setText:@"Sorry, we couldn’t find that."];
   return noResultLabel;
 }
 
@@ -93,5 +93,20 @@
   float size = ([[UIScreen mainScreen] bounds].size.width - 15*4)/3;
   return CGSizeMake(size, 140);
 }
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+  if (!self.results.count && ![[LCUtilityManager performNullCheckAndSetValue:_searchKey] isEqualToString:kEmptyStringValue])
+  {
+    self.noResultsHereView.hidden = NO;
+  }
+  else
+  {
+    self.noResultsHereView.hidden = YES;
+  }
+  
+  return [super collectionView:collectionView numberOfItemsInSection:section];
+}
+
 
 @end

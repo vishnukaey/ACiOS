@@ -135,6 +135,7 @@
 {
   
   searchTopResultsVC.searchResultObject = searchResultObject;
+  searchTopResultsVC.searchKey = _searchBar.text;
   [searchTopResultsVC.topTableView reloadData];
   
   [searchUsersVC setUsersArray:searchResultObject.usersArray];

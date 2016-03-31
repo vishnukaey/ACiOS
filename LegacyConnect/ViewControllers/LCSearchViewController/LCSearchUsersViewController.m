@@ -53,34 +53,22 @@
   [self didFetchResults:usersArray haveMoreData:hasMoreData];
 }
 
-- (UIView *)getNOResultLabel
-{
-  UILabel * noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 40)];
-  [noResultLabel setFont:[UIFont fontWithName:@"Gotham-Book" size:14]];
-  [noResultLabel setTextColor:[UIColor colorWithRed:35.0/255 green:31.0/255 blue:32.0/255 alpha:1]];
-  noResultLabel.textAlignment = NSTextAlignmentCenter;
-  noResultLabel.numberOfLines = 2;
-  [noResultLabel setText:@"No Results Found"];
-  return noResultLabel;
-}
+
 
 #pragma mark - TableView delegates
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  UIView *prev = [tableView viewWithTag:122];
-  if (prev)
+  if (!self.results.count && ![[LCUtilityManager performNullCheckAndSetValue:_searchKey] isEqualToString:kEmptyStringValue])
   {
-    [prev removeFromSuperview];
-  }
-  if (!self.results.count) {
-    UIView *noResultView = [self getNOResultLabel];
-    noResultView.tag = 122;
-    noResultView.center = CGPointMake(tableView.frame.size.width/2, noResultView.center.y);
-    [tableView addSubview:noResultView];
-  }
+      self.noResultsHereView.hidden = NO;
+    }
+    else
+    {
+      self.noResultsHereView.hidden = YES;
+    }
+    
   return [super tableView:tableView numberOfRowsInSection:section];
-  
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
@@ -121,7 +109,6 @@
   profileVC.userDetail = [[LCUserDetail alloc] init];
   profileVC.userDetail = self.results[indexPath.row];
   [self.navigationController pushViewController:profileVC animated:YES];
-  
 }
 
 @end

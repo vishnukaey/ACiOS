@@ -10,7 +10,6 @@
 #import "LCSearchTopBC.h"
 
 @interface LCSearchTopViewController : LCSearchTopBC
-
-
-
+@property (weak, nonatomic) IBOutlet UIView *noResultsView;
+@property (nonatomic,retain) NSString *searchKey;
 @end

@@ -10,7 +10,7 @@
 #import "LCSearchUsersBC.h"
 
 @interface LCSearchUsersViewController : LCSearchUsersBC
-
+@property (weak, nonatomic) IBOutlet UIView *noResultsHereView;
 @property (nonatomic,retain) NSString *searchKey;
 - (void)setUsersArray:(NSArray*) usersArray;
 

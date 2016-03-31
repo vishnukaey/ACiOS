@@ -10,7 +10,7 @@
 #import "LCCollectionViewController.h"
 
 @interface LCSearchInterestsViewController : LCCollectionViewController
-
+@property (weak, nonatomic) IBOutlet UIView *noResultsHereView;
 @property (nonatomic,retain) NSString *searchKey;
 - (void)setInterestsArray:(NSArray*)interests;
 

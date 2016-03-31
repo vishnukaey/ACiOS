@@ -118,20 +118,5 @@
 }
 
 
-//
-//-(void) setDelegate:(id<locationsSearchFieldDelegate>) delegate {
-//  [super setDelegate: delegate];
-//}
-//- (id) delegate {
-//  return [super delegate];
-//}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end

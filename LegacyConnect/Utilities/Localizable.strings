@@ -75,7 +75,7 @@
 "choose_from_library" = "Choose From Library";
 "edit_photo" = "Edit Photo";
 "remove_header_photo" = "Remove Header Photo";
-"access_denied_error_message_camera" = "Please give ThatHelps! permission to access device camera in your settings app!";
+"access_denied_error_message_camera" = "Please give ThatHelps permission to access device camera in your settings app!";
 "attention" = "Attention";
 "close" = "Close";
 "select_photo" = "Select Photo";
@@ -113,7 +113,7 @@
 "website_validation_error_message" = "Please enter a valid website URL";
 "action_type_event" = "Event";
 "action_type_challenge" = "Challenge";
-"action_type_poll" = "Poll";
+"action_type_poll" = "Question";
 "event_created_by" = "Opportunity Created by ";
 "in_" = "in ";
 "you_" = "You";
