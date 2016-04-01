@@ -100,21 +100,23 @@
   {
     return nil;
   }
-  
+  _currentIndex = (int)index;
   if(index == 0)
   {
-    return [self viewControllerAtIndex:[self.pageTitles count]];
+    return [self viewControllerAtIndex:[self.pageTitles count]-1];
   }
-  _currentIndex = (int)index;
   index--;
   return [self viewControllerAtIndex:index];
 }
+
+
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
   NSUInteger index = ((LCAboutPageContentVC*) viewController).pageIndex;
   
-  if (index == NSNotFound) {
+  if (index == NSNotFound)
+  {
     return nil;
   }
   _currentIndex = (int)index;
@@ -139,8 +141,6 @@
   pageContentViewController.imageFile = self.pageImages[index];
   pageContentViewController.titleText = self.pageTitles[index];
   pageContentViewController.pageIndex = index;
-//  _currentIndex = (int)index;
-  
   return pageContentViewController;
 }
 
@@ -158,7 +158,7 @@
   __weak typeof(self) weakSelf = self;
   if (!transitionInProgress) {
     [self.pageViewController setViewControllers:@[nextViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES  completion:^(BOOL finished) {
-      transitionInProgress = !finished;
+      transitionInProgress = NO;
       [weakSelf.pageControl setCurrentPage:weakSelf.currentIndex];
     }];
   }
