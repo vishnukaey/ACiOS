@@ -125,7 +125,7 @@
 
     [self reloadFeedsTable];
 //    [self.tableView layoutIfNeeded]; // Force layout so things are updated before resetting the contentOffset.
-//    [self.tableView setContentOffset:offset];
+    [self.tableView setContentOffset:offset];
     [self setNoResultViewHidden:[self.results count] != 0];
   }
 }

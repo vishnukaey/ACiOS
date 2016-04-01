@@ -186,7 +186,7 @@
   }
   else
   {
-    [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Follower",followersCount] forState:UIControlStateNormal];    
+    [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",followersCount] forState:UIControlStateNormal];    
   }
   [self.causeURLButton setTitle:[LCUtilityManager performNullCheckAndSetValue:self.cause.causeUrl] forState:UIControlStateNormal];
   

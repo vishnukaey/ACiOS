@@ -68,7 +68,7 @@ NSString *const kPlaceholderText = @"Type email addresses here separated by comm
   {
     [_emailsArray removeAllObjects];
     [_emailsArray addObjectsFromArray:emails];
-    NSLog(@"count %ld",_emailsArray.count);
+    NSLog(@"count %ld",(unsigned long)_emailsArray.count);
     [self.navigationController popViewControllerAnimated:YES];
   }
 }

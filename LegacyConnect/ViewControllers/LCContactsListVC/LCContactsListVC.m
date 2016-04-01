@@ -314,7 +314,7 @@
 {
   if(selectedEmailsArray.count>0)
   {
-    [additionalEmailsLabel setText:[NSString stringWithFormat:@"%ld added",selectedEmailsArray.count]];
+    [additionalEmailsLabel setText:[NSString stringWithFormat:@"%ld added",(unsigned long)selectedEmailsArray.count]];
     [additionalEmailsLabel setHidden:NO];
   }
   else
