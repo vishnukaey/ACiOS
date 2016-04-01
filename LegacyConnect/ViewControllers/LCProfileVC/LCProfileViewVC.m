@@ -191,7 +191,9 @@
   UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
   LCImapactsViewController *impactsVC = [profileSB instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
   impactsVC.self.userDetail = self.userDetail;
+  impactsVC.isSelfProfile = [self.userDetail.userID isEqualToString:[LCDataManager sharedDataManager].userID];
   [self.navigationController pushViewController:impactsVC animated:YES];
+
 }
 
 - (IBAction)backAction:(id)sender

@@ -10,7 +10,6 @@
 #import "LCImpactsViewBC.h"
 
 @interface LCImapactsViewController : LCImpactsViewBC
-
 @property (weak, nonatomic) IBOutlet  NSLayoutConstraint *customNavigationHeight;
 
 @end

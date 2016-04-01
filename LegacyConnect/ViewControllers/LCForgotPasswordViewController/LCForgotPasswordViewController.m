@@ -90,6 +90,7 @@
   if ([LCUtilityManager validateEmail:_emailTextField.text])
   {
     [self.emailTextField resignFirstResponder];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self performPasswordResetRequestWithEmail:_emailTextField.text];
   }
   else
@@ -103,7 +104,10 @@
   
   [LCOnboardingAPIManager forgotPasswordOfUserWithMailID:email withSuccess:^(id response) {
     [self.delegate forgotPasswordRequestSent:_emailTextField.text];
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+
   } andFailure:^(NSString *error) {
+    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     LCDLog(@"response : %@",error);
   }];
 }

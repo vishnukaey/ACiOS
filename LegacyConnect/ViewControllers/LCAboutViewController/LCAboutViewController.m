@@ -11,10 +11,12 @@
 
 @interface LCAboutViewController ()
 {
-  int currentIndex;
-  UIPageControl *pageControl;
   NSTimer *timer;
+  bool transitionInProgress;
 }
+@property (nonatomic) UIPageControl *pageControl;
+@property(nonatomic, assign) int currentIndex;
+
 @end
 
 @implementation LCAboutViewController
@@ -22,9 +24,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  pageControl = [UIPageControl appearance];
-  pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-  pageControl.currentPageIndicatorTintColor = [LCUtilityManager getThemeRedColor];
+  _pageControl = [UIPageControl appearance];
+  _pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+  _pageControl.currentPageIndicatorTintColor = [LCUtilityManager getThemeRedColor];
   
   _pageTitles = @[@"aboutPage1_Text", @"aboutPage2_Text", @"aboutPage3_Text", @"aboutPage4_Text"];
   _pageImages = @[@"AboutPage1", @"AboutPage2", @"AboutPage3", @"AboutPage4"];
@@ -38,8 +40,8 @@
   NSArray *viewControllers = @[startingViewController];
   [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
   
-  pageControl.numberOfPages = _pageTitles.count;
-  pageControl.currentPage = 0;
+  _pageControl.numberOfPages = _pageTitles.count;
+  _pageControl.currentPage = 0;
 
   // Change the size of page view controller
   self.pageViewController.view.frame = [[self view] bounds];
@@ -52,18 +54,33 @@
 -(void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  [self restartTimer];
+}
+
+-(void)invalidateTimer
+{
+  [timer invalidate];
+  timer= nil;
+
+  
+}
+
+-(void)restartTimer
+{
+  [self invalidateTimer];
   timer = [NSTimer scheduledTimerWithTimeInterval:3.0
                                            target:self
                                          selector:@selector(loadNextController)
                                          userInfo:nil
                                           repeats:YES];
+
 }
+
 
 -(void)viewDidDisappear:(BOOL)animated
 {
   [super viewDidDisappear:animated];
-  [timer invalidate];
-  timer= nil;
+  [self invalidateTimer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,10 +96,16 @@
   
   NSUInteger index = ((LCAboutPageContentVC*) viewController).pageIndex;
   
-  if ((index == 0) || (index == NSNotFound)) {
+  if (index == NSNotFound)
+  {
     return nil;
   }
   
+  if(index == 0)
+  {
+    return [self viewControllerAtIndex:[self.pageTitles count]];
+  }
+  _currentIndex = (int)index;
   index--;
   return [self viewControllerAtIndex:index];
 }
@@ -94,10 +117,11 @@
   if (index == NSNotFound) {
     return nil;
   }
-  
+  _currentIndex = (int)index;
   index++;
-  if (index == [self.pageTitles count]) {
-    return nil;
+  if (index == [self.pageTitles count])
+  {
+    return [self viewControllerAtIndex:0];
   }
   return [self viewControllerAtIndex:index];
 }
@@ -115,7 +139,7 @@
   pageContentViewController.imageFile = self.pageImages[index];
   pageContentViewController.titleText = self.pageTitles[index];
   pageContentViewController.pageIndex = index;
-  currentIndex = (int)index;
+//  _currentIndex = (int)index;
   
   return pageContentViewController;
 }
@@ -123,23 +147,30 @@
 /*! set next controller */
 - (void)loadNextController
 {
-  currentIndex++;
-  LCAboutPageContentVC *nextViewController = [self viewControllerAtIndex:currentIndex];
+  _currentIndex++;
+  LCAboutPageContentVC *nextViewController = [self viewControllerAtIndex:_currentIndex];
   if (nextViewController == nil) {
-    currentIndex = 0;
-    nextViewController = [self viewControllerAtIndex:currentIndex];
+    _currentIndex = 0;
+    nextViewController = [self viewControllerAtIndex:_currentIndex];
   }
-  [pageControl setCurrentPage:currentIndex];
-  [self.pageViewController setViewControllers:@[nextViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:nil];
-  [pageControl setCurrentPage:currentIndex];
+  [_pageControl setCurrentPage:_currentIndex];
+  
+  __weak typeof(self) weakSelf = self;
+  if (!transitionInProgress) {
+    [self.pageViewController setViewControllers:@[nextViewController] direction:UIPageViewControllerNavigationDirectionForward animated:YES  completion:^(BOOL finished) {
+      transitionInProgress = !finished;
+      [weakSelf.pageControl setCurrentPage:weakSelf.currentIndex];
+    }];
+  }
 }
 
 
 -(void) pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
   LCAboutPageContentVC *currentViewController = pageViewController.viewControllers[0];
-  currentIndex = (int)currentViewController.pageIndex;
-  [pageControl setCurrentPage:currentIndex];
+  _currentIndex = (int)currentViewController.pageIndex;
+  [_pageControl setCurrentPage:_currentIndex];
+  [self restartTimer];
 }
 
 
@@ -150,7 +181,7 @@
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
 {
-  return currentIndex;
+  return _currentIndex;
 }
 
 @end

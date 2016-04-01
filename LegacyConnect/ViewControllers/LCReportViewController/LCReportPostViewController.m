@@ -59,6 +59,8 @@
 
 - (IBAction)cancelButtonTapped:(id)sender
 {
+  UIButton *cancelButton = (UIButton*)sender;
+  cancelButton.userInteractionEnabled = NO;
   [self dismissViewControllerAnimated:YES completion:^{
     [[NSNotificationCenter defaultCenter] postNotificationName:@"block_details_screen_dismissed" object:nil];
   }];

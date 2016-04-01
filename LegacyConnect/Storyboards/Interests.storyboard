@@ -167,7 +167,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCC-FG-Y4a">
-                                                        <rect key="frame" x="41" y="10" width="251" height="30"/>
+                                                        <rect key="frame" x="21" y="10" width="291" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="30" id="2zk-4G-qYm"/>
                                                         </constraints>
@@ -188,11 +188,11 @@
                                                     <constraint firstItem="Fpc-ea-0a9" firstAttribute="top" secondItem="JYL-cO-MZo" secondAttribute="top" constant="17" id="Sfj-dL-v4L"/>
                                                     <constraint firstItem="LCC-FG-Y4a" firstAttribute="top" secondItem="JYL-cO-MZo" secondAttribute="top" constant="10" id="UA7-jX-OZb"/>
                                                     <constraint firstAttribute="trailing" secondItem="LLC-FS-SLd" secondAttribute="trailing" constant="12" id="XOG-91-jEp"/>
-                                                    <constraint firstItem="LCC-FG-Y4a" firstAttribute="leading" secondItem="Fpc-ea-0a9" secondAttribute="trailing" constant="14" id="buS-o1-ZCG"/>
+                                                    <constraint firstItem="LCC-FG-Y4a" firstAttribute="leading" secondItem="Fpc-ea-0a9" secondAttribute="trailing" constant="-6" id="buS-o1-ZCG"/>
                                                     <constraint firstItem="czL-TB-bMS" firstAttribute="top" secondItem="LCC-FG-Y4a" secondAttribute="bottom" constant="9" id="ccL-Z3-xMi"/>
                                                     <constraint firstAttribute="trailing" secondItem="czL-TB-bMS" secondAttribute="trailing" constant="5" id="hRd-as-805"/>
                                                     <constraint firstItem="czL-TB-bMS" firstAttribute="leading" secondItem="JYL-cO-MZo" secondAttribute="leading" constant="10" id="lgp-sP-Wni"/>
-                                                    <constraint firstItem="LLC-FS-SLd" firstAttribute="leading" secondItem="LCC-FG-Y4a" secondAttribute="trailing" constant="8" id="uHI-7y-hzo"/>
+                                                    <constraint firstItem="LLC-FS-SLd" firstAttribute="leading" secondItem="LCC-FG-Y4a" secondAttribute="trailing" constant="-12" id="uHI-7y-hzo"/>
                                                 </constraints>
                                             </view>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f86-sa-3iP">
