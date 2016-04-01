@@ -179,8 +179,15 @@
   self.navigationBar.title.text =[[LCUtilityManager performNullCheckAndSetValue: self.cause.name] uppercaseString];
   [self.causeImageView sd_setImageWithURL:[NSURL URLWithString:self.cause.logoURLSmall] placeholderImage:[UIImage imageNamed:@"cause_placeholder"]];
   self.causeNameLabel.text = [[LCUtilityManager performNullCheckAndSetValue:self.cause.name] uppercaseString];
-  [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Followers",[LCUtilityManager performNullCheckAndSetValue:self.cause.supporters]] forState:UIControlStateNormal];
-  
+  NSString *followersCount = [LCUtilityManager performNullCheckAndSetValue:self.cause.supporters];
+  if([followersCount isEqualToString:@"1"])
+  {
+  [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Follower",followersCount] forState:UIControlStateNormal];
+  }
+  else
+  {
+    [self.causeSupportersCountButton setTitle:[NSString stringWithFormat:@"%@ Follower",followersCount] forState:UIControlStateNormal];    
+  }
   [self.causeURLButton setTitle:[LCUtilityManager performNullCheckAndSetValue:self.cause.causeUrl] forState:UIControlStateNormal];
   
   if(self.cause.isSupporting)

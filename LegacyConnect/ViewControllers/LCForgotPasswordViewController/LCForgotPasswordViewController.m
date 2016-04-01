@@ -1,3 +1,4 @@
+
 //
 //  LCForgotPasswordViewController.m
 //  LegacyConnect
@@ -91,7 +92,7 @@
   {
     [self.emailTextField resignFirstResponder];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self performPasswordResetRequestWithEmail:_emailTextField.text];
+    [self performPasswordResetRequestWithEmail:[_emailTextField.text copy]];
   }
   else
   {
@@ -100,11 +101,14 @@
 }
 
 #pragma mark - private method implementation
-- (void)performPasswordResetRequestWithEmail:(NSString*)email {
-  
+- (void)performPasswordResetRequestWithEmail:(NSString*)email
+{
   [LCOnboardingAPIManager forgotPasswordOfUserWithMailID:email withSuccess:^(id response) {
-    [self.delegate forgotPasswordRequestSent:_emailTextField.text];
-    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+      [self.delegate forgotPasswordRequestSent:[_emailTextField.text copy]];
+    _emailTextField=nil;
+    
+//    [self.navigationController popViewControllerAnimated:YES];
+//    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
 
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];

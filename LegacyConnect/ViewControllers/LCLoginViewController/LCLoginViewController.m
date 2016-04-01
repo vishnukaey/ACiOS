@@ -10,7 +10,9 @@
 #import <SDWebImage/SDImageCache.h>
 
 @interface LCLoginViewController ()
-
+{
+   NSString * forgotPaswordEmail;
+}
 @end
 
 @implementation LCLoginViewController
@@ -35,12 +37,17 @@
   
   //GATracking
   [LCGAManager ga_trackViewWithName:@"SignIn"];
+ 
 }
 
 
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
+  
+  if (forgotPaswordEmail.length) {
+    [self showEmailSentAlert:forgotPaswordEmail];
+  }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -120,11 +127,18 @@
 
 - (void)forgotPasswordRequestSent:(NSString *)user
 {
+  forgotPaswordEmail = user;
   [self.navigationController popViewControllerAnimated:YES];
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"email_sent_message", @""),user] delegate:nil cancelButtonTitle:NSLocalizedString(@"dismiss_button_title", @"") otherButtonTitles:nil];
-  [alertView show];
+//  [self performSelector:@selector(showEmailSentAlert:) withObject:user afterDelay:1];
+//  [self showEmailSentAlert:user];
 }
 
+-(void)showEmailSentAlert:(NSString*) user
+{
+    forgotPaswordEmail = kEmptyStringValue;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:[NSString stringWithFormat:@"%@ %@",NSLocalizedString(@"email_sent_message", @""),user] delegate:nil cancelButtonTitle:NSLocalizedString(@"dismiss_button_title", @"") otherButtonTitles:nil];
+    [alertView show];
+}
 
 - (void)updatePasswordSuccessful
 {

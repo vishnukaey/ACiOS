@@ -19,7 +19,7 @@
 
 
 @property (nonatomic, unsafe_unretained) NSObject <forgotPasswordDelegate> *delegate;
-@property (nonatomic,retain) IBOutlet UITextField *emailTextField;
+@property (nonatomic,weak) IBOutlet UITextField *emailTextField;
 
 
 @end
