@@ -2676,7 +2676,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8bf845ef-8d4d-4b77-ab3c-8672cef03278";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2700,7 +2700,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8bf845ef-8d4d-4b77-ab3c-8672cef03278";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -2819,7 +2819,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8bf845ef-8d4d-4b77-ab3c-8672cef03278";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Development;
 		};
@@ -2919,7 +2919,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8bf845ef-8d4d-4b77-ab3c-8672cef03278";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Staging;
 		};
@@ -3019,7 +3019,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8bf845ef-8d4d-4b77-ab3c-8672cef03278";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Demo;
 		};
@@ -3101,8 +3101,8 @@
 			baseConfigurationReference = D709495BE61C9DA4766359FE /* Pods-LegacyConnect.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Gist Digital Inc. (L75K25G57P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Gist Digital Inc. (L75K25G57P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FB_DISPLAY_NAME = ThatHelps;
 				FB_ID = 535164313296078;
@@ -3119,7 +3119,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gistdigital.thathelps;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "8bf845ef-8d4d-4b77-ab3c-8672cef03278";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Production;
 		};
