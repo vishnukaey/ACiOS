@@ -141,6 +141,7 @@
   {
     UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
     LCOnboardThemesVC *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCChooseCausesVC"];
+    [LCTutorialManager resetTutorialPersistance];
     [self.navigationController pushViewController:termsVC animated:YES];
   }
   else
