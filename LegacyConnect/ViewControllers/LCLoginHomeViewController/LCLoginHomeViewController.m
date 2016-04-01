@@ -91,8 +91,8 @@
           {
             UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
             LCAcceptTermsViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCAcceptTermsViewController"];
-            [self.navigationController pushViewController:termsVC animated:YES];
             [LCTutorialManager resetTutorialPersistance];
+            [self.navigationController pushViewController:termsVC animated:YES];
           }
           else
           {

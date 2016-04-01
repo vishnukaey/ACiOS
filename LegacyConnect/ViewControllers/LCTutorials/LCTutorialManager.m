@@ -161,15 +161,16 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
 
 + (void)setTutorialPersistance
 {
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kHomeFeedTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kNotificationsTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kProfileTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestListTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCauseTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kLeftMenuTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kGIButtonTutorial];
-    [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCreatePostTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kHomeFeedTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kNotificationsTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kProfileTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestListTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kInterestTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCauseTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kLeftMenuTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kGIButtonTutorial];
+  [[NSUserDefaults standardUserDefaults]setObject:@"shown" forKey:kCreatePostTutorial];
+  [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)resetTutorialPersistance
@@ -183,6 +184,8 @@ NSString *const kCreatePostTutorial = @"kCreatePostTutorial";
   [[NSUserDefaults standardUserDefaults]removeObjectForKey:kLeftMenuTutorial];
   [[NSUserDefaults standardUserDefaults]removeObjectForKey:kGIButtonTutorial];
   [[NSUserDefaults standardUserDefaults]removeObjectForKey:kCreatePostTutorial];
+  [[NSUserDefaults standardUserDefaults] synchronize];
+  
 }
 
 @end
