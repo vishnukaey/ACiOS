@@ -55,7 +55,7 @@
   eventToEdit.type = actionForm.actionTypeField.text;
   eventToEdit.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
   eventToEdit.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];
-  eventToEdit.website = actionForm.actionWebsiteField.text;
+  eventToEdit.website = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionWebsiteField.text];
   eventToEdit.eventDescription = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionAboutField.text];
   [MBProgressHUD showHUDAddedTo:actionForm.view animated:YES];
   

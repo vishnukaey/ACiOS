@@ -31,7 +31,7 @@
   LCEvent *com = [[LCEvent alloc] init];
   com.name = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionNameField.text];
   com.interestID = self.selectedInterest.interestID;
-  com.website = actionForm.actionWebsiteField.text;
+  com.website = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionWebsiteField.text];
   com.eventDescription = [LCUtilityManager getSpaceTrimmedStringFromString:actionForm.actionAboutField.text];
   com.startDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.startDate];
   com.endDate = [LCUtilityManager getTimeStampStringFromDate:actionForm.endDate];

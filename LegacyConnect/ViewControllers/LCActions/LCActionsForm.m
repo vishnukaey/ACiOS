@@ -56,7 +56,8 @@
 
 - (IBAction)nextButtonOutletAction
 {
-  if ([LCUtilityManager isaValidWebsiteLink:self.actionWebsiteField.text] || !self.actionWebsiteField.text.length) {
+  NSString *trimmedString = [LCUtilityManager getSpaceTrimmedStringFromString:self.actionWebsiteField.text];
+  if ([LCUtilityManager isaValidWebsiteLink:trimmedString] || !trimmedString.length) {
     [self.formTableView endEditing:YES];
     [delegate nextButtonAction];
   }
