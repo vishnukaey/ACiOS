@@ -129,6 +129,9 @@
   }
   else
   {
+    //GA Tracking
+    [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"GI Button Tapped" andLabel:@"User initiated a Help"];
+    
     [self showMenu];
   }
 }
