@@ -163,7 +163,7 @@
   [LCOnboardingAPIManager registerNewUser:dict withSuccess:^(id response) {
     
     //GA Tracking
-    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful"];
+    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful using email"];
     
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:response];
     [LCUtilityManager saveUserDefaultsForNewUser];

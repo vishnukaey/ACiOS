@@ -146,6 +146,7 @@
   
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
+     [LCGAManager ga_trackEventWithCategory:@"Interests" action:@"Followed" andLabel:interest.name];
      LCDLog(@"Interest followed successfully");
      [LCNotificationManager postInterestFollowedNotificationWithInterest:interest];
      success(response);
@@ -196,7 +197,7 @@
    {
      LCDLog(@"Interest unfollowed successfully");
      [LCNotificationManager postInterestUnFollowedNotificationWithInterest:interest];
-
+     [LCGAManager ga_trackEventWithCategory:@"Interests" action:@"Unfollowed" andLabel:interest.name];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

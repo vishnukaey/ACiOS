@@ -71,11 +71,11 @@
   LCWebServiceManager *webService = [[LCWebServiceManager alloc] init];
   NSString *url = [NSString stringWithFormat:@"%@%@", kBaseURL, kPostLikeURL];
   NSDictionary *dict = @{kPostIDKey: post.entityID};
-  
   [webService performPostOperationWithUrl:url andAccessToken:[LCDataManager sharedDataManager].userToken withParameters:dict withSuccess:^(id response)
    {
      LCDLog(@"Post liked.");
      [LCNotificationManager postLikedNotificationfromResponse:response forPost:post];
+     [LCGAManager ga_trackEventWithCategory:@"Thank" action:@"Thanking" andLabel:post.postToName];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);
@@ -95,6 +95,7 @@
    {
      LCDLog(@"Post unliked.");
      [LCNotificationManager postUnLikedNotificationfromResponse:response forPost:post];
+     [LCGAManager ga_trackEventWithCategory:@"Thank" action:@"Unthanking" andLabel:post.postToName];
      success(response);
    } andFailure:^(NSString *error) {
      LCDLog(@"%@",error);

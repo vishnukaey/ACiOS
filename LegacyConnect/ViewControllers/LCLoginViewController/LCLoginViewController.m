@@ -96,7 +96,7 @@
     [loginBtn setEnabled:true];
 
     //GA Tracking
-    [LCGAManager ga_trackEventWithCategory:@"SignIn" action:@"Success" andLabel:@"User Sign-in successful"];
+    [LCGAManager ga_trackEventWithCategory:@"SignIn" action:@"Success" andLabel:@"User Sign-in successful using email"];
 
     [MBProgressHUD hideHUDForView:self.view animated:YES];
     if([response[@"data"][@"firstTimeLogin"] isEqualToString:@"1"])

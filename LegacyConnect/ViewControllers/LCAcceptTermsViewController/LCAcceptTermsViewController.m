@@ -84,6 +84,7 @@
 {
   NSArray *userDetailsArray = [self getFBUserDetailsArray];
   [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+    [LCGAManager ga_trackEventWithCategory:@"Registration" action:@"Success" andLabel:@"New User Registration Successful using FB"];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self loginUser:response];
     [MBProgressHUD hideHUDForView:self.view animated:YES];

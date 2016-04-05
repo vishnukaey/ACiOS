@@ -97,6 +97,7 @@
           else
           {
             [LCOnboardingAPIManager performOnlineFBLoginRequest:userDetailsArray withSuccess:^(id response) {
+              [LCGAManager ga_trackEventWithCategory:@"SignIn" action:@"Success" andLabel:@"User Sign-in successful using FB"];
               [LCTutorialManager setTutorialPersistance];
               [self loginUser:response];
               [MBProgressHUD hideHUDForView:self.view animated:YES];
