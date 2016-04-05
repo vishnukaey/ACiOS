@@ -1196,7 +1196,6 @@
                                                     <state key="normal">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
-                                                    <state key="selected" backgroundImage="profileTick"/>
                                                     <connections>
                                                         <action selector="addButtonTapped:" destination="1TY-aP-ZMK" eventType="touchUpInside" id="2Gz-no-OEm"/>
                                                     </connections>
@@ -1609,6 +1608,5 @@
         <image name="backButton_image" width="12" height="21"/>
         <image name="contact_plus" width="37" height="37"/>
         <image name="contact_tick" width="37" height="37"/>
-        <image name="profileTick" width="64" height="64"/>
     </resources>
 </document>

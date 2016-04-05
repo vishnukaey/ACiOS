@@ -100,7 +100,6 @@
 		0BB33DB51BA81359009E6D0C /* Interests.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB11BA81359009E6D0C /* Interests.storyboard */; };
 		0BB33DB71BA81359009E6D0C /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DB31BA81359009E6D0C /* SignUp.storyboard */; };
 		0BB33DE01BA81401009E6D0C /* manplaceholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DC41BA81400009E6D0C /* manplaceholder.jpg */; };
-		0BB33DE61BA81401009E6D0C /* profileTick.png in Resources */ = {isa = PBXBuildFile; fileRef = 0BB33DCA1BA81401009E6D0C /* profileTick.png */; };
 		0BB8BF6F1B96ED3800A27F1F /* LCSearchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */; };
 		0BB9714B1BFE058E000A33A9 /* LCRecentNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BB9714A1BFE058E000A33A9 /* LCRecentNotification.m */; };
 		0BBDC0671B70A8490004C4B6 /* LCAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BBDC0661B70A8490004C4B6 /* LCAPIManager.m */; };
@@ -410,7 +409,6 @@
 		0BB33DB11BA81359009E6D0C /* Interests.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Interests.storyboard; path = Storyboards/Interests.storyboard; sourceTree = "<group>"; };
 		0BB33DB31BA81359009E6D0C /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SignUp.storyboard; path = Storyboards/SignUp.storyboard; sourceTree = "<group>"; };
 		0BB33DC41BA81400009E6D0C /* manplaceholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = manplaceholder.jpg; sourceTree = "<group>"; };
-		0BB33DCA1BA81401009E6D0C /* profileTick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileTick.png; sourceTree = "<group>"; };
 		0BB8BF6D1B96ED3800A27F1F /* LCSearchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LCSearchResult.h; path = Models/LCSearchResult/LCSearchResult.h; sourceTree = "<group>"; };
 		0BB8BF6E1B96ED3800A27F1F /* LCSearchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LCSearchResult.m; path = Models/LCSearchResult/LCSearchResult.m; sourceTree = "<group>"; };
 		0BB971491BFE058E000A33A9 /* LCRecentNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCRecentNotification.h; sourceTree = "<group>"; };
@@ -1265,7 +1263,6 @@
 			isa = PBXGroup;
 			children = (
 				0BB33DC41BA81400009E6D0C /* manplaceholder.jpg */,
-				0BB33DCA1BA81401009E6D0C /* profileTick.png */,
 			);
 			name = DummyData;
 			path = "Dummy Data";
@@ -2285,7 +2282,6 @@
 				0BC755801B563907009CE7F3 /* Localizable.strings in Resources */,
 				0B2902791BB90FDF00E80684 /* LCActionsCellView.xib in Resources */,
 				0BB33DA51BA812A3009E6D0C /* Gotham-MediumItalic.otf in Resources */,
-				0BB33DE61BA81401009E6D0C /* profileTick.png in Resources */,
 				0BB33DA21BA812A3009E6D0C /* Gotham-Light.otf in Resources */,
 				CE6515031BF1B44F00BD6B86 /* Actions.storyboard in Resources */,
 				0BF05A4D1B4E622200FF7B39 /* Images.xcassets in Resources */,
