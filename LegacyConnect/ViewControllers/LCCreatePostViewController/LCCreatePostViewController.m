@@ -242,12 +242,12 @@
     if(self.postImageView.image)
     {
       //GA Tracking
-      [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"Post Created" andLabel:@"Post created without media"];
+      [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"Post Created" andLabel:@"Post created with media"];
     }
     else
     {
       //GA Tracking
-      [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"Post Created" andLabel:@"Post created with media content"];
+      [LCGAManager ga_trackEventWithCategory:@"Helps" action:@"Post Created" andLabel:@"Post created without media content"];
     }
   } andFailure:^(NSString *error) {
     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
