@@ -12,7 +12,9 @@
 #import "UIImage+LCImageBlur.h"
 
 @implementation LCSingleInterestVC
-
+{
+  bool reloadingView;
+}
 #pragma mark - Controller life cycle
 - (void)viewDidLoad
 {
@@ -40,7 +42,11 @@
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  self.navigationBarLC.backgroundColor = [UIColor clearColor];
+  if(!reloadingView)
+  {
+    reloadingView = YES;
+    self.navigationBarLC.backgroundColor = [UIColor clearColor];
+  }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
