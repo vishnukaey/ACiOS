@@ -332,6 +332,10 @@ static CGFloat kActionSectionHeight = 30;
     {
       [[UIApplication sharedApplication] openURL:websiteURL];
     }
+    else
+    {
+      [LCUtilityManager showAlertViewWithTitle:nil andMessage:NSLocalizedString(@"cannot_open_url", nil)];
+    }
   }
 }
 

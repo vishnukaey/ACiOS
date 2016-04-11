@@ -111,6 +111,7 @@
 "action_form_header_photo" = "HEADER PHOTO";
 "action_form_about" = "DESCRIPTION";
 "website_validation_error_message" = "Please enter a valid website URL";
+"cannot_open_url" = "This URL cannot be opened";
 "action_type_event" = "Event";
 "action_type_challenge" = "Challenge";
 "action_type_poll" = "Question";

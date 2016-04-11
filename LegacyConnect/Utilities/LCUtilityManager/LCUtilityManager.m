@@ -208,7 +208,7 @@ static NSString *const kWhiteSpace = @" ";
 
 + (BOOL)isaValidWebsiteLink :(NSString *)link
 {
-    NSString *urlRegEx = @"[http(s)?://]*([\\w-]+\\.)+[\\w-]+(/[\\w-\\+ \\[\\]~`@#$^*()!./?%&amp;=]*)?";
+  NSString *urlRegEx = @"[http(s)?://]*([\\w-]+\\.)+[\\w-]+(/[\\w-\\+ \\[\\]~`@#$^*()!./?%&amp;=]*)?";
   NSPredicate *urlTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", urlRegEx];
   return [urlTest evaluateWithObject:link];
 }
