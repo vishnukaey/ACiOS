@@ -328,7 +328,8 @@ static CGFloat kActionSectionHeight = 30;
 {
   if (self.eventObject.website) {
     NSURL * websiteURL = [NSURL HTTPURLFromString:self.eventObject.website];
-    if ([[UIApplication sharedApplication] canOpenURL:websiteURL]) {
+    if ([[UIApplication sharedApplication] canOpenURL:websiteURL])
+    {
       [[UIApplication sharedApplication] openURL:websiteURL];
     }
   }
