@@ -106,6 +106,7 @@ static NSString *const kWhiteSpace = @" ";
   [defaults setValue:kEmptyStringValue forKey:kUserTokenKey];
   [defaults setValue:nil forKey:kUserTokenKey];
   [defaults setValue:nil forKey:kUserIDKey];
+  [defaults setValue:nil forKey:kFBUserIDKey];
 }
 
 #pragma mark - Data and Time method implemenatation

@@ -91,6 +91,7 @@
     NSError *error = nil;
     [LCUtilityManager clearWebCache];
     LCUserDetail *user = [MTLJSONAdapter modelOfClass:[LCUserDetail class] fromJSONDictionary:response[kResponseData] error:&error];
+    [LCUtilityManager clearUserDefaultsForCurrentUser];
     [LCUtilityManager saveUserDetailsToDataManagerFromResponse:user];
     [LCUtilityManager saveUserDefaultsForNewUser];
     [loginBtn setEnabled:true];
