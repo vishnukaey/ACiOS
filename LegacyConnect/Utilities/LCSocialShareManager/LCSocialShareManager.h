@@ -19,11 +19,11 @@ typedef void (^CanShareToTwitter) (BOOL canShare);
 
 @property(nonatomic, weak)UIViewController *presentingController;
 @property(nonatomic, weak)LCTWWebViewVC *webViewVC;
-- (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler;
+- (void)canShareToTwitter:(void (^)(BOOL))completionHandler;
 - (void)shareToTwitterWithStatus:(NSString*)status andImage:(UIImage*)image;
 
 
-+ (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler;
++ (void)canShareToFacebook:(void (^)(BOOL))completionHandler;
 - (void)shareToFacebookWithMessage:(NSString *)message andImage:(UIImage *)image;
 
 

@@ -24,16 +24,12 @@ NSString * const kFBMessageKey = @"message";
 
 #pragma mark- Twitter
 
-- (void)canShareToTwitter:(void (^)(BOOL canShare))completionHandler
+- (void)canShareToTwitter:(void (^)(BOOL))completionHandler
 {
   //check if already granted permissions
   if ([[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey]) {
     self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey consumerSecret:kTWConsumerSecretKey oauthToken:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey] oauthTokenSecret:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenSecretKey]];
-    //    [self.twitterAPI verifyCredentialsWithUserSuccessBlock:^(NSString *username, NSString *userID) {
     completionHandler(YES);
-    //    } errorBlock:^(NSError *error) {
-    //      [self getTwitterPermissions];
-    //    }];
     return;
   }
   [self getTwitterPermissions];
@@ -150,7 +146,7 @@ NSString * const kFBMessageKey = @"message";
 
 #pragma mark- Facebook
 
-+ (void)canShareToFacebook:(void (^)(BOOL canShare))completionHandler
++ (void)canShareToFacebook:(void (^)(BOOL))completionHandler
 {
   FBSDKAccessToken *accessToken = [FBSDKAccessToken currentAccessToken];
   if ([accessToken hasGranted:kFBPublishKey]) {

@@ -28,10 +28,10 @@
   [super viewWillAppear:animated];
   [self updateSignInButtonStatus];
   [_emailTextField addTarget:self
-                      action:@selector(textFieldDidChange:)
+                      action:@selector(textFieldDidChange)
             forControlEvents:UIControlEventEditingChanged];
   [_passwordTextField addTarget:self
-                         action:@selector(textFieldDidChange:)
+                         action:@selector(textFieldDidChange)
                forControlEvents:UIControlEventEditingChanged];
   self.navigationController.navigationBarHidden = true;
   
@@ -169,7 +169,7 @@
 }
 
 
-- (void)textFieldDidChange:(id)sender
+- (void)textFieldDidChange
 {
   [self updateSignInButtonStatus];
 }
