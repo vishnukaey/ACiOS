@@ -378,7 +378,7 @@ static NSString *const kWhiteSpace = @" ";
 {
   [LCUtilityManager clearUserDefaultsForCurrentUser];
   LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
-  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+  UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainSID bundle:nil];
   UIViewController* myStoryBoardInitialViewController = [storyboard instantiateInitialViewController];
   appdel.window.rootViewController = myStoryBoardInitialViewController;
   [appdel.window makeKeyAndVisible];

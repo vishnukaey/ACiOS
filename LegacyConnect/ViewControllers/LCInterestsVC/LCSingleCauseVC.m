@@ -278,7 +278,7 @@ static NSString* const kGradientDefaultClr = @"282828";
   
   if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
@@ -286,7 +286,7 @@ static NSString* const kGradientDefaultClr = @"282828";
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
     LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
     interestVC.interest = [[LCInterest alloc] init];
     interestVC.interest.interestID = tagDetails[kTagobjId];
@@ -323,7 +323,7 @@ static NSString* const kGradientDefaultClr = @"282828";
 
 - (IBAction)supportersListClicked:(id)sender
 {
-  UIStoryboard *storyb = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  UIStoryboard *storyb = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
   LCCauseSupportersVC *viewC = [storyb instantiateViewControllerWithIdentifier:@"LCCauseSupportersVC"];
   viewC.cause = self.cause;
   [self.navigationController pushViewController:viewC animated:YES];

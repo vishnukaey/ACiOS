@@ -83,7 +83,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
   LCSingleCauseVC *singleCauseVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
   singleCauseVC.cause = self.results[indexPath.item];
   [self.navigationController pushViewController:singleCauseVC animated:YES];

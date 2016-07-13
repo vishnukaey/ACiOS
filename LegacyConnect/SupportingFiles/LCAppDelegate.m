@@ -67,7 +67,7 @@
         NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
         if (tokenString) {
           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
+            NSDictionary * userInfo = @{kResetPasswordKey: tokenString};
             [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
                                                                 object:nil
                                                               userInfo:userInfo];
@@ -103,7 +103,7 @@
     if ([url.host isEqualToString:kResetPasswordHostKey]) {
       NSString * tokenString = [LCAppLaunchHelper getPasswordResetTokenFromURLQuery:[url query]];
       if (tokenString) {
-        NSDictionary * userInfo = @{kResetPasswordTokenKey: tokenString};
+        NSDictionary * userInfo = @{kResetPasswordKey: tokenString};
         [[NSNotificationCenter defaultCenter] postNotificationName:kResetPasswordNotificationName
                                                             object:nil
                                                           userInfo:userInfo];

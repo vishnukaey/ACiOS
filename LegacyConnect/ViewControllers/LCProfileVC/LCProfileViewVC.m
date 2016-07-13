@@ -188,7 +188,7 @@
 
 - (IBAction)impactsButtonClicked
 {
-  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
   LCImapactsViewController *impactsVC = [profileSB instantiateViewControllerWithIdentifier:@"LCImapactsViewController"];
   impactsVC.self.userDetail = self.userDetail;
   impactsVC.isSelfProfile = [self.userDetail.userID isEqualToString:[LCDataManager sharedDataManager].userID];
@@ -206,7 +206,7 @@
   
   if (currentProfileStatus == kMyProfile)
   {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
     LCProfileEditVC *editProfileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileEditVC"];
     editProfileVC.self.userDetail = self.self.userDetail;
     UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:editProfileVC];

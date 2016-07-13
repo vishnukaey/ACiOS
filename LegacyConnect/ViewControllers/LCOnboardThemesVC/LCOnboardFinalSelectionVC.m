@@ -76,7 +76,7 @@ NSInteger const kNoOfRowsInSection = 1;
   NSInteger section = sender.tag;
   LCInterest *interest = self.interestArray[section];
   
-  UIStoryboard *  signupSB = [UIStoryboard  storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  UIStoryboard *  signupSB = [UIStoryboard  storyboardWithName:kSignupSID bundle:nil];
   LCOnboardCausesVC *causeVC = [signupSB instantiateViewControllerWithIdentifier:@"LCOnboardCausesVC"];
   causeVC.interest = interest;
   [self.navigationController pushViewController:causeVC animated:YES];;
@@ -102,7 +102,7 @@ NSInteger const kNoOfRowsInSection = 1;
                     withSuccess:^(id response) {
                       [[LCOnboardingHelper selectedItemsDictionary] removeAllObjects];
                       [MBProgressHUD hideAllHUDsForView:self.tableView animated:YES];
-                      UIStoryboard *storyboard = [UIStoryboard  storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+                      UIStoryboard *storyboard = [UIStoryboard  storyboardWithName:kSignupSID bundle:nil];
                       LCContactsListVC *next = [storyboard instantiateViewControllerWithIdentifier:@"connectFriends"];
                       [_doneBUtton setUserInteractionEnabled:YES];
                       [self.navigationController pushViewController:next animated:YES];

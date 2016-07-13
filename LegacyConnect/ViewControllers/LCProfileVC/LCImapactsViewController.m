@@ -116,7 +116,7 @@
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *editPost = [UIAlertAction actionWithTitle:@"Edit Post" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostSID bundle:nil];
     LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
     createPostVC.isEditing = YES;
     createPostVC.postFeedObject = feed;

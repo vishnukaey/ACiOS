@@ -113,26 +113,26 @@ extern NSString *const kSignOutURL;
 
 extern NSString *const kVersionCheckURL;
 
-extern NSString *const kMainStoryBoardIdentifier;
-extern NSString *const kSignupStoryBoardIdentifier;
-extern NSString *const kProfileStoryBoardIdentifier;
-extern NSString *const kInterestsStoryBoardIdentifier;
-extern NSString *const kCommunityStoryBoardIdentifier;
-extern NSString *const kNotificationStoryBoardIdentifier;
-extern NSString *const kCreatePostStoryBoardIdentifier;
-extern NSString *const kSettingsStoryBoardIdentifier;
+extern NSString *const kMainSID;
+extern NSString *const kSignupSID;
+extern NSString *const kProfileSID;
+extern NSString *const kInterestsSID;
+extern NSString *const kCommunitySID;
+extern NSString *const kNotificationSID;
+extern NSString *const kCreatePostSID;
+extern NSString *const kSettingsSID;
 
 extern NSString *const kInterestObj;
 extern NSString *const kCauseObj;
 
 
-extern NSString *const kHomeFeedsStoryBoardID;
-extern NSString *const kChooseCommunityStoryBoardID;
-extern NSString *const kUpdatePasswordStoryBoardID;
-extern NSString *const kLoginStoryBoardID;
-extern NSString *const kForgotPasswordStoryBoardID;
-extern NSString *const kSettingsStoryBoardID;
-extern NSString *const kAllAndMyInterestStoryBoardID;
+extern NSString *const kHomeFeedsSID;
+extern NSString *const kChooseCommunitySID;
+extern NSString *const kUpdatePasswordSID;
+extern NSString *const kLoginSID;
+extern NSString *const kForgotPasswordSID;
+extern NSString *const kSettingsSIDV;
+extern NSString *const kAllAndMyInterestSID;
 
 extern NSString *const kStatusCodeKey;
 extern NSString *const kLCVersionKey;
@@ -152,7 +152,7 @@ extern NSString *const kFriendsKey;
 extern NSString *const kFeedsKey;
 extern NSString *const kFriendIDKey;
 extern NSString *const kPostIDKey;
-extern NSString *const kPasswordResetCodeKey;
+extern NSString *const kPasswordResetCode;
 extern NSString *const kEventsKey;
 extern NSString *const kContactEmailsKey;
 extern NSString *const kMileStonesKey;
@@ -168,7 +168,7 @@ extern NSString *const kchangePrivacyKey;
 extern NSString *const kchangeLCURLKey;
 
 extern NSString *const kStatusCodeSuccess;
-extern NSString *const kStatusCodeVersionFailure;
+extern NSString *const kVersionFailure;
 
 extern NSString *const kLoginStatusKey;
 extern NSString *const kUserTokenKey;
@@ -206,17 +206,17 @@ extern NSString *const kFeedTagTypeUser;
 
 extern NSString *const kEntityTypePost;
 extern NSString *const kEntityTypeEvent;
-extern NSString *const kEntityTypeUserProfile;
+extern NSString *const kEntityUserProfile;
 
 extern NSString *const kTwitterUrlScheme;
 extern NSString *const kLCUrlScheme;
-extern NSString *const kResetPasswordTokenKey;
+extern NSString *const kResetPasswordKey;
 extern NSString *const kResetPasswordHostKey;
 
 extern NSString *const kfeedUpdateEventKey;
 extern NSString *const kfeedDeletedEventKey;
 
-extern NSString *const kTWOauthTokenSecretKey;
+extern NSString *const kTWauthTokenSecretKey;
 extern NSString *const kTWOauthTokenKey;
 
 extern NSString *const kTagobjId;
@@ -228,7 +228,7 @@ extern NSString *const kBulletUnicode;
 
 // Settings Section //
 extern NSString *const kSettingsScreenTitle;
-extern NSString *const kEmailUpdateScreenTitle;
+extern NSString *const kEmailUpdateTitle;
 
 extern NSString *const kAccountTitle;
 extern NSString *const kEmailAddress;

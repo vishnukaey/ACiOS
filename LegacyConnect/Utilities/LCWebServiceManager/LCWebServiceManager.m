@@ -31,7 +31,7 @@
      {
        success(responseObject);
      }
-     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     else if([statusCode isEqualToString:kVersionFailure])//version expired
      {
        [LCUtilityManager showVersionOutdatedAlert];
      }
@@ -88,7 +88,7 @@
      {
        success(responseObject);
      }
-     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     else if([statusCode isEqualToString:kVersionFailure])//version expired
      {
        [LCUtilityManager showVersionOutdatedAlert];
      }
@@ -145,7 +145,7 @@
     {
       success(responseObject);
     }
-    else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+    else if([statusCode isEqualToString:kVersionFailure])//version expired
     {
       [LCUtilityManager showVersionOutdatedAlert];
     }
@@ -191,7 +191,7 @@
      {
        success(responseObject);
      }
-     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     else if([statusCode isEqualToString:kVersionFailure])//version expired
      {
        [LCUtilityManager showVersionOutdatedAlert];
      }
@@ -252,7 +252,7 @@
       {
         success(responseObject);
       }
-      else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+      else if([statusCode isEqualToString:kVersionFailure])//version expired
       {
         [LCUtilityManager showVersionOutdatedAlert];
       }
@@ -284,7 +284,7 @@
      {
        success(responseObject);
      }
-     else if([statusCode isEqualToString:kStatusCodeVersionFailure])//version expired
+     else if([statusCode isEqualToString:kVersionFailure])//version expired
      {
        [LCUtilityManager showVersionOutdatedAlert];
      }

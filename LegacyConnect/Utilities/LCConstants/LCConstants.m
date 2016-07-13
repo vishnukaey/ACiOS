@@ -137,26 +137,26 @@ NSString *const kSignOutURL = @"api/signout";
 NSString *const kVersionCheckURL = @"api/version";
 NSString *const kBlockedUsersURL = @"api/user/blockedList";
 
-NSString *const kMainStoryBoardIdentifier = @"Main";
-NSString *const kSignupStoryBoardIdentifier = @"SignUp";
-NSString *const kProfileStoryBoardIdentifier = @"Profile";
-NSString *const kInterestsStoryBoardIdentifier = @"Interests";
-NSString *const kCommunityStoryBoardIdentifier = @"Actions";
-NSString *const kNotificationStoryBoardIdentifier = @"Notification";
-NSString *const kCreatePostStoryBoardIdentifier = @"CreatePost";
-NSString *const kSettingsStoryBoardIdentifier = @"Settings";
+NSString *const kMainSID = @"Main";
+NSString *const kSignupSID = @"SignUp";
+NSString *const kProfileSID = @"Profile";
+NSString *const kInterestsSID = @"Interests";
+NSString *const kCommunitySID = @"Actions";
+NSString *const kNotificationSID = @"Notification";
+NSString *const kCreatePostSID = @"CreatePost";
+NSString *const kSettingsSID = @"Settings";
 
 NSString *const kInterestObj = @"Interest";
 NSString *const kCauseObj = @"cause";
 
 
-NSString *const kHomeFeedsStoryBoardID = @"LCFeedsHomeViewController";
-NSString *const kChooseCommunityStoryBoardID = @"LCChooseActionsInterest";
-NSString *const kUpdatePasswordStoryBoardID = @"LCUpdatePasswordViewController";
-NSString *const kLoginStoryBoardID = @"LCLoginViewController";
-NSString *const kForgotPasswordStoryBoardID = @"LCForgotPasswordViewController";
-NSString *const kSettingsStoryBoardID = @"LCSettingsViewController";
-NSString *const kAllAndMyInterestStoryBoardID = @"LCMyAndAllInterestVC";
+NSString *const kHomeFeedsSID = @"LCFeedsHomeViewController";
+NSString *const kChooseCommunitySID = @"LCChooseActionsInterest";
+NSString *const kUpdatePasswordSID = @"LCUpdatePasswordViewController";
+NSString *const kLoginSID = @"LCLoginViewController";
+NSString *const kForgotPasswordSID = @"LCForgotPasswordViewController";
+NSString *const kSettingsSIDV = @"LCSettingsViewController";
+NSString *const kAllAndMyInterestSID = @"LCMyAndAllInterestVC";
 
 NSString *const kStatusCodeKey = @"statusCode";
 NSString *const kLCVersionKey = @"lcversion";
@@ -193,7 +193,7 @@ NSString *const kchangeLCURLKey = @"legacyUrl";
 NSString *const kchangePrivacyKey = @"privacy";
 
 NSString *const kStatusCodeSuccess = @"100";
-NSString *const kStatusCodeVersionFailure = @"102";
+NSString *const kVersionFailure = @"102";
 
 NSString *const kIDKey = @"id";
 NSString *const kRange = @"range";
@@ -213,7 +213,7 @@ NSString *const kFBAvatarImageUrlKey = @"avatarUrl";
 NSString *const kFBAccessTokenKey = @"fbAccessToken";
 NSString *const kUserImageData = @"image";
 NSString *const kUserimageExtension = @"imageExtension";
-NSString *const kPasswordResetCodeKey = @"passwordResetCode";
+NSString *const kPasswordResetCode = @"passwordResetCode";
 NSString *const kContactEmailsKey = @"emails";
 
 NSString *const kEmptyStringValue = @"";
@@ -229,12 +229,12 @@ NSString *const kFeedTagTypeUser = @"user";
 
 NSString *const kEntityTypePost = @"post";
 NSString *const kEntityTypeEvent = @"event";
-NSString *const kEntityTypeUserProfile = @"user";
+NSString *const kEntityUserProfile = @"user";
 
 
 NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
 NSString *const kLCUrlScheme = @"legacyconnect";
-NSString *const kResetPasswordTokenKey = @"password_reset_token";
+NSString *const kResetPasswordKey = @"password_reset_token";
 NSString *const kResetPasswordHostKey = @"test";
 
 NSString *const kfeedUpdateEventKey = @"updated_feed";
@@ -243,7 +243,7 @@ NSString *const kfeedDeletedEventKey = @"deleted_feed";
 NSString *const keventUpdateEventKey = @"updated_event";
 NSString *const keventDeletedEventKey = @"deleted_event";
 
-NSString *const kTWOauthTokenSecretKey = @"kTWOauthTokenSecret";
+NSString *const kTWauthTokenSecretKey = @"kTWOauthTokenSecret";
 NSString *const kTWOauthTokenKey = @"kTWOauthToken";
 // -- Tag Dictionary keys -- //
 NSString *const kTagobjId = @"tag_object_id";
@@ -252,7 +252,7 @@ NSString *const kTagobjType = @"tag_object_type";
 
 // Settings Section //
 NSString *const kSettingsScreenTitle = @"SETTINGS";
-NSString *const kEmailUpdateScreenTitle = @"EMAIL ADDRESS";
+NSString *const kEmailUpdateTitle = @"EMAIL ADDRESS";
 
 NSString *const kAccountTitle = @"ACCOUNT";
 NSString *const kEmailAddress = @"Email Address";

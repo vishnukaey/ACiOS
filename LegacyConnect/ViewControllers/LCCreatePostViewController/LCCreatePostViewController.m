@@ -103,7 +103,7 @@
 
 - (IBAction)addFriendsToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostSID bundle:nil];
   LCListFriendsToTagViewController *contactListVC = [createPostSB instantiateViewControllerWithIdentifier:kListFriendSBID];
   contactListVC.alreadySelectedFriends = self.taggedFriendsArray;
   contactListVC.delegate = self;
@@ -114,7 +114,7 @@
 
 - (IBAction)addLocationToPostButtonClicked:(id)sender
 {
-  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostSID bundle:nil];
   LCListLocationsToTagVC *locationsVC = [createPostSB instantiateViewControllerWithIdentifier:kListLocationSBID];
   locationsVC.alreadyTaggedLocation = self.taggedLocation;
   locationsVC.delegate = self;
@@ -147,7 +147,7 @@
 
 - (IBAction)intersestDownArrowClicked
 {
-  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  createPostSB = [UIStoryboard storyboardWithName:kCreatePostSID bundle:nil];
   LCListInterestsAndCausesVC *interestCauseVC = [createPostSB instantiateViewControllerWithIdentifier:kListInterestsAndCauseSBID];
   interestCauseVC.delegate = self;
   interestCauseVC.selectedCause = self.selectedCause;

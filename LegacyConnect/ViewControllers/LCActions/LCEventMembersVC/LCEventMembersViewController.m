@@ -165,7 +165,7 @@
 
 -(IBAction)inviteFriends:(id)sender
 {
-  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunitySID bundle:nil];
   LCInviteToActions *actionsVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCInviteToActions"];
   actionsVC.eventToInvite = self.event;
   UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:actionsVC];

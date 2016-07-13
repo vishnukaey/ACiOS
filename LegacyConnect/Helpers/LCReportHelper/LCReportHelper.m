@@ -19,7 +19,7 @@
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainSID
                                                       bundle:nil];
     LCBlockUserViewController *blockUserVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockUserViewController"];
     LCUserDetail *userDetail = [[LCUserDetail alloc] init];
@@ -32,7 +32,7 @@
   [actionSheet addAction:blockUser];
   
   UIAlertAction *reportPost = [UIAlertAction actionWithTitle:NSLocalizedString(@"report_post", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainSID
                                                       bundle:nil];
     LCReportPostViewController *report = [mainSB instantiateViewControllerWithIdentifier:@"LCReportPostViewController"];
     report.postToReport = feed;
@@ -55,7 +55,7 @@
   {
     //block user action
     UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+      UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainSID
                                                         bundle:nil];
       LCBlockUserViewController *blockUserVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockUserViewController"];
       LCUserDetail *userDetail = [[LCUserDetail alloc] init];
@@ -108,7 +108,7 @@
   {
     //block user action
     UIAlertAction *blockUser = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_user", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+      UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainSID
                                                         bundle:nil];
       LCBlockUserViewController *blockUserVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockUserViewController"];
       LCUserDetail *userDetail = [[LCUserDetail alloc] init];
@@ -156,7 +156,7 @@
   actionSheet.view.tintColor = [UIColor blackColor];
   
   UIAlertAction *blockAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"block_action", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier
+    UIStoryboard*  mainSB = [UIStoryboard storyboardWithName:kMainSID
                                                       bundle:nil];
     LCBlockActionViewController *blockActionVC = [mainSB instantiateViewControllerWithIdentifier:@"LCBlockActionViewController"];
     blockActionVC.eventToBlock = event;

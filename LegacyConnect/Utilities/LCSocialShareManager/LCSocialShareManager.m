@@ -28,7 +28,7 @@ NSString * const kFBMessageKey = @"message";
 {
   //check if already granted permissions
   if ([[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey]) {
-    self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey consumerSecret:kTWConsumerSecretKey oauthToken:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey] oauthTokenSecret:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenSecretKey]];
+    self.twitterAPI = [STTwitterAPI twitterAPIWithOAuthConsumerKey:kTWConsumerKey consumerSecret:kTWConsumerSecretKey oauthToken:[[NSUserDefaults standardUserDefaults] valueForKey:kTWOauthTokenKey] oauthTokenSecret:[[NSUserDefaults standardUserDefaults] valueForKey:kTWauthTokenSecretKey]];
     completionHandler(YES);
     return;
   }
@@ -82,7 +82,7 @@ NSString * const kFBMessageKey = @"message";
   [_twitterAPI postAccessTokenRequestWithPIN:verifier successBlock:^(NSString *oauthToken, NSString *oauthTokenSecret, NSString *userID, NSString *screenName) {
     LCDLog(@"-- screenName: %@", screenName);
     [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessToken forKey:kTWOauthTokenKey];
-    [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessTokenSecret forKey:kTWOauthTokenSecretKey];
+    [[NSUserDefaults standardUserDefaults] setValue:_twitterAPI.oauthAccessTokenSecret forKey:kTWauthTokenSecretKey];
     self.canShareTwitterBlock(YES);
     /*
      At this point, the user can use the API and you can read his access tokens with:

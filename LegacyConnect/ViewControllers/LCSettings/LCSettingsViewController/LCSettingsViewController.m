@@ -290,7 +290,7 @@ static CGFloat kNumberOfSection = 3;
         
     LCAppDelegate *appdel = (LCAppDelegate *)[[UIApplication sharedApplication] delegate];
     appdel.mainContainer = nil;
-    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainStoryBoardIdentifier bundle:nil];
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:kMainSID bundle:nil];
     UINavigationController* initialVC = [storyboard instantiateInitialViewController];
     appdel.window.rootViewController = initialVC;
     [appdel.window makeKeyAndVisible];
@@ -303,7 +303,7 @@ static CGFloat kNumberOfSection = 3;
 
 -(void)inviteContacts
 {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
   LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
   [self.navigationController pushViewController:contacts animated:YES];
   

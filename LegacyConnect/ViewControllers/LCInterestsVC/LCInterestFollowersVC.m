@@ -138,7 +138,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
   LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
   profileVC.userDetail = [self.results objectAtIndex:indexPath.row];
   [self.navigationController pushViewController:profileVC animated:YES];

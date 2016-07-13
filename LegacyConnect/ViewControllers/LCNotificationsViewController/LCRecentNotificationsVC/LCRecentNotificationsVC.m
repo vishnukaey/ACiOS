@@ -136,7 +136,7 @@
     event.eventID = notification.entityId;
     actions.eventObject = event;
     [self.navigationController pushViewController:actions animated:YES];
-  } else if ([notification.entityType isEqualToString:kEntityTypeUserProfile]) {
+  } else if ([notification.entityType isEqualToString:kEntityUserProfile]) {
     UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];

@@ -265,7 +265,7 @@
 
 - (void) loadPostViewControllerWithField:(LCFeed*)feed
 {
-  UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  story_board = [UIStoryboard storyboardWithName:kCreatePostSID bundle:nil];
   LCCreatePostViewController * createPostVC = [story_board instantiateInitialViewController];
   createPostVC.isEditing = YES;
   createPostVC.postFeedObject = feed;
@@ -282,7 +282,7 @@
 {
   if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
     causeVC.cause = [[LCCause alloc] init];
     causeVC.cause.causeID = tagDetails[kTagobjId];
@@ -290,7 +290,7 @@
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];
@@ -298,7 +298,7 @@
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])//go to interest page
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
     LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
     interestVC.interest = [[LCInterest alloc] init];
     interestVC.interest.interestID = tagDetails[kTagobjId];

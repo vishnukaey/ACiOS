@@ -179,7 +179,7 @@
 
 - (void)showFeedCommentsWithFeed:(LCFeed*)feed
 {
-  UIStoryboard *storyboard = [UIStoryboard  storyboardWithName:kMainStoryBoardIdentifier
+  UIStoryboard *storyboard = [UIStoryboard  storyboardWithName:kMainSID
                                                         bundle:nil];
   LCFeedsCommentsController *next = [storyboard instantiateViewControllerWithIdentifier:@"LCFeedsCommentsController"];
   [next setFeedObject:feed];
@@ -219,7 +219,7 @@
 {
   if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeCause])//go to cause page
   {
-    UIStoryboard *  interestSB = [UIStoryboard  storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    UIStoryboard *  interestSB = [UIStoryboard  storyboardWithName:kInterestsSID bundle:nil];
     LCSingleCauseVC *causeVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleCauseVC"];
     causeVC.cause = [[LCCause alloc] init];
     causeVC.cause.causeID = tagDetails[kTagobjId];
@@ -227,7 +227,7 @@
   }
   else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeUser])//go to user page
   {
-    UIStoryboard *  profileSB = [UIStoryboard  storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard *  profileSB = [UIStoryboard  storyboardWithName:kProfileSID bundle:nil];
     LCProfileViewVC *profileVC = [profileSB instantiateViewControllerWithIdentifier:@"LCProfileViewVC"];
     profileVC.userDetail = [[LCUserDetail alloc] init];
     profileVC.userDetail.userID = tagDetails[@"id"];

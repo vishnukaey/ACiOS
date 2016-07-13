@@ -120,7 +120,7 @@
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
 {
-  LCForgotPasswordViewController *forgotPasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kForgotPasswordStoryBoardID];
+  LCForgotPasswordViewController *forgotPasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kForgotPasswordSID];
   forgotPasswordVC.delegate = self;
   [self.navigationController pushViewController:forgotPasswordVC animated:YES];
 }

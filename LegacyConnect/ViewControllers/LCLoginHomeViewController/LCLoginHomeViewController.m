@@ -89,7 +89,7 @@
         [LCOnboardingAPIManager checkIfNewUser:[LCDataManager sharedDataManager].userEmail withSuccess:^(id response) {
           if([response[@"exists"] isEqualToString:@"0"])
           {
-            UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+            UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
             LCAcceptTermsViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCAcceptTermsViewController"];
             [LCTutorialManager resetTutorialPersistance];
             [self.navigationController pushViewController:termsVC animated:YES];
@@ -140,7 +140,7 @@
   [LCUtilityManager saveUserDefaultsForNewUser];
   if([response[@"firstTimeLogin" ] isEqualToString:@"1"])
   {
-    UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
     LCOnboardThemesVC *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCChooseCausesVC"];
     [LCTutorialManager resetTutorialPersistance];
     [self.navigationController pushViewController:termsVC animated:YES];
@@ -163,11 +163,11 @@
   NSDictionary *userInfo = notification.userInfo;
   
   NSMutableArray * viewArray = [[NSMutableArray alloc] initWithArray:[self.navigationController viewControllers]];
-  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:kLoginStoryBoardID];
+  LCLoginViewController *loginVC = [self.storyboard instantiateViewControllerWithIdentifier:kLoginSID];
   [viewArray addObject:loginVC];
-  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordStoryBoardID];
+  LCUpdatePasswordViewController *updatePasswordVC = [self.storyboard instantiateViewControllerWithIdentifier:kUpdatePasswordSID];
   updatePasswordVC.delegate = loginVC;
-  updatePasswordVC.token = userInfo[kResetPasswordTokenKey];
+  updatePasswordVC.token = userInfo[kResetPasswordKey];
   [viewArray addObject:updatePasswordVC];
   self.navigationController.viewControllers = viewArray;
 }

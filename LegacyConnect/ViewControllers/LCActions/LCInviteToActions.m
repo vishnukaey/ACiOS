@@ -198,7 +198,7 @@
 - (void) dismissInviteActionView{
   
   if (isCreatingAction) {
-    UIStoryboard *actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+    UIStoryboard *actionsSB = [UIStoryboard storyboardWithName:kCommunitySID bundle:nil];
     LCViewActions *actionsVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCViewActions"];
     actionsVC.eventObject = self.eventToInvite;
     UINavigationController *nav = [[[self presentingViewController] childViewControllers] objectAtIndex:0];
@@ -326,7 +326,7 @@
   }
   else
   {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
     LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
     contacts.invitingToActions = YES;
     contacts.eventID = eventToInvite.eventID;
@@ -346,7 +346,7 @@
   }
   else
   {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
     LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
     contacts.invitingToActions = YES;
     contacts.eventID = eventToInvite.eventID;
@@ -357,7 +357,7 @@
 
 -(IBAction)inviteFriendsFromContacts:(id)sender
 {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
   LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
   contacts.invitingToActions = YES;
   contacts.eventID = eventToInvite.eventID;

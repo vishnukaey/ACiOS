@@ -123,7 +123,7 @@
 {
   LCInterest *interest = [self.results objectAtIndex:indexPath.row];
   
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
   LCSingleInterestVC *interestVC = [storyboard instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
   interestVC.interest = interest;
   [self.navigationController pushViewController:interestVC animated:YES];

@@ -256,7 +256,7 @@
   }
   else
   {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
     LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
     [self.navigationController pushViewController:contacts animated:YES];
   }
@@ -284,7 +284,7 @@
   }
   else
   {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
     LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
     [self.navigationController pushViewController:contacts animated:YES];
   }
@@ -293,7 +293,7 @@
 
 -(IBAction)inviteFriendsFromContacts:(id)sender
 {
-  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  UIStoryboard *storyboard = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
   LCContactsListVC *contacts = [storyboard instantiateViewControllerWithIdentifier:@"ContactList"];
   [self.navigationController pushViewController:contacts animated:YES];
   

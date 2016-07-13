@@ -341,7 +341,7 @@ static CGFloat kActionSectionHeight = 30;
 
 - (void)gotoMembersScreen
 {
-  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunityStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  actionsSB = [UIStoryboard storyboardWithName:kCommunitySID bundle:nil];
   LCEventMembersViewController *membersVC = [actionsSB instantiateViewControllerWithIdentifier:@"LCEventMembersViewController"];
   membersVC.event = self.eventObject;
   [self.navigationController pushViewController:membersVC animated:YES];

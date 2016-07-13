@@ -74,7 +74,7 @@
 
 -(IBAction)readTermsofService:(id)sender
 {
-  UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupStoryBoardIdentifier bundle:nil];
+  UIStoryboard *signSB = [UIStoryboard storyboardWithName:kSignupSID bundle:nil];
   LCTermsOfServiceViewController *termsVC = [signSB instantiateViewControllerWithIdentifier:@"LCTermsOfServiceViewController"];
   [self.navigationController pushViewController:termsVC animated:YES];
 }

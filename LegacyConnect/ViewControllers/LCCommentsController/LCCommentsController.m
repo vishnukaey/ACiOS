@@ -226,7 +226,7 @@ static CGFloat kCommentFieldHeight = 45.0f;
     [self.navigationController pushViewController:profileVC animated:YES];
   } else if ([tagDetails[kTagobjType] isEqualToString:kFeedTagTypeInterest])
   {
-    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsStoryBoardIdentifier bundle:nil];
+    UIStoryboard*  interestSB = [UIStoryboard storyboardWithName:kInterestsSID bundle:nil];
     LCSingleInterestVC *interestVC = [interestSB instantiateViewControllerWithIdentifier:@"LCSingleInterestVC"];
     interestVC.interest = [[LCInterest alloc] init];
     interestVC.interest.interestID = tagDetails[kTagobjId];

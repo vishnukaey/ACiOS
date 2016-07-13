@@ -147,7 +147,7 @@
   }
   else
   {
-    UIStoryboard *profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+    UIStoryboard *profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
     LCProfileViewVC *viewC = [profileSB instantiateInitialViewController];
     viewC.userDetail = [[LCUserDetail alloc] init];
     LCRequest *request = [self.results objectAtIndex:indexPath.row];

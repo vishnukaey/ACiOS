@@ -143,7 +143,7 @@ static NSString *kFriendsCellID = @"LCFriendsCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
   
-  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileStoryBoardIdentifier bundle:nil];
+  UIStoryboard*  profileSB = [UIStoryboard storyboardWithName:kProfileSID bundle:nil];
   LCProfileViewVC *profileVC = [profileSB instantiateInitialViewController];
   profileVC.userDetail = [[LCUserDetail alloc] init];
   LCFriend *friend = [self.results objectAtIndex:indexPath.row];
