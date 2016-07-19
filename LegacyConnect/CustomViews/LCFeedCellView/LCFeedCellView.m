@@ -16,8 +16,8 @@
 #define kFeedUserTextFont [UIFont fontWithName:@"Gotham-Medium" size:13]
 #define kPostInfoFont [UIFont fontWithName:@"Gotham-Book" size:13]
 
-static NSString *kAddedAPhotoIn = @"Added a Photo in ";
-static NSString *kCreatedAPostIn = @"Created a Post in ";
+static NSString *kAddedAPhotoIn = @"has posted a Help to ";
+static NSString *kCreatedAPostIn = @"is helping ";
 static NSString *kPostTypeTextOnly = @"0";
 
 static NSString *kFeedCellIdentifier = @"LCFeedCell";
@@ -68,9 +68,12 @@ static NSString *kFeedCellIdentifier = @"LCFeedCell";
 - (NSString *)adjustPhotoPostUI
 {
   NSString *typeString = kAddedAPhotoIn;
-  if ([self.feedObject.postType isEqualToString:kPostTypeTextOnly])
+  if ([self.feedObject.postToType isEqualToString:kFeedTagTypeInterest])
   {
     typeString = kCreatedAPostIn;
+  }
+  if ([self.feedObject.postType isEqualToString:kPostTypeTextOnly])
+  {
     postPhotoHeight.constant = 0;
   }
   else

@@ -30,7 +30,8 @@ NSString *const kBaseURL = @"https://demo.legacyconnect.com/";
 #elif STAGING
 /* Staging url */
 //
-NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
+NSString *const kBaseURL = @"https://stagingapi.thathelps.com/";
+
 //NSString *const kBaseURL = @"https://dev.legacyconnect.com/";
 //
 
@@ -39,7 +40,7 @@ NSString *const kBaseURL = @"https://staging.legacyconnect.com/";
 #elif PRODUCTION
 ///* Production url */
 
-NSString *const kBaseURL = @"https://www.legacyconnect.com/";
+NSString *const kBaseURL = @"https://www.api.thathelps.com/";
 
 #elif DEV
 ///* Production url */
