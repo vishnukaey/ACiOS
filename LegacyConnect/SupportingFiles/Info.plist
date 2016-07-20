@@ -30,10 +30,10 @@
 		</dict>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.LC.legacyconnect</string>
+			<string>com.th.thathelps</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>legacyconnect</string>
+				<string>thathelps</string>
 			</array>
 		</dict>
 		<dict>
@@ -57,7 +57,7 @@
 	<array>
 		<string>fbauth2</string>
 		<string>twitter</string>
-		<string>legacyconnect</string>
+		<string>thathelps</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>

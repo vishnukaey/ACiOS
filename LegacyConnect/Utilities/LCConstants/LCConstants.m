@@ -234,7 +234,7 @@ NSString *const kEntityUserProfile = @"user";
 
 
 NSString *const kTwitterUrlScheme = @"twitterUrlScheme";
-NSString *const kLCUrlScheme = @"legacyconnect";
+NSString *const kLCUrlScheme = @"thathelps";
 NSString *const kResetPasswordKey = @"password_reset_token";
 NSString *const kResetPasswordHostKey = @"test";
 

@@ -96,6 +96,7 @@
    </AnalyzeAction>
    <ArchiveAction
       buildConfiguration = "Production"
+      customArchiveName = "ThatHelps"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
